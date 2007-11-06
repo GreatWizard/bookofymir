@@ -1,0 +1,179 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Stylist Script
+//===== By: ================================================== 
+//= eAthena Dev team
+//= Revised by Nekosume [pyRO v3.0] 
+//===== Current Version: ===================================== 
+//= 4.0
+//===== Compatible With: ===================================== 
+//= Any eAthena Version 
+//===== Description: ========================================= 
+//= Revised dye NPC
+//===== Additional Comments: =================================
+//= v4.1 - New hairstyles added [Mass Zero]
+//= v4.0 - Refined and Combined [Darkchild]
+//= v3.0 - Added the 'Browse' options
+//= v2.5 - Added more hair colors
+//= v2.0 - Changed palette and hair style select
+//= v1.5 - Revised script / different dialog
+//= v1.0 - Split into two NPCs
+//============================================================ 
+
+
+//Stylist------------------------------------------------------------------------------------------------------------
+payon,133,235,5		script	Styliste	122,{
+	mes "[^FF8000Styliste^000000]";
+	mes "Je suis le meilleur styliste de tout Rune-Midgard~~!";
+	mes "Je peux changer votre coupe ou couleur de cheveux, mais aussi la couleur de vos vêtements!";
+	mes "Que souhaitez-vous changer?";
+	next;
+	menu "Coupe de cheveux",Lstyle,"Couleur de cheveux",Lcolor,"Couleur des vêtements",Lcloth,"Rien, merci",LCancel;
+
+	Lstyle:
+		mes "[^FF8000Styliste^000000]";
+		mes "Désirez-vous un aperçu de tous les choix, ou bien savez-vous déjà ce que vous voulez?";
+		next;
+		menu "Aperçu",Lbrowsesty,"Je sais ce que je veux",Lwantsty;
+
+	Lwantsty:
+		mes "[^FF8000Styliste^000000]";
+		mes "Parfait! Choisissez le numéro correspondant à la coupe que vous voulez, et je m'exécuterai!";
+ 		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Choisissez un numéro ^0000FFcompris entre 0 et 23^000000.";
+		mes "Le chiffre 0 correspondant à la coupe par défaut de votre personnage.";
+ 		next;
+		input @sty;
+		if (@sty>23) close;
+		if (@sty<0) close;
+		setlook 1,@sty;
+		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Cela vous convient-il? Ou préférez-vous une autre coupe?";
+		next;
+		menu "C'est parfait!",-,"Euh... autre chose s'il vous plaît.",Lwantsty;
+		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Ça vous va super bien~! Revenez quand vous voulez, ok?";
+		close;
+
+	Lbrowsesty:
+		set @look, -1;
+		mes "[^FF8000Styliste^000000]";
+		mes "Ok, c'est parti~! Arrêtez-moi quand ça vous convient, d'accord?";
+		next;
+
+	Lbrowserep:
+		set @look,@look+1;
+		setlook 1,@look;
+		mes "Ceci est la coupe numéro^FF9009 "+@look+" ^000000!"; 
+		if(@look == 23) menu "Revenir au début",Lbrowsesty,"J'aime bien celle-ci",Lstop;
+		if(@look != 23)	menu "Suivante",Lbrowserep,"J'aime bien celle-ci",Lstop;
+		
+	Lcolor:
+		mes "[^FF8000Styliste^000000]";
+		mes "Désirez-vous un aperçu de tous les choix, ou bien savez-vous déjà ce que vous voulez?";
+		next;
+		menu "Aperçu",Lbrowsecolor,"Je sais ce que je veux",Lwantcolor;
+
+	Lwantcolor:
+		mes "[^FF8000Styliste^000000]";
+		mes "Choisissez la couleur qui vous convient.";
+		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Choisissez un numéro ^0000FFcompris entre 0 et 20^000000.";
+		mes "Le chiffre 0 correspondant à la couleur par défaut de votre personnage.";
+ 		next;
+		mes "[^FF8000Styliste^000000]";
+		mes "0 pour la couleur par défaut...";
+		mes "1 pour blond...";
+		mes "2 pour mauve...";
+		mes "3 pour marron...";
+		mes "4 pour vert...";
+		mes "5 pour bleu...";
+		mes "6 pour blanc...";
+		mes "7 pour brun...";
+		mes "8 pour roux...";
+		mes "les suivantes sont des teintes de couleurs très variées!";
+		next;
+		input @color;
+		if (@color>20) close;
+		if (@color<0) close;
+		setlook 6,@color;
+		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Est-ce que cela vous convient?";
+		next;
+		menu "C'est parfait!",-,"Une autre couleur, s'il vous plaît.",Lwantcolor;
+		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Ça vous va super bien~! Revenez quand vous voulez, ok?";
+		close;
+
+	Lbrowsecolor:
+		set @look, -1;
+		mes "[^FF8000Styliste^000000]";
+		mes "Ok, c'est parti~! Arrêtez-moi quand ça vous convient, d'accord?";
+		next;
+
+	Lbrowsecolorrep:
+		set @look,@look+1;
+		setlook 6,@look;
+		mes "Ceci est la couleur numéro^FF9009 "+@look+" ^000000!"; 
+		if(@look == 20) menu "Revenir au début",Lbrowsecolor,"J'aime bien celle-ci",Lstop;
+		if(@look != 20)	menu "Suivante",Lbrowsecolorrep,"J'aime bien celle-ci",Lstop;
+
+		Lstop:
+			mes "[^FF8000Styliste^000000]";
+			mes "Ça vous va super bien~! J'adore~! ^_^";
+			close;
+
+	LCancel:
+		mes "[^FF8000Styliste^000000]";
+		mes "Revenez quand vous voulez.";
+		close;
+
+	Lcloth:
+		mes "[^FF8000Styliste^000000]";
+		mes "Désirez-vous un aperçu de tous les choix, ou bien savez-vous déjà ce que vous voulez?";
+		next;
+		menu "Aperçu",Lbrowsecloth,"Je sais ce que je veux",Lwantcloth;
+
+	Lwantcloth:
+		mes "[^FF8000Styliste^000000]";
+		mes "Parfait! Choisissez le numéro correspondant à la couleur que vous voulez, et je m'exécuterai!";
+ 		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Choisissez un numéro ^0000FFcompris entre 0 et 77^000000.";
+		mes "Le chiffre 0 correspondant à la couleur par défaut.";
+ 		next;
+		input @pal;
+		if (@pal>77) close;
+		if (@pal<0) close;
+		setlook 7,@pal;
+		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Est-ce que cela vous convient?";
+		next;
+		menu "C'est parfait!",-,"Une autre couleur, s'il vous plaît.",Lwantcloth;
+		next;
+		mes "[^FF8000Stylist^000000]";
+		mes "Ça vous va super bien~! Revenez quand vous voulez, ok?";
+		close;
+
+	Lbrowsecloth:
+		set @look, -1;
+		mes "[^FF8000Styliste^000000]";
+		mes "Ok, c'est parti~! Arrêtez-moi quand ça vous convient, d'accord?";
+		next;
+
+	Lbrowseclothrep:
+		set @look,@look+1;
+		setlook 7,@look;
+		mes "Ceci est la couleur numéro^FF9009 "+@look+" ^000000!"; 
+		if(@look == 77) menu "Revenir au début",Lbrowsecloth,"J'aime bien celle-ci",Lstop;
+		if(@look != 77)	menu "Suivante",Lbrowseclothrep,"J'aime bien celle-ci",Lstop;
+}
+

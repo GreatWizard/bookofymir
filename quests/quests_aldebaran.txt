@@ -1,0 +1,95 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Aldebaran 
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= 'Doctor Band', 'Feather Bonnet', 'Opera Masque', 'Sakkat Hat' Quests.
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 Fixed Doctor Band items [Lupus]
+//= 1.2 Removed Duplicates [Silent]
+//============================================================ 
+
+
+//=======================================================================================================//
+//			'Doctor Band', 'Feather Bonnet', 'Opera Masque', 'Sakkat Hat' Quest
+//=======================================================================================================//
+aldeba_in,152,166,4	script	Marchand#01	86,{
+	mes "[Marchand]";
+	mes "Muhahaha! Je suis le Très Célèbre et Enigmatique Marchand d'Aldebaran! Je suis sans cesse à la recherche d'objets uniques dans Rune Midgard!";
+	mes "Jetez un oeil à ma collection d'objets rares!!";
+	next;
+	mes "(1) · ^3355FFDoctor Band^000000 :";
+	mes "^FF55331 Red Bandana + 50 Iron + 1 Cracked Diamond + 3500 Zenys^000000.";
+	mes "(2) · ^3355FFFeather Bonnet^000000 :";
+	mes "^FF55331 Romantic Gent + 300 Feather of Birds + 500 Zenys^000000.";
+	mes "(3) · ^3355FFOpera Masque^000000 :";
+	mes "^FF553320 Iron + 1 Singing Plant + 5000 Zenys^000000.";
+	mes "(4) · ^3355FFSakkat Hat^000000 :";
+	mes "^FF5533120 Trunk + 10000 Zenys^000000.";
+	next;
+	menu "Doctor Band",-, "Feather Bonnet",M_1, "Opera Masque",M_2, "Sakkat",M_3;
+		
+		mes "[Marchand]";
+		if(countitem(2275) == 0 || countitem(998) < 50 || countitem(733) == 0 || Zeny < 3500) goto L_CantMake;
+		delitem 2275,1;//Items: Red Bandana,
+		delitem 998,50;//Items: Iron,
+		delitem 733,1;//Items: Cracked deamond
+		set Zeny,Zeny - 3500;
+		mes "Hum.... Est-ce que vous êtes medecin?!";
+		emotion e_what;
+		next;
+		mes "[Marchand]";
+		mes "J'ai entendu parler d'un physicien qui joue les medecins à ses heures 'Cuwaki'...";
+		mes "Enfin vous faîtes bien ce que vous voulez, hein... Tenez.";
+		getitem 2273,1;//Items: Doctor Band,
+		close;
+	M_1:
+		mes "[Marchand]";
+		if(countitem(2247) == 0 || countitem(916) < 300 || Zeny < 500) goto L_CantMake;//Items: Romantic Gent, Feather of Birds,
+		delitem 2247,1;//Items: Romantic Gent,
+		delitem 916,300;//Items: Feather of Birds,
+		set Zeny,Zeny - 500;
+		mes "Umhahaha. Vous avez le sens de la mode, vous! Je sais que vous avez passé du temps à rassembler tous les objets nécessaires à la création de ce bonnet, mais je vous garantie que vous ne serez pas déçu! Tenez.";
+		emotion e_heh;
+		getitem 5018,1;//Items: Feather Bonnet,
+		close;
+	M_2:
+		mes "[Marchand]";
+		if(countitem(998) < 20 || countitem(707) == 0 || Zeny < 5000) goto L_CantMake;//Items: Iron, Singing Plant,
+		delitem 998,20;//Items: Iron,
+		delitem 707,1;//Items: Singing Plant,
+		set Zeny,Zeny - 5000;
+		mes "C'est un masque très élégant, quoi qu'un peu étrange... On dirait qu'il émet des ondes bizarres. Qu'en pensez-vous?";
+		next;
+		mes "[Marchand]";
+		mes "Vous le trouvez joli quand même? D'accord, tenez!";
+		getitem 2281,1;//Items: Opera Masque,
+		close;
+	M_3:
+		mes "[Marchand]";
+		if(countitem(1019) < 120 || Zeny < 10000) goto L_CantMake;//Items: Trunk,
+		delitem 1019,120;//Items: Trunk,
+		set Zeny,Zeny - 10000;
+		mes "Si vous avez la chance de pouvoir visiter le Village de Payon, vous devriez aller rencontrer l'homme qui a fabriqué ce Sakkat.";
+		mes "Et vous savez quoi? J'ai l'exclusivité sur ce produit! Il ne vend ses Sakkat qu'à moi!";
+		next;
+		mes "[Marchand]";
+		mes "Je suis le seul marchand de Rune Midgard a pouvoir estimer la qualité et la valeur d'un Sakkat. De part sa rareté, le Sakkat est devenu un chapeau très populaire!";
+		next;
+		mes "[Marchand]";
+		mes "OK! Take it!";
+		getitem 2280,1;//Items: Sakkat,
+		close;
+
+	L_CantMake:
+		mes "Espèce d'idiot! Vérifiez au moins que vous avez les objets avant de vous pointer ici! ... Quel imbécille... J'te jure...";
+		emotion e_an;
+		close;
+}

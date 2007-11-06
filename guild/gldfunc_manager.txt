@@ -1,0 +1,418 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= War of Emperium Guild Manager Function
+//===== By: ==================================================
+//= jAthena - kalen (1.0) & eAthena Team
+//===== Current Version: =====================================
+//= 1.6a
+//===== Compatible With: =====================================
+//= eAthena 0.1+; RO Episode 4+
+//===== Description: =========================================
+//= The Guild Manager allows the Guildmaster to invest in comerce
+//= and defense, hire guardians and kafras, go to the treasure room,
+//= and surrender the guild castle.
+//==============================================
+//= Break down of arguments used in the function:
+//=   arg(0): name of Castle Manager
+//=   arg(1): name of guild castle.
+//=   arg(2): x1 coordinate for warp to treasure room
+//=   arg(3): y1 coordinate for warp to treasure room
+//=   arg(4): guild script suffix for kafra, Guardian scripts etc.
+//===== Additional Comments: =================================
+//= 1.31: Added support for Emsolute Develop [celest]
+//= 1.2: All Guild manager scripts use this function. Optimized Comerce and Defense investment. [kobra_k88]
+//= 1.2a Function now returns to script that called it. Added disablenpc line to surrender castle option to remove kafra upon surrender.[kobra_k88]
+//= 1.2b U can't surrender the base during WOE [Lupus]
+//= 1.2c Fixed issue of guardians hp not increasing upon defense investment.[kobra_k88]
+//= 1.3 Now you can't install Guardians during WOE [Lupus]
+//= 1.4 Remove surrender abbility (Was 100% custom as far as I can tell) [Kayla]
+//= 1.41 Fixed possible Economy investment overflow with Emsolute Develop learnt [Lupus]
+//= 1.5 Official Novice Castles Menu (u can't invest / hire guardians) [Lupus]
+//= 1.6 According to recent info u can re-install Guardians during WoE [Lupus]
+//= 1.6a Fix for guild manager recognizing [KarLaeda]
+//============================================================
+
+
+
+//==============================================
+function	script	F_GldManager	{
+
+	set @GID, GetCastleData(getarg(1),1);
+	mes "[ "+getarg(0)+" ]";
+	if (@GID == 0){
+		mes "J'attends les ordres de mon Maître. Brave aventurier, suis ta destinée!";
+		return 0;
+	}
+	if (getcharid(2) != @GID){
+		mes "Je suis employé ici afin de suivre les ordres de Maïtre ^5533FF" + getguildmaster(@GID) + "^000000! Hé, vous ne faîtes même pas partie de la Guilde!";
+		mes "Gardiens! Saisissez cet intrus!";
+		return 0;
+	}
+	if (strcharinfo(0) != getguildmaster(@GID)){
+		mes "Vous n'êtes pas ^5533FF" + getguildmaster(@GID) + "^000000! Je suis employé ici afin de suivre les ordres de Maître ^5533FF" + getguildmaster(@GID) + "^000000.";
+		return 0;
+	}
+
+	mes "Bienvenue, Maître ^5533FF" + getguildmaster(@GID) + "^000000 ! Je vais vous assister du mieux possible!";
+	next;
+
+	//Novice Castles. (we don't need ELSE here. Menu has direct labels)
+	if(getarg(1) == "nguild_prt" || getarg(1) == "nguild_alde" || getarg(1) == "nguild_gef" || getarg(1) == "nguild_pay" )
+		menu "Emploi ou Renvoi d'une Kafra",M_Kafra, "Entrer dans la Salle des Coffres",M_Treas, "Annuler",M_End;
+
+	//Common WoE Castles	
+	menu 	"Résumé de l'Etat du Château",M_Base, "Investissements Commerciaux",M_Comrc, "Investissements Défensifs",M_Def, "Mise en Place de Gardiens",M_Guard, 
+		"Emploi ou Renvoi d'une Kafra",M_Kafra, "Entrer dans la Salle des Coffres",M_Treas, "Déménager",M_Change_Chateau, "Annuler",M_End;
+
+	//========================
+	M_Base:
+	//=========
+		mes "[ "+getarg(0)+" ]";
+		mes "Résumé des Investissements du Château.";
+		mes " ";
+		mes "Investissement Commercial Actuel: ^FF3322" + GetCastleData(getarg(1),2) + "^000000 points.";
+		mes "^0000ff - Vous avez investi " + GetCastleData(getarg(1),4) + " fois aujourd'hui.^000000";
+		next;
+		mes "[ "+getarg(0)+" ]";
+		mes "Investissement Défensif Actuel : ^FF3322" + GetCastleData(getarg(1),3)  + "^000000 points.";
+		mes "^0000ff- Vous avez investi " +  GetCastleData(getarg(1),5)  + " fois aujourd'hui.^000000";
+		mes " ";
+		return 0;
+
+	//========================
+	M_Comrc:
+	//=========
+		set @TriggerE,GetCastleData(getarg(1),4);
+		set @Economy,GetCastleData(getarg(1),2);
+		if(@Economy < 8) set @eco_invest,10000;
+		if(@Economy >= 8) set @eco_invest,20000;
+		if(@Economy >= 16) set @eco_invest,40000;
+		if(@Economy >= 25) set @eco_invest,80000;
+		if(@Economy >= 34) set @eco_invest,160000;
+		if(@Economy >= 44) set @eco_invest,320000;
+		if(@Economy >= 54) set @eco_invest,640000;
+		if(@Economy >= 65) set @eco_invest,1280000;
+		if(@Economy >= 76) set @eco_invest,2560000;
+		if(@Economy >= 88) set @eco_invest,5120000;
+
+		mes "[ "+getarg(0)+" ]";
+		if(@TriggerE == 2){
+			mes "^ff0000Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.^000000 J'espère que nos richesses ne cesseront de s'accroître!";
+ 			return 0;
+		}
+		if(@Economy >= 100){
+			mes "^ff0000L'investissement commercial de ce château a déjà atteint le maximum de 100 points. Il n'est plus nécessaire d'investir à nouveau.^000000";
+	 		return 0;
+		}
+		mes "Grâce aux Investissements Commerciaux, la production de la Guilde augmentera.";
+		mes "Si vous vous projetez dans l'avenir, un investissement est nécessaire.";
+		next;
+		mes "[ "+getarg(0)+" ]";
+		if(@TriggerE == 0) {
+			mes "Vous pouvez investir jusqu'à deux fois par jour. La seconde fois vous coûtera plus cher.";
+			mes "L'argent nécessaire pour cet investissement est de ^5533FF" + @eco_invest + "^000000 Zenys.";
+		} else {
+			set @eco_invest,@eco_invest*4;
+			mes "Vous avez déjà investi une fois aujourd'hui, vous pouvez investir à nouveau pour ^5533FF" + @eco_invest + "^000000 Zenys.";
+		}
+		next;
+		mes "[ "+getarg(0)+" ]";
+		mes "Voulez-vous investir?";
+		next;
+		menu "Investir en Commerce.",-,"Annuler.",M_End;
+
+			mes "[ "+getarg(0)+" ]";
+			if(Zeny < @eco_invest){
+				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";
+				return 0;
+			}
+			set Zeny,Zeny-@eco_invest;
+			SetCastleData getarg(1),4,@TriggerE+1;
+			// if we learnt Emsolute Develop there's 50% chance to get +1 investment again
+			SetCastleData getarg(1),2,@Economy + 1 + (getgdskilllv(@GID,10014)>0 && rand(100)>50 && @Economy<99);
+
+			mes "L'investissement a été pris en compte.";
+			return 0;
+
+	//=========================
+	M_Def:
+	//========
+		set @TriggerD,GetCastleData(getarg(1),5);
+		set @Defence,GetCastleData(getarg(1),3);
+		if(@Defence < 8) set @def_invest,20000;
+		if(@Defence >= 8) set @def_invest,40000;
+		if(@Defence >= 16) set @def_invest,80000;
+		if(@Defence >= 25) set @def_invest,160000;
+		if(@Defence >= 34) set @def_invest,320000;
+		if(@Defence >= 44) set @def_invest,640000;
+		if(@Defence >= 54) set @def_invest,1280000;
+		if(@Defence >= 65) set @def_invest,2560000;
+		if(@Defence >= 76) set @def_invest,5120000;
+		if(@Defence >= 88) set @def_invest,10240000;
+
+		mes "[ "+getarg(0)+" ]";
+		if(@TriggerD == 2){
+			mes "^ff0000Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.^000000 J'espère que nos richesses ne cesseront de s'accroître!";
+ 			return 0;
+		}
+		if(@Defence >= 100){
+			mes "^ff0000L'investissement défensif de ce château a déjà atteint le maximum de 100 points. Il n'est plus nécessaire d'investir à nouveau.^000000";
+	 		return 0;
+		}
+		mes "Grâce aux Investissements Défensifs, les Gardiens et l'Emperium deviendront plus résistants.";
+		mes "Si vous vous projetez dans l'avenir, un investissement est nécessaire.";
+		next;
+		mes "[ "+getarg(0)+" ]";
+		if(@TriggerD == 0) {
+			mes "Vous pouvez investir jusqu'à deux fois par jour. La seconde fois vous coûtera plus cher.";
+			mes "L'argent nécessaire pour cet investissement est de ^5533FF" + @def_invest + "^000000 Zenys.";
+		} else {
+			set @def_invest,@def_invest*4;
+			mes "Vous avez déjà investi une fois aujourd'hui, vous pouvez investir à nouveau pour ^5533FF" + @def_invest + "^000000 Zenys.";
+		}
+		next;
+		mes "[ "+getarg(0)+" ]";
+		mes "Voulez-vous investir?";
+		next;
+		menu "Investir en Défence.",-, "Annuler",M_End;
+
+			mes "[ "+getarg(0)+" ]";
+			if(Zeny < @def_invest){
+				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";
+				return 0;
+			}
+			set Zeny,Zeny-@def_invest;
+			SetCastleData getarg(1),5,@TriggerD+1;
+			SetCastleData getarg(1),3,@Defence+1;
+			// set new hp values for guardians
+			set @Defence, @Defence + 1;
+			set @AGuardian, 28634 + (@Defence*2000);
+			set @KGuardian, 30214 + (@Defence*2000);
+			set @SGuardian, 15670 + (@Defence*2000);
+			//set @AGuardian,strmobinfo(4,1285) + (@Defence*2000);
+			//set @KGuardian,strmobinfo(4,1286) + (@Defence*2000);
+			//set @SGuardian,strmobinfo(4,1287) + (@Defence*2000);
+			if (GetCastleData(getarg(1),10) == 1) SetCastleData getarg(1),18,@SGuardian;
+			if (GetCastleData(getarg(1),11) == 1) SetCastleData getarg(1),19,@SGuardian;
+			if (GetCastleData(getarg(1),12) == 1) SetCastleData getarg(1),20,@SGuardian;
+			if (GetCastleData(getarg(1),13) == 1) SetCastleData getarg(1),21,@AGuardian;
+			if (GetCastleData(getarg(1),14) == 1) SetCastleData getarg(1),22,@AGuardian;
+			if (GetCastleData(getarg(1),15) == 1) SetCastleData getarg(1),23,@KGuardian;
+			if (GetCastleData(getarg(1),16) == 1) SetCastleData getarg(1),24,@KGuardian;
+			if (GetCastleData(getarg(1),17) == 1) SetCastleData getarg(1),25,@KGuardian;
+
+			mes "L'investissement a été pris en compte.";
+			return 0;
+
+	//=========================
+	M_Guard:
+	//=========
+		mes "[ "+getarg(0)+" ]";
+		if (getgdskilllv(@GID,10002) == 0){
+			mes "Maître, je suis désolé, mais vous ne pouvez pas mettre en place de Gardiens pour le moment. Votre Guilde doit d'abord apprendre la compétence ^5533FFGuardian Research^000000.";
+			mes "La mise en place de Gardiens a été annulée.";
+			return 0;
+		}
+
+		set @Defence,GetCastleData(getarg(1),3);
+		set @Guardian0,guardianinfo(0);
+		set @Guardian1,guardianinfo(1);
+		set @Guardian2,guardianinfo(2);
+		set @Guardian3,guardianinfo(3);
+		set @Guardian4,guardianinfo(4);
+		set @Guardian5,guardianinfo(5);
+		set @Guardian6,guardianinfo(6);
+		set @Guardian7,guardianinfo(7);
+		set @AGuardian, 28634 + (@Defence*2000);
+		set @KGuardian, 30214 + (@Defence*2000);
+		set @SGuardian, 15670 + (@Defence*2000);
+		//set @AGuardian,strmobinfo(4,1285) + (@Defence*2000);
+		//set @KGuardian,strmobinfo(4,1286) + (@Defence*2000);
+		//set @SGuardian,strmobinfo(4,1287) + (@Defence*2000);
+
+		//uncomment the following line to disable guardians Installation during WoE
+		//if(agitcheck()) goto L_CantGuard;
+		mes "Voulez-vous mettre en place un Gardien? Les Gardiens protègeront le château des attaques ennemies.";
+		mes "Veuillez choisir un Gardien.";
+		next;
+	
+		menu "Soldier Guardian (" + @Guardian0 + "/" + @SGuardian + ")",L4_1,
+			"Soldier Guardian (" + @Guardian1 + "/" + @SGuardian + ")",L4_2,
+			"Soldier Guardian (" + @Guardian2 + "/" + @SGuardian + ")",L4_3,
+			"Archer Guardian (" + @Guardian3 + "/" + @AGuardian + ")",L4_4,
+			"Archer Guardian (" + @Guardian4 + "/" + @AGuardian + ")",L4_5,
+			"Knight Guardian (" + @Guardian5 + "/" + @KGuardian + ")",L4_6,
+			"Knight Guardian (" + @Guardian6 + "/" + @KGuardian + ")",L4_7,
+			"Knight Guardian (" + @Guardian7 + "/" + @KGuardian + ")",L4_8;
+	
+		L4_1:
+			if (GetCastleData(getarg(1),10) == 1) goto L_GotGuard;
+			set @GDnum,10;
+			set @GDnum2,18;
+			set @GuardianHP,@SGuardian;
+			goto L4_9;
+		L4_2:
+			if (GetCastleData(getarg(1),11) == 1) goto L_GotGuard;
+			set @GDnum,11;
+			set @GDnum2,19;
+			set @GuardianHP,@SGuardian;
+			goto L4_9;
+		L4_3:
+			if (GetCastleData(getarg(1),12) == 1) goto L_GotGuard;
+			set @GDnum,12;
+			set @GDnum2,20;
+			set @GuardianHP,@SGuardian;
+			goto L4_9;
+		L4_4:
+			if (GetCastleData(getarg(1),13) == 1) goto L_GotGuard;
+			set @GDnum,13;
+			set @GDnum2,21;
+			set @GuardianHP,@AGuardian;
+			goto L4_9;
+		L4_5:
+			if (GetCastleData(getarg(1),14) == 1) goto L_GotGuard;
+			set @GDnum,14;
+			set @GDnum2,22;
+			set @GuardianHP,@AGuardian;
+			goto L4_9;
+		L4_6:
+			if (GetCastleData(getarg(1),15) == 1) goto L_GotGuard;
+			set @GDnum,15;
+			set @GDnum2,23;
+			set @GuardianHP,@KGuardian;
+			goto L4_9;
+		L4_7:
+			if (GetCastleData(getarg(1),16) == 1) goto L_GotGuard;
+			set @GDnum,16;
+			set @GDnum2,24;
+			set @GuardianHP,@KGuardian;
+			goto L4_9;
+		L4_8:
+			if (GetCastleData(getarg(1),17) == 1) goto L_GotGuard;
+			set @GDnum,17;
+			set @GDnum2,25;
+			set @GuardianHP,@KGuardian;
+		L4_9:
+			mes "[ "+getarg(0)+" ]";
+			mes "Voulez-vous réellement mettre en place un Gardien? Cela vous coûtera ^5533FF10,000 Zenys^000000...";
+			next;
+			menu "Mise en Place",-, "Annuler",M_End;
+
+				if (Zeny < 10000){
+					mes "[ "+getarg(0)+" ]";
+					mes "Je suis désolé, Maître, mais vous n'avez pas assez d'argent.";
+					return 0;
+				}
+				set Zeny,Zeny-10000;
+				SetCastleData getarg(1),@GDnum,1;
+				SetCastleData getarg(1),@GDnum2,@GuardianHP;
+				return 1;
+
+		L_GotGuard:
+			mes "[ "+getarg(0)+" ]";
+			mes "Maître, ce Gardien a déjà été mis en place...";
+			emotion 4;
+			return 0;
+		L_CantGuard:
+			mes "Maître, vous ne pouvez pas mettre en place de Gardiens pendant la Guerre de l'Emperium.";
+			emotion 4;
+			return 0;
+
+	//===========================
+	M_Kaf:
+	//======
+		mes "[ "+getarg(0)+" ]";
+		if (GetCastleData(getarg(1),9) == 1) goto L_Dismiss;
+		if (getgdskilllv(@GID,10001) == 0){
+			mes "Maître, vous n'avez pas de contrat avec la Corporation Kafra.";
+			mes "Afin de pouvoir employer une Kafra, votre guilde doit dabord apprendre la compétence ^5533FFContract With Kafra^000000.";
+			return 0;
+		}
+
+		L_Hire:
+			mes "Voulez-vous employer une Kafra? Cela vous coûtera ^5533FF10 000 Zenys^000000... ";
+			next;
+			menu "Employer une Kafra",-,"Annuler",sM_KafEnd;
+
+				mes "[ "+getarg(0)+" ]";
+				if (Zeny < 10000){
+					mes "Maître, vous n'avez pas assez d'argent. L'emploi d'une Kafra a été annulé.";
+					return 0;
+				}
+				set Zeny,Zeny-10000;
+				enablenpc "Kafra Service#"+getarg(4);
+				SetCastleData getarg(1),9,1;
+				mes "Vous avez passé un contrat avec la Corporation Kafra.";
+				next;
+				cutin "kafra_01",2;
+				mes "[Employée Kafra]";
+				mes "C'est un honneur de pouvoir vous proposer mes services. Je vous aiderai au mieux.";
+				next;
+				cutin "kafra_01",255;
+				mes "[ "+getarg(0)+" ]";
+				mes "Je pense que cette Employée Kafra sera très bénéfique pour les membres de la Guilde.";
+				return 0;
+
+			sM_KafEnd:
+				mes "[ "+getarg(0)+" ]";
+				mes "Très bien, Maître. Mais je vous suggère d'employer une Kafra très bientôt!";
+				return 0;
+
+		L_Dismiss:
+			mes "Voulez-vous renvoyer l'Employée Kafra actuelle?";
+			next;
+			menu "Renvoi",-,"Annuler",sM_KafEnd2;
+
+				cutin "kafra_01",2;
+				mes "[Employée Kafra]";
+				mes "Si je ne vous ai pas servi au mieux, je vous présente toutes mes excuses.";
+				next;
+				menu "Renvoi",-,"Annuler",ssM_KafEnd2;
+
+					mes "[Employée Kafra]";
+					mes "Je suis confuse de ne pas avoir réussi à servir votre Guilde comme j'aurais dû....";
+					next;
+					disablenpc "Kafra Service#"+getarg(4);
+					SetCastleData getarg(1),9,0;
+					cutin "kafra_01",255;
+					mes "[ "+getarg(0)+" ]";
+					mes "L'Employée Kafra a été renvoyée. Cependant vous devriez en employer à nouveau le plus tôt possible!";
+					return 0;
+				ssM_KafEnd2:
+					mes "[Employée Kafra]";
+					mes "Merci, je ferai de mon mieux.";
+					return 0;
+			sM_KafEnd2:
+				mes "[ "+getarg(0)+" ]";
+				mes "Maître, je suggère que nous gardions notre Employée Kafra actuelle, elle se donne beaucoup de mal pour nous servir au mieux!";
+				return 0;
+
+	//=========================
+	M_Treas:
+	//========
+		mes "[ "+getarg(0)+" ]";
+		mes "Voulez-vous vous rendre dans la Salle des Coffres? Seul vous, le Chef de Guilde, est autorisé à entrer dans cette salle.";
+		next;
+		menu "Entrer.",-,"Annuler",sM_TresEnd;
+
+			mes "[ "+getarg(0)+" ]";
+			mes "Suivez-moi, je vais vous montrer le passage secret pour y accéder.";
+			mes "Vous devrez activer le petit levier dans la salle afin d'en resortir.";
+			next;
+			warp getarg(1),getarg(2),getarg(3);
+			return 0;
+		sM_TresEnd:
+			mes "[ "+getarg(0)+" ]";
+			mes "Nous recevons des coffres chaque jour.";
+			mes "Vous devriez en prendre possession chaque fois que vous le pouvez.";
+			return 0;
+
+
+	//==========================
+	M_End:
+	//=======
+		mes "[ "+getarg(0)+" ]";
+		mes "Très bien, Maître.";
+		return 0;
+}

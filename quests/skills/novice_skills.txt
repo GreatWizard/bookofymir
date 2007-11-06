@@ -1,0 +1,246 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Novice Skills Quests
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 1.4b
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Customized novice skills quest
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Fixed a Zeny exploit, made more variables clear
+//= on finishing quests. [Lupus]
+//= 1.4 Fixed exploits [Lupus]
+//= 1.4a Fixed some typos [IVBela]
+//============================================================ 
+
+
+
+//<---------------------------------------------------------------------------------------------- Nurse Aid: First Aid NPC ---------------------------------------------------------------------------->\\
+prt_in,235,133,4	script	Nurse Aid	90,{
+	mes "[Infirmière]";
+	if(FIRSTAID){
+		if((JobLevel <  3) || (countitem(507) < 5 ) || (countitem(705) < 5) || (countitem(930) < 1)) goto sM_Yes;
+		delitem 507,5;
+		delitem 705,5;
+		delitem 930,1;
+		mes "Oh parfait, vous avez apporté tout le nécessaire pour que je puisse vous apprendre comment pratiquer les premiers soins. Commençons la leçon pratique...";
+		next;
+		mes "....... une heure plus tard.......";
+		next;
+		skill 142,1,0;
+		set FIRSTAID,0;
+		set got_bandage,0;
+		mes "[Infirmière]";
+		mes "Oui! Voilà comme ça! Vous avez parfaitement compris le mouvement. Vous pourrez maintenant soigner vos blessures légères et continuer le combat. Prenez soin de vous!";
+		emotion e_no1;
+		close;
+	}
+	if(getskilllv(142)>0){
+		mes "Re-bonjour. J'espère que mon enseignement sur les premiers soins vous est utile!";
+		close;
+	}
+	mes "Oh, bonjour! Vous semblez fatigué... Avez-vous combattu des monstres, en dehors de la ville?";
+	next;
+	menu "Ha! Je suis FORT comme un TAUREAU!!",-, "Et bien... en quelque sorte...",M_Yep;
+
+		mes "[Infirmière]";
+		mes "Oh je vois. Vous devez être un puissant guerrier. Revenez si vous avez besoin de quelques soins.";
+		close;
+	M_Yep:
+		mes "[Infirmière]";
+		mes "Oh, ne vous inquiétez pas. C'est normal d'avoir du mal à combattre lorsqu'on est inexpérimenté.";
+		next;
+		mes "[Infirmière]";
+		mes "Je le sais car j'ai soigné de nombreuses personnes dans le même état que vous. Il y a tellement de blessés parfois, que je n'ai pas le temps de tous les soigner!";
+		next;
+		mes "[Infirmière]";
+		mes "~Soupir~";
+		next;
+		mes "[Infirmière]";
+		mes "C'est pour cette raison que j'ai décidé d'apprendre aux gens à soigner eux-même leurs petits bobos! Est-ce que ça vous intéresserait?";
+		emotion e_ic;
+		next;
+		menu "Vous le feriez?",sM_Yes, "(...elle est folle!...courrons!)",-;
+
+			mes "[Infirmière]";
+			mes "Hé! ... Où allez-vous?...";
+			emotion e_swt;
+			close;
+		sM_Yes:
+			mes "[Infirmière]";
+			mes "Je peux vous apprendre à pratique les premiers soins, mais vous devez avoir au minimum le ^0000ffNiveau de Job 3^000000.";
+			mes "Vous devrez également m'apporter:^ff0000 5 Red Herbs^000000,^00bb00 5 Clovers^000000, et ^aaaa001 Old Bandage^000000.";
+			next;
+			mes "[Infirmière]";
+			mes "Allez voir l'^0000ffAssistant des Novices^000000 au deuxième étage du Château de Prontera, il vous aider à réunir ces objets.";
+			next;
+			mes "[Infirmière]";
+			mes "Revenez me voir ensuite, d'accord?";
+			set FIRSTAID,1;
+			close;				
+}
+
+
+//<-------------------------------------------------------------------------------------------------- Bulma: Play Dead -------------------------------------------------------------------------------------------->\\
+prt_in,73,87,2	script	Bulma	98,{
+	mes "[Bulma]";
+	if(BaseJob != Job_Novice){
+		mes "Ouais je sais... J'ai l'air cool... Après tout, je fais partie de la Cavalerie de Prontera!";
+		emotion e_heh;
+		next;
+		mes "[Bulma]";
+		mes "Cela ne fait pas longtemps que je suis Chevalier, mais l'armure me va plutôt bien, non?";
+		emotion e_hmm;
+		close;
+	}
+	if(JobLevel < 7){
+		mes "Bonjour mon jeune ami. Vous me rappelez moi-même quand j'étais plus jeune...";
+		mes "Hé hé, ces vieux jours me manquent... Que de bons moments passés...";
+		next;
+		mes "[Bulma]";
+		mes "De nombreux coups durs, mais grâce à la compétence ^5555FFFaire le Mort^000000 (Play Dead), dès le ^5555FFNiveau de Job 7^000000, tout est allé mieux.";
+		mes "Si vous voulez en savoir plus, revenez lorsque vous serez un peu plus expérimenté.";
+		close;
+	}
+	if(PLAYDEAD){
+		if(countitem(7039)<1){
+			mes "Hé! Que faîtes-vous ici? Vous ne devriez pas errer ainsi, le temps c'est de l'argent!!";
+			emotion e_gasp;
+			next;
+			mes "[Bulma]";
+			mes "Allez! Plus vite! Plus vite! Plus VITE!!";
+			emotion e_go;
+			close;
+		}
+		delitem 7039, 1;
+		mes "Re-bonjour, nous allons commencer votre entraînement...";
+		next;
+		mes "[Bulma]";
+		mes "Commençons par définir le concept du but à atteindre... Jouer la comédie! Jouer la comédie nécessite, tout comme au théâtre, de bien cerner le rôle à jouer.";
+		next;
+		mes "[Bulma]";
+		mes "Vous devez apprendre à penser, ressentir, et même vivre comme le personnage que vous interprétez, afin de pouvoir parfaitement comprendre ses motivations, à n'importe quel moment.";
+		next;
+		mes "[Bulma]";
+		mes "Nous allons utiliser cette capacité à jouer la comédie afin de faire semblant d'être mort, pour échapper temporairement au danger.";
+		mes "Pensez comme quelqu'un qui serait mort, ressentez comme un mort, mangez, respirez, dormez, etc. tout comme le ferait une personne morte!!";
+		next;
+		mes "[Bulma]";
+		mes "Ne restez pas planté là! Allongez vous sur le sol et faîtes donc le mort!";
+		next;
+		mes "~ plusieurs heures plus tard ~";
+		next;
+		mes "[Bulma]";
+		mes "Ok, lumières, caméra, et... ACTION! Oui... oui... OUI!! C'est parfait!! En vous voyant ainsi allongé, j'ai vraiment cru que vous étiez mort!";
+		mes "Quelle performance excellente, bravo!!";
+		emotion e_gasp;
+		next;
+		mes "[Bulma]";
+		mes "En restant concentré et motivé, vous pourrez faire le mort à n'importe quel moment.";
+		emotion e_no1;
+		skill 143,1,0;
+		set PLAYDEAD, 0;
+		set got_novnametag,0;
+		close;
+	}
+	if(getskilllv(143)>0){
+		mes "Oui... Je me souviens maintenant... de toutes ces années embarrassantes en tant que Novice... Heureusement que je savais faire le mort!";
+		mes "Cela m'a sauvé de nombreuses fois par le passé. Je suis certain que ça vous sera utile à vous aussi.";
+		next;
+		mes "[Bulma]";
+		mes "Heureusement que vous savez le faire avec brio! Si vous avez des amis novices qui veulent s'essayer à la comédie, n'hésitez pas à me les envoyer pour un petit stage de théâtre!";
+		close;
+	}
+	mes "Bonjour mon ami.  Vous me rappelez moi-même quand j'étais plus jeune... Hé hé, ces vieux jours me manquent... Que de bons moments passés...";
+	mes "On dirait que je suis devenu un vieux sentimental........";
+	next;
+	mes "[Bulma]";
+	mes "Tout ça pour dire que si vous aussi vous travaillez dur et montrez un peu de patience, je suis sûr que vous arriverez à décrocher un métier tôt ou tard.";
+	mes "Restez concentré sur votre objectif, et ne perdez jamais votre détermination!";
+	next;
+	mes "[Bulma]";
+	mes "Hum... Je pourrais peut-être vous aider...";
+	emotion e_hmm;
+	next;
+	mes "[Bulma]";
+	mes "Ha ha, ne prenez pas cet air surpris. Ce que j'ai à vous offrir peut vous être extrêmement utile.";
+	next;
+	mes "[Bulma]";
+	mes "Je peux vous apprendre à ^5555FFFaire le Mort^000000 (Play Dead).";
+	mes "Cette compétence vous permet de faire comme si vous étiez mort, vous protégeant temporairement du danger.";
+	next;
+	mes "[Bulma]";
+	mes "J'ai moi-même utilisé cette compétence de nombreuses fois du temps où j'étais encore un Novice.";
+	mes "Cela peut sembler facile, mais il faut beaucoup travailler afin d'arriver à maîtriser cette compétence.";
+	next;
+	mes "[Bulma]";
+	mes "Le moindre mouvement, et personne ne croira que vous êtes réellement mort! Et si vous êtes entouré de monstres... SQUIK!!";
+	next;
+	mes "[Bulma]";
+	mes "Je crois que je vous en ai dis suffisamment... Vos yeux me disent que vous mourez d'envie d'apprendre cette compétence!";
+	next;
+	mes "[Bulma]";
+	mes "Tout d'abord, avalez cette pilule...";
+	next;
+	mes "(vous prenez et avalez la pilule) ~gloups~";
+	next;
+	mes "[Bulma]";
+	mes "Bien. Maintenant allez voir l'^0000ffAssistant des Novices^000000 au deuxième étage du Château de Prontera, il vous donnera une petite chose dont j'ai besoin.";
+	next;
+	mes "[Bulma]";
+	mes "Vous devrez me rapporter cette chose en moins de ^FF555510 minutes^000000!";
+	mes "Si vous n'y arrivez pas à temps, la pilule que vous venez juste d'avaler libèrera un poison mortel qui vous empêchera de respirer!.....";
+	next;
+	mes "[Bulma]";
+	mes "Héhéhé... Non, je plaisante! La pilule est juste un calmant léger, rassurez-vous.";
+	emotion e_heh;
+	next;
+	mes "[Bulma]";
+	mes "Allez-y! Plus vite! Plus vite! Plus VITE!!";
+	emotion e_go;
+	set PLAYDEAD, 1;
+	close;
+}
+
+
+//Newbie Assistant------------------------------------------------------------------------------
+prt_castle,174,147,2	script	Newbie Assistant	84,{
+	mes "[Assistant des Novices]";
+	if(BaseJob != Job_Novice){
+		mes "Ce que je fais ici? J'essaye simplement d'aider les Novices inexpérimentés qui sont un peu perdus. Mais si, vous voyez très bien de quoi je parle... Vous aussi, vous avez été Novice, un jour!";
+		emotion e_what;
+		close;
+	}
+	if(FIRSTAID && countitem(930)==0 && !got_bandage){
+		mes "Alors comme ça, l'infirmière vous a dit de venir me voir? Ah, qu'elle est gentille... Vous avez de la chance qu'elle vous aide ainsi. Tenez, prenez ceci.";
+		next;
+		getitem 930,1;
+		set got_bandage,1;
+		mes "[Assistant des Novices]";
+		mes "Vous en aurez besoin pour apprendre à pratiquer les premiers soins.";
+		next;
+		mes "[Assistant des Novices]";
+		mes "Quand je regarde cette infirmière travailler, je ne peux m'empêcher de ressentir de l'admiration. On dirait un ange descendu des cieux...";
+		next;
+		mes "[Assistant des Novices]";
+		mes "Sa beauté, sa grâce.... Parfois j'aimerais..... (rougit).......... hum.... bon... euh... Dîtes lui bonjour de ma part.";
+		emotion e_lv;
+		close;
+	}
+	if(PLAYDEAD && countitem(7039)==0 && !got_novnametag){
+		mes "Alors comme ça, Bulma vous a dit de venir me voir? Tenez, prenez ceci.";
+		getitem 7039,1;
+		set got_novnametag,1;
+		next;
+		mes "Bonne chance dans vos aventures!";
+		close;
+	}
+	mes "Bonjour. Je suis ici afin d'aider les Novices tout comme vous. Si vous avez besoin de quelque chose en particulier, n'hésitez pas à vous adresser à moi.";
+	close;
+}

@@ -1,0 +1,386 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par MageGaHell, corrigé par Myllena
+//===== eAthena Script ======================================= 
+//= Thief Skills Quests
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 1.4b
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Sand Attack, Back Slide, Find Stone, Stone Fling skill quests.
+//===== Additional Comments: ================================= 
+//= v1.0 Fully working
+//= v1.1 Changed Sand Attack requirements from 5 Grit to 5 Fine Grit and a
+//= Leather Bag of Infinity.  These are the official RO requirements
+//= Added npc RuRumuni, maker of Leather Bag of Infinity. [kobra_k88]
+//= v1.1a Now using functions found in "Global_Functions.txt" for
+//= class checks.[kobra_k88]
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed exploit [Lupus]
+//= 1.4a Fixed some typos [IVBela]
+//= 1.4b changed perm. variables to temp ones [Lupus]
+//============================================================ 
+
+
+
+//======================================================================================================
+moc_prydb1,154,128,4	script	Alcouskou	118,{
+	mes "[Alcouskou]";
+	if(baseClass == Job_Thief) goto L_Start;
+	if(BaseJob==Job_Novice) goto L_Novice;
+
+L_Other:
+	mes "Z'êtes pas l'genre d'la maison...Dehors!";
+	close;
+
+L_Novice:
+	mes "La plupart des Assassins et des Voleurs et même les vulgaires Rogues ont des compétence communes qui les aident à... faire ce qu'ils doivent faire. Mais la plupart n'ont pas les capacités qui les rendent vraiment 'spéciaux'!";
+	next;
+	mes "[Alcouskou]";
+	mes "Il s'trouve que j'suis le SEUL qui peut enseigner ces compétences 'spéciales'!";
+	mes "Si tu décide de devenir Voleur, Rogue ou Assassin, r'viens ici et j't'apprendrais ces trucs cools.";
+	next;
+	mes "[Alcouskou]";
+	mes "Et si tu connais quelqu'un qu'est déjà l'un d'eux, envoie-le moi! J'enseigne à tous ceux qui sont intéressés.";
+	close;
+
+L_Start:
+	mes "Durant ta longue et rude vie, tu vas devoir affronter beaucoup d'choses...";
+	mes "Parfois, t'auras du mal à comprendre certains trucs qui vont t'arriver et à en tirer profit, certaines expériences te paraîtront p't'être inutiles...";
+	next;
+	mes "[Alcouskou]";
+	mes "Mais fais attention à n'pas juger trop vite! Quelques-uns de ces défis finiront par être importants et pourront te sauver la vie un jour.";
+	next;
+	mes "[Alcouskou]";
+	mes "Laisse moi t'expliquer :";
+M_Menu:
+	next;
+	menu "-Sand Attack",M_Sand, "-Back Slide",M_Back, "-Find Stone",M_Find, "-Stone Fling",M_Fling, "-Je reviendrai plus tard.",M_End;
+
+	M_Sand:
+		mes "[Alcouskou]";
+		if(@SANDATTACK) goto L_Sand;
+		if(getskilllv(149) > 0) goto L_GotSand;
+		mes "Un des aspect les plus importants d'un bon Voleur, Rogue ou Assassin, c'est d'être discret. C'est de n'être vu ou touché que si on l'veut bien!";
+		next;
+		mes "[Alcouskou]";
+		mes "Certains considèrent qu'c'est de la lâcheté. Moi, j'pense pas ça du tout!";
+		mes "On vit dans un monde cruel, où l'on s'en sort toujours. Tu dois tout faire pour survivre...";
+		next;
+		mes "[Alcouskou]";
+		mes "Même par exemple, balancer du sable dans la figure de l'ennemi. C'est pour ça que la compétence, ^5555FFSand Attack^000000, a été créée.";
+		next;
+		mes "[Alcouskou]";
+		mes "Cette compétence sert à lancer du sable précisément dans les yeux des ennemis, pour les aveugler un moment.";
+		mes "Ça les empêche de se défendre ou d'attaquer correctement, c'qui te donne un grand mais bref avantage.";
+		next;
+		mes "[Alcouskou]";
+		mes "Pour apprendre cette compétence, tu dois me rapporter ^5555FF5 Fine Grit^000000 et un ^FF3355'Leather Bag of Infinity'^000000.";
+		if(BaseJob == Job_Thief) mes "Et tu dois aussi être au moins du Niveau de Job ^5555FF25^000000.";
+		next;
+		mes "[Alcouskou]";
+		mes "Tu peux trouver le 'Leather Bag of Infinity' auprès d'un marchand du nom de ^5533FFRuRumuni^000000.";
+		mes "J'crois qu'il traîne ^009500dans la partie Ouest de la ville de Payon^000000.";
+		next;
+		mes "[Alcouskou]";
+		mes "R'viens quand t'auras tout!";
+		set @SANDATTACK, 1;
+		goto M_Menu;
+	M_Back:
+		mes "[Alcouskou]";
+		if(@BACKSLIDE)goto L_Back;
+		if(getskilllv(150)>0) goto L_GotBack;
+		mes "Les gens ont tendance à ne voir que l'attaque et les dégâts, mais 'faut bien comprendre que FUIR c'est AUSSI IMPORTANT que d'attaquer!";
+		next;
+		mes "[Alcouskou]";
+		mes "Nous les Voleurs, les Assassin et les Rogues, on est fiers d'notre capacité à esquiver les coups et d'notre agilité.";
+		next;
+		mes "[Alcouskou]";
+		mes "Mais si on est touché rien qu'UNE fois, ce simple coup peut nous mettre dans de sales draps! Enfin, ça dépend du monstre...";
+		next;
+		mes "[Alcouskou]";
+		mes "J'peux comprendre que ce soit marrant de regarder un monstre qui nous rate à chaque assaut, mais ...";
+		next;
+		mes "[Alcouskou]";
+		mes "Si t'es attaqué par un gros groupe d'monstres... T'auras pas assez d'place pour les esquiver tous et là, ça ne va plus être drôle...";
+		next;
+		mes "[Alcouskou]";
+		mes "C'est pour ça qu'nous les Voleurs, Assassin et Rogues, on fuit quand on voit un gros tas d'monstres.";
+		mes "On est les seuls à pouvoir s'en sortir si on est surpris par une meute!";
+		next;
+		mes "[Alcouskou]";
+		mes "On est les seuls à avoir développé une compétence pour fuir très vite ces hordes d'monstres dangereuses.";
+		mes "Cette compétence nous permet d'faire retraite très vite, mettant une grande distance entre nous et les monstres.";
+		next;
+		mes "[Alcouskou]";
+		mes "On appelle cette compétence ^5555FFBack Slide^000000 et elle demande un long entraînement pour être maîtrisée.";
+		mes "Si tu veux l'apprendre, rapporte-moi d'abord ^5555FF20 Grasshopper's Legs^000000.";
+		next;
+		mes "[Alcouskou]";
+		mes "Considère que c'est la première épreuve d'l'entraînement.";
+		if(BaseJob == Job_Thief) mes "Si t'es un Voleur, il faut qu'tu sois au moins au Niveau de Job ^5555FF35^000000.";
+		set @BACKSLIDE, 1;
+		goto M_Menu;
+	M_Find:
+		mes "[Alcouskou]";
+		if(@FINDSTONE) goto L_Find;
+		if(getskilllv(151)>0) goto L_GotFind;
+		mes "Les membres les plus expérimentés et les plus doués de notre guilde sont très habiles.";
+		mes "Ils peuvent transformer un banal cailloux en une arme mortelle!";
+		next;
+		mes "[Alcouskou]";
+		mes "Ils peuvent balancer un roc avec une telle puissance et une telle précision que personne ne peut l'éviter.";
+		mes "Parfois, ils peuvent même le lancer si fort qu'ils arrivent à assommer l'ennemi.";
+		next;
+		mes "[Alcouskou]";
+		mes "Bien sûr, c'est pas n'importe quel cailloux qui peut faire une bonne arme. C'est pourquoi la compétence ^5555FFFind Sone^000000, a été développée.";
+		mes "Avec la pratique et l'expérience, on peut vite repérer les cailloux qui ont une forme et un poid parfait pour être 'balancer'.";
+		next;
+		mes "[Alcouskou]";
+		mes "Une fois maîtrisée, cette compétence permet au Voleur, au Rogue ou à l'Assassin de toujours trouver les bons cailloux, n'importe où.";
+		next;
+		mes "[Alcouskou]";
+		mes "Mais avant que j't'apprenne cette compétence, il va m'falloir faire un p'tit entraînement. Commence donc par m'rapporter ^5555FF1 Bear's Footskin^000000, et dégotte moi ^5555FF1 Zargon^000000. Ensuite rapporte-moi aussi ^5555FF5 Spawn^000000. Quand t'as tout, reviens m'voir!";
+		next;
+		mes "[Alcouskou]";
+		mes "Trouver ces trucs te permettront d'apprendre le sens de l'observation nécessaire pour maîtriser 'Find Stone'.";
+		set @FINDSTONE, 1;
+		goto M_Menu;
+	M_Fling:
+		mes "[Alcouskou]";
+		if(@STONEFLING) goto L_Fling;
+		if(getskilllv(152)>0) goto L_GotFling;
+		mes "Les membres les plus expérimentés et les plus doués de notre guilde sont très habiles.";
+		mes "Ils peuvent transformer un banal cailloux en une arme mortelle!";
+		next;
+		mes "[Alcouskou]";
+		mes "Ils peuvent balancer un roc avec une telle puissance et une telle précision que personne ne peut l'éviter.";
+		mes "Parfois, ils peuvent même le lancer si fort qu'ils arrivent à assommer l'ennemi.";
+		next;
+		mes "[Alcouskou]";
+		mes "Ils appèlent cette compétence: ^5555FFStone Fling^000000. C'est super utile et ça coute pas un zeny!";
+		next;
+		mes "[Alcouskou]";
+		mes "Si tu veux que j't'apprenne cette compétence, rapporte moi ^5555FF2 Garlet et 2 Scell^000000.";
+		mes "Tu dois aussi parfaitement maîtriser ^5555FFFind Stone^000000.";
+		set @STONEFLING, 1;
+		goto M_Menu;
+	M_End:
+		mes "[Alcouskou]";
+		mes "T'as pas encore assez d'expérience, p'tit...";
+		close;
+
+L_Sand:
+	if(countitem(7041)<5 || countitem(7042)<1) goto L_NotRdy1;
+	if(BaseJob==Job_Thief && JobLevel<25) goto L_LowLvl1;
+	delitem 7041, 5;
+	delitem 7042, 1;
+	mes "Ok, t'as tout c'qui faut. Bon, maintenant faut apprendre.... L'ultime.... attaque.... Sand Attack!!!";
+	next;
+	mes "[Alcouskou]";
+	mes "Regarde à tes pieds. Tu vois? L'truc c'est qu'tu te tiens juste sur le secret ultime de cette attaque...... Le SABLE!!";
+	next;
+	mes "[Alcouskou]";
+	mes "Ok, prends-en une bonne poignée... Oui, ça devrait suffire... Bon, maintenant...";
+	next;
+	mes "[Alcouskou]";
+	mes "BALANCE LE SUR MOI!!!";
+	emotion e_go;
+	next;
+	mes "[Alcouskou]";
+	mes "(AHHH!! Mes YEUX!!! Espèce de...)......... Ouais, tu vois comme c'est efficace........ (RAHH! ça gratte!).......";
+	emotion e_omg;
+	next;
+	mes "[Alcouskou]";
+	mes "Voilà, c'est tout c'qu'y'a à savoir....... (Raaah, j'en ai partout!!).... Et oui, Sand Attack, faut l'utiliser en dernier recours...... (ARGGGHH, c'est HORRIBLE!!)";
+	next;
+	mes "[Alcouskou]";
+	mes "Oh, ça fait des dégâts de l'élément Terre, c'est bon à savoir... (Faut vraiment qu'j'trouve un autre moyen d'enseigner ça).........";
+	emotion e_swt;
+	skill 149,1,0;
+	set @SANDATTACK, 0;
+	close;
+
+	L_NotRdy1:
+		mes "T'as besoin de ^5555FF5 Fine Grit^000000 et d'un ^FF3355'Leather Bag of Infinity'^000000.";
+		next;
+		mes "[Alcouskou]";
+		mes "Tu peux trouver le 'Leather Bag of Infinity' auprès d'un marchand du nom de ^5533FFRuRumuni^000000.";
+		mes "J'crois qu'il traîne ^009500dans la partie Ouest de la ville de Payon^000000.";
+		close;
+	L_LowLvl1:
+		mes "Faut qu'tu sois au moins au ^5555FFNiveau de Job 25^000000 pour apprendre Sand Attack.";
+		close;
+	L_GotSand:
+		mes "Oh, t'es revenu... Pas pour m'lancer du sable dans les yeux, j'espère, hé hé.... hé........ hé..............";
+		emotion e_swt;
+		close;
+
+L_Back:
+	if(countitem(940)<20) goto L_NotRdy2;
+	if(BaseJob==Thief && JobLevel<35) goto L_LowLvl2;
+	delitem 940,20;
+	mes "Cool, t'as les 'Grasshopper Legs'. Pendant que tu les 'récoltais', j'suis sûr que t'as remarqué les caractéristiques particulières de ces sauterelles.";
+	next;
+	mes "[Alcouskou]";
+	mes "T'as besoin de savoir ça, parce que cette compétence est basée sur le mouvement des sauterelles. Comme elles, tu devras être rapide, agile et pouvoir réagir en un clin d'oeil.";
+	next;
+	mes "[Alcouskou]";
+	mes "Ok, alors, on commence........";
+	next;
+	mes "~fwoosh~";
+	next;
+	mes "~fwooooosh~";
+	next;
+	mes "~fwoooooooooooooooosh~";
+	next;
+	mes "[Alcouskou]";
+	mes "Ah! T'as chopé l'truc. Comme un pro. Avec cette compétence, être encerclé par les monstres, c'est du passé!";
+	skill 150,1,0;
+	set @BACKSLIDE, 0;
+	close;
+
+	L_NotRdy2:
+		mes "T'as besoin de ^5555FF20 Grasshopper's Legs^000000.";
+		close;
+	L_LowLvl2:
+		mes "Tu dois être au moins au ^5555FFJNiveau de Job 35^000000 pour apprendre Back Slide.";
+		close;
+	L_GotBack:
+		mes "J'vois qu't'as déjà 'Back Slide'..... Pourquoi tu 'retournes' pas loin d'ici...";
+		close;
+
+L_Find:
+	if(countitem(912)<1 || countitem(948)<1 || countitem(908)<5) goto L_NotRdy3;
+	delitem 912,1;
+	delitem 948,1;
+	delitem 908,5;
+	mes "Ah! J'vois qu't'es complètement préparé à apprendre cette compétence. Alors, commençons....";
+	next;
+	mes "[Alcouskou]";
+	mes "Y'a plein de cailloux sur le sol, ici. Prends-les un par un et examine-les bien.";
+	mes "Essaye de reconnaître chacun par leur poids et ressens bien leurs textures.";
+	next;
+	mes "[Alcouskou]";
+	mes "Tu dois faire qu'un avec le roc... C'est la seule méthode pour l'utiliser correctement...";
+	next;
+	mes "~ une heure plus tard... ~";
+	next;
+	mes "[Alcouskou]";
+	mes "Très bien. T'as choisis les bons cailloux. J'pense ça veut dire que tu maîtrises bien la compétence Find Stone.";
+	emotion e_no1;
+	skill 151,1,0;
+	set @FINDSTONE, 0;
+	next;
+	mes "[Alcouskou]";
+	mes "Eclates-toi avec ça.";
+	close;
+
+	L_NotRdy3:
+		mes "T'as besoin de ^5555FF1 Bear's Footskin, 1 Zargon, et 5 Spawns^000000 pour apprendre Find Stone.";
+		close;
+	L_GotFind:
+		mes "Ramasser des cailloux peut être amusant...... Mais passe pas la journée à faire que ça, ok?";
+		close;
+
+L_Fling:
+	if(getskilllv(151) == 0) goto L_NotRdy4;
+	if((countitem(910)<2) || (countitem(911)<2)) goto L_NotRdy4;
+	delitem 910,2;
+	delitem 911,2;
+	mes "Bien! T'es prêt à apprendre la compétence 'Stone Fling'. Alors, on commence...";
+	next;
+	mes "[Alcouskou]";
+	mes "D'abord, baisse moi ce bras. Ensuite, prend un bon caillou avec 'Find Stone'. Serre le bien, lève le bras. Maintenant ferme les yeux et visualise la cible en pensée.";
+	next;
+	mes "[Alcouskou]";
+	mes "Maintenant, imagine-toi aller en ligne droite vers la cible ! Continue de visualiser ça, yeux fermés!";
+	next;
+	mes "~ 1/2 heure plus tard ... ~";
+	next;
+	mes "[Alcouskou]";
+	mes "Pense que le cailloux est une extension de ton corps. Garde la cible bien en tête! Tu ne fais qu'un avec le roc, le roc ne fait qu'un avec toi...";
+	next;
+	mes "[Alcouskou]";
+	mes "Ouvre les yeux! REGARDE LA CIBLE!! Jette la pierre comme si tu te jetais sur la cible! FAIS LE MAINTENANT!!";
+	emotion e_go;
+	next;
+	mes "!!Whooooouuchh!!.................!! Tchack!!";
+	next;
+	mes "[Alcouskou]";
+	mes "Ha, ha! Excellent! En plein dans le mille! Maintenant, tu maîtrises 'Stone Fling', félicitations.";
+	emotion e_no1;
+	skill 152,1,0;
+	set @STONEFLING, 0;
+	next;
+	mes "[Alcouskou]";
+	mes "Comme tu peux le voir, cette compétence repose sur la concentration.";
+	mes "Tant que t'arriveras à rester concentrer, t'auras aucun soucis pour l'utiliser.";
+	close;
+
+	L_NotRdy4:
+		mes "T'as besoin de ^5555FF2 Scell et 2 Garlet^000000, et de savoir utiliser ^5555FFFind Stone^000000 pour apprendre Stone Fling.";
+		close;
+	L_GotFling:
+		mes "Alors, on prend l'habitude de 'Stone Fling', hein? Fais juste gaffe de pas toucher le mauvais monstre...";
+		close;
+}
+
+
+//====================================================================================
+payon,91,77,4	script	RuRumuni	99,{
+	mes "[RuRumuni]";
+	if(@SANDATTACK && !countitem(7042)) goto L_Start;
+
+	mes "Je suis un humble marchand de Payon. J'achète du cuir et des peaux, rapportés par les chasseurs, pour en faire des sacs de cuir que je vend.";
+	mes "J'ai grandi dans le milieu de la maroquinerie, alors le cuir, ça me connaît. Je peux tout faire avec.";
+	next;
+	mes "[RuRumuni]";
+	mes "Il y a une Guilde de Voleurs à Morroc...";
+	mes "Je connais quelqu'un là bas qui m'envoie des Voleurs qui ont besoin de certains de mes objets 'spéciaux' comme mon fameux ^5533FF'Leather Bag of Infinity'^000000.";
+	close;
+
+L_Start:
+	if(@BAGNFNTY == 1) goto L_Check;
+	mes "Salut. Alors vous êtes envoyé par Alcouskou pour avoir un ^5533FF'Leather Bag of Infinity'^000000...";
+	mes "Je serrais ravi de vous en faire un...";
+	next;
+	mes "[RuRumuni]";
+	mes "Mais ce sac est très spécial, et j'ai besoin de certains objets spéciaux pour le fabriquer.";
+	next;
+	set @BAGNFNTY, 1;
+
+L_List:
+	mes "[RuRumuni]";
+	mes "Voilà ce qu'il me faudrait :";
+	mes "- 5 ^5533FFScorpion Tails^000000";
+	mes "- 1 ^5533FFCobweb^000000";
+	mes "- 1 ^5533FFCactus Needle^000000";
+	mes "- 1 ^5533FFEarthworm Peeling^000000.";
+	next;
+	mes "[RuRumuni]";
+	mes "Si vous pouvez me rapporter tout ça, je vous ferais un 'Bag of Infinity'.";
+	close;
+
+L_Check:
+	mes "Ravi de vous revoir. Vous avez tout ce qu'il me faut? Voyons voir...";
+	next;
+	if(countitem(904)<5 || countitem(1025)<1 || countitem(952)<1 || countitem(1055)<1) goto L_List;
+	delitem 904, 5;
+	delitem 1025, 1;
+	delitem 952, 1;
+	delitem 1055, 1;
+	mes "[RuRumuni]";
+	mes "Parfait, vous avez tout ce que j'ai demandé. Je commence à vous faire le sac tout de suite.......";
+	next;
+	mes "~( 30 minutes plus tard )~";
+	next;
+	mes "[RuRumuni]";
+	mes "Et voilà, un 'Leather Bag of Infinity'. Prenez!";
+	getitem 7042, 1;
+	set @BAGNFNTY, 0;
+	close;
+}

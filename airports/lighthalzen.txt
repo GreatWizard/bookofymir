@@ -1,0 +1,80 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Lighthalzen Airport Staff
+//===== By: ================================================== 
+//= L0ne_W0lf, Muad_Dib
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena Revision 3000+
+//===== Description: ========================================= 
+//= Lighthalzen Airport Staff
+//===== Additional Comments: ================================= 
+//= 1.0 Cloned from einbroch.txt [Justin84]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.2 Fixed syntax errors for duplicate [KarLaeda]
+//============================================================
+
+
+lhz_airport,126,43,4	script	Hôtesse#1::AirportL	90,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bienvenue a l'Aéroport.";
+	mes "En quoi puis-je vous aider?";
+	next;
+	menu "Embarquer",-,"Annuler",L_Cancel;
+
+		mes "[Personnel de l'Aéroport]";
+		mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas a payer ces frais. Voulez-vous prendre le zeppelin?";
+		next;
+		menu "Oui",-,"Non",L_Cancel;
+
+		if(countitem(7311) > 0) goto GotTicket;
+		if(zeny < 1200) goto L_NoZeny;
+		set Zeny,zeny-1200;
+		warp "lhz_airport",148,51;
+		close;
+
+	GotTicket:
+		delitem 7311,1;
+		warp "lhz_airport",148,51;
+		close;
+
+	L_NoZeny:
+		mes "[Personnel de l'Aéroport]";
+		mes "Vous n'avez pas assez d'argent.";
+		close;
+
+	L_Cancel:
+		mes "[Personnel de l'Aéroport]";
+		mes "Merci. Passez une agréable journée!";
+		close;
+}
+
+lhz_airport,143,43,4	duplicate(AirportL)	Hôtesse#2	90
+lhz_airport,156,43,4	duplicate(AirportL)	Hôtesse#3	90
+
+lhz_airport,126,51,4	script	Hôtesse#4::AirportL2	90,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bienvenue~";
+	mes "Veuillez suivre ce chemin afin d'embarquer sur le zeppelin.";
+	next;
+	menu "Retourner au Terminal Principal",-,"Annuler",L_Cancel;
+
+		mes "[Personnel de l'Aéroport]";
+		mes "Si vous quittez le Terminal Principal, vous devrez à nouveau payer les frais d'embarquement.";
+		mes "Voulez-vous vraiment sortir?";
+		next;
+		menu "Oui",-,"Non",L_Cancel;
+
+			warp "lhz_airport",142,40;
+			close;
+
+	L_Cancel:
+		mes "[Personnel de l'Aéroport]";
+		mes "D'accord. Merci de votre confiance. Nous esperons que vous passerez un agréable voyage.";
+		close;
+}
+
+lhz_airport,143,51,4	duplicate(AirportL2)	Hôtesse#5	90
+lhz_airport,156,51,4	duplicate(AirportL2)	Hôtesse#6	90

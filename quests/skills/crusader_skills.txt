@@ -1,0 +1,97 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Crusader Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.3a
+//===== Compatible With: ===================================== 
+//= eAthena Revision 3800+
+//===== Description: ========================================= 
+//= Temp quests for new skills for 2nd classes
+//===== Additional Comments: ================================= 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//============================================================
+
+
+//============================================================
+// CRUSADER SKILL - SHRINK
+//============================================================
+geffen,110,118,3	script	Ford	752,{
+	mes "[Ford]";
+	if(BaseJob!=Job_Crusader) goto L_nocruz;
+	if(getskilllv(1002)) goto L_alreadyhave;
+	mes "Je peux vous apprendre quelque chose de très intéressant... si vous me rapportez quelques petites choses.";
+	mes "Rapportez-moi ceci, et je verrais si je suis d'humeur à vous enseigner une chose importante:";
+	next;
+	mes "[Ford]";
+	mes "1 Red Potion";
+	mes "20 Sticky Mucus";
+	mes "3 Empty Bottles";
+	mes "5 Jellopies";
+	mes "1 Unripe Apple";
+	mes "1 Grape";
+	mes "1 Coal";
+	mes "3 Cyfars";
+	next;
+	
+	mes "[Ford]";
+	mes "Voyons-voir ce que vous avez rapporté...";
+	next;
+	
+	if(countitem(501)<1 || countitem(938)<20 || countitem(713)<3 || countitem(909)<5 || countitem(619)<1 || countitem(514)<1 || countitem(1003)<1 || countitem(7053)<3)goto L_noitems;//Items: Red_Potion, Sticky_Mucus, Empty_Bottle, Jellopy, Unripe_Apple, Grape, Coal, Cyfar,
+	delitem 501, 1;//Items: Red_Potion,
+	delitem 938, 20;//Items: Sticky_Mucus,
+	delitem 713, 3;//Items: Empty_Bottle,
+	delitem 909, 5;//Items: Jellopy,
+	delitem 619, 1;//Items: Unripe_Apple,
+	delitem 514, 1;//Items: Grape,
+	delitem 1003, 1;//Items: Coal,
+	delitem 7053, 3;//Items: Cyfar,
+	mes "[Ford]";
+	mes "Il est l'heure de lancer mon dé de la chance!";
+	mes "Bonne chance, je ne perds jamais.";
+//TODO: add DICE emotions? 8)
+	emotion e_gg;
+	next;
+	if(rand(1,6)!=3) goto L_lose;
+	emotion 58;
+	next;
+	
+	skill 1002,1,0;
+	mes "[Ford]";
+	mes "Je ne peux pas y croire... J'ai perdu!";
+	mes "Je ne perds JAMAIS...";
+	emotion e_sob;
+	close;
+	
+L_noitems:
+	mes "[Ford]";
+	mes "Je suis désolé, mais il vous manque certains objets...";
+	close;
+		
+L_lose:
+	emotion 63;
+	next;
+	mes "[Ford]";
+	mes "J'ai encore gagné!!";
+	mes "Je ne vous enseignerai rien cette fois-ci. Revenez tenter votre chance quand vous voulez!";
+	close;
+	
+L_nocruz:
+	mes "Si vous n'êtes pas Crusader, vous n'avez rien à faire ici... Allez, déguerpissez!";
+	close;
+	
+L_alreadyhave:
+	mes "Hé, vous êtes un sacré chanceux, vous!";
+	close;
+}

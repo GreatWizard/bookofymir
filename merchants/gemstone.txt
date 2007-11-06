@@ -1,0 +1,95 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Gemstone trader
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAhena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Trade various colors of gemstones for other color gemstones.
+//===== Additional Comments: ================================= 
+//= 1.0 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Any notes pertaining to the prior trader may be found
+//=	in the cities/payon.txt
+//============================================================ 
+
+payon,173,238,5	script	Jade#gem01pay	754,{
+	//Ensure the player can hold at least one item
+	//set max_max_c,CheckMaxCount;
+	//if (max_max_c == 1) {
+	//	mes "^3355FFWait a second! Right now, you're carrying too many items with you. Please come back after putting some of your things into Kafra Storage.^000000";
+	//	close;
+	//}
+	mes "[Jade]";
+	mes "Si vous m'apportez deux Gemmes de la même couleur, je peux vous l'échanger contre une Gemme de couleur différente.";
+	next;
+	switch(select("Gemmes Bleues en Gemmes Rouges!:Gemmes Rouges en Gemmes Jaunes!:Gemmes Jaunes en Gemmes Bleues!")) {
+	case 1: callsub S_TradeGems,717,716;
+	case 2: callsub S_TradeGems,716,715;
+	case 3: callsub S_TradeGems,715,717;
+	}
+
+S_TradeGems:
+	if (countitem(getarg(0)) < 2) {
+		mes "[Jade]";
+		mes "Hé...!";
+		mes "Vous plaisantez, j'espère!";
+		mes "Je ne peux pas vous donner des "+getitemname(getarg(1))+"s si vous ne m'apportez pas au moins 2 "+getitemname(getarg(0))+"s!";
+		close;
+	}
+	else {
+		set .@gems,countitem(getarg(0))/2;
+		mes "[Jade]";
+		mes "Avec les "+getitemname(getarg(0))+"s que vous avez apportées, je peux vous proposer au maximum " + .@gems + " " + getitemname(getarg(1)) + "s";
+		mes "Que voulez-vous faire?";
+		next;
+		switch(select("Donnez-m'en le plus possible.:Je vais choisir la quantité.:Finalement rien, merci.")) {
+		case 1:
+			delitem getarg(0),.@gems * 2;
+			getitem getarg(1),.@gems;
+			mes "[Jade]";
+			mes "Tenez, voici vos Gemmes.";
+			mes "Revenez quand vous voulez, j'en ai encore tout un stock.";
+			close;
+		case 2:
+			mes "[Jade]";
+			mes "Combien en voulez-vous?";
+			mes "La limite est de 100.";
+			next;
+			while(1) {
+				input .@input;
+				if (.@input == 0) {
+					mes "[Jade]";
+					mes "Rien du tout?";
+					mes "Je présume que vous avez changé d'avis...";
+					close;
+				}
+				else if (.@input > 100) {
+					mes "[Jade]";
+					mes "Hum... Je vous ai dit que le nombre maximum était 100!";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+
+			if (.@gems > .@input) {
+				delitem getarg(0),.@input * 2;
+				getitem getarg(1),.@input;
+				mes "[Jade]";
+				mes "Tenez, voici vos Gemmes.";
+				mes "Revenez quand vous voulez, j'en ai encore tout un stock.";
+			}
+			close;
+		case 3:
+			mes "[Jade]";
+			mes "Très bien... Revenez si vous avez besoin de quelque chose.";
+			close;
+		}
+	}
+}

@@ -1,0 +1,441 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Alberta Town
+//===== By: ================================================== 
+//= DZeroX
+//===== Current Version: ===================================== 
+//= 1.02
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= Town-specific Alberta NPCs
+//===== Additional Comments: ================================= 
+//= 1.0 Converted from Aegis 10.4 [DZeroX]
+//= 1.02 Optimized, missing next, REMOVED .GATs! again [Lupus]
+//============================================================
+
+alberta,97,51,0	script	Fabian	84,{
+	mes "[Fabian]";
+	mes "Quand on voyage partout dans le monde comme moi, on entend beaucoup de rumeurs. L'une de celles que j'ai entendu récemment est particulièrement intéressante...";
+	next;
+	mes "[Fabian]";
+	mes "Apparemment, il existerait des cartes qui porteraient en elles le pouvoir de certains monstres...";
+	mes "Si on obtient l'une de ces cartes, le pouvoir du monstre en question sera dompté!";
+	next;
+	mes "[Fabian]";
+	mes "Bah! Mais je ne crois pas trop à cette rumeur en fait.";
+	close;
+}
+
+alberta,53,39,0	script	Steiner	100,{
+	mes "[Steiner]";
+	mes "Oh, on dirait que vous n'êtes pas d'ici. Bienvenue à Alberta.";
+	next;
+	mes "[Steiner]";
+	mes "Je réfléchissais à quelques nouvelles idées pour améliorer mon commerce...";
+	next;
+	mes "[Steiner]";
+	mes "Voyez-vous, j'ai entendu dire qu'une boutique à Geffen vendait des armures totalement inédites, qui résistent aux attaques magiques!";
+	mes "Si je pouvais trouver un moyen pour en acheter un stock à bas prix, puis les revendre dans d'autres villes...";
+	next;
+	mes "[Steiner]";
+	mes "Cling! (vous voyez des dollars apparaître dans ses yeux)";
+	emotion e_cash;
+	close;
+}
+
+alberta,20,183,0	script	Chad	49,{
+	mes "[Chad]";
+	mes "On dit que la Lance Légendaire, la ^0000ffGungnir^000000 ne rate jamais sa cible. Si c'est vrai, c'est vraiment épatant!";
+	close;
+}
+
+alberta,189,151,5	script	Fisk	100,{
+	mes "[Fisk]";
+	mes "Hey ho matelot! Où veux-tu aller?";
+	switch(select("Bateau Echoué -> 250 Zenys.","Marina d'Izlude -> 500 Zenys.","Annuler.")) {
+		case 1:
+			next;
+			if (Zeny < 250) {
+				mes "[Fisk]";
+				mes "Je suis désolé, mais le voyage coûte 250 Zenys.";
+				mes "Reviens quand tu auras assez d'argent.";
+				close;
+			}
+			set Zeny,Zeny - 250;
+			warp "alb2trea",43,53;
+			end;
+		case 2:
+			next;
+			if (Zeny < 500) {
+				mes "[Fisk]";
+				mes "Je suis désolé, mais le voyage coûte 500 Zenys.";
+				mes "Reviens quand tu auras assez d'argent.";
+				close;
+			}
+			set Zeny,Zeny - 500;
+			warp "izlude",176,182;
+			end;
+		case 3:
+			next;
+			mes "[Fisk]";
+			mes "C'est ça... Reste sur le plancher des vaches...";
+			close;
+	}
+}
+
+alb2trea,39,50,6	script	Fisk#a2t	100,{
+	mes "[Fisk]";
+	mes "Alors, tu veux retourner à Alberta?";
+	if(select("Oui, s'il vous plaît.","J'ai changé d'avis.")==1)
+		warp "alberta",192,169;
+	close;
+}
+
+alberta,131,139,2	script	Deagle	54,{
+	mes "[Deagle]";
+	mes "(~hips~)... Hum?... Qu-Qu'est ce que vous r'gardez? 'lez vous-en!!";
+	switch(select("Rester.","Le laisser tranquille.")) {
+		case 1:
+			next;
+			mes "[Deagle]";
+			mes "Hahahaha (~hips~)... Vous êtes un nerveux, hein... Hé... J'ai peut être l'air en piteux état, mais autrefois j'étais un marin très beau garçon qui naviguait sur le 'Going Mary'.";
+			switch(select("C'est un bateau?","Vraiment? Vous plaisantez!")) {
+				case 1:
+					next;
+					mes "[Deagle]";
+					mes "Quoi? Vous n'en avez jamais entendu parler? Imbécile! Tout le monte connaît que célèbre bateau pirate 'Going Mary'! (~hips~)";
+					next;
+					mes "[Deagle]";
+					mes "Ah~ C'était le bon vieux temps... Si seulement... Si seulement il n'y avait pas eu cette tempête... (~hips~)";
+					next;
+					mes "[Deagle]";
+					mes "AH~ Capitaine! Mon Capitaine me manque tellement.... Rien ne pouvait survivre à l'épée du Capitaine.";
+					mes "CAPITAINE~~~!!! (~HIPS~) Il donnait des coups d'épée COMME ÇA!... et... ET PUIS...!!!";
+					close;
+				case 2:
+					next;
+					mes "[Deagle]";
+					mes "Ah~ C'était le bon vieux temps... Si seulement... Si seulement il n'y avait pas eu cette tempête... (~hips~)";
+					next;
+					mes "[Deagle]";
+					mes "AH~ Capitaine! Mon Capitaine me manque tellement.... Rien ne pouvait survivre à l'épée du Capitaine.";
+					mes "CAPITAINE~~~!!! (~HIPS~) Il donnait des coups d'épée COMME ÇA!... et... ET PUIS...!!!";
+					next;
+					mes "[Deagle]";
+					mes "Son ennemi, et puis tout autour de lui prenait flammes! Maintenant que j'y pense, cette épée devait avoir de mystérieux pouvoirs magiques.";
+					next;
+					mes "[Deagle]";
+					mes "(~soupir~) (~snif, snif~)... Mon dieu ce qu'ils me manquent... Et voilà c'est malin, maintenant je suis déprimé. Allez-vous en et laissez moi.....";
+					emotion e_sob;
+					close;
+			}
+		case 2:
+			next;
+			mes "[Deagle]";
+			mes "C'est ça! Allez-vous en!~";
+			emotion e_pif;
+			close;
+	}
+}
+
+alberta,58,80,2	script	Shakir	99,{
+	mes "[Shakir]";
+	if (rand(2)) {
+		mes "Nous autres les marchands pouvons ouvrir notre propre boutique pour faire commerce. En plus grâce à notre compétence ^0000ffDiscount^000000 nous pouvons acheter les objets moins cher!";
+		next;
+		mes "[Shakir]";
+		mes "Nous pouvons aussi louer des charrettes afin d'y conserver nos objets à mettre en vente, ou tout ce qui pourrait se montrer encombrant en combat.";
+	} else {
+		mes "We Merchants can";
+		mes "open roadside stands";
+		mes "to do business.";
+		next;
+		mes "[Shakir]";
+		mes "Nous autres les marchands pouvons revendre nos objets plus cher que la normale grâce à notre compétence ^ff0000Overcharge^000000.";
+		next;
+		mes "[Shakir]";
+		mes "Nos taux bonus de revente peuvent atteindre jusqu'à 24%!!";
+	}
+	close;
+}
+
+alberta,62,156,2	script	Sonya	102,{
+	mes "[Sonya]";
+	switch(rand(3)){
+	case 0:
+		mes "Avez-vous déjà vu ces ours au regard perdu, qui vivent dans la forêt qui relie Alberta à Payon?";
+		mes "Mais si, vous savez... Ceux qui jouent à chasser les mouches.";
+		next;
+		mes "[Sonya]";
+		mes "Et bien, un jour, j'ai voulu joué avec l'un d'entre eux, en lui lançant un morceau de bois. Tout d'un coup, il m'a FONCE DESSUS!";
+		next;
+		mes "[Sonya]";
+		mes "J'ai eu SIII peur!! J'ai sauté sur le côté pour l'éviter, et puis BOUM!!! Il s'est cogné contre l'arbre qui était derrière moi et est resté assommé.";
+		emotion e_wah;
+		next;
+		mes "[Sonya]";
+		mes "J'ai appris une leçon ce jour là. Ne JAMAIS énerver les animaux.";
+		close;
+	case 1:
+		mes "Une fois, alors que je me baladais dans la forêt, j'ai aperçu un magnifique brin d'herbe qui se détachait des autres par sa taille et sa finesse.";
+		next;
+		mes "[Sonya]";
+		mes "J'ai voulu m'en approcher pour le toucher, mais à ce moment là, devinez quoi? Le brin d'herbe m'a fouetté la main!";
+		next;
+		mes "[Sonya]";
+		mes "J'étais abasourdie alors qu'ai regardé plus attentivement. J'ai réalisé qu'en fait, ce n'était pas un brin d'herbe, mais une petite créature des bois.";
+		emotion e_gasp;
+		next;
+		mes "[Sonya]";
+		mes "Même les monstres qui ne sont pas agressifs au premier abord peuvent faire très mal! Alors faîtes bien attention si vous allez vous balader en forêt...";
+		close;
+	case 2:
+   		mes "Saviez-vous que les loups sont solidaires entre eux? Si l'un d'entre eux est attaqué, toute la meute viendra à son secours.";
+		next;
+		mes "[Sonya]";
+   		mes "Soyez prudent si vous attaquez l'un d'entre eux.";
+		close;
+	}
+}
+
+alberta,93,174,2	script	Grand-Mère Alma	103,{
+	mes "[Grand-Mère Alma]";
+	mes "Il y a longtemps, un bateau a dérivé et est finalement arrivé dans le port d'Alberta. Quelques jeunes gens, piqués par la curiosité, sont allés voir à l'intérieur du bateau et ont retrouvé des survivants.";
+	next;
+	mes "[Grand-Mère Alma]";
+	mes "Mais après quelques instants, ils sont tous partis en courrant tellement ils étaient terrifiés. Il ont dit avoir vu des squelettes animés!";
+	next;
+	mes "[Grand-Mère Alma]";
+	mes "Le bateau était également envahit de monstres marins qui effrayèrent les habitants et les empêcha de s'approcher du bateau à nouveau.";
+	next;
+	mes "[Grand-Mère Alma]";
+	mes "Nous n'avons jamais été capable de faire quoi que ce soit pour ce bateau hanté, alors on l'a simplement laissé là, espérant qu'un jour, il coulerait ou bien repartirait ailleurs à la dérive.";
+	next;
+	mes "[Grand-Mère Alma]";
+	mes "Ce bateau se nomme maintenant ^0000ddSunken Ship^000000.";
+	next;
+	mes "[Grand-Mère Alma]";
+	mes "Les jeunes guerriers tentent parfois de pénétrer dans le bateau fantôme afin de tester leurs capacités...";
+	next;
+	mes "[Grand-Mère Alma]";
+	mes "Mais ce bateau fantôme est un réel problème pour Alberta, bien qu'il attire de nombreux touristes...";
+	next;
+	mes "[Grand-Mère Alma]";
+	mes "Je dois dire que jamais je ne penserai à risquer ma vie pour jeter un oeil à l'intérieur......";
+	close;
+}
+
+alberta,195,151,2	script	Paul	86,{
+	mes "[Paul]";
+	mes "Bonjour! Souhaitez-vous entrer dans le bateau Echoué (Sunken Ship)?";
+	next;
+	mes "[Paul]";
+	mes "Oh! Je dois vous prévenir, ce n'est pas un endroit pour les froussards! Seuls les valeureux guerriers peuvent survivre à une telle excursion.";
+	emotion e_gasp;
+	next;
+	mes "[Paul]";
+	mes "Qu'en dîtes-vous? L'entrée ne coûte que 200 Zenys. Divertissement garanti!";
+	switch(select("Entrer","S'en aller")) {
+		case 1:
+			next;
+			if (Zeny < 200) {
+				mes "[Paul]";
+				mes "Je suis désolé, mais l'entrée coûte 200 Zenys.";
+				mes "Revenez quand vous aurez assez d'argent.";
+				close;
+			} else {
+				set Zeny,Zeny - 200;
+				warp "alb2trea",62,69;
+				close;
+			}
+		case 2:
+			next;
+			mes "[Paul]";
+			mes "Revenez quand vous voudrez.";
+			close;
+	}
+}
+
+alberta,190,173,4	script	Phelix	85,{
+	set .@weight,MaxWeight-Weight;
+	mes "[Phelix]";
+	if ((.@weight) < 10000) {
+		mes "Je suis désolé, mais vous ne pouvez pas porter autant de choses à la fois.";
+		close;
+	}
+	if (@event_zelopy == 0) {
+		mes "Que diable faîtes-vous ici? Rien n'est gratuit à bord de ce bateau, vous savez! Si vous voulez un salaire, il faut travailler!!";
+		next;
+		mes "[Phelix]";
+
+		mes "Hum, ceci dit, vous pouvez tout de même participer à mon commerce... Je troque vos Jellopys contre certains objets, si vous voulez.";
+		mes " - Pour ^0000ff10 Jellopys^000000 je peux vous donner ^ff00001 Red Potion^000000.";
+		mes " - Pour ^0000ff3 Jellopys^000000 je peux vous donner ^ff00001 Carrot^000000.";
+		next;
+		mes "[Phelix]";
+		mes "Qu'en dîtes-vous?";
+		set @event_zelopy,1;
+		close;
+	} else {
+		mes "Hum... Alors, vous voulez échanger des Jellopies?";
+		switch(select("Oui, contre des Red Potions.","Oui, contre des Carrots.")) {
+		case 1:
+			next;
+			mes "[Phelix]";
+			mes "D'accord, voyons-voir ce que vous avez là...";
+			next;
+			mes "[Phelix]";
+			if (countitem(909) < 10) {
+				mes "Hum... J'avais dit 10 Jellopies pour 1 Red Potion.";
+				close;
+			} else {
+				set .@max,countitem(909)/10;
+				mes "Combien en voulez-vous?";
+				switch(select("Autant que possible.","Je vais choisir la quantité.","Euh, rien finalement.")) {
+				case 1:
+					delitem 909,.@max*10;
+					next;
+					getitem 501,.@max;
+					mes "[Phelix]";
+					mes "Et voilà, comme promis!";
+					close;
+				case 2:
+					next;
+					mes "[Phelix]";
+					mes "Entrez un chiffre s'il vous plaît. Si vous souhaitez annuler, entrez 0.";
+					input .@amount;
+					next;
+					mes "[Phelix]";
+					if (.@amount <= 0) {
+						mes "D'accord, à plus tard.";
+						close;
+					}
+					if (.@amount > 100) {
+						mes "Je suis désolé, mais je peux vous en fournir 100 au maximum.";
+						close;
+					}
+					if (countitem(909) < .@amount*10) {
+						mes "Je suis désolé, mais il vous manque des objets.";
+						close;
+					}
+					delitem 909,.@amount*10;
+					next;
+					getitem 501,.@amount;
+					mes "[Phelix]";
+					mes "Et voilà, comme promis!";
+					close;
+				case 3:
+					next;
+					mes "[Phelix]";
+					mes "D'accord, à plus tard.";
+					close;
+				}
+			}
+		case 2:
+			next;
+			mes "[Phelix]";
+			mes "D'accord, voyons-voir ce que vous avez là...";
+			next;
+			mes "[Phelix]";
+			if (countitem(909) < 3) {
+				mes "Hum... J'avais dit 3 Jellopies pour 1 Carrot.";
+				close;
+			} else {
+				set .@max,countitem(909)/3;
+				mes "Combien en voulez-vous?";
+				switch(select("Autant que possible.","Je vais choisir la quantité.","Euh, rien finalement.")) {
+				case 1:
+					delitem 909,.@max*3;
+					next;
+					getitem 515,.@max;
+					mes "[Phelix]";
+					mes "Et voilà, comme promis!";
+					close;
+				case 2:
+					next;
+					mes "[Phelix]";
+					mes "Entrez un chiffre s'il vous plaît. Si vous souhaitez annuler, entrez 0.";
+					input .@amount;
+					next;
+					mes "[Phelix]";
+					if (.@amount == 0) {
+						mes "D'accord, à plus tard.";
+						close;
+					}
+					if (.@amount > 100) {
+						mes "Je suis désolé, mais je peux vous en fournir 100 au maximum.";
+						close;
+					}
+					if (countitem(909) < .@amount*10) {
+						mes "Je suis désolé, mais il vous manque des objets.";
+						close;
+					}
+					delitem 909,.@amount*3;
+					next;
+					getitem 515,.@amount;
+					mes "[Phelix]";
+					mes "Et voilà, comme promis!";
+					close;
+				case 3:
+					next;
+					mes "[Phelix]";
+					mes "D'accord, à plus tard.";
+					close;
+				}
+			}
+		}
+	}
+}
+
+alberta,43,49,5	script	Marchand	89,{
+	mes "[Machen]";
+	mes "Pourquoi...?";
+	mes "Pourquoi ma famille, autrefois si prospère et prestigieuse, a été réduite à néant?";
+	next;
+	mes "[Machen]";
+	mes "Depuis que les Alcheshs sont venus à Alberta, ils ont pris notre place en tant que plus grande famille marchande...";
+	close;
+}
+
+alberta,43,244,8	script	Touriste#al	99,{
+	mes "[Touriste]";
+	mes "Où suis-je...?";
+	mes "...Qui suis-je?";
+	next;
+	mes "[Touriste]";
+	mes "..........";
+	next;
+	mes "[Touriste]";
+	mes ".....";
+	next;
+	mes "[Touriste]";
+	mes "........";
+	next;
+	mes "[Touriste]";
+	mes "Muahahahahahahaha!!";
+	next;
+	mes "[Touriste]";
+	mes "...J'adore le chocolat!";
+	next;
+	mes "[Touriste]";
+	mes "Attends...";
+	mes "J'ai une petite amie...";
+	mes "et...et...";
+	mes "elle me faisait des cookies...?";
+	mes "Je me sens tellement perdu...";
+	next;
+	mes "[Touriste]";
+	mes "^3355FFNe jamais parler aux fous~^000000";
+	close;
+}
+
+alberta,165,83,4	script	Vieil Homme	755,{
+	mes "[Frank]";
+	mes "Mon dos~";
+	mes "Il est tellement tendu!";
+	mes "Et mes yeux me font de plus en plus mal.";
+	mes "*Soupir* Je deviens vieux...";
+	close;
+}

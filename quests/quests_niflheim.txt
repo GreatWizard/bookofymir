@@ -1,0 +1,301 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Niflheim
+//===== By: ================================================== 
+//= The eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Book of Devil		(MISC_QUEST | 256)
+//= Piano Key Ouest		(MISC_QUEST | 32)
+//===== Additional Comments: ================================= 
+//= 1.0 Initial release, moved Book of Devil and Piano quest
+//=	from npc/cities/niflheim.txt [Evera]
+//= 1.1 Optimized Book of Devil quest. used bit-wise var,
+//=	Optimized Piano Quest - now uses 1 variable [Lupus]
+//============================================================ 
+
+//=============================================================
+//Quest for Book of Devil
+//=============================================================
+niflheim,184,199,5	script	Filette#02	793,{
+	mes "[Sairin]";
+	if(MISC_QUEST & 256){
+		mes "Merci encore!";
+		close;
+	}
+	if(@niflheimlost == 2){
+		mes "Vous l'avez trouvé??";
+		mes "Oh merci!";
+		mes "Tenez, prenez ceci en guise de remerciements.";
+		getitem 642,1;//Items: Book of Devil,
+		set MISC_QUEST,MISC_QUEST | 256;
+		set @niflheimlost,0;
+		close;
+	}
+	if(@niflheimlost == 1){
+M_YES:
+		set @niflheimlost,1;
+		mes "Trouvez-le s'il vous plaît?! Et dîtes-lui où je suis! La dernière fois que je l'ai vu, il n'était pas loin de cette ville, vers l'ouest...";
+		close;
+	}
+	mes "S'il vous plaît, est-ce que vous pourriez m'aider?";
+	if(BaseJob==Job_Novice){
+		mes "Oh... toi aussi tu es perdu...";
+		close;
+	}
+	next;
+	menu "Oui",-, "Non",M_NO;
+
+	mes "[Sairin]";
+	mes "Mon ami et moi on était partis se ballader, et puis d'un coup on s'est retrouvés dans un endroit étrange.";
+	next;
+	mes "[Sairin]";
+	mes "Après, j'ai trouvé une poupée par terre. Et quand je l'ai ramassée, elle s'est transformée en fantôme!";
+	next;
+	mes "[Sairin]";
+	mes "J'ai crié?et j'ai couru aussi vite que j'ai pû! Quand je me suis arrêtée de courir, je me suis retrouvée? dans cette ville bizarre...";
+	next;
+	mes "[Sairin]";
+	mes "Personne ici ne veut m'aider, et il y a des fantômes partout! Vous pourriez m'aider à retrouver mon ami?";
+	next;
+	menu "Bien sûr",M_YES, "Non",M_NO;
+M_NO:
+	close;
+}
+
+nif_fild01,213,268,5	script	Petit Garçon	797,{
+	if(MISC_QUEST & 256){
+L_DONE:
+		set @niflheimlost,2;
+		mes "[Marius]";
+		mes "Merci de nous avoir aidés!";
+		close;
+	}
+	if(@niflheimlost == 2) goto L_PART2;
+	if(@niflheimlost == 1){
+		mes "[Marius]";
+		mes "Qui êtes-vous?";
+		mes "...";
+		mes "Vous avez trouvé Sairin?";
+		mes "Elle s'est réfugiée à Niflheim?";
+		next;
+L_PART2:
+		mes "[Marius]";
+		mes "Pourriez-vous lui dire que je suis en chemin?";
+		mes "Je ne vais pas très vite, et c'est très important qu'elle sache que je vais bien.";
+		next;
+		menu "Oui",L_DONE, "Non",-;
+		close;	
+	}
+	mes "[Marius]";
+	mes "Sairin... Où es-tu?";
+	close;
+}
+
+//=============================================================
+//Piano Quest
+//=============================================================
+niflheim,224,243,3	script	Alager	795,{
+	mes "[Alager]";
+	mes "Muahaha, j'adore la viande...";
+	mes "Tu as l'air... délicieux!";
+	next;
+	mes "[Alager]";
+	mes "Je vais te manger...";
+	next;
+	mes "-Chronk miam slurp-";
+	if(nif_piano&1 || (MISC_QUEST & 32)) goto L_end;
+	percentheal -60,0;
+	next;
+	mes "[Alager]";
+	mes "Ahhh, ça fait longtemps que je n'avais pas mangé de viande si délicieuse!";
+	mes "En tant qu'ancien chef d'un grill, j'apprécie la bonne viande.";
+	mes "Rien de tel qu'un petit filet de boeuf,";
+	mes "grillé à point...";
+	mes "Hum, ça serait délicieux...";
+	next;
+	mes "[Alager]";
+	mes "Ah, laisse-moi t'offrir ceci en guise de remerciement.";
+	mes "Je l'ai trouvé par terre, hoho~";
+	getitem 7184,1;//Items: Piano Key,
+	set nif_piano, nif_piano|1;
+	close;
+L_end:
+	percentheal -30,0;
+ 	close;
+}
+
+nif_in,105,81,3	script	Crayu	794,{
+	mes "[Crayu]";
+	mes "Ah, il y avait ce poème...";
+	mes "Son auteur et sa date d'écriture sont inconnus,";
+	mes "mais on le connaît depuis un long moment...";
+	next;
+	mes "[Crayu]";
+	mes "^FF0000Quand le soleil se couche sur les collines occidentales,^000000";
+	mes "^FF0000Quand le crépuscule déploie son obscurité de velour,^000000";
+	mes "^FF0000La mélodie de la mort enveloppe ton âme,^000000";
+	mes "^FF0000Et le Seigneur de la Mort réveille son courroux.^000000";
+	next;
+	mes "[Crayu]";
+	if(nif_piano&2 || (MISC_QUEST & 32)){
+		mes "Je me demande ce que ça signifie...";
+		mes "Si tu lis attentivement,";
+		mes "on dirait qu'il y a un sens caché,";
+		mes "comme si c'était un secret bien gardé,";
+		mes "caché à l'intérieur de ces mots...";
+		close;
+	}
+	set @nif_random,rand(1,4);
+	mes "Hé, ça te dit un petit examen?";
+	mes "Récite moi la ligne n° " + @nif_random + " du poème";
+	mes "que je viens juste de te déclamer!";
+	next;
+	input @inputstr1$;
+	switch(@nif_random){
+	case 1:
+		set @str1$,"Quand le soleil se couche sur les collines occidentales,";
+		break;
+	case 2:
+		set @str1$,"Quand le crépuscule déploie son obscurité de velour,";
+		break;
+	case 3:
+		set @str1$,"La mélodie de la mort enveloppe ton âme,";
+		break;
+	case 4:
+		set @str1$,"Et le Seigneur de la Mort réveille son courroux.";
+		break;
+	}
+	mes "[Crayu]";
+	if(@inputstr1$ == @str1$){
+		mes "Hoho... Je vois que tu m'as écouté attentivement!";
+		mes "Mon nom est Grey, je suis un poète errant,";
+		mes "et tu as été mon meilleur public jusqu'à présent.";
+		mes "Tiens, voici ta récompense.";
+		getitem 7184,1;//Items: Piano Key,
+		set nif_piano, nif_piano|2;
+		next;
+		mes "[Crayu]";
+		mes "J'espère que tu écouteras les autres poètes";
+		mes "avec autant d'intérêt que celui que tu m'as porté, adieu!";
+		close;
+	}
+	mes "Ah... Si tu avais fait un peu plus attention,";
+	mes "tu aurrais sû la bonne réponse!";
+	mes "Reviens me voir si tu veux tenter ta chance à nouveau,";
+	mes "quand tu t'en souviendras mieux!";
+	close;
+}
+
+nif_in,31,20,3	script	Kurtz	794,{
+	mes "[Kurtz]";
+	mes "Le commerce est vraiment mauvais ces temps-ci...";
+	mes "Même du temps où j'étais vivant,";
+	mes "mes affaires n'allaient déjà pas bien!";
+	if(nif_piano&4 || (MISC_QUEST & 32)) close;
+	next;
+	mes "[Kurtz]";
+	mes "Hé! Toi là bas! Débarasse-moi de ceci,veux-tu?";
+	getitem 7184,1;//Items: Piano Key,
+	set nif_piano, nif_piano|4;
+	next;
+	mes "[Kurtz]";
+	mes "Pourquoi le commerce est-il si mauvais ces derniers temps? ...";
+	mes "*marmonne*";
+	close;
+}
+
+niflheim,169,71,5	script	#1	111,2,2,{
+	if(MISC_QUEST & 32 || nif_piano&8) end;
+
+	mes "- Tout près d'une tombe -";
+	mes "- vous apercevez quelque chose -";
+	mes "- à moitié enfoui dans le sol -";
+	mes "- Qu'est-ce que c'est? -";
+	mes "- On dirait... -";
+	next;
+	mes "- Le ramasser? -";
+	menu "Oui",-,"Non",L_end;
+	getitem 7184,1;//Items: Piano Key,
+	set nif_piano, nif_piano|8;
+L_end:
+	close;
+}
+
+niflheim,208,103,5	script	#2	111,2,2,{
+	if(MISC_QUEST & 32 || nif_piano&32) end;
+	if(nif_piano&16){
+		mes "- Tout près d'une tombe -";
+		mes "- vous apercevez quelque chose -";
+		mes "- à moitié enfoui dans le sol -";
+		mes "- Qu'est-ce que c'est? -";
+		mes "- On dirait... -";
+		next;
+		mes "- Le ramasser? -";
+		menu "Oui",-,"Non",L_end;
+		getitem 7184,1;//Items: Piano Key,
+		set nif_piano, nif_piano|32;
+	L_end:
+		close;
+	}
+	mes "- Tout près d'une tombe -";
+	mes "- vous apercevez quelque chose -";
+	mes "- à moitié enfoui dans le sol -";
+	mes "- Qu'est-ce que c'est? -";
+	mes "- On dirait... -";
+	next;
+	mes "- Le ramasser? -";
+	menu "Oui",-,"Non",L_end;
+	getitem 7184,1;//Items: Piano Key,
+	set nif_piano, nif_piano|16;
+	close;
+}
+
+nif_in,115,181,5	script	#4	111,3,3,{
+	mes "- Vous voyez un immense vieux piano -";
+	if((MISC_QUEST & 32)==0) mes "- auquel il manque quelques touches -";
+	if(MISC_QUEST & 32) mes "- auquel il manque une touche -";
+	if(MISC_QUEST & 32 || countitem(7184) < 6) close;
+
+	delitem 7184,countitem(7184);//Items: Piano Key,
+	set MISC_QUEST,MISC_QUEST | 32;
+	set nif_piano, 0;
+	mes "- Vous glissez les 6 touches de piano -";
+	mes "- une à une dans les emplacements vides -";
+	mes "- mais vous réalisez -";
+	mes "- qu'à l'extrémité gauche du clavier -";
+	mes "- il manque encore une touche. -";
+	close;
+}
+
+nif_in,118,151,5	script	#5	111,3,3,{
+	if((MISC_QUEST & 32)==0) end;
+	mes "- Au moment où la longue ombre de votre corps -";
+	mes "- tombe inerte sur le piano -";
+	next;
+	mes "- Vous vous sentez soudain plus léger -";
+	mes "- et votre vision commence à se brouiller... -";
+	next;
+	warp "nif_in",179,163;
+	close;
+}
+
+nif_in,188,168,3	script	Sorcière	792,{
+	mes "[Kirkena]";
+	mes "Hum?... Mais vous êtes un humain... vivant?!";
+	mes "Ça n'a pas du être facile pour vous";
+	mes "d'arriver jusqu'ici...";
+	mes "Quelle que soit la raison de votre présence ici,";
+	mes "ce n'est pas un lieu pour les vivants...";
+	next;
+	mes "[Kirkena]";
+	mes "Je vais utiliser mes pouvoirs pour vous reconduire en lieu sûr,";
+	mes "mais jamais vous ne devriez revenir ici.";
+	close2;
+	warp "umbala",138,208;
+	end;
+}

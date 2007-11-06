@@ -1,0 +1,273 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par MageGaHell, corrigé par Myllena
+//===== eAthena Script ======================================= 
+//= Super Novice Script
+//===== By: ================================================== 
+//= Darkchild
+//===== Current Version: ===================================== 
+//= 1.8a
+//===== Compatible With: ===================================== 
+//= Any eAthena
+//===== Description: ========================================= 
+//= Super Novice Job Change Npc
+//= Super Novice Cart Rental Npc
+//= Some Other Useless Super Novice Npc
+//===== Additional Comments: ================================= 
+//= Dialogs From Some Other Scripts (Most Of It)
+//= 1.3-1.5 Added Baby class support (and to the Kafta SN Cart
+//= renter, too) [Lupus]
+//= 1.6 Added a fix which prevent High Novices passing
+//= this Job Quests again. [Lupus]
+//= 1.7 Fixed Baby Class Support. [Lupus]
+//= 1.8 Now a Baby can become a Super Baby [Lupus]
+//============================================================ 
+
+
+// -- Jobchanger --
+aldeba_in,223,167,3	script	Tozel	709,{
+	if(SUPNOV_Q == 1) goto L_Start2;
+	if(BaseJob == Job_SuperNovice) goto L_Twice;
+	if(BaseJob != Job_Novice || Upper==1) goto L_Otherjob;
+	mes "[Tozel]";
+	mes "Salut à toi, Novice!";
+	mes "Alors, tu apprécies le statut de novice, la classe préférée du commun des mortels?";
+	next;
+	mes "[Tozel]";
+	mes "Aimerais-tu rejoindre la Guilde des Novices, et renflouer les rangs des Gentlemen Ordinaires, qui mettent leurs talents en commun pour offrir des services de qualité?";
+	next;
+	mes "[Tozel]";
+	mes "Si tu nous rejoins, tu deviendras un Super Novice, tu seras plus compétent!";
+	mes "Alors, qu'est-ce que tu en dis?";
+	next;
+	menu "Vendu!",-,"Supers Novices = Supers Stupides",L_Stupid,"Peut-être qu'avec plus d'informations...",L_Well;
+	if(JobLevel < 10) goto L_LowSkill;
+	if(BaseLevel < 45) goto L_LowLevel;
+	if(SkillPoint != 0) goto L_StillSk; 
+	mes "[Tozel]";
+	mes "Merveilleux!";
+	mes "Tu es maintenant sur la voie qui fera de toi, une personne commune, extraordinaire!";
+	next;
+	mes "[Tozel]";
+	mes "Ordinaire est un super mot, non?";
+	next;
+	mes "[Tozel]";
+	mes "Mais attention, ce n'est pas parce que tu t'es inscris dans la Guilde des Novices que tu seras automatiquement accepté.";
+	mes "Il y a plusieurs conditions à remplir.";
+	next;
+	mes "[Tozel]";
+	mes "Tu ne pourras être membre de la Guilde des Gens Ordinaires que si tu me rapportes plusieurs objets ordinaires. C'est la première condition.";
+	mes "Vas donc me rapporter trente de chacun de ces objets:";
+	mes "^FF0000Sticky Mucus^000000 et";
+	mes "^FF0000Resin^000000.";
+   	next;
+	mes "[Tozel]";
+	mes "Une fois que tu auras réuni le bon nombre de ces objets ordinaires, reviens me voir à la Guilde des Gentlemen Ordinaires.";
+	set SUPNOV_Q,1;
+	close;
+
+L_Stupid:
+	mes "[Tozel]";
+	mes "Hum... C'est une attitude que partagent de nombreux criminels ordinaires et d'autres types marginaux ordinaires.";
+	mes "... Ils ne comprennent pas l'épanouissement que peut gagner un cercle d'amis ordinaires.";
+	next;
+	mes "[Tozel]";
+	mes "Bien sûr, il n'y a que les imbéciles ordinaires qui ne changent pas d'avis.";
+	mes "Donc si tu changes d'avis, reviens me voir.";
+	close;
+
+L_Well:
+	mes "[Tozel]";
+	mes "Oh, tu veux en savoir un peu plus à propos de cette Guilde?";
+	mes "Je suis heureux que tu demandes!";
+	next;
+	mes "[Tozel]";
+	mes "Laisses moi te dire quelques mots à propos de Kima, le fondateur de la Guilde.";
+	mes "Kima a fondé cette guilde parce que ses ancêtres étaient des gens ordinaires, qui n'avaient aucun lieu pour se rassembler et apprécier la présence des uns et des autres.";
+	next;
+	mes "- Tozel vous parle pendant dix minutes. - ";
+	mes "- Sa voix est si ordinaire que vous vous ennuyez à mourir. -";
+	next;
+	mes "[Tozel]";
+	mes "... Quoi qu'il en soit, la Guilde des Novices a grandement prospéré depuis sa fondation.";
+	mes "Nous sommes fiers de notre slogan 'Gens Ordinaires, Buts Communs, Rêves Communs'!!";
+close;
+L_Start2:
+	if(countitem(938) < 30) goto L_ItemError;
+	if(countitem(907) < 30) goto L_ItemError;
+	delitem 938,30;
+	delitem 907,30;
+	mes "[Tozel]";
+	mes "Et bien, ta performance a l'air euh... plutôt ordinaire, mais ça nous suffira!";
+	mes "Bienvenue dans la Guilde des Novices!";
+	next;
+	mes "[Tozel]";
+	mes "Comme promis, je vais faire de toi un Super Novice.";
+	mes "Tu es prêt?!";
+	next;
+	menu "Euh...?!",-,"Peut-être?!",-;
+	mes "- Le comportement extraordinaire de Tozel vous hypnotise, -";
+	mes "- perce votre garde et vous laisse sans voix! -";
+next;
+	if (Upper==0) jobchange Job_SuperNovice;
+	if (Upper==2) jobchange Job_Super_Baby;
+	getitem 2339,1;
+	callfunc "F_ClearJobVar";
+	mes "[Tozel]";
+	mes "Hahahah! Tu es surpris?!";
+	mes "Ce n'est pas parce que nous sommes des gens ordinaires que nous ne pouvons pas parfois réaliser des choses extraordinaires!";
+	next;
+	mes "[Tozel]";
+	mes "Maintenant, ta nouvelle vie en tant que Super Novice commence!";
+	next;
+	mes "[Tozel]";
+	mes "Tu fais maintenant partie du legs de Kima!";
+	mes "Tu dois faire honneur à son nom (bien qu'il soit ordinaire)!";
+	close;
+
+L_LowSkill:
+	mes "[Tozel]";
+	mes "Et bien... on dirait que ton niveau est encore trop ordinaire pour l'instant.";
+	mes "Tu dois avoir un Niveau de Job ^0000FFd'au moins 10^000000 pour pouvoir te joindre à nous.";
+	close;
+
+L_LowLevel:
+	mes "[Tozel]";
+	mes "Et bien... on dirait que ton niveau est encore trop ordinaire pour l'instant.";
+	mes "Tu dois avoir un Niveau de Base ^0000FFd'au moins 45^000000 pour pouvoir te joindre à nous.";
+	close;
+
+L_StillSk:
+	mes "[Tozel]";
+	mes "Et bien... on dirait que tu as encore des points de compétence.";
+	mes "Tu dois avoir réparti ^0000FFTOUS^000000 tes points de compétence pour pouvoir te joindre à nous.";
+	close;
+
+L_ItemError:
+	mes "[Tozel]";
+	mes "As-tu oublié ce que je t'ai demandé de rapporter?";
+	mes "Je vais te le répéter encore une fois.";
+	next;
+	mes "[Tozel]";
+	mes "Tu dois trouver trente de chaque:";
+	mes "^FF0000 Sticky Muscus^000000 et";
+	mes "^FF0000 Resin^000000.";
+	close;
+
+L_Twice:
+	mes "[Tozel]";
+	mes "Tu es un membre de la Guilde des Novices maintenant.";
+	mes "Tu n'as pas besoin d'avoir des talents exceptionnels pour être ici.";
+	mes "Ton bon sens et ta vigilance est tout ce que nous exigeons.";
+	next;
+	mes "[Tozel]";
+	mes "Vas, et vis une vie ordinaire et commune, afin d'apporter le respect à notre guilde.";
+	close;
+L_Otherjob:
+	mes "[Tozel]";
+	mes "Hé! Tu ne fais pas partie de notre cercle d'amis!";
+	mes "Je suis Tozel, le maître de la Guilde des Novices.";
+	next;
+	mes "[Tozel]";
+	mes "Cet endroit réunit des personnes qui ont des buts communs, des croyances ordinaires, et des vies ordinaires.";
+	mes "Pour les gens comme toi, extraordinaires, ce lieu n'a pas d'intérêt.";
+	next;
+	mes "[Tozel]";
+	mes "Les gens comme toi n'ont pas leur place dans notre communauté ordinaire. Désolé.";
+	close;
+}
+
+// -- Totaly Useless:) --
+aldeba_in,216,169,5	script	Serei	86,{
+	if(BaseJob == Job_SuperNovice) goto L_Supernovice;
+	if(BaseJob != Job_Novice) goto L_Otherjob;
+	mes "[Serei]";
+	mes "Vous êtes plutôt ordinaire.";
+	mes "Un homme ordinaire devrait vivre une vie heureuse.";
+	mes "Vous devriez réfléchir et vous inscrire à la Guilde des Novices.";
+	next;
+	mes "[Serei]";
+	mes "VAS, PETIT NOVICE!";
+	mes "Hahahahahahahaha!";
+	close;
+
+L_Supernovice:
+	mes "[Serei]";
+	mes "Ouuuuaaaaiiiis suuupeeerrr!";
+	mes "Tu es un membre de la Guilde des Novices! Comme c'est mignon!";
+	next;
+	mes "[Serei]";
+	mes "C'est vraiment super!";
+	mes "Est-ce que tu tentes de propager l'esprit de la Guilde par ton comportement anti-efforts?";
+	next;
+	mes "[Serei]";
+	mes "Je suis le bras droit de Tozel, le chef de la Guilde!";
+	close;
+
+L_Otherjob:
+	mes "[Serei]";
+	mes "Oh non!";
+	mes "Tu es l'un de ceux qui ont rejeté leur mode de vie ordinaire!";
+	mes "Tu ne dois pas dévergonder les gens qui se dirigent vers un mode de vie banal!";
+	mes "Ahhhh!";
+	close;
+}
+
+
+// -- Car Rental --
+aldebaran,54,238,5	script	Kafra::kaf_sn	117,{
+	if(BaseJob != Job_SuperNovice) goto L_Otherjob;
+	if(checkcart() == 1) goto L_GotCart;
+	mes "[Kafra]";
+	mes "Oh, un Super Novice!";
+	mes "Tu es déçu qu'aucune autre Kafra ne te laisse emprunter une charrette?";
+	mes "Pas de problème!";
+	next;
+	mes "[Kafra]";
+	mes "Je peux t'en prêter une, mais ne te fais pas remarquer, car la loi Kafra spécifie bien qu'aucune charrette ne doit être louée aux Novices.";
+	next;
+	mes "[Kafra]";
+	mes "Et il y a une petite taxe de ^FF00001900 Zenys^000000...";
+	next;
+	mes "[Kafra]";
+	mes "Tu dois également avoir appris la compétence Push Cart.";
+	mes "Est-ce que tu veux vraiment louer une charrette?";
+	next;
+	menu "Prêtez moi une charrette",-,"Ca ne sera pas nécessaire",L_End;
+	mes "[Kafra]";
+	mes "Puisque je te prête cette charrette secrètement, rien ne me dit que tu as la compétence Push Cart.";
+	mes "Si tu ne l'as pas, tu ne pourras pas porter cette charrette, et tu perdras ton argent.";
+	mes "Es-tu vraiment certain de vouloir cette charrette?";
+	next;
+	menu "Je ne suis pas sourd!",-,"Humm... Attendez un instant...",L_End;
+	if(getskilllv(39)==0) goto L_End;
+	if(Zeny < 1900) goto L_Error;
+	set Zeny,Zeny-1900;
+	setcart;
+	mes "[Kafra]";
+	mes "Merci d'avoir utilisé le service Kafra, même si c'est sous le manteau.";
+	mes "Hé hé hé...";
+	close;
+
+L_Error:
+	mes "[Kafra]";
+	mes "Hummm... On dirait que tu es à court d'argent.";
+	close;
+
+L_End:
+	mes "[Kafra]";
+	mes "Merci de ta collaboration.";
+	mes "Reviens quand tu veux!";
+	close;
+
+L_GotCart:
+	mes "[Kafra]";
+	mes "Salut à toi, très cher Super Novice.";
+	mes "Je suis désolée, mais je ne peux pas t'aider. Tu as déjà une charrette!";
+	close;
+
+L_Otherjob:
+	mes "[Kafra]";
+	mes "Je suis désolée, mais je ne prend pas de clients pour l'instant.";
+	mes "Pour toute question, adressez-vous à une autre Kafra.";
+	close;
+}

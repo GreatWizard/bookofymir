@@ -1,0 +1,132 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Alchemist Shop
+//===== By: ================================================== 
+//= eAthena Team
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= eAthena 1.0+
+//===== Description: ========================================= 
+//= Selling Alchemist Materials and Manuals
+//===== Additional Comments: ================================= 
+//= 1.1 fixed Medicine Bowl issue, thanx 2 MasterOfMuppets
+//= 1.2 Reddozen's fixes of typos. added optional Elemental
+//= Potion Guide. [Lupus]
+//= 1.3 Deleted Elemental Potions Guide due to original quest [Lupus]
+//= 1.4 Alchemists can now purchase 2000 Medicine Bowls at once. [SinSloth]
+//============================================================ 
+
+
+alde_alche,24,188,3	script	Gever AI Sharp	740,{
+	mes "[Gever AI Sharp]";
+	mes "Bienvenue à la Guilde des Alchimistes.";
+	mes "En quoi puis-je vous être utile ?";
+	next;
+	menu "Acheter du matériel.",M_Material, "Acheter un manuel de fabrication.",M_Manual, "Rien, merci.", M_Bye;
+
+	M_Material:
+		mes "[Gever AI Sharp]";
+		mes "De quoi avez-vous besoin ?";
+		next;
+		menu "Medicine Bowl - 8z",-,"Rien, merci.",M_Bye;
+
+			mes "[Gever AI Sharp]";
+			mes "Combien vous en faut-il ?";
+			mes "Dites '0' si vous ne souhaitez rien.";
+			next;
+			input @num;
+			if((@num < 1) || (@num > 2000)) goto M_Bye;
+			set @price,@num * 8;
+			mes "[Gever AI Sharp]";
+			if(Zeny < @price) goto sL_NoZeny;
+			if (checkweight(7134,@num) == 0) goto sL_OverW;
+			set Zeny,Zeny-@price;
+			getitem 7134,@num;//Items: Medicine_Bowl,
+			goto L_Bye;
+	M_Manual:
+		mes "[Gever AI Sharp]";
+		mes "Que cherchez-vous ?";
+		mes "Les manuels sont généralement à 100000 Zenys,";
+		mes "sauf pour certains exemplaires assez rares.";
+		next;
+		menu 	"Manuel de Fabrication des Potions",sM_Pot,	"Manuel de Fabrication d'Alcohol",sM_Alc, "Manuel de Fabrication de Grenades",sM_Gren, 
+			"Manuel de Fabrication des Acides",sM_Acid,	"Manuel de Fabrication de Solution de Plantes",sM_Plant, "Manuel de Fabrication de Concentré de Marine Sphere",sM_Mar,
+			"Manuel de Fabrication de Glistening Coat",sM_Coat, "Manuel de Fabrication de Potions Concentrées",sM_Con, "Rien, merci.",M_Bye;
+		sM_Pot:
+			set @itemid,7144;
+			set @price,100000;
+			set @itemname$,"Potions";
+			goto L_Choice;
+		sM_Alc:
+			set @itemid,7127;
+			set @price,100000;
+			set @itemname$,"Bouteilles d'Alcohol";
+			goto L_Choice;
+		sM_Gren:
+			set @itemid,7128;
+			set @price,100000;
+			set @itemname$,"Grenades";
+			goto L_Choice;
+		sM_Acid:
+			set @itemid,7129;
+			set @price,100000;
+			set @itemname$,"Fioles d'Acide";
+			goto L_Choice;
+		sM_Plant:
+			set @itemid,7130;
+			set @price,100000;
+			set @itemname$,"Solutions de Plantes";
+			goto L_Choice;
+		sM_Mar:
+			set @itemid,7131;
+			set @price,100000;
+			set @itemname$,"Concentré de Marine Sphere";
+			goto L_Choice;
+		sM_Coat:
+			set @itemid,7132;
+			set @price,100000;
+			set @itemname$,"Glistening Coat";
+			goto L_Choice;
+		sM_Con:
+			set @itemid,7133;
+			set @price,240000;
+			set @itemname$,"Potions Concentrées";
+			goto L_Choice;
+//		sM_Ele:
+//			set @itemid,7434;
+//			set @price,240000;
+//			set @itemname$,"Potions Elementales";
+//			goto L_Choice;
+
+	L_Choice:
+		mes "[Gever AI Sharp]";
+		mes "Un Manuel de Fabrication de " + @itemname$ + " ?";
+		mes "Cela vous coûtera "+@price/1000+" 000 Zenys.";
+		next;
+		menu "Acheter.",-,"Partir.",M_Bye;
+
+			mes "[Gever AI Sharp]";
+			if(Zeny < @price) goto sL_NoZeny;	
+			if (checkweight(@itemid,1) == 0) goto sL_OverW;
+			set Zeny,Zeny-@price;
+			getitem @itemid,1;			
+		L_Bye:
+			mes "Merci de votre achat !";
+			mes "A bientôt.";
+			close;
+
+			sL_NoZeny:
+				mes "Vous n'avez pas assez d'argent.";
+				close;
+			sL_OverW:
+				mes "Hum... on dirait que vous êtes déjà trop chargé...";
+				close;
+
+
+	M_Bye:
+		mes "[Gever AI Sharp]";
+		mes "Revenez une prochaine fois !";
+		close;
+}

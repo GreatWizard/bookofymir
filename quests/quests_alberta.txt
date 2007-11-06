@@ -1,0 +1,1318 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Zack, corrigé par Myllena
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Alberta
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 1.8a
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= Dolls Quest
+//= Boy's Cap Quest
+//= Antlers Quest
+//= Bao Bao, Cresent Hairpin, Fashionbale Glasses, Heart Hairpin Quests
+//= Hat of Sun God, Sunday Hat, Mage Hat, Magician Hat Quests
+//= Turtle Island Quests
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 Fixed Spore Doll exploit, Gramp's Tiger skin label bug
+//= 1.3 Fixed item ID 7031 -> 7013
+//= 1.4 Fixed a bug, Fixed Exploits, Optimized [Lupus]
+//= 1.6 TEMPESTRA quest uses common quests variable MISC_QUEST 
+//=	Condition if done: (MISC_QUEST & 2) [Lupus]
+//= 1.7 Moved quest from cities/albera.txt [Evera]
+//= 1.8 Re-made the Doll Quest, now with official dialogs. [DZeroX]
+//= 1.8a Removed .GATs [Lupus]
+//============================================================ 
+
+
+
+//=======================================================================================================//
+//						Doll Quest
+//=======================================================================================================//
+alberta,117,135,0	script	Elin	96,{
+	set .@weight,MaxWeight-Weight;
+	if ((.@weight) < 10000) {
+		mes "[Elin]";
+		mes "Attendez un peu!!";
+		mes "Vous portez trop de choses!";
+		mes "Vous ne pouvez plus accepter aucun objet!";
+		mes "Réduisez donc le nombre d'objets en votre possession, et revenez me voir s'il vous plaît";
+		close;
+	}
+		mes "[Elin]";
+	if (Sex == 1) {
+		mes "Bonjour~!";
+		mes "Heh heh, vous êtes un garçon, donc vous ne devez probablement pas aimer les poupées n'est ce pas?";
+		mes "He bien, moi j'aime vraiment vraiment beaucoup les poupées!";
+	} else {
+		mes "Hi hi~! Oh, oh, vous aimez les poupées?";
+		mes "Moi je les aime vraiment vraiment beaucoup... Hee";
+		mes "Hee~!";
+	}
+	next;
+	mes "[Elin]";
+	mes "Vous savez, j'aimerais tellement tellement avoir une nouvelle poupée! J'espère que mon papa m'en offrira une à mon anniversaire...!";
+	switch(select("Hum, j'espère aussi qu'il t'en offrira une.","Et si je t'en offrais une maintenant?")) {
+		case 1:
+			next;
+			mes "[Elin]";
+			mes "Voui, j'espère qu'il me donnera une Poupée de Yoyo. Ils sont trop mignons!";
+			close;
+		case 2:
+			next;
+			set .@weight,MaxWeight-Weight;
+			if ((.@weight) < 10000) {
+				mes "[Elin]";
+				mes "Hou, vous me semblez bien chargé!";
+				mes "Je n'accepterais votre poupée que si vous vous allégez.";
+				close;
+			}
+			mes "[Elin]";
+			if (Sex == 1) {
+				mes "Oh mon Dieu!";
+				mes "Vraiment? Vous êtes vraiment un amour~!";
+			} else {
+				mes "vous voulez vraiment?";
+				mes "Vous allez me donner une poupée? Youhooooouuuuu~";
+			}
+			next;
+			mes "[Elin]";
+			mes "Quel genre de poupée allez vous me donner? Vous allez vraiment m'en offrir une?";
+			switch(select("Poupée de Poring","Poupée de Chonchon","Puppet","Poupée de Rocker","Poupée de Spore","Poupée d'Osiris","Poupée de Baphomet","Poupée de Racoon","Poupée de YoYo","Je suis aussi adorable qu'une poupée, moi T.T")) {
+				case 1:
+					next;
+					if (countitem(741) >= 1) {
+						mes "[Elin]";
+						mes "Youpie, c'est une Poupée de Poring!";
+						next;
+						delitem 741,1;
+						getitem 529,1;
+						mes "[Elin]";
+						mes "Merci pour la poupée!";
+						close;
+					} else {
+						mes "[Elin]";
+						if (Sex == 1) {
+							mes "Aww...?";
+							mes "Vous me taquiniez seulement?";
+						} else {
+							mes "Aww...";
+							mes "Vous savez que vous n'êtes pas gentil!";
+							mes "?";
+						}
+						next;
+						mes "[Elin]";
+						mes "Je suppose que vous l'avez oubliée quelque part...";
+						close;
+					}
+				case 2:
+					next;
+					if (countitem(742) >= 1) {
+						mes "[Elin]";
+						mes "Eh .... une Poupée de Chonchon ... ...";
+						next;
+						mes "[Elin]";
+						mes "Oh bien, puisque vous me le donnez je suppose qu'il faut que je vous récompense ....";
+						next;
+						delitem 742,1;
+						getitem 530,1;
+						mes "[Elin]";
+						mes "Si j'en mangeais trop, je serais pleine caries.";
+						if (Sex == 1) {
+							mes "Vous aussi monsieur.";
+						} else {
+							mes "Vous aussi madame.";
+						}
+						mes "Ne mangez pas trop de bonbons, ok?";
+						mes "Et merci en tout cas ...";
+						next;
+						mes "[Elin]";
+						mes "(Chonchon ... *rumine rumine*)";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "De toutes façons, les Poupées de Chonchon sont moches, mais vous m'avez encore menti! Comment pouvez-vous faire ça?!";
+						next;
+						mes "[Elin]";
+						mes "Waaaaaaaaaaaaaaaaah~~";
+						close;
+					}
+				case 3:
+					next;
+					if (countitem(740) >= 1) {
+						mes "[Elin]";
+						mes "Wow--! C'est un lapin!";
+						mes "C'est trop chou!!";
+						if (Sex == 1) {
+							mes "Merci beaucoup monsieur!";
+						} else {
+							mes "Merci beaucoup madame!";
+						}
+						next;
+						mes "[Elin]";
+						mes "Trop doux~";
+						mes "Oh oui! Laissez-moi vous donner un cadeau aussi!";
+						mes "Ummm ... trouvé!";
+						mes "Prenez ceci!";
+						next;
+						delitem 740,1;
+						getitem 530,1;
+						mes "[Elin]";
+						mes "Je l'ai eu du Père Noël. C'est un sucre d'orge~";
+						if (Sex == 1) {
+							mes "Mangez-en aussi monsieur.";
+						} else {
+							mes "Mangez-en aussi madame.";
+						}
+						mes "Merci beaucoup pour la poupée lapin!";
+						mes "Je lui ferais un câlin avant de m'endormir tous les soirs~";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "Awww, vous me faisiez marcher?";
+						mes "Pourquoi vous moquez vous de moi comme ça?";
+						next;
+						mes "[Elin]";
+						mes "*^CCCCCCSniff...^000000*";
+						next;
+						mes "[Elin]";
+						mes "Waaaaaaaaaaaaaaaaah~~";
+						close;
+					}
+				case 4:
+					next;
+					if (countitem(752) >= 1) {
+						mes "[Elin]";
+						mes "Ah, une Poupée de Rocker.";
+						mes "Je déteste ces bestioles mais la poupée est mignonne.";
+						next;
+						mes "[Elin]";
+						mes "Merci~";
+						mes "Je devrais vous donner quelque chose moi aussi.";
+						mes "Hmm, je ne devrais pas prendre autant de choses à mon oncle ...";
+						next;
+						delitem 752,1;
+						getitem 532,7;
+						mes "[Elin]";
+						mes "Nous en avons des tonnes à la maison.";
+						mes "Donc je peux en partager un peu avec vous~";
+						mes "Merci pour la poupée!";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "Awww...";
+						next;
+						mes "[Elin]";
+						mes "Vous n'avez vraiment pas de poupée...?";
+						mes "J'étais tellement excitée, mais...";
+						close;
+					}
+				case 5:
+					next;
+					if (countitem(743) >= 1) {
+						mes "[Elin]";
+						mes "Blahh ....";
+						mes "C'est un champignon...";
+						mes "Maman m'a toujours recommandé de ne pas manger de champignons...";
+						next;
+						mes "[Elin]";
+						mes "Je la prends de toutes façons puisque la poupée semble mignonne.";
+						mes "Mais je ne mangerai jamais de champignons ...";
+						mes "Hmm, je dois vous donner un cadeau aussi.";
+						next;
+						delitem 743,1;
+						getitem 538,5;
+						mes "[Elin]";
+						mes "Maman a fait ça.";
+						if (Sex == 1) {
+							mes "Prenez le, monsieur!";
+						} else {
+							mes "Prenez le, madame!";
+						}
+						next;
+						mes "[Litte Kid]";
+						mes "Merci pour la poupée~";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "Eh...?";
+						mes "Vous n'avez pas de poupée?";
+						next;
+						mes "[Elin]";
+						mes "Awww...";
+						mes "Ce n'est pas bien de taquiner les gens comme ça. *^CCCCCCSniff, sniff^000000*";
+						close;
+					}
+				case 6:
+					next;
+					if (countitem(751) >= 1) {
+						mes "[Elin]";
+						mes "Yay! C'est une Poupée d'Osiris!";
+						next;
+						delitem 751,1;
+						getitem 522,2;
+						mes "[Elin]";
+						mes "Merci pour la poupée!";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "Awww...";
+						mes "Pourquoi vous vous moquer de moi?";
+						close;
+					}
+				case 7:
+					next;
+					if (countitem(750) >= 1) {
+						mes "[Elin]";
+						mes "Yay! C'est une Poupée de Baphomet!";
+						next;
+						delitem 750,1;
+						getitem 525,5;
+						mes "[Elin]";
+						mes "Merci pour la poupée!";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "Vous racontez des mensonges! Pourquoi vous prétendez être gentil?!";
+						close;
+					}
+				case 8:
+					next;
+					if (countitem(754) >= 1) {
+						mes "[Elin]";
+						mes "Ah, c'est une Poupée de Racoon~";
+						mes "Je hais les Smokies, mais la poupée est vraiment trop chou!";
+						next;
+						mes "[Elin]";
+						mes "C'est trop mignon~";
+						if (Sex == 1) {
+							mes "Merci beaucoup, monsieur!";
+						} else {
+							mes "Merci beaucoup, madame!";
+						}
+						next;
+						delitem 754,1;
+						getitem 539,3;
+						mes "[Elin]";
+						mes "Laissez-moi vous donner les gâteaux fait maison de ma mamie!";
+						if (Sex == 1) {
+							mes "Vous aimez les sucreries, monsieur?";
+						} else {
+							mes "Vous aimez les sucreries, madame?";
+						}
+						mes "C'est vraiment délicieux à manger~";
+						next;
+						mes "[Elin]";
+						mes "Merci pour cette adorable poupée!";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "Hey! Comment pouvez vous dire des choses pareilles? Vous vous moquez de moi?!";
+						close;
+					}
+				case 9:
+					next;
+					if (countitem(753) >= 1) {
+						mes "[Elin]";
+						mes "Wow--!!!";
+						mes "C'est un singe! Trop chou~";
+						if (Sex == 1) {
+							mes "Merci beaucoup monsieur!";
+						} else {
+							mes "Merci beaucoup madame!";
+						}
+						mes "Je la voulais vraiment~";
+						next;
+						mes "[Elin]";
+						mes "C'est vraiment trop mignon~";
+						mes "C'est bon!";
+						mes "En guise de remerciement je voudrais vous donner ça.";
+						next;
+						delitem 753,1;
+						getitem 608,1;
+						mes "[Elin]";
+						mes "Papa l'a eu pendant un de ses voyages.";
+						mes "C'est une graine d'une certaine sorte.";
+						mes "Nous avons essayé de la planter à la maison mais elle n'a pas voulu pousser.";
+						if (Sex == 1) {
+							mes "Je vous la donne monsieur!";
+						} else {
+							mes "Je vous la donne madame!";
+						}
+						next;
+						mes "[Elin]";
+						mes "Merci beaucoup pour la poupée!";
+						close;
+					} else {
+						mes "[Elin]";
+						mes "Hey...";
+						mes "Pourquoi vous moquer de moi?!";
+						close;
+					}
+				case 10:
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Je suis aussi adorable qu'une poupée...";
+					next;
+					mes "[Elin]";
+					mes "Quuuuuuuoooooooooooiiiiiiiiii...?";
+					next;
+					mes "[Elin]";
+					mes "^3355FFQue venez vous^000000";
+					mes "^3355FFde dire?!^000000";
+					close;
+			}
+	}
+}
+
+
+//=======================================================================================================//
+//						Boy's Cap' Quest
+//=======================================================================================================//
+alberta_in,28,145,4	script	Grand-Père#albq	120,{
+	mes "[Grand-Père]";
+	mes "Pff .....";
+	next;
+	mes "[Grand-Père]";
+	mes "Quand je repense à mes jeunes années... Je regrette de ne rien faire de mieux de mon temps...";
+	next;
+	mes "[Grand-Père]";
+	mes "Bien sûr JE ME SENS jeune dans mon coeur..... Malheureusement mon corps est trop vieux et dans une pauvre condition...... *Kof !! Kof* .. !!";
+	next;
+	if(countitem(1030) >= 10) menu "Discutter.",M_Talk, "Lui montrer la Patte du Tigre.",M_Show, "S'en aller.",M_End;
+	menu "Discutter.",M_Talk, "S'en aller.",M_End;
+	
+	M_Talk:
+		mes "[Grand-Père]";
+		mes "Ecoutez moi..... Vous devez prendre soin de votre corps du mieux que vous le pouvez....";
+		mes "Si vous n'êtes pas sérieux avec votre santé aujourd'hui..... Vous le regretterez quand vous serez plus vieux.";
+		next;
+		mes "[Grand-Père]";
+		mes "J'ai essayé de revitaliser mon corps pour l'amener au meilleur de sa forme avec toutes les herbes et potions que j'ai pu acheter....";
+		next;
+		mes "[Grand-Père]";
+		mes "Non seulement elles n'ont pas fonctionné mais leur coût exorbitant m'ont mis sur la paille!";
+		next;
+		mes "[Grand-Père]";
+		mes "J'ai tout essayé pour restaurer ma jeunesse... Enfin.... Il y a une chose que je n'ai pas essayé.....";
+		next;
+		mes "[Grand-Père]";
+		mes "C'est la ^3355FFPatte du Tigre^000000, un talisman légendaire pour la revitalisation!!"; 
+		emotion e_gasp;
+		next;
+		mes "[Grand-Père]";
+		mes "Avez-vous déjà entendu parler de la Patte du Tigre? .....";
+		emotion e_what;
+		next;
+		mes "[Grand-Père]";
+		mes "Juste en le REGARDANT, vos cheveux blancs redeviennent noirs! Rien qu'en le SENTANT vos réflexes sont dix fois plus rapides!";
+		mes "Et juste en le GOÛTANT, un homme de 80 ans devient... UN JEUNE HOMME DE 18 ANS!!!!";
+		next;
+		mes "[Grand-Père]";
+		mes "C'est vraiment étonnant! Si je pouvais tenir dans mes main une Patte du Tigre.... Mes rêves deviendraient sûrement réalité.....";
+		next;
+		mes "[Grand-Père]";
+		mes "Pour le bienheureux qui m'apporterait ^5555FF10 Pattes de Tigre^000000 (Tiger's Footskins), je lui donnerais mon précieux ^3355FFBoys Cap^000000.";
+		close;
+
+	M_Show:
+		mes "[Grand-Père]";
+		mes "Ohhh !! C-c'est le... C'est une véritable... PATTE DU TIGRE!!";
+		next;
+		mes "[Grand-Père]";
+		mes "Juste en le REGARDANT, vos cheveux blancs redeviennent noirs! Rien qu'en le SENTANT vos réflexes sont dix fois plus rapides!";
+		mes "Et juste en le GOÛTANT, un homme de 80 ans devient... UN JEUNE HOMME DE 18 ANS!!!!";
+		next;
+		mes "[Grand-Père]";
+		mes "C'est une véritable Patte du Tigre!! Même dans mes rêves les plus fous je n'ai jamais pensé...... S-s-s'il vous plaît.... Je vous en prie.... Donnez la moi.....";
+		next;
+		menu "Lui donner les Pattes du Tigre.",-, "S'en aller en courant.", sM_End;
+
+			mes "[Grand-Père]";
+			if(countitem(1030) < 10) goto L_NoItems;
+			delitem 1030,10;
+			getitem 5016,1;
+			mes "M-MERCI!! Merci VRAIMENT BEAUCOUP!!";
+			emotion e_thx;
+			next;
+			mes "[Grand-Père]";
+			mes "Maintenant mon corps va être revigoré !!! Je vais les manger sur le champ!";
+			close;
+
+		L_NoItems:
+			mes "Hors de ma vue fichu, tricheur!!!";
+			emotion e_bzz;
+			close;
+
+		sM_End:
+			mes "[Grand-Père]";
+			mes "H-He-Hey!! A-A-Attendez! S'il vous plaît.... Revenez... Je vous en prie.... Re... venez.... ooohh...";
+			close;
+
+	M_End:
+		mes "[Grand-Père]";
+		mes "*Kof kof*!! .. Pa .... Patte..... du ..... Tigre .....*Kof kof* !!";
+		close;
+
+
+}
+
+
+//=======================================================================================================//
+//						Antlers Quest 
+//=======================================================================================================//
+alberta_in,122,53,4	script	Cherokee	47,{
+	mes "[Cherokee]";
+	mes "Hé là, Je suis un collectionneur de cornes!";
+	next;
+	mes "[Cherokee]";
+	mes "Que pensez-vous des cornes d'animaux? Je pense qu'elles ont beaucoup de valeur, ça serait intéressant de toutes les collecter.";
+	mes "Vous pouvez les porter sur votre tête, ou bien décorer votre maison avec.";
+	next;
+	mes "[Cherokee]";
+	mes "Vous savez.... Il y a des cornes particulières que je n'ai pas pu trouver. Ce sont les ^5555FFEvil Horn^000000.";
+	next;
+	mes "[Cherokee]";
+	mes "Certains disent que ces cornes ne viennent pas d'un animal mais du Diable en personne!";
+	mes "Néanmoins, j'aimerais vraiment mettre la main sur ces cornes.";
+	next;
+	mes "[Cherokee]";
+	mes "Dîtes.... avez-vous quelques ^5555FFEvil Horns^000000?";
+	mes "Si vous m'offrez ^5533FF20 Evil Horns^000000, je vous donnerais mon précieux et célèbre ^FF3355Antlers^000000. C'est un marché honnête non?";
+	next;
+	menu "Affaire conclue!",-, "Sans façon, Dumbo.",M_End;
+
+		mes "[Cherokee]";
+		if(countitem(923) < 20) goto L_NotEnuf;
+		delitem 923,20;
+		mes "Whoah~! C'est la première fois que je vois de vraies ^3355FFEvil Horn^000000!!";
+		emotion e_ic;
+		next;
+		mes "[Cherokee]";
+		mes "Merci! Voici l'Antlers que je vous avais promis!";
+		emotion e_thx;
+		getitem 2284,1;
+		next;
+		mes "[Cherokee]";
+		mes "Grâce à votre aide précieuse j'ai pu réaliser mon rêve. J'apprécie ce que vous avez fait!";
+		close;
+
+		L_NotEnuf:
+			mes "Hmm.... comme je disais, j'ai besoin de ^FF553320 Evil Horns^000000.";
+			close;
+
+	M_End:
+		mes "[Cherokee]";
+		mes "Au moins vous n'êtes pas une personne grossière.... Je vous pardonne car j'ai l'intime conviction que nous nous rencontrerons encore....";
+		close;
+}
+
+
+//=======================================================================================================//
+//			Bao Bao, Cresent Hairpin, Fashionbale Glasses, Heart Hairpin
+//=======================================================================================================//
+alberta,120,53,3	script	Zic	51,{
+	mes "[Zic]";
+	mes "Yeah! Une brise fraîche! J'adore la mer!!";
+	emotion e_ho;
+	next;
+	mes "[Zic]";
+	mes "Hum?... Avez vous quelques affaires avec moi? Vous êtes venu me voir parce que je suis un marchand, n'est-ce pas?";
+	emotion e_hmm;
+	next;
+	mes "[Zic]";
+	mes "~Snif!~ Je suis fatigué de ma réputation.... Je ne peux plus avoir la paix dans cette ville.....";
+	next;
+	mes "[Zic]";
+	mes "Bon qu'est ce que vous voulez? Dîtes moi, dîtes moi! Je ne peux pas deviner tout seul.....";
+	next;
+	menu "Bao Bao",-, "Cresent Hairpin",M_1, "Fashionable Glasses",M_2, "Heart Hairpin",M_3;
+
+		mes "[Zic]";
+		mes "Pour faire un Bao Bao j'ai besoin de:";	//5042
+		mes "- ^5555FF1 Silk Ribbon^000000,";	//10007
+		mes "- ^5555FF50 Heroic Emblems^000000.";	//968
+		next;
+		mes "[Zic]";
+		mes "Voulez-vous que je vous en fasse un?";
+		next;
+		menu "Bien sûr.",-, "Non merci.",M_End;
+
+			if (countitem(10007)<1 || countitem(968)<50) goto sL_NotEnuf;
+			delitem 10007, 1;
+			delitem 968, 50;
+			mes "[Zic]";
+			mes "Attendez un peu le temps que je fasse votre Bao Bao s'il vous plaît......";
+			next;
+			mes "[Zic]";
+			mes "Et voilà, un Bao Bao. J'espère que vous aimez.";
+			getitem 5042, 1;
+			close;
+	M_1:
+		mes "[Zic]";
+		mes "Pour faire un Cresent Hairpin j'ai besoin de:";	//5048
+		mes "- ^5555FF1 Heart Hair Pin^000000,";	//5041
+		mes "- ^5555FF10 Steel^000000.";	//999
+		next;
+		mes "[Zic]";
+		mes "Voulez-vous que je vous en fasse un?";
+		next;
+		menu "Bien sûr.",-, "Non merci.",M_End;
+
+			if (countitem(5041)<1 || countitem(999)<10) goto sL_NotEnuf;
+			delitem 5041, 1;
+			delitem 999, 10;
+			mes "[Zic]";
+			mes "Attendez un peu le temps que je fasse votre Cresent Hairpin......";
+			next;
+			mes "[Zic]";
+			mes "Et voilà, un Cresent Hairpin. J'espère que vous aimez.";
+			getitem 5048, 1;
+			close;
+	M_2:
+		mes "[Zic]";
+		mes "Pour faire une paire de Fashionable Glasses j'ai besoin de:";	//5047
+		mes "- ^5555FF1 Jack a Dandy^000000,";	//2271
+		mes "- ^5555FF1 Scarlet Dyestuff^000000.";	//975
+		next;
+		mes "[Zic]";
+		mes "Voulez-vous que je vous en fasse un?";
+		next;
+		menu "Bien sûr.",-, "Non merci.",M_End;
+
+			if (countitem(2271)<1 || countitem(975)<1) goto sL_NotEnuf;
+			delitem 2271, 1;
+			delitem 975, 1;
+			mes "[Zic]";
+			mes "Attendez un peu que je fasse vos Fashionable Glasses......";
+			next;
+			mes "[Zic]";
+			mes "Et voilà, une paire de Fashionable Glasses. J'espère que vous aimez.";
+			getitem 5047, 1;
+			close;
+	M_3:
+		mes "[Zic]";
+		mes "Vous êtes sûr de vouloir un objet basique comme ça? Oh bien... Pour faire un Heart Hairpin j'ai besoin de:";	//5041
+		mes "- ^5555FF1200 Coral Reefs^000000.";	//7013
+		emotion e_hmm;
+		next;
+		mes "[Zic]";
+		mes "Voulez-vous que je vous en fasse un?";
+		next;
+		menu "Bien sûr.",-, "Non merci.",M_End;
+
+			if (countitem(7013)<1200) goto sL_NotEnuf;
+			delitem 7013, 1200;
+			mes "[Zic]";
+			mes "Attendez un peu le temps que je fasse votre Heart Hairpin......";
+			next;
+			mes "[Zic]";
+			mes "Et voilà, un Heart Hairpin. J'espère que vous aimez.";
+			getitem 5041, 1;
+			close;
+
+		sL_NotEnuf:
+			mes "[Zic]";
+			mes "Hum.... Vous n'avez pas assez d'objets pour que je fasse ça. Revenez me voir une prochaine fois.";
+			close;
+
+	M_End:
+		mes "[Zic]";
+		mes "Au revoir.";
+		close;
+}
+
+
+//=======================================================================================================//
+//				Hat of Sun God, Sunday Hat, Mage Hat, Magician Hat
+//=======================================================================================================//
+alberta,135,79,3	script	Tempestra	71,{
+	mes "[Tempestra]";
+	mes "Ah...... Une brise bien fraîche. C'est bien d'être à côté de la mer. Je crois que j'ai bien fait de faire une pause dans mes affaires et de venir ici.";
+	emotion e_ho;
+	if(MISC_QUEST & 2) goto sM_Menu;
+	next;
+	mes "[Tempestra]";
+	mes "Oh le soleil est si lumineux aujourd'hui... J'ai apporté mon chapeau donc ça va. Si ma peau est exposée au soleil comme aujourd'hui, je risque d'attraper un coup de soleil.";
+	next;
+	mes "[Tempestra]";
+	mes "Mon petit, la chaleur me donne soif. Rien ne serait meilleur en ce moment qu'une petite potion jaune bien épicée.....";
+	next;
+	menu "Tenez, il se trouve que j'en ai sur moi...",-, "Allez en chercher une vous même....",M_1;
+
+		if(countitem(503) < 1) goto L_NoPot;
+		delitem 503, 1;
+		set MISC_QUEST,MISC_QUEST | 2;
+		mes "[Tempestra]";
+		mes "Oooh! Merci beaucoup. Je suis contente de rencontrer une personne amicale ici....";
+		emotion e_thx;
+		next;
+		mes "[Tempestra]";
+		mes "(~gulp~gulp~)";
+		next;
+		mes "[Tempestra]";
+		mes "Hyaaaaaaa!! C'est bien frais!! Merci.";
+	sM_Menu:
+		next;
+		menu "Il fait vraiment chaud aujourd'hui...",-, "Vous devriez porter un chapeau.",sM_1;
+
+			mes "[Tempestra]";
+			mes "Oui il fait vraiment chaud en effet.....";
+			next;
+			mes "[Tempestra]";
+			mes "Heureusement j'ai apporté beaucoup de chapeaux. J'ai";
+			mes "un ^5555FFSunday Hat^000000,";
+			mes "un ^5555FFMage Hat^000000,";
+			mes "un ^5555FFMagician Hat^000000, et encore d'autres dans mes bagages...";
+			next;
+			mes "[Tempestra]";
+			mes "Je les ai apportés pour pouvoir les vendre et avoir de l'argent pour mes dépenses de vacances....";
+			mes "Mais maintenant je dois en porter un.....";
+		ssM_Menu:
+			next;
+			menu "Sunday Hat?",-, "Mage Hat?",ssM_0b, "Magician Hat?",ssM_0c, "S'en aller.",ssM_End;
+
+				mes "[Tempestra]";
+				mes "La fabrication d'un Sunday Hat nécessite:";
+				mes "- ^5555FF250 Fabric^000000,";
+				mes "- ^5555FF1 Hat [1]^000000,";
+				mes "- ^5555FF1 Cap [1]^000000,";
+				mes "- ^5555FF600 Soft Feathers^000000.";
+				mes "Si vous voulez, je peux vous en faire un. Allez d'abord me chercher tous ces objets.";
+				next;
+				menu "J'ai tout ce qu'il faut sur moi.",-, "Annuler.",ssM_End;
+
+					if (countitem(1059)<250 || countitem(2221)<1 || countitem(2227)<1 || countitem(7063)<600) goto ssM_Menu;
+					delitem 1059, 250;
+					delitem 2221, 1;
+					delitem 2227, 1;
+					delitem 7063, 600;
+					mes "[Tempestra]";
+					mes "Attendez un peu le temps que je le fasse........";
+					next;
+					getitem 5032, 1;
+					mes "[Tempestra]";
+					mes "Fini... un Sunday Hat juste pour vous. Merci et revenez donc me voir une prochaine fois.";
+					emotion e_thx;
+					close;
+			ssM_0b:
+				mes "[Tempestra]";
+				mes "La fabrication d'un Mage Hat nécessite:";
+				mes "- ^5555FF1 Wizard Hat^000000,";
+				mes "- ^5555FF400 Dragon Scales^000000,";
+				mes "- ^5555FF50 Mould Powder^000000,";
+				mes "- ^5555FF1 Elder Wilow Card^000000.";
+				mes "Si vous voulez, je peux vous en faire un. Allez d'abord me chercher tous ces objets.";
+				next;
+				menu "J'ai tout ce qu'il faut sur moi.",-, "Annuler.",ssM_End;
+
+					if (countitem(2252)<1 || countitem(1036)<400 || countitem(7001)<50 || countitem(4052)<1) goto ssM_Menu;
+					delitem 2252, 1;
+					delitem 1036, 400;
+					delitem 7001, 50;
+					delitem 4052, 1;
+					mes "[Tempestra]";
+					mes "Attendez s'il vous plaît, le temps que je le fasse........";
+					next;
+					getitem 5027, 1;
+					mes "[Tempestra]";
+					mes "Et voilà... un Mage Hat juste pour vous. Merci et revenez donc me voir un de ces jours.";
+					emotion e_thx;
+					close;
+			ssM_0c:
+				mes "[Tempestra]";
+				mes "La fabrication d'un Magician Hat nécessite:";
+				mes "- ^5555FF1 Wizard Hat^000000,";
+				mes "- ^5555FF450 Ancient Lips^000000,";
+				mes "- ^5555FF1200 Solid Shells^000000,";
+				mes "Si vous voulez, je peux vous en faire un. Allez d'abord me chercher tous ces objets.";
+				next;
+				menu "J'ai tout ce qu'il faut sur moi.",-, "Annuler.",ssM_End;
+
+					if (countitem(2252)<1 || countitem(1054)<450 || countitem(943)<1200) goto ssM_Menu;
+					delitem 2252, 1;
+					delitem 1054, 450;
+					delitem 943, 1200;
+					mes "[Tempestra]";
+					mes "Attendez un peu le temps que je le fasse........";
+					next;
+					getitem 5045, 1;
+					mes "[Tempestra]";
+					mes "Et voilà... Un Magician juste pour vous. Merci et à bientôt.";
+					emotion e_thx;
+					close;
+			ssM_End:
+				close;
+
+		sM_1:
+			mes "[Tempestra]";
+			mes "Oh mais mes chapeaux sont en vente. Si je les donne je ne pourrais plus les vendre à mes clients.";
+			next;
+			mes "[Tempestra]";
+			mes "Puisque vous m'avez donné une potion, j'aimerais vous faire quelque chose. Malheuresement je n'ai pas les materiaux nécéssaires à la construction de ce cadeau.";
+			next;
+			mes "[Tempestra]";
+			mes "Hum... Si vous avez:";
+			mes "^5555FF1 Emblem of the Sun God";
+			mes "10 Gold";
+			mes "40 Steel";
+			mes "50 Coal";
+			mes "et 2 Oridecon^000000..........";
+			next;
+			mes "[Tempestra]";
+			mes "Je pourrais vous faire un ^5555FFHat of the Sun God^000000!! C'est un véritable chef-d'oeuvre! Alors qu'en pensez vous?";
+			next;
+			menu "Sans problème.",-, "Pas vraiment maintenant, merci quand même.",ssM_1b;
+
+				if(countitem(7086)<1 || countitem(969)<10 || countitem(999)<40 || countitem(1003)<50 || countitem(984)<2) goto ssL_NotEnuf;
+				delitem 7086, 1;
+				delitem 969, 10;
+				delitem 999, 40;
+				delitem 1003, 50;
+				delitem 984, 2;
+				mes "[Tempestra]";
+				mes "Attendez un peu le temps que je vous fabrique ça........";
+				next;
+				getitem 5022, 1;
+				mes "[Tempestra]";
+				mes "Et voilà... un Hat of the Sun God juste pour vous. Merci encore pour la potion et revenez donc me voir un de ces jours.";
+				emotion e_thx;
+				close;
+
+				ssL_NotEnuf:
+					mes "[Tempestra]";
+					mes "Hum.... Où sont les objets exactement!?";
+					emotion e_hmm;
+					close;
+			ssM_1b:
+				mes "[Tempestra]";
+				mes "Revenez plus tard si vous changez d'avis.";
+				close;
+
+		L_NoPot:
+			mes "[Tempestra]";
+			mes "Hum... excusez moi.... Où est la potion??";
+			emotion e_hmm;
+			close;
+
+	M_1:
+		mes "[Tempestra]";
+		mes "..... Ho mais quelle GROSSIERTE!!";
+		emotion e_gasp;
+		close;
+}
+
+//=======================================================================================================//
+//						Turtle Quest
+//=======================================================================================================//
+// Gotanblue --------------------------------------------------------------------------
+alberta,247,123,5	script	Gotanblue	709,{
+	if(TURTLE) goto L_Turtle;
+	mes "[Gotanblue]";
+	mes "Ha ha! La mer semble sans fin!! Nous ne pouvons pas imaginer sa taille rien qu'en restant sur terre....";
+	next;
+	mes "[Gotanblue]";
+	mes "Vous voyez ce que je veux dire?.....";
+	close;
+
+L_Turtle:
+	mes "[Gotanblue]";
+	mes "Oh! Vos yeux.... Ils me disent tout!! Vous devez avoir été envoyé par ce vieil homme ivre!";
+M_Menu:
+	next;
+	menu "Parlez de moi de l'Île de la Tortue.",-, "Comment puis-je y aller?",M_2, "Finir la conversation.",M_End;
+
+		mes "[Gotanblue]";
+		mes "Ainsi vous voulez en savoir plus sur l'Île de la Tortue?... Vous pensez que c'est un bel endroit?...";
+		next;
+		mes "[Gotanblue]";
+		mes "Bien, laissez moi vous raconter quelquechose....";
+		next;
+		mes "[Gotanblue]";
+		mes "L'Île de la Tortue A PRIS LA VIE DE MES AMIS LES PLUS CHERS!!";
+		emotion e_gasp;
+		next;
+		mes "[Gotanblue]";
+		mes "Etes vous CAPABLE de comprendre ça??.........";
+		next;
+		mes "[Gotanblue]";
+		mes "Cela c'est passé il y a quelques décennies....";
+		next;
+		mes "[Gotanblue]";
+		mes "^5555FFJornadan Niliria^000000, d'autres camarades et moi-même sommes partis dans un long voyage pour voir si toutes les légendes concernant cette île étaient vraies.";
+		next;
+		mes "[Gotanblue]";
+		mes "Cet été là, je venais juste d'intégrer l'équipage de Jornadan.";
+		mes "J'avais à peine vingt ans et c'était un honneur pour moi de faire équipe avec des personnes aussi respectées.";
+		next;
+		mes "[Gotanblue]";
+		mes "Jornadan Niliria était un grand chasseur de trésors, et j'étais le meilleur marin de l'équipage.";
+		next;
+		mes "[Gotanblue]";
+		mes "Nous avons décidé de commencer notre aventure ici, à Alberta. C'était tout simplement parce qu'on savait que l'Île de la Tortue était proche d'Alberta.";
+		next;
+		mes "[Gotanblue]";
+		mes "Nous étions excités et pleins d'espoir! Nous avons tout quitté pour partir vers l'Île de la Tortue!";
+		mes "Nous avons navigué jour et nuit. Nous dérivions, attendant que les jours passent.....";
+		next;
+		mes "[Gotanblue]";
+		mes "Quand un jour... Sans prévenir... Nous avons été subitement entourés par une vraie purée de pois!!";
+		mes "Il était impossible de voir quoi que ce soit à plus d'un mètre!";
+		next;
+		mes "[Gotanblue]";
+		mes "Nous ne pouvions pas savoir où était l'Ouest ou l'Est. Mais ce qui est sûr... C'est qu'a ce moment là nous étions tous épuisés.";
+		next;
+		mes "[Gotanblue]";
+		mes "Puis le pire que l'on pouvait craindre s'est produit. Un énorme rocher a percé le brouillard et a surgi juste devant nous!";
+		mes "Il n'y avait aucun moyen de l'éviter et notre bateau s'est écrasé contre le rocher!!";
+		emotion e_gasp;
+		next;
+		mes "[Gotanblue]";
+		mes "Etonamment, le bateau n'a pas coulé, et nous avons pû rester à bord.";
+		next;
+		mes "[Gotanblue]";
+		mes "Soudain un rayon d'énergie a percé le ciel, le premier rayon de soleil depuis que notre bateau était entré dans ce brouillard.";
+		next;
+		mes "[Gotanblue]";
+		mes "Et comme par magie le brouillard s'est levé et nous avons vu apparaître devant nous l'objet de notre recherche.... L'endroit légendaire.... L'Île de la Tortue!!!!";
+		next;
+		mes "[Gotanblue]";
+		mes "Nous avons commencé par établir un camp pour reposer nos corps las. Quelques jours plus tard nous avons commencer à explorer l'île activement.";
+		mes "Ce que nous trouvâmes nous choquât! Apparemment quelqu'un avait découvert l'île avant nous. Il avait laissé un journal très bien conservé de son expédition.";
+		next;
+		mes "[Gotanblue]";
+		mes "Selon son journal il avait atteint l'île seul. Malheureusement, nous n'avons pas trouvé cette personne.";
+		next;
+		mes "[Gotanblue]";
+		mes "Même si quelqu'un nous avait battu sur la découverte de l'île, nous estimions quand même le fait d'avoir fait le voyage.";
+		mes "Nous avons continué à explorer l'île pour trouver autant de choses que nous le pouvions.";
+		next;
+		mes "[Gotanblue]";
+		mes "Un objet particulier a attiré notre attention. Il était mentionné dans le journal de l'homme....";
+		mes "Oh, maintenant je me rappelle son nom... ^5555FFWon^000000... Apparemment c'était un grand épéiste....";
+		next;
+		mes "[Gotanblue]";
+		mes "De toutes façons, il a décrit cet objet... Le ^FF5555Jewel Fragment^000000 comme 'le plus bel objet du monde'.";
+		next;
+		mes "[Gotanblue]";
+		mes "Nous avons recherché ce bijou intensément. Jours après jours nous l'avons cherché. Les mois ont passés.";
+		mes "Mais même avec les indications du journal de Won, nous n'avons pas pu trouver ce bijou. Nous n'avions pas le choix, nous avons abandonné.";
+		next;
+		mes "[Gotanblue]";
+		mes "Ainsi nous avons rassemblé nos affaires pour rentrer chez nous. Nous avons retraversé ce brouillard horrible.";
+		mes "Après un mois, notre voyage touchait à sa fin... Du moins c'est ce que je croyais.";
+		next;
+		mes "[Gotanblue]";
+		mes "Nous avons aperçu la terre et j'ai lâché un soupire de soulagement... Malheureusement ce sentiment a vite tourné court quand j'ai réalisé..... Que....";
+		next;
+		mes "[Gotanblue]";
+		mes "C'ETAIT L'Île de la Tortue!!! Nous avions débarqué de l'autre côté de l'île! Nous n'avions aucune idée de comment cela c'était produit mais nous sommes partis de nouveau.";
+		emotion e_gasp;
+		next;
+		mes "[Gotanblue]";
+		mes "Et comme si une malédiction planait sur notre équipage, nous nous retrouvâmes encore sur les rivages de l'Île de la Tortue.";
+		mes "A maintes reprises nous avons tenté de nous échapper. Une année passât et nous étions toujours prisonniers!";
+		next;
+		mes "[Gotanblue]";
+		mes "C'était à en devenir fou... Nous avons essayé chaque chemin possible.... Nos espoirs étaient anéantis....";
+		mes "Et les un après les autres mes compagnons tombèrent, n'ayant plus la force de chercher un chemin pour retourner chez eux....";
+		next;
+		mes "[Gotanblue]";
+		mes "ÎLE MAUDITE!!!!!";
+		emotion e_omg;
+		next;
+		mes "[Gotanblue]";
+		mes "Comme vous pouvez le voir, seul Jornadan et moi sommes toujours en vie. Par chance, nous sommes enfin arrivés à Alberta...";
+		next;
+		mes "[Gotanblue]";
+		mes "(~Snif~snif~snif)... Je m'excuse. Même après toutes ces années je reste très sensible sur le sujet... C'est tout ce que je peux vous dire sur L'Île de la Tortue.";
+		emotion e_sob;
+		goto M_Menu;
+	M_2:
+		mes "[Gotanblue]";
+		mes "De quoi? Après mon histoire terrifiante sur l'Île de la Tortue, vous voulez quand même aller là bas? Vous n'êtes pas effrayé??";
+		emotion e_what;
+		next;
+		mes "[Gotanblue]";
+		mes "Ainsi soit-il... Mais vous aurez besoin de moi comme guide et cela vous coûtera 10 000 Zenys!";
+		next;
+		menu "Île de Byalan -> 10 000 Zenys",-, "Annuler",sM_End;
+
+			if(Zeny < 10000) goto sL_Zeny;
+			mes "[Gotanblue]";
+			mes "Fort bien!! Vous avez fait votre choix! Avec mon expérience nous arriverons à l'Île de la Tortue sans problème.";
+			mes "J'admire votre esprit combattant. Gardez-le toujours avec vous!";
+			next;
+			mes "^5555FF(Vous et Gotanblue montez à bord d'un petit bateau à vapeur)^000000";
+			next;
+			mes "[Gotanblue]";
+			mes "Nous sommes maintenant en route pour l'Île de la Tortue. Soyez sans crainte!!";
+			next;
+			mes "^5555FF(~Tchoo~Tchoooo~)^000000";
+			next;
+			if(Zeny < 10000) goto sL_Zeny;
+			set Zeny, Zeny - 10000;
+			warp "tur_dun01",154,39;
+			close;
+		sL_Zeny:
+			mes "[Gotanblue]";
+			mes "De quoi? J'ai dit 10 000 Zenys. Je ne serais pas votre guide pour un si petit prix. Au revoir!";
+			emotion e_what;
+			close;
+		sM_End:
+			mes "[Gotanblue]";
+			mes "Un très bon choix!! L'Île de la Tortue est un endroit MAUDIT et DIABOLIQUE!";
+			mes "Quand j'emmène des personnes sur cette île j'ai l'impression de les conduire à leur MORT!";
+			close;
+	M_End:
+		mes "[Gotanblue]";
+		mes "A ce jour, l'Île de la Tortue est une île entourée de mystère. Il extrêmement difficile d'y arriver et presque impossible d'en repartir.";
+		mes "Si vous ne voulez pas souffrir maints et maints tourments oubliez-la....";
+		close; 
+}
+
+//Go back to Alberta
+tur_dun01,166,29,1	script	Gotanblue#2	709,{
+	mes "[Gotanblue]";
+	mes "Voulez-vous revenir à Alberta?";
+	next;
+	menu "Oui.",-, "Non.",M_End;
+
+	mes "^5555FF(Vous et Gotanblue montez à bord d'un petit bateau à vapeur)^000000";
+	next;
+	warp "alberta",244,123;
+	close;
+
+M_End:
+	mes "[Gotanblue]";
+	mes "Un très bon choix!!";
+	close;
+}
+
+// Turtle Grandpa -------------------------------------------------------------------
+alberta_in,23,104,2	script	Grand-Père	120,{
+	mes "[Tortue Géniale]";
+	mes "~Buuurrrpp!!!~ Ooups...";
+	emotion e_swt;
+	next;
+	mes "[Tortue Géniale]";
+	mes "Ça me dépasse de voir que les gens pensent qu' Alberta est le centre du commerce mondial.";
+	mes "Je veux dire qu'il n'y a même pas un bar décent ici pour se saouler!!";
+	emotion e_an;
+	next;
+	mes "[Tortue Géniale]";
+	mes "Pourquoi dois-je boire dans un endroit pareil??";
+	emotion e_what;
+	next;
+	menu "Dîtes moi deux mots sur l'Île de la Tortue.",-, "Comment puis-je aller sur l'Île de la Tortue?",M_1, "S'en aller.",M_End;
+
+		mes "[Tortue Géniale]";
+		mes "Il y a une énorme cave au trésor sur l'Île de la Tortue.";
+		mes "Il y a aussi un breuvage magique qui peut allonger la durée de vie d'une personne sur cette île......";
+		next;
+		mes "[Tortue Géniale]";
+		mes "Il y a un tas de mythes et de légendes sur cette île mais personne ne sait si tout cela existe vraiment.";
+		next;
+		mes "[Tortue Géniale]";
+		mes "Si seulement quelqu'un pouvait me croire.... ";
+		emotion e_gasp;
+		next;
+		mes "[Tortue Géniale]";
+		mes "Si vous êtes un marin quelquonque, si vous avez l'esprit d'aventure, et si vous vous destinez à devenir un grand chasseur de trésors....";
+		mes "Alors vous pourriez être digne de l'information que je peux vous offrir...";
+		next;
+		menu "-(~Clin d'oeil~)",-, "-Allez! Crachez le morceau!",sM_1;
+
+			mes "[Tortue Géniale]";
+			mes "Son nom était ^5555FFJornadan Niliria^000000. Jornadan et dix de ses compagnons sont partis dans un voyage pour trouver l'Île de la Tortue.";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Au début ils n'avaient aucune idée d'où ils allaient. Ils étaient ambitieux et travaillaient dur pour récolter des informations sur l'Île de la Tortue.";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Ils étaient très forts, surtout Jornadan. En fait, il était tellement fort, qu'un seul de ses coups pouvait assommer n'importe qui de normalement constitué!";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Il pouvait attraper une flèche d'une seule main tout en aidant un camarade de l'autre, et le tout en plein milieu d'un combat!";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Hé hé. Boah, c'est juste une rumeur, a vous de voir si elle en vaut la peine. Je disais donc....";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Après des recherches incessantes, Jornadan et ses compagnons trouvèrent l'Île de la Tortue.";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Mais pour des raisons inconnues, il se sont échoués sur l'île pour toujours!!";
+			mes "Bien que je ne connaisse pas le pourquoi du comment de cette affaire, il y a UNE personne qui a réussi à en revenir....";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Allez sur les docks à l'Est de la ville. Cherchez un professeur nommé.... ^FF3333Jornadan^000000... ^FF3333Niliria^000000...";
+			mes "Parlez lui. Il vous en dira certainement plus..... ";
+			next;
+			mes "[Tortue Géniale]";
+			mes "Oh! Un autre chose... Cherchez son ^5555FFjournal^000000. Il l'a généralement à côté de lui. Ce sera certainement très instructif à lire.";
+			if(TURTLE==0) set TURTLE, 1;
+			close;
+		sM_1:
+			mes "[Tortue Géniale]";
+			mes "Y a pas moyen! Je ne trouve vraiment aucun intérêt à discuter avec une personne qui porte autant d'avarice dans son coeur!";
+			emotion e_gasp;
+			next;
+			mes "[Tortue Géniale]";
+			mes "Hors de ma vue!!! DEGAGE!";
+			emotion e_an;
+			next;
+			mes "[Tortue Géniale]";
+			mes "Quoi encore?? Tu es toujours là?..... FILE! DEGAGE!!............";
+			emotion e_go;
+			close;
+	M_1:
+		mes "[Tortue Géniale]";
+		mes "Elle est très dure à trouver et encore plus dure à atteindre. Les possibilités de retour chez soi sont minimes....";
+		next;
+		mes "[Tortue Géniale]";
+		mes "En fait..... C'EST IMPOSSIBLE!!!!";
+		emotion e_gasp;
+		next;
+		mes "[Tortue Géniale]";
+		mes "Pourtant vous voulez toujours allez là bas??";
+		emotion e_what;
+		next;
+		mes "[Tortue Géniale]";
+		mes "Je voudrais vous avertir des dangers qui vous attendent.... Mais.... J'ai la tête qui tourne..... Wooah..... Ça doit être la vodka....";
+		next;
+		mes "[Tortue Géniale]";
+		mes "Si vous allez sur les docks, vous trouverez un gros vieux marin. Son nom est ^5555FFGotanblue^000000.";
+		mes "Dîtes lui que je vous envoie et il vous dira comment aller à l'Île de la Tortue. Bonne chance.";
+		close;
+	M_End:
+		mes "[Tortue Géniale]";
+		mes "Whooops......";
+		next;
+		mes "!!KA-PLOP!!(il s'effondre sur le sol)";
+		next;
+		mes "[Tortue Géniale]";
+		mes "He he he.... Regarde moi.... Je suis un poisson... Je suis ivre comme un poisson, c'est..... assez pour aujourd'hui..... ~ZZZZZzzzz~";
+		close;
+}
+
+// Letter of an explorer (on Turtle Grandpa's desk)------------------------------------------------------------------
+alberta_in,17,101,1	script	Lettre d'un Explorateur	111,{
+	mes "~ Lecture de la lettre... ~";
+	mes "- O/X/XOVX -";
+	mes "Si vous trouvez cette lettre, cela voudra dire que notre expédition pour l'Île de la Tortue aura échouée. Informez les autres s'il vous plaît...";
+	next;
+	mes "~ Suite...~";
+	mes "A cette date, seulement la moitié des membres de notre équipage est parti. Nos provisions ne tiendront que dix jours de plus. Nous sommes face à une situation très grave....";
+	next;
+	mes "~ Suite...~";
+	mes "- V/O/XOVX -";
+	mes "Il semblerait que mes lettres ont pris contact avec le monde extérieur, elles sont revenues à ma place.... Cette foutue île est MAUDITE!! Oh mon Dieu.....";
+	next;
+	mes "~ Suite...~";
+	mes "ÎLE PERDUE!! Il ne reste plus rien à manger..... Aidez... moi... s'il vous plaît.... AIDEZ MOI!!";
+	next;
+	mes "~ Suite...~";
+	mes "- V/X/XOVX -";
+	mes "^5555FF- Cette section est chiffonnée et en lambeaux. -^000000";
+	mes "^5555FF- Vous ne pouvez pas la lire. -^000000";
+	close;
+}
+
+// Jornadan Niliria ------------------------------------------------------------------------
+alberta,248,90,1	script	Jornadan Niliria	121,{
+	mes "[Jornadan Niliria]";
+	mes "Parfois j'ai l'impression que le monde autour de moi ne change pas.";
+	mes "Pourtant quand je regarde la terre je la trouve différente, quand je regarde le ciel je le trouve tout aussi différent....";
+	next;
+	mes "[Jornadan Niliria]";
+	mes "La manière dont Alberta et l'Île de la Tortue sont différentes. Ha ha ha....";
+	next;
+	menu "A propos de l'Île de la Tortue.",-, "Hum, vous confondez avec Al De Baran?",M_1, "S'en aller.",M_End;
+
+		mes "[Jornadan Niliria]";
+		mes "Ah oui..... L'Île de la Tortue.... Vous savez pourquoi elle a été appellée ainsi? Vous voulez le savoir? Haha......";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "La raison est vraiment très simple et vous pourriez même la trouver un peu idiote si je vous la disais comme ça.";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "Elle s'appelle l'Île de la 'Tortue' parce qu'on dirait qu'elle a la forme d'une tortue. Haha. C'est tout.";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "Il y a une zone de brouillard incroyablement dense autour de l'île.";
+		mes "Au début nous avons essayé d'en trouver la cause mais sans succès. Nous avons donc pris ça comme un phénomène naturel normal.";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "Nous avons trouvé une caverne le long du littoral de l'île. A l'intérieur nous avons été stupéfaits de voir une ENORME cascade.";
+		mes "Il s'est avéré que c'était cette cascade qui créait ce brouillard si dense.";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "La raison était vraiment très simple mais beaucoup de gens essayent toujours de chercher des raisons plus bizarres....";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "Je pense que les gens veulent continuer à chercher dans la difficulté car ils n'arrivent pas à admettre que leurs efforts aient été vains.";
+		mes "Peut-être qu'ils ont peur de la vérité..... Moi j'étais effrayé d'une chose.... de l'Île de la Tortue....";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "Mais maintenant que je comprends tous les mythes et les légendes au sujet de l'Île de la Tortue je la vois d'un oeil plus rassuré.";
+		mes "Il reste cependant un point obscur pour moi..... L'existence de ce ^FF5555Jewel Fragment^000000 inconnu.";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "Je ne sais vraiment pas ce que c'est en réalité. Je vais continuer à chercher jusqu'a ce que je découvre la vérité! Hahaha!!";
+		close;
+	M_1:
+		mes "[Jornadan Niliria]";
+		mes "Whoops ! Oh c'est vrai !! Je suis confus !.... Ouais !..... WOOOOO !!!";		//Je n'ai aucune idée de ce que ça signifie.....
+		close;
+	M_End:
+		mes "[Jornadan Niliria]";
+		mes "Si vous recherchez la vérité, veillez à rester sur cette voie. Un jour vous trouverez ce que vous cherchez...";
+		next;
+		mes "[Jornadan Niliria]";
+		mes "Humm.... D'ailleurs.... J'ai faim. Pourquoi Alberta n'a t-elle pas un petit restaurant où on peut manger pas cher??";
+		close;
+}
+
+// Jornadan's Voyage Log -------------------------------------------------
+alberta,247,93,1	script	Notes de Voyage	111,{
+	if(TURTLE == 1) goto L_Treasure;
+	mes "[Notes de voyage]";
+	mes "= 03:20 am =";
+	mes "La lune était foncée et je ne pouvais pas voir à 100m devant moi. J'avais de l'appréhension concernant la situation..... Je n'étais pas le seul...";
+	next;
+	mes "[Notes de voyage]";
+	mes "Je pouvais voir aux regards sur les visages de mes camarades qu'ils étaient inquiets eux aussi. Personne n'a pu dormir cette nuit. J'espère que nous reverrons la lueur du solei bientôt....";
+	next;
+	mes "[Notes de voyage]";
+	mes "= 04:10 =";
+	mes "Il y a 5 minutes un de nos camarades, Cooker, est mort. Alors qu'il marchait sur le pont, le mât du drapeau s'est soudainement cassé et est tombé sur sa tête....";
+	next;
+	mes "[Notes de voyage]";
+	mes "Il est mort environ à 04:07. Le mât avait été endommagé depuis que nous avions heurté ce récif.";
+	mes "Le bateau a subit de sérieux dommages sur tout son côté droit et sur le pont aussi. J'ai invité le chef à le réparer.";
+	next;
+	mes "[Notes de voyage]";
+	mes "= 04:45 =";
+	mes "Tandis que deux de nos ouvriers travaillaient sur les réparations, des monstres les ont attaqués soudainement.";
+	mes "Apparemment ils étaient entrés par une brèche sur le pont.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Deux hommes ont été perdus. Heureusement le bateau semble tenir le coup malgré tout. J'espère que nous allons trouver la terre bientôt.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Pendant la collision nous avons perdu 30% de nos approvisionnements. En particulier de la nourriture... Beaucoup de nourriture....";
+	next;
+	mes "[Notes de voyage]";
+	mes "= 05:23 =";
+	mes "Nous avons noté une augmentation du nombre de récifs. Ils deviennent de plus en plus gros.";
+	mes "Je me demande quand allons nous trouver la terre.... Je me demande si nous pouvons seulement....";
+	next;
+	mes "[Notes de voyage]";
+	mes "- Ecrit par -";
+	mes "- le capitaine Jornadan Niliria -";
+	next;
+	mes "^5555FF- Fin des notes de voyage -^000000";
+	close;
+
+L_Treasure:
+	mes "^5555FF- Le papier est déchiré -";
+	mes "- Les algues et les moules -";
+	mes "- sont mélangées au papier -";
+	mes "- Il a l'air d'être dans -";
+	mes "- un piteux état. -^000000";
+	next;
+	mes "^5555FF- Entre quelques pages -";
+	mes "- Il y a une feuille de banane -";
+	mes "- Quelques mots sont écrits. -^000000";
+	next;
+	mes "[Notes de voyage]";
+	mes "= date du O/X =";
+	mes "Juste après avoir débarqué sur l'Île de la Tortue nous avons cherché de la nourriture. Je suis si maigre maintenant...";
+	next;
+	mes "[Notes de voyage]";
+	mes "Quand je me suis regardé dans le miroir c'était horrible. J'ai été vraiment perturbé par ce que j'ai vu...";
+	next;
+	mes "[Notes de voyage]";
+	mes "= date du X/X =";
+	mes "Nous avons trouvé une nouvelle sorte de fruit! Il est long et de couleur jaune. Comme une banane!";
+	next;
+	mes "[Notes de voyage]";
+	mes "= date du XO/X =";
+	mes "Bien que très semblable, le fruit n'était pas une banane. Nous pensons qu'il s'agit d'une variété parente à la banane";
+	mes "Il avait le goût et l'odeur de la banane.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Nous étions affamés alors nous en avons cueillis pour nous en servir de nourriture.";
+	mes "Bien qu'il n'y avait qu'un nombre d'arbres limités, il y en avait assez pour notre survie.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Ces fruits étaient la réponse à notre manque de nourriture.";
+	mes "~ NOUS ADORONS LES BANANES!! ~";
+	next;
+	mes "[Notes de voyage]";
+	mes "= date du O/O =";
+	mes "Au milieu de la nuit, un de nos camarade s'est plaint d'une douleur au ventre, certainement suite à quelque chose qu'il avait mangé.";
+	next;
+	mes "[Notes de voyage]";
+	mes "= date du OO/O =";
+	mes "Un autre camarade est tombé malade. Il avait pourtant le système digestif le plus fort de nous tous.";
+	mes "Son surnom était 'Berot Berot', et il jouait un rôle vital dans notre groupe.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Le fait qu'il ait été malade ne pouvait signifier qu'une chose: nous avions mangé quelque chose d'empoisonné.";
+	next;
+	mes "[Notes de voyage]";
+	mes "= date du XO/O =";
+	mes "Une troisième personne est tombée malade alors que nous explorions l'île. La première personne malade est morte.... Nous sommes tous très inquiétés.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Nous avons essayé de trouver la cause de la maladie......";
+	next;
+	mes "[Notes de voyage]";
+	mes "Ce qui avait provoqué ce massacre..... c'était notre bien-aimée BANANE!!";
+	next;
+	mes "[Notes de voyage]";
+	mes "Nous avons décidé de nous débarrasser de toutes nos bananes. Mais pour une curieuse raison elles ne se décomposaient pas.";
+	mes "Même si on enlevait la peau, le fruit restait le même.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Je pense que le poison ou une autre chose dans le fruit lui permet de vivre.";
+	mes "Nous pourrions nous en servir pour des besoins médicinaux plus tard mais pour le moment il ne nous est d'aucune utilité.";
+	mes "Avant de partir pour Alberta, nous avons décidé d'enterrer quelques fruits.";
+	next;
+	mes "[Notes de voyage]";
+	mes "Ceci est l'endroit où nous l'avons enterré au cas où nous oublierions:";
+	mes "^FF8888- tur_dun01 -";
+	mes "- X: 160, Y: 81 -^000000";
+	next;
+	mes "^5555FF- Il y a une petite clé -";
+	mes "- avec une marque -";
+	mes "de crâne dessus -^000000";
+	set TURTLE, 2;
+	close;
+}
+
+// Burried treasure --------------------------------------------------------------------
+tur_dun01,160,80,1	script	Tombeau en Pierre	111,{
+	if(TURTLE == 2) goto L_OpenBox;
+	mes "^5555FF(C'est un tombeau en pierre effrayant avec un horrible crâne dessus.)^000000";
+	close;
+
+L_OpenBox:
+	mes "^5555FF(Sous la pierre il y a un petit trou avec une marque de crâne. Vous utilisez la clé récupérée près des notes de voyage pour ouvrir la boîte.)^000000";
+	next;
+	mes "^5555FF(~click!~click!~)^000000";
+	next;
+	mes "^5555FF(Soudain la pierre s'ouvre et plein de choses étaient enfermées à l'intérieur!)^000000";
+	set TURTLE, 3;
+	next;
+	mes "^5555FF(Vous obtenez 5 Tropical Bananas et 5 Banana Juices.)^000000";
+	getitem 634, 5;
+	getitem 532, 5;
+	close;
+}
+
