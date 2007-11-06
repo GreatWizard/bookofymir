@@ -1,0 +1,75 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Dancer Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.3a
+//===== Compatible With: ===================================== 
+//= eAthena Revision 3800+
+//===== Description: ========================================= 
+//= Temp quests for new skills for 2nd classes
+//===== Additional Comments: ================================= 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//============================================================
+
+
+//============================================================
+// DANCER - WINK OF CHARM
+//============================================================
+comodo,205,171,7	script	Chanel	724,{
+	mes "[Chanel]";
+	if(BaseJob!=Job_Dancer) goto L_nodancer;
+	if(getskilllv(1011)) goto L_alreadyhave;
+	mes "Salut à toi, petite... Tu veux que je t'apprenne tout mon savoir?";
+	mes "Ok... mais d'abord, il va falloir que tu me prouves que tu es capable de rapporter ceci:";
+	mes "1 Crystal Mirror";
+	mes "1 Alcohol";
+	mes "1 China";
+	mes "1 Apple";
+	mes "3 Bananas";
+	mes "5 Well-baked Cookies";
+	next;
+	
+	mes "[Chanel]";
+	mes "Voyons-voir ce que tu as rapporté...";
+	next;
+	
+	if(countitem(747)<1 || countitem(970)<1 || countitem(736)<1 || countitem(512)<1 || countitem(513)<3 || countitem(538)<5) goto L_noitems;//Items: Crystal_Mirror, Alcohol, China, Apple, Banana, Well-baked_Cookie,
+	delitem 747, 1;//Items: Crystal_Mirror,
+	delitem 970, 1;//Items: Alcohol,
+	delitem 736, 1;//Items: China,
+	delitem 512, 1;//Items: Apple,
+	delitem 513, 3;//Items: Banana,
+	delitem 538, 5;//Items: Well-baked_Cookie,
+
+	mes "[Chanel]";
+	mes "Héhé, je vois que tu as tout ce que j'avais demandé!";
+	mes "Je vais donc t'apprendre mes petits secrets de Danceuse...";
+	skill 1011,1,0;
+	close;
+	
+L_noitems:
+	mes "[Chanel]";
+	mes "Hé, mais tu n'as pas tout ce qui était convenu!";
+	mes "Vas chercher le reste, et reviens me voir!";
+	close;
+		
+L_nodancer:
+	mes "Hum... tu n'as pas l'air d'avoir le sens du rythme...";
+	emotion e_gasp;
+	close;
+
+L_alreadyhave:
+	mes "Je t'ai déjà appris tout ce que je savais...";
+	close;
+}

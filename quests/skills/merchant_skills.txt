@@ -1,0 +1,307 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Merchant Skills Quests
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.4b
+//===== Compatible With: =====================================
+//= eAthena 7.15 +
+//===== Description: =========================================
+//= <Description> 
+//===== Additional Comments: =================================
+//= Fully working
+//= v1.1 Bug fixes
+//= v1.a Now using functions found in "Global_Functions.txt"
+//= for class checks.[kobra_k88]
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed exploits [Lupus]
+//= 1.4a Fixed some typos [IVBela] 1.4b  Gershaun -> Gershuan
+//= 	changed perm. variables to temp ones [Lupus]
+//= 1.4b Added missing 1 Banana Juice requirement to Cart Revolution [DracoRPG]
+//============================================================
+
+
+
+//--------------------------------------- Necko: Crazy Uproar--------------------------------\\
+alberta,89,96,5	script	Necko#01	139,0,4,{
+	mes "[!?]";
+	mes "Muahahahahhhahahahahhahah!!";
+	mes "Pukakakakakkakakakakakakaka!!";
+	close;
+}
+
+alberta,83,96,5	script	Necko#02	98,{
+	mes "[Necko]";
+	if(baseClass == Job_Merchant) goto L_Start;
+
+L_Other:
+	mes "La Boutique de Necko est fermée pour le moment. Revenez plus tard...";
+	close;
+
+L_Start:
+	if(getskilllv(155)>0) goto L_GotSkill;
+	if(@CRAZYROAR) goto L_GetSkill;
+	mes "Oh! Vous êtes venu ici parce que voix vous a intriguée? Oui, mon timbre de voix est assez puissant, vous ne trouvez pas?";
+	emotion e_what;
+	next;
+	mes "[Necko]";
+	mes "En fait... Ma voix n'est pas simplement forte... Elle est totalement unique!...";
+	next;
+	mes "[Necko]";
+	if(BaseJob==Job_Merchant && JobLevel < 15) goto L_JobLvl;
+	mes "Voyez-vous, je connais une compétence qui me permet de crier afin d'effrayer mes ennemis... Cela s'appelle ^3355FFCrazy Uproar^000000!!!";
+	emotion e_ic;
+	next;
+	mes "[Necko]";
+	mes "La compétence Crazy Uproar vous donne une voix si forte qu'elle augmente votre puissance de combat!";
+	mes "Elle nécessite ^FF55338 SP^000000 et vous octroie un bonus de ^3355FF4 en STR pendant 5 minutes^000000!!";
+	next;
+	mes "[Necko]";
+	mes "C'est très pratique. Si vous voulez l'utiliser vous aussi, vous devrez dompter l'origine des sons. A ce propos, j'ai rencontré une chanteuse à Payon qui avait une théorie très intéressante... C'est elle qui m'a tout appris.......";
+	next;
+	mes "[Necko]";
+	mes "Malheureusement cette personne est morte.............";
+	mes "Je vois que vous êtes déçu... Vous vouliez vraiment apprendre Crazy Uproar??";
+	next;
+	mes "[Necko]";
+	mes "Hum..... Dans ce cas je peux vous apprendre, si vous le voulez vraiment. Vous devrez évidement entraîner durement vos cordes vocales, mais aussi me rapporter ces quelques petits objets:";
+	next;
+	mes "[Necko]";
+	mes "- ^3355FF7 Pearls,";
+	mes "- 1 Banana juice,";
+	mes "- 50 Mushroom spores^000000.";
+	next;
+	mes "[Necko]";
+	mes "Revenez quand vous serez prêt! Je dois maintenant faire quelques vocalises........";
+	mes "Bbooowuuuuuuuuuuuuuuuuuuuuuuuuuh!!";
+	set @CRAZYROAR, 1;
+	close;
+
+	L_JobLvl:
+		mes "Quand vous aurez atteint le ^3355FFNiveau de Job 15^000000, revenez me voir. Je vous confierai quelques petits secrets...";
+		next;
+		mes "[Necko]";
+		mes "Uahahahahahahhahahahahahaha!";
+		mes "Kyukwakakakakkakakakakakkakaka!";
+		close;
+
+L_GetSkill:
+	if((countitem(722)<7) || (countitem(532)<1) || (countitem(921)<50)) goto L_Items;
+	delitem 722,7;
+	delitem 532,1;
+	delitem 921,50;
+	mes "Oh, vous avez tout apporté! Très bien, très bien. Nous allons commencer votre entraînement.....";
+	next;
+	mes "[Necko]";
+	mes "Répétez après moi: Fa fa fa fa fa.... Sol sol sol sol sol..... La la la la la.... Mi mi mi mi mi mi......";
+	next;
+	mes "~plusieurs heures plus tard~";
+	next;
+	mes "[Necko]";
+	mes "Raaaaaawwwwrrrrrrrrrrr!....... Ha ha!! Excellent! Votre voix est maintenant prête pour l'utilisation de ^3355FFCrazy Uproar^000000. Bon travail!";
+	skill 155,1,0;
+	set @CRAZYROAR, 0;
+	emotion e_no1;
+	close;
+
+	L_Items:
+	 	mes "Rapportez-moi ces quelques petits objets:";
+		mes "- ^3355FF7 Pearls,";
+		mes "- 1 Banana juice,";
+		mes "- 50 Mushroom spores^000000.";
+		close;
+
+L_GotSkill:
+	mes "Re-bonjour! A vous entendre, on dirait que vous maîtrisez parfaitement Crazy Uproar!";
+	close;
+}
+
+
+//----------------------------------------- Charlron: Change cart ---------------------------------\\
+alberta,119,221,6	script	Charlron	107,{
+	mes "[Charlron]";
+	if(baseClass == Job_Merchant) goto L_Start;
+L_Other:
+	mes "Je fais commerce sur une très grande gamme de produits. Mon nom est Charlron. Si vous trouvez quelque chose d'intéressant, vous pouvez toujours en négocier la vente avec moi!";
+	close;
+L_Start:
+	if(getskilllv(154)>0) goto L_GotSkill;
+	if(@CHANGECART) goto L_GetSkill;
+	mes "Bienvenue, petit. Je suis le marchand Charlron.";
+	next;
+	mes "[Charlron]";
+	mes "Tu en as marre de ta vieille charrette rouillée? Je peux t'aider.";
+	next;
+	mes "[Charlon]";
+	mes "J'ai fait de longues études à propos du design des charrettes, et j'ai récemment terminé quelques modèles...";
+	next;
+	mes "[Charlon]";
+	mes "Je peux t'enseigner comment rendre ta charrette plus attrayante si tu veux. Evidement, ce ne sera pas gratuit......";
+	next;
+	mes "[Charlron]";
+	if(BaseJob==Job_Merchant && JobLevel < 30) goto L_JobLvl;
+	mes "Tout d'abord, rapporte moi ces quelques petits objets:";
+	mes "^3355FF50 Trunks,";
+	mes "20 Animal Skin,";
+	mes "10 Iron^000000.";
+	set @CHANGECART, 1;
+	close;
+
+	L_JobLvl:
+		mes "Je suis un marchand plutôt célèbre, alors je ne fais pas affaires avec les débutants..........";
+		mes "Reviens quand tu auras atteint le ^3355FFNiveau de Job 30^000000 et je reconsidérerais peut-être la chose.";
+		close;
+
+L_GetSkill:
+	if((countitem(1019)<50) || (countitem(998)<10) || (countitem(919)<20)) goto L_Items;
+	mes "Oh parfait, tu as apporté tous les objets. Voici un petit guide de tunning de charrette! Si tu le suis à la lettre, ta charrette sera transformée en un rien de temps!";
+// Note: It is not supposed to take these items, just check you have collected them
+	skill 154,1,0;
+	set @CHANGECART, 0;
+	next;
+	mes "[Charlron]";
+	mes "Bonne chance, et à plus tard!";
+	close;
+
+	L_Items:
+		mes "Reviens quand tu auras réuni ces quelques petits objets:";
+		mes "^3355FF50 Trunks,";
+		mes "20 Animal Skin,";
+		mes "10 Iron^000000.";
+		close;
+L_GotSkill:
+	mes "Hé hé... C'est tellement agréable de pouvoir personnaliser un peu sa charrette! ....";
+	close;
+
+}
+
+
+//-------------------------====-------- Gershaun: Cart Revolution ---------------------------------\\
+alberta,232,106,6	script	Gershuan	57,{
+	if(baseClass == Job_Merchant) goto L_Start;
+
+L_Other:
+	mes "[Gershuan]";
+	mes "Si ça ne fonctionne pas, fais en sorte que ça fonctionne!";
+	mes "Si ça ne fonctionne pas, fais en sorte que ça fonctionne!";
+	mes "Si ça ne fonctionne pas, fais en sorte que ça fonctionne!";
+	close;
+
+L_Start:
+	if(getskilllv(153)>0) goto L_GotSkill;
+	if(@CARTREVO) goto L_GetSkill;
+	mes "[Gershuan]";
+	mes "Hum... un jeune marchand... Toi aussi tu utilises une charrette? Pour vendre bien sûr mais..... C'est tout?";
+	emotion e_hmm;
+	next;
+	mes "[Gershuan]";
+	mes "J'ai trouvé de nombreuses autres utilisations d'une charrette, tu sais! Une pour cuisiner des ramen, une autre pour faire du saut à la corde... Non, ne pose pas la question.";
+	mes "Mais aucune de ces idées ne semble vraiment satisfaisante.";
+	next;
+	menu "Je vois ce que vous voulez dire.",M_0, "......???",M_1;
+
+	M_0:
+		mes "[Gershuan]";
+		mes "Tu vois ce que je veux dire?! COMMENT DIABLE pourrais-tu COMPRENDRE?";
+		emotion e_omg;
+		close;
+	M_1:
+		mes "[Gershuan]";
+		mes "Dans mon grand désarroi, j'ai erré ça et là, traînant ma charrette...";
+		next;
+		mes "[Gershuan]";
+		mes "Et au détour d'un chemin, je me suis retrouvé nez à nez avec un monstre incroyablement fort! J'ai su immédiatement que ma vie était en danger!";
+		mes "Je me disais, 'Pourquoi moi?! Un pauvre marchand, même pas armé!'...";
+		emotion e_gasp;
+		next;
+		mes "[Gershuan]";
+		mes "J'avais tellement peur... Je pensais vraiment que c'en était fini de moi. Avec le peu de forces qui me restaient, j'ai tenté une attaque désespéré...";
+		emotion e_swt2;
+		next;
+		mes "[Gershuan]";
+		mes "J'ai utilisé ma charrette pour attaquer le monstre!!";
+		emotion e_gasp;
+		next;
+		mes "[Gershuan]";
+		mes "Le monstre fût vaincu sur le coup! J'avais donc trouvé une excellent utilisation alternative de ma charrette.... en tant qu'ARME!";
+		next;
+		mes "[Gershuan]";
+		mes "J'ai appelé ma découverte ^3355FF'Cart Revolution'^000000!";
+		mes "En utilisant ^FF553312 SP^000000, on fait tournoyer sa charrette et on la lance sur l'ennemi!";
+		emotion e_ic;
+		next;
+		mes "[Gershuan]";
+		mes "Plus la charrette est lourde, plus c'est efficace! Alors, ça te dirait d'apprendre cette compétence?";
+		next;
+		menu "Oui!!",sM_0, "Je préfèrerais apprendre à faire des sushi...",sM_1;
+
+		sM_0:
+			mes "[Gershuan]";
+			if(BaseJob==Job_Merchant && JobLevel < 35) goto ssL_LowLvl;
+			mes "D'accord! Je t'apprendrais si tu me rapportes ces quelques petits objets:";
+			mes "^3355FF30 Sticky Mucus,";
+			mes "20 Fly wings,";
+			mes "15 Iron,";
+			mes "5 Tentacles,";
+			mes "2 Grape Juice,";
+			mes "1 Banana Juice^000000.";
+			next;
+			mes "[Gershuan]";
+			mes "Reviens quand tu auras tout! Bonne chance.";
+			set @CARTREVO, 1;
+			close;
+
+			ssL_LowLvl:
+				mes "[Gershuan]";
+				mes "Tu n'es pas encore assez expérimenté... Reviens quand tu auras atteint le ^3355FFNiveau de Job 35^000000!";
+				close;
+
+		sM_1:
+			mes "[Gershuan le Roi des Sushi]";
+			mes "Idiot!! Tu es bien trop jeune pour ne serait-ce qu'essayer de faire des sushi!!";
+			emotion e_an;
+			close;
+
+L_GetSkill:
+	if((countitem(532)<1) || (countitem(533)<2) || (countitem(998)<15) || (countitem(938)<30) || (countitem(601)<20) || (countitem(962)<5)) goto sM_0;
+	delitem 532,1;
+	delitem 533,2;
+	delitem 998,15;
+	delitem 938,30;
+	delitem 601,20;
+	delitem 962,5;
+	mes "[Gershuan]";
+	mes "Re-bonjour! Ah, tu as tout apporté... C'est parfait! Nous allons commencer l'entraînement....";
+	next;
+	mes "[Gershuan]";
+	mes "Tout d'abord, écarte tes pieds pour qu'ils soient alignés avec tes épaules. La stabilité est très importante pour ne pas être emporté en même temps que ta charrette. Maintenant, plie un peu les genoux, serre bien fort les poignées de ta charrette, mais pas trop non plus...";
+	next;
+	mes "[Gershuan]";
+	mes "Et maintenant, tournoie!!!!";
+	next;
+	mes "[Gershuan]";
+	mes "Euh....... ce n'était pas terrible. Essaye encore une fois....";
+	emotion e_swt;
+	next;
+	mes "~de nombreuses heures plus tard~";
+	next;
+	mes "[Gershuan]";
+	mes "OUI!! ENFIN!!! Bravo, tu as enfin compris le mouvement pour utiliser Cart Revolution!";
+	emotion e_no1;
+	next;
+	skill 153,1,0;
+	set @CARTREVO, 0;
+	mes "[Gershuan]";
+	mes "Prends bien soin de toi, et souviens-toi que plus ta charrette sera remplie, plus la compétence sera efficace.";
+	emotion e_gg;
+	close;
+
+L_GotSkill:
+	mes "[Gershuan]";
+	mes "Alors, c'est super Cart Revolution, non? N'oublie pas que ^3355FFplus ta charrette est lourde^000000, plus la compétence sera efficace.";
+	close;
+
+}

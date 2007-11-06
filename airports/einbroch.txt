@@ -1,0 +1,93 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Einbroch Airport Staff
+//===== By: ================================================== 
+//= L0ne_W0lf, Muad_Dib
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena Revision 3000+
+//===== Description: ========================================= 
+//= Einbroch Airport Staff
+//===== Additional Comments: ================================= 
+//= Converted by Dr.Evil, 1.0b more typos and credits [Lupus]
+//= 1.1 Fixed wrong check, added extra condition [Justin84]
+//= 1.2 Removed Duplicates [Silent]
+//= 1.3 Fixed syntax errors for duplicate [KarLaeda]
+//============================================================
+
+
+airport,126,43,4	script	Hôtesse#01::AirportE	90,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bienvenue a l'Aéroport.";
+	mes "En quoi puis-je vous aider?";
+	next;
+	menu "Embarquer",-,"Annuler",L_Cancel;
+
+		mes "[Personnel de l'Aéroport]";
+		mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas a payer ces frais. Voulez-vous prendre le zeppelin?";
+		next;
+		menu "Oui",-,"Non",L_Cancel;
+
+		if(countitem(7311) > 0) goto L_GotTicket;
+		if(Zeny < 1200) goto L_NoZeny;
+			set Zeny, Zeny - 1200;
+			warp "airport",148,51;
+			close;
+
+		L_GotTicket:
+			delitem 7311,1;
+			warp "airport",148,51;
+			close;
+
+	L_NoZeny:
+		mes "[Personnel de l'Aéroport]";
+		mes "Vous n'avez pas assez d'argent.";
+		close;
+
+	L_Cancel:
+		mes "[Personnel de l'Aéroport]";
+		mes "Merci. Passez une agréable journée!";
+		close;
+}
+
+airport,143,43,4	duplicate(AirportE)	Hôtesse#02	90
+airport,156,43,4	duplicate(AirportE)	Hôtesse#03	90
+
+airport,126,51,4	script	Hôtesse#04::AirportE2	90,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bienvenue~";
+	mes "Veuillez suivre ce chemin afin d'embarquer sur le zeppelin.";
+	next;
+	menu "Retourner au Terminal Principal",-,"Annuler",L_Cancel;
+
+		mes "[Personnel de l'Aéroport]";
+		mes "Si vous quittez le Terminal Principal, vous devrez à nouveau payer les frais d'embarquement.";
+		mes "Voulez-vous vraiment sortir?";
+		next;
+		menu "Oui",-,"Non",L_Cancel;
+
+			warp "airport",142,40;
+			close;
+
+	L_Cancel:
+		mes "[Personnel de l'Aéroport]";
+		mes "D'accord. Merci de votre confiance. Nous esperons que vous passerez un agréable voyage.";
+
+		close;
+}
+
+airport,143,51,4	duplicate(AirportE2)	Hôtesse#05	90
+airport,156,51,4	duplicate(AirportE2)	Hôtesse#06	90
+
+einbroch,94,267,4	script	Hôtesse	91,{
+	mes "[Personnel du Zeppelin]";
+	mes "Bienvenue à l'Aéroport d'Einbroch.";
+	mes "Veuillez emprunter cette porte afin d'embarquer pour Lighthalzen, Yuno ou la République de Schwarzwald.";
+	next;
+	mes "[Personnel du Zeppelin]";
+	mes "Si vous souhaitez simplement rejoindre la ville d'Einbroch, descendez les escaliers et parlez au Personnel de l'Aéroport afin de rejoindre le Terminal Principal.";
+	mes "Merci d'utiliser nos services. Nous esperons que vous avez effectué un agréable voyage.";
+	close;
+}

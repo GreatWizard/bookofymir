@@ -1,0 +1,1182 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Amatsu
+//===== By: ================================================== 
+//= eAthena team & others? & MasterOfMuppets
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Momotaro event, Sushi Quest, Amatsu Event
+//===== Additional Comments: ================================= 
+//= 1.0 Rewrote parts of other/momotaro.txt to make it work.
+//=	I'm sorry for the mess, I couldn't do much better with
+//=	the current code I had.
+//= 1.1 Added Sushi Quest and Amatsu Event from cities/ [Evera]
+//= 1.2 Fixed Momotaro Quest, thanks to .~Abism0~. [Lupus]
+//============================================================ 
+
+amatsu,223,235,4	script	Chargée de Publication	763,{
+	if (event_momo > 4) goto Lfin;
+	if ((event_momo >= 1) && (event_momo <= 4)) goto Lget;
+	mes "[Chargée de Publication]";
+	mes "Bonjour.";
+	mes "Je représente ^009CFFLa Société de Publication Tsurukame^000000 qui propose les légendes contées dans le village depuis des générations.";
+	mes "Une de nos légendes les plus populaires auprès des hommes et femmes de tous âges est ^009CFFL'histoire de Momotaro^000000......";
+	next;
+	mes "[Chargée de Publication]";
+	mes "Un million d'exemplaires ont été vendus!";
+	mes "Afin de faire perdurer cette histoire, le ^3163FFParc d'Attractions Momotaro^000000 a été mis en place.";
+	next;
+	mes "[Chargée de Publication]";
+	mes "Devenez le protagoniste de l'histoire de Momotaro, et combattez des Dokebis!";
+	mes "Des récompenses sont en jeu!";
+	next;
+	menu "Qui est Momotaro?",-,"Je suis partant!",L1,"Je suis occupé, là...",L2;
+		mes "[Chargée de Publication]";
+		mes "Comment?! Vous ne connaissez pas Momotaro? Quel genre d'inculte êtes-vous...";
+		mes "Bon, je vais vous raconter l'histoire...";
+		next;
+		mes "[Chargée de Publication]";
+		mes "Il était une fois, un vieux couple...";
+		mes "Ils s'entendaient à merveille, malheureusement ils n'avaient pas d'enfant...";
+		next;
+		mes "[Chargée de Publication]";
+		mes "Un jour, alors que la grand-mère faisait sa lessive à la rivière, elle apperçut une énorme pêche, qui flottait.";
+		mes "La grand-mère attrapa la pêche sur l'eau, et la rapporta chez elle, où le grand-père voulu couper le fruit en deux afin de le partager avec son épouse...";
+		mes "Mais au milieu de la pêche se trouvait un bébé.";
+		next;
+		mes "[Chargée de Publication]";
+		mes "Le grand-père et la grand-mère furent très surpris, mais décidèrent de garder l'enfant et de l'élever comme s'il était leur propre fils.";
+		next;
+		mes "[Chargée de Publication]";
+		mes "L'enfant grandit très rapidement, et devint un beau jeune-homme à peine quelques jours plus tard.";
+		next;
+		mes "[Chargée de Publication]";
+		mes "Le nom de cet enfant était ^3163FFMomotaro^000000.";
+		mes "Dans le même temps, un petit démon apparut, et commença à semer la zizanie parmis les villageois. Momotaro décida alors de partir en voyage pour chercher un moyen de vaincre le démon...";
+		next;
+		mes "[Chargée de Publication]";
+		mes "Sur sa route, Momotaro rencontra un ^3163FFsinge^000000, une ^3163FFfaisan^000000 et un ^3163FFchien^000000, qui devinrent ses compagnons.";
+		mes "Finalement, ils vainquirent le démon, et vécurent tous ensemble avec le grand-père et la grand-mère pendant de longs jours heureux...";
+		mes "- fin -";
+		next;
+		mes "[Chargée de Publication]";
+		mes "Comment c'était?";
+		mes "On a déjà vendu Un Million d'exemplaires!";
+		close;
+L1:
+		mes "[Chargée de Publication]";
+		mes "Oh! Vous semblez être une jeune personne très enthousiaste! Vous paraissez plein de vigueur!";
+		mes "Dans ce cas, remplissez ce formulaire d'inscription...";
+		next;
+		mes "[Chargée de Publication]";
+		mes "......";
+		mes "... Hum hum...";
+		mes "... Bien! Tout est en règle!";
+		mes "Vous pouvez commencer. Je vous souhaite un bon amusement au ^3163FFParc d'Attractions Momotaro^000000.";
+		close2;
+		warp "ama_test",52,35;
+		end;
+L2:
+		mes "[Chargée de Publication]";
+		mes "Il y a aussi des cadeaux exceptionnels, vous savez... (*clin d'oeil*)";
+		close;
+Lget:
+	mes "[Chargée de Publication]";
+	mes "Comment c'était? Avez-vous apprécié l'attraction?";
+	mes "J'espère que les différentes activités proposées vous auront permis de passer un moment agréable.";
+	next;
+	if (event_momo >= 1 && event_momo < 4)
+	{
+		switch(rand(1,10))
+		{
+		case 1: getitem 622,1; break; //rainbow carrot
+		case 2: getitem 627,1; break; //sweet milk
+		case 3: getitem 629,1; break; //singing flower
+		case 4: getitem 632,1; break; //fatty chubby earthworm
+		case 5: getitem 623,1; break; //earthworm the dude
+		case 6: getitem 619,1; break; //unripe apple
+		case 7: getitem 621,1; break; //bitter herb
+		case 8: getitem 620,1; break; //orange juice
+		case 9: getitem 625,1; break; //rusty iron
+		case 10: getitem 624,1; break; //rotten fish
+		}
+	}
+
+//Am Mut successful finish unknown
+	if (event_momo == 4)
+	{
+		switch(rand(1,10))
+		{
+		case 1: getitem 659,1; break; //her heart
+		case 2: getitem 633,1; break; //sweet potato
+		case 3: getitem 634,1; break; //tropical banana
+		case 4: getitem 639,1; break; //armlet of obedience
+		case 5: getitem 636,1; break; //no recipient
+		case 6: getitem 628,1; break; //well-dried bone
+		case 7: getitem 637,1; break; //old broom
+		case 8: getitem 635,1; break; //orc trophy
+		case 9: getitem 626,1; break; //monster juice
+		case 10: getitem 641,1; break; //contract in shadow
+		}
+	}
+	set event_momo,5;
+	mes "[Chargée de Publication]";
+	mes "Très bien, voici un petit cadeau que je vous avais préparé...";
+	mes "Que ce conte soit apprécié pendant encore de nombreuses générations!";
+	close;
+Lfin:
+	mes "[Chargée de Publication]";
+	mes "Quelle belle journée nous avons aujourd'hui, vous ne trouvez pas? ... Un temps idéal pour aérer les futons!";
+	close;
+}
+//=====================================================================
+ama_test,50,44,4	script	Satoshi	109,{
+	mes "[Satoshi]";
+	mes "Bienvenue au Parc d'Attractions Momotaro!";
+	next;
+	mes "[Satoshi]";
+	mes "Je suis responsable de la salle d'attente du Parc d'Attractions Momotaro. Mon nom est Satoshi.";
+	next;
+	mes "[Satoshi]";
+	mes "Au départ ce devait être le travail de la Chargée de Publication, mais... elle n'avait pas le temps pour assurer ce travail, alors j'ai été muté ici...";
+	mes "Mais c'est une bonne chose! De cette manière, nous pouvons rendre l'attraction encore plus attrayante pour les visiteurs.";
+	next;
+	mes "[Satoshi]";
+	mes "... Héhéhé, non, non, c'était une simple boutade...";
+	next;
+	mes "[Satoshi]";
+	mes "Très bien, je vais vous donner quelques explications à propos de ce Parc d'Attractions.";
+	next;
+	mes "[Satoshi]";
+	mes "Avez-vous interrogé la Chargée de Publication à propos de l'histoire de Momotaro?";
+	next;
+	menu "Oui.",L1,"Non.",-;
+		mes "[Satoshi]";
+		mes "Comment!?! Vous venez ici sans même connaître l'histoire?";
+		mes "...";
+		mes "Vous n'êtes en aucun point un fan de Momotaro.";
+		next;
+		mes "[Satoshi]";
+		mes "La Chargée de Publication pourra vous raconter l'histoire. Donc... Au revoir.";
+		close2;
+		warp "amatsu",223,230;
+		end;
+L1:
+		mes "[Satoshi]";
+		mes "Hum...";
+		mes "L'histoire de Momotaro est l'un des plus grands succès de notre éditeur. Peut-être même un chef d'oeuvre?";
+		mes "Hahaha!!!";
+		next;
+		mes "[Satoshi]";
+		mes "... Bref, et ensuite... Ah oui!";
+		next;
+		mes "[Satoshi]";
+		mes "Les règles du Parc d'Attractions sont simples. Devenez Momotaro le courageux, et affrontez les petits démons!";
+		mes "En clair, soyez courageux et tout se passera bien!";
+		next;
+		mes "[Satoshi]";
+		mes "Il y a encore trois points importants.";
+		next;
+		mes "[Satoshi]";
+		mes "Premièrement:";
+		mes "Une fois que vous avez accompli les attractions du Parc, vous ne pourrez plus y revenir.";
+		mes "J'insiste sur ce point.";
+		next;
+		mes "[Satoshi]";
+		mes "Deuxièmement:";
+		mes "Les animaux de compagnie ne sont pas admis dans l'enceinte du Parc. Si vous avez un animal avec vous, vous êtes priés de le laisser à l'entrée.";
+		next;
+		mes "[Satoshi]";
+		mes "Et le dernier point important:";
+		mes "Il y a un compte à rebours de six minutes une fois entré dans le Parc.";
+		next;
+		mes "[Satoshi]";
+		mes "Très bien, vous pouvez entrer dans la salle d'attente et attendre votre tour. Je vous souhaite bonne chance.";
+		close;
+OnInit:
+	waitingroom "Salle d'Attente du Parc",1,"Satoshi::OnMax";
+OnInitCopy:
+	enablewaitingroomevent "Satoshi";
+	areawarp "ama_test",30,78,68,120,"amatsu",223,230;
+	disablenpc "Manager#Momotaro";
+	enablenpc "Grand-Père#Momotaro";
+	enablenpc "Grand-Mère#Momotaro";
+	donpcevent "#MomotaroTimer::OnStopTimer";
+	killmonsterall "ama_test";
+	end;
+OnMax:
+	warpwaitingpc "ama_test",51,85;
+	disablewaitingroomevent "Satoshi";
+	disablenpc "Manager#Momotaro";
+	enablenpc "Grand-Père#Momotaro";
+	enablenpc "Grand-Mère#Momotaro";
+	donpcevent "#MomotaroActivator::OnMomoInit";
+	end;
+}
+
+ama_test,1,1,0	script	#MomotaroTimer	-1,{
+OnStartTimer:
+	initnpctimer;
+	end;
+OnTimer180000:
+	if(!isloggedin($MomotaroRID))goto s_Cleanup;
+	mapannounce "ama_test","Chronomètre: 3 Minutes Restantes!",8;
+	end;
+OnTimer300000:
+	if(!isloggedin($MomotaroRID))goto s_Cleanup;
+	mapannounce "ama_test","Chronomètre: 1 Minute Restante!",8;
+	end;
+OnTimer360000:
+	if(!isloggedin($MomotaroRID))goto s_Cleanup;
+	mapannounce "ama_test","Chronomètre: Bip- Bip- Bip- Le Temps est écoulé!",8;
+OnTimer362500:
+	areawarp "ama_test",30,78,68,120,"amatsu",223,230;
+	goto s_Cleanup;
+
+
+OnTimer20000:
+OnTimer40000:
+OnTimer60000:
+OnTimer80000:
+OnTimer100000:
+OnTimer120000:
+OnTimer140000:
+OnTimer160000:
+OnTimer200000:
+OnTimer220000:
+OnTimer240000:
+OnTimer260000:
+OnTimer280000:
+OnTimer320000:
+OnTimer340000:
+	if(!isloggedin($MomotaroRID))goto s_Cleanup;
+	end;
+
+OnCleanUp:
+s_Cleanup:
+	stopnpctimer;
+	set $Momotaro,0;
+	set $MomoDokebi,0;
+	set $MomoDokebi2,0;
+	set $MomotaroRID,0;
+	mapannounce "ama_test","La Salle d'Attente va ouvrir dans quelques instants.",8;
+	disablenpc "Manager#Momotaro";
+	donpcevent "Satoshi::OnInitCopy";
+	end;
+
+OnStopTimer:
+	stopnpctimer;
+	end;
+
+}
+
+ama_test,51,85,0	script	#MomotaroActivator	139,1,1,{
+	if($Momotaro)end;
+	set $Momotaro,1;
+	set $MomotaroRID,getcharid(3);
+	areaannounce "ama_test",30,78,68,120,"Chronomètre: un compte à rebours de 6 minutes vient de démarer. Tuez tous les monstres avant la fin du chronomètre!",8;
+	donpcevent "#MomotaroTimer::OnStartTimer";
+	mes "[Grand-Mère]";
+	mes "Oh...!?";
+	next;
+	mes "[Grand-Mère]";
+	mes "Grand-Père, sais-tu où j'ai rangé mon porte-monnaie?";
+	next;
+	mes "[Grand-Père]";
+	mes "Grand-Mère... Le chef du village a dit qu'une bande de Dokebis avaient volé de l'argent récement à plusieurs personnes du village, causant un sacré remue-ménage...";
+	next;
+	mes "[Grand-Mère]";
+	mes "Hiiiiiii......!";
+	next;
+	mes "[Grand-Père]";
+	mes "Enfin c'est ce qui se raconte au village...";
+	next;
+	mes "[Grand-Père]";
+	mes "Oh, Momotaro...";
+	next;
+	mes "[Grand-Père]";
+	mes "Comme tu le sais peut-être, il n 'y a que des lâches qui n'ont pas la force d'affronter ces petits démons...";
+	mes "J'aimerais te demander une faveur, Momotaro.";
+	next;
+	mes "[Grand-Mère]";
+	mes "Momotaro...";
+	mes "Ta grand-mère aimerait pouvoir te donner ^3355ffla meilleure potion rouge du monde^000000... mais ce n'est pas bon pour ta ligne... ";
+	next;
+	mes "[Grand-Mère]";
+	mes "Je suis vraiment désolée... Momotaro...";
+	next;
+	mes "[Grand-Mère & Grand-Père]";
+	mes "S'il te plaît, Momotaro, aide-nous...";
+	close2;
+	initnpctimer;
+	end;
+
+OnTimer5000:
+	stopnpctimer;
+	set $MomoDokebi,0;
+	set $MomoDokebi2,0;
+	disablenpc "Grand-Père#Momotaro";
+	disablenpc "Grand-Mère#Momotaro";
+	monster "ama_test",47,101,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",51,101,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",55,101,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",55,97,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",55,93,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",53,91,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",49,91,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",45,96,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	monster "ama_test",45,99,"Dokebi",1110,1,"mobcount#momotaro::OnMobDead";
+	end;
+
+OnInit:
+	set $Momotaro,0;
+	set $MomoDokebi,0;
+	set $MomoDokebi2,0;
+	set $MomotaroRID,0;
+	end;
+
+}
+
+ama_test,49,95,4	script	Grand-Père#Momotaro	766,{
+
+	mes "[Grand-Père]";
+	mes "Zzzzzz......";
+	close;
+}
+
+ama_test,51,95,4	script	Grand-Mère#Momotaro	761,{
+
+	mes "[Grand-Mère]";
+	mes "Oh....!?";
+	close;
+
+}
+
+ama_test,50,100,4	script	Manager#Momotaro	762,{
+
+	if (event_momo >= 4) goto LSecondFin;
+	mes "[Manager]";
+	mes "Ho ho, vous avez réussi...... Je suis le manager de ce lieu... Vous n'êtes pas une personne ordinaire, n'est-ce pas? Vous avez brillement réussi.";
+	next;
+	mes "[Manager]";
+	mes "Le Momotaro de la légende a une incarnation dans ce monde!";
+	mes "Hohoho hoho!";
+	next;
+	menu "C'est quoi la suite?",L1,"Merci du cirque... euh, divertissement.",L2;
+L1:
+	mes "[Manager]";
+	mes "Hohoho...";
+	mes "Ce n'est peut-être pas très recommandé...";
+	mes "Vu votre gabarit, je pense que les petits démons ne feront qu'une bouchée de vous.";
+	mes "... Hohoho...";
+	next;
+	mes "[Manager]";
+	mes "...";
+	mes "Je rigolais.";
+	next;
+	mes "[Manager]";
+	mes "Alors, vous appréciez le Parc d'Attractions Momotaro?";
+	mes "Allez parler au membre du personnel que vous avez rencontrée en premier, et questionnez-la sur les cadeaux premium. Elle vous récompensera peut-être.";
+	next;
+	mes "[Manager]";
+	mes "Quoi que vous affrontiez à l'avenir, ne perdez jamais votre force d'esprit!";
+	close2;
+	set $Momotaro,0;
+	set $MomoDokebi,0;
+	set $MomoDokebi2,0;
+	set $MomotaroRID,0;
+	set event_momo,1;
+	donpcevent "Satoshi::OnInitCopy";
+	warp "amatsu",223,230;
+	disablenpc "Manager#Momotaro";
+	end;
+L2:
+	mes "[Manager]";
+	mes "!!!!!";
+	mes "... Ho... Hohoho...";
+	mes "Vous êtes un petit plaisantin...";
+	mes "Et bien... Juste un petit conseil de vous à moi...";
+	next;
+	mes "[Manager]";
+	mes "Normalement je devrais simplement vous jeter dehors à coups de pieds aux fesses, mais... J'aimerais voir de quoi vous êtes réellement capable... Hohoho.";
+	next;
+	mes "[Manager]";
+	mes "Qu'en dites-vous? Je vous donne une chance qui ne se représentera pas deux fois. C'est l'épreuve de ^3355ffDeuxième Grade^000000, qui n'est pas ouvert au public normalement...";
+	mes "Mais je vous préviens, celui-là sera difficile.";
+	next;
+	menu "Non, j'en ai assez.",L2_1,"Je relève le défis!",L2_2;
+L2_1:
+	mes "[Manager]";
+	mes "Hoho...";
+	mes "Vous êtes fatigué de votre dernier combat?";
+	mes "Dans ce cas, ok... Avez-vous apprécié le Parc d'Attractions Momotaro? Allez parler au membre du personnel que vous avez rencontrée en premier, et questionnez-la sur les cadeaux premium. Elle vous récompensera peut-être.";
+	next;
+	mes "[Manager]";
+	mes "Quoi que vous affrontiez à l'avenir, ne perdez jamais votre force d'esprit!";
+	next;
+	set event_momo,2;
+	goto LWarpOut;
+L2_2:
+	mes "[Manager]";
+	mes "Hohoho, vous en voulez toujours plus, pas vrai? Ce sera la bataille décisive. Laissez libre court à votre force!";
+	initnpctimer;
+	close;
+OnTimer5000:
+	stopnpctimer;
+	if(!isloggedin($MomotaroRID)){ donpcevent "#MomotaroTimer::OnCleanUp"; end; }
+	attachrid($MomotaroRID);
+	monster "ama_test",35,103,"Am Mut",1301,1,"mobcount2#momotaro::OnMobDead";
+	monster "ama_test",56,111,"Am Mut",1301,1,"mobcount2#momotaro::OnMobDead";
+	monster "ama_test",40,91,"Am Mut",1301,1,"mobcount2#momotaro::OnMobDead";
+	misceffect 16;
+	set event_momo,3;
+	disablenpc "Manager#Momotaro";
+	end;
+LSecondFin:
+	mes "[Manager]";
+	mes "Vous êtes vraiment fort... N'était-ce pas terrifiant? Vous voyez que le Parc d'Attractions Momotaro peut être un bon divertissement!";
+	mes "Maintenant, allez parler au membre du personnel que vous avez rencontrée en premier, et questionnez-la sur les cadeaux premium. Elle vous récompensera peut-être.";
+	close2;	
+	set event_momo,4;
+LWarpOut:
+	mes "[Manager]";
+	mes "Quoi que vous affrontiez à l'avenir, ne perdez jamais votre force d'esprit!";
+	close2;
+	set $Momotaro,0;
+	set $MomoDokebi,0;
+	set $MomoDokebi2,0;
+	set $MomotaroRID,0;
+	warp "amatsu",223,230;
+	donpcevent "Satoshi::OnInitCopy";
+	disablenpc "Manager#Momotaro";
+	end;
+OnStart:
+	misceffect 215;
+	if(!isloggedin($MomotaroRID)){ donpcevent "#MomotaroTimer::OnCleanUp"; end; }
+	attachrid($MomotaroRID);
+	mes "[Manager]";
+	mes "Hohoho......";
+	close;
+
+}
+//=======================================MobCount===============================-
+ama_test,0,1,0	script	mobcount#momotaro	-1,{
+OnMobDead:
+	if ($MomoDokebi >= 8){
+		areaannounce "ama_test",30,78,68,120,"Dokebi: I will be baaack~~~~!!!",8;
+		attachrid($MomotaroRID);
+		initnpctimer;
+		end;
+	}
+	set $MomoDokebi,$MomoDokebi+1;
+	set @mobrand,rand(4);
+	if (@mobrand == 1) goto Lrand1;
+	if (@mobrand == 2) goto Lrand2;
+	if (@mobrand == 3) goto Lrand3;
+
+	areaannounce "ama_test",30,78,68,120,"Dokebi: Je vous demande pardon, pardon~~! Waaaaah~~",8;
+	end;
+Lrand1:
+	areaannounce "ama_test",30,78,68,120,"Dokebi:!! On m'a frappé par derrière...!!",8;
+	end;
+Lrand2:
+	areaannounce "ama_test",30,78,68,120,"Dokebi: Je n'ai rien fait de mal~!",8;
+	end;
+Lrand3:
+	areaannounce "ama_test",30,78,68,120,"Dokebi: Aie, Aiiie!!!",8;
+	end;
+OnTimer5000:
+	donpcevent "mobcount2#momotaro::OnTimer5000";
+	end;
+}
+//=======================================MobCount2==============================-
+ama_test,50,101,0	script	mobcount2#momotaro	-1,{
+OnMobDead:
+	if ($MomoDokebi2 == 2) goto Lfin;
+	set $MomoDokebi2,$MomoDokebi2+1;
+	areaannounce "ama_test",30,78,68,120,"Am Mut: Aie, Aiiie!!!",8;end;
+Lfin:
+	areaannounce "ama_test",30,78,68,120,"Am Mut: Je vous demande pardon, pardon~~! Waaaaah~~",8;
+	set event_momo,4;
+	initnpctimer;
+	end;
+OnTimer5000:
+	stopnpctimer;
+	enablenpc "Manager#Momotaro";
+	donpcevent "Manager#Momotaro::OnStart";
+	end;
+
+}
+
+//============================================================
+//====================================================== Sushi
+//====================================================== Quest
+ama_in01,162,17,0	script	ShabuShabu	765,{
+	if (ama_sushi == 1) goto LStart2;
+	mes "[ShabuShabu]";
+	mes "*Pff* C'est de pire en pire...";
+	mes "Chaque jour de nouveaux clients arrivent, mais je n'arrive jamais à les servir tous, même aujourd'hui.";
+	mes "Beaucoup de clients doivent être en colère.";
+	next;
+	mes "[ShabuShabu]";
+	mes "*Pff*, encore un. Bienvenue!";
+	mes "Comme toujours, je propose mes sashimi faits maison et garantis fraîcheur de la pêche du jour! Qu'est-ce que je vous sers?";
+	next;
+	menu "Je voudrais des sushi aux crevettes.",L1,"Je voudrais des sashimi.",L2,"Avez-vous besoin d'aide?",L3,"Continuez de faire de la bonne cuisine.",-;
+		mes "[ShabuShabu]";
+		mes "Très bien! Vous savez, mes sashimi sont connus à travers le monde entier! Leur goût si fin vient de leur fraîcheur, personne d'autre ne les réussit mieux que moi.";
+		mes "Revenez goûter un petit sashimi un de ces jours!";
+		close;
+	L1:
+		mes "[ShabuShabu]";
+		mes "Très bien! Combien en voulez-vous?";
+		mes "C'est 700 zeny pièce, mais si vous voulez simplement goûter, je peux vous en faire un à 74 zeny.";
+		mes "Si le goût vous plait, revenez me voir!";
+		next;
+		menu "Je voudrais celui à 700 zeny pièce!",L1_1,"J'aimerais goûter celui à 74 zeny.",L1_2,"Je reviendrais déjeuner une autre fois.",-;
+			mes "[ShabuShabu]";
+			mes "Très bien. Vous savez, mes sushi aux crevettes sont connus à travers le monde entier! Leur goût si fin vient de leur fraîcheur, personne d'autre ne les réussit mieux que moi.";
+			mes "Revenez goûter un petit sashimi un de ces jours!";
+			close;
+		L1_1:
+			if (Zeny < 700) goto Lzeny;
+			set Zeny,Zeny-700;
+			getitem 551,10;
+			mes "[ShabuShabu]";
+			mes "Revenez goûter un petit sashimi un de ces jours!";
+			mes "Merci beaucoup.";
+			close;
+		L1_2:
+			if (Zeny < 74) goto Lzeny;
+			set Zeny,Zeny-74;
+			getitem 551,1;
+			mes "[ShabuShabu]";
+			mes "Revenez goûter un petit sashimi un de ces jours!";
+			mes "Merci beaucoup.";
+			close;
+	L2:
+		mes "[ShabuShabu]";
+		mes "Très bien! Combien en voulez-vous?";
+		mes "C'est 350 zeny pièce, mais si vous voulez simplement goûter, je peux vous en faire un à 37 zeny.";
+		mes "Si le goût vous plait, revenez me voir!";
+		next;
+		menu "Je voudrais celui à 350 zeny pièce!",L2_1,"J'aimerais goûter celui à 37 zeny.",L2_2,"Je reviendrais déjeuner une autre fois.",-;
+			mes "[ShabuShabu]";
+			mes "Très bien! Vous savez, mes sashimi sont connus à travers le monde entier! Leur goût si fin vient de leur fraîcheur, personne d'autre ne les réussit mieux que moi.";
+			mes "Revenez goûter un petit sashimi un de ces jours!";
+			close;
+		L2_1:
+			if (Zeny < 350) goto Lzeny;
+			set Zeny,Zeny-350;
+			getitem 544,10;
+			mes "[ShabuShabu]";
+			mes "Merci beaucoup.";
+			close;
+		L2_2:
+			if (Zeny < 37) goto Lzeny;
+			set Zeny,Zeny-37;
+			getitem 544,1;
+			mes "[ShabuShabu]";
+			mes "Merci beaucoup.";
+			close;
+		Lzeny:
+			mes "[ShabuShabu]";
+			mes "Vous n'avez pas assez d'argent.";
+			close;
+L3:
+		mes "[ShabuShabu]";
+		mes "Oui, toute aide est la bienvenue!";
+		mes "J'étais justement en train de penser que le poisson se faisait rare ces temps ci.";
+		mes "Vous voulez bien me donner un coup de main?";
+		mes "Evidement, vous serrez payé si vous m'aidez.";
+		next;
+
+		set ama_sushi,1;
+		mes "[ShabuShabu]";
+		mes "Crab Shell.";
+		mes "Il n'y en a plus en réserve. J'en aurais besoin le plus vite possible.";
+		mes "Pourriez-vous me rapporter ^0000FF10 Crab shells^000000?";
+		mes "Je n'arrive jamais à en trouver quand j'en ai besoin.";
+		mes "Je compte sur vous!";
+		next;
+		mes "[ShabuShabu]";
+		mes "Et bien, dépêchez-vous! Je vous attends ici, n'oubliez-pas de me les rapporter!";
+		close;
+LStart2:
+	if (countitem(964)>=10) goto Lok;
+	mes "[ShabuShabu]";
+	mes "Ça y est, vous avez ce qu'il faut?";
+	mes "Oh non, auriez-vous oublié ce que je vous ai demandé?";
+	next;
+	mes "[ShabuShabu]";
+	mes "^0000FF10 Crab shells^000000";
+	mes "N'oubliez pas!";
+	mes "Vous devez m'aider à les trouver!";
+	close;
+Lok:
+	delitem 964,10;
+	getitem 551,20;
+	mes "[ShabuShabu]";
+	mes "Hum! Merci infiniment!";
+	next;
+	mes "[ShabuShabu]";
+	mes "Tenez, en gage de ma gratitude.";
+	set ama_sushi,0;
+	close;
+
+}
+
+//============================================================
+//===================================================== Amatsu
+//====================================================== Event
+amatsu,189,166,4	script	Kouji	764,{
+	mes "[Kouji]";
+	mes "Lalala Lalala Lalalalalala..";
+	mes "Lalala Lalala Lalalalalala..";
+	next;
+	if (event_amatsu == 2) goto L1;
+	if ((event_amatsu == 3) || (event_amatsu == 4)) goto L2;
+	if (event_amatsu == 5) goto L3;
+	if (event_amatsu == 6) goto L4;
+L0:
+	mes "[Kouji]";
+	mes "Suspendu Sous le Toit Bleu du Ciel";
+	mes "Brille Sur un Mur Bleu le Reflet du Lac Bleu";
+	mes "Un Coeur Bleu Qui Renferme un Désir Bleu";
+	mes "Bleu, Bleu, Tout Est Si Bleu";
+	next;
+	goto LEnd;
+L1:
+	mes "[Kouji]";
+	mes "Monsieur le Moine, Le Renard Me Poursuit!";
+	mes "Parce Que Je Possède Son Plat Favori!";
+	mes "Les Nouilles au Porc, Je Les Aime Moi Aussi.";
+	mes "Je Pourrais en Manger Toute la Vie";
+	set event_amatsu,3;
+	goto LEnd;
+L2:
+	mes "[Kouji]";
+	mes "Monsieur le Moine, Le Renard Me Poursuit!";
+	mes "Pour l'Effrayer, Pousse un Grand Cri!";
+	mes "Ma Voix Etait Trop Faible, Alors J'ai Fui";
+	mes "Tout le Long du Côté Nord du Temple, Il m'a Suivi!";
+	set event_amatsu,4;
+	goto LEnd;
+L3:
+	mes "[Kouji]";
+	mes "Monsieur le Moine, Le Renard Me Poursuit!";
+	mes "Les Nouilles au Porc Sont mon Plat Favori.";
+	mes "Mais Maintenant Je n'ai Plus Peur de Lui.";
+	mes "Pour l'Effrayer J'ai Poussé un Grand Cri!";
+	goto LEnd;
+L4:
+	mes "[Kouji]";
+	mes "Sur les Docks un Bateau est Abandonné!";
+	mes "Dans ce Bateau Tout le Monde a Oublié";
+	mes "Les Trésors et l'Or qu'il Contenait.";
+	mes "De ce Bateau, Tout le Monde est Effrayé";
+	goto LEnd;
+
+LEnd:
+	next;
+	mes "[Kouji]";
+	mes "Lalala Lalala Lalalalalala..";
+	mes "Lalala Lalala Lalalalalala..";
+	close;
+}
+//=====================================================================
+amatsu,171,174,4	script	Garde#01	767,{
+	if ((event_amatsu == 0) || (event_amatsu == 1)) goto L0;
+	if (event_amatsu == 6) goto L1;
+	if (event_amatsu == 7) goto L2;
+	mes "[Garde]";
+	mes "Ici se trouve la maison où demeure la mère du Maître. Elle est ici en convalescence.";
+	next;
+	mes "[Garde]";
+	mes "Il ne faut pas l'ébruiter... Elle est tombée malade il y a plusieurs mois et elle vit ici depuis.";
+	close;
+L0:
+	mes "[Garde]";
+	mes "Ici est le lieu où demeure la mère du Maître. Ne l'ébruitez surtout pas! Nous sommes déjà suffisamment inquiets en devant monter la garde chaque jour.";
+	next;
+	mes "[Garde]";
+	mes "Pourquoi une telle chose est arrivée à notre Maître si sage et généreux... Je ne comprends pas... *snif*...";
+	close;
+L1:
+	mes "[Garde]";
+	mes "Comment? On dirait que quelque chose dans l'air est plus léger... Avez-vous vu quelque chose? J'ai entendu un grand bruit... ça m'a donné la chaire de poule.";
+	close;
+L2:
+	mes "[Garde]";
+	mes "Tout ira bien pour notre Maître à présent. Nous aussi, nous sommes grandement soulagés.";
+	mes "Vous n'avez pas idée à quel point nous étions inquiets... Pfiou.";
+	close;
+}
+//=====================================================================
+amatsu,164,174,4	script	Garde#02	767,{
+	if (event_amatsu == 0) goto LOnce;
+	if ((event_amatsu >= 2) && (event_amatsu <= 5)) goto L2;
+	if (event_amatsu == 6) goto L3;
+	if (event_amatsu == 7) goto L4;
+	mes "[Garde]";
+	mes "Nous avons bon espoir qu'elle se rétablisse bientôt... Le Maître a passé beaucoup de temps à s'occuper d'elle.";
+	close;
+LOnce:
+	mes "[Garde]";
+	mes "Ici se trouve la maison où demeure la mère du Maître. Elle est ici en convalescence.";
+	next;
+	mes "[Garde]";
+	mes "Il ne faut pas l'ébruiter... Elle est tombée malade il y a plusieurs mois et elle vit ici depuis.";
+	set event_amatsu,1;
+	close;
+L2:
+	mes "[Garde]";
+	mes "Si vous êtes invité par le Maître, vous pouvez entrer.";
+	mes "De nombreux médecins sont venus faire leur diagnostic, mais à ce jour tous leurs efforts ont été inutiles.";
+	close;
+L3:
+	mes "[Garde]";
+	mes "Hé!";
+	mes "Quel est ce bruit?";
+	mes "D'où est-ce que ça venait!?";
+	close;
+L4:
+	mes "[Garde]";
+	mes "La mère du Maître n'es toujours pas en grande forme... bien que les choses aient pris une meilleur tournure.";
+	close;
+}
+
+//=====================================================================
+ama_in01,22,111,0	script	Vieille Dame#01	761,{
+	if (event_amatsu == 5) goto LStart2;
+	if (event_amatsu == 6) goto LStart3;
+	if (event_amatsu == 7) goto LStart4;
+	mes "[...]";
+	mes "^FF6060Clang Clannng! Clang Clannng! Encore ces stupides humains!";
+	mes "Clang Clannng, Clang Clannng. Qui est-ce? C'est un humain!?";
+	mes "Qu'est-ce que tu viens fouiner ici?! Vas-t-en!";
+	mes "Et plus vite que ça! ... Clang Clannng! Clang Clannng!^000000";
+	next;
+	mes "[...]";
+	mes "^FF6060J'ai décidé de vivre ici jusqu'à ce que la lignée de la Famille prenne fin!";
+	mes "Arrête de me déranger et sors d'ici Clang Clannng!^000000";
+	next;
+	warp "amatsu",167,197;
+	end;
+LStart2:
+	mes "[...]";
+	mes "^FF0066Clang Clannng! Clang Clannng! Encore un qui vient me déranger!";
+	mes "Stupides Humains! Qu'est-ce que tu me veux?";
+	mes "Me jeter dehors!?^000000";
+	next;
+	mes "[...]";
+	mes "^FF0066On dirait que tu as appris une petite chose...";
+	mes "C'est tout ce dont tu es capable?";
+	mes "Tu ne pourras rien contre moi!! Clang Clannng!^000000";
+	next;
+	menu "HAAAA!!",-;
+	set @which,rand(2);
+	if (@which == 1) goto Lfail;
+	mes "[...]";
+	mes "^FF0066Clang Clannng! Clang Clannng! Clang Clannng! Ce sale petit humain!";
+	mes "Il m'a fichu dehors!";
+	mes "Noooon!! Ce n'est pas juste!!^000000";
+	next;
+	mes "[...]";
+	mes "^FF0066Ces maudits Ishida qui m'ont anéanti.";
+	mes "Je les maudirai pour toujours! POUR TOUJOURS!";
+	mes "Humain, tu ferais mieux de te méfier à l'avenir!^000000";
+	next;
+	monster "ama_in01",22,112,"Fox",1180,1;
+	killmonsterall "ama_in01";
+	getitem 1022,1;
+	mes "[...]";
+	mes "^FF0066Tout ce que Yoshinaku a fait le conduira tôt ou tard à sa perte...^000000";
+	mes "^CC3300Clangggggggggggg!!^000000";
+	set event_amatsu,6;
+	close;
+Lfail:
+	mes "[...]";
+	mes "^FF0066Clang Clannng! Haha! Clang Clannng! Hahahaha!";
+	mes "Comment oses-tu?! Vouloir me jeter dehors!";
+	mes "Sors d'ici!! Clang Clannng!^000000";
+	next;
+	warp "amatsu",167,197;
+	end;
+LStart3:
+	mes "[Ishida Sauk]";
+	mes "...*Soupir* D'où venez-vous, jeune homme...?";
+	mes "Avez-vous réussi à vous débarrasser du renard?";
+	mes "Je me sens si fatiguée... *soupir*...";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Merci. Vous venez de loin,";
+	mes "et vous devez encore endurer cela.";
+	mes "Je suis sincèrement navrée... Vraiment...";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Je dois absolument voir mon fils, et lui dire que vous m'avez débarrassée de ce renard...";
+	mes "Merci.";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Je suis vraiment fatiguée à présent.";
+	mes "Je dois me reposer un peu, jeune homme.....";
+	mes "Allez trouver mon fils...";
+	close;
+LStart4:
+	mes "[Ishida Sauk]";
+	mes "Oh, vous êtes le jeune-homme";
+	mes "qui m'a débarrassée du renard... bienvenue.";
+	mes "Asseyez-vous, si vous avez un moment...";
+	next;
+	mes "[Ishida Sauk]";
+	mes "D'avoir été possédée par ce renard... est entièrement ma faute...";
+	mes "Je n'ai pas élevé mon fils correctement... *soupir*";
+	mes "Déjà jeune, c'était un bon petit garçon.";
+	mes "Mais je n'ai pas été assez stricte...";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Au début, cette ville était petite.";
+	mes "Il n'y avait ni château ni maisons imposantes.";
+	mes "Mais mon fils a réussi à se procurer des zenys, et me les as confié.";
+	mes "Je ne sais pas exactement comment il les as obtenus.";
+	mes "Même à moi, il a toujours caché la vérité...";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Après avoir commencé à construire le château et rénover la ville, il a traité les habitants de manière juste et bonne...";
+	mes "S'il n'y avait que ça, il n'y aurait pas de problème.";
+	mes "Les problèmes survinrent après qu'il ait fait certaines choses étranges...";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Oui, il a mis les dieux en colère, en apprenant certains sorts étranges, je ne sais où.";
+	mes "Et il a commencé ses expériences, capturant des monstres, les utilisant comme cobayes...";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Et maintenant, ces monstres se retrouvent à vivre dans les environs d'Amatsu...";
+	mes "Les dieux devinrent si outrés, que même les moines du temple ne savent pas quoi faire.....";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Ils m'ont punie aussi... en m'envoyant ce renard, espérant me donner une alerte, mais mon fils n'a pas arrêté ses expériences.";
+	next;
+	mes "[Ishida Sauk]";
+	mes "Arrêtez mon fils, s'il vous plait!";
+	mes "Je suis vieille et presque sur mon lit de mort.";
+	mes "Je suis désemparée, je ne sais pas quoi faire...";
+	mes "S'il vous plait, protégez cette ville paisible!";
+	mes "Je ne sais pas ce quelle mouche a piqué mon fils pour qu'il en vienne à faire des choses pareilles...";
+	close;
+}
+//=====================================================================
+ama_in02,170,62,4	script	Soldat#02	767,{
+	mes "[Kyro]";
+	mes "Mon nom est Kyro. Je suis le Chargé Administratif de cette ville.";
+	mes "Que puis-je faire pour votre service?";
+	next;
+	menu "J'aimerais obtenir un passe",-,"J'aimerais vivre ici",L2,"Rien, merci",L3;
+
+	if (event_amatsu == 7) goto L1_1;
+		mes "[Kyro]";
+		mes "Le Maître permet à tous les invités de continents étrangers de se déplacer librement, sans aucun besoin de permis ou de passe.";
+		close;
+L1_1:
+	if (countitem(7160) == 0) goto L1_2;
+		mes "[Kyro]";
+		mes "Je vous ai déjà donné un passe.";
+		close;
+L1_2:
+		mes "[Kyro]";
+		mes "Avez-vous perdu votre passe?";
+		mes "Si vous souhaitez un autre passe, vous devez payer 10 000 zenys pour les frais administratifs.";
+		next;
+		menu "Racheter un passe",L1_2_1,"Peut-être une autre fois",-;
+			mes "Aucun problème!";
+			mes "Si vous avez besoin de quoi que ce soir, revenez me voir!";
+			close;
+L1_2_1:
+		if (Zeny < 10000) goto LError;
+		set Zeny,Zeny-10000;
+		getitem 7160,1;
+		mes "[Kyro]";
+		mes "Tenez, le voici.";
+		mes "Faites attention de ne pas le perdre.";
+		close;
+LError:
+		mes "[Kyro]";
+		mes "Vous n'avez pas assez d'argent!";
+		close;
+L2:
+		mes "[Kyro]";
+		mes "Je crains que cela ne soit difficile.";
+		mes "Vous pouvez vous déplacer à votre guise dans la ville, mais le Maître n'a encore permis aucune immigration.";
+		mes "Quoi qu'il en soit, vous pouvez séjourner aussi longtemps qu'il vous plaira.";
+		close;
+L3:
+		mes "[Kyro]";
+		mes "Très bien...";
+		mes "S'il y a quoi que ce soit pour votre service, revenez me voir.";
+		close;
+
+}
+
+//=====================================================================
+ama_in02,115,177,7	script	Juro	767,{
+	mes "[Juro]";
+	mes "Pourquoi êtes-vous ici?";
+	mes "Il n'y a rien à voir, circulez.";
+	next;
+	menu "Oh, vraiment?",-,"Ouvrer cette porte, s'il vous plaît.",L2;
+
+		mes "[Juro]";
+		mes "La ville a d'autres endroits bien plus intéressants.";
+		mes "Passez une bonne journée...";
+		close;
+L2:
+	if (event_amatsu != 7) goto Lnoflag;
+	if (countitem(7160) < 1) goto Llost;
+		mes "[Juro]";
+		mes "Oh, je vois que vous possédez un passe...";
+		mes "Voulez-vous entrer directement?";
+		mes "Ou préférez-vous que je vous donne quelques explications?";
+		next;
+		menu "Accès direct",-,"Ecouter ses explications",L2_2;
+
+			mes "[Juro]";
+			mes "Bien, je vais donc vous ouvrir.";
+			mes "Faites attention à vous...";
+			next;
+			warp "ama_dun01",229,10;
+			end;
+L2_2:
+			mes "[Juro]";
+			mes "Ce grenier semble être protégé par des enchantements très puissants.";
+			mes "Ceux qui s'y aventurent sans précaution, se perdent facilement, et seront assaillis de façon mystérieuse, et périront.";
+			next;
+			mes "[Juro]";
+			mes "Je ne peux pas vous en dire beaucoup plus.";
+			mes "Je ne suis jamais entré.";
+			mes "C'est un endroit mystérieux, tout ce que j'en connais m'ont été raconté par des survivants qui se sont aventurés à l'intérieur.";
+			next;
+			mes "[Juro]";
+			mes "Tout d'abord...";
+			mes "'Ne croyez pas ce que vous verrez.'";
+			next;
+			mes "[Juro]";
+			mes "Deuxièmement...";
+			mes "A propos des enchantements, ils possèdent leurs propres règles.";
+			mes "Tout a une fonction propre, y compris les enchantements.";
+			mes "Trouverez-vous les réponses?";
+			next;
+			mes "[Juro]";
+			mes "Bien, je vais donc vous ouvrir.";
+			mes "Faites attention à vous...";
+			next;
+			warp "ama_dun01",229,10;
+			end;
+Llost:
+		mes "[Juro]";
+		mes "Vous ne possédez pas de passe, je ne peux donc pas vous ouvrir.";
+		mes "Comprenez-moi.";
+		close;
+Lnoflag:
+		mes "[Juro]";
+		mes "De quelle porte parlez-vous?";
+		mes "Il n'y a aucune porte ici, enfin pas que je connaisse.";
+		mes "Vous avez dû vous tromper.";
+		next;
+		mes "[Juro]";
+		mes "La ville a d'autres endroits bien plus intéressants.";
+		mes "Passez une bonne journée...";
+		close;
+}
+ama_dun01,229,7,0	script	Soldat#08	767,{
+	mes "[Juro]";
+	mes "Prêt à rentrer?";
+	next;
+	menu "Faites moi sortir d'ici!",-,"Je vais rester encore un peu.",L1;
+		mes "[Juro]";
+		mes "C'est parti!!";
+		next;
+		warp "ama_in02",119,181;
+		end;
+L1:
+		mes "[Juro]";
+		mes "Faites attention à vous!";
+		close;
+}
+
+//=====================================================================
+ama_in02,200,176,4	script	Ishida Yoshinaku	768,{
+	if (event_amatsu == 1) goto LStart2;
+	if ((event_amatsu >= 2) && (event_amatsu <=5)) goto LStart3;
+	if (event_amatsu == 6) goto LStart4;
+	if (event_amatsu == 7) goto LStart5;
+	mes "[Ishida Yoshinaku]";
+	mes "Comment?! Un étranger?";
+	mes "Pourquoi avez-vous besoin de moi?? Si ce n'est rien d'important, revenez me voir plus tard...!";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "Allez-vous en maintenant! Peu importe qui vous êtes!!";
+	mes "Je suis de TRES mauvaise humeur!";
+	close;
+LStart2:
+	mes "[Ishida Yoshinaku]";
+	mes "Comment? Un visiteur...? Oh, désolé.";
+	mes "Aujourd'hui je ne suis pas vraiment d'humeur à recevoir des visiteurs!";
+	next;
+	menu "Il paraît que votre mère est malade...?",L1,"Quel château magnifique!",L2,"Qui êtes-vous?",L3;
+L1:
+	mes "[Ishida Yoshinaku]";
+	mes "Oh... Vous êtes un expert en médecine?";
+	mes "Oui c'est ça, vous êtes un expert d'un autre continent.";
+	mes "Je peux donc vous croire sur parole...";
+	mes "Enfin je crois...";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "Bienvenue. Comme vous le savez déjà, je suis le propriétaire du Château du Lac Est.";
+	mes "Mon nom est Ishida Yoshinaku, ravi de vous rencontrer.";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "Pour faire simple, ma mère n'est plus en très bonne santé.";
+	mes "Bien sûr, vous êtes ici pour ça.";
+	mes "Pouvez-vous guérir ma très chère mère?";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "Tant de médecins talentueux et reconnus sont déjà venus l'ausculter, mais non seulement aucun d'eux n'a sût la guérir, ils ont également aggravé son état!!";
+	mes "J'étais donc très contrarié...";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "Mais vous, en tant qu'expert étranger, vous pouvez guérir la maladie de ma mère!";
+	mes "Si vous y arriver, je vous donnerai beaucoup d'argent en récompense...";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "S'il vous plaît, aidez là!";
+	mes "Ma mère vit dans une petite maison en dehors du château.";
+	mes "Une fois que vous l'aurez guérie, revenez me voir.";
+	set event_amatsu,2;
+	close;
+L2:
+	mes "[Ishida Yoshinaku]";
+	mes "Oui! Magnifique en effet!";
+	mes "Et vous l'aurez quitté une fois que vous en serez lassés!";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "Par les temps qui courent... *Snif*...";
+	mes "Partez quand vous serez satisfait ou lassé!";
+	close;
+L3:
+	mes "[Ishida Yoshinaku]";
+	mes ".... C'est à moi que vous posez la question? Vous ne savez vraiment pas?!";
+	mes "Je suis le Maître de ce château!";
+	mes "Allez donc demander aux soldats qui sont dehors si vous ne me croyez pas!";
+	next;
+	mes "[Ishida Yoshinaku]";
+	mes "Par les temps qui courent... *Snif*...";
+	mes "Partez quand vous serez satisfait ou lassé!";
+	close;
+LStart3:
+	mes "[Ishida Yushinaku]";
+	mes "Comment se porte ma mère?";
+	mes "Si vous connaissez le nom de sa maladie... dites le moi tout de suite!";
+	mes "Ah... Je suis si inquiet!";
+	mes "Je n'en dors plus la nuit!";
+	next;
+	mes "[Ishida Yushinaku]";
+	mes "Si vous venez vraiment d'un autre continent, vous devez connaître cette maladie...";
+	mes "Vous êtes le seul en qui je peux avoir confiance désormais.";
+	close;
+LStart4:
+	mes "[Ishida Yushinaku]";
+	mes "Waouh, vous êtes doués m'a-t-on dit!";
+	mes "Ma mère se porte beaucoup mieux déjà.";
+	mes "Alors, de quelle maladie s'agissait-il?";
+	next;
+	mes "[Ishida Yushinaku]";
+	mes "Un renard? Un renard serait la cause de...? Oh...";
+	mes "Alors ce n'était pas une maladie, après tout...!!";
+	mes "Pourquoi n'y ai-je pas pensé plus tôt?!!";
+	next;
+	mes "[Ishida Yushinaku]";
+	mes "Maudit renard, après s'être enfui,";
+	mes "il est revenu se venger de la sorte...";
+	mes "Mais maintenant, plus de renard!";
+	mes "Hahaha! Hahahaha!";
+	next;
+	mes "[Ishida Yushinaku]";
+	mes "Hum, hum, hum...";
+	next;
+	mes "[Ishida Yushinaku]";
+	mes "Quoi qu'il en soit, merci pour votre aide!";
+	mes "Je pense que ma mère devrait vite se rétablir maintenant...";
+	mes "Je veux vous prouver ma gratitude...";
+	next;
+	mes "[Ishida Yushinaku]";
+	mes "Tenez, je vous remets ce passe.";
+	mes "Tant que vous porterez ce passe sur vous,";
+	mes "vous pourrez aller où vous voulez";
+	mes "PARTOUT dans cette ville.";
+	next;
+	set event_amatsu,7;
+	getitem 7160,1;
+	mes "[Ishida Yushinaku]";
+	mes "Même si ce n'est pas un cadeau habituel, je suis certain qu'il vous sera utile très bientôt...";
+	mes "Parlez à 'Juro' pour plus de détails.";
+	close;
+LStart5:
+	mes "[Ishida Yushinaku]";
+	mes "J'espère que vous passez un agréable séjour à Amatsu.";
+	mes "Nous sommes toujours ravis d'accueillir les étrangers!";
+	close;
+}
+
+ama_in01,180,173,2	script	Takikuwi	762,{
+	if (event_amatsu == 4) goto LStart2;
+	if (event_amatsu == 5) goto LStart3;
+	mes "[Takikuwi]";
+	mes "Salut à toi, étranger!";
+	mes "Ce Temple a été laissé à l'abandon il y a longtemps.";
+	mes "Je viens souvent ici pour jouer avec mon amie Tokari";
+	next;
+	mes "[Takikuwi]";
+	mes "Si vous êtes ici pour vous réfugier des monstres dehors, entrez, entrez, pas de monstres ici.";
+	mes "Vous pouvez vous reposer un moment, pas de problème!";
+	close;
+LStart2:
+	mes "[Takikuwi]";
+	mes "Salut à toi, étranger! Tu me cherchais?";
+	mes "Le renard te cause des ennuis?";
+	mes "Vu ton visage, on dirait bien que oui.";
+	next;
+	mes "[Takikuwi]";
+	mes "Même si normalement, le moine en charge de ce temple devrait t'aider lui-même, il a déserté depuis bien longtemps.";
+	next;
+	mes "[Takikuwi]";
+	mes "C'est très dur de se débarrasser d'un renard qui habite le corps d'une personne.";
+	mes "Si tu as de l'alcool ou des nouilles au porc, ce sera peut être un peu plus simple, mais ils sont quand même durs à dénicher!";
+	next;
+	mes "[Takikuwi]";
+	mes "Heureusement que j'en connais un peu à propos des renards, alors écoute bien ces quelques conseils : même si les renards sont très rusés et qu'ils adorent se jouer des humains, il est très rare qu'un renard soit vraiment méchant ou haineux.";
+	next;
+	mes "[Takikuwi]";
+	mes "Autrement dit, si ils montrent de la haine envers les humains, c'est que ceux-ci ont fait quelque chose de mal!!";
+	mes "Ils peuvent blesser la personne en tort, et parfois des accidents peuvent survenir à leur famille et amis également!";
+	next;
+	mes "[Takikuwi]";
+	mes "Quoi qu'il en soit, j'ai entendu dire que quand un le renard se retrouve face à un animal très puissant, il quitte l'humain qu'il habite.";
+	mes "Donc tu peux essayer d'invoquer l'esprit d'un animal fort!";
+	next;
+	menu "Haaaa!!",-;
+	mes "[Takikuwi]";
+	mes "Très bien, si tu arrives à le répéter au renard, cela lui montrera la puissance de cet esprit, et tu auras un bon résultat!";
+	mes "Mais la meilleur chose à faire est de découvrir pourquoi le renard est entré dans le corps de cette personne.";
+	set event_amatsu,5;
+	close;
+LStart3:
+	mes "[Takikuwi]";
+	mes "N'oublie pas, quand tu tenteras d'invoquer l'esprit animal, tu dois penser très fort à un monstre bien plus terrifiant que le renard, ou alors tes efforts seront vains!";
+	mes "Souviens toi....... Plus fort que le renard....";
+	close;
+}

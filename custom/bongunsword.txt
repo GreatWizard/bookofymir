@@ -1,0 +1,159 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Munak and Bongun accessory / Taming items Quest
+//===== By: ================================================== 
+//= eAthena Team
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= Quest itms:Sword o'Chinese Exorcist,No Recipient,Her Heart
+//===== Additional Comments: ================================= 
+//= 1.0. merged 3 sep. files, fixed exploits [Lupus]
+//= 1.1	Added missing next;'s [Evera]
+//= 1.2 Added another missing next; [Evera]
+//============================================================ 
+
+
+comodo,135,227,5	script	Sherri	93,{
+	mes "[Sherri]";
+	mes " ";
+	mes "*soupire*";
+	next;
+	mes "[Sherri]";
+	mes "Oh? Ce qui ne va pas? ...et bien, j'ai finalement réussi à emprisonner l'âme d'un très beau jeune homme...";
+	next;
+	mes "[Sherri]";
+	mes "...alors pourquoi suis-je si triste?";
+	mes " ";
+	mes "C'est parce que je ne connais même pas sa personnalité... J'ai son journal intime, mais il ne parle que de sa petite amie... Dîtes, si vous pouviez me rapporter le journal intime de cette fille, un 'Girl's Diary', je vous donnerai son journal intime à lui!";
+	next;
+	mes "[Sherri]";
+	mes "Est-ce que vous allez m'aider?";
+	next;
+
+	menu "De quoi avez-vous besoin, déjà?",-,"Tenez! Je vous ai apporté ce qu'il vous faut!",ExCreate,"Désolé, je ne peux pas vous aider.",ExEnd;
+
+	mes "[Sherri]";
+	mes "Ce dont j'ai besoin est...";
+	mes " ";
+	mes "Un journal intime de fille, qui parle de lui... un 'Girl's Diary'...";
+	close;
+
+ExCreate:
+	mes "[Sherri]";
+	mes "Vraiment! Vous allez donc m'aider!";
+	next;
+
+	if(countitem(1558)<1) goto L_NoItem;//Items: Girl's_Diary,
+	delitem 1558,1;//Items: Girl's_Diary,
+	getitem 659,1;//Items: Her_Heart,
+	mes "[Sherri]";
+	mes "Merveilleux! Je vous serai redevable éternellement!";
+	mes " ";
+	mes "Voici son journal intime, comme promis! Merci encore!";
+	next;
+	mes "[Sherri]";
+	mes "Attendez! Voici aussi son épée, je l'ai trouvée près de lui... mais elle est cassée. Je connais un vieil homme à l'Ouest de Geffen qui pourra peut-être la réparer.";
+	getitem 7110,1;//Items: Broken_Sword,
+	close;
+
+L_NoItem:
+	mes "[Sherri]";
+	mes "Waahhhh, ce n'est pas bien de me donner de faux espoirs!";
+	mes " ";
+	mes "Allez-vous en!";
+	close;
+ExEnd:
+	mes "[Sherri]";
+	mes "*soupire*";
+	close;    
+}
+
+izlude_in,115,76,5	script	Evan	47,{
+	mes "[Evan]";
+	mes " ";
+	mes "*soupire*";
+	next;
+	mes "[Evan]";
+	mes "Oh? Ce qui ne va pas? ...et bien, j'ai finalement réussi à emprisonner l'âme d'une très belle jeune fille...";
+	next;
+	mes "[Evan]";
+	mes "...alors pourquoi suis-je si triste?";
+	mes " ";
+	mes "C'est parce que je ne sais même pas à quoi elle ressemblait... Dîtes, si vous pouviez me rapporter un vieux portrait d'elle, un 'Old Portrait', je vous donnerai une lettre d'amour que lui a écrit son amoureux!";
+	next;
+	mes "[Evan]";
+	mes "Qu'en dîtes-vous?";
+	next;
+
+	menu "De quoi avez-vous besoin, déjà?",-,"Tenez! Je vous ai apporté ce qu'il vous faut!",ExCreate,"Désolé, je ne peux pas vous aider.",ExEnd;
+
+	mes "[Evan]";
+	mes "Un portrait de son joli minois...";
+	mes " ";
+	mes "Un 'Old Portrait' pour être exact...";
+	close;
+
+ExCreate:
+	mes "[Evan]";
+	mes "Vraiment! Vous allez donc m'aider!";
+	next;
+	if(countitem(7014)<1) goto L_NoItem;//Items: Old_Portrait,
+	delitem 7014,1;//Items: Old_Portrait,
+	getitem 636,1;//Items: No_Recipient,
+	mes "[Evan]";
+	mes "Merveilleux! Je vous serai redevable éternellement!";
+	mes " ";
+	mes "Voici la lettre d'amour de son petit ami, comme promis! Merci encore!";
+	close;
+
+L_NoItem:
+	mes "[Evan]";
+	mes "Waahhhh, ce n'est pas bien de me donner de faux espoirs!";
+	mes " ";
+	mes "Allez-vous en!";
+	close;
+
+ExEnd:
+	mes "[Evan]";
+	mes "*soupire*";
+	close;
+}
+
+gef_fild07,183,239,5	script	Vieux Forgeron	120,{
+	mes "[Vieux Forgeron]";
+	mes "Ah, n'est-ce pas un endroit paisible...? Il y a longtemps, je fus l'un des Forgerons Légendaires de Midgard... Malheureusement, mes talents ont disparus.";
+	next;
+	if(countitem(7110)<1) goto L_NoItemS;//Items: Broken_Sword,
+	mes "[Vieux Forgeron]";
+	mes "Hum, on dirait que vous avez besoin de quelque chose. En quoi puis-je vous aider?";
+	next;
+	menu "Pourriez-vous réparer cette épée?",-,"Rien d'important...",ExEnd;
+
+	mes "[Vieux Forgeron]";
+	mes "Ahhh, c'est une épée très ancienne! Oui, je crois que je peux la réparer... Cependant j'aurais besoin d'un 'Oridecon' pour combler les brèches.";
+	next;
+	if(countitem(7110)<1 || countitem(984)<1) goto L_NoItem;//Items: Broken_Sword, Oridecon,
+	delitem 7110,1;//Items: Broken_Sword,
+	delitem 984,1;//Items: Oridecon,
+	getitem 10020,1;//Items: Sword_of_Chinese_Exorcist,
+	mes "[Vieux Forgeron]";
+	mes "Nous y voilà!";
+	mes " ";
+	mes "Haha! Papy a encore un peu de magie au bout des doigts. Voici pour vous!";
+	close;
+
+L_NoItem:
+	mes "[Vieux Forgeron]";
+	mes "Hum, il vous manque quelque chose... Sûrement l' 'Oridecon'.";
+	close;
+
+L_NoItemS:
+ExEnd:
+	mes "[Vieux Forgeron]";
+	mes "... sortez vous aérer l'esprit jeune homme. Le temps ne s'arrête jamais de tourner! Tic Tac Tic Tac Tic...!";
+	close;
+}

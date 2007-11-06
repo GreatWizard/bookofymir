@@ -1,0 +1,133 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Abyss Cave Warper
+//===== By: ==================================================
+//= erKURITA
+//===== Current Version: =====================================
+//= 1.3a
+//===== Compatible With: =====================================
+//= Any Athena Version
+//===== Description: =========================================
+//= Warper to Abyss Cave. and warper out
+//===== Additional Comments: =================================
+//= 1.0 Added by Nexon [Nexon]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.2 Fixed tab - missing pillar's appeared [Lupus]
+//= 1.3 Updated Abyss Lake entrance based on official [SinSloth]
+//= 1.3a Removed .GATs [Lupus]
+//= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//============================================================
+
+hu_fild05,168,304,0	script	Colonne#abyss1	111,{
+
+	mes "^3355FFVous remarquez trois cannelures curieusement formées sur la surface de la colonne.";
+	mes "Il semble que certaines partie du corps d'un dragon s'adapteraient parfaitement dans ces cannelures.^000000";
+
+	if((countitem(1035)) && (countitem(1036)) && (countitem(1037)))
+	{
+		next;
+		switch( select( "Insérer les Parties du Dragon","Manger les Parties du Dragon" ) )
+		{
+			case 1:
+				mes "^3355FFVous placez soigneusement la Canine de Dragon dans l'une des cannelures.";
+				mes "Vous entendez un cliquetis provenant de l'intérieur de la colonne.^000000";
+				specialeffect 52;
+				next;
+				mes "^3355FFVous placez doucement l'Ecaille de Dragon dans une autre cannelure de la colonne.";
+				mes "Vous entendez un roulement provenant de l'intérieur de la colonne, et quelque chose semble avoir légèrement bougé.^000000";
+				specialeffect 52;
+				next;
+				mes "^3355FFVous insérez avec prudence la Queue de Dragon dans la dernière cannelure.";
+				mes "Vous entendez un grondement, et des lumières se mettent à briller, sortant des fissures de la surface de la colonne...^000000";
+				specialeffect 52;
+				next;
+				mes "^3355FFLe sol sous vos pieds";
+				mes "commence à s'agiter violement.^000000";
+				specialeffect 73;
+				donpcevent "AbyssWarp::OnWarp";
+				specialeffect2 36;
+				delitem 1035,1;
+				delitem 1036,1;
+				delitem 1037,1;
+				close2;
+				warp "hu_fild05",184,204;
+				end;
+
+			case 2:
+				mes "^3355FFVous placez délicatement une Canine de Dragon, une Ecaille, et un morceau de Queue, au creux de votre bouche.";
+				mes "Vous mâchez doucement, mais rien ne se produit. Soudain, vous ressentez un goût putride envahir tout votre être.^000000";
+				next;
+				emotion e_rice,1;
+				delitem 1035,1;
+				delitem 1036,1;
+				delitem 1037,1;
+				percentheal -10,0;
+				close;
+		}
+	}
+	close;
+}
+
+hu_fild05,171,211,0	script	Colonne#abyss2	111,1,1,{
+
+	mes "^3355FFCette colonne semble tout à fait semblable à celle que vous avez vue en surface, près du lac.";
+	mes "Vous remarquez une fissure dans laquelle est insérée une drôle de pièce, et par laquelle s'échappe une étrange lumière.^000000";
+	next;
+	switch( select( "Toucher la Fissure","Retirer la Pièce de la Fissure" ) )
+	{
+		case 1:
+			mes "^3355FF*Vous entendez un cliquetis*^000000";
+			next;
+			mes "^3355FFLa lumière qui émanait de la fissure se fait plus intense, et la colonne commence à bouger.";
+			mes "Vous entendez un faible roulement provenant de l'intérieur de la colonne.^000000";
+			specialeffect 52;
+			next;
+			mes "*Ggghhhhhzzzz!*";
+			mes "*BAM!*";
+			next;
+			mes "^3355FFLa lumière émanant de la colonne se fait plus brillante, et vous sentez que vos pieds s'éloignent progressivement du sol...^000000";
+			next;
+			specialeffect 73;
+			specialeffect2 36;
+			close2;
+			warp "hu_fild05",169,305;
+			end;
+
+		case 2:
+			mes "^3355FF*Ppppiisssh!*";
+			mes "Vous avez cassé la pièce!^000000";
+			specialeffect 52;
+			next;
+			mes "^3355FF*Gggggggghhhhhhhhzzzzzzjjjjhh!*^000000";
+			next;
+			mes "^3355FFLa lumière émanant de la colonne se fait plus brillante. Un soudain tremblement menace de vous faire perdre l'équilibre, puis vous sentez que vos pieds s'éloignent progressivement du sol...^000000";
+			next;
+			specialeffect 73;
+			specialeffect2 36;
+			close2;
+			warp "hu_fild05",157,284;
+			end;
+	}
+}
+
+hu_fild05,196,210,1	script	AbyssWarp	45,2,2,{
+
+OnInit:
+	disablenpc "AbyssWarp";
+	end;
+
+OnTouch:
+	warp "abyss_01",260,268;
+	end;
+
+OnWarp:
+	initnpctimer;
+	enablenpc "AbyssWarp";
+	end;
+
+OnTimer30000:
+	stopnpctimer;
+	disablenpc "AbyssWarp";
+	end;
+}

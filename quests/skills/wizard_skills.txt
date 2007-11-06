@@ -1,0 +1,151 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Wizard Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.3c
+//===== Compatible With: ===================================== 
+//= eAthena Revision 3800+
+//===== Description: ========================================= 
+//= Temp quests for new skills for 2nd classes
+//===== Additional Comments: ================================= 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//= 1.3c Removed duplicates [Toms]
+//============================================================
+
+
+//============================================================
+// WIZARD - SIGHTBLASTER
+//============================================================
+gef_tower,116,37,1	script	Enoz#2	748,{
+	if(HELLIONQ == 22)goto L_remember;
+	if(HELLIONQ == 21)goto L_joke;
+	if(HELLIONQ == 20)goto L_take;
+	if(BaseJob!=Job_Wizard) goto L_nowiz;
+	if(getskilllv(1006)) goto L_alreadyhave;
+
+	mes "[Enoz]";
+	mes "Je peux vous enseigner une technique secrète si vous me rapportez:";
+	mes "10 Crystal Blue";
+	mes "10 Green Live";
+	mes "10 Red Blood";
+	mes "10 Wind of Verdure";
+	next;
+	
+	mes "[Enoz]";
+	mes "Voyons-voir ce que vous avez rapporté...";
+	next;
+	
+	if(countitem(990)<10 || countitem(991)<10 || countitem(992)<10 || countitem(993)<10) goto L_noitems;//Items: Red_Blood, Crystal_Blue, Wind_of_Verdure, Green_Live,
+	delitem 990, 10;//Items: Red_Blood,
+	delitem 991, 10;//Items: Crystal_Blue,
+	delitem 992, 10;//Items: Wind_of_Verdure,
+	delitem 993, 10;//Items: Green_Live,
+	
+	mes "[Enoz]";
+	mes "Je vois que vous avez tout apporté comme convenu. Je vais donc vous enseigner une technique secrète...";
+	skill 1006,1,0;
+	close;
+
+L_take:
+	mes "[Enoz]";
+	mes "Elle n'est plus nulle part! Où peut-elle être? Ce n'est pas possible qu'elle ait disparu! Oh mon dieu, qui a bien pû la prendre sans m'avertir?";
+	mes "...";
+	mes "Une minute... C'est peut-être vous?!";
+	next;
+	menu "En fait, c'est Welshyun qui m'envoie.",L_sent,"Moi? T'es complètement zinzin, mec!",-;
+
+	mes "[Enoz]";
+	mes "Zinzin?! Vous voulez me voir devenir fou de colère, c'est ça? Vous voulez vraiment me voir devenir méchaaaaaant?!";
+	mes "Parce que je peux devenir très dangereux si on me cherche!!";
+	close;
+
+L_sent:
+	mes "[Enoz]";
+	mes "Welshyun, mon mentor?";
+	mes "Hum. Je devais lui remettre un compte-rendu et j'ai complètement oublié. C'était quoi, déjà, le nom de ce rapport?";
+	next;
+	input @tempstr$;
+	if(@tempstr$ != "La Vie des Monstres aux Alentours de Geffen")goto L_wrongstr;
+
+	mes "[Enoz]";
+	mes "\"La Vie des Monstres aux Alentours de Geffen\"?";
+	mes "Oh non... Je lui avais promis de lui rendre il y a trois jours, et j'ai complètement oublié. J'espère qu'il ne m'en tiendra pas rigueur.";
+	next;
+	mes "[Enoz]";
+	mes "Aaaah ce n'est pas possible!";
+	mes "Et que diable ai-je fais de mon Encyclopédie de Maîtrise des Sciences?";
+	mes "Elle était posée juste là, sur le bureau! ....";
+	mes "Du moins elle était là il y a trois jours...";
+	set HELLIONQ,21;
+	close;
+
+L_joke:
+	mes "[Enoz]";
+	mes "Welshyun, mon mentor, aime bien faire des petites plaisanteries. Vous devriez aller lui parler, c'est quelqu'un de très drôle quand il veut.";
+	mes "Aaah, où diable est passée mon Encyclopédie de Maîtrise des Sciences?";
+	close;
+
+L_wrongstr:
+	mes "[Enoz]";
+	mes @tempstr$ + "?";
+	mes "Je n'ai rédigé aucun compte-rendu portant ce nom.";
+	mes "Enfin je ne crois pas?";
+	mes "Vous me mettez le doute. Quoi qu'il en soit, il me faut le nom exact du compte-rendu que vous voulez emprunter!";
+	close;
+
+L_remember:
+	mes "[Enoz]";
+	mes "Oh hé, je me souviens de vous~";
+	mes "Alors comme ça mon mentor vous a envoyé vers moi?";
+	next;
+	mes "^3151FFVous tendez précautionneusement l'Encyclopédie de Maîtrise des Sciences à Enoz.";
+	next;
+	mes "[Enoz]";
+	mes "Oui! Oh oui!";
+	mes "C'est le livre que l'ai perdu il y a trois jours! Merci infiniment!";
+	mes "Je peux enfin continuer à travailler sur mon projet de recherche!";
+	next;
+	mes "[Enoz]";
+	mes "Euh... Attendez, une minute! Il manque une page! Mais si, regardez, LA! Il manque la page dont j'ai absolument besoin!";
+	mes "Hum, il y a une annotation sur la page d'à côté... Hum...";
+	mes "^111111\"Enoz, je pense que cette page vaut au moins une bonne bière. Et ne traîne pas, ok? --Welshyun\"^000000.";
+	next;
+	mes "[Enoz]";
+	mes "NOooOOoOoN!";
+	mes "Pas encore!!";
+	mes "POURQUOI fait-il toujours ce genre de blagues stupides?!";
+	mes "Une bonne bière! Il faut que je me procure de la bière!";
+	next;
+	mes "^3151FFOn dirait qu'il est temps d'aller chercher une gemme bleue et de la rapporter à  Welshyun l'amateur de bière... euh, Welshyun le Sage.";
+	set HELLIONQ,23;
+	close;
+	
+L_noitems:
+	mes "[Enoz]";
+	mes "Je suis désolé, mais il vous manque certains objets...";
+	close;
+	
+L_nowiz:
+	mes "[Enoz]";
+	mes "Disparu! Il a disparu!";
+	mes "Où est passé le livre dont j'ai absolument besoin?";
+	mes "Ah non non non nooon!";
+	mes "Aaaaaah, je vais pleurer!";
+	close;
+
+L_alreadyhave:
+	mes "[Enoz]";
+	mes "Je vous ai déjà enseigné tout ce que je savais...";
+	close;
+}

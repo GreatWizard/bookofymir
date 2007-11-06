@@ -1,0 +1,261 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Soul Linker Job Quest
+//===== By: ================================================== 
+//= Celestria
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= 
+//===== Additional Comments: ================================= 
+//= A temp Soul Linker Job Changer based on the kRO quest.
+//= Quest info from RagnaInfo. Sprites from kRO screenshots
+//= 1.0	Optimized and updated [Lupus]
+//= 1.1 Fixed NPC names according to iRO [Lupus]
+//============================================================ 
+
+morocc_in,174,30,7	script	Enfant#sltest	716,{
+	if(SOUL_Q==1) goto L_Check;
+	if(SOUL_Q >= 2) goto L_Warp;
+	if(Class==Job_Soul_Linker) goto L_Thanks;
+	mes "[Enfant]";
+	mes "*sniff sniff*";
+	next;
+	if((Class==Job_Taekwon) && (JobLevel>=40)) goto L_Taekwon;
+	mes "Le petit garçon est en train de pleurer, et on dirait que vous n'allez pas pouvoir lui parler facilement.";
+	close;
+
+L_Thanks:
+	mes "[Enfant]";
+	mes "Hé, merci de m'avoir aidé l'autre fois!";
+	close;
+
+L_Taekwon:
+	mes "[Enfant]";
+	mes "Excusez-moi... *sniff*";
+	mes "Je suppose que vous ne pouvez pas m'aider... n'est-ce pas?";
+	next;
+	menu "Mais si, qu'est-ce qu'il y a?",L_Goon,"Non, je suis occupé.",L_No;
+
+L_No:
+	mes "[Enfant]";
+	mes "Waaaaaaaaaaaaaah~";
+	close;
+
+L_Goon:
+	mes "[Enfant]";
+	mes "Et bien vous voyez, je faisais des courses l'autre jour avec mon papa, qui est alchimiste. Et sur le chemin du retour, un voleur nous a tout pris!!";
+	next;
+	menu "Je peux t'aider à retrouver ce qu'il te faut?",-,"Ah, c'est pas de chance.",L_No;
+	mes "[Enfant]";
+	mes "Vraiment!?";
+	mes "Vous feriez ça pour moi?";
+	set SOUL_Q,1;
+	next;
+	mes "[Enfant]";
+	mes "D'accord, j'aurais besoin de:";
+	mes "^0000FF- 1 3-Carat Diamond^000000";
+	mes "^0000FF- 1 Witherless Rose^000000";
+	mes "^0000FF- 1 Immortal Heart^000000";
+	next;
+	mes "[Enfant]";
+	mes "Merci de m'aider...";
+	close;
+
+L_Check:
+	if(countitem(748) < 1 || countitem(732) < 1 || countitem(929) < 1) goto L_Noitem;
+	delitem 748,1;
+	delitem 732,1;
+	delitem 929,1;
+	set SOUL_Q,2;
+	if(SkillPoint) goto L_Skill;
+	mes "[Enfant]";
+	mes "Wahou, merci beaucoup!";
+	mes "Vous m'avez rendu un fier service, je ne connais pas grand monde qui aurait fait ça pour moi.";
+	mes "Je connais d'autres personnes qui auraient aussi besoin d'aide...";
+	next;
+	menu "Je serais ravi d'aider.",L_Warp,"Hum... Pas maintenant.",-;
+	mes "[Enfant]";
+	mes "D'accord, revenez si vous changez d'avis.";
+	close;
+
+L_Noitem:
+	mes "[Enfant]";
+	mes "Oh... Vous n'avez pas pu tout rapporter...";
+	next;
+	mes "[Enfant]";
+	mes "Il me fallait:";
+	mes "^0000FF- 1 3-Carat Diamond^000000";
+	mes "^0000FF- 1 Witherless Rose^000000";
+	mes "^0000FF- 1 Immortal Heart^000000";
+	next;
+	mes "[Enfant]";
+	mes "Merci de m'aider...";
+	close;
+
+L_Warp:
+	if(SkillPoint) goto L_Skill;
+	mes "[Enfant]";
+	mes "D'accord, allons-y.";
+	close2;
+	warp "job_soul",30,30;
+	end;
+
+L_Skill:
+	mes "[Enfant]";
+	mes "On dirait que vous avez encore des points de compétence. Je ne peux pas vous amener voir mes amis si vous ne les utilisez pas.";
+	close;
+}
+
+job_soul,30,35,2	script	Lost Soul#1	827,{
+	if(SOUL_Q==2) goto L_Talk1;
+	mes "[Âme Perdue]";
+	mes "Je vous ai confié tout ce que j'avais besoin de dire. Merci.";
+	close;
+
+L_Talk1:
+	mes "[Âme Perdue]";
+	mes "Vous êtes ici dans un lieu où les âmes perdues se rendent lorsqu'elles pensent avoir encore quelque chose à accomplir ou transmettre en ce bas monde.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Je suis ici parce que je voulais protéger mes proches... mais mes bras n'ont pas été assez forts.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Je me suis perdu en même temps que j'ai perdu les gens que j'aimais...";
+	next;
+	mes "[Âme Perdue]";
+	mes "Maintenant, je flotte ici entre la vie et la mort, ressassant mon passé et regrettant de ne pas avoir réussi à être plus fort.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Mais avec le temps, j'ai appris à mieux accepter mon passé.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Vous... Vous avez l'air fort. Si seulement je pouvais vous transmettre la force d'esprit que j'ai réussi à acquérir depuis tout ce temps passé ici...";
+	set SOUL_Q,3;
+	next;
+	mes "[Âme Perdue]";
+	mes "Merci de m'avoir écouté.";
+	close;
+}
+
+job_soul,25,30,3	script	Lost Soul#2	744,{
+	if(SOUL_Q==3) goto L_Talk2;
+	if(SOUL_Q < 3) goto L_Notyet2;
+	mes "[Âme Perdue]";
+	mes "Je vous ai confié tout ce que j'avais besoin de dire. Merci.";
+	close;
+
+L_Notyet2:
+	mes "[Âme Perdue]";
+	mes "Parlez d'abord aux autres s'il vous plaît.";
+	close;
+
+L_Talk2:
+	mes "[Âme Perdue]";
+	mes "Vous savez pourquoi vous êtes ici...";
+	next;
+	mes "[Âme Perdue]";
+	mes "Moi, je suis ici parce que j'ai voulu guérir quelqu'un qui avait une maladie très grave. Je lui ai administré mes herbes et mes potions, mais...";
+	next;
+	mes "[Âme Perdue]";
+	mes "J'étais inexpérimenté, et j'ai accidentellement mélangé des ingrédients sans vraiment faire attention...";
+	next;
+	mes "[Âme Perdue]";
+	mes "Ceux que j'essayais de sauver ont souffert et ont péris à cause de mon incompétence.";
+	next;
+	mes "[Âme Perdue]";
+	mes "J'ai passé des années à être furieux contre moi-même à cause de cette erreur.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Bien sûr, tout le monde fait des erreurs... Mais lorsqu'elles coûtent la vie à des personnes, jamais on ne se pardonne.";
+	set SOUL_Q,4;
+	next;
+	mes "[Âme Perdue]";
+	mes "Merci de m'avoir écouté.";
+	close;
+}
+
+job_soul,30,25,0	script	Lost Soul#3	754,{
+	if(SOUL_Q==4) goto L_Talk3;
+	if(SOUL_Q < 4) goto L_Notyet3;
+	mes "[Âme Perdue]";
+	mes "Je vous ai confié tout ce que j'avais besoin de dire. Merci.";
+	close;
+
+L_Notyet3:
+	mes "[Âme Perdue]";
+	mes "Parlez d'abord aux autres s'il vous plaît.";
+	close;
+
+L_Talk3:
+	mes "[Âme Perdue]";
+	mes "Je crois que c'est l'heure de vous raconter mon histoire...";
+	next;
+	mes "[Âme Perdue]";
+	mes "Etudier. Etudier. Etudier.";
+	mes "Tout ce que j'ai fait dans ma vie c'est étudier.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Oh! Les choses que j'ai apprises m'ont bien servies. Mon vocabulaire est varié, je connais les noms de toutes les plantes locales, et appris plusieurs langues.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Mais tout le temps que j'ai passé à étudier était du temps que je ne pouvais pas passer ni avec mes amis ni avec ma famille et mes proches.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Ce n'est que le jour où je suis tombé malade par manque de sommeil et que personne n'est venu à mon chevet, que j'ai réalisé la solitude dans laquelle je m'étais enfermé.";
+	next;
+	mes "[Âme Perdue]";
+	mes "Tout ceci pour vous rappeler que rien n'est plus important que la famille ou les amis.";
+	set SOUL_Q,5;
+	next;
+	mes "[Âme Perdue]";
+	mes "Merci de m'avoir écouté.";
+	close;
+}
+
+job_soul,35,30,3	script	Enfant#4	716,{
+	if(SOUL_Q < 5) goto L_Notyet4;
+	mes "[Enfant]";
+	mes "Avez-vous écouté les histoires de tous mes amis?";
+	next;
+	mes "[Enfant]";
+	mes "Ce ne sont pas de mauvaises personnes, ils sont simplement déprimés.";
+	next;
+	mes "[Enfant]";
+	mes "Mais depuis qu'ils vous ont parlé, ils semblent aller un peu mieux.";
+	mes "cela faisait longtemps que je ne les avais pas vus souriants comme ça.";
+	next;
+	mes "[Enfant]";
+	mes "Vous semblez avoir un don pour soulager les gens... Avec votre permission, je pense que vous feriez un formidable Soul Linker.";
+	mes "Vous voulez devenir un Soul Linker?";
+	next;
+	menu "Oui",-,"Non",L_Warpout;
+
+	mes "[Enfant]";
+	mes "Très bien.";
+	mes "Je pense que vous avez fait le bon choix.";
+	jobchange Job_Soul_Linker;
+	callfunc "F_ClearJobVar";
+	misceffect 247;
+	next;
+	mes "[Enfant]";
+	mes "Essayez d'aider les autres comme vous l'avez fait pour moi.";
+	close2;
+	warp "morocc_in",175,31;
+	end;
+
+L_Warpout:
+	mes "[Enfant]";
+	mes "Si vous changez d'avis, revenez me voir.";
+	close2;
+	warp "morocc_in",175,31;
+	end;
+
+L_Notyet4:
+	mes "[Enfant]";
+	mes "Parlez d'abord aux autres s'il vous plaît.";
+	close;	
+}

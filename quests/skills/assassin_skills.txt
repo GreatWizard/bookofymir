@@ -1,0 +1,69 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Assassin Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.3a
+//===== Compatible With: ===================================== 
+//= eAthena Revision 3800+
+//===== Description: ========================================= 
+//= Temp quests for new skills for 2nd classes
+//===== Additional Comments: ================================= 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//============================================================
+
+
+//============================================================
+// ASSASSIN - SONIC ACCELERATION + THROW VENOM KNIFE
+//============================================================
+in_moc_16,14,21,3	script	Kiltin	884,{
+	mes "[Kiltin]";
+	if(BaseJob!=Job_Assassin) goto L_nosin;
+	if(getskilllv(1003) && getskilllv(1004)) goto L_alreadyhave;
+
+	mes "Salut à toi, petit... Tu veux que je t'apprenne tout mon savoir?";
+	mes "Ok... mais d'abord, il va falloir que tu me prouves que tu es capable de te procurer ceci:";
+	mes "3 Sapphires";
+	mes "1 Ruby";
+	next;
+	
+	mes "[Kiltin]";
+	mes "Voyons-voir ce que tu as rapporté...";
+	next;
+	
+	if(countitem(726)<3 || countitem(723)<1) goto L_noitems;//Items: Sapphire, Ruby,
+	delitem 726, 3;//Items: Sapphire,
+	delitem 723, 1;//Items: Ruby,
+
+	mes "[Kiltin]";
+	mes "Héhé, je vois que tu as tout ce que j'avais demandé!";
+	mes "Je vais donc t'apprendre mes petits secrets des Assassins...";
+	skill 1003,1,0;
+	skill 1004,1,0;
+	close;
+	
+L_noitems:
+	mes "[Kiltin]";
+	mes "Hé, mais tu n'as pas tout ce qui était convenu!";
+	mes "Vas chercher le reste, et reviens me voir!";
+	close;
+		
+L_nosin:
+	mes "Désolé, mais je suis occupé, là.";
+	emotion e_gasp;
+	close;
+
+L_alreadyhave:
+	mes "Je t'ai déjà appris tout ce que je savais...";
+	close;
+}

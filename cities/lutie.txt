@@ -1,0 +1,818 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Zack, corrigé par Myllena
+//===== eAthena Script ======================================= 
+//= Lutie Town
+//===== By: ================================================== 
+//=
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//=
+//===== Additional Comments: ================================= 
+//= 1.1 Edited some text and updated/enabled some triggers
+//= for the quest.[kobra_k88]
+//= 1.2 Fixed exploit. Checked for Bard Job Quest compatibility [Lupus]
+//= 1.3 Fixed typo’s [Nexon] 1.4 Fixed exploit [Lupus]
+//= 1.5 Fixed a bug that could reset Lutie quest state [Lupus]
+//============================================================
+
+
+//=====================================================
+//		Getting To Lutie
+//=====================================================
+aldebaran,168,168,4	script	Mr. Noël	718,{
+	mes "[Mr. Noël]";
+	mes "Joyeux Noël!!";
+	mes "Je te souhaite plein de bonheur et de joie!";
+	next;
+	menu "D'où venez vous?",L0, "Emmenez moi à ^5533FFLutie^000000",L1, "Annuler",LEnd;
+
+	L0:
+		mes "[Mr. Noël]";
+		mes "Je viens de ^3355FFLutie^000000, la ville fantastique de Noël!!";
+		mes "C'est Noël toute l'année, on y trouve des gâteaux délicieux, et des jouets à perte de vue.";
+		next;
+		mes "[Mr. Noël]";
+		mes "La joie et le bonheur emplissent la ville! C'est vraiment un lieu magique!";
+		mes "Cet endroit n'est-il pas fantastique?";
+		next;
+		mes "[Mr. Noël]";
+		mes "Alors qu'attends-tu?! Dis juste un mot et je t'emmènerais à Lutie sur le champ! Tu pourrais même rencontrer le merveilleux Père Noël.";
+		close;
+	L1:
+		mes "[Mr. Noël]";
+		mes "Donc tu es prêt à aller dans le plus bel endroit du monde?";
+		next;
+		mes "[Mr. Noël]";
+		mes "Très bien, tu vas pouvoir apprécier tout l'amusement et l'excitation que Lutie peut t'offrir!";
+		close2;
+		warp "xmas_fild01",78,68;
+		end;
+	LEnd:
+		mes "[Mr. Noël]";
+		mes "Bien... Si tu veux visiter Lutie tu peux revenir me le demander quand tu veux.";
+		mes "Joyeux Noël!! Joyeux Noël!!";
+		close;
+}
+
+
+//=====================================================================
+//		NPCs inside
+//=====================================================================
+
+// Mima
+//============================================================
+xmas_in,27,103,4	script	Mima	701,{
+	if(xmas_npc==5) goto Xmas5;
+	if(xmas_npc==6) goto Xmas6;
+	if(xmas_npc==7) goto Xmas7;
+	if(xmas_npc==8) goto Xmas8;
+	mes "[Mima]";
+	mes "Joyeux Noël!";
+	mes "Je peux sentir l'esprit de Noël m'envahir à chaque fois que je vois de jeunes étrangers... Je vous souhaite un joyeux Noël!";
+	next;
+	mes "[Mima]";
+	mes "Il y a une ^5533FFUsine de Jouets^000000 abandonnée, ici, dans cette ville.";
+	mes "Cela semble assez intéressant, cependant....";
+	next;
+	mes "[Mima]";
+	mes "Récemment, j'ai noté que beaucoup de monstres avaient élu résidence à l'intérieur de l'usine. Certains d'entre eux ressemblent aux monstres que l'on aperçoit à l'extérieur de la ville... Je veux dire qu'ils paraissent complètement identiques!!";
+	next;
+	mes "[Mima]";
+	mes "Bien qu'ils se ressemblent, ce ne sont pas vraiment les mêmes. Pour plusieurs raisons, ces monstres ont des caractéristiques différentes de ceux trouvés à l'extérieur. Certains d'entre eux sont vraiment uniques et il semblerait que leur descendance se soit adaptée à l'environnement d'ici.";
+	next;
+	mes "[Mima]";
+	mes "... Oh j'allais presque oublier, je dois aller faire du kimchi (du chou saumuré épicé)... Hum... Le kimchi au chocolat est mon préféré!";
+	next;
+	mes "[Mima]";
+	mes "Entre chaque tranche de kimchi, j'étale un chocolat spécial qui fond assez facilement. Le reste est un secret familial.... héhé.";
+	close;
+	
+Xmas5:
+	mes "[Mima]";
+	mes "Hum? L'oncle Ken vous a parlé de moi, n'est ce pas? Bien bien, je sais ce qu'il pense... Hoo hoo! Il a l'intention de me rendre heureuse et espère ainsi que je vais lui donner quelques bocaux de kimchi gratuitement!";
+	mes "Hoo hoo, oh bien...";
+	next;
+	mes "[Mima]";
+	mes "Il sait beaucoup de choses sur moi... Je ne peux pas lui interdire d'obtenir un peu de mon kimchi. Oui oui. De toutes façons, je sais que mon kimchi est le meilleur de la ville!";
+	mes "Ho? L'histoire de ^3355FFJack Frost^000000? Oh... Oui oui, je vois.";
+	next;
+	mes "[Mima]";
+	mes "Mais je ne peux pas vous raconter son histoire comme ça.... Comme vous le savez, les gens sachant un secret ne le dévoilent pas comme ça! Et je suis l'une de ces personnes! Je ne lâcherai pas le morceau aussi facilement! Comme je dis toujours, 'Quand on te demande quelque chose, avant de répondre, demande autre chose'. Donc, j'ai une faveur à vous demander.";
+	mes "Jack Frost à gardé quelque chose pour moi.....";
+	next;
+	mes "[Mima]";
+	mes "Voudriez-vous me le rapporter s'il vous plaît? ^3355FFLe sel le plus brut du monde^000000. C'est un ingrédient essentiel pour saumurer les choux. Dîtes lui juste que je vous ai envoyé et il comprendra.";
+	next;
+	mes "[Mima]";
+	mes "Il vous donnera mon sel. Maintenant, dépêchez vous. Revenez vite.";
+	set xmas_npc,6;
+	close;
+Xmas6:
+	mes "[Mima]";
+	mes "Hohohoho~";
+	mes "Voyons voir... Hein? Vous ne l'avez toujours pas rapporté?";
+	mes "Oh mon Dieu, mes choux vont devenir aigres!";
+	mes "( ? )";
+	mes "Dépêchez vous, allez allez!!";
+	next;
+	mes "[Mima]";
+	mes "*soupir* Vous êtes vraiment une personne écervelée, mon cher...";
+	mes "J'ai dit de M'APPORTER ^3355FFLE SEL LE PLUS BRUT DU MONDE^000000 !!!!!!!! Filez maintenant et dépêchez vous!";
+	close;
+Xmas7:
+	mes "[Mima]";
+	mes "Hohohohoh hohohohoho!";
+	mes "Voyons voyons...... Merci mon cher, merci!";
+	next;
+	mes "- Vous lui tendez ^3355FFLe sel le plus brut du monde^000000 -";
+	set xmas_npc,8;
+	next;
+	mes "[Mima]";
+	mes "Maintenant je suis capable de saumurer mes choux correctement. Merci mon cher, merci . . . . . Hooo? Ahhh oui, désolée, j'avais presque oublié que je vous l'avais promis... Oui je me souviens, vous m'aviez demandé des explications sur le sac à cadeaux de Jack Frost, n'est-ce pas?";
+	next;
+	mes "[Mima]";
+	mes "Si vous avez déjà rencontré l'Oncle Ken, vous devez maintenant savoir que Jack Frost a été fait d'un peu de neige mystérieuse dissimulant une épaisse herbe magique.";
+	next;
+	mes "[Mima]";
+	mes "Je ne peux pas vous dire quelle était la raison, mais il m'a semblé que Jack Frost était venu pour posséder le sac de cadeaux, en raison de la réaction étrange entre des articles d'alchimie utilisés par un grand alchimiste et sa matière de structure originale, la neige mystérieuse.";
+	next;
+	mes "[Mima]";
+	mes "En fait, le sac de cadeaux crée autant de cadeaux que Jack Frost le souhaite. Grâce à cela, Jack Frost ressemble au Père Noël car il possède les mêmes dons que lui. Si ce pouvoir venait à tomber entre de mauvaises mains, nous serions très probablement dans l'ennui, mais tout le monde sait que Jack Frost est la créature la plus gentille et innocente qui soit... Nous ne sous sommes jamais inquiétés de sa capacité si étonnante...";
+	next;
+Xmas8:
+	mes "[Mima]";
+	mes "Hohohoho . . Ah et, récemment j'ai entendu quelques nouvelles surprenantes de la part d'^3355FFHowie^000000 le clown. C'est une histoire intéressante... Si vous êtes intéressé, pourquoi n'iriez-vous pas à sa rencontre?";
+	close;
+}
+
+// Santa Claus
+//===================================================================
+xmas_in,100,96,4	script	Père Noël::Santa1	718,{
+	if(@talkedsanta == 1) goto L_Xmas1;
+	mes "[Père Noël]";
+	mes "Ho Ho Ho~";
+	mes "Joooyeux Noël!!";
+	next;
+	mes "[Père Noël]";
+	mes "Ho Ho Ho~";
+	mes "Je suis le Père Noël, et j'offre des cadeaux à tous les garçons et les filles le soir de Noël!";
+	next;
+	mes "[Père Noël]";
+	mes "Ho Ho Ho~";
+	mes "Si pour une raison quelconque tu voudrais quitter la merveilleuse ville de Lutie, vas au sud de la ville. Tu y trouvera un portail qui te ramènera à Al De Baran.";
+	next;
+	mes "[Santa Claus]";
+	mes "Ho Ho Ho~ Joyeux Noël!!";
+	mes "Joyeux Noël!!";
+	if(xmas_npc==0) set @talkedsanta, 1;
+	close;
+
+L_Xmas1:
+	mes "[Père Noël]";
+	mes "Je suis le Père Noël.";
+	mes "J'ai un cadeau pour toi, laisse moi regarder dans mon sac.";
+	next;
+	mes "[Santa]";
+	mes "Ha oui, j'ai ici un cadeau à ton nom.";
+	mes "Le voici!";
+	next;
+	set @temp, rand(1,4);
+	if (@temp == 2) goto L_2;
+	if (@temp == 3) goto L_3;
+	if (@temp == 4) goto L_4;
+	
+		getitem 529,5;
+		goto L_End;
+L_1:
+		getitem 530,3;
+		goto L_End;
+L_2:
+		getitem 528,1;
+		if(xmas_npc==0) set xmas_npc, 1;
+		set @talkedsanta, 0;
+		mes "[Père Noël]";
+		mes "Hum, tu n'as pas dû être une personne très gentille cette année. Fais un effort!";
+		close;
+L_3:
+		getitem 539,2;
+		goto L_End;
+L_4:
+		getitem 539,1;
+L_End:
+		if(xmas_npc==0) set xmas_npc, 1;
+		set @talkedsanta, 0;
+		mes "[Père Noël]";
+		mes "J'espère que tu aimes ton cadeau!";
+		mes "Mes elfes l'ont fait spécialement pour toi.";
+		close;
+}
+
+// Debra
+//==================================================================
+xmas_in,165,173,4	script	Debra	711,{
+	if(xmas_npc==1 || xmas_npc==2) goto Xmas1;
+	mes "[Debra]";
+	mes "Joyeux Noël!";
+	mes "Bienvenue à Lutie!";
+	next;
+	mes "[Debra]";
+	mes "Avez-vous déjà parlé au bonhomme de neige à la sortie de la ville?";
+	mes "Un bonhomme de neige solitaire, fait de Neige Blanche....";
+	next;
+	mes "[Debra]";
+	mes "Il est doté d'un coeur d'or. On l'appelle 'Jack Frost'. Bien que ce soit un bonhomme de neige, il nous comprend et peut rester là, debout, à nous écouter.";
+	next;
+	mes "[Debra]";
+	mes ". . . . .";
+	mes "Quand je parle à Jack Frost, j'en arrive à me poser beaucoup de questions sur lui. Une aura de mystères l'entoure... Je présume que vous aurez la même impression que moi si vous essayez de lui parler.";
+	next;
+	mes "[Debra]"; 
+	mes "Comment il a été créé, qui lui a offert un coeur d'être humain et comment il peut parler...";
+	next;
+	mes "[Debra]";
+	mes "D'où il vient? Cela devait être un endroit où la neige tombait dru... Mais comment a-t-il fait pour venir jusqu'ici sans jambes?";
+	next;
+	mes "[Debra]";
+	mes "Récemment, dans cette ville, il semblerait que le nombre de curieux venus voir Jack Frost ait grandement augmenté.";
+	mes "Si vous n'arrivez pas à résoudre son secret après lui avoir parlé, je vous conseille de parler aux autres habitants...";
+	if(xmas_npc==0) goto Xmas0;
+	close;
+
+	Xmas0:
+		mes "Ah!... J'allais oublier de vous dire... Le père Noël vit ici, dans cette ville....";
+		next;
+		mes "[Debra]";
+		mes "Vous ne l'avez pas encore vu? Pourquoi ne pas partir à sa rencontre? Maintenant faites attention! Joyeux Noël!!";
+		close;
+
+	Xmas1:
+		mes "[Debra]";
+		mes "Joyeux Noël!";
+		mes "Bienvenue à Lutie!";
+		next;
+		mes "[Debra]";
+		mes "Vous avez reçu un cadeau de la part du Père Noël?! Vous devez être complètement excité!";
+		mes "Ha ha! Avez vous déjà entendu que nous avions au moins une personne équivalente au fameux Père Noël dans cette ville?";
+		next;
+		mes "[Debra]";
+		mes "Cette personne est ^3355FFJack Frost^000000, le bonhomme de neige mystérieux, qui peut communiquer avec les humains.";
+		next;
+		mes "[Debra]";
+		mes "Vous ne l'avez pas encore rencontré? Je pense que vous devriez essayer de lui parler si vous le voyez... Sur ce, Joyeux Noël!!";
+		set xmas_npc,2;
+		close;
+}
+
+
+//=======================================================================
+//		NPC's Outside
+//=======================================================================
+
+// Peterson
+//=========================================================
+xmas,117,304,4	script	Peterson	713,{
+	if((xmas_npc==3) || (xmas_npc==4)) goto Xmas34;
+	mes "[Peterson]";
+	mes "Joyeux Noël!";
+	next;
+	mes "[Peterson]";
+	mes "Ici à Lutie, c'est toujours Noël 24 heures sur 24 et 365 jours par an. Noël est célébré non-stop ici! Cette magnifique cité remplit votre coeur du joyeux esprit de Noël...";
+	next;
+	mes "[Peterson]";
+	mes "Faites donc une promenade autour de la ville... Vous verrez qu'elle possède des capacités attractives sans nulle autre pareille.";
+	next;
+	mes "[Peterson]";
+	mes "Lutie est vraiment la ville idéale pour ceux qui ne veulent s'inquiéter de rien. Que le bonheur soit avec vous... Joyeux Noël!!";
+	close;
+
+Xmas34:
+	mes "[Peterson]";
+	mes "^3355FFJack Frost^000000 vous a-t-il parlé de moi? Oh je vois... C'est un bonhomme de neige sans jambes. C'est dommage... Il ne peut pas venir jusqu'ici pour me voir... J'apprécie le fait que vous veniez me voir pour lui. J'irai lui rendre visite un jour.";
+	next;
+	mes "[Peterson]";
+	mes "Il y a un homme qui connaît le secret de Jack Frost.....";
+	mes "Cet homme est l' ^3355FFOncle Ken^000000... Oui, il doit savoir...";    
+	next;
+	mes "[Peterson]";
+	mes "Un jour, quand un apprenti du Grand Alchimiste est venu visiter Lutie, j'ai écouté la conversation entre l'Oncle Ken et Jack Frost.";
+	next;
+	mes "[Peterson]";
+	mes "Il y a longtemps, ce Grand Alchimiste était venu sur la terre natale de Jack Frost. Et, l'ayant trouvé entre la vie et la mort en train de se liquéfier, il le fit revivre avec plusieurs minerais magiques.....";
+	next;
+	mes "[Peterson]";
+	mes "Bien, si vous voulez plus de détails sur cette histoire, je vous recommande d'aller parler à l'^3355FFOncle Ken^000000.";
+	set xmas_npc,4;
+	close;
+}
+
+// Hairy Uncle Ken
+//==========================================================
+xmas,176,236,4	script	Oncle Ken	712,{
+	if(xmas_npc==4) goto Xmas4;
+	if(xmas_npc==5) goto Xmas5;
+	mes "[Oncle Ken]";
+	mes "Jooooooooyeux Noël!";
+	mes "Bienvenue dans la ville de Noël!!";
+	mes "Votre tête est toute rouge... La température ici est assez ... Froide!";
+	mes "Et il fait si froid que cela vous fait ressembler à........";
+	next;
+	mes "[Oncle Ken]";
+	mes "Une ^3355FFPetite Pomme Rouge^000000!";
+	mes "HarHarHarHar!";
+	mes "N'attrapez pas froid! La grippe à Lutie est bien trop forte.......";
+	next;
+	mes "[Oncle Ken]";
+	mes "... Parler du froid, cela me rappelle...";
+	next;
+	mes "[Oncle Ken]";
+	mes "Mon enfant a sérieusement attrapé froid récemment.... C'était dans les environs de minuit et toutes les pharmacies étaient fermées. J'étais tellement désespéré que je suis allé à l'^5533FFUsine de Jouets^000000 abandonnée.......";
+	next;
+	mes "[Oncle Ken]";
+	mes "Des petits monstres couraient partout... Des ^5533FFPorings de Glace^000000!";
+	mes "Les gens les appellent parfois Boule de Glace... J'en ai saisi un et je suis vite revenu à la maison. Je l'ai placé sur le front de mon enfant...";
+	next;
+	mes "[Oncle Ken]";
+	mes "Et vous savez quoi? Sa fièvre a baissé tout de suite! Heh! C'est vraiment commode de vivre dans ce village.....";
+	mes "Sur ce, bonne chance!";
+	close;
+
+Xmas4:
+	if(countitem(1024)>0 && countitem(938)>0) goto XmasL0;
+	mes "[Oncle Ken]";
+	mes "Ha ouais ? Peterson vous a dit que vous pouviez me parler?";
+	mes "Haw Haw Haw!! Ouais, ouais, je le connais un peu . .";
+	mes "Pour être honnête, vous pouvez dire que je suis son point faible!";
+	mes "Parce que je connais le secret de la ^3355FFNaissance de Jack Frost^000000!!";
+	next;
+	mes "[Oncle Ken]";
+	mes "Vous êtes curieux hein? *petit rire* Ouais, je peux le voir à votre tête.";
+	mes "Cependant, n'allez pas croire que je vais vous dire ce secret pour rien...";
+	mes "Je pourrais réfléchir... Mais là je suis vraiment trop assoiffé....";
+	mes "Apportez-moi ^3355FF1 Squid Ink^000000 et ^3355FF1 Sticky Muscus^000000!!!";
+	next;
+	mes "[Oncle Ken]";
+	mes "Wahhahaha! Ne me regardez pas comme ça! Mes goûts ne concernent que moi!!! Commencez donc à chercher ce que je veux, ou sinon ...... vous n'aurez pas ce que VOUS voulez.... *ricanement*";
+	close;
+
+	XmasL0:
+		delitem 1024,1;
+		delitem 938,1;
+		mes "[Oncle Ken]";
+		mes "Oh?! *petit rire* !! Vous semblez être une personne fiable..";
+		mes "Bon! Ok, mais d'abord j'ai besoin de quelque chose à boire....";
+		next;
+		mes "^3355FF- Vous lui tendez la Squid Ink -^000000";
+		mes "^3355FF- et le Sticky Muscus. -^000000";
+		next;
+		mes "[Oncle Ken]";
+		mes "Burrrrpppp - Ok! Bien, maintenant je vais raconter mon histoire...";
+		mes "Gardez à l'esprit que cette histoire ne comporte que les éléments que je connais......";
+		mes "Vous avez dû en entendre parler ...";
+		next;
+		mes "[Oncle Ken]";
+		mes "Il y a longtemps, très longtemps, vivait un Grand Alchimiste très loin vers le nord. Son nom était ^3355FFPhilip Varsez^000000!!";
+		next;
+		mes "[Oncle Ken]";
+		mes "Il voulait atteindre les limites de la nouvelle alchimie... Mais la pratique de cette nouvelle sorte d'alchimie nécessitait de nombreux matériaux rares. Il décida donc de partir voyager à travers le monde pour chercher des objets possédant une Grande Force Magique en eux.";
+		mes "Finalement, il parvint à un village aux conditions météorologiques glaciales, quelque part dans le grand nord...";
+		next;
+		mes "[Oncle Ken]";
+		mes "La première chose qu'il vu après être entré dans le village fut une scène sinistre..... Tout était détruit.... Il ne restait rien.";
+		mes "Les survivants gémissaient dans la douleur...";
+		mes "C'était la scène la plus horrible dont il fut témoin.";
+		next;
+		mes "[Oncle Ken]";
+		mes "Soudainement, une force étrange attira son attention.... Cette chose étrange était un bonhomme de neige qui fondait dans l'eau.... ^3355FFJack Frost^000000! Mais la chose la plus stupéfiante était qu'il tenait deux bébés pleurant dans ses bras. Le Grand Alchimiste supposa qu'il s'était sacrifié pour les proteger d'un grand danger.";
+		next;
+		mes "[Oncle Ken]";
+		mes "Cela toucha l'Alchimiste, et il décida de sauver la vie du bonhomme de neige grâce à son pouvoir. Il transporta le bonhomme de neige à Lutie, la ville de Noël, l'endroit le plus sûr au monde.";
+		next;
+		mes "[Oncle Ken]";
+		mes "Quelques temps plus tard, les rumeurs ont commencé à circuler non seulement sur Jack Frost sauvé par la pitié de l'Alchimiste, mais aussi à propos de la neige dont Jack Frost était fait.";
+		next;
+		mes "[Oncle Ken]";
+		mes "La vérité est qu'en fait, Jack Frost a été fait d'une neige qui recouvrait un champ mystérieux où toutes sortes de plantes et de fleurs magiques poussaient.";
+		next;
+		mes "[Oncle Ken]";
+		mes "Mouhahaha!";
+		mes "Voilà voilà... C'est là toute l'histoire que je connais.";
+		mes "Et vous? Mon histoire vous a t-elle satisfaite? Haw Haw Haw!!";
+		next;
+		mes "[Oncle Ken]";
+		mes "Ho bien... Maintenant j'ai le regret de vous annoncer que je n'ai aucune idée sur la capacité spéciale de Jack Frost qui est de créer des Cadeaux de Noël de façon ininterrompue...";
+		next;
+	Xmas5:
+		mes "[Oncle Ken]";
+		mes " ^3355FFMima^000000, l'excellente faiseuse de kimchi qui connaît tout sur tout... Si vous êtes intéressé, vous feriez mieux de lui rendre visite. Sur ce, Joyeux Noël!!";
+		set xmas_npc,5;
+		close;
+}
+
+// Jack Frost
+//====================================================================
+xmas,134,112,4	script	Jack Frost	710,{
+	mes "[Jack Frost]";
+	if(xmas_npc==2) goto Xmas2;
+	if(xmas_npc==3) goto Xmas3;
+	if(xmas_npc==4) goto Xmas4;
+	if(xmas_npc==5) goto Xmas5;
+	if(xmas_npc==6) goto Xmas6;
+	if(xmas_npc==7) goto Xmas7;
+	if(xmas_npc==8) goto Xmas8;
+	if(xmas_npc==9) goto Xmas9;
+	if(xmas_npc==10) goto Xmas10;
+	if(xmas_npc==11) goto Xmas11;
+	mes "*snif**snif*........ Je suis si seul..... Je ne peux aller nulle part! Je suis collé ici jour et nuit... Gelé sur cette terre froide....";
+	emotion e_sob;
+	next;
+	menu "^0000FFJack Frost?^000000",L0, "Une Usine de Jouet secrète?",L1, "...............",LEnd;
+	
+	L0:
+		mes "[Jack Frost]";
+		mes "J'ai été créé par un humain..... Certaines personnes me voient comme une sorte de poupée de neige géante.....";
+		mes "Je me rappelle être né dans un endroit très froid......";
+		next;
+		mes "[Jack Frost]";
+		mes "Un peu comme Lutie, c'est une petite ville froide.... J'étais heureux dans le nord mais.......";
+		next;
+		mes "[Jack Frost]";
+		mes "Un jour une horrible femme est venue dans le village. ..... Son nom était.... ^790079Mariposum^000000......";
+		mes "J'ai cru entendre qu'elle venait d'un endroit extrêmement chaud..... Un village mystérieux dans une caverne.";
+		next;
+		mes "[Jack Frost]";
+		mes "A la quatrième nuit suivant sa venue, elle alla au square du centre de notre village.......";
+		mes "Sans plus attendre elle commença d'horribles incantations....... Soudain, une tempête énorme apparut.....";
+		next;
+		mes "[Jack Frost]";
+		mes "Presque immédiatement après, la puissante tempête frappa de plein fouet mon ami et moi. Je tombais inconscient........";
+		next;
+		mes "[Jack Frost]";
+		mes "Je ne sais pas combien de temps je suis resté endormi, mais toujours est-il qu'à mon réveil j'étais ici, à Lutie..........";
+		next;
+		mes "[Jack Frost]";
+		mes "Mais mes amis ne sont pas...... J'ai perdu tous mes amis.......... Je me sens si seul.......";
+		emotion e_sob;
+		close;
+	L1:
+		mes "[Jack Frost]";
+		mes "Quelque part à Lutie existe un endroit qui ressemble à une ^5533FFUsine de Jouet^000000....... C'est très bien décoré et cela peut paraître amusant mais.......";
+		next;
+		mes "[Jack Frost]";
+		mes "J'ai entendu dire que ce lieu est envahi par des petits soldats et d'étranges paquets cadeaux........";
+		next;
+		mes "[Jack Frost]";
+		mes "Une part de moi est intriguée par cet endroit et aimerait le voir au moins une fois..... Mais d'un autre côté, je suis plutôt effrayé par cette histoire de jouets possédés.....";
+		close;
+	LEnd:
+		mes "[Jack Frost]";
+		mes "A bientôt! Revenez me voir un de ces jours. Joyeux Noël!";
+		close;
+
+Xmas2:
+	mes "Avez vous entendu ce qu'a dit Debra? Hé hé... Les gens de Lutie m'appellent 'le Bonhomme de Neige mystérieux'... Honnêtement, je ne suis en rien qu'un simple bonhomme de neige... hé hé.";
+	next;
+	mes "[Jack Frost]";
+	mes "En plus je ne sais même pas qui je suis vraiment. Peut être que je me connais aussi bien que les gens d'ici.";
+	next;
+	mes "[Jack Frost]";
+	mes "Mr. ^3355FFPeterson^000000 m'a donné sa carte de visite et m'a dit que je pouvais le voir quand je le désirais.... Mais comme vous pouvez le voir.....";
+	next;
+	mes "[Jack Frost]";
+	mes "Je n'ai pas de jambes, je ne peux aller nulle part..... ";
+	emotion e_sob;
+	next;
+	mes "[Jack Frost]";
+	mes "Pourquoi suis-je arrivé ici...? Pourquoi puis-je communiquer avec les humains...?";
+	mes "Pourquoi......??";
+	next;
+	mes "^3355FF- Jack Frost sombre dans ses pensées -^000000";
+	mes "^3355FF- Il regarde le nom de 'Peterson' inscrit sur la carte -^000000";
+	set xmas_npc,3;
+	close;
+Xmas3:
+	mes ". . . . . . . . . . . . . . .";
+	next;
+	mes "^3355FF- Jack Frost sombre dans ses pensées -^000000";
+	mes "^3355FF- Il regarde le nom de 'Peterson' inscrit sur la carte -^000000";
+	close;
+Xmas4:
+	mes "Vous avez rencontré Peterson? C'est un homme honnête et diligent . .";
+	mes "Et je sais . . Qu'il est amoureux de Debra....";
+	mes "Héhéhéhéhé...";
+	next;
+	mes "[Jack Frost]";
+	mes "Je pense que Debra devrait être plus généreuse. Elle est aimable avec tout le monde sauf avec Peterson. Mais je sais... Que Debra aime ce que fait Peterson pour les gens d'ici...";
+	close;
+Xmas5:
+	mes "Vous avez parlé à ^3355FFL'oncle Ken^000000?";
+	mes "L'oncle Ken a une voix forte et ne prend jamais de douches.....";
+	mes "Il sent un peu mauvais.... Mais c'est quelqu'un de vraiment drôle.";
+	mes "Tout le monde l'aime.";
+	next;
+	mes "[Jack Frost]";
+	mes "Il aime bien boire d'étranges sortes de boissons......";
+	mes "Tout le monde dit que c'est un miracle qu'il n'ait pas mal au ventre.";
+	mes "Heh~ . .J'aime beaucoup cet homme . .";
+	close;
+Xmas6:
+	mes "Humm avez vous rencontré ^3355FFMima^000000, l'experte en kimchi?";
+	mes "Ouais ouais. Je l'ai gardé pour elle. Vous êtes ici, parce qu'elle veut le sel?";
+	next;
+	set xmas_npc,7;
+	mes "^3355FFVous obtenez 'Le sel le plus brut du monde'^000000.";
+	next;
+	mes "[Jack Frost]";
+	mes "J'adore sa cuisine parce que c'est tout bonnement délicieux.";
+	mes "Parfois elle m'offre des tasses de flocons de glace avec du jus de raisin...";
+	next;
+	mes "[Jack Frost]";
+Xmas7:
+	mes "Je pense que vous pourrez effectuer votre livraison sans risques...";
+	mes "^3355FF'Le sel le plus brut du monde'^000000...";
+	close;
+Xmas8:
+	mes "Howie? Ce clown ennuyeux? ... Au premier regard on dirait, un mauvais clown sans talent..... Mais il a un coeur pur et il est toujours plein d'attentions pour les deux orphelins...";
+	close;
+Xmas9:
+	mes "Charlie est un garçon imbu d'optimisme...";
+	mes "Il deviendra bonze plus tard . .";
+	mes "Tout comme moi!";
+	mes "Hahahaha . . . . .";
+	close;
+Xmas10:
+	mes ". . . . . Merci de m'avoir écouté jusqu'ici.";
+	mes "J'ai beaucoup apprécié que vous ayez essayiez de me comprendre, bien que vous soyiez un étranger.";
+	next;
+	mes "[Jack Frost]";
+	mes "Je pense que maintenant vous devez en savoir plus sur moi que n'importe qui d'autre dans cette ville.";
+	mes "Hahahaha.... Je voudrais vous offrir un petit cadeau en retour.";
+	next;
+	mes "[Jack Frost]";
+	mes "Tah dah!! Prenez ce que vous voulez là dedans!!";
+	next;
+	mes "^3355FF- Remue le sac de cadeaux -^000000";
+	next;
+
+	//it's a part of Bard Job Quest also
+	set xmas_npc,11;
+
+	set @temp, rand(1,8);
+	if(@temp == 2) goto L_Prize2;
+	if(@temp == 3) goto L_Prize3;
+	if(@temp == 4) goto L_Prize4;
+	if(@temp == 5) goto L_Prize5;
+	if(@temp == 6) goto L_Prize6;
+	if(@temp == 7) goto L_Prize7;
+	if(@temp == 8) goto L_Prize8;
+
+	L_Prize1:
+		getitem 529,5;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 5 Candy -^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions.";
+		mes "A plus tard!";
+		mes "Joyeux Noël!!";
+		close;
+	L_Prize2:
+		getitem 529,10;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 10 Candy -^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions .";
+		mes "A bientôt!";
+		mes "Joyeux Noël!!";
+		close;
+	L_Prize3:
+		getitem 530,5;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 5 Candy Cane-^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions .";
+		mes "A la prochaine!";
+		mes "Joyeux Noël!!";
+		close;
+	L_Prize4:
+		getitem 530,10;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 10 Candy Cane-^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions .";
+		mes "Au plaisir de vous revoir!";
+		mes "Joyeux Noël!!";
+		close;
+	L_Prize5:
+		getitem 539,1;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 1 Piece of Cake-^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions .";
+		mes "A un de ces quatre!";
+		mes "Joyeux Noël!!";
+		close;
+	L_Prize6:
+		getitem 539,2;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 2 Piece of Cake-^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions .";
+		mes "Au revoir!";
+		mes "Joyeux Noël!!";
+		close;
+	L_Prize7:
+		getitem 538,5;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 5 Cookie-^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions .";
+		mes "Prenez soin de vous!";
+		mes "Joyeux Noël!!";
+		close;
+	L_Prize8:
+		getitem 538,10;
+		mes "[Jack Frost]";
+		mes "Wahou! Félicitations!!";
+		mes "^3355FF- 10 Cookie-^000000!";
+		mes "Mon cher ami,";
+		mes "revenez me voir de temps à autres pour que nous rediscutions .";
+		mes "A une prochaine fois!";
+		mes "Joyeux Noël!!";
+		close;
+Xmas11:
+	mes "Bienvenue mon cher ami!";
+	mes "Vous êtes toujour le bienvenue dans la ville de Noël.";
+	mes "Et surtout par moi, Jack Frost!";
+	mes "Joyeux Noël!!";
+	close;
+}
+
+// Howie the Clown
+//=====================================================================
+xmas,146,136,4	script	Howie le Clown	715,{
+	mes "[Howie]";
+	mes "Jooo~YyyeeuuUUXX Noël~!";
+	mes "La La La! La La La La!~";
+	mes "Dum di Dum di Dum";
+	next;
+	menu "Bonjour Monsieur le Clown, que faîtes-vous?",L0, "A propos du bonhomme de neige.",L1, "Quitter la conversation.",LEnd;
+	
+	L0:
+		mes "[Howie]";
+		mes "La La La~ Dum di Dum di Dum........ Hum?.....";
+		next;
+		mes "[Howie]";
+		mes "Oh, Je travaille sur un spectacle pour amuser deux jeunes enfants....";
+		mes "^5533FFCharlie et Marsha^000000.... Et ce n'est pas facile!";
+		next;
+		mes "[Howie]";
+		mes "Croiyez le ou pas mais il faut être futé, talentueux, et bien sûr drôle pour être un clown. Il est de plus en plus difficile de faire rire les enfants de nos jours.... Ils se lassent si facilement.... *snif*";
+		next;
+		mes "[Howie]";
+		mes "Donc je dois me forcer à être plus créatif.... pour agir drôlement et parler drôlement...... Pour les faire rire à gorge déployée!!";
+		next;
+		mes "[Howie]";
+		mes "HaHaHaHa! HeHeHeHeHe! HoHoHoHoHo! Joyeux Noël!!"; 
+		close;
+	L1:
+		if(xmas_npc==8 || xmas_npc==9) goto Xmas8;
+		mes "[Howie]";
+		mes "Vous avez rencontré ^5533FFJack Frost^000000? Bien sûr que je le connais. Tout le monde connaît Jack Frost le bonhomme de neige. Parfois je vais le voir et je parle avec lui.";
+		next;
+		mes "[Howie]";
+		mes "Je fais même quelques petits spectacles pour lui. Mais je ne sais pas si il les aime.... Parce qu'a chaque fois que je finis mes spectacles.... Il semble n'avoir aucune réaction.....";
+		next;
+		mes "[Howie]";
+		mes "Comment pourrait-on ne pas aimer un spectacle aussi fascinant que le mien??";
+		emotion e_hmm;
+		next;
+		mes "[Howie]";
+		mes "Il y a quelque chose d'étrange à propos de Jack Frost.... Quoiqu'il en soit...";
+		mes "La La La~ Dum di Dum di Dum";
+		mes "Joyeux Noël!!";
+		close;
+
+		Xmas8:
+			mes "[Howie]";
+			mes "Dum di Dum di Dum... Ah ha! Je présume que vous êtes ici à cause de Jack Frost? Bah, après tout il n'a rien de particulier....";
+			next;
+			mes "[Howie]";
+			mes "Les deux enfants, ^3355FFCharlie^000000 et ^3355FFMarsha^000000, sont des spectateurs réguliers de mes spectacles. Est-ce que par hasard l'Oncle Ken vous aurait parlé de l'incident qui s'est produit dans le nord?";
+			next;
+			mes "[Howie]";
+			mes ". . . . . Dans ce cas vous devez vous rappeler des deux bébés, que Jack Frost portait dans ses bras... tandis que son corps fondait...";
+			next;
+			mes "[Howie]";
+			mes "Vous avez deviné... Les deux enfants sont Charlie et Marsha. Ils semblent ne rien savoir de tout ça. Jack Frost m'a raconté leur histoire...";
+			mes "Il avait utilisé son corps pour bloquer la boule de feu géante qui fonçait sur les deux bébés....";
+			next;
+			mes "[Howie]";
+			mes "Jack Frost a fait le sacrifice ultime pour Charlie et Marsha....";
+			mes "Je peux voir que vous êtes intéressé par l'histoire de Jack Frost, pourquoi ne pas aller rencontrer les deux enfants pour plus d'informations?";
+			next;
+			mes "[Howie]";
+			mes "Ils pourraient vous raconter une histoire que nous autres habitants de Lutie, n'avons jamais eu la chance d'entendre.";
+			mes "Sur ce, bonne chance! Au revoir!";
+			set xmas_npc,9;
+			close;
+	LEnd:
+		mes "[Howie]";
+		mes "La La La... Dum di Dum di Dum";
+		mes "Joyeux Noël! Passez une bonne journée!";
+		close;
+}
+
+// Charlie
+//================================================================
+xmas,206,168,4	script	Charlie	706,{
+	if(xmas_npc==9) goto Xmas9;
+	mes "[Charlie]";
+	mes "Joyeux, Joyeux Noël! Avez vous parlé à ce clown, ^5533FFHowie^000000? Ce clown est VRAIMENT ennuyeux......";
+	next;
+	mes "[Charlie]";
+	mes "Après avoir vu son spectacle, Marsha et moi avons vraiment eu l'impression d'avoir perdu notre temps.....";
+	next;
+	mes "[Marsha]";
+	mes "Comment peux-tu dire ça? Tu sais bien qu'il a toujours fait son possible pour nous rendre heureux.....";
+	next;
+	mes "[Charlie]";
+	mes "Mouais.... Quoique.... Je pense toujours qu'il est ennuyeux....... Je préfère parler à ^3355FFJack Frost^000000. Il est un peu PLUS marrant.";
+	next;
+	mes "[Charlie]";
+	mes "Vous devriez avoir rencontré le bonhomme de neige, Jack Frost, pourtant...... Sinon, allez le voir.";
+	mes "C'est vraiment un gars marrant."; 
+	next;
+	mes "[Charlie]";
+	mes "Quoiqu'il en soit, Joyeux Noël! Profitez de votre séjour à Lutie!";
+	close;
+
+Xmas9:
+	mes "[Charlie]";
+	mes "Hum...? Jack Frost? Humm...... C'est un bonhomme de neige sympa...";
+	mes "Vous voudriez en savoir plus sur Jack Frost.... C'est ce que vous voulez? Humm...";
+	mes "Le mieux est de demander à Marsha!";
+	close;
+}
+
+// Marsha
+//================================================================
+xmas,208,168,4	script	Marsha	703,{
+	if(xmas_npc==10) goto Xmas10;
+	if(xmas_npc==9) goto Xmas9a;
+
+	mes "[Marsha]";
+	mes "Joyeux Noël à vous!";
+	next;
+	mes "[Marsha]";
+	mes "Je ne sais pas si c'est vrai... mais j'ai entendu dire que le bonhomme de neige avait quelque chose de spécial..... Une sorte de pouvoir spécial en fait..";
+	next;
+	mes "[Marsha]";
+	mes "Oh d'ailleurs..... Avez vous déjà rencontré le ^5533FFPère Noël^000000? Il porte des TONNES et des tonnes de cadeaux dans son grand sac. J'ai entendu dire que le bonhomme de neige faisait la même chose.... Ce n'est pas INCROYABLE!?? Je trouve ça excitant!!";
+	emotion e_ic;
+	next;
+	mes "[Marsha]";
+	mes "Je veux dire, il a un grand sac rempli de choses trop chouettes.... Seuls ceux qui ont été gentils avec le bonhomme de neige ont des cadeaux de sa part!";
+	next;
+	mes "[Marsha]";
+	mes "..... Ben en fait c'est ce que les gens racontent... mais.... il n'est pas toujours INCROYABLE!!";
+	emotion e_hmm;
+	close;
+
+Xmas9a:
+	mes "[Marsha]";
+	mes "Vous connaissez Jack Frost? Bien sûr que je le sais.. C'est un gars marrant et vraiment sympa.";
+	mes "Comme Charlie le répète toujours, il est bien plus drôle que Howie.....";
+	mes "(Mais s'il vous plaît ne le dîtes pas à Howie~)";
+	next;
+	mes "[Marsha]";
+	mes "Charlie et moi sommes orphelins. Nous ne nous souvenons pas du tout de nos parents.";
+	mes "Nous avons été élevés par des personnes gentilles à Lutie, comme L'Oncle Ken et aussi Tatie Mima.";
+	next;
+	mes "[Marsha]";
+	mes "Ils sont tous gentils et généreux, et d'ailleurs nous leur sommes reconnaissants de toute l'attention qu'ils nous portent. D'ailleurs j'ai entendu dire que Jack Frost n'avait ni maman ni papa... Et j'ai aussi entendu dire que ni nous ni Jack Frost n'étions nés dans cette ville de Noël.";
+	next;
+	mes "[Marsha]";
+	mes "Il y a une rumeur qui dit que Jack Frost, Charlie et moi même venons d'ailleurs. Je ne suis pas réellement sûre de ces choses là mais, je sais que nous avons tous le même type de brûlures sur nos corps. Charlie et moi l'avons dans le dos.";
+	next;
+	mes "[Marsha]";
+	mes "Jack Frost a une grosse trace sombre sur le ventre.... Il me donne la sensation d'être... Comme reliés à nous...";
+	next;
+Xmas10:
+	mes "[Marsha]";
+	mes "Oh? Je vois maintenant.... Vous êtes venu pour en apprendre plus sur Jack Frost....";
+	mes "Essayez plutôt de parler à Mr. Jack Frost s'il vous plaît. Il sera sûrement ravi de voir que vous vous intéressez à lui. Peut être pourriez-vous même obtenir un cadeau de sa part.";
+	next;
+	mes "[Marsha]";
+	mes "Je vous souhaite la meilleure chance possible. Joyeux Noël!!";
+	set xmas_npc,10;
+	close;
+}

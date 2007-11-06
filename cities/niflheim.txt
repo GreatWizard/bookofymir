@@ -1,0 +1,212 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Niflheim Script 
+//===== By: ================================================== 
+//= Fyrien, Dizzy, PKGINGO
+//= Official NPCs translated and re-edited by Celest
+//===== Current Version: ===================================== 
+//= 1.3a
+//===== Compatible With: ===================================== 
+//= Any eAthena Version; Niflheim Required
+//===== Description: ========================================= 
+//= Official NPC's for Niflheim
+//= 1.01 Splitted file(guides, shops). Fixed rand() bugs,
+//= missing labels bugs, optimization [Lupus]
+//= 1.03 fixed end; -> close;
+//= 1.04-1.05 fixed several bugs with missing CLOSE button, wrong var name
+//=	in Piano Keys quest
+//=     fixed zeny/item, exploit in Sairin, some optimizations [Lupus]
+//= 1.06 some typos in some variables fixed (thx 2 Dr.Evil) [Lupus]
+//= 1.07 Fixed typos [Nexon]
+//= 1.08 Commented "Traveler" out as it is not official & we have correct Bungee quest in. 
+//=     Also removed TODO, as they are already done. [Vicious_Pucca]
+//= 1.1 Replaced nif_q_done with MISC_QUEST & 32. nif_t -> @nif_t [Lupus]
+//= 1.2 Removed Duplicates [Silent]
+//= 1.3 Moved Book of Devil and Piano quest to quests/quests_niflheim.txt [Evera]
+//============================================================ 
+
+
+niflheim,52,174,3	script	Kirz	796,{
+	mes "[Kirz]";
+	mes "Les humains ne sont pas acceptés ici!";
+	mes "Tous les êtres vivants ont interdiction formelle de passer!";
+	close;
+}
+
+niflheim,213,221,0	script	Esprit::spirits	802,{
+	mes "[Esprit]";
+	mes "Bienvenue dans mon monde...";
+	mes "Ce lieu se nomme...";
+	mes "Niflheim...";
+	percentheal -85,-85;
+	close;
+}
+
+niflheim,39,146,0	duplicate(spirits)	Esprit#2	802
+niflheim,95,61,0	duplicate(spirits)	Esprit#3	802
+niflheim,313,187,0	duplicate(spirits)	Esprit#4	802
+niflheim,212,264,0	duplicate(spirits)	Esprit#5	802
+niflheim,247,72,0	duplicate(spirits)	Esprit#6	802
+niflheim,130,176,0	duplicate(spirits)	Esprit#7	802
+niflheim,173,110,0	duplicate(spirits)	Esprit#8	802
+niflheim,182,167,0	duplicate(spirits)	Esprit#9	802
+
+
+niflheim,195,211,5	script	Gigantia	796,{
+	mes "[Gigantia]";
+	mes "Le Seigneur de la Mort observe tout ce qu'il se passe...";
+	close;
+}
+
+niflheim,153,215,3	script	Feline	794,{
+	mes "[Feline]";
+	mes "Pourquoi restez-vous dans ce village si dangereux?";
+	mes "Vous feriez mieux de repartir, et vite...";
+	close;
+}
+
+nif_in,16,27,1	script	Poule Morte	800,{
+	mes "[Poule Morte]";
+	mes "J'ai été mangée par des humains quand j'étais encore vivante,";
+	mes "maintenant c'est mon tour de vous manger! Cotcotcotcot~";
+	mes "Aaah, je n'aurais pas cru que c'était comme ça, après la mort, cotcotcotcot~";
+	percentheal -5,0;
+	close;
+}
+
+nif_in,16,30,4	script	Chauve-Souris Vampire	799,{
+	mes "[Chauve-Souris Vampire]";
+	mes "Mort ou vivant, le sang humain";
+	mes "est le plus gouteux!";
+	mes "Comment? Tu veux que je";
+	mes "suce ton sang? Hum... approche!";
+	percentheal -5,0;
+	close;
+}
+
+nif_in,156,93,5	script	Fillette	793,{
+	mes "[Alakina Ann]";
+	mes "C'est quoi cet endroit? Je viens de me réveiller";
+	mes "et j'étais ici... Maman...";
+	mes "Est ce que tu as vu ma maman? ... snif...";
+	mes "Je veux rentrer à la maison...";
+	next;
+	menu "A propos de la sorcière...",-,"A propos de la malédiction...",L_Curse,"Mettre fin à la conversation",L_end;
+	mes "[Alakina Ann]";
+	mes "Une sorcière? Je ne connais aucune sorcière...";
+	mes "Même si j'ai lu plein de contes,";
+	mes "je ne sais pas si elles existent vraiment ou pas,";
+	mes "et si elles existent c'est vraiment effrayant...";
+	next;
+	mes "[Alakina Ann]";
+	mes "Pourquoi il fait si froid?";
+	if (sex == 1)
+		mes "Vous n'avez pas froid monsieur? Etrange... Hum~";
+	else
+		mes "Vous n'avez pas froid madame? Etrange... Hum~";
+	mes "La douce chaleur de ma maison me manque.";
+	mes "Vous pouvez m'aider s'il vous plait? S'il vous plaît?";
+	close;
+   
+L_Curse:
+	mes "[Alakina Ann]";
+	mes "Une malédiction... Ma grand-mère m'en a parlé.";
+	mes "Elle connaît un moyen de se protéger de tous les mauvais sorts,";
+	mes "mais bien différent des bénédictions sacrées...";
+	next;
+	mes "[Alakina Ann]";
+	mes "Klaatu...";
+	mes "Verata.....";
+	mes "Et... truc... bidule... qu'est-ce que c'était?";
+	mes "Je ne me souviens pas du dernier mot.";
+	next;
+	mes "[Alakina Ann]";
+	mes "Elle dit que si on prononce ces mots magiques,";
+	mes "on peut même échapper à un destin maudit.";
+	mes "Elle m'a aussi dit d'autres choses d'importantes...";
+	mes "mais je les ai oubliées aussi.";
+	close;
+   
+L_end:
+	mes "[Alakina Ann]";
+	mes "Si froid... si froid...";
+	mes "J'aimerais rentrer à la maison... est-ce que vous pouvez m'emmener avec vous...";
+	mes "J'ai trop peur ici...";
+	mes "Aidez-moi... s'il vous plaît...";
+	close;
+}
+
+niflheim,350,258,5	script	Âme Maudite::cursedsoul	802,{
+	killmonster "niflheim","cursedsoul::OnNFMob";
+	mes "[Ashe Bruce]";
+	mes "Je seeeens une terriiible malédiction sur toi!";
+	mes "Je reniiiie ton existeeeence!";
+	mes "Vas-t'en ou tu mourraaaaas!";
+	mes "Et ne touche à aucun de mes liiiiiivres!";
+	next;
+	menu "Prendre le 1er livre",L_book1,"Prendre le 2ième livre",L_book2,"Prendre le 3ième livre",L_book3,"Partir le plus silencieusement possible",L_back;
+   
+L_book1:
+	mes "[Ashe Bruce]";
+	mes "Ne touche pas à mes liiiiivres!!";
+	mes "Hahahaha, je te maudis, que tu sois mordu, griffé et battu!!";
+	mes "A jamais tu seras lié à cette malédiction!!";
+	monster "niflheim",350,258,"Rideword",1478,1,"cursedsoul::OnNFMob";
+	close;
+
+L_book2:
+	mes "[Ashe Bruce]";
+	mes "J'ai dit de ne pas toucher à mes liiiivres...";
+	mes "Fous le camp....";
+	mes "Ne dérange pas mon repooooos!!";
+	warp "niflheim",34,162;
+	close;
+
+L_book3:
+	set @nif_t,0;
+	mes "[Ashe Bruce]";
+	mes "Hahahaha.... tu es bien courageux!!";
+	mes "Commence à réciter tes prières!!";
+	next;
+	if(select("Clover.:Klaatu.:Kleitos.")==2)
+		set @nif_t,@nif_t + 10;
+
+	if(select("Verit.:Veritas.:Verata.")==3)
+		set @nif_t,@nif_t + 10;
+
+	if(select("Necktie.:Necklace.:Nero.:^FFFFFFNictu.^000000")==4)
+		set @nif_t,@nif_t + 10;
+
+	mes "[Ashe Bruce]";
+	if(@nif_t == 30){
+		if(rand(9)){
+			mes "Tes prières sont justes hahaha...";
+			mes "mais ta malédiction resteraaaaa!!";
+			mes "Haahahahaha.....!!!";
+			close;
+		}
+		mes "Hahahaha!! Ta malédiction a été levée!!";
+		mes "Gahahahaha.....!!!";
+	       close;
+	}
+	mes "Hahahaha!! Tes prières sont incertaines!!";
+	mes "Il est temps d'affronter la mooooort hohoho,";
+	mes "Sois damné à jamaiiiis hahahaha!!";
+	monster "niflheim",349,256,"Orc Skeleton",1462,1,"cursedsoul::OnNFMob";
+	monster "niflheim",347,258,"Orc Skeleton",1462,1,"cursedsoul::OnNFMob";
+	monster "niflheim",347,254,"Orc Skeleton",1462,1,"cursedsoul::OnNFMob";
+	monster "niflheim",350,252,"Orc Skeleton",1462,1,"cursedsoul::OnNFMob";
+	monster "niflheim",344,255,"Orc Skeleton",1462,1,"cursedsoul::OnNFMob";
+	monster "niflheim",348,252,"Orc Skeleton",1462,1,"cursedsoul::OnNFMob";
+	monster "niflheim",347,259,"Orc Skeleton",1462,1,"cursedsoul::OnNFMob";
+	close;
+
+L_back:
+	mes "[Ashe Bruce]";
+	mes "Hahahaha! Pas mal du touuuut haahaaa...";
+	mes "Je prierai pour que tu reviennes vivaaaant...";
+	close;
+OnNFMob:
+	end;
+}

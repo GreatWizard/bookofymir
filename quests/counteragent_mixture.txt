@@ -1,0 +1,269 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Counteragent and Mixture Quest(Morgenstein)
+//===== By: ================================================== 
+//= kobra_k88
+//= added some dialogs for Morgenstein by Komurka
+//===== Current Version: ===================================== 
+//= 2.1
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Counteragent and Mixtures for making dyes & Alchemist Job Quest
+//===== Additional Comments: ================================= 
+//= Fully working
+//= Update for Alchemist Quest.
+//= 1.2 added check for Empty Bottle [Lupus]
+//= Fixed some lil thingys [Darkchild]
+//= More li'l thing, added comments for items IDs [Lupus]
+//= 1.5 Fixed Spelling mistakes. [Nexon]
+//= 1.6 Fixed some bugs, also related to Alch Job quest [Lupus]
+//= 1,7 Fixed exploit 1.8 Got rid of 'al_morgen' var [Lupus]
+//= 2.1 now uses (MISC_QUEST & 4) bit instead of al_morgen [Lupus]
+//============================================================ 
+
+
+// Merchant Louitz -----------------------------------------------------------
+alberta_in,130,54,2	script	Louitz	84,{
+	mes "[Louitz]";
+	mes "Hé, salut! Quoi de neuf?";
+	if(countitem(970) && countitem(971) && countitem(972)) goto M_Menu2;//Items: Alcohol, Detrimindexta, Karvodailnirol,
+M_Menu:
+	next;
+	menu "Lui parler",M_Talk,"S'en aller",M_Cancel;
+M_Menu2:
+	next;
+	menu "Lui parler",M_Talk,"Que savez-vous des produits chimiques?",M_Solut,"S'en aller",M_Cancel;
+	
+	M_Talk:
+		mes "[Merchant Louitz]";
+		mes "J'étais à Geffen il y a quelques temps... J'essayais de trouver une boutique pas chère pour mon matériel de magie. J'ai entendu des rumeurs concernant un scientifique un peu fou...";
+		mes "Piqué par la curiosité, j'ai essayé plusieurs fois de le trouver pour le rencontrer.";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Après plusieurs semaines, je l'ai finalement trouvé. Mais il était tellement concentré sur son travail qu'il ne m'a même pas prêté attention.";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Il murmurait sans arrêt ^0000FF'Karvodainirol... Detrimindexta... Alcohol^000000...'";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Au début, je n'avais aucune idée de ce que ça signifiait, mais j'ai appris plus tard que ces noms rapportaient à des produits chimiques très rares.";
+		if(countitem(970) && countitem(971) && countitem(972)) goto M_Menu2;//Items: Alcohol, Detrimindexta, Karvodailnirol,
+		mes "J'aurais aimé ^0000FFpouvoir les voir^000000 de mes propres yeux...";
+		emotion e_slur;
+		goto M_Menu;
+
+	M_Solut:
+		if((MISC_QUEST & 4)==0 && MORGEN==0)set MORGEN,1;
+		mes "[Merchant Louitz]";
+		mes "Apparemment, un scientifique aurait découvert une nouvelle utilisation de certains produits chimiques afin de fabriquer d'autres mixtures très puissantes.";
+		mes "Si vous voulez en savoir plus, vous devriez parler à ^0000ddAure Dupon^000000 à Geffen. ";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Vous le trouverez près de la ^0000ddsortie Est^000000 de la ville. Posez-lui des questions à propos de ^0000ddMorgenstein^000000. C'est le nom de ce fameux scientifique fou.";
+		goto M_Menu2;
+
+	M_Cancel:
+		mes "[Louitz]";
+		mes "Quelle impolitesse...";
+		close;
+}
+
+// Aure Dupon ------------------------------------------------------------------------
+geffen,181,114,4	script	Aure Dupon	55,{
+	mes "[Aure Dupon]";
+	mes "Le TEMPS ne s'ARRÊTE JAMAIS!! Même la MAGIE est IMPUISSANTE envers ça! Je peux ressentir le temps s'écouler!! ....";
+	emotion e_gasp;
+	next;
+	mes "[Aure Dupon]";
+	mes "Alors... pourquoi me dérangez-vous??";
+	emotion e_hmm;
+	if((MISC_QUEST & 4) || MORGEN) goto M_Menu2;
+M_Menu:
+	next;
+	menu "Lui parler",M_Talk,"S'en aller",M_Cancel;
+M_Menu2:
+	next;
+	menu "Lui parler",M_Talk,"Lui poser des questions à propos de Morgenstein",M_Morgen,"S'en aller",M_Cancel;
+	
+	M_Talk:
+		mes "[Aure Dupon]";
+		mes "C'est vrai, on me considère comme quelqu'un d'excentrique à cause de mon obscession à augmenter ma puissance magique, mais je suis certain qu'il existe des gens bien plus dérangés que moi.";
+		next;
+		mes "[Aure Dupon]";
+		mes "Comme par exemple ce scientifique un peu dingue, ^0000ddMorgenstein^000000. Quoi qu'il en soit, si vous étiez à ma place, seriez-vous capable de dévouer votre vie ENTIERE à un unique but?";
+		next;
+		mes "[Aure Dupon]";
+		mes "Seriez-vous capable de tout abandonner pour atteindre cet objectif? Même si vous risqueriez de devenir fou??";
+		if((MISC_QUEST & 4) || MORGEN) goto M_Menu2;
+		goto M_Menu;
+
+	M_Morgen:
+		if(MORGEN==1) set MORGEN,2;
+		mes "[Aure Dupon]";
+		mes "Morgenstein? Ce gars-là a des cases en moins, ça c'est certain! Il se trouve dans la ^0000ddGuilde des Forgerons^000000, toujours en train de fabriquer des potions bizarres.";
+		mes "Il appelle ça des ^ff0000Mixtures^000000 ou encore des ^ff0000Counteragents^000000. Je ne suis certain qu'il les ait vraiment testées, juste une seule fois.";
+		next;
+		mes "[Aure Dupon]";
+		mes "Vous devriez aller lui parler si son travail vous intéresse.";
+		goto M_Menu2;
+
+	M_Cancel:
+		mes "[Aure Dupon]";
+		mes "Les êtres humains ne sont qu'une infime partie de la Nature... La volonté des êtres humains devrait s'accorder avec celle de la Nature...";
+		close;
+}
+
+// Chemist Morgenstein -----------------------------------------------------------
+geffen_in,141,140,2	script	Morgenstein	121,{
+	if(MORGEN >= 2) goto L_0;
+	if(MISC_QUEST & 4) goto L_1;
+
+	mes "[Morgenstein]";
+	mes "Heheheheheh... Sniff Sniff... Je sens une délicieuse odeur... hum... appétissant...";
+	mes "Oh, mais c'est un humain! Et vivant en plus... hum... miam miam... Heheheheheh";
+	emotion e_awsm;
+	close;
+
+L_0:
+	mes "[Morgenstein]";
+	mes "Oh, vous me cherchiez? Qu'est-ce que vous voulez?";
+M_Menu:
+	next;
+	menu "Pouriez-vous me parler de votre recherche?",M_Rsrch,"Euh... rien.",M_End;
+	
+	M_Rsrch:
+		mes "[Morgenstein]";
+		mes "Heheheheheh... Vous avez sûrement déjà entendu des rumeurs sur mes travaux...";
+		mes "D'accord... Je vais tout vous dire... Ça ne servirait à rien de vous le cacher... Heheheheheh...";
+		emotion e_gg;
+		next;
+		mes "[Morgenstein]";
+		mes "Personnellement, je trouve que mes recherches ont atteint un niveau inégalable...";
+		mes "Je suis un génie, vous savez, je peux tout faire!! Heheheheh... Ce n'est qu'une question de temps...";
+		next;
+		mes "[Morgenstein]";
+		mes "Vous voyez de quoi je veux parler... Du temps? ... Hehehehehehehya....";
+		emotion e_gg;
+		next;
+		mes "[Morgenstein]";
+		mes "Hum.... Vous avez dit que vous vouliez connaître mes recherches?... Oh c'est très simple en fait... J'essaye simplement de trouver un moyen de combiner certains matériaux...";
+		next;
+		mes "[Morgenstein]";
+		mes "N'est-ce pas excitant? Je parfait une méthode afin de faire fondre les matériaux tels que la pierre ou l'acier, et de les mélanger une fois fondus pour créer une nouvelle substance!!!";
+		next;
+		mes "[Morgenstein]";
+		mes "~~~~!! Hehe!!!...Heheheheheh!!!...squash squash!!!..Kekekekekelll!!!!";
+		emotion e_slur;
+		next;
+		mes "[Morgenstein]";
+		mes "Ack!~cough~cough~ Euh.... Même si je n'y suis pas encore arrivé, je me suis tout de même rendu compte de quelque chose d'incroyable.";
+		mes "A travers mes recherches, j'ai inventé de nouvelles sortes de liquides. Je les ai appellés ^5533FF'counteragents et mixtures'^000000.";
+		next;
+		mes "[Morgenstein]";
+		mes "Je peux vous en fabriquer si vous voulez?? Ahhh... Vous parler de mes recherches et de mes expériences me rend.... 'excité'.......";
+		mes "Je peux vous faire partager mon 'excitation' si vous voulez..... Ahhhhh.... Je pourrais...";
+		set MISC_QUEST,MISC_QUEST | 4;
+		set MORGEN,0;
+		close;
+
+L_1:
+	mes "[Morgenstein]";
+	mes "Qu'est-ce que vous voulez?";
+M_Menu2:
+	next;
+	menu "Pourriez-vous me parler de votre recherche?",M_Rsrch,"Pourriez-vous fabriquer un produit pour moi?",-, "Euh... rien.",M_End;
+	
+		mes "[Morgenstein]";
+		mes "Heheheheheheh.... Alors comme ça vous êtes intéressé par mes inventions?..... Qui ne le serait pas.... Kekekekekekeke!!!";
+		mes "Qu'est ce que vous voulez?? Hum? Heheheheheh.............";
+		emotion e_gg;
+		next;
+		menu "-Counteragent",-, "-Mixture",sM_Mixture, "-Euh... rien finalement.",M_End;
+		
+			mes "[Morgenstein]";
+			mes "Oh... Vous avez dit Counteragent?... Kekekekekekeke... Voyons voir.... J'aurais besoin de quelques ingrédients.......";
+			mes "... Voyons voir... Oh... Oh...... Ahhhh..... Hmmm.....";
+			next;
+			mes "[Morgenstein]";
+			mes "Hum.... Je vais avoir besoin de....:";
+			mes "^5533FF1 Alcohol";
+			mes "1 Detrimindexta^000000......";
+			mes "et ^5533FF1 Empty Bottle^000000....";
+			next;
+			mes "[Morgenstein]";
+			mes "A partir de ces trois ingrédients, je pourrais vous fabriquer un Counteragent. Ce sera du gâteau..... Kekekekekekeke....";
+			mes "Oh, et il y aura un petit surplus de ^5533FF3000 zeny^000000, d'accord? Heheheheheh..... C'est bien normal n'est-ce pas?...";
+			next;
+			mes "[Morgenstein]";
+			mes "Ça vous va?....";
+			next;
+			menu "D'accord.",-,"Non.",M_End;
+
+				mes "[Morgenstein]";
+				if(countitem(970) && countitem(971) && countitem(713) && Zeny>=3000) goto sl_GetCounter;//Items: Alcohol, Detrimindexta, Empty Bottle,
+					mes "Je suis désolé, mais il vous faut 1 Empty Bottle, 1 Alcohol, 1 Detrimindexta, et 3000 Zeny pour fabriquer un Counteragent.";
+					emotion e_sry;
+					close;
+	
+				sl_GetCounter:
+					delitem 970,1;//Items: Alcohol,
+					delitem 713,1;//Items: Empty Bottle,
+					delitem 971,1;//Items: Detrimindexta,
+					set Zeny, Zeny-3000;
+					mes "OhOhOhOh...... Heheheheheh...... Bien... voilà, comme ça..... oui... encore... plus........ Heheheheheh";
+					mes ".... Ahhhh.... ..... OhOh.... OhOh!..... OhOhOhOhOhOh!!! ...!!!!!!";
+					next;
+					getitem 973,1;//Items: Counteragent,
+					mes "[Morgenstein]";
+					mes ".... Humm......";
+					emotion e_hmm;
+					close;
+
+		sM_Mixture:
+			mes "[Morgenstein]";
+			mes "Oh... Vous avez dit Mixture?... Kekekekekekeke... Voyons voir.... J'aurais besoin de quelques ingrédients.......";
+			mes "... Voyons voir... Oh... Oh...... Ahhhh..... Hmmm.....";
+			next;
+			mes "[Morgenstein]";
+			mes "Hum.... Je vais avoir besoin de....:";
+			mes "^5533FF1 Alcohol";
+			mes "1 Karvodailnirol^000000.....";
+			mes "aet ^5533FF1 Empty Bottle^000000...........";
+			next;
+			mes "[Morgenstein]";
+			mes "A partir de ces trois ingrédients, je pourrais vous fabriquer une Mixture. Ce sera du gâteau..... Kekekekekekeke....";
+			mes "Oh, et il y aura un petit surplus de ^5533FF4000 zeny^000000, d'accord? Heheheheheh..... C'est bien normal n'est-ce pas?...";
+			next;
+			mes "[Morgenstein]";
+			mes "Ça vous va?....";
+			next;
+			menu "D'accord.",-,"Non.",M_End;
+
+				mes "[Morgenstein]";
+				if(countitem(970) && countitem(972) && countitem(713) && Zeny>=4000) goto sl_GetMix;//Items: Alcohol, Karvodailnirol, Empty Bottle,
+					mes "Je suis désolé, mais il vous faut 1 Empty Bottle, 1 Alcohol, 1 Karvodainirol, et 4000 Zeny pour fabriquer une Mixture.";
+					emotion e_sry;
+					close;
+			
+				sl_GetMix:
+					delitem 970,1;//Items: Alcohol,
+					delitem 713,1;//Items: Empty Bottle,
+					delitem 972,1;//Items: Karvodailnirol,
+					set Zeny, Zeny-4000;
+					mes "OhOhOhOh...... Heheheheheh...... Bien... voilà, comme ça..... oui... encore... plus........ Heheheheheh";
+					mes ".... Ahhhh.... ..... OhOh.... OhOh!..... OhOhOhOhOhOh!!! ...!!!!!!";
+					next;
+					getitem 974,1;//Items: Mixture,
+					mes "[Morgenstein]";
+					mes ".... Humm......";
+					emotion e_hmm;
+					close;
+
+	M_End:
+		mes "[Morgenstein]";
+		mes "... Kekekekekekeke....";
+		emotion e_heh;
+		close;
+}

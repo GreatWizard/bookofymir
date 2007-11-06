@@ -1,0 +1,100 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Bunny Band Quest
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= v1.4
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//=
+//===== Additional Comments: ================================= 
+//= 1.1 using duplicate command
+//= 1.2 Fixed NPC location, removed NPC dupes [Lupus]
+//= 1.3 RE-Fixed exploit V_V, also cleared used VAR [Lupus]
+//= 1.4 replaced BUNYBND with @BUNYBND [Lupus]
+//============================================================ 
+
+
+// Alberta ------------------------------------------------------------------------------------------------------------------------------------------
+alberta,23,232,1	script	Représentant#1::KCRep	83,{
+	mes "[Représentant de la Kafra Corp.]";
+	if (@BUNYBND) goto L_Check;
+	mes "^529DFFEvènement Spécial, ^FF0000Quête du Bunny Band ^529DFF!!^000000";
+	next;
+	menu "Informations",-, "Participer",M_Join, "Annuler",M_End;
+
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Pour remercier nos utilisateurs d'avoir recours aux services de la Kafra Corp., nous avons préparé une petite attraction spécialement pour eux...";
+		next;
+		mes "[Représentant de la Kafra Corp.]";
+		mes "La ^FF0000Quête du Bunny Band ^529DFF!!!^000000. (Sponsorisée par l'Association des Marchands d'Alberta.)";
+		mes "Cette quête permet aux participants d'obtenir un chapeau unique, le ^FF0000Bunny Band^000000!";
+		next;
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Tout ce que vous avez à faire, est de réunir certains objets et de les apporter à un représentant de la Kafra Corp. tel que moi par exemple.";
+		mes "Nous fabriquerons avec soin un Bunny Band rien que pour vous!";
+		next;
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Voici les objets dont vous aurez besoin si vous souhaitez un Bunny Band.";
+		mes "^5555FF100 Feather^000000,";
+		mes "^5555FF1 Four Leaf Clover^000000,";
+		mes "^5555FF1 Pearl^000000,";
+		mes "^5555FF1 Kitty Band^000000.";
+		next;
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Une fois que vous aurez réuni tous ces objets, parle à un représentant de la Kafra Corp.";
+		mes "Nous sommes en service dans la plupart des villes à travers Rune Midgard.";
+		close;
+
+	M_Join:
+
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Merci de vouloir participer à cette quête. Revenez quand vous aurez rassemblé tous les objets nécessaires.";
+		set @BUNYBND, 1;
+		close;
+
+	M_End:
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Passez une bonne journée.";
+		close;
+
+	L_Check:
+		if(countitem(949)<100 || countitem(706)<1 || countitem(722)<1 || countitem(2213)<1) goto sL_NoItems;
+		delitem 949,100;
+		delitem 706,1;
+		delitem 722,1;
+		delitem 2213,1;
+		mes "Wahou! Bien joué, pas mal du tout! Vous avez tout rapporté! Je vais vous fabriquer un Bunny Band immédiatement...";
+		emotion e_no1;
+		next;
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Tah dah!!! Voici votre ^FF0000Bunny Band^000000... Tenez, prenez-le!";
+		getitem 2214,1;
+		set @BUNYBND,0;
+		next;
+		mes "[Représentant de la Kafra Corp.]";
+		mes "Nous apprécions que vous ayez participé à cet évènement spécial. Merci, et profitez bien de votre Bunny Band!";
+		close;
+
+		sL_NoItems:
+			mes "Voici les objets dont vous aurez besoin si vous souhaitez un Bunny Band.";
+			mes "^5555FF100 Feather^000000,";
+			mes "^5555FF1 Four Leaf Clover^000000,";
+			mes "^5555FF1 Pearl^000000,";
+			mes "^5555FF1 Kitty Band^000000.";
+			close;
+
+}
+
+
+// Geffen ------------------------------------------------------------------------------------------------------------------------------------------
+//geffen,116,62,2	duplicate(KCRep)	Représentant#2	83,
+// Morroc ------------------------------------------------------------------------------------------------------------------------------------------
+//morocc,154,97,4	duplicate(KCRep)	Représentant#3	83,
+// Payon ------------------------------------------------------------------------------------------------------------------------------------------
+//payon,184,104,4	duplicate(KCRep)	Représentant#4	83,
+// Prontera ------------------------------------------------------------------------------------------------------------------------------------------
+//prontera,146,87,6	duplicate(KCRep)	Représentant#5	83,

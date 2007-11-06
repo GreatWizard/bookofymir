@@ -1,0 +1,58 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= War of Emperium Guild Flags Function
+//===== By: ==================================================
+//= jAthena - kalen (1.0)
+//= 1.1 by Akaru, ho|yAnge|X, and Valaris
+//===== Current Version: =====================================
+//= 1.3a
+//===== Compatible With: =====================================
+//= eAthena 0.1+; RO Episode 4+
+//===== Description: =========================================
+//= Flags display messages stating whether or not a guild castle has been captured.
+//= Allows the guild members to return to a captured castle.
+//======================================
+//= Break down of arguments used in the function:
+//=   arg(0): name of City.
+//=   arg(1): name of guild castle.
+//=   arg(2): x1 coordinate for warp
+//=   arg(3): y1 coordinate for warp
+//=   arg(4): Teleportable (0/1) 
+//===== Additional Comments: =================================
+//= v1.2: All Guild flags scripts use this function. [kobra_k88]
+//= v1.3: Can now only flag in from outside the castle [Kayla]
+//= v1.3a: Implemented k3dt's exploit fix [Vicious]
+//============================================================
+
+function	script	F_Flags	{
+
+	set @GID, GetCastleData(getarg(1)+"",1);
+	if (@GID != 0) goto L_Startg;
+
+	mes "[ Edit du l'Intendant du Roi, Province de " + getarg(0) + " ]";
+	mes " ";
+	mes "1. Sous la Divine Ordonance du Roi de Rune Midgard, et selon l'Intendant du Roi délégué à la province de " + getarg(0) + ", ce château n'appartient pour l'instant à aucune guilde.";
+	mes " ";
+	mes "2. Pour prendre possession de ce château, vous devez éliminer tous les guardiens qui le protège et détruire l'Emperium.";
+	return;
+L_Startg:
+	if ((getcharid(2) == @GID) && (getarg(4) == 1)) goto L_Startg2;
+	mes "[ Edit du l'Intendant du Roi, Province de "+ getarg(0) +" ]";
+	mes " ";
+	mes "1. Sous la Divine Ordonance du Roi de Rune Midgard, et selon l'Intendant du Roi délégué à la province de "+ getarg(0) +", nous approuvons la possession de ce château à la guilde ^ff0000" + GetGuildName(@GID) + "^000000.";
+	mes "2. Le Chef de la Guilde";
+	mes "^ff0000"+ GetGuildName(@GID) + "^000000 est ^0000FF" + GetGuildMaster(@GID) + "^000000.";
+	mes "A quiconque souhaitant remettre en cause ce fait, qu'il lève son épée et se batte pour l'Honneur.";
+	return;
+L_Startg2:
+	mes "[ Ringing Voice ]";
+	mes "Brave guerrier... voulez vous retourner dans votre humble base?";
+	next;
+	menu "Retourner.",M_Enter,"Annuler.",-;
+	return;
+
+	M_Enter:
+		if (getcharid(2) == GetCastleData(getarg(1),1)) warp getarg(1),getarg(2),getarg(3);
+		return;
+}

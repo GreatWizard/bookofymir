@@ -1,0 +1,656 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Morroc Town
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.9
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Morroc Town NPCs
+//===== Additional Comments: ================================= 
+//= Fully working
+//= Fixed Lapidary sprite, Implemented ANTHELL trigger
+//= (in both NPC/Warps) [Lupus]. Removed it from NPC and put in Warp
+//= 1.3 Removed some NPC due to Assassin Job Quest [kobra_k88]
+//= 1.3b mobs name corrected [Lupus], 1.3c - Adv classes support
+//= 1.4 Fixed typos [Nexon]
+//= 1.5 Added a lvl 4 weapon quest related NPC [MasterOfMuppets]
+//= 1.6 Added Bartender NPC, made by Persian69 [Vicious_Pucca]
+//= 1.7 Removed Duplicates [Silent]
+//= 1.8 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
+//= 1.9 Removed duplicate NPC, changed temp char vars to temp npc. [L0ne_W0;f]
+//============================================================
+
+// Morroc
+//============================================================
+morocc,68,260,0	script	Spencer#Spencer	99,{
+	switch(rand(3)) {
+	case 1:
+	case 2:
+		mes "[Spencer]";
+		mes "C'est immenses bâtiments triangulaires au Nord Ouest de la ville sont les Pyramides... Elles ont été construites il y a des milliers et des milliers d'années.";
+		next;
+		mes "[Spencer]";
+		mes "Personne ne sait exactement qui, pourquoi et comment elles ont vraiment été construites! Tout ce qu'on sait, c'est qu'il y a des tas de créatures maléfiques à l'intérieur...";
+		next;
+		mes "[Spencer]";
+		mes "Vous devriez ne pas trop vous en approcher. Les monstres de la Pyramide ADORENT se nourrir des étrangers...";
+		close;
+
+	Default:
+		mes "[Spencer]";
+		mes "Pff...";
+		next;
+		mes "[Spencer]";
+		mes "Oh...";
+		mes "Pff...";
+		next;
+		mes "[Spencer]";
+		mes "Ce que je m'ennuie!!";
+		next;
+		mes "[Spencer]";
+		mes "Hé...";
+		mes "Ça vous dirait de jouer à Papier, Caillou, Ciseaux?";
+		next;
+		mes "[Spencer]";
+		mes "Je dois vous prévenir cependant, je suis le champion régional de cet honorable jeu de stratégie intellectuelle.";
+		next;
+		if (select("D'accord~:Euh...?!") == 1) {
+			mes "[Spencer]";
+			mes "Ok...";
+			mes "Un, deux...";
+			mes "Trois!";
+			next;
+			switch(select("Caillou:Papier:Ciseaux")) {
+			case 1:
+				switch(rand(3)) {
+				case 1:
+					Emotion e_rock;
+					mes "["+strcharinfo(0)+"]";
+					mes "Caillou...!";
+					next;
+					mes "[Spencer]";
+					mes "Qu'est-ce que...?!";
+					mes "Je vois que les grands esprits se rencontrent!...";
+					close;
+				case 2:
+					Emotion e_paper;
+					mes "["+strcharinfo(0)+"]";
+					mes "Caillou...!";
+					next;
+					mes "[Spencer]";
+					mes "On dirait que j'ai gagné!";
+					mes "Heh heh~ Comme d'habitude.";
+					close;
+				Default:
+					Emotion e_scissors;
+					mes "["+strcharinfo(0)+"]";
+					mes "Caillou...!";
+					next;
+					mes "[Spencer]";
+					mes "...Quoi?!";
+					mes "Pas possible!";
+					mes "J'ai perdu?!";
+					next;
+					mes "[Spencer]";
+					mes "Et bien...";
+					mes "Je vois que vous n'êtes pas n'importe qui...";
+					close;
+				}
+			case 2:
+				switch(rand(3)) {
+				case 1:
+					Emotion e_rock;
+					mes "["+strcharinfo(0)+"]";
+					mes "Papier...!";
+					next;
+					mes "[Spencer]";
+					mes "Ce n'est pas possible...";
+					mes "J'ai perdu?!";
+					next;
+					mes "[Spencer]";
+					mes "Vous n'êtes pas un liseur d'esprits, par hasard?...";
+					close;
+				case 2:
+					Emotion e_paper;
+					mes "["+strcharinfo(0)+"]";
+					mes "Papier...!";
+					next;
+					mes "[Spencer]";
+					mes "Hum...";
+					mes "On dirait qu'il y a égalité...";
+					next;
+					mes "[Spencer]";
+					mes "Vous êtes un adversaire de taille!...";
+					close;
+				case 3:
+					Emotion e_scissors;
+					mes "["+strcharinfo(0)+"]";
+					mes "Papier...!";
+					next;
+					mes "[Spencer]";
+					mes "Bwah Hah Hah!";
+					mes "Vous avez perdu!";
+					next;
+					mes "[Spencer]";
+					mes "C'était trop facile...";
+					close;
+				}
+			case 3:
+				switch(rand(3)) {
+				case 1:
+					Emotion e_rock;
+					mes "["+strcharinfo(0)+"]";
+					mes "Ciseaux...!";
+					next;
+					mes "[Spencer]";
+					mes "BAM...!";
+					mes "Ecrasé!!";
+					mes "Haha, c'est qui le plus fort?!";
+					close;
+				case 2:
+					Emotion e_paper;
+					mes "["+strcharinfo(0)+"]";
+					mes "Ciseaux...!";
+					next;
+					mes "[Spencer]";
+					mes "Ce n'est pas possible...!";
+					mes "Je me suis entraîné pendant des années! Je suis ceinture noire à ce jeu!!";
+					close;
+				case 3:
+					Emotion e_scissors;
+					mes "["+strcharinfo(0)+"]";
+					mes "Ciseaux...!";
+					next;
+					mes "[Spencer]";
+					mes "Hum oh...";
+					mes "On dirait que vous avez l'oeil du tigre.";
+					next;
+					mes "[Spencer]";
+					mes "Nous sommes peut-être à égalité cette fois-ci, mais la prochaine fois, je vous écraserai comme une mouche!";
+					close;
+				}
+			}
+		}
+		mes "[Spencer]";
+		mes "D'accord...";
+		mes "Je comprends que vous ayez peur d'affronter un ^7A378BMaître^000000 tel que moi.";
+		close;
+	}
+}
+
+morocc,116,266,0	script	Ogleson#moc	85,{
+	if (BaseLevel > 98) {
+		mes "[Ogleson]";
+		mes "Wahou...";
+		next;
+		mes "[Ogleson]";
+		mes "Vous êtes vraiment fort! Je vois une magnifique aura qui émane de vous... Vous ne devez avoir peur de rien, pas même des Loups du Désert!";
+		next;
+		mes "[Ogleson]";
+		mes "Je suis jaloux!!";
+		close;
+	}
+	mes "[Ogleson]";
+	mes "Si vous devez vous aventurer hors de la ville, prenez garde aux Loups du Désert. Ces créatures sont vraiment maléfiques...";
+	next;
+	mes "[Ogleson]";
+	mes "Ces loups ne se déplacent qu'en bandes. S'ils vous trouvent, ils vous traqueront jusqu'à votre mort.";
+	next;
+	mes "[Ogleson]";
+	mes "Je suis heureux que ces créatures sauvages ne puissent pas pénétrer en ville. Sinon, nous ne pourrions pas dormir en sûreté!";
+	close;
+}
+
+morocc,208,85,0	script	Joe#2moc	83,{
+	mes "[Joe]";
+	mes "Je gagne mon pain en troquant quelques objets que je rapporte de mes voyages entre Morroc et Prontera.";
+	mes "Je ne compte plus le nombre de fois que j'ai traversé le désert!";
+	next;
+	mes "[Joe]";
+	mes "Un jour, alors que je marchais dans le désert, de retour d'un voyage, je suis tombé brusquement à court d'eau... Très vite, j'ai commencé à avoir très soif!";
+	mes "J'étais vraiment désespéré, alors j'ai essayé de trouver de l'eau à la racine d'un cactus.......";
+	next;
+	mes "[Joe]";
+	mes "ET TOUT D'UN COUP!! Le cactus commença à me lancer ses épines et à produire un son strident!!";
+	emotion e_omg;
+	next;
+	mes "[Joe]";
+	mes "C'était la PIRE expérience de TOUTE ma vie!!";
+	next;
+	mes "[Joe]";
+	mes "J'ai compris plus tard que ce cactus n'était pas tout à fait normal... Il s'agissait en fait d'un ^00cc00Muka^000000, un monstre-cactus.";
+	next;
+	mes "[Joe]";
+	mes "Faîtes attention si vous devez vous rendre dans le désert. Ne faîtes pas la même erreur que moi! (~soupir~)";
+	close;
+}
+
+morocc,150,50,0	script	Artisan#3moc	99,{
+	mes "[Artisan]";
+	mes "La plus belle des pierres précieuses est le Diamant. Personne ne peut rester insensible face à sa beauté... C'est aussi pour cela que c'est si cher!";
+	next;
+	mes "[Artisan]";
+	mes "Plusieurs facteurs peuvent expliquer les différences de prix qu'on observe selon les boutiques... La taille du diamant, bien sûr...";
+	next;
+	mes "[Artisan]";
+	mes "Mais aussi sa qualité, son nombre de carats... Et s'il est ébréché, alors ce n'est même pas la peine d'essayer de le revendre!";
+	close;
+}
+
+morocc,44,180,8	script	Homme Saoul	89,{
+	mes "[Homme Saoul]";
+	mes "Hé Hé... (Hips)! Oh, vous êtes nouveau par ici? Ravi de vous rencontrer! Vous v'nez d'où?";
+	mes "Moi j'vous l'dit, on était prédestinés à s'rencontrer vous et moi! (Hips). Laissez moi vous dire un truc que j'ai entendu l'aut' jour au bar....";
+	next;
+	mes "[Homme Saoul]";
+	mes "La rumeur court qu'il existerait une dague qui peut apporter la fortune à quiconque la possède.";
+	mes "Apparemment ce s'rait un voleur très célèbre de Rune-Midgard qui l'aurait en sa possession pour le moment, et il ne s'est jamais fait attraper!";
+	next;
+	mes "[Homme Saoul]";
+	mes "C'que j'donnerais pas pour avoir un tel objet entre mes mains (Hips). Mais bon... c'est beau d'rêver....";
+	next;
+	mes "[Homme Saoul]";
+	mes "Et vous? Pourquoi ne pas aller la chercher? Ça n'devrait pas poser de problème pour quelqu'un d'aussi courageux qu'vous n'est-ce pas?";
+	mes "Héhéhé... (Hips)! Vous m'payerez à boire la prochaine fois, hein? (Hips!)";
+	emotion e_hmm;
+	close;
+}
+
+morocc,79,111,4	script	Syvia#moc	66,{
+	mes "[Syvia]";
+	mes "Partout dans Rune-Midgard, vous verrez des animaux très mignons, tels que les Spores ou bien les Pickys... Tout le monde dit que ce ne sont que des créatures apparentées aux monstres maléfiques, mais moi je les trouve tellement choupis!";
+	next;
+	mes "[Syvia]";
+	mes "Les Pickys, les poussins que l'on trouve dans les régions désertiques, sont particulièrement craquants quand ils ont encore un morceau de coquille sur la tête! Il sautillent et sautillent gaiement sur le sable...!";
+	mes "Cependant, il ne faut pas renier que le ^FF8888Poring^000000 est l'une des créatures les plus populaires!";
+	next;
+	mes "[Syvia]";
+	mes "Même si tout le monde connaît le Poring rose classique, il faut savoir qu'il existe deux autres créatures très rares, que l'on trouve non loin de Prontera.";
+	next;
+	mes "[Syvia]";
+	mes "On les appelle l'^ffaa00Angeling^000000 et le ^5555ffGhostring^000000.";
+	next;
+	switch(select("Angeling?:Ghostring?:Fin de la Conversation.")) {
+	case 1:
+		mes "[Syvia]";
+		mes "L'Angeling est un poring avec des ailes d'ange. On en voit rarement, mais ça vaut le détour. Ne vous laissez pas tromper par son apparence angélique, c'est un monstre très puissant et joueur. Il est de propriété élémentale Sacrée, et donc il ne craint pas vraiment la magie...";
+		next;
+		mes "[Syvia]";
+		mes "Si vous deviez le combattre pour votre survie, une bonne épée classique devrait faire l'affaire plutôt qu'un sortilège magique.";
+		next;
+		mes "[Syvia]";
+		mes "Vous n'y connaissez pas grand chose aux Porings, hein? Personnellement, je les adore!";
+		close;
+	case 2:
+		mes "[Syvia]";
+		mes "Le Ghostring est un poring fantôme... Il est extrêmement rare de pouvoir le croiser, ou alors quand on est très chanceux!";
+		next;
+		mes "[Syvia]";
+		mes "C'est un fantôme, et donc il ne craint pas les attaques physiques classiques... Faîtes donc bien attention!";
+		mes "Si vous deviez le combattre pour votre survie, des armes élémentales ou bien de la magie seront vos meilleurs atouts!";
+		next;
+		mes "[Syvia]";
+		mes "Vous n'y connaissez pas grand chose aux Porings, hein? Personnellement, je les adore!";
+		close;
+	case 3:
+		mes "[Syvia]";
+		mes "Comment!";
+		emotion e_omg;
+		next;
+		mes "[Syvia]";
+		mes "Vous ne voulez pas m'écouter? Moi, l'une de plus grandes expertes sur les Porings?!";
+		next;
+		mes "[Syvia]";
+		mes "Humpf!";
+		emotion e_pif;
+		close;
+	}
+}
+
+morocc,76,75,4	script	Akira#moc	47,{
+	mes "[Akira]";
+	mes "A environ une journée de marche vers le nord, et trois vers l'est en partant d'ici, se trouve l'entrée d'une cave connue sous le nom de l'^ff0000Enfer des Fourmis^000000 ...";
+	next;
+	switch(select("L'Enfer des Fourmis?:Fourmis?:Fin de la conversation.")) {
+	case 1:
+		mes "[Akira]";
+		mes "L'Enfer des Fourmis tient son nom du fait que cette cave est infestée de nombreuses colonies de fourmis géantes...";
+		mes "Il y en a des milliers, travaillant pour la colonie, tandis que leur reine pond des centaines et des centaines d'oeufs.";
+		next;
+		mes "[Akira]";
+		mes "Beaucoup de jeunes aventuriers s'y rendent afin de s'entraîner... Mais faîtes bien attention à vous si vous y allez...";
+		next;
+		mes "[Akira]";
+		mes "Attaquer une fourmi peut être une grave erreur, car vous pourriez très bien vous retrouver la seconde suivante avec toute la colonie sur le râble!";
+		emotion e_gasp;
+		close;
+	case 2:
+		mes "[Akira]";
+		mes "Il existe trois sortes de fourmis différentes, chacune possédant une couleur caractéristique et un rôle différent dans la colonie.";
+		mes "Les Andres sont blanches, les Pieres sont vertes, et les Deniros sont rouges. Enfin... peu importe la couleur, elles ne sont pas très belles!";
+		next;
+		mes "[Akira]";
+		mes "Les Andres sont les plus faibles, tandis que les Deniros sont plus féroces. Les Pieres sont entre les deux.";
+		next;
+		mes "[Akira]";
+		mes "Faîtes attention à ne rien laisser tomber au sol lorsque vous êtes prêt d'une fourmi, elle se jetterait dessus pour dévorer votre bien!";
+		close;
+	case 3:
+		mes "[Akira]";
+		mes "Avant que vous ne partiez, laissez-moi vous dire un mot à propos des Giearths. Ce ne sont pas des fourmis, mais vous pourrez en trouver dans la cave de l'Enfer des Fourmis. Ne les sousestimez pas! Ils sont petits mais très forts...";
+		next;
+		mes "[Akira]";
+		mes "A plus tard!";
+		close;
+	}
+}
+
+morocc,123,58,4	script	Gamin#moc	118,{
+	mes "[Timmy]";
+	mes "Les ^ff00ffAssassin^000000 sont des experts au combat au corps à corps! Ils éliminent leur ennemi sans un bruit, se mouvant dans les ombres...!";
+	next;
+	switch(select("Hum?:Où se trouve la Guilde des Assassins?:Fin de la conversation.")) {
+	case 1:
+		mes "[Timmy]";
+		mes "Les Assassins sont un clan secret de tueurs d'élite. Les gens disent que les Assassins sont entraînés à éliminer leur cible sans laisser aucune trace!";
+		next;
+		mes "[Timmy]";
+		mes "Ça fait trois mois que j'ai quitté la maison pour chercher la Guilde des Assassins... Où peut-elle être?!";
+		close;
+	case 2:
+		mes "[Timmy]";
+		mes "Les gens disent que si vous marchez deux jours à l'Est puis deux jours au Sud de Morroc, vous trouverez la Guilde des Assassins.";
+		next;
+		mes "[Timmy]";
+		mes "Mais pour tout vous dire, je doute que cette Guilde existe...";
+		next;
+		mes "[Timmy]";
+		mes "Ça fait trois mois que j'ai quitté la maison pour chercher la Guilde des Assassins... Je ne serais jamais un Assassin........";
+		close;
+	case 3:
+		close;
+	}
+}
+
+morocc,180,155,4	script	Dimitri#moc	49,{
+	mes "[Dimitri]";
+	mes "La température moyenne dans le désert de Morroc dépasse souvent les plus grands records de chaleur partout ailleurs dans Rune-Midgard.";
+	next;
+	mes "[Dimitri]";
+	mes "Prenez garde si vous allez dans le désert, même lorsque vous vous assiérez pour vous reposer! Si vous ne trouvez pas un coin d'ombre, vous pourriez attraper un méchant coup de soleil!";
+	next;
+	switch(Select("A propos du sable du désert:A propos du remède contre la fatigue:Fin de la conversation")) {
+	case 1:
+		mes "[Dimitri]";
+		mes ". . . . . Et bien...";
+		next;
+		mes "[Dimitri]";
+		mes "Il est CHAUD, évidement! Mais en fait il n'est pas SI chaud.....";
+		next;
+		mes "[Dimitri]";
+		mes "Pour une raison inconnue, le sable du désert de Morroc conduit moins bien la chaleur que le sable des plages de Comodo... Etonnant, non?";
+		mes "Au lieu d'être complètement brûlant, il apporte simplement une douce sensation de chaleur.... Ne craignez rien, vous pouvez vous y asseoir et vous reposer.";
+		close;
+	case 2:
+		mes "[Dimitri]";
+		mes "Aaaaahhh!!!!";
+		next;
+		mes "[Dimitri]";
+		mes "Rien n'efface mieux la fatigue occasionnée par une balade dans le désert que quelques potions! Les potions ^ff0000rouges^000000 sont particulièrement populaires avec leur petit goût unique de framboise...";
+		next;
+		mes "[Dimitri]";
+		mes "Elles désaltèrent peu, mais si vous êtes dans un oasis au milieu du désert, rien ne saurait mieux vous réconforter qu'un petit sac de potions ^ff0000rouges^000000.";
+		close;
+	case 3:
+		mes "[Dimitri]";
+		mes "Saviez-vous que les Oeufs de PecoPeco peuvent donner du très bon ^0000bblait^000000? Je me demande comment une telle chose est possible, d'ailleurs.......?";
+		close;
+	}
+}
+
+morocc,234,273,4	script	Armani#moc	54,{
+	mes "[Armani]";
+	mes "JE L'AI VU!! JE L'AI VU!!!";
+	emotion e_ic;
+	next;
+	mes "[Armani]";
+	mes "J'ai vu une ^ff0000Dragon Fly^000000 juste au Sud d'ici! C'était incroyable!!";
+	next;
+	if (select("... Dragon Fly?!:Et alors?") == 1) {
+		mes "[Armani]";
+		mes "C'est le nom de la Reine de Mouches, qui vit dans le désert... Sa force n'a absolument rien à voir avec celle d'une mouche ordinaire.";
+		mes "Il est rare de la croiser, et encore plus rare d'être suffisamment fort pour pouvoir la vaincre.... ";
+		next;
+		mes "[Armani]";
+		mes "La Dragon Fly possède un objet très rare, que l'on appelle ^0000ddClip^000000!";
+		mes "Les Clips sont des accessoires très pratiques... Je donnerai n'importe quoi pour en avoir un!";
+		next;
+		mes "[Armani]";
+		mes "En effet, les Clips possèdent un ^ffaa00slot^000000. Vous pouvez donc y insérer une carte! C'est ce qui lui donne toute sa valeur...";
+		next;
+		mes "[Armani]";
+		mes "Alors.... Vous comptez aller chasser la Dragon Fly?";
+		close;
+	}
+	mes "[Armani]";
+	mes "ET ALORS!!??";
+	emotion e_omg;
+	next;
+	mes "[Armani]";
+	mes "J'espère que vous ne sous-estimez pas la Dragon Fly?? C'est peut-être une mouche, mais je vous garantie que CETTE MOUCHE vous en ferra voir des vertes et des pas mûres!";
+	emotion e_pif;
+	next;
+	mes "[Armani]";
+	mes "Enfin peu importe. Si vous êtes suffisamment malchanceux pour le rencontrer, vous verrez bien vite de quoi il retourne. Après tout, ce n'est que la REINE des MOUCHES!!!!";
+	next;
+	mes "[Armani]";
+	mes "^ff0000Dragon Fly^000000. N'oubliez jamais ce nom!!";
+	close;
+}
+
+morocc,277,213,4	script	Phlanette#moc	48,{
+	mes "[Phlanette]";
+	mes "La ville de Morroc se situe dans une région très sèche, entourée par le désert. Il n'existe aucun endroit plus chaud et sec que Morroc dans le Royaume de Rune-Midgard.";
+	next;
+	if (select("Histoire du Désert:Fin de la Conversation") == 1) {
+		mes "[Phlanette]";
+		mes "Laissez-moi vous dire quelques mots à propos du désert.....";
+		next;
+		mes "[Oncle Phlanette]";
+		mes "Voyez-vous, le désert est un lieu où la végétation est quasi nulle, à cause de l'absence de chutte de pluie et de l'évaporation rapide du peu d'humidité présente en hiver.";
+		mes "Même dans ces conditions extrêmes, vous pourrez trouver quelques plantes qui survivent dans le désert... Mais elles sont plutôt rares. Et là où il y a des plantes, il y a des animaux.";
+		next;
+		mes "[Oncle Phlanette]";
+		mes "Malgré les hautes températures et un accès très limité à l'eau, les êtres vivants ont trouvé un moyen de survivre dans le désert."; 
+		next;
+		mes "[Oncle Phlanette]";
+		mes "Malheureusement, pour des raisons inconnues, certaines plantes et animaux se sont transformés en de dangereuses créatures.";
+		mes "Les ^00cc00'Mukas'^000000 sont des monstres-cactus... Ne vous approchez pas trop d'eux!";
+		close;
+	}
+	close;
+}
+
+// Inside Morroc
+//============================================================
+morocc_in,112,122,0	script	Vieux Professeur#moc	61,{
+	mes "[Vieux Professeur]";
+	mes "J'ai dévoué ma vie à la recherche dans les pyramides... Bien que mes recherches n'aient abouties à rien de concret, je suis sûr que je finirai par trouver la Tombe de l'Ancien Roi, Osiris!";
+	next;
+	mes "[Vieux Professeur]";
+	mes "Elle doit se situer très profondément, dans l'une des pyramides de Morroc... Mais où? ... Et dire que le plus grand roi de l'histoire dort d'un sommeil éternel, si proche et si loin à la fois...";
+	next;
+	if (countitem(1030) > 0) {
+		mes "[Vieux Professeur]";
+		mes "Hé mais...";
+		mes "Quelle est cette odeur...?";
+		mes "C'est ça! C'est l'odeur d'une ^993300Tiger's Footskin^000000!";
+		next;
+		mes "[Vieux Professeur]";
+		mes "Cela me rappelle mes débuts en temps qu'aventurier...";
+		close;
+	}
+	mes "[Vieux Professeur]";
+	mes "Je suppose que nous devons maintenant compter sur la jeune génération d'aventuriers pour explorer les mystères du monde...";
+	close;
+}
+
+
+// Morroc Field
+//============================================================
+moc_fild16,199,212,4	script	Hashisid#moc	55,{
+	mes "[Hashisid]";
+	mes "Pour les Assassins, l'important est de ne jamais regarde sa cible dans les yeux. Si la cible le remarque, elle pourrait deviner nos intentions...";
+	next;
+	if (select("A propos des Assassins:S'en aller comme si de rien n'était") == 1) {
+		mes "[Hashisid]";
+		mes "Laissez-moi vous en dire un peu plus sur les Assassins.";
+		next;
+		mes "[Hashisid]";
+		mes "Les Assassins sont entraînés à l'infiltration, l'analyse d'une situation, puis l'attente du moment propice pour commettre le meurtre sans être ni vu ni entendu.";
+		mes "La discrétion et la rapidité sont vitales pour les Assassins. Ils vient dans les ombres, et ne sont jamais remerciés ou félicités.";
+		next;
+		mes "[Hashisid]";
+		mes "C'est leur travail de ne pas se faire repérer. Même si un meurtre peut sembler être un acte cruel... un Assassin ne fera jamais de mal aux créatures innocentes. Le seul but des Assassins sont de traquer et de combattre les forces du mal!";
+		close;
+	}
+	mes "[Hashisid]";
+	mes "Il y a bien longtemps, nos ancêtres avaient coûtume de fumer avant d'aller accomplir leur devoir.";
+	next;
+	mes "[Hashisid]";
+	mes "Mais nous ne faisons plus ça de nos jours, car les animaux et les insectes détectent très vite l'odeur.";
+	next;
+	mes "[Hashisid]";
+	mes "De nombreux facteurs contribuent à la réussite d'une mission. Et cela dépend en grande partie de votre adversaire, il ne suffit pas toujours d'être invisible pour réussir...";
+	close;
+}
+
+moc_fild16,177,246,4	script	Assassin#moc	118,{
+	mes "[La Conte]";
+	mes "Une fois devenus Assassins, les Voleurs se voient offrir plusieurs styles de combat.";
+	next;
+	mes "[La Conte]";
+	mes "Il en existe deux principaux: l'utilisation de deux dagues simultanément, ou bien l'utilisation de katars.";
+	next;
+	switch(select("Katars?:Doubles Dagues?:Fin de la conversation.")) {
+	case 1:
+		mes "[La Conte]";
+		mes "Vous pouvez utiliser un set de katars dans vos deux mains, vous conférant rapidité et précision.";
+		next;
+		mes "[La Conte]";
+		mes "Vous pouvez acheter des katars à l'armurerie de Morroc, et seuls les Assassins peuvent les utiliser.";
+		next;
+		mes "[La Conte]";
+		mes "Le katar de votre main droite fera toujours un peu plus de dommages que celui de votre main gauche, en accord avec votre puissance de frappe.";
+		next;
+		mes "[La Conte]";
+		mes "Mais comme les katars sont équipés dans les deux mains, vous ne pourrez alors pas porter de bouclier...";
+		next;
+		mes "[La Conte]";
+		mes "Comparé à un style de combat à double dagues, l'utilisation de katars permet d'avoir une vitesse de frappe bien meilleure. De plus, vous pourrez utiliser la compétence ^663399Sonic Blow^000000 uniquement si vous portez des katars.";
+		close;
+	case 2:
+		mes "[La Conte]";
+		mes "Vous pouvez utiliser deux dagues différentes simultanément, une dans chaque main.";
+		next;
+		mes "[La Conte]";
+		mes "Evidement, vous pouvez choisir d'autres types d'armes que les dagues, mais vous manquerez certainement de rapidité et de précision.";
+		next;
+		mes "[La Conte]";
+		mes "Attention, si vous n'avez pas de dague dans la main droite, vous ne pourrez pas utiliser la compétence ^663399Double Attack^000000.";
+		next;
+		mes "[La Conte]";
+		mes "Grâce à vos deux dagues, vous pourrez porter une double attaque de la puissance de frappe de votre main droite, et une attaque simple avec celle de votre main gauche.";
+		next;
+		mes "[La Conte]";
+		mes "Et hop! Vous lancez trois coups par attaque! Les dommages infligés aux ennemis n'en seront que plus meurtriers!";
+		close;
+	case 3:
+		mes "[La Conte]";
+		mes "Plus que les armes, ce qui compte par dessus tout c'est la stratégie d'attaque!";
+		close;
+	}
+}
+
+// Other NPCs
+//============================================================
+//Bartender
+morocc_in,166,76,3	script	Barman#02	46,{
+	mes "[Barman]";
+	mes "Bonjour. Qu'est-ce que j'vous serre?";
+	next;
+	menu "Tropical Sograt",L1,"Coktail Vermillion",L2,"Rien, merci.",-;
+
+	mes "[Barman]";
+	mes "Hum...";
+	close;
+
+L1:
+	if (zeny < 1000 ) goto Nomoney;
+	getitem 12112,1;
+	set zeny,zeny-1000;
+	mes "[Barman]";
+	mes "Et voilà!";
+	mes "Des fruits, et... un p'tit truc en plus, bien sûr!";
+	mes "N'en abusez pas trop.";
+	close;
+
+L2:
+	if (zeny < 1000 ) goto Nomoney;
+	getitem 12113,1;
+	set zeny,zeny-1000;
+	mes "[Barman]";
+	mes "Et voilà!";
+	mes "N'en abusez pas trop.";
+	close;
+
+Nomoney:
+	mes "[Barman]";
+	mes "Comme si j'allais vous servir gratuitement...";
+	mes "Ça va pas la tête, non?";
+	mes "C'est 1000 Zenys le verre! Je vais pas les payer de ma poche pour vos beaux yeux!";
+	close;
+}
+
+// Lvl 4 weapon quest related NPC ================================
+
+morocc,289,230,3	script	Citoyen#06	92,{
+	mes "[Citoyen]";
+	mes "Rencontrer quelqu'un de mort est quelque chose de fondamentalement impossible... Sauf peut-être si son âme souffrante erre encore sur cette terre...";
+	mes "Si jamais vous en rencontrez un, vous vous apercevrez qu'il ne se souviendra pas forcément de toute sa vie... Parfois même il ne se rend pas compte qu'il est mort!";
+	next;
+	mes "[Citoyen]";
+	mes "Mais si vous arrivez à mettre la main sur un objet lui ayant appartenu quand il était en vie, il est possible d'éveiller sa mémoire...";
+	close;
+}
+
+//==================================================
+// Assassin Guild Guards
+//===================================================
+
+moc_fild16,195,281,4	script	Garde Assassin#1::SinGuard	707,{
+	mes "[Garde Assassin]";
+	if(BaseJob == Job_Assassin) {
+		mes "Bienvenue.";
+		close;
+	}
+	set .@temp, rand(1,4);
+	if(.@temp == 1) mes "........";
+	if(.@temp == 2) mes "Hum..........";
+	if(.@temp == 3) mes "Hum... vous ne devriez pas être ici.....";
+	if(.@temp == 4) mes "Vous entrez en zone privée.......";
+	close;
+}
+
+moc_fild16,204,281,4	duplicate(SinGuard)	Garde Assassin#2	707
+moc_fild16,207,281,4	duplicate(SinGuard)	Garde Assassin#3	707
+moc_fild16,216,281,4	duplicate(SinGuard)	Garde Assassin#4	707
+moc_fild16,200,231,4	duplicate(SinGuard)	Garde Assassin#5	707
+moc_fild16,211,231,4	duplicate(SinGuard)	Garde Assassin#6	707
+moc_fild16,200,257,4	duplicate(SinGuard)	Garde Assassin#7	707
+moc_fild16,211,257,4	duplicate(SinGuard)	Garde Assassin#8	707
