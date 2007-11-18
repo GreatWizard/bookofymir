@@ -5,14 +5,16 @@
 //===== By: ================================================== 
 //= DZeroX
 //===== Current Version: ===================================== 
-//= 1.02
+//= 1.2b
 //===== Compatible With: ===================================== 
 //= eAthena 1.0
 //===== Description: ========================================= 
 //= Town-specific Alberta NPCs
 //===== Additional Comments: ================================= 
 //= 1.0 Converted from Aegis 10.4 [DZeroX]
-//= 1.02 Optimized, missing next, REMOVED .GATs! again [Lupus]
+//= 1.1 Optimized, missing next, REMOVED .GATs! again [Lupus]
+//= 1.2 Implemented progression fixes provided by $ephiroth. [L0ne_W0lf]
+//= 1.2b More pregression clean up provided by Barron-Monster. [L0ne_W0lf]
 //============================================================
 
 alberta,97,51,0	script	Fabian	84,{
@@ -54,9 +56,9 @@ alberta,20,183,0	script	Chad	49,{
 alberta,189,151,5	script	Fisk	100,{
 	mes "[Fisk]";
 	mes "Hey ho matelot! Où veux-tu aller?";
+	next;
 	switch(select("Bateau Echoué -> 250 Zenys.","Marina d'Izlude -> 500 Zenys.","Annuler.")) {
 		case 1:
-			next;
 			if (Zeny < 250) {
 				mes "[Fisk]";
 				mes "Je suis désolé, mais le voyage coûte 250 Zenys.";
@@ -67,7 +69,6 @@ alberta,189,151,5	script	Fisk	100,{
 			warp "alb2trea",43,53;
 			end;
 		case 2:
-			next;
 			if (Zeny < 500) {
 				mes "[Fisk]";
 				mes "Je suis désolé, mais le voyage coûte 500 Zenys.";
@@ -78,7 +79,6 @@ alberta,189,151,5	script	Fisk	100,{
 			warp "izlude",176,182;
 			end;
 		case 3:
-			next;
 			mes "[Fisk]";
 			mes "C'est ça... Reste sur le plancher des vaches...";
 			close;
@@ -88,6 +88,7 @@ alberta,189,151,5	script	Fisk	100,{
 alb2trea,39,50,6	script	Fisk#a2t	100,{
 	mes "[Fisk]";
 	mes "Alors, tu veux retourner à Alberta?";
+	next;
 	if(select("Oui, s'il vous plaît.","J'ai changé d'avis.")==1)
 		warp "alberta",192,169;
 	close;
@@ -96,14 +97,15 @@ alb2trea,39,50,6	script	Fisk#a2t	100,{
 alberta,131,139,2	script	Deagle	54,{
 	mes "[Deagle]";
 	mes "(~hips~)... Hum?... Qu-Qu'est ce que vous r'gardez? 'lez vous-en!!";
+	next;
 	switch(select("Rester.","Le laisser tranquille.")) {
 		case 1:
 			next;
 			mes "[Deagle]";
 			mes "Hahahaha (~hips~)... Vous êtes un nerveux, hein... Hé... J'ai peut être l'air en piteux état, mais autrefois j'étais un marin très beau garçon qui naviguait sur le 'Going Mary'.";
+			next;
 			switch(select("C'est un bateau?","Vraiment? Vous plaisantez!")) {
 				case 1:
-					next;
 					mes "[Deagle]";
 					mes "Quoi? Vous n'en avez jamais entendu parler? Imbécile! Tout le monte connaît que célèbre bateau pirate 'Going Mary'! (~hips~)";
 					next;
@@ -132,7 +134,6 @@ alberta,131,139,2	script	Deagle	54,{
 					close;
 			}
 		case 2:
-			next;
 			mes "[Deagle]";
 			mes "C'est ça! Allez-vous en!~";
 			emotion e_pif;
@@ -237,9 +238,9 @@ alberta,195,151,2	script	Paul	86,{
 	next;
 	mes "[Paul]";
 	mes "Qu'en dîtes-vous? L'entrée ne coûte que 200 Zenys. Divertissement garanti!";
+	next;
 	switch(select("Entrer","S'en aller")) {
 		case 1:
-			next;
 			if (Zeny < 200) {
 				mes "[Paul]";
 				mes "Je suis désolé, mais l'entrée coûte 200 Zenys.";
@@ -251,7 +252,6 @@ alberta,195,151,2	script	Paul	86,{
 				close;
 			}
 		case 2:
-			next;
 			mes "[Paul]";
 			mes "Revenez quand vous voudrez.";
 			close;
@@ -280,9 +280,9 @@ alberta,190,173,4	script	Phelix	85,{
 		close;
 	} else {
 		mes "Hum... Alors, vous voulez échanger des Jellopies?";
+		next;
 		switch(select("Oui, contre des Red Potions.","Oui, contre des Carrots.")) {
 		case 1:
-			next;
 			mes "[Phelix]";
 			mes "D'accord, voyons-voir ce que vous avez là...";
 			next;
@@ -293,16 +293,15 @@ alberta,190,173,4	script	Phelix	85,{
 			} else {
 				set .@max,countitem(909)/10;
 				mes "Combien en voulez-vous?";
+				next;
 				switch(select("Autant que possible.","Je vais choisir la quantité.","Euh, rien finalement.")) {
 				case 1:
 					delitem 909,.@max*10;
-					next;
 					getitem 501,.@max;
 					mes "[Phelix]";
 					mes "Et voilà, comme promis!";
 					close;
 				case 2:
-					next;
 					mes "[Phelix]";
 					mes "Entrez un chiffre s'il vous plaît. Si vous souhaitez annuler, entrez 0.";
 					input .@amount;
@@ -321,20 +320,17 @@ alberta,190,173,4	script	Phelix	85,{
 						close;
 					}
 					delitem 909,.@amount*10;
-					next;
 					getitem 501,.@amount;
 					mes "[Phelix]";
 					mes "Et voilà, comme promis!";
 					close;
 				case 3:
-					next;
 					mes "[Phelix]";
 					mes "D'accord, à plus tard.";
 					close;
 				}
 			}
 		case 2:
-			next;
 			mes "[Phelix]";
 			mes "D'accord, voyons-voir ce que vous avez là...";
 			next;
@@ -345,16 +341,15 @@ alberta,190,173,4	script	Phelix	85,{
 			} else {
 				set .@max,countitem(909)/3;
 				mes "Combien en voulez-vous?";
+				next;
 				switch(select("Autant que possible.","Je vais choisir la quantité.","Euh, rien finalement.")) {
 				case 1:
 					delitem 909,.@max*3;
-					next;
 					getitem 515,.@max;
 					mes "[Phelix]";
 					mes "Et voilà, comme promis!";
 					close;
 				case 2:
-					next;
 					mes "[Phelix]";
 					mes "Entrez un chiffre s'il vous plaît. Si vous souhaitez annuler, entrez 0.";
 					input .@amount;
@@ -373,13 +368,11 @@ alberta,190,173,4	script	Phelix	85,{
 						close;
 					}
 					delitem 909,.@amount*3;
-					next;
 					getitem 515,.@amount;
 					mes "[Phelix]";
 					mes "Et voilà, comme promis!";
 					close;
 				case 3:
-					next;
 					mes "[Phelix]";
 					mes "D'accord, à plus tard.";
 					close;
