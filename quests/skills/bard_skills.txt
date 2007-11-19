@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script ======================================= 
 //= Bard Skills Quests
 //===== By: ================================================== 
@@ -24,48 +26,45 @@
 //============================================================
 // BARD - PANG VOICE
 //============================================================
-prontera,134,328,7	script	Timid man	89,{
-	mes "[Timid man]";
+prontera,134,328,7	script	Homme Timide	89,{
+	mes "[Homme Timide]";
 	if(BaseJob!=Job_Bard) goto L_nobard;
 	if(getskilllv(1010)) goto L_alreadyhave;
 	if(JobLevel<40) goto L_nojob;
 
-	mes "I'll teach you all I know, but";
-	mes "I'm a little thirsty. Bring me";
+	mes "Salut à toi, petit... Tu veux que je t'apprenne tout mon savoir?";
+	mes "Ok... mais d'abord, il va falloir que tu me prouves que tu es capable de rapporter ceci:";
 	mes "1 Tropical Sograt";
 	next;
 	
-	mes "[Timid man]";
-	mes "Let me check your items.";
+	mes "[Homme Timide]";
+	mes "Voyons-voir ce que tu as rapporté...";
 	next;
 	
 	if (countitem(12112)<1) goto L_noitems;//Items: Tropical_Sograt,
 	delitem 12112, 1;//Items: Tropical_Sograt,
-	mes "[Timid man]";
-	mes "I see you have what you need,";
-	mes "so I'll teach you my talent.";
+	mes "[Homme Timide]";
+	mes "Héhé, je vois que tu as tout ce que j'avais demandé!";
+	mes "Je vais donc t'apprendre mes petits secrets de Barde...";
 	skill 1010,1,0;
 	close;
 	
 L_noitems:
-	mes "[Timid man]";
-	mes "You don't have enough items.";
-	mes "Come back when you have all";
-	mes "the required items for me.";
+	mes "[Homme Timide]";
+	mes "Hé, mais tu n'as pas tout ce qui était convenu!";
+	mes "Vas chercher le reste, et reviens me voir!";
 	close;
 		
 L_nobard:
-	mes "Hum... you don't seem to be a musician";
+	mes "Hum... vous n'avez pas l'air d'un musicien, vous...";
 	emotion e_gasp;
 	close;
 
 L_alreadyhave:
-	mes "I've already taught you";
-	mes "everything I know...";
+	mes "Je t'ai déjà appris tout ce que je savais...";
 	close;
 
 L_nojob:
-	mes "Come back when you've learned";
-	mes "more about being a Bard.";
+	mes "Reviens quand tu auras appris le métier de Barde.";
 	close;
 }
