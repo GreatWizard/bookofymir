@@ -59,11 +59,11 @@ function	script	F_GldManager	{
 
 	//Novice Castles. (we don't need ELSE here. Menu has direct labels)
 	if(getarg(1) == "nguild_prt" || getarg(1) == "nguild_alde" || getarg(1) == "nguild_gef" || getarg(1) == "nguild_pay" )
-		menu "Emploi ou Renvoi d'une Kafra",M_Kafra, "Entrer dans la Salle des Coffres",M_Treas, "Annuler",M_End;
+		menu "Emploi ou Renvoi d'une Kafra",M_Kaf, "Entrer dans la Salle des Coffres",M_Treas, "Annuler",M_End;
 
 	//Common WoE Castles	
 	menu 	"Résumé de l'Etat du Château",M_Base, "Investissements Commerciaux",M_Comrc, "Investissements Défensifs",M_Def, "Mise en Place de Gardiens",M_Guard, 
-		"Emploi ou Renvoi d'une Kafra",M_Kafra, "Entrer dans la Salle des Coffres",M_Treas, "Déménager",M_Change_Chateau, "Annuler",M_End;
+		"Emploi ou Renvoi d'une Kafra",M_Kaf, "Entrer dans la Salle des Coffres",M_Treas, "Déménager",M_Change_Chateau, "Annuler",M_End;
 
 	//========================
 	M_Base:
@@ -382,6 +382,7 @@ function	script	F_GldManager	{
 				ssM_KafEnd2:
 					mes "[Employée Kafra]";
 					mes "Merci, je ferai de mon mieux.";
+					cutin "kafra_01",255;
 					return 0;
 			sM_KafEnd2:
 				mes "[ "+getarg(0)+" ]";
@@ -392,7 +393,7 @@ function	script	F_GldManager	{
 	M_Treas:
 	//========
 		mes "[ "+getarg(0)+" ]";
-		mes "Voulez-vous vous rendre dans la Salle des Coffres? Seul vous, le Chef de Guilde, est autorisé à entrer dans cette salle.";
+		mes "Voulez-vous vous rendre dans la Salle des Coffres? Seul vous, le Chef de Guilde, êtes autorisé à entrer dans cette salle.";
 		next;
 		menu "Entrer.",-,"Annuler",sM_TresEnd;
 
