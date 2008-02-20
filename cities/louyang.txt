@@ -10,12 +10,288 @@
 //= MasterOfMuppets (2.0)
 //= eAthena Dev Team
 //===== Current Version: ===================================== 
-//= 2.8
+//= 2.9
 //===== Compatible With: ===================================== 
-//= Any eAthena Version
+//= eAthena SVN
 //===== Description: ========================================= 
-//= Official NPC's for Louyang city.
+//= [Aegis Conversion]
+//= Louyang Town Script
 //===== Additional Comments: ================================= 
+//= 2.9 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
+//============================================================
+
+// Louyang Transportaion
+//============================================================
+alberta,245,45,3	script	Jeune Fille#0lou	815,{
+	mes "[Jeune Fille]";
+	mes "La la la la~";
+	mes "Quelle belle journée!~";
+	mes "Un temps parfait pour aller pique-niquer!";
+	mes "La la la la~";
+	next;
+	switch(select("A propos de Louyang.:Aller à Louyang.:Annuler.")) {
+	case 1:
+		mes "[Jeune Fille]";
+		mes "Oh, vous êtes intéressé par Louyang?";
+		mes "C'est une ville très agréable à visiter pour les touristes.";
+		next;
+		mes "[Jeune Fille]";
+		mes "Louyang a une longue histoire, avec des contes de magie ancienne et de guerriers valeureux. On dit aussi que des bêtes féroces errent autours de la ville...";
+		next;
+		mes "[Jeune Fille]";
+		mes "Vous pourrez en tous cas y trouver tous les remèdes à partir de plantes magiques, des sages, des médecins, et même des moines pratiquant les arts martiaux!";
+		next;
+		mes "[Jeune Fille]";
+		mes "Quand j'habitais à Louyang, je m'entraînais tous les matins aux arts martiaux! On ne dirait peut être pas, mais je suis plus forte que j'en ai l'air!";
+		next;
+		mes "[Jeune Fille]";
+		mes "Si vous voulez visiter Louyang, je peux vous y conduire en échange de quelques Zenys...";
+		close;
+	case 2:
+		mes "[Jeune Fille]";
+		mes "Je peux vous guider jusqu'à Louyang, mais mes services sont payant... Le voyage vous coûtera 10 000 Zenys.";
+		next;
+		mes "[Jeune Fille]";
+		mes "Alors, ça vous tente?";
+		next;
+		if (select("Bien sûr!:Non.") == 1) {
+			if (Zeny > 9999) {
+				mes "[Jeune Fille]";
+				mes "Très bien~";
+				mes "C'est parti!";
+				mes "Bon voyage!";
+				close2;
+				set zeny,zeny-10000;
+				warp "lou_fild01",190,101;
+				end;
+			}
+			mes "[Jeune Fille]";
+			mes "...";
+			mes "...";
+			mes "On dirait que vous n'avez pas assez d'argent...";
+			mes "Tant pis pour vous!";
+			close;
+		}
+		mes "[Jeune Fille]";
+		mes "Oh...";
+		mes "Je suis désolée de l'entendre.";
+		mes "Passez une bonne journée!";
+		close;
+	case 3:
+		mes "[Jeune Fille]";
+		mes "Oh...";
+		mes "D'accord, passez une bonne journée!";
+		close;
+	}
+}
+
+lou_fild01,190,100,7	script	Jeune Fille#1lou	815,{
+	mes "[Jeune Fille]";
+	mes "Voulez-vous retourner à Alberta?";
+	next;
+	if (select("Oui, s'il vous plaît.:Non, merci.") == 1) {
+		mes "[Jeune Fille]";
+		mes "J'espère vous revoir bientôt!";
+		mes "Au revoir!";
+		close2;
+		warp "alberta",235,45;
+		end;
+	}
+	mes "[Jeune Fille]";
+	mes "Si vous aimez Louyang, n'oubliez pas de faire le tour des belvédères, et de goûter à la cuisine locale!";
+	next;
+	if (Sex) {
+		mes "[Jeune Fille]";
+		mes "Et peut-être aussi... rencontrer l'âme soeur?";
+		mes "Hihi~";
+	}
+	else {
+		mes "[Jeune Fille]";
+		mes "Et peut-être aussi... rencontrer un beau garçon?";
+		mes "Hihi~";
+	}
+	close;
+}
+
+// Generic Louyang NPCs
+//============================================================
+louyang,297,167,2	script	Zhi Ching Li#lou	815,{
+	if (!Sex) {
+		mes "[Zhi Ching Li]";
+		mes "Tous les membres du Palais des Servantes sont des femmes, y compris notre maître.";
+		next;
+		mes "[Zhi Ching Li]";
+		mes "Récemment, nous n'avons pas eu beaucoup de nouvelles recrues, alors je suis venue voir s'il n'y avait pas une femme ou deux intéressée par nous rejoindre.";
+		emotion e_dots;
+		close;
+	}
+	mes "[Zhi Ching Li]";
+	mes "...";
+	next;
+	mes "[Zhi Ching Li]";
+	mes "...";
+	mes "......";
+	next;
+	mes "[Zhi Ching Li]";
+	mes "Laissez-moi tranquille s'il vous plaît,";
+	mes "je suis occupée.";
+	close;
+}
+
+louyang,274,136,4	script	Akiira#lou	819,{
+	mes "[Akiira]";
+	mes "Je m'entraîne à la technique 'La Griffe du Dragon'. Non seulement elle me permet de développer la puissance de mes poings, mais elle me permet aussi de développer ma concentration spirituelle.";
+	next;
+	mes "[Akiira]";
+	mes "Tout art martial requiert un entraînement spirituel intense, puisque comme vous le savez, l'esprit contrôle le corps.";
+	mes "Si vous êtes très entraîné spirituellement, vous pourrez facilement contrôler chaque partie de votre corps indépendamment.";
+	next;
+	mes "[Akiira]";
+	mes "Si vous pensez vous mettre aux arts martiaux un jours, vous devrez d'abord acquérir de grandes connaissances, avant de commencer votre entraînement physique à proprement parlé.";
+	next;
+	mes "[Akiira]";
+	mes "Etudiez les arts martiaux, et méditez sur les vérités de la Vie. Vous devez avant tout trouver la paix de l'esprit, avant de pouvoir espérer maîtriser totalement votre esprit et votre corps.";
+	close;
+}
+
+louyang,276,136,4	script	Zhiang Xiau Ji#lou	819,{
+	mes "[Zhiang Xiau Ji]";
+	mes "Enfin...";
+	mes "J'ai enfin réussi à maîtriser la technique de 'La Griffe du Dragon'.";
+	next;
+	mes "[Zhiang Xiau Ji]";
+	mes "Bien qu'il n'y ait que huit pas de base avant l'enchaînement de coups de poings, il a fallut que j'étudie l'histoire de cet art martial, méditer pendant de longues heures et me concentrer sur les mouvements... pendant environ trois ans!";
+	next;
+	mes "[Zhiang Xiau Ji]";
+	mes "Après cela, mon maître a finalement commencé à m'entraînement physiquement, afin de pouvoir enchaîner parfaitement les huit pas de la Griffe du Dragon. Je me suis consacré aux arts martiaux depuis maintenant trente ans.";
+	next;
+	mes "[Zhiang Xiau Ji]";
+	mes "Je suis très fier d'avoir enfin réussi à maîtriser cet art, dix ans avant ce que j'avais prévu. Je dois maintenant continuer à étudier cette technique afin d'en corriger ses points faibles, et améliorer ma puissance de frappe.";
+	next;
+	mes "[Zhiang Xiau Ji]";
+	mes "Je pense que ça me prendra encore dix ans. Mais cela ne me démotive pas du tout!";
+	next;
+	mes "[Zhiang Xiau Ji]";
+	mes "Lorsque vous apprenez les arts martiaux, vous pouvez y consacrer entièrement votre vie sans jamais vous lasser.";
+	close;
+}
+
+louyang,276,133,0	script	Elève#1lou::LouTrainee	819,{
+	mes "[Elève]";
+	mes "Yeeeyap~!";
+	mes "Taaaaaah~~!!";
+	mes "Hooo~.";
+	close;
+}
+
+louyang,276,131,0	script	Elève#2lou	819,{
+	mes "[Elève]";
+	mes "Tah Tah Tah!";
+	mes "Taaaaaah~~!!";
+	mes "Schwooooooo~";
+	close;
+}
+
+louyang,276,129,0	script	Elève#3lou	819,{
+	mes "[Elève]";
+	mes "Si!";
+	mes "Ayah!!";
+	close;
+}
+
+louyang,274,133,0	script	Elève#4lou	819,{
+	mes "[Elève]";
+	mes "Dergh!";
+	mes "Dergh!";
+	mes "Schwa--!";
+	close;
+}
+
+louyang,274,131,0	script	Elève#5lou	819,{
+	mes "[Elève]";
+	mes "Yah Yah Yah!";
+	mes "Taaaaaah~~!!";
+	mes "Wataaaaaaaah!";
+	close;
+}
+
+louyang,274,129,0	script	Elève#6lou	819,{
+	mes "[Elève]";
+	mes "Yeeeyap~!";
+	mes "Taaaaaah~~!!";
+	mes "Hooo~";
+	close;
+}
+
+louyang,278,133,0	duplicate(LouTrainee)	Elève#7lou	819
+louyang,278,131,0	duplicate(LouTrainee)	Elève#8lou	819
+louyang,278,129,0	duplicate(LouTrainee)	Elève#9lou	819
+louyang,272,133,0	duplicate(LouTrainee)	Elève#10lou	819
+louyang,272,131,0	duplicate(LouTrainee)	Elève#11lou	819
+louyang,272,129,0	duplicate(LouTrainee)	Elève#12lou	819
+
+// Louyang Viewing Tower
+//============================================================
+lou_in01,25,23,5	script	Hong Miao#lo	817,{
+	mes "[Hong Miao]";
+	mes "Bienvenue.";
+	next;
+	mes "[Hong Miao]";
+	mes "Ici se trouve le passage qui mène à la Tour d'Observation. Nous mettons à votre service un ascenseur tout confort, rapide et sûr!";
+	mes "Voulez-vous monter admirer le paysage?";
+	next;
+	switch(select("Pouvez-vous me donner plus d'informations?:Oui, s'il vous plaît.:Peut-être une autre fois.")) {
+	case 1:
+		mes "[Hong Miao]";
+		mes "L'office du tourisme de Louyang a reçu de nombreuses lettres de suggestions demandant l'aménagement de la Tour d'Observation, afin que les touristes puissent profiter du belvédère.";
+		next;
+		mes "[Hong Miao]";
+		mes "Du fait de sa position géographique, de nombreux pics permettent d'admirer la lande des régions de Louyang.";
+		next;
+		mes "[Hong Miao]";
+		mes "Vous pouvez monter en haut de la Tour d'Observation en empruntant l'ascenseur spécialement mis en place pour les touristes. Il est sûr et rapide, et le prix de l'attraction n'est que de 500 Zenys par personne.";
+		close;
+	case 2:
+		if (Zeny < 500) {
+			mes "[Hong Miao]";
+			mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+			close;
+		}
+		mes "[Hong Miao]";
+		mes "Merci de votre participation.";
+		mes "Profitez bien de la vue!";
+		next;
+		set zeny,zeny-500;
+		warp "lou_in01",17,19;
+		end;
+	case 3:
+		mes "[Hong Miao]";
+		mes "Revenez quand vous voulez.";
+		close;
+	}
+}
+
+louyang,84,254,0	script	Sortie#lou	111,{
+	mes "^3355FFIl y a une sorte de descente aménagée dans la branche de l'arbre.";
+	mes "Voulez-vous l'utiliser?^000000";
+	next;
+	if (select("Oui.:Non.") == 1) {
+		if (rand(1,100) == 34) {
+			percentheal -99,0;
+			warp "louyang",86,269;
+			mapannounce "louyang",""+strnpcinfo(0)+" : Aaaaah, Je toooooommbeeee~~!!!!",bc_map;
+		}
+		else {
+			warp "lou_in01",10,18;
+		}
+		end;
+	}
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
 //= Originally made for Vidar
 //= 1.2 - Added official warp NPC's
 //= 1.3 - Fixed gramatical errors. (Like wtf's with the weird
@@ -38,409 +314,5 @@
 //= 2.7a Minor optimizations before Louyang quests [Lupus]
 //= 2.7b Moved guides to the Guides folder. 2.7ñ more typos [Lupus]
 //= 2.8 Moved some quest-related NPCs to proper file. [SinSloth]
+//= 2.9 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
 //============================================================
-
-alberta,245,45,4	script	Jeune-Fille#02	815,{
-	mes "[Jeune-Fille]";
-	mes "La la la la~";
-	mes "Quelle belle journée!~";
-	mes "Un temps parfait pour aller pique-niquer!";
-	mes "La la la la~";
-	next;
-	menu "A propos de Louyang.",-,"Aller à Louyang.",M_GOTO,"Annuler.",M_CANCEL;
-
-	mes "[Jeune-Fille]";
-	mes "Oh, vous êtes intéressé par Louyang?";
-	mes "C'est une ville très agréable à visiter pour les touristes.";
-	next;
-	mes "[Jeune-Fille]";
-	mes "Louyang a une longue histoire, avec des contes de magie ancienne et de guerriers valeureux. On dit aussi que des bêtes féroces èrent autours de la ville...";
-	next;
-	mes "[Jeune-Fille]";
-	mes "Vous pourrez en tous cas y trouver tous les remèdes à partir de plantes magiques, des sages, des médecins, et même des moines pratiquant les arts martiaux!";
-	next;
-	mes "[Jeune-Fille]";
-	mes "Quand j'habitais à Louyang, je m'entraînais tous les matins aux arts martiaux! On ne dirait peut être pas, mais je suis plus forte que j'en ai l'air!";
-	next;
-	mes "[Jeune-Fille]";
-	mes "Si vous voulez visiter Louyang, je peux vous y conduire en échange de quelques Zenys...";
-	close;
-
-M_GOTO:
-	mes "[Jeune-Fille]";
-	mes "Je peux vous guider jusqu'à Louyang, mais mes services sont payant... Le voyage vous coûtera 10 000 Zenys.";
-	next;
-	mes "[Jeune-Fille]";
-	mes "Alors, ça vous tente?";
-	next;
-	menu "Bien sûr!",-,"Non, merci.",M_CANCEL2;
-
-	mes "[Jeune-Fille]";
-	if(Zeny < 10000){
-		mes "...";
-		mes "On dirait que vous n'avez pas assez d'argent...";
-		mes "Tant pis pour vous!";
-		close;
-	}
-	mes "Très bien~";
-	mes "C'est parti!";
-	mes "Bon voyage!";
-	close2;
-	set Zeny,Zeny-10000;
-	warp "lou_fild01",190,101;
-	end;
-
-M_CANCEL:
-	mes "[Jeune-Fille]";
-	mes "Oh...";
-	mes "D'accord, passez une bonne journée!";
-	close;
-
-M_CANCEL2:
-	mes "[Jeune-Fille]";
-	mes "Oh...";
-	mes "Je suis désolée de l'entendre.";
-	mes "Passez une bonne journée!";
-	close;
-}
-
-lou_fild01,190,100,1	script	Jeune-Fille#03	815,{
-	mes "[Jeune-Fille]";
-	mes "Voulez-vous retourner à Alberta?";
-	next;
-	menu "Oui, s'il vous plaît.",-,"Non, merci.",M_CANCEL;
-
-	mes "[Jeune-Fille]";
-	mes "J'espère vous revoir bientôt!";
-	mes "Au revoir!";
-	close2;
-	warp "alberta",235,45;
-	end;
-
-M_CANCEL:
-	mes "[Jeune-Fille]";
-	mes "Si vous aimez Louyang, n'oubliez pas de faire le tour des belvédères, et de goûter à la cuisine locale!";
-	next;
-	mes "[Jeune-Fille]";
-	mes "Et peut-être aussi... rencontrer l'âme soeur?";
-	mes "Hihi~";
-	close;
-}
-
-louyang,261,123,4	script	Chi Wu Ping	824,{
-	mes "[Chi Wu Ping]";
-	mes "Je ne me sens pas très bien...";
-	next;
-	mes "[Chi Wu Ping]";
-	mes "Tout mon corps me fait mal!";
-	mes "Mes muscles me tirent...";
-	mes "Il n'existe qu'une seule chose qui puisse guérir cette douleur insupportable...";
-	next;
-	mes "[Chi Wu Ping]";
-	mes "Hé, petit~!";
-	mes "Tu n'as pas l'air d'ici!";
-	mes "Est-ce que tu pourrais continuer la route par ici, et aller me chercher de la soupe dans le grand restaurant que tu trouveras?";
-	next;
-	mes "[Chi Wu Ping]";
-	mes "Leur soupe est probablement la meilleure chose qui existe au monde... Et elle est très bonne pour la santé!";
-	next;
-	mes "[Chi Wu Ping]";
-	mes "Je crois que je pourrais en boire des litres... Pour que ma santé s'améliore, évidement.";
-	close;
-}
-
-lou_in02,43,169,8	script	Jiang Rong	827,{
-	mes "[Jiang Rong]";
-	mes "La Soupe du Dragon est réputée pour avoir un goût à la fois pimenté, amer, et raffraîchissant.";
-	next;
-	mes "[Jiang Rong]";
-	mes "Elle est préparée à base de légumes locaux et de plantes médicinales, elle est donc très bonne pour la santé!";
-	next;
-	mes "[Jiang Rong]";
-	mes "La Soupe du Dragon crée une chaleur interne qui se propage dans le corps et diffuse ses bienfaits dans le sang. Elle aide à prolonger la longévité des organes.";
-	next;
-	mes "[Jiang Rong]";
-	mes "Je mange de la Soupe du Dragon régulièrement depuis que je suis tout jeune. Et regardez moi! Je suis en pleine forme!";
-	close;
-}
-
-lou_in02,76,181,2	script	Employée#03	822,{
-	mes "[Huang Jia Xian]";
-	mes "Héeee...";
-	mes "Je suis désolé...";
-	mes "....................";
-	mes "...Zzzzz...Zzzz...";
-	close;
-}
-
-lou_in02,58,183,4	script	Assistant Cuisinier	823,{
-	mes "[Jin Wei Ling]";
-	mes "Il y a longtemps, j'adorais les arts martiaux. Je les pratiquais avec enthousiasme.";
-	next;
-	mes "[Jin Wei Ling]";
-	mes "Bien que je sois devenu un assistant cuisinier, je me considère toujours comme un pratiquant des arts martiaux avant tout.";
-	next;
-	mes "[Jin Wei Ling]";
-	mes "Alors j'ai décidé de retranscrire l'esprit des arts martiaux dans ma cuisine. Le restaurant a beaucoup de succès, vous savez! Nous avons toujours beaucoup de clients.";
-	next;
-	mes "[Jin Wei Ling]";
-	mes "Quand on a trop d'affluence, j'utilise les arts martiaux afin de pouvoir cuisiner plus vite! Hahaha~ C'est vraiment très pratique.";
-	next;
-	mes "[Jin Wei Ling]";
-	mes "Waaa-!!!!";
-	misceffect 55;
-	next;
-	mes "[Jin Wei Ling]";
-	mes "Waaa Taah-!!!!!";
-	misceffect 11;
-	next;
-	mes "[Jin Wei Ling]";
-	mes "Waaa...";
-	mes "Waa Taaah-!!!!!";
-	misceffect 121;
-	next;
-	mes "[Jin Wei Ling]";
-	mes "^3131FF*Chop chop chop chop chop*^000000";
-	donpcevent "Lounpc::OnEffect";	
-	next;
-	mes "[Jin Wei Ling]";
-	emotion e_no1;
-	mes "Hahahaha! Regardez moi ces rondelles de légumes, elles sont minces et parfaites! Muhahahaha!!";
-	mes "Ma méthode est infaillible!";
-	close;
-}
-
-lou_in02,58,181,2	script	Lounpc	139,{
-OnEffect:
-	misceffect 122;
-	end;
-}
-
-louyang,274,136,4	script	Akiira	819,{
-	mes "[Akiira]";
-	mes "Je m'entraîne à la technique 'La Griffe du Dragon'. Non seulement elle me permet de développer la puissance de mes poings, mais elle me permet aussi de développer ma concentration spirituelle.";
-	next;
-	mes "[Akiira]";
-	mes "Tout art martial requiert un entraînement spirituel intense, puisque comme vous le savez, l'esprit contrôle le corps.";
-	mes "Si vous êtes très entraîné spirituellement, vous pourrez facilement contrôler chaque partie de votre corps indépendamment.";
-	next;
-	mes "[Akiira]";
-	mes "Si vous pensez vous mettre aux arts martiaux un jours, vous devrez d'abord acquérir de grandes connaissances, avant de commencer votre entraînement physique à proprement parlé.";
-	next;
-	mes "[Akiira]";
-	mes "Etudiez les arts martiaux, et méditez sur les vérités de la Vie. Vous devez avant tout trouver la paix de l'esprit, avant de pouvoir espérer maîtriser totalement votre esprit et votre corps.";
-	close;
-}
-
-louyang,276,136,4	script	Zhiang Xiau Ji	819,{
-	mes "[Zhiang Xiau Ji]";
-	mes "Enfin...";
-	mes "J'ai enfin réussi à maîtriser la technique de 'La Griffe du Dragon'.";
-	next;
-	mes "[Zhiang Xiau Ji]";
-	mes "Bien qu'il n'y ait que huit pas de base avant l'enchaînement de coups de poings, il a fallut que j'étudie l'histoire de cet art martial, méditer pendant de longues heures et me concentrer sur les mouvements... pendant environ trois ans!";
-	next;
-	mes "[Zhiang Xiau Ji]";
-	mes "Après cela, mon maître a finalement commencé à m'entraînement physiquement, afin de pouvoir enchaîner parfaitement les huit pas de la Griffe du Dragon. Je me suis consacré aux arts martiaux depuis maintenant trente ans.";
-	next;
-	mes "[Zhiang Xiau Ji]";
-	mes "Je suis très fier d'avoir enfin réussi à maîtriser cet art, dix ans avant ce que j'avais prévu. Je dois maintenant continuer à étudier cette technique afin d'en corriger ses points faibles, et améliorer ma puissance de frappe.";
-	next;
-	mes "[Zhiang Xiau Ji]";
-	mes "Je pense que ça me prendra encore dix ans. Mais cela ne me démotive pas du tout!";
-	next;
-	mes "[Zhiang Xiau Ji]";
-	mes "Lorsque vous apprenez les arts martiaux, vous pouvez y consacrer entièrement votre vie sans jamais vous lasser.";
-	close;	
-}
-
-louyang,272,133,0	script	Stagiaire::trainees	819,{
-	mes "[Stagiaire]";
-	switch(rand(12)){
-	case 0:
-		mes "Aha~!";
-		mes "Hai~!!";
-		mes "Huh...";
-		close;
-	case 1:
-		mes "Woh~!";
-		mes "Hai~!!";
-		mes "Huh huh...";
-		close;
-	case 2:
-		mes "Kyaa~";
-		mes "Yah~~!!";
-		mes ".......";
-		close;
-	case 3:
-		mes "Hu~!";
-		mes "Hu hu~~!!";
-		mes "Hu...";
-		close;
-	case 4:
-		mes "Wah?!";
-		mes "Ahchiu~~!!";
-		mes "Wah...";
-		close;
-	case 5:
-		mes "Yaah~";
-		mes "...!";
-		mes "........!!";
-		close;
-	case 6:
-		mes "Chongchiu!!";
-		mes "Hu~~!!";
-		mes "Hwooh~~";
-		close;
-	case 7:
-		mes "Zhua loh~!";
-		mes ".....";
-		mes "Hu";
-		close;
-	case 8:
-		mes "Une, deux~!";
-		mes "Hai~!!";
-		mes "Yah~!!";
-		close;
-	case 9:
-		mes "Ai yah..";
-		mes "Yaahah~~";
-		close;
-	case 10:
-		mes "Niu ah...";
-		mes "Un~~!!";
-		mes "Deux~~!!!";
-		close;
-	case 11:
-	default:
-		mes "Yeeah~!";
-		mes "Ah... je suis fatigué~~!!";
-		close;
-	}
-}
-
-louyang,272,131,0	duplicate(trainees)	Stagiaire#2	819
-louyang,272,129,0	duplicate(trainees)	Stagiaire#3	819
-louyang,274,133,0	duplicate(trainees)	Stagiaire#4	819
-louyang,274,131,0	duplicate(trainees)	Stagiaire#5	819
-louyang,274,129,0	duplicate(trainees)	Stagiaire#6	819
-louyang,276,133,0	duplicate(trainees)	Stagiaire#7	819
-louyang,276,131,0	duplicate(trainees)	Stagiaire#8	819
-louyang,276,129,0	duplicate(trainees)	Stagiaire#9	819
-louyang,278,133,0	duplicate(trainees)	Stagiaire#10	819
-louyang,278,131,0	duplicate(trainees)	Stagiaire#11	819
-louyang,278,129,0	duplicate(trainees)	Stagiaire#12	819
-
-
-
-lou_in01,111,151,4	script	Soldat#11	825,{
-	mes "[Soldat]";
-	mes "*Baille* C'est tellement ennuyeux de faire ce métier de nos jours. Il y a longtemps, c'était peut-être différent...";
-	next;
-	mes "[Soldat]";
-	mes "Des monstres s'introduisaient régulièrement dans la ville, et les Soldats avaient toujours à faire.";
-	mes "Mais maintenant...";
-	close;
-}
-
-lou_in01,91,151,4	script	Soldat#12	825,{
-	mes "[Soldat]";
-	mes "....z..Z..z...";
-	next;
-	menu "Hé, debout!",-;
-	mes "[Soldat]";
-	mes "Chef! Oui chef!...!";
-	mes "Oh? Je m'étais assoupi~";
-	mes "Rholala...la...";
-	next;
-	mes "[Soldat]";
-	mes "...";
-	next;
-	mes "[Soldat]";
-	mes "...";
-	mes "......";
-	next;
-	mes "[Soldat]";
-	mes "...";
-	mes "......";
-	mes "....z..Z..z...";
-	close;
-}
-
-lou_in01,102,144,4	script	Soldat#15	825,{
-	mes "[Soldat]";
-	mes "Les gens disent qu'un maraudeur rôderait en ville...";
-	next;
-	menu "...?",-;
-	mes "[Soldat]";
-	mes "Mais j'ai fait plusieurs tournées sans jamais rien remarquer d'anormal. Je suis sûr que ce ne sont que des rumeurs inventées par les bourgeois!";
-	close;
-}
-
-lou_in01,99,144,4	script	Soldat#16	825,{
-	mes "[Soldat]";
-	mes "Ah, ne faîtes pas attention au gars qui est là.";
-	next;
-	mes "[Soldat]";
-	mes "J'espère que vous passerez un bon séjour à Louyang!";
-	close;
-}
-
-lou_in01,25,23,4	script	Hong Miao	817,{
-	mes "[Hong Miao]";
-	mes "Bienvenue.";
-	next;
-	mes "[Hong Miao]";
-	mes "Ici se trouve le passage qui mène à la Tour d'Observation. Nous mettons à votre service un ascenseur tout confort, rapide et sûr!";
-	mes "Voulez-vous monter admirer le paysage?";
-	next;
-	menu "Pouvez-vous me donner plus d'informations?",-,"Oui, s'il vous plaît",s_Yes,"Peut-être une autre fois.",s_Next_Time;
-	mes "[Hong Miao]";
-	mes "L'office du tourisme de Louyang a reçu de nombreuses lettres de suggestions demandant l'aménagement de la Tour d'Observation, afin que les touristes puissent profiter du belvédère.";
-	next;
-	mes "[Hong Miao]";
-	mes "Du fait de sa position géographique, de nombreux pics permettent d'admirer la lande des régions de Louyang.";
-	next;
-	mes "[Hong Miao]";
-	mes "Vous pouvez monter en haut de la Tour d'Observation en empruntant l'ascenseur spécialement mis en place pour les touristes. Il est sûr et rapide, et le prix de l'attraction n'est que de 500 Zenys par personne.";
-	close;
-s_Yes:
-	mes "[Hong Miao]";
-	if(zeny < 500){
-		mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
-		close;
-	}
-	set Zeny,Zeny - 500;
-	mes "Merci de votre participation.";
-	mes "Profitez bien de la vue!";
-	close2;
-	warp "lou_in01",16,19;
-	end;
-
-s_Next_Time:
-	mes "[Hong Miao]";
-	mes "Revenez quand vous voulez.";
-	close;
-}
-
-louyang,84,253,0	script	Sortie	111,{
-
-	mes "^3131FFIl y a une sorte de descente aménagée dans la branche de l'arbre.";
-	mes "Voulez-vous l'utiliser?^000000";
-	next;	
-	menu "Oui",-,"Non",s_No;
-	warp "lou_in01",10,18;
-	end;
-s_No:
-	close;
-}
-
-lou_in02,272,55,1	script	Patient	86,{
-
-	mes "[??????]";
-	mes "*Kof kof...*";
-	mes "Awww......www...";
-	mes "Aww...wwww..";
-	emotion e_dots;
-	close;
-}
