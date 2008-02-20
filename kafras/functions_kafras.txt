@@ -129,14 +129,14 @@ function	script	F_Kafra	{
 
 		// No Teleport (Common)
 		case 3: 
-			setarray @K_Menu0$[0],"Sauvegarder","Ouvrir mon Stock","Louer une Charette","Guide","Demander d'Autres Informations","Annuler";
+			setarray @K_Menu0$[0],"Sauvegarder","Ouvrir mon Stock","Louer une Charrette","Guide","Demander d'Autres Informations","Annuler";
 			break;
 
 		// Case 4 is Einbroch no tele message.
 
 		// No save, or teleport. (Common)
 		case 5:
-			setarray @K_Menu0$[0],"Ouvrir mon Stock","Louer une Charette","Demander d'Autres Informations","Guide","Annuler";
+			setarray @K_Menu0$[0],"Ouvrir mon Stock","Louer une Charrette","Demander d'Autres Informations","Guide","Annuler";
 			break;
 
 		// Storage and Check Other Information only.
@@ -146,7 +146,7 @@ function	script	F_Kafra	{
 
 		// Save, Storage, and Pushcart only (Kafra Warehouse)
 		case 7:
-			setarray @K_Menu0$[0],"Sauvegarder","Ouvrir mon Stock","Louer une Charette","Annuler";
+			setarray @K_Menu0$[0],"Sauvegarder","Ouvrir mon Stock","Louer une Charrette","Annuler";
 			break;
 
 		// Save, Storage, Other Check information. (Turbo track)
@@ -156,14 +156,14 @@ function	script	F_Kafra	{
 
 		// Common Employée Kafra
 		default:
-			setarray @K_Menu0$[0],"Sauvegarder","Ouvrir mon Stock","Utiliser le Service de Téléportation","Louer une Charette","Guide","Demander d'Autres Informations","Annuler";
+			setarray @K_Menu0$[0],"Sauvegarder","Ouvrir mon Stock","Utiliser le Service de Téléportation","Louer une Charrette","Guide","Demander d'Autres Informations","Annuler";
 			break;
 	}
 
 	// Guild Kafra Menu override (free Teleport, free Storage, Free Cart)
 	if(getarg(0)==2) {
 		cleararray @K_Menu0$[0],"",7;
-		setarray @K_Menu0$[0],"Ouvrir mon Stock","Ouvrir le Stock de Guilde","Louer une Charette","Utiliser le Service de Téléportation","Annuler";
+		setarray @K_Menu0$[0],"Ouvrir mon Stock","Ouvrir le Stock de Guilde","Louer une Charrette","Utiliser le Service de Téléportation","Annuler";
 	}
 	menu 	@K_Menu0$[0],K_Menu0,@K_Menu0$[1],K_Menu1,@K_Menu0$[2],K_Menu2,
 		@K_Menu0$[3],K_Menu3,@K_Menu0$[4],K_Menu4,@K_Menu0$[5],K_Menu5,
@@ -215,7 +215,7 @@ function	script	F_Kafra	{
 			callfunc "F_KafTele",getarg(0);
 			goto M_Menu;
 		}
-		if (@K_Menu0$[@num] == "Louer une Charette"){
+		if (@K_Menu0$[@num] == "Louer une Charrette"){
 			if(callfunc("F_KafCart",getarg(0),getarg(4)) == 1) next;
 			goto M_Menu;
 		}
@@ -404,13 +404,13 @@ function	script	F_KafCart	{
 	// Ensure that the class wanting to rent a pushcart is a merchant
 	if(baseClass != Job_Merchant){
 		mes "[Employée Kafra]";
-		mes "Je suis désolée, mais la location de charettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
+		mes "Je suis désolée, mais la location de charrettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
 		return 1;
 	}
 	// Make sure the invoking character does not have a cart already
 	else if(checkcart() == 1){
 		mes "[Employée Kafra]";
-		mes "Désolée... Mais vous avez déjà une Charette....";
+		mes "Désolée... Mais vous avez déjà une Charrette....";
 		return 1;
 	}
 
@@ -419,7 +419,7 @@ function	script	F_KafCart	{
 	if(countitem(7061) > 0 && getarg(0) != 2) delitem 7061,1;
 	else {
 		mes "[Employée Kafra]";
-		mes "La location de Charette";
+		mes "La location de Charrette";
 		mes "coûte "+getarg(1)+" Zenys.";
 		mes "Acceptez-vous ce tarif?";
 		next;
@@ -429,7 +429,7 @@ function	script	F_KafCart	{
 				mes "Je suis désolée, mais";
 				mes "vous n'avez pas assez";
 				mes "d'argent pour payer les";
-				mes ""+getarg(1)+" Zenys nécessaires à la location d'une Charette.";
+				mes ""+getarg(1)+" Zenys nécessaires à la location d'une Charrette.";
 				return 1;
 			}
 			set Zeny,Zeny-getarg(1);
