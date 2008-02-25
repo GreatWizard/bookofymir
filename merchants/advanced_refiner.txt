@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= Advanced Refiner
 //===== By: ==================================================
@@ -23,10 +25,8 @@
 
 payon,174,138,0	script	Suhnbi#cash	85,{
 	mes "[Suhnbi]";
-	mes "I am the Armsith";
-	mes "I can refine all kinds of weapons,";
-	mes "armor and equipment, so let me";
-	mes "know what you want to refine.";
+	mes "Bonjour. Mon nom est Suhnbi.";
+	mes "Je suis forgeron, je peux raffiner tous types d'armes, armures et équipements. Quel équipement souhaiteriez-vous que je raffine?";
 	next;
 	set .@strRetPart1$,getequipname(1);
 	set .@strRetPart2$,getequipname(2);
@@ -46,7 +46,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,1;
 		if (getequipisequiped(1) == 0) {
 			mes "[Suhnbi]";
-			mes "Do you want me to refine your skull?";
+			mes "Vous voulez peut-être que je raffine le petit pois qui vous sert de cerveau?";
 			close;
 		}
 		break;
@@ -54,7 +54,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,2;
 		if (getequipisequiped(2) == 0) {
 			mes "[Suhnbi]";
-			mes "I'll refine your torso with my own passionate body!";
+			mes "Vous voulez que j'applique mon chalumeau sur votre peau...?";
 			close;
 		}
 		break;
@@ -62,7 +62,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,3;
 		if (getequipisequiped(3) == 0) {
 			mes "[Suhnbi]";
-			mes "Sorry, there ain't any technology yet to put rockets on your left hand...";
+			mes "J'aurais beau essayer, je ne peux pas transformer votre main gauche en arme de guerre...";
 			close;
 		}
 		break;
@@ -70,7 +70,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,4;
 		if (getequipisequiped(4) == 0) {
 			mes "[Suhnbi]";
-			mes "Sorry, there ain't any technology yet to put rockets on your right hand...";
+			mes "J'aurais beau essayer, je ne peux pas transformer votre main droite en arme de guerre...";
 			close;
 		}
 		break;
@@ -78,7 +78,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,5;
 		if (getequipisequiped(5) == 0) {
 			mes "[Suhnbi]";
-			mes "You're not even wearing a garment? Are you?";
+			mes "Mais regardez-vous... Vous n'avez même pas de Garment sur vous...";
 			close;
 		}
 		break;
@@ -86,7 +86,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,6;
 		if (getequipisequiped(6) == 0) {
 			mes "[Suhnbi]";
-			mes "What do I look like, a makeover artist? I can't refine your bare feet!";
+			mes "Argh!! Ça pue des pieds ici! Je ne peux pas raffiner dans ces conditions... erk!!";
 			close;
 		}
 		break;
@@ -94,7 +94,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,7;
 		if (getequipisequiped(7) == 0) {
 			mes "[Suhnbi]";
-			mes "Um... You're not wearing an Accessory.";
+			mes "Qu'entendez-vous par 'Accessoire'? Où vous en voyez un, vous?";
 			close;
 		}
 		break;
@@ -102,7 +102,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,8;
 		if (getequipisequiped(8) == 0) {
 			mes "[Suhnbi]";
-			mes "Accessory? You're not wearing one of those.";
+			mes "Qu'entendez-vous par 'Accessoire'? Où vous en voyez un, vous?";
 			close;
 		}
 		break;
@@ -110,7 +110,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,9;
 		if (getequipisequiped(9) == 0) {
 			mes "[Suhnbi]";
-			mes "I refine equipment. I don't give hair cuts.";
+			mes "Je raffine des équipements. Je suis forgeron, pas coiffeur.";
 			close;
 		}
 		break;
@@ -118,7 +118,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		set .@part,10;
 		if (getequipisequiped(10) == 0) {
 			mes "[Suhnbi]";
-			mes "What am I, your personal hairstylist?. Go to the salon if you want work done on your precious hair.";
+			mes "Vous me prenez pour votre styliste personnel ou quoi? Allez au salon de coiffure si vous voulez une coupe tendance.";
 			close2;
 		}
 		break;
@@ -126,17 +126,17 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 
 	if (getequipisenableref(.@part) == 0) {
 		mes "[Suhnbi]";
-		mes "I don't think I can refine this item at all.";
+		mes "Je ne peux pas travailler sur cet équipement...";
 		close;
 	}
 	if (getequipisidentify(.@part) == 0) {
 		mes "[Suhnbi]";
-		mes "This is has not been identified. So, it can't be refined...";
+		mes "Vous devez d'abord identifier cet équipement.";
 		close;
 	}
 	if (getequiprefinerycnt(.@part) >= 10) {
 		mes "[Suhnbi]";
-		mes "This item cannot be refined because it has already reached its maximum level...";
+		mes "Cet équipement est déjà à son maximum, je ne peux pas le raffiner plus.";
 		close;
 	}
 	// Make sure you have the neccessary items and Zeny to refine your items
@@ -151,18 +151,17 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 
 	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
 		mes "[Suhnbi]";
-		mes "Clink! Clank! Clunk!";
+		mes "Cling! Clang! Clang!";
 		SuccessRefItem .@part;
 		next;
 		Emotion e_no1;
 		mes "[Suhnbi]";
-		mes "Here you are! It's done.";
-		mes "It's been a while since I've made such a fine weapon. You must be happy because it has become stronger!";
+		mes "HAHA, quel talent! On dirait que mes vieux os ne sont pas encore rouillés! Splendide... tout simplement splendide...";
 		close;
 	}
 	else {
 		mes "[Suhnbi]";
-		mes "Clink! Clank! Clunk!";
+		mes "Cling! Clang! Clung!";
 		FailedRefItem .@part;
 		next;
 		if (rand(5) == 1)
@@ -170,45 +169,36 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		else 
 			Emotion e_omg;
 		mes "[Suhnbi]";
-		mes "Cough!!!!";
+		mes "Aaahhh!! Oh non...!!";
 		next;
 		mes "[Suhnbi]";
-		mes "Cough...Cough..";
-		mes "What a shame...";
-		mes "Your equipment broke during hte refining process. I had told you earlier this might happen!";
+		mes "He... Hem... Je suis désolé mais le raffinement a ^ff0000échoué ^000000.";
+		next;
+		mes "[Suhnbi]";
+		mes "Jai vraiment honte de ce que j'ai fait... MAIS je vous avais prévenu qu'il y avait des risques!";
 		close;
 	}
 
 S_RefineValidate:
 	mes "[Suhnbi]";
 	if (getarg(0))
-		mes "A level "+getarg(0)+" weapon...";
-	mes "To refine this I need one ^ff9999"+getitemname(getarg(1))+"^000000 and a service fee of "+getarg(2)+" Zeny.";
-	mes "Do you wish to continue?";
+		mes "Une Arme de Niveau "+getarg(0)+"...";
+	mes "Afin de raffiner cet équipement j'aurais besoin de minerais ^ff9999"+getitemname(getarg(1))+"^000000 et de "+getarg(2)+" Zenys.";
+	mes "Voulez-vous continuer?";
 	next;
-	if (select("Yes:No") == 1) {
+	if (select("Oui:Non") == 1) {
 		if (getequippercentrefinery(getarg(3)) < 100) {
 			mes "[Suhnbi]";
-			mes "Wow!!";
-			mes "This weapon, probably";
-			mes "looks like it's been refined...";
-			mes "many times...";
-			mes "It may break if";
-			mes "you refine it again.";
+			mes "Hum... Attendez une minute! Cet équipement a déjà été raffiné un certain nombre de fois!";
+			mes "Je dois vous prévenir, que si vous le raffinez ENCORE, il pourrait SE ^ff0000DETRUIRE^000000 durant la forge et devenir ^ff0000INUTILISABLE^000000!!";
 			next;
-			mes "And if it breaks,";
-			mes "you can't use it anymore!";
-			mes "All the cards in it and the";
-			mes "properties";
-			mes "^ff0000will be lost^000000!!";
-			mes "^ff0000 besides, the equipment will break!^000000";
-			mes " ";
-			mes "Are you sure you still want to continue?";
+			mes "[Suhnbi]";
+			mes "Voulez vous tout de même tenter de le raffiner? Si oui, je ne vous garantie pas le résultat...";
 			next;
-			if (select("Yes:No") == 2) {
+			if (select("Oui:Non") == 2) {
 				mes "[Suhnbi]";
-				mes "I completely agree...";
-				mes "I might be a great refiner, but something even I make mistakes.";
+				mes "Bon choix.";
+				mes "Ah ça oui... un choix judicieux. Je serais terriblement embarrassé si je détruisais votre équipement par mégarde.";
 				close;
 			}
 		}
@@ -219,15 +209,15 @@ S_RefineValidate:
 		}
 		else {
 			mes "[Suhnbi]";
-			mes "You don't seem to have enough Zeny or "+getitemname(getarg(1))+"...";
-			mes "Go get some more. I'll be here ll day if you need me.";
+			mes "On dirait qu'il vous manque de l'argent ou bien du minerais "+getitemname(getarg(1))+"...";
+			mes "Allez en chercher. Je reste ici, de toutes façons...";
 			close;
 		}
 	}
 	else {
 		mes "[Suhnbi]";
-		mes "Yeah... There's no need to rush.";
-		mes "Take your time.";
+		mes "C'est vrai... Pas la peine de se presser.";
+		mes "Prenez votre temps.";
 		close;
 	}
 }
