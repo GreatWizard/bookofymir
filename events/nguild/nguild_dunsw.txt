@@ -1,17 +1,48 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= War of Emperium Dungeon Switch for NGuild Castles
 //===== By: ==================================================
 //= kobra_k88
 //===== Current Version: =====================================
-//= 1.0
+//= 1.1
 //===== Compatible With: =====================================
 //= eAthena 0.1+; RO Episode 4+
 //===== Description: =========================================
 //= Switch that warps guild members to the guild dungeon
 //===== Additional Comments: =================================
 //= Based off existing guild scripts.  Do not know if it is accurate.[kobra_k88]
+//= 1.1 Guild Dungeon Switch Fucntion added. [L0ne_W0lf]
 //============================================================
 
+
+//==================================================
+function	script	F_GldDunSw	{
+	set .@GID, GetCastleData(getarg(0),1);
+	if (.@GID == 0) {
+		mes "[ Voix Mystérieuse ]";
+		mes " ' ..... Vous n'êtes pas assez brave pour pénétrer ici...... ' ";
+		close;
+	}
+	else {
+		mes "[ Voix Mystérieuse ]";
+		mes " ' Seuls les braves peuvent franchir cette limite... ' ";
+		next;
+		mes " ";
+		mes "Vous remarquez un petit levier....... Voulez-vous l'activer?";
+		next;
+
+		if (select("Activer.:Ne rien faire.") == 1) {
+			if (getcharid(2) == .@GID) {
+				warp "gld_dun"+getarg(1),getarg(2),getarg(3);
+				end;
+			}
+			mes " ";
+			mes " Rien ne se produit.";
+		}
+		return;
+	}
+}
 
 // Castle 1 ===============================================
 nguild_alde,212,181,0	script	Switch#DunN01	111,{
