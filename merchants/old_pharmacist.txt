@@ -25,6 +25,12 @@
 //============================================================
 
 alberta_in,16,28,4	script	Vieux Pharmacien	61,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Attendez! -";
+		mes "- Vous portez actuellement trop d'objets sur vous. -";
+		mes "- Revenez après en avoir déposé dans votre Stock Kafra. -";
+		close;
+	}
 	mes "[Vieux Pharmacien]";
 	mes "Hummm... que voulez-vous...?";
 	switch(select("Fabriquer une Potion","Discuter","Des Informations","Non, rien")) {
@@ -83,7 +89,7 @@ alberta_in,16,28,4	script	Vieux Pharmacien	61,{
 								mes "[Vieux Pharmacien]";
 								mes "Donnez-moi un chiffre entre 1 et 100. Dîtes 0 si vous voulez annuler.";
 								mes "Vous pouvez obtenir "+.@max+" potions au maximum, avec ce que vous avez apporté.";
-								input .@amount;
+								input .@amount,0,101;
 								if (.@amount == 0) {
 									next;
 									mes "[Vieux Pharmacien]";

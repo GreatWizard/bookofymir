@@ -6,7 +6,7 @@
 //= Darkchild (1.1)
 //= Playtester (1.2)
 //===== Current Version: ===================================== 
-//= 2.2
+//= 2.5
 //===== Compatible With: ===================================== 
 //= eAthena 1.0+
 //===== Description: ========================================= 
@@ -39,6 +39,9 @@
 //= 2.1 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
 //= 2.1a Corrected a little Typo error. (bugreport:536 & 537) [Samuray22]
 //= 2.2 Small update to Vein's Inn Master. [L0ne_W0lf]
+//= 2.3 Added Lighthalzen Inn from Lighthalzen town file. [L0ne_W0lf]
+//= 2.4 Fixed Inn Employee#Ahlma warping to same destination as save point, bugreport: 191.
+//= 2.5 Added Moscovia Gostinitsa (Inn) from jA
 //============================================================ 
 
 
@@ -53,7 +56,7 @@ prt_in,244,135,2	script	Aubergiste#Sammy	53,{
 prt_in,61,141,2	script	Aubergiste#Ahlma	53,{
 
 	callfunc "F_InnMaid","[Ahlma]","Auberge Nenkaras","prt_in",64,136;
-	warp "prt_in",64,136; end;
+	warp "prt_in",60,166; end;
 }
 
 //======================== Alberta ====================================
@@ -113,10 +116,50 @@ ra_in01,376,69,4	script	Aubergiste#Annie	931,{
 	warp "ra_in01",384,128; end;
 }
 
+//====================== Lighthalzen =================================
+lhz_in02,230,284,4	script	Employée de l'Hôtel#01	86,{
+
+	mes "[Employée de l'Hôtel]";
+	mes "Bienvenue à l'Hôtel Dragon Royal, où vous pourrez profiter des meilleurs services en matière d'hôtellerie.";
+	next;
+	menu "Sauvegarder",s_Save,"Louer une Chambre -> 5000 Zenys",s_Rest,"Rien, merci",-;
+
+	mes "[Employée de l'Hôtel]";
+	mes "Merci, passez une bonne journée.";
+	close;
+
+s_Save:
+	savepoint "lhz_in02",209,275;
+	mes "[Employée de l'Hôtel]";
+	mes "Votre point de sauvegarde";
+	mes "a été enregistré.";
+	mes "Merci, je reste";
+	mes "à votre disposition.";
+	close;
+
+s_Rest:
+	if(Zeny < 5000)goto s_NEnoughZ;
+	set Zeny,Zeny - 5000;
+	mes "[Employée de l'Hôtel]";
+	mes "Merci~";
+	mes "J'espère que vous apprécierez votre séjour à l'Hôtel Dragon Royal.";
+	close2;
+	warp "lhz_in02",219,150;
+	percentheal 100,100;
+	sc_start SC_BLESSING,240000,10;
+	skilleffect AL_BLESSING,0;
+	end;
+
+s_NEnoughZ:
+	mes "[Employée de l'Hôtel]";
+	mes "Je suis désolée, mais vous n'avez pas assez d'argent. Revenez quand vous en aurez!";
+	close;
+}
+
 //======================== Hugel ====================================
 hu_in01,246,107,3	script	Aubergiste#Receptio	53,{
 
-	callfunc "F_InnMaid","[Réceptioniste]","Auberge d'Hugel","hu_in01",263,95;
+	callfunc "F_InnMaid","[Réceptionniste]","Auberge d'Hugel","hu_in01",263,95;
 	warp "hu_in01",267,5; end;
 }
 
@@ -141,7 +184,7 @@ ve_in,157,219,5	script	Aubergiste#master	709,{
 		mes "[Aubergiste]";
 		if(Zeny < 5000){
 			mes "Je suis désolé, mais vous n'avez pas assez d'argent pour louer une chambre.";
-			mes "Le prix de ce service esst de 5000 Zenys.";
+			mes "Le prix de ce service est de 5000 Zenys.";
 			close;
 		}
 		mes "Profitez de votre séjour ici~";
@@ -192,3 +235,43 @@ function	script	F_InnMaid	{
 	Mend:
 		close;
 }
+
+//======================== Moscovia ====================================
+mosk_in,135,191,5	script	Aubergiste#Receptionist	961,{
+	mes "[Aubergiste]";
+	mes "Bonjour~";
+	mes "Bienvenue dans l'auberge la plus comfortable de Moscovia~";
+	next;
+	menu "Sauvegarder",Msave, "Louer une Chambre -> 5000 Zenys",Mrent, "Rien, merci",Mend;
+
+	Msave:
+		mes "[Aubergiste]";
+		mes "Votre point de sauvegarde";
+		mes "a été enregistré à Moscovia.";
+		mes "Merci, je reste";
+		mes "à votre disposition.";
+		mes "Bon séjour~";
+		savepoint "mosk_in",142,189;
+		close;
+	Mrent:
+		mes "[Aubergiste]";
+		if(Zeny < 5000){
+			mes "Je suis désolée, mais le coût de";
+			mes "ce service est de 5000 Zenys.";
+			mes "Veuillez vous assurer d'avoir assez";
+			mes "d'argent sur vous la prochaine fois.";
+			close;
+		}
+		mes "Merci.";
+		mes "Passez une";
+		mes "agréable nuit~";
+		close2;
+		set Zeny,Zeny - 5000;
+		percentheal 100,100;
+		warp "mosk_in",215,181;
+
+	Mend:
+		close;
+}
+
+
