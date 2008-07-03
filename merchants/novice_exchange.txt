@@ -1,149 +1,341 @@
 //Le Livre d'Ymir http://bookofymir.free.fr/
 //traduit par Myllena
-//===== eAthena Script ========================================
+//===== eAthena Script =======================================
 //= Novice Goods Exchanger
 //===== By: ==================================================
 //= ???, eAthena Team
 //===== Current Version: =====================================
-//= 1.1a
+//= 1.4
 //===== Compatible With: =====================================
-//= eAthena 1.0+
+//= eAthena SVN
 //===== Description: =========================================
-//= Exchanges your cheap loot to Red Potions.
-//= Official NPC.
+//= [Aegis COnversion]
+//= Exchanges your Basic Monster drops for Red Potions.
 //===== Additional Comments: =================================
-//= 1.1 Made it as a function. U can add your own Merchs [Lupus]
-//= 1.1a Fixed item select [KarLaeda]
+//= 1.2 Rescripted to Aegis 10.standards. [L0ne_W0lf[
+//=	Made it easier to add new items to exhange list
+//=	meaning only the exchange is done in a function now.
+//= 1.3 Fixed dialog mix-up in function. [L0ne_W0lf]
+//= 1.4 Added checkweight, and input min/max values. [L0ne_W0lf]
 //============================================================
 
-function	script	F_NMerch	{
-	mes "["+getarg(0)+"]";
-	if((Weight*100)/MaxWeight >= 90){
-		mes "Vous avez l'air bien chargé jeune-homme...";
+prontera,123,102,5	script	Marchand#pron	85,{
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[Marchand]";
+		mes "Haha!";
+		mes "Vous vous prenez pour un super héros?";
+		mes "Vous transportez bien trop d'objets sur vous!";
+		mes "Vous feriez mieux d'en déposer un peu dans votre Stock Kafra~";
 		close;
 	}
+	mes "[Marchand]";
 	mes "Bien le Bonjour!";
-	mes "Auriez-vous par hasard une petite collection de "+getitemname(getarg(1))+" ou de "+getitemname(getarg(3))+"?";
-	if(getarg(5))
-		mes "...Que diriez-vous de quelques "+getitemname(getarg(5))+"?..";
-	mes "Evidement, ce ne sera pas gratuit.";
+	mes "Auriez-vous par hasard une petite collection de Shells ou de Fluff?";
+	mes "Ou peut-être bien des Jellopies? Parce que en fait, j'en aurais bien besoin.";
 	next;
-	mes "["+getarg(0)+"]";
-	mes "Et si on disait... Je vous donne 1 Red Potion en échange de";
-	mes " "+getarg(2)+" "+getitemname(getarg(1))+" ou "+getarg(4)+" "+getitemname(getarg(3))+"?";
-	if(getarg(5))
-		mes "Ou "+getarg(6)+" "+getitemname(getarg(5))+"?";
+	mes "[Marchand]";
+	mes "Evidemment, je ne vais pas vous demander de me donner tout ça gratuitement. Et si on disait... Je vous donne une Potion Rouge en échange de 5 Shells, 10 Fluff, ou 10 Jellopies?";
 	next;
-	switch (select("Super!:Quelle arnaque...:Non merci")) {
+	switch(select("Super!:Quelle arnaque!:Non, merci.")) {
 	case 1:
-		mes "["+getarg(0)+"]";
-		mes "Alors, quels objets allez-vous m'apporter?";
-		mes ""+getitemname(getarg(1))+"?  "+getitemname(getarg(3))+"?";
-		if(getarg(5))
-			mes "Ou "+getitemname(getarg(5))+"?";
+		mes "[Marchand]";
+		mes "Alors, quels objets allez-vous me donner?";
+		mes "Des Shells, des Fluffs, ou bien des Jellopies?";
 		next;
-		if(getarg(5))
-			set @i,select(""+getitemname(getarg(1))+"",""+getitemname(getarg(3))+"",""+getitemname(getarg(5))+"","Annuler");
-		else
-			set @i,select(""+getitemname(getarg(1))+"",""+getitemname(getarg(3))+"","Annuler");
-		if(@i==4 || (@i==3 && !getarg(5))) {
-			mes "["+getarg(0)+"]";
-			mes "D'accord, pas de problème.";
+		switch(select("Shells:Jellopies:Fluff:Annuler")) {
+		case 1: callfunc "F_PotExchange",935,5;
+		case 2: callfunc "F_PotExchange",909,10;
+		case 3: callfunc "F_PotExchange",914,10;
+		case 4:
+			mes "[Marchand]";
+			mes "D'accord~";
+			mes "Pas de problème.";
 			close;
 		}
-		set @item,getarg(@i*2-1);
-		set @amount,getarg(@i*2);
-		set @have,countitem(@item);
-		if(@have < @amount) {
-			mes "["+getarg(0)+"]";
-			mes "Hé, où sont tous les ";
-			mes getitemname(@item)+" que vous m'aviez promis?";
-			close;
-		}
-		mes "["+getarg(0)+"]";
-		mes "Ok, voyons-voir ce que vous avez rapporté.";
-		next;
-		set @max,@have / @amount;
-		mes "["+getarg(0)+"]";
-		mes "Vous avez "+@have+" "+getitemname(@item)+"...";
-		mes "Je peux vous les échanger contre";
-		mes "... disons "+@max+" Red Potions.";
-		next;
-		mes "["+getarg(0)+"]";
-		mes "Qu'en dîtes-vous?";
-		next;
-		if(select("Emballé c'est pesé!:Quellel arnaque!")==2) {
-			mes "["+getarg(0)+"]";
-			mes "Si vous le dîtes...";
-			close;
-		}
-		mes "["+getarg(0)+"]";
-		mes "Vous savez le nombre exact de Red Potions";
-		mes "que vous pouvez recevoir en échange de "+getitemname(@item)+"?";
-		next;
-		mes "["+getarg(0)+"]";
-		mes "Le nombre de Red Potions maximum que je peux vous échanger à la fois est de 100.";
-		mes "Si vous avez changé d'avis, entrez simplement '0' pour annuler.";
-		while(1) {
-			next;
-			input @val;
-			if(@val<0 || @val>100) {
-				mes "["+getarg(0)+"]";
-				mes "Hum, le nombre que vous m'avez donné n'est pas correct.";
-				mes "Vérifiez bien le nombre de Red Potions que vous pouvez obtenir.";
-				continue;
-			}
-			break;
-		}
-		mes "["+getarg(0)+"]";
-		if(@val == 0) {
-			mes "Que... Quoi?! Comment osez-vous me traiter ainsi?";
-			mes "Partez! Je ne fais pas affaires avec des lunatiques tels que vous.";
-			close;
-		}
-		if(@val > @max) {
-			mes "Hum, le nombre que vous m'avez donné n'est pas correct.";
-			mes "Vérifiez bien le nombre de Red Potions que vous pouvez obtenir.";
-			close;
-		}
-		delitem @item,@amount*@val;
-		getitem 501,@val;
-		mes "Et voilà!";
-		mes "Merci, vous avez fait une bonne affaire.";
-		close;
 	case 2:
-		mes "["+getarg(0)+"]";
-		mes "Vous dîtes que je suis un arnaqueur?!";
-		mes "Vous avez autre chose de plus intelligent à dire?";
-		next;
-		mes "["+getarg(0)+"]";
-		mes "Si vous étudiez bien le prix de chaque objet, vous vous rendrez compte que je fais du commerce à perte!";
+		mes "[Marchand]";
+		mes "Une arnaque...?";
+		mes "Si vous étudiez bien les prix de chaque objet sur le marché actuel, vous vous rendrez compte que je fais du commerce à perte!";
 		mes "Si vous ne voulez pas profiter de mon offre, allez-vous en!";
 		close;
 	case 3:
-		mes "["+getarg(0)+"]";
+		mes "[Marchand]";
 		mes "D'accord, pas de problème.";
+		mes "Revenez si vous changez d'avis.";
 		close;
 	}
 }
 
-prontera,123,102,5	script	Marchand#1	85,{
-	callfunc "F_NMerch","Merchant",935,5,914,10,909,10;
+morocc,180,259,3	script	Marchand#morroc	85,{
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[Marchand]";
+		mes "Haha!";
+		mes "Vous vous prenez pour un super héros?";
+		mes "Vous transportez bien trop d'objets sur vous!";
+		mes "Vous feriez mieux d'en déposer un peu dans votre Stock Kafra~";
+		close;
+	}
+	mes "[Marchand]";
+	mes "Bien le Bonjour!";
+	mes "Auriez-vous par hasard une petite collection de Shells ou de Feathers of Bird?";
+	mes "Ou peut-être bien des Jellopies? Parce que en fait, j'en aurais bien besoin.";
+	next;
+	mes "[Marchand]";
+	mes "Evidemment, je ne vais pas vous demander de me donner tout ça gratuitement. Et si on disait... Je vous donne une Potion Rouge en échange de 5 Shells, 7 Feathers of Bird, ou 10 Jellopies?";
+	next;
+	switch(select("Super!:Quelle arnaque!:Non, merci.")) {
+	case 1:
+		mes "[Marchand]";
+		mes "So which item do";
+		mes "you want to bring me?";
+		mes "Shells, Feathers of Birds,";
+		mes "or Jellopies?";
+		next;
+		switch(select("Shells:Feathers of Birds:Jellopies:Annuler")) {
+		case 1: callfunc "F_PotExchange",935,5;
+		case 2: callfunc "F_PotExchange",916,7;
+		case 3: callfunc "F_PotExchange",909,10;
+		case 4:
+			mes "[Marchand]";
+			mes "D'accord~";
+			mes "Pas de problème.";
+			close;
+		}
+	case 2:
+		mes "[Marchand]";
+		mes "Une arnaque...?";
+		mes "Si vous étudiez bien les prix de chaque objet sur le marché actuel, vous vous rendrez compte que je fais du commerce à perte!";
+		mes "Si vous ne voulez pas profiter de mon offre, allez-vous en!";
+		close;
+	case 3:
+		mes "[Marchand]";
+		mes "D'accord, pas de problème.";
+		mes "Revenez si vous changez d'avis.";
+		close;
+	}
 }
 
-geffen,173,88,5	script	Marchand#2	85,{
-	callfunc "F_NMerch","Merchant",935,5,915,6,909,10;
+payon,200,134,5	script	Marchand#pay	85,{
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[Marchand]";
+		mes "Haha!";
+		mes "Vous vous prenez pour un super héros?";
+		mes "Vous transportez bien trop d'objets sur vous!";
+		mes "Vous feriez mieux d'en déposer un peu dans votre Stock Kafra~";
+		close;
+	}
+	mes "[Marchand]";
+	mes "Bien le Bonjour!";
+	mes "Auriez-vous par hasard une petite collection de Tree Roots?";
+	mes "Ou peut-être bien des Jellopies? Parce que en fait, j'en aurais bien besoin.";
+	next;
+	mes "[Marchand]";
+	mes "Evidemment, je ne vais pas vous demander de me donner tout ça gratuitement. Et si on disait... Je vous donne une Potion Rouge en échange de 6 Tree Roots, ou 10 Jellopies?";
+	next;
+	switch(select("Super!:Quelle arnaque!:Non, merci.")) {
+	case 1:
+		mes "[Marchand]";
+		mes "So which item do";
+		mes "you want to bring me?";
+		mes "Tree Roots, or Jellopies?";
+		next;
+		switch(select("Tree Roots:Jellopies:Annuler")) {
+		case 1: callfunc "F_PotExchange",902,6;
+		case 2: callfunc "F_PotExchange",909,10;
+		case 3:
+			mes "[Marchand]";
+			mes "D'accord~";
+			mes "Pas de problème.";
+			close;
+		}
+	case 2:
+		mes "[Marchand]";
+		mes "Une arnaque...?";
+		mes "Si vous étudiez bien les prix de chaque objet sur le marché actuel, vous vous rendrez compte que je fais du commerce à perte!";
+		mes "Si vous ne voulez pas profiter de mon offre, allez-vous en!";
+		close;
+	case 3:
+		mes "[Marchand]";
+		mes "D'accord, pas de problème.";
+		mes "Revenez si vous changez d'avis.";
+		close;
+	}
 }
 
-morocc,180,259,3	script	Marchand#3	85,{
-	callfunc "F_NMerch","Merchant",935,5,916,7,909,10;
+aldebaran,152,63,5	script	Marchand#alde	85,{
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[Marchand]";
+		mes "Haha!";
+		mes "Vous vous prenez pour un super héros?";
+		mes "Vous transportez bien trop d'objets sur vous!";
+		mes "Vous feriez mieux d'en déposer un peu dans votre Stock Kafra~";
+		close;
+	}
+	mes "[Marchand]";
+	mes "Bien le Bonjour!";
+	mes "Auriez-vous par hasard une petite collection de Worm Peelings ou de Feather of Birds?";
+	mes "Ou peut-être bien des Jellopies? Parce que en fait, j'en aurais bien besoin.";
+	next;
+	mes "[Marchand]";
+	mes "Evidemment, je ne vais pas vous demander de me donner tout ça gratuitement. Et si on disait... Je vous donne une Potion Rouge en échange de 1 Worm Peeling, 7 Feather of Birds, ou 10 Jellopies?";
+	next;
+	switch(select("Super!:Quelle arnaque!:Non, merci.")) {
+	case 1:
+		mes "[Marchand]";
+		mes "So which item do";
+		mes "you want to bring me?";
+		mes "Feathers of Birds?";
+		mes "Worm Peelings?";
+		mes "Or Jellopies?";
+		next;
+		switch(select("Worm Peelings:Feathers of Birds:Jellopies:Annuler")) {
+		case 1: callfunc "F_PotExchange",955,1;
+		case 2: callfunc "F_PotExchange",916,7;
+		case 3: callfunc "F_PotExchange",909,10;
+		case 4:
+			mes "[Marchand]";
+			mes "D'accord~";
+			mes "Pas de problème.";
+			close;
+		}
+	case 2:
+		mes "[Marchand]";
+		mes "Une arnaque...?";
+		mes "Si vous étudiez bien les prix de chaque objet sur le marché actuel, vous vous rendrez compte que je fais du commerce à perte!";
+		mes "Si vous ne voulez pas profiter de mon offre, allez-vous en!";
+		close;
+	case 3:
+		mes "[Marchand]";
+		mes "D'accord, pas de problème.";
+		mes "Revenez si vous changez d'avis.";
+		close;
+	}
 }
 
-aldebaran,152,63,5	script	Marchand#4	85,{
-	callfunc "F_NMerch","Merchant",955,1,916,7,909,10;
+geffen,173,88,5	script	Marchand#geff	85,{
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[Marchand]";
+		mes "Haha!";
+		mes "Vous vous prenez pour un super héros?";
+		mes "Vous transportez bien trop d'objets sur vous!";
+		mes "Vous feriez mieux d'en déposer un peu dans votre Stock Kafra~";
+		close;
+	}
+	mes "[Marchand]";
+	mes "Bien le Bonjour!";
+	mes "Auriez-vous par hasard une petite collection de Shells ou de Chrysalises?";
+	mes "Ou peut-être bien des Jellopies? Parce que en fait, j'en aurais bien besoin.";
+	next;
+	mes "[Marchand]";
+	mes "Evidemment, je ne vais pas vous demander de me donner tout ça gratuitement. Et si on disait... Je vous donne une Potion Rouge en échange de 5 Shells, 6 Chrysalises, ou 10 Jellopies?";
+	next;
+	switch(select("Super!:Quelle arnaque!:Non, merci.")) {
+	case 1:
+		mes "[Marchand]";
+		mes "So which item do";
+		mes "you want to bring me?";
+		mes "Shells, Chrysalises, or Jellopies?";
+		next;
+		switch(select("Shells:Chrysalises:Jellopies:Annuler")) {
+		case 1: callfunc "F_PotExchange",935,5;
+		case 2: callfunc "F_PotExchange",915,6;
+		case 3: callfunc "F_PotExchange",909,10;
+		case 4:
+			mes "[Marchand]";
+			mes "D'accord~";
+			mes "Pas de problème.";
+			close;
+		}
+	case 2:
+		mes "[Marchand]";
+		mes "Une arnaque...?";
+		mes "Si vous étudiez bien les prix de chaque objet sur le marché actuel, vous vous rendrez compte que je fais du commerce à perte!";
+		mes "Si vous ne voulez pas profiter de mon offre, allez-vous en!";
+		close;
+	case 3:
+		mes "[Marchand]";
+		mes "D'accord, pas de problème.";
+		mes "Revenez si vous changez d'avis.";
+		close;
+	}
 }
 
-payon,200,134,5	script	Marchand#5	85,{
-	//we remove 3rd item, by adding 0,0
-	callfunc "F_NMerch","Merchant",902,6,909,10,0,0;
+function	script	F_PotExchange	{
+	if (countitem(getarg(0)) < getarg(1)) {
+		mes "[Marchand]";
+		mes "Hé, où sont tous les "+getitemname(getarg(0))+"";
+		mes "que vous m'aviez promis?";
+		mes "Donnez-moi des "+getitemname(getarg(0))+"!";
+		close;
+	}
+	else {
+		mes "[Marchand]";
+		mes "Ok, voyons voir combien de "+getitemname(getarg(0))+" vous avez rapporté. Hum...";
+		next;
+		mes "[Marchand]";
+		mes "Vous avez";
+		mes "un total de " + countitem(getarg(0)) + " "+getitemname(getarg(0))+".";
+		mes "Je peux vous les échanger contre un total";
+		mes "de " + (countitem(getarg(0))/getarg(1)) + " Potions Rouges.";
+		next;
+		mes "[Marchand]";
+		mes "Qu'en dîtes-vous?";
+		mes "Marché conclu?";
+		next;
+		if (select("Emballé c'est pesé!:Quellel arnaque!") == 1) {
+			mes "[Marchand]";
+			mes "Vous savez le nombre exact de Potions Rouges que vous pouvez recevoir en échange de vos "+getitemname(getarg(0))+", n'est-ce pas?";
+			next;
+			mes "[Marchand]";
+			mes "Je peux vous en échanger 100 au maximum.";
+			mes "Si vous avez changé d'avis, entrez simplement '0' pour annuler.";
+			next;
+			while(1) {
+				input .@input,0,101;
+				if (.@input == 0) {
+					mes "[Marchand]";
+					mes "Que... Quoi?! Comment osez-vous me traiter ainsi?";
+					mes "Partez! Je ne fais pas affaires avec des lunatiques tels que vous.";
+					close;
+				}
+				else if (.@input > 100) {
+					mes "[Marchand]";
+					mes "Hum, le nombre que vous m'avez donné n'est pas correct, je ne peux pas vous en donner plus de 100 à la fois.";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			set .@put_out_item,.@input * getarg(1);
+			if (countitem(getarg(0)) < .@put_out_item) {
+				mes "[Marchand]";
+				mes "Hum, le nombre que vous m'avez donné n'est pas correct, vérifiez le nombre que vous pouvez obtenir.";
+				close;
+			}
+			mes "[Marchand]";
+			mes "Et voilà!";
+			mes "Merci, vous avez fait une bonne affaire.";
+			delitem getarg(0),.@put_out_item; //Shell
+			getitem 501,.@input; //Red_Potion
+			close;
+		}
+		mes "[Marchand]";
+		mes "Hum~";
+		mes "D'accord.";
+		mes "Mais qu'y-a-t-il de plus utile que des Potions Rouges pour un aventurier tel que vous?";
+		close;
+	}
 }
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.1 Made it as a function. U can add your own Merchs [Lupus]
+//= 1.1a Fixed item select [KarLaeda]
+//============================================================ 

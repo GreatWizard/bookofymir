@@ -6,7 +6,7 @@
 //= Kalen - Original jAthena
 //= Fredzilla - Converted, Lupus
 //===== Current Version: ===================================== 
-//= 3.2a
+//= 3.4
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -16,6 +16,8 @@
 //= 3.2 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //=	No longer uses function "F_BlockHigh"
 //= 3.2a Deleted unused variables. [Samuray22]
+//= 3.3 Updated waiting room. (Removes global var) [L0ne_W0lf]
+//= 3.4 Fixed bad variables, bugreport:1685 [Brainstorm]
 //============================================================
 
 comodo,180,153,4	script	Sonotora#1	90,{
@@ -295,10 +297,10 @@ job_duncer,43,93,4	script	Aile#da	724,{
 			mes "Apportez...";
 			mes "^CD688910 000 Zenys^000000,";
 			if (DANC_Q == 2) {
-				mes "^CD6889"+.@count[0]+" "+getitemname(.@items[0])+"^000000,";
-				mes "^CD6889"+.@count[1]+" "+getitemname(.@items[1])+"^000000,";
-				mes "^CD6889"+.@count[2]+" "+getitemname(.@items[2])+"^000000 et";
-				mes "^CD6889"+.@count[3]+" "+getitemname(.@items[3])+"^000000.";
+				mes "^CD6889"+.@count[0]+" "+getitemname(.@item[0])+"^000000,";
+				mes "^CD6889"+.@count[1]+" "+getitemname(.@item[1])+"^000000,";
+				mes "^CD6889"+.@count[2]+" "+getitemname(.@item[2])+"^000000 et";
+				mes "^CD6889"+.@count[3]+" "+getitemname(.@item[3])+"^000000.";
 			}
 			else if (DANC_Q == 3) {
 				mes "^CD6889"+.@count[0]+" "+getitemname(.@item[0])+"^000000 et";
@@ -774,10 +776,10 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 job_duncer,32,154,1	script	Salle d'Attente#dance	66,{
 OnInit:
 	waitingroom "Salle d'Attente",20,"Salle d'Attente#dance::OnStartArena",1;
+	enablewaitingroomevent;
 	end;
 
 OnStartArena:
-	disablewaitingroomevent;
 	disablenpc "dance#up";
 	disablenpc "dance#down";
 	disablenpc "dance#left";
@@ -786,10 +788,7 @@ OnStartArena:
 	donpcevent "dance#return::OnDisable";
 	warpwaitingpc "job_duncer",69,110,1;
 	donpcevent "Bijou#dance_timer::OnEnable";
-	set .Dance_PID,$@warpwaitingpc[0];
-	if (attachrid(.Dance_PID) == 0) {
-		enablewaitingroomevent;
-	}
+	disablewaitingroomevent;
 	end;
 
 OnEnable:
@@ -1105,6 +1104,7 @@ OnTimer89000:
 	donpcevent "dance#return::OnEnable";
 	donpcevent "dance#poring::OnDisable";
 	stopnpctimer;
+	end;
 }
 
 job_duncer,69,110,0	script	dance#return	-1,1,4,{
@@ -1123,6 +1123,7 @@ OnDisable:
 OnEnable:
 	enablenpc "dance#return";
 	donpcevent "dance#return#2::OnEnable";
+	end;
 }
 
 job_duncer,66,110,0	script	dance#return#2	-1,1,1,{
@@ -1138,6 +1139,7 @@ OnDisable:
 OnEnable:
 	enablenpc "dance#return#2";
 	donpcevent "dance#return#3::OnEnable";
+	end;
 }
 
 job_duncer,72,110,0	script	dance#return#3	-1,1,1,{
@@ -1153,6 +1155,7 @@ OnDisable:
 OnEnable:
 	enablenpc "dance#return#3";
 	donpcevent "Salle d'Attente#dance::OnEnable";
+	end;
 }
 
 // Dance Move Triggers
@@ -1183,6 +1186,8 @@ OnMyMobDead:
 
 OnDisable:
 	killmonsterall "job_duncer";
+	end;
+
 }
 
 // Backup Dancers
