@@ -7,7 +7,7 @@
 //= Converted by kobra_k88
 //= Further bugfixed and tested by Lupus
 //===== Current Version: ===================================== 
-//= 2.7
+//= 2.8
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -35,6 +35,8 @@
 //=	Corrected usages of killmonster and killmonsterall.
 //= 2.6 Corrected an improper areawarp destination. [L0ne_W0lf]
 //= 2.7 Deleted unused variables. [Samuray22]
+//= 2.7a Corrected a Typo error ";;". [Samuray22]
+//= 2.8 Now uses enable and disable waitingroomevent. [L0ne_W0lf]
 //============================================================ 
 
 prt_in,88,101,4	script	Capitaine Herman#knt	56,{
@@ -1162,20 +1164,20 @@ job_knt,89,106,4	script	Windsor Benedict#knt	733,{
 OnInit:
 	disablenpc "Windsor Benedict#knt";
 	waitingroom "Salle d'attente",20,"Windsor Benedict#knt::OnStartArena",1;
+	enablewaitingroomevent;
 	end;
 
 OnStartArena:
-	set $@KntUsers, getareausers("job_knt", 24, 126, 63, 165);			// get user count for first lvl
-	set $@KntUsers, $@KntUsers + getareausers("job_knt", 24, 32, 63, 71);		// get user count for second lvl + first lvl
-	set $@KntUsers, $@KntUsers + getareausers("job_knt", 124, 132, 163, 171);	// get user count for third lvl + second lvl + first lvl
-	if($@KntUsers > 0) end;
-
-	if ((getwaitingroomstate(33)) == 0) end;	// stops the rest of the script from running if there is no one in the waiting room;
 	killmonster "job_knt", "Knight1::OnMyMobDead";
 	killmonster "job_knt", "Knight2::OnMyMobDead";
 	killmonster "job_knt", "Knight3::OnMyMobDead";
 	warpwaitingpc "job_knt",43,146;
 	donpcevent "Knight1::OnEnable";
+	disablewaitingroomevent;
+	end;
+
+OnStart:
+	enablewaitingroomevent;
 	end;
 }
 
@@ -1232,7 +1234,9 @@ OnTimer181000:
 	end;
 
 OnTimer182000:
-	donpcevent "Windsor Benedict#knt::OnEnable";
+	stopnpctimer;
+	donpcevent "Knight1::OnDisable";
+	donpcevent "Windsor Benedict#knt::OnStart";
 	end;
 }
 
@@ -1271,7 +1275,7 @@ OnMyMobDead:
 	if (.MyMobs < 1) {
 		mes "[Sir Windsor]";
 		mes "...Hmm.";
-		next;;
+		next;
 		mes "[Sir Windsor]";
 		mes "...Encore un niveau.";
 		close2;
@@ -1291,8 +1295,9 @@ OnTimer181000:
 	end;
 
 OnTimer182000:
+	stopnpctimer;
 	donpcevent "Knight2::OnDisable";
-	donpcevent "Windsor Benedict#knt::OnEnable";
+	donpcevent "Windsor Benedict#knt::OnStart";
 	end;
 }
 
@@ -1350,7 +1355,9 @@ OnTimer181000:
 	end;
 
 OnTimer182000:
-	donpcevent "Windsor Benedict#knt::OnEnable";
+	stopnpctimer;
+	donpcevent "Knight3::OnDisable";
+	donpcevent "Windsor Benedict#knt::OnStart";
 	end;
 }
 

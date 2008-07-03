@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= eAthena Dev Team
 //===== Current Version: ===================================== 
-//= 1.0
+//= 1.1a
 //===== Compatible With: ===================================== 
 //= eAthena SVN 3422+(Requires jA Script System)
 //===== Description: ========================================= 
@@ -30,10 +30,12 @@
 //= 0.9 Fixed a incorrect variable changed form "mob_inv" to "mobinv". [Samuray22]
 //= 0.9b Fixed a typo and bad variable use in the Typing Challenge [ultramage]
 //= 1.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 1.1 Touch-ups, and changed references of "Yuno" to "Juno",  [L0ne_W0lf]
+//= 1.1a Small fix to comparison check. [Paradox924X]
 //============================================================ 
 
 //============================================================ 
-//= The Airship System (Yuno -> Hugel -> Einbroch -> Lighthalzen -> repeat)
+//= The Airship System (Juno -> Hugel -> Einbroch -> Lighthalzen -> repeat)
 //============================================================ 
 
 airplane,243,74,4	script	#AirshipWarp-1	45,2,2,{
@@ -185,9 +187,7 @@ OnTimer260000:
 //============================================================ 
 
 airplane,240,64,5	script	Sortie#01::Exit2	857,{
-
-end;
-
+	end;
 }
 
 airplane,247,64,5	duplicate(Exit2)	Sortie#02	857
@@ -202,7 +202,6 @@ airplane,100,69,2	script	Personnel de Bord#01::Airship Crew	852,{
 	mes "Lorsque nous atterrirons à votre destination, et que vous souhaitez quitter le dirigeable, merci d'emprunter les escaliers de sortie.";
 	mes "Merci de votre compréhension.";
 	close;
-
 }
 
 airplane,250,59,3	script	Personnel de Bord::AirshipInfo	67,{
@@ -415,8 +414,10 @@ s_Play:
 	"Mais il est naze ce mec! J'avance et AAHHHHH. BAAAM~! J'ai mal!!!",
 	"Par le pouvoir de p-po-por-po-por-pori-poring DU DIEU-PORING. VOUS NE PASSEREZ PAS!",
 	"...silencieux. bienveillance tranquille... compagnon d'âme... merveille. énigme... j'aime les nuages.";
+
 	//lengths
 	setarray $@lengths[0],20,32,73,73,65,66,67,55,67,66,67,69;
+
 	//	initnpctimer;
 	// pick 2 distinct phrases and initialize related variables
 	set @index,rand(1,getarraysize($@textstringsa$))-1;
@@ -449,7 +450,7 @@ s_Play:
 	if(@string2c$ != "")mes @string2c$;
 	input @comparisonvar$[2];
 	next;
-	if(@comparisonvar$[1] == @typingstring1$ && @comparisonvar$[2] == @typingstring2$) goto s_Fail;
+	if(@comparisonvar$[1] != @typingstring1$ || @comparisonvar$[2] != @typingstring2$) goto s_Fail;
 	set @time,(gettime(3)*60*60+gettime(2)*60+gettime(1))-@start; //seconds taken
 	set @mypoints,(@typingkeys * 100) / @time;
 	mes "[Nils]";
@@ -736,166 +737,135 @@ airplane_01,71,31,6	script	Shimizu	106,{
 //= The Izlude Airship Staff
 //============================================================
 
-izlude,201,54,3	script	Personnel de l'Aéroport::persaeroizl	91,{
-
+izlude,201,54,3	script	Personnel de l'Aéroport#izl	91,{
 	mes "[Personnel de l'Aéroport]";
 	mes "Bienvenu à l'Aéroport International.";
 	mes "En quoi puis-je vous aider?";
 	next;
-	menu "Embarquer",-,"Annuler",L_Cancel;
-
-		mes "[Personnel de l'Aéroport]";
-		mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
+	if (select("Embarquer:Annuler") == 1) {
+				mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
 		next;
-		menu "Oui",-,"Non",L_Cancel;
-
-		if(countitem(7311) > 0) goto L_GotTicket;
-		if(Zeny < 1200) goto L_NoZeny;
-			set Zeny, Zeny - 1200;
-			warp "airplane_01",224,64;
+		if (select("Oui:Non") == 1) {
+			if(countitem(7311) > 0) {
+				delitem 7311,1;
+				warp "airplane_01",224,64;
+				close;
+			}
+			if(Zeny > 1200) {
+				set Zeny, Zeny - 1200;
+				warp "airplane_01",224,64;
+				close;
+			}
+			mes "[Personnel de l'Aéroport]";
+			mes "Vous n'avez pas assez d'argent.";
 			close;
-
-		L_GotTicket:
-			delitem 7311,1;
-			warp "airplane_01",224,64;
-			close;
-
-	L_NoZeny:
-		mes "[Personnel de l'Aéroport]";
-		mes "Vous n'avez pas assez d'argent.";
-		close;
-
-	L_Cancel:
-		mes "[Personnel de l'Aéroport]";
-		mes "Merci, bonne journée!";
-		close;
+		}
+	}
+	mes "[Personnel de l'Aéroport]";
+	mes "Thank you and";
+	mes "have a nice day.";
+	close;
 }
 
 //============================================================ 
 //= The Hugel Airship Staff
 //============================================================
 
-hugel,182,150,3	script	Personnel de l'Aéroport::persaerohu	91,{
-
+hugel,182,150,3	script	Personnel de l'Aéroport#hu	91,{
 	mes "[Personnel de l'Aéroport]";
-	mes "Bienvenu à l'Aéroport de la République de Schwarzwald.";
+	mes "Bienvenu à l'Aéroport International.";
 	mes "En quoi puis-je vous aider?";
 	next;
-	menu "Embarquer",-,"Annuler",L_Cancel;
-
+	if (select("Embarquer:Annuler") == 1) {
 		mes "[Personnel de l'Aéroport]";
 		mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
 		next;
-		menu "Oui",-,"Non",L_Cancel;
-
-		if(countitem(7311) > 0) goto L_GotTicket;
-		if(Zeny < 1200) goto L_NoZeny;
-			set Zeny, Zeny - 1200;
-			warp "airplane",224,64;
+		if (select("Oui:Non") == 1) {
+			if(countitem(7311) > 0) {
+				delitem 7311,1;
+				warp "airplane",224,64;
+				close;
+			}
+			if(Zeny > 1200) {
+				set Zeny, Zeny - 1200;
+				warp "airplane",224,64;
+				close;
+			}
+			mes "[Personnel de l'Aéroport]";
+			mes "Vous n'avez pas assez d'argent.";
 			close;
-
-		L_GotTicket:
-			delitem 7311,1;
-			warp "airplane",224,64;
-			close;
-
-	L_NoZeny:
-		mes "[Personnel de l'Aéroport]";
-		mes "Vous n'avez pas assez d'argent.";
-		close;
-
-	L_Cancel:
-		mes "[Personnel de l'Aéroport]";
-		mes "Merci, bonne journée!";
-		close;
+		}
+	}
+	mes "[Personnel de l'Aéroport]";
+	mes "Merci. Passez une agréable journée!";
+	close;
 }
 
 //============================================================ 
 //= The Rachel Airship Staff
 //============================================================
 
-ra_fild12,294,206,3	script	Personnel de l'Aéroport::persaerora	91,{
-
-	mes "[Personnel de l'Aéroport]";
-	mes "Bienvenu à l'Aéroport International.";
-	mes "En quoi puis-je vous aider?";
+ra_fild12,295,208,3	script	Personnel de l'Aéroport#ra	45,1,1,{
+OnTouch:
+	mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
 	next;
-	menu "Embarquer",-,"Annuler",L_Cancel;
-
-		mes "[Personnel de l'Aéroport]";
-		mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
-		next;
-		menu "Oui",-,"Non",L_Cancel;
-
-		if(countitem(7311) > 0) goto L_GotTicket;
-		if(Zeny < 1200) goto L_NoZeny;
-			set Zeny, Zeny - 1200;
-			warp "airplane_01",224,64;
-			close;
-
-		L_GotTicket:
+	if (select("Oui:Non") == 1) {
+		if (countitem(7311) > 0) {
 			delitem 7311,1;
 			warp "airplane_01",224,64;
 			close;
-
-	L_NoZeny:
-		mes "[Personnel de l'Aéroport]";
+		}
+		if (Zeny >= 1200) {
+			set Zeny, Zeny - 1200;
+			warp "airplane_01",224,64;
+			close;
+		}
 		mes "Vous n'avez pas assez d'argent.";
 		close;
-
-	L_Cancel:
-		mes "[Personnel de l'Aéroport]";
-		mes "Merci, bonne journée!";
-		close;
+	}
+	mes "Merci. Passez une bonne journée.";
+	close;
 }
 
 //============================================================ 
-//= Yuno Airport NPCs
+//= Juno Airport NPCs
 //============================================================
 
-y_airport,144,63,4	script	Personnel de l'Aéroport::persaeroein	91,{
-
+y_airport,144,63,4	script	Airport Staff#Ein	91,{
 	mes "[Personnel de l'Aéroport]";
 	mes "Bonjour!";
-	mes "Voulez-vous aller à ^FF0000Einbroch^000000, ^FF0000Hugel^000000 ou ^FF0000Lighthalzen^000000?";
+	mes "Souhaitez-vous aller à ^FF0000Einbroch^000000, ^FF0000Hugel^000000 ou ^FF0000Lighthalzen^000000?";
 	next;
-	menu "Oui.",s_Warp,"Non.",-;
-
+	if (select("Oui.:Non.") == 1) {
+		mes "[Personnel de l'Aéroport]";
+		mes "Merci. Passez une agréable journée!";
+		close2;
+		warp "yuno",57,240;
+		end;
+	}
 	mes "[Personnel de l'Aéroport]";
-	mes "Merci, bonne journée!";
+	mes "Merci. Passez une agréable journée!";
 	close;
-
-s_Warp:
-	mes "[Personnel de l'Aéroport]";
-	mes "Merci, bonne journée!";
-	close2;
-	warp "yuno",57,240;
-	end;
-
 }
 	
-y_airport,141,63,4	script	Personnel de l'Aéroport::persaeroizl2	91,{
-
+y_airport,141,63,4	script	Airport Staff#Izl	91,{
 	mes "[Personnel de l'Aéroport]";
 	mes "Bonjour!";
-	mes "Voulez-vous aller à ^FF0000Izlude^000000 ou ^FF0000Rachel^000000?";
+	mes "Souhaitez-vous aller à ^FF0000Izlude^000000 ou ^FF0000Rachel^000000?";
 	next;
-	menu "Oui.",s_Warp,"Non.",-;
-
+	if (select("Oui.:Non.") == 1) {
+		mes "[Personnel de l'Aéroport]";
+		mes "Merci. Passez une agréable journée!";
+		close2;
+		warp "yuno",50,240;
+		end;
+	}
 	mes "[Personnel de l'Aéroport]";
-	mes "Merci, bonne journée!";
+	mes "Merci. Passez une agréable journée!";
 	close;
-
-s_Warp:
-	mes "[Personnel de l'Aéroport]";
-	mes "Merci, bonne journée!";
-	close2;
-	warp "yuno",50,240;
-	end;
-
 }
 
-yuno,14,262,3	script	Personnel de l'Aéroport::Airship Staff	91,{
+yuno,14,262,3	script	Personnel de l'Aéroport#yuno01::Airship Staff	91,{
 	mes "[Personnel de l'Aéroport]";
 	mes "Bienvenu dans l'Aéroport de Yuno.";
 	mes "Passez par cette porte si vous souhaitez monter à bord du dirigeable qui volera en direction d'Izlude, au Royaume de Rune-Midgard.";
@@ -907,7 +877,7 @@ yuno,14,262,3	script	Personnel de l'Aéroport::Airship Staff	91,{
 	close;
 }
 
-yuno,88,263,5	duplicate(Airship Staff)	Personnel de l'Aéroport	91
+yuno,88,263,5	duplicate(Airship Staff)	Personnel de l'Aéroport#yuno02	91
 
 //============================================================ 
 //= Apple Gambling Function
