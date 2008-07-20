@@ -6,7 +6,7 @@
 //= Darkchild (1.1)
 //= Playtester (1.2)
 //===== Current Version: ===================================== 
-//= 2.5
+//= 2.6
 //===== Compatible With: ===================================== 
 //= eAthena 1.0+
 //===== Description: ========================================= 
@@ -42,6 +42,7 @@
 //= 2.3 Added Lighthalzen Inn from Lighthalzen town file. [L0ne_W0lf]
 //= 2.4 Fixed Inn Employee#Ahlma warping to same destination as save point, bugreport: 191.
 //= 2.5 Added Moscovia Gostinitsa (Inn) from jA
+//= 2.6 Removed Duplicate Inn function. [L0ne_W0lf]
 //============================================================ 
 
 
@@ -197,45 +198,6 @@ ve_in,157,219,5	script	Aubergiste#master	709,{
 		close;
 }
 
-
-//======================= Inn Function ==============================
-function	script	F_InnMaid	{
-	mes getarg(0);
-	mes "Bienvenue à";
-	mes "l'"+getarg(1)+".";
-	mes "Que puis-je pour vous?";
-	next;
-	menu "Sauvegarder",Msave, "Louer une Chambre -> 5000 Zenys",Mrent, "Rien, merci",Mend;
-
-	Msave:
-		mes getarg(0);
-		mes "Votre point de sauvegarde";
-		mes "a été enregistré.";
-		mes "Merci, je reste";
-		mes "à votre disposition.";
-		savepoint getarg(2),getarg(3),getarg(4);
-		close;
-	Mrent:
-		mes getarg(0);
-		if(Zeny < 5000){
-			mes "Je suis désolée, mais le coût de";
-			mes "ce service est de 5000 Zenys.";
-			mes "Veuillez vous assurer d'avoir assez";
-			mes "d'argent sur vous la prochaine fois.";
-			close;
-		}
-		mes "Merci.";
-		mes "Passez une";
-		mes "agréable nuit~";
-		close2;
-		set Zeny,Zeny - 5000;
-		percentheal 100,100;
-		return;
-
-	Mend:
-		close;
-}
-
 //======================== Moscovia ====================================
 mosk_in,135,191,5	script	Aubergiste#Receptionist	961,{
 	mes "[Aubergiste]";
@@ -274,4 +236,40 @@ mosk_in,135,191,5	script	Aubergiste#Receptionist	961,{
 		close;
 }
 
+//======================= Inn Function ==============================
+function	script	F_InnMaid	{
+	mes getarg(0);
+	mes "Bienvenue à";
+	mes "l'"+getarg(1)+".";
+	mes "Que puis-je pour vous?";
+	next;
+	menu "Sauvegarder",Msave, "Louer une Chambre -> 5000 Zenys",Mrent, "Rien, merci",Mend;
 
+	Msave:
+		mes getarg(0);
+		mes "Votre point de sauvegarde";
+		mes "a été enregistré.";
+		mes "Merci, je reste";
+		mes "à votre disposition.";
+		savepoint getarg(2),getarg(3),getarg(4);
+		close;
+	Mrent:
+		mes getarg(0);
+		if(Zeny < 5000){
+			mes "Je suis désolée, mais le coût de";
+			mes "ce service est de 5000 Zenys.";
+			mes "Veuillez vous assurer d'avoir assez";
+			mes "d'argent sur vous la prochaine fois.";
+			close;
+		}
+		mes "Merci.";
+		mes "Passez une";
+		mes "agréable nuit~";
+		close2;
+		set Zeny,Zeny - 5000;
+		percentheal 100,100;
+		return;
+
+	Mend:
+		close;
+}
