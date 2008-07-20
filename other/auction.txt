@@ -1,3 +1,5 @@
+//= Le Livre d'Ymir http://bookofymir.free.fr/
+//= Traduit par Elianor
 //===== eAthena Script =======================================
 //= Auction system
 //===== By: ==================================================
@@ -15,31 +17,29 @@
 
 // Auction House warpers
 //============================================================
-morocc,182,95,6	script	Auction Hall Guide#moc	98,{
+morocc,182,95,6	script	Salle des enchères#moc	98,{
 	callfunc "F_AuctionWarper",1;
 }
 
-prontera,218,120,4	script	Auction Hall Guide#prt	117,{
+prontera,218,120,4	script	Salle des enchères#prt	117,{
 	callfunc "F_AuctionWarper",2;
 }
 
-yuno,129,116,0	script	Auction Hall Guide#yuno	90,{
+yuno,129,116,0	script	Salle des enchères#yuno	90,{
 	callfunc "F_AuctionWarper",3;
 }
 
-lighthalzen,205,169,6	script	Auction Hall Guide#lhz	833,{
+lighthalzen,205,169,6	script	Salle des enchères#lhz	833,{
 	callfunc "F_AuctionWarper",4;
 }
 
 function	script	F_AuctionWarper	{
-	mes "[Auction Hall Guide]";
-	mes "Hello, would you";
-	mes "like to enter the";
-	mes "Auction Hall?";
+	mes "[Guide des Enchères]";
+	mes "Bonjour, désirez-vous entrer dans la salle de vente aux enchères?";
 	next;
-	if (select("Yes.:No.") == 1) {
-		mes "[Auction Hall Guide]";
-		mes "Enjoy your auction.";
+	if (select("Oui.:Non.") == 1) {
+		mes "[Guide des Enchères]";
+		mes "Faites de bonnes enchères.";
 		close2;
 		switch(getarg(0)) {
 		case 1:
@@ -52,26 +52,23 @@ function	script	F_AuctionWarper	{
 			warp "auction_02",43,24; end;
 		}
 	}
-	mes "[Auction Hall Guide]";
-	mes "Alright then,";
-	mes "See you later.";
-	mes "If you change your";
-	mes "mind, please come";
-	mes "and enjoy the auctions~";
+	mes "[Guide des Enchères]";
+	mes "Très bien, à plus tard.";
+	mes "Si vous changez d'avis, revenez pour profiter des enchères~";
 	close;
 }
 
 // Sign posts
 //============================================================
-morocc,180,97,6	script	Information Post#moc::AuctionSign	837,{
+morocc,180,97,6	script	Information#moc::AuctionSign	837,{
 	mes "[Information]";
-	mes "Auction Warp Guide";
+	mes "Téléportation vers la salle de ventes aux enchères.";
 	close;
 }
 
-prontera,216,120,4	duplicate(AuctionSign)	Information Post#prt	837,{
-yuno,131,116,0	duplicate(AuctionSign)	Information Post#yuno	837,{
-lighthalzen,207,169,6	duplicate(AuctionSign)	Information Post#lhz	837
+prontera,216,120,6	duplicate(AuctionSign)	Information#prt	837,{
+yuno,131,116,0	duplicate(AuctionSign)	Information#yuno	837,{
+lighthalzen,207,169,6	duplicate(AuctionSign)	Information#lhz	837
 
 // Warps
 //============================================================
@@ -82,39 +79,34 @@ auction_02,43,17,0	warp	auction_enterance_lhz	1,1,lighthalzen,209,169
 
 // Auction House NPCs
 //============================================================
-auction_01,182,68,6	script	Auction Broker#moc1::AuctionBroker	98,{
-	mes "[Auction Broker]";
-	mes "Welcome to the Auction Hall.";
-	mes "Would you like to view the goods?";
+auction_01,182,68,6	script	Commissaire Priseur#moc1::AuctionBroker	98,{
+	mes "[Commissaire Priseur]";
+	mes "Bienvenue à la salle des enchères.";
+	mes "Souhaitez-vous voir les objets?";
 	next;
-	if (select("Yes.:No.") == 1) {
-		mes "[Auction Broker]";
-		mes "Wery well.";
-		mes "Please take";
-		mes "a look, and see";
-		mes "What's being offered~";
+	if (select("Oui.:Non.") == 1) {
+		mes "[Commissaire Priseur]";
+		mes "Très bien.";
+		mes "Prenez le temps de jeter un coup d'oeil, et voir tout ce qui est proposé~";
 		OpenAuction;
 		close;
 	}
-	mes "[Auction Broker]";
-	mes "Very well then.";
-	mes "If you change your";
-	mes "mind, then please";
-	mes "come and check";
-	mes "out the auctions~";
+	mes "[Commissaire Priseur]";
+	mes "Comme vous voulez.";
+	mes "Si vous changez d'avis n'hésitez pas à revenir voir les enchères~";
 	close;
 }
 
-auction_01,182,75,0	duplicate(AuctionBroker)	Auction Broker#moc2	99
-auction_01,177,75,2	duplicate(AuctionBroker)	Auction Broker#moc3	98
-auction_01,177,68,4	duplicate(AuctionBroker)	Auction Broker#moc4	99
-auction_01,21,74,4	duplicate(AuctionBroker)	Auction Broker#prt1	117
-auction_01,27,78,4	duplicate(AuctionBroker)	Auction Broker#prt2	116
-auction_01,16,78,4	duplicate(AuctionBroker)	Auction Broker#prt3	115
-auction_02,158,47,6	duplicate(AuctionBroker)	Auction Broker#yuno1	90
-auction_02,145,47,2	duplicate(AuctionBroker)	Auction Broker#yuno2	90
-auction_02,151,54,0	duplicate(AuctionBroker)	Auction Broker#yuno3	90
-auction_02,152,41,4	duplicate(AuctionBroker)	Auction Broker#yuno4	90
-auction_02,57,46,2	duplicate(AuctionBroker)	Auction Broker#lhz1	874
-auction_02,31,46,6	duplicate(AuctionBroker)	Auction Broker#lhz2	874
-auction_02,43,65,4	duplicate(AuctionBroker)	Auction Broker#lhz3	833
+auction_01,182,75,0	duplicate(AuctionBroker)	Commissaire Priseur#moc2	99
+auction_01,177,75,2	duplicate(AuctionBroker)	Commissaire Priseur#moc3	98
+auction_01,177,68,4	duplicate(AuctionBroker)	Commissaire Priseur#moc4	99
+auction_01,21,74,4	duplicate(AuctionBroker)	Commissaire Priseur#prt1	117
+auction_01,27,78,4	duplicate(AuctionBroker)	Commissaire Priseur#prt2	116
+auction_01,16,78,4	duplicate(AuctionBroker)	Commissaire Priseur#prt3	115
+auction_02,158,47,6	duplicate(AuctionBroker)	Commissaire Priseur#yuno1	90
+auction_02,145,47,2	duplicate(AuctionBroker)	Commissaire Priseur#yuno2	90
+auction_02,151,54,0	duplicate(AuctionBroker)	Commissaire Priseur#yuno3	90
+auction_02,152,41,4	duplicate(AuctionBroker)	Commissaire Priseur#yuno4	90
+auction_02,57,46,2	duplicate(AuctionBroker)	Commissaire Priseur#lhz1	874
+auction_02,31,46,6	duplicate(AuctionBroker)	Commissaire Priseur#lhz2	874
+auction_02,43,65,4	duplicate(AuctionBroker)	Commissaire Priseur#lhz3	833
