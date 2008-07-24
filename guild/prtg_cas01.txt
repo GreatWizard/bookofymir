@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= War of Emperium (Prontera)
 //===== By: ==================================================
@@ -29,24 +31,17 @@ OnRecvCastlePt01:
 prt_gld,131,60,6	script	Kriemhild#p1-2::Kriemhild2	722,{
 	set .@GID, GetCastleData("prtg_cas01",1);
 	if (.@GID == 0) {
-		mes " [ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune Midgard Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château n'appartient pour l'instant à aucune guilde.";
 		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "2. Celui qui éliminera tous les gardiens qui protègent ce château et qui détruira l'Emperium, sera reconnu par le Roi de Rune Midgard en tant qu'humble possesseur du château.";
 	}
 	else {
 		if (getcharid(2) == .@GID) {
-			mes "Brave ones...";
-			mes "Do you wish to return to your honorable place?";
+			mes "Brave guerrier... voulez vous retourner dans votre humble base?";
 			next;
-			if (select("Return to the guild castle.:Quit.") == 1) {
+			if (select("Retourner au château.:Annuler.") == 1) {
 				if (getcharid(2) == GetCastleData("prtg_cas01",1)) {
 					warp "prtg_cas01",96,173;
 					end;
@@ -54,17 +49,13 @@ prt_gld,131,60,6	script	Kriemhild#p1-2::Kriemhild2	722,{
 			}
 			close;
 		}
-		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Following the ordinance of the";
-		mes "Divine Rune Midgard Kingdom,";
-		mes "we approve that this place is in";
-		mes "the private possession of ^ff0000" + GetGuildName(.@GID) + "^000000 Guild.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château appartient à la Guilde ^ff0000" + GetGuildName(.@GID) + "^000000.";
 		mes " ";
-		mes "2. The guild Master of ^ff0000"+ GetGuildName(.@GID) + "^000000 Guild is";
+		mes "2. Le Chef de la Guilde ^ff0000"+ GetGuildName(.@GID) + "^000000 est";
 		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
-		mes "If there is anyone who objects to this,";
-		mes " prove your strength and honor with a steel blade in your hand.";
+		mes "A quiconque souhaitant remettre en cause ce fait, qu'il lève son épée et se batte pour l'Honneur.";
 	}
 	close;
 
@@ -82,30 +73,20 @@ prt_gld,135,60,6	duplicate(Kriemhild2)	Kriemhild#p1-5	722
 prtg_cas01,58,56,4	script	Kriemhild#p1-4::Kriemhild3	722,{
 	set .@GID, GetCastleData("prtg_cas01",1);
 	if (.@GID == 0) {
-		mes " [ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune Midgard Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château n'appartient pour l'instant à aucune guilde.";
 		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "2. Celui qui éliminera tous les gardiens qui protègent ce château et qui détruira l'Emperium, sera reconnu par le Roi de Rune Midgard en tant qu'humble possesseur du château.";
 	}
 	else {
-		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Following the ordinance of the";
-		mes "Divine Rune Midgard Kingdom,";
-		mes "we approve that this place is in";
-		mes "the private possession of ^ff0000" + GetGuildName(.@GID) + "^000000 Guild.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château appartient à la Guilde ^ff0000" + GetGuildName(.@GID) + "^000000.";
 		mes " ";
-		mes "2. The guild Master of ^ff0000"+ GetGuildName(.@GID) + "^000000 Guild is";
+		mes "2. Le Chef de la Guilde ^ff0000"+ GetGuildName(.@GID) + "^000000 est";
 		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
-		mes "If there is anyone who objects to this,";
-		mes " prove your strength and honor with a steel blade in your hand.";
+		mes "A quiconque souhaitant remettre en cause ce fait, qu'il lève son épée et se batte pour l'Honneur.";
 	}
 	close;
 
@@ -144,9 +125,10 @@ prtg_cas01,96,173,0	duplicate(Gld_Kafra_Template)	Kafra Staff#prtg_cas01	117
 //============================================================
 prtg_cas01,15,209,0	script	#switch_Pt01	111,{
 	mes " ";
-	mes "There's a small lever. Will you pull it? ";
+	mes "Vous remarquez un petit levier...";
+	mes "Voulez-vous l'activer?";
 	next;
-	switch(select("Pull.:Do not.")) {
+	switch(select("Oui.:Non.")) {
 	case 1:
 		warp "prtg_cas01",112,183;
 		break;
