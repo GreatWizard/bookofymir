@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= War of Emperium (Payon)
 //===== By: ==================================================
@@ -29,24 +31,17 @@ payon,123,322,4	duplicate(BambooGroveHill)	Bamboo Grove Hill#f5-2	722
 pay_gld,208,268,4	script	Bamboo Grove Hill#f5-3::BambooGroveHill2	722,{
 	set .@GID, GetCastleData("payg_cas05",1);
 	if (.@GID == 0) {
-		mes " [ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune Midgard Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château n'appartient pour l'instant à aucune guilde.";
 		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "2. Celui qui éliminera tous les gardiens qui protègent ce château et qui détruira l'Emperium, sera reconnu par le Roi de Rune Midgard en tant qu'humble possesseur du château.";
 	}
 	else {
 		if (getcharid(2) == .@GID) {
-			mes "Brave ones...";
-			mes "Do you wish to return to your honorable place?";
+			mes "Brave guerrier... voulez vous retourner dans votre humble base?";
 			next;
-			if (select("Return to the guild castle.:Quit.") == 1) {
+			if (select("Retourner au château.:Annuler.") == 1) {
 				if (getcharid(2) == GetCastleData("payg_cas05",1)) {
 					warp "payg_cas05",276,227;
 					end;
@@ -54,17 +49,13 @@ pay_gld,208,268,4	script	Bamboo Grove Hill#f5-3::BambooGroveHill2	722,{
 			}
 			close;
 		}
-		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Following the ordinance of the";
-		mes "Divine Rune Midgard Kingdom,";
-		mes "we approve that this place is in";
-		mes "the private possession of ^ff0000" + GetGuildName(.@GID) + "^000000 Guild.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château appartient à la Guilde ^ff0000" + GetGuildName(.@GID) + "^000000.";
 		mes " ";
-		mes "2. The guild Master of ^ff0000"+ GetGuildName(.@GID) + "^000000 Guild is";
+		mes "2. Le Chef de la Guilde ^ff0000"+ GetGuildName(.@GID) + "^000000 est";
 		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
-		mes "If there is anyone who objects to this,";
-		mes " prove your strength and honor with a steel blade in your hand.";
+		mes "A quiconque souhaitant remettre en cause ce fait, qu'il lève son épée et se batte pour l'Honneur.";
 	}
 	close;
 
@@ -82,30 +73,20 @@ pay_gld,187,294,2	duplicate(BambooGroveHill2)	Bamboo Grove Hill#f5-6	722
 payg_cas05,32,249,4	script	Bamboo Grove Hill#f5-7::BambooGroveHill3	722,{
 	set .@GID, GetCastleData("payg_cas05",1);
 	if (.@GID == 0) {
-		mes " [ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune Midgard Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château n'appartient pour l'instant à aucune guilde.";
 		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "2. Celui qui éliminera tous les gardiens qui protègent ce château et qui détruira l'Emperium, sera reconnu par le Roi de Rune Midgard en tant qu'humble possesseur du château.";
 	}
 	else {
-		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " [ Edit du Divin Royaume de Rune Midgard ]";
 		mes " ";
-		mes "1. Following the ordinance of the";
-		mes "Divine Rune Midgard Kingdom,";
-		mes "we approve that this place is in";
-		mes "the private possession of ^ff0000" + GetGuildName(.@GID) + "^000000 Guild.";
+		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château appartient à la Guilde ^ff0000" + GetGuildName(.@GID) + "^000000.";
 		mes " ";
-		mes "2. The guild Master of ^ff0000"+ GetGuildName(.@GID) + "^000000 Guild is";
+		mes "2. Le Chef de la Guilde ^ff0000"+ GetGuildName(.@GID) + "^000000 est";
 		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
-		mes "If there is anyone who objects to this,";
-		mes " prove your strength and honor with a steel blade in your hand.";
+		mes "A quiconque souhaitant remettre en cause ce fait, qu'il lève son épée et se batte pour l'Honneur.";
 	}
 	close;
 
@@ -140,9 +121,10 @@ payg_cas05,276,227,1	duplicate(Gld_Kafra_Template)	Kafra Staff#payg_cas05	117
 //============================================================
 payg_cas05,161,136,0	script	#switch_Py05	111,{
 	mes " ";
-	mes "There's a small lever. Will you pull it? ";
+	mes "Vous remarquez un petit levier...";
+	mes "Voulez-vous l'activer?";
 	next;
-	switch(select("Pull.:Do not.")) {
+	switch(select("Oui.:Non.")) {
 	case 1:
 		warp "payg_cas05",277,250;
 		break;
