@@ -1,0 +1,2663 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//===== eAthena Script =======================================
+//= Epicerie Tofeko Custom Quest Book Of Ymir
+//===== By: ==================================================
+//= Myllena
+//===== Current Version: =====================================
+//= 3.3
+//===== Compatible With: =====================================
+//= eAthena
+//===== Description: =========================================
+//= Epicerie Tofeko:
+//= 1) Vente d'objets divers intervenants dans d'autres quêtes
+//=    custom (100%)
+//= 2) Missions par Ville avec récompense (100%)
+//= 3) Missions Spéciales pour les super-Aventuriers (à venir)
+//= 4) Interviendra dans la quête Crocs des Dragons (à venir)
+//= 5) Un panneau d'informations a été ajouté dans Morroc pour
+//=    situer l'épicerie (100%)
+//=
+//= Nécessite l'ajout d'items custom. Se référer au site et au
+//= fichier informatif pour toutes les informations
+//===== Additional Comments: =================================
+//= 3.3 Fully Working
+//============================================================
+
+
+morocc,104,65,5	script	Informations#tof	858,{
+
+mes "[Informations]";
+mes "Epicerie Tofeko, l'épicerie où 'y a tout c'qu'il vous faut!";
+next;
+mes "[Informations]";
+mes "Venez découvrir notre collection de bibelots et souvenirs du monde...";
+next;
+mes "[Informations]";
+mes "... Mais également notre étalage de fruits, légumes, épices, et condiments importés du monde entier!";
+next;
+mes "[Informations]";
+mes "Sans oublier notre Bric à Brac, avec de nombreuses remises sur objets en tous genre.";
+close;
+
+
+}
+
+
+//=======================================================================//
+// 			Sryana Tofeko					 //
+//=======================================================================//
+
+morocc_in,51,166,4	script	Sryana Tofeko	74,{
+
+mes "[Sryana Tofeko]";
+mes "Bonjour et bienvenue à l'Epicerie Tofeko, l'épicerie où 'y a tout c'qu'il vous faut!";
+mes "En quoi puis-je vous être utile?";
+next;
+menu "Effectuer des Achats",L_achat,"Discuter",L_discuter,"Annuler",L_bye2;
+close;
+
+L_discuter:
+mes "[Sryana Tofeko]";
+
+//si le joueur a fait toutes les missions et a déjà eu sa récompense
+if (superaventurier_tofeko == 1) {
+switch(rand(10))
+{
+		case 0:
+			mes "Quel bonheur de vivre à Morroc! Bien qu'en été la chaleur soit souvent étouffante, de septembre à mai nous avons un temps ravissant. Je ne pourrais pas vivre dans un endroit gris et sans soleil!";
+			emotion e_ok;
+			break;
+
+		case 1:
+			mes "Vimentine? Vimentine?! Mais où diable est encore passée cette canaille?!! J'espère qu'elle n'est pas partie trop loin de la maison...";
+			emotion e_ag;
+			break;
+
+		case 2:
+			mes "Milfen.... Mon cher mari.... Où peut-il bien être? ..... *soupir*";
+			break;
+
+		case 3:
+			mes "L'autre jour, le bijoutier de la rue Darmain a essayé de m'arnaquer! Il voulait me vendre une bague à 45000 Zenys, vous vous rendez compte?! 45000 Zenys! Pour une bague, même très jolie, je trouve ça un peu excessif!";
+			emotion e_pif;
+			break;
+
+		case 4:
+			mes "Si je peux me permettre un conseil, évitez d'acheter des bananes au vendeur à la sauvette de la rue d'à côté. Déjà que la récolte n'a pas été très bonne cette année, mais en plus les siennes sont complètement vertes! C'est scandaleux de vendre de la marchandise d'aussi mauvaise qualité.";
+			emotion e_pif;
+			break;
+
+		case 5:
+			mes "Tout à fait entre nous, je ne pourrais pas vivre dans une ville telle que Lutie. C'est peut-être noël toute l'année, mais surtout, il y fait froid toute l'année! Quelle idée d'installer un village dans une région aussi peu clémente...";
+			emotion e_hmm;
+			break;
+
+		case 6:
+			mes "Il paraît que le Bar au Nord-Ouest de la ville propose de nouveaux cocktails aux fruits de saison. Ne vous inquiétez pas, ils sont faiblement alcoolisés. Enfin... je crois...";
+			emotion e_dots;
+			break;
+
+		case 7:
+			mes "* fredonnant *";
+			mes "~ Puisque notre amour ne peut viiivreeeeu...";
+			mes "Mieux vaut en refermer le liiivreeeeuu...";
+			mes "Et plutôt que de le brûler....";
+			mes "Mouriiiiir d'aimeeer.... ~";
+			emotion e_ho;
+			break;
+
+		case 8:
+			mes "Mort aux insectes! Mort aux insectes! Yahaaa~";
+			emotion e_pif;
+			break;
+
+
+		case 9:
+			mes "Alors~ Une petite canine de boa, une herbe bleue, de la boue de Louyang... Laisser mijoter quatre à cinq minutes à feu doux~";
+			mes "...";
+			emotion e_hmm;
+			break;
+
+
+		}
+next;
+mes "[Sryana Tofeko]";
+	if (sex == 0) { mes "Oh... "+strcharinfo(0)+"! Ça me fait plaisir de vous revoir."; }
+	if (sex == 1) { mes "Oh... "+strcharinfo(0)+"! Ça me fait plaisir de vous revoir."; }
+next;
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais pour l'instant je n'ai plus de missions à vous confier.";
+mes "Revenez me voir de temps en temps, il n'est pas impossible que j'aie besoin des services du ^FF0000plus grand aventurier de tous les temps^000000!";
+next;
+goto L_bye2;
+close;
+}
+
+//vérifie si le joueur a terminé toutes les quêtes (mais n'a pas encore reçu sa récompense)
+if ((alberta_tofeko == 2) && (aldebaran_tofeko == 2) && (comodo_tofeko == 2) && (geffen_tofeko == 2) && (izlude_tofeko == 2) && (jawaii_tofeko == 2) && (lutie_tofeko == 2) && (morroc_tofeko == 2) && (payon_tofeko == 2) && (prontera_tofeko == 2) && (hugel_tofeko == 2) && (lighthalzen_tofeko == 2) && (einbroch_tofeko == 2) && (einbech_tofeko == 2) && (yuno_tofeko == 2) && (rachel_tofeko == 2) && (veins_tofeko == 2) && (amatsu_tofeko == 2) && (ayothaya_tofeko == 2) && (gonryun_tofeko == 2) && (louyang_tofeko == 2) && (umbala_tofeko == 2) && (superaventurier_tofeko == 0)) {
+	if (sex == 0) { mes "Oh... Je commence à connaître votre visage, mademoiselle l'aventurière! Ça me fait plaisir de vous revoir."; }
+	if (sex == 1) { mes "Oh... Je commence à connaître votre visage, monsieur l'aventurier! Ça me fait plaisir de vous revoir."; }
+	next;
+	mes "[Sryana Tofeko]";
+	mes "Vous avez déjà visité de nombreuses villes, et accompli moultes missions pour moi. Je pense que vous méritez de recevoir une digne récompense.";
+	next;
+	mes "[Sryana Tofeko]";
+	getitem 617,1; //old purple box
+	mes "Prenez tout d'abord cette jolie boîte. Je ne sais pas ce qu'elle contient, je n'ai jamais osé l'ouvrir...";
+	next;
+	mes "[Sryana Tofeko]";
+	mes "Ensuite... Hum... Que pourrais-je bien vous donner...";
+	mes "Ah!";
+	mes "Oui, cette drôle de baguette...";
+	next;
+	mes "[Sryana Tofeko]";
+	mes "Je ne sais pas trop à quoi elle sert, mais si j'étais vous, je la manierai avec une ^0000FFinfinie précaution^000000!";
+	getitem 12213,1; //neuralizer (reset skill 1 fois si poids = 0 et utilisé)
+	next;
+	mes "[Sryana Tofeko]";
+	mes "Ah, encore une chose... Quel est votre nom?";
+	next;
+	L_inputnom:
+	input @nom$;
+	if (@nom$ != strcharinfo(0)) {  mes "[Sryana Tofeko]";
+					mes "Hahaha, petit plaisantin~";
+					mes "Personne ne pourrait porter un nom aussi ^FF0000ridicule^000000!";
+					mes "Soyez sérieux deux minutes, voulez-vous?";
+					next;
+					goto L_inputnom; }
+	mes "[Sryana Tofeko]";
+	mes ""+strcharinfo(0)+"...";
+	mes "Vous êtes l'un des plus grands aventuriers de tous les temps, je ne l'oublierai pas!";
+	getexp 1000000,0;
+	set superaventurier_tofeko,1;
+	next;
+	goto L_bye2;
+	close;
+}
+
+//Vérification Mission Alberta
+if (alberta_tofeko == 1) {
+if (countitem(1030) > 0) {
+mes "Oh magnifique! Vous avez rapporté une ^D16236patte de tigre^000000 de votre voyage à Alberta! Comme je suis heureuse! Voudriez-vous bien me la donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Je vous la donne de bon coeur.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je la garderai toujours sur moi. Espérons qu'elle me porte chance!";
+next;
+menu "Ce n'est pas une patte de lapin...",-,"Oui, espérons!",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ce ^D16236Bandeau de Pirate^000000. Mon mari l'a rapporté de l'un de ses voyages.";
+delitem 1030,1; //tiger footskin
+getitem 2287,1; //pirate bandana
+getexp 100000,0;
+set alberta_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Alberta? C'est dommage... J'aurais tellement voulu que vous me rapportiez une ^D16236patte de tigre^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_alberta;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Alberta
+
+
+//Vérification Mission Aldebaran
+if (aldebaran_tofeko == 1) {
+if ( (countitem(7026) >0) && (countitem(7027) >0)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236clés de la tour de l'horloge^000000 de votre voyage à Aldebaran! Elles sont magnifiquement travaillées, un vrai travail d'orfèvre! Voudriez-vous bien me les donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Je vous les donne de bon coeur.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir les ajouter à ma collection.";
+mes "J'adore les clés, ce sont des objets si beaux et complexes...";
+next;
+menu "Entièrement d'accord!",-,"Euh... ouais, c'est ça...",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ce livre. Il provient de la bibliothèque de mon mari, mais celui-ci, il l'a en plusieurs exemplaires. Je pense que ça ne lui manquera pas.";
+delitem 7026,1; //key of clock tower
+delitem 7027,1; //key of the underground
+getitem 1006,1; //old magic book
+getexp 75000,0;
+set aldebaran_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Aldebaran? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236clés de la tour de l'horloge^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_aldebaran;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Aldebaran
+
+//Vérification Mission Comodo
+if (comodo_tofeko == 1) {
+if (countitem(7300) > 0) {
+mes "Oh magnifique! Vous avez rapporté une ^D16236gemme^000000 du monstre de la grotte de Comodo! Comme je suis heureuse! Voudriez-vous bien me la donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Je vous la donne de bon coeur.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir l'ajouter à ma collection de pierres précieuses. Celle-ci n'est pas très belle, mais au moins elle est rare!";
+next;
+menu "Pas très belle? J'aurais dit difforme...",-,"Et rare est synonyme de cher! *clin d'oeil*",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez cette bouteille. Je ne sais pas trop ce qu'il y a dedans, mais je vous conseille de la mettre au frigo.";
+getitem 702,1; //animal gore
+delitem 7300,1; //gemstone
+getexp 100000,0;
+set comodo_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Comodo? C'est dommage... J'aurais tellement voulu que vous me rapportiez l'une des ^D16236gemmes^000000 du monstre de pierre qui vit dans une grotte non loin de la ville.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_comodo;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Comodo
+
+//Vérification Mission Geffen
+if (geffen_tofeko == 1) {
+if ( (countitem(1036) > 4) && (countitem(1035) > 4) && (countitem(1037) > 4) && (countitem(7123) > 4) && (countitem(7265) > 4)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236canines, queues, peaux, cornes et écailles^000000 des créatures dragonoïdes de Geffen! Vous êtes un authentique chasseur de dragons, hahaha! Voudriez-vous bien me les donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Je n'en ai pas besoin... Tenez.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir... hum... A vrai dire je ne sais pas encore ce que je vais en faire. Peut-être tester de nouvelles décoctions?";
+next;
+menu "Vous goûtez à vos créations?",-,"Ou des infusions, peut-être...",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces pots de miel et de gelée royale. Mon mari les a rapporté de la région de Mjolnir également. C'est délicieusement sucré!";
+getitem 518,5; //honey
+getitem 526,5; //royal jelly
+delitem 1036,5; //dragon scale
+delitem 1035,5; //dragon canine
+delitem 7123,5; //dragon skin
+delitem 1037,5; //dragon tail
+delitem 7265,5; //dragon horn
+getexp 75000,0;
+set geffen_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Geffen? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236canines, queues, peaux, cornes et écailles^000000 des créatures dragonoïdes que l'on trouve dans la montagne de Mjolnir...";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_geffen;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Geffen
+
+//Vérification Mission Izlude
+if (izlude_tofeko == 1) {
+if ( (countitem(510) > 2) && (countitem(511) > 2) && (countitem(507) > 2) && (countitem(508) > 2) && (countitem(509) > 2)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236pousses de chaque couleur^000000 de votre voyage à Izlude! Comme je suis heureuse! Voudriez-vous bien me les donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Ce n'est pas grand chose, tenez.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir en faire des tisanes parfumées!";
+next;
+menu "Rien de tel qu'une bonne tisane.",-,"Ce ne sont que des herbes banales...",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces fruits. Ils sont parfaitement murs, ne tardez pas à les manger.";
+delitem 510,3; //blue herb
+delitem 511,3; //green herb
+delitem 507,3; //red herb
+delitem 509,3; //white herb
+delitem 508,3; //yellow herb
+getitem 512,2; //apple
+getitem 514,2; //grape
+getitem 582,2; //orange
+getitem 578,2; //strawberry
+getitem 513,2; //banana
+getitem 515,2; //carrot
+getitem 535,2; //pumpkin
+getexp 30000,0;
+set izlude_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Izlude? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236pousses de chaque couleur^000000 que vous trouverez dans les plaines de la région.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_izlude;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Izlude
+
+//Vérification Mission Jawaii
+if (jawaii_tofeko == 1) {
+if ( (countitem(7013) > 2) && (countitem(961) > 2) && (countitem(965) > 2) && (countitem(964) > 2)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236coquillages^000000 de votre voyage à Jawaii! Ils sont vraiment superbes! Voudriez-vous bien me les donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Avec joie!",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je les disposerai dans ma salle de bain pour faire joli~";
+next;
+menu "Décoration classique mais efficace!",-,"J'aurais dû vous rapporter du sable!",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces objets symbolisant l'amour... Vous pourrez les offrir à la personne que vous aimez.";
+getitem 994,1; //flame heart
+getitem 7561,1; //ice heart
+getitem 7189,1; //wooden heart
+delitem 7013,3; // coral reef
+delitem 961,3; // conch
+delitem 965,3; // clam shell
+delitem 964,3; // crab shell
+getexp 50000,0;
+set jawaii_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Jawaii? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236récifs de corail, des conques, des coquilles de palourde et des coquilles de crabes^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_jawaii;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Jawaii
+
+//Vérification Mission Lutie
+if (lutie_tofeko == 1) {
+if ( (countitem(529) > 4) && (countitem(530) > 4) && (countitem(538) > 4) && (countitem(539) > 4)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236sucreries^000000 de votre voyage à Lutie! Hahaha, c'est Vimentine, ma petite fille, qui va être contente! Voudriez-vous bien me les donner?";
+next;
+menu "Si c'est pour votre petite fille...",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Il va falloir que je surveille Vimentine, autrement elle est capable de tout manger dans la journée et de se retrouver avec des caries!";
+next;
+menu "Sans parler du diabète!",-,"Vous n'allez pas en goûter un peu?",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces pierres précieuses. Elles proviennent de ma collection personnelle, ne sont-elles pas magnifiques?";
+getitem 995,1; //mystic frozen
+getitem 720,1; //aquamarine
+getitem 727,1; //opal
+delitem 529,5; //candy
+delitem 530,5; //candy cane
+delitem 538,5; //well baked cookie
+delitem 539,5; //piece of cake
+getexp 40000,0;
+set lutie_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Lutie? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236bonbons, des cannes à sucre, des cookies et des parts de gâteau^000000? Je les aurais donnés à ma petite fille.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_lutie;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Lutie
+
+//Vérification Mission Morroc
+if (morroc_tofeko == 1) {
+if (countitem(1008) > 0) {
+mes "Oh magnifique! Vous avez rapporté le véritable ^D16236Collier de l'Oubli^000000 de la Guilde des Assassins! Incroyable! Comment avez-vous fait? Voudriez-vous bien me le donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Dans ce cas, d'accord.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir l'ajouter à ma collection.";
+next;
+menu "Faîtes attention en le manipulant...",-,"Ce n'est pas dangereux?",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ce verre de terre. C'est une espèce très rare, ne doutez pas de sa valeur!";
+getitem 632,1; //fatty chewby earthworm
+delitem 1008,1; //necklace of oblivion
+getexp 75000,0;
+set morroc_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre expédition à la Guilde des Assassins? C'est dommage... J'aurais tellement voulu que vous me rapportiez le ^D16236Collier de l'Oubli^000000...";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_morroc;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Morroc
+
+//Vérification Mission Payon
+if (payon_tofeko == 1) {
+if ((countitem(1068) > 0) && (countitem(1066) > 0) && (countitem(1067) > 0) && (countitem(1019) > 0) && (countitem(902) > 0) && (countitem(7188) > 0) && (countitem(1033) > 0)) {
+mes "Oh... Vous avez rapporté du ^D16236bois^000000 de votre voyage à Payon. Je vous dirais bien 'bravo', mais je pense que ça a dû être un peu facile, quand même... Ceci dit, voudriez-vous bien me donner tout ça?";
+next;
+menu "Ce n'est pas comme si ça m'était utile",-,"Peut-être un autre jour",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir en faire un joli feu de joie! Euh... Une réserve de bois pour l'hiver... euh... L'hiver est froid, même à Morroc, n'en doutez pas!";
+next;
+menu "Je n'en doute pas une seconde!",-,"Mais de qui se moque-t-on? ...",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ceci... Et manipulez-le avec précaution!";
+getitem 604,1; //dead branch
+delitem 1068,1; //barren trunk
+delitem 1066,1; //fine-gained trunk
+delitem 1067,1; //solid trunk
+delitem 1019,1; //trunk
+delitem 902,1; //tree root
+delitem 7188,1; //brown root
+delitem 1033,1; //maneater root
+getexp 30000,0;
+set payon_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Payon? C'est dommage... J'aurais tellement voulu que vous me rapportiez ^D16236toutes les sortes de bois et de racines^000000 que vous auriez pû trouver...";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_payon;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Payon
+
+//Vérification Mission Prontera
+if (prontera_tofeko == 1) {
+if ((countitem(725) > 0) && (countitem(728) > 0) && (countitem(726) > 0) && (countitem(721) > 0) && (countitem(719) > 0) && (countitem(723) > 0) && (countitem(729) > 0) && (countitem(727) > 0) && (countitem(724) > 0)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236pierres précieuses^000000 de votre voyage à Prontera! C'est comme dans un rêve! Voudriez-vous bien me les donner? Evidement, vous recevrez un petit quelque chose en échange.";
+next;
+menu "Je vous les donne de bon coeur",-,"Peut-être un autre jour",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir les ajouter à ma collection. Elles sont si belles et si colorées...";
+next;
+menu "*pincement au coeur*",-,"Et si rares... et si chères...",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ce magnifique chapeau! Tous les touristes l'adorent!";
+getitem 2248,1; //western grace
+delitem 725,1; //Sardonyx
+delitem 728,1; //Topaz
+delitem 726,1; //Sapphire
+delitem 721,1; //Emerald
+delitem 719,1; //Amethyst
+delitem 723,1; //Ruby
+delitem 729,1; //Zircon
+delitem 727,1; //Opal
+delitem 724,1; //cursed ruby
+getexp 150000,0;
+set prontera_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Prontera? C'est dommage... J'aurais tellement voulu que vous me rapportiez ^D16236le plus de pierres précieuses différentes possible^000000 pour que je puisse faire baver d'envie de vendeur de joyaux de la rue d'à côté.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_prontera;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Prontera
+
+//Vérification Mission Hugel
+if (hugel_tofeko == 1) {
+if ((countitem(1012) > 4) && (countitem(7003) > 4) && (countitem(903) > 4)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236peaux de reptiles^000000 de votre voyage à Hugel! Beurk... Euh je veux dire, incroyable! Voudriez-vous bien me les donner?";
+next;
+menu "Prenez-les, je n'en ai pas besoin",-,"Peut-être un autre jour",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir... hum... A vrai dire je ne sais pas encore ce que je vais en faire, mais merci.";
+next;
+menu "Tout ça pour ça!",-,"Mais de qui se moque-t-on? ...",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez cette veste de cuir... Vous ne trouvez pas que c'est approprié?";
+getitem 2304,1; //jacket slot
+delitem 1012,5; // frill
+delitem 7003,5; // anolian skin
+delitem 903,5; // reptile tongue
+getexp 50000,0;
+set hugel_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Hugel? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236collerettes, langues et peaux de reptiles^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_hugel;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Hugel
+
+//Vérification Mission Lighthalzen
+if (lighthalzen_tofeko == 1) {
+if ((countitem(7347) > 4) && (countitem(7136) > 0) && (countitem(1092) > 4) && (countitem(7134) > 4) && (countitem(974) > 0)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236produits chimiques et alchimiques^000000 de votre voyage à Lighthalzen! Merveilleux! Voudriez-vous bien me les donner?";
+next;
+menu "Pas de soucis, les voilà.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir... hum... m'en servir pour... Hé, ça ne vous regarde pas en fait!";
+next;
+menu "(je n'aurais peut-être pas dû lui donner)",-,"Chacun est responsable de ses actes~",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces lunettes... Les scientifiques en portent pour se donner un air sérieux.";
+getitem 2243,1; //geek glasses
+delitem 7347,5; //research chart
+delitem 7136,1; //acid bottle
+delitem 1092,5; //empty test tube
+delitem 7134,5; // medicine bowl
+delitem 974,1; // mixture
+getexp 10000,0;
+set lighthalzen_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Lighthalzen? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236publications de recherches, des bouteilles d'acide, des tubes à essais, des bols médicinaux, et des mixtures.^000000";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_lighthalzen;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Lighthalzen
+
+//Vérification Mission Einbroch
+if (einbroch_tofeko == 1) {
+if ((countitem(7320) > 4) && (countitem(7322) > 4) && (countitem(7154) > 4)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236résidus de pollution^000000 de votre voyage à Einbroch! Vous avez bien du courage, j'espère que vous ne vous êtes pas abîmé les poumons! Voudriez-vous bien me les donner?";
+next;
+menu "*Kof* *Kof* Tenez! *Kof*",-,"Peut-être un autre jour",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir... hum... m'en servir pour... Hé, ça ne vous regarde pas en fait!";
+next;
+menu "(j'aurais mieux fait de rester chez moi)",-,"Je crois que je suis malade... Beuh... ~",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces... ce... Enfin, ce truc, là!";
+getitem 630,1; //dew laden moss
+delitem 7320,5; // dust pollutant
+delitem 7322,5; // toxic gas
+delitem 7154,5; // poisonous powder
+getexp 50000,0;
+set einbroch_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Einbroch? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236poussières polluées, plusieurs mesures de gaz toxique et plusieurs mesures de poudre empoisonnée^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_einbroch;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Einbroch
+
+//Vérification Mission Einbech
+if (einbech_tofeko == 1) {
+if ((countitem(730) > 0) && (countitem(731) > 0) && (countitem(732) > 0) && (countitem(7315) > 0) && (countitem(7321) > 0)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236cristaux et des pierres précieuses^000000 de votre voyage à Einbech! Merveilleux... Voudriez-vous bien me les donner?";
+next;
+menu "Je vous les donne de bon coeur.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir les ajouter à ma collection de pierres précieuses.";
+next;
+menu "De belles pierres pour une belle femme...",-,"Formidable...",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces minerais. Ils sont de grande valeur. Enfin, je crois...";
+getitem 985,1; //elunium
+getitem 984,1; //oridecon
+delitem 730,1; //1 carat diamond
+delitem 731,1; //2 carat diamond
+delitem 732,1; //3 carat diamond
+delitem 7315,1; //1 dark crystal fragment
+delitem 7321,1; //1 crystal fragment
+getexp 75000,0;
+set einbech_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Einbech? C'est dommage... J'aurais tellement voulu que vous me rapportiez ^D16236des diamants de chaque taille, des fragments de cristaux et des cristaux sombres^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_einbech;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Einbech
+
+//Vérification Mission Yuno
+if (yuno_tofeko == 1) {
+if ((countitem(7119) > 9) && (countitem(7326) > 9) && (countitem(938) > 9) && (countitem(7565) > 9) && (countitem(7004) > 9)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236ingrédients gluants^000000 de votre voyage à Yuno! Excellent! Voudriez-vous bien me les donner?";
+next;
+menu "Beurk, tenez!",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir les utiliser pour mes décoctions.";
+next;
+menu "Beuh... je me sens malade~",-,"Attention à ne pas les mélanger à vos tisanes.",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ce masque à oxygène, c'est indispensable quand on fait une expérience... odorante! Mais je remarque que vous avez un visage plus gros que le mien, il risque de ne pas vous aller...";
+getitem 10002,1; //monster oxygen mask
+delitem 7119,10; //bacillus
+delitem 7326,10; //fluorescent liquid
+delitem 938,10; //sticky mucus
+delitem 7565,10; //sticky poison
+delitem 7004,10; //mud lump
+getexp 50000,0;
+set yuno_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Yuno? C'est dommage... J'aurais tellement voulu que vous me rapportiez ^D16236des bacilles, des liquides fluorescents, des mucus gluants, des poisons gluants, et des tas de boue.^000000";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_yuno;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Yuno
+
+//Vérification Mission Rachel
+if (rachel_tofeko == 1) {
+if ((countitem(517) > 2) && (countitem(7564) > 2) && (countitem(919) > 2) && (countitem(7171) > 2) && (countitem(7172) > 2) && (countitem(7267) > 2)) {
+mes "Oh magnifique! Vous êtes vraiment un grand chasseur pour avoir rapporté ces ^D16236peaux de léopard^000000 de votre voyage à Rachel! Comme je suis heureuse! Voudriez-vous bien me les donner?";
+next;
+menu "Pas de problème.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir les coudre les peaux pour en faire une descente de lit.";
+mes "Et avec la viande, je vais vous cuisiner ma spécialité pour carnassiers!";
+next;
+menu "Vous cuisinez bien, d'ordinaire?",-,"J'en ai déjà l'eau à la bouche!",-;
+mes "[Sryana Tofeko]";
+mes "Et voilà le travail! Un délicieux ^D16236steak^000000.";
+mes "Hum... Ce n'est pas tout à fait réussi, mais c'est un début.";
+getitem 12043,1; //bomber steak
+delitem 517,3; //meat
+delitem 7564,3; //rotten meat
+delitem 919,3; //animal skin
+delitem 7171,3; //leopard skin
+delitem 7172,3; //leopard claw
+delitem 7267,3; //tiger panty
+getexp 40000,0;
+set rachel_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Rachel? C'est dommage... J'aurais tellement voulu que vous me rapportiez ^D16236des peaux d'animaux, des peaux et griffes de léopard, et quelques slips léopard^000000. Oui euh... les slips, c'est pour mon mari évidemment! Et aussi ^D16236quelques morceaux de viande et des morceaux de viande faisandée^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_rachel;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Rachel
+
+//Vérification Mission Veins
+if (veins_tofeko == 1) {
+if ((countitem(926) > 9) && (countitem(937) > 9) && (countitem(954) > 9)) {
+mes "Oh magnifique! Vous avez rapporté des^D16236 écailles de serpent^000000 de votre voyage à Veins! Comme je suis heureuse, je vais pouvoir refaire mes décoctions! Voudriez-vous bien me les donner?";
+next;
+menu "Hum... bon, d'accord.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Rien de tel qu'une décoction à base de canine de boa pour guérir le rhume des foins!";
+next;
+menu "Excellent remède en effet!",-,"Le rhume des foins? A Morroc?",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez cette herbe. Attention!! Manipulez-la avec précaution, elle est toxique.";
+getitem 631,1; //deadly noxious herb
+delitem 926,10; //snake scale
+delitem 937,10; //venom canine
+delitem 954,10; //shining scale
+getexp 40000,0;
+set veins_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Veins? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236écailles de serpent, des écailles brillantes et des crocs de serpent^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_veins;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Veins
+
+//Vérification Mission Amatsu
+if (amatsu_tofeko == 1) {
+if ((countitem(579) > 9) && (countitem(551) > 9) && (countitem(544) > 9) && (countitem(567) > 9)) {
+mes "Oh magnifique! Vous avez rapporté du ^D16236poisson cru^000000 de votre voyage à Amatsu! J'espère que vous l'avez bien gardé au frais pendant le voyage! Voudriez-vous bien m'en donner?";
+next;
+menu "Un poisson cru, un!",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Pour vous remercier, je vais essayer de préparer une spécialité culinaire de là bas!";
+mes "Hahaha, c'est parti! Sryana, tu peux le faire!";
+mes "*remonte ses manches*";
+next;
+menu "Vous cuisinez bien, d'ordinaire?",-,"J'en ai déjà l'eau à la bouche!",-;
+mes "[Sryana Tofeko]";
+mes "Et voilà le travail!";
+mes "Hum... Ce n'est pas tout à fait réussi, mais c'est un début.";
+getitem 624,1; //rotten fish
+getitem 12054,1; //seasoned jellyfish
+delitem 579,10; //fresh fish
+delitem 551,10; //sushi
+delitem 544,10; //raw fish
+delitem 567,10; //shrimp
+getexp 60000,0;
+set amatsu_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Amatsu? C'est dommage... J'aurais tellement voulu que vous me rapportiez mes du ^D16236poisson frais, des sushi, des morceaux de poisson cru et des crevettes^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_amatsu;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Amatsu
+
+//Vérification Mission Ayothaya
+if (ayothaya_tofeko == 1) {
+if ((countitem(7455) > 9) && (countitem(7456) > 9) && (countitem(7452) > 9) && (countitem(7286) > 0) && (countitem(553) > 19)) {
+mes "Oh magnifique! Vous avez rapporté ^D16236ingrédients^000000 nécessaires à la préparation du ^D16236Bao de Feu^000000 de votre voyage à Ayothaya! Comme je suis heureuse! Voudriez-vous bien me les donner?";
+next;
+menu "Et voilà ma p'tite dame~",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir m'essayer à la cuisine Ayothayienne.";
+mes "Hahaha, c'est parti! Sryana, tu peux le faire!";
+mes "*remonte ses manches*";
+next;
+menu "Vous cuisinez bien, d'ordinaire?",-,"J'en ai déjà l'eau à la bouche!",-;
+mes "[Sryana Tofeko]";
+mes "Et voilà le travail! Un ^D16236Bao de Feu^000000!!";
+mes "Hum... Ce n'est pas tout à fait réussi, mais c'est un début.";
+getitem 12055,1; //spicy fried bao
+delitem 7455,10; //spicy sauce
+delitem 7456,10; //red spice
+delitem 7452,10; //yellow spice
+delitem 7286,1; //red chile
+delitem 553,20; //bao
+getexp 80000,0;
+set ayothaya_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Ayothaya? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236bouteilles de sauce piquante, plusieurs mesures d'épice rouge, quelques pincées d'épice jaune, du piment rouge et de nombreux bao^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_ayothaya;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Ayothaya
+
+//Vérification Mission Gonryun
+if (gonryun_tofeko == 1) {
+if ((countitem(7162) > 9) && (countitem(1000) > 9) && (countitem(1001) > 9)) {
+mes "Oh magnifique! Vous avez rapporté des ^D16236éléments célestes^000000 de votre voyage à Gonryun! Magnifique! Comme je suis heureuse! Voudriez-vous bien me les donner?";
+next;
+menu "Je vous les donne de bon coeur.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je les garderai précieusement.";
+next;
+menu "J'espère bien!",-,"Prenez en soin~",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ce ^D16236Cristal Anti-Magie^000000. Il est très précieux, surtout ne le perdez pas! Et ne le vendez sous aucun prétexte, c'est compris?";
+getitem 20930,1; //cristal anti magie
+delitem 7162,10; //cloud crumb
+delitem 1000,10; //star crumb
+delitem 1001,10; //star dust
+getexp 150000,0;
+set gonryun_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Gonryun? C'est dommage... J'aurais tellement voulu que vous me rapportiez ^D16236des nuages en bouteilles, des poussières d'étoile et des miettes d'étoile^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_gonryun;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Gonryun
+
+//Vérification Mission Louyang
+if (louyang_tofeko == 1) {
+if ((countitem(1056) > 0) && (countitem(7043) > 0) && (countitem(7264) > 0) && (countitem(7124) > 0) && (countitem(1061) > 0)) {
+mes "Oh magnifique! Vous avez rapporté toutes ces différentes sortes de ^D16236sable^000000 de votre voyage à Louyang! Comme je suis heureuse! Voudriez-vous bien me donner tout ceci?";
+next;
+menu "C'est juste du sable... tenez.",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je suis certaine que les collègues géologues de mon mari seront ravis! Haha, j'en connais qui seront surexcités à l'idée de pouvoir étudier ceci!";
+next;
+menu "Chouette~",-,"La géologie est synonyme d'ennui~",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez cette pierre précieuse de ma collection. Elle est belle, n'est-ce pas?";
+getitem 997,1; //great nature
+delitem 1056,1; //grit
+delitem 7043,1; //fine sand
+delitem 7264,1; //dry sand
+delitem 7124,1; //sand clumb
+delitem 1061,1; //witched starsand
+getexp 50000,0;
+set louyang_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Louyang? C'est dommage... J'aurais tellement voulu que vous me rapportiez ^D16236des cristaux sablonneux, des petits tas de cristaux de sable, du sable sec, des blocs de sable et du sable de sorcière^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_louyang;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Louyang
+
+//Vérification Mission Umbala
+if (umbala_tofeko == 1) {
+if ((countitem(928) > 4) && (countitem(7316) > 4) && (countitem(955) > 4) && (countitem(1055) > 4) && (countitem(7190) > 4) && (countitem(7202) > 4)) {
+mes "Oh magnifique! Vous avez contribué à l'éradication des insectes nuisibles d'Umbala! Voudriez-vous bien donner les ^D16236carapaces d'insectes^000000 que vous avez tués? Je vous donnerai un petit quelque chose en échange.";
+next;
+menu "Un petit quelque chose à manger?",-,"Peut-être un autre jour.",L_plustard;
+mes "[Sryana Tofeko]";
+mes "Je vous remercie infiniment. Je vais pouvoir les afficher en trophée! Mort aux insectes! Mort aux insectes! Yahaaa~";
+next;
+menu "Les insectes sont nos amis~",-,"Yahaaaaa~",-;
+mes "[Sryana Tofeko]";
+mes "Tenez, en échange prenez ces bananes tropicales. Elles sont si exquises! Ce sont mes préférées!";
+getitem 634,1; //tropical banana
+delitem 928,5; //insect feeler
+delitem 7316,5; //insect leg
+delitem 955,5; //worm peeling
+delitem 1055,5; //earthworm peeling
+delitem 7190,5; //solid husk
+delitem 7202,5; //pincher of beetle
+getexp 50000,0;
+set umbala_tofeko,2;
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+close; }
+
+else {
+mes "Oh... Vous revenez bredouille de votre voyage à Umbala? C'est dommage... J'aurais tellement voulu que vous me rapportiez des ^D16236antennes et pattes d'insecte, des peaux de ver et de ver de terre, des carapaces épaisses et des pinces de scarabée^000000.";
+next;
+menu "Je vais y retourner!",-,"Je suis désolé, je n'y arriverai pas.",L_abandon_umbala;
+mes "[Sryana Tofeko]";
+mes "Ah! Je suis heureuse de l'entendre. Quand repartez-vous?";
+mes "Prenez soin de vous au cours de ce voyage.";
+goto L_bye;
+close; }
+}
+//Fin Vérification Mission Umbala
+
+switch(rand(10))
+{
+		case 0:
+			mes "Quel bonheur de vivre à Morroc! Bien qu'en été la chaleur soit souvent étouffante, de septembre à mai nous avons un temps ravissant. Je ne pourrais pas vivre dans un endroit gris et sans soleil!";
+			emotion e_ok;
+			break;
+
+		case 1:
+			mes "Vimentine? Vimentine?! Mais où diable est encore passée cette canaille?!! J'espère qu'elle n'est pas partie trop loin de la maison...";
+			emotion e_ag;
+			break;
+
+		case 2:
+			mes "Milfen.... Mon cher mari.... Où peut-il bien être? ..... *soupir*";
+			break;
+
+		case 3:
+			mes "L'autre jour, le bijoutier de la rue Darmain a essayé de m'arnaquer! Il voulait me vendre une bague à 45000 Zenys, vous vous rendez compte?! 45000 Zenys! Pour une bague, même très jolie, je trouve ça un peu excessif!";
+			emotion e_pif;
+			break;
+
+		case 4:
+			mes "Si je peux me permettre un conseil, évitez d'acheter des bananes au vendeur à la sauvette de la rue d'à côté. Déjà que la récolte n'a pas été très bonne cette année, mais en plus les siennes sont complètement vertes! C'est scandaleux de vendre de la marchandise d'aussi mauvaise qualité.";
+			emotion e_pif;
+			break;
+
+		case 5:
+			mes "Tout à fait entre nous, je ne pourrais pas vivre dans une ville telle que Lutie. C'est peut-être noël toute l'année, mais surtout, il y fait froid toute l'année! Quelle idée d'installer un village dans une région aussi peu clémente...";
+			emotion e_hmm;
+			break;
+
+		case 6:
+			mes "Il paraît que le Bar au Nord-Ouest de la ville propose de nouveaux coktails aux fruits de saison. Ne vous inquiétez pas, ils sont faiblement alcoolisés. Enfin... je crois...";
+			emotion e_dots;
+			break;
+
+		case 7:
+			mes "* fredonnant *";
+			mes "~ Puisque notre amour ne peut viiivreeeeu...";
+			mes "Mieux vaut en refermer le liiivreeeeuu...";
+			mes "Et plutôt que de le brûler....";
+			mes "Mouriiiiir d'aimeeer.... ~";
+			emotion e_ho;
+			break;
+
+		case 8:
+			mes "Mort aux insectes! Mort aux insectes! Yahaaa~";
+			emotion e_pif;
+			break;
+
+
+		case 9:
+			mes "Alors~ Une petite canine de boa, une herbe bleue, de la boue de Louyang... Laisser mijoter quatre à cinq minutes à feu doux~";
+			mes "...";
+			emotion e_hmm;
+			break;
+
+
+		}
+if (aventurier_tofeko == 1) {
+next;
+mes "[Sryana Tofeko]";
+if (sex == 0) { mes "Oh, mademoiselle l'aventurière! Ça me fait plaisir de vous revoir."; }
+if (sex == 1) { mes "Oh, monsieur l'aventurier! Ça me fait plaisir de vous revoir."; }
+goto L_choixmission;
+close; }
+
+else {
+close; }
+
+
+L_abandon_alberta:
+set alberta_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_aldebaran:
+set aldebaran_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_comodo:
+set comodo_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_geffen:
+set geffen_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_izlude:
+set izlude_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_jawaii:
+set jawaii_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_lutie:
+set lutie_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_morroc:
+set morroc_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_payon:
+set payon_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_prontera:
+set prontera_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_hugel:
+set hugel_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_lighthalzen:
+set lighthalzen_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_einbroch:
+set einbroch_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_einbech:
+set einbech_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_yuno:
+set yuno_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_rachel:
+set rachel_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_veins:
+set veins_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_amatsu:
+set amatsu_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_ayothaya:
+set ayothaya_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_gonryun:
+set gonryun_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_louyang:
+set louyang_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_umbala:
+set umbala_tofeko,0;
+goto L_abandon_general;
+close;
+
+L_abandon_general:
+mes "[Sryana Tofeko]";
+mes "C'est vraiment dommage. Enfin, si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+goto L_bye;
+
+
+L_achat:
+mes "[Sryana Tofeko]";
+mes "Quel genre d'objets recherchez-vous?";
+mes "Nous avons une large collection de... beaucoup de choses. Je vous laisse regarder par vous-même.";
+next;
+L_premierchoix:
+menu "Bibelots et Souvenirs",L_bibelots,"Epicerie Fine",L_fine,"Bric à Brac",L_bricabrac,"Annuler",L_bye2;
+close;
+
+L_bibelots:
+mes "[Sryana Tofeko]";
+mes "Nous possédons de nombreux bibelots et souvenirs de par le monde. Ce sont mon mari et ma fille qui me les rapportent en général! Mais parfois je les achète directement aux aventuriers de passages en ville.";
+next;
+mes "[Sryana Tofeko]";
+mes "Je vous laisse regarder notre collection sur l'étagère qui se trouve juste derrière moi.";
+next;
+if (aventurier_tofeko == 1) {menu "D'accord, merci.",L_bye2;}
+else {menu "D'accord, merci.",L_bye2,"Moi aussi je collectionne les souvenirs du monde!",L_quetestart;}
+close;
+
+L_quetestart:
+	if (baselevel < 60) {
+		mes "[Sryana Tofeko]";
+		if (sex == 0) { mes "Oh, vous êtes une aventurière? Comme c'est excitant!!"; }
+		if (sex == 1) { mes "Oh, vous êtes un aventurier? Comme c'est excitant!!"; }
+		mes "Mais n'êtes-vous pas un peu jeune?";
+		mes "Je vous aurais volontiers confié des missions, mais vous me semblez trop inexpérimenté...";
+		close;		
+	}
+
+mes "[Sryana Tofeko]";
+set aventurier_tofeko,1;
+if (sex == 0) { mes "Oh, vous êtes une aventurière? Comme c'est excitant!!"; }
+if (sex == 1) { mes "Oh, vous êtes un aventurier? Comme c'est excitant!!"; }
+L_choixmission:
+mes "Quel endroit projetez-vous de visiter prochainement?";
+next;
+menu "Royaume de Rune-Midgard",L_midgard,"République de Swartzwald",L_swartzwald,"Nation d'Arunafeltz",L_arunafeltz,"Royaumes et Lieux Indépendants",L_independant,"En fait, je prends quelques vacances",-;
+mes "[Sryana Tofeko]";
+mes "Vous avez bien raison! Il faut se reposer de temps en temps!";
+mes "Cependant si vous comptez partir en voyage prochainement, revenez me parler de vos projets! J'adore les histoires d'aventures!";
+next;
+goto L_bye2;
+close;
+
+L_midgard:
+menu "Alberta",L_alberta,"Aldebaran",L_aldebaran,"Comodo",L_comodo,"Geffen",L_geffen,"Izlude",L_izlude,"Jawaii",L_jawaii,"Lutie",L_lutie,"Morroc",L_morroc,"Payon",L_payon,"Prontera",L_prontera,"Retour",L_choixmission;
+close;
+
+L_swartzwald:
+menu "Hugel",L_hugel,"Lighthalzen",L_lighthalzen,"Einbech",L_einbech,"Einbroch",L_einbroch,"Yuno",L_yuno,"Retour",L_choixmission;
+close;
+
+L_arunafeltz:
+menu "Rachel",L_rachel,"Veins",L_veins,"Retour",L_choixmission;
+close;
+
+L_independant:
+menu "Amatsu",L_amatsu,"Ayothaya",L_ayothaya,"Gonryun",L_gonryun,"Louyang",L_louyang,"Umbala",L_umbala,"Retour",L_choixmission;
+close;
+
+L_alberta:
+mes "[Sryana Tofeko]";
+if (alberta_tofeko == 2) {
+mes "Oh, vous retournez à Alberta? C'est vrai que c'est une magnifique cité portuaire, et il est agréable de se balader sur le port...";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Alberta? C'est vrai que c'est une magnifique cité portuaire au croisement de tous les échanges par voie marine. C'est le coeur du commerce international! Et il est agréable de se balader sur le port...";
+next;
+mes "[Sryana Tofeko]";
+mes "Il parait qu'un bateau s'est échoué il y a longtemps sur une île non loin d'Alberta, et que depuis il est hanté. Certains disent même qu'on peut y croiser des squelettes. Un ramassis de sottises si vous voulez mon avis.";
+next;
+mes "[Sryana Tofeko]";
+mes "Je pense que les Albertiens sont paranoïaques, ou bien totalement affabulateurs. Ils disent que si on s'enfonce dans la forêt qui s'étend à l'Ouest de la ville, on risque de tomber nez à nez avec un ^D16236Tigre^000000. Vous vous rendez compte? Un tigre dans ces régions!";
+mes "Personnellement, je n'y crois pas une seconde!";
+next;
+mes "[Sryana Tofeko]";
+mes "Quoi qu'il en soit, si vous allez visiter Alberta et que vous croisez le tigre, rapportez-moi l'une de ses ^D16236pattes^000000! Comme ça, on saura s'il existe vraiment ou si ce ne sont que des affabulations.";
+set alberta_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_aldebaran:
+mes "[Sryana Tofeko]";
+if (aldebaran_tofeko == 2) {
+mes "Oh, vous retournez à Aldebaran? C'est vrai que c'est une jolie ville, et il est agréable de se balader sur le port...";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Aldebaran? Cette ville possède de magnifiques canaux, ainsi qu'une Grande Tour de l'Horloge. Cette tour est si grande! Les habitants doivent en être très fiers...";
+next;
+mes "[Sryana Tofeko]";
+mes "Personnellement, je n'ai jamais eu le plaisir de visiter cette Tour de l'Horloge. Il parait que les gardiens de cette tour sont des tire au flanc, et qu'il est aisé de se faufiler hors des visites guidées. Mais je suppose que les pièces les plus intéressantes doivent être fermées à clé?";
+next;
+mes "[Sryana Tofeko]";
+mes "Si jamais vous allez à Aldebaran et que vous visitez la Tour de l'Horloge, essayez de subtiliser les ^D16236clés^000000 qui permettent d'ouvrir toutes les portes de cet édifice et rapportez-les moi! Je vous en donnerai un bon prix!";
+set aldebaran_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_comodo:
+mes "[Sryana Tofeko]";
+if (comodo_tofeko == 2) {
+mes "Oh, vous retournez à Comodo? C'est vrai que c'est une ville parfaite pour le farniente et les vacances.";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Comodo? Ce n'est pas loin d'ici, mais le temps y est plus frais qu'à Morroc. C'est parce que la ville est située au bord de l'océan, et profite toute l'année de l'air marin. Il y fait doux en hiver et pas trop chaud en été.";
+next;
+mes "[Sryana Tofeko]";
+mes "Cependant, faîtes attention si vous vous aventurez dans les grottes alentours. Il paraît que l'une d'entre elle abrite un monstre de pierre difforme et extrêmement dangereux. J'ai ouïe dire que de nombreux aventuriers ont tenté de le combattre pour s'emparer de sa tête, car ses yeux et ses cheveux seraient sertis de pierres précieuses.";
+next;
+mes "[Sryana Tofeko]";
+mes "Un monstre avec des joyaux à la place des yeux! vous y croyez? Personnellement, je ne sais pas trop quoi penser. Mais s'il existe vraiment, j'adorerai posséder l'une des ^D16236gemmes^000000 de son visage.";
+set comodo_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_geffen:
+mes "[Sryana Tofeko]";
+if (geffen_tofeko == 2) {
+mes "Oh, vous retournez à Geffen? Je vous conseille de faire un tour à la Taverne du Sorcier Chauve, ils y servent le meilleur cocktail de la région.";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Geffen? Je vous conseille de faire un tour à la Taverne du Sorcier Chauve, ils y servent le meilleur cocktail de la région.";
+next;
+mes "[Sryana Tofeko]";
+mes "Oh, je ne dis pas que les Sorciers sont tous des pochtrons, loin de moi cette idée... Mais bon, quand on écoute les habitants parler des légendes de Geffen, on peut se demander s'ils n'ont pas bu un verre de trop.";
+next;
+mes "[Sryana Tofeko]";
+mes "Au nord et à l'ouest de la ville, on raconte qu'il existerait des créatures à moitié dragon, errant dans la montagne de Mjolnir. Ces créatures auraient été créées par des sorciers de Geffen il y a bien longtemps, suite à une expérience de magie combinée à l'alchimie.";
+next;
+mes "[Sryana Tofeko]";
+mes "Si cette légende est vraie, on peut dire que c'était plutôt irresponsable de la part des sorciers! Quoi qu'il en soit, ces créatures sont toujours là, bien que leur apparence ne fait pas penser immédiatement à celle d'un dragon.";
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous allez vous promener dans le coin, j'aimerais que vous me rapportiez des ^D16236canines, queues, peaux, cornes et écailles^000000 de ces créatures dragonoïdes. Ce que je vais en faire? Hum... Peut-être que je tenterai une nouvelle recette de soupe.";
+set geffen_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_izlude:
+mes "[Sryana Tofeko]";
+if (izlude_tofeko == 2) {
+mes "Oh, vous retournez à Izlude? C'est une petite ville coquette...";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Izlude? C'est une petite ville coquette... mais il n'y a pas grand chose à y faire. Vous pouvez prendre le bateau pour vous rendre sur l'île de Byalan, la vue y est très jolie.";
+next;
+mes "[Sryana Tofeko]";
+mes "Et puis.... Hum... C'est tout je crois. Il y a peu d'attractions touristiques. Sorti de la ville, vous verrez des plaines à perte de vue. Bucolique, mais un peu ennuyeux...";
+next;
+mes "[Sryana Tofeko]";
+mes "Ceci dit, ces plaines regorgent de fleurs de toutes les couleurs, c'est un spectacle magnifiquement romantique! Si vous allez vous balader dans cette région, rapportez-moi ^D16236des pousses de chaque couleur que vous trouverez^000000.";
+set izlude_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_jawaii:
+mes "[Sryana Tofeko]";
+if (jawaii_tofeko == 2) {
+mes "Oh, vous retournez à Jawaii? Ah, Jawaii... La ville de l'Amour!";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Jawaii? Ah, Jawaii... La ville de l'Amour! C'est la destination préférée des amoureux. A tel point que l'île est devenue une véritable forteresse réservée aux jeunes couples mariés!";
+next;
+mes "[Sryana Tofeko]";
+mes "Mais si vous êtes célibataire, pas de panique, je connais un moyen pour vous rendre là bas. Il suffit de se rendre dans un lieu où tous les célibataires dépressifs se retrouvent... Par contre, une fois sur place, montrez-vous discret! Les pochtrons sont assez mal accueillis.";
+next;
+mes "[Sryana Tofeko]";
+mes "Bien que je sois mariée, je n'ai hélas jamais pû me rendre sur cette île... Le voyage était bien trop cher pour mon mari et moi-même à l'époque. J'aurais tant aimé faire des balades romantiques sur la plage, ramasser des coquillages...";
+mes "*soupir*";
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous avez la chance de vous promener sur les plages de sable fin de Jawaii, j'aimerais que vous me rapportiez ^D16236des récifs de corail, des conques, des coquilles de palourde et des coquilles de crabes^000000. Rien ne me ferait plus plaisir!";
+set jawaii_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_lutie:
+mes "[Sryana Tofeko]";
+if (lutie_tofeko == 2) {
+mes "Oh, vous retournez à Lutie? N'oubliez pas d'emporter un pull en laine, des gants, un bonet, et des bottes fourrées... Il ne faudrait pas que vous attrapiez la mort dans cette contrée peu clémente!";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Lutie? N'oubliez pas d'emporter un pull en laine, des gants, un bonnet, et des bottes fourrées... Il ne faudrait pas que vous attrapiez la mort dans cette contrée peu clémente!";
+next;
+mes "[Sryana Tofeko]";
+mes "Tout à fait entre nous, je ne pourrais pas vivre dans une ville telle que Lutie. C'est peut-être noël toute l'année, mais surtout, il y fait froid toute l'année! Quelle idée d'installer un village dans une région aussi peu clémente...";
+next;
+mes "[Sryana Tofeko]";
+mes "Ceci dit, il paraît que les pâtisseries et les douceurs y sont incomparablement délicieuses. Si vous allez dans ce pays enneigé, pourriez-vous me rapporter ^D16236des bonbons, des cannes à sucre, des cookies et des parts de gâteau^000000? Je les donnerai à ma petite fille, elle sera aux anges!";
+set lutie_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_morroc:
+mes "[Sryana Tofeko]";
+if (morroc_tofeko == 2) {
+mes "Oh, vous retournez à Morroc? Hahaha, mais vous y êtes déjà!";
+mes "J'espère que vous apprécierez votre séjour dans la plus belle ville de Rune-Midgard!";
+close; }
+mes "Oh, vous allez à Morroc? Hahaha, mais vous y êtes déjà!";
+mes "Notre ville a été construite sur un oasis, et peut accueillir les visiteurs et voyageurs fatigués d'avoir traversé le désert.";
+next;
+mes "[Sryana Tofeko]";
+mes "Le Château de Morroc au centre de la ville est une merveille d'architecture. N'hésitez pas à explorer les ruelles de la ville et à en apprécier l'atmosphère unique. Cependant, ne laissez pas traîner vos sacs, et gardez bien vos poches! Les pickpockets et les voleurs ne sont pas rares par ici...";
+next;
+mes "[Sryana Tofeko]";
+mes "La Guilde des Assassins est cachée dans le désert... Mais rassurez-vous, les assassins ne tuent que sur contrat. A moins que votre tête ne soit mise à prix, vous ne risquez rien en allant là bas. Du moins...";
+next;
+mes "[Sryana Tofeko]";
+mes "Du moins, vous ressortirez en vie. Par contre, si vous découvrez l'emplacement de la Guilde des Assassins, vous risquez d'être capturé, et vos souvenirs seront effacés par les gens de la Guilde.";
+next;
+mes "[Sryana Tofeko]";
+mes "Comment font-ils pour effacer vos souvenirs? Je n'en suis pas certaine, mais il paraîtrait qu'ils utilisent un artefact magique très rare, appelé le ^D16236Collier de l'Oubli^000000.";
+next;
+mes "[Sryana Tofeko]";
+mes "Hahaha, je vous lance un défi! Trouvez la Guilde des Assassins, et rapportez-moi le ^D16236Collier de l'Oubli^000000! Vous ne serez pas déçu de la récompense...";
+set morroc_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_payon:
+mes "[Sryana Tofeko]";
+if (payon_tofeko == 2) {
+mes "Oh, vous retournez à Payon? C'est une ville très agréable et très verdoyante, logique pour une cité construite au coeur de la forêt!";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Payon? C'est une ville très agréable et très verdoyante, logique pour une cité construite au coeur de la forêt!";
+next;
+mes "[Sryana Tofeko]";
+mes "La nature y est vraiment magnifique, et les arbres.... De si grands arbres! Nous n'avons pas de végétation aussi développée, ici à Morroc. Il fait bien trop sec!";
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous allez visiter cette contrée verdoyante, pourriez-vous me rapporter différents bois? Je ne sais pas exactement comment sont nommés toutes ces choses-là, mais essayez de me rapporter ^D16236toutes les sortes de bois et de racines^000000 que vous pourrez trouver.";
+set payon_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_prontera:
+mes "[Sryana Tofeko]";
+if (prontera_tofeko == 2) {
+mes "Oh, vous retournez à Prontera? C'est vrai que c'est une jolie ville, et il est agréable de se balader sur le port...";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Prontera? Ah... Prontera... La capitale du Royaume de Rune-Midgard!";
+mes ".......";
+mes "Si vous voulez mon avis, tout cela est très surfait. Prontera est très touristique, et on se demande bien pourquoi!";
+next;
+mes "[Sryana Tofeko]";
+mes "Oh, il est vrai que la cité est très jolie, avec ses rues pavées toujours impeccables, ses maisons toutes plus coquettes les unes que les autres.";
+next;
+mes "[Sryana Tofeko]";
+mes "Mais entre nous, je trouve que la ville manque de... quel est le mot?... Prontera manque de caractère, voilà!";
+mes "Elle a cependant un intérêt non négligeable: le commerce y est, comme à Alberta, très développé.";
+next;
+mes "[Sryana Tofeko]";
+mes "J'ai ouïe dire que l'on peut tout trouver à Prontera. Y compris des pierres précieuses que même les meilleurs vendeurs de joyaux de Morroc peuvent envier.";
+next;
+mes "[Sryana Tofeko]";
+mes "Si jamais vous en avez l'occasion, pourriez-vous me rapporter ^D16236le plus de pierres précieuses différentes possible^000000? Ainsi, je pourrais faire baver d'envie le vendeur de joyaux de la rue d'à côté!";
+mes "Evidement, vous aurez une récompense appropriée!";
+set prontera_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_hugel:
+mes "[Sryana Tofeko]";
+if (hugel_tofeko == 2) {
+mes "Oh, vous retournez à Hugel? C'est vrai que c'est une jolie ville, nichée au coeur des montagnes et juste au bord de l'océan...";
+mes "Le rêve, quoi! Par contre, bonjour le coût de la vie, là bas...";
+close; }
+mes "Oh, vous allez à Hugel? C'est vrai que c'est une jolie ville, nichée au coeur des montagnes et juste au bord de l'océan...";
+mes "Le rêve, quoi! Par contre, bonjour le coût de la vie, là bas...";
+next;
+mes "[Sryana Tofeko]";
+mes "Les habitants d'Hugel sont soit de riches fermiers, soit des bourgeois qui vont là bas profiter de leur maison de campagne.";
+mes "C'est un peu calme comme coin...";
+next;
+mes "[Sryana Tofeko]";
+mes "Mais il parait que récemment, des archéologues y auraient fait une prodigieuse découverte...";
+next;
+mes "[Sryana Tofeko]";
+mes "Je me demande bien comment ils ont pu explorer les alentours d'Hugel! Ça grouille de reptiles visqueux...";
+mes "Beurk! En tous cas, si vous y allez, tuez quelques-uns de ces monstres écailleux pour moi!";
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous me rapportez ^D16236des collerettes, langues et peaux de reptiles^000000, je vous récompenserais par un petit quelque chose en cuir.";
+set hugel_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_lighthalzen:
+mes "[Sryana Tofeko]";
+if (lighthalzen_tofeko == 2) {
+mes "Oh, vous retournez à Lighthalzen? J'ai entendu dire que c'était une ville imposante avec des bâtiments possédant une architecture inégalable.";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Lighthalzen? J'ai entendu dire que c'était une ville imposante avec des bâtiments possédant une architecture inégalable.";
+next;
+mes "[Sryana Tofeko]";
+mes "Il paraît aussi que les habitants sont classés selon leur niveau de richesse. Il y aurait ainsi deux quartiers dans la ville, un pour les classes aisées, et un pour les plus démunis. Vous vous rendez compte? Je trouve ça absolument scandaleux!";
+next;
+mes "[Sryana Tofeko]";
+mes "La richesse de la ville provient principalement de leur grande avancée dans la recherche scientifique. Ils possèdent un laboratoire de biomagie très réputé.";
+next;
+mes "[Sryana Tofeko]";
+mes "Si jamais vous allez là bas, pourriez-vous me rapporter les produits chimiques et alchimiques suivants?";
+mes "*elle sort une liste de sous son comptoir et vous la tend*";
+next;
+mes "[Sryana Tofeko]";
+mes "^D16236Publications de Recherches,";
+mes "Bouteilles d'Acide,";
+mes "Tubes à Essais,";
+mes "Bols Médicinaux,";
+mes "Mixtures.^000000";
+set lighthalzen_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_einbroch:
+mes "[Sryana Tofeko]";
+if (einbroch_tofeko == 2) {
+mes "Oh, vous retournez à Einbroch? Il faut le vouloir, c'est tellement pollué...";
+mes "J'espère que vous apprécierez votre voyage, malgré tout. La vie trépidante d'une cité industrielle doit plaire aux jeunes...";
+close; }
+mes "Oh, vous allez à Einbroch? Il faut le vouloir, c'est tellement pollué...";
+mes "La vie trépidante d'une cité industrielle doit plaire aux jeunes... Moi je préfère notre bonne vieille Morroc.";
+next;
+mes "[Sryana Tofeko]";
+mes "Il paraît que certains jours, il y a des alertes à la pollution qui empêche carrément les gens de sortir de chez eux!";
+mes "Franchement, si on risque l'infection respiratoire en allant acheter son pain, où va-t-on?";
+next;
+mes "[Sryana Tofeko]";
+mes "Cependant, si vous êtes toujours décidé à sacrifier vos poumons, vous pourriez me rendre un petit service?";
+mes "Pourriez-vous me rapporter ^D16236des poussières polluées, plusieurs mesures de gaz toxique et des mesures de poudre empoisonnée^000000?";
+next;
+mes "[Sryana Tofeko]";
+mes "Je les ferai analyser et je verrai s'il n'est pas possible de préparer un sirop contre la toux. Ça se vendra bien, là bas.";
+mes "Bien sûr, je vous donnerai un petit quelque chose pour avoir risqué votre santé là bas...";
+set einbroch_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_einbech:
+mes "[Sryana Tofeko]";
+if (einbech_tofeko == 2) {
+mes "Oh, vous retournez à Einbech? C'est l'appât du gain, n'est-ce pas?";
+mes "Toutes ces mines, ça excite les aventuriers et les voleurs! En tout cas, bonne chance!";
+close; }
+mes "Oh, vous allez à Einbech? C'est l'appât du gain, n'est-ce pas? Oh pas la peine de prétendre le contraire, je sais bien que les mines excitent la curiosité des voleurs et des aventuriers.";
+next;
+mes "[Sryana Tofeko]";
+mes "Oui, Einbech est une ville peu coquette, c'est le moins qu'on puisse dire. Mais elle regorge de mines, et cela attire beaucoup de chercheurs d'emploi... et de chercheurs d'or.";
+next;
+mes "[Sryana Tofeko]";
+mes "C'est d'ailleurs curieux qu'ils soient si pauvres, là-bas... Où passent donc les métaux précieux que les mineurs s'échinent à extraire?";
+next;
+mes "[Sryana Tofeko]";
+mes "En tout cas, si vous descendez dans les mines, ça m'intéresse!";
+mes "Toutes les femmes sont sensibles à l'éclat des bijoux. Si j'avais de la matière brute, je pourrais faire fabriquer quelques bijoux pour les vendre...";
+next;
+mes "[Sryana Tofeko]";
+mes "Rapportez-moi donc ^D16236des diamants de chaque taille, des fragments de cristaux et des cristaux sombres^000000.";
+mes "En échange, je vous donnerai quelques-uns des produits miniers de mon stock...";
+set einbech_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_yuno:
+mes "[Sryana Tofeko]";
+if (yuno_tofeko == 2) {
+mes "Oh, vous retournez à Yuno? Quelle chance, cette ville flottante est splendide.";
+mes "Et en plus, elle regorge de livres... Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Yuno? Quelle chance, cette ville flottante est splendide... Bien qu'un peu austère, haha!";
+next;
+mes "[Sryana Tofeko]";
+mes "Si vous en avez l'occasion, allez faire un tour à la célèbre bibliothèque de Yuno! C'est bien simple, les murs sont littéralement recouverts de livres! Ouvrages anciens ou modernes, livres de recettes de cuisine du monde, manuels d'alchimie... On y trouve de tout!";
+next;
+mes "[Sryana Tofeko]";
+mes "Par contre, ne vous attardez pas à essayer de discuter avec les Sages. A part mon mari, je ne connais aucun Sage qui soit un bon vivant. Ils ont toujours la mine pâle, signe de manque de soleil si vous voulez mon avis.";
+next;
+mes "[Sryana Tofeko]";
+mes "Sans parler de ceux qui s'adonnent à des expériences pas très recommandables...";
+next;
+mes "[Sryana Tofeko]";
+mes "Personnellement, je n'ai jamais mis les pieds là bas. Mais mon mari m'a raconté qu'il a visité quelques laboratoires de Sages, s'essayant à l'Alchimie. Ça gargouille, ça fume, il y a des produits bizarres partout!";
+next;
+mes "[Sryana Tofeko]";
+mes "D'ailleurs, je m'intéresse moi-même un peu à l'alchimie, et il me faut parfois des ingrédients pour le moins repoussants et gluants...";
+mes "Comme vous allez à Yuno, vous pourriez réapprovisionner mon stock!";
+next;
+mes "[Sryana Tofeko]";
+mes "Bien évidemment, je vous donnerais quelque chose pour compenser votre... inconfort.";
+mes "*elle sort une liste de sous son comptoir et vous la tend*";
+next;
+mes "[Sryana Tofeko]";
+mes "^D16236Bacilles,";
+mes "Liquides Fluorescents,";
+mes "Mucus Gluants,";
+mes "Poisons Gluants,";
+mes "Tas de Boue.^000000";
+set yuno_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_rachel:
+mes "[Sryana Tofeko]";
+if (rachel_tofeko == 2) {
+mes "Oh, vous retournez à Rachel? C'est vrai que c'est une jolie ville, un joyau dans le désert...";
+mes "Un peu trop préchi-précha à mon goût, mais bon... Envoyez-moi quand même une carte postale!";
+close; }
+mes "Oh, vous allez à Rachel? C'est vrai que c'est une jolie ville, un joyau dans le désert...";
+mes "Un peu trop préchi-précha à mon goût, mais bon... Le soleil du désert, ça tape sur la caboche!";
+next;
+mes "[Sryana Tofeko]";
+mes "En tout cas, évitez de sortir de la ville: la savane alentour grouille de fauves et de bêtes féroces. Sans parler des plantes carnivores!";
+next;
+mes "[Sryana Tofeko]";
+mes "Mais il paraît qu'il n'y a rien de plus goûtu que la viande de fauve...";
+mes "Si vous vous sentez l'âme d'un grand chasseur, prouvez-le moi en me rapportant ^D16236des peaux d'animaux, des peaux et griffes de léopard, et quelques slips léopard^000000. Oui euh... les slips, c'est pour mon mari évidemment!";
+next;
+mes "[Sryana Tofeko]";
+mes "Et rapportez-moi aussi ^D16236plusieurs morceaux de viande et des morceaux de viande faisandée^000000.";
+mes "Je vous ferai peut-être goûter une de mes spécialité pour carnassiers!";
+set rachel_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_veins:
+mes "[Sryana Tofeko]";
+if (veins_tofeko == 2) {
+mes "Oh, vous retournez à Veins? C'est un long et dangereux voyage, avec ce volcan non loin...";
+mes "J'espère que vous survivrez à la traversée du désert. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Veins? C'est un long et dangereux voyage, avec ce volcan non loin... Non vraiment, il faut le vouloir, pour aller dans une région aussi inhospitalière.";
+mes "Surtout que le désert alentour grouille de fauves et de serpents!";
+next;
+mes "[Sryana Tofeko]";
+mes "En parlant de serpents, je n'ai bientôt plus d'ingrédients pour mes décoctions...";
+mes "Pourriez-vous me rapporter ^D16236des écailles de serpent, des écailles brillantes et des crocs de serpent^000000?";
+next;
+mes "[Sryana Tofeko]";
+mes "Vu les nombres de bêtes venimeuses près de Veins, cela devrait être facile... Enfin, si vous survivez au voyage.";
+mes "Je vous récompenserai quand même par quelque chose de... mortel! Ha ha!";
+set veins_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_amatsu:
+mes "[Sryana Tofeko]";
+if (amatsu_tofeko == 2) {
+mes "Oh, vous retournez à Amatsu? C'est vrai que c'est une jolie ville, avec de magnifiques cerisiers en fleur au printemps...";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Amatsu? C'est vrai que c'est une jolie ville de bord de mer... Au printemps, les cerisiers en fleur constituent un spectacle absolument incomparable...";
+mes "Et à l'automne, les feuilles rougissent et offrent le plus beau des souvenirs.";
+next;
+mes "[Sryana Tofeko]";
+mes "Mais l'essentiel d'Amatsu n'est pas là. La spécialité, la renommé de cette lointaine cité vient de sa... cuisine!";
+next;
+mes "[Sryana Tofeko]";
+mes "Amatsu propose mille et un délices à base de poisson cru. Si frais! Si fondant! Si rafraîchissant! Quel plaisir ce serait de pouvoir en déguster ici, avec cette chaleur...";
+next;
+mes "[Sryana Tofeko]";
+mes "Hummmm... Si vous me rapportez les ingrédients, je pourrais peut-être essayer de préparer un plat de là-bas...";
+next;
+mes "[Sryana Tofeko]";
+mes "Rapportez moi ^D16236du poisson frais, des sushi, des morceaux de poisson cru et des crevettes^000000.";
+mes "Je verrai ce que je peux faire avec ça...";
+next;
+mes "[Sryana Tofeko]";
+mes "Et surtout, ne traînez pas en route! Tout doit être frais du jour!";
+set amatsu_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_ayothaya:
+mes "[Sryana Tofeko]";
+if (ayothaya_tofeko == 2) {
+mes "Oh, vous retournez à Ayothaya? C'est une belle ville à la fois calme et colorée...";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Ayothaya? C'est une belle ville à la fois calme et colorée...";
+mes "La tranquillité du zen y côtoie l'explosion de saveur des spécialités culinaires locales.";
+next;
+mes "[Sryana Tofeko]";
+mes "Je ne suis allée qu'une fois à Ayothaya, mais je me souviendrai toujours du repas que j'y avais mangé... Si épicé, pimenté, aigre et doux-amer à la fois!";
+next;
+mes "[Sryana Tofeko]";
+mes "Si j'avais tout les ingrédients, j'arriverais peut-être à le refaire...";
+mes "Ça vous dirait de m'aider? Je vous en préparerai une portion aussi. Ça pique, mais ça vaut le détour!";
+next;
+mes "[Sryana Tofeko]";
+mes "Pour cuisiner cette spécialité, il me faut:";
+mes "^D16236plusieurs bouteilles de sauce piquante, quelques mesures d'épice rouge, plusieurs pincées d'épice jaune, du piment rouge et de nombreux bao^000000.";
+set ayothaya_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_gonryun:
+mes "[Sryana Tofeko]";
+if (gonryun_tofeko == 2) {
+mes "Oh, vous retournez à Gonryun? C'est vraiment une ville fascinante, qui flotte mystérieusement dans les cieux!";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Gonryun? C'est vraiment une ville fascinante, qui flotte mystérieusement dans les cieux!";
+mes "Je me demande d'où vient l'idée de bâtir des villes dans les airs... On doit risquer de laisser tomber des choses en bas...";
+emotion e_hmm;
+next;
+mes "[Sryana Tofeko]";
+mes "En tout cas, les gens de Gonryun sont des mystiques qui peuvent sereinement admirer les étoiles et les nuages.";
+mes "Hummm... Peut-être est-ce l'endroit idéal pour trouver des éléments célestes?";
+next;
+mes "[Sryana Tofeko]";
+mes "Pourriez-vous voir si vous y trouvez ^D16236des nuages en bouteilles, des poussières d'étoile et des miettes d'étoile^000000?";
+mes "Si vous me rapportez ces objets très prisés, je vous donnerais quelque chose de rare issu de mes collections...";
+set gonryun_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_louyang:
+mes "[Sryana Tofeko]";
+if (louyang_tofeko == 2) {
+mes "Oh, vous retournez à Louyang? C'est vrai que c'est une ville à la culture intéressante et aux traditions millénaires.";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Louyang? C'est vrai que c'est une ville à la culture intéressante et aux traditions millénaires.";
+mes "Mais c'est aussi un peu poussiéreux, comme endroit. Ce doit être dû à l'argile que l'on trouve alentour.";
+next;
+mes "[Sryana Tofeko]";
+mes "Certes, à Morroc il y a beaucoup de sable. Mais le sable fin, chaud sous les pieds, c'est agréable! Rien à voir avec les chemins de terre poussiéreux que les Louyannais doivent emprunter chaque jour.";
+next;
+mes "[Sryana Tofeko]";
+mes "Enfin bon, si vous allez là bas, cela tombe bien! J'aurais besoin de divers échantillons sablonneux pour des collègues géologues...";
+next;
+mes "[Sryana Tofeko]";
+mes "Pourriez vous me rapportez ^D16236des cristaux sablonneux, des petit tas de cristaux de sable, du sable sec, des blocs de sable et du sable de sorcière^000000?";
+next;
+mes "[Sryana Tofeko]";
+mes "Je vous échangerai tout ce sable contre un pierre bien plus précieuse de ma collection personnelle!";
+set louyang_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+L_umbala:
+mes "[Sryana Tofeko]";
+if (umbala_tofeko == 2) {
+mes "Oh, vous retournez à Umbala? Il faut le vouloir pour retourner dans cette jungle moite... Même si les indigènes sont accueillants.";
+mes "J'espère que vous apprécierez votre voyage. Envoyez-moi une carte postale!";
+close; }
+mes "Oh, vous allez à Umbala? C'est une véritable jungle moite et inhospitalière, là bas... Même si les indigènes sont accueillants.";
+next;
+mes "[Sryana Tofeko]";
+mes "...Umba, Umbaumbaumba.";
+mes "Umbaumbaumbababa.";
+mes "Umbabawaumbaumbaba.";
+mes "Umbaumba.";
+mes "...Umbaumbamabababumba.";
+emotion e_heh;
+next;
+mes "[Sryana Tofeko]";
+mes "Et oui, je baragouine quelques mots d'Umbalien!";
+mes "C'est mon mari qui m'a appris... J'adore la sonorité de leur langue! Et vous saviez que leur vocabulaire est bien plus riche que le notre?";
+next;
+mes "[Sryana Tofeko]";
+mes "Le village est agréable, avec ses jolis ponts suspendus. Par contre, ça grouille d'insecte, là bas! Beurk!";
+next;
+mes "[Sryana Tofeko]";
+mes "Je n'ai aucune envie d'y aller, même si j'adorerais pouvoir converser avec les habitants dans leur langue natale...";
+mes "Tiens, pourriez-vous massacrer quelques insectes pour moi? Ça me ferait du bien, et en retour je vous offrirai un petit quelque chose.";
+next;
+mes "[Sryana Tofeko]";
+mes "Prouvez-moi que vous les avez tués en me rapportant ^D16236des antennes et pattes d'insecte, des peaux de ver et de ver de terre, des carapaces épaisses et des pinces de scarabée^000000.";
+set umbala_tofeko,1;
+next;
+goto L_bye2;
+close;
+
+
+L_bricabrac:
+mes "[Sryana Tofeko]";
+mes "Oh! Vous aimez chiner les bonnes affaires. Allez voir dans la remise, il y a pas mal de bric et de broc... Vous y trouverez peut-être votre bonheur?";
+next;
+mes "[Sryana Tofeko]";
+mes "La remise est située dans la pièce à ma droite.";
+close;
+
+L_fine:
+mes "[Sryana Tofeko]";
+mes "Fruits, légumes, viandes, épices, condiments... Dans la famille, nous adorons la cuisine du monde entier!";
+next;
+mes "[Sryana Tofeko]";
+mes "Je vous laisse regarder les produits dont nous disposons sur l'étalage au coin de la pièce.";
+mes "Faîtes attention, certains de ces produits peuvent être très pimentés...";
+close;
+
+L_paszeny:
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+mes "Comprenez que je ne peux pas vous faire de réduction, et encore moins vous donner cet objet gratuitement... Je suis seule pour gérer cette boutique, vous savez, et ce n'est pas facile tous les jours...";
+close;
+
+
+L_plustard:
+mes "[Sryana Tofeko]";
+mes "Ah... Bon d'accord.";
+next;
+L_bye2:
+mes "[Sryana Tofeko]";
+L_bye:
+mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+close;
+
+
+}
+
+//======================================================================//
+// 			Bibelots et Souvenirs				//
+//= Ba Gua (7169)			50k				//
+//= Bougie (7554)			10k				//
+//= Chung Jah (735)			5k				//
+//= Emblème de Pharaoh (7113)		50k				//
+//= Jarre de Liqueur Ebréchée (7158)	5k				//
+//= Miroir (747)			5k				//
+//= Masque Blanc (7568)			5k				//
+//= Masque Coloré (20906)		5k				//
+//= Masque de Culte (1045)		5k				//
+//= Masque de Tutankhamen (7114)	5k				//
+//= Montre à Gousset (7513)		30k				//
+//= Porcelaine de Chine (736)		10k				//
+//= Statuette de Novice (7271)		25k				//
+//======================================================================//
+
+
+morocc_in,51,169,0	script	#bibelots	111,{
+
+mes "[Sryana Tofeko]";
+mes "Voici notre collection de bibelots et souvenirs du monde.";
+mes "Qu'est-ce qui vous intéresserait?";
+next;
+	switch(select("Ba Gua > 50000z:Bougie > 10000z:Chung Jah > 5000z:Emblème de Pharaoh > 50000z:Jarre de Liqueur Ebréchée > 5000z:Miroir > 5000z:Masque Blanc > 5000z:Masque Coloré > 5000z:Masque de Culte > 5000z:Masque de Tutankhamen > 5000z:Montre à Gousset > 30000z:Porcelaine de Chine > 10000z:Statuette de Novice > 25000z:Rien, merci")) {
+	case 1:
+		if(zeny < 50000)goto L_paszeny;
+		set Zeny, Zeny - 50000;
+		getitem 7169,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 2:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 7554,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 3:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 735,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 4:
+		if(zeny < 50000)goto L_paszeny;
+		set Zeny, Zeny - 50000;
+		getitem 7113,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 5:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7158,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 6:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 747,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 7:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7568,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 8:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 20906,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 9:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 1045,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 10:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7114,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 11:
+		if(zeny < 30000)goto L_paszeny;
+		set Zeny, Zeny - 30000;
+		getitem 7513,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 12:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 736,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 13:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7271,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 14:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	default:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	}
+
+mes "[Sryana Tofeko]";
+mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+close;
+
+L_paszeny:
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+mes "Comprenez que je ne peux pas vous faire de réduction, et encore moins vous donner cet objet gratuitement... Je suis seule pour gérer cette boutique, vous savez, et ce n'est pas facile tous les jours...";
+close;
+
+
+}
+
+
+
+//======================================================================//
+// 			Epicerie Fine (Nourriture)			//
+//= Bananes Douces (7749)		10k				//
+//= Boulette de Riz (7613)		5k				//
+//= Calmar (7768)			25k				//
+//= Conté (20922)			20k				//
+//= Eau Sucrée (20917)			5k				//
+//= Flan (7744)				5k				//
+//= Gulaman (7743)			25k				//
+//= Kaong (7742)			25k				//
+//= Krathong (7302)			25k				//
+//= Langka (7747)			25k				//
+//= Macapuno (7750)			25k				//
+//= Marshmallow (7862)			5k				//
+//= Noisette (20904)			5k				//
+//= Pain Dur (20911)			5k				//
+//= Pois Doux (7748)			5k				//
+//= Sago (7746)				25k				//
+//= Confiture d'Ube (7745)		20k				//
+//======================================================================//
+
+
+morocc_in,38,171,0	script	#epicerie1	111,{
+
+
+mes "[Sryana Tofeko]";
+mes "Fruits, légumes, viandes, épices, condiments... Dans la famille, nous adorons la cuisine du monde entier!";
+mes "Qu'est-ce qui vous intéresserait?";
+next;
+	switch(select("Bananes Douces >10000z:Boulette de Riz >5000z:Calmar >25000z:Conté >20000z:Eau Sucrée >5000z:Flan >5000z:Gulaman >25000z:Kaong >25000z:Krathong >25000z:Langka >25000z:Macapuno >25000z:Marshmallow >5000z:Noisette >5000z:Pain Dur >5000z:Pois Doux >5000z:Sago >25000z:Confiture d'Ube >20000z:Rien, merci")) {
+	case 1:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 7749,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 2:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7613,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 3:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7768,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 4:
+		if(zeny < 20000)goto L_paszeny;
+		set Zeny, Zeny - 20000;
+		getitem 20922,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 5:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 20917,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 6:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7744,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 7:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7743,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 8:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7742,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 9:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7302,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 10:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7747,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 11:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7750,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 12:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7862,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 13:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 20904,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 14:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 20911,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 15:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7748,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 16:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7746,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 17:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 20000;
+		getitem 7745,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 18:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	default:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	}
+
+mes "[Sryana Tofeko]";
+mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+close;
+
+
+L_paszeny:
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+mes "Comprenez que je ne peux pas vous faire de réduction, et encore moins vous donner cet objet gratuitement... Je suis seule pour gérer cette boutique, vous savez, et ce n'est pas facile tous les jours...";
+close;
+
+}
+
+
+
+//======================================================================//
+// 			Bric à Brac					//
+//= Canette (7405)			5k				//
+//= Chaussettes Rayées (7219)		10k				//
+//= Collyre (20900)			15k				//
+//= Eventail Pliable (7262)		15k				//
+//= Fermeture Eclair (20924)		5k				//
+//= Gjallar (7057)			25k				//
+//= Gros Ruban (20923)			25k				//
+//= Jouet (20907)			15k				//
+//= Lampion (7191)			10k				//
+//= Mégaphone (7040)			10k				//
+//= Napperon (7050)			15k				//
+//= Panier en Osier (20912)		25k				//
+//= Pièces de Charrette (7046)		30k				//
+//= Pot à Crayons (20919)		10k				//
+//= Poudre de Glace (20920)		50k				//
+//= Tête de Méduse (1047)		50k				//
+//= Thermomètre Cassé (20927)		15k				//
+//= Tonnelet (20909)			20k				//
+//= Sac à Dos (20914)			10k				//
+//= Seau d'Eau (20902)			10k				//
+//= Vernis à Griffes (20901)		20k				//
+//======================================================================//
+
+
+morocc_in,17,156,0	script	#bricabrac	111,{
+
+mes "*vous fouillez dans la remise et découvrez une montagne de bazar en tout genre*";
+next;
+	switch(select("Canette >5000z:Chaussettes Rayées >10000z:Collyre >15000z:Eventail Pliable >15000z:Fermeture Eclair >5000z:Gjallar >25000z:Gros Ruban >25000z:Jouet >15000z:Lampion >10000z:Mégaphone >10000z:Napperon >15000z:Panier en Osier >25000z:Pièces de Charrette >30000z:Pot à Crayons >10000z:Poudre de Glace >50000z:Tête de Méduse >50000z:Thermomètre Cassé >15000z:Tonnelet >20000z:Sac à Dos >10000z:Seau d'Eau >10000z:Vernis à Griffes >20000z:S'en aller")) {
+
+
+	case 1:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 7405,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 2:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 7219,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 3:
+		if(zeny < 15000)goto L_paszeny;
+		set Zeny, Zeny - 15000;
+		getitem 20900,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 4:
+		if(zeny < 15000)goto L_paszeny;
+		set Zeny, Zeny - 15000;
+		getitem 7262,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 5:
+		if(zeny < 5000)goto L_paszeny;
+		set Zeny, Zeny - 5000;
+		getitem 20924,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 6:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 7057,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 7:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 20923,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 8:
+		if(zeny < 15000)goto L_paszeny;
+		set Zeny, Zeny - 15000;
+		getitem 20907,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 9:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 7191,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 10:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 7040,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 11:
+		if(zeny < 15000)goto L_paszeny;
+		set Zeny, Zeny - 15000;
+		getitem 7050,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 12:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 20912,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 13:
+		if(zeny < 30000)goto L_paszeny;
+		set Zeny, Zeny - 30000;
+		getitem 7046,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 14:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 20919,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 15:
+		if(zeny < 50000)goto L_paszeny;
+		set Zeny, Zeny - 50000;
+		getitem 20920,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 16:
+		if(zeny < 50000)goto L_paszeny;
+		set Zeny, Zeny - 50000;
+		getitem 1047,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 17:
+		if(zeny < 15000)goto L_paszeny;
+		set Zeny, Zeny - 15000;
+		getitem 20927,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 18:
+		if(zeny < 20000)goto L_paszeny;
+		set Zeny, Zeny - 20000;
+		getitem 20909,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 19:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 20914,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 20:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 20902,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 21:
+		if(zeny < 20000)goto L_paszeny;
+		set Zeny, Zeny - 20000;
+		getitem 20901,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 22:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	default:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	}
+mes "[Sryana Tofeko]";
+mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+close;
+
+L_paszeny:
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+mes "Comprenez que je ne peux pas vous faire de réduction, et encore moins vous donner cet objet gratuitement... Je suis seule pour gérer cette boutique, vous savez, et ce n'est pas facile tous les jours...";
+close;
+
+}
+
+
+
+//======================================================================//
+// 			Fleurs						//
+//= Brin d'Herbe (20908)		10k				//
+//= Feuille de Lotus (7771)	*2*	30k				//
+//= Feuilles Mélangées (20913)		10k				//
+//= Fleur d'Amour (7864)		40k				//
+//= Fleur de Lotus (7553)	*2*	50k				//
+//= Jasmine (7147)			40k				//
+//= Orties (20903)			15k				//
+//= Racine (20918)			10k				//
+//= Tournesol (20905)			25k				//
+//======================================================================//
+
+
+morocc_in,36,157,0	script	#fleurs	111,{
+
+mes "*vous fouillez dans la jarre de fleurs posée au sol*";
+next;
+	switch(select("Brin d'Herbe > 10000z:Feuilles Mélangées > 10000z:Fleur d'Amour > 40000z:Jasmine > 40000z:Orties > 15000z:Racine > 10000z:Tournesol > 25000z:S'en aller")) {
+	case 1:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 20908,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 2:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 20913,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 3:
+		if(zeny < 40000)goto L_paszeny;
+		set Zeny, Zeny - 40000;
+		getitem 7864,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 4:
+		if(zeny < 40000)goto L_paszeny;
+		set Zeny, Zeny - 40000;
+		getitem 7147,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 5:
+		if(zeny < 15000)goto L_paszeny;
+		set Zeny, Zeny - 15000;
+		getitem 20903,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 6:
+		if(zeny < 10000)goto L_paszeny;
+		set Zeny, Zeny - 10000;
+		getitem 20918,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 7:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 20905,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 8:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	default:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+
+	}
+mes "[Sryana Tofeko]";
+mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+close;
+
+L_paszeny:
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+mes "Comprenez que je ne peux pas vous faire de réduction, et encore moins vous donner cet objet gratuitement... Je suis seule pour gérer cette boutique, vous savez, et ce n'est pas facile tous les jours...";
+close;
+
+}
+
+
+morocc_in,50,153,0	script	#fleurs2	111,{
+
+mes "*vous fouillez dans la jarre de fleurs posée au sol*";
+next;
+	switch(select("Feuille de Lotus > 30000z:Fleur de Lotus > 50000z:S'en aller")) {
+	case 1:
+		if(zeny < 30000)goto L_paszeny;
+		set Zeny, Zeny - 30000;
+		getitem 7771,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 2:
+		if(zeny < 50000)goto L_paszeny;
+		set Zeny, Zeny - 50000;
+		getitem 7553,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 3:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	default:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+
+	}
+mes "[Sryana Tofeko]";
+mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+close;
+
+L_paszeny:
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+mes "Comprenez que je ne peux pas vous faire de réduction, et encore moins vous donner cet objet gratuitement... Je suis seule pour gérer cette boutique, vous savez, et ce n'est pas facile tous les jours...";
+close;
+
+}
+
+//======================================================================//
+// 			Livres						//
+//= Manuel de la Brute (20916) - 25k					//
+//======================================================================//
+
+
+morocc_in,74,167,0	script	#livres	111,{
+
+mes "*vous fouillez dans la bibliothèque et découvrez des ouvrages pour le moins surprenants*";
+next;
+	switch(select("Manuel de la Brute > 25000z:S'en aller")) {
+
+
+	case 1:
+		if(zeny < 25000)goto L_paszeny;
+		set Zeny, Zeny - 25000;
+		getitem 20916,1;
+		mes "[Sryana Tofeko]";
+		mes "C'est un bon choix.";
+		mes "Tenez, voilà pour vous.";
+		next;
+		break;
+	case 2:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	default:
+		mes "[Sryana Tofeko]";
+		mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+		close;
+	}
+
+mes "[Sryana Tofeko]";
+mes "En espérant vous revoir bientôt, l'Epicerie Tofeko vous salue!";
+close;
+
+L_paszeny:
+mes "[Sryana Tofeko]";
+mes "Je suis désolée, mais vous n'avez pas assez d'argent.";
+mes "Comprenez que je ne peux pas vous faire de réduction, et encore moins vous donner cet objet gratuitement... Je suis seule pour gérer cette boutique, vous savez, et ce n'est pas facile tous les jours...";
+close;
+
+}
+
+
+//=======================================================================//
+// 			Vimentine Tofeko Rool				 //
+//=======================================================================//
+
+//à venir
