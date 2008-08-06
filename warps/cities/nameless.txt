@@ -1,11 +1,9 @@
-//Le Livre d'Ymir http://bookofymir.free.fr/
-//traduit par Atikae, corrigé par Myllena
 //===== eAthena Script =======================================
 //= Nameless Island Warp Script
 //===== By: ==================================================
 //= $ephiroth
 //===== Current Version: =====================================
-//= 1.2
+//= 1.3
 //===== Compatible With: =====================================
 //= Any Athena Version
 //===== Description: =========================================
@@ -14,11 +12,10 @@
 //= 1.0 Initial version [$ephiroth]
 //= 1.1 Added SinSloth's warper to this file [Playtester]
 //= 1.2 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.3 Removed SinSloth's warper from this file [L0ne_W0lf]
 //============================================================
 
 nameless_n,157,184,0	warp	namelesswarp0401	1,1,abbey01,51,12
-nameless_i,168,257,0	warp	namelesswarp1001	1,1,nameless_in,12,43
-nameless_in,12,40,0	warp	namelesswarp1002	1,1,nameless_i,168,254
 nameless_i,252,130,0	warp	namelesswarp1003	1,1,nameless_in,26,128
 nameless_in,23,128,0	warp	namelesswarp1004	1,1,nameless_i,249,130
 nameless_i,79,256,0	warp	namelesswarp1005	1,1,nameless_in,12,172
@@ -26,79 +23,3 @@ nameless_in,12,169,0	warp	namelesswarp1006	1,1,nameless_i,82,256
 nameless_i,78,94,0	warp	namelesswarp1007	1,1,nameless_in,96,180
 nameless_in,96,177,0	warp	namelesswarp1008	1,1,nameless_i,81,96
 
-ve_fild07,128,131,3	script	Homme du Désert#na	943,{
-
-	mes "[Homme du Désert]";
-	mes "Hé vous! Oui, vous!";
-	mes "Avez-vous déjà entendu parler de L'Île Sans Nom?...";
-	next;
-	mes "[Homme du Désert]";
-	mes "Chut! Pas aussi fort!";
-	mes "Certaines rumeurs disent que c'est un ancien monastère...";
-	mes "Vous devriez aller voir vous-même...";
-	next;
-	mes "[Homme du Désert]";
-	mes "Vous savez... C'est un peu interdit de parler de cet endroit...";
-	mes "En fait, il est presque impossible de s'y rendre.";
-	mes "Mais je peux vous y emmener...";
-	next;
-	mes "[Homme du Désert]";
-	mes "10 000 Zenys!";
-	mes "Et je ferai en sorte que personne ne sache que vous êtes allé sur cette île.";
-	mes "C'est un bon marché, non?";
-	next;
-	switch( select( "Bien sûr.","Oubliez ça." ) )
-	{
-		case 1:
-			if(Zeny < 10000)
-			{
-				mes "[Homme du Désert]";
-				mes "Pensiez-vous vraiment que je prendrais autant de risque gratuitement?";
-				mes "Pas d'argent, pas de voyage. Compris?";
-				close;
-			}
-			mes "[Homme du Désert]";
-			mes "Haha! Je savais que vous étiez courageux!";
-			mes "Allons-y!";
-			mes "J'espère que vous n'avez rien oublié...";
-			set Zeny,Zeny-10000;
-			close2;
-			warp "nameless_n",254,231;
-			end;
-			
-		case 2:
-			mes "[Homme du Désert]";
-			mes "Bien, comme vous voulez.";
-			mes "Souvenez-vous, ne parlez à personne de cet endroit, ou vous aurez des problèmes...";
-			close;
-	}
-}
-
-nameless_n,251,236,3	script	Homme du Désert	943,{
-
-	mes "[Homme du Désert]";
-	mes "Ce n'est pas que je ne vous aime pas... Mais s'il vous plaît, laissez-moi tranquille. J'ai entendu des cris au centre de l'île...";
-	next;
-	mes "[Homme du Désert]";
-	mes "Je vais retourner à Veins.";
-	mes "Je n'aime pas du tout cet endroit.";
-	mes "Voulez-vous revenir avec moi?";
-	next;
-	switch( select( "Emmenez-moi loin d'ici.","Je n'ai pas peur." ) )
-	{
-		case 1:
-			mes "[Homme du Désert]";
-			mes "D'accord. Je vois que vous êtes un aventurier, mais votre décision est sage.";
-			mes "Je ne veux pas rester ici non plus.";
-			close2;
-			warp "ve_fild07",127,135;
-			end;
-			
-		case 2:
-			mes "[Homme du Désert]";
-			mes "C'est votre problème maintenant.";
-			mes "Je ne veux pas prendre part à votre expédition.";
-			mes "Faîtes attention.";
-			close;
-	}
-}
