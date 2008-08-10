@@ -39,6 +39,7 @@
 //= 2.4e Touched up a few issues as pointed out by Ultramage. [L0ne_W0lf]
 //= 2.5 Krongast is in Lighthalzen. (DarkValmir) [L0ne_W0lf]
 //= 2.6 Fixed 4 bugs [Lupus]
+//= 2.6a Typo fix [Yommy]
 //==============================================================
 
 ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
@@ -85,7 +86,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 		mes "Bonjour! Vous venez commander une arme? Désolé mais pour l'instant, j'ai de la paperasse à finir, donc je n'ai pas le temps pour forger.";
 		close;
 	}
-	else if (Baselass == Job_Archer) {
+	else if (BaseClass == Job_Archer) {
 		mes "[Forgeron Altiregen]";
 		mes "Hummm, désolé, mais nous n'embauchons que des Marchands.";
 		close;
@@ -95,7 +96,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 		mes "Vous cherchez de l'entraînement? Notre guilde ne peut fournir aucun support aux magiciens pour ce genre de choses.";
 		close;
 	}
-	else if (Baseclass == Job_Acolyte) {
+	else if (BaseClass == Job_Acolyte) {
 		mes "[Forgeron Altiregen]";
 		mes "Oh! Une personne de la sainte église...! Faîtes moi une faveur et bénissez la lame que je suis en train de forger!";
 		close;
@@ -470,15 +471,10 @@ L_AskQuestions:
 			mes "Allez chercher ces objets, ce sera votre épreuve, et ça me permettra d'économiser un peu d'argent sur cette commande. Hé, qu'est-ce que vous croyez, je ne suis pas toujours un gars sympa! C'est une épreuve!";
 			next;
 			mes "[Geschupenschte]";
-			mes "Rapportez-moi:";
-			mes "^8E6B23"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
-			mes "^8E6B23"+.@items[3]+" "+getitemname(.@items[2])+"^000000,";
-			mes "^8E6B23"+.@items[5]+" "+getitemname(.@items[4])+"^000000, et";
-			mes "^8E6B23"+.@items[7]+" "+getitemname(.@items[6])+"^000000, achetable en boutique.";
-			next;
-			mes "[Geschupenschte]";
 			mes "Très bien~";
-			mes "Bonne chance!";
+			mes "Bonne chance pour votre première épreuve!";
+
+
 			close;
 		}
 		else if (BSMITH_Q > 3 && BSMITH_Q < 9) {
@@ -1081,7 +1077,7 @@ ein_in01,24,41,5	script	Mitmayer#moc	726,{
 			mes "Très bien...";
 			mes "Ce test est relativement simple. Je vais vous poser cinq questions, et évidement je ne vous donnerai aucun indice!";
 			next;
-			set blackss_te,0;
+			set .@blackss_te,0;
 			mes "[Mitmayer]";
 			mes "Ok, c'est parti. Si vous n'obtenez pas suffisamment de bonnes réponses, vous échouerez! Alors réfléchissez bien avant de répondre.";
 			next;
