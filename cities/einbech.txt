@@ -3,7 +3,7 @@
 //===== eAthena Script ======================================= 
 //= Einbech Town
 //===== By: ================================================== 
-//= Muad_dib
+//= Muad_Dib
 //===== Current Version: ===================================== 
 //= 1.4
 //===== Compatible With: ===================================== 
@@ -24,6 +24,7 @@
 //= 1.2 Removed Duplicates [Silent]
 //= 1.3 Implemented the Lover's quest. [MasterOfMuppets]
 //= 1.4 Moved quests to quests/quests_ein.txt [Evera]
+//= 1.5 Optimized some of the NPCs and fixed some typos [DZeroX]
 //============================================================
 
 
@@ -243,23 +244,25 @@ einbech,39,215,6	script	Gare Ferroviaire#ein01	852,{
 	mes "Bienvenue à la Gare Ferroviaire d'Einbech.";
 	mes "Le prochain train en direction d'Einbroch est sur le départ. Souhaitez-vous rejoindre Einbroch? Le coût du trajet est de 200 Zenys.";
 	next;
-	menu "Oui.",L_YES,"Non.",-;
-
-	mes "[Employé]";
-	mes "Passez un bon séjour à Einbech.";
-	close;
-L_YES:
-	if(Zeny < 200)goto L_ZENY;
-	mes "[Employé]";
-	mes "Merci. Bon voyage!";
-	next;
-	set Zeny,Zeny - 200;
-	warp "einbroch",226,276;
-	end;
-L_ZENY:
-	mes "[Employé]";
-	mes "Je suis désolé, mais vous n'avez pas assez d'argent.";
-	close;
+	switch (select("Oui:Non")) {
+		case 1:
+			if(Zeny < 200) {
+				mes "[Employé]";
+				mes "Je suis désolé, mais vous n'avez pas assez d'argent.";
+				close;
+			}
+			mes "[Employé]";
+			mes "Merci. Bon voyage!";
+			mes "En voiture!";
+			close2;
+			set Zeny,Zeny - 200;
+			warp "einbroch",226,276;
+			end;
+		case 2:
+			mes "[Employé]";
+			mes "Passez un bon séjour à Einbech.";
+			close;
+	}
 }
 
 einbech,157,215,4	script	Gare Ferroviaire#ein02	852,{
@@ -326,72 +329,76 @@ einbech,148,242,5	script	Jung	855,{
 	mes "[Jung]";
 	mes "Dîtes moi si vous avez l'intention d'entrer dans les mines, je pourrai vous renseigner et vous en apprendre beaucoup sur les monstres qui s'y trouvent pour vous y préparer.";
 	next;
-	menu "Pourquoi pas?",L_TELL,"Non, merci.",-;
-	mes "[Jung]";
-	mes "Je peux comprendre que vous soyez du genre hâtif.";
-	mes "Mais si vous êtes nouveau, vous devriez en apprendre le plus possible avant d'entrer dans les donjons.";
-	next;
-	mes "[Jung]";
-	mes "Bon et bien, prenez soin de vous lors de vos voyages.";
-	close;
-L_TELL:
-	mes "[Jung]";
-	mes "Ah, les monstres qui sont uniques dans les mines sont les Noxious, Venomous, Porcellio et Obsidian.";
-	mes "Voulez-vous en savoir plus sur l'un d'eux?";
-	next;
-	menu "Noxious et Venomous",-,"Porcellio",L_PORCELLIO,"Obsidian",L_OBSIDIAN;
-	mes "[Jung]";
-	mes "Vous savez, il semble que personne ne sache d'où les Noxious et les Venomous proviennent.";
-	mes "Ils sont arrivés de nul part lors des débuts de l'industrialisation d'Einbroch.";
-	next;
-	mes "[Jung]";
-	mes "Voila mon avis, je doute que ce soit des monstres créés naturellement.";
-	mes "Ils ont un regard fixe, empli de désespoir et de douleur, et je trouve qu'il sont assez suicidaires, on dirait qu'il font tout pour être tués.";
-	next;
-	mes "[Jung]";
-	mes "Enfin, restez prudent quand même!";
-	mes "Attention! Les Noxious et les Venomous sont des monstres furtifs, ils peuvent flotter tranquillement dans les airs et vous attaquer avant même que vous vous en rendiez compte...";
-	next;
-	mes "[Jung]";
-	mes "Vous devez savoir que les Noxious possèdent les propriétés des Fantômes, et les Venomous sont des montres de type Poison.";
-	mes "Les deux sont de taille moyenne, et n'ont pas une apparence précise.";
-	next;
-	mes "[Jung]";
-	mes "L'un ou l'autre peut vous apporter ces objets: Apple, Dust Pollutant, Toxic Gas, Poisonous Powder, Bacillus, Mold Powder et Anodyne.";
-	next;
-	mes "[Jung]";
-	mes "C'est tout ... Pour le moment.";
-	mes "N'hésitez pas a venir me voir si vous avez des questions sur les monstres de la mine.";
-	mes "Partez sans crainte maintenant mon ami.";
-	close;
-L_PORCELLIO:
-	mes "[Jung]";
-	mes "Le Porcellio est un insecte vivant dans les cavernes et buvant l'eau qui s'égoutte des stalactites.";
-	mes "Il est différent d'Ungoliant puisqu'il aime être près des différents genres de minerais et métaux.";
-	next;
-	mes "[Jung]";
-	mes "Le Porcellio peut laisser tomber des Jubilee, Insect Leg, Single Cell, Moss of Morning Dew, Neon Liquid et quelques autres objets dont je ne me rappelle plus le nom.";
-	next;
-	mes "[Jung]";
-	mes "Enfin, le Porcellio est un monstre de propriété élementale Terre.";
-	mes "C'est tout ce que je sais sur eux.";
-	mes "Mais si vous avez d'autres questions sur les monstres des mines, n'hésitez pas.";
-	close;
-L_OBSIDIAN:
-	mes "[Jung]";
-	mes "Êtes vous au courant que les roches des souterrains contenant une quantité phénoménal d'énergie ont une âme? Les Obsidians sont l'une des dernières espèces de roches vivantes.";
-	next;
-	mes "[Jung]";
-	mes "Un simple morceau d'Obsidian implanté dans une de mes machines fournirait assez d'énergie pour éclairer le ciel en pleine nuit.";
-	mes "Malheureusement, il est impossible d'en capturer un en vie. De plus, les chasser n'est pas aussi facile qu'on le croit.";
-	next;
-	mes "[Jung]";
-	mes "L'Obsidian est un petit monstre diforme qui peut laisse tomber des Clear Jewel, Piece of Black Crystal, Coal, Elunium, Iron et Steel quand il est battu.";
-	next;
-	mes "[Jung]";
-	mes "C'est tout ce que je sais sur les Obsidians.";
-	mes "Si vous avez d'autres questions sur les monstres des mines, n'hésitez pas.";
-	close;
+	switch (select("Pourquoi pas?:Non, merci.")) {
+		case 1:
+			mes "[Jung]";
+			mes "Ah, les monstres qui sont uniques dans les mines sont les Noxious, Venomous, Porcellio et Obsidian.";
+			mes "Voulez-vous en savoir plus sur l'un d'eux?";
+			next;
+			switch (select("Noxious et Venomous:Porcellio:Obsidian")) {
+				case 1:
+					mes "[Jung]";
+					mes "Vous savez, il semble que personne ne sache d'où les Noxious et les Venomous proviennent.";
+					mes "Ils sont arrivés de nul part lors des débuts de l'industrialisation d'Einbroch.";
+					next;
+					mes "[Jung]";
+					mes "Voila mon avis, je doute que ce soit des monstres créés naturellement.";
+					mes "Ils ont un regard fixe, empli de désespoir et de douleur, et je trouve qu'il sont assez suicidaires, on dirait qu'il font tout pour être tués.";
+					next;
+					mes "[Jung]";
+					mes "Enfin, restez prudent quand même!";
+					mes "Attention! Les Noxious et les Venomous sont des monstres furtifs, ils peuvent flotter tranquillement dans les airs et vous attaquer avant même que vous vous en rendiez compte...";
+					next;
+					mes "[Jung]";
+					mes "Vous devez savoir que les Noxious possèdent les propriétés des Fantômes, et les Venomous sont des montres de type Poison.";
+					mes "Les deux sont de taille moyenne, et n'ont pas une apparence précise.";
+					next;
+					mes "[Jung]";
+					mes "L'un ou l'autre peut vous apporter ces objets: Apple, Dust Pollutant, Toxic Gas, Poisonous Powder, Bacillus, Mold Powder et Anodyne.";
+					next;
+					mes "[Jung]";
+					mes "C'est tout ... Pour le moment.";
+					mes "N'hésitez pas a venir me voir si vous avez des questions sur les monstres de la mine.";
+					mes "Partez sans crainte maintenant mon ami.";
+					close;
+				case 2:
+					mes "[Jung]";
+					mes "Le Porcellio est un insecte vivant dans les cavernes et buvant l'eau qui s'égoutte des stalactites.";
+					mes "Il est différent d'Ungoliant puisqu'il aime être près des différents genres de minerais et métaux.";
+					next;
+					mes "[Jung]";
+					mes "Le Porcellio peut laisser tomber des Jubilee, Insect Leg, Single Cell, Moss of Morning Dew, Neon Liquid et quelques autres objets dont je ne me rappelle plus le nom.";
+					next;
+					mes "[Jung]";
+					mes "Enfin, le Porcellio est un monstre de propriété élementale Terre.";
+					mes "C'est tout ce que je sais sur eux.";
+					mes "Mais si vous avez d'autres questions sur les monstres des mines, n'hésitez pas.";
+					close;
+				case 3:
+					mes "[Jung]";
+					mes "Êtes vous au courant que les roches des souterrains contenant une quantité phénoménal d'énergie ont une âme? Les Obsidians sont l'une des dernières espèces de roches vivantes.";
+					next;
+					mes "[Jung]";
+					mes "Un simple morceau d'Obsidian implanté dans une de mes machines fournirait assez d'énergie pour éclairer le ciel en pleine nuit.";
+					mes "Malheureusement, il est impossible d'en capturer un en vie. De plus, les chasser n'est pas aussi facile qu'on le croit.";
+					next;
+					mes "[Jung]";
+					mes "L'Obsidian est un petit monstre diforme qui peut laisse tomber des Clear Jewel, Piece of Black Crystal, Coal, Elunium, Iron et Steel quand il est battu.";
+					next;
+					mes "[Jung]";
+					mes "C'est tout ce que je sais sur les Obsidians.";
+					mes "Si vous avez d'autres questions sur les monstres des mines, n'hésitez pas.";
+					close;
+			}
+		case 2:
+			mes "[Jung]";
+			mes "Je peux comprendre que vous soyez du genre hâtif.";
+			mes "Mais si vous êtes nouveau, vous devriez en apprendre le plus possible avant d'entrer dans les donjons.";
+			next;
+			mes "[Jung]";
+			mes "Bon et bien, prenez soin de vous lors de vos voyages.";
+			close;	
+	}
 }
 
 einbech,148,246,5	script	Franz	851,{
@@ -406,74 +413,78 @@ einbech,148,246,5	script	Franz	851,{
 	mes "Est-ce que vous allez explorer les mines et les alentours de la ville?";
 	mes "Asseyez-vous deux minutes, vous pourriez apprendre quelques trucs.";
 	next;
-	menu "D'accord.",L_OKAY,"Non, merci.",-;
-	mes "[Franz]";
-	mes "Oh, d'accord.";
-	mes "Vous êtes occupé et vous avez des choses à faire, je comprends.";
-	mes "Vous devriez vous éloigner le plus loin d'ici alors.";
-	next;
-	mes "[Franz]";
-	mes "J...";
-	mes "J'ai des matériaux que je devrais façonner.";
-	mes "Oh oui, mais j'ai trop de choses à faire.";
-	close;
-L_OKAY:
-	mes "[Franz]";
-	mes "Ooh, avez-vous entendu parler de la créature vivant dans les cavernes ou de ce qu'il s'est produit récemment?";
-	mes "Vous aimeriez en savoir plus?";
-	next;
-	menu "La créature des cavernes",L_CREATURE,"L'accident en ville",-;
-	mes "[Franz]";
-	mes "A Einbroch, les Teddy Bear ont été au top de la mode pendant une courte durée.";
-	mes "Cependant, une série d'accidents et de meurtres mystérieux où des familles entières ont été tuées s'est également produite.";
-	next;
-	mes "[Franz]";
-	mes "Il s'avère que chaque famille qui avait été assassinée avait acheté un de ces nounours.";
-	mes "Une rumeur dit que ces nounours ont prit vie.";
-	next;
-	mes "[Franz]";
-	mes "Après une enquête, les autorités ont appris que tous les marchands qui ont vendu ces ours les avaient achetés du même grossiste un étranger dont personne ne sait rien.";
-	next;
-	mes "[Franz]";
-	mes "Puisque ces oursons n'ont pas été créés pour être de simples et inoffensives peluches des troupes ont été envoyées pour les chasser hors de la ville.";
-	next;
-	mes "[Franz]";
-	mes "Mais dès qu'ils furent en dehors de la ville, ils ont commencé à bouger et à s'ameuter! C'est une preuve évidente que ces ours étaient contrôlés par une force démoniaque.";
-	next;
-	mes "[Franz]";
-	mes "Ces ours agressifs se sont maintenant dispersés partout et le gouvernement les a déclaré comme étant des monstres à part entière.";
-	mes "Il faut les tuer sans aucun scrupules!";
- 	next;
-	mes "[Franz]";
-	mes "Selon les aventuriers qui ont attrapé ces ours, ce sont des monstres de propriété élémentale Neutre de petite taille pouvant laisser des Honey, Screw, Well-baked Cookie et des Oridecon Hammer.";
-	next;
-	mes "[Franz]";
-	mes "C'est tout que je sais à leur sujet. Ouvrez l'oeil si vous partez les chasser, d'accord?";
-	mes "Ils sont peut être mignons, mais ils sont également très vicieux!";
-	close;
-L_CREATURE:
-	mes "[Franz]";
-	mes "Le monstre dont je vous parle est Ungoliant, également connu sous le nom de Maître des Cavernes.";
-	mes "On dit qu'il vit dans les profondeurs des mines où les minerais et les métaux sont dotés d'étranges pouvoirs.";
-	next;
-	mes "[Franz]";
-	mes "Au début, je pensais que c'était juste un conte de fées, mais il a commencé à se montrer il y a environ dix ans, exactement au même moment où les éboulements des tunnels ont commencé à se produire.";
-	next;
-	mes "[Franz]";
-	mes "Comme son nombre d'apparitions s'accroît, le nombre d'effondrements augmente également.";
-	mes "Je pense que les mineurs sont entrés par inadvertance sur son territoire.";
-	next;
-	mes "[Franz]";
-	mes "Selon la légende, les anciens géants travaillaient le charbon à l'intérieur d'une mine, bien cachée des humains.";
-	mes "Mais ils ont fait trop de bruit pendant qu'ils creusaient et ont réveillé Ungoliant.";
-	next;
-	mes "[Franz]";
-	mes "Quand les mineurs sont allés travailler le matin suivant, ils ont trouvé les corps ensanglantés de ces géants.";
-	mes "Après ça, les gens ont craint la menace qu'Ungoliant représente pour quiconque entre dans les mines.";
-	next;
-	mes "[Franz]";
-	mes "Maintenant, un aventurier qui est parvenu à tuer un Ungoliant m'a affirmé avoir obtenu ces objets: Ant's Jaw, Colorful Shell, Very Hard Shell, Long Leg, Neon Liquid et Zircon.";
-	close;
+	switch (select("D'accord.:Non, merci.")) {
+		case 1:
+			mes "[Franz]";
+			mes "Ooh, avez-vous entendu parler de la créature vivant dans les mines ou de ce qu'il s'est produit récemment?";
+			mes "Vous aimeriez en savoir plus?";
+			next;
+			switch (select("La Créature des Mines.:L'Accident en Ville")) {
+				case 1:
+					mes "[Franz]";
+					mes "Le monstre dont je vous parle est Ungoliant, également connu sous le nom de Maître des Mines.";
+					mes "On dit qu'il vit dans les profondeurs des mines où les minerais et les métaux sont dotés d'étranges pouvoirs.";
+					next;
+					mes "[Franz]";
+					mes "Au début, je pensais que c'était juste un conte de fées, mais il a commencé à se montrer il y a environ dix ans, exactement au même moment où les éboulements des tunnels ont commencé à se produire.";
+					next;
+					mes "[Franz]";
+					mes "Comme son nombre d'apparitions s'accroît, le nombre d'effondrements augmente également.";
+					mes "Je pense que les mineurs sont entrés par inadvertance sur son territoire.";
+					next;
+					mes "[Franz]";
+					mes "Selon la légende, les anciens géants travaillaient le charbon à l'intérieur d'une mine, bien cachée des humains.";
+					mes "Mais ils ont fait trop de bruit pendant qu'ils creusaient et ont réveillé Ungoliant.";
+					next;
+					mes "[Franz]";
+					mes "Quand les mineurs sont allés travailler le matin suivant, ils ont trouvé les corps ensanglantés de ces géants.";
+					mes "Après ça, les gens ont craint la menace qu'Ungoliant représente pour quiconque entre dans les mines.";
+					next;
+					mes "[Franz]";
+					mes "Maintenant, un aventurier qui est parvenu à tuer un Ungoliant m'a affirmé avoir obtenu ces objets: Ant's Jaw, Colorful Shell, Very Hard Shell, Long Leg, Neon Liquid et Zircon.";
+					close;
+				case 2:
+					mes "[Franz]";
+					mes "A Einbroch, les Teddy Bear ont été au top de la mode pendant une courte durée.";
+					mes "Cependant, une série d'accidents et de meurtres mystérieux où des familles entières ont été tuées s'est également produite.";
+					next;
+					mes "[Franz]";
+					mes "Il s'avère que chaque famille qui avait été assassinée avait acheté un de ces nounours.";
+					mes "Une rumeur dit que ces nounours ont prit vie.";
+					next;
+					mes "[Franz]";
+					mes "Après une enquête, les autorités ont appris que tous les marchands qui ont vendu ces ours les avaient achetés du même grossiste un étranger dont personne ne sait rien.";
+					next;
+					mes "[Franz]";
+					mes "Puisque ces oursons n'ont pas été créés pour être de simples et inoffensives peluches des troupes ont été envoyées pour les chasser hors de la ville.";
+					next;
+					mes "[Franz]";
+					mes "Mais dès qu'ils furent en dehors de la ville, ils ont commencé à bouger et à s'ameuter! C'est une preuve évidente que ces ours étaient contrôlés par une force démoniaque.";
+					next;
+					mes "[Franz]";
+					mes "Ces ours agressifs se sont maintenant dispersés partout et le gouvernement les a déclaré comme étant des monstres à part entière.";
+					mes "Il faut les tuer sans aucun scrupules!";
+ 					next;
+					mes "[Franz]";
+					mes "Selon les aventuriers qui ont attrapé ces ours, ce sont des monstres de propriété élémentale Neutre de petite taille pouvant laisser des Honey, Screw, Well-baked Cookie et des Oridecon Hammer.";
+					next;
+					mes "[Franz]";
+					mes "C'est tout que je sais à leur sujet. Ouvrez l'oeil si vous partez les chasser, d'accord?";
+					mes "Ils sont peut être mignons, mais ils sont également très vicieux!";
+					close;
+				}
+			case 2:
+				mes "[Franz]";
+				mes "Oh, d'accord.";
+				mes "Vous êtes occupé et vous avez des choses à faire, je comprends.";
+				mes "Vous devriez vous éloigner le plus loin d'ici alors.";
+				next;
+				mes "[Franz]";
+				mes "J...";
+				mes "J'ai des matériaux que je devrais façonner.";
+				mes "Oh oui, mais j'ai trop de choses à faire.";
+				close;
+	}
 }
 
 einbech,151,168,4	script	Tollaf	854,{
@@ -541,34 +552,36 @@ einbech,172,113,4	script	Nemuk	855,{
 	mes "Vous semblez être un étranger, laissez-moi vous poser quelques questions.";
 	mes "Que pensez vous d'Einbech?";
 	next;
-	menu "C'est cool.",L_FINE,"Ça doit pas être facile de vivre ici.",-;
-	mes "[Nemuk]";
-	mes "Je le pense tout autant.";
-	mes "Je m'excuse de vous embêter avec tout cela.";
-	next;
-	mes "[Nemuk]";
-	mes "Tout le monde ici a une dure vie au quotidien.";
-	mes "C'est comme si les choses ne s'arrangeaient pas, quoi que nous fassions.";
-	next;
-	mes "[Nemuk]";
-	mes "J'ai vraiment envie de partir, mais ce n'est plus qu'un rêve vide.";
-	mes "Mon corps est emprisonné ici tandis que mon coeur désire ardemment une vie bien meilleure. *Soupire*";
-	mes "C'est sans espoir? Qu'est ce que je peux faire?";
-	close;
-L_FINE:
-	mes "[Nemuk]";
-	mes "Hein...?";
-	mes "Je ne sais pas ce que vous avez vu, mais je suis surpris de vous entendre dire ça.";
-	next;
-	mes "[Nemuk]";
-	mes "Cela fait dix ans que je me demande si je ne vais pas quitter cette ville.";
-	mes "Je me pose toujours cette question d'ailleurs.";
-	mes "Maintenant, si j'étais riche, je partirais sur le champs, mais c'est dur d'obtenir de l'argent et de partir.";
-	next;
-	mes "[Nemuk]";
-	mes "*Soupire...*";
-	mes "Si seulement j'avais pu être un aventurier dans ma jeunesse, je n'aurais certainement pas tous ces problèmes aujourd'hui...";
-	close;
+	switch (select("C'est cool.:Ça doit pas être facile de vivre ici.")) {
+		case 1:
+			mes "[Nemuk]";
+			mes "Hein...?";
+			mes "Je ne sais pas ce que vous avez vu, mais je suis surpris de vous entendre dire ça.";
+			next;
+			mes "[Nemuk]";
+			mes "Cela fait dix ans que je me demande si je ne vais pas quitter cette ville.";
+			mes "Je me pose toujours cette question d'ailleurs.";
+			mes "Maintenant, si j'étais riche, je partirais sur le champs, mais c'est dur d'obtenir de l'argent et de partir.";
+			next;
+			mes "[Nemuk]";
+			mes "*Soupir...*";
+			mes "Si seulement j'avais pu être un aventurier dans ma jeunesse, je n'aurais certainement pas tous ces problèmes aujourd'hui...";
+			close;
+		case 2:
+			mes "[Nemuk]";
+			mes "Je le pense tout autant.";
+			mes "Je m'excuse de vous embêter avec tout cela.";
+			next;
+			mes "[Nemuk]";
+			mes "Tout le monde ici a une dure vie au quotidien.";
+			mes "C'est comme si les choses ne s'arrangeaient pas, quoi que nous fassions.";
+			next;
+			mes "[Nemuk]";
+			mes "J'ai vraiment envie de partir, mais ce n'est plus qu'un rêve vide.";
+			mes "Mon corps est emprisonné ici tandis que mon coeur désire ardemment une vie bien meilleure. *Soupire*";
+			mes "C'est sans espoir? Qu'est ce que je peux faire?";
+			close;
+	}
 }
 
 ein_in01,281,85,2	script	Homme Saoul#ein1	849,{

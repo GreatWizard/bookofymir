@@ -3,9 +3,10 @@
 //===== eAthena Script =======================================
 //= Hugel City
 //===== By: ==================================================
-//= vicious_pucca, Poki#3, erKURITA, Munin
+//= vicious_pucca, Poki#3, erKURITA, Munin, and everybody in the
+//= comments
 //===== Current Version: =====================================
-//= 1.2
+//= 1.5
 //===== Compatible With: =====================================
 //= eAthena 1.0
 //===== Description: =========================================
@@ -24,6 +25,8 @@
 //=	just using up memory. [erKURITA]
 //= 1.2 Added a few NPCs scripted by Munin and fixed up format a little [Playtester]
 //= 1.3 Moved some quests-related NPCs to proper file. [SinSloth]
+//= 1.4 Optimized the Party Supplies Shop [DZeroX]
+//= 1.5 Fixed Party Supplies Shop. [L0ne_W0lf]
 //============================================================
 
 //---------------------------------------------------------------------------
@@ -37,6 +40,7 @@ hugel,189,143,5	script	Jeune Homme	898,{
 	mes "[Jeune Homme]";
 	mes "Hum. Alors cet énorme ballon d'air peut faire voler les gens?";
 	close;
+	
 }
 
 
@@ -53,6 +57,7 @@ hugel,126,151,3	script	Emily	90,{
 	mes "Elle disait qu'elle ne supportait plus la béatitude des gens qui vivent ici...";
 	mes "Vous ne pensez pas que c'est une réaction étrange?";
 	close;
+	
 }
  
 //Mudie
@@ -70,6 +75,7 @@ hugel,85,93,3	script	Mudie	866,{
 	mes "Si vous voulez parier, ou bien simplement assister à une course, allez voir l'un des frères Eckar.";
 	mes "J'espère que vous apprécierez votre séjour dans notre petite ville~";
 	close;
+	
 }
 
 //Kayplas
@@ -80,6 +86,7 @@ hugel,86,165,5	script	Kayplas	896,{
 	mes "Ooh, j'adorerais pouvoir m'acheter une de ces bouteilles de sirop de framboise...";
 	mes "Je demanderais bien à ma maman de m'en acheter, mais c'est tellement cher...";
 	close;
+	
 }
 
 //Lisa
@@ -95,6 +102,7 @@ hugel,71,197,3	script	Lisa	90,{
 	mes "Il n'y a plus aucune vie privée dans les petits villages...";
 	mes "Un jour, j'irai vivre dans une très grande ville!~";
 	close;
+	
 }
 
 //Old Nikki 
@@ -111,6 +119,7 @@ hugel,169,112,5	script	Nikki	892,{
 	mes "Et vous ne ressemblez à aucun autre par ici, ça non...";
 	mes "Et bien, passez une bonne journée, jeune aventurier~";
 	close;
+	
 }
 
 //Bismarc
@@ -128,6 +137,7 @@ hugel,168,183,5	script	Bismarc	118,{
 	mes "[Bismarc]";
 	mes "Quand mon antidote arrivera-t-il?!";
 	close;
+	
 }
 
 hugel,175,115,5	script	Marius	897,{
@@ -140,6 +150,7 @@ hugel,175,115,5	script	Marius	897,{
 	mes "C'est parce que nous ne tournons pas le dos à la tache! Nous refusons de nous laisser abatre!";
 	mes "Allez gamin, montre moi ta force!!~";
 	close;
+	
 }
 
 //-------------------------------------------------------------------------
@@ -156,6 +167,7 @@ hu_in01,111,386,4	script	Chris	86,{
 	mes "[Chris]";
 	mes "Si vous voulez acheter quelques armures de bonne qualité, vous feriez mieux de vous fournir dans une grande ville.";
 	close;
+	
 }
 
 //Rachel
@@ -179,26 +191,24 @@ hu_in01,23,311,4	script	Farces et Attrapes	898,{
 	mes "Salut~ Bienvenue dans ma boutique de Farces et Attrapes! Je vends des petits feux d'artifices, est-ce que vous en voulez?";
 	mes "Seulement 500 Zenys pour 5 ^FF0000Feux d'Artifices^000000!";
 	next;
-	menu "Oui s'il vous plaît",L_Buy,"Non merci",L_Cancel;
-
-	L_Buy:
-		if (Zeny < 500) goto L_NEnoughZ;
-
-		set Zeny,Zeny-500;
-		getitem 12018,5;
-		mes "[Josh]";
-		mes "Et voilà pour vous! Amusez-vous bien!";
-		close;
-
-	L_NEnoughZ:
-		mes "[Josh]";
-		mes "Hum.... désolé mais vous n'avez pas assez d'argent~";
-		close;
-
-	L_Cancel:
-		mes "[Josh]";
-		mes "Revenez quand vous voulez!";
-		close;
+	switch (select("Oui, s'il vous plaît.:Non, merci.")) {
+		case 1:
+			if (Zeny < 500) { 
+				mes "[Josh]";
+				mes "Hum.... désolé mais vous n'avez pas assez d'argent~";
+				close;
+			}
+			set Zeny,Zeny-500;
+			getitem 12018,5;
+			mes "[Josh]";
+			mes ""Et voilà pour vous! Amusez-vous bien!";
+			close;
+		case 2:
+			mes "[Josh]";
+			mes "Revenez quand vous voulez.";
+			close;
+	}
+		
 }
 
 hu_in01,18,94,0	script	Luda#1	49,{
@@ -216,6 +226,7 @@ hu_in01,18,94,0	script	Luda#1	49,{
 	mes "Je dois nettoyer les deux pièces, alors je n'ai pas le temps de chômer!";
 	mes "Pourquoi ne tenteriez-vous pas de participer à leur expédition? C'est une merveilleuse chance pour explorer les environs~";
 	close;
+	
 }
 
 hu_in01,26,77,4	script	Assistant#2	50,{
@@ -224,6 +235,7 @@ hu_in01,26,77,4	script	Assistant#2	50,{
 	mes "totalement accaparé";
 	mes "par son travail...^000000";
 	close;
+	
 }
 
 //Should be moved later on to Bulletin Boards.txt
