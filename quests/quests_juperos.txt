@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://bookofymir.free.fr/
-//partiellement traduit par Capria, corrigé par Myllena
+//traduit par Capria (Juperos Ruins History Quest) et Myllena (le reste), corrigé par Myllena
 //===== eAthena Script =======================================
 //= Juperos Dungeon Quests
 //===== By ===================================================
@@ -1245,27 +1245,23 @@ juperos_01,100,91,0	script	jupe_goto#1	-1,2,2,{
 OnTouch:
 	initnpctimer "jupe_goto#1",1;
 	mes "^777777["+ strcharinfo(0) +"]^000000";
-	mes "This light...";
-	mes "It feels like...";
-	mes "Its warmth is...";
-	mes "Wrapping all over me...";
+	mes "Cette lumière...";
+	mes "On dirait que...";
+	mes "Sa chaleur...";
+	mes "m'enveloppe...";
 	next;
-	switch(select("Ah, it's so nice...:No! This is wrong!")) {
+	switch(select("Ah, quelle agréable sensation...:Non! Il y a quelque chose qui cloche!")) {
 	case 1:
 		mes "^777777["+ strcharinfo(0) +"]^000000";
 		mes "Ahhhh...";
-		mes "It feels like";
-		mes "I'm floating...";
+		mes "J'ai l'impression de flotter...";
 		specialeffect2 348; // EF_LIGHTSPHERE
 		close2;
 		stopnpctimer;
 		warp "juperos_02",128,278;
 	case 2:
 		mes "^777777["+ strcharinfo(0) +"]^000000";
-		mes "N-No! This is";
-		mes "wrong! Something";
-		mes "weird's happening!";
-		mes "I gotta get away!";
+		mes "N-Non! Quelque chose ne va pas! Je dois m'éloigner!";
 		close2;
 		stopnpctimer;
 		warp "juperos_01",96,91;
@@ -1320,20 +1316,20 @@ OnEnable:
 
 OnTimer5000:
 	set .MyMobs,3;
-	monster "juperos_02",24,275,"1st Gate Switch",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
-	monster "juperos_02",240,29,"2nd Gate Switch",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
-	monster "juperos_02",282,183,"3rd Gate Switch",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
+	monster "juperos_02",24,275,"1ier Gardien de la Porte",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
+	monster "juperos_02",240,29,"2ème Gardien de la Porte",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
+	monster "juperos_02",282,183,"3ème Gardien de la Porte",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
 	stopnpctimer;
 	end;
 
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs == 2)
-		mapannounce "juperos_02","Who are you to come here?",bc_map,"0xFF0000";
+		mapannounce "juperos_02","Qui ose pénétrer cet endroit?",bc_map,"0xFF0000";
 	else if (.MyMobs == 1)
-		mapannounce "juperos_02","Have you come seeking Juperos?! It no longer exists...",bc_map,"0xFF0000";
+		mapannounce "juperos_02","Êtes-vous venu à la recherche de Juperos?! Ce lieu n'existe plus...",bc_map,"0xFF0000";
 	else if (.MyMobs == 0) {
-		mapannounce "juperos_02","Have you come to see me? Fine! Find me first!",bc_map,"0xFF0000";
+		mapannounce "juperos_02","Êtes-vous venu à ma recherche? Très bien! Trouvez-moi!",bc_map,"0xFF0000";
 		specialeffect2 563; // 563
 		soundeffectall "earth_quake.wav",0;
 		disablenpc "3F Gate Switch#jupe";
@@ -1358,11 +1354,11 @@ OnTimer5000:
 	end;
 
 OnTimer7000:
-	mapannounce "juperos_02","Attention, visitors.",bc_map,"0xE559A2";
+	mapannounce "juperos_02","Attention, visiteurs.",bc_map,"0xE559A2";
 	end;
 
 OnTimer9000:
-	mapannounce "juperos_02","You are allowed to enter the next zone for a short period of time. Please use the portal in the center of the map.",bc_map,"0xE559A2";
+	mapannounce "juperos_02","Vous êtes autorisés à pénétrer la zone suivant pour un court laps de temps. Veuillez utiliser le portail situé au centre de la carte.",bc_map,"0xE559A2";
 	end;
 
 OnTimer9001:
@@ -1392,11 +1388,11 @@ OnTimer552000:
 	end;
 
 OnTimer556000:
-	mapannounce "juperos_02","Attention, visitors. The gate to the next zone will close shortly.",bc_map,"0xE559A2";
+	mapannounce "juperos_02","Attention, visiteurs. Le portail menant à la zone suivante va bientôt se refermer.",bc_map,"0xE559A2";
 	end;
 
 OnTimer561000:
-	mapannounce "juperos_02","1 minute remaining until Gate Closure. ",bc_map,"0xE559A2";
+	mapannounce "juperos_02","Une minute restante avant la fermeture du portail. ",bc_map,"0xE559A2";
 	end;
 
 OnTimer598000:
@@ -1404,11 +1400,11 @@ OnTimer598000:
 	end;
 
 OnTimer600000:
-	mapannounce "juperos_02","The gate is being closed...",bc_map,"0xE559A2";
+	mapannounce "juperos_02","Le portail est désormais fermé...",bc_map,"0xE559A2";
 	end;
 
 OnTimer603000:
-	mapannounce "juperos_02"," Switches will reactivate shortly.",bc_map,"0xE559A2";
+	mapannounce "juperos_02"," Il s'activera de nouveau dans peu de temps.",bc_map,"0xE559A2";
 	end;
 
 OnTimer621000:
@@ -1431,56 +1427,34 @@ OnTouch:
 jupe_area1,88,224,0	script	#hole#1-1	844,{
 	cutin "1",2;
 	if ($@JupreArea1InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "1",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7356) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#1-1" EF_TOPRANK
 				cutin "1-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "1-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#1-1::OnEnable";
 					enablenpc "Red Alarm#1-1";
@@ -1491,21 +1465,15 @@ jupe_area1,88,224,0	script	#hole#1-1	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "1",255;
 				end;
 			}
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "1",255;
 			end;
@@ -1513,13 +1481,8 @@ jupe_area1,88,224,0	script	#hole#1-1	844,{
 		close;
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "1",255;
 		end;
@@ -1583,22 +1546,22 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area1","Those of you who have come here...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Ceux d'entre vous qui sont parvenus jusqu'ici...",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area1","I do not intend to stop you.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Je n'ai pas l'intention de vous arrêter.",bc_map,"0xFF0000";
 	soundeffectall "jupe_warning.wav",0,"jupe_area1";
 	soundeffectall "jupe_warning.wav",0,"jupe_area1";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area1","But I assume you are prepared for a few obstacles...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Mais j'espère que vous êtes préparés à affronter quelques obstacles...",bc_map,"0xFF0000";
 	donpcevent "Monster1#1-1::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area1","After all, you are venturing through a forbidden area!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Après tout, vous vous êtes aventurés en ce lieu interdit!",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -1623,18 +1586,18 @@ OnEnable:
 	enablenpc "Monster1#1-1";
 	initnpctimer;
 	set .MyMobs,8;
-	monster "jupe_area1",30,263,"Security Guard",1675,1,"Monster1#1-1::OnMyMobDead";
-	monster "jupe_area1",30,262,"Security Guard",1669,1,"Monster1#1-1::OnMyMobDead";
-	monster "jupe_area1",30,261,"Security Guard",1675,1,"Monster1#1-1::OnMyMobDead";
-	monster "jupe_area1",30,260,"Security Guard",1669,1,"Monster1#1-1::OnMyMobDead";
-	monster "jupe_area1",30,259,"Security Guard",1675,1,"Monster1#1-1::OnMyMobDead";
-	monster "jupe_area1",30,258,"Security Guard",1669,1,"Monster1#1-1::OnMyMobDead";
-	monster "jupe_area1",30,257,"Security Guard",1675,1,"Monster1#1-1::OnMyMobDead";
-	monster "jupe_area1",30,256,"Security Guard",1669,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,263,"Gardien",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,262,"Gardien",1669,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,261,"Gardien",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,260,"Gardien",1669,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,259,"Gardien",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,258,"Gardien",1669,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,257,"Gardien",1675,1,"Monster1#1-1::OnMyMobDead";
+	monster "jupe_area1",30,256,"Gardien",1669,1,"Monster1#1-1::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area1","Do you realize this is a hallucination?",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Réalisez-vous que tout ceci n'est qu'une hallucination?",bc_map,"0xFF0000";
 	set $@JupreArea1InUse,0;
 	end;
 
@@ -1670,32 +1633,32 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area1","How about now?",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Et maintenant?",bc_map,"0xFF0000";
 	soundeffectall "jupe_warning.wav",0,"jupe_area1";
 	soundeffectall "jupe_warning.wav",0,"jupe_area1";
 	end;
 
 OnTimer4000:
-	mapannounce "jupe_area1","Let me see...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Voyons voir...",bc_map,"0xFF0000";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area1","Just how strong you are!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Voyons voir si vous êtes fort!",bc_map,"0xFF0000";
 	soundeffectall "jupe_warning.wav",0,"jupe_area1";
 	soundeffectall "jupe_warning.wav",0,"jupe_area1";
 	set .MyMobs,8;
-	monster "jupe_area1",30,238,"Security Guard",1675,1,"Monster2#1-1::OnMyMobDead";
-	monster "jupe_area1",31,238,"Security Guard",1669,1,"Monster2#1-1::OnMyMobDead";
-	monster "jupe_area1",32,238,"Security Guard",1675,1,"Monster2#1-1::OnMyMobDead";
-	monster "jupe_area1",33,238,"Security Guard",1669,1,"Monster2#1-1::OnMyMobDead";
-	monster "jupe_area1",34,238,"Security Guard",1675,1,"Monster2#1-1::OnMyMobDead";
-	monster "jupe_area1",35,238,"Security Guard",1669,1,"Monster2#1-1::OnMyMobDead";
-	monster "jupe_area1",36,238,"Security Guard",1675,1,"Monster2#1-1::OnMyMobDead";
-	monster "jupe_area1",37,238,"Security Guard",1669,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",30,238,"Gardien",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",31,238,"Gardien",1669,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",32,238,"Gardien",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",33,238,"Gardien",1669,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",34,238,"Gardien",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",35,238,"Gardien",1669,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",36,238,"Gardien",1675,1,"Monster2#1-1::OnMyMobDead";
+	monster "jupe_area1",37,238,"Gardien",1669,1,"Monster2#1-1::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area1","Bwahaha! You're only good at running away!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Bwahaha! Vous n'êtes bon qu'à vous enfuir!",bc_map,"0xFF0000";
 	set $@JupreArea1InUse,0;
 	end;
 
@@ -1723,56 +1686,34 @@ OnMyMobDead:
 jupe_area1,25,238,0	script	#hole#1-2	844,{
 	cutin "2",2;
 	if ($@JupreArea1InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "2",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7357) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#1-2" EF_TOPRANK
 				cutin "2-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "2-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#1-2::OnEnable";
 					enablenpc "Red Alarm#1-2";
@@ -1783,11 +1724,7 @@ jupe_area1,25,238,0	script	#hole#1-2	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "2",255;
 				end;
@@ -1795,10 +1732,8 @@ jupe_area1,25,238,0	script	#hole#1-2	844,{
 			break;
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "2",255;
 			end;
@@ -1806,13 +1741,8 @@ jupe_area1,25,238,0	script	#hole#1-2	844,{
 		close;
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "2",255;
 		end;
@@ -1875,20 +1805,20 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area1","Come on, come on!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Allez, approchez!",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area1","Yes. Run... Right into my hands!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Oui. Courrez... accourez vers moi!",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area1","Do you want to know who I am?",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Voulez-vous savoir qui je suis?",bc_map,"0xFF0000";
 	donpcevent "Monster1#1-2::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area1","You will know, once you defeat all of my minions!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Vous le saurez lorsque vous aurez vaincu tous mes suivants!",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -1911,18 +1841,18 @@ OnEnable:
 	initnpctimer;
 	enablenpc "Monster1#1-2";
 	set .MyMobs,8;
-	monster "jupe_area1",30,176,"High Guard",1669,1,"Monster1#1-2::OnMyMobDead";
-	monster "jupe_area1",31,176,"High Guard",1675,1,"Monster1#1-2::OnMyMobDead";
-	monster "jupe_area1",32,176,"High Guard",1669,1,"Monster1#1-2::OnMyMobDead";
-	monster "jupe_area1",33,176,"High Guard",1675,1,"Monster1#1-2::OnMyMobDead";
-	monster "jupe_area1",34,176,"High Guard",1669,1,"Monster1#1-2::OnMyMobDead";
-	monster "jupe_area1",35,176,"High Guard",1675,1,"Monster1#1-2::OnMyMobDead";
-	monster "jupe_area1",36,176,"High Guard",1669,1,"Monster1#1-2::OnMyMobDead";
-	monster "jupe_area1",37,176,"High Guard",1675,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",30,176,"Haut Gardien",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",31,176,"Haut Gardien",1675,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",32,176,"Haut Gardien",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",33,176,"Haut Gardien",1675,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",34,176,"Haut Gardien",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",35,176,"Haut Gardien",1675,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",36,176,"Haut Gardien",1669,1,"Monster1#1-2::OnMyMobDead";
+	monster "jupe_area1",37,176,"Haut Gardien",1675,1,"Monster1#1-2::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area1","I can't believe how cowardly you really are...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Je n'en revient pas d'une telle lâcheté...",bc_map,"0xFF0000";
 	set $@JupreArea1InUse,0;
 	end;
 
@@ -1958,33 +1888,33 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area1","I was the head of this underground laboratory.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","J'étais à la tête de ce laboratoire sousterrain.",bc_map,"0xFF0000";
 	end;
 
 OnTimer4000:
-	mapannounce "jupe_area1","But that was a long time ago, back when I was merely a human.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Mais c'était il y a longtemps, quand j'étais encore un humain.",bc_map,"0xFF0000";
 	end;
 
 OnTimer6000:
-	mapannounce "jupe_area1","I was called Vesper Newton. Hahah, they called me a mad man back then.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","On m'appelait Vesper Newton. Hahah, on m'a souvent traité de fou par la suite.",bc_map,"0xFF0000";
 	set .MyMobs,13;
-	monster "jupe_area1",30,152,"Security Guard",1669,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",31,152,"Security Guard",1675,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",32,152,"Security Guard",1669,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",33,152,"Security Guard",1675,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",34,152,"Security Guard",1669,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",35,152,"Security Guard",1675,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",36,152,"Security Guard",1669,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",37,152,"Security Guard",1675,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",30,150,"Security Guard",1669,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",31,150,"Security Guard",1675,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",32,150,"Security Guard",1669,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",33,150,"Security Guard",1675,1,"Monster2#1-2::OnMyMobDead";
-	monster "jupe_area1",34,150,"Security Guard",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",30,152,"Gardien",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",31,152,"Gardien",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",32,152,"Gardien",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",33,152,"Gardien",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",34,152,"Gardien",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",35,152,"Gardien",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",36,152,"Gardien",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",37,152,"Gardien",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",30,150,"Gardien",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",31,150,"Gardien",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",32,150,"Gardien",1669,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",33,150,"Gardien",1675,1,"Monster2#1-2::OnMyMobDead";
+	monster "jupe_area1",34,150,"Gardien",1669,1,"Monster2#1-2::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area1","...Not yet.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","...Pas encore.",bc_map,"0xFF0000";
 	set $@JupreArea1InUse,0;
 	end;
 
@@ -1997,7 +1927,7 @@ OnTimer300002:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "jupe_area1","Not yet!",bc_map,"0xFF0000";
+		mapannounce "jupe_area1","Pas encore!",bc_map,"0xFF0000";
 		disablenpc "Monster2#1-2";
 		enablenpc "#hole#1-2";
 		set $@JupreArea1InUse,0;
@@ -2012,56 +1942,34 @@ OnMyMobDead:
 jupe_area1,36,146,0	script	#hole#1-3	844,{
 	cutin "3",2;
 	if ($@JupreArea1InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "3",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7358) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#1-3" EF_TOPRANK
 				cutin "3-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "3-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#1-3::OnEnable";
 					enablenpc "Red Alarm#1-3";
@@ -2072,34 +1980,23 @@ jupe_area1,36,146,0	script	#hole#1-3	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "3",255;
 				end;
 			}
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "3",255;
 			end;
 		}
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "3",255;
 		end;
@@ -2162,20 +2059,20 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area1","These security systems...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Ces systèmes de sécurité...",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area1","They're not really for protection.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","... ne sont pas vraiment là pour assurer ma protection.",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area1","It's sort of just a hobby to pass the time...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","C'est simplement une sorte de loisir, pour passer le temps...",bc_map,"0xFF0000";
 	donpcevent "Monster1#1-3::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area1","Being immortal, I have a lot of time on my hands...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Lorsqu'on est immortel, on dispose de beaucoup de temps...",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -2198,14 +2095,14 @@ OnEnable:
 	initnpctimer;
 	enablenpc "Monster1#1-3";
 	set .MyMobs,8;
-	monster "jupe_area1",30,89,"Security Guard",1675,1,"Monster1#1-3::OnMyMobDead";
-	monster "jupe_area1",31,89,"Security Guard",1669,1,"Monster1#1-3::OnMyMobDead";
-	monster "jupe_area1",32,89,"Security Guard",1675,1,"Monster1#1-3::OnMyMobDead";
-	monster "jupe_area1",33,89,"Security Guard",1669,1,"Monster1#1-3::OnMyMobDead";
-	monster "jupe_area1",34,89,"Security Guard",1675,1,"Monster1#1-3::OnMyMobDead";
-	monster "jupe_area1",35,89,"Security Guard",1669,1,"Monster1#1-3::OnMyMobDead";
-	monster "jupe_area1",36,89,"Security Guard",1675,1,"Monster1#1-3::OnMyMobDead";
-	monster "jupe_area1",37,89,"Security Guard",1669,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",30,89,"Gardien",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",31,89,"Gardien",1669,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",32,89,"Gardien",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",33,89,"Gardien",1669,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",34,89,"Gardien",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",35,89,"Gardien",1669,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",36,89,"Gardien",1675,1,"Monster1#1-3::OnMyMobDead";
+	monster "jupe_area1",37,89,"Gardien",1669,1,"Monster1#1-3::OnMyMobDead";
 	end;
 
 OnTimer300000:
@@ -2244,35 +2141,35 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area1","Why have you come?",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Pourquoi êtes-vous ici?",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area1","Were you hoping to find something wonderful? Something miraculous?",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Espériez-vous trouver quelque chose de merveilleux? De miraculeux?",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
-	mapannounce "jupe_area1","You're wrong! Welcome to Hell!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","C'était une grossière erreur! Bienvenue... en Enfer!",bc_map,"0xFF0000";
 	set .MyMobs,15;
-	monster "jupe_area1",42,64,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",43,64,"Security Guard",1675,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",44,64,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",45,64,"Security Guard",1675,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",46,64,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",47,64,"Security Guard",1675,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",48,64,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",49,64,"Security Guard",1675,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",42,62,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",43,62,"Security Guard",1675,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",44,62,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",45,62,"Security Guard",1675,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",46,62,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",47,62,"Security Guard",1675,1,"Monster2#1-3::OnMyMobDead";
-	monster "jupe_area1",48,62,"Security Guard",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",42,64,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",43,64,"Gardien",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",44,64,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",45,64,"Gardien",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",46,64,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",47,64,"Gardien",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",48,64,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",49,64,"Gardien",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",42,62,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",43,62,"Gardien",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",44,62,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",45,62,"Gardien",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",46,62,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",47,62,"Gardien",1675,1,"Monster2#1-3::OnMyMobDead";
+	monster "jupe_area1",48,62,"Gardien",1669,1,"Monster2#1-3::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area1","Do you still have your courage? Come. Prove it.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Vous reste-t-il un peu de courage? Venez, et prouvez-le.",bc_map,"0xFF0000";
 	set $@JupreArea1InUse,0;
 	end;
 
@@ -2285,7 +2182,7 @@ OnTimer300002:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "jupe_area1","Do you still have your courage? Come. Prove it.",bc_map,"0xFF0000";
+		mapannounce "jupe_area1","Vous reste-t-il un peu de courage? Venez, et prouvez-le.",bc_map,"0xFF0000";
 		disablenpc "Monster2#1-3";
 		enablenpc "#hole#1-3";
 		set $@JupreArea1InUse,0;
@@ -2300,56 +2197,34 @@ OnMyMobDead:
 jupe_area1,50,49,0	script	#hole#1-4	844,{
 	cutin "4",2;
 	if ($@JupreArea1InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "4",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7359) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#1-4" EF_TOPRANK
 				cutin "4-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "4-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#1-4::OnEnable";
 					donpcevent "Red Alarm#1-4::OnEnable";
@@ -2360,11 +2235,7 @@ jupe_area1,50,49,0	script	#hole#1-4	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "4",255;
 				end;
@@ -2372,23 +2243,16 @@ jupe_area1,50,49,0	script	#hole#1-4	844,{
 			break;
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "4",255;
 			end;
 		}
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "4",255;
 		end;
@@ -2455,20 +2319,20 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area1","I've been waiting for someone strong enough to compete with me.",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","J'ai attendu quelqu'un de suffisamment fort pour rivaliser avec moi.",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area1","If you hear this, I wish you will be the one...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Si vous entendez ceci, sachez que je vous choisi comme adversaire...",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area1","Perhaps, a mere shadow of my former self...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Peut-être qu'une ombre résiduelle de mon ancienne forme corporelle...",bc_map,"0xFF0000";
 	donpcevent "Monster1#1-4::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area1","Is somewhere down here, wandering...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","... erre encore ici bas...",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -2491,14 +2355,14 @@ OnEnable:
 	initnpctimer;
 	enablenpc "Monster1#1-4";
 	set .MyMobs,8;
-	monster "jupe_area1",92,154,"Security Guard",1669,1,"Monster1#1-4::OnMyMobDead";
-	monster "jupe_area1",96,154,"Security Guard",1675,1,"Monster1#1-4::OnMyMobDead";
-	monster "jupe_area1",100,154,"Security Guard",1669,1,"Monster1#1-4::OnMyMobDead";
-	monster "jupe_area1",104,154,"Security Guard",1675,1,"Monster1#1-4::OnMyMobDead";
-	monster "jupe_area1",92,161,"Security Guard",1669,1,"Monster1#1-4::OnMyMobDead";
-	monster "jupe_area1",96,161,"Security Guard",1675,1,"Monster1#1-4::OnMyMobDead";
-	monster "jupe_area1",100,161,"Security Guard",1669,1,"Monster1#1-4::OnMyMobDead";
-	monster "jupe_area1",104,161,"Security Guard",1675,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",92,154,"Gardien",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",96,154,"Gardien",1675,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",100,154,"Gardien",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",104,154,"Gardien",1675,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",92,161,"Gardien",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",96,161,"Gardien",1675,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",100,161,"Gardien",1669,1,"Monster1#1-4::OnMyMobDead";
+	monster "jupe_area1",104,161,"Gardien",1675,1,"Monster1#1-4::OnMyMobDead";
 	end;
 
 OnTimer300000:
@@ -2538,31 +2402,31 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area1","I can never rest in peace...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Je ne pourrai jamais reposer en paix...",bc_map,"0xFF0000";
 	end;
 
 OnTimer4000:
-	mapannounce "jupe_area1","I'll wait forever or until someone can put me out of my misery...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","J'attendrai à tout jamais que quelqu'un me tire de cette misère...",bc_map,"0xFF0000";
 	end;
 
 OnTimer6000:
-	mapannounce "jupe_area1","I will be waiting for you!",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Je vous attendrai!",bc_map,"0xFF0000";
 	set .MyMobs,10;
-	monster "jupe_area1",104,161,"Security Guard",1675,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",108,161,"Security Guard",1669,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",111,161,"Security Guard",1675,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",112,161,"Security Guard",1669,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",115,161,"Security Guard",1675,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",104,154,"Security Guard",1669,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",108,154,"Security Guard",1675,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",111,154,"Security Guard",1669,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",112,154,"Security Guard",1675,1,"Monster2#1-4::OnMyMobDead";
-	monster "jupe_area1",115,154,"Security Guard",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",104,161,"Gardien",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",108,161,"Gardien",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",111,161,"Gardien",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",112,161,"Gardien",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",115,161,"Gardien",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",104,154,"Gardien",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",108,154,"Gardien",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",111,154,"Gardien",1669,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",112,154,"Gardien",1675,1,"Monster2#1-4::OnMyMobDead";
+	monster "jupe_area1",115,154,"Gardien",1669,1,"Monster2#1-4::OnMyMobDead";
 	end;
 
 OnTimer300000:
 	set $@JupreArea1InUse,0;
-	mapannounce "jupe_area1","It's funny... Isn't it?",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","C'est amusant... vous ne trouvez pas?",bc_map,"0xFF0000";
 	end;
 
 OnTimer300002:
@@ -2573,7 +2437,7 @@ OnTimer300002:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "jupe_area1","It's funny... Isn't it?",bc_map,"0xFF0000";
+		mapannounce "jupe_area1","C'est amusant... vous ne trouvez pas?",bc_map,"0xFF0000";
 		disablenpc "Monster2#1-4";
 		enablenpc "#hole#1-4";
 		set $@JupreArea1InUse,0;
@@ -2586,11 +2450,9 @@ OnMyMobDead:
 // Move to Elevator
 //============================================================
 jupe_area1,112,162,0	script	Lever#ufe	844,{
-	mes "^3355FFIt's a lever";
-	mes "whose function";
-	mes "is not known to you.^000000";
+	mes "^3355FFOn dirait une sorte de levier, mais vous n'avez aucune idée de ce à quoi il peut servir.^000000";
 	next;
-	switch(select("Pull.:Cancel.")) {
+	switch(select("Tirer le levier.:Annuler.")) {
 	case 1:
 		if($@JupreArea1InUse == 1) close;
 		initnpctimer;
@@ -2599,9 +2461,7 @@ jupe_area1,112,162,0	script	Lever#ufe	844,{
 		close;
 	case 2:
 		mes "[" + strcharinfo(0) + "]";
-		mes "Pull this lever?";
-		mes "I don't even know";
-		mes "what will happen...";
+		mes "Sait-on jamais ce qui se produira si je tire ce levier... Mieux vaut être prudent.";
 		close;
 	}
 	close;
@@ -2640,56 +2500,34 @@ OnTimer3000:
 jupe_area2,74,224,0	script	#hole#2-1	844,{
 	cutin "1",2;
 	if ($@JupreArea2InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "1",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7356) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#2-1" EF_TOPRANK
 				cutin "1-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "1-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#2-1::OnEnable";
 					enablenpc "Red Alarm#2-1";
@@ -2700,21 +2538,15 @@ jupe_area2,74,224,0	script	#hole#2-1	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "1",255;
 				end;
 			}
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "1",255;
 			end;
@@ -2722,13 +2554,8 @@ jupe_area2,74,224,0	script	#hole#2-1	844,{
 		close;
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "1",255;
 		end;
@@ -2792,22 +2619,22 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area2","Those of you who have come here...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Ceux d'entre vous qui sont parvenus jusqu'ici...",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area2","I do not intend to stop you.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Je n'ai pas l'intention de vous arrêter.",bc_map,"0xFF0000";
 	soundeffectall "jupe_warning.wav",0,"jupe_area2";
 	soundeffectall "jupe_warning.wav",0,"jupe_area2";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area2","But I assume you are prepared for a few obstacles...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Mais j'espère que vous êtes préparés à affronter quelques obstacles...",bc_map,"0xFF0000";
 	donpcevent "Monster1#2-1::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area2","After all, you are venturing through a forbidden area!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Après tout, vous vous êtes aventurés en ce lieu interdit!",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -2832,18 +2659,18 @@ OnEnable:
 	enablenpc "Monster1#2-1";
 	initnpctimer;
 	set .MyMobs,8;
-	monster "jupe_area2",126,252,"Security Guard",1669,1,"Monster1#2-1::OnMyMobDead";
-	monster "jupe_area2",127,252,"Security Guard",1675,1,"Monster1#2-1::OnMyMobDead";
-	monster "jupe_area2",128,252,"Security Guard",1669,1,"Monster1#2-1::OnMyMobDead";
-	monster "jupe_area2",129,252,"Security Guard",1675,1,"Monster1#2-1::OnMyMobDead";
-	monster "jupe_area2",130,252,"Security Guard",1669,1,"Monster1#2-1::OnMyMobDead";
-	monster "jupe_area2",131,252,"Security Guard",1675,1,"Monster1#2-1::OnMyMobDead";
-	monster "jupe_area2",132,252,"Security Guard",1669,1,"Monster1#2-1::OnMyMobDead";
-	monster "jupe_area2",133,252,"Security Guard",1675,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",126,252,"Gardien",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",127,252,"Gardien",1675,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",128,252,"Gardien",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",129,252,"Gardien",1675,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",130,252,"Gardien",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",131,252,"Gardien",1675,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",132,252,"Gardien",1669,1,"Monster1#2-1::OnMyMobDead";
+	monster "jupe_area2",133,252,"Gardien",1675,1,"Monster1#2-1::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area2","Do you realize this is a hallucination?",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Réalisez-vous que tout ceci n'est qu'une hallucination?",bc_map,"0xFF0000";
 	set $@JupreArea2InUse,0;
 	end;
 
@@ -2879,32 +2706,32 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area2","How about now?",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Et maintenant?",bc_map,"0xFF0000";
 	soundeffectall "jupe_warning.wav",0,"jupe_area2";
 	soundeffectall "jupe_warning.wav",0,"jupe_area2";
 	end;
 
 OnTimer4000:
-	mapannounce "jupe_area2","Let me see...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Voyons voir...",bc_map,"0xFF0000";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area2","Just how strong you are!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Voyons voir si vous êtes fort!",bc_map,"0xFF0000";
 	soundeffectall "jupe_warning.wav",0,"jupe_area2";
 	soundeffectall "jupe_warning.wav",0,"jupe_area2";
 	set .MyMobs,8;
-	monster "jupe_area2",126,236,"Security Guard",1675,1,"Monster2#2-1::OnMyMobDead";
-	monster "jupe_area2",127,236,"Security Guard",1669,1,"Monster2#2-1::OnMyMobDead";
-	monster "jupe_area2",128,236,"Security Guard",1675,1,"Monster2#2-1::OnMyMobDead";
-	monster "jupe_area2",129,236,"Security Guard",1669,1,"Monster2#2-1::OnMyMobDead";
-	monster "jupe_area2",130,236,"Security Guard",1675,1,"Monster2#2-1::OnMyMobDead";
-	monster "jupe_area2",131,236,"Security Guard",1669,1,"Monster2#2-1::OnMyMobDead";
-	monster "jupe_area2",132,236,"Security Guard",1675,1,"Monster2#2-1::OnMyMobDead";
-	monster "jupe_area2",133,236,"Security Guard",1669,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",126,236,"Gardien",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",127,236,"Gardien",1669,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",128,236,"Gardien",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",129,236,"Gardien",1669,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",130,236,"Gardien",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",131,236,"Gardien",1669,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",132,236,"Gardien",1675,1,"Monster2#2-1::OnMyMobDead";
+	monster "jupe_area2",133,236,"Gardien",1669,1,"Monster2#2-1::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area2","Bwahaha! You're only good at running away!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Bwahaha! Vous n'êtes bon qu'à vous enfuir!",bc_map,"0xFF0000";
 	set $@JupreArea2InUse,0;
 	end;
 
@@ -2932,56 +2759,34 @@ OnMyMobDead:
 jupe_area2,138,238,0	script	#hole#2-2	844,{
 	cutin "2",2;
 	if ($@JupreArea2InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "2",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7357) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#2-2" EF_TOPRANK
 				cutin "2-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "2-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#2-2::OnEnable";
 					enablenpc "Red Alarm#2-2";
@@ -2992,11 +2797,7 @@ jupe_area2,138,238,0	script	#hole#2-2	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "2",255;
 				end;
@@ -3004,10 +2805,8 @@ jupe_area2,138,238,0	script	#hole#2-2	844,{
 			break;
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "2",255;
 			end;
@@ -3015,13 +2814,8 @@ jupe_area2,138,238,0	script	#hole#2-2	844,{
 		close;
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "2",255;
 		end;
@@ -3084,20 +2878,20 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area2","Come on, come on!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Allez, approchez!",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area2","Yes. Run... Right into my hands!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Oui. Courrez... accourez vers moi!",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area2","Do you want to know who I am?",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Voulez-vous savoir qui je suis?",bc_map,"0xFF0000";
 	donpcevent "Monster1#2-2::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area2","You will know, once you defeat all of my minions!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Vous le saurez lorsque vous aurez vaincu tous mes suivants!",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -3120,18 +2914,18 @@ OnEnable:
 	initnpctimer;
 	enablenpc "Monster1#2-2";
 	set .MyMobs,8;
-	monster "jupe_area2",126,176,"High Guard",1669,1,"Monster1#2-2::OnMyMobDead";
-	monster "jupe_area2",127,176,"High Guard",1675,1,"Monster1#2-2::OnMyMobDead";
-	monster "jupe_area2",128,176,"High Guard",1669,1,"Monster1#2-2::OnMyMobDead";
-	monster "jupe_area2",129,176,"High Guard",1675,1,"Monster1#2-2::OnMyMobDead";
-	monster "jupe_area2",130,176,"High Guard",1669,1,"Monster1#2-2::OnMyMobDead";
-	monster "jupe_area2",131,176,"High Guard",1675,1,"Monster1#2-2::OnMyMobDead";
-	monster "jupe_area2",132,176,"High Guard",1669,1,"Monster1#2-2::OnMyMobDead";
-	monster "jupe_area2",133,176,"High Guard",1675,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",126,176,"Haut Gardien",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",127,176,"Haut Gardien",1675,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",128,176,"Haut Gardien",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",129,176,"Haut Gardien",1675,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",130,176,"Haut Gardien",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",131,176,"Haut Gardien",1675,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",132,176,"Haut Gardien",1669,1,"Monster1#2-2::OnMyMobDead";
+	monster "jupe_area2",133,176,"Haut Gardien",1675,1,"Monster1#2-2::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area2","I can't believe how cowardly you really are...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Je n'en revient pas d'une telle lâcheté...",bc_map,"0xFF0000";
 	set $@JupreArea2InUse,0;
 	end;
 
@@ -3167,33 +2961,33 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area2","I was the head of this underground laboratory.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","J'étais à la tête de ce laboratoire sousterrain.",bc_map,"0xFF0000";
 	end;
 
 OnTimer4000:
-	mapannounce "jupe_area2","But that was a long time ago, back when I was merely a human.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Mais c'était il y a longtemps, quand j'étais encore un humain.",bc_map,"0xFF0000";
 	end;
 
 OnTimer6000:
-	mapannounce "jupe_area2","I was called Vesper Newton. Hahah, they called me a mad man back then.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","On m'appelait Vesper Newton. Hahah, on m'a souvent traité de fou par la suite.",bc_map,"0xFF0000";
 	set .MyMobs,13;
-	monster "jupe_area2",126,156,"Security Guard",1675,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",127,156,"Security Guard",1669,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",128,156,"Security Guard",1675,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",129,156,"Security Guard",1669,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",130,156,"Security Guard",1675,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",131,156,"Security Guard",1669,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",132,156,"Security Guard",1675,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",133,156,"Security Guard",1669,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",133,156,"Security Guard",1675,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",127,152,"Security Guard",1669,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",129,152,"Security Guard",1675,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",130,152,"Security Guard",1669,1,"Monster2#2-2::OnMyMobDead";
-	monster "jupe_area2",132,152,"Security Guard",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",126,156,"Gardien",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",127,156,"Gardien",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",128,156,"Gardien",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",129,156,"Gardien",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",130,156,"Gardien",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",131,156,"Gardien",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",132,156,"Gardien",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",133,156,"Gardien",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",133,156,"Gardien",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",127,152,"Gardien",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",129,152,"Gardien",1675,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",130,152,"Gardien",1669,1,"Monster2#2-2::OnMyMobDead";
+	monster "jupe_area2",132,152,"Gardien",1675,1,"Monster2#2-2::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area2","...Not yet.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","...Pas encore.",bc_map,"0xFF0000";
 	set $@JupreArea2InUse,0;
 	end;
 
@@ -3206,7 +3000,7 @@ OnTimer300002:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "jupe_area2","Not yet!",bc_map,"0xFF0000";
+		mapannounce "jupe_area2","Pas encore!",bc_map,"0xFF0000";
 		disablenpc "Monster2#2-2";
 		enablenpc "#hole#2-2";
 		set $@JupreArea2InUse,0;
@@ -3221,56 +3015,34 @@ OnMyMobDead:
 jupe_area2,127,146,0	script	#hole#2-3	844,{
 	cutin "3",2;
 	if ($@JupreArea2InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "3",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7358) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#2-3" EF_TOPRANK
 				cutin "3-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "3-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#2-3::OnEnable";
 					enablenpc "Red Alarm#2-3";
@@ -3281,34 +3053,23 @@ jupe_area2,127,146,0	script	#hole#2-3	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "3",255;
 				end;
 			}
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "3",255;
 			end;
 		}
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "3",255;
 		end;
@@ -3371,21 +3132,21 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area2","These security systems...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Ces systèmes de sécurité...",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area2","They're not really for protection.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","... ne sont pas vraiment là pour assurer ma protection.",bc_map,"0xFF0000";
 	disablenpc "#hole#2-3";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area2","It's sort of just a hobby to pass the time...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","C'est simplement une sorte de loisir, pour passer le temps...",bc_map,"0xFF0000";
 	donpcevent "Monster1#2-3::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area2","Being immortal, I have a lot of time on my hands...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Lorsqu'on est immortel, on dispose de beaucoup de temps...",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -3408,14 +3169,14 @@ OnEnable:
 	initnpctimer;
 	enablenpc "Monster1#2-3";
 	set .MyMobs,8;
-	monster "jupe_area2",126,89,"Security Guard",1675,1,"Monster1#2-3::OnMyMobDead";
-	monster "jupe_area2",127,89,"Security Guard",1669,1,"Monster1#2-3::OnMyMobDead";
-	monster "jupe_area2",128,89,"Security Guard",1675,1,"Monster1#2-3::OnMyMobDead";
-	monster "jupe_area2",129,89,"Security Guard",1669,1,"Monster1#2-3::OnMyMobDead";
-	monster "jupe_area2",130,89,"Security Guard",1675,1,"Monster1#2-3::OnMyMobDead";
-	monster "jupe_area2",131,89,"Security Guard",1669,1,"Monster1#2-3::OnMyMobDead";
-	monster "jupe_area2",132,89,"Security Guard",1675,1,"Monster1#2-3::OnMyMobDead";
-	monster "jupe_area2",133,89,"Security Guard",1669,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",126,89,"Gardien",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",127,89,"Gardien",1669,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",128,89,"Gardien",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",129,89,"Gardien",1669,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",130,89,"Gardien",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",131,89,"Gardien",1669,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",132,89,"Gardien",1675,1,"Monster1#2-3::OnMyMobDead";
+	monster "jupe_area2",133,89,"Gardien",1669,1,"Monster1#2-3::OnMyMobDead";
 	end;
 
 OnTimer300000:
@@ -3454,36 +3215,36 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area2","Why have you come?",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Pourquoi êtes-vous ici?",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area2","Were you hoping to find something wonderful? Something miraculous?",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Espériez-vous trouver quelque chose de merveilleux? De miraculeux?",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
-	mapannounce "jupe_area2","You're wrong! Welcome to Hell!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","C'était une grossière erreur! Bienvenue... en Enfer!",bc_map,"0xFF0000";
 	set .MyMobs,16;
-	monster "jupe_area2",114,64,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",115,64,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",116,64,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",117,64,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",118,64,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",119,64,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",120,64,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",121,64,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",114,62,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",115,62,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",116,62,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",117,62,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",118,62,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",119,62,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",120,62,"Security Guard",1675,1,"Monster2#2-3::OnMyMobDead";
-	monster "jupe_area2",121,62,"Security Guard",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",114,64,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",115,64,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",116,64,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",117,64,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",118,64,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",119,64,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",120,64,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",121,64,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",114,62,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",115,62,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",116,62,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",117,62,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",118,62,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",119,62,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",120,62,"Gardien",1675,1,"Monster2#2-3::OnMyMobDead";
+	monster "jupe_area2",121,62,"Gardien",1669,1,"Monster2#2-3::OnMyMobDead";
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area2","Do you still have your courage? Come. Prove it.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Vous reste-t-il un peu de courage? Venez, et prouvez-le.",bc_map,"0xFF0000";
 	set $@JupreArea2InUse,0;
 	end;
 
@@ -3496,7 +3257,7 @@ OnTimer300002:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "jupe_area2","Do you still have your courage? Come. Prove it.",bc_map,"0xFF0000";
+		mapannounce "jupe_area2","Vous reste-t-il un peu de courage? Venez, et prouvez-le.",bc_map,"0xFF0000";
 		disablenpc "Monster2#2-3";
 		enablenpc "#hole#2-3";
 		set $@JupreArea2InUse,0;
@@ -3511,56 +3272,34 @@ OnMyMobDead:
 jupe_area2,113,49,0	script	#hole#2-4	844,{
 	cutin "4",2;
 	if ($@JupreArea2InUse == 1) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "4",255;
 		end;
 	}
 	else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		next;
-		switch(select("Insert a Crest Piece.:Cancel.")) {
+		switch(select("Insérer un Crest Piece.:Annuler.")) {
 		case 1:
 			if (countitem(7359) > 0) {
-				mes "^3355FFYou take out your";
-				mes "Crest Piece and place";
-				mes "it into the slot where it";
-				mes "happens to fit perfectly.^000000";
+				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
+				mes "Les deux s'emboîtent comme clé et serrure.^000000";
 				specialeffect 159; //"#hole#2-4" EF_TOPRANK
 				cutin "4-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
-					mes "^3355FFNothing happens.";
-					mes "Perhaps an alarm or";
-					mes "some other safety measure";
-					mes "was activated to keep the";
-					mes "Crest Piece from activating";
-					mes "this transportation device.";
-					mes "You retrieve the Crest Piece.^000000";
+					mes "^3355FFRien ne se produit.";
+					mes "Peut-être qu'une alarme ou un autre type de dispositif de sécurité s'est mis en route afin d'empêcher le Crest Piece d'activer ce portail.";
+					mes "Vous récupérez donc le Crest Piece.^000000";
 					close2;
 					cutin "4-1",255;
 					end;
 				}
 				else {
-					mes "^3355FFThe slot rotates and";
-					mes "the Crest Piece moves as";
-					mes "if it were turning a key. You";
-					mes "feel a weak tremor as a Warp";
-					mes "Portal to the other side is";
-					mes "activated. You then retrieve";
-					mes "your Crest Piece.^000000";
+					mes "^3355FFLa fente tourne et le Crest Piece tourne comme si une clé tournait dans une serrure. Vous sentez un léger tremblement alors qu'un Portail de Téléportation s'active de l'autre côté. Vous récupérez ensuite le Crest Piece.^000000";
 					initnpctimer;
 					donpcevent "Warp#2-4::OnEnable";
 					donpcevent "Red Alarm#2-4::OnEnable";
@@ -3571,11 +3310,7 @@ jupe_area2,113,49,0	script	#hole#2-4	844,{
 				}
 			}
 			else {
-				mes "^3355FFUnfortunately, you're";
-				mes "not carrying anything";
-				mes "that might be able to fit";
-				mes "into the slot and activate";
-				mes "this mechanical device.^000000";
+				mes "^3355FFMalheureusement, vous ne transportez aucun objet qui semble pouvoir se glisser dans la fente et activer ce mécanisme.^000000";
 				close2;
 				cutin "4",255;
 				end;
@@ -3583,23 +3318,16 @@ jupe_area2,113,49,0	script	#hole#2-4	844,{
 			break;
 		case 2:
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hmmm...";
-			mes "Do I have anything";
-			mes "that might make this";
-			mes "weird machine work?";
+			mes "Hummm...";
+			mes "Est-ce que je n'aurais pas quelque chose sur moi qui puisse faire fonctionner cette machine bizarre?";
 			close2;
 			cutin "4",255;
 			end;
 		}
 	}
 	else {
-		mes "^3355FFThis seems like";
-		mes "some kind of device";
-		mes "that will allow you to";
-		mes "pass to the other side.";
-		mes "There's a slot where you";
-		mes "probably need to insert";
-		mes "some kind of object...^000000";
+		mes "^3355FFOn dirait une sorte de mécanisme qui vous permettrait de passer de l'autre côté.";
+		mes "Il y a une fente où vous pouvez probablement insérer un objet...^000000";
 		close2;
 		cutin "4",255;
 		end;
@@ -3666,20 +3394,20 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "jupe_area2","I've been waiting for someone strong enough to compete with me.",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","J'ai attendu quelqu'un de suffisamment fort pour rivaliser avec moi.",bc_map,"0xFF0000";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_area2","If you hear this, I wish you will be the one...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Si vous entendez ceci, sachez que je vous choisi comme adversaire...",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_area2","Perhaps, a mere shadow of my former self...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Peut-être qu'une ombre résiduelle de mon ancienne forme corporelle...",bc_map,"0xFF0000";
 	donpcevent "Monster1#2-4::OnEnable";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_area2","Is somewhere down here, wandering...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","... erre encore ici bas...",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
@@ -3702,14 +3430,14 @@ OnEnable:
 	initnpctimer;
 	enablenpc "Monster1#2-4";
 	set .MyMobs,8;
-	monster "jupe_area2",75,161,"Security Guard",1675,1,"Monster1#2-4::OnMyMobDead";
-	monster "jupe_area2",72,161,"Security Guard",1669,1,"Monster1#2-4::OnMyMobDead";
-	monster "jupe_area2",71,161,"Security Guard",1675,1,"Monster1#2-4::OnMyMobDead";
-	monster "jupe_area2",68,161,"Security Guard",1669,1,"Monster1#2-4::OnMyMobDead";
-	monster "jupe_area2",75,154,"Security Guard",1675,1,"Monster1#2-4::OnMyMobDead";
-	monster "jupe_area2",72,154,"Security Guard",1669,1,"Monster1#2-4::OnMyMobDead";
-	monster "jupe_area2",71,154,"Security Guard",1675,1,"Monster1#2-4::OnMyMobDead";
-	monster "jupe_area2",68,154,"Security Guard",1669,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",75,161,"Gardien",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",72,161,"Gardien",1669,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",71,161,"Gardien",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",68,161,"Gardien",1669,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",75,154,"Gardien",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",72,154,"Gardien",1669,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",71,154,"Gardien",1675,1,"Monster1#2-4::OnMyMobDead";
+	monster "jupe_area2",68,154,"Gardien",1669,1,"Monster1#2-4::OnMyMobDead";
 	end;
 
 OnTimer300000:
@@ -3749,33 +3477,33 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area2","I can never rest in peace...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Je ne pourrai jamais jamais en paix...",bc_map,"0xFF0000";
 	end;
 
 OnTimer4000:
-	mapannounce "jupe_area2","I'll wait forever or until someone can put me out of my misery...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","J'attendrai à tout jamais que quelqu'un me tire de cette misère...",bc_map,"0xFF0000";
 	end;
 
 OnTimer6000:
-	mapannounce "jupe_area2","I will be waiting for you!",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Je vous attendrai!",bc_map,"0xFF0000";
 	set .MyMobs,12;
-	monster "jupe_area2",63,161,"Security Guard",1675,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",61,161,"Security Guard",1669,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",59,161,"Security Guard",1675,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",57,161,"Security Guard",1669,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",55,161,"Security Guard",1675,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",53,161,"Security Guard",1669,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",53,154,"Security Guard",1675,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",55,154,"Security Guard",1669,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",57,154,"Security Guard",1675,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",59,154,"Security Guard",1669,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",61,154,"Security Guard",1675,1,"Monster2#2-4::OnMyMobDead";
-	monster "jupe_area2",63,154,"Security Guard",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",63,161,"Gardien",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",61,161,"Gardien",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",59,161,"Gardien",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",57,161,"Gardien",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",55,161,"Gardien",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",53,161,"Gardien",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",53,154,"Gardien",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",55,154,"Gardien",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",57,154,"Gardien",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",59,154,"Gardien",1669,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",61,154,"Gardien",1675,1,"Monster2#2-4::OnMyMobDead";
+	monster "jupe_area2",63,154,"Gardien",1669,1,"Monster2#2-4::OnMyMobDead";
 	end;
 
 OnTimer300000:
 	set $@JupreArea2InUse,0;
-	mapannounce "jupe_area2","It's funny... Isn't it?",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","C'est amusant... vous ne trouvez pas?",bc_map,"0xFF0000";
 	end;
 
 OnTimer300002:
@@ -3786,7 +3514,7 @@ OnTimer300002:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "jupe_area2","It's funny... Isn't it?",bc_map,"0xFF0000";
+		mapannounce "jupe_area2","C'est amusant... vous ne trouvez pas?",bc_map,"0xFF0000";
 		disablenpc "Monster2#2-4";
 		enablenpc "#hole#2-4";
 		set $@JupreArea2InUse,0;
@@ -3799,11 +3527,9 @@ OnMyMobDead:
 // Move to Elevator
 //============================================================
 jupe_area2,51,162,0	script	Lever#ufe2	844,{
-	mes "^3355FFIt's a lever";
-	mes "whose function";
-	mes "is not known to you.^000000";
+	mes "^3355FFOn dirait une sorte de levier, mais vous n'avez aucune idée de ce à quoi il peut servir.^000000";
 	next;
-	switch(select("Pull.:Cancel.")) {
+	switch(select("Tirer le levier.:Annuler.")) {
 	case 1:
 		if($@JupreArea2InUse == 1) close;
 		initnpctimer;
@@ -3812,9 +3538,7 @@ jupe_area2,51,162,0	script	Lever#ufe2	844,{
 		close;
 	case 2:
 		mes "[" + strcharinfo(0) + "]";
-		mes "Pull this lever?";
-		mes "I don't even know";
-		mes "what will happen...";
+		mes "Sait-on jamais ce qui se produira si je tire ce levier... Mieux vaut être prudent.";
 		close;
 	}
 	close;
@@ -3852,38 +3576,24 @@ OnTimer3000:
 //============================================================
 jupe_ele_r,51,98,0	script	Switch#ufe	844,{
 	if ($@JupeElevatorInUse == 1) {
-		mes "^3355FFIt's some sort of";
-		mes "lever that looks like";
-		mes "it was already pulled";
-		mes "by someone else.^000000";
+		mes "^3355FFOn dirait une sorte de levier, qui aurait déjà été activé par quelqu'un d'autre.^000000";
 		close;
 	}
 	else {
 		cutin "5",2;
-		mes "^3355FFIt's some sort of";
-		mes "lever that's located";
-		mes "next to four empty slots.^000000";
+		mes "^3355FFOn dirait une sorte de levier, situé aux côtés de quatre fentes.^000000";
 		next;
-		switch(select("Pull the lever.:Leave it alone.")) {
+		switch(select("Tirer le levier.:Ne pas toucher au levier.")) {
 		case 1:
-			mes "^3355FF*Snap Snap*^000000";
+			mes "^3355FF*Clic clonc*^000000";
 			next;
-			mes "^3355FFYou pull the lever,";
-			mes "but nothing happened.";
-			mes "You probably need to";
-			mes "insert the correct objects";
-			mes "into the slots in order";
-			mes "for the lever to operate.^000000";
+			mes "^3355FFVous tirez le levier, mais rien ne se produit. Il vous faut sûrement insérer les bons objets dans les fentes et dans un certain ordre, afin que le mécanisme se débloque.^000000";
 			next;
 			if (countitem(7356) > 0 && countitem(7359) > 0 && countitem(7357) > 0 && countitem(7358) > 0) {
-				switch(select("Insert all of your Crest Pieces.")) {
+				switch(select("Insérer tous vos Crest Pieces.")) {
 				case 1:
 					mes "^3300FF*Snap!*^000000";
-					mes "^3300FFStrangely enough,";
-					mes "all four of the Crest";
-					mes "Pieces fit perfectly into";
-					mes "the slots and begin to";
-					mes "emit a strange light.^000000";
+					mes "^3300FFDe manière étonnante, vos quatre Crest Pieces s'emboîtent parfaitement dans les fentes, qui commencent à émettre une étrange lueur.^000000";
 					cutin "5-1",2;
 					specialeffect 72; //"Switch#ufe" EF_SPHERE
 					delitem 7356,1; //Piece_Of_Crest1
@@ -3891,13 +3601,10 @@ jupe_ele_r,51,98,0	script	Switch#ufe	844,{
 					delitem 7357,1; //Piece_Of_Crest2
 					delitem 7358,1; //Piece_Of_Crest3
 					next;
-					switch(select("Pull out the Crest Pieces.:Pull the lever.")) {
+					switch(select("Retirer les Crest Pieces.:Tirer le levier.")) {
 					case 1:
 						cutin "5",2;
-						mes "^3355FFYou pull out all";
-						mes "the Crest Pieces";
-						mes "that you inserted";
-						mes "into the slots.^000000";
+						mes "^3355FFVous retirez tous les Crest Pieces que vous aviez insérés dans les fentes.^000000";
 						getitem 7356,1; //Piece_Of_Crest1
 						getitem 7359,1; //Piece_Of_Crest4
 						getitem 7357,1; //Piece_Of_Crest2
@@ -3907,20 +3614,13 @@ jupe_ele_r,51,98,0	script	Switch#ufe	844,{
 						end;
 					case 2:
 						if ($@JupeElevatorInUse == 1) {
-							mes "^3355FFIt's strange,";
-							mes "but this lever has";
-							mes "already been pulled.^000000";
+							mes "^3355FFC'est étrange, mais ce levier est déjà relevé.^000000";
 							close2;
 							cutin "5",255;
 							end;
 						}
 						else {
-							mes "^3355FFOnce you pull the lever,";
-							mes "the Crest Piece slots are";
-							mes "suddenly covered, making";
-							mes "them irretrievable, and the";
-							mes "ground begins to shake";
-							mes "violently. This isn't normal!^000000";
+							mes "^3355FFAlors que vous tirez le levier, les Crest Pieces semblent s'enfoncer plus profondément dans les fentes en émettant un cliquetis suggérant qu'ils ne pourront plus être retirés. Le sol se met à trembler violemment. Ce n'est pas normal!^000000";
 							next;
 							set $@JupeElevatorInUse,1;
 							disablenpc "Switch#ufe";
@@ -3936,29 +3636,20 @@ jupe_ele_r,51,98,0	script	Switch#ufe	844,{
 				}
 			}
 			else if (countitem(7356) > 0 || countitem(7359) > 0 || countitem(7357) > 0 || countitem(7358) > 0) {
-				select("Insert Crest Pieces.");
-				mes "^3355FFRight now, you don't";
-				mes "have enough Crest Pieces";
-				mes "to place into all four of these";
-				mes "slots. You'll need to find and^FFFFFF ^3355FF bring them all to make this work.^000000";
+				select("Insérer tous vos Crest Pieces.");
+				mes "^3355FFVous vous rendez compte que vous n'avez plus assez de Crest Pieces pour en placer dans les quatre fentes. Le mécanisme ne bouge pas d'un pouce.^000000";
 				close2;
 				cutin "5-1",255;
 				end;
 			}
 			else {
-				mes "^3355FFYou need to find";
-				mes "some kind of object";
-				mes "that you can fit into";
-				mes "each of these four slots...^000000";
+				mes "^3355FFVous devez trouver des objets qui puissent s'emboîter dans ces quatre fentes...^000000";
 				close2;
 				cutin "5-1",255;
 				end;
 			}
 		case 2:
-			mes "^3355FFWho knows what";
-			mes "this lever may do?";
-			mes "You'll never know unless";
-			mes "you have the courage to try.^000000";
+			mes "^3355FFQui sait ce que ce levier pourrait déclencher? Vous ne le saurez probablement jamais, à moins que vous n'ayez le courage d'essayer.^000000";
 			close2;
 			cutin "5",255;
 			end;
@@ -3967,44 +3658,42 @@ jupe_ele_r,51,98,0	script	Switch#ufe	844,{
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_ele_r","My descendents...",bc_map,"0x66FF00";
+	mapannounce "jupe_ele_r","Mes descendants...",bc_map,"0x66FF00";
 	end;
 
 OnTimer3000:
-	mapannounce "jupe_ele_r","Do you want to know why this city was buried beneath the earth...?",bc_map,"0x66FF00";
+	mapannounce "jupe_ele_r","Voulez-vous savoir pourquoi cette cité a été ensevelie...?",bc_map,"0x66FF00";
 	end;
 
 OnTimer7000:
-	mapannounce "jupe_ele_r","If so, follow my voice...",bc_map,"0x66FF00";
+	mapannounce "jupe_ele_r","Si votre curiosité surpasse votre peur, suivez ma voix...",bc_map,"0x66FF00";
 	end;
 
 OnTimer10000:
-	mapannounce "jupe_ele_r","I shall let you see for yourself what you desire to know...",bc_map,"0x66FF00";
+	mapannounce "jupe_ele_r","Je vous laisserai voir par vous-même ce que vous souhaitez connaître...",bc_map,"0x66FF00";
 	end;
 
 OnTimer17000:
-	mapannounce "jupe_ele_r","Overcome all the hallucinations.",bc_map,"0xCC6600";
+	mapannounce "jupe_ele_r","Venez à bout des hallucinations.",bc_map,"0xCC6600";
 	end;
 
 OnTimer20000:
-	mapannounce "jupe_ele_r","Open your eyes and see past all of the lies.",bc_map,"0xFF0000";
+	mapannounce "jupe_ele_r","Ouvrez vos yeux et faîtes la lumière à travers les mensonges.",bc_map,"0xFF0000";
 	end;
 
 OnTimer23000:
-	mapannounce "jupe_ele_r","I can only maintain this vision for you for 20 minutes.",bc_map,"0xFF0000";
+	mapannounce "jupe_ele_r","Cette vision ne durera que vingt minutes.",bc_map,"0xFF0000";
 	donpcevent "Elevator Guard1#ufe::OnEnable";
 	end;
 
 OnTimer27000:
-	mapannounce "jupe_ele_r","Look! And remember!",bc_map,"0xFF0000";
+	mapannounce "jupe_ele_r","Regardez attentivement! Et mémorisez précisément!",bc_map,"0xFF0000";
 	stopnpctimer;
 	end;
 }
 
 jupe_ele_r,51,98,0	script	Switch On#ufe	844,{
-	mes "^3355FFIt seems like";
-	mes "someone else is";
-	mes "using this machine...^000000";
+	mes "^3355FFOn dirait que quelqu'un d'autre est en train d'utiliser cette machine...^000000";
 	close;
 
 OnInit:
@@ -4027,35 +3716,35 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	monster "jupe_ele_r",44,99,"Guard",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",44,99,"Gardien",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer1200:
-	monster "jupe_ele_r",55,99,"Guard",1675,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",55,99,"Gardien",1675,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer1400:
-	monster "jupe_ele_r",45,84,"Guard",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",45,84,"Gardien",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer1600:
-	monster "jupe_ele_r",54,84,"Guard",1675,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",54,84,"Gardien",1675,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer1800:
-	monster "jupe_ele_r",45,99,"Guard",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",45,99,"Gardien",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer2000:
-	monster "jupe_ele_r",54,99,"Guard",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",54,99,"Gardien",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer2200:
-	monster "jupe_ele_r",48,84,"Guard",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",48,84,"Gardien",1669,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer2400:
-	monster "jupe_ele_r",52,84,"Guard",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
+	monster "jupe_ele_r",52,84,"Gardien",1683,1,"Elevator Guard1#ufe::OnMyMobDead";
 	end;
 
 OnTimer2600:
@@ -4063,7 +3752,7 @@ OnTimer2600:
 	end;
 
 OnTimer120000:
-	mapannounce "jupe_ele_r","It is disappointing to see that you are too weak to even defeat a hallucination...",bc_map,"0x66FF00";
+	mapannounce "jupe_ele_r","Il est décevant de voir qu'une simple hallucination a eu raison de vous...",bc_map,"0x66FF00";
 	enablenpc "Switch#ufe";
 	disablenpc "Switch On#ufe";
 	donpcevent "Annihilation#ufe::OnEnable";
@@ -4095,7 +3784,7 @@ OnEnable:
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_ele_r","Those of you who have defeated the hallucination, step forward.",bc_map,"0x66FF00";
+	mapannounce "jupe_ele_r","Que ceux qui ont percé à jour l'hallucination s'avancent.",bc_map,"0x66FF00";
 	soundeffectall "earth_quake.wav",0;
 	end;
 
@@ -4203,31 +3892,31 @@ OnTimer120000:
 	donpcevent "Guard-2#ufe::OnDisable";
 	donpcevent "Guard-3#ufe::OnDisable";
 	donpcevent "Guard-4#ufe::OnDisable";
-	mapannounce "jupe_ele","In the end, you can't even overcome your inner fear...",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Au final, vous n'arrivez même pas à surpasser votre peur intérieure...",bc_map,"0xFF0000";
 	end;
 
 OnTimer122000:
-	mapannounce "jupe_ele","You have never encountered your inner fears, have you?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Vous n'avez jamais fait face à vos démons intérieurs, n'est-ce pas?",bc_map,"0xFF0000";
 	end;
 
 OnTimer125000:
-	mapannounce "jupe_ele","Did you expect this would be the end of the hallucination?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Pensiez-vous que vous alliez sortir de ce cauchemar?",bc_map,"0xFF0000";
 	end;
 
 OnTimer127000:
-	mapannounce "jupe_ele","What if the voice you're hearing is also a hallucination?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Et si la voix que vous entendiez n'était qu'une hallucination?",bc_map,"0xFF0000";
 	end;
 
 OnTimer129000:
-	mapannounce "jupe_ele","What if you're just dreaming all of this?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Et si vous n'aviez fait que rêver tout ceci?",bc_map,"0xFF0000";
 	end;
 
 OnTimer131000:
-	mapannounce "jupe_ele","What if the existence of this city is a lie?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Et si toute l'histoire de cette cité perdue n'était qu'un mensonge?",bc_map,"0xFF0000";
 	end;
 
 OnTimer133000:
-	mapannounce "jupe_ele","Are you even real?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Êtes-vous simplement réel?",bc_map,"0xFF0000";
 	end;
 
 OnTimer134000:
@@ -4257,27 +3946,27 @@ OnDisable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_ele","I admire your patience.",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","J'admire votre patience.",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_ele","Let's see if everything you have experienced",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Voyons voir si tout ce que vous avez appris...",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
-	mapannounce "jupe_ele","were traps for intruders...",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","...n'était que de la poudre aux yeux...",bc_map,"0xFF0000";
 	end;
 
 OnTimer12000:
 	set .MyMobs,8;
-	monster "jupe_ele",48,44,"Guard",1675,1,"Guard-1#ufe::OnMyMobDead";
-	monster "jupe_ele",45,42,"Guard",1669,1,"Guard-1#ufe::OnMyMobDead";
-	monster "jupe_ele",38,42,"Guard",1675,1,"Guard-1#ufe::OnMyMobDead";
-	monster "jupe_ele",35,44,"Guard",1669,1,"Guard-1#ufe::OnMyMobDead";
-	monster "jupe_ele",35,51,"Guard",1675,1,"Guard-1#ufe::OnMyMobDead";
-	monster "jupe_ele",38,53,"Guard",1669,1,"Guard-1#ufe::OnMyMobDead";
-	monster "jupe_ele",45,53,"Guard",1675,1,"Guard-1#ufe::OnMyMobDead";
-	monster "jupe_ele",48,51,"Guard",1669,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",48,44,"Gardien",1675,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Gardien",1669,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Gardien",1675,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Gardien",1669,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Gardien",1675,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Gardien",1669,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Gardien",1675,1,"Guard-1#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Gardien",1669,1,"Guard-1#ufe::OnMyMobDead";
 	set $@JupeElevatorInUse2,1;
 	end;
 
@@ -4312,31 +4001,31 @@ OnDisable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_ele","This city was not",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Cette cité...",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_ele","as magnificient as you thought.",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","...n'était pas aussi magnifique que ce que vous pensez.",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
-	mapannounce "jupe_ele","This is a place where all the fears of humans flourish.",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","En ce lieus s'épanouissent toutes les peurs des hommes.",bc_map,"0xFF0000";
 	end;
 
 OnTimer11000:
-	mapannounce "jupe_ele","Yes. Nobody leaves alive!",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Oui. Plus personne ne vit ici désormais!",bc_map,"0xFF0000";
 	end;
 
 OnTimer12000:
 	set .MyMobs,8;
-	monster "jupe_ele",48,44,"Guard",1683,1,"Guard-2#ufe::OnMyMobDead";
-	monster "jupe_ele",45,42,"Guard",1669,1,"Guard-2#ufe::OnMyMobDead";
-	monster "jupe_ele",38,42,"Guard",1683,1,"Guard-2#ufe::OnMyMobDead";
-	monster "jupe_ele",35,44,"Guard",1669,1,"Guard-2#ufe::OnMyMobDead";
-	monster "jupe_ele",35,51,"Guard",1683,1,"Guard-2#ufe::OnMyMobDead";
-	monster "jupe_ele",38,53,"Guard",1669,1,"Guard-2#ufe::OnMyMobDead";
-	monster "jupe_ele",45,53,"Guard",1683,1,"Guard-2#ufe::OnMyMobDead";
-	monster "jupe_ele",48,51,"Guard",1669,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",48,44,"Gardien",1683,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Gardien",1669,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Gardien",1683,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Gardien",1669,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Gardien",1683,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Gardien",1669,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Gardien",1683,1,"Guard-2#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Gardien",1669,1,"Guard-2#ufe::OnMyMobDead";
 	set $@JupeElevatorInUse2,2;
 	end;
 
@@ -4371,27 +4060,27 @@ OnDisable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_ele","What do you see?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Que voyez-vous?",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_ele","Are your eyes actually seeing something?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Vos yeux peuvent-ils discerner quelque chose?",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
-	mapannounce "jupe_ele","Or do you just believe you are seeing?",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Ou pensez-vous regarder alors que vous ne pouvez voir?",bc_map,"0xFF0000";
 	end;
 
 OnTimer12000:
 	set .MyMobs,8;
-	monster "jupe_ele",48,44,"Guard",1675,1,"Guard-3#ufe::OnMyMobDead";
-	monster "jupe_ele",45,42,"Guard",1669,1,"Guard-3#ufe::OnMyMobDead";
-	monster "jupe_ele",38,42,"Guard",1683,1,"Guard-3#ufe::OnMyMobDead";
-	monster "jupe_ele",35,44,"Guard",1675,1,"Guard-3#ufe::OnMyMobDead";
-	monster "jupe_ele",35,51,"Guard",1669,1,"Guard-3#ufe::OnMyMobDead";
-	monster "jupe_ele",38,53,"Guard",1683,1,"Guard-3#ufe::OnMyMobDead";
-	monster "jupe_ele",45,53,"Guard",1675,1,"Guard-3#ufe::OnMyMobDead";
-	monster "jupe_ele",48,51,"Guard",1669,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",48,44,"Gardien",1675,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Gardien",1669,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Gardien",1683,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Gardien",1675,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Gardien",1669,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Gardien",1683,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Gardien",1675,1,"Guard-3#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Gardien",1669,1,"Guard-3#ufe::OnMyMobDead";
 	set $@JupeElevatorInUse2,3;
 	end;
 
@@ -4427,23 +4116,23 @@ OnDisable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_ele","Do not forget. That which limits you is nothing but yourself.",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","N'oubliez pas. Vous êtes votre propre et seule limite.",bc_map,"0xFF0000";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_ele","Nothing is what you fear and you have nothing to fear...",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","Vous n'avez rien à craindre, et vous craignez le néant...",bc_map,"0xFF0000";
 	end;
 
 OnTimer8000:
 	set .MyMobs,8;
-	monster "jupe_ele",48,44,"Guard",1684,1,"Guard-4#ufe::OnMyMobDead";
-	monster "jupe_ele",45,42,"Guard",1669,1,"Guard-4#ufe::OnMyMobDead";
-	monster "jupe_ele",38,42,"Guard",1684,1,"Guard-4#ufe::OnMyMobDead";
-	monster "jupe_ele",35,44,"Guard",1669,1,"Guard-4#ufe::OnMyMobDead";
-	monster "jupe_ele",35,51,"Guard",1675,1,"Guard-4#ufe::OnMyMobDead";
-	monster "jupe_ele",38,53,"Guard",1669,1,"Guard-4#ufe::OnMyMobDead";
-	monster "jupe_ele",45,53,"Guard",1683,1,"Guard-4#ufe::OnMyMobDead";
-	monster "jupe_ele",48,51,"Guard",1675,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",48,44,"Gardien",1684,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",45,42,"Gardien",1669,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",38,42,"Gardien",1684,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",35,44,"Gardien",1669,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",35,51,"Gardien",1675,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",38,53,"Gardien",1669,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",45,53,"Gardien",1683,1,"Guard-4#ufe::OnMyMobDead";
+	monster "jupe_ele",48,51,"Gardien",1675,1,"Guard-4#ufe::OnMyMobDead";
 	set $@JupeElevatorInUse2,4;
 	end;
 
@@ -4476,28 +4165,28 @@ OnDisable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_ele","I am not going to tell you anything.",bc_map,"0x66FF00";
+	mapannounce "jupe_ele","Ne comptez pas sur moi pour vous révéler quoi que ce soit.",bc_map,"0x66FF00";
 	end;
 
 OnTimer5000:
-	mapannounce "jupe_ele","My city, my people are now but a memory.",bc_map,"0x66FF00";
+	mapannounce "jupe_ele","Ma cité, mon peuple, ne sont à présent plus que des souvenirs.",bc_map,"0x66FF00";
 	end;
 
 OnTimer8000:
-	mapannounce "jupe_ele","Everything was a mistake. We were not supposed to be here.",bc_map,"0x66FF00";
+	mapannounce "jupe_ele","Tout ceci était une vaste erreur. Nous n'étions pas supposés en arriver là.",bc_map,"0x66FF00";
 	end;
 
 OnTimer11000:
-	mapannounce "jupe_ele","Is this a place where humans are forbidden?",bc_map,"0x66FF00";
+	mapannounce "jupe_ele","Ce lieu est pourtant interdit aux humains, n'est-ce pas?",bc_map,"0x66FF00";
 	end;
 
 OnTimer12000:
-	mapannounce "jupe_ele","You want to know, don't you? Go ahead... Go deeper.",bc_map,"0x66FF00";
+	mapannounce "jupe_ele","Vous voulez connaître la vérité? Allez-y... Allez plus loin.",bc_map,"0x66FF00";
 	enablenpc "4F Enter#ufe";
 	end;
 
 OnTimer22000:
-	mapannounce "jupe_ele","It's not real anyway. All of it's safe, it can't hurt you...",bc_map,"0x66FF00";
+	mapannounce "jupe_ele","Tout ceci n'est pas réel de toutes façons. Il n'y a aucun danger, vous ne serez pas blessé...",bc_map,"0x66FF00";
 	soundeffectall "earth_quake.wav",0;
 	disablenpc "4F Enter#ufe";
 	end;
@@ -4536,11 +4225,9 @@ jupe_gate,50,173,0	script	gate#start	-1,2,3,{
 
 OnTouch:
 	initnpctimer "gate#start",1;
-	mes "^3355FFIt's a Warp Portal";
-	mes "that will teleport you";
-	mes "to the previous floor.^000000";
+	mes "^3355FFCe Portail de Téléportation va vous conduire à l'étage précédent.^000000";
 	next;
-	switch(select("Use it.:Ignore it.")) {
+	switch(select("L'utiliser.:L'ignorer.")) {
 	case 1:
 		specialeffect2 348; // EF_LIGHTSPHERE
 		close2;
@@ -4548,8 +4235,8 @@ OnTouch:
 		warp "juperos_02",130,142;
 	case 2:
 		mes "[" + strcharinfo(0) + "]";
-		mes "Not now!";
-		mes "I can't leave yet!";
+		mes "Pas maintenant!";
+		mes "Je ne peux pas partir maintenant!";
 		close2;
 		stopnpctimer;
 		warp "jupe_gate",50,168;
