@@ -1,16 +1,16 @@
 //Le Livre d'Ymir http://bookofymir.free.fr/
-//traduit par Iria, corrigé par Myllena
+//traduit par Myllena et Iria, corrigé par Myllena
 //===== eAthena Script =======================================
 //= Umbala Town script
 //===== By: ==================================================
 //= jAthena (1.0) Fusion Dev Team (1.1) Muad Dib (1.2) Darkchild (1.3)
 //===== Current Version: =====================================
-//= 1.9
+//= 2.1
 //===== Compatible With: =====================================
-//= Any eAthena Version; RO Episode XX
+//= eAthena SVN; RO Episode XX
 //===== Description: =========================================
+//- [Aegis Conversion]
 //= Umbala Town Npcs
-//==================================================
 //===== Additional Comments: =================================
 //= 1.0 - Done By jAthena (dunno Who)
 //= 1.1 - Translated by Fusion Dev Team
@@ -23,718 +23,781 @@
 //= 1.8 - Warps you to Niff with 1HP [Lance]
 //= 1.9 - Moved Umbala Event, Create Essence/Dismantle Stone, and Skeletal Gate to npc/quests/quests_umbala.txt [Evera]
 //= 2.0 - Removed duplicates, max NPC name length is 23, so Utan Tribe Young Adult#1, the 1 is skipped [Toms]
+//= 2.1 - Updated to Aegis 10.3 standards. [L0ne_W0lf]
+//=	- Disabled warping to Niflheim from the bungee jump, uncomment to reenable.
 //============================================================
 
+comodo,170,137,7	script	La Ed#um	84,{
+	end;
 
-//========================================================
-// == NPCs on the road to Umbala ==
-//========================================================
-//Note that On_Emotion is NOT an npc command but just an trigger for DoNpcEvent!!
-comodo,170,137,7	script	Reid	84,{
-	close;
-On_Emotion20:
+OnEmoteHmm:
 	emotion e_hmm;
 	end;
-On_Emotion29:
+
+OnEmoteGG:
 	emotion e_gg;
 	end;
 }
 
-//========================================================
-comodo,171,137,1	script	Heath	92,{
-	mes "[Reid]";
+comodo,171,137,1	script	Haith#um	92,{
+	mes "[La Ed]";
 	mes "Il y a un énorme trésor caché dans les parages!";
 	next;
-	mes "[Heath]";
+	mes "[Haith]";
 	mes "Si seulement nous pouvions mettre la main dessus, ces gens qui nous ont affublés du sobriquet de 'duo d'idiots' regretteraient amèrement de nous avoir appelés ainsi!!";
 	next;
-	mes "[Reid]";
+	mes "[La Ed]";
 	mes "Nous continuerons de chercher aussi longtemps qu'il le faudra!";
 	next;
-	donpcevent "Reid::On_Emotion29";
+	mes "[Haith]";
+	mes "Allons trouver ce trésor!";
+	next;
+	mes "[La Ed]";
+	mes "Allons-y~ !!";
 	emotion e_gg;
-	mes "[Heath]";
-	mes "Ehh, Reid, viens voir!";
 	next;
-	mes "[Reid]";
-	mes "............";
+	mes "[Haith]";
+	mes "................";
 	next;
-	donpcevent "Reid::On_Emotion29";
+	mes "[La Ed]";
+	mes "D'ailleurs... par où commencer pour cherche ce trésor?";
 	emotion e_hmm;
-	mes "[Reid]";
-	mes "D'accord, d'accord... J'arrive.";
+	donpcevent "La Ed#um::OnEmoteHmm";
 	next;
-	menu "Ehh attendez! Un trésor?",Lwhat_1;
-
-	Lwhat_1:
-		mes "[Reid]";
-		mes "Vous n'en avez jamais entendu parler?!";
-		next;
-		emotion e_gg;
-		mes "[Heath]";
-		mes "Oh, vous voulez écouter l'histoire du trésor, hein? Bien, à quel point est-ce important à vos yeux?";
-		next;
-		mes "[Reid and Heath]";
-		donpcevent "Reid::On_Emotion29";
-		emotion e_gg;
-		mes "Assez important pour vous coûter 1000 Zenys?!";
-		next;
-		menu "Entendu, voici les 1000 Zenys.",Lzeny_1,"Courez toujours, duo d'idiot!",Lzeny_2;
-
-		Lzeny_1:
-			if(Zeny < 1000) goto Lzeny_no;
-			set Zeny,Zeny-1000;
-			mes "[Heath]";
-			mes "Très bien cher 'ami'. Ecoutez attentivement.";
+	select("Ehh attendez! Un trésor?");
+	mes "[La Ed]";
+	mes "Quoi--?! Depuis quand est-ce que vous nous écoutez?!";
+	next;
+	mes "[Haith]";
+	mes "Hum... On dirait que vous voulez en savoir plus sur le trésor. Mais ce genre d'information n'est pas gratuit, vous savez...";
+	emotion e_gg;
+	next;
+	mes "[La Ed]";
+	mes "Nous aurions besoin d'un petit quelque chose, juste au cas où... *raclement de gorge* ^555555nous ne trouvions rien du tout.^000000";
+	next;
+	mes "[La Ed, Haith]";
+	mes "Si vous nous donnez 1000 Zenys, on partagera nos informations!";
+	emotion e_gg;
+	donpcevent "La Ed#um::OnEmoteGG";
+	next;
+	if (select("Payer 1000 Zenys:Refuser de payer") == 1) {
+		if (Zeny > 999) {
+			set zeny,zeny-1000;
+			mes "[Haith]";
+			mes "Hahahaha! C'est parti mon pote!";
 			next;
-			mes "[Reid]";
-			mes "Un glorieux aventurier appelé Niles revint dans ce village après un long périple. Il traînait...";
+			mes "[La Ed]";
+			mes "Très bien, il n'y a pas si longtemps, un aventurier célèbre du nom de Niels est revenu de ses nombreux voyages.";
 			next;
-			mes "[Heath]";
-			mes "...(chuchotement)";
-			mes "une boîte vraiment énorme derrière lui!!";
+			mes "[Haith]";
+			mes "*chuchote*";
+			mes "^555555Il traînait derrière lui une énorme boîte.^000000";
 			next;
-			mes "[Reid]";
-			mes "Il était rentré pendant la tombée de la nuit, espérant que personne ne verrait son chargement.";
+			mes "[La Ed]";
+			mes "En plus, il est revenu au milieu de la nuit, sans prévenir qui que ce soit. Donc, évidement, il y a un secret là dessous, vous ne pensez pas?";
 			next;
-			mes "[Heath]";
+			mes "[Haith]";
 			mes "Il devait y avoir quelque chose de valeur dans cette boîte! Il n'y a pas d'autres explications!";
 			next;
-			mes "[Reid]";
-			mes "Je suis à la recherche de cette boite!";
-			mes "Et je la trouverai!";
+			mes "[La Ed]";
+			mes "Nous nous sommes donc lancés à la recherche de ce trésor par nous-mêmes!!";
 			next;
+			mes "[Haith]";
+			mes "Il y a juste un problème. Nous n'avons pas la moindre idée de l'endroit où Niels a dissimulé son trésor.";
 			emotion e_hmm;
-			mes "[Heath]";
-			mes "Il y a juste un problème. Nous n'avons pas la moindre idée de l'endroit où Niles a dissimulé son trésor.";
 			next;
-			mes "[Reid]";
-			mes "Niles est en train de nous faire passer pour des idiots!";
+			mes "[La Ed]";
+			mes "Niels nous traite toujours comme des idiots~!!";
 			next;
-			menu "Où se trouve ce Niles maintenant?",Lwhere_1;
-
-			Lwhere_1:
-				mes "[Reid]";
-				mes "Il est dans la partie Nord du village.";
-				next;
-				mes "[Heath]";
-				mes "J'espère que ces informations vous ont servies.";
-				next;
-				mes "[Reid and Heath]";
-				mes "En tout cas, elles nous ont bien servi!";
-				mes "Heh heh heh!";
-				close;
-
-			Lzeny_no:
-				mes "[Reid]";
-				mes "Hé! Revenez nous voir quand vous serez moins pauvre! On n'a rien sans rien dans ce bas-monde!";
-				close;
-
-		Lzeny_2:
-			donpcevent "Reid::On_Emotion20";
-			emotion e_hmm;
-			mes "[Heath]";
-			mes "Quoi?! Je présume que nous ne sommes plus aussi crédibles que nous l'étions.";
-			mes "Comment sommes-nous censés gagner honnêtement notre argent maintenant?!?!";
+			select("Où se trouve ce Niels maintenant?");
+			mes "[La Ed]";
+			mes "Il réside dans la partie Nord du village.";
+			next;
+			mes "[Haith]";
+			mes "Nous vous avons donné de bonnes informations, alors vous avez intérêt à nous rendre la pareil!";
+			next;
+			mes "[La Ed, Haith]";
+			mes "Bonne chance!";
 			close;
+		}
+		mes "[La Ed]";
+		mes "Oh d'accord~! Si vous n'avez pas d'argent, nous ne pouvons pas vous donner d'information~";
+		close;
+	}
+	mes "[Haith]";
+	mes "Bah! Peu importe~";
+	emotion e_hmm;
+	emotion e_hmm;
+	close;
 }
 
-//========================================================
-cmd_in01,175,120,3	script	Iria	69,{
-	mes "[Iria]";
+cmd_in01,175,120,3	script	Iriya#um	69,{
+	mes "[Iriya]";
 	mes "Le type assis à la table au fond dans le coin est l'aventurier Niles. Il semble avoir une montagne d'histoires à raconter sur ses multiples périples.";
 	next;
-	mes "[Iria]";
+	mes "[Iriya]";
 	mes "Il est toujours très volubile, racontant un tas de choses comme 'Votre aventure vous mènera-t-elle à la gloire ou à une mort certaine?!'";
 	next;
-	mes "[Iria]";
+	mes "[Iriya]";
 	mes "Qui plus est, quiconque parle à Niles pendant un certain temps semble inévitablement entraîné par la même passion.";
 	close;
 }
 
-//========================================================
-cmd_in01,164,115,1	script	Niles	731,{
-	mes "[Niles]";
+cmd_in01,164,115,1	script	Niels#um	731,{
+	mes "[Niels]";
 	mes "Oh? Un autre fou pour me questionner à propos de cette rumeur idiote qui circule dans la ville?";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Cette histoire comme quoi j'aurais trouvé un grand trésor est un énorme malentendu. En fait, c'est simplement ma collection de bric et de broc.";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Ceci dit, je pense être sur la piste d'un objet pouvant être très lucratif et qui ne demande qu'à être trouvé.";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Ne croyez-vous pas que cette grotte contiguë à Comodo est intéressante?";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Je pense qu'un joyaux massif pourrait bien y être dissimulé.";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Jusqu'à récemment, nous ne savions pas comment nous rendre dans cette grotte.";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes ".............";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes ".......Hum?";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Êtes-vous mentalement prêt à vous rendre là-bas?! Pouvez-vous imaginer ce que vous y trouverez?!";
 	next;
-	mes "[Niles]";
-	mes "Le fait de simplement en parler vous motive à partir à l'aventure?!!!";
+	mes "[Niels]";
+	mes "Le fait de simplement en parler vous motive à partir à l'aventure?";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Franchissez les obstacles sur votre chemin et laissez vos instincts primaires vous mener à votre but!";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Allez-y! Maintenant!";
 	next;
-	mes "[Niles]";
+	mes "[Niels]";
 	mes "Allez vous suivre le chemin de la gloire avec cette aventure, où bien... serait-ce la voie vers une mort certaine?! Hahahaha!!!!";
 	close;
 }
 
-
-//==================================================================
-//	Umbala NPCs and Quests
-//==================================================================
-
-//==================================================================
-//Trade money for meat
-umbala,70,106,3	script	Enfant Utan#1	781,{
-if(event_umbala < 3) goto LumWord;
-	mes "[???]";
-	mes "Bonjour! Je suis membre de la Tribu Utan.";
-	next;
-	mes "[???]";
-	mes "Mon nom est Hatan! Ravi de vous rencontrer.";
-	emotion e_heh;
-	next;
-	mes "[Hatan]";
-	mes "...Je ne peux pas jouer pour le moment, parce qu'un récent orage a provoqué un trou dans le toit de ma maison...";
-	emotion e_sob;
-	next;
-	mes "[Hatan]";
-	mes "...!";
-	next;
-	mes "[Hatan]";
-	mes "Hé! Vous semblez être sympathique. Pensez-vous pouvoir nous offrir un peu d'argent afin que nous réparions les dégâts? s'il vous plaît!";
-	emotion e_sob;
-	next;
-	menu "D'accord",-,"Non, désolé",Lend2;
-
-		if(Zeny < 1000) goto LError2;
-		mes "[Hatan]";
-		mes "Ouais!!";
-		mes "Vous êtes le meilleur!!";
-		set Zeny,Zeny-1000;
-		emotion e_swt2;
+umbala,70,106,3	script	Enfant Utan#um	781,{
+	if (event_umbala >= 3) {
+		mes "[???]";
+		mes "Hum?";
+		mes "Vous n'êtes pas l'un des nôtres, n'est-ce pas?";
 		next;
-		mes "[Hatan]";
-		mes "Acceptez ceci en guise de remerciements s'il vous plaît.";
-		getitem 517,1;//Items: Meat,
+		mes "[???]";
+		mes "Bonjour!";
+		mes "Mon nom est Haatan.";
 		emotion e_heh;
-		close;
-
-		LError2:
-			mes "[Hatan]";
-			mes "Eh bien, peut-être ai-je surévalué vos moyens, mais vous ne devriez pas mentir....";
-			emotion e_pif;
+		next;
+		mes "[Haatan]";
+		mes "...*Soupir*";
+		mes "Je suis désolé, je ne peux pas venir jouer avec vous pour l'instant.";
+		mes "Il y a eu un orage et des éclairs hier soir, et ça a fait un gros trou dans le toit de ma maison...";
+		emotion e_sob;
+		next;
+		mes "[Haatan]";
+		mes " . . . !";
+		next;
+		mes "[Haatan]";
+		mes "Hé! Mais bien sûr!";
+		mes "Pensez-vous pouvoir nous offrir un peu d'argent afin que nous réparions les dégâts?";
+		mes "Vous les habitants de Rune-Midgard sont bien plus riches que les Utans! S'il vous plaît!";
+		emotion e_heh;
+		next;
+		if (select("(Acquiscer):(Secouer la tête)") == 1) {
+			mes "[Haatan]";
+			mes "Whoaaaa!!";
+			mes "Vous êtes le meilleur!!";
+			mes "Merci beaucoup! Super~!";
+			if (zeny > 1000) {
+				set zeny,zeny-1000;
+				if (checkweight(517,1)) {
+					getitem 517,1; //Meat
+					mes "Acceptez ceci en guise de remerciements s'il vous plaît.";
+				}
+				emotion e_swt2;
+			}
+			else {
+				next;
+				mes "[Haatan]";
+				mes "Uh...";
+				mes "On dirait que vous non plus n'avez pas beaucoup d'argent...";
+				emotion e_pif;
+				close;
+			}
+			next;
+			mes "[Haatan]";
+			mes "Merci beaucoup!";
+			emotion e_heh;
 			close;
-	Lend2:
-		mes "[Hatan]";
-		mes "...Sniiiif.";
+		}
+		mes "[Haatan]";
+		mes ".............*Snif*...";
 		emotion e_sob;
 		close;
-
-LumWord:
-	mes "[???]";
-	mes "Umba!";
-	mes "Umbaluwababawamuba.";
-	next;
-	mes "[???]";
-	mes "Umba!  Umbaumba!";
-	mes "Umbabama Hatan baba.";
-	emotion e_heh;
-	next;
-	mes "[Hatan]";
-	mes "...Umba, Umbaumbaumba.";
-	mes "Umbaumbaumbababa.";
-	mes "Umbabawaumbaumbaba.";
-	mes "Umbaumba.";
-	mes "...Umbaumbamabababumba.";
-	emotion e_sob;
-	next;
-	mes "[Hatan]";
-	mes "...!";
-	next;
-	mes "[Hatan]";
-	mes "Umba!";
-	mes "Umbaumbaumbababa.";
-	mes "Umbababaumbawabaumba!";
-	mes "Umbaumbaumbababa.";
-	mes "wamfuba!  Umba!";
-	emotion e_sob;
-	next;
-	menu "Acquiescer",-,"Secouer la tête",Lend;
-
-		if(Zeny < 1000) goto LError;
-		mes "[Hatan]";
-		mes "Umbaumba!!";
-		mes "Um!-babaumba-baumba-.";
-		mes "Umba-umba-Umbabawamamaba!";
-		set Zeny,Zeny-1000;
-		getitem 517,1;//Items: Meat,
-		emotion e_swt2;
+	}
+	else {
+		mes "[???]";
+		mes "Umbah?";
+		mes "Umbala umbabah umbah?";
 		next;
-		mes "[Hatan]";
-		mes "Umbaumba....";
+		mes "[???]";
+		mes "Umbah! Umbaumbah!";
+		mes "Umbahumbah Haatan babah.";
+		emotion e_sob;
+		next;
+		mes "[Haatan]";
+		mes "........umbah,";
+		mes "Umbah umbah umbaumbumbah umbah umbah";
+		mes "Babaum babahum woombah umbah umbabah";
+		mes "Umbah umbah";
+		mes "..Umbah umbabah umbah...";
+		emotion e_heh;
+		next;
+		mes "[Haatan]";
+		mes " . . . !";
+		next;
+		mes "[Haatan]";
+		mes "Umbah!";
+		mes "Umbah umbah? Umbah umbahbah";
+		mes "abaum babahum woombah!";
+		mes "Umbahumbah umbabahumbaumhumbah! Umbah!";
+		emotion e_heh;
+		next;
+		if (select("(Acquiscer):(Secouer la tête)") == 1) {
+			mes "[Haatan]";
+			mes "Umbaumbah!!";
+			mes "Um~bahumbah~ Um~baumbah~";
+			mes "Um~baumbah~ um~baumbah~";
+			if (zeny > 1000) {
+				set zeny,zeny-1000;
+				if (checkweight(517,1)) {
+					getitem 517,1; //Meat
+				}
+				emotion e_swt2;
+			}
+			else {
+				next;
+				mes "[Haatan]";
+				mes "...umbah? Umbahumbah!! Umbaum!";
+				emotion e_pif;
+				close;
+			}
+			next;
+			mes "[Haatan]";
+			mes "Umba umba umbaum.";
+			emotion e_sob;
+			close;
+		}
+		mes "[Haatan]";
+		mes "........umbah..";
 		emotion e_heh;
 		close;
-
-		LError:
-			mes "[Hatan]";
-			mes "Umba-Umbana!";
-			emotion e_pif;
-			close;
-	Lend:
-		mes "[Hatan]";
-		mes "....Umba....";
-		emotion e_sob;
-		close;
+	}
+	close;
 }
 
-//==================================================================
-//Trade Meat for Clover, ???, and Soft Fur 
-umbala,59,243,5	script	Enfant Utan#2	787,{
-if(event_umbala < 3) goto LumWord;
-	mes "[Kotan]";
-	mes ".....";
-	mes ".....";
-	mes "...De la viande.";
-	mes "...Donnez-moi de la viande!";
-	next;
-	menu "Bien sûr.",-,"Pas question!",L2;
-	if(countitem(517) < 1) goto LError;//Items: Meat,
-		delitem 517,1;//Items: Meat,
+umbala,59,243,5	script	Enfant Utan#1	787,{
+	if (event_umbala >= 3) {
 		mes "[Kotan]";
-		mes "HAaa, merci!";
-		mes "Prenez ceci!";
-		emotion e_scissors;
-		getitem 909,2;//Items: Jellopy,
-		getitem 914,2;//Items: Fluff,
-		getitem 705,2;//Items: Clover,
-		close;
-	L2:
+		mes "............";
+		mes ".........poop!";
+		mes "...De la viande.";
+		mes "...Donnez-moi de la viande!";
+		emotion e_rock;
+		next;
+		if (select("Lui donner de la viande.:Refuser.") == 1) {
+			if (countitem(517) > 0) {
+				mes "[Kotan]";
+				mes "Whoa, c'est vrai? Merci! Tenez des petits cadeaux en échange.";
+				delitem 517,1; //Meat
+				getitem 909,2; //Jellopy
+				getitem 914,2; //Fluff
+				getitem 705,2; //Clover
+				emotion e_scissors;
+				close;
+			}
+			mes "[Kotan]";
+			mes "Hé! Vous avez dit que vous aviez de la viande! Donc vous mentiez? Je déteste les menteurs!";
+			percentheal -20,0;
+			emotion e_an;
+			close;
+		}
 		mes "[Kotan]";
-		mes "......";
+		mes ".........";
 		mes "...J'ai si faim!";
 		mes "...De la viande!";
+		percentheal -1,0;
 		emotion e_sob;
 		close;
-LError:
-	mes "[Kotan]";
-	mes "Hé! Vous avez dit que vous aviez de la viande! Donc vous mentiez? Je vous déteste!";
-	emotion e_an;
-	close;
-LumWord:
-	mes "[???]";
-	mes "....";
-	mes "....";
-	mes "...Umbaba!";
-	mes "...Famba!";
-	emotion e_rock;
-	next;
-	menu "Umba",-,"Umbabu",Lu2;
-	if(countitem(517) < 1) goto LuError;//Items: Meat,
-		delitem 517,1;//Items: Meat,
+	}
+	else {
 		mes "[???]";
-		mes "Umbaumbaumbababa.";
-		mes "Umbababauma.";
-		emotion e_scissors;
-		getitem 909,2;//Items: Jellopy,
-		getitem 914,2;//Items: Fluff,
-		getitem 705,2;//Items: Clover,
-		close;
-	Lu2:
+		mes "............";
+		mes "........umbah.";
+		mes ".......umbabah.";
+		mes "......humbah.";
+		emotion e_rock;
+		next;
+		if (select("Umbah:Umbaboo") == 1) {
+			if (countitem(517) > 0) {
+				mes "[???]";
+				mes "Umbaumbaumbabababah.";
+				mes "Umbababahum.";
+				delitem 517,1; //Meat
+				getitem 909,2; //Jellopy
+				getitem 914,2; //Fluff
+				getitem 705,2; //Clover
+				emotion e_scissors;
+				close;
+			}
+			mes "[???]";
+			mes "Umbahumumhumbubabababah!!";
+			mes "Umbahumbababah umbahumboo!";
+			percentheal -20,0;
+			emotion e_an;
+			close;
+		}
 		mes "[???]";
-		mes "....";
-		mes "......Unguba!";
-		mes "....Umbababa.";
+		mes "...........";
+		mes "......woong bah.";
+		mes "....umbabababah.";
 		emotion e_sob;
+		percentheal -1,0;
 		close;
-LuError:
-	mes "[???]";
-	mes "Umbawamufumabababa!";
-	mes "Umbabababaumbaumbu!";
-	emotion e_an;
-	close;
+	}
 }
 
-
-//=====================================================================
-umbala,177,153,3	script	Bast	97,{
-	if (event_umbala>=3) emotion e_gasp;
-	mes "[Bast]";
-	mes "Oh! Un autre visiteur. Il est rare d'en rencontrer dans ce village. Mon nom est Bast.";
+umbala,177,153,3	script	Pasto#um	97,{
+	mes "[Pasto]";
+	emotion e_gasp;
+	mes "Oh~! Un habitant de Rune-Midgard! Il est rare d'en voir par ici!! Ravi de vous rencontrer, mon nom est Pasto!";
 	next;
-	mes "[Bast]";
-	mes "En raison de son isolement au coeur d'une profonde forêt, la culture d'Umbala n'est pas influencée par la course constante au progrès.";
+	mes "[Pasto]";
+	mes "Ce village se nomme Umbala.";
+	mes "Les habitants de ce village ont développé leur propre culture, qui diffère beaucoup de tous les autres endroits que j'ai pû visiter.";
 	next;
-	mes "[Bast]";
-	mes "Il n'y a pas seulement ça, mais aussi la couleur de peau et la langue qui est différente. N'êtes-vous pas troublé par leur gestuelle et leurs expressions bizarres?";
+	mes "[Pasto]";
+	mes "Je suppose que c'est parce que ce lieu est plutôt isolé des autres régions, de par sa situation géographique.";
 	next;
-	mes "[Bast]";
+	mes "[Pasto]";
+	mes "Ils sont différents de nous, et pas seulement de par leur couleur de peau ou leur langage. N'êtes-vous pas troublé par leur gestuelle et leurs expressions bizarres?";
+	next;
+	mes "[Pasto]";
 	mes "Même les choses qui vous penseriez communes à toutes les cultures prennent un sens tout autre à Umbala.";
 	next;
-	mes "[Bast]";
-	mes "Le visage d'un autochtone qui sourit ne veux pas forcément dire que celui-ci est en train de rire. Compris?";
+	mes "[Pasto]";
+	mes "Le visage d'un autochtone qui sourit ne veux pas forcément dire que celui-ci est en train de rire. Parfois vous devrez faire attention parce que ce que vous dîtes ou faîtes pourrait être mal interprété et posséder un sens complètement différent de celui auquel vous pensez.";
 	next;
-	emotion e_sob;
-	mes "[Bast]";
-	mes "C'est pour ça que les habitants qui connaissent notre langue peuvent parfois avoir des ennuis!!";
-	close;
-}
-
-//=====================================================================
-umbala,80,146,4	script	Yuki	753,{
-	mes "[Yuki]";
-	mes "Umbaubaugau...Oh!";
-	mes "Vous venez de l'extérieur? C'est formidable! Je n'aurais jamais pensé croiser quelqu'un de l'extérieur ici. Hahaha.";
-	next;
-	mes "[Yuki]";
-	mes "J'étais venu ici en quête de vaillants compagnons, mais j'ai été incapable de comprendre leur langage.";
-	mes "";
-	mes "Il me faut les écouter parler d'avantage avant de réussir à y arriver. Hahaha.";
-	next;
-	mes "[Yuki]";
-	mes "Les gens d'ici semblent vouloir protéger leurs coutumes tout en évitant les pièges de la vie moderne. Les membres de la tribu sont très avenants entre eux.";
-	next;
-	mes "[Yuki]";
-	mes "L'ambiance primitive qui règne ici est vraiment dépaysante. Les lois de la tribu sont très peu contraignantes et n'entravent pas l'épanouissement de chacun au sein du village. C'est vraiment formidable.";
-	close;
-}
-
-//=====================================================================
-um_in,101,73,3	script	Yunatan 	783,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Yunatan]";
-	mes "Je suis sorti parce que je ne supporte pas de voir ce débauché de Wambokoriotan.";
-	mes "";
-	mes "Je hais ce type!";
-	close;
-LumWord:
-	mes "[Yunatan]";
-	mes "Umbaba!  Umbaumbaugaga";
-	mes "Ugugumubaugaumuumu.";
-	mes "Umbabababababababa.";
-	close;
-}
-
-//=====================================================================
-um_in,94,123,5	script	Bartsutan	783,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Bartsutan]";
-	mes "J'aimerais que Wambokoriotan soit changé en insecte, ainsi je pourrais avoir le plaisir de lui écrabouiller la tête! Je le hais, lui et ses manières! Si seulement il pouvait se tenir loin de moi.";
-	close;
-LumWord:
-	mes "[Bartsutan]";
-	mes "Umbarugumbarumbauma!";
-	mes "Umuguugumubarumba.";
-	mes "Umba...uumu.";
-	close;
-}
-
-//=====================================================================
-umbala,140,157,6	script	Jeune Utan#3::UtanTribeYougAdult1	785,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Seirutan]";
-	mes "Le ^513177Bungy Jumping^000000 est extrêmement dangereux. Par ailleurs, le réussir avec succès est une épreuve obligatoire afin d'être considéré en tant qu'adulte parmi la tribu Utan.";
-	close;
-LumWord:
-	mes "[?????]";
-	mes "Umbaumbafumba.";
-	mes "Uwambaunbaumbabaufumba";
-	mes "Umbababaumbaumba.";
-	close;
-}
-
-//=====================================================================
-umbala,146,157,4	script	Jeune Utan#4	786,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Arotan]";
-	mes "Accomplir un ^513177Bungy Jump^000000 sans danger est un pari vraiment décisif. Lorsque quelqu'un réussit avec succès son premier saut, de nombreuses personnes préparent alors une importante fête.";
-	close;
-LumWord:
-	mes "[????]";
-	mes "Umbaumbaumbabaumbaba.";
-	mes "Umbaumbabaumbababaumufumuba.";
-	close;
-}
-
-//=====================================================================
-umbala,149,165,4	script	Jeune Utan#5	781,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Kryubatan]";
-	mes "J'ai le vertige et donc je n'ai pas vraiment envie de sauter, mais je dois quand même le faire afin d'être considéré comme un membre valeureux de la tribu Utan.";
-	close;
-LumWord:
-	mes "[??????]";
-	mes "Umbaumbaumbababa.";
-	mes "Umbaumbaumumbabaumfumuba.";
-	mes "Umbaumbaumumubafumba.";
-	close;
-}
-
-//=====================================================================
-umbala,92,159,4	script	Hartan	785,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Hartan]";
-	mes "Vous voulez savoir pourquoi notre peau est si foncée?";
-	mes "......";
-	next;
-	mes "[Hartan]";
-	mes "Et bien...";
-	mes "Chaque nuit avant de nous coucher, nous mangeons beaucoup de chocolat!";
-	next;
-	mes "[Hartan]";
-	mes "Mmmmmmm... Chocolat...";
-	close;
-LumWord:
-	mes "[????]";
-	mes "Umbaumbaumba";
-	mes "Umbaumbaumba";
-	mes "Umbaumbaumba";
-	next;
-	mes "[????]";
-	mes "Umbaumbabaungaha.";
+	mes "[Pasto]";
+	mes "J'aimerais tellement comprendre leur langue... *Soupir*";
+	mes "...Ou bien rencontrer plus de personnes qui comprennent la mienne...";
+	mes "Je... Je me sens parfois si seul... *Snif*";
 	emotion e_sob;
 	close;
 }
 
-//=====================================================================
-umbala,194,104,4	script	Enfant Utan#6	787,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Burkatan]";
-	mes "Un étranger? Êtes-vous ici pour essayer le ^513177Bungy Jumping^000000?";
+umbala,80,146,4	script	Yuwooki#um	753,{
+	mes "[Yuwooki]";
+	mes "Umbah umbah woogawoo...";
+	mes "Oups, pardon! Je suis tellement habitué à parler Utan maintenant. C'est un plaisir de vous rencontrer.";
 	next;
-	menu "Exactement!",-,"Eh bien....",L2;
-		mes "[Burkatan]";
-		mes "Quel courage! La Tribu Utan accueille d'un oeil bienveillant les gens courageux.";
-		close;
-	L2:
-		mes "[Burkatan]";
-		mes "Les adultes ne veulent même pas que je m'approche de la zone du ^513177Bungy Jumping^000000. Dans notre tribu, c'est un rituel de passage. Si je parviens à leur prouver que je suis assez grand pour accomplir un ^513177Bungy Jump^000000, ils seront forcés de me traiter en tant qu'adulte!";
-		close;
-LumWord:
-	mes "[???]";
-	mes "Umbaumbababaumfumuba.";
-	mes "Umbababaumbabaumbaumba.";
+	mes "[Yuwooki]";
+	mes "Je n'aurais jamais imaginé rencontrer un autre Rune-Midgardien dans ce village.";
+	mes "Hahahahah~!";
 	next;
-	menu "Euh... oui?",-,"Non...",Lu2;
+	mes "[Yuwooki]";
+	mes "Je suis venu ici afin de chercher des combattants qui accepteraient de m'aider à améliorer mes techniques de combat. Mais en fait j'ai mis beaucoup de temps à simplement apprendre leur langage...";
+	next;
+	mes "[Yuwooki]";
+	mes "Maintenant je suis plutôt habitué à la vie ici. Même si ça m'a pris du temps d'intégrer toutes les subtilités de la culture Utan. Hahahaha~!";
+	next;
+	mes "[Yuwooki]";
+	mes "Mais vous savez ce qu'il y a de plus bizarre? Les hommes Utan ont gardé un instinct de protection des leurs qui est très fort.";
+	next;
+	mes "[Yuwooki]";
+	mes "Il y a beaucoup de beaux jeunes hommes Utan dans ce village. Certains peuvent dire des Utans qu'ils sont restés très primitifs, mais...";
+	next;
+	mes "[Yuwooki]";
+	mes "Plus j'en apprenais sur eux, plus j'ai réalisé que leurs rituels et leurs coutumes sont plus avancées que tout ce que la culture de Rune-Midgard a à offrir.";
+	mes "Les lois de leur tribu n'entravent pas l'épanouissement de chacun au sein du village. C'est vraiment formidable.";
+	next;
+	mes "[Yuwooki]";
+	mes "C'est vraiment fascinant.";
+	close;
+}
+
+umbala,140,157,6	script	Homme Utan#1	785,{
+	if (event_umbala >= 3) {
+		mes "[Jertan]";
+		mes "Le Bungee Jumping peut vraiment être dangereux, vous risquez votre vie en le pratiquant.";
+		mes "Nous autres Utans considérons le Bungee Jumping comme une épreuve très importante afin d'être considéré en tant qu'adulte parmi la tribu.";
+		close;
+	}
+	else {
 		mes "[???]";
-		mes "Umbaumbaumbababa.";
-		mes "Umbaumbaumubaba.";
+		mes "Umbaumbah humba.";
+		mes "Woo umbaumbaumbabah woo humbah";
+		mes "Umbababah umba umba.";
 		close;
-	Lu2:
+	}
+}
+
+umbala,146,157,4	script	Homme Utan#2	786,{
+	if (event_umbala >= 3) {
+		mes "[Arotan]";
+		mes "Accomplir un Bungee Jumping est très difficile. Aujourd'hui, nous préparons une fête en l'honneur de ceux qui ont accompli ce saut et prouvé leur courage.";
+		close;
+	}
+	else {
 		mes "[???]";
-		mes "Umbaumbaumuam.";
-		mes "Umbaumbaumbaba.";
-		mes "Umbaumfumababaumu.";
+		mes "Woo umbaumbaumbabah woo humbah";
+		mes "Umbababah umba umba.";
 		close;
+	}
 }
 
-//=====================================================================
-umbala,193,208,6	script	Jeune Utan#7	789,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Fuitan]";
-	mes "Quand j'étais plus petit, même si j'étais alors très jeune, j'ai voulu m'essayer au ^513177Bungy Jumping^000000 bien que ce soit dangereux. Je l'ai fait, et dès lors, mon corps tout entier s'est empreint d'un sentiment d'accomplissement. Les coutumes incitent les comportements insensés, mais les hommes sont ainsi, vous ne pensez pas?";
-	close;
-LumWord:
-	mes "[????]";
-	mes "Umbaumbababa.";
-	mes "Umbamubafumabaumumbabamua";
-	mes "Umumbababaumbafuma.";
+umbala,149,165,4	script	Enfant Utan#3	781,{
+	if (event_umbala >= 3) {
+		mes "[Klumatan]";
+		mes "Ça fait vraiment peur, de tomber de si haut...";
+		mes "Mais je suppose que je n'ai pas le choix. Je dois le faire, sinon personne ne me considèrera jamais comme un adulte.";
+		next;
+		mes "[Klumatan]";
+		mes "Il faut le faire pour être considéré comme un membre valeureux de la tribu Utan. Les garçons de mon âge sont pressés de ne plus être considérés comme des gamins, mais moi... Je ne sais pas trop.";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "Umbahumba umumbah.";
+		mes "Umbahumbah umbabah.";
+		mes "Umbahumhumbabahum.";
+		close;
+	}
+}
+
+umbala,92,159,4	script	Bertan#um	785,{
+	if (event_umbala >= 3) {
+		mes "[Bertan]";
+		mes "Quoi de neuf, tête de noeud!";
+		next;
+		mes "[Bertan]";
+		mes "C'est quoi ton problème, Rune-Midgardien?!?!";
+		mes "Tu ne rêves pas, je t'ai appelé tête de noeud!";
+		mes "Mais je suppose qu'avec ton petit crâne d'oeuf tu n'as pas compris!!";
+		mes "Hahahahahahaahahhahaha~!";
+		next;
+		mes "[Bertan]";
+		mes "...";
+		mes "Uh...oh!";
+		next;
+		mes "[Bertan]";
+		mes "On dirait que... tu peux comprendre ce que je dis?! Ah bon... c'est bien!";
+		mes "Bon allez, on passe l'éponge? Je suis sûr que tu as envie d'entendre une petite blague.";
+		next;
+		mes "[Bertan]";
+		mes "D'accord, d'accord.";
+		mes "voyons voir.";
+		mes "Ummmm...";
+		mes "Ah, j'en ai une bonne.";
+		next;
+		switch(rand(1,6)) {
+		case 1:
+			mes "[Bertan]";
+			mes "C'est un Rune-Midgardien qui arrive à Umbala et qui croise un Utan qui a une banane dans l'oreille.";
+			next;
+			mes "[Bertan]";
+			mes "L'étranger dit à l'homme Utan: -^000099Hé, vous avez une banane dans l'oreille...^000000";
+			mes "-^990033Hein? Quoi?^000000 répond le villageois.";
+			next;
+			mes "[Bertan]";
+			mes "-^000099Je voulais simplement vous prévenir que vous avez une banane coincée dans l'oreille.^000000";
+			mes "-^990033Comment? Qu'est-ce que vous dîtes?^000000";
+			next;
+			mes "[Bertan]";
+			mes "-^000099Je dis: VOUS AVEZ UNE BANANE DANS L'OREILLE!!!^000000";
+			mes "-^990033HEIN, QUOI??!! PARLEZ PLUS FORT, J'AI UNE BANANE DANS L'OREILLE!!!^000000";
+			next;
+			mes "[Bertan]";
+			mes "Hahaha!!":
+			mes "Elle me fera toujours bien rire, celle-là!";
+			close;
+		case 2:
+			mes "[Bertan]";
+			mes "Quelle est la meilleure façon d'appâter une Femme Orc?";
+			mes "Alors vous le savez..?";
+			next;
+			mes "[Bertan]";
+			mes "C'est de la demander en mariage!";
+			mes "HAHAHAHAHAHAHHA!";
+			mes "C'est vraiment hilarant!!";
+			next;
+			mes "[Bertan]";
+			mes "...";
+			mes "...Attendez.";
+			mes "Attendez une minute...";
+			next;
+			mes "[Bertan]";
+			mes "Ce n'est pas drôle du tout...";
+			mes "C'est même plutôt effrayant...";
+			mes "Brrr--!";
+			mes "Les femmes orc sont hideuses!!";
+			close;
+		case 3:
+			mes "[Bertan]";
+			mes "En fait... oubliez ça.";
+			next;
+			mes "[Bertan]";
+			mes "J'allais vous faire la blague de 'Toc toc, qui est là?' mais en fait c'est complètement dépassé comme plaisanterie!";
+			close;
+		case 4:
+			mes "[Bertan]";
+			mes "Quelle est le comble des Rune-Midgardiens?";
+			mes "Alooooors?...";
+			mes "Hum, hmmmmm.";
+			mes "En fait ce n'est peut-être pas la blague la plus appropriée.";
+			close;
+		case 5:
+			mes "[Bertan]";
+			mes "Vous voulez savoir pourquoi la peau des Utan est si foncée?";
+			next;
+			mes "[Bertan]";
+			mes "Et bien...";
+			mes "Chaque nuit avant de nous coucher, nous mangeons beaucoup de chocolat!";
+			next;
+			mes "[Bertan]";
+			mes "DU CHOCOLAT! Hummmm... Chocolat~";
+			close;
+		case 6:
+			mes "[Bertan]";
+			mes "Un Croisé, un Alchimiste et un Novice rentrent dans une auberge.";
+			next;
+			mes "[Bertan]";
+			mes "A l'intérieur, un écriteau indique: '^CC0000Plat du jour - 10 Zenys: cuisses de Savage grillées et pommes de terres frites.^000000'";
+			next;
+			mes "[Bertan]";
+			mes "^000099Ça a l'air savoureux, je vais prendre un menu du jour!^000000 dit le Croisé à l'intention du serveur qui se trouvait à proximité.";
+			next;
+			mes "[Bertan]";
+			mes "^000099Je prendrai la même chose!^000000 dirent en choeur l'Alchimiste et le Novice, tout en s'installant à une table près du foyer.";
+			next;
+			mes "[Bertan]";
+			mes "Peu après, le serveur arrive avec les trois plats du jour, et chacun paye 10 Zenys au serveur. Les trois aventuriers commencent à se régaler. Mais alors que le serveur retourne au comptoir pour encaisser, le patron de l'auberge s'exclame.";
+			next;
+			mes "[Bertan]";
+			mes "^330099Ne sais-tu pas qu'il y a une réduction en ce moment?!^000000 dit le patron au serveur. ^330099C'est 25 Zenys les trois plats du jour!^000000";
+			next;
+			mes "[Bertan]";
+			mes "Le serveur calcule donc qu'il doit rendre la différence de prix que les aventuriers ont payé en trop, soit 5 Zenys. Il se dit pour lui-même: ^CC00005 Zenys, et ils sont trois... Oh, je sais! Je vais rendre 1 Zeny à chacun, et garder 2 Zenys pour moi. Le patron n'en saura rien...^000000";
+			next;
+			mes "[Bertan]";
+			mes "Le serveur s'exécute et rend donc 1 Zeny au Croisé, 1 Zeny à l'Alchimiste, et 1 Zeny au Novice. Au final, chaque aventurier a donc payé 10 Zenys moins 1 Zeny rendu par le serveur, soit 9 Zenys.";
+			next;
+			mes "[Bertan]";
+			mes "Trois aventuriers ayant payé 9 Zenys leur repas, ça fait 3 x 9 = 27 Zenys. Plus les 2 Zenys que le serveur a gardés dans sa poche, ça fait 29 Zenys. Mais où est passé le trentième Zeny?";
+			mes "....";
+			next;
+			mes "[Bertan]";
+			mes ".....";
+			mes "..........";
+			mes "Alors?";
+			next;
+			mes "[Bertan]";
+			mes "Hahaha, j'adore cette devinette!";
+			close;
+		}
+	}
+	else {
+		mes "[????]";
+		mes "Umbaumba Umbaumbah";
+		next;
+		mes "[????]";
+		mes "Bwahbwah hahbrah!";
+		mes "Umbaumba Umbaumbah";
+		mes "Umbaumba Umbaumbah";
+		next;
+		mes "[????]";
+		mes "Umbaumba Umbaumbah woo~";
+		emotion e_ho;
+		close;
+	}
 	close;
 }
 
-//=====================================================================
-umbala,139,205,4	script	Jeune Utan#8::UtanTribeYougAdult5	785,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Tsunitan]";
-	mes "Génial! Je n'ai pas croisé d'étranger depuis un moment. Vous arrivez juste à temps pour regarder les jeunes de tout le village accomplir un ^513177Bungy Jump^513177 afin de prouver leur courage!";
-	next;
-	mes "[Tsunitan]";
-	mes "Après avoir sauté, on peut utiliser la corde pour remonter. Par ailleurs, si on cherche sous l'eau, il est possible d'accéder à une grotte immergée. Evidemment, il y a des malchanceux qui y laissent leur vie....";
-	next;
-	mes "[Tsunitan]";
-	mes "Vous pouvez également vous sentir mal comme si le sol se dérobait sous vos pieds, en raison des silhouettes de monstres aquatiques qui se déplacent sous la surface.";
-	mes "";
-	mes "Si vous plongez sous la surface, vous mourrez certainement...";
-	close;
-LumWord:
-	mes "[????]";
-	mes "Umbaumba!";
-	mes "Umbaumbabababaumumba.";
-	mes "Babaum Utan Umbaumbaba";
-	mes "Umbababafumu.";
-	mes "Umfumubabaumbaumbaumbaba.";
-	next;
-	mes "[????]";
-	mes "Umbafumumababaumba.";
-	mes "Umbabatanumbaumba.";
-	mes "Umumu.  Umbaumbaumbaum.";
-	mes "Umbabaumbaumbaumubaamum.";
-	mes "Umbaumbaumbafumu.";
+umbala,194,104,4	script	Enfant Utan#2	787,{
+	if (event_umbala >= 3) {
+		mes "[Boorkatan]";
+		mes "Hum? Vous venez de Rune-Midgard, n'est-ce pas?";
+		mes "Est-ce que vous avez déjà fait du Bungee Jumping?";
+		next;
+		if (select("Oui:Non") == 1) {
+			mes "[Boorkatan]";
+			mes "Whoa, c'est impressionnant! Je n'aurais jamais pensé que quelqu'un de l'extérieur y arriverait! La Tribu Utan accueille d'un oeil bienveillant les gens courageux.";
+			close;
+		}
+		mes "[Boorkatan]";
+		mes "Euh, je vois...";
+		mes "Comme ça fait partie de la cérémonie de passage à l'âge adulte, tous les enfants Utan doivent effectuer au moins un Bungee Jumping. Quand je serai plus grand, je devrai le faire aussi, pour prouver à tout le monde que je suis un homme, un vrai!";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "Umbaumbababah umhumba.";
+		mes "Umbabaumumba umbaumbah?";
+		next;
+		if (select("Oui:Non") == 1) {
+			mes "[???]";
+			mes "Umba, Umumbah umbabah.";
+			mes "Umbaumbah umumbabah.";
+			close;
+		}
+		mes "[???]";
+		mes "Er, Umbahumba umumbah.";
+		mes "Umbahumbah umbabah.";
+		mes "Umbahumhumbabahum.";
+		close;
+	}
+}
+
+umbala,193,208,6	script	Homme Utan#3	789,{
+	if (event_umbala >= 3) {
+		mes "[Weitan]";
+		mes "Quand j'étais jeune, j'ai mois aussi accompli un Bungee Jumping. Je m'en souviens très bien...";
+		mes "C'était la première fois, et j'ai eu l'impression que le sol avait bondi à ma rencontre...";
+		mes "Pendant un moment, j'ai cru que j'allais mourir...";
+		next;
+		mes "[Weitan]";
+		mes "Mais après l'avoir fait, mon corps tout entier s'est empreint d'un sentiment d'accomplissement. Les coutumes incitent les comportements insensés, mais les hommes sont ainsi, vous ne pensez pas?";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "Umbahumba umumbah.";
+		mes "Umbahumbah umbabah.";
+		mes "Umbahumhumbabahum.";
+		close;
+	}
+}
+
+umbala,139,205,4	script	Homme Utan#5	785,{
+	if (event_umbala >= 3) {
+		mes "[Jooltan]";
+		mes "Ça faisait longtemps que je n'avais pas croisé de Rune-Midgardien~!";
+		mes "Bienvenue, étranger.";
+		next;
+		mes "[Jooltan]";
+		mes "Nous autres Utans, utilisons cet endroit pour effectuer du Bungee Jumping. Les jeunes y montrent leur courage, gagnent leur propre estime et y deviennent adultes.";
+		next;
+		mes "[Jooltan]";
+		mes "Oh... en effet. Quelques malchanceux meurent après avoir raté leur saut. Certains ont même des crises cardiaques rien qu'à regarder les autres sauter...";
+		next;
+		mes "[Jooltan]";
+		mes "Donc...";
+		mes "Faîtes attention à ne pas tomber par mégarde. Et si vous souhaitez essayer du Bungee Juming, préparez-vous bien.";
+		next;
+		mes "[Jooltan]";
+		mes "Oh... et vous devez aussi savoir qu'une créature vit sous ces eaux. Donc si jamais vous attérissez dans l'eau, sortez-en le plus vite possible~!";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "Umbah umbah!";
+		mes "Umbaumbah bababah umbah.";
+		mes "Babaumm Utan umbah umbabah";
+		mes "Umbaba hum.";
+		mes "Umumhumbah umbaumbah umbabah.";
+		next;
+		mes "[???]";
+		mes "Umbaum mahbababh umba,";
+		mes "Umbabatan umbaumbah.";
+		mes "Ba, umbaumbaumumbabaumm.";
+		mes "Umbabah umbaumumum.";
+		mes "Umbaumbaubahum.";
+		close;
+	}
+}
+
+um_in,158,71,3	script	Villageois Utan#um	787,{
+	if (event_umbala >= 3) {
+		mes "[Mutakutan]";
+		mes "La forêt d'Umbala regorge d'arbres à étudier pour remplir toute une vie!~";
+		next;
+		mes "[Mutakutan]";
+		mes "Umbala possède suffisamment d'arbres à étudier pour remplir toute une vie!";
+		next;
+		mes "[Mutakutan]";
+		mes "Mon arbre favori est énorme. Il transperce le ciel aussi loin que ce que notre vue peut discerner. Il semblerait que ce soit l'arbre le plus grand en ce monde!";
+		next;
+		mes "[Mutakutan]";
+		mes "Il est si vieux et si grand qu'on ne peut pas en distinguer la cime!";
+		next;
+		mes "[Mutakutan]";
+		mes "Même en prenant un point d'observation plus élevé, la cime n'apparaît pas. Je pense être un expert en étude des arbres, donc ceci est quelque peu déroutant.";
+		next;
+		mes "[Mutakutan]";
+		mes "Cela dit, le fruit que j'ai réussi à saisir sur l'une des plus hautes branches est délicieux!";
+		next;
+		mes "[Mutakutan]";
+		mes "Il a un goût assez prononcé. Le manger m'a donné des frissons tout le long du corps!!";
+		next;
+		mes "[Mutakutan]";
+		mes "A la même époque, une terrible maladie se propageait dans le village d'Umbala.";
+		next;
+		mes "[Mutakutan]";
+		mes "La santé du doyen se dégradait et son agonie était proche, mais dès qu'il a avalé un morceau du fruit, sa santé s'est améliorée de manière fulgurante en peu de temps. Ce fruit est sans aucun doute un don de la forêt!";
+		next;
+		mes "[Mutakutan]";
+		mes "Cet arbre se situe au nord du village. Pourquoi ne pas aller y jeter un oeil si c'est sur votre chemin?";
+		}
+	else {
+		mes "[??????]";
+		mes "Umbaumbah umbahbah woomhah!";
+		mes "Umbah umbah umbabah umbah";
+		mes "Umbah umbah umbah";
+		mes "Umbabah umbah umbabbah";
+		next;
+		mes "[??????]";
+		mes "....";
+		mes "......";
+		mes "Umbah balooooga?";
+		mes "Umbah balooooooooga?";
+		next;
+		mes "[??????]";
+		mes "...";
+		mes "Moogahaloo schluloo.";
+	}
 	close;
 }
 
-//=====================================================================
-um_in,158,71,3	script	Homme de la Tribu Utan	787,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Mutakutan]";
-	mes "Umbala possède suffisamment d'arbres à étudier pour remplir toute une vie!";
-	next;
-	mes "[Mutakutan]";
-	mes "Mon arbre favori est énorme. Il transperce le ciel aussi loin que ce que notre vue peut discerner. Il semblerait que ce soit l'arbre le plus grand en ce monde!";
-	emotion e_ok;
-	next;
-	mes "[Mutakutan]";
-	mes "Il est si vieux et si grand qu'on ne peut pas en distinguer la cime!";
-	next;
-	mes "[Mutakutan]";
-	mes "Même en prenant un point d'observation plus élevé, la cime n'apparaît pas. Je pense être un expert en étude des arbres, donc ceci est quelque peu déroutant.";
-	next;
-	mes "[Mutakutan]";
-	mes "Cela dit, le fruit que j'ai réussi à saisir sur l'une des plus hautes branches est délicieux!";
-	emotion e_no1;
-	next;
-	mes "[Mutakutan]";
-	mes "Il a un goût assez prononcé. Le manger m'a donné des frissons tout le long du corps!!";
-	emotion e_no1;
-	next;
-	mes "[Mutakutan]";
-	mes "A la même époque, une terrible maladie se propageait dans le village d'Umbala.";
-	next;
-	mes "[Mutakutan]";
-	mes "La santé du doyen se dégradait et son agonie était proche, mais dès qu'il a avalé un morceau du fruit, sa santé s'est améliorée de manière fulgurante en peu de temps. Ce fruit est sans aucun doute un don de la forêt!";
-	emotion e_sob;
-	next;
-	mes "[Mutakutan]";
-	mes "Cet arbre se situe au nord du village. Pourquoi ne pas y jeter un oeil si c'est sur votre chemin?";
-	close;
-LumWord:
-	mes "[????]";
-	mes "Umbaumbaumbabaumba!";
-	mes "Umbaumbaumbababaumba";
-	mes "Umbaumbaumba";
-	mes "Umbabaumbaumbaba.";
-	close;
+umbala,140,197,1	script	Bungee Jump	-1,0,0,{
+OnTouch:
+	switch(rand(1,3)) {
+	case 1:
+		percentheal -100,0;
+		mapannounce "umbala","Zone de Bungy Jumping: "+strcharinfo(0)+" : Kyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa~~~~~~~",bc_map;
+		end;
+	case 2:
+		percentheal -50,0;
+		mapannounce "umbala","Zone de Bungy Jumping: "+strcharinfo(0)+" : Wooooooaaaaaaaaaaaaaahhhhhhhhhhhh~~~~~~!",bc_map;
+		end;
+	case 3:
+		//if (rand(1,2) == 2) {
+		//	percentheal -99,0;
+		//	warp "nif_in",69,15;
+		//}
+		end;
+	}
 }
 
-//=====================================================================
-umbala,145,217,3	script	Chibibatan	783,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Chibibatan]";
-	mes "J'aimerais bien passer un plus de temps avec Wambokoriotan, mais je crois que sa femme se doute de quelque chose...";
-	close;
-LumWord:
-	mes "[Chibibatan]";
-	mes "Umbaba.";
-	mes "Ugaugumbarumbaruuuu!";
-	mes "Ugugauwubaruguagumbagua.";
-	close;
-}
-
-//=====================================================================
-um_in,139,48,5	script	Purenotan	783,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Purenotan]";
-	mes "Vous voyez ce débauché là-bas? C'est mon mari. Je suis quasiment certaine qu'il me trompe avec une autre femme du village.";
-	mes "";
-	mes "Si je l'attrape, cette guenon va passer un sale quart d'heure, c'est moi qui vous le dit!";
-	close;
-LumWord:
-	mes "[Purenotan]";
-	mes "Umbaumbaugaga!";
-	mes "Umbaumbabababa!";
-	mes "Umbaumba!";
-	emotion e_an;
-	next;
-	mes "[Purenotan]";
-	mes "Umbaumabaumbaumbaba!";
-	mes "Umbababababaugau!";
-	mes "Uguugaumbabaumbagumba!";
-	emotion e_oh;
-	next;
-	emotion e_go;
-	close;
-On_emo:
-emotion e_an;
-end;
-}
-
-//=====================================================================
-um_in,144,45,5	script	Wambokoriotan	789,{
-	if(event_umbala < 3) goto LumWord;
-	mes "[Wambokoriotan]";
-	mes "Ahhh... Ma femme est une vraie bombe. Ouch... Ouch...";
-	next;
-	mes "[Wambokoriotan]";
-	mes "Yunatan, Bartsutan, Chibibatan... Je désire toutes ces femmes autant qu'elles me désirent... Ouch...ouch!";
-	close;
-LumWord:
-	mes "[Wambokoriotan]";
-	mes "Umbaumbaba.....";
-	mes "Umbaugua!";
-	mes "Umbagumumbabagumbagaga!";
-	emotion e_heh;
-	next;
-	donpcevent "Purenotan::On_emo";
-	close;
-}
-
-//==============================================================================
-//Bungee jumping!
-//==============================================================================
-umbala,140,197,0	script	#Shibonochikka	139,0,1,{
-	set @jumprand,rand(0,4);
-	if (@jumprand == 1) goto L1;
-	if (@jumprand == 2) goto L2;
-	if (@jumprand == 3) goto L3;
-	if (@jumprand == 4) goto L4;
-	mapannounce "umbala","Zone de Bungy Jumping: " + strcharinfo(0) + " : Iyahaaaaahh!",8;
-	end;
-
-L1:
-//Dead
-	mapannounce "umbala","Zone de Bungy Jumping: " + strcharinfo(0) + " : Ukiyaaaaaaaaaa!",8;
-	percentheal -100,0;
-	end;
-
-L2:
-//HP50% Damage
-	mapannounce "umbala","Zone de Bungy Jumping: " + strcharinfo(0) + " : Kyaaaaaaaaaaa!",8;
-	percentheal -50,0;
-	end;
-
-L3:
-//HP99% Damage
-	mapannounce "umbala","Zone de Bungy Jumping: " + strcharinfo(0) + " : Waaaaaaaaaah!",8;
-	percentheal -99,0;
-	end;
-
-L4:
-//1 HP left, warp to Niflheim
-	mapannounce "umbala","Zone de Bungy Jumping: " + strcharinfo(0) + " : No-o!",8;
-	heal -HP+1,0;
-	warp "nif_in",69,15;
-	end;
-}
-
-//=====================================================================
-umbala,136,195,0	script	#Warp Point	139,1,1,{
+umbala,136,195,0	script	 #jump	-1,1,1,{
+OnTouch:
 	warp "umbala",145,166;
 	end;
 }
