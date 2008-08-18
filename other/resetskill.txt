@@ -1,5 +1,7 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
-//= Hypnotist
+//= Hypnotiseur
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
@@ -14,129 +16,88 @@
 //===== Additional Comments: =================================
 //= 1.0 First version. [L0ne_W0lf]
 //============================================================
-prontera,146,232,4	script	Hypnotist#2	124,{
-	mes "[Hypnotist]";
-	mes "Greetings, adventurer.";
-	mes "I'm a member of the Hypnotist";
-	mes "Academy sent here to Prontera";
-	mes "to provide Skill Reset services";
-	mes "to certain First Class characters for a really good price: free!";
+prontera,146,232,4	script	Hypnotiseur#2	124,{
+	mes "[Hypnotiseur]";
+	mes "Salutations, aventurier.";
+	mes "Je suis un membre de l'Académie d'Hypnotisation en détachement à Prontera, afin de proposer nos services de Reset Skill à ceux qui le souhaiteraient et à un bon prix, c'est à dire gratuitement!";
 	next;
-	mes "[Hypnotist]";
-	mes "Although I offer unlimited";
-	mes "skill resets for now, I have";
-	mes "two conditions that must be";
-	mes "fulfilled. First, you must be";
-	mes "lower than ^FF0000Base Level 40^000000.";
+	mes "[Hypnotiseur]";
+	mes "Bien que le nombre de Reset Skill est illimité, deux conditions doivent être cependant requises.";
+	mes "Tout d'abord, vous devez posséder un ^FF0000Niveau de Base inférieur à 40^000000.";
 	next;
-	mes "[Hypnotist]";
-	mes "Second, you must be a";
+	mes "[Hypnotiseur]";
+	mes "Deuxièmement, seules les personnes exerçant le métier de";
 	mes "^FF0000Swordman, Acolyte, Mage,";
-	mes "Thief, Archer, Merchant,";
-	mes "Taekwon Boy, Taekwon Girl, Gunslinger and Ninja^000000";
-	mes "Job character to qualify.";
-	mes "Now, do you have any questions?";
+	mes "Voleur, Archer, Marchand,";
+	mes "Taekwon Boy, Taekwon Girl, Gunslinger ou Ninja^000000";
+	mes "peuvent bénéficier de ce service.";
+	mes "Avez-vous des questions?";
 	next;
-	switch(select("Skill Reset?:I want a Skill Reset:Nothing")) {
+	switch(select("Qu'est-ce qu'un Reset Skill?:Je souhaite faire un Reset Skill.:Rien, merci.")) {
 
 	case 1:
-		mes "[Hypnotist]";
-		mes "Skill Resets allow adventuers";
-		mes "to redistribute their Skill";
-		mes "Points if they are unhappy";
-		mes "with their current skills.";
+		mes "[Hypnotiseur]";
+		mes "Le service de Reset Skill permet aux aventuriers de redistribuer leurs Points de Compétences s'ils ne sont pas satisfaits de leurs compétences actuelles.";
 		next;
-		mes "[Hypnotist]";
-		mes "Before proceeding with";
-		mes "a Skill Reset, you must";
-		mes "reduce all of the weight";
-		mes "of all carried items on your";
-		mes "character to 0. You can put";
-		mes "extra items in Kafra Storage.";
+		mes "[Hypnotiseur]";
+		mes "Avant de procéder à un Reset Skill, le poids de l'inventaire doit être réduit à 0, par exemple en déposant les objets dans le Stock Kafra.";
 		next;
-		mes "[Hypnotist]";
-		mes "Ah, it's also important";
-		mes "to remove your ^FF0000Pushcart^000000";
-		mes "if you have one equipped.";
-		mes "Otherwise, hypnosis won't";
-		mes "work, or will backfire...";
+		mes "[Hypnotiseur]";
+		mes "Ah, si vous êtes marchand il vous faudra également retirer votre ^FF0000Charrette^000000.";
 		close;
 
 	case 2:
-		mes "[Hypnotist]";
-		mes "Are you sure that you";
-		mes "want to proceed with";
-		mes "my ^FF0000Skill Reset^000000 service?";
+		mes "[Hypnotiseur]";
+		mes "Êtes-vous certain de vouloir utiliser notre service de";
+		mes "^FF0000Reset Skill^000000?";
 		next;
-		if (select("Yes:Cancel") == 1) {
+		if (select("Oui:Non") == 1) {
 			if (BaseLevel > 40) {
-				mes "[Hypnotist]";
-				mes "I'm sorry, but characters";
-				mes "with Base Levels higher";
-				mes "than 40 are ineligible for the";
-				mes "Skill Reset service I provide.";
+				mes "[Hypnotiseur]";
+				mes "Je suis désolé, mais votre Niveau de Base est supérieur à 40, ce qui est la limite pour pouvoir profiter du service de Reset Skill.";
 				close;
 			}
 			if ((Class > 0 && Class < 7 && Upper == 0) || (Class == Job_Gunslinger) || (Class == Job_Ninja) || (Class == Job_Taekwon)) {
 				if (checkcart()) {
-					mes "[Hypnotist]";
-					mes "Oh! Please remove your";
-					mes "Pushcart before proceeding";
-					mes "with the Skill Reset service.";
-					mes "Thanks for cooperating~";
+					mes "[Hypnotiseur]";
+					mes "Oh! Merci de retirez votre Charrette avant de procéder au Reset Skill.";
+					mes "Merci de votre coopération~";
 					close;
 				}
 				if (Weight) {
-					mes "[Hypnotist]";
-					mes "If you're here for my Skill";
-					mes "Reset service, please";
-					mes "remember that you can't";
-					mes "reset your skills until the";
-					mes "^FF0000weight of your carried items in";
-					mes "your Inventory is reduced to 0^000000.";
+					mes "[Hypnotiseur]";
+					mes "Afin de pouvoir procéder au Reset Skill, je vous demanderais de bien vouloir stocker les objets de votre inventaire dans votre Stock Kafra. Le poids de votre inventaire doit être ^FF0000égal à 0^000000.";
 					next;
-					mes "[Hypnotist]";
-					mes "Why don't you place your";
-					mes "things into the Kafra Storage";
-					mes "for now? That way, you can";
-					mes "safely keep all of your goods.";
+					mes "[Hypnotiseur]";
+					mes "Merci de votre compréhension.";
 					close;
 				}
-				mes "[Hypnotist]";
-				mes "Thank you for using";
-				mes "my Skill Redistribution";
-				mes "services. Oh, and best";
-				mes "of luck to you on your";
-				mes "travels, adventurer.";
+				mes "[Hypnotiseur]";
+				mes "Merci d'avoir utilisé nos services. Veuillez à redistribuer vos points de compétences de façon réfléchie.";
+				mes "Bonne chance dans vos aventures. Faîtes attention à vous au cours de vos voyages~";
 				ResetSkill;
 				close;
 			}
-			mes "[Hypnotist]";
-			mes "I'm sorry, but your";
-			mes "Job Class doesn't qualify";
-			mes "for the Skill Reset service";
-			mes "that I provide. I can only";
-			mes "offer Skill Resets to the";
-			mes "following Jobs...";
+			mes "[Hypnotiseur]";
+			mes "Je suis désolé, mais votre profession ne permet pas l'accès à nos services de Reset Skill.";
 			next;
-			mes "[Hypnotist]";
+			mes "[Hypnotiseur]";
+			mes "seules les personnes exerçant le métier de";
 			mes "^FF0000Swordman, Acolyte,";
-			mes "Mage, Thief, Archer,";
-			mes "Merchant, Taekwon";
-			mes "Boy, Taekwon Girl, Gunslinger and Ninja^000000.";
+			mes "Mage, Voleur, Archer,";
+			mes "Marchand, Taekwon";
+			mes "Boy, Taekwon Girl, Gunslinger et Ninja^000000";
+			mes "peuvent bénéficier de ce service.";
+			mes "Merci de votre compréhension.";
 			close;
 		}
-		mes "[Hypnotist]";
-		mes "Thank you, and good";
-		mes "luck on your adventures.";
-		mes "Please travel in safety~";
+		mes "[Hypnotiseur]";
+		mes "Merci et bonne chance dans vos aventures. Faîtes attention à vous au cours de vos voyages~";
 		close;
 
 	case 3:
-		mes "[Hypnotist]";
-		mes "Thank you, and good";
-		mes "luck on your adventures.";
-		mes "Please travel in safety~";
+		mes "[Hypnotiseur]";
+		mes "Merci et bonne chance dans vos aventures. Faîtes attention à vous au cours de vos voyages~";
 		close;
 	}
 
