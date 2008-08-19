@@ -1,3 +1,10 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+// Cube Room: traduit par Myllena
+// Lighthalzen Pickpocket Mini-Quest: à venir
+// Friendship: à venir
+// Cursed Spirit Quest: à venir
+// Rekenber Job Quest: à venir
+// President Quest aka. Schwartzvalt Trilogy Quest: à venir
 //===== eAthena Script ======================================= 
 //= Quest NPCs located in Lighthalzen
 //===== By: ================================================== 
@@ -110,7 +117,7 @@ OnTimer10000:
 MakeMob:
 	if($@lhz_alert == 1) goto ChkEnd;
 	set $@mobcount, $@mob;
-	mapannounce "lighthalzen","Attention, citizens. Our security has been breached and the city is in Gangster Alert status. Please find shelter immediately!", 1;
+	mapannounce "lighthalzen","Ceci est un message d'alerte aux citoyens de Lighthalzen. Une faille de sécurité est survenue, la ville passe en état d'alerte. Veuillez trouver un refuge immédiatement!", 1;
 	
 	for( set $@i, 0; $@i < $@mob; set $@i, $@i + 1 ) {
 		monster "lighthalzen",0,0,"Gangster",1592,1,"AlertChk::OnMobKilled";
@@ -124,7 +131,7 @@ MakeMob:
 ClearMob:
 	if($@lhz_alert == 0) goto ChkEnd;
 	set $@mobcount, 0;
-	mapannounce "lighthalzen","Attention, citizens. Our law enforcement department has successfully contained the situation. Alert status has been canceled.", 1;	
+	mapannounce "lighthalzen","Citoyens de Lighthalzen, votre attention s'il vous plaît. Notre département de contrôle des lois a contenu la situation avec succès. L'état d'alerte est suspendu.", 1;	
 	killmonster "lighthalzen","AlertChk::OnMobKilled";
 	set $@lhz_alert, 0;
 	set $@sneakguard, 0;
@@ -142,53 +149,39 @@ ChkEnd:
 	end;	
 }
 
-lighthalzen,267,200,3	script	Guard#lhz01	868,{
+lighthalzen,267,200,3	script	Garde#lhz01	868,{
 	if(countitem(7350)>0) {
-		mes "[Guard]";
-		mes "Hold it right th--!";
-		mes "Oh. I'm sorry. I didn't";
-		mes "realize you were carrying";
-		mes "a pass and had authorization.";
+		mes "[Garde]";
+		mes "Hé attendez, on ne pas pas--!";
+		mes "Oh. Je suis désolé. Je n'avais pas vu que vous étiez muni d'une autorisation d'accès.";
 		close2;
 		warp "lighthalzen",303,229;
 		end;
 	}
 	else if($@lhz_alert == 1) {
-		mes "[Guard]";
-		mes "Recently too many people";
-		mes "have been traveling between";
-		mes "Uptown and the ghetto, so";
-		mes "we've heightened security";
-		mes "around here. But how can";
-		mes "so many sneak through us?";
+		mes "[Garde]";
+		mes "Trop de personnes ont voyagé entre la ville et le ghetto récemment. Les contrôles de sécurité ont donc été renforcés dans cette zone. Je me demande comment certains arrivent systématiquement à nous filer sous le nez?";
 		close;
 	}
 	else if ((gettime(2)>00 && gettime(2)<10) || (gettime(2)>30 && gettime(2)<40)) {
 		if(rand(1,10) < 2) {
-			mes "[Guard]";
-			mes "Hold it right there!";
-			mes "I can't permit anyone";
-			mes "to enter the slums.";
-			mes "Go back to where you";
-			mes "came from, adventurer!";
+			mes "[Garde]";
+			mes "Stop, arrêtez-vous!";
+			mes "Aucune personne n'est autorisée à entrer dans le quartier des taudis.";
+			mes "Retournez d'où vous venez!";
 			close;
 		}
-		mes "[Guard]";
+		mes "[Garde]";
 		mes "Zzzz... Zzz...";
 		mes "ZZZzzzzzzzzzz...";
 		next;
-		mes "^3355FFThis guard is";
-		mes "dozing off, so this is";
-		mes "the perfect opportunity";
-		mes "to sneak past him.^000000";
+		mes "^3355FFCe garde est en train de somnoler. C'est le moment idéal pour lui passer sous le nez!^000000";
 		close2;
 		warp "lighthalzen",303,229;
 		end;
 	}
 	else if(rand(1,10) < 2) {
-		mes "^3355FFThe guard seems distracted";
-		mes "and is looking elsewhere. Now's";
-		mes "your chance to sneak past him!^000000";
+		mes "^3355FFLe garde semble distrait, il a les yeux en l'air, le regard perdu. C'est maintenant où jamais de lui passer sous le nez!^000000";
 		close2;
 		warp "lighthalzen",297,227;
 		set $@sneakguard, $@sneakguard + 1;
@@ -196,53 +189,39 @@ lighthalzen,267,200,3	script	Guard#lhz01	868,{
 	}
 }
 
-lighthalzen,294,223,7	script	Guard#lhz02	868,{
+lighthalzen,294,223,7	script	Garde#lhz02	868,{
 	if(countitem(7350)>0) {
-		mes "[Guard]";
-		mes "Hold it right th--!";
-		mes "Oh. I'm sorry. I didn't";
-		mes "realize you were carrying";
-		mes "a pass and had authorization.";
+		mes "[Garde]";
+		mes "Hé attendez, on ne pas pas--!";
+		mes "Oh. Je suis désolé. Je n'avais pas vu que vous étiez muni d'une autorisation d'accès.";
 		close2;
 		warp "lighthalzen",260,199;
 		end;
 	}
 	if($@lhz_alert == 1) {
-		mes "[Guard]";
-		mes "Recently too many people";
-		mes "have been traveling between";
-		mes "Uptown and the ghetto, so";
-		mes "we've heightened security";
-		mes "around here. But how can";
-		mes "so many sneak through us?";
+		mes "[Garde]";
+mes "Trop de personnes ont voyagé entre la ville et le ghetto récemment. Les contrôles de sécurité ont donc été renforcés dans cette zone. Je me demande comment certains arrivent systématiquement à nous filer sous le nez?";
 		close;
 	}
 	if((gettime(2)>00 && gettime(2)<10) || (gettime(2)>30 && gettime(2)<40)) {
 		if(rand(1,10) < 2) {
-			mes "[Guard]";
-			mes "Hold it right there!";
-			mes "I can't permit anyone to";
-			mes "enter Uptown Lighthalzen!";
-			mes "If you don't have a pass,";
-			mes "then move on out of here!";
+			mes "[Garde]";
+			mes "Stop, arrêtez-vous!";
+			mes "Aucune personne n'est autorisée à entrer dans le quartier des taudis.";
+			mes "Retournez d'où vous venez!";
 			close;
 		}
-		mes "[Guard]";
+		mes "[Garde]";
 		mes "Zzzz... Zzz...";
 		mes "ZZZzzzzzzzzzz...";
 		next;
-		mes "^3355FFThis guard is";
-		mes "dozing off, so this is";
-		mes "the perfect opportunity";
-		mes "to sneak past him.^000000";
+		mes "^3355FFCe garde est en train de somnoler. C'est le moment idéal pour lui passer sous le nez!^000000";
 		close2;
 		warp "lighthalzen",264,200;
 		end;
 	}
 	else if(rand(1,10) < 2) {
-		mes "^3355FFThe guard seems distracted";
-		mes "and is looking elsewhere. Now's";
-		mes "your chance to sneak past him!^000000";
+		mes "^3355FFLe garde semble distrait, il a les yeux en l'air, le regard perdu. C'est maintenant où jamais de lui passer sous le nez!^000000";
 		close2;
 		warp "lighthalzen",264,200;
 		set $@sneakguard, $@sneakguard + 1;
@@ -263,204 +242,124 @@ lighthalzen,341,224,3	script	Fishbone	868,{
 	// Quest is finished.
 	if (MISC_QUEST&512) {
 			mes "[Fishbone]";
-			mes "Oh hey, it's you!";
-			mes "Now, listen. If you wanna";
-			mes "get into Regenschirm again,";
-			mes "you gotta enter that Sewer Pipe";
-			mes "that's like, northeast from me.";
-			mes "It's gross, but you gotta...";
+			mes "Oh hé, c'est toi!";
+			mes "Si tu veux retourner au Laboratoire de Regenschirm à nouveau, t'as juste à passer par cette canalisation au Nord-Est d'ici.";
+			mes "Ça pue, mais au moins t'es sûr que personne te verra...";
 			next;
 			mes "[Fishbone]";
-			mes "Anyway, good luck in";
-			mes "whatever it is you're doing";
-			mes "here in Lighthazlen. Oh, and";
-			mes "be real careful! Something";
-			mes "shadier than me is going";
-			mes "on in this big city~";
+			mes "Quoi qu'il en soit, bonne chance dans ce que tu fais. Et fais attention... Quelque chose de pas clair se trame dans cette ville~";
 			close;
 	}
 	// Apparantly if the boss quest progress is at 6, you skip the level requirement.
 	if (lhz_boss == 6 || BaseLevel >= 60) {
 		if (lhz_sincube == 0) {
 			mes "[Fishbone]";
-			mes "What...?";
-			mes "Is there something";
-			mes "on my face? Quit looking";
-			mes "at me and let me do my work.";
+			mes "Quoi...?";
+			mes "J'ai quelque chose sur le visage? Arrête de me regarder et laisse-moi faire mon boulot.";
 			set lhz_sincube,1;
 			close;
 		}
 		else if (lhz_sincube == 1) {
 			mes "[Fishbone]";
-			mes "Hey. Hey you.";
-			mes "You're still looking";
-			mes "at me. Quit it. I'm busy";
-			mes "here and you're bothering me.";
+			mes "Hé. Hé, toi.";
+			mes "T'es encore en train de me regarder. Arrête ça! Je suis occupé là, au cas où t'aurais pas remarqué, et tu me gênes.";
 			set lhz_sincube,2;
 			close;
 		}
 		else if (lhz_sincube == 2) {
 			mes "[Fishbone]";
-			mes "Seriously, you are";
-			mes "starting to really get";
-			mes "on my nerves! What could";
-			mes "you possibly want from me?!";
+			mes "Sérieusement, arrête de me dévisager, ça commence à me taper sur les nerfs! Qu'est-ce que tu veux à la fin?!";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Nothing really.";
-			mes "I just feel like";
-			mes "watching you work.";
-			mes "What exactly are you";
-			mes "doing anyway, huh?";
+			mes "En fait pas grand chose. J'avais juste envie de vous regarder travailler. Vous faîtes quoi, d'ailleurs?";
 			next;
 			mes "[Fishbone]";
-			mes "Hey! If I could just show";
-			mes "you what I'm doing, I wouldn't";
-			mes "be so uptight about you looking";
-			mes "at what I'm doing, now would I?";
+			mes "Hé! Je te signale que je suis plutôt concentré sur ce que je fais, donc je n'ai pas le temps de m'occuper d'un fouineur dans ton genre. Vu?";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Nah...";
-			mes "I just think";
-			mes "you're uptight";
-			mes "in general.";
+			mes "Bah...";
+			mes "Vous avez l'air de vous en sortir là, non?";
 			next;
 			mes "[Fishbone]";
-			mes "Muthafruit!";
-			mes "So you're just";
-			mes "gonna sit and watch";
-			mes "me all day?! Fine! Then";
-			mes "I'll just ignore you, jerk!";
+			mes "Ben voyons!";
+			mes "Alors tu vas t'assoir ici et me regarder toute la journée?! Très bien! Je vais simplement t'ignorer, espèce de casse-pieds!";
 			next;
 			mes "[Fishbone]";
 			mes "...";
 			mes "......";
-			mes "Damn it!";
-			mes "This is really";
-			mes "ticking me off! Why";
-			mes "don't you go away?!";
+			mes "Bon sang!";
+			mes "Ça me met vraiment hors de moi! Pourquoi tu ne vas pas voir ailleurs si j'y suis?!";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Well, I was also";
-			mes "wondering why you're";
-			mes "working in a place that's";
-			mes "so, um... depressing.";
+			mes "Et bien, je me demandais pourquoi vous travaillez dans un endroit si, hum... déprimant.";
 			next;
 			mes "[Fishbone]";
-			mes "Alright, fine!";
-			mes "But once I tell you";
-			mes "what I do here, you're";
-			mes "outta here! Okay? Now,";
-			mes "your lips are frickin' sealed.";
-			mes "See, what I do is kinda illegal.";
+			mes "Très bien, d'accord!";
+			mes "Mais une fois que je t'aurais répondu, tu me fiches le camp d'ici! Vu?";
+			mes "Maintenant tu te tais et tu m'écoutes. Parce que tu vois, ce que je fais est en quelque sorte illégal.";
 			next;
 			mes "[Fishbone]";
-			mes "I provide routes that let";
-			mes "people enter Lighthalzen,";
-			mes "or even go anywhere in this";
-			mes "city, without authorization.";
-			mes "Hell, I could even get you";
-			mes "into that Laboratory...";
+			mes "Je fournis des laisser-passer et j'organise des accès entre les deux quartiers de Lighthalzen aux personnes qui ne possèdent pas d'autorisation.";
+			mes "Je pense que je pourrais même faire entrer quelqu'un au Laboratoire...";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "W-wait!";
-			mes "Laboratory?!";
-			mes "Are you serious?";
-			mes "Can you get me";
-			mes "into that place?";
+			mes "A-Attendez!";
+			mes "Au Laboratoire?!";
+			mes "Vous êtes sérieux?";
+			mes "Vous pouvez m'y faire entrer?";
 			next;
 			mes "[Fishbone]";
-			mes "Sonuva--You're not";
-			mes "gonna leave me alone,";
-			mes "are you? Look, you seem";
-			mes "okay, even if you are kinda";
-			mes "stubborn, kid. But I don't trust";
-			mes "or serve strangers, period.";
+			mes "Dîtes-moi que je rêve... Tu ne vas jamais me laisser tranquille ou quoi?";
+			mes "Ecoute-moi bien, tête de noeud, t'es plutôt têtu! Je ne suis pas d'humeur à aider les étrangers, c'est tout.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "But isn't there";
-			mes "anything I can do";
-			mes "so you can help me";
-			mes "get into the Laboratory?";
+			mes "Mais... N'y a-t-il rien que je puisse faire pour que vous acceptiez de m'aider à entrer au Laboratoire?";
 			next;
 			mes "[Fishbone]";
-			mes "No way, no how.";
-			mes "No matter how much you";
-			mes "beg, I can't take a chance";
-			mes "and just trust anyone who";
-			mes "wants to know a secret";
-			mes "route. Now get outta here!";
+			mes "C'est hors de question. Peu importe le nombre de fois que tu demanderas, je ne peux pas faire confiance au premier venu et lui faire partager la connaissance de mes routes secrètes! Maintenant, déguerpis de là, et que ça saute!";
 			set lhz_sincube,3;
 			close;
 		}
 		else if (lhz_sincube == 3) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Please...";
-			mes "Please tell me";
-			mes "how I can get inside";
-			mes "the Laboratory. I'm...";
-			mes "I'm begging you!";
+			mes "S'il vous plaît...";
+			mes "Dîtes-moi comment je peux entrer à l'intérieur du Laboratoire. Je...";
+			mes "Je vous en supplie!";
 			next;
 			mes "[Fishbone]";
-			mes "No! Now shaddup";
-			mes "and stop begging, okay?";
-			mes "You're only embarassing";
-			mes "yourself! Good grief...";
+			mes "Non! Maintenant ferme ton clapet et arrête de te mettre à genoux. Tout ce que tu vas y gagner c'est te taper la honte! Je te jure...";
 			set lhz_sincube,4;
 			close;
 		}
 		else if (lhz_sincube == 4) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Why won't you";
-			mes "heeeeelp meee?";
-			mes "Pleeeeeeeease~";
-			mes "You're the only one";
-			mes "who knoooooows~";
+			mes "Pourquoi vous ne voulez pas m'aideeeeerr?";
+			mes "S'il vous plaaaaaaît~";
+			mes "Vous êtes le seul à pouvoir le faaaaire~";
 			next;
 			mes "[Fishbone]";
-			mes "Yeesh, you're a nutty";
-			mes "kid. Look, ''no'' means";
-			mes "''no.'' That's it. That's";
-			mes "final. How many times do";
-			mes "you gotta make me spell it out?";
+			mes "T'es un peu long à la détente ou quoi? Ecoute, 'non', ça veut dire 'non'. C'est tout. Point final. Combien de fois il va falloir te le répéter?";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "But there's gotta";
-			mes "be something I can";
-			mes "do so you'll help me?";
-			mes "Th-that's the way i-it";
-			mes "always w-works. You";
-			mes "can't just-- You c-can't...";
+			mes "Mais il doit bien y avoir quelque chose que je puisse faire pour que vous m'aidiez? C'est... C'est comme ça que ça marche, non? Vous ne pouvez... pas...";
 			next;
 			mes "[Fishbone]";
-			mes "Alright, you got me.";
-			mes "But if I'm gonna risk";
-			mes "my life to help you get";
-			mes "into that Laboratory I want";
-			mes "something in return. Okay?";
+			mes "*Profond soupir*";
+			mes "D'accord, d'accord, t'as gagné!";
+			mes "Mais si je dois risquer ma vie pour t'aider à entrer dans ce Laboratoire, je veux quelque chose en échange. Ok?";
 			next;
 			mes "[Fishbone]";
-			mes "All you need to do is";
-			mes "come back here with";
-			mes "^FF000071,381,305,294,921,000 zeny^000000.";
-			mes "Then I'll give you all the help";
-			mes "you need. Alright, good luck";
-			mes "to you, brave adventurer.";
+			mes "Tout ce que tu as à faire c'est revenir ici avec";
+			mes "^FF000071 381 305 294 921 000 Zenys^000000.";
+			mes "Ensuite je t'accorderai toute l'aide dont tu auras besoin. D'accord? Bonne chance, courageux aventurier.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "You're joking right?!";
-			mes "There's no way I can ever";
-			mes "get that much zeny! I'd...";
-			mes "I'd have to at least take";
-			mes "over the world or, or...";
+			mes "C'est une plaisanterie?!";
+			mes "Je ne pourrais jamais amasser une telle somme d'argent! Je.. Je devrai devenir le roi de Rune-Midgard, ou même... le maître du monde pour ça! C'est...";
 			next;
 			mes "[Fishbone]";
-			mes "Good point.";
-			mes "Fine, maybe that";
-			mes "price is a little high.";
-			mes "I'll just cut it in half,";
-			mes "then. Still want my";
-			mes "help? Then bring me...";
+			mes "Effectivement.";
+			mes "Bon, peut-être que mon prix était un peu trop élevé. Disons que je te fais une petite remise... Tu veux toujours mon aide? Alors rapporte-moi...";
 			next;
 			mes "[Fishbone]";
 			mes " ";
@@ -468,122 +367,82 @@ lighthalzen,341,224,3	script	Fishbone	868,{
 			mes "...^FF000020 Jellopy^000000.";
 			next;
 			mes "[Fishbone]";
-			mes "Gosh.";
-			mes "It's like I'm";
-			mes "doing this for free...";
+			mes "Entre nous, c'est un prix d'ami...";
 			next;
-			if (select("Okay.:No! It's impossible!") == 1) {
+			if (select("Ça marche.:Non! C'est beaucoup trop!") == 1) {
 				mes "[Fishbone]";
-				mes "Alright, then";
-				mes "bring me back a";
-				mes "total of 20 Jellopy.";
-				mes "But you gotta have";
-				mes "exactly 20 Jellopy on";
-				mes "you, okay? Seeya pal~";
+				mes "D'accord, alors rapporte-moi 20 Jellopy, pas un de plus, pas un de moins, capiche?";
+				mes "A plus mon pote~";
 				set lhz_sincube,5;
 				close;
 			}
 			mes "[Fishbone]";
-			mes "What are you--";
-			mes "Okay, now you're the";
-			mes "one who's joking around.";
-			mes "Look, it's either bring me";
-			mes "20 Jellopy or 71,381,3--";
-			mes "whatever number I said-- zeny!";
+			mes "Mais d'où tu sors?";
+			mes "Allez, arrête de te payer de ma tête.";
+			mes "C'est 20 Jellopy ou 713813... enfin le nombre de zenys que je t'ai dit tout à l'heure!";
 			close;
 		}
 		else if (lhz_sincube == 5) {
 			mes "[Fishbone]";
-			mes "So...";
-			mes "Did you bring";
-			mes "the stuff?";
+			mes "Alors...";
+			mes "T'as tout apporté?";
 			next;
-			switch(select("I'm still working on it.:Here you go!:Um... Stuff?")) {
+			switch(select("J'y travaille encore.:Oui, voilà!:Hein... de quoi?")) {
 			case 1:
 				mes "[Fishbone]";
-				mes "Still working on it?";
-				mes "Okay, I know I didn't";
-				mes "ask you for very much,";
-				mes "but gimme some respect";
-				mes "and get serious about it!";
-				mes "It's 20 friggin' Jellopies!";
+				mes "T'y travailles encore?";
+				mes "Ok, je sais que ce que je t'ai demandé n'est pas facile mais... Entre nous, soyons sérieux. On parle de 20 pauvres Jellopy là!";
 				close;
 			case 2:
 				if (countitem(909) > 19) {
 					mes "[Fishbone]";
-					mes "Ooh. Hey, good work.";
-					mes "Okay, I can see you're";
-					mes "the reliable type. A deal";
-					mes "is a deal, so I'll tell you";
-					mes "how you can get inside";
-					mes "that Laboratory.";
+					mes "Ooh. Hé, bon boulot.";
+					mes "Ok, je vois que t'es du genre sur qui on peut compter. Un marché est un marché, donc je vais te dire comment rentrer au Laboratoire.";
 					next;
 					mes "[Fishbone]";
-					mes "Now, if you're wondering";
-					mes "why I don't got much qualm";
-					mes "against helping you, it's";
-					mes "because I used to work in";
-					mes "the Laboratory... But then";
-					mes "they laid me off unfairly.";
+					mes "Tu dois te demander pourquoi je n'ai pas plus de scrupules que ça à t'aider. C'est parce que tu vois, avant je bossais au Laboratoire... Mais on m'a foutu dehors sans raison.";
 					next;
 					mes "[Fishbone]";
-					mes "Anyway, anything I can";
-					mes "do to cause them trouble";
-					mes "is good in my book. Let me";
-					mes "get some stuff ready and";
-					mes "then I'll tell you what you";
-					mes "really need to know.";
+					mes "Quoi qu'il en soit, maintenant tout ce que je peux faire pour leur foutre les bâtons dans les roues est bon à prendre.";
+					mes "Je dois préparer deux-trois trucs et après je te révèlerai ce que tu as besoin de savoir.";
 					delitem 909,20; //Jellopy
 					set lhz_sincube,6;
 					close;
 				}
 				mes "[Fishbone]";
 				mes "Uh...";
-				mes "I said 20 Jellopies,";
-				mes "didn't I? This ain't";
-				mes "enough pal, so go out";
-				mes "and get some more!";
+				mes "J'ai dit 20 Jellopy, non?";
+				mes "Ça suffit pas là, mon pote, alors vas donc m'en chercher plus!";
 				close;
 			case 3:
 				mes "[Fishbone]";
-				mes "What the...?";
-				mes "How could you forget";
-				mes "something like that?";
-				mes "Anyway, I asked you to";
-				mes "bring 20 Jellopies.";
+				mes "Mais je rêve! ...";
+				mes "Comment t'as pû oublier quelque chose d'aussi simple que ça?";
+				mes "Je t'ai demandé 20 Jellopy! 20 Je-llo-py! C'est quand même pas sorcier!";
 				close;
 			}
 		}
 		else if (lhz_sincube == 6) {
 			mes "[Fishbone]";
 			if (lhz_boss == 6) {
-				mes "way to get into Regenschrim";
-				mes "Lab. However, I do know of";
-				mes "this secret maze that should";
-				mes "get you there. Still, if you're";
-				mes "willing and ready to go...";			
+				mes "Un moyen de rentrer au Labo de Regenschrim? Ouais je connais un passage secret qui peut y conduire. Enfin, si t'as toujours envie d'y aller...";			
 			}
 			else {	
-				mes "Okay...";
-				mes "Are you ready now?";
-				mes "I'm gonna send you";
-				mes "someplace where you";
-				mes "can find the Lab entrance.";
+				mes "Ok...";
+				mes "T'es prêt?";
+				mes "Je vais te faire entrer par derrière. Je suis sûr que tu trouveras l'entrée du Labo sans problème à partir de là.";
 			}
 			next;
-			switch(select("Not yet.:Yes.")) {
+			switch(select("Pas maintenant.:D'accord.")) {
 			case 1:
 				mes "[Fishbone]";
-				mes "Eh...?";
-				mes "Alright, it's";
-				mes "not a problem.";
-				mes "Just take your time.";
+				mes "Hein...?";
+				mes "D'accord, prends ton temps.";
 				close;
 			}
 			mes "[Fishbone]";
-			mes "Great!";
-			mes "Okay then,";
-			mes "here we go!";
+			mes "Super!";
+			mes "Alors c'est parti!";
 			close2;
 			set lhz_sincube,7;
 			switch(rand(1,3)) {
@@ -595,35 +454,23 @@ lighthalzen,341,224,3	script	Fishbone	868,{
 		}
 		else if (lhz_sincube < 10) {
 			mes "[Fishbone]";
-			mes "Hm, you must not have";
-			mes "accomplished whatever";
+			mes "Hum, t'as pas encore fait tout ce que tu voulais au";
 			if (lhz_boss == 6) {
-				mes "it is you need to do in the";
-				mes "Regenschirm Laboratory yet.";
+				mes "Laboratoire de Regenschirm?";
 			}
 			else {
-				mes "it was you were doing";
-				mes "in the Laboratory. Do";
+				mes "Laboratoire?";
 			}
-			mes "you want me to send";
-			mes "you there again?";
+			mes "Tu veux y retourner?";
 			next;
-			if (select("No.:Yes.") == 1) {
+			if (select("Non.:Oui.") == 1) {
 				mes "[Fishbone]";
-				mes "Geez, you must have";
-				mes "really had a hard time";
-				mes "there. Okay, well, when";
-				mes "you're ready to go there,";
-				mes "just let me know, got it?";
+				mes "Qu'est-ce qu'il y a, ça c'est mal passé là pas? Bon, dis-moi simplement quand tu voudras y retourner, compris?";
 				close;
 			}
 			mes "[Fishbone]";
-			mes "Got a lot of";
-			mes "spirit in you,";
-			mes "don't you? Heh!";
-			mes "I like you style~";
-			mes "Get ready, 'cuz";
-			mes "here we go...!";
+			mes "T'as encore pas mal de ressources, hein? J'aime bien ton style~";
+			mes "Allez tiens-toi prêt, c'est parti...!";
 			close2;
 			set lhz_sincube,7;
 			switch(rand(1,3)) {
@@ -635,46 +482,26 @@ lighthalzen,341,224,3	script	Fishbone	868,{
 		}
 		else if (lhz_sincube == 10) {
 			mes "[Fishbone]";
-			mes "Hey, you came back!";
-			mes "Good, I was starting";
-			mes "to get a little worried";
-			mes "about what happened to";
-			mes "you. So did you get what";
-			mes "you wanted over there?";
+			mes "Hé, t'es revenu!";
+			mes "Bien, je commençais à m'inquiéter un peu. Alors, tu as trouvé ce que tu cherchais là bas?";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Yeah...";
-			mes "I hope so,";
-			mes "anyway.";
+			mes "Oui...";
+			mes "Enfin, je pense.";
 			next;
 			mes "[Fishbone]";
-			mes "Good! Whatever you did,";
-			mes "I hope it messes them up big";
-			mes "time! I usedta be a respected";
-			mes "scientist for Regenschirm till";
-			mes "they laid me off! Serves those";
-			mes "ungrateful jerkoffs right!";
+			mes "Bon! Quoi que tu aies fait, j'espère que ça a laissé un beau bordel! Et dire que j'étais un scientifique respecté de Regenschirm jusqu'à ce qu'on me foute à la porte! Ils n'ont que ce qu'ils méritent!";
 			next;
 			mes "[Fishbone]";
-			mes "Then again, my current";
-			mes "line of work seems to suit";
-			mes "me much better. And I don't";
-			mes "gotta worry about formulas";
-			mes "and algorithms anymore.";
+			mes "Mon boulot actuel me convient beaucoup mieux, finalement. Et je n'ai plus à me soucier de formules compliquées et d'algorithmes insensés.";
 			next;
 			mes "[Fishbone]";
-			mes "Oh yeah, the place you";
-			mes "just went to? There's a";
-			mes "secret path the Laboratory";
-			mes "there. If you want, I can";
-			mes "send you back there. So";
-			mes "what do you say?";
+			mes "Ah oui, l'endroit par où tu es ressorti? C'est un passage secret qui conduit au Laboratoire. Si tu veux y retourner, je peux t'aider. Alors qu'en dis-tu?";
 			next;
-			if (select("Sure:No thanks~") == 1) {
+			if (select("D'accord:Non merci~") == 1) {
 				mes "[Fishbone]";
-				mes "Okay then, here";
-				mes "we go! Good luck";
-				mes "to you, buddy.";
+				mes "D'accord, c'est parti!";
+				mes "Bonne chance, mon pote!";
 				close2;
 				switch(rand(1,3)) {
 				case 1: warp "lhz_cube",67,193; break;
@@ -684,122 +511,71 @@ lighthalzen,341,224,3	script	Fishbone	868,{
 				end;
 			}
 			mes "[Fishbone]";
-			mes "Alright, it's your";
-			mes "choice. Oh, and that";
-			mes "pass you have should";
-			mes "let you into the Laboratory";
-			mes "anyway. Good luck to you, pal.";
+			mes "D'accord, c'est ton choix. Oh, et de toutes façons tu as obtenu un pass magnétique! Maintenant tu peux aller au Laboratoire quand tu veux.";
+			mes "Bonne chance, mon pote!";
 			close;
 		}
 		mes "[Fishbone]";
-		mes "Heya pal!";
-		mes "It's been a while.";
-		mes "You doin' good? I'm";
-		mes "just peachy, thanks~";
+		mes "Hé mon pote!";
+		mes "Ça fait un bail!";
+		mes "Ça gaze? Moi ça roule, tout baigne~";
 		close;
 	}
 	else if (BaseLevel < 60) {
-		mes "Hey kid, get";
-		mes "outta here! Can't";
-		mes "you tell I'm dealin'";
-		mes "in something shady";
-		mes "here? This is no place";
-		mes "for baby faced guys like you!";
+		mes "Hé gamin, tire-toi de là! Tu vois pas que tu gènes là? Il n'y a pas la place pour les mioches ici!";
 		close;
 	}
 	else if (lhz_boss > 6) {
 		mes "[Fishbone]";
-		mes "Heya pal!";
-		mes "It's been a while.";
-		mes "You doin' good? I'm";
-		mes "just peachy, thanks~";
+		mes "Hé mon pote!";
+		mes "Ça fait un bail!";
+		mes "Ça gaze? Moi ça roule, tout baigne~";
 		close;
 	}
 }
 
-lhz_cube,237,198,0	script	Bundle of Files#cube	111,{
+lhz_cube,237,198,0	script	Pile de Dossiers#cube	111,{
 	if (lhz_sincube < 7) {
-		mes "^3355FFThere are a bunch";
-		mes "of files scattered";
-		mes "on the ground.^000000";
+		mes "^3355FFIl y a une pile de dossiers éparpillés sur le sol.^000000";
 		close;
 	}
 	else if (lhz_sincube < 10) {
 		if (@lhz_secret01 < 1) {
-			mes "^3355FFThere are a bunch";
-			mes "of files scattered";
-			mes "on the ground. They";
-			mes "seem to contain all";
-			mes "sorts of information,";
-			mes "but they're all mixed up.^000000";
+			mes "^3355FFIl y a une pile de dossiers éparpillés sur le sol. Ils contiennent certainement des informations importantes, mais tout est mélangé.^000000";
 			next;
-			if (select("Rummage through the files.:Cancel") == 1) {
-				mes "^3355FFWhile you are";
-				mes "rummaging through";
-				mes "the files, a Red Key";
-				mes "drops to the ground";
-				mes "with a clink. You decide";
-				mes "to keep this ^000000Red Key^3355FF.^000000";
+			if (select("Fouiller dans les dossiers.:Ne pas y toucher.") == 1) {
+				mes "^3355FFAlors que vous fouillez dans l'amas de dossiers, une Clé Rouge tombe au sol en émettant un cling-cling. Vous décidez de garder cette ^000000Clé Rouge^3355FF.^000000";
 				set @lhz_secret01,1;
 			}
 			close;
 		}
-		mes "^3355FFThis is the place";
-		mes "where you found the";
-		mes "^000000Red Key^3355FF while you were";
-		mes "looking through the files";
-		mes "scattered on the ground.^000000";
+		mes "^3355FFC'est l'endroit où vous avez trouvé la ^000000Clé Rouge^3355FF alors que vous cherchiez parmi les dossiers éparpillés sur le sol.^000000";
 		close;
 	}
-	mes "^3355FFThis is the place";
-	mes "where you found the";
-	mes "^000000Red Key^3355FF while you were";
-	mes "looking through the files";
-	mes "scattered on the ground.^000000";
+	mes "^3355FFC'est l'endroit où vous avez trouvé la ^000000Clé Rouge^3355FF alors que vous cherchiez parmi les dossiers éparpillés sur le sol.^000000";
 	close;
 }
 
-lhz_cube,234,202,0	script	Picture#cube	111,{
+lhz_cube,234,202,0	script	Tableau#cube	111,{
 	if (@lhz_secret01 < 2) {
-		mes "^3355FFThis picture hanging";
-		mes "on the wall catches";
-		mes "your attention for some";
-		mes "inexplicably strange reason.^000000";
+		mes "^3355FFCe tableau accroché sur l'un des murs attire votre attention pour une raison étrange et inexplicable.^000000";
 		next;
-		if (select("Look behind picture.:Cancel") == 1) {
-			mes "^3355FFYou push and pull";
-			mes "with all your strength,";
-			mes "but the picture won't";
-			mes "budge. If it's too hard";
-			mes "to move, there must be";
-			mes "something hidden behind it.^000000";
+		if (select("Regarder derrière le tableau.:Ne pas y toucher.") == 1) {
+			mes "^3355FFVous poussez et tirez de toutes vos forces, mais le tableau ne bouge pas d'un centimètre. Il est trop difficile à bouger, vous êtes certain que quelque chose est caché derrière.^000000";
 		}
 		close;
 	}
 	else if (@lhz_secret01 == 2) {
-		mes "^3355FFThis picture hanging";
-		mes "on the wall catches";
-		mes "your attention for some";
-		mes "inexplicably strange reason.^000000";
+		mes "^3355FFCe tableau accroché sur l'un des murs attire votre attention pour une raison étrange et inexplicable.^000000";
 		next;
-		if (select("Look behind picture.:Cancel") == 1) {
-			mes "^3355FFYou push and pull";
-			mes "with all your strength,";
-			mes "but this picture is too";
-			mes "hard to move with just";
-			mes "brute strength alone.^000000";
+		if (select("Regarder derrière le tableau.:Ne pas y toucher.") == 1) {
+			mes "^3355FVous poussez et tirez de toutes vos forces, mais le tableau est trop difficile à bouger avec la seule force de vos bras.^000000";
 			next;
 			input .@input$;
-			if (.@input$ == "Jackknife") {
-				mes "^3355FFYou take the";
-				mes "Jackknife, thrust";
-				mes "it under the picture";
-				mes "and twist it in order to";
-				mes "pry the picture off the wall.^000000";
+			if (.@input$ == "Couteau Suisse") {
+				mes "^3355FFVous sortez le Couteau Suisse de votre poche, et vous glissez la lame sous le tableau, afin de le décoller légèrement du mur.^000000";
 				next;
-				mes "^3355FFBehind the picture, you";
-				mes "find that the following";
-				mes "numbers are written:^000000";
+				mes "^3355FFDerrière le tableau, vous trouvez une suite de chiffres gravés à même le mur:^000000";
 				mes " ";
 				set .@number_rand,rand(1,3);
 				if (.@number_rand == 1) {
@@ -816,21 +592,13 @@ lhz_cube,234,202,0	script	Picture#cube	111,{
 				}
 				close;
 			}
-			mes "^3355FFUnfortunately,";
-			mes "doing that apparently";
-			mes "wasn't enough to move";
-			mes "the picture. Perhaps you";
-			mes "should try something else.^000000";
+			mes "^3355FFMalheureusement, rien de ce que vous faîtes ne semble suffisant pour faire bouger le tableau. Peut-être devriez-vous essayer autre chose.^000000";
 			close;
 		}
 		close;
 	}
 	else if (@lhz_secret01 < 6) {
-		mes "^3355FFThe following numbers";
-		mes "were written behind the";
-		mes "picture. If they were hidden,";
-		mes "these numbers must have";
-		mes "some kind of importance.^000000";
+		mes "^3355FFCette suite de chiffres était cachée derrière le tableau, ils doivent donc avoir une certaine importance.^000000";
 		mes " ";
 		if (@lhz_secret01 == 3) {
 			mes "4 3 2 9 1 6 8 2 7";
@@ -843,141 +611,82 @@ lhz_cube,234,202,0	script	Picture#cube	111,{
 		}
 		close;
 	}
-	mes "^3355FFThere is a picture";
-	mes "hanging on the wall.^000000";
+	mes "^3355FFC'est un tableau accroché au mur.^000000";
 	next;
-	if (select("Look beneath picture.:Cancel") == 1) {
-		mes "^3355FFThere are some";
-		mes "numbers behind the";
-		mes "picture, but now there is";
-		mes "no need to memorize them.^000000";
+	if (select("Regarder derrière le tableau.:Ne rien faire.") == 1) {
+		mes "^3355FFUne suite de chiffres est gravée derrière le tableau, mais vous n'avez plus besoin de les mémoriser à présent.^000000";
 	}
 	close;
 }
 
-lhz_cube,242,201,0	script	Drawer#cube	111,{
+lhz_cube,242,201,0	script	Tiroir#cube	111,{
 	if (@lhz_secret01 < 1) {
-		mes "^3355FFThe drawer here";
-		mes "looks interesting,";
-		mes "but it's locked and";
-		mes "you can't open it.^000000";
+		mes "^3355FFCe tiroir semble fermé à clé... Vous ne pouvez pas l'ouvrir.^000000";
 		close;
 	}
 	else if (@lhz_secret01 == 1) {
-		mes "^3355FF The drawer here";
-		mes "looks interesting, but";
-		mes "it's locked. Hopefully, you";
-		mes "can figure how to open it.^000000";
+		mes "^3355FFCe tiroir semble fermé à clé... Heureusement, vous avez une idée pour l'ouvrir.^000000";
 		next;
 		input .@input$;
-		if (.@input$ == "Red Key") {
-			mes "^3355FFYou insert the Red Key";
-			mes "into the lock and open the";
-			mes "drawer. Inside, you find a";
-			mes "^000000Jackknife^3355FF that you decide";
-			mes "to take. After all, it might";
-			mes "be handy sometime.^000000";
+		if (.@input$ == "Clé Rouge") {
+			mes "^3355FFVous insérez la clé rouge dans la serrure et ouvrez le tiroir. A l'intérieur, vous trouvez un ^000000Couteau Suisse^3355FF que vous décidez de conserver. Après tout, cela pourra toujours vous être utile.^000000";
 			set @lhz_secret01,2;
 		}
 		else {
-			mes "^3355FFUnfortunately, you";
-			mes "can't open or break";
-			mes "the lock on the drawer";
-			mes "by doing that. You need";
-			mes "to try something else.^000000";
+			mes "^3355FFMalheureusement, le verrou semble vous résister. Peut-être devriez-vous essayer autre chose.^000000";
 		}
 		close;
 	}
-	mes "^3355FFThis is the drawer";
-	mes "in which you found the";
-	mes "^000000Jackknife^3355FF. It is now empty";
-	mes "and devoid of purpose.^000000";
+	mes "^3355FFC'est le tiroir dans lequel vous avez trouvé le ^000000Couteau Suisse^3355FF. Il est maintenant vide.^000000";
 	close;
 }
 
-lhz_cube,248,179,0	script	Chest#cube	111,{
+lhz_cube,248,179,0	script	Coffre#cube	111,{
 	if (lhz_sincube < 7) {
-		mes "^3355FFYou've found a chest";
-		mes "with an axe laid on";
-		mes "top. The axe's purpose";
-		mes "is completely utilitarian";
-		mes "and isn't suited for battle.^000000";
+		mes "^3355FFVous trouvez un coffre avec une hache posée dessus. Cette hache semble complètement hors d'usage, et ne pourrait en aucun cas servir pendant un combat.^000000";
 		close;
 	}
 	else if (lhz_sincube == 7) {
-		mes "^3355FFYou've found a chest,";
-		mes "but more importantly,";
-		mes "there is a utility Axe";
-		mes "laid on top of it.^000000";
+		mes "^3355FFVous trouvez un coffre avec une hache posée négligemment dessus.^000000";
 		next;
-		if (select("Take the utility Axe.:Cancel") == 1) {
-			mes "^3355FFWithout shame or";
-			mes "an ounce of guilt, you";
-			mes "pick up the utility ^000000Axe^3355FF";
-			mes "and claim it as your own.^000000";
+		if (select("Prendre la hache.:Ne rien toucher.") == 1) {
+			mes "^3355FFSans l'ombre d'une hésitation ou d'un remord, vous récupérez la ^000000Hache^3355FF et la rangez avec le reste de votre équipement.^000000";
 			set lhz_sincube,8;
 		}
 		close;
 	}
-	mes "^3355FFThis is just a normal";
-	mes "chest. There used to be";
-	mes "a utility ^000000Axe^3355FF on top of";
-	mes "it until you picked it up.^000000";
+	mes "^3355FFC'est un coffre tout ce qu'il y a de plus banal. Une ^000000Hache^3355FF était posée dessus, jusqu'à ce que vous la preniez.^000000";
 	close;
 }
 
-lhz_cube,237,183,0	script	Barrel#cube	111,{
+lhz_cube,237,183,0	script	Tonneau#cube	111,{
 	set number_line,0;
 	if (lhz_sincube < 8) {
-		mes "^3355FFYou have";
-		mes "found a shabbily";
-		mes "constructed barrel.^000000";
+		mes "^3355FFCe tonneau semble abîmé, ou alors il a été construit n'importe comment...^000000";
 		close;
 	}
 	else if (lhz_sincube == 8) {
-		mes "^3355FFYou have";
-		mes "found a shabbily";
-		mes "constructed barrel.";
-		mes "You sense that there's";
-		mes "something inside, but";
-		mes "you need something to";
-		mes "smash the barrel open.^000000";
+		mes "^3355FFCe tonneau semble abîmé, ou alors il a été construit étrangement... Vous sentez qu'il y a quelque chose à l'intérieur, mais il vous faudrait un objet conséquent pour le percer.^000000";
 		next;
 		input .@input$;
-		if (.@input$ == "Axe") {
-			mes "^3355FFAxe in hand, you lift";
-			mes "it above your head and";
-			mes "swing it downwards,";
-			mes "smashing off the top of";
-			mes "the barrel. Inside, you find a";
-			mes "box topped with a metal plate.^000000";
+		if (.@input$ == "Hache") {
+			mes "^3355FFLa Hache à la main, vous la soulevez au dessus de votre tête et la laissez retombée avec fracas sur le haut du tonneau, qui s'ébrèche rapidement. A l'intérieur, vous trouvez une boîte avec un couvercle en métal.^000000";
 			next;
-			mes "^3355FFThe numbers one";
-			mes "through nine are";
-			mes "etched on the surface";
-			mes "of the metal plate on";
-			mes "top of the box you found,";
-			mes "like some kind of keypad...^000000";
+			mes "^3355FFLe couvercle en métal présente une molette où sont gravés des chiffres, un peu comme un cadenas à code...^000000";
 			set lhz_sincube,9;
 		}
 		else {
-			mes "^3355FFDoing that probably won't";
-			mes "break open this keg. You'll";
-			mes "need to try something else.^000000";
+			mes "^3355FFRien de ce que vous faîtes ne semble suffire à ébrécher le tonneau. Vous devriez peut-être essayer autre chose.^000000";
 		}
 		close;
 	}
 	else if (lhz_sincube == 9) {
 		if (@lhz_secret01 < 3) {
-			mes "^3355FFYou decide to enter";
-			mes "some numbers into the";
-			mes "metallic keypad. Remember,";
-			mes "you can only enter single";
-			mes "digit numbers at one time...^000000";
+			mes "^3355FFVous décidez d'entrer une combinaison de chiffres sur le cadenas en métal. On dirait que vous ne pouvez entrer qu'un seul chiffre à la fois...^000000";
 			next;
 			for( set $@i, 0; .@i < 9; set .@i, .@i + 1 )
 				input .@input;
-			mes "^3355FFNothing happened...^000000";
+			mes "^3355FFRien ne se produit...^000000";
 			close;
 		}
 		else if (@lhz_secret01 >= 3 && @lhz_secret01 <= 5) {
@@ -986,610 +695,329 @@ lhz_cube,237,183,0	script	Barrel#cube	111,{
 			case 4: setarray .@numbers[0],3,6,4,1,2,8,7,1,5; break;
 			case 5: setarray .@numbers[0],4,9,3,7,6,2,8,6,6; break;
 			}
-			mes "^3355FFYou decide to enter";
-			mes "some numbers into the";
-			mes "numberpad etched on the";
-			mes "metal plate on top of the box";
-			mes "you found inside the keg.^000000";
+			mes "^3355FFVous décidez d'entrer une combinaison de chiffres sur le cadenas en métal. On dirait que vous ne pouvez entrer qu'un seul chiffre à la fois...^000000";
 			next;
 			for( set $@i, 0; .@i < 9; set .@i, .@i + 1 ) {
 				input .@input;
 				if (.@input == .@numbers[.@i]) set .@number_line,.@number_line+1;
 			}
 			if (.@number_line == 9) {
-				mes "^3355FFThe metal plate slides";
-				mes "open and you find a key";
-				mes "Key inside the box. You";
-				mes "to keep this ^000000Yellow Key^3355FF.^000000";
+				mes "^3355FFLe couvercle de métal coulisse enfin, et vous trouvez une Clé Jaune à l'intérieur de la boîte. Vous décidez de conserver cette ^000000Clé Jaune^3355FF.^000000";
 				set @lhz_secret01,6;
 			}
 			else {
-				mes "^3355FFNothing happened.";
-				mes "It's likely that you did not";
-				mes "enter the correct numbers.^000000";
+				mes "^3355FFRien ne se produit. On dirait que vous n'avez pas entré les bons chiffres.^000000";
 			}
 			close;
 		}
-		mes "^3355FFThis is the box with";
-		mes "the keypad in which you";
-		mes "found the ^000000Yellow Key^3355FF.";
-		mes "The box is now empty.^000000";
+		mes "^3355FFC'est la boîte que vous avez trouvée dans le tonneau, et qui contenait la ^000000Clé Jaune^3355FF.";
+		mes "Tout est vide à présent.^000000";
 		close;
 	}
-	mes "^3355FFThis is a box";
-	mes "topped with a metal";
-	mes "plate that looks like";
-	mes "a crudely made keypad.^000000";
+	mes "^3355FFC'est la boîte que vous avez trouvée dans le tonneau. Tout est vide à présent.^000000";
 	close;
 }
 
-lhz_cube,224,192,0	script	Power Generator#cube	111,{
+lhz_cube,224,192,0	script	Générateur#cube	111,{
 	if (@lhz_secret01 < 6) {
-		mes "^3355FFThis is a noisily";
-		mes "operating huge machine";
-		mes "with a front panel that has";
-		mes "a strange mark. There is a";
-		mes "keyhole on the machine";
-		mes "right next to this panel.^000000";
+		mes "^3355FFCette énorme et bruyante machine présente un panneau de contrôle. Une serrure est présente à même le panneau de contrôle.^000000";
 		next;
 		input .@input$;
-		mes "^3355FFNothing happened.";
-		mes "You probably need";
-		mes "to find the right key to";
-		mes "insert into the keyhole.^000000";
+		mes "^3355FFRien ne se produit.";
+		mes "Vous devez probablement trouver quelque chose à insérer dans la serrure.^000000";
 		close;
 	}
 	else if (@lhz_secret01 == 6) {
-		mes "^3355FFThis is a noisily";
-		mes "operating huge machine";
-		mes "with a front panel that has";
-		mes "a strange mark. There is a";
-		mes "keyhole on the machine";
-		mes "right next to this panel.^000000";
+		mes "^3355FFCette énorme et bruyante machine présente un panneau de contrôle. Une serrure est présente à même le panneau de contrôle.^000000";
 		next;
 		input .@input$;
-		if (.@input$ == "Yellow Key") {
-			mes "^3355FFYou insert the";
-			mes "Yellow Key into the";
-			mes "keyhole and turn it,";
-			mes "causing the machine";
-			mes "to sputter and deactivate.^000000";
+		if (.@input$ == "Clé Jaune") {
+			mes "^3355FFVous insérez la clé jaune dans la serrure du panneau de contrôle, ce qui a pour effet de couper instantanément le courant.^000000";
 			next;
-			mes "^3355FFYou notice that the";
-			mes "^000000Status Light ^3355FFnext to the";
-			mes "bed has now turned off.^000000";
+			mes "^3355FFVous remarquez que la ^000000Lampe^3355FF au dessus du lit est maintenant éteinte.^000000";
 			set @lhz_secret01,7;
 		}
 		else {
-			mes "^3355FFNothing happened.";
-			mes "You probably need";
-			mes "to find the right key to";
-			mes "insert into the keyhole.^000000";
+			mes "^3355FFRien ne se produit.";
+			mes "Vous devez probablement trouver quelque chose à insérer dans la serrure.^000000";
 		}
 		close;
 	}
-	mes "^3355FFIt's a giant machine.^000000";
+	mes "^3355FFC'est une énorme machine.^000000";
 	close;
 }
 
-lhz_cube,244,201,0	script	Status Light#cube	111,{
+lhz_cube,244,201,0	script	Lampe#cube	111,{
 	if (@lhz_secret01 < 7) {
-		mes "^3355FFThe Status Light is";
-		mes "on. It looks like there's";
-		mes "something inside the";
-		mes "bulb, but you can't get";
-		mes "near it since it generates";
-		mes "incredibly scorching heat.^000000";
+		mes "^3355FFLa lumière de cette lampe est allumée. On dirait qu'il y a quelque chose à l'intérieur de l'ampoule, mais vous ne pouvez pas y toucher, c'est beaucoup trop chaud!^000000";
 		next;
-		mes "^3355FFNow, if you could";
-		mes "somehow shut down the";
-		mes "Power Generator in this";
-		mes "room, the bulb would be";
-		mes "cool enough for you to touch...^000000";
+		mes "^3355FFSi vous pouviez éteindre les lumières de la pièce, l'ampoule pourrait suffisamment refroidir pour que vous puissiez la toucher...^000000";
 		close;
 	}
 	else if (@lhz_secret01 == 7) {
-		mes "The Status Light";
-		mes "is now off and the";
-		mes "bulb has cooled down.";
+		mes "Les lumières sont maintenant éteintes, l'ampoule a eu le temps de refroidir.";
 		next;
-		if (select("Smash the light bulb.:Cancel") == 1) {
-			mes "^3355FFYou smash the";
-			mes "Status Light's bulb";
-			mes "and discover another key.";
-			mes "You obtained a ^000000Black Key^3355FF.^000000";
+		if (select("Casser l'ampoule de la lampe.:Ne pas y toucher.") == 1) {
+			mes "^3355FFVous fracassez l'ampoule de la lampe, manquant de vous blesser avec les éclats. Vous y découvrez une ^000000Clé Noire^3355FF.^000000";
 			set @lhz_secret01,8;
 		}
 		close;
 	}
-	mes "^3355FFYou find the remains";
-	mes "of a broken light bulb.^000000";
+	mes "^3355FFVous avez cassé l'ampoule de cette lampe.^000000";
 	close;
 }
 
-lhz_cube,234,200,0	script	Desk#cube	111,{
+lhz_cube,234,200,0	script	Bureau#cube	111,{
 	if (@lhz_secret02 <= 1) {
-		mes "^3355FFYou've found";
-		mes "a completely";
-		mes "cluttered desk.^000000";
+		mes "^3355FFCe bureau est très encombré!^000000";
 		next;
-		switch(select("On the desk:Under the desk:Desk drawer")) {
+		switch(select("Regarder sur le bureau.:Regarder sous le bureau.:Regarder le tiroir du bureau.")) {
 		case 1:
-			mes "^3355FFVarious documents,";
-			mes "books and lab equipment";
-			mes "are scattered on the desk.";
-			mes "But none of them seem";
-			mes "all that useful right now.^000000";
+			mes "^3355FFDifférents documents, livres, et matériel de laboratoire sont dispersés sur le bureau. Rien de tout cela ne semble utile pour le moment.^000000";
 			close;
 		case 2:
 			if (@lhz_secret02 < 1) {
-				mes "^3355FFUnder this desk, of";
-				mes "all conceivable places,";
-				mes "you find a ^000000Short Stick^3355FF";
-				mes "that you decide to keep.";
-				mes "You never know when";
-				mes "you'll need one of those.^000000";
+				mes "^3355FFVous trouvez, à moitié coincé sous le bureau, un ^000000Petit Bâton^3355FF de bois, que vous décidez de conserver pour le moment.^000000";
 				set @lhz_secret02,1;
 			}
 			else {
-				mes "^3355FFThis is where you";
-				mes "found your ^000000Short Stick^3355FF.";
-				mes "Sadly, there are no more";
-				mes "hidden treasures for you to";
-				mes "discover beneath this desk.^000000";
+				mes "^3355FFC'est ici que vous avez trouvé le ^000000Petit Bâton^3355FF de bois.";
+				mes "Hélas, il n'y a pas d'autre trésors cachés sous ce bureau.^000000";
 			}
 			close;
 		case 3:
-			mes "^3355FFThe desk drawer is";
-			mes "locked and probably";
-			mes "with good reason. After all,";
-			mes "you just tried to invade this";
-			mes "private and intimate space.^000000";
+			mes "^3355FFLe tiroir du bureau est fermé à clé, il y a sûrement une bonne raison à cela. Après tout, vous n'avez pas vraiment envie d'en savoir plus sur l'intimité du possesseur de ce bureau.^000000";
 			close;
 		}
 	}
 	else if (@lhz_secret02 == 2) {
-		mes "^3355FFYou're back at the";
-		mes "messy desk which";
-		mes "is probably used by";
-		mes "a high ranking executive";
-		mes "who has someone else";
-		mes "do his desk tidying for him.^000000";
+		mes "^3355FFVous êtes de retour devant ce poussiéreux bureau en bazar, dont le propriétaire est certainement quelqu'un de trop occupé pour voir l'état catastrophique de son lieu de travail.^000000";
 		next;
-		switch(select("On the desk:Under the desk:Desk drawer")) {
+		switch(select("Regarder sur le bureau.:Regarder sous le bureau.:Regarder le tiroir du bureau.")) {
 		case 1:
-			mes "^3355FFAlas, no matter how much";
-			mes "you rummage through it,";
-			mes "the clutter on the desk";
-			mes "proves to be useless to you.^000000";
+			mes "^3355FFHélas, peu importe le nombre de papiers que vous soulevez, on dirait que le bazar amoncelé sur le bureau est sans fin et sans intérêt pour vous.^000000";
 			next;
 			if (Sex) {
-				mes "^3355FFAn issue of the";
-				mes "Dancer magazine,";
-				mes "''Harmonic Lick'' catches";
-				mes "your eye, but you really";
-				mes "shouldn't be interested";
-				mes "in that publication just";
-				mes "because of the pictures.^000000";
+				mes "^3355FFUn vieux numéro du Harmonic Lick Magazine attire votre attention. La photo de la belle Danseuse en couverture n'a rien de déplaisant... Mais les aventuriers n'ont pas le temps pour ce genre de choses!^000000";
 			}
 			else {
-				mes "^3355FFAn issue of the female";
-				mes "entertainment magazine,";
-				mes "''Magnum Break'' catches";
-				mes "your eye, but adventurers";
-				mes "have no time to look at";
-				mes "pictures of beautiful men.^000000";
+				mes "^3355FFUn vieux numéro de Magnum Break Magazine attire votre attention. La photo du beau Forgeron en couverture ne vous laisse pas indifférente... Mais les aventurières n'ont pas le temps pour ce genre de choses!^000000";
 			}
 			close;
 		case 2:
-			mes "^3355FFUnder the desk, you";
-			mes "discover another Short";
-			mes "Stick which happens to";
-			mes "fit perfectly into the other";
-			mes "Short Stick you found earlier.";
+			mes "^3355FFSous le bureau, vous trouvez un autre Petit Bâton tout à fait similaire à celui que vous avez trouvé tout à l'heure. De plus, il présente à son extrémité une fente qui semble lui permettre de s'emboîter dans l'autre...";
 			next;
-			mes "^3355FFYou combine the two";
-			mes "lesser sticks to create";
-			mes "a stick that is superior";
-			mes "to the sum of its parts.";
-			mes "You are now the proud";
-			mes "bearer of a ^000000Long Stick^3355FF.^000000";
+			mes "^3355FFVous combinez les deux petits bâtons via leurs extrémités. Vous êtes maintenant l'heureux possesseur d'un ^000000Grand Bâton^3355FF.^000000";
 			set @lhz_secret02,3;
 			close;
 		case 3:
-			mes "^3355FFThis desk drawer is";
-			mes "locked shut and probably";
-			mes "always will be. It's likely";
-			mes "that nothing really valuable";
-			mes "is inside, aside from perhaps";
-			mes "a hip flask or a candy stash.";
+			mes "^3355FFLe tiroir du bureau est toujours fermé. Vous vous demandez s'il contient une petite flasque de liqueur, ou bien peut-être des bonbons.";
 			close;
 		}
 	}
-	mes "^3355FFThis desk is cluttered";
-	mes "with all sorts of random";
-	mes "objects, but such is its";
-	mes "destiny as office equipment.^000000";
+	mes "^3355FFCe bureau est encombré d'objets en tous genres, mais n'est-ce pas là le destin normal d'un tel meuble de travail?^000000";
 	next;
-	switch(select("On the desk:Under the desk:Desk drawer")) {
+	switch(select("Regarder sur le bureau.:Regarder sous le bureau.:Regarder le tiroir du bureau.")) {
 	case 1:
-		mes "^3355FFAlas, no matter how much";
-		mes "you rummage through it,";
-		mes "the clutter on the desk";
-		mes "proves to be useless to you.^000000";
+		mes "^3355FFHélas, peu importe le nombre de papiers que vous soulevez, on dirait que le bazar amoncelé sur le bureau est sans fin et sans intérêt pour vous.^000000";
 		next;
-		mes "^3355FFThere's part of a newspaper";
-		mes "here, but it's only the Comics";
-		mes "section which, of course, isn't";
-		mes "informative enough for world";
-		mes "savvy adventurers like you.^000000";
+		mes "^3355FFIl y a de vieux journaux par-ci par-là, mais aucun d'eux ne semblent contenir de page de bande dessinée ni d'horoscope. Ce sont donc de simples journaux ennuyeux~^000000";
 		close;
 	case 2:
-		mes "^3355FFThis is where you found";
-		mes "one of two Short Sticks";
-		mes "to make your ^000000Long Stick^3355FF.";
-		mes "There isn't anything else";
-		mes "under here, so it's impossible";
-		mes "to make your stick any longer.^000000";
+		mes "^3355FFC'est ici que vous avez trouvé l'un de vos deux Petit Bâtons afin de fabriquer le ^000000Grand Bâton^3355FF.";
+		mes "Il n'y a rien d'autre là dessous.^000000";
 		close;
 	case 3:
-		mes "^3355FFThis desk drawer is";
-		mes "locked very securely.";
-		mes "The owner of this desk";
-		mes "was wise to provide a";
-		mes "measure of drawer security.";
-		mes "But why put sticks under the";
-		mes "desk? This is most curious...^000000";
+		mes "^3355FFLe tiroir est toujours fermé, son propriétaire avait pris ses précautions. Mais alors pourquoi avoir mis un petit bâton sous le bureau? C'est assez curieux...^000000";
 		close;
 	}
 }
 
-lhz_cube,247,198,0	script	Bed#cube	111,{
+lhz_cube,247,198,0	script	Lit#cube	111,{
 	if (@lhz_secret02 == 0) {
-		mes "^3355FFYou've found a bed";
-		mes "in which the sheets";
-		mes "are slovenly arranged.^000000";
+		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
-		if (select("On the bed:Under the bed") == 1) {
-			mes "^3355FFNo one's in the bed";
-			mes "and if you climbed in,";
-			mes "you'd just be alone. For";
-			mes "some people, this may";
-			mes "be an immutable truth.^000000";
+		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
+			mes "^3355FFIl n'y a personne sur le lit, et si vous montez dessus vous serez seul. Pour certains, c'est une vérité immuable..^000000";
 		}
 		else {
-			mes "^3355FFUnder the bed, you";
-			mes "discover a ^000000Short Stick^3355FF";
-			mes "which you decide to";
-			mes "keep. You never know";
-			mes "when certain, seemingly";
-			mes "useless objects will save you.^000000";
+			mes "^3355FFA moitié coincé sous le lit, vous découvrez un ^000000Petit Bâton^3355FF  de bois, que vous décidez de conserver pour le moment. Certains objets peuvent paraître sans intérêt au premier abord, mais se révèleront utiles un jour ou l'autre.^000000";
 			set @lhz_secret02,2;
 		}
 		close;
 	}
 	else if (@lhz_secret02 == 1) {
-		mes "^3355FFYou've found a bed";
-		mes "in which the sheets";
-		mes "are slovenly arranged.^000000";
+		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
-		if (select("On the bed:Under the bed") == 1) {
-			mes "^3355FFNo one's in the bed";
-			mes "and if you climbed in,";
-			mes "you'd just be alone. For";
-			mes "some people, this may";
-			mes "be an immutable truth.^000000";
+		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
+			mes "^3355FFIl n'y a personne sur le lit, et si vous montez dessus vous serez seul. Pour certains, c'est une vérité immuable.^000000";
 		}
 		else {
-			mes "^3355FFUnder the bed, you";
-			mes "discover another Short";
-			mes "Stick which happens to";
-			mes "fit perfectly into the other";
-			mes "Short Stick you found earlier.";
+			mes "^3355FFSous le bureau, vous trouvez un autre Petit Bâton tout à fait similaire à celui que vous avez trouvé tout à l'heure. De plus, il présente à son extrémité une fente qui semble lui permettre de s'emboîter dans l'autre...";
 			next;
-			mes "^3355FFYou combine the two";
-			mes "lesser sticks to create";
-			mes "a stick that is superior";
-			mes "to the sum of its parts.";
-			mes "You are now the proud";
-			mes "bearer of a ^000000Long Stick^3355FF.^000000";
+			mes "^3355FFVous combinez les deux petits bâtons via leurs extrémités. Vous êtes maintenant l'heureux possesseur d'un ^000000Grand Bâton^3355FF.^000000";
 			set @lhz_secret02,3;
 		}
 		close;
 	}
 	else if (@lhz_secret02 == 2) {
-		mes "^3355FFYou've found a bed";
-		mes "in which the sheets";
-		mes "are slovenly arranged.^000000";
+		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
-		if (select("On the bed:Under the bed") == 1) {
-			mes "^3355FFNo one's in the bed";
-			mes "and if you climbed in,";
-			mes "you'd just be alone. For";
-			mes "some people, this may";
-			mes "be an immutable truth.^000000";
+		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
+			mes "^3355FFIl n'y a personne sur le lit, et si vous montez dessus vous serez seul. Pour certains, c'est une vérité immuable.^000000";
 		}
 		else {
-			mes "^3355FFIn a distant and";
-			mes "dusty corner beneath";
-			mes "the bed, you manage to";
-			mes "spot an object. If only you";
-			mes "could reach it somehow...^000000";
+			mes "^3355FFDans un lointain coin poussiéreux sous le lit, vous croyez apercevoir un objet. Si seulement vous pouviez l'atteindre...^000000";
 			next;
 			input .@input$;
-			if (.@input$ == "Short Stick") {
-				mes "^3355FFYou try to reach";
-				mes "the object by using";
-				mes "your Short Stick. After";
-				mes "a few attempts, you had no";
-				mes "choice but to admit that your";
-				mes "stick just wasn't long enough.^000000";
+			if (.@input$ == "Petit Bâton") {
+				mes "^3355FFVous essayez d'atteindre le coin opposé à tâtons, en vous aidant du petit bâton. Après plusieurs minutes, votre dos vous tire et vous devez admettre que votre bâton n'est pas assez long pour pouvoir atteindre cet endroit.^000000";
 			}
 			else {
-				mes "^3355FFUnfortunately,";
-				mes "whatever you used to";
-				mes "try to reach the object";
-				mes "didn't work. You'll have";
-				mes "to think of something else.^000000";
+				mes "^3355FFMalheureusement tout ce que vous récoltez ce sont des courbatures. Vous devriez peut-être essayer autre chose.^000000";
 			}
 		}
 		close;
 	}
 	else if (@lhz_secret02 == 3) {
-		mes "^3355FFYou find a messy";
-		mes "bed that may be more";
-		mes "than meets the eye.^000000";
+		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
-		if (select("On the bed:Under the bed") == 1) {
-			mes "^3355FFNo one's in the bed";
-			mes "and if you climbed in,";
-			mes "you'd just be alone. For";
-			mes "some people, this may";
-			mes "be an immutable truth.^000000";
+		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
+			mes "^3355FFIl n'y a personne sur le lit, et si vous montez dessus vous serez seul. Pour certains, c'est une vérité immuable.^000000";
 		}
 		else {
-			mes "^3355FFIn a distant and";
-			mes "dusty corner beneath";
-			mes "the bed, you manage to";
-			mes "spot an object. If only you";
-			mes "could reach it somehow...^000000";
+			mes "^3355FFDans un lointain coin poussiéreux sous le lit, vous croyez apercevoir un objet. Si seulement vous pouviez l'atteindre...^000000";
 			next;
 			input .@input$;
-			if (.@input$ == "Long Stick") {
-				mes "^3355FFWith Long Stick in";
-				mes "hand, you manage to";
-				mes "reach the object and drag";
-				mes "it under the bed towards you.";
-				mes "You now possess the ^000000Cube^3355FF";
-				mes "that was under the bed.^000000";
+			if (.@input$ == "Grand Bâton") {
+				mes "^3355FFLe grand bâton à la main, vous vous retrouvez le nez au sol et les membres tendus pour atteindre le coin poussiéreux où vous aviez repéré un objet. Tout d'un coup vous sentez que vous touchez quelque chose, et le ramenez à vous.";
+				mes "Vous êtes maintenant l'heureux possesseur d'un étrange ^000000Cube^3355FF.^000000";
 				set @lhz_secret02,4;
 			}
 			else {
-				mes "^3355FFUnfortunately,";
-				mes "whatever you used to";
-				mes "try to reach the object";
-				mes "didn't work. You'll have";
-				mes "to think of something else.^000000";
+				mes "^3355FFMalheureusement tout ce que vous récoltez ce sont des courbatures. Vous devriez peut-être essayer autre chose.^000000";
 			}
 		}
 		close;
 	}
-	mes "^3355FFYou've found a bed";
-	mes "in which the sheets";
-	mes "are slovenly arranged.^000000";
+	mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 	next;
-	if (select("On the bed:Under the bed") == 1) {
-		mes "^3355FFNo one's in the bed";
-		mes "and if you climbed in,";
-		mes "you'd just be alone. For";
-		mes "some people, this may";
-		mes "be an immutable truth.^000000";
+	if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
+		mes "^3355FFIl n'y a personne sur le lit, et si vous montez dessus vous serez seul. Pour certains, c'est une vérité immuable.^000000";
 		close;
 	}
-	mes "^3355FFThis is where you";
-	mes "managed to find some";
-	mes "sort of strange ^000000Cube^3355FF.^000000";
+	mes "^3355FFC'est ici que vous avez trouvé un étrange ^000000Cube^3355FF.^000000";
 	close;
 }
 
-lhz_cube,229,184,0	script	Goblet#cube	111,{
+lhz_cube,229,184,0	script	Gobelet#cube	111,{
 	if (lhz_sincube < 10) {
 		if (@lhz_secret03 == 0) {
-			mes "^3355FFYou see an empty";
-			mes "bottle and a goblet.";
-			mes "It looks like you";
-			mes "missed the party.^000000";
+			mes "^3355FFVous voyez une bouteille à moitié vide ainsi qu'un gobelet posé à côté. On dirait que vous avez raté la fête.^000000";
 			next;
-			if (select("Examine the goblet.:Cancel") == 1) {
-				mes "^3355FFInside the goblet,";
-				mes "you find a ^000000Rusty Key^3355FF";
-				mes "which you decide to keep.";
-				mes "However, you'll need to get";
-				mes "rid of that rust somehow.";
-				mes "Perhaps you can dip the key";
-				mes "in some corrosive chemical?^000000";
+			if (select("Examiner le gobelet.:Ne pas y toucher.") == 1) {
+				mes "^3355FFA l'intérieur du gobelet, vous trouvez une ^000000Clé Rouillée^3355FF que vous décidez de conserver. Cependant elle ne vous sera pas très utile dans ce état, il vous faut trouver un moyen d'enlever toute cette rouille... Peut-être avec un produit chimique particulier?^000000";
 				set @lhz_secret03,1;
 			}
 			close;
 		}
-		mes "^3355FFThis is the goblet where";
-		mes "you found that ^000000Rusty Key^3355FF.^000000";
+		mes "^3355FFC'est le gobelet où vous avez trouvé la ^000000Clé Rouillée^3355FF.^000000";
 		close;
 	}
-	mes "^3355FFThis is goblet cup where";
-	mes "you found that ^000000Rusty Key^3355FF.^000000";
+	mes "^3355FFC'est le gobelet où vous avez trouvé la ^000000Clé Rouillée^3355FF.^000000";
 	close;
 }
 
-lhz_cube,231,202,0	script	Chemicals#cube	111,{
+lhz_cube,231,202,0	script	Produits Chimiques#cube	111,{
 	if (@lhz_secret03 < 1) {
-		mes "^3355FFThere is a bottle";
-		mes "containing slightly";
-		mes "corrosive chemicals";
-		mes "that is sitting on the ledge.^000000";
+		mes "^3355FFCette bouteille semble contenir un produit chimique fumant, certainement très corrosif.^000000";
 		next;
 		input .@input$;
-		mes "^3355FFWhatever you tried to";
-		mes "pour the chemicals on";
-		mes "wasn't affected at all.";
-		mes "You should try pouring the";
-		mes "chemicals on something else.^000000";
+		mes "^3355FFA quoi cela pourrait-il bien vous servir?^000000";
 		close;
 	}
 	else if (@lhz_secret03 == 1) {
-		mes "^3355FFThere is a bottle";
-		mes "containing slightly";
-		mes "corrosive chemicals";
-		mes "that is sitting on the ledge.^000000";
+		mes "^3355FFCette bouteille semble contenir un produit chimique fumant, certainement très corrosif.^000000";
 		next;
 		input .@input$;
-		if (.@input$ == "Rusty Key") {
-			mes "^3355FFPouring the chemicals";
-			mes "on the Rusty Key removes";
-			mes "the rust, making it usable";
-			mes "again. Now that it is clean,";
-			mes "the Rusty Key has become";
-			mes "a sparkling ^000000Green Key^3355FF.^000000";
+		if (.@input$ == "Clé Rouillée") {
+			mes "^3355FFVous versez prudemment un peu de ce produit chimique sur la clé rouillée. En un instant, le produit attaque la rouille qui se met à faire des bulles et couler, laissant une grosse tâche orange à l'endroit où vous aviez posé la clé. Vous découvrez que votre clé rouillée était à la base une étincelante ^000000Clé Verte^3355FF.^000000";
 			set @lhz_secret03,2;
 		}
 		else {
-			mes "^3355FFWhatever you tried to";
-			mes "pour the chemicals on";
-			mes "wasn't affected at all.";
-			mes "You should try pouring the";
-			mes "chemicals on something else.^000000";
+			mes "^3355FFIl vaudrait mieux utiliser ce produit avec précautions, et le verser uniquement sur un objet particulier.^000000";
 		}
 		close;
 	}
-	mes "^3355FFThese are the chemicals";
-	mes "that you used to clean the";
-	mes "Rusty Key so that it was";
-	mes "restored to its original glory,";
-	mes "becoming the ^000000Green Key^3355FF.^000000";
+	mes "^3355FFVous avez l'un de ces produits chimiques pour nettoyer votre clé rouillée, qui a maintenant retrouvé sa magnifique couleur d'origine en une ^000000Clé Verte^3355FF.^000000";
 	close;
 }
 
-lhz_cube,249,191,0	script	Cabinet#cube	111,{
+lhz_cube,249,191,0	script	Armoire#cube	111,{
 	if (@lhz_secret03 < 2) {
-		mes "^3355FFYou've found a";
-		mes "cabinet that contains";
-		mes "many drawers. Perhaps";
-		mes "something useful is inside?";
+		mes "^3355FFCette armoire contient de nombreux tiroirs. Peut-être trouverez-vous quelque chose d'utile à l'intérieur?";
 		next;
-		if (select("Open:Cancel") == 1) {
+		if (select("Ouvrir l'armoire.:Ne pas y toucher.") == 1) {
 			input .@input$;
-			mes "^3355FFUnfortunately, the";
-			mes "cabinet has been locked.";
-			mes "You'll need the right key";
-			mes "in order to open the drawers.^000000";
+			mes "^3355FFMalheureusement l'armoire semble fermée. Vous aurez besoin de la bonne clé pour ouvrir les tiroirs.^000000";
 		}
 		close;
 	}
 	else if (@lhz_secret03 == 2) {
-		mes "^3355FFYou've found a";
-		mes "cabinet that contains";
-		mes "many drawers. Perhaps";
-		mes "something useful is inside?";
+		mes "^3355FFCette armoire contient de nombreux tiroirs. Peut-être trouverez-vous quelque chose d'utile à l'intérieur?";
 		next;
 		input .@input$;
-		if (.@input$ == "Green Key") {
-			mes "^3355FFYou take the Green Key";
-			mes "and finds that it fits into";
-			mes "one of the drawer keyholes.";
-			mes "You open the drawer and";
-			mes "obtain a strange ^000000Polygon^3355FF.^000000";
+		if (.@input$ == "Clé Verte") {
+			mes "^3355FFVotre clé verte s'adapte parfaitement aux serrures des tiroirs. Dans l'un d'eux, vous trouvez un étrange ^000000Polygone^3355FF.^000000";
 			set @lhz_secret03,3;
 		}
 		else {
-			mes "^3355FFWhatever you tried";
-			mes "did not succeed in";
-			mes "opening this cabinet.";
-			mes "Think. Think of how";
-			mes "locks are unlocked...";
-			mes "Then you'll find the";
-			mes "answer you seek.^000000";
+			mes "^3355FFRien à faire, vous n'arrivez pas à ouvrir l'armoire. Réfléchissez à une manière d'ouvrir ce qui est fermé... Vous trouverez la réponse que vous cherchez.^000000";
 		}
 		close;
 	}
-	mes "^3355FFThis is the locker";
-	mes "where you used the";
-	mes "Green Key to open one";
-	mes "of the Drawers and obtained";
-	mes "a ^000000Polygon^3355FF. You're pretty happy";
-	mes "with your Polygon and don't";
-	mes "need to open the other drawers.^000000";
+	mes "^3355FFC'est ici que vous avez ouvert un tiroir de l'armoire avec votre clé verte, et obtenu cet étrange ^000000Polygone^3355FF.^000000";
 	close;
 }
 
-lhz_cube,224,197,0	script	Experiment Tube#cube	111,{
+lhz_cube,224,197,0	script	Tubes#cube	111,{
 	if (@lhz_secret01 < 8) {
-		mes "^3355FFYou find a strange";
-		mes "tube that seems to";
-		mes "contain something.";
-		mes "Underneath the tube is";
-		mes "a thin plate with a keyhole";
-		mes "and a card insertion slot.^000000";
+		mes "^3355FFL'un de ces tubes d'expérimentations semblent contenir quelque chose. A côté des tubes se trouve une fine plaque en métal présentant une serrure et une fente pouvant accueillir une carte.^000000";
 		next;
 		input .@input$;
-		mes "^3355FFNothing happened.";
-		mes "You'll probably need";
-		mes "to find the right key for";
-		mes "the keyhole and the correct";
-		mes "card to insert into the slot.^000000";
+		mes "^3355FFRien ne se produit.";
+		mes "Vous devez probablement trouver une clé pour la serrure, et une carte magnétique pour la fente prévue à cet effet.^000000";
 		close;
 	}
 	else if (@lhz_secret01 == 8) {
-		mes "^3355FFYou find a strange";
-		mes "tube that seems to";
-		mes "contain something.";
-		mes "Underneath the tube is";
-		mes "a thin plate with a keyhole";
-		mes "and a card insertion slot.^000000";
+		mes "^3355FFL'un de ces tubes d'expérimentations semblent contenir quelque chose. Sous les tubes se trouve une fine plaque en métal présentant une serrure et une fente pouvant accueillir une carte magnétique.^000000";
 		next;
 		input .@input$;
-		if (.@input$ == "Black Key") {
-			mes "^3355FFYou insert the Black Key";
-			mes "into the keyhole, causing";
-			mes "the experiment tube to open";
-			mes "and reveal an ^000000Oval^3355FF which you";
-			mes "you choose to take with you.^000000";
+		if (.@input$ == "Clé Noire") {
+			mes "^3355FFVous insérez la clé noire dans la serrure. L'un des tubes se brise, révélant un étrange objet de forme ^000000Ovale^3355FF que vous décidez de conserver.^000000";
 			set @lhz_secret01,9;
 		}
 		else {
-			mes "^3355FFNothing happened...^000000";
+			mes "^3355FFRien ne se produit...^000000";
 		}
 		close;
 	}
 	else if (@lhz_secret01 == 9) {
-		mes "^3355FFThis is where you";
-		mes "obtained the ^000000Oval^3355FF.";
-		mes "As you look around";
-		mes "the tube's location,";
-		mes "you notice an artificial";
-		mes "ground fissure which";
-		mes "can probably open up...^000000";
+		mes "^3355FFC'est ici que vous avez obtenu l'objet de forme ^000000Ovale^3355FF.";
+		mes "A côté des tubes, vous remarquez une fissure artificielle sans le sol, qui peut probablement être ouverte...^000000";
 		close;
 	}
 	else {
 		if (lhz_sincube == 10) {
-			mes "^3355FFThere is a narrow,";
-			mes "rectangular card slot";
-			mes "in front of the tube.^000000";
+			mes "^3355FFLa plaque en métal située près des tubes d'expérimentation présente une fente pouvant accueillir une carte magnétique.^000000";
 			next;
 			input .@input$;
 			if (.@input$ == "Laboratory Permit") {
 				if (countitem(2657) == 1) {
-					mes "^3355FFYou insert the";
-					mes "Laboratory Permit";
-					mes "into the slot and the";
-					mes "man made fissure in the";
-					mes "ground splits open, revealing";
-					mes "an underground staircase.^000000";
+					mes "^3355FFVous insérez le Laboratory Permit dans la fente prévue à cet effet. La fissure au sol s'ouvre, révélant un escalier souterrain.^000000";
 					next;
-					if (select("Go downstairs:Cancel") == 1) {
-						mes "^3355FFYou walk down";
-						mes "the long flight";
-						mes "of winding stairs...^000000";
+					if (select("Descendre:Annuler") == 1) {
+						mes "^3355FFVous descendez prudemment la longue suite de marches...^000000";
 						close2;
 						//remove variables that are no longer used.
 						set lhz_sincube,0;
@@ -1600,157 +1028,109 @@ lhz_cube,224,197,0	script	Experiment Tube#cube	111,{
 					close;
 				}
 				mes "^3355FF..............";
-				mes "Nothing happened.^000000";
+				mes "Rien ne se produit.^000000";
 				close;
 			}
-			mes "^3355FFNothing happened.^000000";
+			mes "^3355FFRien ne se produit.^000000";
 			close;
 		}
-		mes "^3355FFThis is where you";
-		mes "obtained the ^000000Oval^3355FF.";
-		mes "As you look around";
-		mes "the tube's location,";
-		mes "you notice an articial";
-		mes "ground fissure which";
-		mes "can probably open up...^000000";
+		mes "^3355FFC'est ici que vous avez obtenu l'objet de forme ^000000Ovale^3355FF.";
+		mes "A côté des tubes, vous remarquez une fissure artificielle sans le sol, qui peut probablement être ouverte...^000000";
 		close;
 	}
 }
 
-lhz_cube,248,193,0	script	Box#cube1	111,{
+lhz_cube,248,193,0	script	Boîte#cube1	111,{
 	if ((@lhz_secret01 < 9) && (@lhz_secret02 < 4) && (@lhz_secret03 < 3)) {
-		mes "^3355FFYou find a box with";
-		mes "three distinctively";
-		mes "shaped holes.^000000";
+		mes "^3355FFCette boîte présente trois cavités ayant chacune une forme distincte.^000000";
 		next;
-		select("Oval Hole:Cubic Hole:Polygon Hole");
+		select("Cavité Ovale:Cavité Cubique:Cavité Polygonale");
 		input .@input$;
-		mes "^3355FFNothing happened.^000000";
+		mes "^3355FFRien ne se produit.^000000";
 		close;
 	}
 	else if ((@lhz_secret01 != 10) || (@lhz_secret02 != 5) || (@lhz_secret03 != 4)) {
-		mes "^3355FFYou find a box with";
-		mes "three distinctively";
-		mes "shaped holes.^000000";
+		mes "^3355FFCette boîte présente trois cavités ayant chacune une forme distincte.^000000";
 		next;
-		switch(select("Oval Hole:Cube Hole:Polygon Hole")) {
+		switch(select("Cavité Ovale:Cavité Cubique:Cavité Polygonale")) {
 		case 1:
 			if (@lhz_secret01 == 9) {
 				next;
 				input .@input$;
-				if (.@input$ == "Oval") {
-					mes "^3355FFYou insert the Oval";
-					mes "into the Oval shaped";
-					mes "hole where it fits perfectly.^000000";
+				if (.@input$ == "Ovale") {
+					mes "^3355FFVous insérez l'objet de forme ovale dans la cavité ovale. Tout s'assemble parfaitement.^000000";
 					set @lhz_secret01,10;
 					close;
 				}
-				mes "^3355FFNothing happened.^000000";
+				mes "^3355FFRien ne se produit.^000000";
 				close;
 			}
 			else if (lhz_secret01 == 10) {
-				mes "^3355FFThe Oval shaped hole";
-				mes "already has an Oval in it.";
-				mes "Besides, it's not you have";
-				mes "any Ovals to spare, anyway.^000000";
+				mes "^3355FFVous avez déjà inséré l'objet de forme ovale dans la cavité ovale.^000000";
 				close;
 			}
 			input .@input$;
-			mes "^3355FFNothing happened.^000000";
+			mes "^3355FFRien ne se produit.^000000";
 			close;
 		case 2:
 			if (@lhz_secret02 == 4) {
 				next;
 				input .@input$;
 				if (.@input$ == "Cube") {
-					mes "^3355FFYou insert the Cube";
-					mes "into the Cubic hole";
-					mes "and it clicks into place.";
-					mes "Your formal Kindergarten";
-					mes "training is finally justified.^000000";
+					mes "^3355FFVous insérez l'étrange cube dans la cavité cubique. Tout s'assemble parfaitement! Finalement, votre dur entraînement au jardin d'enfants aura fait ses preuves.^000000";
 					set @lhz_secret02,5;
 					close;
 				}
-				mes "^3355FFNothing happened.^000000";
+				mes "^3355FFRien ne se produit.^000000";
 				close;
 			}
 			else if (@lhz_secret02 == 5) {
-				mes "^3355FFYou already placed";
-				mes "a Cube into the hole.";
-				mes "You could take it back";
-				mes "out and put it in again,";
-				mes "but that would just be";
-				mes "a total waste of time.^000000";
+				mes "^3355FFVous avez déjà inséré l'étrange cube dans la cavité cubique. Vous pouvez toujours vous amuser à le sortir pour le remettre, mais ce serait une pure perte de temps.^000000";
 				close;
 			}
 			input .@input$;
-			mes "^3355FFNothing happened.^000000";
+			mes "^3355FFRien ne se produit.^000000";
 			close;
 		case 3:
 			if (@lhz_secret03 == 3) {
 				next;
 				input .@input$;
-				if (.@input$ == "Polygon") {
-					mes "^3355FFFortunately, the";
-					mes "nondescript Polygon";
-					mes "that you have is exactly";
-					mes "the same shape as this";
-					mes "nondescript Polygonal hole.";
-					mes "The Polygon fits perfectly,";
-					mes "almost as if it were destiny.^000000";
+				if (.@input$ == "Polygone") {
+					mes "^3355FFOn dirait que la chance vous sourit: le polygone possède exactement la même forme que la cavité polygonale qui vous semblait jusqu'à lors quelconque. Tout s'emboîte parfaitement, comme si le destin menait vos actes depuis le commencement.^000000";
 					set @lhz_secret03,4;
 					close;
 				}
-				mes "^3355FFNothing happened.^000000";
+				mes "^3355FFRien ne se produit.^000000";
 				close;
 			}
 			else if (@lhz_secret03 == 4) {
-				mes "^3355FFThe Polygon is already";
-				mes "inserted into the hole.";
-				mes "Trust that this is as much";
-				mes "as this Polygon can do for you.^000000";
+				mes "^3355FFVous avez déjà inséré le polygone dans la cavité polygonale. Il serait douteux que le polygone puisse vous servir à nouveau.^000000";
 				close;
 			}
 			input .@input$;
-			mes "^3355FFNothing happened.^000000";
+			mes "^3355FFRien ne se produit.^000000";
 			close;
 		}
 	}
 	else if (@lhz_secret01 == 10 && @lhz_secret02 == 5 && @lhz_secret03 == 4 && lhz_sincube != 10) {
-		mes "^3355FFYou find a box with";
-		mes "three distinctively";
-		mes "shaped holes that";
-		mes "are now filled with the";
-		mes "objects you've inserted.^000000";
+		mes "^3355FFCette boîte présente trois cavités ayant chacune une forme distincte, et maintenant remplies des objets que vous y avez inséré.^000000";
 		next;
-		if (select("Open the box.:Cancel") == 1) {
-			mes "^3355FFYou open the box";
-			mes "and find that there's";
-			mes "a small card labeled";
-			mes "''Laboratory Permit'' inside.";
-			mes "You pocket this ^000000Laboratory";
-			mes "Permit^3355FF, knowing that you";
-			mes "will be needing it later.";
+		if (select("Ouvrir la boîte.:Annuler.") == 1) {
+			mes "^3355FFVous ouvrez la boîte et découvrez une petite carte magnétique portant l'inscription 'Laboratory Permit'. Vous récupérez donc le ^000000Laboratory Permit^3355FF, qui vous sera très certainement utile par la suite.";
 			set lhz_sincube,10;
 			getitem 2657,1; //Lab_Passport
 		}
 		close;
 	}
-	mes "^3355FFYou find the open box";
-	mes "which used to contain";
-	mes "the ^000000Laboratory Permit^3355FF.";
-	mes "This box is no longer";
-	mes "useful to you now, but";
-	mes "once upon a time, its";
-	mes "mysteries were a challenge.^000000";
+	mes "^3355FFLa boîte est désormais ouverte. Elle contenait le ^000000Laboratory Permit^3355FF.";
+	mes "Il n'y a plus rien d'utile ici, mais percer le mystère de son ouverture a constitué un vrai challenge.^000000";
 	close;
 }
 
-lhz_cube,250,184,0	script	Door#cube	111,{
-	mes "^3355FFYou've come upon a";
-	mes "door that leads outside.^000000";
+lhz_cube,250,184,0	script	Porte#cube	111,{
+	mes "^3355FFVous êtes arrivé par cette porte, qui conduit vers l'extérieur.^000000";
 	next;
-	if (select("Exit:Cancel") == 1) {
+	if (select("Sortir:Annuler") == 1) {
 		warp "lighthalzen",310,302;
 		end;
 	}
@@ -1763,10 +1143,7 @@ OnTouch:
 		warp "lhz_cube",231,90;
 		end;
 	}
-	mes "^3355FFYou found a passage that";
-	mes "seems to lead somewhere,";
-	mes "but you get the feeling that";
-	mes "you shouldn't enter it for now.^000000";
+	mes "^3355FFVous trouvez un passage qui semble conduire quelque part, mais vous avez le sentiment que vous ne devriez pas entrer ici pour le moment.^000000";
 	close;
 }
 
