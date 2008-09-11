@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script ======================================= 
 //= Dungeon Teleport Service
 //===== By: ================================================== 
@@ -75,89 +77,65 @@
 //============================================================ 
 
 //Yuno
-yuno,153,191,4	script	Cool Event Voting Staff::CoolEventVotingStaff01	874,{
+yuno,153,191,4	script	Votes Cool Event Corp.::CoolEventVotingStaff01	874,{
 	callfunc "F_DTS_Warp",0,0;
 }
-yuno,162,191,6	script	Kafra Voting Staff#01	861,{
+yuno,162,191,6	script	Votes Kafra Corp.#01	861,{
 	callfunc "F_DTS_Warp",1,8;
 }
 //Lighthalzen
-lighthalzen,154,60,6	script	Cool Event Voting Staff::CoolEventVotingStaff02	874,{
+lighthalzen,154,60,6	script	Votes Cool Event Corp.::CoolEventVotingStaff02	874,{
 	callfunc "F_DTS_Warp",0,0;
 }
 //Prontera
-prontera,147,125,4	script	Cool Event Voting Staff::CoolEventVotingStaff03	874,{
+prontera,147,125,4	script	Votes Cool Event Corp.::CoolEventVotingStaff03	874,{
 	callfunc "F_DTS_Warp",0,0;
 }
-prontera,164,125,6	script	Kafra Voting Staff#02	115,{
+prontera,164,125,6	script	Votes Kafra Corp.#02	115,{
 	callfunc "F_DTS_Warp",1,3;
 }
 
 //Cool Event Staff Headquarters NPCs
 //Kudiuu (Maintenance Guy)
-lhz_in02,20,274,6	script	Maintenance Guy#dts	851,{
+lhz_in02,20,274,6	script	Kudiuu#dts	851,{
 	mes "[Kudiuu]";
-	mes "Holy...!";
-	mes "Will this place";
-	mes "ever get cleaned up?!";
-	mes "*Cough cough* There's";
-	mes "so much dust here, it's";
-	mes "almost a health hazard!";
+	mes "Par tous les diables...!";
+	mes "Est-ce que cette pièce sera nettoyée un jour?!";
+	mes "*Tousse tousse* Il y a tellement de poussière ici, ce n'est pas bon pour la santé!";
 	close;
 }
 //Cesuna (Zondaman at desk)
-lhz_in02,36,284,1	script	Cool Event Staff#01	874,{
+lhz_in02,36,284,1	script	Cesuna#01	874,{
 	mes "[Cesuna]";
-	mes "Ack! I'm totally";
-	mes "swamped with all this";
-	mes "work! But I don't wannna";
-	mes "do any of it. That's it!";
-	mes "I totally need a break";
+	mes "Argh! Je suis complètement enterré sous le boulot! Mais j'ai une flemme monstrueuse! J'ai besoin d'une pause...";
 	next;
 	mes "[Cesuna]";
-	mes "*Sigh...*";
-	mes "I wonder if Saera";
-	mes "would ever consider";
-	mes "going out with me?";
-	mes "That would be nice~";
+	mes "*Soupir...*";
+	mes "Je me demande si Saera serait d'accord pour sortir avec moi? Ce serait cool~";
 	close;
 }
 //Jellarin (Event planner)
-lhz_in02,40,279,3	script	Event Planner	833,{
+lhz_in02,40,279,3	script	Jellarin	833,{
 	mes "[Jellarin]";
-	mes "I don't like this.";
-	mes "But I don't like that";
-	mes "idea either. What will";
-	mes "I do for a new event, eh?";
+	mes "Je n'aime pas ça. Mais cette idée ne me plaît pas non plus. Qu'est-ce que je pourrais faire pour le prochain évènement?";
 	next;
 	mes "[Jellarin]";
-	mes "I need something";
-	mes "major, something that'll";
-	mes "really shake up the world,";
-	mes "something epochal, but what?";
-	mes "Hey, do you have any ideas";
+	mes "J'ai besoin de quelque chose d'unique, de grand, quelque chose qui impressionnerait vraiment tout le monde... mais quoi?";
+	mes "Hé, vous n'auriez pas quelques idées?";
 	close;
 }
 //Baoto (Cool Event Manager)
-lhz_in02,110,283,5	script	Cool Event Manager	853,{
+lhz_in02,110,283,5	script	Baoto	853,{
 	mes "[Baoto]";
-	mes "Hmmm...";
-	mes "The employees seem";
-	mes "to be having too much";
-	mes "fun amongst themselves";
-	mes "recently. This does not";
-	mes "bode well at all...";
+	mes "Humm...";
+	mes "Les employés ont l'air de trainasser un peu trop ces temps-ci. Ce n'est pas sain...";
 	next;
 	mes "[Baoto]";
-	mes "It looks like I'm";
-	mes "just going to have to";
-	mes "start cracking that whip";
-	mes "more often and much";
-	mes "harder. Ha ha ha ha!";
+	mes "On dirait que je vais devoir user de mon fouet une fois de plus. Ha ha ha ha!";
 	close;
 }
 //Saera (Secretary), contains GM menu
-lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
+lhz_in02,36,274,3	script	Saera#02	831,{
 	callfunc "F_ClearGarbage";				//Clear outdated, unused variables
 	if($dts == 0){
 		set $dts,$dts|(1<<0);				//Sets NPCs to election mode if first time running
@@ -176,54 +154,37 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 		set $dts,$dts|(1<<3);
 	}
 	mes "[Saera]";
-	mes "Welcome to the";
-	mes "temporary headquarters";
-	mes "of Cool Event Corporation";
-	mes "How may I help you today?";
+	mes "Bienvenue au Quartier Général Temporaire de la Corporation Cool Event.";
+	mes "En quoi puis-je vous aider?";
 	next;
 	if(getgmlevel()>=40){ 						//Unofficial Text, GM-configurable settings for Event (GM level above 40 required)
 		mes "[Saera]";
-		mes "Why, I didn't even";
-		mes "notice you there,";
-		mes strcharinfo(0)+". What would";
-		mes "you like to do today?";
+		mes "Oh, c'est vous,";
+		mes strcharinfo(0)+". Que souhaitez-vous faire aujourd'hui?";
 		next;
-		menu "Fix Vote",Lfixvote,
-		"Set current teleporter",Lsettele,
-		"Set last election winner",Lsetlast,
-		"Manually run vote check",Lmanuvotecheck,
-		"Normal menu please",-;
+		menu "Attribuer des votes.",Lfixvote,
+		"Définir la société de téléportation",Lsettele,
+		"Définir le gagnant de la précédente élection",Lsetlast,
+		"Re-vérifier les votes",Lmanuvotecheck,
+		"Accéder au menu normal.",-;
 		mes "[Saera]";
 		mes "Ok";
 		next;
 	}
-	menu "Temporary headquarters?",Ltemphead,
-	"Voting",Lvoting,"No, thanks.",Lnothx;
+	menu "Quartier Général Temporaire?",Ltemphead,
+	"Elections?",Lvoting,"Rien, merci.",Lnothx;
 
 	Ltemphead:
 		mes "[Saera]";
-		mes "Our headquarters building";
-		mes "is currently undergoing";
-		mes "reconstruction, so we are";
-		mes "basing our operations in";
-		mes "this place for the meantime";
+		mes "Les bâtiments de notre Quartier Général sont encore en construction, c'est pourquoi nous nous sommes basés ici pour l'instant.";
 		close;
 
 	Lvoting:
 		mes "[Saera]";
-		mes "Currently, Kafra Corporation";
-		mes "and Cool Event Corp are working";
-		mes "on a collaborative program that";
-		mes "will provide direct teleport";
-		mes "services to dungeons.";
+		mes "La Corporation Kafra et la Corporation Cool Event travaillent conjointement sur un projet de téléportation directe vers les donjons.";
 		next;
 		mes "[Saera]";
-		mes "Due to technical issues,";
-		mes "both companies cannot provide";
-		mes "teleport services to the same";
-		mes "dungeon. Therefore, we will be";
-		mes "selecting our valued customers";
-		mes "to choose the company they want.";
+		mes "Pour des raisons techniques, les deux compagnies ne peuvent pas proposer ce service de téléportation vers les mêmes donjons. De ce fait, les utilisateurs doivent voter pour choisir la compagnie qu'ils souhaitent utiliser.";
 		next;
 		if((dtseligible == 0 || dtseligible == 3) && baselevel >= 60 && MISC_QUEST&128 == 0) set dtseligible,1;
 		//Clear previous var of dtseligible,3 being tried for eligibility already
@@ -234,113 +195,96 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 		switch(dtseligible){
 			default:
 				mes "[Saera]";
-				mes "Only a limited number of";
-				mes "voters will be chosen, so";
-				mes "you can check your voting";
-				mes "eligibility at the headquarters";
-				mes "of both participating companies.";
-				mes "Thank you for your patronage~";
+				mes "Seules certaines personnes sont habilitées à voter. Vous pouvez consulter votre statut d'électeur après des quartiers généraux des deux compagnies.";
+				mes "Merci de votre compréhension~";
 				close;
 				break;
 			case 1:
 				mes "[Saera]";
-				mes "It appears that you are";
-				mes "eligible to vote";
-				mes "so please cast your";
-				mes "vote at any Voting Staff";
-				mes "representative. Thank you~";
+				mes "Je vois que votre statut d'électeur est à jour. Vous pouvez dès à présent enregistrer votre vote auprès d'un représentant de l'élection. Merci~";
 				close;
 				break;
 			case 2:
 				mes "[Saera]";
-				mes "You are eligible to vote, but";
-				mes "you have already voted. Thank";
-				mes "you for your participation";
+				mes "Je vois que votre statut d'électeur est à jour, et que vous avez déjà voté! Merci de votre participation.";
 				close;
 				break;
 		}
 
 	Lnothx:
 		mes "[Saera]";
-		mes "Thank you.";
-		mes "Have a good day.";
+		mes "Merci.";
+		mes "Passez une bonne journée.";
 		close;
 									//GM options start
 	Lfixvote:							//Fix Vote
 		mes "[Saera]";
-		mes "Umm, sure..";
-		if($dtsv > 0) mes "Cool Event Corp is currently winning by "+$dtsv+" votes.";
-		if($dtsv < 0) mes "Kafra Corp is currently winning by "+$dtsv*-1+" votes.";
-		if($dtsv == 0) mes "The vote is currently tied.";
-		mes "To who would you like to give votes to?";
+		mes "Hum, d'accord.";
+		if($dtsv > 0) mes "La Cool Event Corp. est actuellement en tête avec "+$dtsv+" votes.";
+		if($dtsv < 0) mes "La Kafra Corp. est actuellement en tête avec "+$dtsv*-1+" votes.";
+		if($dtsv == 0) mes "Les votes sont actuellement à égalité.";
+		mes "A qui souhaitez-vous attribuer vos votes?";
 		next;
-		menu "Kafra",-,"Cool Event Corp",Lfixcool;
+		menu "Kafra Corp.",-,"Cool Event Corp.",Lfixcool;
 
 	Lfixkafra:							//Fixing vote for Kafra
 		mes "[Saera]";
-		if($dtsv > 0) mes "Cool Event Corp is currently winning by "+$dtsv+" votes.";
-		if($dtsv < 0) mes "Kafra Corp is currently winning by "+$dtsv*-1+" votes.";	//multiplied by -1 because var is negative
-		if($dtsv == 0) mes "The vote is currently tied.";
-		mes "Please input the amount you wish to give to Kafra Corp";
+		if($dtsv > 0) mes "La Cool Event Corp. est actuellement en tête avec "+$dtsv+" votes.";
+		if($dtsv < 0) mes "La Kafra Corp. est actuellement en tête avec "+$dtsv*-1+" votes.";	//multiplied by -1 because var is negative
+		if($dtsv == 0) mes "Les votes sont actuellement à égalité.";
+		mes "Veuillez entrer le nombre de votes que vous souhaitez accorder à la Kafra Corp.";
 		input @dtstemp;					//Set buffer for Kafra vote
 		next;
 		mes "[Saera]";
-		mes "You inputted "+@dtstemp+" for Kafra";
-		if($dtsv > 0) mes "Cool Event Corp is currently winning by "+$dtsv+" votes.";
-		if($dtsv < 0) mes "Kafra Corp is currently winning by "+$dtsv*-1+" votes.";
-		if($dtsv == 0) mes "The vote is currently tied.";
-		mes "Are you sure you would like to";
-		mes "make these changes?";
+		mes "Vous avez ajouté "+@dtstemp+" votes pour la Kafra Corp.";
+		if($dtsv > 0) mes "La Cool Event Corp. est actuellement en tête avec "+$dtsv+" votes.";
+		if($dtsv < 0) mes "La Kafra Corp. est actuellement en tête avec "+$dtsv*-1+" votes.";
+		if($dtsv == 0) mes "Les votes sont actuellement à égalité.";
+		mes "Êtes-vous sûr de vouloir valider ces changements?";
 		next;
-		menu "Yes",-,"No",Lnothx;
+		menu "Oui",-,"Non",Lnothx;
 		set $dtsv,$dtsv-@dtstemp;				//Set buffer to Kafra vote
 		mes "[Saera]";
-		mes "Okay, you fixed the vote";
-		mes "of Kafra Corp.";
-		if($dtsv > 0) mes "Cool Event Corp is currently winning by "+$dtsv+" votes.";
-		if($dtsv < 0) mes "Kafra Corp is currently winning by "+$dtsv*-1+" votes.";
-		if($dtsv == 0) mes "The vote is currently tied.";
+		mes "Très bien, la modification a été enregistrée.";
+		if($dtsv > 0) mes "La Cool Event Corp. est actuellement en tête avec "+$dtsv+" votes.";
+		if($dtsv < 0) mes "La Kafra Corp. est actuellement en tête avec "+$dtsv*-1+" votes.";
+		if($dtsv == 0) mes "Les votes sont actuellement à égalité.";
 		close;
 
 	Lfixcool:						//Fixing vote for cool corp
 		mes "[Saera]";
-		mes "Let me find the papers...";
-		if($dtsv > 0) mes "Cool Event Corp is currently winning by "+$dtsv+" votes.";
-		if($dtsv < 0) mes "Kafra Corp is currently winning by "+$dtsv*-1+" votes.";
-		if($dtsv == 0) mes "The vote is currently tied.";
-		mes "Please input new vote for Cool Event Corp";
+		mes "Voyons voir...";
+		if($dtsv > 0) mes "La Cool Event Corp. est actuellement en tête avec "+$dtsv+" votes.";
+		if($dtsv < 0) mes "La Kafra Corp. est actuellement en tête avec "+$dtsv*-1+" votes.";
+		if($dtsv == 0) mes "Les votes sont actuellement à égalité.";
+		mes "Veuillez entrer le nombre de votes que vous souhaitez accorder à la Cool Event Corp.";
 		input @dtstemp;					//Set buffer for Cool vote
 		next;
 		mes "[Saera]";
 		mes "You inputted "+@dtstemp+" for Cool Event Corp";
-		if($dtsv > 0) mes "Cool Event Corp is currently winning by "+$dtsv+" votes.";
-		if($dtsv < 0) mes "Kafra Corp is currently winning by "+$dtsv*-1+" votes.";
-		if($dtsv == 0) mes "The vote is currently tied.";
-		mes "Are you sure you would like to";
-		mes "make these changes?";
+		if($dtsv > 0) mes "La Cool Event Corp. est actuellement en tête avec "+$dtsv+" votes.";
+		if($dtsv < 0) mes "La Kafra Corp. est actuellement en tête avec "+$dtsv*-1+" votes.";
+		if($dtsv == 0) mes "Les votes sont actuellement à égalité.";
+		mes "Êtes-vous sûr de vouloir valider ces changements?";
 		next;
-		menu "Yes",-,"No",Lnothx;			//Confirmaiton
+		menu "Oui",-,"Non",Lnothx;			//Confirmaiton
 		set $dtsv,@dtsv+@dtstemp;			//Set buffer to Cool vote
 		mes "[Saera]";
-		mes "Okay, you fixed the vote";
-		mes "of Cool Event Corp.";
-		if($dtsv > 0) mes "Cool Event Corp is currently winning by "+$dtsv+" votes.";
-		if($dtsv < 0) mes "Kafra Corp is currently winning by "+$dtsv*-1+" votes.";
-		if($dtsv == 0) mes "The vote is currently tied.";
+		mes "Très bien, la modification a été enregistrée.";
+		if($dtsv > 0) mes "La Cool Event Corp. est actuellement en tête avec "+$dtsv+" votes.";
+		if($dtsv < 0) mes "La Kafra Corp. est actuellement en tête avec "+$dtsv*-1+" votes.";
+		if($dtsv == 0) mes "Les votes sont actuellement à égalité.";
 		close;
 
 	Lsettele:							//Set current DTS tele
 		mes "[Saera]";
-		mes "Type Kafra for Kafra-enabled warp,";
-		mes "Cool for Cool Event Corp-enabled";
-		mes "warp ,Election for election mode,";
-		mes "or Cancel to cancel.";
-		if($dts&(1<<0)) mes "The election is currently in election mode.";
-		if($dts&(1<<1)) mes "Cool Event Corp is currently the DTS warper.";
-		if($dts&(1<<2)) mes "Kafra Corp is currently the DTS warper.";
+		mes "Pour définir la société en charge des téléportations, tapez 'Kafra' pour désigner la Corporation Kafra, ou 'Cool' pour désigner la Corporation Cool Event. Tapez 'Election' pour activer les élections et la possibilité de voter, et 'Annuler' si vous souhaitez annuler.";
+		if($dts&(1<<0)) mes "Les élections sont actuellement ouvertes.";
+		if($dts&(1<<1)) mes "La Cool Event Corp. est actuellement désignée comme la compagnie de téléportation vers les donjons.";
+		if($dts&(1<<2)) mes "La Kafra Corp. est actuellement désignée comme la compagnie de téléportation vers les donjons.";
 		next;
 		input @dtstemps$;					//Typed in choices to prevent mistakes
-		mes "Let me find the papers...";
+		mes "Voyons voir...";
 		next;
 		if(@dtstemps$ == "Election" || @dtstemps$ == "election"){
 			if($dts&(1<<1)){
@@ -352,7 +296,7 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 				set $dts,$dts|(1<<0);
 			}
 			mes "[Saera]";
-			mes "Set to election mode.";
+			mes "Les élections sont maintenant ouvertes.";
 			close;
 		}
 		if(@dtstemps$ == "Cool" || @dtstemps$ == "cool"){
@@ -365,7 +309,7 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 				set $dts,$dts|(1<<1);
 			}
 			mes "[Saera]";
-			mes "Cool Event Corp. is now the DTS warper.";
+			mes "La Cool Event Corp. est actuellement désignée comme la compagnie de téléportation vers les donjons.";
 			close;
 		}
 		if(@dtstemps$ == "Kafra" || @dtstemps$ == "kafra"){
@@ -378,30 +322,27 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 				set $dts,$dts|(1<<2);
 			}
 			mes "[Saera]";
-			mes "Kafra Corp. is now the DTS warper.";
+			mes "La Kafra Corp. est actuellement désignée comme la compagnie de téléportation vers les donjons.";
 			close;
 		}
-		if(@dtstemps$ == "Cancel" || @dtstemps$ == "cancel") goto Lnothx;
+		if(@dtstemps$ == "Annuler" || @dtstemps$ == "annuler") goto Lnothx;
 		mes "[Saera]";
-		mes "Please input a correct name for the election";
+		mes "Veuillez entrer un mot correct.";
 		next;
 		goto Lsettele;
 
 	Lsetlast:							//Set last winner
 		mes "[Saera]";
-		mes "Type Kafra for election records to show Kafra,";
-		mes "Cool for Cool for election records to show Cool Event Corp,";
-		mes "None for no winner in election records,";
-		mes "or Cancel to cancel.";
-		if($dts&(1<<3)) mes "There was no previous winner";
-		if($dts&(1<<4)) mes "Cool Event Corp was the last winner";
-		if($dts&(1<<5)) mes "Kafra Corp was the last winner";
+		mes "Pour définir le vainqueur des dernières élections, tapez 'Kafra' pour désigner la Corporation Kafra comme vainqueur dans les archives des résultats des élections, ou 'Cool' pour désigner la Corporation Cool Event. Tapez 'Aucun' pour supprimer l'archive du dernier résultat, et 'Annuler' si vous souhaitez annuler.";
+		if($dts&(1<<3)) mes "Il n'y a pas de précédent vainqueur.";
+		if($dts&(1<<4)) mes "La Cool Event Corp. était le dernier vainqueur.";
+		if($dts&(1<<5)) mes "La Kafra Corp. était le dernier vainqueur.";
 		next;
 		input @dtstemps$;
 		mes "[Saera]";
-		mes "Let me find the papers...";
+		mes "Voyons voir...";
 		next;
-		if(@dtstemps$ == "None" || @dtstemps$ == "none"){
+		if(@dtstemps$ == "Aucun" || @dtstemps$ == "aucun"){
 			if($dts&(1<<4)){
 				set $dts,$dts&~(1<<4);			//removes last winner
 				set $dts,$dts|(1<<3);			//sets current last winner
@@ -411,7 +352,7 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 				set $dts,$dts|(1<<3);
 			}
 			mes "[Saera]";
-			mes "Set records to show no previous winner.";
+			mes "Les archives des résultats des élections ne montreront aucun gagnant pour les précédentes élections.";
 			close;
 		}
 		if(@dtstemps$ == "Cool" || @dtstemps$ == "cool"){
@@ -424,7 +365,7 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 				set $dts,$dts|(1<<4);
 			}
 			mes "[Saera]";
-			mes "Cool Event Corp. is now the previous winner.";
+			mes "La Cool Event Corp. est maintenant enregistrée comme vainqueur des dernières élections.";
 			close;
 		}
 		if(@dtstemps$ == "Kafra" || @dtstemps$ == "kafra"){
@@ -437,22 +378,20 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 				set $dts,$dts|(1<<5);
 			}
 			mes "[Saera]";
-			mes "Kafra Corp. is now the previous winner.";
+			mes "La Kafra Corp. est maintenant enregistrée comme vainqueur des dernières élections.";
 			close;
 		}
-		if(@dtstemps$ == "Cancel" || @dtstemps$ == "cancel") goto Lnothx;
+		if(@dtstemps$ == "Annuler" || @dtstemps$ == "annuler") goto Lnothx;
 		mes "[Saera]";
-		mes "Please input a correct name";
-		mes "for previous winner";
+		mes "Veuillez entrer un mot correct.";
 		next;
 		goto Lsetlast;
 
 	Lmanuvotecheck:
 		mes "[Saera]";
-		mes "Are you sure you would like to run";
-		mes "the vote check again?";
+		mes "Êtes-vous certain de vouloir re-vérifier les votes?";
 		next;
-		menu "Yes",Lmanuvoteyes,"No",Lnothx;
+		menu "Oui",Lmanuvoteyes,"Non",Lnothx;
 
 	Lmanuvoteyes:
 		if($dtsday<4 || $dtsday>=100) set $dtsday,4;
@@ -509,10 +448,10 @@ lhz_in02,36,274,3	script	Cool Event Staff#02	831,{
 			set $dtsv,0;
 		}
 		mes "[Saera]";
-		mes "Vote check run again.";
-		if($dts&(1<<0)) mes "The election is currently in election mode.";
-		if($dts&(1<<1)) mes "Cool Event Corp is currently the DTS warper.";
-		if($dts&(1<<2)) mes "Kafra Corp is currently the DTS warper.";
+		mes "Les votes ont été recalculés.";
+		if($dts&(1<<0)) mes "Les élections sont actuellement ouvertes.";
+		if($dts&(1<<1)) mes "La Cool Event Corp. est actuellement désignée comme la compagnie de téléportation vers les donjons.";
+		if($dts&(1<<2)) mes "La Kafra Corp. est actuellement désignée comme la compagnie de téléportation vers les donjons.";
 		close;
 }
 
@@ -531,13 +470,8 @@ function	script	F_DTS_Warp	{
 	switch(getarg(0)){
 	case 0:
 		cutin "zonda_01",2;
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "Hello! Don't forget to make";
-		mes "your voice be heard and make";
-		mes "sure you vote in the elections";
-		mes "between Cool Event Corp. and";
-		mes "Kafra Corporation for control of";
-		mes "the Dungeon Teleport Service!";
+		mes "[Votes Cool Event Corp.]";
+		mes "Bonjour! N'oubliez pas de faire entendre votre voix en votant à l'élection de la future compagnie de téléportation vers les donjons!";
 		break;
 	case 1:
 		switch(getarg(1)){
@@ -552,98 +486,53 @@ function	script	F_DTS_Warp	{
 		case 8: cutin "kafra_09",2; break;
 		default: cutin "kafra_09",2; break;
 		}
-		mes "[Kafra Voting Staff]";
-		mes "Greetings, adventurer.";
-		mes "As you may be aware, we";
-		mes "are holding an election to";
-		mes "provide the Dungeon Teleport";
-		mes "Service. How may I help you?";
+		mes "[Votes Kafra Corp.]";
+		mes "Bonjour, aventurier.";
+		mes "Comme vous le savez peut-être déjà, des élections sont en cours pour désigner la future compagnie de téléportation vers les donjons.";
+		mes "En quoi puis-je vous aider?";
 		break;
 	}
 	next;
-	menu "Reason for Election",Lelection,"Cast a Vote",Lvote,
-	"Use Teleport Service",Lteleport,"Cancel",Lcancel;
+	menu "Des élections?",Lelection,"Voter.",Lvote,
+	"Utiliser le service de téléportation.",Lteleport,"Annuler.",Lcancel;
 
 	Lelection: 							//Reason for election explanation
 		switch(getarg(0)){
 		case 0:
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "Cool Event Corp. has been";
-			mes "planning to provide a new";
-			mes "Dungeon Teleport Service to";	
-			mes "its customers, a service not";
-			mes "already provided by the Kafra";
-			mes "Corporation. However...";
+			mes "[Votes Cool Event Corp.]";
+			mes "La Corporation Cool Event a pour projet de proposer des nouveaux services à ses clients: un système de téléportation directe vers les donjons. Cependant...";
 			next;
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "Kafra Corporation, which";
-			mes "already monopolizes the";
-			mes "public teleportation market,";
-			mes "actually also had plans to";
-			mes "provide a similar service.";
+			mes "[Votes Cool Event Corp.]";
+			mes "La Corporation Kafra, qui a déjà le monopole sur de nombreux services, a élaboré un projet très similaire au notre.";
 			next;
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "Because of technological";
-			mes "limitations, only one company";
-			mes "can be chosen as the provider";
-			mes "of this Dungeon Teleport Service.";
-			mes "Hence, we will let the customers";
-			mes "decide through these elections.";
+			mes "[Votes Cool Event Corp.]";
+			mes "Pour des raisons de limites technologiques, une seule de nos deux compagnies peut être choisie pour assurer ce service de téléportation vers les donjons.";
+			mes "De ce fait, nous souhaitons laisser nos clients choisir la compagnie de leur choix, à travers des élections.";
 			next;
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "Multiple elections will be";
-			mes "held so that our customers";
-			mes "can test out the special services";
-			mes "of each company for themselves.";
-			mes "However, keep in mind that you";
-			mes "must be eligible in order to vote.";
+			mes "[Votes Cool Event Corp.]";
+			mes "Ces élections auront lieu régulièrement, afin que nos clients puissent tester et comparer la qualité de nos services.";
 			next;
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "For voter eligibility";
-			mes "details, please visit our";
-			mes "headquarters in the city of";
-			mes "Lighthalzen located in the";
-			mes "Schwarzwald Republic.";
-			mes "Thank you for your time.";
+			mes "[Votes Cool Event Corp.]";
+			mes "Tout le monde ne peut pas voter: il faut remplir des conditions afin de devenir électeur. Pour obtenir plus d'informations, veuillez vous rendre dans notre quartier général à Lighthalzen, dans la République de Schwarzwalt.";
+			mes "Merci, bonne journée.";
 			break;
 		case 1:
-			mes "[Kafra Voting Staff]";
-			mes "Cool Event Corp and the";
-			mes "Kafra Corporation have both";
-			mes "been planning to provide a";
-			mes "Teleport Service to dungeons.";
+			mes "[Votes Kafra Corp.]";
+			mes "La Corporation Cool Event et la Corporation Kafra ont toutes deux élaboré un projet de service de téléportation directe vers les donjons.";
 			next;
-			mes "[Kafra Voting Staff]";
-			mes "But due to technological";
-			mes "limitations, only one company";
-			mes "can serve as provider for this";
-			mes "Dungeon Teleport Service at a";
-			mes "time. There, both companies have";
-			mes "agreed to hold special elections";
+			mes "[Votes Kafra Corp.]";
+			mes "Pour des raisons de limites technologiques, une seule de nos deux compagnies peut être choisie pour assurer ce service de téléportation vers les donjons.";
+			mes "De ce fait, nous avons décidé d'un commun accord de laisser nos clients choisir la compagnie de leur choix, à travers des élections.";
 			next;
-			mes "[Kafra Voting Staff]";
-			mes "Each company has its own";
-			mes "policies and guarantees in";
-			mes "regards to the Dungeon Teleport";
-			mes "Service, and in this election, the";
-			mes "customers will ultimately decide";
-			mes "and choose what's best for them.";
+			mes "[Votes Kafra Corp.]";
+			mes "Chacune de nos deux compagnies possèdent des politiques de garantie pour ce futur service de téléportation vers les donjons. Par ces élections, nos clients pourront choisir d'eux-mêmes ce qu'il y a de mieux pour eux.";
 			next;
-			mes "[Kafra Voting Staff]";
-			mes "For now, the Dungeon";
-			mes "Teleport Service will be";
-			mes "provided in a series of trial";
-			mes "periods. This way, customers can";
-			mes "see the benefits of both companies";
-			mes "before making the final decision";
+			mes "[Votes Kafra Corp.]";
+			mes "Pour l'instant, ces nouveaux services de téléportation vers les donjons sont proposés sur de courtes périodes. Ainsi, les élections ont lieu régulièrement, et nos clients peuvent comparer la qualité des services des deux compagnies avant d'émettre leur décision finale.";
 			next;
-			mes "[Kafra Voting Staff]";
-			mes "If you are qualified,";
-			mes "please vote in each election";
-			mes "to decide which company will";
-			mes "provide the Dungeon Teleport";
-			mes "Service for the next trial period.";
-			mes "Thank you for your support~";
+			mes "[Votes Kafra Corp.]";
+			mes "Si vous remplissez les conditions pour devenir électeur, n'oubliez pas de voter afin de décider laquelle de nos deux compagnie proposera les services de téléportation vers les donjons.";
+			mes "Merci de votre soutien~";
 			break;
 		}
 		goto Lend;
@@ -654,22 +543,14 @@ function	script	F_DTS_Warp	{
 	Lnoteligible: 							//Text displayed if wanted to vote, but not eligible/voted
 		switch(getarg(0)){
 		case 0:
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "I'm sorry, but you are not";
-			mes "eligible to vote at this time.";
-			mes "Please visit our headquarters";
-			mes "in Lighthalzen for information";
-			mes "related to acquiring voting";
-			mes "rights. Thank you for your time.";
+			mes "[Votes Cool Event Corp.]";
+			mes "Je suis désolé, mais vous n'êtes pas habilité à voter pour ces élections. Pour obtenir plus d'informations, veuillez vous rendre dans notre quartier général à Lighthalzen.";
+			mes "Merci de votre compréhension.";
 			break;
 		case 1:
-			mes "[Kafra Voting Staff]";
-			mes "Oh, I'm so sorry, but you";
-			mes "are currently not qualified to";
-			mes "vote. For voting qualification";
-			mes "information, please visit the";
-			mes "Al De Baran Kafra Headquarters.";
-			mes "Thank you and have a nice day.";
+			mes "[Votes Kafra Corp.]";
+			mes "Je suis désolée, mais vous n'êtes pas habilité à voter pour ces élections. Pour obtenir plus d'informations, veuillez vous rendre dans notre quartier général à Al De Baran.";
+			mes "Merci, passez une bonne journée.";
 			break;
 		}
 		goto Lend;
@@ -678,23 +559,16 @@ function	script	F_DTS_Warp	{
 		if(MISC_QUEST&128 && $dtsday == dtseligible) goto Lnoteligible; //Var check if voted
 		switch(getarg(0)){
 		case 0:
-			mes "[Cool Event Corp. Voting Staff]"; 		//Unofficial text
-			mes "Checking your credentials, you";
-			mes "are able to vote for the";
-			mes "Dungeon Teleport Service";
-			mes "elections. Who would you like";
-			mes "to vote for?";
+			mes "[Votes Cool Event Corp.]"; 		//Unofficial text
+			mes "Pour qui souhaitez-vous voter?";
 			break;
 		case 1:
-			mes "[Kafra Voting Staff]";
-			mes "It appears that you qualify";
-			mes "to vote for the Dungeon";
-			mes "Teleport Service elections.";
-			mes "Who would you like to vote for";		//End Unofficial text
+			mes "[Votes Kafra Corp.]";
+			mes "A qui souhaitez-vous accorder votre vote?";		//End Unofficial text
 			break;
 		}
 		next;
-		menu "Cool Event Corp.",Lvotecool,"Kafra Corp.",Lvotekafra;
+		menu "Corporation Cool Event",Lvotecool,"Corporation Kafra",Lvotekafra;
 	
 	Lvotecool:
 		set $dtsv,$dtsv+1;				//Adds 1 to cool count
@@ -702,18 +576,13 @@ function	script	F_DTS_Warp	{
 		set dtseligible,$dtsday;
 		switch(getarg(0)){
 		case 0:
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "Thank you for voting for us.";
-			mes "Your vote has been counted,";
-			mes "and we appreciate your input";
-			mes "Thank you and have a good day.";
+			mes "[Votes Cool Event Corp.]";
+			mes "Votre vote a bien été enregistré. Nous vous remercions pour votre soutien, et nous espérons pouvoir vous proposer bientôt des services d'excellence.";
 			break;
 		case 1:
-			mes "[Kafra Voting Staff]";
-			mes "We thank you for your vote.";
-			mes "Your opinion matters very much";
-			mes "and has been counted for Cool";
-			mes "Event Corp.";
+			mes "[Votes Kafra Corp.]";
+			mes "Votre vote pour la Corporation Cool Event a bien été enregistré.";
+			mes "Merci, passez une bonne journée.";
 			break;
 		}
 		goto Lend;
@@ -724,20 +593,13 @@ function	script	F_DTS_Warp	{
 		set dtseligible,$dtsday;
 		switch(getarg(0)){
 		case 0:
-			mes "[Cool Event Corp. Voting Staff]";		//Unofficial Text
-			mes "Thank you for your opinion.";
-			mes "Your vote for Kafra corp.";
-			mes "has been counted. Thank";
-			mes "you and have a good day.";
+			mes "[Votes Cool Event Corp.]";		//Unofficial Text
+			mes "Votre vote pour la Corporation Kafra a bien été enregistré.";
+			mes "Merci, passez une bonne journée.";
 			break;
 		case 1:
-			mes "[Kafra Voting Staff]";
-			mes "Your vote for us has been";
-			mes "counted. We thank you very";
-			mes "much for your input, and";
-			mes "we hope that we meet your";
-			mes "adventuring needs and";
-			mes "standards of excellence.";
+			mes "[Votes Kafra Corp.]";
+			mes "Votre vote a bien été enregistré. Nous vous remercions pour votre soutien, et nous espérons pouvoir vous proposer bientôt des services d'excellence.";
 			break;
 		}
 		goto Lend;						//End Unofficial text
@@ -746,42 +608,23 @@ function	script	F_DTS_Warp	{
 		switch(getarg(0)){
 		case 0:
 			if($dts&(1<<0)){
-				mes "[Cool Event Corp. Voting Staff]";
-				mes "I'm sorry, but the";
-				mes "Dungeon Teleport Service is";
-				mes "unavailable during elections";
-				mes "and will be reactivated after the";
-				mes "election results are announced.";
-				mes "Thank you and have a nice day.";
+				mes "[Votes Cool Event Corp.]";
+				mes "Désolé, mais les élections pour désigner la compagnie en charge du service de téléportation vers les donjons sont actuellement en cours. Nous ne pouvons proposer nos services avant l'annonce du résultat.";
 				goto Lend;
 			}
 			if($dts&(1<<1)) goto Lteleenabled;
-			mes "[Cool Event Corp. Voting Staff]";		//Text if Kafra won DTS elect.
-			mes "I'm sorry, but Cool Event";
-			mes "Corp. does not currently offer";
-			mes "the Dungeon Teleport Service";
-			mes "due to the results of the last";
-			mes "election. Please vote for us";
-			mes "next time, alright? Good day~";
+			mes "[Votes Cool Event Corp.]";		//Text if Kafra won DTS elect.
+			mes "Je suis désolé, mais la Corporation Cool Event n'est actuellement pas la compagnie en charge du service de téléportation vers les donjons. Votez pour nous aux prochaines élections~";
 			break;
 		case 1:
 			if($dts&(1<<0)){
-				mes "[Kafra Voting Staff]";
-				mes "Sorry, but the elections for";
-				mes "which Dungeon Teleport System";
-				mes "to use is currently going on";
-				mes "right now. We are unable to";
-				mes "vote until results are announced";
+				mes "[Votes Kafra Corp.]";
+				mes "Désolée, mais les élections pour désigner la compagnie en charge du service de téléportation vers les donjons sont actuellement en cours. Nous ne pouvons proposer nos services avant l'annonce du résultat.";
 				goto Lend;
 			}
 			if($dts&(1<<2)) goto Lteleenabled;
-			mes "[Kafra Voting Staff]";
-			mes "We're sorry, but Kafra Corp";
-			mes "doesn't currently offer the";
-			mes "Dungeon Teleport System due";
-			mes "to last election's results,";
-			mes "Please vote for Kafra Corp";
-			mes "next time~";
+			mes "[Votes Kafra Corp.]";
+			mes "Je suis désolée, mais la Corporation Kafra n'est actuellement pas la compagnie en charge du service de téléportation vers les donjons. Votez pour nous aux prochaines élections~";
 			break;
 		}
 		goto Lend;
@@ -791,34 +634,28 @@ function	script	F_DTS_Warp	{
 	cleararray @dtswarp$[0],"",getarraysize(@dtswarp$);
 	switch(getarg(0)){
 	case 0:
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "Please remember that we";
-		mes "cannot accept Free Warp Tickets";
-		mes "or award Special Reserve Points";
-		mes "for this service. Now, please";
-		mes "choose your destination.";
-		setarray @dtswarpmap$[0],"Byalan, Level 4","Clock Tower, Basement 3";
-		setarray @dtswarp$[0],@dtswarpmap$[0]+" -> 4,000z",
-		@dtswarpmap$[1]+" -> 4,000z","Cancel";
+		mes "[Votes Cool Event Corp.]";
+		mes "Veuillez choisir votre destination.";
+		mes "Veuillez noter que nous n'acceptons aucun ticket de réduction ou de bons de quelque autre sorte.";
+		setarray @dtswarpmap$[0],"Île de Byalan, Niveau 4","Tour de l'Horloge, 3ième sous-sol";
+		setarray @dtswarp$[0],@dtswarpmap$[0]+" -> 4000 Zenys",
+		@dtswarpmap$[1]+" -> 4000 Zenys","Annuler";
 		if($dts&(1<<4)){ 
-			set @dtswarpmap$[2],"Glastheim Entrance";
-			setarray @dtswarp$[2],@dtswarpmap$[2]+" -> 4,000z","Cancel";
+			set @dtswarpmap$[2],"Glast Heim, Entrée";
+			setarray @dtswarp$[2],@dtswarpmap$[2]+" -> 4000 Zenys","Annuler";
 		}
 		break;
 	case 1:
-		mes "[Kafra Voting Staff]";
-		mes "Thank you for choosing the";
-		mes "Dungeon Teleport Service";
-		mes "Please keep in mind that the";
-		mes "Free Warp Tickets and Kafra";
-		mes "Special Reserve Points do not";
-		mes "apply in this special service.";
-		setarray @dtswarpmap$[0],"Toy Factory, Level 2","Clock Tower, Level 3";
-		setarray @dtswarp$[0],@dtswarpmap$[0]+" -> 4,000z",
-		@dtswarpmap$[1]+" -> 4,000z","Cancel";
+		mes "[Votes Kafra Corp.]";
+		mes "Merci d'avoir choisir la Corporation Kafra pour vos services de téléportation vers les donjons.";
+		mes "Veuillez noter que nous n'acceptons aucun ticket de réduction ou de bons de quelque autre sorte.";
+		mes "Choisissez votre destination.";
+		setarray @dtswarpmap$[0],"Fabrique de Jouets, Niveau 2","Tour de l'Horloge, Niveau 3";
+		setarray @dtswarp$[0],@dtswarpmap$[0]+" -> 4000 Zenys",
+		@dtswarpmap$[1]+" -> 4000 Zenys","Annuler";
 		if($dts&(1<<5)){ 
-			set @dtswarpmap$[2],"Lava Dungeon, Level 2";
-			setarray @dtswarp$[2],@dtswarpmap$[2]+" -> 4,000z","Cancel";
+			set @dtswarpmap$[2],"Donjon de Lave, Niveau 2";
+			setarray @dtswarp$[2],@dtswarpmap$[2]+" -> 4000 Zenys","Annuler";
 		}
 		break;
 	}
@@ -838,39 +675,32 @@ function	script	F_DTS_Warp	{
 			break;
 	}
 	Lwarp:
-		if (@dtswarp$[@num] == "Cancel") goto Lcancel;
+		if (@dtswarp$[@num] == "Annuler") goto Lcancel;
 		if (Zeny<4000) goto Lnomoney;
 		set Zeny, Zeny-4000;
-		if (@dtswarpmap$[@num] == "Toy Factory, Level 2") warp "xmas_dun02",130,123;
+		if (@dtswarpmap$[@num] == "Fabrique de Jouets, Niveau 2") warp "xmas_dun02",130,123;
  //Maps to warp to
-		if (@dtswarpmap$[@num] == "Clock Tower, Level 3") warp "alde_dun03",265,22;
+		if (@dtswarpmap$[@num] == "Tour de l'Horloge, Niveau 3") warp "alde_dun03",265,22;
 
-		if (@dtswarpmap$[@num] == "Lava Dungeon, Level 2") warp "mag_dun02",47,40;
+		if (@dtswarpmap$[@num] == "Donjon de Lave, Niveau 2") warp "mag_dun02",47,40;
 
-		if (@dtswarpmap$[@num] == "Byalan, Level 4") warp "iz_dun03",32,63;
+		if (@dtswarpmap$[@num] == "Île de Byalan, Niveau 4") warp "iz_dun03",32,63;
 
-		if (@dtswarpmap$[@num] == "Clock Tower, Basement 3") warp "alde_dun03",277,178;
+		if (@dtswarpmap$[@num] == "Tour de l'Horloge, 3ième sous-sol") warp "alde_dun03",277,178;
 
-		if (@dtswarpmap$[@num] == "Glastheim Entrance") warp "glast_01",370,304;
+		if (@dtswarpmap$[@num] == "Glast Heim, Entrée") warp "glast_01",370,304;
 
 		cutin "", 255;
 		end;
 	Lnomoney:
 		switch(getarg(0)){
 		case 0:
-			mes "[Cool Event Corp. Voting Staff]"; 		//Unofficial Text
-			mes "Umm, apparently you don't have";
-			mes "adequate funds for your";
-			mes "selected warp. Please check";
-			mes "that you have the correct amount";
-			mes "of money, and try again later";
+			mes "[Votes Cool Event Corp.]"; 		//Unofficial Text
+			mes "Humm, apparemment, vous n'avez pas assez d'argent pour accéder à ce service.";
 			break;
 		case 1:
-			mes "[Kafra Voting Staff]";
-			mes "It appears as if you don't";
-			mes "have enough zeny for the warp";
-			mes "Please check your funds and";
-			mes "try again.";
+			mes "[Votes Kafra Corp.]";
+			mes "Humm, apparemment, vous n'avez pas assez d'argent pour accéder à ce service.";
 			break;
 		}
 		goto Lend;						//End unofficial text
@@ -878,21 +708,14 @@ function	script	F_DTS_Warp	{
 	Lcancel: 							//Selected Cancel on first menu
 		switch(getarg(0)){
 		case 0:
-			mes "[Cool Event Corp. Voting Staff]";	
-			mes "Cool Event Corp. is always";
-			mes "working to make sure that";
-			mes "not only are our customers";
-			mes "satisfied, but that we also";
-			mes "exceed your utmost standards.";
-			mes "Thank you and have a good day.";
+			mes "[Votes Cool Event Corp.]";	
+			mes "La Corporation Cool Event se donne toujours au maximum pour vous offrir les meilleurs services.";
+			mes "Nous espérons que nos efforts et nos services de qualités satisfont nos clients.";
+			mes "Merci, passez une bonne journée.";
 			break;
 		case 1:
-			mes "[Kafra Voting Staff]";
-			mes "We, here at Kafra Corporation,";
-			mes "are alwyas endeavoring to provide";
-			mes "you with the best services. We hope";
-			mes "that we meet your adventuring needs";
-			mes "and the standards of excellence.";
+			mes "[Votes Kafra Corp.]";
+			mes "La Corporation Kafra se donne toujours au maximum pour vous proposer les meilleurs services. Nous espérons avoir répondu à vos exigences d'aventurier dans les standards de l'excellence.";
 			break;
 		}
 		goto Lend;
