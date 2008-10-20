@@ -1,0 +1,1965 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//===== eAthena Script =======================================
+//= Capture The Flag
+//===== By: ==================================================
+//= Cid Kramer alias Tacos
+//= avec l'utilisation comme base du code de [Lance]
+//===== Current Version: =====================================
+//= 3.02
+//===== Compatible With: =====================================
+//= eAthena
+//===== Description: =========================================
+//= Mode de Capture de Drapeau pour Ragnarok Online, 
+//= L'équipe doit aller chercher le drapeau dans le camp en face,
+//= et le rammener dans son camp.
+//===== Prerequis =============================================
+//= Nécessite l'ajout de la map custom associée boy_ctf1 (voir site)
+//= 2 palettes (une pour l'équipe rouge et une pour l'équipe bleu) ici les palettes 146 et 169 mais à modifier selon VOS palettes
+//= Le script utilise les Event script, il est nécéssaire des les activer en Label dans script_athena.conf
+//===== Additional Comments: =================================
+//= 3.02 Fonctionnel.
+//===== Variables =============================================
+//=
+//= Variables serveurs temporaires :
+//=
+//= $ctf_modedejeu Définit le mode de jeu : 1 = match à point, 15 = 15 minutes, 30 = 30 minutes, 45 = 45 minutes, 60 = 1 heure de jeu
+//= $@ctf_rnd = Nombres de points à effectuer pour gagner le match (si $ctf_modedejeu == 1)
+//= $@ctf_rew = Mise a miser pour gagner le double si l'équipe gagne.
+//= $@equipeBleuID = id équipe bleu
+//= $@equipeRougeID = id équipe rouge
+//= $@ctfevent_start = Si le jeu a commencé ou non
+//= $@ctf_rtaken = Si le drapeau Rouge est pris
+//= $@ctf_btaken = Si le drapeau Bleu est pris
+//= $@ctf_takername$ = Nom du joueur qui viens de marquer un point
+//= $@ctf_fb : variable du First Blood
+//= $@ctf_db_1[] : Tableau des joueurs de l'équipe Rouge
+//= $@ctf_db_2[] : Tableau des joueurs de l'équipe Bleu
+//= $@ctf_db_logout_1 : Tableau des joueurs de l'équipe Rouge déconnectés
+//= $@ctf_db_logout_2 : Tableau des joueurs de l'équipe Bleu déconnectés
+//= $@estpret : Savoir si les deux équipes sont prêtes ( ont cliqué sur 'Commencer la partie)
+//=
+//= Variables NPC :
+//=
+//= .team[1] = Nombre de points de l'équipe rouge
+//= .team[2] = Nombre de points de l'équipe bleu
+//= .leader$ : Nom du joueur qui doit choisir la configuration (dernier chef d'équipe a avoir cliqué sur 'Commencer la partie')
+//= .leader2$ : Nom du joueur qui doit confirmer la configuration du .leader$
+//=
+//= Variables Joueur :
+//=
+//= @ctf : 1 = joueur appartenant à l'équipe Rouge, 2 = équipe Bleu
+//= @ctf_com : Nombre de kill d'affilé (pour tueur en série)
+//= @ctf_time : définit le temps que le joueur as pour faire des frags en série (10 seconde).
+//= @ctf_taker : si le joueur a un drapeau
+//= @ctf_kill : nombre de kills effectué depuis sa dernière mort.
+//= @ctf_killtot : nombre de kills effectué au total.
+//= savepoint_map$ = map du save point d'origine du joueur. (savepoint_x et savepoint_y)
+//= pal = palette du joueur d'origine.
+//=
+//=
+//= Variables servant uniquement pour les statistiques :
+//=
+//= Concernant la partie en cours :
+//= .@CTF_MINKILL : Nombre minimum de kill qu'un joueur ai fait.
+//= .@CTF_MAXKILL : Nombre maximum de kill qu'un joueur ai fait.
+//= .@CTF_MAXKILLER$ : Nom du joueur le plus meurtrier
+//= .@CTF_MINKILLER$ : Nom du joueur le moins meurtrier
+//= .@CTF_drapeaupreneur$ : Nom du joueur ayant marqué le plus de points
+//= .@CTF_drapeauMpreneur$ : Nom du joueur ayant marqué le moins de points
+//= .@CTF_drapeauMpris : Nombre minimum de points emportés par un joueur.
+//= .@CTF_drapeaupris : Nombre maximum de points emportés par un joueur.
+//= .@CTF_COUNTMINKILLER : Nombre de joueurs ayant fait le moins de kill
+//= .@CTF_COUNTKILLER : Nombre de joueurs ayant fait le plus de kill
+//= .@CTF_COUNTFLAGER : Nombre de joueurs ayant marqué le plus de points
+//= .@CTF_COUNTMINFLAGER : Nombre de joueurs ayant marqué le moins de points
+//= .CTF_FlagperduR : Nombre de flags Rouge perdus.
+//= .CTF_FlagperduB : Nombre de flags Bleu perdus.
+//= .CTF_KILLED : Nombre de morts au total.
+//=
+//= Concernant tout le serveur :
+//= $CTFRgagne : Nombre de parties gagnés par les rouges.
+//= $CTFBgagne : Nombre de parties gagnés par les bleus.
+//= $CTF_drapeaupreneur$ : Nom du joueur ayant marqué le plus de points
+//= $CTF_drapeaupris : Nombre maximum de points emportés par un joueur.
+//= $CTF_MAXKILL : Nombre maximum de kill qu'un joueur ai fait.
+//= $CTF_MAXKILLER$ : Nom du joueur le plus meurtrier
+//= $CTF_FlagperduR : Nombre de flags Rouge perdus.
+//= $CTF_FlagperduB : Nombre de flags Bleu perdus.
+//= $Rpoint : Nombre de points marqué par les Rouges.
+//= $Bpoint : Nombre de points marqué par les Bleu.
+//= $CTF_KILLED : Nombre de morts au total.
+//= $CTF_SERIE$ : Nom du plus gros tueur en série
+//= $CTF_SERIEN : Nombre maximum de kills en séries effectué
+//=============================================================
+//===== Remarques =============================================
+//=============================================================
+//= N'essayez pas de réduire la taille du script en créant une fonction pour le calcul des stats dans L_Stop car j'ai choisit
+//= L'utilisations de variables NPC Temporaires (choix repris de Lance) et lorsqu'on appéle une fonction interne ou externe au NPC, 
+//= Ses variables ne sont plus les mêmes (remises à 0) comme si dans une function il s'agissait d'un nouvel NPC temporaire.
+//=============================================================
+
+
+boy_ctf1,104,13,0	warp	ctf1#grotte0	1,1,boy_ctf1,46,210
+boy_ctf1,43,210,0	warp	ctf1#grotte1	1,1,boy_ctf1,101,13
+
+boy_ctf1,246,12,0	warp	ctf1#chateau0	1,1,boy_ctf1,241,219
+boy_ctf1,244,219,0	warp	ctf1#chateau1	1,1,boy_ctf1,246,15
+
+boy_ctf1	mapflag	nobranch
+boy_ctf1	mapflag	noexp
+boy_ctf1	mapflag	noicewall
+boy_ctf1	mapflag	noloot
+boy_ctf1	mapflag	nomemo
+boy_ctf1	mapflag	nopenalty
+boy_ctf1	mapflag	noreturn
+boy_ctf1	mapflag	nosave	SavePoint
+boy_ctf1	mapflag	noteleport
+boy_ctf1	mapflag	nowarp
+boy_ctf1	mapflag	nowarpto
+boy_ctf1	mapflag	pvp
+boy_ctf1	mapflag	pvp_noguild
+
+//=============================================================
+// Script pour remettre les variables joueur a Zéro
+//=============================================================
+
+function	script	Variables_A_Zero	{
+
+			set @ctf, 0;
+			set @ctf_com, 0;
+			set drapeaupris,0;
+			set @ctf_kill, 0;
+			set @ctf_killtot, 0;
+			set @ctf_time, 0;
+			set @ctf_taker, 0;
+            		setlook 7,pal;
+			savepoint savepoint_map$,savepoint_x,savepoint_y;
+			return;
+
+}
+
+//=============================================================
+// Script principal : Contient tout le CTF
+//=============================================================
+	
+boy_ctf1,0,0,0	script	ctf_sys	-1,{
+
+	if(ctf_li){
+		set ctf_li, 0;
+		warp "payon",163,245;
+	}
+	end;
+	
+	
+OnBlueScore:
+	soundeffectall "DominationWin.wav", 0, "boy_ctf1";
+	mapannounce "boy_ctf1", "L'équipe Bleu a marqué un point grâce à "+$@ctf_takername$+"!",bc_map,0x00AAFF;
+	set .team[2], .team[2] + 1;
+	if( $ctf_modedejeu == 1 && .team[2] >= $@ctf_rnd && .team[2] != .team[1]) goto L_Stop;
+	
+	if((.team[2]-1) == .team[1])
+		soundeffectall "BlueTeamTakesTheLead.wav", 0, "boy_ctf1";
+	else if((.team[2]-1) > .team[1])
+		soundeffectall "BlueTeamIncreases.wav", 0, "boy_ctf1";
+	else
+		soundeffectall "BlueTeamScores.wav", 0, "boy_ctf1";
+	
+
+	if ($@ctf_rtaken) enablenpc "ctf_rflag";
+	if ($@ctf_btaken) enablenpc "ctf_bflag";
+	movenpc "ctf_bflag", 245,99;
+	movenpc "ctf_rflag", 37,99;
+	set $@ctf_rtaken, 0;
+	set $@ctf_btaken, 0;
+
+	end;
+
+OnRedScore:
+	soundeffectall "DominationWin.wav", 0, "boy_ctf1";
+	mapannounce "boy_ctf1", "L'équipe Rouge a marqué un point grâce à "+$@ctf_takername$+"!",bc_map,0xFF0000;
+	set .team[1], .team[1] + 1;
+	if( $ctf_modedejeu ==1 && .team[1] >= $@ctf_rnd && .team[2] != .team[1]) goto L_Stop;
+
+	if((.team[1]-1) == .team[2])
+		soundeffectall "RedTeamTakesTheLead.wav", 0, "boy_ctf1";
+	else if((.team[1]-1) > .team[2])
+		soundeffectall "RedTeamIncreases.wav", 0, "boy_ctf1";
+	else
+		soundeffectall "RedTeamScores.wav", 0, "boy_ctf1";
+
+	if ($@ctf_rtaken) enablenpc "ctf_rflag";
+	if ($@ctf_btaken) enablenpc "ctf_bflag";
+	movenpc "ctf_bflag", 245,99;
+	movenpc "ctf_rflag", 37,99;
+	set $@ctf_rtaken, 0;
+	set $@ctf_btaken, 0;
+
+	end;
+
+OnStart:
+	set $@ctfevent_start, $@ctfevent_start + 1;
+	set $@ctf_fb, 0;
+	set .@total, getarraysize($@ctf_db_1);
+	enablenpc "ctf_rflag";
+	enablenpc "ctf_bflag";
+	set $@ctf_rtaken, 0;
+	set $@ctf_btaken, 0;
+	for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+		if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+		
+				if(Zeny < ($@ctf_rew/2)){
+					mapannounce "boy_ctf1", "Les paris sont annulés car " + strcharinfo(0) + " n'a pas assez d'argent.", bc_map;
+					set $@ctf_rew,0;
+				}
+
+			pcblockmove 0,1;
+			dispbottom "Le Capture de Drapeaux va bientôt commencer. Vous faîtes partie de l'Equipe Rouge.";
+			dispbottom "Vous devez prendre le Drapeau Bleu au Sud, et le rapporter dans votre camp!";
+	        setlook 7,146;
+			set @ctf, 1;
+			warp "boy_ctf1",37,94;
+			savepoint "boy_ctf1",52,209;
+			detachrid;
+		}
+	}
+	set .@total, getarraysize($@ctf_db_2);
+	for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+		if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+			
+				if(Zeny < ($@ctf_rew/2)){
+					mapannounce "boy_ctf1", "Les paris sont annulés car " + strcharinfo(0) + " n'a pas assez d'argent.", bc_map;
+					set $@ctf_rew,0;
+				}
+
+			pcblockmove 0,1;
+			dispbottom "Le Capture de Drapeaux va bientôt commencer. Vous faîtes partie de l'Equipe Bleue.";
+			dispbottom "Vous devez prendre le Drapeau Rouge au Nord, et le rapporter dans votre camp!";
+	        setlook 7,169;
+			set @ctf, 2;
+			warp "boy_ctf1",245,92;
+			savepoint "boy_ctf1",238,219;
+			detachrid;
+		}
+	}
+	sleep 5000;
+	soundeffectall "NewRound.wav", 0, "boy_ctf1";
+	mapannounce "boy_ctf1", "La partie commence dans ...", bc_map;
+	initnpctimer;
+	end;
+
+L_Stop:
+
+
+	if(.team[1] > .team[2]){
+		if ( $ctf_modedejeu == 1 ) mapannounce "boy_ctf1", "Et remporte la victoire !", bc_map,0xFF0000;
+		else mapannounce "boy_ctf1", "L'équipe Rouge remporte la victoire !", bc_map,0xFF0000;
+		set .@total, getarraysize($@ctf_db_1);
+		set $CTFRgagne,$CTFRgagne+1;
+		set .@CTF_MINKILL,999;
+		set .@CTF_MAXKILLER$,"NULL_789";
+		set .@CTF_drapeaupreneur$, "NULL_789";
+		set .@CTF_drapeauMpris,999;
+
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){	
+			if (attachrid(getelementofarray($@ctf_db_1, .@i))){	// Une boucle d'attachrid : Elle effectue sont contenue pour chaqu'un des membres de l'équipe choisit (ici $@ctf_db_1 donc l'équipe rouge).
+				soundeffect "YouHaveWonTheMatch.wav", 0;
+				set Zeny, Zeny + $@ctf_rew;			// En cas de pari, si il y en a pas la variable $@ctf_rew est à 0, donc aucunes incrémentations
+
+				// Explications de la suite : Ce calcul vérifie si le joueur a plus ou moins de frag qu'un autre, si oui il note sont nom et son nombre de skill dans deux autres variables.
+							   // Si il a fait un nombre égal de frag que le plus fort, la variable va alors contenir les deux noms des deux joueur, et une autre variable
+							   // Va préciser le fait qu'ils sont deux meilleur/moins bons joueur (pour un affichage plus agréable des statistiques à la fin du match)
+
+
+				if (@ctf_killtot>=.@CTF_MAXKILL){						// Si le joueur as plus de kill (ou même nombre) que le plus fort actuel
+					if (@ctf_killtot==.@CTF_MAXKILL && .@CTF_MAXKILLER$ != "NULL_789"){  	// 	Si il a le même nombre de kill que le plus fort, et si c'est pas le premier checké
+						set .@CTF_MAXKILLER$,.@CTF_MAXKILLER$+",  "+strcharinfo(0); 	// 	Alors, On note son nom à la suite du plus fort (les deux noms séparé par une virgule)
+						set .@CTF_COUNTKILLER,.@CTF_COUNTKILLER+1;			//	Et on ajoute 1 à la variable contenant le nombre de joueurs les plus fort
+					} else { 
+						set .@CTF_MAXKILLER$,strcharinfo(0);				//      Sinon, On note son nom dans la variable en écrasant son contenu
+						if (.@CTF_COUNTKILLER>=1) set .@CTF_COUNTKILLER,0;		//	Et on remet la variable contenant le nb de joueur les plus fort à 0 (au cas ou)
+					}
+					set .@CTF_MAXKILL,@ctf_killtot;						//On modifie le plus grand nombre de mort qu'un joueur ai fait par celui du joueur actuellement chequé (quoi qu'il arrive, on le modifie)
+				}
+
+				if (@ctf_killtot<=.@CTF_MINKILL){						// Remarque : c'est la même structure pour les 4 calculs de stats que celle expliqué au dessus.
+					if (@ctf_killtot==.@CTF_MINKILL){ 
+						set .@CTF_MINKILLER$,.@CTF_MINKILLER$+",  "+strcharinfo(0);
+						set .@CTF_COUNTMINKILLER,.@CTF_COUNTMINKILLER+1;
+					} else {
+						set .@CTF_MINKILLER$,strcharinfo(0);
+						if ( .@CTF_COUNTMINKILLER>=1) set  .@CTF_COUNTMINKILLER,0;
+					}
+					set .@CTF_MINKILL,@ctf_killtot;
+				}
+
+				if (drapeaupris>=.@CTF_drapeaupris){
+					if (drapeaupris==.@CTF_drapeaupris && .@CTF_drapeaupreneur$ != "NULL_789"){ 
+						set .@CTF_drapeaupreneur$,.@CTF_drapeaupreneur$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTFLAGER,.@CTF_COUNTFLAGER+1;
+					} else {
+						set .@CTF_drapeaupreneur$,strcharinfo(0);
+						if (.@CTF_COUNTFLAGER>=1) set  .@CTF_COUNTFLAGER,0;
+					}
+					set .@CTF_drapeaupris,drapeaupris;
+				}
+
+				if (drapeaupris<=.@CTF_drapeauMpris){
+					if (drapeaupris==.@CTF_drapeauMpris){
+						set .@CTF_drapeauMpreneur$,.@CTF_drapeauMpreneur$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTMINFLAGER,.@CTF_COUNTMINFLAGER+1;
+					} else {
+						set .@CTF_drapeauMpreneur$,strcharinfo(0);
+						if (.@CTF_COUNTMINFLAGER>=1) set .@CTF_COUNTMINFLAGER,0;
+					}
+					set .@CTF_drapeauMpris,drapeaupris;
+				}
+				callfunc "Variables_A_Zero";
+
+				detachrid;
+			}
+		}
+		set .@total, getarraysize($@ctf_db_2);
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+			soundeffect "YouHaveLostTheMatch.wav", 0;
+			set Zeny, Zeny - ($@ctf_rew/2);
+
+			
+			if (@ctf_killtot>=.@CTF_MAXKILL){						// Exactement les 4 mêmes calculs qu'au dessus (voir Remarque)
+				if (@ctf_killtot==.@CTF_MAXKILL && .@CTF_MAXKILLER$ != "NULL_789"){  
+					set .@CTF_MAXKILLER$,.@CTF_MAXKILLER$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTKILLER,.@CTF_COUNTKILLER+1;
+				} else { 
+					set .@CTF_MAXKILLER$,strcharinfo(0);
+					if (.@CTF_COUNTKILLER>=1) set .@CTF_COUNTKILLER,0;
+				}
+				set .@CTF_MAXKILL,@ctf_killtot;
+			}
+
+			if (@ctf_killtot<=.@CTF_MINKILL){
+				if (@ctf_killtot==.@CTF_MINKILL){ 
+					set .@CTF_MINKILLER$,.@CTF_MINKILLER$+",  "+strcharinfo(0);
+					set .@CTF_COUNTMINKILLER,.@CTF_COUNTMINKILLER+1;
+				} else {
+					set .@CTF_MINKILLER$,strcharinfo(0);
+					if ( .@CTF_COUNTMINKILLER>=1) set  .@CTF_COUNTMINKILLER,0;
+				}
+				set .@CTF_MINKILL,@ctf_killtot;
+			}
+
+			if (drapeaupris>=.@CTF_drapeaupris){
+				if (drapeaupris==.@CTF_drapeaupris && .@CTF_drapeaupreneur$ != "NULL_789"){ 
+					set .@CTF_drapeaupreneur$,.@CTF_drapeaupreneur$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTFLAGER,.@CTF_COUNTFLAGER+1;
+				} else {
+					set .@CTF_drapeaupreneur$,strcharinfo(0);
+					if (.@CTF_COUNTFLAGER>=1) set  .@CTF_COUNTFLAGER,0;
+				}
+				set .@CTF_drapeaupris,drapeaupris;
+			}
+
+			if (drapeaupris<=.@CTF_drapeauMpris){
+				if (drapeaupris==.@CTF_drapeauMpris){
+					set .@CTF_drapeauMpreneur$,.@CTF_drapeauMpreneur$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTMINFLAGER,.@CTF_COUNTMINFLAGER+1;
+				} else {
+					set .@CTF_drapeauMpreneur$,strcharinfo(0);
+					if (.@CTF_COUNTMINFLAGER>=1) set .@CTF_COUNTMINFLAGER,0;
+				}
+				set .@CTF_drapeauMpris,drapeaupris;
+			}
+			callfunc "Variables_A_Zero";
+
+			detachrid;
+			}
+		}
+	}else if(.team[1] < .team[2]){
+		if ( $ctf_modedejeu == 1 ) mapannounce "boy_ctf1", "Et remporte la victoire !", bc_map,0x00AAFF;
+		else mapannounce "boy_ctf1", "L'équipe Bleue remporte la victoire !", bc_map,0x00AAFF;
+		set .@total, getarraysize($@ctf_db_1);
+		set $CTFBgagne,$CTFBgagne+1;
+		set .@CTF_MINKILL,999;
+		set .@CTF_MAXKILLER$,"NULL_789";
+		set .@CTF_drapeaupreneur$, "NULL_789";
+		set .@CTF_drapeauMpris,999;
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+				soundeffect "YouHaveLostTheMatch.wav", 0;
+				set Zeny, Zeny - ($@ctf_rew/2);
+
+				
+				if (@ctf_killtot>=.@CTF_MAXKILL){						// Exactement les 4 mêmes calculs qu'au dessus (voir Remarque)
+					if (@ctf_killtot==.@CTF_MAXKILL && .@CTF_MAXKILLER$ != "NULL_789"){  
+						set .@CTF_MAXKILLER$,.@CTF_MAXKILLER$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTKILLER,.@CTF_COUNTKILLER+1;
+					} else { 
+						set .@CTF_MAXKILLER$,strcharinfo(0);
+						if (.@CTF_COUNTKILLER>=1) set .@CTF_COUNTKILLER,0;
+					}
+					set .@CTF_MAXKILL,@ctf_killtot;
+				}
+
+				if (@ctf_killtot<=.@CTF_MINKILL){
+					if (@ctf_killtot==.@CTF_MINKILL){ 
+						set .@CTF_MINKILLER$,.@CTF_MINKILLER$+",  "+strcharinfo(0);
+						set .@CTF_COUNTMINKILLER,.@CTF_COUNTMINKILLER+1;
+					} else {
+						set .@CTF_MINKILLER$,strcharinfo(0);
+						if ( .@CTF_COUNTMINKILLER>=1) set  .@CTF_COUNTMINKILLER,0;
+					}
+					set .@CTF_MINKILL,@ctf_killtot;
+				}
+
+				if (drapeaupris>=.@CTF_drapeaupris){
+					if (drapeaupris==.@CTF_drapeaupris && .@CTF_drapeaupreneur$ != "NULL_789"){ 
+						set .@CTF_drapeaupreneur$,.@CTF_drapeaupreneur$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTFLAGER,.@CTF_COUNTFLAGER+1;
+					} else {
+						set .@CTF_drapeaupreneur$,strcharinfo(0);
+						if (.@CTF_COUNTFLAGER>=1) set  .@CTF_COUNTFLAGER,0;
+					}
+					set .@CTF_drapeaupris,drapeaupris;
+				}
+
+				if (drapeaupris<=.@CTF_drapeauMpris){
+					if (drapeaupris==.@CTF_drapeauMpris){
+						set .@CTF_drapeauMpreneur$,.@CTF_drapeauMpreneur$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTMINFLAGER,.@CTF_COUNTMINFLAGER+1;
+					} else {
+						set .@CTF_drapeauMpreneur$,strcharinfo(0);
+						if (.@CTF_COUNTMINFLAGER>=1) set .@CTF_COUNTMINFLAGER,0;
+					}
+					set .@CTF_drapeauMpris,drapeaupris;
+				}
+				callfunc "Variables_A_Zero";
+
+				detachrid;
+			}
+		}
+		set .@total, getarraysize($@ctf_db_2);
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+			soundeffect "YouHaveWonTheMatch.wav", 0;
+			set Zeny, Zeny + $@ctf_rew;
+
+			
+			if (@ctf_killtot>=.@CTF_MAXKILL){						// Exactement les 4 mêmes calculs qu'au dessus (voir Remarque)
+				if (@ctf_killtot==.@CTF_MAXKILL && .@CTF_MAXKILLER$ != "NULL_789"){  
+					set .@CTF_MAXKILLER$,.@CTF_MAXKILLER$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTKILLER,.@CTF_COUNTKILLER+1;
+				} else { 
+					set .@CTF_MAXKILLER$,strcharinfo(0);
+					if (.@CTF_COUNTKILLER>=1) set .@CTF_COUNTKILLER,0;
+				}
+				set .@CTF_MAXKILL,@ctf_killtot;
+			}
+
+			if (@ctf_killtot<=.@CTF_MINKILL){
+				if (@ctf_killtot==.@CTF_MINKILL){ 
+					set .@CTF_MINKILLER$,.@CTF_MINKILLER$+",  "+strcharinfo(0);
+					set .@CTF_COUNTMINKILLER,.@CTF_COUNTMINKILLER+1;
+				} else {
+					set .@CTF_MINKILLER$,strcharinfo(0);
+					if ( .@CTF_COUNTMINKILLER>=1) set  .@CTF_COUNTMINKILLER,0;
+				}
+				set .@CTF_MINKILL,@ctf_killtot;
+			}
+
+			if (drapeaupris>=.@CTF_drapeaupris){
+				if (drapeaupris==.@CTF_drapeaupris && .@CTF_drapeaupreneur$ != "NULL_789"){ 
+					set .@CTF_drapeaupreneur$,.@CTF_drapeaupreneur$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTFLAGER,.@CTF_COUNTFLAGER+1;
+				} else {
+					set .@CTF_drapeaupreneur$,strcharinfo(0);
+					if (.@CTF_COUNTFLAGER>=1) set  .@CTF_COUNTFLAGER,0;
+				}
+				set .@CTF_drapeaupris,drapeaupris;
+			}
+
+			if (drapeaupris<=.@CTF_drapeauMpris){
+				if (drapeaupris==.@CTF_drapeauMpris){
+					set .@CTF_drapeauMpreneur$,.@CTF_drapeauMpreneur$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTMINFLAGER,.@CTF_COUNTMINFLAGER+1;
+				} else {
+					set .@CTF_drapeauMpreneur$,strcharinfo(0);
+					if (.@CTF_COUNTMINFLAGER>=1) set .@CTF_COUNTMINFLAGER,0;
+				}
+				set .@CTF_drapeauMpris,drapeaupris;
+			}
+			callfunc "Variables_A_Zero";
+
+			detachrid;
+			}
+		}
+	}else if(.team[1] == .team[2]){
+		mapannounce "boy_ctf1", "La partie est un match nul !", bc_map,0x000000;
+		set .@total, getarraysize($@ctf_db_1);
+		set .@CTF_MINKILL,999;
+		set .@CTF_MAXKILLER$,"NULL_789";
+		set .@CTF_drapeaupreneur$, "NULL_789";
+		set .@CTF_drapeauMpris,999;
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+				
+				if (@ctf_killtot>=.@CTF_MAXKILL){						// Exactement les 4 mêmes calculs qu'au dessus (voir Remarque)
+					if (@ctf_killtot==.@CTF_MAXKILL && .@CTF_MAXKILLER$ != "NULL_789"){  
+						set .@CTF_MAXKILLER$,.@CTF_MAXKILLER$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTKILLER,.@CTF_COUNTKILLER+1;
+					} else { 
+						set .@CTF_MAXKILLER$,strcharinfo(0);
+						if (.@CTF_COUNTKILLER>=1) set .@CTF_COUNTKILLER,0;
+					}
+					set .@CTF_MAXKILL,@ctf_killtot;
+				}
+
+				if (@ctf_killtot<=.@CTF_MINKILL){
+					if (@ctf_killtot==.@CTF_MINKILL){ 
+						set .@CTF_MINKILLER$,.@CTF_MINKILLER$+",  "+strcharinfo(0);
+						set .@CTF_COUNTMINKILLER,.@CTF_COUNTMINKILLER+1;
+					} else {
+						set .@CTF_MINKILLER$,strcharinfo(0);
+						if ( .@CTF_COUNTMINKILLER>=1) set  .@CTF_COUNTMINKILLER,0;
+					}
+					set .@CTF_MINKILL,@ctf_killtot;
+				}
+
+				if (drapeaupris>=.@CTF_drapeaupris){
+					if (drapeaupris==.@CTF_drapeaupris && .@CTF_drapeaupreneur$ != "NULL_789"){ 
+						set .@CTF_drapeaupreneur$,.@CTF_drapeaupreneur$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTFLAGER,.@CTF_COUNTFLAGER+1;
+					} else {
+						set .@CTF_drapeaupreneur$,strcharinfo(0);
+						if (.@CTF_COUNTFLAGER>=1) set  .@CTF_COUNTFLAGER,0;
+					}
+					set .@CTF_drapeaupris,drapeaupris;
+				}
+
+				if (drapeaupris<=.@CTF_drapeauMpris){
+					if (drapeaupris==.@CTF_drapeauMpris){
+						set .@CTF_drapeauMpreneur$,.@CTF_drapeauMpreneur$+",  "+strcharinfo(0); 
+						set .@CTF_COUNTMINFLAGER,.@CTF_COUNTMINFLAGER+1;
+					} else {
+						set .@CTF_drapeauMpreneur$,strcharinfo(0);
+						if (.@CTF_COUNTMINFLAGER>=1) set .@CTF_COUNTMINFLAGER,0;
+					}
+					set .@CTF_drapeauMpris,drapeaupris;
+				}
+				callfunc "Variables_A_Zero";
+
+				detachrid;
+			}
+		}
+		set .@total, getarraysize($@ctf_db_2);
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+
+			
+			if (@ctf_killtot>=.@CTF_MAXKILL){						// Exactement les 4 mêmes calculs qu'au dessus (voir Remarque)
+				if (@ctf_killtot==.@CTF_MAXKILL && .@CTF_MAXKILLER$ != "NULL_789"){  
+					set .@CTF_MAXKILLER$,.@CTF_MAXKILLER$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTKILLER,.@CTF_COUNTKILLER+1;
+				} else { 
+					set .@CTF_MAXKILLER$,strcharinfo(0);
+					if (.@CTF_COUNTKILLER>=1) set .@CTF_COUNTKILLER,0;
+				}
+				set .@CTF_MAXKILL,@ctf_killtot;
+			}
+
+			if (@ctf_killtot<=.@CTF_MINKILL){
+				if (@ctf_killtot==.@CTF_MINKILL){ 
+					set .@CTF_MINKILLER$,.@CTF_MINKILLER$+",  "+strcharinfo(0);
+					set .@CTF_COUNTMINKILLER,.@CTF_COUNTMINKILLER+1;
+				} else {
+					set .@CTF_MINKILLER$,strcharinfo(0);
+					if ( .@CTF_COUNTMINKILLER>=1) set  .@CTF_COUNTMINKILLER,0;
+				}
+				set .@CTF_MINKILL,@ctf_killtot;
+			}
+
+			if (drapeaupris>=.@CTF_drapeaupris){
+				if (drapeaupris==.@CTF_drapeaupris && .@CTF_drapeaupreneur$ != "NULL_789"){ 
+					set .@CTF_drapeaupreneur$,.@CTF_drapeaupreneur$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTFLAGER,.@CTF_COUNTFLAGER+1;
+				} else {
+					set .@CTF_drapeaupreneur$,strcharinfo(0);
+					if (.@CTF_COUNTFLAGER>=1) set  .@CTF_COUNTFLAGER,0;
+				}
+				set .@CTF_drapeaupris,drapeaupris;
+			}
+
+			if (drapeaupris<=.@CTF_drapeauMpris){
+				if (drapeaupris==.@CTF_drapeauMpris){
+					set .@CTF_drapeauMpreneur$,.@CTF_drapeauMpreneur$+",  "+strcharinfo(0); 
+					set .@CTF_COUNTMINFLAGER,.@CTF_COUNTMINFLAGER+1;
+				} else {
+					set .@CTF_drapeauMpreneur$,strcharinfo(0);
+					if (.@CTF_COUNTMINFLAGER>=1) set .@CTF_COUNTMINFLAGER,0;
+				}
+				set .@CTF_drapeauMpris,drapeaupris;
+			}
+			callfunc "Variables_A_Zero";
+
+			detachrid;
+			}
+		}
+	}
+
+	// Annonce des statistiques
+
+	mapannounce "boy_ctf1", "              Partie Terminée", bc_map, 0x00FF00;
+	mapannounce "boy_ctf1", "Le score est de : "+ .team[1] +" pour les Rouges, et "+ .team[2] +" pour les Bleus.", bc_map, 0x00FF00;
+	if (.team[1]>.team[2]) 
+		mapannounce "boy_ctf1", "Bravo les rouges !", bc_map, 0xFF0000;
+	else if (.team[1]<.team[2]) 
+		mapannounce "boy_ctf1", "Bravo les Bleus !", bc_map, 0x00AAFF;
+	mapannounce "boy_ctf1", "Tableau des scores :", bc_map, 0x00FF00;
+	mapannounce "boy_ctf1", "Drapeaux Perdus : Rouges : " + .CTF_FlagperduR +" , Bleus : "+ .CTF_FlagperduB, bc_map, 0x00FF00;
+	mapannounce "boy_ctf1", "Nombre de morts au total : " + .CTF_KILLED, bc_map, 0x00FF00;
+	if (.@CTF_MAXKILL<=0) 
+		mapannounce "boy_ctf1",  "Vous avez été trop gentil cette fois... Il n'y a eu aucun meurtre.", bc_map, 0x00FF00;
+	else if (.@CTF_MAXKILL==.@CTF_MINKILL)
+		mapannounce "boy_ctf1",  "Vous avez tous tués le même nombre de personnes, belle coordination !", bc_map, 0x00FF00;
+	else {	
+		if (.@CTF_COUNTKILLER>=1)
+			mapannounce "boy_ctf1",  .@CTF_MAXKILLER$ + " sont les " + (.@CTF_COUNTKILLER + 1) + " plus meurtriers avec " + .@CTF_MAXKILL + " personne(s) tuée(s).", bc_map, 0x00FF00;
+		else 
+			mapannounce "boy_ctf1",  .@CTF_MAXKILLER$ + " est le plus meurtrier avec " + .@CTF_MAXKILL + " personne(s) tuée(s).", bc_map, 0x00FF00;
+		if (.@CTF_COUNTMINKILLER>=1)
+			mapannounce "boy_ctf1",  .@CTF_MINKILLER$ + " sont les " + (.@CTF_COUNTMINKILLER + 1) + " plus doux avec " + .@CTF_MINKILL + " personne(s) tuée(s).", bc_map, 0x00FF00;
+		else 
+			mapannounce "boy_ctf1",  .@CTF_MINKILLER$ + " est le plus doux avec " + .@CTF_MINKILL + " personne(s) tuée(s).", bc_map, 0x00FF00;
+	}
+
+	if (.@CTF_drapeaupris<=0) 
+		mapannounce "boy_ctf1",  "Personne n'a marqué de points...", bc_map, 0x00FF00;
+	else if (.@CTF_drapeaupris==.@CTF_drapeauMpris)
+		mapannounce "boy_ctf1",  "Vous avez tous marqués le même nombre de points, incroyable... !", bc_map, 0x00FF00;
+	else {	
+		if (.@CTF_COUNTFLAGER>=1)
+			mapannounce "boy_ctf1",  .@CTF_drapeaupreneur$ + " ont marqué le plus de points, avec " + .@CTF_drapeaupris + " drapeau(x) validé(s).", bc_map, 0x00FF00;
+		else
+			mapannounce "boy_ctf1",  .@CTF_drapeaupreneur$ + " a marqué le plus de points, avec " + .@CTF_drapeaupris + " drapeau(x) validé(s).", bc_map, 0x00FF00;
+		if (.@CTF_COUNTMINFLAGER>=1)
+			mapannounce "boy_ctf1",  .@CTF_drapeauMpreneur$ + " ont marqué le moins de points, avec " + .@CTF_drapeauMpris + " drapeau(x) validé(s).", bc_map, 0x00FF00;
+		else
+			mapannounce "boy_ctf1",  .@CTF_drapeauMpreneur$ + " a marqué le moins de points, avec " + .@CTF_drapeauMpris + " drapeau(x) validé(s).", bc_map, 0x00FF00;
+	}
+
+
+	// Changement des Statistiques Globales au serveur :
+
+	if (.@CTF_drapeaupris>=$CTF_drapeaupris) {
+
+		set $CTF_drapeaupreneur$, .@CTF_drapeaupreneur$ ;
+		set $CTF_drapeaupris,.@CTF_drapeaupris;
+		mapannounce "boy_ctf1",  "Nouveau Meilleur score dans les statistiques des meilleurs marqueurs de points : " + .@CTF_drapeauMpreneur$ , bc_map, 0x00FF00;
+		}
+
+	if (.@CTF_MAXKILL>=$CTF_MAXKILL) {
+		set $CTF_MAXKILLER$, .@CTF_MAXKILLER$ ;
+		set $CTF_MAXKILL,.@CTF_MAXKILL;
+		mapannounce "boy_ctf1",  "Nouveau Meilleur score dans les statistiques des tueurs les plus puissants : " + .@CTF_MAXKILLER$ , bc_map, 0x00FF00;
+		}
+	set $Rpoint,$Rpoint + .team[1];
+	set $Bpoint,$Bpoint + .team[2];
+	set $CTF_FlagperduR, $CTF_FlagperduR + .CTF_FlagperduR;
+	set $CTF_FlagperduB, $CTF_FlagperduB + .CTF_FlagperduB;
+	set $CTF_KILLED, $CTF_KILLED + .CTF_KILLED;
+	set .CTF_FlagperduR,0;
+	set .CTF_FlagperduB,0;
+	set .CTF_KILLED,0;
+		
+
+L_Clean:
+	set $@ctfevent_start, 0;
+	deletearray $@ctf_db_1, getarraysize($@ctf_db_1);
+	deletearray $@ctf_db_2, getarraysize($@ctf_db_2);
+	deletearray $@ctf_db_logout_1, getarraysize($@ctf_db_logout_1);
+	deletearray $@ctf_db_logout_2, getarraysize($@ctf_db_logout_2);
+	deletearray .team, getarraysize(.team);
+	set $@ctf_fb, 0;
+	set $@estpret,0;
+	set .@CTF_COUNTKILLER,0;
+	set .@CTF_COUNTMINFLAGER,0;
+	set .@CTF_COUNTFLAGER,0;
+	set .@CTF_COUNTMINKILLER,0;
+	set $@equipeRougeID,0;
+	set $@equipeBleuID,0;
+	set $ctf_modedejeu,0;
+	movenpc "ctf_bflag", 245,99;
+	movenpc "ctf_rflag", 37,99;
+	sleep 5000;
+	mapwarp "boy_ctf1", "payon",163,245;
+	end;
+
+OnTimer4000:
+	mapannounce "boy_ctf1", "5!",8;
+	soundeffectall "5.wav", 0, "boy_ctf1";
+	end;
+OnTimer5000:
+	mapannounce "boy_ctf1", "4!",bc_map;
+	soundeffectall "4.wav", 0, "boy_ctf1";
+	end;
+OnTimer6000:
+	mapannounce "boy_ctf1", "3!",bc_map;
+	soundeffectall "3.wav", 0, "boy_ctf1";
+	end;
+OnTimer7000:
+	mapannounce "boy_ctf1", "2!",bc_map;
+	soundeffectall "2.wav", 0, "boy_ctf1";
+	end;
+OnTimer8000:
+	mapannounce "boy_ctf1", "1!",bc_map;
+	soundeffectall "1.wav", 0, "boy_ctf1";
+	end;
+OnTimer9000:
+	set .@total, getarraysize($@ctf_db_1);
+	for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+		pcblockmove getelementofarray($@ctf_db_1, .@i),0;
+	}
+	set .@total, getarraysize($@ctf_db_2);
+	for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+		pcblockmove getelementofarray($@ctf_db_2, .@i),0;
+	}
+	soundeffectall "Play.wav", 0, "boy_ctf1";
+	end;
+
+
+OnTimer600000:
+if ($ctf_modedejeu == 15) {
+
+	mapannounce "boy_ctf1", "Attention, la partie va se terminer dans 5 minutes !",bc_map;
+
+}
+end;
+
+OnTimer900000:
+if ($ctf_modedejeu == 15 && .team[1] == .team[2]) {
+
+	mapannounce "boy_ctf1", "Egalité pour les deux équipes, la partie est donc ralongée. La prochaine équipe qui marque un point remporte la victoire !",bc_map;
+	set $ctf_modedejeu, 1;
+
+}else if ($ctf_modedejeu == 15) goto L_Stop;
+end;
+
+
+
+
+
+OnTimer1500000:
+if ($ctf_modedejeu == 30) {
+
+	mapannounce "boy_ctf1", "Attention, la partie va se terminer dans 5 minutes !",bc_map;
+
+}
+end;
+
+
+OnTimer1800000:
+if ($ctf_modedejeu == 30 && .team[1] == .team[2]) {
+
+	mapannounce "boy_ctf1", "Egalité pour les deux équipes, la partie est donc ralongée. La prochaine équipe qui marque un point remporte la victoire !",bc_map;
+	set $ctf_modedejeu, 1;
+
+}else if ($ctf_modedejeu == 30) goto L_Stop;
+end;
+
+
+
+
+
+
+OnTimer2300000:
+if ($ctf_modedejeu == 45) {
+
+	mapannounce "boy_ctf1", "Attention, la partie va se terminer dans 5 minutes !",bc_map;
+
+}
+end;
+
+
+OnTimer2600000:
+if ($ctf_modedejeu == 45 && .team[1] == .team[2]) {
+
+	mapannounce "boy_ctf1", "Egalité pour les deux équipes, la partie est donc ralongée. La prochaine équipe qui marque un point remporte la victoire !",bc_map;
+	set $ctf_modedejeu, 1;
+
+}else if ($ctf_modedejeu == 45) goto L_Stop;
+end;
+
+
+
+
+
+OnTimer3300000:
+if ($ctf_modedejeu == 60) {
+
+	mapannounce "boy_ctf1", "Attention, la partie va se terminer dans 5 minutes !",bc_map;
+
+}
+end;
+
+
+OnTimer3600000:
+if ($ctf_modedejeu == 60 && .team[1] == .team[2]) {
+
+	mapannounce "boy_ctf1", "Egalité pour les deux équipes, la partie est donc ralongée. La prochaine équipe qui marque un point remporte la victoire !",bc_map;
+	set $ctf_modedejeu, 1;
+
+}else if ($ctf_modedejeu == 60) goto L_Stop;
+end;
+
+
+
+
+
+OnPCKillEvent:
+	if(@ctf && $@ctfevent_start){
+		if($@ctf_fb == 0){
+			set $@ctf_fb, 1;
+			mapannounce "boy_ctf1", strcharinfo(0) + " fait couler les premières gouttes de SANG!", 16;
+			soundeffectall "FirstBlood.wav", 0, "boy_ctf1";
+		}
+		set @ctf_kill, @ctf_kill + 1;
+		set @ctf_killtot, @ctf_killtot + 1;
+		set .CTF_KILLED, .CTF_KILLED + 1 ;
+		if(gettimetick(2) - @ctf_time < 10){
+			set @ctf_time, gettimetick(2);
+			set @ctf_com, @ctf_com + 1;
+
+			function Stat_Best_SerialKiller {
+
+					if ($CTF_SERIEN<=getarg(0)){
+						set $CTF_SERIE$,strcharinfo(0);
+						set $CTF_SERIEN,getarg(0);
+						announce "Tu es maintenant dans les statistiques du meilleur tueur en série !", bc_self;
+					}
+			return;
+
+
+			}
+
+			switch(@ctf_com){
+				case 1: 					// 2 kills
+					announce "Double Meutre!", bc_self;
+					soundeffect "DoubleKill.wav",  0;
+					Stat_Best_SerialKiller(1);
+					break;
+				case 2:
+					announce "Triple Meutre!", bc_self;
+					soundeffect "TripleKill.wav", 0;
+					Stat_Best_SerialKiller(2);
+					break;
+				case 3:
+					announce "Multi Tuerie !", bc_self;
+					soundeffect "MultiKill.wav", 0;
+					Stat_Best_SerialKiller(3);
+					break;
+				case 4:
+					announce "Ultra Massacre !", bc_self;
+					soundeffect "UltraKill.wav", 0;
+					Stat_Best_SerialKiller(4);
+					break;
+				case 5:
+					announce "Mega Tuerie !", bc_self;
+					soundeffect "MegaKill.wav", 0;
+					Stat_Best_SerialKiller(5);
+					break;
+				case 6:
+					announce "TUEUR PROFESSIONEL !!", bc_self;
+					soundeffect "MonsterKill.wav", 0;
+					Stat_Best_SerialKiller(6);
+					break;
+				case 7:
+					announce "SERIAL KILLER !!", bc_self;
+					soundeffect "LudricousKill.wav", 0;
+					Stat_Best_SerialKiller(7);
+					break;
+				default:					 // Holy shit!
+					announce "IMBATTABLE !", bc_self;
+					soundeffect "HolyShit.wav", 0;
+					Stat_Best_SerialKiller(8);
+					break;
+			}
+			sleep2 3000;
+		} else {
+			set @ctf_time, gettimetick(2);
+			set @ctf_com, 0;
+		}
+		if(@ctf_kill > 30){
+			announce "TUEUR PSYCHOPATHE !!!", bc_self;
+			soundeffect "WickedSick.wav", 0;
+		} else if(@ctf_kill > 25){
+			announce "INVINCIBLE !!", bc_self;
+			soundeffect "Godlike.wav", 0;
+		} else if(@ctf_kill > 20){
+			announce "DOMINATION !", bc_self;
+			soundeffect "Dominating.wav", 0;
+		} else if(@ctf_kill > 15){
+			announce "ON NE PEUT PAS L'ARRETER !", bc_self;
+			soundeffect "Unstoppable.wav", 0;
+		} else if(@ctf_kill > 10){
+			announce "MASSACRE !", bc_self;
+			soundeffect "Rampage.wav", 0;
+		} else if(@ctf_kill > 5){
+			mapannounce "boy_ctf1", strcharinfo(0) + " a tué " + rid2name(killedrid) + ", il est en FURIE !!",16;
+			soundeffect "KillingSpree.wav", 0;
+		}
+	}
+	end;
+
+	
+	
+	
+	
+OnPCDieEvent:
+	if(@ctf && $@ctfevent_start){
+		set @ctf_com, 0;
+		set @ctf_time, 0;
+		if(@ctf_kill> 5){
+			mapannounce "boy_ctf1", rid2name(killerrid) + " a arrêté " + strcharinfo(0) + " dans son massacre!",16;
+		}
+		set @ctf_kill,0;
+		if(@ctf_taker){
+			if(getmapxy(.@m$,.@x,.@y,0) != 0)
+				end;
+			if(@ctf == 1){
+				if ($@ctf_btaken) enablenpc "ctf_bflag";
+				movenpc "ctf_bflag", .@x, .@y;
+				mapannounce "boy_ctf1", strcharinfo(0)+" vient de perdre le Drapeau Bleu!",bc_map,0x00AAFF;
+				set .CTF_FlagperduB, .CTF_FlagperduB + 1;
+				soundeffectall "BlueFlagDropped.wav", 0, "boy_ctf1";
+			}else{
+				if ($@ctf_rtaken) enablenpc "ctf_rflag";
+				movenpc "ctf_rflag", .@x, .@y;
+				mapannounce "boy_ctf1", strcharinfo(0)+" vient de perdre le Drapeau Rouge!",bc_map,0xFF0000;
+				set .CTF_FlagperduR, .CTF_FlagperduR + 1;
+				soundeffectall "RedFlagDropped.wav", 0, "boy_ctf1";
+			}
+			set @ctf_taker, 0;
+		}
+	}
+	end;
+	
+	
+	
+OnPCLogoutEvent:
+
+	
+	if ($@ctfevent_start == 0 && @ctf && strcharinfo(0) == getpartyleader(getcharid(1))) {
+           	if (@ctf==1){
+				set $@equipeRougeID,0;
+				set .@total, getarraysize($@ctf_db_1);
+				for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+					if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+						dispbottom "Votre groupe de Capture de Drapeau à été annulé car le votre chef s'est déconnecté.";
+						callfunc "Variables_A_Zero";
+						detachrid;
+					}
+				}
+				deletearray $@ctf_db_1, getarraysize($@ctf_db_1);
+				deletearray $@ctf_db_logout_1, getarraysize($@ctf_db_logout_1);
+			}
+
+
+           	else if (@ctf==2){
+				set $@equipeBleuID,0;	
+				set .@total, getarraysize($@ctf_db_2);
+				for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+					if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+						dispbottom "Votre groupe de Capture de Drapeau à été annulé car le votre chef s'est déconnecté.";
+						callfunc "Variables_A_Zero";
+						detachrid;
+					}
+				}
+			deletearray $@ctf_db_2, getarraysize($@ctf_db_2);
+			deletearray $@ctf_db_logout_2, getarraysize($@ctf_db_logout_2);
+
+
+			}
+
+			set $@estpret, 0;
+			set $@ctfevent_start, 0;
+			deletearray .team, getarraysize(.team);
+			set $@ctf_fb, 0;
+			set $@estpret,0;	
+			set .@CTF_COUNTKILLER,0;
+			set .@CTF_COUNTMINFLAGER,0;
+			set .@CTF_COUNTFLAGER,0;
+			set .@CTF_COUNTMINKILLER,0;
+			set $ctf_modedejeu,0;
+			end;
+			
+	}
+		
+	else if(@ctf && $@ctfevent_start > 0 ){
+		set ctf_li, 1;
+		callfunc "ctf_rem", @ctf;
+		warp "payon",163,245;
+		if(@ctf_taker){
+			if(getmapxy(.@m$,.@x,.@y,0) != 0)
+				end;
+			if(@ctf == 1){
+				if ($@ctf_btaken) enablenpc "ctf_bflag";
+				movenpc "ctf_bflag", .@x, .@y;
+				mapannounce "boy_ctf1", strcharinfo(0)+" s'est déconnecté et vient de perdre le Drapeau Bleu!",bc_map,0xFF0000;
+				set .CTF_FlagperduB, .CTF_FlagperduB + 1;
+				soundeffectall "BlueFlagDropped.wav", 0, "boy_ctf1";
+			}else{
+				if ($@ctf_rtaken) enablenpc "ctf_rflag";
+				movenpc "ctf_rflag", .@x, .@y;
+				mapannounce "boy_ctf1", strcharinfo(0)+" s'est déconnecté et vient de perdre le Drapeau Rouge!",bc_map,0x00AAFF;
+				set .CTF_FlagperduR, .CTF_FlagperduR + 1;
+				soundeffectall "RedFlagDropped.wav", 0, "boy_ctf1";
+			}
+		}else {
+			if(@ctf == 1)	mapannounce "boy_ctf1", strcharinfo(0)+" s'est déconnecté !",bc_map,0xFF0000;
+			else		mapannounce "boy_ctf1", strcharinfo(0)+" s'est déconnecté !",bc_map,0x00AAFF;
+		}
+
+
+		if (@ctf == 1 &&  $@ctfevent_start)
+			set getd("$@ctf_db_logout_1[" + getarraysize(getd("$@ctf_db_logout_1]"))), getcharid(0);
+		else if (@ctf == 2 &&  $@ctfevent_start)
+			set getd("$@ctf2_db_logout_2[" + getarraysize(getd("$@ctf2_db_logout_2]"))), getcharid(0);
+		
+		
+		if(@ctf && (getarraysize($@ctf_db_1) == 0 || getarraysize($@ctf_db_2) == 0) ){
+		
+			if(@ctf == 1)	mapannounce "boy_ctf1", "L'équipe Bleu est la dernière équipe en jeu !",bc_map,0x00AAFF;
+			else		mapannounce "boy_ctf1", "L'équipe Rouge est la dernière équipe en jeu !",bc_map,0xFF0000;
+			goto L_Stop;
+		}
+	
+		callfunc "Variables_A_Zero";
+	}
+	end;
+
+
+}
+
+
+//=============================================================
+// Script pour se désinscrire Fonction ABANDONEE 
+//=============================================================
+
+function	script	ctf_rem	{
+			  	if (getarg(0)==1){		
+					set @total, getarraysize($@ctf_db_1);
+					for(set @i, 0; @i < @total; set @i, @i + 1)
+						if (getcharid(0)==getelementofarray($@ctf_db_1, @i)) set @size,@i;
+					deletearray $@ctf_db_1[@size], 1;
+
+				}
+
+           		 	else if (getarg(0)==2){
+					set @total, getarraysize($@ctf_db_2);
+					for(set @i, 0; @i < @total; set @i, @i + 1)
+						if (getcharid(0)==getelementofarray($@ctf_db_2, @i)) set @size,@i;
+					deletearray $@ctf_db_2[@size], 1;
+
+			  	}
+	return;
+}
+
+
+//=============================================================
+// Script du Drapeau Rouge
+//=============================================================
+
+
+boy_ctf1,37,99,4	script	Drapeau Rouge::ctf_rflag	973,3,3,{
+end;
+OnTouch:
+	if(@ctf && $@ctfevent_start && Hp > 0){
+		if(@ctf == 1){
+			if($@ctf_rtaken != 0){
+				movenpc "ctf_rflag", 37, 99;
+				mapannounce "boy_ctf1", "Le Drapeau Rouge retourne à son camp grâce à "+strcharinfo(0)+"!",bc_map,0xFF0000;
+				soundeffectall "RedFlagReturned.wav", 0, "boy_ctf1";
+				set $@ctf_rtaken, 0;
+			}
+			end;
+		}
+		set $@ctf_rtaken, 1;
+		set @ctf_taker, 1;
+		mapannounce "boy_ctf1", "Drapeau Rouge capturé par "+strcharinfo(0)+"!",bc_map,0xFF0000;
+		soundeffectall "RedFlagTaken.wav", 0, "boy_ctf1";
+		disablenpc "ctf_rflag"; 								  // On intégre le disablenpc dans la boucle car sinon le npc s'enable tout seul (à cause de son skin il est impossible de le disable autrement)
+		
+		while (@ctf_taker==1){ 									  // Boucle infinit pour l'effet du porteur de drapeau
+		specialeffect2 548;
+		sleep2(500);
+		}
+	}
+	end;
+}
+
+//=============================================================
+// Script du Drapeau Bleu
+//=============================================================
+
+boy_ctf1,245,99,4	script	Drapeau Bleu::ctf_bflag	974,3,3,{
+end;
+OnTouch:
+	if(@ctf && $@ctfevent_start && Hp > 0){
+		if(@ctf == 2){
+			if($@ctf_btaken != 0){
+				movenpc "ctf_bflag", 245, 99;
+				mapannounce "boy_ctf1", "Le Drapeau Bleu retourne à son camp grâce à "+strcharinfo(0)+"!",bc_map,0x00AAFF;
+				soundeffectall "BlueFlagReturned.wav", 0, "boy_ctf1";
+				set $@ctf_btaken, 0;
+			}
+			end;
+		}
+		set $@ctf_btaken, 1;
+		set @ctf_taker, 1;
+		mapannounce "boy_ctf1", "Drapeau Bleu capturé par "+strcharinfo(0)+"!",bc_map,0x00AAFF;
+		soundeffectall "BlueFlagTaken.wav", 0, "boy_ctf1";
+		disablenpc "ctf_bflag"; 								  // On intégre le disablenpc dans la boucle car sinon le npc s'enable tout seul (à cause de son skin il est impossible de le disable autrement)
+		
+		while (@ctf_taker==1){ 									  // Boucle infinit pour l'effet du porteur de drapeau
+		specialeffect2 549;
+		sleep2(500);
+		}
+	}
+	end;
+}
+
+//=============================================================
+// Script de la base Rouge
+//=============================================================
+
+boy_ctf1,38,99,4,	script	Base Rouge::ctf_rbase	45,4,4,{
+	end;
+OnTouch:
+	if(@ctf && $@ctfevent_start){
+		if(@ctf == 1){
+			percentheal 100,100;
+		}
+		if(@ctf_taker && $@ctf_rtaken == 0){
+			set @ctf_taker, 0;
+			set $@ctf_takername$,strcharinfo(0);
+			set drapeaupris,drapeaupris+1;
+			donpcevent "ctf_sys::OnRedScore";
+		}
+	}
+	else if (getcharid(1)== 0){
+	mes "Voulez-vous partir du Capture the flag ?";
+	menu "Oui",-,"Non",M_Non;
+		
+	set ctf_li, 1;
+	callfunc "ctf_rem", @ctf;
+	warp "payon",163,245;
+	if(@ctf_taker){
+		if(getmapxy(.@m$,.@x,.@y,0) != 0)
+			end;
+		if(@ctf == 1){
+			if ($@ctf_btaken) enablenpc "ctf_bflag";
+			movenpc "ctf_bflag", .@x, .@y;
+			mapannounce "boy_ctf1", strcharinfo(0)+" est partit et vient de perdre le Drapeau Bleu!",bc_map,0xFF0000;
+			set .CTF_FlagperduB, .CTF_FlagperduB + 1;
+			soundeffectall "BlueFlagDropped.wav", 0, "boy_ctf1";
+		}else{
+			if ($@ctf_rtaken) enablenpc "ctf_rflag";
+			movenpc "ctf_rflag", .@x, .@y;
+			mapannounce "boy_ctf1", strcharinfo(0)+" est partit et vient de perdre le Drapeau Rouge!",bc_map,0x00AAFF;
+			set .CTF_FlagperduR, .CTF_FlagperduR + 1;
+			soundeffectall "RedFlagDropped.wav", 0, "boy_ctf1";
+		}
+	}else {
+		if(@ctf == 1)	mapannounce "boy_ctf1", strcharinfo(0)+"  est partit !",bc_map,0xFF0000;
+		else		mapannounce "boy_ctf1", strcharinfo(0)+"  est partit !",bc_map,0x00AAFF;
+	}
+
+
+	if (@ctf == 1 &&  $@ctfevent_start)
+		set getd("$@ctf_db_logout_1[" + getarraysize(getd("$@ctf_db_logout_1]"))), getcharid(0);
+	else if (@ctf == 2 &&  $@ctfevent_start)
+		set getd("$@ctf2_db_logout_2[" + getarraysize(getd("$@ctf2_db_logout_2]"))), getcharid(0);
+	
+	
+	if(@ctf && (getarraysize($@ctf_db_1) == 0 || getarraysize($@ctf_db_2) == 0) ){
+	
+		if(@ctf == 1)	mapannounce "boy_ctf1", "L'équipe Bleu est la dernière équipe en jeu !",bc_map,0x00AAFF;
+		else		mapannounce "boy_ctf1", "L'équipe Rouge est la dernière équipe en jeu !",bc_map,0xFF0000;
+		goto L_Stop;
+	}
+
+	callfunc "Variables_A_Zero";
+	end;
+	M_Non:
+	close;
+	end;
+	
+	}
+	end;
+}
+
+//=============================================================
+// Script de la base Bleu
+//=============================================================
+
+boy_ctf1,246,99,4,	script	Base Bleu::ctf_bbase	45,4,4,{
+	end;
+OnTouch:
+	if(@ctf && $@ctfevent_start){
+		if(@ctf == 2){
+			percentheal 100,100;
+		}
+		if(@ctf_taker && $@ctf_btaken == 0){
+			set @ctf_taker, 0;
+			set $@ctf_takername$,strcharinfo(0);
+			set drapeaupris,drapeaupris+1;
+			donpcevent "ctf_sys::OnBlueScore";
+		}
+	}
+	else if (getcharid(1)== 0){
+	mes "Voulez-vous partir du Capture the flag ?";
+	menu "Oui",-,"Non",M_Non;
+		
+	set ctf_li, 1;
+	callfunc "ctf_rem", @ctf;
+	warp "payon",163,245;
+	if(@ctf_taker){
+		if(getmapxy(.@m$,.@x,.@y,0) != 0)
+			end;
+		if(@ctf == 1){
+			if ($@ctf_btaken) enablenpc "ctf_bflag";
+			movenpc "ctf_bflag", .@x, .@y;
+			mapannounce "boy_ctf1", strcharinfo(0)+" est partit et vient de perdre le Drapeau Bleu!",bc_map,0xFF0000;
+			set .CTF_FlagperduB, .CTF_FlagperduB + 1;
+			soundeffectall "BlueFlagDropped.wav", 0, "boy_ctf1";
+		}else{
+			if ($@ctf_rtaken) enablenpc "ctf_rflag";
+			movenpc "ctf_rflag", .@x, .@y;
+			mapannounce "boy_ctf1", strcharinfo(0)+" est partit et vient de perdre le Drapeau Rouge!",bc_map,0x00AAFF;
+			set .CTF_FlagperduR, .CTF_FlagperduR + 1;
+			soundeffectall "RedFlagDropped.wav", 0, "boy_ctf1";
+		}
+	}else {
+		if(@ctf == 1)	mapannounce "boy_ctf1", strcharinfo(0)+"  est partit !",bc_map,0xFF0000;
+		else		mapannounce "boy_ctf1", strcharinfo(0)+"  est partit !",bc_map,0x00AAFF;
+	}
+
+
+	if (@ctf == 1 &&  $@ctfevent_start)
+		set getd("$@ctf_db_logout_1[" + getarraysize(getd("$@ctf_db_logout_1]"))), getcharid(0);
+	else if (@ctf == 2 &&  $@ctfevent_start)
+		set getd("$@ctf2_db_logout_2[" + getarraysize(getd("$@ctf2_db_logout_2]"))), getcharid(0);
+	
+	
+	if(@ctf && (getarraysize($@ctf_db_1) == 0 || getarraysize($@ctf_db_2) == 0) ){
+	
+		if(@ctf == 1)	mapannounce "boy_ctf1", "L'équipe Bleu est la dernière équipe en jeu !",bc_map,0x00AAFF;
+		else		mapannounce "boy_ctf1", "L'équipe Rouge est la dernière équipe en jeu !",bc_map,0xFF0000;
+		goto L_Stop;
+	}
+
+	callfunc "Variables_A_Zero";
+	end;
+	M_Non:
+	close;
+	end;
+	
+	}
+	end;
+}
+
+
+
+
+//=============================================================
+// Fonction d'inscription
+//=============================================================
+
+function	script	ctf_sign	{
+	set getd("$@ctf_db_" + getarg(0) + "[" + getarraysize(getd("$@ctf_db_" + getarg(0))) + "]"), getarg(1);
+	set @ctf, getarg(0);
+	set savepoint_map$,getsavepoint(0);
+	set savepoint_x,getsavepoint(1);
+	set savepoint_y,getsavepoint(2);
+	if(@ctf == 1)	{
+		dispbottom "Vous avez rejoint l'Equipe Rouge pour la Capture de Drapeaux!";
+        	set pal, getlook(7);
+        	setlook 7,146;
+	}
+	else	{
+		dispbottom "Vous avez rejoint l'Equipe Bleu pour la Capture de Drapeaux!";
+        	set pal, getlook(7);
+        	setlook 7,169;
+	}
+	return 1;
+}
+
+
+//=============================================================
+// Script du NPC
+//=============================================================
+
+
+payon,163,247,4	script	Capture de Drapeaux::CTF_DUDE	107,{
+
+cutin "CTFBOY",2;
+L_menu:
+	
+	if (getgmlevel() >=25){
+		mes "[Capture de Drapeaux]";
+		mes "Bonjour maître "+strcharinfo(0)+" !";
+		next;
+		menu "Menu Classique",Start_CTF_DUDE,"Menu GM",-;
+		mes "[Capture de Drapeaux]";
+		if ($@ctfevent_start)
+			mes "^FF0000 ATTENTION : Une partie est en cours !^000000";	
+		else 
+			mes "^00AAFF Aucune parties en cours !^000000";
+		next;
+		menu "Annuler",M_ANN,"Arrêter toute la partie",-,"Désinscrire l'équipe ^FF0000Rouge^000000",uninsc_red,"Désinscrire l'équipe ^00AAFFBleue^000000",uninsc_blue;
+	
+	
+		 mes "Partie annulée.";
+		set $@equipeRougeID,0;
+		close2; cutin "",255;
+		set .@total, getarraysize($@ctf_db_1);
+
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+				dispbottom "Votre groupe de Capture de Drapeau à été annulé par un GM.";
+				callfunc "Variables_A_Zero";
+				warp "payon",164,241;
+				detachrid;
+			}
+		}
+		deletearray $@ctf_db_1, getarraysize($@ctf_db_1);
+		deletearray $@ctf_db_logout_1, getarraysize($@ctf_db_logout_1);
+		
+		set $@equipeBleuID,0;
+
+		set .@total, getarraysize($@ctf_db_2);
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+			dispbottom "Votre groupe de Capture de Drapeau à été annulé par un GM.";
+			callfunc "Variables_A_Zero";
+			warp "payon",162,241;
+			detachrid;
+			}
+		}
+			
+		deletearray $@ctf_db_2, getarraysize($@ctf_db_2);
+		deletearray $@ctf_db_logout_2, getarraysize($@ctf_db_logout_2);
+		set $@ctfevent_start, 0;
+		deletearray .team, getarraysize(.team);
+		set $@ctf_fb, 0;
+		set $@estpret,0;	
+		set .@CTF_COUNTKILLER,0;
+		set .@CTF_COUNTMINFLAGER,0;
+		set .@CTF_COUNTFLAGER,0;
+		set .@CTF_COUNTMINKILLER,0;
+		set $ctf_modedejeu,0;
+		doevent "ctf_sys::L_Stop";
+		end;
+					
+					
+					
+		uninsc_red:
+		mes "Equipe ^FF0000Rouge^000000 annulée.";
+		set $@equipeRougeID,0;
+		close2; cutin "",255;
+		set .@total, getarraysize($@ctf_db_1);
+
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+				dispbottom "Votre groupe de Capture de Drapeau à été annulé par un GM.";
+				callfunc "Variables_A_Zero";
+				warp "payon",162,241;
+				detachrid;
+			}
+		}
+		deletearray $@ctf_db_1, getarraysize($@ctf_db_1);
+		deletearray $@ctf_db_logout_1, getarraysize($@ctf_db_logout_1);
+		set $@ctfevent_start, 0;
+		deletearray .team, getarraysize(.team);
+		set $@ctf_fb, 0;
+		set $@estpret,0;	
+		set .@CTF_COUNTKILLER,0;
+		set .@CTF_COUNTMINFLAGER,0;
+		set .@CTF_COUNTFLAGER,0;
+		set .@CTF_COUNTMINKILLER,0;
+		set $ctf_modedejeu,0;
+		end;
+		
+		uninsc_blue:
+		mes "Equipe ^00AAFFBleue^000000 annulée.";
+		set $@equipeBleuID,0;
+		close2; cutin "",255;
+
+		set .@total, getarraysize($@ctf_db_2);
+		for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+			if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+			dispbottom "Votre groupe de Capture de Drapeau à été annulé par un GM.";
+			callfunc "Variables_A_Zero";
+			warp "payon",164,241;
+			detachrid;
+			}
+		}
+		deletearray $@ctf_db_2, getarraysize($@ctf_db_2);
+		deletearray $@ctf_db_logout_2, getarraysize($@ctf_db_logout_2);
+		set $@ctfevent_start, 0;
+		deletearray .team, getarraysize(.team);
+		set $@ctf_fb, 0;
+		set $@estpret,0;	
+		set .@CTF_COUNTKILLER,0;
+		set .@CTF_COUNTMINFLAGER,0;
+		set .@CTF_COUNTFLAGER,0;
+		set .@CTF_COUNTMINKILLER,0;
+		set $ctf_modedejeu,0;
+		end;
+
+		
+					
+					
+	
+	
+	}
+	
+	START_CTF_DUDE:
+	if ($@ctfevent_start && ($@ctf_db_logout_1 == getcharid(0) || $@ctf_db_logout_2 == getcharid(0) )) goto A_Logout; 
+	if($@estpret == 5 && @ctf) goto Menu_Fin;
+	if($@estpret == 5 || ($@equipeBleuID != 0 && $@equipeRougeID !=0) && (getcharid(1) != $@equipeRougeID && getcharid(1) != $@equipeBleuID)) {
+	mes "[Capture de Drapeaux]";
+	mes "Une partie est déjà en cours, veuillez repasser plus tard.";
+	mes "Bonne journée.";
+	close2; cutin "",255; close;
+	}
+	mes "[Capture de Drapeaux]";
+	mes "^FF0000Equipe Rouge^000000 - " + getarraysize($@ctf_db_1);
+	mes "^00AAFFEquipe Bleu^000000 - " + getarraysize($@ctf_db_2);
+	switch(select("Inscriptions","Voir les membres des équipes","Demarrer la partie","Statistiques","Informations")){
+		case 1:
+			next;
+
+
+			if ( strcharinfo(0) != getpartyleader(getcharid(1)) && @ctf == 0 ) {
+				mes "[Capture de Drapeaux]";
+				mes "Je dois parler au chef de votre équipe !";
+			  	close2; cutin "",255; close;
+			}
+
+
+			if ( strcharinfo(0) == getpartyleader(getcharid(1)) ) {
+	
+			 	if(@ctf){
+               		 		mes "[Capture de Drapeaux]";
+           		 		mes "Vous avez déjà inscrit votre équipe, voulez-vous annuler son inscription?";
+			 		menu "Non",-,"Oui",M_OUI;
+               			 
+					close2; cutin "",255; close;
+
+					M_OUI:
+
+			 		 mes "Inscription annulée.";
+			  		if (@ctf==1){		
+						set $@equipeRougeID,0;
+						close2; cutin "",255;
+						set .@total, getarraysize($@ctf_db_1);
+
+						for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+							if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+								dispbottom "Votre groupe de Capture de Drapeau à été annulé.";
+								callfunc "Variables_A_Zero";
+								detachrid;
+							}
+						}
+					deletearray $@ctf_db_1, getarraysize($@ctf_db_1);
+					deletearray $@ctf_db_logout_1, getarraysize($@ctf_db_logout_1);
+					}
+
+
+           		 	else if (@ctf==2){
+						set $@equipeBleuID,0;
+						close2; cutin "",255;
+	
+						set .@total, getarraysize($@ctf_db_2);
+						for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+							if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+							dispbottom "Votre groupe de Capture de Drapeau à été annulé.";
+							callfunc "Variables_A_Zero";
+							detachrid;
+							}
+						}
+					deletearray $@ctf_db_2, getarraysize($@ctf_db_2);
+					deletearray $@ctf_db_logout_2, getarraysize($@ctf_db_logout_2);
+
+
+			  		}
+
+					set $@ctfevent_start, 0;
+					deletearray .team, getarraysize(.team);
+					set $@ctf_fb, 0;
+					set $@estpret,0;	
+					set .@CTF_COUNTKILLER,0;
+					set .@CTF_COUNTMINFLAGER,0;
+					set .@CTF_COUNTFLAGER,0;
+					set .@CTF_COUNTMINKILLER,0;
+					set $ctf_modedejeu,0;
+					end;
+				}
+
+			           		 
+			
+
+			mes "[Capture de Drapeaux]";
+
+			if ($@equipeRougeID == 0 && $@equipeBleuID == 0){
+				mes "Quelle équipe souhaitez-vous faire rejoindre votre groupe?";
+				initnpctimer;
+          			menu "^FF0000Equipe Rouge^000000",Redteam,"^00AAFFEquipe Bleu^000000",Bleueteam;
+                       	
+			}else if ($@equipeRougeID!=0) 
+                        	   	goto Bleueteam;
+			 else if  ($@equipeBleuID!=0) 
+                        	   	goto Redteam;
+		
+
+		
+
+          		      Redteam:
+					set $@equipeRougeID,getcharid(1);
+                        	   	next;
+					mes "[Capture de Drapeaux]";
+							mes "Votre équipe est maintenant l'^FF0000Equipe Rouge^000000!";
+							getpartymember getcharid(1),2;
+							set .@partymembercount,$@partymembercount;
+							copyarray .@partymemberaid[0],$@partymemberaid[0],.@partymembercount;
+							close2; cutin "",255;
+							detachrid;
+							set .@i, 0;
+							for(set .@i, 0; .@i < .@partymembercount; set .@i, .@i + 1){
+								if (attachrid(getelementofarray(.@partymemberaid, .@i))){
+									callfunc "ctf_sign", 1, playerattached();
+									detachrid;
+								}
+							}
+						end;
+						
+
+               		    Bleueteam:
+							set $@equipeBleuID,getcharid(1);
+		                    next;
+							mes "[Capture de Drapeaux]";
+							mes "Votre équipe est maintenant l'^00AAFFEquipe Bleue^000000!";
+							getpartymember getcharid(1),2;
+							set .@partymembercount,$@partymembercount;
+							copyarray .@partymemberaid[0],$@partymemberaid[0],.@partymembercount;
+							close2; cutin "",255;
+							detachrid;
+							set .@i, 0;
+							for(set .@i, 0; .@i < .@partymembercount; set .@i, .@i + 1){
+								if (attachrid(getelementofarray(.@partymemberaid, .@i))) {
+									callfunc "ctf_sign", 2, playerattached();
+									detachrid;
+								}
+							}
+						end;
+						
+
+		} 
+			 if(@ctf){
+               		 	mes "[Capture de Drapeaux]";
+           		 	mes "Vous êtes inscrit, veuillez attendre que votre chef prenne une décision !";
+			 }           		 
+                	close2; cutin "",255; close;
+
+
+
+
+
+
+		case 2:
+			select "^FF0000Equipe Rouge^000000","^00AAFFEquipe Bleu^000000";
+            set .@total, getarraysize(getd("$@ctf_db_" + @menu));
+			mes "-----------------------------------";
+			if (.@total == 0) mes "Personne n'est encore inscrit dans cette équipe.";
+			for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+				mes rid2name(getelementofarray(getd("$@ctf_db_" + @menu), .@i));
+			}
+			next;
+			goto L_menu;
+
+		case 3:
+			next;
+	if ( strcharinfo(0) != getpartyleader(getcharid(1)) ){
+               		 	mes "[Capture de Drapeaux]";
+           		 	mes "Seul le Chef d'équipe peut choisir de démarrer la partie.";
+                		close2; cutin "",255; close;
+
+	}
+			getpartymember getcharid(1);
+			set @partymembercount,$@partymembercount;
+			if (@ctf==1){
+				if (@partymembercount != getarraysize($@ctf_db_1)) {
+               		mes "[Capture de Drapeaux]";
+           		 	mes "^FF0000Attention, le nombre d'inscrits ne correspond pas au nombre de joueurs dans votre équipe! Annulez, puis réinscrivez l'équipe entière pour que tout le monde soit en jeu !^000000";
+					next;
+					menu "Annuler",M_ANN,"Continuer quand même",-;
+				}
+				npctalk "L'équipe Rouge est prête, " + strcharinfo(0) + " souhaite démarrer la partie.";
+				if($@estpret==2){
+					set .leader$,strcharinfo(0);
+					goto Menu_Fin;
+				}
+			set $@estpret,1;
+			}
+			else if (@ctf==2){
+				if (@partymembercount != getarraysize($@ctf_db_2)) {
+               		mes "[Capture de Drapeaux]";
+           		 	mes "^FF0000Attention, le nombre d'inscrits ne correspond pas au nombre de joueurs dans votre équipe! Annulez, puis réinscrivez l'équipe entière pour que tout le monde soit en jeu !^000000";
+					next;
+					menu "Annuler",M_ANN,"Continuer quand même",-;
+				}
+				npctalk "L'équipe Bleue est prête, " + strcharinfo(0) + " souhaite démarrer la partie.";
+				if($@estpret==1) {
+					set .leader$,strcharinfo(0);
+					goto Menu_Fin;
+				}
+			set $@estpret,2;
+
+			}
+			else {
+				mes "[Capture de Drapeaux]";
+				mes "Vous n'êtes pas inscrit.";
+			}
+			break;
+			
+			M_ANN:
+            close2; cutin "",255; close;
+			
+
+
+		case 4:
+			next;
+			mes "Nombre de parties jouées : "+($CTFBgagne+$CTFRgagne);
+			mes "Nombre de parties gagnées :";
+			mes "^00AAFFBleus : " + $CTFBgagne + ", ^FF0000Rouges : " + $CTFRgagne;
+			mes "^000000Nombre de points gagnés :";
+			mes "^00AAFFBleus : " + $Bpoint + ",^FF0000 Rouges : " + $Rpoint;
+			mes "^000000Nombre de tentatives échouées : ";
+			mes "^00AAFFBleus : " + $CTF_FlagperduB + ",^FF0000 Rouges : " + $CTF_FlagperduR;
+			next;
+			mes "^000000Meilleur Tueur : ";
+			mes "^FF0000"+$CTF_MAXKILLER$ ;
+			mes "^000000Avec : ";
+			mes "^FF0000"+$CTF_MAXKILL + "  tués.";
+			mes "^000000Meilleur Tueur en série :";
+			mes "^FF0000"+$CTF_SERIE$;
+					switch ($CTF_SERIEN){
+						case 0:
+							mes "Il n'y a encore aucun tueur en série.";
+							break;
+						case 1:
+							mes "Double Meutre ( 2 tués )";
+							break;
+						case 2:
+							mes "Triple Meutre ( 3 tués )";
+							break;
+						case 3:
+							mes "Multi Tuerie ( 4 tués )";
+							break;
+						case 4:
+							mes "Ultra Massacre ( 5 tués )";
+							break;
+						case 5:
+							mes "Mega Tuerie ( 6 tués )";
+							break;
+						case 6:
+							mes "Tueur Professionel ( 7 tués )";
+							break;
+						case 7:
+							mes "Serial Killer ( 8 tués )";
+							break;
+						default:
+							mes "^FFAA00Invincible !!! ( " + $CTF_SERIEN + " tués )";
+							break;
+
+
+
+					}
+			next;
+			mes "^000000Meilleur marqueur de points : ";
+			mes "^FF0000"+$CTF_drapeaupreneur$;
+			mes "^000000Avec : ";
+			mes "^FF0000"+$CTF_drapeaupris + "  drapeaux validés.";
+			next;
+			goto L_menu;
+
+
+		case 5:
+			next;
+			mes "[Capture de Drapeaux]";
+			mes "Le but du jeu est de capturer le drapeau de l'équipe adverse et de le rappoter dans son camp... Tout en empêchant l'ennemi de faire la même chose, bien entendu!";
+			next;
+			goto L_menu;
+	
+
+
+	}
+	close2; cutin "",255; close;
+
+
+
+		Menu_Fin:
+		if (.leader$ != strcharinfo(0)){
+
+			mes "Je ne parle qu'à " + .leader$ + " pour la configuration de la partie.";
+				close2; cutin "",255; close;
+
+		}
+		if (.leader$ ==.leader2$ ){
+		
+			mes "[Capture de Drapeaux]";
+			mes "Confirmer les paramètres actuels?";
+			next;
+			switch (select("Oui","Non")){
+				case 1:
+				close2; cutin "",255;
+				set .leader2$,0;
+				set .leader$,0;
+				stopnpctimer;
+				donpcevent "ctf_sys::OnStart";
+				break;
+				case 2:
+				set $@ctf_rew,0;
+				set $ctf_modedejeu,69;
+			
+			}
+		}
+
+		set $@estpret,5;
+		if (@ctf==1)
+		set .leader2$,(getpartyleader ($@equipeBleuID));
+		else set .leader2$,(getpartyleader ($@equipeRougeID));
+		if ($ctf_modedejeu == 69) {
+		npctalk strcharinfo(0) + " a refusé la configuration  de " + .leader2$ +", il en choisit une autre.";
+		goto M_Joueur_Settings;
+		}
+		npctalk "Les équipes sont prêtes, vous devez maintenant selectionner le mode de jeu entre un match à point, ou un match à temps.";
+
+		M_Joueur_Settings:
+		mes "Les équipes sont prêtes, vous devez maintenant selectionner le mode de jeu.";
+		next;
+		switch (select("Match à Point","Match à Temps","Annuler la partie","Activer les Paris","Se concerter")){
+
+			case 1:
+			npctalk strcharinfo(0) + "a choisi un match à point. Choisissez maintenant le nombre de points pour gagner. (0 pour annuler)";
+			input $@ctf_rnd;
+
+			if ($@ctf_rnd==0){
+				npctalk "Je vous laisse réfléchir...";
+				close2; cutin "",255; close;	
+				break;
+			} else {
+				npctalk strcharinfo(0) + " a choisi " + $@ctf_rnd + " points pour gagner la partie, en attente de la confirmation de " + .leader2$ + ".";
+				set $ctf_modedejeu,1;
+				close2;
+				goto Commencer_CTF;
+			}
+			break;
+
+
+			function Match_A_Temps {
+				npctalk strcharinfo(0) + " a choisi une partie de " + getarg(0) + " minutes, en attente de la confirmation de " + .leader2$ + ".";
+				set $ctf_modedejeu,getarg(0);
+				close2;
+				goto Commencer_CTF;
+			}
+			case 2:
+			npctalk strcharinfo(0) + "a choisi un match à temps. Choisissez maintenant le temps de jeu entre 15, 30, 45 minutes ou 1 heure.";
+
+			switch (select("15 Minutes","30 Minutes","45 Minutes","1 Heure","Se concerter")){
+
+				case 1:
+				Match_A_Temps(15);
+				break;
+
+				case 2:
+				Match_A_Temps(30);
+				break;
+
+				case 3:
+				Match_A_Temps(45);
+				break;
+
+				case 4:
+				Match_A_Temps(60);
+				break;
+
+				case 5:
+				npctalk "Je vous laisse réfléchir...";
+				close2; cutin "",255; close;	
+				break;
+			}
+
+			break;
+
+			case 3:
+		Player_Annule:
+			mes "Vous annulez la partie.";
+			npctalk strcharinfo(0) + " a décidé d'annuler la partie.";
+			close2;
+			cutin "",255;
+			set $@equipeRougeID,0;
+			set $@equipeBleuID,0;
+			set $@estpret,0;
+			set .leader2$,0;
+			set .leader$,0;
+			set .@total, getarraysize($@ctf_db_1);
+			for(set .@i, 0; .@i < .@total ; set .@i, .@i + 1){
+
+				if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+					callfunc "Variables_A_Zero";
+					detachrid;
+				}
+			}
+			set .@total, getarraysize($@ctf_db_2);
+			for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+				if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+					callfunc "Variables_A_Zero";
+					detachrid;
+				}
+			}
+
+			deletearray $@ctf_db_1, getarraysize($@ctf_db_1);
+			deletearray $@ctf_db_2, getarraysize($@ctf_db_2);
+			end;
+			break;
+
+			case 4:		
+			if ($@ctf_rew == 0){
+				npctalk strcharinfo(0) + " a choisi d'activer les paris. Il choisit une somme à parier, tout le monde doit la payer, les gagnants remportent le double de la somme misée.";
+				input $@ctf_rew;
+				set $@ctf_rew, ($@ctf_rew + $@ctf_rew);
+
+				npctalk strcharinfo(0) + " pose la mise à " + ($@ctf_rew/2) + " Zenys. Les gagnants recevront donc " + $@ctf_rew + " Zenys. Vérifiez si vous possédez assez d'argent.";
+
+			}else {
+				npctalk strcharinfo(0) + " a choisi de désactiver les paris.";
+				set $@ctf_rew,0;
+			}
+			goto M_Joueur_Settings;
+			break;
+
+			case 5:			
+			npctalk "Je vous laisse réfléchir...";
+			close2; cutin "",255; close;
+			break;
+		}
+	
+	close2; cutin "",255;
+	end;
+
+
+
+
+Commencer_CTF:
+
+
+set .leader$,.leader2$;
+end;
+
+	OnTimer900000:
+	npctalk "Vous êtes trop lent pour vous décider, j'annule tout.";
+			set $@equipeRougeID,0;
+			set $@equipeBleuID,0;
+			set $@estpret,0;
+			set .leader2$,0;
+			set .leader$,0;
+			set .@total, getarraysize($@ctf_db_1);
+			for(set .@i, 0; .@i < .@total ; set .@i, .@i + 1){
+
+				if (attachrid(getelementofarray($@ctf_db_1, .@i))){
+					callfunc "Variables_A_Zero";
+					detachrid;
+				}
+			}
+			set .@total, getarraysize($@ctf_db_2);
+			for(set .@i, 0; .@i < .@total; set .@i, .@i + 1){
+				if (attachrid(getelementofarray($@ctf_db_2, .@i))){
+					callfunc "Variables_A_Zero";
+					detachrid;
+				}
+			}
+
+			deletearray $@ctf_db_1, getarraysize($@ctf_db_1);
+			deletearray $@ctf_db_2, getarraysize($@ctf_db_2);
+	deletearray $@ctf_db_logout_1, getarraysize($@ctf_db_logout_1);
+	deletearray $@ctf_db_logout_2, getarraysize($@ctf_db_logout_2);
+	
+	stopnpctimer;
+	end;
+	
+	
+	
+OnInit:
+	set $@ctf_rnd, 1;
+	set $@ctf_rew, 0;
+	set $@estpret,0;
+	set $ctf_modedejeu,0;
+	end;
+	
+	
+	
+A_Logout:
+
+	mes "[Capture de Drapeaux]";
+	mes "Vous avez été déconnecté durant le match de Capture de Drapeaux, voulez-vous retourner dans l'arène?";
+	next;
+	switch(select("Oui","Non")){
+		case 1:
+		if ($@ctf_db_logout_1 == getcharid(0)){
+        callfunc "ctf_sign", 1, playerattached();
+		dispbottom "Vous faîtes partie de l'Equipe Rouge.";
+		dispbottom "Vous devez prendre le Drapeau Bleu au Sud, et le rapporter dans votre camp!";
+		mapannounce "boy_ctf1", strcharinfo(0)+" est de retour dans la partie !",bc_map,0xFF0000;
+        setlook 7,146;
+		warp "boy_ctf1",37,94;
+		savepoint "boy_ctf1",37,94;
+		
+		}
+		
+		if ($@ctf_db_logout_2 == getcharid(0)){
+        callfunc "ctf_sign", 2, playerattached();
+		dispbottom "Vous faîtes partie de l'Equipe Bleue.";
+		dispbottom "Vous devez prendre le Drapeau Rouge au Nord, et le rapporter dans votre camp!";
+		mapannounce "boy_ctf1", strcharinfo(0)+" est de retour dans la partie !",bc_map,0x00AAFF;
+        setlook 7,169;
+		warp "boy_ctf1",245,92;
+		savepoint "boy_ctf1",245,92;
+		
+		}	
+		
+		case 2:
+	mes "[Capture de Drapeaux]";
+	mes "A bientot.";
+		close;
+	
+	
+	}
+	
+	
+	
+	
+}
+
+
+
+function	script	ctf_stats1	{
+
+	// Calcul des Statistiques FONCTION ABANDONNEEE (voir Remarque)
+
+
+			if (getarg(0)>=getarg(1)){
+			if (getarg(0)==getarg(1) && getarg(0) != 0)  set getarg(2),getarg(2)+",  "+getarg(3); 
+				else set getarg(2),getarg(3);
+			set getarg(1),getarg(0);
+			}
+}
