@@ -1,0 +1,304 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//===== eAthena Script =======================================
+//= Colored Beanie Book Of Ymir
+//===== By: ==================================================
+//= MageGaHell
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= eAthena
+//===== Description: =========================================
+//= Quête pour fabriquer les bonnets (Beanies/Fur Hat) colorés.
+//===== Additional Comments: =================================
+//= 1.1 Fully working =3
+//============================================================
+
+//Gosse 1
+xmas,204,244,4	script	Myri	891,{
+
+mes "[Myri]";
+mes "Chuuut! Sois plus discret!";
+mes "Je joue à cache-cache!";
+if ((bonnets > 0)&&(bonnets < 5)){
+next;
+menu "Ta grand-mère te cherche.",-,"Oh, pardon!",L_end;
+if (bonnetsmyri != 0) {
+mes "[Myri]";
+mes "Oui je sais... Mais je joue encore cinq minutes et après je rentre, c'est promis!";
+close; }
+mes "[Myri]";
+mes "Oh! Je n'avais pas vu l'heure!";
+mes "Désolé, désolé! Je vais rentrer bientôt!";
+set bonnets, bonnets +1;
+set bonnetsmyri,1;
+close;
+
+L_end:
+mes "[Myri]";
+mes "Merci! Ne révèle à personne l'endroit où je me cache!";
+close;
+}
+close;
+
+}
+
+//Gosse 2
+xmas,70,140,4	script	Solven	797,{
+
+mes "[Solven]";
+mes "Attention! Je joue à cache-cache! Si tu restes là, on va m'trouver!";
+if ((bonnets > 0)&&(bonnets < 5)){
+next;
+menu "Ta grand-mère te cherche.",-,"Oh, pardon!",L_end;
+if (bonnetssolven != 0) {
+mes "[Solven]";
+mes "Oui je sais... Mais je joue encore cinq minutes et après je rentre, c'est promis!";
+close; }
+mes "[Solven]";
+mes "Oh! Je n'avais pas vu l'heure!";
+mes "Désolé, désolé! Promis, je rentre bientôt!";
+set bonnets, bonnets +1;
+set bonnetssolven,1;
+close;
+
+L_end:
+mes "[Solven]";
+mes "Merci! Ne révèle à personne l'endroit où je me cache!";
+close;
+}
+close;
+
+}
+
+//Gosse 3
+xmas_fild01,190,113,4	script	Kjortan	752,{
+
+mes "[Kjortan]";
+mes "Bonjour. Collègue d'aventure?";
+mes "Faîtes attention, ces régions glaciales peuvent être mortelles...";
+next;
+mes "[Kjortan]";
+mes "N'hésitez pas à vous réfugier au village de Lutie, plus au Nord.";
+mes "Il y fait moins froid et les habitants sont accueillants.";
+if ((bonnets > 0)&&(bonnets < 5)&&(bonnetshyriole == 0)){
+next;
+menu "Que faîtes-vous ici?.",-,"Bon conseil!",L_end;
+mes "[Kjortan]";
+mes "Oh, je fais partie d'un groupe d'aventurier qui explore cette région.";
+mes "Mais bon, là, on est un  peu bloqués...";
+next;
+mes "[Kjortan]";
+mes "On a trouvé un gosse à moitié gelé. Les autres le soignent et le réchauffe à l'intérieur pendant que je monte la garde.";
+next;
+menu "Justement, je cherche un enfant.",-,"Ah, bon, très bien.",L_end;
+mes "[Kjortan]";
+mes "Ah oui?";
+mes "C'est peut-être le même... Mais comment savoir?";
+mes "Nous ne pouvons pas laisser un enfant entre les mains de n'importe qui...";
+next;
+mes "[Kjortan]";
+mes "Connaîtriez-vous son nom, par hasard?";
+next;
+input @nom$;
+next;
+if (@nom$ == "Hyriole"){
+set bonnets, bonnets + 1;
+set bonnetshyriole,1;
+mes "[Kjortan]";
+mes "Oui, c'est ça. C'était écrit dans son drôle de bonnet coloré.";
+mes "Allez rassurer ces parents. Nous le conduirons en ville dès qu'il se sera un peu réchauffé.";
+close;
+}
+else{
+mes "[Kjortan]";
+mes "Hummm, on ne doit pas parler du même gamin, alors...";
+mes "Bonne recherche.";
+close;
+}
+
+L_end:
+mes "[Kjortan]";
+mes "Bon vent d'hiver, aventurier!";
+close;
+}
+close;
+
+}
+
+//Fabriquant de bonnets
+xmas,96,231,4	script	Wollenna	892,{
+
+if (bonnets == 4){goto L_hat;}
+if ((bonnets > 0)&&(bonnets < 5)){goto L_cherche;}
+
+mes "[Wollenna]";
+mes "Ah, la neige... C'est fort beau, n'est-ce pas?";
+mes "Mais également... dangereux!";
+next;
+mes "[Wollenna]";
+mes "Ici, le froid serait mortel, sans la magie des Lutins qui protègent la ville.";
+mes "Et même comme ça, nous subissons parfois de rudes tempêtes de neige.";
+next;
+mes "[Wollenna]";
+mes "C'est pour ça qu'il vaut mieux sortir bien couvert.";
+mes "Moi, par exemple, je tricote des bonnets pour mes petites enfants...";
+next;
+mes "[Wollenna]";
+mes "Mais je vieillis et ma vue baisse sérieusement. Avec tout ce blanc, je n'arrive plus à voir les enfants qui jouent dans la neige...";
+next;
+mes "[Wollenna]";
+mes "J'ai alors eu l'idée de teindre les bonnets blanc de mes petits-enfants!";
+mes "Un rose, un bleu, un jaune! Comme ça, je ne les perds pas de vue!";
+next;
+mes "[Wollenna]";
+mes "Enfin... C'est ce que j'espérais... Mais ces petits chenapans s'amusent à jouer à cache-cache!";
+mes "Cela fait des heures... Je suis un peu inquiète.";
+next;
+menu "Je peux aller voir où ils sont.",L_begin,"Bah, ils vont finir par rentrer.",-;
+L_end:
+mes "[Wollenna]";
+mes "A mon âge, on se fait un sang d'encre.";
+mes "Plus qu'à attendre...";
+close;
+
+L_begin:
+mes "[Wollenna]";
+mes "Oh, vous feriez ça!";
+mes "Je vous en serais infiniment reconnaissante!";
+next;
+mes "[Wollenna]";
+mes "J'ai trois petits enfants: Myri, Solven et Hyriole.";
+mes "Je sais qu'ils sont partis jouer à cache-cache dans le village.";
+next;
+mes "[Wollenna]";
+mes "Enfin... J'espère qu'ils n'en sont pas sortis. Hyriole est un peu aventureux.";
+mes "Accepteriez-vous de les retrouver pour moi?";
+next;
+menu "Oui, bien sûr.",-,"Désolé, je n'ai pas le temps.",L_end;
+set bonnets, 1;
+mes "[Wollenna]";
+mes "Milles merci! Je vous attends ici!";
+close;
+
+L_cherche:
+mes "[Wollenna]";
+mes "Oooh, Myri, Solven et Hyriole, incorrigible chenapans! Vous ne les avez pas encore tous trouvés?";
+if (bonnets == 2){ mes "Je me demande où sont les deux autres... J'espère qu'ils vont bien!";}
+if (bonnets == 3){ mes "Je me demande où se trouve le dernier gredin...";}
+close;
+
+L_hat:
+mes "[Wollenna]";
+mes "Oh, merci! Vous avez retrouvé tous mes petits enfants...";
+mes "Je les punirais pour nous avoir tous inquiétés comme ça!";
+next;
+mes "[Wollenna]";
+mes "Mais vous avez l'air frigorifié après avoir couru dans la neige comme ça...";
+mes "Et c'est ma faute!";
+next;
+mes "[Wollenna]";
+mes "Pour me faire pardonner, que diriez-vous que je vous tricote un bonnet coloré?";
+next;
+menu "J'en aimerais un rose.",L_rose,"Un bleu, s'il vous plait.",L_bleu,"Un jaune pâle!",L_grey,"Non, ça ira.",-;
+L_fin:
+mes "[Wollenna]";
+mes "Comme vous voulez. N'hésitez pas à revenir me voir si vous changez d'avis!";
+close;
+
+
+L_rose:
+if ((countitem(719) > 0)&&(countitem(741) > 4)&&(countitem(2203) > 0)&&(countitem(5076) > 0)&&(Zeny > 49999)){goto L_rosemake;}
+mes "[Wollenna]";
+mes "Pour vous fabriquer un ^FF1493Bonnet Rose^000000, je vais avoir besoin de quelques fournitures...";
+next;
+mes "[Wollenna]";
+mes "Il me faudrait ^FF1493un Bonnet^000000, ^FF14935 porings dolls^000000 et ^FF1493une Amethyst^000000";    
+mes "J'aurais aussi besoin d'une ^FF1493paire de lunettes^000000 et de ^FF149350 000 Zenys^000000";
+next;
+mes "[Wollenna]";
+mes "Revenez me voir quand vous aurez tout ça!";
+close;
+
+L_rosemake: 
+mes "[Wollenna]";
+mes "Oh, vous avez tout ce qu'il faut pour que je vous fasse un ^FF1493Bonnet Rose^000000!";
+mes "Vous le voulez tout de suite?";
+next; 
+menu "Oui!",-,"Finalement, peut-être pas.",L_fin;
+delitem 719,1;
+delitem 741,5;
+delitem 2203,1;
+delitem 5076,1;
+set Zeny, Zeny - 50000;
+getitem 5237,1;
+mes "[Wollenna]";
+mes "Voici votre ^FF1493Bonnet Rose^000000!";
+mes "Merci encore d'avoir retrouvé mes petits-enfants.";
+mes "N'hésitez pas à revenir me voir.";
+close;
+
+
+
+L_bleu:
+if ((countitem(720) > 0)&&(countitem(726) > 0)&&(countitem(2203) > 0)&&(countitem(5076) > 0)&&(Zeny > 49999)){goto L_bleumake;}
+mes "[Wollenna]";
+mes "Pour vous fabriquer un ^00008BBonnet Bleu^000000, je vais avoir besoin de quelques fournitures...";
+next;
+mes "[Wollenna]";
+mes "Il me faudrait ^00008Bun Bonnet^000000, ^00008Bun Saphir^000000 et ^00008Bune Aquamarine^000000";    
+mes "J'aurais aussi besoin d'une ^00008Bpaire de lunettes^000000 et de ^00008B50 000 Zenys^000000";
+next;
+mes "[Wollenna]";
+mes "Revenez me voir quand vous aurez tout ça!";
+close;
+
+L_bleumake: 
+mes "[Wollenna]";
+mes "Oh, vous avez tout ce qu'il faut pour que je vous fasse un ^00008BBonnet Bleu^000000!";
+mes "Vous le voulez tout de suite?";
+next; 
+menu "Oui!",-,"Finalement, peut-être pas.",L_fin;
+delitem 720,1;
+delitem 726,1;
+delitem 2203,1;
+delitem 5076,1;
+set Zeny, Zeny - 50000;
+getitem 5236,1;
+mes "[Wollenna]";
+mes "Voici votre ^00008BBonnet Bleu^000000!";
+mes "Merci encore d'avoir retrouvé mes petits-enfants.";
+mes "N'hésitez pas à revenir me voir.";
+close;
+
+
+L_grey:
+if ((countitem(997) > 0)&&(countitem(728) > 0)&&(countitem(2203) > 0)&&(countitem(5076) > 0)&&(Zeny > 49999)){goto L_greymake;}
+mes "[Wollenna]";
+mes "Pour vous fabriquer un ^B8860BBonnet jaune pâle^000000, je vais avoir besoin de quelques fournitures...";
+next;
+mes "[Wollenna]";
+mes "Il me faudrait ^B8860Bun Bonnet^000000, ^B8860Bune Topaze^000000 et ^B8860Bun Great Nature^000000";    
+mes "J'aurais aussi besoin d'une ^B8860Bpaire de lunettes^000000 et de ^B8860B50 000 Zenys^000000";
+next;
+mes "[Wollenna]";
+mes "Revenez me voir quand vous aurez tout ça!";
+close;
+
+L_greymake: 
+mes "[Wollenna]";
+mes "Oh, vous avez tout ce qu'il faut pour que je vous fasse un ^B8860BBonnet jaune pâle^000000!";
+mes "Vous le voulez tout de suite?";
+next; 
+menu "Oui!",-,"Finalement, peut-être pas.",L_fin;
+delitem 997,1;
+delitem 728,1;
+delitem 2203,1;
+delitem 5076,1;
+set Zeny, Zeny - 50000;
+getitem 5235,1;
+mes "[Wollenna]";
+mes "Voici votre ^B8860BBonnet jaune pâle^000000!";
+mes "Merci encore d'avoir retrouvé mes petits-enfants.";
+mes "N'hésitez pas à revenir me voir.";
+close;
+}
