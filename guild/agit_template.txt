@@ -142,7 +142,7 @@ OnAgitBreak:
 
 	// Refresh castle data, disable Kafra and reset Invest information.
 	GetCastleData strnpcinfo(2),0,strnpcinfo(0)+"::OnRecvCastle";
-	disablenpc "Employée Kafra#"+strnpcinfo(2);
+	disablenpc "Kafra#"+strnpcinfo(2);
 	for( set .@i, 4; .@i <= 9; set .@i, .@i+1 ) {
 		SetCastleData strnpcinfo(2), .@i, 0;
 	}
@@ -176,7 +176,7 @@ OnGuildBreak:
 	if (strnpcinfo(0) == "Gld_Agit_Manager") end;
 	// Kill guardians, disable the Kafra, and set owner to 0.
 	killmonster strnpcinfo(2),"Gardien#"+strnpcinfo(2)+"::OnGuardianDied";
-	disablenpc "Employée Kafra#"+strnpcinfo(2);
+	disablenpc "Kafra#"+strnpcinfo(2);
 	SetCastleData strnpcinfo(2),0,0;
 	// Wait before refreshing guild information.
 	sleep getbattleflag("gvg_eliminate_time");
@@ -294,7 +294,7 @@ OnRecvCastle:
 		}
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 		// Disable Kafra Staff...
-		disablenpc "Employée Kafra#"+strnpcinfo(2);
+		disablenpc "Kafra#"+strnpcinfo(2);
 		end;
 	}
 	else {
@@ -326,7 +326,7 @@ OnRecvCastle:
 		// And load purchased Guardian in castles.
 		donpcevent "Gardien#"+strnpcinfo(2)+"::OnSpawnGuardians";
 		// And display Kafra if purchased.
-		if (GetCastleData(strnpcinfo(2),9) < 1) disablenpc "Employée Kafra#"+strnpcinfo(2);
+		if (GetCastleData(strnpcinfo(2),9) < 1) disablenpc "Kafra#"+strnpcinfo(2);
 	}
 	end;
 }
@@ -688,7 +688,7 @@ OnRecvCastle:
 				mes "Elle est très travailleuse, vous avez raison de le garder à votre service.";
 				close;
 			}
-			disablenpc "Employée Kafra#"+strnpcinfo(2);
+			disablenpc "Kafra#"+strnpcinfo(2);
 			SetCastleData strnpcinfo(2),9,0;
 			mes "[ Steward " + .@name$ + " ]";
 			mes "....";
@@ -713,7 +713,7 @@ OnRecvCastle:
 					close;
 				}
 				set zeny,zeny-10000;
-				enablenpc "Employée Kafra#"+strnpcinfo(2);
+				enablenpc "Kafra#"+strnpcinfo(2);
 				SetCastleData strnpcinfo(2),9,1;
 				mes "Vous avez passé un contrat avec la Corporation Kafra.";
 				next;

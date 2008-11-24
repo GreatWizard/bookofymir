@@ -1978,7 +1978,7 @@ arug_cas02,303,341,3	script	Steward#aru02	55,{
 				mes "Elle est très travailleuse, vous avez raison de le garder à votre service.";
 				close;
 			}
-			disablenpc "Employée Kafra#aru_cas02";
+			disablenpc "Kafra#aru_cas02";
 			SetCastleData "arug_cas02",9,0;
 			mes "[ Steward ]";
 			mes "....";
@@ -2004,7 +2004,7 @@ arug_cas02,303,341,3	script	Steward#aru02	55,{
 					close;
 				}
 				set zeny,zeny-10000;
-				enablenpc "Employée Kafra#aru02";
+				enablenpc "Kafra#aru02";
 				SetCastleData "arug_cas02",9,1;
 				mes "[ Steward ]";
 				mes "Vous avez passé un contrat avec la Corporation Kafra et engagé une Employée Kafra affectée au Bastion. La voici~";
@@ -2068,7 +2068,7 @@ OnStartArena:
 	for( set .@i, 4; .@i <= 9; set .@i, .@i+1 )
 		SetCastleData "arug_cas02", .@i, 0;
 	// Disable Kafra
-	disablenpc "Employée Kafra#aru02";
+	disablenpc "Kafra#aru02";
 
 	set .msg,2;
 	if (.msg == 1) {
@@ -2104,7 +2104,7 @@ OnTimer10000:
 }
 
 // Guild Kafra
-arug_cas02,354,326,3	script	Employée Kafra#aru02	117,{
+arug_cas02,354,326,3	script	Kafra#aru02	117,{
 	set .@GID, GetCastleData("arug_cas02",1);
 	if (getcharid(2) == .@GID && getgdskilllv(.@GID,10001)) {
 		mes "[Employée Kafra]";
@@ -2207,7 +2207,7 @@ OnRecvCastleAr02:
 		monster "arug_cas02",0,0,"Tower Keeper",1270,4;
 	}
 	if (GetCastleData("arug_cas02",9) < 1) {
-		disablenpc "Employée Kafra#aru02";
+		disablenpc "Kafra#aru02";
 	}
 	end;
 }
