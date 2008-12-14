@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88; L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 2.1
+//= 2.2
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -35,12 +35,13 @@
 //= 1.9 Dialog is official, but the Script is now custom as far as maps go. [L0ne_W0lf]
 //= 1.9b Fixed usage of wrong jobchange func messing up baby classes [ultramage]
 //= 2.0 Corrected NPC names to fall within proper resctrictions. [L0ne_W0lf]
-//= 2.1 Warp portals dont end with ; [Yommy]
+//= 2.1 Fixed mistake in condition check. [L0ne_W0lf]
+//= 2.2 Warp portals dont end with ; [Yommy]
 //============================================================ 
 
 izlude_in,74,172,4	script	Maître Epéiste#swd_1	119,{
 	if (Upper == 1) {
-		if (Class == Job_Novice_High && ADVJOB == Job_Lord_Knight || ADVJOB == Job_Paladin) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Lord_Knight || ADVJOB == Job_Paladin)) {
 			mes "[Maître Epéiste]";
 			mes "Ce...";
 			mes "Ce n'est pas possible...";
@@ -49,7 +50,7 @@ izlude_in,74,172,4	script	Maître Epéiste#swd_1	119,{
 			mes "[Maître Epéiste]";
 			mes "Je vois que vous reprenez fièrement le chemin de l'apprentissage du métier d'Epéiste! Lorsque l'on a brandi une épée une fois, vous ne pouvez plus jamais revenir en arrière!!";
 			next;
-			if (getskilllv(1) < 9) {
+			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Maître Epéiste]";
 				mes "Hum? Ah, cependant vous devez d'abord apprendre vos compétences de base avant de pouvoir à nouveau exercer le métier d'Epéiste.";
 				next;
@@ -131,7 +132,7 @@ izlude_in,74,172,4	script	Maître Epéiste#swd_1	119,{
 			}
 		}
 		mes "[Maître Epéiste]";
-		if (getskilllv(1) < 9) {
+		if (getskilllv("NV_BASIC") < 9) {
 			mes "Euh... Hem... Vous devez d'abord avoir appris toutes vos compétences de base de Novice avant de pouvoir postuler au métier de Swordsman.";
 			next;
 			mes "[Maître Epéiste]";
@@ -211,7 +212,7 @@ izlude_in,62,170,6	script	Maître Epéiste#swd_2	85,{
 		mes "Mais qui êtes vous bon Dieu?! Personne, mis à part les Novices, ne sont autorisés à entrer ici!";
 		close;
 	}
-	else if (getskilllv(1) < 9) {
+	else if (getskilllv("NV_BASIC") < 9) {
 		mes "Stop! Je ne peux vous laissez aller plus loin si vous n'avez pas appris toutes les compétences de base. Cette épreuve n'est pas à prendre à la légère!";
 		close;
 	}

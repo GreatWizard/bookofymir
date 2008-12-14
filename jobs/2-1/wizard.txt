@@ -4,7 +4,7 @@
 //= (Aegis) Translated by yoshiki, converted by kobra_k88
 //= Further bugfixed and tested by Lupus
 //===== Current Version: ===================================== 
-//= 2.7
+//= 2.9
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -18,7 +18,11 @@
 //= 2.5c Bug fixes. Cleaned up some NPCs slightly. [L0ne_W0lf]
 //= 2.6 Fixed Water Room not warping on time-up. [L0ne_W0lf]
 //= 2.7 Now uses enable and disable waitingroomevent. [L0ne_W0lf]
-//= 	Other monir fixes to various NPCs.
+//= 	Other minor fixes to various NPCs.
+//= 2.7a Added end; :D (bugreport:2038) [Yommy]
+//= 2.8 Fixed donpcevent to doevent. (bugreport:2311) [SoulBlaker]
+//= 2.9 Reverted the change of donpcevent to doevent. [L0ne_W0lf]
+//=     Was probably cuased by a warp BEFORE a percentheal
 //============================================================ 
 
 gef_tower,111,37,4	script	Wizard Guildsman	70,{
@@ -1185,8 +1189,8 @@ OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
 		mapannounce "job_wiz",strcharinfo(0)+" has succeeded in eliminating the monsters.",bc_map;
-		warp "job_wiz",116,97;
 		percentheal 100,100;
+		warp "job_wiz",116,97;
 		donpcevent "Room of Water#Door::OnDisable";
 		donpcevent "Room of Earth::OnEnable";
 		stopnpctimer;
@@ -1614,6 +1618,7 @@ OnTimer9000:
 	donpcevent "Test Helper#wiz::OnDisable";
 	donpcevent "Waiting Room#wiz::OnStart";
 	stopnpctimer;
+	end;
 }
 
 gef_tower,107,36,4	script	White Dog#wiz	81,{
