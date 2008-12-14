@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= Darkchild
 //===== Current Version: ===================================== 
-//= 2.0
+//= 2.1
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -16,10 +16,11 @@
 //===== Additional Comments: ================================= 
 //= 1.9 Rescripted to the Aegis 10.3 Standars. [Samuray22]
 //= 2.0 Rescripted again, this time using an iRO base. [L0ne_W0lf]
+//= 2.1 Swapped use of baseclass for basejob. [L0ne_W0lf]
 //============================================================ 
 
 aldeba_in,223,167,3	script	Tzerero#sn	709,{
-	if (BaseClass == Job_SuperNovice) {
+	if (BaseJob == Job_SuperNovice) {
 		mes "[Tzerero]";
 		mes "J'espère que vous appréciez la vie parfaitement ordinaire d'un Super Novice? Ah, très bien... Comme je le supposais. Vraiment, l'aura de la normalité brille superbement en vous...";
 		next;
@@ -78,7 +79,7 @@ aldeba_in,223,167,3	script	Tzerero#sn	709,{
 		mes "^FF000030 Resin^000000.";
 		close;
 	}
-	if (BaseClass == Job_Novice && upper != 1) {
+	if (BaseJob == Job_Novice && upper != 1) {
 		mes "[Tzerero]";
 		mes "...Huumm?";
 		mes "Stop.";
@@ -104,7 +105,7 @@ aldeba_in,223,167,3	script	Tzerero#sn	709,{
 		next;
 		switch(select("Accepter son offre.:Refuser son offre.:Ecouter plus attentivement.")) {
 		case 1:
-			if (getskilllv(1) < 9) {
+			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Tzerero]";
 				mes "Humm... Mais appréciez-vous vraiment le fait de trouver de la force dans la faiblesse?";
 				mes "Vous devez me prouvez que vous êtes un éternel indécis.";
@@ -176,7 +177,7 @@ aldeba_in,223,167,3	script	Tzerero#sn	709,{
 		}
 	}
 	else {
-		if (BaseClass == Job_SuperNovice) {
+		if (BaseJob == Job_SuperNovice) {
 			mes "[Tzerero]";
 			mes "J'espère que vous appréciez la vie parfaitement ordinaire d'un Super Novice? Ah, très bien... Comme je le supposais. Vraiment, l'aura de la normalité brille superbement en vous...";
 			next;
@@ -270,7 +271,7 @@ aldebaran,54,238,5	script	Employée Kafra#sn	117,{
 				if (Zeny >= 1899) {
 					set RESRVPTS, RESRVPTS + 190;
 					set zeny,zeny-1900;
-					if (getskilllv(39) > 0) setcart;
+					if (getskilllv("MC_PUSHCART") > 0) setcart;
 					mes "[Employée Kafra]";
 					mes "Merci d'avoir utilisé nos services.";
 					mes "Même si ce que je viens de faire n'est pas très légal pour les autres Employées Kafra, je crois fermement que ce que je fais est juste pour les clients.";

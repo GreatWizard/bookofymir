@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88; L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.7a
+//= 1.8
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -22,11 +22,12 @@
 //=	Arrow reward is now equal to the type sof trunks brought.
 //=	No longer uses function "F_ToHigh"
 //= 1.7a Fixed minor dialogue bug at Grade==25 [Lupus]
+//= 1.8 Fixed mistake in condition check. [L0ne_W0lf]
 //============================================================ 
 
 payon_in02,64,71,4	script	Archer#archer	85,{
 	if (Upper == 1) {
-		if (Class == Job_Novice_High && ADVJOB == Job_Sniper || ADVJOB == Job_Clown || ADVJOB == Job_Gypsy) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Sniper || ADVJOB == Job_Clown || ADVJOB == Job_Gypsy)) {
 			mes "[Archer]";
 			mes "C'est bizarre... J'ai l'impression de vous connaître.";
 			mes "Nous sommes-nous déjà rencontrés?";
@@ -35,7 +36,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 			mes "Ah, vous revenez du Valhalla?!";
 			mes "Impressionnant.";
 			next;
-			if (getskilllv(1) < 9) {
+			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Archer]";
 				mes "Hum...";
 				mes "Cependant vous devriez apprendre toutes vos compétences de base avant de vous présenter à moi pour devenir Archer.";
@@ -118,7 +119,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 		mes "[Archer]";
 		mes "Vous êtes... " + strcharinfo(0) + "?";
 		next;
-		if (getskilllv(1) < 9) {
+		if (getskilllv("NV_BASIC") < 9) {
 			mes "[Archer]";
 			mes "On dirait que vous n'êtes pas encore suffisamment qualifié pour devenir un Archer.";
 			next;

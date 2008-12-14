@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88; L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 2.0
+//= 2.1
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -27,11 +27,12 @@
 //= 1.9a Added a missing next; (Barron-Monster) [L0ne_W0lf]
 //= 1.9b Typo. "nextl" -> "next;" (Barron-Monster) [L0ne_W0lf]
 //= 2.0 Should "fix" the problem with the Biliban Kafra. [L0ne_W0lf]
+//= 2.1 Fixed mistake in condition check. [L0ne_W0lf]
 //============================================================ 
 
 alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 	if (Upper == 1) {
-		if (Class == Job_Novice_High && ADVJOB == Job_Whitesmith || ADVJOB == Job_Creator) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Whitesmith || ADVJOB == Job_Creator)) {
 			mes "[Chef Mahnsoo]";
 			mes "Hé, ça fait un bail!";
 			mes "Nous pensions que vous aviez laissé tomber les affaires.";
@@ -41,7 +42,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 			mes "Whaou...";
 			mes "Alors comme ça vous étiez au Valhalla?! Incroyable...";
 			next;
-			if (getskilllv(1) < 9) {
+			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Chef Mahnsoo]";
 				mes "Humm...";
 				mes "On dirait cependant que vous n'êtes pas encore prêt à reprendre vos activités de Marchand. Pourquoi n'iriez-vous pas apprendre les compétences de base avant de revenir ici?";
@@ -253,7 +254,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 			mes "[Chef Mahnsoo]";
 			mes "Un marchand, vous dîtes? Bien...";
 			next;
-			if (getskilllv(1) < 9) {
+			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Chef Mahnsoo]";
 				mes "Je suis désolé, mais vous devez avoir atteint le Niveau de Job 9 et avoir appris toutes vos compétences de base avant de pouvoir postuler à la Guilde Marchande.";
 				next;
