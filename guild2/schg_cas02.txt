@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.7
+//= 1.9
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
@@ -22,6 +22,8 @@
 //= 1.7 Fixed investment period not resetting. [L0ne_W0lf]
 //=     Made it so treasure won't spawn if castle is empty.
 //=     Treasure will now be killed before spawning.
+//= 1.8 Fixed error with control devices. [L0ne_W0lf]
+//= 1.9 Replaced effect numerics with constants. [L0ne_W0lf]
 //============================================================
 
 schg_cas02,1,1,0	script	Manager#sch02_02	111,{
@@ -38,8 +40,8 @@ OnRecvCastlesc02:
 	}
 	end;
 
-OnAgitStart:
-	if (agitcheck()) {
+OnAgitStart2:
+	if (agitcheck2()) {
 		MapRespawnGuildID "schg_cas02",GetCastleData("schg_cas02",1),2;
 		GvgOn "schg_cas02";
 		donpcevent "Manager#sch02_02::Onstart";
@@ -52,11 +54,12 @@ OnAgitStart:
 	}
 	end;
 
-OnAgitEnd:
+OnAgitEnd2:
 	GvgOff "schg_cas02";
 	if (GetCastleData("schg_cas02",1)) {
 		KillMonster "schg_cas02","Steward#sch02::OnStartArena";
 		donpcevent "Manager#sch02_02::Onreset";
+		donpcevent "Steward#sch02::Onstop";
 	}
 	end;
 
@@ -92,7 +95,7 @@ Onreset:
 	donpcevent "Contrôle Porte 1#sch02::OnDisable";
 	donpcevent "Contrôle Porte 2#sch02::OnDisable";
 	donpcevent "Contrôle Porte 3#sch02::OnDisable";
-	if (agitcheck()) {
+	if (agitcheck2()) {
 		setarray $agit_sc02[0],0,0,1,1,1,0;
 	}
 	end;
@@ -107,7 +110,11 @@ Onchange:
 
 OnClock0001:
 	if (!GetCastleData("schg_cas02",1)) end;
-	killmonster "schg_cas02","Manager#sch02_02::OnMyTreasureDied";
+	killmonster "schg_cas02","Manager#sch02_02::OnTreasureDied";
+
+	setcastledata "schg_cas02",4,0;
+	setcastledata "schg_cas02",5,0;
+
 	set .@Treasure,GetCastleData("schg_cas02",2)/5+4;
 	if (.@Treasure) {
 		monster "schg_cas02",249,378,"Coffre",1939,1,"Manager#sch02_02::OnTreasureDied";
@@ -155,8 +162,6 @@ OnClock0001:
 		if (.@Treasure < 24) end;
 		monster "schg_cas02",253,370,"Coffre",1324,1,"Manager#sch02_02::OnTreasureDied";
 	}
-	setcastledata "schg_cas02",4,0;
-	setcastledata "schg_cas02",5,0;
 	end;
 
 OnTreasureDied:
@@ -177,7 +182,7 @@ schg_cas02,140,184,3	script	Endeef#sch02_01	868,{
 			close;
 		}
 		else {
-			if (agitcheck() == 0) {
+			if (agitcheck2() == 0) {
 				mes "[Endeef]";
 				mes "Mon nom est Endeef, et je suis le gardien de ce bastion. Tout est calme en ces lieux... pour le moment.";
 				next;
@@ -607,7 +612,7 @@ schg_cas02,231,57,0	script	Pierre Gardienne#1sch02	844,{
 					else {
 						switch(rand(1,3)) {
 						case 1:
-							specialeffect 54; //"Pierre Gardienne#1sch02" EF_BEGINSPELL2
+							specialeffect EF_BEGINSPELL2;
 							mes "^3355FFLes Gemstones doivent être orientées en fonction de leur puissance et de leurs propriétés magiques.^000000";
 							next;
 							switch(select("Red Gemstone:Yellow Gemstone:Blue Gemstone")) {
@@ -623,13 +628,13 @@ schg_cas02,231,57,0	script	Pierre Gardienne#1sch02	844,{
 								mes "^3355FFVous avez déposé les Blue Gemstones.^000000";
 								set .@nice,.@nice+10;
 								set .@roof0,.@roof0 + 1;
-								specialeffect 18; //"Pierre Gardienne#1sch02" EF_STEAL
+								specialeffect EF_STEAL;
 								next;
 								break;
 							}
 							break;
 						case 2:
-							specialeffect 225; //"Pierre Gardienne#1sch02" EF_VOLCANO
+							specialeffect EF_VOLCANO;
 							mes "^3355FFLes Gemstones doivent être orientées en fonction de leur puissance et de leurs propriétés magiques.^000000";
 							next;
 							switch(select("Red Gemstone:Yellow Gemstone:Blue Gemstone")) {
@@ -637,7 +642,7 @@ schg_cas02,231,57,0	script	Pierre Gardienne#1sch02	844,{
 								mes "^3355FFVous avez déposé les Red Gemstones.^000000";
 								set .@nice,.@nice+10;
 								set .@roof0,.@roof0 + 1;
-								specialeffect 18; //"Pierre Gardienne#1sch02" EF_STEAL
+								specialeffect EF_STEAL;
 								next;
 								break;
 							case 2:
@@ -651,7 +656,7 @@ schg_cas02,231,57,0	script	Pierre Gardienne#1sch02	844,{
 							}
 							break;
 						case 3:
-							specialeffect 56; //"Pierre Gardienne#1sch02" EF_BEGINSPELL4
+							specialeffect EF_BEGINSPELL4;
 							mes "^3355FFLes Gemstones doivent être orientées en fonction de leur puissance et de leurs propriétés magiques.^000000";
 							next;
 							switch(select("Red Gemstone:Yellow Gemstone:Blue Gemstone")) {
@@ -663,7 +668,7 @@ schg_cas02,231,57,0	script	Pierre Gardienne#1sch02	844,{
 								mes "^3355FFVous avez déposé les Yellow Gemstones.^000000";
 								set .@nice,.@nice+10;
 								set .@roof0,.@roof0 + 1;
-								specialeffect 18; //"Pierre Gardienne#1sch02" EF_STEAL
+								specialeffect EF_STEAL;
 								next;
 								break;
 							case 3:
@@ -680,7 +685,7 @@ schg_cas02,231,57,0	script	Pierre Gardienne#1sch02	844,{
 						close;
 					}
 					else {
-						if (agitcheck() == 0) {
+						if (agitcheck2() == 0) {
 							mes "^3355FFIl est impossible de reconstruire la Pierre Gardienne car l'Emperium est absent.^000000";
 							close;
 						}
@@ -694,7 +699,7 @@ schg_cas02,231,57,0	script	Pierre Gardienne#1sch02	844,{
 							delitem 716,5; //Red_Gemstone
 							close2;
 							donpcevent "#sch02_df01::OnEnable";
-							specialeffect 135; //"Pierre Gardienne#1sch02" EF_ICECRASH
+							specialeffect EF_ICECRASH;
 							disablenpc "Pierre Gardienne#1sch02";
 							setarray $agit_sc02[0],0;
 							set .@df_all,$agit_sc02[0]+$agit_sc02[1];
@@ -735,7 +740,7 @@ OnInit:
 
 OnEnable:
 	enablenpc "Pierre Gardienne#1sch02";
-	specialeffect 247; //"Pierre Gardienne#1sch02" EF_MAPPILLAR2
+	specialeffect EF_MAPPILLAR2;
 	end;
 
 OnDisable:
@@ -863,7 +868,7 @@ schg_cas02,335,231,0	script	Pierre Gardienne#2sch02	844,{
 					else {
 						switch(rand(1,3)) {
 						case 1:
-							specialeffect 54; //"Pierre Gardienne#2sch02" EF_BEGINSPELL2
+							specialeffect EF_BEGINSPELL2;
 							mes "^3355FFLes Gemstones doivent être orientées en fonction de leur puissance et de leurs propriétés magiques.^000000";
 							next;
 							switch(select("Red Gemstone:Yellow Gemstone:Blue Gemstone")) {
@@ -879,13 +884,13 @@ schg_cas02,335,231,0	script	Pierre Gardienne#2sch02	844,{
 								mes "^3355FFVous avez déposé les Blue Gemstones.^000000";
 								set .@nice,.@nice+10;
 								set .@roof0,.@roof0 + 1;
-								specialeffect 18; //"Pierre Gardienne#2sch02" EF_STEAL
+								specialeffect EF_STEAL;
 								next;
 								break;
 							}
 							break;
 						case 2:
-							specialeffect 225; //"Pierre Gardienne#2sch02" EF_VOLCANO
+							specialeffect EF_VOLCANO;
 							mes "^3355FFLes Gemstones doivent être orientées en fonction de leur puissance et de leurs propriétés magiques.^000000";
 							next;
 							switch(select("Red Gemstone:Yellow Gemstone:Blue Gemstone")) {
@@ -893,7 +898,7 @@ schg_cas02,335,231,0	script	Pierre Gardienne#2sch02	844,{
 								mes "^3355FFVous avez déposé les Red Gemstones.^000000";
 								set .@nice,.@nice+10;
 								set .@roof0,.@roof0 + 1;
-								specialeffect 18; //"Pierre Gardienne#2sch02" EF_STEAL
+								specialeffect EF_STEAL;
 								next;
 								break;
 							case 2:
@@ -907,7 +912,7 @@ schg_cas02,335,231,0	script	Pierre Gardienne#2sch02	844,{
 							}
 							break;
 						case 3:
-							specialeffect 56; //"Pierre Gardienne#2sch02" EF_BEGINSPELL4
+							specialeffect EF_BEGINSPELL4;
 							mes "^3355FFLes Gemstones doivent être orientées en fonction de leur puissance et de leurs propriétés magiques.^000000";
 							next;
 							switch(select("Red Gemstone:Yellow Gemstone:Blue Gemstone")) {
@@ -919,7 +924,7 @@ schg_cas02,335,231,0	script	Pierre Gardienne#2sch02	844,{
 								mes "^3355FFVous avez déposé les Yellow Gemstones.^000000";
 								set .@nice,.@nice+10;
 								set .@roof0,.@roof0 + 1;
-								specialeffect 18; //"Pierre Gardienne#2sch02" EF_STEAL
+								specialeffect EF_STEAL;
 								next;
 								break;
 							case 3:
@@ -936,7 +941,7 @@ schg_cas02,335,231,0	script	Pierre Gardienne#2sch02	844,{
 						close;
 					}
 					else {
-						if (agitcheck() == 0) {
+						if (agitcheck2() == 0) {
 							mes "^3355FFIl est impossible de reconstruire la Pierre Gardienne car l'Emperium est absent.^000000";
 							close;
 						}
@@ -950,7 +955,7 @@ schg_cas02,335,231,0	script	Pierre Gardienne#2sch02	844,{
 							delitem 716,5; //Red_Gemstone
 							close2;
 							donpcevent "#sch02_df02::OnEnable";
-							specialeffect 135; //"Pierre Gardienne#2sch02" EF_ICECRASH
+							specialeffect EF_ICECRASH;
 							disablenpc "Pierre Gardienne#2sch02";
 							setarray $agit_sc02[1],0;
 							set .@df_all,$agit_sc02[0]+$agit_sc02[1];
@@ -991,7 +996,7 @@ OnInit:
 
 OnEnable:
 	enablenpc "Pierre Gardienne#2sch02";
-	specialeffect 247; //"Pierre Gardienne#2sch02" EF_MAPPILLAR2
+	specialeffect EF_MAPPILLAR2;
 	end;
 
 OnDisable:
@@ -1129,7 +1134,7 @@ schg_cas02,288,97,0	script	Contrôle Porte 1#sch02	111,{
 									mes "^3355FFL'encadrement de la Porte a été renforcé par le bois des Trunks.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 2:
@@ -1162,7 +1167,7 @@ schg_cas02,288,97,0	script	Contrôle Porte 1#sch02	111,{
 									mes "^3355FFVous avez utilisé de l'oridecon pour renforcer la structure de la Porte: on dirait que ça a bien fonctionné.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								}
@@ -1178,7 +1183,7 @@ schg_cas02,288,97,0	script	Contrôle Porte 1#sch02	111,{
 									mes "^3355FFVous avez essayé d'utiliser de l'acier pour combler les failles: la structure semble meilleure.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 3:
@@ -1203,7 +1208,7 @@ schg_cas02,288,97,0	script	Contrôle Porte 1#sch02	111,{
 									mes "^3355FFVous avez réussi à utiliser de l'emveretarcon pour renforcer la cohésion globale de la Porte.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 4:
@@ -1215,7 +1220,7 @@ schg_cas02,288,97,0	script	Contrôle Porte 1#sch02	111,{
 					}
 					mes "^3355FFLa Porte Barrière semble être totalement réparée à présent.^000000";
 					next;
-					if (agitcheck() == 0) {
+					if (agitcheck2() == 0) {
 						mes "^3355FFVous ne pouvez pas réparer la Porte Barrière, car l'Emperium n'est pas présent.^000000";
 						close;
 					}
@@ -1296,7 +1301,7 @@ schg_cas02,230,209,0	script	Contrôle Porte 2#sch02	111,{
 									mes "^3355FFL'encadrement de la Porte a été renforcé par le bois des Trunks.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 2:
@@ -1329,7 +1334,7 @@ schg_cas02,230,209,0	script	Contrôle Porte 2#sch02	111,{
 									mes "^3355FFVous avez utilisé de l'oridecon pour renforcer la structure de la Porte: on dirait que ça a bien fonctionné.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								}
@@ -1345,7 +1350,7 @@ schg_cas02,230,209,0	script	Contrôle Porte 2#sch02	111,{
 									mes "^3355FFVous avez essayé d'utiliser de l'acier pour combler les failles: la structure semble meilleure.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 3:
@@ -1370,7 +1375,7 @@ schg_cas02,230,209,0	script	Contrôle Porte 2#sch02	111,{
 									mes "^3355FFVous avez réussi à utiliser de l'emveretarcon pour renforcer la cohésion globale de la Porte.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 4:
@@ -1382,7 +1387,7 @@ schg_cas02,230,209,0	script	Contrôle Porte 2#sch02	111,{
 					}
 					mes "^3355FFLa Porte Barrière semble être totalement réparée à présent.^000000";
 					next;
-					if (agitcheck() == 0) {
+					if (agitcheck2() == 0) {
 						mes "^3355FFVous ne pouvez pas réparer la Porte Barrière, car l'Emperium n'est pas présent.^000000";
 						close;
 					}
@@ -1465,7 +1470,7 @@ schg_cas02,159,143,0	script	Contrôle Porte 3#sch02	111,{
 									mes "^3355FFL'encadrement de la Porte a été renforcé par le bois des Trunks.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 2:
@@ -1498,7 +1503,7 @@ schg_cas02,159,143,0	script	Contrôle Porte 3#sch02	111,{
 									mes "^3355FFVous avez utilisé de l'oridecon pour renforcer la structure de la Porte: on dirait que ça a bien fonctionné.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								}
@@ -1514,7 +1519,7 @@ schg_cas02,159,143,0	script	Contrôle Porte 3#sch02	111,{
 									mes "^3355FFVous avez essayé d'utiliser de l'acier pour combler les failles: la structure semble meilleure.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 3:
@@ -1539,7 +1544,7 @@ schg_cas02,159,143,0	script	Contrôle Porte 3#sch02	111,{
 									mes "^3355FFVous avez réussi à utiliser de l'emveretarcon pour renforcer la cohésion globale de la Porte.^000000";
 									set .@rp_temp,.@rp_temp + 1;
 									set .@ro_of02,.@ro_of02 + 1;
-									specialeffect2 101; // EF_REPAIRWEAPON
+									specialeffect2 EF_REPAIRWEAPON;
 									next;
 									break;
 								case 4:
@@ -1551,7 +1556,7 @@ schg_cas02,159,143,0	script	Contrôle Porte 3#sch02	111,{
 					}
 					mes "^3355FFLa Porte Barrière semble être totalement réparée à présent.^000000";
 					next;
-					if (agitcheck() == 0) {
+					if (agitcheck2() == 0) {
 						mes "^3355FFVous ne pouvez pas réparer la Porte Barrière, car l'Emperium n'est pas présent.^000000";
 						close;
 					}
@@ -1568,7 +1573,7 @@ schg_cas02,159,143,0	script	Contrôle Porte 3#sch02	111,{
 							mapannounce "schg_cas02","La troisième Porte Barrière a été reconstruite!",bc_map,"0x00ff00";
 							setarray $agit_sc02[4],0;
 							setarray $agit_sc02[3],2;
-							donpcevent "Contrôle Porte 2#sch02::OnDevice02#sch02_dlrp02";
+							donpcevent "Contrôle Porte 2#sch02::OnEnable";
 							end;
 						}
 						else {
@@ -2064,7 +2069,7 @@ OnStartArena:
 	else if (.msg == 2) {
 		announce "La Guilde [" + getguildname(.@gid) + "] a conquis le Deuxième Bastion de Nithafjoll: " + GetCastleName("schg_cas02"),bc_all;
 		mapannounce "schg_cas02","L'Emperium a été détruit!",bc_map,"0x00FF00";
-		if (agitcheck()) {
+		if (agitcheck2()) {
 			donpcevent "Manager#sch02_02::Onreset";
 			initnpctimer;
 		}
@@ -2100,7 +2105,7 @@ schg_cas02,131,365,3	script	Kafra#sch02	117,{
 		next;
 		switch(select("Ouvrir mon Stock:Service de Téléportation:Louer une Charrette:Annuler")) {
 		case 1:
-			if (basicskillcheck() && getskilllv(1) < 6) {
+			if (basicskillcheck() && getskilllv("NV_BASIC") < 6) {
 				mes "[Employée Kafra]";
 				mes "Je suis désolée, mais vous devez être un Novice de Niveau de Job 6 au minimum pour pouvoir consulter votre stock.";
 			}

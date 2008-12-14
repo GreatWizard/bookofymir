@@ -5,13 +5,14 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.0
+//= 1.1
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
 //= NPCs that relate to Payon Guild Castle 4
 //===== Additional Comments: =================================
 //= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
+//= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
 //============================================================
 
 // Guild Flag (Town)
@@ -71,24 +72,7 @@ pay_gld,153,166,1	duplicate(SacredAltar2)	Sacred Altar#f4-6	722
 // Guild Flag (Inside Castle)
 //============================================================
 payg_cas04,255,259,0	script	Sacred Altar#f4-7::SacredAltar3	722,{
-	set .@GID, GetCastleData("payg_cas04",1);
-	if (.@GID == 0) {
-		mes " [ Edit du Divin Royaume de Rune Midgard ]";
-		mes " ";
-		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château n'appartient pour l'instant à aucune guilde.";
-		mes " ";
-		mes "2. Celui qui éliminera tous les gardiens qui protègent ce château et qui détruira l'Emperium, sera reconnu par le Roi de Rune Midgard en tant qu'humble possesseur du château.";
-	}
-	else {
-		mes " [ Edit du Divin Royaume de Rune Midgard ]";
-		mes " ";
-		mes "1. Sous la Divine Ordonnance du Roi de Rune Midgard, ce château appartient à la Guilde ^ff0000" + GetGuildName(.@GID) + "^000000.";
-		mes " ";
-		mes "2. Le Chef de la Guilde ^ff0000"+ GetGuildName(.@GID) + "^000000 est";
-		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
-		mes "A quiconque souhaitant remettre en cause ce fait, qu'il lève son épée et se batte pour l'Honneur.";
-	}
-	close;
+	end;
 
 OnRecvCastlePy04:
 	FlagEmblem GetCastleData("payg_cas04",1);
