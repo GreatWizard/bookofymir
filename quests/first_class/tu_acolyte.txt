@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= Fix up by Jukka
 //===== Current Version: ===================================== 
-//= 1.2
+//= 1.3
 //===== Compatible With: ===================================== 
 //= eAthena SVN (Testet in Trunk 88xx)
 //===== Description: ========================================= 
@@ -15,6 +15,7 @@
 //= 1.1 optimized [Lupus]
 //=	TODO: Test, Add correct misceffects numbers
 //= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.3 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
 //============================================================ 
 
 
@@ -226,7 +227,7 @@ prt_monk,230,106,3	script	Asthe#tu	79,{
 		mes "HEAL!!";
 		unitskilluseid getcharid(3),28,10;
 		set tu_acolyte01, 3;
-		if(getskilllv(28) == 0){
+		if(getskilllv("AL_HEAL") == 0){
 			getexp 0,100;
 			//misceffect EF_CONE;
 		}
@@ -236,7 +237,7 @@ prt_monk,230,106,3	script	Asthe#tu	79,{
 		mes "J'aimerais que vous partiez en mission, qu'en pensez-vous?";
 		mes "Je pense que l'apprentissage des bases est la quête la plus importante pour vous à partir de maintenant.";
 		next;
-		if(getskilllv(28) < 3){
+		if(getskilllv("AL_HEAL") < 3){
 			mes "[Asthe]";
 			mes "Bien, partez exercer votre compétence de soins jusqu'au ^3131FFNiveau 3 ^000000 puis revenez me voir.";
 			next;
@@ -275,7 +276,7 @@ prt_monk,230,106,3	script	Asthe#tu	79,{
 		}
 		break;
 	case 4:
-		if(getskilllv(28) > 2){
+		if(getskilllv("AL_HEAL") > 2){
 			if(countitem(1504) > 0){
 				mes "Oh!";
 				mes "Bienvenue parmi nous~";
@@ -856,12 +857,12 @@ prt_monk,226,257,6	script	Petite Fille#tu	93,{
 			close; 
 			break;
 		case 2:
-			if(getskilllv(34) == 0) goto L_NONE;
+			if(getskilllv("AL_BLESSING") == 0) goto L_NONE;
 			mes "["+strcharinfo(0)+"]";
 			mes "B...";
 			mes "Blessing!";
 			next;
-			if(rand(100) < getskilllv(34)*10){
+			if(rand(100) < getskilllv("AL_BLESSING")*10){
 				//misceffect EF_BLESSING;
 				mes "["+strcharinfo(0)+"]";
 				mes "Je...";
@@ -883,7 +884,7 @@ prt_monk,226,257,6	script	Petite Fille#tu	93,{
 			}
 			break;
 		case 3:
-			if(getskilllv(35) == 0) goto L_NONE;
+			if(getskilllv("AL_CURE") == 0) goto L_NONE;
 			mes "["+strcharinfo(0)+"]";
 			mes "C-Cure...!";
 			//misceffect EF_CURE;
@@ -897,7 +898,7 @@ prt_monk,226,257,6	script	Petite Fille#tu	93,{
 			close;
 			break;
 		case 5:
-			if(getskilllv(32) == 0) goto L_NONE;
+			if(getskilllv("AL_CRUCIS") == 0) goto L_NONE;
 			mes "["+strcharinfo(0)+"]";
 			mes "S-Signum...";
 			mes "Signum Crucis!";
