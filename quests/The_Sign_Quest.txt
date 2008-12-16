@@ -3,7 +3,7 @@
 //===== By: ================================================== 
 //= SinSloth(Most of the NPCs), MasterOfMuppets(Some of the NPCs + bug fixes) & Kargha(The quiz NPCs)
 //===== Current Version: ===================================== 
-//= 2.5a
+//= 2.9
 //===== Compatible With: ===================================== 
 //= eAthena SVN 3422+(Requires jA Script System)
 //===== Description: ========================================= 
@@ -40,6 +40,9 @@
 //= 2.5 Updated to fall within proper name restrictions. [L0ne_W0lf]
 //= 2.5a Corrected a Typo error ";;". [Samuray22]
 //= 2.6 Fixed Engel giving back 7 Sobbing Starlight on failing to refine it, bugreport:1473 [Brainstorm]
+//= 2.7 Replaced effect numerics with constants. [Samuray22]
+//= 2.8 Fixed some bugs with itemids and leftover questitems [Fish0r]
+//= 2.9 Made a delitem causing script to fault use countitem when deleting. [L0ne_W0lf]
 //============================================================ 
 //===== Configuration : ======================================
 prontera,1,1,1	script	TheSignConfig	-1,{
@@ -626,7 +629,7 @@ L_Where:
         close2;
         cutin "",255;
         end;
-    } else if ( (signquest > 54 && signquest < 59) || (signquest == 59 && !countitem(2644))) {
+    } else if ( (signquest > 54 && signquest < 59) || (signquest == 59 && !countitem(7314))) {
         mes "[Metz]";
         mes "I think you're";
         mes "almost there. All";
@@ -635,7 +638,7 @@ L_Where:
         close2;
         cutin "",255;
         end;
-    } else if (signquest == 59 && countitem(2644)) {
+    } else if (signquest == 59 && countitem(7314)) {
         mes "[Metz]";
         mes "This is it...!";
         mes "You've brought me,";
@@ -643,7 +646,7 @@ L_Where:
         mes "proven its existence!";
         mes "Please let me handle";
         mes "this and come back later~";
-        delitem 2644,1;
+        delitem 7314,1;
         set @metzhour,gettime(3);
         set @metzmin,gettime(2);
         if (@metzmin > 29) set @metzhour,@metzhour +1;
@@ -678,7 +681,7 @@ L_Where:
             mes "may be even other applications";
             mes "using the power of this item...";
             next;
-            getitem 2644,1;
+            getitem 7314,1;
             set signquest,61;
             mes "[Metz]";
             mes "I can only think of";
@@ -5131,7 +5134,7 @@ mjo_dun02,88,295,3	script	Flaming Spirit Man	85,{
 
     if (signquest > 62) goto L_Improve;
     if (signquest > 61) goto L_Hour;
-    if (signquest > 60 && countitem(2644)) goto L_Sign;
+    if (signquest > 60 && countitem(7314)) goto L_Sign;
     if (signquest > 22) goto L_Done;
     if (signquest == 21) goto L_Refine;
     if (signquest == 18 || signquest == 22) goto L_Check;
@@ -5397,7 +5400,7 @@ L_Success:
     next;
     getitem 7178,1;
     set signquest,23;
-    specialeffect2 94;
+    specialeffect2 EF_YUFITELHIT;
     next;
     mes "[Engel]";
     mes "This was one of the most difficult";
@@ -5460,7 +5463,7 @@ L_Sign:
     mes "Unfortunately, I can't even";
     mes "give you a time estimate...";
     mes "But I'll do my best for you.";
-    delitem 2644,1;
+    delitem 7314,1;
     set @engelhour,gettime(3);
     set @engelmin,gettime(2);
     if (@engelmin > 29) set @engelhour,@engelhour +1;
@@ -5967,7 +5970,7 @@ L_FirstTouch:
 	mes "What the...?";
 	mes "What's happening?!";
 	next;
-	specialeffect2 9;
+	specialeffect2 EF_ENHANCE;
 	mes "^3355FFFor some reason, in";
 	mes "this particular spot, the";
 	mes "Sobbing Starlight is reacting";
@@ -5976,7 +5979,7 @@ L_FirstTouch:
 	mes "holding. All the objects are";
 	mes "violently resonating";
 	next;
-	specialeffect2 99;
+	specialeffect2 EF_FLASHER;
 	mes "All of a sudden these";
 	mes "objects emit a bright flash";
 	mes "of light that envelops your";
@@ -6121,7 +6124,7 @@ L_Done:
 	mes "" + strcharinfo(0) + ". Verily,";
 	mes "you are an honorable";
 	mes "hero worthy of praise!";
-	getitem 2644,1;
+	getitem 7314,1;
 	set signquest,59;
 	close;
 }
@@ -7383,6 +7386,7 @@ L_SignWitch:
 	if(signquest > 41) goto L_Think;
 	if(signquest > 40) goto L_Tragic;
 	if(signquest > 39) goto L_Crow;
+	if(signspellbook) goto L_SpellBook;
 	if(signquest > 37 || !countitem(7304)) end;
 	mes "[Kirkena]";
 	mes "W-what's this?";
@@ -7398,7 +7402,9 @@ L_SignWitch:
 	mes "without my permission. Still, it's";
 	mes "a relief to have my spells back.";
 	delitem 7304,1;
+	set signspellbook,1;
 	next;
+L_SpellBook:
 	mes "[Kirkena]";
 	mes "So mortal...";
 	mes "You must be here for";
@@ -7423,6 +7429,7 @@ L_Child:
 	mes "a living human back to one";
 	mes "of the towns in your realm.";
 	set signquest,38;
+	set signspellbook,0;
 	getitem 7309,1;
 	close;
 
@@ -8526,7 +8533,7 @@ L_Soul:
 	mes "I'm leaving my soul";
 	mes "with you. Please guide";
 	mes "me to the queen of the dead...";
-	delitem 7306,4;
+	delitem 7306,countitem(7306);
 	getitem 7307,1;
 	set signquest,54;
 	close;
@@ -8735,6 +8742,7 @@ L_Work:
 	mes "humans know it, may actually be";
 	mes "different than the truth.";
 	getitem 7025,1;
+	if (countitem(2642)) delitem 2642,1;
 	set signquest,66;
 	next;
 	mes "[Lady Hell]";
@@ -9389,7 +9397,7 @@ geffen,119,49,1	script	Fountain#SignFountain	111,{
 	close;
 
 L_Lament:
-	specialeffect2 200;
+	specialeffect2 EF_LEVEL99;
 	mes "^3355FFAs you approach the fountain, a strange light begins to emit from the Lucifer's Lament in your pocket and from something deep within the fountain's water.";
 	next;
 	menu "Throw Lucifer's Lament into the fountain.",L_Throw,"Ignore the light.",-;
