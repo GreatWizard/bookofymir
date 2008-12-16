@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= Lupus, Reddozen
 //===== Current Version: ===================================== 
-//= 1.4
+//= 1.5
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -13,12 +13,13 @@
 //= Quests for skills: Sight Blaster
 //===== Additional Comments: ================================= 
 //= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.5 Replaced effect numerics with constants. [L0ne_W0lf]
 //============================================================
 
 gef_tower,115,36,4	script	Meow#q_wiz	876,{
 	if (BaseJob == Job_Wizard) {
 		if (WIZ_SK == 100) {
-			if (getskilllv(1006) == 0) {
+			if (getskilllv("WZ_SIGHTBLASTER") == 0) {
 				mes "[Meow]";
 				mes "Quoi...?! Vous avez oublié l'incroyable compétence que je vous ai apprise?";
 				mes "La renaissance n'est pas une excuse!";
@@ -26,15 +27,15 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 				mes "Alors, c'est parti pour votre leçon!";
 				next;
 				mes "^3355FF*BAM! BOOM! CRASH!*^000000";
-				specialeffect2 183; // EF_SUI_EXPLOSION
+				specialeffect2 EF_SUI_EXPLOSION;
 				next;
 				mes "[Meow]";
 				mes "Ne soyez pas si prétentieux avec moi juste parce que vous avez effectué une renaissance.";
 				mes "Vous feriez mieux de vous rappeler de comment utiliser cette compétence, avant que je vous fouette un autre coup!";
 				next;
 				mes "^3355FFVous vous rappelez miraculeusement comment utiliser Sight Blaster avant que Meow ne puisse vous administrer une autre vicieuse et douloureuse correction.";
-				specialeffect2 253; // EF_ABSORBSPIRITS
-				skill 1006,1,0;
+				specialeffect2 EF_ABSORBSPIRITS;
+				skill "WZ_SIGHTBLASTER",1,0;
 				next;
 				mes "[Meow]";
 				mes "Vous vous en souvenez, maintenant?";
@@ -173,7 +174,7 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 			mes "Cette compétence est appelée ^FF0000Sight Blaster^000000. Plutôt cool, hein?";
 			mes "Sinon, c'est un sort de Feu qui nécessite que vous lanciez le sort Sight avant de pouvoir l'activer. Maintenant, essayons.";
 			next;
-			specialeffect2 183; // EF_SUI_EXPLOSION
+			specialeffect2 EF_SUI_EXPLOSION;
 			mes "^3355FF*BAM! BOOM!*^000000";
 			next;
 			mes "[Meow]";
@@ -187,13 +188,13 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 			mes "Enfin...!";
 			mes "Vous avez pigez le truc!";
 			mes "Cela vous a demandé pas mal d'efforts, mais finalement on y est arrivé.";
-			specialeffect2 253; // EF_ABSORBSPIRITS
+			specialeffect2 EF_ABSORBSPIRITS;
 			delitem 991,10; //Crystal_Blue
 			delitem 993,10; //Yellow_Live
 			delitem 990,10; //Boody_Red
 			delitem 992,10; //Wind_Of_Verdure
 			set WIZ_SK,100;
-			skill 1006,1,0;
+			skill "WZ_SIGHTBLASTER",1,0;
 			next;
 			mes "[Meow]";
 			mes "Je suis très fatigué de cet enseignement. Je pense que je vais faire une bonne sieste bien méritée, maintenant. Allez-vous en et si vous connaissez d'autres Sorciers intéressés par cette compétence, envoyez-les moi.";
