@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.0
+//= 1.4
 //===== Compatible With: =====================================
 //= Eathena SVN
 //===== Description: =========================================
@@ -21,6 +21,9 @@
 //===== Additional Comments: =================================
 //= 1.0 First Version. [L0ne_W0lf]
 //= 1.1 Fixed a weird carriage return. o_o [L0ne_W0lf]
+//= 1.2 Optimizing refine method [Zephyrus]
+//= 1.3 Typo fixes [Yommy]
+//= 1.4 Removed unnecessary dialogs [Zephyrus]
 //============================================================
 
 payon,174,138,0	script	Suhnbi#cash	85,{
@@ -28,130 +31,55 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 	mes "Bonjour. Mon nom est Suhnbi.";
 	mes "Je suis forgeron, je peux raffiner tous types d'armes, armures et équipements. Quel équipement souhaiteriez-vous que je raffine?";
 	next;
-	set .@strRetPart1$,getequipname(1);
-	set .@strRetPart2$,getequipname(2);
-	set .@strRetPart3$,getequipname(3);
-	set .@strRetPart4$,getequipname(4);
-	set .@strRetPart5$,getequipname(5);
-	set .@strRetPart6$,getequipname(6);
-	set .@strRetPart7$,getequipname(7);
-	set .@strRetPart8$,getequipname(8);
-	set .@strRetPart9$,getequipname(9);
-	set .@strRetPart10$,getequipname(10);
+	
+	setarray .@position$[1], "Tête","Corps","Main Gauche","Main Droite","Robe","Chaussures","Accessoire 1","Accessoire 2","Tête 2","Tête 3";
+	set .@menu$,"";
+	for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+	{
+		if( getequipisequiped(.@i) )
+			set .@menu$, .@menu$ + .@position$[.@i] + "-" + "[" + getequipname(.@i) + "]";
 
-	set .@menu$,.@strRetPart1$+":"+.@strRetPart2$+":"+.@strRetPart3$+":"+.@strRetPart4$+":"+.@strRetPart5$+":"+.@strRetPart6$+":"+.@strRetPart7$+":"+.@strRetPart8$+":"+.@strRetPart9$+":"+.@strRetPart10$;
-
-	switch(select(.@menu$)) {
-	case 1:
-		set .@part,1;
-		if (getequipisequiped(1) == 0) {
-			mes "[Suhnbi]";
-			mes "Vous voulez peut-être que je raffine le petit pois qui vous sert de cerveau?";
-			close;
-		}
-		break;
-	case 2:
-		set .@part,2;
-		if (getequipisequiped(2) == 0) {
-			mes "[Suhnbi]";
-			mes "Vous voulez que j'applique mon chalumeau sur votre peau...?";
-			close;
-		}
-		break;
-	case 3:
-		set .@part,3;
-		if (getequipisequiped(3) == 0) {
-			mes "[Suhnbi]";
-			mes "J'aurais beau essayer, je ne peux pas transformer votre main gauche en arme de guerre...";
-			close;
-		}
-		break;
-	case 4:
-		set .@part,4;
-		if (getequipisequiped(4) == 0) {
-			mes "[Suhnbi]";
-			mes "J'aurais beau essayer, je ne peux pas transformer votre main droite en arme de guerre...";
-			close;
-		}
-		break;
-	case 5:
-		set .@part,5;
-		if (getequipisequiped(5) == 0) {
-			mes "[Suhnbi]";
-			mes "Mais regardez-vous... Vous n'avez même pas de Garment sur vous...";
-			close;
-		}
-		break;
-	case 6:
-		set .@part,6;
-		if (getequipisequiped(6) == 0) {
-			mes "[Suhnbi]";
-			mes "Argh!! Ça pue des pieds ici! Je ne peux pas raffiner dans ces conditions... erk!!";
-			close;
-		}
-		break;
-	case 7:
-		set .@part,7;
-		if (getequipisequiped(7) == 0) {
-			mes "[Suhnbi]";
-			mes "Qu'entendez-vous par 'Accessoire'? Où vous en voyez un, vous?";
-			close;
-		}
-		break;
-	case 8:
-		set .@part,8;
-		if (getequipisequiped(8) == 0) {
-			mes "[Suhnbi]";
-			mes "Qu'entendez-vous par 'Accessoire'? Où vous en voyez un, vous?";
-			close;
-		}
-		break;
-	case 9:
-		set .@part,9;
-		if (getequipisequiped(9) == 0) {
-			mes "[Suhnbi]";
-			mes "Je raffine des équipements. Je suis forgeron, pas coiffeur.";
-			close;
-		}
-		break;
-	case 10:
-		set .@part,10;
-		if (getequipisequiped(10) == 0) {
-			mes "[Suhnbi]";
-			mes "Vous me prenez pour votre styliste personnel ou quoi? Allez au salon de coiffure si vous voulez une coupe tendance.";
-			close2;
-		}
-		break;
+		set .@menu$, .@menu$ + ":";
 	}
+	set .@part,select(.@menu$);
 
-	if (getequipisenableref(.@part) == 0) {
+	if( !getequipisequiped(.@part) )
+		close;
+
+	if( !getequipisenableref(.@part) )
+	{
 		mes "[Suhnbi]";
 		mes "Je ne peux pas travailler sur cet équipement...";
 		close;
 	}
-	if (getequipisidentify(.@part) == 0) {
+	if( !getequipisidentify(.@part) )
+	{
 		mes "[Suhnbi]";
 		mes "Vous devez d'abord identifier cet équipement.";
 		close;
 	}
-	if (getequiprefinerycnt(.@part) >= 10) {
+	if( getequiprefinerycnt(.@part) >= 10 )
+	{
 		mes "[Suhnbi]";
 		mes "Cet équipement est déjà à son maximum, je ne peux pas le raffiner plus.";
 		close;
 	}
+
 	// Make sure you have the neccessary items and Zeny to refine your items
 	// Determines chance of failure and verifies that you want to continue.
-	switch(getequipweaponlv(.@part)) {
-	case 1: callsub S_RefineValidate,1,7620,50,.@part; break;
-	case 2: callsub S_RefineValidate,2,7620,200,.@part; break;
-	case 3: callsub S_RefineValidate,3,7620,5000,.@part; break;
-	case 4: callsub S_RefineValidate,4,7620,20000,.@part; break;
-	default: callsub S_RefineValidate,0,7619,2000,.@part; break;
+	switch( getequipweaponlv(.@part) )
+	{
+		case 1: callsub S_RefineValidate,1,7620,50,.@part; break;
+		case 2: callsub S_RefineValidate,2,7620,200,.@part; break;
+		case 3: callsub S_RefineValidate,3,7620,5000,.@part; break;
+		case 4: callsub S_RefineValidate,4,7620,20000,.@part; break;
+		default: callsub S_RefineValidate,0,7619,2000,.@part; break;
 	}
 
-	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+	if( getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100) )
+	{
 		mes "[Suhnbi]";
-		mes "Cling! Clang! Clang!";
+		mes "Cling! Clang! Clung!";
 		SuccessRefItem .@part;
 		next;
 		Emotion e_no1;
@@ -159,7 +87,8 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 		mes "HAHA, quel talent! On dirait que mes vieux os ne sont pas encore rouillés! Splendide... tout simplement splendide...";
 		close;
 	}
-	else {
+	else
+	{
 		mes "[Suhnbi]";
 		mes "Cling! Clang! Clung!";
 		FailedRefItem .@part;
@@ -170,9 +99,7 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 			Emotion e_omg;
 		mes "[Suhnbi]";
 		mes "Aaahhh!! Oh non...!!";
-		next;
-		mes "[Suhnbi]";
-		mes "He... Hem... Je suis désolé mais le raffinement a ^ff0000échoué ^000000.";
+		mes "He... Hem... Je suis désolé mais le raffinement a ^ff0000échoué^000000.";
 		next;
 		mes "[Suhnbi]";
 		mes "Jai vraiment honte de ce que j'ai fait... MAIS je vous avais prévenu qu'il y avait des risques!";
@@ -182,12 +109,14 @@ payon,174,138,0	script	Suhnbi#cash	85,{
 S_RefineValidate:
 	mes "[Suhnbi]";
 	if (getarg(0))
-		mes "Une Arme de Niveau "+getarg(0)+"...";
-	mes "Afin de raffiner cet équipement j'aurais besoin de minerais ^ff9999"+getitemname(getarg(1))+"^000000 et de "+getarg(2)+" Zenys.";
+		mes "Une arme de niveau " + getarg(0) + " ...";
+	mes "Afin de raffiner cet équipement j'aurais besoin de minerais ^ff9999" + getitemname(getarg(1)) + "^000000 et de " + getarg(2) + " Zenys.";
 	mes "Voulez-vous continuer?";
 	next;
-	if (select("Oui:Non") == 1) {
-		if (getequippercentrefinery(getarg(3)) < 100) {
+	if( select("Oui:Non") == 1 )
+	{
+		if( getequippercentrefinery(getarg(3)) < 100 )
+		{
 			mes "[Suhnbi]";
 			mes "Hum... Attendez une minute! Cet équipement a déjà été raffiné un certain nombre de fois!";
 			mes "Je dois vous prévenir, que si vous le raffinez ENCORE, il pourrait SE ^ff0000DETRUIRE^000000 durant la forge et devenir ^ff0000INUTILISABLE^000000!!";
@@ -195,26 +124,30 @@ S_RefineValidate:
 			mes "[Suhnbi]";
 			mes "Voulez vous tout de même tenter de le raffiner? Si oui, je ne vous garantie pas le résultat...";
 			next;
-			if (select("Oui:Non") == 2) {
+			if( select("Oui:Non") == 2 )
+			{
 				mes "[Suhnbi]";
 				mes "Bon choix.";
 				mes "Ah ça oui... un choix judicieux. Je serais terriblement embarrassé si je détruisais votre équipement par mégarde.";
 				close;
 			}
 		}
-		if (countitem(getarg(1)) > 0 && Zeny > getarg(2)) {
-			delitem getarg(1),1;
-			set zeny,zeny-getarg(2);
+		if( countitem(getarg(1)) > 0 && Zeny > getarg(2) )
+		{
+			delitem getarg(1), 1;
+			set Zeny, Zeny - getarg(2);
 			return;
 		}
-		else {
+		else
+		{
 			mes "[Suhnbi]";
-			mes "On dirait qu'il vous manque de l'argent ou bien du minerais "+getitemname(getarg(1))+"...";
+			mes "On dirait qu'il vous manque de l'argent ou bien du minerais " + getitemname(getarg(1)) + "...";
 			mes "Allez en chercher. Je reste ici, de toutes façons...";
 			close;
 		}
 	}
-	else {
+	else
+	{
 		mes "[Suhnbi]";
 		mes "C'est vrai... Pas la peine de se presser.";
 		mes "Prenez votre temps.";
