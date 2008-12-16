@@ -12,7 +12,7 @@
 //= Persian, Vicious_Pucca, aoa00, Evera, MasterOfMupppets,
 //= Lupus, Lord Gywall
 //===== Current Version: ===================================== 
-//= 4.2
+//= 4.4
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -73,6 +73,14 @@
 //= 4.0 Updated several NPCs to Official (iRO) dialog, and restrucured. [L0ne_W0lf]
 //= 4.1 Updated Dungeon quest, and Friendhsip quest to 10.3 standards. [L0ne_W0lf]
 //= 4.2 Fixed wrong variable type in use in "Box#cube1". [L0ne_W0lf]
+//= 4.3 Fixed a bug where if you relog after you take out the Lab Permit from the Box
+//=     You can't finish the quest. (bugreport:1798) [Samuray22]
+//= 4.3a Reverted changes from the last version. . [L0ne_W0lf]
+//=     Changed temp char vars to normal vars, that unset at end.
+//=     Tube just makes sure you have 1 or more permits.
+//= 4.4 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 4.5 Corrected an Incorrect check of the Shinokas_Quest. (bugreport:2276) [Samuray22]
+//=	  Replaced effect numerics with constants.
 //============================================================ 
 
 lighthalzen,1,1,7	script	sneakAddSuber	-1,{
@@ -541,12 +549,12 @@ lhz_cube,237,198,0	script	Pile de Dossiers#cube	111,{
 		close;
 	}
 	else if (lhz_sincube < 10) {
-		if (@lhz_secret01 < 1) {
+		if (lhz_secret01 < 1) {
 			mes "^3355FFIl y a une pile de dossiers éparpillés sur le sol. Ils contiennent certainement des informations importantes, mais tout est mélangé.^000000";
 			next;
 			if (select("Fouiller dans les dossiers.:Ne pas y toucher.") == 1) {
 				mes "^3355FFAlors que vous fouillez dans l'amas de dossiers, une Clé Rouge tombe au sol en émettant un cling-cling. Vous décidez de garder cette ^000000Clé Rouge^3355FF.^000000";
-				set @lhz_secret01,1;
+				set lhz_secret01,1;
 			}
 			close;
 		}
@@ -558,7 +566,7 @@ lhz_cube,237,198,0	script	Pile de Dossiers#cube	111,{
 }
 
 lhz_cube,234,202,0	script	Tableau#cube	111,{
-	if (@lhz_secret01 < 2) {
+	if (lhz_secret01 < 2) {
 		mes "^3355FFCe tableau accroché sur l'un des murs attire votre attention pour une raison étrange et inexplicable.^000000";
 		next;
 		if (select("Regarder derrière le tableau.:Ne pas y toucher.") == 1) {
@@ -566,7 +574,7 @@ lhz_cube,234,202,0	script	Tableau#cube	111,{
 		}
 		close;
 	}
-	else if (@lhz_secret01 == 2) {
+	else if (lhz_secret01 == 2) {
 		mes "^3355FFCe tableau accroché sur l'un des murs attire votre attention pour une raison étrange et inexplicable.^000000";
 		next;
 		if (select("Regarder derrière le tableau.:Ne pas y toucher.") == 1) {
@@ -581,15 +589,15 @@ lhz_cube,234,202,0	script	Tableau#cube	111,{
 				set .@number_rand,rand(1,3);
 				if (.@number_rand == 1) {
 					mes "4 3 2 9 1 6 8 2 7";
-					set @lhz_secret01,3;
+					set lhz_secret01,3;
 				}
 				else if (.@number_rand == 2) {
 					mes "3 6 4 1 2 8 7 1 5";
-					set @lhz_secret01,4;
+					set lhz_secret01,4;
 				}
 				else {
 					mes "4 9 3 7 6 2 8 6 6";
-					set @lhz_secret01,5;
+					set lhz_secret01,5;
 				}
 				close;
 			}
@@ -598,16 +606,16 @@ lhz_cube,234,202,0	script	Tableau#cube	111,{
 		}
 		close;
 	}
-	else if (@lhz_secret01 < 6) {
+	else if (lhz_secret01 < 6) {
 		mes "^3355FFCette suite de chiffres était cachée derrière le tableau, ils doivent donc avoir une certaine importance.^000000";
 		mes " ";
-		if (@lhz_secret01 == 3) {
+		if (lhz_secret01 == 3) {
 			mes "4 3 2 9 1 6 8 2 7";
 		}
-		else if (@lhz_secret01 == 4) {
+		else if (lhz_secret01 == 4) {
 			mes "3 6 4 1 2 8 7 1 5";
 		}
-		else if (@lhz_secret01 == 5) {
+		else if (lhz_secret01 == 5) {
 			mes "4 9 3 7 6 2 8 6 6";
 		}
 		close;
@@ -621,17 +629,17 @@ lhz_cube,234,202,0	script	Tableau#cube	111,{
 }
 
 lhz_cube,242,201,0	script	Tiroir#cube	111,{
-	if (@lhz_secret01 < 1) {
+	if (lhz_secret01 < 1) {
 		mes "^3355FFCe tiroir semble fermé à clé... Vous ne pouvez pas l'ouvrir.^000000";
 		close;
 	}
-	else if (@lhz_secret01 == 1) {
+	else if (lhz_secret01 == 1) {
 		mes "^3355FFCe tiroir semble fermé à clé... Heureusement, vous avez une idée pour l'ouvrir.^000000";
 		next;
 		input .@input$;
 		if (.@input$ == "Clé Rouge") {
 			mes "^3355FFVous insérez la clé rouge dans la serrure et ouvrez le tiroir. A l'intérieur, vous trouvez un ^000000Couteau Suisse^3355FF que vous décidez de conserver. Après tout, cela pourra toujours vous être utile.^000000";
-			set @lhz_secret01,2;
+			set lhz_secret01,2;
 		}
 		else {
 			mes "^3355FFMalheureusement, le verrou semble vous résister. Peut-être devriez-vous essayer autre chose.^000000";
@@ -682,7 +690,7 @@ lhz_cube,237,183,0	script	Tonneau#cube	111,{
 		close;
 	}
 	else if (lhz_sincube == 9) {
-		if (@lhz_secret01 < 3) {
+		if (lhz_secret01 < 3) {
 			mes "^3355FFVous décidez d'entrer une combinaison de chiffres sur le cadenas en métal. On dirait que vous ne pouvez entrer qu'un seul chiffre à la fois...^000000";
 			next;
 			for( set $@i, 0; .@i < 9; set .@i, .@i + 1 )
@@ -690,8 +698,8 @@ lhz_cube,237,183,0	script	Tonneau#cube	111,{
 			mes "^3355FFRien ne se produit...^000000";
 			close;
 		}
-		else if (@lhz_secret01 >= 3 && @lhz_secret01 <= 5) {
-			switch(@lhz_secret01) {
+		else if (lhz_secret01 >= 3 && lhz_secret01 <= 5) {
+			switch(lhz_secret01) {
 			case 3: setarray .@numbers[0],4,3,2,9,1,6,8,2,7; break;
 			case 4: setarray .@numbers[0],3,6,4,1,2,8,7,1,5; break;
 			case 5: setarray .@numbers[0],4,9,3,7,6,2,8,6,6; break;
@@ -704,7 +712,7 @@ lhz_cube,237,183,0	script	Tonneau#cube	111,{
 			}
 			if (.@number_line == 9) {
 				mes "^3355FFLe couvercle de métal coulisse enfin, et vous trouvez une Clé Jaune à l'intérieur de la boîte. Vous décidez de conserver cette ^000000Clé Jaune^3355FF.^000000";
-				set @lhz_secret01,6;
+				set lhz_secret01,6;
 			}
 			else {
 				mes "^3355FFRien ne se produit. On dirait que vous n'avez pas entré les bons chiffres.^000000";
@@ -720,7 +728,7 @@ lhz_cube,237,183,0	script	Tonneau#cube	111,{
 }
 
 lhz_cube,224,192,0	script	Générateur#cube	111,{
-	if (@lhz_secret01 < 6) {
+	if (lhz_secret01 < 6) {
 		mes "^3355FFCette énorme et bruyante machine présente un panneau de contrôle. Une serrure est présente à même le panneau de contrôle.^000000";
 		next;
 		input .@input$;
@@ -728,7 +736,7 @@ lhz_cube,224,192,0	script	Générateur#cube	111,{
 		mes "Vous devez probablement trouver quelque chose à insérer dans la serrure.^000000";
 		close;
 	}
-	else if (@lhz_secret01 == 6) {
+	else if (lhz_secret01 == 6) {
 		mes "^3355FFCette énorme et bruyante machine présente un panneau de contrôle. Une serrure est présente à même le panneau de contrôle.^000000";
 		next;
 		input .@input$;
@@ -736,7 +744,7 @@ lhz_cube,224,192,0	script	Générateur#cube	111,{
 			mes "^3355FFVous insérez la clé jaune dans la serrure du panneau de contrôle, ce qui a pour effet de couper instantanément le courant.^000000";
 			next;
 			mes "^3355FFVous remarquez que la ^000000Lampe^3355FF au dessus du lit est maintenant éteinte.^000000";
-			set @lhz_secret01,7;
+			set lhz_secret01,7;
 		}
 		else {
 			mes "^3355FFRien ne se produit.";
@@ -749,18 +757,18 @@ lhz_cube,224,192,0	script	Générateur#cube	111,{
 }
 
 lhz_cube,244,201,0	script	Lampe#cube	111,{
-	if (@lhz_secret01 < 7) {
+	if (lhz_secret01 < 7) {
 		mes "^3355FFLa lumière de cette lampe est allumée. On dirait qu'il y a quelque chose à l'intérieur de l'ampoule, mais vous ne pouvez pas y toucher, c'est beaucoup trop chaud!^000000";
 		next;
 		mes "^3355FFSi vous pouviez éteindre les lumières de la pièce, l'ampoule pourrait suffisamment refroidir pour que vous puissiez la toucher...^000000";
 		close;
 	}
-	else if (@lhz_secret01 == 7) {
+	else if (lhz_secret01 == 7) {
 		mes "Les lumières sont maintenant éteintes, l'ampoule a eu le temps de refroidir.";
 		next;
 		if (select("Casser l'ampoule de la lampe.:Ne pas y toucher.") == 1) {
 			mes "^3355FFVous fracassez l'ampoule de la lampe, manquant de vous blesser avec les éclats. Vous y découvrez une ^000000Clé Noire^3355FF.^000000";
-			set @lhz_secret01,8;
+			set lhz_secret01,8;
 		}
 		close;
 	}
@@ -769,7 +777,7 @@ lhz_cube,244,201,0	script	Lampe#cube	111,{
 }
 
 lhz_cube,234,200,0	script	Bureau#cube	111,{
-	if (@lhz_secret02 <= 1) {
+	if (lhz_secret02 <= 1) {
 		mes "^3355FFCe bureau est très encombré!^000000";
 		next;
 		switch(select("Regarder sur le bureau.:Regarder sous le bureau.:Regarder le tiroir du bureau.")) {
@@ -777,9 +785,9 @@ lhz_cube,234,200,0	script	Bureau#cube	111,{
 			mes "^3355FFDifférents documents, livres, et matériel de laboratoire sont dispersés sur le bureau. Rien de tout cela ne semble utile pour le moment.^000000";
 			close;
 		case 2:
-			if (@lhz_secret02 < 1) {
+			if (lhz_secret02 < 1) {
 				mes "^3355FFVous trouvez, à moitié coincé sous le bureau, un ^000000Petit Bâton^3355FF de bois, que vous décidez de conserver pour le moment.^000000";
-				set @lhz_secret02,1;
+				set lhz_secret02,1;
 			}
 			else {
 				mes "^3355FFC'est ici que vous avez trouvé le ^000000Petit Bâton^3355FF de bois.";
@@ -791,7 +799,7 @@ lhz_cube,234,200,0	script	Bureau#cube	111,{
 			close;
 		}
 	}
-	else if (@lhz_secret02 == 2) {
+	else if (lhz_secret02 == 2) {
 		mes "^3355FFVous êtes de retour devant ce poussiéreux bureau en bazar, dont le propriétaire est certainement quelqu'un de trop occupé pour voir l'état catastrophique de son lieu de travail.^000000";
 		next;
 		switch(select("Regarder sur le bureau.:Regarder sous le bureau.:Regarder le tiroir du bureau.")) {
@@ -809,7 +817,7 @@ lhz_cube,234,200,0	script	Bureau#cube	111,{
 			mes "^3355FFSous le bureau, vous trouvez un autre Petit Bâton tout à fait similaire à celui que vous avez trouvé tout à l'heure. De plus, il présente à son extrémité une fente qui semble lui permettre de s'emboîter dans l'autre...";
 			next;
 			mes "^3355FFVous combinez les deux petits bâtons via leurs extrémités. Vous êtes maintenant l'heureux possesseur d'un ^000000Grand Bâton^3355FF.^000000";
-			set @lhz_secret02,3;
+			set lhz_secret02,3;
 			close;
 		case 3:
 			mes "^3355FFLe tiroir du bureau est toujours fermé. Vous vous demandez s'il contient une petite flasque de liqueur, ou bien peut-être des bonbons.";
@@ -835,7 +843,7 @@ lhz_cube,234,200,0	script	Bureau#cube	111,{
 }
 
 lhz_cube,247,198,0	script	Lit#cube	111,{
-	if (@lhz_secret02 == 0) {
+	if (lhz_secret02 == 0) {
 		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
 		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
@@ -843,11 +851,11 @@ lhz_cube,247,198,0	script	Lit#cube	111,{
 		}
 		else {
 			mes "^3355FFA moitié coincé sous le lit, vous découvrez un ^000000Petit Bâton^3355FF  de bois, que vous décidez de conserver pour le moment. Certains objets peuvent paraître sans intérêt au premier abord, mais se révèleront utiles un jour ou l'autre.^000000";
-			set @lhz_secret02,2;
+			set lhz_secret02,2;
 		}
 		close;
 	}
-	else if (@lhz_secret02 == 1) {
+	else if (lhz_secret02 == 1) {
 		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
 		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
@@ -857,11 +865,11 @@ lhz_cube,247,198,0	script	Lit#cube	111,{
 			mes "^3355FFSous le bureau, vous trouvez un autre Petit Bâton tout à fait similaire à celui que vous avez trouvé tout à l'heure. De plus, il présente à son extrémité une fente qui semble lui permettre de s'emboîter dans l'autre...";
 			next;
 			mes "^3355FFVous combinez les deux petits bâtons via leurs extrémités. Vous êtes maintenant l'heureux possesseur d'un ^000000Grand Bâton^3355FF.^000000";
-			set @lhz_secret02,3;
+			set lhz_secret02,3;
 		}
 		close;
 	}
-	else if (@lhz_secret02 == 2) {
+	else if (lhz_secret02 == 2) {
 		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
 		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
@@ -880,7 +888,7 @@ lhz_cube,247,198,0	script	Lit#cube	111,{
 		}
 		close;
 	}
-	else if (@lhz_secret02 == 3) {
+	else if (lhz_secret02 == 3) {
 		mes "^3355FFLes draps de ce lit sont négligemment arrangés.^000000";
 		next;
 		if (select("Regarder sur le lit.:Regarder sous le lit.") == 1) {
@@ -893,7 +901,7 @@ lhz_cube,247,198,0	script	Lit#cube	111,{
 			if (.@input$ == "Grand Bâton") {
 				mes "^3355FFLe grand bâton à la main, vous vous retrouvez le nez au sol et les membres tendus pour atteindre le coin poussiéreux où vous aviez repéré un objet. Tout d'un coup vous sentez que vous touchez quelque chose, et le ramenez à vous.";
 				mes "Vous êtes maintenant l'heureux possesseur d'un étrange ^000000Cube^3355FF.^000000";
-				set @lhz_secret02,4;
+				set lhz_secret02,4;
 			}
 			else {
 				mes "^3355FFMalheureusement tout ce que vous récoltez ce sont des courbatures. Vous devriez peut-être essayer autre chose.^000000";
@@ -913,12 +921,12 @@ lhz_cube,247,198,0	script	Lit#cube	111,{
 
 lhz_cube,229,184,0	script	Gobelet#cube	111,{
 	if (lhz_sincube < 10) {
-		if (@lhz_secret03 == 0) {
+		if (lhz_secret03 == 0) {
 			mes "^3355FFVous voyez une bouteille à moitié vide ainsi qu'un gobelet posé à côté. On dirait que vous avez raté la fête.^000000";
 			next;
 			if (select("Examiner le gobelet.:Ne pas y toucher.") == 1) {
 				mes "^3355FFA l'intérieur du gobelet, vous trouvez une ^000000Clé Rouillée^3355FF que vous décidez de conserver. Cependant elle ne vous sera pas très utile dans ce état, il vous faut trouver un moyen d'enlever toute cette rouille... Peut-être avec un produit chimique particulier?^000000";
-				set @lhz_secret03,1;
+				set lhz_secret03,1;
 			}
 			close;
 		}
@@ -930,20 +938,20 @@ lhz_cube,229,184,0	script	Gobelet#cube	111,{
 }
 
 lhz_cube,231,202,0	script	Produits Chimiques#cube	111,{
-	if (@lhz_secret03 < 1) {
+	if (lhz_secret03 < 1) {
 		mes "^3355FFCette bouteille semble contenir un produit chimique fumant, certainement très corrosif.^000000";
 		next;
 		input .@input$;
 		mes "^3355FFA quoi cela pourrait-il bien vous servir?^000000";
 		close;
 	}
-	else if (@lhz_secret03 == 1) {
+	else if (lhz_secret03 == 1) {
 		mes "^3355FFCette bouteille semble contenir un produit chimique fumant, certainement très corrosif.^000000";
 		next;
 		input .@input$;
 		if (.@input$ == "Clé Rouillée") {
 			mes "^3355FFVous versez prudemment un peu de ce produit chimique sur la clé rouillée. En un instant, le produit attaque la rouille qui se met à faire des bulles et couler, laissant une grosse tâche orange à l'endroit où vous aviez posé la clé. Vous découvrez que votre clé rouillée était à la base une étincelante ^000000Clé Verte^3355FF.^000000";
-			set @lhz_secret03,2;
+			set lhz_secret03,2;
 		}
 		else {
 			mes "^3355FFIl vaudrait mieux utiliser ce produit avec précautions, et le verser uniquement sur un objet particulier.^000000";
@@ -955,7 +963,7 @@ lhz_cube,231,202,0	script	Produits Chimiques#cube	111,{
 }
 
 lhz_cube,249,191,0	script	Armoire#cube	111,{
-	if (@lhz_secret03 < 2) {
+	if (lhz_secret03 < 2) {
 		mes "^3355FFCette armoire contient de nombreux tiroirs. Peut-être trouverez-vous quelque chose d'utile à l'intérieur?";
 		next;
 		if (select("Ouvrir l'armoire.:Ne pas y toucher.") == 1) {
@@ -964,13 +972,13 @@ lhz_cube,249,191,0	script	Armoire#cube	111,{
 		}
 		close;
 	}
-	else if (@lhz_secret03 == 2) {
+	else if (lhz_secret03 == 2) {
 		mes "^3355FFCette armoire contient de nombreux tiroirs. Peut-être trouverez-vous quelque chose d'utile à l'intérieur?";
 		next;
 		input .@input$;
 		if (.@input$ == "Clé Verte") {
 			mes "^3355FFVotre clé verte s'adapte parfaitement aux serrures des tiroirs. Dans l'un d'eux, vous trouvez un étrange ^000000Polygone^3355FF.^000000";
-			set @lhz_secret03,3;
+			set lhz_secret03,3;
 		}
 		else {
 			mes "^3355FFRien à faire, vous n'arrivez pas à ouvrir l'armoire. Réfléchissez à une manière d'ouvrir ce qui est fermé... Vous trouverez la réponse que vous cherchez.^000000";
@@ -982,7 +990,7 @@ lhz_cube,249,191,0	script	Armoire#cube	111,{
 }
 
 lhz_cube,224,197,0	script	Tubes#cube	111,{
-	if (@lhz_secret01 < 8) {
+	if (lhz_secret01 < 8) {
 		mes "^3355FFL'un de ces tubes d'expérimentations semblent contenir quelque chose. A côté des tubes se trouve une fine plaque en métal présentant une serrure et une fente pouvant accueillir une carte.^000000";
 		next;
 		input .@input$;
@@ -990,20 +998,20 @@ lhz_cube,224,197,0	script	Tubes#cube	111,{
 		mes "Vous devez probablement trouver une clé pour la serrure, et une carte magnétique pour la fente prévue à cet effet.^000000";
 		close;
 	}
-	else if (@lhz_secret01 == 8) {
+	else if (lhz_secret01 == 8) {
 		mes "^3355FFL'un de ces tubes d'expérimentations semblent contenir quelque chose. Sous les tubes se trouve une fine plaque en métal présentant une serrure et une fente pouvant accueillir une carte magnétique.^000000";
 		next;
 		input .@input$;
 		if (.@input$ == "Clé Noire") {
 			mes "^3355FFVous insérez la clé noire dans la serrure. L'un des tubes se brise, révélant un étrange objet de forme ^000000Ovale^3355FF que vous décidez de conserver.^000000";
-			set @lhz_secret01,9;
+			set lhz_secret01,9;
 		}
 		else {
 			mes "^3355FFRien ne se produit...^000000";
 		}
 		close;
 	}
-	else if (@lhz_secret01 == 9) {
+	else if (lhz_secret01 == 9) {
 		mes "^3355FFC'est ici que vous avez obtenu l'objet de forme ^000000Ovale^3355FF.";
 		mes "A côté des tubes, vous remarquez une fissure artificielle sans le sol, qui peut probablement être ouverte...^000000";
 		close;
@@ -1042,7 +1050,7 @@ lhz_cube,224,197,0	script	Tubes#cube	111,{
 }
 
 lhz_cube,248,193,0	script	Boîte#cube1	111,{
-	if ((@lhz_secret01 < 9) && (@lhz_secret02 < 4) && (@lhz_secret03 < 3)) {
+	if ((lhz_secret01 < 9) && (lhz_secret02 < 4) && (lhz_secret03 < 3)) {
 		mes "^3355FFCette boîte présente trois cavités ayant chacune une forme distincte.^000000";
 		next;
 		select("Cavité Ovale:Cavité Cubique:Cavité Polygonale");
@@ -1050,17 +1058,17 @@ lhz_cube,248,193,0	script	Boîte#cube1	111,{
 		mes "^3355FFRien ne se produit.^000000";
 		close;
 	}
-	else if ((@lhz_secret01 != 10) || (@lhz_secret02 != 5) || (@lhz_secret03 != 4)) {
+	else if ((lhz_secret01 != 10) || (lhz_secret02 != 5) || (lhz_secret03 != 4)) {
 		mes "^3355FFCette boîte présente trois cavités ayant chacune une forme distincte.^000000";
 		next;
 		switch(select("Cavité Ovale:Cavité Cubique:Cavité Polygonale")) {
 		case 1:
-			if (@lhz_secret01 == 9) {
+			if (lhz_secret01 == 9) {
 				next;
 				input .@input$;
 				if (.@input$ == "Ovale") {
 					mes "^3355FFVous insérez l'objet de forme ovale dans la cavité ovale. Tout s'assemble parfaitement.^000000";
-					set @lhz_secret01,10;
+					set lhz_secret01,10;
 					close;
 				}
 				mes "^3355FFRien ne se produit.^000000";
@@ -1074,18 +1082,18 @@ lhz_cube,248,193,0	script	Boîte#cube1	111,{
 			mes "^3355FFRien ne se produit.^000000";
 			close;
 		case 2:
-			if (@lhz_secret02 == 4) {
+			if (lhz_secret02 == 4) {
 				next;
 				input .@input$;
 				if (.@input$ == "Cube") {
 					mes "^3355FFVous insérez l'étrange cube dans la cavité cubique. Tout s'assemble parfaitement! Finalement, votre dur entraînement au jardin d'enfants aura fait ses preuves.^000000";
-					set @lhz_secret02,5;
+					set lhz_secret02,5;
 					close;
 				}
 				mes "^3355FFRien ne se produit.^000000";
 				close;
 			}
-			else if (@lhz_secret02 == 5) {
+			else if (lhz_secret02 == 5) {
 				mes "^3355FFVous avez déjà inséré l'étrange cube dans la cavité cubique. Vous pouvez toujours vous amuser à le sortir pour le remettre, mais ce serait une pure perte de temps.^000000";
 				close;
 			}
@@ -1093,18 +1101,18 @@ lhz_cube,248,193,0	script	Boîte#cube1	111,{
 			mes "^3355FFRien ne se produit.^000000";
 			close;
 		case 3:
-			if (@lhz_secret03 == 3) {
+			if (lhz_secret03 == 3) {
 				next;
 				input .@input$;
 				if (.@input$ == "Polygone") {
 					mes "^3355FFOn dirait que la chance vous sourit: le polygone possède exactement la même forme que la cavité polygonale qui vous semblait jusqu'à lors quelconque. Tout s'emboîte parfaitement, comme si le destin menait vos actes depuis le commencement.^000000";
-					set @lhz_secret03,4;
+					set lhz_secret03,4;
 					close;
 				}
 				mes "^3355FFRien ne se produit.^000000";
 				close;
 			}
-			else if (@lhz_secret03 == 4) {
+			else if (lhz_secret03 == 4) {
 				mes "^3355FFVous avez déjà inséré le polygone dans la cavité polygonale. Il serait douteux que le polygone puisse vous servir à nouveau.^000000";
 				close;
 			}
@@ -1113,7 +1121,7 @@ lhz_cube,248,193,0	script	Boîte#cube1	111,{
 			close;
 		}
 	}
-	else if (@lhz_secret01 == 10 && @lhz_secret02 == 5 && @lhz_secret03 == 4 && lhz_sincube != 10) {
+	else if (lhz_secret01 == 10 && lhz_secret02 == 5 && lhz_secret03 == 4 && lhz_sincube != 10) {
 		mes "^3355FFCette boîte présente trois cavités ayant chacune une forme distincte, et maintenant remplies des objets que vous y avez inséré.^000000";
 		next;
 		if (select("Ouvrir la boîte.:Annuler.") == 1) {
@@ -1159,8 +1167,10 @@ OnTouch:
 	switch(rand(1,3)) {
 	case 1:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //"Type Louche#lhz_01" EF_STEAL
-		set zeny,zeny-100;
+		specialeffect EF_STEAL;
+		if (zeny >= 100) {
+			set zeny,zeny-100;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1172,8 +1182,10 @@ OnTouch:
 		close;
 	case 2:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //"Type Louche#lhz_01" EF_STEAL
-		set zeny,zeny-200;
+		specialeffect EF_STEAL;
+		if (zeny >= 200) {
+			set zeny,zeny-200;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1184,8 +1196,10 @@ OnTouch:
 		close;
 	case 3:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //EF_STEAL
-		set zeny,zeny-10;
+		specialeffect EF_STEAL;
+		if (zeny >= 10) {
+			set zeny,zeny-10;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1221,8 +1235,10 @@ OnTouch:
 	switch(rand(1,3)) {
 	case 1:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //"Type Louche#lhz_02" EF_STEAL
-		set zeny,zeny-100;
+		specialeffect EF_STEAL;
+		if (zeny >= 100) {
+			set zeny,zeny-100;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1234,8 +1250,10 @@ OnTouch:
 		close;
 	case 2:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //"Type Louche#lhz_02" EF_STEAL
-		set zeny,zeny-200;
+		specialeffect EF_STEAL;
+		if (zeny >= 200) {
+			set zeny,zeny-200;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1246,8 +1264,10 @@ OnTouch:
 		close;
 	case 3:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //EF_STEAL
-		set zeny,zeny-10;
+		specialeffect EF_STEAL;
+		if (zeny >= 10) {
+			set zeny,zeny-10;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1283,8 +1303,10 @@ OnTouch:
 	case 1:
 	case 2:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //EF_STEAL
-		set zeny,zeny-100;
+		specialeffect EF_STEAL;
+		if (zeny >= 100) {
+			set zeny,zeny-100;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1297,8 +1319,10 @@ OnTouch:
 	case 3:
 	case 4:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //EF_STEAL
-		set zeny,zeny-200;
+		specialeffect EF_STEAL;
+		if (zeny >= 200) {
+			set zeny,zeny-200;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -1309,8 +1333,10 @@ OnTouch:
 		close;
 	case 5:
 		mes "^3355FF*SHHHHHHUK!*^000000";
-		specialeffect 18; //"Type Louche#lhz_03" EF_STEAL
-		set zeny,zeny-10;
+		specialeffect EF_STEAL;
+		if (zeny >= 10) {
+			set zeny,zeny-10;
+		}
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Hum...?";
@@ -3085,13 +3111,13 @@ L_NoText:
 				next;
 				mes "[Personne Âgée]";
 				mes "Les esprits peuvent vous révéler les lieux auxquels ils sont attachés et que vous devrez rejoindre, mais une et une fois seulement. Souvenez-vous bien des endroits que je vais vous indiquer. Prêt? ...";
-				specialeffect2 22;
+				specialeffect2 EF_SIGHT;
 				next;
 				mes "[Personne Âgée]";
 				mes "Yaaaaappp ---!";
-				specialeffect2 62;
-				specialeffect2 225;
-				specialeffect2 36;
+				specialeffect2 EF_SIGHTRASHER;
+				specialeffect2 EF_VOLCANO;
+				specialeffect2 EF_PORTAL;
 				next;
 				mes "[Personne Âgée]";
 				mes "Voilà! Ce sont les endroits auxquels vous devez vous rendre afin de faire la lumière sur vos tourments. Ne les oubliez pas!";
@@ -3172,11 +3198,11 @@ L_NoText:
 		mes "......";
 		mes ".........";
 		mes "Hoooooooo...";
-		specialeffect2 88;
+		specialeffect2 EF_SUFFRAGIUM;
 		next;
 		mes "[Personne Âgée]";
 		mes "Yaaaaapp ---!";
-		specialeffect2 86;
+		specialeffect2 EF_ASPERSIO;
 		next;
 		mes "[Personne Âgée]";
 		mes "Pfiou! J'ai réussi à annuler le maléfice qui pesait sur vous. Cela ne change à ce qui est arrivé au propriétaire de ce médaillon. C'est vraiment tragique...";
@@ -3219,7 +3245,7 @@ lhz_in03,32,162,3	script	Jeune Infirme	53,{
 			mes "vieux médaillon";
 			mes "dans ses mains.^000000";
 			next;
-			specialeffect2 259;
+			specialeffect2 EF_MAPPILLAR3;
 			mes "...............";
 			next;
 			mes "["+strcharinfo(0)+"]";
@@ -3368,7 +3394,7 @@ lhz_in03,32,162,3	script	Jeune Infirme	53,{
 							mes "vieux médaillon";
 							mes "dans ses mains.^000000";
 							next;
-							specialeffect2 259;
+							specialeffect2 EF_MAPPILLAR3;
 							mes "......";
 							next;
 							mes "["+strcharinfo(0)+"]";
@@ -3502,7 +3528,7 @@ OnTouch:
 		next;
 		mes "[????]";
 		mes "............";
-		specialeffect2 36;
+		specialeffect2 EF_PORTAL;
 		next;
 		mes "[???]";
 		mes "^FF0000...Je suis désolé...";

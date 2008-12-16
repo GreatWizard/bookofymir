@@ -5,7 +5,7 @@
 //===== By ===================================================
 //= MasterOfMuppets
 //===== Version ==============================================
-//= 1.5
+//= 1.7
 //===== Compatible With ======================================
 //= eAthena SVN
 //===== Description ==========================================
@@ -22,6 +22,8 @@
 //= 1.3b Minor updates to juperos elevator NPCs. [L0ne_W0lf]
 //= 1.4 Fixed Elevator not working after failing once. [L0ne_W0lf]
 //= 1.5 Lots of Fixes, missing stopnpctimers, cleanup. [Zephyrus]
+//= 1.6 Added missing close in "Popular Feats" [L0ne_W0lf]
+//= 1.7 Replaced effect numerics with constants. [L0ne_W0lf]
 //============================================================
 
 yuno_in04,190,125,4	script	Erudite	700,{
@@ -1045,6 +1047,7 @@ yuno_in04,102,106,1	script	Festins Populaires	111,{
 			mes "["+strcharinfo(0)+"]";
 			mes "Hé, cette page n'y est plus!";
 			mes "Je suppose que la Salade de Poring est la recette la plus populaire du livre.";
+			close;
 
 		case 3:
 			mes "^8B6914...";
@@ -1255,7 +1258,7 @@ OnTouch:
 		mes "^777777["+ strcharinfo(0) +"]^000000";
 		mes "Ahhhh...";
 		mes "J'ai l'impression de flotter...";
-		specialeffect2 348; // EF_LIGHTSPHERE
+		specialeffect2 EF_LIGHTSPHERE;
 		close2;
 		stopnpctimer;
 		warp "juperos_02",128,278;
@@ -1442,7 +1445,7 @@ jupe_area1,88,224,0	script	#hole#1-1	844,{
 			if (countitem(7356) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#1-1" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "1-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
@@ -1701,7 +1704,7 @@ jupe_area1,25,238,0	script	#hole#1-2	844,{
 			if (countitem(7357) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#1-2" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "2-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
@@ -1957,7 +1960,7 @@ jupe_area1,36,146,0	script	#hole#1-3	844,{
 			if (countitem(7358) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#1-3" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "3-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
@@ -2212,7 +2215,7 @@ jupe_area1,50,49,0	script	#hole#1-4	844,{
 			if (countitem(7359) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#1-4" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "4-1",2;
 				next;
 				if ($@JupreArea1InUse == 1) {
@@ -2515,7 +2518,7 @@ jupe_area2,74,224,0	script	#hole#2-1	844,{
 			if (countitem(7356) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#2-1" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "1-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
@@ -2774,7 +2777,7 @@ jupe_area2,138,238,0	script	#hole#2-2	844,{
 			if (countitem(7357) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#2-2" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "2-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
@@ -3030,7 +3033,7 @@ jupe_area2,127,146,0	script	#hole#2-3	844,{
 			if (countitem(7358) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#2-3" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "3-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
@@ -3287,7 +3290,7 @@ jupe_area2,113,49,0	script	#hole#2-4	844,{
 			if (countitem(7359) > 0) {
 				mes "^3355FFVous sortez un Crest Piece et le placez dans la fente qui semblait prévue à cet effet.";
 				mes "Les deux s'emboîtent comme clé et serrure.^000000";
-				specialeffect 159; //"#hole#2-4" EF_TOPRANK
+				specialeffect EF_TOPRANK;
 				cutin "4-1",2;
 				next;
 				if ($@JupreArea2InUse == 1) {
@@ -3595,7 +3598,7 @@ jupe_ele_r,51,98,0	script	Switch#ufe	844,{
 					mes "^3300FF*Snap!*^000000";
 					mes "^3300FFDe manière étonnante, vos quatre Crest Pieces s'emboîtent parfaitement dans les fentes, qui commencent à émettre une étrange lueur.^000000";
 					cutin "5-1",2;
-					specialeffect 72; //"Switch#ufe" EF_SPHERE
+					specialeffect EF_SPHERE;
 					delitem 7356,1; //Piece_Of_Crest1
 					delitem 7359,1; //Piece_Of_Crest4
 					delitem 7357,1; //Piece_Of_Crest2
@@ -4229,7 +4232,7 @@ OnTouch:
 	next;
 	switch(select("L'utiliser.:L'ignorer.")) {
 	case 1:
-		specialeffect2 348; // EF_LIGHTSPHERE
+		specialeffect2 EF_LIGHTSPHERE;
 		close2;
 		stopnpctimer;
 		warp "juperos_02",130,142;
