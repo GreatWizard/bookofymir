@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88 & Samuray22
 //===== Current Version: ===================================== 
-//= 1.3a
+//= 1.4
 //===== Compatible With: ===================================== 
 //= eAthena 7.15 +
 //===== Description: ========================================= 
@@ -14,15 +14,14 @@
 //= 1.1 Fixed exploits [Lupus]
 //= 1.2 Removed Duplicates [Silent]
 //= 1.3 Updated "Welding Mask" Quest to the Official one. [Samuray22]
-//= 1.3a replaced item "names" with item id. Added missing [] [Lupus]
+//= 1.3a replaced item "names" with item id. Added missing [Lupus]
+//= 1.4 Updated welding mask and headset quests. [L0ne_W0lf]
 //============================================================ 
-
-
 
 //==============================================================================================//
 // 					Blacksmith: 'Welding Mask' Quest
 //==============================================================================================//
-geffen_in,144,166,5	script	Forgeron	63,{
+geffen_in,144,166,4	script	Forgeron	63,{
 	mes "[Forgeron]";
 	mes "Je le seul et l'unique, le plus vieux et le plus doué des Forgerons!! Vous n'avez pas entendu parler de moi?";
 	mes "J'ai travaillé pendant 30 ans dans la fournaise de Hellfire!";
@@ -30,7 +29,7 @@ geffen_in,144,166,5	script	Forgeron	63,{
 	mes "[Forgeron]";
 	mes "En tant que meilleur forgeron de tous les temps, j'ai créé quelque chose d'incroyable... Vous voulez en savoir plus?";
 	next;
-	switch( select( "J'adorerais!", "Non, pas vraiment...")) {
+	switch(select("J'adorerais!:Non, pas vraiment...")) {
 	case 1:
 		mes "[Forgeron]";
 		mes "Les forgerons font fondre les métaux afin de pouvoir travailler leurs créations. Dans ces conditions, il fait toujours extrêmement CHAUD!";
@@ -43,33 +42,35 @@ geffen_in,144,166,5	script	Forgeron	63,{
 		mes "En portant ce masque, on est protégé de la chaleur et des projections de débris brûlants.";
 		mes "Qu'en pensez-vous? Pour ^2244FF50 Steels^000000 et seulement ^4422FF2000 Zenys^000000, je peux vous en fabriquer un sur le champ!";
 		next;
-		switch( select( "Hum... Pourquoi pas?", "Non merci, je n'en ai pas besoin.")) {
-			case 1:
-				if (countitem(999) > 49 && Zeny > 1999) {
-					mes "[Forgeron]";
-					mes "Génial! Je vais en faire un tout de suite...";
-					next;
-					delitem 999, 50;
-					set Zeny, Zeny-2000;
-					getitem 2292, 1;
-					mes "~!clonk!~!clank!~!bang!~ ~!clonk!~!clank!~!bang!~";
-					next;
-					mes "[Forgeron]";
-					mes "Voici pour vous, un magnifique Welding Mask! C'était un plaisir de faire affaires avec vous!";
-					close;
-				}
-					mes "[Forgeron]";
-					mes "Hé! Vous n'avez pas tous les matériaux nécessaires! Vous me prenez pour qui? Un Alchimiste? Il me faut du matos sinon je ne vois pas comment je pourrais travailler!";
-					close;
-			case 2:
+		switch(select("Hum... Pourquoi pas?:Non merci, je n'en ai pas besoin.")) {
+		case 1:
+			if ((countitem(999) > 49) && (Zeny > 1999)){
 				mes "[Forgeron]";
-				mes "Vous êtes sûr?... Vous allez peut-être le regretter... Croyez moi, un jour ou l'autre, vous aurez besoin d'un ^5555FFWelding Mask^000000.";
-				mes "Tout le monde en a besoin...";
+				mes "Génial! Je vais en faire un tout de suite...";
+				next;
+				delitem 999,50;  //Steel
+				set Zeny,Zeny-2000;
+				getitem 2292,1; // Welding_Mask
+				mes "[Forgeron]";
+				mes "Hahaha~! Voici pour vous, un magnifique Welding Mask! C'était un plaisir de faire affaires avec vous!";
 				close;
 			}
+			else {
+				mes "[Forgeron]";
+				mes "Hé! Vous n'avez pas tous les matériaux nécessaires! Vous me prenez pour qui? Un Alchimiste? Il me faut du matos sinon je ne vois pas comment je pourrais travailler!";
+				close;
+			}
+		case 2:
+			mes "[Forgeron]";
+			mes "Vous êtes sûr?... Vous allez peut-être le regretter... Croyez moi, un jour ou l'autre, vous aurez besoin d'un ^5555FFWelding Mask^000000.";
+			mes "Tout le monde en a besoin...";
+			close;
+		}
 	case 2:
 		mes "[Forgeron]";
 		mes "Peu importe... Je ne vais pas continuer à perdre mon temps à vous parler de toutes façons. Allez-vous en!";
+		next;
+		mes "^3355FFCe type a l'air d'avoir pris la grosse tête...^000000";
 		close;
 	}
 }
@@ -82,10 +83,9 @@ geffen_in,144,166,5	script	Forgeron	63,{
 geffen_in,30,71,4	script	Eric	83,{
 	mes "[Eric]";
 	mes "S'il vous plaît, écoutez l'histoire de mon grand père...";
-	emotion e_sob;
 	next;
-	menu "Ecouter.",-, "Demander les ingrédients nécessaires.",M_Ask, "Fabriquer.",M_Make, "Annuler.",M_End;
-
+	switch(select("Ecouter.:Demander les ingrédients nécessaires.:Fabriquer.:Annuler.")) {
+	case 1:
 		mes "[Eric]";
 		mes "Mon grand père est mort il y a plusieurs années... Il représentait beaucoup pour moi...";
 		next;
@@ -127,52 +127,45 @@ geffen_in,30,71,4	script	Eric	83,{
 		next;
 		mes "[Eric]";
 		mes "Mon unique but est d'arriver à matérialiser ce que mon grand père avait imaginé, et ainsi rendre hommage à l'homme que j'estime le plus en ce monde...";
-		emotion e_sob;
 		next;
 		mes "[Eric]";
 		mes "Si seulement je pouvais avoir tous les matériaux... Hum... Seriez-vous intéressé par ce projet? Tout ce que vous avez besoin de faire, est de rassembler les matériaux pour moi...";
-		emotion e_hmm;
 		close;
-
-	M_Ask:
+	case 2:
 		mes "[Eric]";
 		mes "Voici les matériaux dont j'aurais besoin:";
-		mes "^3355FFSteel^000000 ^FF555540^000000";
-		mes "^3355FFOridecon^000000 ^FF55551^000000";
-		mes "^3355FFAlcohol^000000 ^FF55551^000000";
-		mes "^3355FFCoal^000000 ^FF55551^000000";
+		mes "40 ^3355FFSteel^000000";
+		mes "1 ^3355FFOridecon^000000";
+		mes "1 ^3355FFAlcohol^000000";
+		mes "1 ^3355FFCoal^000000";
 		close;
-
-	M_Make:
-		mes "[Eric]";
-		if(countitem(999) < 40 || countitem(984) < 1 || countitem(970)<1 || countitem(1003) < 1) goto L_NotEnuf;
-		delitem 999,40;
-		delitem 984,1;
-		delitem 970,1;
-		delitem 1003,1;
-		mes "Oh mais c'est SUPER! Vous avez tout apporté! Je vais pouvoir fabriquer le Headset imaginé par mon grand père!";
-		emotion e_ic;
-		next;
-		mes "[Eric]";
-		mes "Donnez-moi quelques minutes......";
-		next;
-		getitem 5001,1;
-		mes "[Eric]";
-		mes "ENFIN!! Il est terminé! Le Headset de mon grand père! Tenez, prenez-le... Sans votre aide, je n'aurais jamais pu y arriver.";
-		emotion e_gasp;
-		next;
-		mes "[Eric]";
-		mes "Merci infiniment! Grâce à vous, j'ai pu réaliser le rêve de mon grand père. Je sais que où qu'il soit en ce moment, il est certainement en train de sourire...";
-		emotion e_thx;
-		close;
-
-		L_NotEnuf:
-			mes "Merci d'essayer de m'aider, mais vous n'avez visiblement pas réussi à apporter tous les matériaux...";
-			emotion e_swt;
+	case 3:
+		if ((countitem(999) > 39) && (countitem(984) > 0) && (countitem(970) > 0) && (countitem(1003) > 0)) {
+			delitem 999,40;  //Steel
+			delitem 984,1;  //Oridecon
+			delitem 970,1;  //Alchol
+			delitem 1003,1;  //Coal
+			getitem 5001,1; // Headset
+			mes "*Tap! Tap! Tap!*";
+			next;
+			mes "[Eric]";
+			mes "ENFIN!! Il est terminé! Le Headset de mon grand père! Tenez, prenez-le... Sans votre aide, je n'aurais jamais pu y arriver.";
+			next;
+			mes "[Eric]";
+			mes "Merci infiniment! Grâce à vous, j'ai pu réaliser le rêve de mon grand père. Je sais que où qu'il soit en ce moment, il est certainement en train de sourire...";
 			close;
-	M_End:
+		}
+		else {
+			mes "[Eric]";
+			mes "Merci d'essayer de m'aider, mais vous n'avez visiblement pas réussi à apporter tous les matériaux...";
+			close;
+		}
+	case 4:
 		mes "[Eric]";
-		mes "Adieu.....";
-		emotion e_sob;
+		mes "N-non?";
+		mes "Et bien...";
+		mes "Je suppose que vous avez vous propres soucis.";
+		mes "Adieu.";
 		close;
+	}
 }
