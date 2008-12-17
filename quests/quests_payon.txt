@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88
 //===== Current Version: ===================================== 
-//= 1.6
+//= 1.7
 //===== Compatible With: ===================================== 
 //= eAthena 7.15 +
 //===== Description: ========================================= 
@@ -19,6 +19,7 @@
 //= 1.5 Updated Dialogs from "Pretend Murdered Quest" [Samuray22]
 //= 1.5a replaced item "names" with item id. [Lupus]
 //= 1.6 Updated Dialogs from "Oxygen Mask Quest" [Samuray22]
+//= 1.7 Updated headgear quests. [L0ne_W0lf]
 //============================================================ 
 
 
@@ -26,16 +27,24 @@
 //==========================================================================================//
 //				Pretend Murdered quest
 //==========================================================================================//
-payon,154,170,4	script	Grand Mère#2	78,{
-	if(countitem(1049) > 3 ) {
+payon_in01,99,72,4	script	Grand Mère#2	103,{
+	if (checkweight(908,1) == 0) {
+		mes "^3355FFAttendez!";
+		mes "Vous portez bien trop de choses sur vous, vous allez vous faire un lumbago!";
+		mes "Vous devriez déposer des objets dans votre Stock Kafra...^000000";
+		close;
+	}
+	if (countitem(1049) > 3) {
 		mes "[Grand Mère]";
 		mes "Oh... Vous avez réussi à trouver des Skirt of Virgin! Avec tout ça je pourrais confectionner des déguisements pour mes petits enfants pour le festival du mois prochain...";
+		next;
+		mes "[Grand Mère]";
 		mes "Est-ce que vous pourriez me donner vos ^3355FFSkirt of Virgin^000000? Il m'en faudrait quatre... s'il vous plaît?";
 		mes "Je vous en prie!";
 		next;
-		switch(select( "Lui donner.","Pas question!")) {
+		switch(select("D'accord.:Pas question!")) {
 		case 1:
-			delitem 1049,4;
+			delitem 1049,4;  //Skirt_Of_Virgin
 			mes "[Grand Mère]";
 			mes "Uh-uh... Merci infiniment! Maintenant je vais pouvoir confectionner des déguisements pour mes petits enfants.";
 			mes "Et... Oh! Mais oui! Quand j'étais jeune, j'étais une actrice de théâtre...";
@@ -44,7 +53,11 @@ payon,154,170,4	script	Grand Mère#2	78,{
 			mes "[Grand Mère]";
 			mes "Tenez, prenez-le... S'il vous plaît!";
 			mes "Je l'avais toujours gardé en souvenir... Je suis certaine que vous rigolerez beaucoup avec cet objet!";
-			getitem 2293,1;
+			next;
+			getitem 2293,1; // Pretend_Murdered
+			mes "[Grand Mère]";
+			mes "Au revoir, aventurier~!";
+			mes "Merci d'avoir rendu ce service à une ville dame comme moi...";
 			close;
 		case 2:
 			mes "[Grand Mère]";
@@ -53,6 +66,7 @@ payon,154,170,4	script	Grand Mère#2	78,{
 			close;
 		}
 	}
+	else {
 		mes "[Grand Mère]";
 		mes "Je ramasse des champignons dans montagne de Payon tous les jours afin de gagner ma vie. Je ne sais pas si j'aurais de quoi manger à ma faim le mois prochain...";
 		mes "... Mais il y a un festival le mois prochain!";
@@ -63,88 +77,93 @@ payon,154,170,4	script	Grand Mère#2	78,{
 		mes "Jeune aventurier... J'ai une faveur à vous demander... Si jamais vous trouvez des ^3355FFSkirt of Virgin^000000...";
 		mes "Vous pourriez m'en apporter? Je vous en serais éternellement reconnaissante...";
 		close;
+	}
 }
-
 
 //========================================================================================//
 //					Ear Muffs Quest
 //========================================================================================//
-payon_in01,18,10,4	script	Jeune Fille	75,{
+payon_in01,18,10,4	script	Jeune Fille	76,{
 	mes "[Jeune Fille Mystérieuse]";
-	mes "Bonjour.";
+	mes "Ma famille et moi avons récemment emménagé à Payon.";
+	mes "Avant nous habitions dans une région au climat très froid, et nous avions développé un commerce d'^3355FFEar Muffs^000000 faits mains de grande qualité!";
 	next;
-	menu "Salut.",-,"Pourriez-vous me fabriquer des Ear Muffs?",M_Muffs, "Au revoir.",M_End;
-
-		mes "[Jeune Fille Mystérieuse]";
-		mes "Ma famille et moi avons récemment emménagé à Payon.";
-		mes "Avant nous habitions dans une région au climat très froid, et nous avions développé un commerce d'^5555FFEar Muffs^000000 faits mains de grande qualité!";
-		next;
-		mes "[Jeune Fille Mystérieuse]";
-		mes "J'essaye de faire perdurer l'entreprise familiale ici, à Payon, mais comme il fait chaud ce n'est pas très rentable.";
-		next;
-		mes "[Jeune Fille Mystérieuse]";
-		mes "Même si les Ear Muffs ne sont pas vraiment utiles ici, si vous voyagez régulièrement dans des pays froids, nos Ear Muffs pourraient beaucoup vous aider.";
-		next;
-		mes "[Jeune Fille Mystérieuse]";
-		mes "Si ça vous intéresse, tout ce dont j'ai besoin est:";
-		mes "^5555FF1 Cursed Ruby,";
-		mes "1 Headset,";
-		mes "200 Feathers,";
-		mes "et 5000 Zenys^000000.";
-		next;
-		mes "[Jeune Fille Mystérieuse]";
-		mes "Avec tous ces matériaux, je pourrais vous fabriquer une paire d'Ear Muffs. Croyez-moi, ils sont de la meilleure qualité qui existe!";
-		close;
-	
-	M_Muffs:
-		if(countitem(724)<1 || countitem(5001)<1 || countitem(949)<200 || zeny<5000) goto sL_NotEnuf;
-		delitem 724,1;
-		delitem 5001,1;
-		delitem 949,200;
-		set Zeny, Zeny-5000;
-		mes "[Jeune Fille Mystérieuse]";
-		mes "Oh, je vois que vous avez rapporté tous les matériaux... Donnez-moi quelques instants...";
-		next;
-		mes "[Jeune Fille Mystérieuse]";
-		mes "... ceci va comme ça ... ceci va là ...... un peu de glue ici ... quelques soudures par là..........";
-		next;
-		getitem 2283,1;
-		mes "[Jeune Fille Mystérieuse]";
-		mes "Tenez! Une paire d'Ear Muffs. Bonne journée!";
-		close;
-
-		sL_NotEnuf:
+	mes "[Jeune Fille Mystérieuse]";
+	mes "J'essaye de faire perdurer l'entreprise familiale ici, à Payon, mais comme il fait chaud ce n'est pas très rentable.";
+	Emotion e_dots;
+	next;
+	mes "[Jeune Fille Mystérieuse]";
+	mes "Même si les Ear Muffs ne sont pas vraiment utiles ici, si vous voyagez régulièrement dans des pays froids, nos Ear Muffs pourraient beaucoup vous aider.";
+	Emotion e_dots;
+	next;
+	mes "[Jeune Fille Mystérieuse]";
+	mes "Si ça vous intéresse, tout ce dont j'ai besoin est: ^FF33551 Cursed Ruby^000000, ^3311AA1 Headset,^000000 ^3355FF 200 Feathers^000000 et ^DDDD005000 Zenys^000000.";
+	next;
+	mes "[Jeune Fille Mystérieuse]";
+	mes "Avec tous ces matériaux, je pourrais vous fabriquer une paire d'Ear Muffs. Croyez-moi, ils sont de la meilleure qualité qui existe!";
+	next;
+	switch(select("Pourriez-vous me fabriquer des Ear Muffs?:Non, merci.")) {
+	case 1:
+		if ((countitem(724) > 0) && (countitem(949) > 199) && (countitem(5001) > 0) && (Zeny > 4999)) {
+			mes "[Jeune Fille Mystérieuse]";
+			delitem 724,1;  //Cardinal_Jewel_
+			delitem 949,200;  //Feather
+			delitem 5001,1;  //Headset
+			set Zeny,Zeny-5000;
+			mes "Oh, je vois que vous avez rapporté tous les matériaux... Tenez! Une paire d'Ear Muffs.";
+			getitem 2283,1; // Ear_Mufs
+			next;
+			mes "[Jeune Fille Mystérieuse]";
+			mes "Merci! Vous ne le regretterez pas. Avec des Ear Muffs: Oreilles Protégées, Satisfaction Garantie~";
+			Emotion e_dots;
+			close;
+		}
+		else {
 			mes "[Jeune Fille Mystérieuse]";
 			mes "Je suis désolée, mais il vous manque des matériaux...";
+			mes "Comprenez-moi, je ne peux pas vous faire de remise... Je dois bien vivre moi aussi...";
+			Emotion e_dots;
 			close;
-	M_End:
+		}
+	case 2:
+		mes "[Jeune Fille Mystérieuse]";
+		mes "D'accord.";
+		mes "Nous nous rencontrerons peut-être à nouveau.";
+		mes "...un de ces jours.";
+		Emotion e_dots;
 		close;
-
+	}
 }
-
 
 //========================================================================================//
 //					Oxygen Mask Quest
 //========================================================================================//
-payon_in02,25,71,3	script	Jeune Homme#11	86,{
-	if(countitem(701) > 4) {
+payon_in02,25,71,4	script	Jeune Homme#oxmq	86,{
+	if (countitem(701) > 4) {
 		mes "[Jeune Homme]";
-		mes "ArrrGgghhh!! Non!... Ce n'est pas possible!..... Je crois que je vais devenir fou...";
+		mes "ArrrGggghh!";
+		mes "Ah, Non, c'est pas possible...";
 		next;
-		switch(select( "Lui montrer l'Ora Ora.","Lui donner l'Ora Ora.","Annuler.")) {
+		mes "[Jeune Homme]";
+		mes "..... Je crois que je vais devenir fou...";
+		next;
+		switch(select("Lui montrer l'Ora Ora.:Lui donner l'Ora Ora.:Annuler.")) {
 		case 1:
 			mes "[Jeune Homme]";
 			mes "Oooooohhhh..... c'est.. c'est... de... l'Ora Ora...??? Oh donnez le moi, je vous en supplie!";
 			close;
 		case 2:
-			delitem 701, 5;
+			if (countitem(701) > 4) {
+				delitem 701,5;  //Ora_Ora
+			}
 			mes "[Jeune Homme]";
 			mes "Muhahahahah!!! J'ai finalement réussi en avoir... de l'Ora Ora! Stupides et dégoûtants petits insectes... vous allez payer pour avoir envahi ma maison!!";
 			next;
 			mes "[Jeune Homme]";
 			mes "..... Euh hem... désolé. Je suis un peu surmené.... Laissez-moi vous récompenser en échange de ce merveilleux trésor que vous m'avez rapporté......";
 			next;
-			getitem 5004, 1;
+			getitem 5004,1; // Oxygen_Mask
+			mes "[Jeune Homme]";
 			mes "[Jeune Homme]";
 			mes "Si vous portez ce masque sur votre bouche, l'air que vous respirerez sera filtré et donc assez pur.";
 			mes "Je l'ai trouvé quand je travaillais en tant que marin. Et comme je n'en ai plus besoin...";
@@ -154,15 +173,18 @@ payon_in02,25,71,3	script	Jeune Homme#11	86,{
 			close;
 		case 3:
 			mes "[Jeune Homme]";
+			mes "Huhuhuhuhu...";
 			mes "Comment faire pour se débarrasser de ces satanés insectes?... Et si jamais je n'y arrivais pas...?!";
 			close;
 		}
 	}
+	else {
 		mes "[Jeune Homme]";
 		mes "Uh...Ah! Je n'en peux plus!";
 		mes "Satanés insectes!!";
 		next;
-		if( select( "L'écouter.","S'en aller.") == 1) {
+		switch(select("L'écouter.:S'en aller.")) {
+		case 1:
 			mes "[Jeune Homme]";
 			mes "~Soupir~ J'ai n'ai pas eu une vie facile. Vous savez, mes parents sont morts quand je n'étais encore qu'un petit garçon, alors j'ai du me prendre en mains très tôt.";
 			next;
@@ -191,78 +213,112 @@ payon_in02,25,71,3	script	Jeune Homme#11	86,{
 			mes "Je donnerai n'importe quoi pour ne plus voir ces sales bêtes... Comme je n'ai pas beaucoup d'argent, je ne peux pas me payer ^5555FF'5 Ora Oras'^000000.";
 			mes "Si jamais vous trouvez des Ora Ora par hasard, faîtes le moi savoir... s'il vous plaît?";
 			close;
-		}
+		case 2:
 			mes "[Jeune Homme]";
 			mes "Je suis fatigué et j'en ai assez de me battre sans arrêt contre ces insectes... Ces sales bêtes!!";
 			close;
+		}
+	}
 }
-
 
 //========================================================================================//
 //			Derivuchi Cap(Hat of Petite Diablo), Helm of Angel
 //========================================================================================//
-payon_in01,56,12,4	script	[Jeune Homme]#12	89,{
+payon_in01,56,12,7	script	Jeune Homme#12	89,{
 	mes "[Jeune Homme]";
-	mes "Que voulez-vous?............";
+	mes "Que voulez-vous? ............";
 	next;
-	menu "Pourriez-vous me fabriquer un chapeau?",-, "Euh... rien.",M_End;
-
+	switch(select("Pourriez-vous me fabriquer un chapeau?:Euh... rien.")) {
+	case 1:
 		mes "[Jeune Homme]";
 		mes "Je vois... Vous avez entendu parlé de moi... D'accord, dîtes-moi ce que vous voulez.";
 		next;
-		menu "-Helm of Angel",-, "-Deviruchi Hat",sM_Devir, "-Je reviendrai plus tard",M_End;
-
+		switch(select("Helm of Angel.:Deviruchi cap.:Je reviendrai plus tard.")) {
+		case 1:
 			mes "[Jeune Homme]";
 			mes "Pour un Helm of Angel j'aurais besoin de:";
 			mes "- ^5555FF1 Helm (slotted)^000000.";
 			mes "- ^5555FF1 Angel Wing^000000.";
 			mes "- ^5555FF5 Fang of Garm^000000.";
-			set @HAT, 1;
 			next;
-			goto sL_GetHat;
-		sM_Devir:
+			mes "[Jeune Homme]";
+			mes "Attendez un peu! Faîtes attention à ce que vous allez me donner.";
+			next;
+			mes "[Jeune Homme]";
+			mes "S'il vous manque un objet, je ne ferai pas la distinction entre l'équipement que vous portez et les matériaux demandés.";
+			mes "Si vous ne voulez pas risquer de perdre un objet qui vous est cher, laissez-le à l'abri dans votre stock.";
+			next;
+			mes "[Jeune Homme]";
+			mes "Avez-vous tous les matériaux nécessaires?";
+			next;
+			switch(select("Lui donner.:S'en aller.")) {
+			case 1:
+				if ((countitem(2229) > 0) && (countitem(2254) > 0) && (countitem(7036) > 4)) {
+					mes "[Jeune Homme]";
+					mes ".....Hum. Voici votre Helm of Angel.";
+					delitem 2229,1;  //Helm_
+					delitem 2254,1;  //Angelic_Chain
+					delitem 7036,5;  //Fang_Of_Garm
+					close2;
+					getitem 5025,1; // Helm_Of_Angel
+					end;
+				}
+				else {
+					mes "[Jeune Homme]";
+					mes "...Vous n'avez pas tous les matériaux nécessaires.";
+					close;
+				}
+			case 2:
+				mes "[Jeune Homme]";
+				mes "Comme vous voulez...";
+				close;
+			}
+		case 2:
 			mes "[Jeune Homme]";
 			mes "Pour un Deviruchi Hat j'aurais besoin de:";
 			mes "- ^5555FF600 Little Evil Horn^000000.";
 			mes "- ^5555FF40 Talon of Griffon^000000.";
-			set @HAT, 2;
-
-			sL_GetHat:
+			next;
+			mes "[Jeune Homme]";
+			mes "Attendez un peu! Faîtes attention à ce que vous allez me donner.";
+			next;
+			mes "[Jeune Homme]";
+			mes "S'il vous manque un objet, je ne ferai pas la distinction entre l'équipement que vous portez et les matériaux demandés.";
+			mes "Si vous ne voulez pas risquer de perdre un objet qui vous est cher, laissez-le à l'abri dans votre stock.";
+			next;
+			mes "[Jeune Homme]";
+			mes "Avez-vous tous les matériaux nécessaires?";
+			next;
+			switch(select("Lui donner.:S'en aller.")) {
+			case 1:
+				if ((countitem(1038) > 599) && (countitem(7048) > 39)) {
+					mes "[Jeune Homme]";
+					mes ".....Hum. Voici votre Deviruchi Hat.";
+					delitem 1038,600;  //Petite_DiablOfs_Horn
+					delitem 7048,40;  //Talon_Of_Griffin
+					close2;
+					getitem 5038,1; // Deviruchi_Cap
+					end;
+				}
+				else {
+					mes "[Jeune Homme]";
+					mes "...Vous n'avez pas tous les matériaux nécessaires.";
+					close;
+				}
+			case 2:
 				mes "[Jeune Homme]";
-				mes "Attendez un peu! Faîtes attention à ce que vous allez me donner.";
-				mes "S'il vous manque un objet, je ne ferai pas la distinction entre l'équipement que vous portez et les matériaux demandés.";
-				mes "Si vous ne voulez pas risquer de perdre un objet qui vous est cher, laissez-le à l'abri dans votre stock.";
-				next;
-				mes "[Jeune Homme]";
-				mes "Avez-vous tous les matériaux nécessaires?";
-				menu "-Lui donner.",-, "S'en aller.",M_End;
-
-				if(@HAT == 2) goto ssL_Devir;
-
-					if(countitem(2229)<1 || countitem(2254)<1 || countitem(7036)<5) goto ssL_NotEnuf;
-					delitem 2229, 1;
-					delitem 2254, 1;
-					delitem 7036, 5;
-					mes "[Jeune Homme]";
-					mes "Voici votre Helm of Angel.";
-					getitem 5025, 1;
-					close;
-				ssL_Devir:
-					if(countitem(1038)<600 || countitem(7048)<40) goto ssL_NotEnuf;
-					delitem 1038, 600;
-					delitem 7048, 40;
-					mes "[Jeune Homme]";
-					mes "Voici votre Deviruchi Hat.";
-					getitem 5038, 1;
-					close;
-				ssL_NotEnuf:
-					mes "[Jeune Homme]";
-					mes "Vous n'avez pas tous les matériaux nécessaires.";
-					close;
-
-	M_End:
+				mes "Comme vous voulez...";
+				close;
+			}
+		case 3:
+			mes "[Jeune Homme]";
+			mes "D'accord, je vois.....";
+			close;
+		}
+	case 2:
 		mes "[Jeune Homme]";
-		mes "D'accord, je vois.....";
+		mes "Hum.";
+		mes "A plus.";
 		close;
-
+	}
 }
