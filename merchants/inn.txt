@@ -194,41 +194,30 @@ ve_in,157,219,5	script	Aubergiste#master	709,{
 }
 
 //======================== Moscovia ====================================
-mosk_in,135,191,5	script	Aubergiste#Receptionist	961,{
-	mes "[Aubergiste]";
-	mes "Bonjour~";
-	mes "Bienvenue dans l'auberge la plus confortable de Moscovia~";
+mosk_in,135,191,5	script	Propriétaire#mosk	961,{
+	mes "[Propriétaire]";
+	mes "Oh, bienvenue dans l'auberge du 'Mélèze de Dahurie'.";
+	mes "Il s'agit de l'endroit le plus calme et confortable de tout Moscovia.";
 	next;
-	menu "Sauvegarder",Msave, "Louer une Chambre -> 5000 Zenys",Mrent, "Rien, merci",Mend;
-
-	Msave:
-		mes "[Aubergiste]";
-		mes "Votre point de sauvegarde";
-		mes "a été enregistré à Moscovia.";
-		mes "Merci, je reste";
-		mes "à votre disposition.";
-		mes "Bon séjour~";
-		savepoint "mosk_in",142,189;
+	if (select("Sauvegarder:Rester une nuit - 5000z") == 1) {
+		mes "[Propriétaire]";
+		mes "Votre point de sauvegarde a été enregistré.";
+		mes "J'espère avoir l'occasion de vous revoir, hoho.";
+		savepoint "mosk_in",141,188;
 		close;
-	Mrent:
-		mes "[Aubergiste]";
-		if(Zeny < 5000){
-			mes "Je suis désolée, mais le coût de";
-			mes "ce service est de 5000 Zenys.";
-			mes "Veuillez vous assurer d'avoir assez";
-			mes "d'argent sur vous la prochaine fois.";
-			close;
-		}
-		mes "Merci.";
-		mes "Passez une";
-		mes "agréable nuit~";
-		close2;
-		set Zeny,Zeny - 5000;
-		percentheal 100,100;
-		warp "mosk_in",215,181;
-
-	Mend:
+	}
+	mes "[Propriétaire]";
+	if(Zeny < 5000) {
+		mes "Le coût du service est de 5000z.";
+		mes "Veuillez vérifier que vous possédez assez d'argent pour une chambre.";
 		close;
+	}
+	mes "Mettez-vous à l'aise.";
+	close2;
+	set Zeny,Zeny - 5000;
+	percentheal 100,100;
+	warp "mosk_in",215,181;
+	end;
 }
 
 //======================= Inn Function ==============================
