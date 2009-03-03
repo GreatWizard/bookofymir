@@ -7,7 +7,7 @@
 //= DNett123 (1.1 - 1.5)
 //= L0ne_w0lf
 //===== Current Version: =====================================
-//= 3.5
+//= 3.6
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
@@ -36,6 +36,7 @@
 //= 3.3a Just a little typo error. [Samuray22]
 //= 3.4 Added missing checkweights. [L0ne_W0lf]
 //= 3.5 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 3.6 Fixed bartender so he no longer hangs. [L0ne_W0lf]
 //============================================================
 
 // Jawaii
@@ -804,7 +805,9 @@ jawaii_in,28,124,0	script	Barman#jaw	46,{
 				percentheal -100,0;
 				end;
 			}
-			set zeny,zeny-100;
+			if (Zeny >= 100) {
+				set zeny,zeny-100;
+			}
 			switch(rand(4)) {
 			case 1:
 					mes "[Barman]";
