@@ -1,0 +1,96 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,50,3	script	Créateur#Valkyrie	122,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Créateur]";
+			mes "Félicitations.";
+			mes "Honneur aux Guerriers!";
+			close;
+		}
+		mes "[Créateur]";
+		mes "Il est étrange que quelqu'un comme moi vive dans un endroit comme celui-ci. Mais vous savez, même les doués en sciences peuvent devenir des héros.";
+		next;
+		mes "[Créateur]";
+		mes "L'important, ce n'est pas les moyens que j'ai utilisés, mais le résultat final, qui m'a permis de gagner une place au Valhalla...";
+		close;
+	}
+	else if (ADVJOB == Job_Creator && Class == Job_Merchant_High && JobLevel > 39) {
+		mes "[Créateur]";
+		mes "Oui...";
+		mes "L'heure est bientôt arrivée...";
+		mes "Nous avons besoin de génies tels que vous dans Rune-Midgard.";
+		next;
+		mes "[Créateur]";
+		mes "Souhaitez-vous devenir Créateur?";
+		next;
+		if (select("Non.:Oui.") == 1) {
+			mes "[Créateur]";
+			mes "Revenez quand vous vous sentirez prêt.";
+			next;
+			mes "[Créateur]";
+			mes "Honneur aux Guerriers!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Créateur]";
+			mes "Vous n'avez pas terminé votre apprentissage.";
+			close;
+		}
+		jobchange Job_Creator;
+		set ADVJOB,0;
+		mes "[Créateur]";
+		mes "Félicitations!";
+		mes "En tant que Créateur, j'espère que vous utiliserez vos vastes connaissances à des causes justes.";
+		close;
+	}
+	else {
+		if (Class == Job_Creator && MISC_QUEST & 64 && getskilllv("AM_BIOETHICS") == 0) {
+			mes "[Créateur]";
+			mes "Ah, vous êtes venu pour retrouver certains de vos souvenirs? Souhaitez-vous vous remémorer les secrets que vous eussiez sus...";
+			next;
+			if (select("Oui:Non") == 1) {
+				mes "[Créateur]";
+				mes "Fermez vos yeux et faîtes le vide dans votre esprit. Nous allons retourner dans votre passé pour rassembler les fragments de votre mémoire perdue.";
+				next;
+				mes "[Créateur]";
+				mes "Lorsque vous ouvrirez vos yeux, vous vous souviendrez clairement du secret de la vie. Vous vous souviendrez également du poids et de la responsabilité d'utiliser ces secrets pour des causes justes...";
+				next;
+				skill 238,1,0;
+				mes "[Créateur]";
+				mes "Ouvrez vos yeux...";
+				mes "Vous vous souvenez maintenant comment créer la vie artificielle. Je vous demande simplement de traiter toutes vos créations avec respect.";
+				close;
+			}
+			mes "[Créateur]";
+			mes "Si vous souhaitez retrouver certains de vos souvenirs perdus, revenez me voir. Le secret de la création de la vie n'est pas une chose futile...";
+			close;
+		}
+		mes "[Créateur]";
+		mes "Bienvenue au Valhalla, le Hall des Honneurs.";
+		next;
+		mes "[Créateur]";
+		mes "Faîtes comme chez vous.";
+		mes "Honneur aux Guerriers!";
+		close;
+	}
+}
+

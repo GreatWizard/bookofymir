@@ -1,0 +1,364 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//Myllena: ajout de quelques textes explicatifs de la
+//mythologie nordique. code identique
+//===== eAthena Script ======================================= 
+//= Valkyrie Realm
+//===== By: ==================================================
+//= Nana, fixes by Poki
+//= finished, optimized and tested by Lupus
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 2.9b
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quest to become a Tranceded Class. (Advanced/Rebirthed)
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions,additional checks,quest skills,now Valhallana can return you back. She also makes reborn process only when you got no Zeny/items (as in kRO) [Lupus]
+//= 1.2 now alternative classes can use their 1-1 job NPC to become Advanced 1st Class [Lupus]
+//= 1.4 added Baby Class support [Lupus]
+//= 1.5 Fixed loads of gramatical errors. [Mass Zero]
+//= 1.6 Added a func which prevent advanced classes passing 2nd Job Quests again. It also guides adv classes where to go. [Lupus]
+//= 1.7 On reborn reset some Job Quest Vars and Reset Girls Counter [Lupus]
+//= 1.8 Added Taekwondo classes check [Lupus]
+//= 1.9 Added support for Job NPC Fase pics, sorrected one dialogue stuff [Lupus]
+//= 2.0 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 2.1 Changed all numbers into constants. [Vicious]
+//= 2.2 Now ALL quests skills are saved/restored [Lupus]
+//= 2.3 Removed Duplicates [Silent]
+//= 2.4 Fixed typos, optimized [Lupus]
+//= 2.5 Fixed a stuck bug [Lupus]
+//= 2.6a Adding proper dialogues [Lupus]
+//= 2.7 Rescripted to Aegis 10.3 standards. [L0ne_W0;f]
+//=	Removed all functions as they are no longer required.
+//=	Correct job level requirements for 1-1 -> 2-x.
+//= 2.7a Added Function "F_BlockHigh" back in until rewriteing of the 2-x [L0ne_W0lf]
+//=	scripts are comepleted.
+//= 2.7b Removed function "F_BlockHigh" as it's no longer used. [L0ne_W0lf]
+//= 2.8 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 2.9 Corrected Valkyrie case spicifying where to warp after rebirthing. [L0ne_W0lf]
+//= 2.9b Fixed Verdandi typo, fixed resetting vars [Lupus]
+//============================================================ 
+
+valkyrie,48,86,4	script	Valkyrie#	811,{
+	if (ADVJOB != 0 || Upper == 1) {
+		mes "[Valhallana]";
+		mes "Bienvenue au Valhalla,";
+		mes "le Hall des Honneurs.";
+		next;
+		mes "[Valhallana]";
+		mes "C'est un grand honneur de saluer les envoyés de Valhalla.";
+		mes "Honneur aux Guerriers!";
+		close;
+	}
+	else if (Baselevel > 98 && JobLevel > 49 && Class >= Job_Knight && Class <= Job_Crusader2) {
+		mes "[Valhallana]";
+		mes "Bienvenue au Valhalla,";
+		mes "le Hall des Honneurs.";
+		next;
+		mes "[Valhallana]";
+		mes "A partir d'ici, vous ne pourrez plus revenir en arrière.";
+		mes "Honneur aux Guerriers!";
+		next;
+		if (Weight > 0 || Zeny > 0 || checkcart() != 0 || checkfalcon() != 0 || checkriding() != 0) {
+			mes "[Valhallana]";
+			mes "Avant de commencer la cérémonie de renaissance, vous devez faire le vide dans votre esprit et votre corps. L'honneur vient à ceux qui savent abandonner leurs désirs matériels, et se débarrasser de leur égoïsme.";
+			next;
+			mes "[Valhallana]";
+			mes "Vous ne pourrez rien emporter avec vous dans votre prochaine vie. Vos objets, votre argent, vos biens ou vos fidèles compagnons. Vous ne devez plus avoir aucune attache à votre vie actuelle.";
+			next;
+			mes "[Valhallana]";
+			mes "Lorsque vous serez prêt à faire ce sacrifice, revenez me voir.";
+			mes "Je vous souhaite bon courage, brave aventurier.";
+			close2;
+			warp "yuno_in02",93,205;
+			end;
+		}
+		else {
+			mes "[Valhallana]";
+			mes "Je vois que vous avez déjà abandonné toutes vos attaches à votre vie présente,";
+			mes ""+ strcharinfo(0) +".";
+			next;
+			mes "[Valhallana]";
+			mes "C'est un sacrifice admirable pour un aventurier aussi brave que vous l'êtes. L'honneur vient à ceux qui savent abandonner leurs désirs matériels, et se débarrasser de tout égoïsme pour le bien de l'humanité.";
+			next;
+			if (SkillPoint) {
+				mes "[Valhallana]";
+				mes "Hum... Je sens que vous avez encore des attachements à votre vie actuelle... Des affaires que vous devez encore régler.";
+				close2;
+				warp "yuno_in02",93,205;
+				end;
+			}
+//Myllena: j'ai ajouté quelques textes pour expliquer la mythologie nordique
+			mes "[Valhallana]";
+			mes "Valeureux Guerrier, savez-vous qui étaient les Nornes?";
+			mes "Les trois Nornes vivent sous la protection du grand Yggdrasil, l'arbre monde au centre du cosmos, où elles tissent la grande tapisserie des destins.";
+			next;
+			mes "[Valhallana]";
+			mes " 'D'ici vinrent les Nornes";
+			mes "  Savantes en toutes choses.";
+			mes "  Trois, venant de la mer,";
+			mes "  qui s'étend sous l'arbre";
+			mes "        Yggdrasil...";
+			next;
+			mes "[Valhallana]";
+			mes "  L'une est appelée Urd.";
+			mes "  Verdandi l'autre.";
+			mes "  La troisième est Skuld.";
+			mes "  Elles ont fait les lois.";
+			mes "  Elles ont fixé les vies";
+			mes "  Des fils des hommes.'";
+			next;
+			mes "[Valhallana]";
+			mes "J'en appelle maintenant à Urd, Norne du Passé,";
+			mes "afin d'effacer les souvenirs de la vie présente de ce guerrier.";
+			callfunc "F_ClearJobVar";
+			next;
+			mes "[Valhallana]";
+			mes "J'en appelle maintenant à Verdandi, Norne du Présent,";
+			mes "afin que les souvenirs les plus mémorables de la vie présente de ce guerrier soient préservés contre le temps.";
+			//callfunc("F_SaveQuestSkills"); //now not used
+			next;
+			mes "[Valhallana]";
+			mes "J'en appelle maintenant à Skuld, Norne du Futur,";
+			mes "afin que ce guerrier soit guidé après sa renaissance et dans ses prochaines aventures.";
+			set ADVJOB, Class+Job_Novice_High; //memo the target 3rd Job ID
+			if(ADVJOB == Job_Lord_Knight2) set ADVJOB,Job_Lord_Knight;
+			if(ADVJOB == Job_Paladin2) set ADVJOB,Job_Paladin;
+			jobchange Job_Novice_High;
+			resetlvl(1);
+			set MISC_QUEST,MISC_QUEST | 1024; //<-reset Skill Reset Event
+			skill 142,1,0;
+			skill 143,1,0;
+			next;
+			mes "[Valhallana]";
+			mes "Félicitations.";
+			mes "Vous avez maintenant effectué votre renaissance. Vous disposez d'une nouvelle vie, faîtes-en bon usage...";
+			mes "Voici également quelques petites choses, en préparation de vos nouvelles aventures.";
+			getitem 1202,1; //Knife_
+			getitem 2302,1; //Cotton_Shirt_
+			next;
+			mes "[Valhallana]";
+			mes "J'espère que la Norne Urd vous a libéré de vos tracas passés, et que sa bénédiction vous accompagnera en tous temps. Que les souvenirs que Verdandi vous a accordé de conserver vous honorent pour toujours.";
+			next;
+			mes "[Valhallana]";
+			mes "Je prierai pour que Skuld guide votre nouvelle vie.";
+			close2;
+			switch (ADVJOB) {
+			case 4008:
+			case 4015:
+				warp "izlude",94,103; break;
+			case 4009:
+			case 4016:
+				warp "prontera",273,354; break;
+			case 4010:
+			case 4017:
+				warp "geffen",120,60; break;
+			case 4011:
+			case 4019:
+				warp "alberta",116,57; break;
+			case 4012:
+			case 4020:
+			case 4021:
+				warp "payon",69,100; break;
+			case 4013:
+			case 4018:
+				warp "morocc",154,50; break;
+			default:
+				warp "yuno_in02",93,205; break;
+			}
+			end;
+		}
+	}
+	else {
+		mes "[Valhallana]";
+		mes "Bienvenue au Valhalla,";
+		mes "le Hall des Honneurs.";
+		next;
+		mes "[Valhallana]";
+		mes "Malheureusement, vous n'avez pas été convié. Je vous demanderais de partir immédiatement. Honneur aux Guerriers!";
+		close2;
+		warp "yuno_in02",93,205;
+		end;
+	}
+}
+
+yuno_in02,88,164,5	script	Metheus Sylphe#Library	742,{
+	if (Baselevel > 98 && JobLevel > 49 && Class >= Job_Knight && Class <= Job_Crusader2) {
+		if (valkyrie_Q == 0) {
+			mes "[Metheus Sylphe]";
+			mes "Bienvenue à la Bibliothèque de l'Académie de Magie Shubaichul.";
+			mes "Je suppose que vous êtes ici pour pouvoir lire le Livre d'Ymir.";
+			next;
+			mes "[Metheus Sylphe]";
+			mes "Vous savez que c'est un livre d'une extrême rareté. Seuls quelques élus peuvent lire ces sages écritures.";
+			next;
+			mes "[Metheus Sylphe]";
+			mes "Vous avez l'air digne, jeune humain.";
+			mes "Moi, le 78ième Bibliothécaire de l'Ordre Secret, ai promis de protéger ce livre, et il n'y aura pas d'exception pour vous.";
+			mes "Si vous voulez que je vous autorise à lire ce livre merveilleux, vous devrez me payer 1 285 000 Zenys, qui reviendront à l'Académie de Magie Shubaichul pour la conservation des ouvrages de la Bibliothèque.";
+			next;
+			if (select("Payer maintenant.:S'en aller.") == 1) {
+				if (Zeny > 1284449) {
+					set zeny,zeny-1285000;
+					set valkyrie_Q,1;
+					mes "[Metheus Sylphe]";
+					mes "Merci. Vous pouvez aller lire le Livre d'Ymir. Mais faîtes bien attention! Bien que ce livre soit exceptionnel, le Temps a son emprise sur toutes choses en ce monde.";
+					close;
+				}
+				mes "[Metheus Sylphe]";
+				mes "Vous n'avez malheureusement pas assez d'argent sur vous. Vous n'êtes pas autorisé à lire le Livre.";
+				close;
+			}
+			mes "[Metheus Sylphe]";
+			mes "Prenez votre temps.";
+			close;
+		}
+		mes "[Metheus Sylphe]";
+		mes "Encore merci pour votre donation. Vous pouvez aller lire le Livre d'Ymir. Mais faîtes bien attention! Bien que ce livre soit exceptionnel, le Temps a son emprise sur toutes choses en ce monde.";
+		close;
+	}
+	mes "[Metheus Sylphe]";
+	mes "Bienvenue à la Bibliothèque de l'Académie de Magie Shubaichul.";
+	mes "Nous possédons une grande collection de livres rares.";
+	mes "Vous pouvez jeter un oeil, mais ne touchez pas au Livre d'Ymir! Seuls quelques élus peuvent lire ces sages écritures.";
+	close;
+}
+
+yuno_in02,93,207,1	script	Livre d'Ymir	111,{
+	if (ADVJOB != 0 || Upper == 1) {
+		mes "[Livre d'Ymir]";
+		mes "...L'entrée du Hall des Honneurs est ouvert à tous ceux qui ont décidé d'aller de l'avant, vers leur vie future.";
+		mes "Ce Hall aide les héros à décider de leur avenir et de ce qu'ils peuvent accomplir dans ce monde.";
+		next;
+		mes "[Livre d'Ymir]";
+		mes "La rumeur dit que tous les souhaits peuvent être accomplis dans le Hall des Honneurs.";
+		next;
+		if (select("Arrêter la lecture.:Continuer la lecture.") == 1) {
+			mes "[Livre d'Ymir]";
+			mes ".....";
+			close;
+		}
+		mes "[Livre d'Ymir]";
+		mes "Un ancien chemin mène au Hall des Honneurs, le lieu le plus proche du Paradis.";
+		mes "Cependant, son accès y est interdit pour le commun des mortels...";
+		close2;
+		warp "valkyrie",48,8;
+		end;
+	}
+	else if (Baselevel > 98 && JobLevel > 49 && Class >= Job_Knight && Class <= Job_Crusader2) {
+		if (valkyrie_Q != 0) {
+			mes "[Livre d'Ymir]";
+			mes "...Alors, les anciens héros, dans l'angoisse de leur mort, quitteront le monde des mortels afin de s'élever vers une autre réalité...";
+			next;
+			mes "[Livre d'Ymir]";
+			mes "Aucun document, conte ou chanson ne décrit précisément cette réalité...";
+			mes "Seul un vieux parchemin contient les informations sur ce lieu où règne... Valkyrie...";
+			next;
+			mes "[Livre d'Ymir]";
+			mes "Valkyrie...";
+			mes "L'ange gardien légendaire de Ragnarok.";
+			next;
+			mes "[Livre d'Ymir]";
+			mes "Seuls les aventuriers faisant preuve d'une grande bravoure seront conduits par la Valkyrie au Valhalla, le Hall des Honneurs. Là, une nouvelle vie commencera...";
+			next;
+			mes "[Livre d'Ymir]";
+			mes "Après leur renaissance, ils vivront à nouveau en tant que héros, et illumineront le monde. Leur corps sera plus fort, leur énergie étincelante.";
+			next;
+			mes "[Livre d'Ymir]";
+			mes "Leur esprit recevra les dons des fragments du Coeur d'Ymir, détruit et éparpillé partout dans le monte après la bataille de Rune-Midgard.";
+			next;
+			mes "[Livre d'Ymir]";
+			mes "Que les héros profitent de leur nouvelle vie.";
+			mes "Alors ils protègeront le monde des dangers qui le menacent.";
+			mes "......";
+			mes "...........";
+			set valkyrie_Q,2;
+			close;
+		}
+		mes "[Livre d'Ymir]";
+		mes "...";
+		close;
+	}
+	mes "[Livre d'Ymir]";
+	mes "...";
+	close;
+}
+
+//Myllena: j'ai conservé les textes présents dans les anciennes versions
+yuno_in05,49,43,1	script	Coeur d'Ymir	111,{
+	if (Baselevel > 98 && JobLevel > 49 && Class >= Job_Knight && Class <= Job_Crusader2) {
+		if (valkyrie_Q == 2) {
+		mes "[Coeur d'Ymir]";
+		mes "Ce sont quand les temps sont durs, et que notre estime personnelle est au plus bas, que notre foi doit être la plus forte.";
+		next;
+		mes "[Coeur d'Ymir]";
+		mes "Depuis des temps immémoriaux, les gardiens secrets de la route vers le paradis ont protégé cette porte secrète des esprits du mal.";
+		next;
+		mes "[Coeur d'Ymir]";
+		mes "Ainsi, les liens s'affaiblirent à mesure du temps... La Légion des Sages commença à recruter et former des magiciens et sages, jeunes, courageux, rapides d'esprit, leur enseignant les lois qui gouvernent notre monde.";
+		next;
+		mes "[Coeur d'Ymir]";
+		mes "Les siècles passèrent et les Sages devinrent de plus en plus forts, autant mentalement que physiquement, jusqu'à ce qu'ils soient crains par tous, y compris à travers le monde des monstres.";
+		next;
+		mes "[Coeur d'Ymir]";
+		mes "Maintenant, après avoir écouté mes sages paroles, avancez vers le Livre d'Ymir, et laissez vous aller dans la lumière des Dieux.";
+		next;
+		mes "[Coeur d'Ymir]";
+		mes "Si votre coeur est pur et que vos intentions sont bonnes, les portes de la renaissance s'ouvriront à vous...";
+		close2;
+		warp "valkyrie",48,8;
+		end;
+		}
+	}
+	end;
+}
+
+valkyrie,44,33,5	script	Réseau de Téléportation	124,{
+	if (Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Réseau de Téléportation]";
+			mes "Félicitations.";
+			mes "Honneur aux Guerriers!";
+			close;
+		}
+		mes "[Réseau de Téléportation]";
+		mes "Bonjour...";
+		mes "Ne touchez à rien s'il vous plaît.";
+		mes "..........";
+		close;
+	}
+	else {
+		mes "[Réseau de Téléportation]";
+		mes "Valeureux guerrier,";
+		mes "où souhaitez-vous être téléporté?";
+		next;
+		switch(select("Prontera:Morroc:Payon:Geffen:Alberta:Izlude:Al De Baran:Comodo:Yuno")) {
+		case 1: callsub S_Warpchar,"prontera",116,72;
+		case 2: callsub S_Warpchar,"morocc",156,46;
+		case 3: callsub S_Warpchar,"payon",69,100;
+		case 4: callsub S_Warpchar,"geffen",120,39;
+		case 5: callsub S_Warpchar,"alberta",117,56;
+		case 6: callsub S_Warpchar,"izlude",94,103;
+		case 7: callsub S_Warpchar,"aldebaran",91,105;
+		case 8: callsub S_Warpchar,"comodo",209,143;
+		case 9: callsub S_Warpchar,"yuno",328,101;
+		}
+	}
+S_WarpChar:
+	mes "[Réseau de Téléportation]";
+	mes "Bon voyage.";
+	close2;
+	savepoint getarg(0),getarg(1),getarg(2);
+	warp getarg(0),getarg(1),getarg(2);
+	end;
+}
+
+// Warps
+//============================================================ 
+valkyrie,48,73,0	warp	valk01#1	1,1,valkyrie,48,64
+valkyrie,48,66,0	warp	valk01#2	1,1,valkyrie,48,75
+

@@ -1,0 +1,114 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Alberta Guides
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.5a
+//===== Compatible With: ===================================== 
+//= eAthena  SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Guides for the city of Alberta
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 Fixed Armory coords, thanks to Freya team
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Updated the guide according to how it is on iRO, thanks [MasterOfMuppets]
+//=     to Muad_Dib
+//= 1.4 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.5 Fixed some errors with the loop[Samuray22]
+//	-Thanks to $ephiroth.
+//============================================================ 
+
+alberta,23,238,4	script	Guide#alb::AlbGuide	105,{
+	cutin "prt_soldier",2;
+	mes "[Guide d'Alberta]";
+	mes "Bienvenue à Alberta, la Cité Portuaire.";
+	mes "N'hésitez pas à me demander des renseignements si vous cherchez quelque chose de précis en ville, ou si vous voulez juste des informations touristiques!";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("Guide de la Ville:Effacer les Informations de la Mini-Map:Astuce:Annuler")) {
+		case 1:
+			mes "[Guide d'Alberta]";
+			mes "Sélectionnez un lieu spécifique dans le menu suivant.";
+			if (.@compass_check == 0) {
+				mes "Voulez-vous que j'indique ces emplacements sur votre Mini-Map?";
+				next;
+				if (select("Oui:Non") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while (.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				
+				switch(select("^FF0000Guilde des Marchands^000000:Armurerie:Boutique:Auberge:Forge:Annuler")) {
+				case 1:
+					mes "[Guide d'Alberta]";
+					mes "La Guilde des Marchands, lieu d'apprentissage du métier de Marchand et situé au Sud Ouest d'Alberta.";
+					if (.@compass_check)
+						viewpoint 1,33,41,2,0xFF0000;
+					break;
+				case 2:
+					mes "[Guide d'Alberta]";
+					mes "L'Armurerie se situe tout au Sud d'Alberta.";
+					if (.@compass_check)
+						viewpoint 1,117,37,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[Guide d'Alberta]";
+					mes "La Boutique se situe dans le centre ville. Vous ne devriez pas avoir de difficulté à la trouver.";
+					if (.@compass_check)
+						viewpoint 1,98,154,4,0xFFFF00FF;
+					break;
+				case 4:
+					mes "[Guide d'Alberta]";
+					mes "Vous trouverez une Auberge au Nord Ouest d'Alberta.";
+					if (.@compass_check)
+						viewpoint 1,65,233,5,0xFF00FF;
+					break;
+				case 5:
+					mes "[Guide d'Alberta]";
+					mes "La Forge d'Alberta se situe dans le même bâtiment que la Guilde des Marchands, au Sud Ouest.";
+					if (.@compass_check)
+						viewpoint 1,35,41,6,0xFF00FF;
+					break;
+				case 6:
+					mes "[Guide d'Alberta]";
+					mes "Si vous ne souhaitez plus voir afficher les informations sur votre Mini-Map, demandez-moi et je les effacerais.";
+					set .@loop2,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,2,0xFF0000;
+			viewpoint 2,237,41,3,0xFF00FF;
+			viewpoint 2,46,345,4,0xFF00FF;
+			viewpoint 2,175,220,5,0xFF00FF;
+			viewpoint 2,175,220,6,0xFF00FF;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[Guide d'Alberta]";
+			mes "Votre Mini-Map est située dans le coin haut droit de votre écran.";
+			mes "Si vous ne la voyez pas, pressez Ctrl + Tab ou cliquez sur le bouton 'Map' dans votre fenêtre d'informations.";
+			next;
+			mes "[Guide d'Alberta]";
+			mes "Sur votre Mini-Map, cliquez sur '+' ou '-' pour modifier le zoom.";
+			mes "Nous espérons que vous apprécierez votre séjour à Alberta.";
+			break;
+		case 4:
+			mes "[Guide d'Alberta]";
+			mes "Soyez prudent au cours de vos voyages, et n'hésitez-pas à vous adressez à moi si vous avez des questions à propos d'Alberta.";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "prt_soldier",255;
+	end;
+}
+
+alberta,120,60,3	duplicate(AlbGuide)	Guide#2alb	105

@@ -1,0 +1,524 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Thief Job Quest
+//===== By: ==================================================
+//= eAthena dev team
+//===== Current Version: =====================================
+//= 1.7
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= [Aegis Conversion]
+//= Job quest for Thief classes
+//===== Additional Comments: =================================
+//= Fully working
+//= v1.1 Added instant job change for High Novice [Lupus]
+//= 1.3 Added Baby Class support [Lupus]
+//= v1.4 Optimised and moved first checker to Jfunc1-1 [massdriller]
+//= Fixed possible EXP abuse [Lupus]
+//= 1.5 Now saves/restores all quest skills [Lupus]
+//= 1.6 Merged back JFunc [Lupus] 1.6a typos
+//= 1.7 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//=	No longer uses function "F_ToHigh"
+//============================================================
+
+moc_prydb1,39,129,2	script	Voleur	69,{
+	if (Upper == 1) {
+		if (ADVJOB == Job_Assassin_Cross || ADVJOB == Job_Stalker) {
+			if (Class == Job_Novice_High) {
+				mes "[Voleur]";
+				mes "Hum? Est-ce qu'on se connaît? Ta p'tite tête m'est ne m'est pas inconnue... T'as un jumeau, c'est ça?";
+				next;
+				if (getskilllv("NV_BASIC") < 9) {
+					mes "[Voleur]";
+					mes "Quoi? Tu veux devenir Voleur? Je suis désolé, mais il va falloir t'entraîner un peu plus!";
+					next;
+					mes "[Voleur]";
+					mes "Apprends toutes les compétences de base et reviens me voir, ok?";
+					close;
+				}
+				mes "[Voleur]";
+				mes "Je suis persuadé de t'avoir connu dans une autre vie... Tu as sûrement déjà beaucoup combattu. Tu peux devenir Voleur... Tes yeux me disent que tu es déjà apte à exercer ce métier.";
+				next;
+				skill 143,0,0;
+				jobchange Job_Thief_High;
+				skill 149,1,0;
+				skill 150,1,0;
+				skill 151,1,0;
+				skill 152,1,0;
+				mes "[Voleur]";
+				mes "Puisque tu es devenu Voleur, vis en tant que tel à partir de maintenant. Allez... Du balais!";
+				close;
+			}
+			else {
+				mes "[Voleur]";
+				if (sex)
+					mes "Salut mon pote!";
+				else
+					mes "Salut ma belle~";
+				close;
+			}
+		}
+		else {
+			mes "[Voleur]";
+			if (sex)
+				mes "Salut mon pote! T'as l'air d'un bon p'tit gars...";
+			else
+				mes "Salut ma belle~ T'as l'air d'une bonne p'tite fille...";
+			mes "...Un peu trop d'ailleurs, pour pouvoir devenir Voleur! Maintenant, ouste! Je suis occupé. Du balais!";
+			close;
+		}
+	}
+	if (BaseJob == Job_Thief) {
+		mes "[Voleur]";
+		mes "T'es déjà un voleur... Qu'est ce qu'tu veux? Tire toi!";
+		emotion e_swt;
+		close;
+	}
+	else if (BaseJob != Job_Novice && BaseJob != Job_Thief) {
+		mes "[Voleur]";
+		mes "Qu'est-ce que... ?";
+		switch(Class) {
+		case 1:
+			mes "Oh non, encore un gamin qui ne sait que dire 'Bash'. Fais moi une faveur... Pourquoi tu n'irais pas voir ailleurs si j'y suis?";
+			break;
+		case 2:
+			mes "Oh un apprenti magicien. Tu sais, on peut faire du feu avec une allumette, hein. HAHAHA.";
+			break;
+		case 3:
+			mes "Hahahaha mais j'te reconnais! T'es l'archer pitoyable que j'ai croisé l'autre jour dans la forêt!";
+			break;
+		case 4:
+			mes "Oh mon dieu, au secooours.... Un protecteur de Poring!";
+			mes "Pourquoi t'es là à traîner dans ce coin miteux, et pas à l'église en train de prier?";
+			break;
+		case 5:
+			mes "EEEErrk... un marchand ici! Vas faire ton commerce ailleurs! Pouah!";
+			break;
+		case 8:
+			mes "Oh... Est-ce que je vais mourir?";
+			next;
+			mes "[Voleur]";
+			mes "Pour quelle autre raison un Prêtre viendrait traîner ici? Je suppose qu'il vaut mieux que je confesse tous mes péchés.";
+			close;
+		case 12:
+			mes "Hé, t'étais pas l'un des notres? On dirait qu't'a changé. T'as l'air vraiment dangeureux, maintenant...";
+			close;
+		case 17:
+			mes "Hé mec, ton allure est super cool!";
+			close;
+		}
+		next;
+		mes "[Voleur]";
+		mes "*Soupir* Il n'y a vraiment pas besoin de vous dans ce genre de lieu. Vous feriez mieux de partir.";
+		close;
+	}
+	if (job_thief_q == 3 && countitem(1069) > 0 || countitem(1070) > 0) {
+		mes "[Voleur]";
+		mes "Hmmm?";
+		mes "T'as rapporté des Champignons pour le test c'est ça?";
+		next;
+		mes "[Voleur]";
+		mes "Ici, parle au mec à coté. C'est le seul chargé de vérifier ce que t'as fais.";
+		close;
+	}
+	else if (job_thief_q == 3) {
+		mes "[Voleur]";
+		mes "Alors, c'était bien, la Ferme aux Champignons.  Tu t'es éclaté?";
+		next;
+		if (select("Ouais, c'était cool..:C'était...Horrible.") == 1) {
+			mes "[Voleur]";
+			mes "Woa! J't'aime bien, toi! Fabuleux! Tous les autres avant étaient des crétins!";
+			next;
+			mes "[Voleur]";
+			mes "...... Tu vises pas mon boulot, j'espère?";
+			emotion e_gasp;
+			close;
+		}
+		mes "[Voleur]";
+		mes "Ouais? J'vois ce qu'tu veux dire. J'y suis allé avant toi, c'était horrible. Tous ces champignons puants et ces monstres sadiques...";
+		close;
+	}
+	if (job_thief_q == 2) {
+		mes "[Voleur]";
+		mes "..... Qu'est-ce tu fous ici? T'étais pas sensé aller voler des champignons??";
+		mes "Ne m'dit pas qu't'as oublié ce qu'il faut faire??? Pffff... T'as envie que j'te réexplique encore une fois?......";
+		emotion e_hmm;
+		next;
+		if  (select("Heu... Ouais, j'crois bien...:Non, c'est bon.") == 1) {
+			mes "[Voleur]";
+			mes "(~soupir~) Y'en a toujours un qui est un peu à la traîne.... C'est la dernière fois, alors écoute ATTENTIVEMENT!!....";
+			next;
+			mes "[Voleur]";
+			mes "Pour le test tu dois ^ff0000t'infiltrer^000000 dans la ^ff0000Ferme de Shibu^000000, et ^ff0000'emprunter'^000000 quelques ^aaaa00champignons^000000.";
+			mes "Il y a ^ff00002 différentes ^000000sortes de ^aaaa00champignons^000000 dans la ferme, ^ffbb00Orange Net Mushrooms^000000 et ^ffbb00Orange Gooey Mushrooms^000000.";
+			next;
+			mes "[Voleur]";
+			mes "Shibu est devenu l'un des pires arnaqueurs de Marchands à Morroc, au cas où tu t'demanderais pourquoi c'est notre cible.";
+			next;
+			mes "[Voleur]";
+			mes "Rapporte les champignons ici et quelqu'un te donnera un score, en fonction du nombre et du type de champignons qu't'auras.";
+			mes "1 Orange Net Mushroom = ^0000ff3 points^000000 alors que  1 Orange Gooey Mushroom = ^0000ff1 point^000000. T'as besoin de 25 points pour réussir l'test.";
+			next;
+			mes "[Voleur]";
+			mes "Pour te rendre à la Ferme de Shibu t'as besoin de parler à l'un de nos 'associés'. Tu l'trouveras en dehors des Pyramides, à coté de quelques colonnes.";
+			mes "Il est connu sous le nom de ^ddcc00L'Impertinent^000000.";
+			next;
+			mes "[Voleur]";
+			mes "Voici ses coordonnées exactes, au cas où tu serais géographiquement déficient: ^FF0000141, 125^000000.";
+			mes "Va l'trouver et il te mènera à un passage secret vers la Ferme.";
+			next;
+			mes "[Voleur]";
+			mes "Ça semble facile mais ^009900tu sais, y'a quelques monstres qui gardent les champignons contre les voleurs^000000?";
+			mes "Alors ^0000ffremets les pieds sur terre^000000 et ^ff0000concentre toi! Ça va pas être une partie de plaisir^000000.";
+			next;
+			mes "[Voleur]";
+			mes "Donc, j'vais t'donner un conseil. ^ff0000Prépare une stratégie^000000 avant d'entrer dans la Ferme.";
+			next;
+			mes "[Voleur]";
+			mes "Essaye de voler les champignons aussi vite que possible. Tu devras p't'être ^0000ffy aller à la main plutôt qu'à la dague^000000.";
+			mes "Gaffe de pas crever durant l'Test... enfin, pas avant d'm'avoir donner les champignons.... aprés, tu peux mourir si tu veux... HAHAHA!";
+			next;
+			mes "[Voleur]";
+			mes "Si t'as pas d'questions... alors BOUGE TOI!";
+			close;
+		}
+		mes "[Voleur]";
+		mes ".... Alors, tu veux quoi??? T'as un truc à m'dire? TU es le gars qui est venu ici ME chercher...";
+		mes "Quoi... Tu m'cherches?? HEIN!!??";
+		close;
+	}
+	mes "[Voleur]";
+	if (job_thief_q == 0) {
+		if(Sex) {
+		mes "Hé... T'as l'air d'un bon p'tit gars... Qu'est-ce qui t'amène dans ce trou à rat?";
+			}
+		else{
+		mes "Heh... T'as l'air d'une bonne p'tite fille... Qu'est-ce qui t'amène dans ce trou à rat?";
+		    }
+				}
+	else {
+		mes "Ah...";
+		mes "T'es revenu.";
+		mes "T'es sûr d'être prêt pour recommencer?";
+	}
+	next;
+	if (select("Hey, J'suis pas venu pour l'ambiance, compris?!:Moi? J'fais que passer...") == 1) {
+		if (job_thief_q == 0) {
+			mes "[Voleur]";
+			mes "Humph... Ça sonne un rien vantard.... T'sais, être un Voleur, c'est pas aussi simple que ça....";
+			mes "Ça me rappelle moi.... Je devais être de niveau 9 ou 10.... C'était mon premier vol....";
+			next;
+			mes "[Voleur]";
+			mes "Hahahaha... J'peux encore me rappeler la tronche de ce gars...";
+			emotion e_heh;
+			next;
+			mes "[Voleur]";
+			mes "Mais bon... J'suppose que t'es là pour devenir Voleur...";
+			next;
+			switch(select("-Bien vu.:-Non. J'te fait juste perdre ton temps.:-Pourquoi vous avez volé ce type?")) {
+			case 1:
+				mes "[Voleur]";
+				mes "Vraiment...";
+				break;
+			case 2:
+				mes "[Voleur]";
+				mes "Ouais, je vois ça.";
+				break;
+			case 3:
+				mes "[Voleur]";
+				mes "Me...?";
+				mes "Hein? Moi?... Et bien... J'avais pas d'autre choix à cette époque.... C'était soit le vol, soit la famine.";
+				mes "J'ai pas pu supporter de crever de faim un jour de plus.";
+				break;
+			}
+			next;
+			mes "[Voleur]";
+			mes "Ok, très bien. D'abord, remplis cette demande d'admission.";
+			next;
+			switch(select("Remplir la demande:J'ai trop peur d'être un Voleur!")) {
+			case 1:
+				mes "[Voleur]";
+				mes "Très bien, ^FF0000"+ strcharinfo(0) + "^000000, si c'est ton VRAI nom..... apparemment t'as déjà un chouette 'casier' ici.";
+				mes "Voyons.... attaque aggravé... larcins lâches..... humm....";
+				set job_thief_q,1;
+				next;
+				mes "[Voleur]";
+				mes "Ah, c'est bon...... T'as tout ce qu'il faut pour devenir un Voleur. Maintenant, tout ce qu'il te reste à faire est de passer le ^FF0000Test des Voleurs de Morroc^000000.";
+				next;
+				switch(select("Ok, c'est parti.:Je vais réfléchir en faite.")) {
+				case 1:
+					break;
+				case 2:
+					mes "[Voleur]";
+					mes "Réfléchir?";
+					mes "Comment est ce que tu peux dire que tu vas réfléchir?!";
+					close;
+				}
+				break;
+			case 2:
+				mes "[Voleur]";
+				mes "Trop peur?!?";
+				mes "Hahahahahahah!";
+				mes "Oh, arrête...!";
+				mes "Tu vas me faire crever!";
+				close;
+			}
+		}
+		else {
+			mes "[Voleur]";
+			mes "Okay...";
+			mes "Donne moi une seconde.";
+			next;
+		}
+		mes "[Voleur]";
+		mes "Ton nom est...";
+		mes strcharinfo(0) + "? Um, Où qu'il est? Ah, là. Voyons ça...";
+		next;
+		mes "[Voleur]";
+		if (getskilllv("NV_BASIC") < 9) {
+			mes "Euh... J'peux voir qu't'es ambitieux......Mais on peut pas filer un flingue à un bébé, non? Reviens quand t'auras appris toutes tes Compétences de Base.";
+			close;
+		}
+		mes "Okay. J'ai vu ton casier, sympa. T'as peut être ce qu'il faut pour être Voleur en faite.";
+		next;
+		mes "[Voleur]";
+		mes "Je peux le sentir, et maintenant je peux dire que t'as passé l'interview avec succès. Bon travail!";
+		set job_thief_q,2;
+		next;
+		mes "[Voleur]";
+		mes "Maintenant, c'est tes capacités qu'on va tester. Tu connais quelque chose sur l'épreuve?";
+		next;
+		switch(select("Oui.:Bof, rien de spécial.")) {
+		case 1:
+			mes "[Voleur]";
+			mes "Oh? C'est cool ça, ça va nous faciliter la tâche.";
+			break;
+		case 2:
+			mes "[Voleur]";
+			mes "Pour le test tu dois ^ff0000t'infiltrer^000000 dans la ^ff0000Ferme de Shibu^000000, et ^ff0000'emprunter'^000000 quelques ^aaaa00champignons^000000.";
+			mes "Il y a ^ff00002 différentes ^000000sortes de ^aaaa00champignons^000000 dans la ferme, ^ffbb00Orange Net Mushrooms^000000 et ^ffbb00Orange Gooey Mushrooms^000000.";
+			next;
+			mes "[Voleur]";
+			mes "Shibu est devenu l'un des pires arnaqueurs de Marchands à Morroc, au cas où tu t'demanderais pourquoi c'est notre cible.";
+			next;
+			mes "[Voleur]";
+			mes "Ramène les champignons ici et quelqu'un te donnera un score, en fonction du nombre et du type de champignons qu't'auras.";
+			mes "1 Orange Net Mushroom = ^0000ff3 points^000000 alors que  1 Orange Gooey Mushroom = ^0000ff1 point^000000. T'as besoin de 25 points pour réussir l'test.";
+			next;
+			mes "[Voleur]";
+			mes "Pour te rendre à la Ferme de Shibu t'as besoin de parler à l'un de nos 'associés'. Tu l'trouveras en dehors des Pyramides, à coté de quelques colonnes.";
+			mes "Il est connu sous le nom de ^ddcc00L'Impertinent^000000.";
+			next;
+			mes "[Voleur]";
+			mes "Voici ses coordonnées exactes, au cas où tu serais géographiquement déficient: ^FF0000141, 125^000000.";
+			mes  "Va l'trouver et il te mènera à un passage secret vers la Ferme.";
+			next;
+			mes "[Voleur]";
+			mes "Ça semble facile mais ^009900tu sais, y'a quelques monstres qui gardent les champignons contre les voleurs^000000?";
+			mes "Alors ^0000ffremets les pieds sur terre^000000 et ^ff0000concentre toi! Ça va pas être une partie de plaisir^000000.";
+			next;
+			mes "[Voleur]";
+			mes "Donc, j'vais t'donner un conseil. ^ff0000Prépare une stratégie^000000 avant d'entrer dans la Ferme.";
+			next;
+			mes "[Voleur]";
+			mes "Essaye de voler les champignons aussi vite que possible. Tu devras p't'être ^0000ffy aller à la main plutôt qu'à la dague^000000.";
+			mes "Gaffe de pas crever durant l'Test... enfin, pas avant d'm'avoir donner les champignons.... après, tu peux mourir si tu veux... HAHAHA!";
+			next;
+			mes "[Voleur]";
+			mes "Si t'as pas d'questions... alors BOUGE TOI!";
+			emotion e_go;
+		}
+		next;
+		mes "[Voleur]";
+		mes "N'oublies pas de bien te préparer avant d'entrer dans la ferme. Déplaces toi aussi vite que tu peux, et fais gaffe à pas te faire buter.";
+		close;
+	}
+	close;
+}
+
+moc_prydb1,42,133,2	script	Brad	118,{
+	if (BaseJob == Job_Thief) {
+		mes "[Brad]";
+		mes "On n'a pas d'plans spéciaux pour les Voleurs pour le moment... Reviens une autre fois, d'acc'?";
+		close;
+	}
+	else if (BaseJob != Job_Novice && BaseJob != Job_Thief) {
+		mes "[Brad]";
+		mes "Hé~ Hé~!! T'as pas la gueule d'un Voleur. C'est quoi l'problème? T'as INTERET à pas manigancer quelque chose sur le TERRITOIRE DES VOLEURS!!";
+		close;
+	}
+	if (job_thief_q == 0 || job_thief_q == 1) {
+		mes "[Brad]";
+		mes "Errr? C'est quoi ton problème, gamin? Si tu veux devenir Voleur, parle à la fille à coté d'moi.";
+		close;
+	}
+	else if (job_thief_q == 2) {
+		mes "[Brad]";
+		mes "T'as réussi l'interview?";
+		mes "Et donc t'attends pour...?";
+		close;
+	}
+	else if (job_thief_q == 3) {
+		mes "[Brad]";
+		mes "Ah, le guide m'a parlé de toi. Bon, voyons ce que t'as...";
+		if (countitem(1069) == 0 && countitem(1070) == 0) {
+			next;
+			mes "[Brad]";
+			mes "Mais c'est quoi le délire...";
+			mes "T'as piqué aucun champignons! Retournes y tout de suite ou je m'énerve. Et je ferai tout pour que tu loupes ton examen pour devenir Voleur!";
+			close;
+		}
+		next;
+		set .@thief_item1,countitem(1069) * 3;
+		set .@thief_item2,countitem(1070);
+		set .@total_thief,.@thief_item1 + .@thief_item2;
+		set .@money_thief,((.@thief_item1 * 5) + (.@thief_item2 * 2)) + 200;
+		mes "[Brad]";
+		if (countitem(1069) != 0) {
+			mes "Bien. T'as récupéré quelques champignons chez ce taré de Shibu...";
+			mes "Huh, " + countitem(1069) + " Orange Net Mushrooms.";
+		}
+		if (countitem(1070) != 0)
+			mes "Et maintenant les Orange Gooey Mushrooms. T'en a " + countitem(1070) + ".";
+		next;
+		mes "[Brad]";
+		mes "Ce qui te fait un score total de...";
+		next;
+		mes "[Brad]";
+		mes "Hmmm. " + .@total_thief + " degrés, multiplié par la vitesse de la lumière, divisé par l'intégrale de pi fois la différence de taille entre les 2 types de champignons plus la racine carrée de la valeur absolue du nombre de joueur en ligne en ce moment ...";
+		next;
+		mes "[Brad]";
+		mes "Okay!";
+		mes "Ah voilà, j'ai fini.";
+		next;
+		mes "[Brad]";
+		if (.@total_thief > 25) {
+			mes "Ooooh.  Plus de 25, cool. Tu feras un excellent voleur!";
+		}
+		else if (.@total_thief == 25) {
+			mes "Bien. T'as réussit le Test.";
+		}
+		else {
+			mes "Mince!.... Visiblement, c'est pas assez. Aller! Tu peux faire mieux qu'ça! Vas y et ramène plus de champignons!!!";
+			close;
+		}
+		next;
+		mes "[Brad]";
+		mes "Félicitations ^ff0000"+strcharinfo(0)+"^000000, t'as réussi le Test Officiel des Voleurs! Maintenant, tu peux devenir l'un d'entre nous!!";
+		if (countitem(1069) != 0) delitem 1069,countitem(1069); //Mushroom_Of_Thief_1
+		if (countitem(1070) != 0) delitem 1070,countitem(1070); //Mushroom_Of_Thief_2
+		callfunc "Job_Change",Job_Thief;
+		callfunc "F_ClearJobVar";
+		next;
+		mes "[Brad]";
+		mes "A partir de maintenant, tu dois agir, penser et même sentir comme un Voleur.";
+		mes "T'es l'un d'entre nous, ce qui signifie que t'as la confiance et le respect de tous les Voleurs de Rune-Midgard.";
+		next;
+		mes "[Brad]";
+		mes "Néanmoins, si t'apportes le déshonneur à notre Guilde, ou si tu nous trahis, nous n'hésiterons pas à te......";
+		mes "Comment dire.... à t'^ff0000'EFFACER'^000000 de la Guilde des Voleurs.";
+		next;
+		mes "[Brad]";
+		mes "*Ahem* Bonne chance et rappelle-toi toujours le ^0000ccDicton des Voleurs^000000: ^ff0000Ne te fais JAMAIS prendre ^000000l!";
+		next;
+		mes "[Brad]";
+		mes "Tiens, v'là une p'tite récompense pour ton travail acharné. Dépense-la comme tu veux.";
+		set zeny,zeny+.@money_thief;
+		close;
+	}
+}
+
+moc_ruins,141,125,3	script	L'Impertinent	83,{
+	if (BaseJob == Job_Thief) {
+		mes "[L'Impertinent]";
+		mes "Yahou! Matez moi ça! T'es devenu un Voleur sacrément cool!";
+		next;
+		mes "[L'Impertinent]";
+		mes "T'inquiète à propos de la Ferme de Shibu. Laisse les p'tits nouveaux s'en occuper. Pourquoi tu voyages pas un peu, histoire de buter quelques monstres un peu plus forts?";
+		close;
+	}
+	else if (BaseJob != Job_Novice && BaseJob != Job_Thief) {
+		mes "[L'Impertinent]";
+		switch(rand(4)) {
+		case 1:
+			mes "Fait chaud, vais crever, t'as pas à boire?";
+			close;
+		case 2:
+			mes "Donnes moi ton fric!";
+			next;
+			mes "[L'Impertinent]";
+			mes "Allez magnes toi!!";
+			close;
+		case 3:
+			mes "C'EST QUI QUE T'APPELES PSYCHOPATHE?!?!";
+			close;
+		case 4:
+			mes "J'ai rien à te dire. Y'a moyen que tu te casses et que tu me laisses tranquille?";
+			close;
+		default:
+			mes "Aujourd'hui, c'est une bonne journée pour aller chasser dans les pyramides avec mes potes.";
+			close;
+		}
+	}
+	if (job_thief_q == 3) {
+		mes "[L'Impertinent]";
+		mes "Hahahahaha~!";
+		mes "T'as pas réussi l'épreuve?";
+		mes "Okay, je te renvois là bas...";
+		close2;
+		switch(rand(5)) {
+		case 1: warp "job_thief1",228,106; end;
+		case 2: warp "job_thief1",38,50; end;
+		case 3: warp "job_thief1",66,331; end;
+		case 4: warp "job_thief1",196,331; end;
+		default: warp "job_thief1",309,234; end;
+		}
+	}
+	else if (job_thief_q == 2) {
+		mes "[L'Impertinent]";
+		mes "Hmm...";
+		mes "Tu viens pour le test, c'est ça? Je peux voir dans tes yeux que tu sais quelque chose.";
+		next;
+		mes "[L'Impertinent]";
+		mes "Ton nom est " + strcharinfo(0) + "? Ah, il est sur ma liste. C'est bon, je vais t'envoyer dans la ferme aux champignons, mais je ne peux ni assurer ni garantir ta sécurité...";
+		close2;
+		set job_thief_q,3;
+		switch(rand(5)) {
+		case 1: warp "job_thief1",228,106; end;
+		case 2: warp "job_thief1",38,50; end;
+		case 3: warp "job_thief1",66,331; end;
+		case 4: warp "job_thief1",196,331; end;
+		default: warp "job_thief1",309,234; end;
+		}
+	}
+	else if (job_thief_q == 1) {
+		mes "[L'Impertinent]";
+		mes "Il y a une étrange odeur venant de... Toi. Qu'est ce que tu veux?";
+		close;
+	}
+	mes "[L'Impertinent]";
+	mes "Hé!! Le Novice! Tu veux d'venir plus fort et plus puissant!? T'aimes t'infiltrer partout et te cacher?";
+	mes "Si oui, rejoins la Guilde des Voleurs! Tout le monde est l'bienvenue! Rejoins-nous maintenant!";
+	next;
+	mes "[L'Impertinent]";
+	mes "Tu peux avoir plus d'informations au premier sous-sol de la Pyramide!";
+	close;
+}
+
+// Monsters
+//============================================================
+job_thief1,0,0,0,0	monster	Orange Mushroom	1182,180,0,0,0
+job_thief1,0,0,0,0	monster	Fabre	1184,50,0,0,0
+job_thief1,0,0,0,0	monster	Chonchon	1183,50,0,0,0
+job_thief1,0,0,0,0	monster	Spore	1014,30,0,0,0
+
+//============================================================
+// mapflag
+//============================================================
+job_thief1	mapflag	nomemo
+job_thief1	mapflag	noteleport
+job_thief1	mapflag	nosave	SavePoint
+job_thief1	mapflag	nopenalty
+job_thief1	mapflag	nobranch

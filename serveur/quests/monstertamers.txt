@@ -1,0 +1,666 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Monster Tamers
+//===== By: ==================================================
+//= kobra_k88, Darkchild, x[tsk]
+//===== Current Version: =====================================
+//= 1.4b
+//===== Compatible With: =====================================
+//= eAthena 1.0
+//===== Description: =========================================
+//= Cute pet quest items
+//===== Additional Comments: =================================
+//= May not have all of the Monster Tamers, but the ones here are fully working.
+//= 1.1 Fixed exploits [Lupus]
+//= 1.2 Removed Duplicates [Silent]
+//= 1.3 Added Bongun's taming item quest. Credits to Lone_Wolf. [SinSloth]
+//= 1.4 Updated Monster taming item quests. [L0ne_W0lf]
+//= 1.4a FIXED item requirement for stellar hairpin. [L0ne_W0lf]
+//= 1.4b Fixed the delitem assosiated with the last uptate. [L0ne_W0lf]
+//============================================================
+
+alberta_in,173,76,4	script	Iwado#alb	125,{
+	mes "[Iwado]";
+	mes "Apprivoiser un monstre est devenu très à la mode ces derniers temps! Pourquoi ne pas essayer vous aussi? ....";
+	next;
+	switch(select("^3355FFApprivoiser un monstre^000000?:^3355FF'Monster Juice'^000000:^3355FF'Singing Flower'^000000:^3355FF'Wild Flower'^000000:Annuler")) {
+	case 1:
+		mes "[Iwado]";
+		mes "Apprivoiser un monstre permet de pouvoir obtenir le monstre en question en tant qu'animal de compagnie. Bien évidement, tous les monstres ne se laissent pas apprivoiser facilement.";
+		mes "Il faut utiliser un ^5555FF'appât'^000000 pour pouvoir sensibiliser les monstres et les faire devenir des animaux de compagnie.";
+		next;
+		mes "[Iwado]";
+		mes "Ces appâts sont très durs à obtenir, mais il existe des membres de la Guilde d'Apprivoisement des Monstres, tel que moi, qui peuvent aider les amoureux des animaux à obtenir des appâts plus facilement.";
+		next;
+		mes "[Iwado]";
+		mes "Voici les appâts que je vous propose:";
+		mes "^5555FF'Monster Juice'^000000";
+		mes "^5555FF'Singing Flower'^000000";
+		mes "^5555FF'Wild Flower'^000000";
+		mes "Ce sont des appâts vraiment efficaces! Vous devriez en essayer un!";
+		next;
+		mes "[Iwado]";
+		mes "Le ^5555FF'Monster Juice'^000000 est une boisson faite à partir de sang d'animaux. Personne de sensé ne voudrait boire ce truc là, mais pour les ^FF5555Hunter Fly^000000, c'est une douceur de choix.";
+		mes "Je peux vous en fabriquer à partir de:";
+		mes "^3355FF1 Animal Gore^000000 et";
+		mes "^3355FF2 Apple^000000.";
+		next;
+		mes "[Iwado]";
+		mes "La ^5555FF'Singing Flower'^000000 est la fleur d'une Singing Plant. Elle est unique et très rare, parfaite pour appâter les ^FF5555Rockers^000000.";
+		mes "Je peux vous en donner une si vous me rapportez:";
+		mes "^3355FF1 Singing Plant^000000.";
+		next;
+		mes "[Iwado]";
+		mes "La ^5555FF'Wild Flower'^000000 est une fleur sauvage qui pousse dans certaines régions de Rune-Midgard. On peut en utiliser une pour appâter un ^FF5555Orc Warrior^000000.";
+		mes "Je peux vous en donner une si vous me rapportez:";
+		mes "^3355FF1 Fancy Flower^000000 et";
+		mes "^3355FF1 Clover^000000.";
+		close;
+	case 2:
+		mes "[Iwado]";
+		mes "Le ^3355FFMonster Juice^000000 est une boisson faite à partir de sang d'animaux. Personne de sensé ne voudrait boire ce truc là, mais pour les ^FF5555Hunter Fly^000000, c'est une douceur de choix.";
+		next;
+		if ((countitem(702) > 0) && (countitem(512) > 1)) {
+			mes "[Iwado]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour du Monster Juice! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[Iwado]";
+			mes "Je dois...";
+			mes "Presser les pommes comme ceci...";
+			mes "Et faire comme ça...";
+			next;
+			mes "^3355FF*Splash splash swoosh swhoosh splash splash*^000000";
+			next;
+			mes "[Iwado]";
+			mes "Et voilà! Du Monster Juice! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 512,2;  //Apple
+			delitem 702,1;  //Animal_Blood
+			getitem 626,1; // Monster_Juice
+			close;
+		}
+		else {
+			mes "[Iwado]";
+			mes "Je peux vous en fabriquer à partir de:";
+			mes "^3355FF1 Animal Gore^000000 et";
+			mes "^3355FF2 Apple^000000.";
+			next;
+			mes "[Iwado]";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerais un appât dans les règles de l'art!";
+			close;
+		}
+	case 3:
+		mes "[Iwado]";
+		mes "La ^3355FFSinging Flower^000000 est la fleur d'une Singing Plant. Elle est unique et très rare, parfaite pour appâter les ^FF5555Rockers^000000.";
+		next;
+		if (countitem(707) > 0) {
+			mes "[Iwado]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour une Singing Flower!! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[Iwado]";
+			mes "Je dois...";
+			mes "Tourner ceci...";
+			mes "Et faire comme ça...";
+			next;
+			mes "^3355FF*Crumble crumble scratch scratch*^000000";
+			next;
+			mes "[Iwado]";
+			mes "Et voilà! Une Singing Flower! Utilisez-la à bon escient, et revenez quand vous voulez!";
+			delitem 707,1;  //Singing_Plant
+			getitem 629,1; // Singing_Flower
+			close;
+		}
+		else {
+			mes "[Iwado]";
+			mes "Je peux vous en donner une si vous me rapportez:";
+			mes "^3355FF1 Singing Plant^000000.";
+			next;
+			mes "[Iwado]";
+			mes "Si vous me rapportez cet ingrédient, je vous fabriquerais un appât dans les règles de l'art!";
+			close;
+		}
+	case 4:
+		mes "[Iwado]";
+		mes "La ^3355FFWild Flower^000000 est une fleur sauvage qui pousse dans certaines régions de Rune-Midgard. On peut en utiliser une pour appâter un ^FF5555Orc Warrior^000000.";
+		next;
+		if ((countitem(2207) > 0) && (countitem(705) > 0)) {
+			mes "[Iwado]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour une Wild Flower! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[Iwado]";
+			mes "Je dois...";
+			mes "Tourner ceci...";
+			mes "Et faire comme ça...";
+			next;
+			mes "^3355FF*Crumble crumble rip rip*^000000";
+			next;
+			mes "[Iwado]";
+			mes "Et voilà! Une Wild Flower! Utilisez-la à bon escient, et revenez quand vous voulez!";
+			delitem 2207,1;  //Fancy_Flower
+			delitem 705,1;  //Clover
+			getitem 10009,1; // Wild_Flower
+			close;
+		}
+		else {
+			mes "[Iwado]";
+			mes "Je peux vous en donner une si vous me rapportez:";
+			mes "^3355FF1 Fancy Flower^000000 et";
+			mes "^3355FF1 Clover^000000.";
+			next;
+			mes "[Iwado]";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerais un appât dans les règles de l'art!";
+			close;
+		}
+	case 5:
+		mes "[Iwado]";
+		mes "Oh... Je vois!";
+		mes "Vous avez du mal à choisir quel monstre vous voulez élever pour l'instant.";
+		next;
+		mes "[Iwado]";
+		mes "C'est une décision très importante, je vous comprends. Prenez votre temps.";
+		close;
+	}
+}
+
+
+aldeba_in,168,175,4	script	YuU#alde	125,{
+	mes "[YuU]";
+	mes "Vous cherchez des appâts ou des accessoires? Quand il s'agit d'apprivoiser un monstre, personne dans Rune Midgard ne pourra mieux vous renseigner que moi.";
+	next;
+	mes "[YuU]";
+	mes "Je sais fabriquer toutes sortes d'accessoires pour les Monstres de Compagnie.";
+	mes "Vous n'avez qu'à demander~";
+	next;
+	switch(select("^3355FFApprivoiser un Monstre^000000?:^3355FFSkull Helm^000000:^3355FFMonster Oxygen Mask^000000:^3355FFSilk Ribbon^000000:^3355FFStellar Hairpin^000000:^3355FFTiny Egg Shell^000000:^3355FFRocker Glasses^000000:Annuler")) {
+	case 1:
+		mes "[YuU]";
+		mes "Apprivoiser un monstre permet de pouvoir avoir le monstre en question en tant qu'animal de compagnie. Bien évidement, tous les monstres ne se laissent pas apprivoiser facilement.";
+		mes "Il faut utiliser un ^5555FF'appât'^000000 pour pouvoir sensibiliser les monstres et les faire devenir des animaux de compagnie.";
+		next;
+		mes "[YuU]";
+		mes "Comme tous les animaux de compagnie, les monstres apprivoisés ont besoin qu'on leur témoigne de l'amour et qu'on s'occupe d'eux. C'est vraiment très important si on souhaite avoir un animal de compagnie.";
+		next;
+		mes "[YuU]";
+		mes "Le meilleur moyen de montrer votre affection à votre petit compagnon est d'obtenir un 'accessoire' qui puisse le différencier de ses autres congénères de Rune Midgard.";
+		next;
+		mes "[YuU]";
+		mes "Ces ^5555FFAccessoires pour Animaux de Compagnie^000000 sont très durs à obtenir. Mais il existe des membres de la Guilde d'Apprivoisement des Monstres, tel que moi, qui peuvent aider les amoureux des animaux à obtenir des accessoires plus facilement.";
+		next;
+		mes "[YuU]";
+		mes "Voici les accessoires que je vous propose:";
+		mes "^5555FFSkull Helm";
+		mes "Monster Oxygen Mask";
+		mes "Silk Ribbon";
+		mes "Stellar Hairpin";
+		mes "Tiny Egg Shell";
+		mes "Rocker Glasses^000000";
+		next;
+		mes "[YuU]";
+		mes "La fabrication d'un Skull Helm nécessite";
+		mes "1 ^3355FFBone Helm^000000";
+		next;
+		mes "[YuU]";
+		mes "La fabrication d'un Monster Oxygen Mask nécessite";
+		mes "1 ^3355FFOxygen Mask^000000.";
+		next;
+		mes "[YuU]";
+		mes "La fabrication d'un Silk Ribbon nécessite";
+		mes "1 ^3355FFRibbon^000000.";
+		next;
+		mes "[YuU]";
+		mes "La fabrication d'un Stellar Hairpin nécessite";
+		mes "1 ^3355FFStellar^000000.";
+		next;
+		mes "[YuU]";
+		mes "La fabrication d'un Tiny Egg Shell nécessite";
+		mes "1 ^3355FFEgg Shell^000000.";
+		next;
+		mes "[YuU]";
+		mes "La fabrication de Rocker Glassess nécessite";
+		mes "^3355FF400 Zenys^000000,";
+		mes "2 ^3355FFZargon^000000 et";
+		mes "1 ^3355FFRibbon^000000. ";
+		next;
+		mes "[YuU]";
+		mes "Ce sont des accessoires vraiment jolis! Vous devriez en essayer un!";
+		close;
+	case 2:
+		mes "[YuU]";
+		mes "Cela pourra peut-être vous effrayer, mais ce casque fait en os a un mystérieux pouvoir de domptage sur les monstres, mais rend fou tout être humain qui le porte!";
+		next;
+		if (countitem(5017) > 0) {
+			mes "[YuU]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour un Skull Helm! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[YuU]";
+			mes "Très bien, donnez-moi une minute, que je prépare l'accessoire...";
+			next;
+			mes "[YuU]";
+			mes "Et voilà! Un Skull Helm! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 5017,1;  //Bone_Helm
+			getitem 10001,1; // Skull_Helm
+			close;
+		}
+		else {
+			mes "[YuU]";
+			mes "Il irait particulièrement bien pour votre ^3355FFBaphomet Jr^000000.";
+			next;
+			mes "[YuU]";
+			mes "La fabrication d'un Skull Helm nécessite";
+			mes "1 ^3355FFBone Helm^000000";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 3:
+		mes "[YuU]";
+		mes "Ce masque, une fois porté, rend les monstres difficiles à différencier d'un être humain, telle une illusion.";
+		next;
+		if (countitem(5004) > 0) {
+			mes "[YuU]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour 1 Monster Oxygen Mask! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[YuU]";
+			mes "Très bien, donnez-moi une minute, que je prépare l'accessoire...";
+			next;
+			mes "^3355FF*Flip flop... Zowie!*^000000";
+			next;
+			mes "[YuU]";
+			mes "Et voilà! Un Monster Oxygen Mask! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 5004,1;  //Oxygen_Mask
+			getitem 10002,1; // Monster_Oxygen_Mask
+			close;
+		}
+		else {
+			mes "[YuU]";
+			mes "Ce serait un superbe cadeau pour votre ^3355FFChoncon, Steel Choncon, ou Hunter Fly^000000.";
+			next;
+			mes "[YuU]";
+			mes "La fabrication d'un Monster Oxygen Mask nécessite";
+			mes "1 ^3355FFOxygen Mask^000000.";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 4:
+		mes "[YuU]";
+		mes "C'est un ruban tissé à partir d'une soie d'une extraordinaire douceur.";
+		next;
+		if (countitem(2208) > 0) {
+			mes "[YuU]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour 1 Silk Ribbon! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[YuU]";
+			mes "Très bien, donnez-moi une minute, que je prépare l'accessoire...";
+			next;
+			mes "[YuU]";
+			mes "Et voilà! Un Silk Ribbon! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 2208,1;  //Ribbon
+			getitem 10007,1; // Silk_Ribbon
+			close;
+		}
+		else {
+			mes "[YuU]";
+			mes "Il rendra votre ^3355FFLunatic^000000 encore plus mignon qu'il ne l'est déjà!.";
+			next;
+			mes "[YuU]";
+			mes "La fabrication d'un Silk Ribbon nécessite";
+			mes "1 ^3355FFRibbon^000000.";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 5:
+		mes "[YuU]";
+		mes "C'est un bijou très pointu, qui possède un pouvoir mystérieux si bien que les monstres veulent le porter à tout prix!";
+		next;
+		if (countitem(2294) > 0) {
+			mes "[YuU]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour 1 Stellar! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[YuU]";
+			mes "Très bien, donnez-moi une minute, que je prépare l'accessoire...";
+			next;
+			mes "^3355FF*Shine shine*^000000";
+			next;
+			mes "[YuU]";
+			mes "Et voilà! Un Stellar Hairpin! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 2294,1;  // Stellar
+			getitem 10011,1; // Stellar_Hairpin
+			close;
+		}
+		else {
+			mes "[YuU]";
+			mes "Votre ^3355FFGreen Petite^000000 l'adorera, c'est certain!";
+			next;
+			mes "[YuU]";
+			mes "La fabrication d'un Stellar Hairpin nécessite";
+			mes "1 ^3355FFStellar^000000.";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 6:
+		mes "[YuU]";
+		mes "Bien que minuscule, cette armure étincelante est particulièrement résistante.";
+		next;
+		if (countitem(5015) > 0) {
+			mes "[YuU]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour 1 Tiny Egg Shell! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[YuU]";
+			mes "Très bien, donnez-moi une minute, que je prépare l'accessoire...";
+			next;
+			mes "^3355FF*Scrub scrub squeeze squeeze*^000000";
+			next;
+			mes "[YuU]";
+			mes "Et voilà! Un Tiny Egg Shell! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 5015,1;  //Egg_Shell
+			getitem 10012,1; // Tiny_Egg_Shell
+			close;
+		}
+		else {
+			mes "[YuU]";
+			mes "Elle protègera parfaitement votre ^3355FFPicky^000000.";
+			next;
+			mes "[YuU]";
+			mes "La fabrication d'un Tiny Egg Shell nécessite";
+			mes "1 ^3355FFEgg Shell^000000.";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 7:
+		mes "[YuU]";
+		mes "Cette paire de lunettes est typique de celles que portent les geeks.";
+		next;
+		if ((countitem(912) > 1) && (countitem(2208) > 0) && (Zeny > 399)) {
+			mes "[YuU]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour 1 Rocker Glasses! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[YuU]";
+			mes "Très bien, donnez-moi une minute, que je prépare l'accessoire...";
+			next;
+			mes "^3355FF*Squeak squeak crush snap*^000000";
+			next;
+			mes "[YuU]";
+			mes "Et voilà! Une paire de Rocker Glasses! Utilisez-les à bon escient, et revenez quand vous voulez!";
+			delitem 912,2;  //Zargon
+			delitem 2208,1;  //Ribbon
+			set Zeny,Zeny-400;
+			getitem 10014,1; // Rocker_Glasses
+			close;
+		}
+		else {
+			mes "[YuU]";
+			mes "Elle sera parfaite pour votre ^3355FFRocker^000000.";
+			next;
+			mes "[YuU]";
+			mes "La fabrication de Rocker Glassess nécessite";
+			mes "^3355FF400 Zenys^000000,";
+			mes "2 ^3355FFZargon^000000 et";
+			mes "1 ^3355FFRibbon^000000. ";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 8:
+		mes "[YuU]";
+		mes "Oh... Je vois!";
+		mes "Vous avez du mal à choisir quel monstre vous voulez élever pour l'instant.";
+		next;
+		mes "[YuU]";
+		mes "C'est une décision très importante, je vous comprends. Prenez votre temps.";
+		close;
+	}
+}
+
+izlude_in,129,64,4	script	Shogo#izu	125,{
+	mes "[Shogo]";
+	mes "Vous voulez apprivoiser un monstre très particulier pour en faire votre animal de compagnie? Alors je suis la personne quil vous faut...";
+	next;
+	switch(select("^3355FFApprivoiser un Monstre^000000?:^3355FFBook of Devil^000000:^3355FFNo Recipient^000000:^3355FFOrc Trophy^000000:Annuler")) {
+	case 1:
+		mes "[Shogo]";
+		mes "Apprivoiser un monstre permet de pouvoir avoir le monstre en question en tant quanimal de compagnie. Bien évidement, tous les monstres ne se laissent pas apprivoiser facilement.";
+		mes "Il faut utiliser un ^5555FFappât^000000 pour pouvoir sensibiliser les monstres et les faire devenir des animaux de compagnie.";
+		next;
+		mes "[Shogo]";
+		mes "Ces appâts sont très durs à obtenir, mais il existe des membres de la Guilde d'Apprivoisement des Monstres, tel que moi, qui peuvent aider les amoureux des animaux à obtenir des appâts plus facilement.";
+		next;
+		mes "[Shogo]";
+		mes "Voici les appâts que je vous propose:";
+		mes "^5555FFBook of Devil^000000,";
+		mes "^5555FFNo Recipient^000000,";
+		mes "^5555FFHorror of Tribe^000000.";
+		mes "Ce sont des appâts vraiment efficaces! Vous devriez en essayer un!";
+		next;
+		mes "[Shogo]";
+		mes "La fabrication d'un Book of Devil nécessite";
+		mes "^3355FF1 Old Magic Book^000000 et";
+		mes "^3355FF2 Horrendous Mouth^000000.";
+		next;
+		mes "[Shogo]";
+		mes "La fabrication d'un No Recipient nécessite";
+		mes "^3355FF1 Old Portrait^000000.";
+		next;
+		mes "[Shogo]";
+		mes "La fabrication d'un Orc Trophy nécessite";
+		mes "^3355FF1 Chivalry Emblem^000000 et";
+		mes "^3355FF1 Scorpion Tail^000000.";
+		close;
+	case 2:
+		mes "[Shogo]";
+		mes "Ce livre est bien trop puissant pour tout mortel qui voudrait en lire le contenu et percer le secret de l'apprivoisement du diable!";
+		next;
+		if ((countitem(1006) > 0) && (countitem(958) > 1)) {
+			mes "[Shogo]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour un Book of Devil! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[Shogo]";
+			mes "Voyons voir...";
+			mes "Hum, ça ne va pas être facile.";
+			next;
+			mes "^3355FF*Knock knock scrape scrape*^000000";
+			next;
+			mes "[Shogo]";
+			mes "Et voilà! Un Book of Devil! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 958,2;  //Horrendous_Mouth
+			delitem 1006,1;  //Old_Magic_Book
+			getitem 642,1; // Book_Of_Devil
+			close;
+		}
+		else {
+			mes "[Shogo]";
+			mes "Mais si vous le lisez, vous pourrez peut-être appâter un ^3355FFBaphomet Jr.^000000...";
+			next;
+			mes "[Shogo]";
+			mes "La fabrication d'un Book of Devil nécessite";
+			mes "^3355FF1 Old Magic Book^000000 et";
+			mes "^3355FF2 Horrendous Mouth^000000.";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 3:
+		mes "[Shogo]";
+		mes "C'est une vieille lettre qui n'a jamais pû être remise à son destinataire...";
+		next;
+		if (countitem(7014) > 0) {
+			mes "[Shogo]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour un No Recipient! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[Shogo]";
+			mes "Très bien, donnez-moi une minute, que je prépare l'appât...";
+			next;
+			mes "^3355FF*Scrape scrape brush brush*^000000";
+			next;
+			mes "[Shogo]";
+			mes "Et voilà! Un No Recipient! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 7014,1;  //Old_Portrait
+			getitem 636,1; // No_Recipient
+			close;
+		}
+		else {
+			mes "[Shogo]";
+			mes "Pour un être humain, c'est sans importance. Mais pour les ^3355FFMunaks^000000, cela présente un certain intérêt...";
+			next;
+			mes "[Shogo]";
+			mes "La fabrication d'un No Recipient nécessite";
+			mes "^3355FF1 Old Portrait^000000.";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 4:
+		mes "[Shogo]";
+		mes "Ce trophé est l'objet favori des ^3355FFOrc Warriors^000000.";
+		next;
+		if ((countitem(1004) > 0) && (countitem(904) > 0)) {
+			mes "[Shogo]";
+			mes "Oh! Vous avez tout ce qui est nécessaire pour an Orc Trophy! Bien, bien! Je vais vous fabriquer cet appât tout de suite.";
+			next;
+			mes "[Shogo]";
+			mes "Alors, je dois...";
+			mes "Faire comme ça, et...";
+			mes "Comme ceci...";
+			next;
+			mes "^3355FF*Clang clang Boong*^000000";
+			next;
+			mes "[Shogo]";
+			mes "Et voilà! Un Orc Trophy! Utilisez-le à bon escient, et revenez quand vous voulez!";
+			delitem 904,1;  //Scorpion's_Tail
+			delitem 1004,1;  //Patriotism_Marks
+			getitem 635,1; // Horror_Of_Tribe
+			close;
+		}
+		else {
+			mes "[Shogo]";
+			mes "La fabrication d'un Orc Trophy nécessite";
+			mes "^3355FF1 Chivalry Emblem^000000 et";
+			mes "^3355FF1 Scorpion Tail^000000.";
+			next;
+			mes "[Shogo]";
+			mes "Si vous me rapportez ces ingrédients, je vous fabriquerai un accessoire dans les règles de l'art!";
+			close;
+		}
+	case 5:
+		mes "[Shogo]";
+		mes "Oh... Je vois!";
+		mes "Vous avez du mal à choisir quel monstre vous voulez élever pour l'instant.";
+		next;
+		mes "[Shogo]";
+		mes "C'est une décision très importante, je vous comprends. Prenez votre temps.";
+		close;
+	}
+}
+
+comodo,112,182,0	script	Grand Mère#m	103,{
+	if (countitem(1558) > 0) {
+		mes "[Grand Mère]";
+		mes "Aidez moi sil vous plaît...";
+		mes "Avez-vous vu ma petite fille,";
+		if (Sex == 1) {
+			mes "monsieur? Ma pauvre petite fille";
+		}
+		else {
+			mes "mademoiselle? Ma pauvre petite fille";
+		}
+		mes "a disparu...";
+		next;
+		mes "[Grand Mère]";
+		mes "Je ne me souviens plus précisément de la date, mais cétait lorsque nous vivions à Payon. Elle était tellement mignonne... Elle adorait quand je lui faisais une ^000077tresse^000000...";
+		next;
+		mes "[Grand Mère]";
+		mes "Elle travaillait souvent avec le chef du village... Elle était si gentille, et s'entendait très bien avec le fils du chef...";
+		next;
+		mes "[Grand Mère]";
+		mes "Mais un jour, notre déité s'est mis en colère et a lancé un sort sur le fils du chef du village, et il tomba très malade!";
+		mes "Les habitants décidèrent que le meilleur moyen était de donner ma petite fille en mariage au fils du chef afin de lever la malédiction...";
+		next;
+		mes "[Grand Mère]";
+		mes "Le fils du chef fut guéri, mais j'ai perdu ma petite fille!!";
+		mes "Je ne peux pas le regarder en face sans penser à ma petite fille, alors jai fui cette situation et je suis venue ici, à Comodo...";
+		next;
+		switch(select("Allons, haut les coeurs!:Peut-être que ce journal...?")) {
+		case 1:
+			mes "[Grand Mère]";
+			mes "Ma petite fille hante mes nuits.";
+			mes "J'essaye de penser à autre chose depuis des années, mais c'est impossible...";
+			close;
+		case 2:
+			if (countitem(901) > 0) {
+				mes "[Grand Mère]";
+				mes "Oh mon dieu!";
+				mes "C'est le journal intime de ma petite fille!";
+				mes "C'est son écriture! Oh mon dieu...!";
+				next;
+				mes "[Grand Mère]";
+				if (Sex == 1) {
+					mes "Jeune homme... Je peux vous le lire si vous voulez, et si";
+				}
+				else {
+					mes "Jeune fille... Je peux vous le lire si vous voulez, et si";
+				}
+				mes "vous me donnez une Danggie. Sil vous plaît... Je n'ai plus aucun objet lui appartenant...";
+				next;
+				switch(select("Pas question.:Daccord.")) {
+				case 1:
+					mes "[Grand Mère]";
+					mes "Oh...?";
+					if (Sex == 1) {
+						mes "D'accord, jeune homme.";
+					}
+					else {
+						mes "D'accord, jeune fille.";
+					}
+					next;
+					mes "[Grand Mère]";
+					mes "J'en suis très attristée...";
+					mes "Vraiment...";
+					next;
+					mes "[Grand Mère]";
+					mes "Je peux simplement prier pour que notre déité prenne bien soin delle.";
+					close;
+				case 2:
+					delitem 1558,1;
+					delitem 901,1;
+					mes "[Grand Mère]";
+					if (Sex == 1) {
+						mes "Oh!";
+						mes "Merci du fond du coeur,";
+						mes "jeune homme~!";
+					}
+					else {
+						mes "Oh!";
+						mes "Merci du fond du coeur,";
+						mes "jeune fille~!";
+					}
+					next;
+					mes "[Grand Mère]";
+					mes "Je vais...";
+					mes "Je vais vous en lire un passage.";
+					mes "Voyons voir...";
+					next;
+					mes "[Grand Mère]";
+					mes "Apparemment le chef du village a traité ma petite fille comme sa propre enfant!";
+					mes "Il y a tant de souvenirs heureux dans ce livre!";
+					next;
+					getitem 659,1;
+					mes "[Grand Mère]";
+					mes "Oh, merci. Je sais maintenant que ma petite fille vit heureuse, et jai même un souvenir delle!";
+					mes "Que le Dieu des Porings vous bénisse!";
+					close;
+				}
+			}
+			else {
+				mes "[Grand Mère]";
+				mes "Comment? Quel journal? Tout de même pas CE journal...?";
+				mes "Je... Je ne me souviens plus...";
+				next;
+				mes "[Grand Mère]";
+				mes "Si seulement je pouvais ne serait-ce que lui refaire une ^000077tresse^000000, pouvoir toucher ses cheveux à nouveau...";
+				mes "Oh, ma chère petite fille...";
+				close;
+			}
+		}
+	}
+	else {
+		mes "[Grand Mère]";
+		mes "Ma chère petite fille...";
+		mes "Pourquoi me l'a-t-on enlevée...?";
+		close;
+	}
+}

@@ -1,0 +1,267 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Ayotaya Town
+//===== By: ================================================== 
+//= MasterOfMuppets
+//===== Current Version: =====================================
+//= 1.7
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Ayotaya Town Script
+//===== Additional Comments: ================================= 
+//= 1.6 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.7 Fixed character's anme bugs [Lupus]
+//============================================================ 
+
+// Ayothaya Transportation NPC
+//============================================================ 
+alberta,247,42,3	script	Aibakthing#ayo	843,{
+	mes "[Aibakthing]";
+	mes "Hoo! Hah! Hoo! Hah!";
+	mes "Si vous le souhaitez, je peux vous conduire vers un lieu spirituel, une terre d'où se dégage un exotique mystère... ma ville natale, Ayothaya.";
+	next;
+	switch(select("A propos d'Ayothaya.:Aller à Ayothaya.:Annuler.")) {
+	case 1:
+		mes "[Aibakthing]";
+		mes "Nous autres, les habitants d'Ayothaya, sommes des gens paisibles et sincères. Nous aimons la simplicité, et vivre en harmonie avec la nature.";
+		next;
+		mes "[Aibakthing]";
+		mes "Notre cuisine traditionnelle est très réputée! Nos plats les plus connus sont le Tom Yum Goong, à base de crevettes, la limonade, et le chili, dont la saveur est totalement unique!";
+		next;
+		mes "[Aibakthing]";
+		mes "Pour ceux qui apprécient les contes, une vieille histoire locale raconte que le Tigre de Sa-mhing, une créature maléfique, hante les ruines du temple.";
+		next;
+		mes "[Aibakthing]";
+		mes "Hoo! Hahh! Hoo! Hahh!";
+		mes "Aucun homme ne peut résister à l'appel de cette terre magnifique. Les habitants de Rune-Midgard seront toujours les bienvenus ici!";
+		close;
+	case 2:
+		mes "[Aibakthing]";
+		mes "Le prix du voyage est de 10 000 Zenys.";
+		mes "Si vous êtes prêt, nous partons tout de suite~";
+		next;
+		if (select("Allons-y!:Non, merci.") == 1) {
+			if (Zeny > 9999) {
+				mes "[Aibakthing]";
+				mes "Hoo! Hah! Hoo! Hah!";
+				mes "Nous sommes partis! Voguons vers ma belle Ayothaya!";
+				close2;
+				set zeny,zeny-10000;
+				warp "ayothaya",149,71;
+				end;
+			}
+			mes "[Aibakthing]";
+			mes "Je suis désolé, mais le prix du voyage est de 10 000 Zenys. Ce prix n'est rien comparé à l'expérience qui vous attend là bas!";
+			close;
+		}
+		mes "[Aibakthing]";
+		mes "Avez-vous déjà rêvé d'une terre magnifique, emplie d'une sérénité spirituelle? Votre rêve est exaucé... vous êtes à Ayothaya, mon ami.";
+		close;
+	case 3:
+		mes "[Aibakthing]";
+		mes "Avez-vous déjà rêvé d'une terre magnifique, emplie d'une sérénité spirituelle? Votre rêve est exaucé... vous êtes à Ayothaya, mon ami.";
+		close;
+	}
+}
+
+ayothaya,152,68,1	script	Aibakthing#ayo2	843,{
+	mes "[Aibakthing]";
+	mes "Hoo! Hah! Hmm! Hah!";
+	mes "Alors, vous avez apprécié la visite d'Ayothaya? Avez-vous pu tester Tom Yum Goong? Si vous le souhaitez, je peux vous reconduire chez vous.";
+	next;
+	if (select("Rentrer à Alberta.:Annuler.") == 1) {
+		mes "[Aibakthing]";
+		mes "Revenez quand vous voulez, vous serez toujours le bienvenu. J'espère vous revoir bientôt. A plus tard~";
+		close2;
+		warp "alberta",235,45;
+		end;
+	}
+	mes "[Aibakthing]";
+	mes "Ah oui... Je comprends tout à fait qu'il soit difficile de quitter un aussi bel endroit qu'Ayothaya. Ne vous inquiétez pas, prenez votre temps.";
+	close;
+}
+
+// Generic Ayothaya NPCs
+//============================================================ 
+ayothaya,189,120,3	script	Young Man#Thang	843,{
+	mes "[Thang]";
+	mes "Il existe un bâtiment très ancien à Ayothaya que personne n'ose approcher...";
+	next;
+	mes "[Thang]";
+	mes "Par le passé, quelques curieux insouciants s'y sont aventurés sans prêter attention aux horribles histoires qu'on racontait, et n'en sont jamais ressortis. Que diable peut-il y avoir à l'intérieur de cet endroit?";
+	next;
+	mes "[Thang]";
+	mes "Cependant, si vous voulez prouver votre courage aux autres, aller affronter le danger à l'intérieur de ce bâtiment maudit peut être un très bon challenge pour un aventurier...";
+	mes "Enfin, c'est ce que je pense.";
+	close;
+}
+	
+ayothaya,171,152,5	script	Jeune Fille#Lalitha	838,{
+	set .@sit,rand(1,5);
+	if (.@sit > 0 && .@sit < 3) {
+		mes "[Lalitha]";
+		mes "Bonjour!";
+		mes "Je ne crois pas";
+		mes "vous avoir déjà rencontré?";
+		next;
+		mes "[Lalitha]";
+		mes "Vous venez sûrement du";
+		mes "Royaume de Rune-Midgard.";
+		mes "Après tout, je connais chaque habitant de ce village.";
+		mes "Heh heh~";
+		next;
+		mes "[Lalitha]";
+		mes "Hum...";
+		mes "Puis-je vous demander d'où vous venez exactement?";
+		mes "Je suis curieuse de tout ce qui peut se";
+		mes "trouver à travers le monde extérieur.";
+		next;
+		mes "[Lalitha]";
+		mes "Vous savez, comme les belles robes et les bijoux que portent les femmes dans d'autres pays, ou bien savoir si les hommes sont attirants, les chansons qu'on fredonne ou bien comment sont les jeunes filles et les jeunes garçons... Tout ça...";
+		emotion e_what;
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes ".........";
+		next;
+		mes "[Lalitha]";
+		mes "..........";
+		emotion e_swt;
+		next;
+		mes "[Lalitha]";
+		mes "D'accord~!";
+		mes "Prenez soin de vous";
+		mes "au cours de vos voyages!";
+		close;
+	}
+	else if (.@sit > 2 && .@sit < 6) {
+		mes "[Lalitha]";
+		mes "Si vous allez à l'Est du village, vous trouverez les ruines d'un vieux temple. Elles sont emplies de créatures maléfiques...";
+		next;
+		mes "[Lalitha]";
+		mes "Si vous comptez vous aventurer dans ces ruines, préparez bien votre expédition!";
+		next;
+		mes "[Lalitha]";
+		mes "Ah...";
+		mes "Je me demande où est mon Chevalier Noir~...";
+		emotion e_lv;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Euh... Vous voulez dire votre Prince Charmant sur son cheval blanc?";
+		next;
+		mes "[Lalitha]";
+		mes "Hum...?";
+		mes "Oh, et bien...";
+		mes "Pourquoi pas les deux à la fois!";
+		mes "Hee hee~!";
+		close;
+	}
+	mes "[Lalitha]";
+	mes "Hum...?";
+	mes "Que voulez-vous?";
+	close;
+}
+	
+ayothaya,143,102,5	script	Vieil Homme#ayothaya	842,{
+	mes "[Villageois]";
+	mes "Ummm.";
+	mes "Hmmmmm...";
+	mes "Ummmmm...?";
+	next;
+	mes "[Villageois]";
+	mes "Vous devez être un étranger.";
+	mes "Oui. Oui, en effet.";
+	next;
+	mes "[Villageois]";
+	mes "Ce que j'aime faire? Ce que font tous les vieux hommes: pêcher.";
+	next;
+	mes "[Villageois]";
+	mes "Hum...";
+	mes "Vous voulez entendre quelque chose d'intéressant? J'en ai entendu parler non loin de mon lieu de pêche favori! Quelqu'un aurait trouvé un anneau à l'intérieur d'un poisson qu'il aurait attrapé.";
+	next;
+	mes "[Villageois]";
+	mes "On entend souvent des histoires qui racontent que des pêcheurs trouvent des objets de valeur dans leurs prises.";
+	next;
+	mes "[Villageois]";
+	mes "Si vous êtes suffisamment chanceux, vous pourriez peut-être faire fortune?";
+	mes "Heh heh heh~";
+	next;
+	mes "[Villageois]";
+	mes "...!?";
+	mes "Ah, Je suis venu au marché aux poissons! ^666666*Soupir*^000000 On dirait que je me suis encore trompé de chemin. Pour pêcher, il faut aller à l'opposé du village.";
+	next;
+	mes "[Villageois]";
+	mes "Puisque je suis ici, je vais tout de même jeter un oeil aux poissons du marché. Tous les fruits de mer qu'on y trouve sont de première fraîcheur et du meilleur goût! Tous les autres fruits de mer que vous aurez goûtés avant ceux-ci vous sembleront bien fades!";
+	close;
+}
+	
+ayothaya,197,189,5	script	Jeune Homme#1ayothaya	841,{
+	mes "[Kwan]";
+	mes "Pfiou, quelle chaleur étouffante aujourd'hui, vous ne trouvez pas?";
+	next;
+	mes "[Kwan]";
+	mes "Vous devez être de Rune-Midgard, c'est ça?";
+	mes "Nous voyons beaucoup de touristes ces temps-ci.";
+	next;
+	mes "[Kwan]";
+	mes "Soyez particulièrement attentif si vous voyagez en dehors du village. Quoi que vous fassiez, ne vous aventurez pas dans les ruines du vieux temple, dans la forêt.";
+	next;
+	mes "[Kwan]";
+	mes "C'est un lieu plus que dangereux! A moins que vous ne possédiez une amulette protectrice...";
+	next;
+	mes "[Kwan]";
+	mes "Bien, quoi qu'il en soit, j'espère que vous apprécierez votre séjour à Ayothaya.";
+	close;
+}
+	
+ayothaya,214,142,5	script	Jeune Homme#5ayothaya	843,{
+	mes "[Detzi]";
+	mes "Ici, à Ayothaya, nous possédons nos propres arts martiaux traditionels. Les jeunes hommes du village s'entraînent chaque jour afin de devenir plus forts!";
+	next;
+	mes "[Detzi]";
+	mes "Pourquoi ne pas vous initier à nos arts du combat? Cela vous sera peut-être utile dans vos prochains voyages.";
+	close;
+}
+	
+ayothaya,241,264,5	script	Jeune Homme#5ayothaya2	843,{
+	mes "[Eik]";
+	mes "Hé...";
+	mes "Vous avez l'air assez fort. Vous voulez vous battre avec moi?";
+	next;
+	if (select("Ouais!:Nan~") == 1) {
+		mes "[Eik]";
+		mes "Oh oh oh!";
+		mes "Je plaisantais!";
+		next;
+		mes "[Eik]";
+		mes "Je ne suis pas idiot pour provoquer en duel les étrangers sans raison!";
+		emotion e_wah;
+		close;
+	}
+	mes "[Eik]";
+	mes "Le vrai pouvoir s'acquiert après des dizaines d'année d'entraînement... J'espère que vous n'avez pas peur de m'affronter!";
+	emotion e_pif;
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 0.1 Added a Sailor NPC to get back to Alberta [ZoDIaC]
+//= 0.2 fixed coords, dialogues
+//= 0.3 Fixed Warp name, ayotaya doesn't exist, even though iRO 
+//= 	decided to call it Ayotaya, it really is Ayothaya, like 
+//=	that Yuno/Juno thing
+//= 0.4 Added the official warp npc for Ayothaya. [MasterOfMuppets]
+//= 1.0 Added most of the official npcs. The following quests were added: [MasterOfMuppets]
+//=     Tom Yum Goong quest, Holy Threads quest and Holier threads quest.
+//= 1.0a some checks, optimization [Lupus]
+//= 1.1 Missing delitem fixed by Poki#3 [Lupus]
+//= 1.1a Fixed a typo and clarified a comment at the bottom of the script [MasterOfMuppets]
+//= 1.2 Fixed exploits [Lupus]
+//= 1.3 Removed Duplicates [Silent]
+//= 1.4 Moved quests to quests/quests_ayothaya.txt [Evera]
+//= 1.5 Moved a few NPC's to quests/quests_ayothaya.txt [MasterOfMuppets]
+//============================================================ 

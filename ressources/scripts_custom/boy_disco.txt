@@ -1,0 +1,862 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//===== eAthena Script =======================================
+//= Discothèque Book Of Ymir
+//===== By: ==================================================
+//= Myllena
+//===== Current Version: =====================================
+//= 0.6
+//===== Compatible With: =====================================
+//= eAthena
+//===== Description: =========================================
+//= Discothèque pouvant servir au réveillon du jour de l'an.
+//= Nécessite l'emploi d'une map custom (voir site)
+//===== Additional Comments: =================================
+//= 0.6 accessible maintenant de 0h à 4h du matin
+//============================================================
+
+//Warps
+dot_disco,164,27,0	warp	dot002	2,5,comodo,82,168
+
+
+comodo,76,168,0	script	dot001	45,1,1,{
+	if (gettime(3) == 23 || gettime(3) == 22 || gettime(3) == 21 || gettime(3) == 20 || gettime(3) == 19 || gettime(3) == 18 || gettime(3) == 17 || gettime(3) == 16 || gettime(3) == 15 || gettime(3) == 14 || gettime(3) == 13 || gettime(3) == 12  || gettime(3) == 11  || gettime(3) == 10  || gettime(3) == 9  || gettime(3) == 8  || gettime(3) == 7  || gettime(3) == 6  || gettime(3) == 5)
+	 { mes "^D16236 - Discothèque -";
+	   mes " - Ouverture entre -";
+	   mes " - 00h et 04h -";
+	   mes " - (GMT + 1) - ^000000";
+	   close; }
+warp "dot_disco",164,38; end;
+}
+
+//Barman
+
+dot_disco,190,44,0	script	Barman#dotdisco	46,{
+	mes "[Barman]";
+	mes "Bienvenue, cher client!";
+	mes "Alors, que puis-je vous servir?";
+	next;
+	if (zeny < 99) {
+		set .@r_jaw,rand(1,100);
+		mes "[Barman]";
+		if (.@r_jaw > 29) {
+			mes "Hummm, je suis désolé,";
+			mes "mais vous n'avez pas assez d'argent pour un verre...";
+			close;
+		}
+		mes "....Hummmm...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Hé...!";
+		mes "Patron...";
+		mes "Encore un verre...";
+		next;
+		mes "[Barman]";
+		mes "Ok...";
+		mes "Celui là, je vous l'offre.";
+		mes "Voilà, servez-vous.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Merci patron.";
+		close2;
+		percentheal -100,0;
+		end;
+	}
+	while (1) {
+		switch(select("Cocktail du Jour.:Cocktail Nimi.:Cocktail Debout les Mort.:Cocktail Misa.:Cocktail Bleu Céleste.")) {
+		case 1:
+			set .@roof_jaw,.@roof_jaw+3;
+			if (.@roof_jaw > 9) {
+				mes "[Barman]";
+				mes "Hummm...";
+				mes "Vous avez déjà bu pas mal. Vous êtes sûr de pouvoir en supporter plus?";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Patron,";
+				mes "J'me sens complètement déprimé.";
+				mes "C'est à cause de...";
+				input .@inputstr$;
+				mes ""+.@inputstr$+"...";
+				next;
+				mes "[Barman]";
+				mes "Alors, pour ça...";
+				mes "Je vais vous préparer un";
+				mes "un ^0000FF'Le Spécial Dévrilleur de Crâne'^000000 juste pour vous!";
+				mes "Cadeau de la maison!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Merci...";
+				mes "Patron...";
+				close2;
+				percentheal -100,0;
+				end;
+			}
+			set zeny,zeny-100;
+			switch(rand(4)) {
+			case 1:
+					mes "[Barman]";
+					mes "Hmm... Pourquoi pas celui-ci?";
+					next;
+					mes "[Barman]";
+					mes "Que diriez-vous d'un ^0000FFBarcardi 151 Croisade d'Izlude^000000?";
+					mes "C'est un cocktail de pirates, chargé d'histoire...";
+					next;
+					mes "- Vous regardez le liquide jaune dans un petit verre -";
+					mes "- On dirait que vous pouvez le finir d'un coup, cul-sec -";
+					mes "- Mais ça à l'air d'une boisson bien corsée -";
+					next;
+					mes "[Barman]";
+					mes "Ce bébé brûlant va vous réchauffer, ça j'vous l'dis.";
+					mes "Buvez le cul-sec et appréciez sa délicieuse chaleur qui vous brûle la gorge.";
+				next;
+				mes "^3355FF- Vous buvez cul-sec -^000000";
+				specialeffect2 124; //EF_VENOMDUST
+				percentheal -20,0;
+				next;
+				break;
+			case 2:
+				mes "[Barman]";
+				mes "Pourquoi pas celui-ci?";
+				next;
+				mes "[Barman]";
+				mes "Je vous recommande ce ^0000FFDouble Einbech Noir^000000, une boisson qui vous fera sentir toutes la puissance d'un mineur d'Einbech et de ses vastes terres.";
+				next;
+				mes "- Vous regarder le mélange d'un liquide noirâtre et de glaçon -";
+				mes "- Même si la senteur est douce -";
+				mes "- Il vous semble sentir une relent d'after-shave masculin... -";
+				next;
+				mes "[Barman]";
+				mes "Il est recommandé de le boire par petites gorgées, en raison de son degré d'alcool.";
+				mes "C'est un breuvage qu'on adore en République de Schwarzwald.";
+				next;
+				mes "^3355FF- Vous sentez l'arôme fort et buvez à petites gorgées. -^000000";
+				specialeffect2 118; //EF_FIREIVY
+				percentheal -20,0;
+				next;
+				break;
+			case 3:
+				mes "[Barman]";
+				mes "Et bien... Pourquoi pas ceci...?";
+				next;
+				mes "[Barman]";
+				mes "Je vous recommande l'^0000FFAssaut de Baisers Passionnés^000000, un breuvage de douces senteurs avec une couleur pourpre unique qui attise les flammes de la passion.";
+				next;
+				mes "- Vous recevez un verre triangulaire couvert de sucre glace -";
+				mes "- Il déborde de douces effluves tentantes -";
+				mes "- Mais même si elles semblent enivrantes, elles semblent aussi dangereuses... -";
+				next;
+				mes "[Barman]";
+				mes "La première rencontre est l'étape la plus importante.";
+				mes "La sensation du sucre glissant dans votre gosier est fantastique.";
+				mes "Ajuster bien la manière dont vous buvez cette boisson et buvez-la lentement pour mieux apprécier.";
+				next;
+				mes "^3355FF- Vous prenez précautionneusement une gorgée -^000000";
+				specialeffect2 38; //EF_DECAGILITY
+				percentheal -20,0;
+				next;
+				break;
+			Default:
+
+					mes "[Barman]";
+					mes "Laissez moi vous recommander...";
+					next;
+					mes "[Barman]";
+					mes "Disons ceci: ^0000FFLa Magarita Blanche Chaude'^000000, une boisson au fort arôme de citron!";
+					next;
+					mes "- Vous recevez un verre triangulaire enduit du jus de citron -";
+					mes "- Il libère un parfum doux et aigre à la fois -";
+					mes "- Aussi intéressant qu'il paraisse, on ne peut en ignorer le danger -";
+					next;
+					mes "[Barman]";
+					mes "Le parfum doux et rafraîchissant en est très apprécié, surtout par les filles, surtout avec cette... sensation d'être sur une plage de Comodo.";
+					next;
+					mes "^3355FF- Vous vous imaginez vêtu d'un sombrero -";
+					mes "- et vous buvez le cocktail! -^000000";
+				specialeffect2 17; //EF_MAGNUMBREAK
+				percentheal -20,0;
+				next;
+			}
+			break;
+		case 2:
+			callsub S_KillChar,2;
+			mes "Voilà, essayez ça!";
+			mes "Si vous voulez prouver votre amour à une fille, choisissez ça!";
+			mes "Avec son arôme spécial et puissant, cela vous fera paraître spécial aussi!";
+			next;
+			mes "^3355FF- Vous recevez un verre simple, remplis d'un liquide blanc -";
+			mes "- Malgré un léger parfum de douceur, cela semble un peu aigre -";
+			mes "- Et il vous donne envie de hurler - ^000000";
+			next;
+			mes "[Barman]";
+			mes "Beaucoup de monde dit qu'un mélange de doux et d'amer est comme le parfum de la vie.";
+			mes "La meilleure manière de goûter ce cocktail est avec le bout de votre langue";
+			next;
+			mes "^3355FF- Vous le goûtez avec le bout de la langue -^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "^3355FF- Et il vous fait vous sentir.... Bang!! -^000000";
+			next;
+			specialeffect2 18; //EF_STEAL
+			percentheal -10,0;
+			next;
+			break;
+
+		case 3:
+
+			callsub S_KillChar,2;
+				mes "Celui-là est comme un vieil ami.";
+				mes "Plus vous en buvez, plus vous vous sentez bien.";
+				mes "Vous pouvez en boire quand vous voulez, autant que vous voulez.";
+				next;
+				mes "- Un liquide mauve appétissant vous est servi -";
+				mes "- Dans son verre luxueux, il titille vos narines avec son parfum aigre-doux -";
+				next;
+				mes "[Barman]";
+				mes "N'en prenez pas qu'une seule gorgée.";
+				mes "Le goût s'améliore à chaque lampée!";
+				next;
+				mes "- Votre bouche s'emplie de l'arôme doux-amer après que vous ayez bu votre verre en trois lampées -";
+				mes "- C'est vraiment un goût spécial... -";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Aaaaaahhhhhh~!";
+			mes "Cette boisson est géniale!";
+			specialeffect2 83; //EF_SANCTUARY
+			percentheal -10,0;
+			next;
+			break;
+
+		case 4:
+			callsub S_KillChar,2;
+				mes "Cette boisson est recommandée pour ceux qui se languissent d'un prétendu glorieux passé...";
+				mes "Pour ceux qui commencent une guerre pour préserver la Paix...";
+				mes "Et bien sûr... Pour ceux qui dénaturent la vérité de l'Histoire.";
+				next;
+				mes "- On vous sert un liquide marron dans une bouteille -";
+				mes "- Vous sentez un parfum lourd et épais comme de l'huile de machine -";
+				mes "- L'odeur des feux d'artifice? Non, c'est un peu différent... -";
+				next;
+				mes "[Barman]";
+				mes "Ça paraît beaucoup, mais je vous recommande de le boire d'un coup.";
+				mes "Le goût s'affadit si on le boit trop lentement.";
+				next;
+				mes "- Attrapant la bouteille, vous la videz d'un coup -";
+				next;
+				mes "- Et c'est comme si vous receviez un boulet de canon au creux de l'estomac -";
+			specialeffect2 106; //EF_BLASTMINEBOMB
+			percentheal -10,0;
+			next;
+			break;
+
+		case 5:
+			callsub S_KillChar,1;
+			mes "[Barman]";
+			mes "Peu de gens apprécient cette boisson. Mais ceux qui l'aiment... Finissent par l'adorer!";
+			next;
+			mes "[Barman]";
+			mes "Même s'il a des couleurs chatoyantes et appétissantes. Beaucoup de gens ce sente froid et esseulé";
+			mes "aprés l'avoir bu.";
+			next;
+			mes "^3355FFVous recevez un verre orné de glace";
+			mes "rempli d'un liquide bleu glacier. Même si l'odeur est plaisante, vous avez un étrange sentiment de dégoût quand vous l'approchez de vous.";
+			next;
+			mes "[Barman]";
+			mes "Si vous n'en voulez pas, dîtes-le maintenant. Mais je vous recommande de l'essayer au moins une fois.";
+			next;
+			mes "^3355FF- Vous prenez une gorgez en soupirant -.^000000";
+			next;
+			mes "^3355FF- Et vous décidez soudain qu'il vaut mieux renoncer à jamais à l'alcool -^000000";
+			specialeffect2 5; //EF_HIT6
+			percentheal -10,0;
+			next;
+			break;
+		}
+
+		mes "["+strcharinfo(0)+"]";
+		mes "Patron...";
+		mes "Un autre...";
+		next;
+	}
+	end;
+
+S_KillChar:
+	if (.@roof_jaw > 8) {
+		mes "[Barman]";
+		mes "C'est pour moi...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Merci...";
+		mes "Patron...";
+		close2;
+		percentheal -100,0;
+		end;
+	}
+	set zeny,zeny-100;
+	set .@roof_jaw,.@roof_jaw+getarg(0);
+	mes "[Barman]";
+	mes "Et c'est parti.";
+	next;
+	mes "[Barman]";
+	return;
+}
+
+//Serveuses
+dot_disco,168,52,0	script	Serveuse#dotdisco1	80,{
+		mes "[Serveuse]";
+		mes "Salut,";
+		mes "En quoi puis-je vous aider?";
+		Emotion e_kis;
+		next;
+		switch(select("J'aimerais manger un morceau.:Apportez-moi un verre.:Où est le bar?")) {
+		case 1:
+			mes "[Serveuse]";
+			mes "Le plat du jour est... du Confit de Canard, pour seulement 1000 Zenys!";
+			mes "Vous en voulez?";
+			next;
+			if (select("Oui.:Ouaaah! Trop cher!") == 1) {
+				mes "[Serveuse]";
+				if (zeny > 999) {
+					set zeny,zeny-1000;
+					getitem 517,1; //Meat
+					mes "Et voilà!";
+					mes "Bon appétit!";
+					close;
+				}
+				mes "Je suis désolée...";
+				mes "Vous n'avez pas assez d'argent...";
+				close;
+			}
+			mes "[Serveuse]";
+			mes "Si vous avez besoin de quoi que ce soit, appelez-moi!";
+			close;
+
+		case 2:
+			mes "[Serveuse]";
+			mes "Nous avons une boisson revigorante couleur soleil pour 1000 Zenys.";
+			mes "Cela vous tente?";
+			next;
+			if (select("Oui.:C'est un peu trop cher.") == 1) {
+				mes "[Serveuse]";
+				if (zeny > 999) {
+					set zeny,zeny-1000;
+					getitem 503,1; //Yelow_Potion
+					mes "Et voilà!";
+					mes "Régalez-vous!";
+					close;
+				}
+				mes "Je suis désolée, mais vous n'avez pas assez d'argent...";
+				close;
+			}
+			mes "[Serveuse]";
+			mes "Si vous avez besoin de quoi que ce soit, appelez-moi!";
+			close;
+
+		case 3:
+			mes "[Serveuse]";
+			mes "Oh, c'est juste à l'entrée de la discothèque, sur la droite.";
+			mes "Amusez-vous bien, mais faîtes attention et ne buvez pas trop! Bonne soirée!";
+			close;
+		}
+
+}
+
+
+dot_disco,147,55,0	script	Serveuse#dotdisco2	80,{
+	mes "[Serveuse]";
+	mes "Bonjour. Qu'est-ce que j'vous serre?";
+	next;
+	menu "Tropical Sograt",L1,"Coktail Vermillion",L2,"Rien, merci.",-;
+
+	mes "[Serveuse]";
+	mes "Hum...";
+	close;
+
+L1:
+	if (zeny < 1000 ) goto Nomoney;
+	getitem 12112,1;
+	set zeny,zeny-1000;
+	mes "[Serveuse]";
+	mes "Et voilà!";
+	mes "Des fruits, et... un p'tit truc en plus, bien sûr!";
+	mes "N'en abusez pas trop.";
+	close;
+
+L2:
+	if (zeny < 1000 ) goto Nomoney;
+	getitem 12113,1;
+	set zeny,zeny-1000;
+	mes "[Serveuse]";
+	mes "Et voilà!";
+	mes "N'en abusez pas trop.";
+	close;
+
+Nomoney:
+	mes "[Serveuse]";
+	mes "Comme si j'allais vous servir gratuitement...";
+	mes "Ça va pas la tête, non?";
+	mes "C'est 1000 Zenys le verre! Je vais pas les payer de ma poche pour vos beaux yeux!";
+	close;
+
+}
+
+//Vendeur de cotillons et feux d'artifices
+dot_disco,137,44,0	script	Feux d'Artifices#disco	898,{
+
+	mes "[Josh]";
+	mes "Hey hey! Bonne Année 2008!!!";
+	mes "Bienvenue dans ma boutique de Feux d'Artifices!";
+	next;
+	mes "[Josh]";
+	mes "Je vends des petits feux d'artifices par lot de 5, est-ce que vous en voulez? Super promo pour le réveillon, tout les articles sont à moitié prix!";
+	next;
+	mes "[Josh]";
+	mes "5 Firecrackers pour 500z.";
+	mes "5 Cornets Etincellants pour 500z.";
+	mes "5 Petits Pétards pour 500z.";
+	mes "5 Pétards Etincellants pour 500z.";
+	mes "5 Tire Boules pour 1000z.";
+	mes "5 Myriades Etoilées pour 1000z.";
+	next;
+	menu "Oui,5 Firecrackers s'il vous plaît",L_Buy1,
+		"Oui,5 Cornets Etincellants s'il vous plaît",L_Buy2,
+		"Oui,5 Petits Pétards s'il vous plaît",L_Buy3,
+		"Oui,5 Pétards Etincellants s'il vous plaît",L_Buy4,
+		"Oui,5 Tire Boules s'il vous plaît",L_Buy5,
+		"Oui,5 Myriades Etoilées s'il vous plaît",L_Buy6,
+		"Non merci",L_Cancel;
+
+	L_Buy1:
+		if (Zeny < 500) goto L_NEnoughZ;
+
+		set Zeny,Zeny-500;
+		getitem 12018,5;	//Firecracker
+		mes "[Josh]";
+		mes "Et voilà pour vous! Amusez-vous bien!";
+		close;
+
+	L_Buy2:
+		if (Zeny < 500) goto L_NEnoughZ;
+
+		set Zeny,Zeny-500;
+		getitem 20801,5;	//Cornet_Etincellant
+		mes "[Josh]";
+		mes "Et voilà pour vous! Amusez-vous bien!";
+		close;
+
+	L_Buy3:
+		if (Zeny < 500) goto L_NEnoughZ;
+
+		set Zeny,Zeny-500;
+		getitem 20802,5;	//Petit_Pétard
+		mes "[Josh]";
+		mes "Et voilà pour vous! Amusez-vous bien!";
+		close;
+
+	L_Buy4:
+		if (Zeny < 500) goto L_NEnoughZ;
+
+		set Zeny,Zeny-500;
+		getitem 20804,5;	//Pétard_Etincellant
+		mes "[Josh]";
+		mes "Et voilà pour vous! Amusez-vous bien!";
+		close;
+
+	L_Buy5:
+		if (Zeny < 1000) goto L_NEnoughZ;
+
+		set Zeny,Zeny-1000;
+		getitem 20800,5;	//Tire_Boules
+		mes "[Josh]";
+		mes "Et voilà pour vous! Amusez-vous bien!";
+		close;
+
+	L_Buy6:
+		if (Zeny < 1000) goto L_NEnoughZ;
+
+		set Zeny,Zeny-1000;
+		getitem 20803,5;	//Myriade_Etoilée
+		mes "[Josh]";
+		mes "Et voilà pour vous! Amusez-vous bien!";
+		close;
+
+	L_NEnoughZ:
+		mes "[Josh]";
+		mes "Hum.... désolé mais vous n'avez pas assez d'argent~";
+		close;
+
+	L_Cancel:
+		mes "[Josh]";
+		mes "Revenez quand vous voulez!";
+		close;
+
+}
+
+
+//Distributeur de boissons
+dot_disco,191,75,0	script	Distributeur#DISCO	910,{
+
+set @temp,0;
+
+L_MENU:
+	mes "[Ecran Digital]";
+	mes "^FF0000VEUILLEZ INSERER 15 000 ZENYS^000000";
+	mes "^FF0000PIECES ACCEPTEES PAR LA MACHINE:^000000";
+	mes "^FF00001 000Z, 2 000Z, 5 000Z, 10 000Z^000000";
+	mes " ";
+	mes "^FF0000SOMME INSEREE: "+@temp+" 000 ZENYS^000000";
+	next;
+	menu
+		"Insérer une pièce.",L_Piece,
+		"^00AA00Valider^000000",L_Valid,
+		"^DD0000Annuler^000000",L_Recup,
+		"Laisser le distributeur.",L_END;
+
+L_Piece:
+	menu
+		"Insérer une pièce de  1 000 zenys.",L_1000,
+		"Insérer une pièce de  2 000 zenys.",L_2000,
+		"Insérer une pièce de  5 000 zenys.",L_5000,
+		"Insérer une pièce de 10 000 zenys.",L_10000,
+		"Retour.",L_MENU;
+		
+
+L_1000:
+	if(zeny<1000)
+	{
+		mes "^999999Vous vous rendez compte que vous n'avez pas de pièce de 1 000 zenys sur vous.^000000";
+		next;
+	}
+	else
+	{
+		initnpctimer "DistribSon#DISCO";
+		setnpctimer 2000,"DistribSon#DISCO";
+		set zeny,zeny-1000;
+		set @temp,@temp+1;
+	}
+	goto L_MENU;
+
+
+L_2000:
+	if(zeny<2000)
+	{
+		mes "^999999Vous vous rendez compte que vous n'avez pas de pièce de 2 000 zenys sur vous.^000000";
+		next;
+	}
+	else
+	{
+		initnpctimer "DistribSon#DISCO";
+		setnpctimer 4000,"DistribSon#DISCO";
+		set zeny,zeny-2000;
+		set @temp,@temp+2;
+	}
+	goto L_MENU;
+
+
+L_5000:
+	if(zeny<1000)
+	{
+		mes "^999999Vous vous rendez compte que vous n'avez pas de pièce de 5 000 zenys sur vous.^000000";
+		next;
+	}
+	else
+	{
+		initnpctimer "DistribSon#DISCO";
+		setnpctimer 6000,"DistribSon#DISCO";
+		set zeny,zeny-5000;
+		set @temp,@temp+5;
+	}
+	goto L_MENU;
+
+
+L_10000:
+	if(zeny<10000)
+	{
+		mes "^999999Vous vous rendez compte que vous n'avez pas de pièce de 10 000 zenys sur vous.^000000";
+		next;
+	}
+	else
+	{
+		initnpctimer "DistribSon#DISCO";
+		setnpctimer 8000,"DistribSon#DISCO";
+		set zeny,zeny-10000;
+		set @temp,@temp+10;
+	}
+	goto L_MENU;
+
+L_Recup:
+	if(@temp>0)
+	{
+		initnpctimer "DistribSon#DISCO";
+		setnpctimer 10000,"DistribSon#DISCO";
+		set zeny,zeny+(@temp*1000);
+		set @temp,0;
+	}
+	goto L_MENU;
+
+L_Valid:
+	if(@temp>=15)
+	{
+		initnpctimer "DistribSon#DISCO";
+		setnpctimer 12000,"DistribSon#DISCO";
+		L_Tape:
+		mes "[Ecran Digital]";
+		mes "^FF0000PATIENTEZ.^000000";
+		next;
+		if(rand(3)==0)
+		{
+			mes " ";
+			mes "^999999La machine semble bloquée.^000000";
+			next;
+			menu "Taper sur le distributeur",-;
+			initnpctimer "DistribSon#DISCO";
+			setnpctimer 14000,"DistribSon#DISCO";
+			goto L_Tape;
+		}
+		initnpctimer "DistribSon#DISCO";
+		setnpctimer 16000,"DistribSon#DISCO";
+		set @temp2,rand(4);
+		if(@temp2)
+		{
+			set @temp2,rand(4);
+			if(@temp2==0) set @temp2,12046;
+			else if(@temp2==1) set @temp2,12047;
+			else if(@temp2==2) set @temp2,12061;
+			else if(@temp2==3) set @temp2,12067;
+		}
+		else
+		{
+			set @temp2,rand(5);
+			if(@temp2==0) set @temp2,682;
+			else if(@temp2==1) set @temp2,12048;
+			else if(@temp2==2) set @temp2,12049;
+			else if(@temp2==3) set @temp2,12050;
+			else if(@temp2==4) set @temp2,12063;
+		}
+		getitem @temp2,1;
+		mes "[Ecran Digital]";
+		mes "^FF0000RECUPEREZ VOTRE BOISSON.^000000";
+		next;
+		if((@temp-15)>0)
+		{
+			mes "[Ecran Digital]";
+			mes "^FF0000RECUPEREZ VOTRE MONNAIE.^000000";
+			initnpctimer "DistribSon#DISCO";
+			setnpctimer 10000,"DistribSon#DISCO";
+			set zeny,zeny+((@temp-15)*1000);
+			next;
+		}
+		set @temp,0;
+		goto L_END;
+	}
+	else
+	{
+	}
+	goto L_MENU;
+
+L_END:
+	close;
+
+}
+
+dot_disco,188,73,4	script	DistribSon#DISCO	-1,{
+
+
+
+
+OnTimer2001:
+	soundeffectall "ef_coin.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+
+OnTimer4001:
+	soundeffectall "ef_coin1.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+
+OnTimer6001:
+	soundeffectall "ef_coin2.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+
+OnTimer8001:
+	soundeffectall "ef_coin3.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+
+OnTimer10001:
+	soundeffectall "rog_steal coin.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+
+OnTimer12001:
+	soundeffectall "se_machine.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+
+OnTimer14001:
+	soundeffectall "apocalips_h_move.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+Ontimer16010:
+	soundeffectall "mimic_die2.wav",0,24,"dot_disco",185,87,191,65;
+	stopnpctimer;
+	end;
+
+
+
+}
+
+//Effets de lumières
+
+
+dot_disco,168,71,0	script	lumi#dotdisco	-1,2,2,{
+
+OnTouch:
+
+switch(rand(29)) {
+
+	case 1:
+	specialeffect2 6; 
+	break;
+
+	case 2:
+	specialeffect2 8;
+	break;
+
+	case 3:
+	specialeffect2 9;
+	break;
+
+	case 4:
+	specialeffect2 29;
+	break;
+
+	case 5:
+	specialeffect2 36;
+	break;
+
+	case 6:
+	specialeffect2 44;
+	break;
+
+	case 7:
+	specialeffect2 45;
+	break;
+
+	case 8:
+	specialeffect2 52;
+	break;
+
+	case 9:
+	specialeffect2 53;
+	break;
+
+	case 10:
+	specialeffect2 70;
+	break;
+
+	case 11:
+	specialeffect2 71;
+	break;
+
+	case 12:
+	specialeffect2 72;
+	break;
+
+	case 13:
+	specialeffect2 94;
+	break;
+
+	case 14:
+	specialeffect2 96;
+	break;
+
+	case 15:
+	specialeffect2 110;
+	break;
+
+	case 16:
+	specialeffect2 116;
+	break;
+
+	case 17:
+	specialeffect2 118;
+	break;
+
+	case 18:
+	specialeffect2 133;
+	break;
+
+	case 19:
+	specialeffect2 134;
+	break;
+
+	case 20:
+	specialeffect2 135;
+	break;
+
+	case 21:
+	specialeffect2 139;
+	break;
+
+	case 22:
+	specialeffect2 150;
+	break;
+
+	case 23:
+	specialeffect2 173;
+	break;
+
+	case 24:
+	specialeffect2 174;
+	break;
+
+	case 25:
+	specialeffect2 175;
+	break;
+
+	case 26:
+	specialeffect2 176;
+	break;
+
+	case 27:
+	specialeffect2 177;
+	break;
+
+	case 28:
+	specialeffect2 178;
+	break;
+
+	Default:
+	specialeffect2 1799;
+	break;
+
+
+}
+sleep 1000;
+end;
+
+}
+
+dot_disco,159,71,0	duplicate(lumi#dotdisco)	lumi#2	-1,2,2
+dot_disco,170,62,0	duplicate(lumi#dotdisco)	lumi#3	-1,2,2
+dot_disco,157,61,0	duplicate(lumi#dotdisco)	lumi#4	-1,2,2
+dot_disco,155,67,0	duplicate(lumi#dotdisco)	lumi#5	-1,2,2
+dot_disco,172,67,0	duplicate(lumi#dotdisco)	lumi#6	-1,2,2
+dot_disco,173,72,0	duplicate(lumi#dotdisco)	lumi#7	-1,2,2
+dot_disco,171,76,0	duplicate(lumi#dotdisco)	lumi#8	-1,2,2
+dot_disco,163,77,0	duplicate(lumi#dotdisco)	lumi#9	-1,2,2
+dot_disco,155,76,0	duplicate(lumi#dotdisco)	lumi#10	-1,2,2
+dot_disco,154,71,0	duplicate(lumi#dotdisco)	lumi#11	-1,2,2
+dot_disco,149,65,0	duplicate(lumi#dotdisco)	lumi#12	-1,2,2
+dot_disco,149,77,0	duplicate(lumi#dotdisco)	lumi#13	-1,2,2
+dot_disco,172,67,0	duplicate(lumi#dotdisco)	lumi#14	-1,2,2
+dot_disco,178,81,0	duplicate(lumi#dotdisco)	lumi#15	-1,2,2
+dot_disco,177,72,0	duplicate(lumi#dotdisco)	lumi#16	-1,2,2
+dot_disco,178,63,0	duplicate(lumi#dotdisco)	lumi#17	-1,2,2

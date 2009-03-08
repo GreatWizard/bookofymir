@@ -1,0 +1,123 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Veins Guide
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [iRO-Based]
+//= Veins City guide
+//===== Additional Comments: ================================= 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Added second Veins guide NPC. [L0ne_W0lf]
+//============================================================ 
+
+veins,210,345,5	script	Guide de Veins#1::ve_guide	934,{
+	mes "[Guide de Veins]";
+	mes "Bienvenue à Veins, la Cité du Désert. Nous accueillons les aventuriers qui cherchent à se réfugier pendant les tempêtes de sable.";
+	mes "N'hésitez pas à me demander des renseignements si vous cherchez quelque chose de précis en ville, ou si vous voulez juste des informations.";
+	set .@loop1,1;
+	while(.@loop1) {
+		next;
+		switch(select("Guide de la Ville:Effacer les Informations de la Mini-Map:Astuce:Annuler")) {
+		case 1:
+			mes "[Guide de Veins]";
+			mes "Je peux vous renseigner sur n'importe quel endroit de la ville de Veins.";
+			mes "Sélectionnez un lieu spécifique dans le menu suivant.";
+			if (.@compass_check == 0) {
+				mes "Voulez-vous que j'indique ces emplacements sur votre Mini-Map?";
+				next;
+				if (select("Oui:Non") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+
+				switch(select("Temple:Auberge:Armurerie:Boutique:Zeppelin:Taverne:Institut de Recherches en Géologie:Annuler")) {
+				case 1:
+					mes "[Guide de Veins]";
+					mes "Notre Temple est situé au Nord de la ville et est toujours bondé de croyants qui sont des fidèles de la Déesse Freya.";
+					if (.@compass_check == 1) viewpoint 1,196,258,1,0xFF0000;
+					break;
+				case 2:
+					mes "[Guide de Veins]";
+					mes "Vous pouvez vous reposer de vos voyages et reprendre des forces à l'Auberge.";
+					mes "C'est le bâtiment qui est situé juste à ma gauche.";
+					if (.@compass_check == 1) viewpoint 1,128,266,2,0xFF00FF;
+					break;
+				case 3:
+					mes "[Guide de Veins]";
+					mes "Vous pouvez y acheter des armes et armures de très bonne qualité à des prix abordables.";
+					mes "Idéal pour se protéger du danger!";
+					mes "L'Armurerie de Veins est située à l'Ouest de la ville.";
+					if (.@compass_check == 1) viewpoint 1,150,175,3,0x99FFFF;
+					break;
+				case 4:
+					mes "[Guide de Veins]";
+					mes "Avez-vous bien tout ce qu'il vous faut avant de partir à l'aventure?";
+					mes "Si ce n'est pas le cas, je vous suggère d'aller faire un tour à la Boutique de Veins située au centre de la ville.";
+					if (.@compass_check == 1) viewpoint 1,230,161,4,0x0000FF;
+					break;
+				case 5:
+					mes "[Guide de Veins]";
+					mes "La ville de Veins est reliée au Zeppelin mais ne s'en sert que pour des voyages commerciaux.";
+					if (.@compass_check == 1) viewpoint 1,273,285,5,0x00FF00;
+					break;
+				case 6:
+					mes "[Guide de Veins]";
+					mes "Si vous souhaitez vous faire des amis parmi les habitants de Veins, je vous suggère d'aller boire un verre à la Taverne située à l'Ouest de la ville.";
+					if (.@compass_check == 1) viewpoint 1,150,217,6,0x00FF00;
+					break;
+				case 7:
+					mes "[Guide de Veins]";
+					mes "Vous aimez la géologie?";
+					mes "Alors allez faire un tour à l'Institut de Recherches en Géologie. Il est situé au premier étage de l'Armurerie.";
+					if (.@compass_check == 1) viewpoint 1,150,175,7,0x00FF00;
+					break;
+				case 8:
+					mes "[Guide de Veins]";
+					mes "Si vous ne souhaitez plus voir afficher les informations sur votre Mini-Map, demandez-moi et je les effacerais.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+
+		case 2:
+			viewpoint 2,196,258,1,0xFF0000;
+			viewpoint 2,128,266,2,0xFF00FF;
+			viewpoint 2,150,175,3,0x99FFFF;
+			viewpoint 2,230,161,4,0x0000FF;
+			viewpoint 2,273,285,5,0x00FF00;
+			viewpoint 2,150,217,6,0x00FF00;
+			viewpoint 2,150,175,7,0x00FF00;
+			mes "[Guide de Veins]";
+			mes "Toutes les indications ont été effacées.";
+			mes "Nous espérons que vous apprécierez votre séjour à Veins.";
+			break;
+		case 3:
+			mes "[Guide de Veins]";
+			mes "Votre Mini-Map est située dans le coin haut droit de votre écran.";
+			mes "Si vous ne la voyez pas, pressez Ctrl + Tab ou cliquez sur le bouton 'Map' dans votre fenêtre d'informations.";
+			next;
+			mes "[Guide de Veins]";
+			mes "Sur votre Mini-Map, cliquez sur '+' ou '-' pour modifier le zoom.";
+			mes "Nous espérons que vous apprécierez votre séjour à Veins.";
+			break;
+		case 4:
+			mes "[Guide de Veins]";
+			mes "Nous espérons que vous apprécierez votre séjour à Veins.";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	close;
+}
+
+veins,189,101,5	duplicate(ve_guide)	Guide de Veins#2	934

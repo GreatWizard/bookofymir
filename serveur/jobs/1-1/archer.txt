@@ -1,0 +1,253 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Archer Job Quest
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.8
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Job quest for Archer classes
+//===== Additional Comments: ================================= 
+//= Fully working
+//= v1.1 Added instant job change for High Novice [Lupus]
+//= v1.3 Added Baby Class support [Lupus]
+//= v1.4 Optimised and moved first checker to Jfunc1-1 [massdriller]
+//= 1.5 Now saves/restores all quest skills [Lupus]
+//= 1.6 Merged back JFunc [Lupus]
+//= 1.7 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//=	Arrow reward is now equal to the type sof trunks brought.
+//=	No longer uses function "F_ToHigh"
+//= 1.7a Fixed minor dialogue bug at Grade==25 [Lupus]
+//= 1.8 Fixed mistake in condition check. [L0ne_W0lf]
+//============================================================ 
+
+payon_in02,64,71,4	script	Archer#archer	85,{
+	if (Upper == 1) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Sniper || ADVJOB == Job_Clown || ADVJOB == Job_Gypsy)) {
+			mes "[Archer]";
+			mes "C'est bizarre... J'ai l'impression de vous connaître.";
+			mes "Nous sommes-nous déjà rencontrés?";
+			next;
+			mes "[Archer]";
+			mes "Ah, vous revenez du Valhalla?!";
+			mes "Impressionnant.";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Archer]";
+				mes "Hum...";
+				mes "Cependant vous devriez apprendre toutes vos compétences de base avant de vous présenter à moi pour devenir Archer.";
+				next;
+				mes "[Archer]";
+				mes "À bientôt.";
+				close;
+			}
+			mes "[Archer]";
+			mes "Et bien dans ce cas, je n'ai même pas besoin de vous tester.";
+			mes "Je sais que vous ferez un Archer formidable...";
+			next;
+			skill 143,0,0;
+			jobchange Job_Archer_high;
+			skill 147,1,0;
+			skill 148,1,0;
+			mes "[Archer]";
+			mes "Cependant, il n'y a pas de récompense spéciale pour vous cette fois-ci, j'espère que vous comprenez. Prenez bien soin de vous dans votre nouvelle vie.";
+			close;
+		}
+		else {
+			mes "[Archer]";
+			mes "Oh...?";
+			mes "Qui êtes-vous...?";
+			next;
+			mes "[Archer]";
+			mes "Vous n'êtes pas fait pour être Archer. Cependant je ressens une très grande puissance en vous...";
+			close;
+		}
+	}
+	mes "[Archer]";
+	mes "Bonjour. En quoi puis-je vous aider?";
+	next;
+	switch(select("Je voudrais devenir un Archer.:Quels sont les prérequis?:Euh... non, rien.")) {
+	case 1:
+		if (BaseJob == Job_Archer) {
+			mes "[Archer]";
+			mes "Votre esprit semble en communion avec la nature... Vous êtes déjà un Archer, n'est-ce pas?...";
+			close;
+		}
+		else if (BaseJob != Job_Archer && BaseJob != Job_Novice) {
+			mes "[Archer]";
+			mes "Hmm...";
+			mes "Je suis désolé, mais je suis obligé de refuser votre inscription à la Guilde des Archers.";
+			next;
+			mes "[Archer]";
+			mes "Quoi qu'il en soit, et qui que vous soyez, vous ne pouvez devenir Archer car vous avez déjà un métier.";
+			close;
+		}
+		if (job_archer_q == 0) {
+			mes "[Archer]";
+			mes "Excellent choix!";
+			mes "Veuillez remplir cette fiche d'inscription, j'examinerai ensuite vos qualifications.";
+			next;
+			if (select("Remplir la fiche.:Partir") == 1) {
+				set job_archer_q,1;
+				mes "[Archer]";
+				mes "Okay, signez ici. Parfait, hum, je ferai de vous un Archer lorsque tous les prérequis seront satisfaits.";
+				next;
+				mes "[Archer]";
+				mes "Si vous pensez qu'ils le sont, et que vous êtes prêt, nous pouvons voir ça sans attendre.";
+				mes "Êtes-vous prêt?";
+				next;
+				if (select("Oui.:Oui... euh en faite pas tout à fait.") == 1) {
+					mes "[Archer]";
+					mes "Parfait, laissez-moi regarder.";
+					next;
+				}
+				else {
+					mes "[Archer]";
+					mes "Je comprend. N'hésitez pas si vous avez des questions sur les prérequis.";
+					close;
+				}
+			}
+			mes "[Archer]";
+			mes "Oh, bon si vous insistez.";
+			mes "À plus tard alors.";
+			close;
+		}
+		mes "[Archer]";
+		mes "Vous êtes... " + strcharinfo(0) + "?";
+		next;
+		if (getskilllv("NV_BASIC") < 9) {
+			mes "[Archer]";
+			mes "On dirait que vous n'êtes pas encore suffisamment qualifié pour devenir un Archer.";
+			next;
+			mes "[Archer]";
+			mes "Vous devez atteindre un métier de niveau 10 au moins, et n'oubliez pas que vous devez apprendre toutes les compétences de base.";
+			close;
+		}
+		if (job_archer_q == 1) {
+			set .@archer_item1,countitem(1066) * 5;
+			set .@archer_item2,countitem(1067) * 3;
+			set .@archer_item3,countitem(1068) * 2;
+			set .@archer_item4,countitem(1019);
+			set .@total_archer,.@archer_item1 + .@archer_item2 + .@archer_item3 + .@archer_item4;
+			set .@total_archer2,(((.@archer_item2 + .@archer_item3) * 2) + .@archer_item4);
+			mes "[Archer]";
+			mes "Oh, vous êtes déjà de retour!";
+			mes "Bien, voyons voir...";
+			next;
+			mes "[Archer]";
+			mes "Je vais examiner les Trunks que vous avez apporté, nécessaire à la fabrication des arcs.";
+			next;
+			if (countitem(1066) == 0 && countitem(1067) == 0 && countitem(1068) == 0 && countitem(1019) == 0) {
+				mes "[Archer]";
+				mes "Um...";
+				mes "Quoi? Mais vous n'avez rapporté aucun morceau de bois? Je vais vous ré-expliquer en quoi consiste l'épreuve...";
+				close;
+			}
+			mes "[Archer]";
+			if (countitem(1066) != 0) mes " Fine Grained Trunks: " + countitem(1066) + " soit " + .@archer_item1 + " points.";
+			if (countitem(1067) != 0) mes " Solid Trunks: " + countitem(1067) + " soit : " + .@archer_item2 + " points.";
+			if (countitem(1068) != 0) mes " Barren Trunks: " + countitem(1068) + " soit : " + .@archer_item3 + " points.";
+			if (countitem(1019) != 0) mes " Trunks: " + countitem(1019) + " soit : " + .@archer_item4 + " points.";
+			if (.@total_archer < 25) {
+				mes "Total des Points: ^FF0000" + .@total_archer + "^000000 / 40";
+				next;
+				mes "[Archer]";
+				mes "Je suis désolé, mais votre score n'est pas assez élevé. Vous avez échoué à l'épreuve.";
+				next;
+				mes "[Archer]";
+				mes "Ne vous en faîtes pas, c'est que le moment n'était pas encore venu. Je vais vous laisser un autre chance. Cette fois-ci, ne me décevez pas!";
+				close;
+			}
+			else {
+				mes "Total Grades: ^0000FF" + .@total_archer + "^000000 / 40";
+				next;
+				mes "[Archer]";
+				if (.@total_archer > 40) {
+					mes "Wow! Plus de 40!";
+					mes "Excellent! Félicitations!";
+				}
+				else if (.@total_archer > 30) {
+					mes "Plus de 30! Bien joué!";
+					mes "Félicitations!";
+				}
+				else {
+					mes "*Soupir* Et bien, ça passe de justesse... Quoi qu'il en soit, bon travail.";
+				}
+			}
+			next;
+			mes "[Archer]";
+			mes "Je vais envoyer tout ce bois à notre Centre de Fabrication d'Arcs. Maintenant que vous avez réussi toutes les épreuves, laissez-moi faire de vous l'un des membre officiel de la Guilde des Archers!";
+			if (countitem(1066) != 0) delitem 1066,countitem(1066); //Tree_Of_Archer_1
+			if (countitem(1067) != 0) delitem 1067,countitem(1067); //Tree_Of_Archer_2
+			if (countitem(1068) != 0) delitem 1068,countitem(1068); //Tree_Of_Archer_3
+			if (countitem(1019) != 0) delitem 1019,countitem(1019); //Wooden_Block
+		}
+		next;
+		callfunc "Job_Change",Job_Archer;
+		callfunc "F_ClearJobVar";
+		mes "[Archer]";
+		mes "Vous faites maintenant officiellement partie de la Guilde des Archers... Bienvenue!";
+		next;
+		mes "[Archer]";
+		mes "Bien sûr, nous espérons que vous nous aiderez en contribuant à l'avenir de la Guilde des Archers avec vos efforts.";
+		next;
+		mes "[Archer]";
+		mes "Ah, votre arc vient d'arriver du Centre de Fabrication des Arcs. Tenez, prenez-le! Il est à vous~";
+		getitem 1702,1; //Bow_
+		next;
+		mes "[Archer]";
+		mes "Oh, j'allais oublier... Qu'est-ce qu'un chasseur avec son arc s'il n'a pas de flèches?";
+		mes "En voici quelques-unes.";
+		getitem 1750,.@total_archer2; //Arrow
+		next;
+		mes "[Archer]";
+		mes "Assurez vous de toujours en avoir sur vous, sinon c'est votre vie que vous mettrez en jeu.";
+		next;
+		mes "[Archer]";
+		mes "Un Archer est libre, vous pouvez continuer de vivre sans attache et profiter de la vie! Je suis convaincu que vous ferez un excellent Archer.";
+		next;
+		mes "[Archer]";
+		mes "Adieu, et bonne chance pour vos voyages.";
+		close;
+	case 2:
+		mes "[Archer]";
+		mes "Je vais vous expliquer quels sont les prérequis pour devenir Archer.";
+		if (BaseJob != Job_Novice) {
+			if (BaseJob == Job_Archer) {
+				next;
+				mes "[Archer]";
+				mes "Mais...";
+				mes "Vous êtes déjà un Archer. Vous devez déjà tout savoir de ce que j'allais dire...";
+			}
+			else {
+				next;
+				mes "[Archer]";
+				mes "Mais... Attendez une seconde. Vous avez déjà un métier, je ne vois pas en quoi cela vous concerne~";
+			}
+			mes "Bon...Yeah...Je n'ai donc pas besoin de vous en apprendre plus sur le sujet...";
+		}
+		next;
+		mes "[Archer]";
+		mes "Tout d'abord, vous devez avoir un Niveau de Job égal à 9, et avoir appris toutes vos compétences de Novice.";
+		next;
+		mes "[Archer]";
+		mes "Deuxièmement, vous serez invité à participer à une petite épreuve, qui déterminera votre aptitude au métier d'Archer.";
+		next;
+		mes "[Archer]";
+		mes "On comptabilise au moins ^FF00004 différentes sortes de bois^000000, chacun comptant pour un nombre de points différent. Rassemblez une grande variété de bois et rapportez-les ici.";
+		next;
+		mes "[Archer]";
+		mes "Pour devenir Archer, vous devrez comptabiliser un total entre ^0000FF25 et 40^000000 points. Le bois se ramasse en général sur les 'Willow', un monstre-arbre qui se trouve aux alentours de Payon. Mais soyez prudent quand même. Ils peuvent être assez robustes.";
+		next;
+		mes "[Archer]";
+		mes "Ce sont les uniques prérequis. Si vous les remplissez tous les deux, vous pourrez devenir un membre à part entière de la Guilde des Archers.";
+		close;
+	case 3:
+		close;
+	}
+}
+

@@ -1,0 +1,706 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Mage Job Quest
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.7a
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Job quest for Mage classes
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 Fixed input ingridients bug [Lupus]
+//= v1.2 Added instant job change for High Novice [Lupus]
+//= 1.3 Added Baby Class support [Lupus]
+//= v1.4 Optimised and moved first checker to Jfunc1-1 [massdriller]
+//= 1.5 Now saves/restores all quest skills [Lupus]
+//= 1.6 Merged back JFunc, CHANGED NUMBERS TO CONSTANTS [Lupus]
+//= 1.7 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//=	No longer uses function "F_ToHigh"
+//= 1.7a Fixed a "If" in the quest. (bugreport:489) [Samuray22]
+//============================================================ 
+
+geffen_in,164,124,4	script	Magicienne	123,{
+	if (Upper == 1) {
+		if (ADVJOB == Job_High_Wizard || ADVJOB == Job_Professor) {
+			if (Class == Job_Novice_High) {
+				mes "[Magicienne]";
+				mes "Whoah, ça fait un bail! Mais euh... Vous n'étiez pas mort?";
+				next;
+				mes "[Magicienne]";
+				mes "Ah, vous venez de renaître? Je suis heureuse de vous revoir ici.";
+				next;
+				if (getskilllv("NV_BASIC") < 9) {
+					mes "[Magicienne]";
+					mes "Je suis désolée, mais vous n'êtes cependant pas encore prêt à apprendre à nouveau la magie. Vous devez d'abord apprendre les compétences de base...";
+					next;
+					mes "[Magicienne]";
+					mes "Prenez votre temps. Plus vous étudierez, plus vous en apprendrez, et plus apte vous serez à apprendre la magie.";
+					close;
+				}
+				mes "[Magicienne]";
+				mes "Et bien, puisque vous avez déjà passé l'épreuve pour devenir Mage, je ne pense pas avoir besoin de tester vos qualifications. Vous voulez pouvoir utiliser vos compétences au plus vite, n'est-ce pas?";
+				next;
+				skill 143,0,0;
+				jobchange Job_Mage_High;
+				skill 157,1,0;
+				mes "[Magicienne]";
+				mes "Vous avez l'air... plus cool! Bon courage pour votre nouvelle vie.";
+				close;
+			}
+			else {
+				mes "[Magicienne]";
+				mes "En quoi puis-je vous être utile? N'attendez pas pour tester vos nouvelles capacités... Le monde est si vaste!";
+				close;
+			}
+		}
+		else {
+			mes "[Magicienne]";
+			mes "Êtes-vous intéressé par la Guilde des Magiciens? Je suis désolée mais ce lieu est réservé à ceux qui ont des aptitudes magiques.";
+			next;
+			mes "[Magicienne]";
+			mes "Je ne sais pas pourquoi vous êtes toujours debout en face de moi, mais je peux vous dire que vous n'avez pas l'étoffe d'un Mage.";
+			close;
+		}
+	}
+	mes "[Magicienne]";
+	mes "Bonjour bonjour! En quoi puis-je vous aider?";
+	next;
+	switch(select("J'adore la magie, j'aimerais devenir Mage!:Quels sont les prérequis?:Rien, merci.")) {
+	case 1:
+		mes "[Magicienne]";
+		if (BaseJob == Job_Mage) {
+			mes "Vous devriez vous acheter un miroir. Vous verriez que vous êtes déjà un Mage.";
+			next;
+			mes "[Magicienne]";
+			mes "Ça vous permettrait aussi de vous coiffer un peu mieux, peut-être...";
+			close;
+		}
+		if (BaseJob != Job_Novice) {
+			mes "Oh... Il est vrai qu'on dit toujours que deux vaut mieux qu'un, mais pour ce qui est des métiers, un seul choix est possible. Je suis désolée.";
+			mes "Ne faites pas cette tête, votre métier actuel ne doit pas être si terrible.";
+			emotion e_no;
+			close;
+		}
+		if (job_magician_q == 0) {
+			mes "Vous voulez devenir Mage, eh...?";
+			if (sex)
+				mes "Hey, regardez-vous! Trop mignon~! Mais pas mon type...";
+			else {
+				mes "Oooh, vous avez l'air... en forme~!";
+				mes "J'aime les filles comme vous~";
+			}
+			next;
+			mes "[Magicienne]";
+			mes "Très bien, veuillez remplir ce formulaire d'inscription s'il vous plaît.";
+			next;
+			if (select("Signer.:Partir.") == 1) {
+				mes "[Magicienne]";
+				mes "Okay. Signez ici. Oh, vous avez une très belle écriture. Bien. Votre nom est... " + strcharinfo(0) + ", et le plus important, vous avez exactement le profil que nous recherchons!";
+				next;
+				mes "[Magicienne]";
+				mes "Il ne vous reste plus qu'à passer l'épreuve officielle de l'Académie de Magie! Voici le détail de cette épreuve:";
+				switch(rand(3)) {
+				case 1:
+					mes "Votre épreuve consiste à fabriquer la ^3355FFSolution n°1^000000 et à me la rapporter.";
+					set job_magician_q,1;
+					break;
+				case 2:
+					mes "Votre épreuve consiste à fabriquer la ^3355FFSolution n°2^000000 et à me la rapporter.";
+					set job_magician_q,2;
+					break;
+				case 3:
+					mes "Votre épreuve consiste à fabriquer la ^3355FFSolution n°3^000000 et à me la rapporter.";
+					set job_magician_q,3;
+					break;
+				default:
+					mes "Votre épreuve consiste à fabriquer la ^3355FFSolution n°4^000000 et à me la rapporter.";
+					set job_magician_q,4;
+				}
+				next;
+				getitem 1092,1; //Empty_Cylinder
+				mes "[Magicienne]";
+				mes "Vous trouverez les recettes vous indiquant les ingrédients nécessaires dans le Guide rangé dans l'une des armoires de cette pièce.";
+				mes "Référez-vous à la liste des ingrédients afin de préparer votre solution.";
+				next;
+				mes "[Magicienne]";
+				mes "Quand vous aurez réuni tous les ingrédients, vous pouvez utiliser la Machine-Mixeuse au centre de la pièce afin de préparer votre solution.";
+				next;
+				mes "[Magicienne]";
+				mes "Bonne chance! Je vous attends ici.";
+				close;
+			}
+			mes "[Magicienne]";
+			mes "Quoooiiii~?! Juste après être venu me voir pour me dire que vous vouliez devenir Mage, vous changez d'avis?!";
+			close;
+		}
+		mes "Prêt...?";
+		if (getskilllv("NV_BASIC") < 9) {
+			mes "Oh, attendez. Il y a un petit problème.";
+			next;
+			mes "[Magicienne]";
+			mes "Oh... Je suis désolée, mais vous devez avoir au minimum le Niveau de Job 10 et avoir appris toutes vos Compétences de Base avant de pouvoir postuler à l'Académie de Magie.";
+			mes "Allez donc... tuer quelques Fabres?";
+			close;
+		}
+		mes "L'épreuve de " + strcharinfo(0) + " était de faire...";
+		if (job_magician_q == 1)
+			mes "La Solution n°1.";
+		else if (job_magician_q == 2)
+			mes "La Solution n°2.";
+		else if (job_magician_q == 3)
+			mes "La Solution n°3.";
+		else
+			mes "La Solution n°4.";
+		next;
+		mes "[Magicienne]";
+		mes "Okay, laissez moi examiner votre solution...";
+		next;
+		mes "[Magicienne]";
+		if (countitem(1071) == 0 && countitem(1085) == 0 && countitem(1086) == 0 && countitem(1087) == 0 && countitem(1090) == 0) {
+			mes "Hey, mais où est la solution que je vous ai demandée...? Je ne peux pas la vérifier si vous ne me l'apportez pas, vous comprenez.";
+			close;
+		}
+		else {
+			if ((job_magician_q == 1 && countitem(1071) == 0) || (job_magician_q == 2 && countitem(1085) == 0) || (job_magician_q == 3 && countitem(1086) == 0) || (job_magician_q == 4 && countitem(1087) == 0)) {
+				mes "Attendez.";
+				mes "Ce n'est pas la solution que je vous ai demandée!";
+				next;
+				mes "[Magicienne]";
+				if (job_magician_q == 1)
+					mes "Vous deviez faire la solution n°1 et me la rapporter. Veuillez refaire votre solution je vous prie.";
+				else if (job_magician_q == 2)
+					mes "Vous deviez faire la solution n°2 et me la rapporter. Veuillez refaire votre solution je vous prie.";
+				else if (job_magician_q == 3)
+					mes "Vous deviez faire la solution n°3 et me la rapporter. Veuillez refaire votre solution je vous prie.";
+				else
+					mes "Vous deviez faire la solution n°4 et me la rapporter. Veuillez refaire votre solution je vous prie.";
+
+				if (countitem(1071) != 0) delitem 1071,1; //Mage_Test_1
+				else if (countitem(1085) != 0) delitem 1085,1; //Mage_Test_2
+				else if (countitem(1086) != 0) delitem 1086,1; //Mage_Test_3
+				else if (countitem(1087) != 0) delitem 1087,1; //Mage_Test_4
+				else delitem 1090,1; //Mage_Test_Etc
+				close;
+			}
+		}
+		if (countitem(1071) != 0) delitem 1071,1; //Mage_Test_1
+		else if (countitem(1085) != 0) delitem 1085,1; //Mage_Test_2
+		else if (countitem(1086) != 0) delitem 1086,1; //Mage_Test_3
+		else if (countitem(1087) != 0) delitem 1087,1; //Mage_Test_4
+		else delitem 1090,1; //Mage_Test_Etc
+		mes "Hmm. Je vois que vous avez travaillé dur. Pour un débutant, ce n'est pas si mal que ça.";
+		mes "Bon travail!";
+		next;
+		mes "[Magicienne]";
+		mes "Parfait! Je suis heureuse de vous annoncer que vous avez réussi l'épreuve officielle de l'Académie de Magie. Je vais donc faire de vous un mage!";
+		next;
+		mes "[Magicienne]";
+		mes "*Ahem*";
+		mes "Abracadabra et hocus pocus, change ce jeune novice en MAGE!!";
+		next;
+		callfunc "Job_Change",Job_Mage;
+		callfunc "F_ClearJobVar";
+		set Zeny,Zeny+50;
+		mes "[Magicienne]";
+		mes "Bienvenue dans Mon Monde~ héhé... J'ai toujours rêvée de dire ça. Quoi qu'il en soit, félicitations! Vous faîtes maintenant partie de l'Académie de Magie de Geffen!";
+		next;
+		mes "[Magicienne]";
+		mes "Maintenant que vous êtes un collègue, soyons amis, okay?";
+		mes "Bonne chance et prenez soin de vous!";
+		close;
+	case 2:
+		mes "[Magicienne]";
+		mes "Vous voulez devenir Mage, eh?";
+		if (sex)
+			mes "Je suis heureuse d'expliquer comment faire à quelqu'un d'aussi mignon que vous!";
+		else
+			mes "Je serai heureuse de vous expliquer comment faire, jolie jeune fille!";
+		next;
+		mes "[Magicienne]";
+		mes "Tout d'abord, vous devez avoir au minimum le Niveau de Job 10 et avoir appris toutes vos Compétences de Base avant de pouvoir postuler à l'Académie de Magie.";
+		next;
+		if (job_magician_q != 0) {
+			mes "[Magicienne]";
+			mes "L'épreuve consiste à";
+			switch(job_magician_q) {
+			case 1:
+				mes "faire la Solution n°1 et me la rapporter.";
+				break;
+			case 2:
+				mes "faire la Solution n°2 et me la rapporter.";
+				break;
+			case 3:
+				mes "faire la Solution n°3 et me la rapporter.";
+				break;
+			default:
+				mes "faire la Solution n°4 et me la rapporter.";
+			}
+			next;
+			mes "[Magicienne]";
+			mes "Vous trouverez les recettes vous indiquant les ingrédients nécessaires dans le Guide rangé dans l'une des armoires de cette pièce.";
+			mes "Référez-vous à la liste des ingrédients afin de préparer votre solution.";
+		}
+		else {
+			mes "[Magicienne]";
+			mes "Vous ne pourrez savoir quelle solution vous devrez réaliser qu'après avoir rempli et signé la demande de candidature.";
+		}
+		next;
+		mes "[Magicienne]";
+		mes "Faîtes le moi savoir si vous décidez de devenir Mage, okay?";
+		close;
+	case 3:
+		mes "[Magicienne]";
+		mes "Rien...?";
+		close;
+	}
+}
+
+geffen_in,164,112,4	script	Machine Mixeuse	111,{
+	mes "[Machine Mixeuse]";
+	mes "Cette Machine sert à préparer les solutions magiques, et est la propriété de l'Académie de Magie de Geffen.";
+	next;
+	if (select("Utiliser la machine.:Laisser tomber.") == 1) {
+		mes "[Machine Mixeuse]";
+		mes "Veuillez sélectionner un solvant pour votre solution.";
+		next;
+		switch(select("Solvant de Payon.:Solvant de Morroc.:Aucun solvant.")) {
+		case 1:
+			if (countitem(1089) == 0) {
+				mes "[Machine Mixeuse]";
+				mes "Erreur.";
+				mes "Impossible de trouver l'article.";
+				mes "Veuillez recommencer.";
+				mes "Abandon du processus de création de solution.";
+				close;
+			}
+			set .@mixitem2,1;
+			break;
+		case 2:
+			if (countitem(1088) == 0) {
+				mes "[Machine Mixeuse]";
+				mes "Erreur.";
+				mes "Impossible de trouver l'article.";
+				mes "Veuillez recommencer.";
+				mes "Abandon du processus de création de solution.";
+				close;
+			}
+			set .@mixitem2,2;
+			break;
+		case 3:
+			set .@mixitem2,0;
+			break;
+		}
+		while (1) {
+			if (.@progress == 2) {
+				mes "[Machine Mixeuse]";
+				if (.@mixitem1_1 != 0) mes "Jellopy: " + .@mixitem1_1 + " ea.";
+				if (.@mixitem1_2 != 0) mes "Fluff: " + .@mixitem1_2 + " ea.";
+				if (.@mixitem1_3 != 0) mes "Milk: " + .@mixitem1_3 + " ea.";
+				if (.@mixitem2 == 0) mes "Solvant: Aucun.";
+				if (.@mixitem2 == 1) mes "Solvant: Solvant de Payon.";
+				if (.@mixitem2 == 2) mes "Solvant: Solvant de Morroc.";
+				next;
+				mes "[Machine Mixeuse]";
+				mes "Veuillez indiquer si vous souhaitez commencer le mixage, ou si vous voulez repréciser la quantité d'articles à mixer.";
+				next;
+				switch(select("Lancer le mixage.:Repréciser le nombre d'articles.:Annuler.")) {
+				case 1:
+					mes "[Machine Mixeuse]";
+					mes "Veuillez déposer tous les ingrédients dans la Machine. Assurez-vous que les quantité soient bonnes.";
+					next;
+					mes "[Machine Mixeuse]";
+					mes "Vous ne pourrez plus intervenir une fois les ingrédients placés dans la machine.";
+					next;
+					mes "[Machine Mixeuse]";
+					mes "Tout est prêt, appuyez sur le bouton 'Mixer' quand vous serez prêt. Sinon, appuyez sur le bouton 'Annuler'.";
+					next;
+					if (select("Appuyer sur 'Mixer'.:Appuyer sur 'Annuler'.") == 1) {
+						mes "[Machine Mixeuse]";
+						mes "Veuillez déposer tous les ingrédients dans la Machine. Veuillez patienter.";
+						next;
+						mes "[Machine Mixeuse]";
+						if (countitem(909) < .@mixitem1_1) {
+							mes "Jellopy insuffisants.";
+							mes "Veuillez recommencer.";
+							mes "Abandon de la procédure de mixage.";
+							close;
+						}
+						else if (countitem(914) < .@mixitem1_2) {
+							mes "Fluff insuffisants.";
+							mes "Veuillez recommencer.";
+							mes "Abandon de la procédure de mixage.";
+							close;
+						}
+						else if (countitem(519) < .@mixitem1_3) {
+							mes "Milk insuffisant.";
+							mes "Veuillez recommencer.";
+							mes "Abandon de la procédure de mixage.";
+							close;
+						}
+						else if (.@mixitem2 == 1 || .@mixitem2 == 2) {
+							if (countitem(1089) == 0 && countitem(1088) == 0) {
+								mes "Solution introuvable.";
+								mes "Veuillez recommencer.";
+								mes "Abandon de la procédure de mixage.";
+								close;
+							}
+						}
+						if (.@mixitem1_1 != 0) delitem 909,.@mixitem1_1; //Jellopy
+						if (.@mixitem1_2 != 0) delitem 914,.@mixitem1_2; //Fluff
+						if (.@mixitem1_3 != 0) delitem 519,.@mixitem1_3; //Milk
+						if (.@mixitem2 == 1) delitem 1089,1; //Payon_Potion
+						if (.@mixitem2 == 2) delitem 1088,1; //Morocc_Potion
+						mes "Ingrédients préparés.";
+						mes "Fermeture du couvercle.";
+						set .@progress,3;
+						next;
+					}
+					break;
+				case 2:
+					set .@continue,0;
+					next;
+					break;
+				case 3:
+					set .@mixitem1_1,0;
+					set .@mixitem1_2,0;
+					set .@mixitem1_3,0;
+					set .@progress,0;
+					set .@continue,0;
+					mes "[Machine Mixeuse]";
+					mes "Annulation du mixage.";
+					mes "Voulez-vous recommencer?";
+					next;
+					if (select("Oui.:Non.") == 1)
+						break;
+					mes "[Machine Mixeuse]";
+					mes "Abandon de la procédure de mixage.";
+					mes "Merci.";
+					close;
+				}
+				if (.@progress == 3) break;
+			}
+			else if (.@progress == 1) {
+				mes "[Machine Mixeuse]";
+				mes "Auncun ingrédient détecté.";
+				next;
+			}
+			mes "[Machine Mixeuse]";
+			mes "Choix des ingrédients.";
+			while(1) {
+				switch(select("Jellopy.:Fluff.:Milk.:Étape Suivante.")) {
+				case 1:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[Machine Mixeuse]";
+							mes "Erreur: Quantité limite dépassée. Veuillez saisir une quantité inférieure à 10,000.";
+							next;
+						}
+						else {
+							if (countitem(909) > 0) set .@mixitem1_1,.@mixitem1_1 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+				case 2:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[Machine Mixeuse]";
+							mes "Erreur: Quantité limite dépassée. Veuillez saisir une quantité inférieure à 10,000.";
+							next;
+						}
+						else {
+							if (countitem(914) > 0) set .@mixitem1_2,.@mixitem1_2 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+				case 3:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[Machine Mixeuse]";
+							mes "Erreur: Quantité limite dépassée. Veuillez saisir une quantité inférieure à 10,000.";
+							next;
+						}
+						else {
+						if (countitem(519) > 0) set .@mixitem1_3,.@mixitem1_3 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+
+				case 4:
+					if (.@progress != 2)
+						set .@progress,1;
+					set .@continue,1;
+					next;
+				}
+				if (.@continue) break;
+			}
+		}
+		mes "[Machine Mixeuse]";
+		mes "Entrez maintenant le numéro de l'ingrédient spécial.";
+		next;
+		while(1) {
+			input .@input;
+			if (.@input < 1000 || .@input > 9999) {
+				mes "[Machine Mixeuse]";
+				if (.@input == 0) {
+					mes "Voulez-vous ignorer cette étape?";
+					next;
+					if (select("Oui.:Non.") == 1) {
+						break;
+					}
+				}
+				else {
+					mes "Numéro invalide.";
+					mes "Veuillez réessayer.";
+					next;
+				}
+			}
+			else {
+				mes "[Machine Mixeuse]";
+				mes "Le numéro de l'ingrédient spécial est #" + .@input + ", est-ce correct?";
+				next;
+				if (select("Confirmer.:Annuler.") == 1) {
+					if (.@input == 8472)
+						set .@magic_powder,1;
+					else if (.@input == 3735)
+						set .@magic_powder,2;
+					else if (.@input == 2750)
+						set .@magic_powder,3;
+					else if (.@input == 5429)
+						set .@magic_powder,4;
+					else
+						set .@magic_powder,5;
+				}
+				break;
+			}
+		}
+		mes "[Machine Mixeuse]";
+		mes "Veuillez choisir un Catalyseur.";
+		next;
+		switch(select("Yellow Gemstone.:Red Gemstone.:Blue Gemstone.:1carat Diamond.:Ignorer.")) {
+		case 1: set .@mixitem3,1; break;
+		case 2: set .@mixitem3,2; break;
+		case 3: set .@mixitem3,3; break;
+		case 4: set .@mixitem3,4; break;
+		case 5: break;
+		}
+		mes "[Machine Mixeuse]";
+		mes "Initialisation de la procédure de mixage...";
+		mes "Mixage en cours...";
+		mes "Veuillez patienter.";
+		next;
+		mes "[Machine Mixeuse]";
+		mes "- Proverbe du jour -";
+		switch(rand(1,5)) {
+		case 1:
+			mes "Oeil pour oeil, dent pour dent: Quand vous prenez quelque chose à une personne, vous devez remplacer ou rembourser cette chose d'une façon ou d'une autre.";
+			break;
+		case 2:
+			mes "Dans le doute, abstiens-toi: Si on n'est pas sûr, il vaut mieux éviter d'agir.";
+			break;
+		case 3:
+			mes "De deux maux il faut choisir le moindre:";
+			mes "Quand un problème se pose, toujours choisir la solution la moins douloureuse.";
+			break;
+		case 4:
+			mes "Le destin est comme la tortue d'Eschyle:";
+			mes "Un oracle ayant prédit à Eschyle qu'il mourrait écrasé, il alla vivre aux champs.";
+			next;
+			mes "Un aigle tenait dans ses serres une tortue qu'il laissa échapper et la chute de cette tortue tua Eschyle.";
+			mes "On ne peut échapper à son destin.";
+			break;
+		default:
+			mes "On juge de la pièce, pas de l'échantillon: Il vaut mieux juger le résultat global qu’une partie.";
+		}
+		next;
+		if (.@mixitem1_1 == 2 && .@mixitem1_2 == 3 && .@mixitem1_3 == 1 && .@mixitem2 == 1 && .@mixitem3 == 1 && .@magic_powder == 1) {
+			mes "[Machine Mixeuse]";
+			mes "Solution n°1 de l'épreuve des Mages.";
+			getitem 1071,1; //Mage_Test_1
+			next;
+		}
+		else if (.@mixitem1_1 == 3 && .@mixitem1_2 == 1 && .@mixitem1_3 == 1 && .@mixitem2 == 0 && .@mixitem3 == 2 && .@magic_powder == 2) {
+			mes "[Machine Mixeuse]";
+			mes "Solution n°2 de l'épreuve des Mages.";
+			getitem 1085,1; //Mage_Test_2
+			next;
+		}
+		else if (.@mixitem1_1 == 6 && .@mixitem1_2 == 1 && .@mixitem1_3 == 0 && .@mixitem2 == 1 && .@mixitem3 == 3 && .@magic_powder == 3) {
+			mes "[Machine Mixeuse]";
+			mes "Solution n°3 de l'épreuve des Mages.";
+			getitem 1086,1; //Mage_Test_3
+			next;
+		}
+		else if (.@mixitem1_1 == 2 && .@mixitem1_2 == 3 && .@mixitem1_3 == 0 && .@mixitem2 == 2 && .@mixitem3 == 4 && .@magic_powder == 4) {
+			mes "[Machine Mixeuse]";
+			mes "Solution n°4 de l'épreuve des Mages.";
+			getitem 1087,1; //Mage_Test_4
+			next;
+		}
+		else {
+			mes "[Machine Mixeuse]";
+			mes "Un problème à été rencontré.";
+			mes "Veuillez retirer votre solution.";
+			getitem 1090,1; //Mage_Test_Etc
+			next;
+		}
+		mes "[Machine Mixeuse]";
+		mes "Opération de mixage terminée.";
+		mes "Merci.";
+		close;
+	}
+	close;
+}
+
+pay_arche,122,100,0	script	Dollshoi	88,{
+	mes "[Membre de la Guilde des Mages]";
+	mes "Vous voulez une petite Solution, c'est ça? Alors ça fera 50 Zenys. Ah, et 1 Empty Test-Tube aussi.";
+	next;
+	if (select("Marché conclu!:Je ne crois pas, non.") == 1) {
+		mes "[Membre de la Guilde des Mages]";
+		if (Zeny < 50) {
+			mes "Pfff, vous êtes trop pauvre pour transporter une si noble Solution!";
+			close;
+		}
+		if (countitem(1092) == 0) {
+			mes "Et comment voulez-vous transporter la Solution sans récipient?";
+			close;
+		}
+		mes "Merci! Je suis certain que vous ferez un très bon Mage, vous êtes tellement généreux.";
+		mes "J'espère vous recroiser un de ces jours!";
+		emotion e_no1;
+		delitem 1092,1; //Empty_Cylinder
+		set zeny,zeny-50;
+		getitem 1089,1; //Payon_Potion
+	}
+	close;
+}
+
+moc_ruins,91,150,0	script	Ponka-Hontas	93,{
+	mes "[Membre de la Guilde des Mages]";
+	mes "Vous voulez une petite Solution, c'est ça? Alors ça fera 50 Zenys. Ah, et 1 Empty Test-Tube aussi.";
+	next;
+	IF (select("Marché conclu!:Je ne crois pas, non.") == 1) {
+		mes "[Membre de la Guilde des Mages]";
+		if (zENY < 50) {
+			mes "Pfff, vous êtes trop pauvre pour transporter une si noble Solution!";
+			close;
+		}
+		if (countitem(1092) == 0) {
+			mes "Et comment voulez-vous transporter la Solution sans récipient?";
+			close;
+		}
+		mes "Merci! Je suis certaine que vous ferez un très bon Mage, vous êtes tellement généreux.";
+		mes "J'espère vous recroiser un de ces jours!";
+		emotion e_no1;
+		delitem 1092,1; //Empty_Cylinder
+		set zeny,zeny-50;
+		getitem 1088,1; //Morocc_Potion
+	}
+	close;
+}
+
+geffen_in,177,112,4	script	Guide des Solutions	111,{
+	mes "[Guide des Solutions]";
+	mes "J'appartiens à la bibliothèque de l'Académie de Magie de Geffen. Merci de me manipuler avec précaution !";
+	next;
+	switch(select("Solution n°1.:Solution n°2.:Solution n°3.:Solution n°4.:Refermer le Guide.")) {
+	case 1:
+		mes "[Recette pour la Solution n°1]";
+		mes "* Liste des Ingrédients *";
+		mes " - 2 Jellopy";
+		mes " - 3 Fluff";
+		mes " - 1 Milk";
+		next;
+		mes "[Recette pour la Solution n°1]";
+		mes "* Solvant *";
+		mes "  Solution de Payon.";
+		mes "  Où la trouver: au Village des Archers, près de Payon.";
+		next;
+		mes "[Recette pour la Solution n°1]";
+		mes "* Ingrédient Spécial *";
+		mes " - 8472";
+		next;
+		mes "[Recette pour la Solution n°1]";
+		mes "* Catalyseur *";
+		mes " - Yellow Gemstone";
+		mes "(le catalyseur sera fourni par la Machine)";
+		close;
+	case 2:
+		mes "[Recette pour la Solution n°2]";
+		mes "* Liste des Ingrédients *";
+		mes " - 3 Jellopy";
+		mes " - 1 Fluff";
+		mes " - 1 Milk";
+		next;
+		mes "[Recette pour la Solution n°2]";
+		mes "* Solvant *";
+		mes " - Aucun.";
+		next;
+		mes "[Recette pour la Solution n°2]";
+		mes "* Ingrédient Spécial *";
+		mes " - 3735";
+		next;
+		mes "[Recette pour la Solution n°2]";
+		mes "* Catalyseur *";
+		mes " - Red Gemstone";
+		mes "(le catalyseur sera fourni par la Machine)";
+		close;
+	case 3:
+		mes "[Recette pour la Solution n°3]";
+		mes "* Liste des Ingrédients *";
+		mes " - 6 Jellopy";
+		mes " - 1 Fluff";
+		next;
+		mes "[Recette pour la Solution n°3]";
+		mes "* Solvant *";
+		mes "  Solution de Payon.";
+		mes "  Où la trouver: au Village des Archers, près de Payon.";
+		next;
+		mes "[Recette pour la Solution n°3]";
+		mes "* Ingrédient Spécial *";
+		mes " - 2750";
+		next;
+		mes "[Recette pour la Solution n°3]";
+		mes "* Catalyseur *";
+		mes " - Blue Gemstone";
+		mes "(le catalyseur sera fourni par la Machine)";
+		close;
+	case 4:
+		mes "[Recette pour la Solution n°4]";
+		mes "* Liste des Ingrédients *";
+		mes " - 2 Jellopy";
+		mes " - 3 Fluff";
+		next;
+		mes "[Recette pour la Solution n°4]";
+		mes "* Solvant *";
+		mes "  Solution de Morroc";
+		mes "  Où la trouver: non loin des Pyramides, près de Morroc.";
+		next;
+		mes "[Recette pour la Solution n°4]";
+		mes "* Ingrédient Spécial *";
+		mes " - 5429";
+		next;
+		mes "[Recette pour la Solution n°4]";
+		mes "* Catalyseur *";
+		mes " - 1carat Diamond";
+		mes "(le catalyseur sera fourni par la Machine)";
+		close;
+	}
+}

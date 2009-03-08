@@ -1,0 +1,312 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par MageGaHell, corrigé par Myllena
+//===== eAthena Script ======================================= 
+//= Super Novice Script
+//===== By: ================================================== 
+//= Darkchild
+//===== Current Version: ===================================== 
+//= 2.1
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Super Novice Job Change Npc
+//= Super Novice Cart Rental Npc
+//= Some Other Useless Super Novice Npc
+//===== Additional Comments: ================================= 
+//= 1.9 Rescripted to the Aegis 10.3 Standars. [Samuray22]
+//= 2.0 Rescripted again, this time using an iRO base. [L0ne_W0lf]
+//= 2.1 Swapped use of baseclass for basejob. [L0ne_W0lf]
+//============================================================ 
+
+aldeba_in,223,167,3	script	Tzerero#sn	709,{
+	if (BaseJob == Job_SuperNovice) {
+		mes "[Tzerero]";
+		mes "J'espère que vous appréciez la vie parfaitement ordinaire d'un Super Novice? Ah, très bien... Comme je le supposais. Vraiment, l'aura de la normalité brille superbement en vous...";
+		next;
+		mes "[Tzerero]";
+		mes "Je vous encourage à prendre la vie comme Maître Kimu-Shaun l'a fait... Devenez un touche à tout... Et ne maîtrisez rien.";
+		close;
+	}
+	if (countitem(938) > 29 && countitem(907) > 29 && SUPNOV_Q == 1) {
+		delitem 938,30; //Sticky_Mucus
+		delitem 907,30; //Resin
+		mes "[Tzerero]";
+		mes "Ah, je vois que vous m'avez rapporté les objets parfaitement ordinaires que j'avais demandé.";
+		mes "Vous avez prouvé que vous êtes digne de rejoindre la Société des Super Novices, la Guilde des Gens Ordinaires.";
+		next;
+		mes "[Tzerero]";
+		mes "Et bien, comme promis je vais faire  de vous un ^3355FFSuper Novi--^000000 Hum?";
+		mes "Oh mon dieu, attention, derrière-vous!?!";
+		next;
+		select("Hein?:Qu'est-ce que c'est?");
+		mes "^3355FFVous vous retournez vivement et...";
+		mes "Il n'y a rien derrière vous.";
+		mes "Quelque chose de tordu se passe ici...^000000";
+		next;
+		callfunc "F_ClearJobVar";
+		getitem 2339,1; //G_Strings
+		if (Upper==0) jobchange Job_SuperNovice;
+		if (Upper==2) jobchange Job_Super_Baby;
+		mes "[Tzerero]";
+		mes "Ha ha ha! J'vous ai eu!";
+		mes "Alors... Vous n'avez pas aimé ma blague?";
+		mes "Oh bon, oublions ça...";
+		next;
+		mes "[Tzerero]";
+		mes "... Ainsi que toutes les raisons pour lesquelles un homme adulte comme moi pourrait se balader avec une paire de Panties supplémentaires...";
+		next;
+		mes "[Tzerero]";
+		mes "La chose la plus importante c'est... Que vous faîtes à présent partie du cercle très fermé des honorables Super Novices.";
+		next;
+		mes "[Tzerero]";
+		mes "Considérez que ces Panties sont un cadeau pour votre intronisation...";
+		mes "La rumeur raconte que ces sous-vêtements ont été portés par Maître Kimu-Shaun, notre légendaire père fondateur, au début de sa recherche de la normalité exemplaire.";
+		next;
+		mes "[Tzerero]";
+		mes "Maintenant allez-y et parcourez le monde pour vivre votre nouvelle vie de Super Novice!";
+		mes "Voyagez, cherchez l'aventure, aidez les gens du commun et devenez l'un d'eux au passage! ";
+		close;
+	}
+	if (SUPNOV_Q == 1) {
+		mes "[Tzerero]";
+		mes "Hein? Auriez-vous par hasard oublié ce que j'attends de vous?";
+		mes "Ok, je veux bien le répéter à nouveau. Essayez de le retenir, cette fois...";
+		next;
+		mes "[Tzerero]";
+		mes "Je vous avais demandé de me rapporter";
+		mes "^FF000030 Sticky Mucus^000000 et";
+		mes "^FF000030 Resin^000000.";
+		close;
+	}
+	if (BaseJob == Job_Novice && upper != 1) {
+		mes "[Tzerero]";
+		mes "...Huumm?";
+		mes "Stop.";
+		mes "Laissez-moi vous regarder.";
+		next;
+		mes "[Tzerero]";
+		mes ".....";
+		mes ".......";
+		mes ".........";
+		emotion e_dots;
+		next;
+		mes "[Tzerero]";
+		mes "Je vois l'aura de la normalité luire brillamment tout autour de vous...";
+		next;
+		mes "[Tzerero]";
+		mes "Pourquoi ne pas nous rejoindre, jeune Novice? Rejoins-nous et apprends la subtile grandeur d'être quelqu'un d'ordinaire...";
+		next;
+		mes "[Tzerero]";
+		mes "Accepte mon offre... Retire tes vêtements ternes et poussiéreux pour renaître en tant qu'un splendide...";
+		next;
+		mes "[Tzerero]";
+		mes "... ^CE6300Super Novice^000000.";
+		next;
+		switch(select("Accepter son offre.:Refuser son offre.:Ecouter plus attentivement.")) {
+		case 1:
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Tzerero]";
+				mes "Humm... Mais appréciez-vous vraiment le fait de trouver de la force dans la faiblesse?";
+				mes "Vous devez me prouvez que vous êtes un éternel indécis.";
+				next;
+				mes "[Tzerero]";
+				mes "Vivez votre vie comme un Novice... Et revenez me voir quand vous connaîtrez toutes les Compétences de Base... Croissez dans la normalité et devenez un Novice de Niveau de Job 10...";
+				close;
+			}
+			if (BaseLevel < 45) {
+				mes "[Tzerero]";
+				mes "Humm... Mais appréciez-vous vraiment la vie tranquille d'un aventurier complètement banal?";
+				mes "Prouvez-moi que vous ne succomberez pas à l'attrait du pouvoir...";
+				next;
+				mes "[Tzerero]";
+				mes "Vivez une vie absolument normale... Devenez un Novice de Niveau 45... C'est uniquement comme cela que vous serez autorisé à nous rejoindre...";
+				close;
+			}
+			mes "[Tzerero]";
+			mes "Je peux voir dans vos yeux votre détermination à mener une vie simple...";
+			next;
+			mes "[Tzerero]";
+			mes "Seuls les plus grands sages savent reconnaître qu'une vie ordinaire et banale est la meilleure façon de vivre.";
+			next;
+			mes "[Tzerero]";
+			mes "Cependant, nous ne pouvons pas accepter n'importe qui dans notre Guilde banale. Vous devez d'abord, comme le veut l'usage classique, passer un test parfaitement ordinaire.";
+			next;
+			mes "[Tzerero]";
+			mes "Pour réussir cette épreuve, vous devez me rapporter quelques objets normaux, en tuant quelques montres parfaitement ordinaires.";
+			next;
+			mes "[Tzerero]";
+			mes "Hummmm...";
+			mes "^FF000030 Sticky Mucus^000000";
+			mes "et^FF000030 Resin";
+			mes "^000000seraient parfaits pour me prouver votre habilité à pourfendre des ennemis classiques.";
+			next;
+			mes "[Tzerero]";
+			mes "Par ailleurs, le chiffre 30 est significatif. Rien de spécial, c'est juste un nombre parfaitement ordinaire. Hahahaha!";
+			next;
+			set SUPNOV_Q,1;
+			mes "[Tzerero]";
+			mes "Bonne chance, mon banal ami.";
+			close;
+		case 2:
+			mes "[Tzerero]";
+			mes "Bien, bien... je suppose que la valeur d'une vie simple et ordinaire vous est difficile à comprendre. C'est...ok... Après tout, c'est votre vie.";
+			next;
+			mes "[Tzerero]";
+			mes "Mais si un jour vous recevez l'illumination de la banalité, vous pourrez toujours revenir me voir si vous le souhaitez...";
+			next;
+			mes "[Tzerero]";
+			mes "Mais comme notre Ligue des Gentlemen Ordinaires devient de plus en plus populaire, nous allons peut être devoir choisir un test plus difficile...";
+			close;
+		case 3:
+			mes "[Tzerero]";
+			mes "Notre Guilde des Gens Ordinaires a été crée par le légendaire Maître Kimu-Shaun... Peut-être le plus grand homme de sa génération.";
+			next;
+			mes "[Tzerero]";
+			mes "Il réalisa qu'il y avait beaucoup trop de souffrances dans le monde, particulièrement chez les gens du commun de Rune-Midgard...";
+			next;
+			mes "[Tzerero]";
+			mes "Il apprit toutes les compétences qu'il pouvait auprès de tous les gens différents qu'il rencontra... Mais comme il ne restait jamais longtemps au même endroit, il devint un touche à tout qui connaissait tout... Mais ne maîtrisait rien.";
+			next;
+			mes "[Tzerero]";
+			mes "En partageant les souffrances des gens ordinaires, il en devint un lui-même... La plus extraordinaire des personnes ordinaires.";
+			next;
+			mes "[Tzerero]";
+			mes "Les membres de notre Guilde essayent de vivre comme Maître Kimu-Shaun l'a fait, en accord avec les principes qu'il nous a laissés...";
+			close;
+		}
+	}
+	else {
+		if (BaseJob == Job_SuperNovice) {
+			mes "[Tzerero]";
+			mes "J'espère que vous appréciez la vie parfaitement ordinaire d'un Super Novice? Ah, très bien... Comme je le supposais. Vraiment, l'aura de la normalité brille superbement en vous...";
+			next;
+			mes "[Tzerero]";
+			mes "Je vous encourage à prendre la vie comme Maître Kimu-Shaun l'a fait... Devenez un touche à tout... Et ne maîtrisez rien.";
+			next;
+			mes "[Tzerero]";
+			mes "Je vous encourage à accroitre votre potentiel de Super Novice, et de devenir un exemple pour tous en vivant une vie absolument banale.";
+			close;
+		}
+		mes "[Tzerero]";
+		mes "Bonjour, je suis Tzerero, le directeur non-officiel de la grande Guilde des Gens Ordinaires.";
+		next;
+		mes "[Tzerero]";
+		mes "Hummm... vous avez l'air d'être bien supérieur à la personne moyenne. Oui, vous êtes définitivement plus exceptionnel qu'ordinaire...";
+		next;
+		mes "[Tzerero]";
+		mes "*Soupir* Je suppose que vous ne pourrez jamais comprendre notre façon de vivre, la subtile grandeur d'être banal. Mais ce n'est pas grave...";
+		next;
+		mes "[Tzerero]";
+		mes "Et bien... Il y a des milliers de personnes différentes dans ce monde, alors je vais essayer d'accepter toutes nos différences. J'espère que vous ferez de même.";
+		close;
+	}
+}
+
+aldeba_in,216,169,5	script	Esseray#sn	86,{
+	if (BaseJob == Job_SuperNovice) {
+		mes "[Esseray]";
+		mes "Hum? Hé, vous êtes un membre banal de notre grande Guilde des Gens Ordinaires, n'est-ce pas? C'est la meilleure Guilde du monde, hein!?";
+		next;
+		mes "[Esseray]";
+		mes "Vivant nos vies modestement, en accord avec les principes de Maître Kimu-Shaun... C'est si bon d'être ordinaire!";
+		next;
+		mes "[Esseray]";
+		mes "Essayons de mener nos vies aussi normalement que possible!";
+		mes "Pour votre gouverne, je suis le membre numéro un de la Guilde des Gens Ordinaire, après Maître Tzerero, bien sûr!";
+		close;
+	}
+	if (BaseJob == Job_Novice && upper != 1) {
+		mes "[Esseray]";
+		mes "Ha! Vous ne connaissez encore rien au fait d'être une personne ordinaire!";
+		mes "Pourquoi ne pas rejoindre notre Guilde des Gens Ordinaires? C'est la meilleures Guilde du monde!";
+		next;
+		mes "[Esseray]";
+		mes "Oui, les Super Novices sont les meilleurs!";
+		mes "Hahahahahahahaha!";
+		close;
+	}
+	else {
+		mes "[Esseray]";
+		mes "Bouh! Vous semblez bien supérieur à la moyenne... Enfer, vous êtes même peut être quelqu'un de 'spécial'...";
+		mes "Quel dommage... J'espère que vous prendrez tout de même la vie du bon coté...";
+		close;
+	}
+}
+
+aldebaran,54,238,5	script	Employée Kafra#sn	117,{
+	if (BaseJob == Job_SuperNovice) {
+		mes "[Employée Kafra]";
+		if (Sex )
+			mes "Bonjour, Monsieur le Super Novice!";
+		else
+			mes "Bonjour, Madame la Super Novice!";
+		mes "Vous devez être fort déçu que les autres Employées Kafra ne vous laissent pas louer une Charrette...";
+		mes "Mais ne vous en faîtes pas!";
+		next;
+		mes "[Employée Kafra]";
+		mes "Je suis là spécialement pour vous procurer ces Charrettes...";
+		next;
+		mes "[Employée Kafra]";
+		mes "^3355FF*Chuchote*^000000";
+		mes "^555555Je ne suis pas supposée faire ça, c'est contre le règlement de la compagnie. Mais je me sens si triste pour les Super Novices... Alors me voilà.^000000";
+		next;
+		mes "[Employée Kafra]";
+		mes "Alors, souhaitez-vous louer une Charrette? Le coût de service est de 1 900 Zenys.";
+		next;
+		if (select("Louer une Charrette.:Non merci, c'est inutile.") == 1) {
+			mes "[Employée Kafra]";
+			mes "Oh, encore une chose...";
+			mes "Avez-vous bien appris la compétence 'Push Cart'? Je peux bien vous louer une charrette, mais si vous ne savez pas comment la tirer, vous gaspillerez juste vos Zenys!";
+			next;
+			mes "[Employée Kafra]";
+			mes "Alors soyez sûr de déjà bien maîtriser la compétence 'Push Cart'.";
+			next;
+			if (select("Louer une Charrette.:Annuler.") == 1) {
+				if (checkcart()) {
+					mes "[Employée Kafra]";
+					mes "Oh, mais vous avez déjà une Charrette!";
+					close;
+				}
+				if (Zeny >= 1899) {
+					set RESRVPTS, RESRVPTS + 190;
+					set zeny,zeny-1900;
+					if (getskilllv("MC_PUSHCART") > 0) setcart;
+					mes "[Employée Kafra]";
+					mes "Merci d'avoir utilisé nos services.";
+					mes "Même si ce que je viens de faire n'est pas très légal pour les autres Employées Kafra, je crois fermement que ce que je fais est juste pour les clients.";
+					close;
+				}
+				else {
+					mes "[Employée Kafra]";
+					mes "Je suis désolée, mais il semblerait que vous n'ayez pas assez d'argent. Le prix de la location est de 1 900 Zenys.";
+					close;
+				}
+			}
+			mes "[Employée Kafra]";
+			mes "Merci, n'hésitez pas à revenir.";
+			mes "Merci d'utilisé nos services.";
+			close;
+		}
+		mes "[Employée Kafra]";
+		mes "Merci, n'hésitez pas à revenir.";
+		mes "Merci d'utilisé nos services.";
+		close;
+	}
+	mes "[Employée Kafra]";
+	mes "Bonjo...!";
+	mes "Désolée, je ne pense pas pouvoir vous fournir ce que vous désirez... Merci de consulter l'une de mes collègues Kafra. Je m'excuse pour cet inconvénient...";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= Dialogs From Some Other Scripts (Most Of It)
+//= 1.3-1.5 Added Baby class support (and to the Kafta SN Cart
+//= renter, too) [Lupus]
+//= 1.6 Added a fix which prevent High Novices passing
+//= this Job Quests again. [Lupus]
+//= 1.7 Fixed Baby Class Support. [Lupus]
+//= 1.8 Now a Baby can become a Super Baby [Lupus]
+//============================================================ 

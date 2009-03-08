@@ -1,0 +1,1876 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Wizard Job Quest
+//===== By: ================================================== 
+//= (Aegis) Translated by yoshiki, converted by kobra_k88
+//= Further bugfixed and tested by Lupus
+//===== Current Version: ===================================== 
+//= 2.9
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Job Change quest for Wizard class.
+//===== Additional Comments: ================================= 
+//= 2.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 2.5 Several bugfixes with the help of Barron-Monster. [L0ne_W0lf]
+//= 2.5a More bugfixes care of Barron-Monster. [L0ne_W0lf]
+//= 2.5b Fixed tests calling on a non-existant label in "Room of x#Failed" npcs. [L0ne_W0lf]
+//= 2.5c Bug fixes. Cleaned up some NPCs slightly. [L0ne_W0lf]
+//= 2.6 Fixed Water Room not warping on time-up. [L0ne_W0lf]
+//= 2.7 Now uses enable and disable waitingroomevent. [L0ne_W0lf]
+//= 	Other minor fixes to various NPCs.
+//= 2.7a Added end; :D (bugreport:2038) [Yommy]
+//= 2.8 Fixed donpcevent to doevent. (bugreport:2311) [SoulBlaker]
+//= 2.9 Reverted the change of donpcevent to doevent. [L0ne_W0lf]
+//=     Was probably cuased by a warp BEFORE a percentheal
+//============================================================ 
+
+gef_tower,111,37,4	script	Catherine	70,{
+	if (Upper == 1) {
+		mes "[Catherine]";
+		mes "? Excusez-moi, je me demandais si nous ne nous étions pas déjà rencontrés...?";
+		mes "Hé~ vous avez beaucoup changé! Que s'est-il passé?";
+		next;
+		mes "[Catherine]";
+		mes "Vous êtes devenu plus puissant, n'est-ce pas?";
+		mes "Félicitations, et bonne chance dans votre nouvelle vie!";
+		close;
+	}
+	if (BaseJob != Job_Mage) {
+		if (BaseJob == Job_Wizard) {
+			mes "[Catherine]";
+			mes "Vous exercez déjà le métier de Sorcier, je doute que vous ayez quoi que ce soit à faire ici à présent...?";
+			mes "Maintenant, si vous vous voulez bien m'excusez.";
+			next;
+			mes "[Catherine]";
+			if (sex)
+				mes "A moins que... Vous soyez ici pour m'inviter à sortir avec vous...? Hohoho.";
+			else
+				mes "A moins que... Vous connaissiez un joli garçon à me présenter...? Hohoho!.";
+			close;
+		}
+		else if (BaseClass == Job_Novice) {
+			mes "[Sorcière]";
+			mes "Oh mon dieu, tu es un novice~ Tu es mimi tout plein!";
+			mes "Ici nous sommes dans la Guilde des Sorciers, mon chéri.";
+			next;
+			mes "[Sorcière]";
+			mes "Si tu es intéressé par la magie, tu devrais plutôt te rendre à la ^0000FFGuilde des Mages^000000.";
+		}
+		else {
+			mes "[Sorcière]";
+			mes "Hum? Qu'est-ce qui vous amène tout en haut de cette tour...?";
+			mes "Si vous n'avez rien à faire ici, veuillez vous en aller.";
+			mes "Ce lieu est réservé aux Sorciers, vous comprenez?";
+		}
+		next;
+		mes "[Sorcière]";
+		mes "Au revoir.";
+		close;
+	}
+	if (WIZ_Q == 0) {
+		mes "[Sorcière]";
+		mes "Hum? Qu'est-ce qui vous amène tout en haut de la Tour des Sorciers...?";
+		next;
+		if (select("Je souhaite devenir un Sorcier.:...rien de spécial.") == 1) {
+			mes "[Sorcière]";
+			mes "Je vois... Evidemment, vous souhaitez devenir un Sorcier. Je ne vois pas pour quelle autre raison vous auriez grimpé toutes ces marches, pas vrai?";
+			mes "Quoi qu'il en soit, soyez le bienvenue. Je vais vous assister dans votre apprentissage du métier de Sorcier.";
+			next;
+			mes "[Sorcière]";
+			mes "Mon nom est Catherine Medici. Entre vous et moi, je viens juste de devenir une Sorcière!";
+			mes "Vous pouvez m'appeler Cathy si vous voulez. Héhéhéhéhé~";
+			next;
+			mes "[Catherine]";
+			mes "Beaucoup de gens souhaitent de venir Sorciers, mais seuls ceux qui font preuve à la fois de force et de patience pourront atteindre leur but.";
+			mes "Afin de devenir Sorcier, il faut résoudre des quêtes difficiles.";
+			next;
+			mes "[Catherine]";
+			mes "Seuls les Mages ayant atteint au minimum le Niveau de Job 40 sont qualifiés pour s'inscrire à la formation au métier de Sorcier.";
+			mes "Les Mages de niveau inférieur ne sont pas assez expérimentés!";
+			next;
+			mes "[Catherine]";
+			mes "Bien, je vous donnerai plus d'informations si vous décidez de vous inscrire à la formation.";
+			mes "Alors? Est-ce que vous voulez vous inscrire?";
+			next;
+			if (select("Oui, s'il vous plaît.:Je vais y réfléchir.") == 1) {
+				if (JobLevel < 40) {
+					mes "[Catherine]";
+					mes "Hé, vous avez écouté ce que je viens de dire?";
+					mes "Je vous ai dit qu'il fallait avoir atteint au minimum le Niveau de Job 40.";
+					next;
+					mes "[Catherine]";
+					mes "Pas besoin de vous presser, vous savez. Allez vous entraîner encore un peu, et revenez me voir.";
+					close;
+				}
+				if (SkillPoint) {
+					mes "[Catherine]";
+					mes "Hum... Il vous reste des Points de Compétence à répartir.";
+					close;
+				}
+				mes "[Catherine]";
+				mes "Très bien, je vous sors un formulaire.";
+				mes "Ecrivez votre nom ici... voilà..." + strcharinfo(0) + ", c'est ça? J'espère que je l'ai prononcé correctement.";
+				next;
+				mes "[Catherine]";
+				mes "L'épreuve pour devenir Sorcier est divisée en trois parties.";
+				mes "La première consiste à rapporter des objets magiques.";
+				mes "La deuxième est un test écrit.";
+				mes "La troisième est une épreuve de pratique de la magie.";
+				next;
+				mes "[Catherine]";
+				mes "Si vous avez réussi à atteindre le Niveau de Job 50, vous serez exempté de la première partie qui consiste à rapporter divers objets.";
+				mes "Une fois toutes les épreuves accomplies, les efforts que vous aurez fournis nous auront prouvé votre volonté à devenir Sorcier.";
+				next;
+				if (JobLevel == 50) {
+					mes "[Catherine]";
+					mes "Hum, je vois que vous avez atteint le Niveau de Job 50? Vous avez travaillé très dur. Je suis sûre que vous deviendrez un Sorcier très puissant, je ressens bien ces choses là!";
+					next;
+					mes "[Catherine]";
+					mes "D'accord, vous êtes donc exempté de la première tâche. Mais ne vous reposez pas sur vos lauriers, il reste encore les deux autres tâches à accomplir.";
+					next;
+					mes "[Catherine]";
+					mes "Allez parler à l'homme situé dans le coin de la pièce, c'est lui qui est en charge de la suite des examens.";
+					mes "Soyez prudent, nous avons perdu... un certain nombre de jeunes Mages, à cause de la difficulté des épreuves.";
+					set WIZ_Q,3;
+					close;
+				}
+				mes "[Catherine]";
+				mes "Bien, puisque vous êtes maintenant inscrit à notre formation, je vais vous fournir les détails de la première épreuve.";
+				mes "Essayez de vous en souvenir, ou bien prenez des notes, je n'aime pas me répéter.";
+				next;
+				mes "[Catherine]";
+				mes "La première épreuve consiste à rassembler certains objets magiques. Attention, vous devez le faire vous-même!";
+				next;
+				set wizard_m1,rand(1,2);
+				mes "[Catherine]";
+				mes "La liste des objets que vous devez rapporter est la suivante...";
+				if (rand(1)) {
+					set WIZ_Q,1;
+					mes "10 ^3355FFGemmes Rouges^000000,";
+					mes "10 ^3355FFGemmes Bleues^000000, et";
+					mes "10 ^3355FFGemmes Jaunes^000000.";
+				}
+				else {
+					set WIZ_Q,2;
+					mes "5 ^3355FFCrystal Blue^000000,";
+					mes "5 ^3355FFGreen Live^000000,";
+					mes "5 ^3355FFRed Blood^000000, et";
+					mes "5 ^3355FFWind of Verdure^000000.";
+				}
+				mes "...ça ne sera pas trop difficile? Non, quiconque souhaite devenir Sorcier doit au moins être capable de rapporter ces petits objets.";
+				next;
+				mes "[Catherine]";
+				mes "Bien, bonne chance.";
+				mes "Je vous attends ici. ~Héhé.";
+				close;
+			}
+			mes "[Catherine]";
+			mes "D'accord, d'accord, prenez votre temps.";
+			mes "Comme je suis toujours ici, je vous attendrai si vous changez d'avis...*soupir*...";
+			close;
+		}
+		mes "[Sorcière]";
+		mes "Et bien, si vous n'avez rien à faire ici, du balais!";
+		close;
+	}
+	else if (WIZ_Q == 1) {
+		mes "[Catherine]";
+		mes "Voyons voir si vous avez tous les objets...";
+		next;
+		if (countitem(716) > 9 && countitem(717) > 9 && countitem(715) > 9) {
+			mes "[Catherine]";
+			mes "Parfait! C'est du bon travail!~";
+			mes "Je vais mettre ces objets dans le stock commun des fournitures magiques de notre guilde. ~Héhéhé.";
+			next;
+			delitem 716,10; //Red_Gemstone
+			delitem 717,10; //Blue_Gemstone
+			delitem 715,10; //Yellow_Gemstone
+			set WIZ_Q,3;
+			mes "[Catherine]";
+			mes "Bravo, vous avez réussi la première épreuve.";
+			mes "Mais ne vous reposez pas sur vos lauriers, il reste encore les deux autres tâches à accomplir.";
+			next;
+			mes "[Catherine]";
+			mes "Allez parler à l'homme situé dans le coin de la pièce, c'est lui qui est en charge de la suite des examens.";
+			mes "Soyez prudent, nous avons perdu... un certain nombre de jeunes Mages, à cause de la difficulté des épreuves.";
+			close;
+		}
+		mes "[Catherine]";
+		mes "Et bien? Pourquoi vous n'avez pas les objets que je vous ai demandés?!";
+		next;
+		mes "[Catherine]";
+		mes "La vie est suffisamment courte, alors arrêtez de gaspiller votre temps et rapportez-moi les objets que je vous ai demandés! Et dire que c'est la partie la plus simple des épreuves...";
+		next;
+		mes "[Catherine]";
+		mes "Vous devez rapporter:";
+		mes "10 ^3355FFGemmes Rouges^000000,";
+		mes "10 ^3355FFGemmes Bleues^000000, et";
+		mes "10 ^3355FFGemmes Jaunes^000000.";
+		mes "N'oubliez pas, et ne traînez pas en chemin, c'est compris? ...";
+		close;
+	}
+	else if (WIZ_Q == 2) {
+		mes "[Catherine]";
+		mes "Voyons voir si vous avez tous les objets...";
+		next;
+		if (countitem(991) > 4 && countitem(993) > 4 && countitem(990) > 4 && countitem(992) > 4) {
+			mes "[Catherine]";
+			mes "Parfait! C'est du bon travail!~";
+			mes "Je vais mettre ces objets dans le stock commun des fournitures magiques de notre guilde. ~Héhéhé.";
+			next;
+			delitem 991,5; //Crystal_Blue
+			delitem 993,5; //Yellow_Live
+			delitem 990,5; //Boody_Red
+			delitem 992,5; //Wind_Of_Verdure
+			set WIZ_Q,3;
+			mes "[Catherine]";
+			mes "Bravo, vous avez réussi la première épreuve.";
+			mes "Mais ne vous reposez pas sur vos lauriers, il reste encore les deux autres tâches à accomplir.";
+			next;
+			mes "[Catherine]";
+			mes "Allez parler à l'homme situé dans le coin de la pièce, c'est lui qui est en charge de la suite des examens.";
+			mes "Soyez prudent, nous avons perdu... un certain nombre de jeunes Mages, à cause de la difficulté des épreuves.";
+			close;
+		}
+		mes "[Catherine]";
+		mes "Et bien? Pourquoi vous n'avez pas les objets que je vous ai demandés?!";
+		next;
+		mes "[Catherine]";
+		mes "La vie est suffisamment courte, alors arrêtez de gaspiller votre temps et rapportez-moi les objets que je vous ai demandés! Et dire que c'est la partie la plus simple des épreuves...";
+		next;
+		mes "[Catherine]";
+		mes "Vous devez rapporter:";
+		mes "5 ^3355FFCrystal Blue^000000,";
+		mes "5 ^3355FFGreen Live^000000,";
+		mes "5 ^3355FFRed Blood^000000, et";
+		mes "5 ^3355FFWind of Verdure^000000.";
+		mes "N'oubliez pas, et ne traînez pas en chemin, c'est compris? ...";
+		close;
+	}
+	else if (WIZ_Q == 3) {
+		mes "[Catherine]";
+		mes "Et bien, quoi? Je vous ai dit d'aller parler à l'homme situé dans le coin de la pièce. Vous ne pourrez pas devenir Sorcier si vous restez planté là comme un piquet...";
+		next;
+		mes "[Catherine]";
+		mes "Vous devez réussir les deux épreuves restantes! Je vous attends ici, alors zou! Du balais!";
+		close;
+	}
+	else if (WIZ_Q == 4) {
+		mes "[Catherine]";
+		mes "*soupir*...Mon pauvre ami, quelle déchéance.";
+		mes "Comment pouvez-vous imaginer pouvoir devenir Sorcier si vous n'arrivez même pas à répondre à des questions aussi simples?";
+		next;
+		mes "[Catherine]";
+		mes "Voyons voir... Est-ce que je devrais vous donner quelques indices? Après tout, je suis votre aînée?";
+		mes "Mais j'ai un peu soif, là... Si vous pouviez m'apporter un Jus de Pommes, ce serait bien aimable. ~Héhéhé";
+		next;
+		switch(select("Donnez-moi des indices!:Je vais réessayer par moi-même!")) {
+		case 1:
+			if (countitem(531) > 0) {
+				delitem 531,1; //Apple_Juice
+				mes "[Catherine]";
+				mes "Miam... Le Jus de Pomme c'est ce qu'il y a de meilleur au monde...";
+				mes "Glou glou glou... Haaaaaah... ~Héhé";
+				next;
+				mes "[Catherine]";
+				mes "Bon, comme promis je vais vous donner des indices pour la deuxième épreuve.";
+				next;
+				mes "[Catherine]";
+				mes "On va vous poser trois types de questions: à propos de la magie, à propos des monstres, et à propos des magiciens.";
+				next;
+				mes "[Catherine]";
+				mes "C'est le Sorcier Raulel qui décide des questions à poser. *Soupir*... D'ailleurs il devrait se raser et se couper les cheveux, ça lui irait bien mieux...";
+				mes "Il a toujours l'air négligé, car il ne prend pas soin de son apparence... *soupir*... C'est vraiment dommage, il pourrait devenir un vrai tombeur! ~téhéhéhé";
+				next;
+				mes "[Catherine]";
+				mes "Quoi qu'il en soit, concernant les questions à propos de la magie... Elles portent en général sur les sortilèges que vous avez appris.";
+				next;
+				mes "[Catherine]";
+				mes "Concernant les questions à propos des monstres, si vous vous êtes bien entraîné que vous avez déjà combattu différentes races de monstres, vous ne devriez pas avoir de problème pour répondre.";
+				next;
+				mes "[Catherine]";
+				mes "Mais si jamais vous voulez vraiment bien vous préparer, vous pouvez étudier à la Bibliothèque de Prontera! Il y a là bas une quantité d'informations absolument énorme à propos de tous les monstres du continent de Rune Midgard!";
+				next;
+				mes "[Catherine]";
+				mes "En dernier mais non moindre, les questions concernant les magiciens... portent sur des choses que personne ne peut vous enseigner. Parce que vous êtes un magicien, pardis!";
+			}
+			else {
+				mes "[Catherine]";
+				mes "Comme je vous l'ai dit, j'ai un peu soif, là... Si vous pouviez m'apporter un Jus de Pommes, ce serait bien aimable. ~Héhéhé";
+			}
+			break;
+		case 2:
+			mes "[Catherine]";
+			mes "Oui, on a plus de satisfaction quand on résout ses problèmes soi-même. Allez terminer les épreuves avec cet esprit combatif!";
+		}
+		next;
+		mes "[Catherine]";
+		mes "Bon et bien, à plus tard! *croise les doigts* Ne finissez pas comme les autres (que Dieu veille sur leurs âmes)... hum? Ah euh, oubliez ce que je viens de dire! ~Héhéhéhé";
+		close;
+	}
+	else if (WIZ_Q == 5) {
+		mes "[Catherine]";
+		mes "Téhéhéhé~ J'ai tout entendu.";
+		mes "Bien joué, vous avez bien répondu aux questions...";
+		next;
+		mes "[Catherine]";
+		mes "Mais il vous reste encore une épreuve à passer, pas vrai?";
+		mes "Encore un petit effort, et vous deviendrez Sorcier. Et à ce moment là, je vous offrirai un petit cadeau. ~Héhé";
+		next;
+		mes "[Catherine]";
+		mes "Allez, au travail! Vous êtes attendu par Raulel!";
+		close;
+	}
+	else if (WIZ_Q == 6) {
+		mes "[Catherine]";
+		mes "Hé, vous êtes parti au milieu de l'épreuve?";
+		mes "Pff... *soupir*... Je ne pensais pas que vous feriez quelque chose d'aussi déshonorant.";
+		next;
+		mes "[Catherine]";
+		if (sex) {
+			mes "Vous êtes un magicien, comment pouvez-vous vous montrer aussi faible?!";
+			mes "Enfin, au moins vous êtes en vie. Retournez-y et faîtes de votre mieux cette fois ci. ~téhéhéhé";
+		}
+		else {
+			mes "Ne faîtes pas semblant d'être faible parce que vous êtes une fille. Regardez-moi! J'ai réussi, donc vous aussi vous pouvez le faire. Pas la peine de demander un traitement de faveur.";
+			mes "Vous êtes venu jusqu'ici pour devenir une Sorcière, alors allez-y!!";
+			next;
+			mes "[Catherine]";
+			mes "Je comprends que cette épreuve soit difficile, mais il est hors de question d'abandonner.";
+			mes "Vous trouverez la force et la patience pour réussir cette épreuve, j'en suis sûre!";
+		}
+		next;
+		mes "[Catherine]";
+		mes "Donc, au travail! ...";
+		mes "Raulel vous attend!";
+		close;
+	}
+	else if (WIZ_Q == 7) {
+		if (JobLevel < 40) {
+			set WIZ_Q,0;
+			mes "[Catherine]";
+			mes "Qu'est-ce que vous n'avez pas compris?";
+			mes "Je vous ai dit que vous deviez avoir atteint au minimum le Niveau de Job 40!";
+			next;
+			mes "[Catherine]";
+			mes "Pas la peine de vous presser, prenez votre temps pour étudier et vous entraîner.";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Catherine]";
+			mes "Il vous reste des Points de Compétence à attribuer!";
+			close;
+		}
+		mes "[Catherine]";
+		mes "Waaahouuuuu... Vous avez réussi toutes les épreuves?!";
+		mes "Félicitations, félicitations, fé-li-ci-ta-tions! Youuupiiiii! ~Héhéhéhéhéhé";
+		next;
+		mes "[Catherine]";
+		mes "Bon, pas la peine d'attendre plus longtemps. Tenez, voici votre diplôme de Sorcier.";
+		next;
+		callfunc "Job_Change",Job_Wizard;
+		callfunc "F_ClearJobVar";		// clears all job variables for the current player
+		mes "[Catherine]";
+		mes "Puisque vous êtes un Sorcier à présent, comportez-vous comme tel, c'est compris?";
+		mes "Nous autres Sorciers devons rester prudents, car nous possédons des pouvoirs magiques très puissants.";
+		next;
+		mes "[Catherine]";
+		mes "Ne lancez pas de sortilège sans raison, et surtout pas en plein milieu des villes! N'embêtez pas les gens en lançant des sortilèges à tout va au milieu d'une bataille.";
+		next;
+		mes "[Catherine]";
+		mes "Vous devriez maintenant aller vous entraîner, l'apprentissage du métier de Sorcier est très long!";
+		mes "Et... oh, attendez, j'ai préparé un petit cadeau pour vous.";
+		next;
+		mes "[Catherine]";
+		mes "remue remue...";
+		mes "fouille fouille...";
+		next;
+		getitem 505,6; //Blue_Potion
+		mes "[Catherine]";
+		mes "Et voilà pour vous. J'espère que vous en ferez bon usage. ~téhéhé";
+		mes "Hé, c'est un cadeau, hein! Ne les vendez pas, utilisez-les pour vous-même, d'accord?";
+		next;
+		mes "[Catherine]";
+		mes "Bon et bien... *soupir*... c'est le moment de vous dire au revoir!";
+		close;
+	}
+}
+
+gef_tower,102,24,2	script	Sorcier Sombre	735,{
+	if (BaseJob != Job_Mage) {
+		if (BaseJob == Job_Wizard) {
+			mes "[Raulel]";
+			mes "*Kof* *kof* Qu'est-ce que vous voulez?";
+			mes "Vous êtes un Sorcier vous aussi... n'oubliez pas d'étudier les sortilèges avant de vous en servir.";
+			next;
+			mes "[Raulel]";
+			mes "Soyez honnête et poli, ou bien un jour ou l'autre vous serez victime de vos propres sortilèges que vous n'aurez sû contrôler, et BOUM, vous serez mort!";
+			if (sex == 1) {
+				mes "Si vous ne voulez pas que ça se produise, étudiez et utilisez vos sortilèges correctement!";
+				next;
+				mes "[Raulel]";
+				mes "Si vous devez obsédé par la Magie, vous vivrez paralysé dans la peur. ~haha";
+			}
+			else {
+				mes "Alors apprenez à utiliser la magie correctement, ou alors ne l'utilisez pas du tout.";
+				next;
+				mes "[Raulel]";
+				mes "Si vous ne faîtes pas attention, vous vous retrouverez dépendant à la magie, un jour...";
+			}
+			close;
+		}
+		else if (BaseJob == Job_Priest) {
+			mes "[Raulel]";
+			mes "Allez-vous en, serviteur de l'Eglise!";
+			mes "La Magie repousse les pouvoirs Divins... Vous perturbez mon aura, là!";
+			next;
+			mes "[Raulel]";
+			mes "En plus, *kof* *kof* ma santé n'est très bonne... Alors ne vous approchez pas de moi! Partez bon sang!";
+			close;
+		}
+		else if (BaseClass == Job_Novice) {
+			mes "[Raulel]";
+			mes "Qu'est-ce qu'un petit mioche dans ton genre fait ici?!";
+			mes "Dégage! ~Hahahahaha";
+			close2;
+			warp "geffen",120,110;
+			end;
+		}
+		mes "[Raulel]";
+		mes "*renifle* *kof* Oooowww... j'ai mal partout. C'est comme si j'étais piégé dans de l'eau glacée!";
+		next;
+		mes "[Raulel]";
+		mes "Qu'est-ce que vous voulez? Pff... allez voir ailleurs si j'y suis!";
+		close;
+	}
+	if (WIZ_Q == 0) {
+		mes "[Raulel]";
+		mes "*kof* *kof* *renifle* Je ne sais pas qui vous êtes et ce que vous faites ici, mais je n'ai rien à vous dire.";
+		next;
+		mes "[Raulel]";
+		mes "Alors dégagez! Du balais!";
+		close;
+	}
+	else if (WIZ_Q == 1 || WIZ_Q  == 2) {
+		mes "[Raulel]";
+		mes "Hahahaha~ Vous êtes celui qui veut devenir Sorcier?!";
+		next;
+		mes "[Raulel]";
+		mes "*renifle* Vous avez une vie paisible, vous vous entraînez, vous étudiez... une vie on ne peut plus simple...";
+		next;
+		mes "[Raulel]";
+		mes "*kof* *kof* Mais si vous devez Sorcier votre vie ne sera plus de tout repos. ~Hahahahhaha";
+		close;
+	}
+	else if (WIZ_Q == 3) {
+		mes "[Raulel]";
+		mes "*kof* *kof*... Vous avez réussi la première épreuve?";
+		mes "D'accord, je suis le Sorcier en charge de la suite des épreuves. Mon nom est Raulel Asparagus.";
+		next;
+		mes "[Raulel]";
+		mes "*renifle* Il n'est pas trop tard pour vous: si vous voulez repartir en ville et continuer à vivre votre paisible petit quotidien, ce n'est pas moi qui vais vous en empêcher.";
+		next;
+		mes "[Raulel]";
+		mes "Hahahaha~ Vous ne le savez pas encore mais... la Magie de Haut Niveau peut être très dangereuse.";
+		next;
+		if (select("Je veux rester Mage.:Je veux continuer les épreuves.") == 1) {
+			mes "[Raulel]";
+			mes "Hahaha~ *renifle* Bon choix...*kof* *kof*~";
+			mes "Devenir Sorcier... Même pas en rêve! La Ma... Mag...*renifle* La Magie de Haut Niveau n'a pas été créée pour les simples mortels!";
+			next;
+			mes "[Raulel]";
+			mes "Quittez cet endroit et ne vous retournez pas en partant. Vivez paisiblement, et contentez-vous des pouvoirs que vous possédez actuellement.";
+			close;
+		}
+		mes "[Raulel]";
+		mes "*renifle* Hahahaha~ On a un fou, et de un!";
+		mes "D'accord, dans ce cas voyons voir quel es votre niveau. *kof* Je veux pouvoir vous juger de mes propres yeux!";
+		next;
+		mes "[Raulel]";
+		mes "*renifle* Commençons le test!";
+		mes "Si vous ne répondez pas à toutes mes questions correctement, vous échouerez. Hahahahahahahahaha~";
+		next;
+		mes "[Raulel]";
+		mes "*kof* *kof* C'est parti!";
+L_AskQuestions:
+		next;
+		switch(rand(1,3)) {
+		case 1:
+			mes "[Raulel]";
+			mes "1. Laquelle de ces compétences n'est pas nécessaire pour apprendre Fire Wall?";
+			next;
+			if (select("Fire Bolt Niveau 4:Fire Ball Niveau 5:Sight Niveau 1:Napalm Beat Niveau 4") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "2. Quelle est la propriété élémentale d'un monstre sur lequel vous avez lancé le sortilège Frost Diver?";
+			next;
+			if (select("Eau:Terre:Feu:Vent") == 1)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "3. Lorsque vous maîtrisez totalement le sortilège Napalm Beat, quel est le ratio d'augmentation de votre MATK en utilisant ce sort?";
+			next;
+			if (select("1.6 fois:1.7 fois:2 fois:20 fois") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "4. De quel objet avez-vous besoin pour lancer le sortilège Stone Curse?";
+			next;
+			if (select("Red Blood:Gemme Bleue:Gemme Jaune:Gemme Rouge") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "5. Laquelle de ces compétences n'est pas nécessaire pour maîtriser Safety Wall?";
+			next;
+			if (select("Napalm Beat Niveau 4:Soul Strike Niveau 5:Increase SP Recovery Niveau 6:Safety Wall Niveau 7") == 3)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "6. Sans compter les bonus conférés par votre INT, combien de SP recouvrez-vous toutes les 10 secondes lorsque vous avez appris Increase SP Recovery au Niveau 7?";
+			next;
+			if (select("14:21:28:35") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "7. Lorsque vous utilisez Energy Coat et qu'il vous reste 50% de vos SP, combien de SP perdrez-vous si vous êtes touché, et quel est le pourcentage de réduction de dégâts dont vous bénéficiez?";
+			next;
+			if (select("Dégâts 18% SP1.5%:Dégâts 18% SP2%:Dégâts 24% SP1.5%:Dégâts 24% SP2%") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "8. Combien de SP sont consommés et combien de fois pouvez-vous évitez une attaque lorsque vous êtes protégé par un Safety Wall de Niveau 6?";
+			next;
+			if (select("SP 40, 6 fois:SP 35, 6 fois:SP 40, 7 fois:SP 35, 7 fois") == 3)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "9. Combien de SP sont nécessaire pour lancer un Thunderstorm de Niveau 10?";
+			next;
+			if (select("84:74:64:54") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "10. Quelle est la compétence la plus utile dans le Donjon de Byalan?";
+			next;
+			if (select("Lightning Bolt:Fire Bolt:Cold Bolt:Sight") == 1)
+				set .@wizard_t,.@wizard_t+10;
+			break;
+		case 2:
+			mes "[Raulel]";
+			mes "1. De quel monstre pouvez-vous obtenir un Guard [1]?";
+			next;
+			if (select("Thief Bug:PecoPeco:Pupa:Kobold (Hammer)") == 3)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "2. Lequel de ces monstres est le plus simple à combattre pour un Mage débutant?";
+			next;
+			if (select("Flora:Giearth:Golem:Myst") == 1)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "3. Lequel de ces monstres ne peut pas être affecté par le sortilège Stone Curse?";
+			next;
+			if (select("Elder Willow:Evil Druid:Magnolia:Marc") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "4. Lorsque vous attaquez un monstre de propriété élémentale d'Eau Niveau 3 avec une arme enchantée Vent, quel est le pourcentage de dégâts infligés?";
+			next;
+			if (select("125%:150%:175%:200%") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "5. Si un Baby Desert Wolf et Familiar se combattent, lequel des deux gagnera?";
+			next;
+			if (select("Baby Desert Wolf:Familiar:Aucun des deux:Je ne sais pas") == 1)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "6. Lequel des monstres suivants ne peut pas devenir un Monstre de Compagnie?";
+			next;
+			if (select("Poporing:Roda Frog:Smokie:Poison Spore") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "7. Quel est le monstre qui a la plus faible défense contre une attaque de type Feu?";
+			next;
+			if (select("Dagger Goblin:Mace Goblin:Morningstar Goblin:Hammer Goblin") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "8. Lequel de ces monstres a la plus haute défense?";
+			next;
+			if (select("Horn:Chonchon:Andre:Caramel") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "9. Lequel de ces monstres est d'une race différente des autres?";
+			next;
+			if (select("Poring:Mastering:Ghostring:Spore") == 3)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "10. Lequel de ces monstres n'est pas un Mort-Vivant?";
+			next;
+			if (select("Drake:Megalodon:Deviace:Khalitzburg") == 3)
+				set .@wizard_t,.@wizard_t+10;
+			break;
+		case 3:
+			mes "[Raulel]";
+			mes "1. Quelle statistique est la plus importante pour un Mage?";
+			next;
+			if (select("INT:AGI:DEX:VIT") == 1)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "2. Quel élément ne possède pas d'attaque de type 'Bolt'?";
+			next;
+			if (select("Eau:Terre:Feu:Vent") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "3. Qu'est-ce qui ne caractérise pas un Mage?";
+			next;
+			if (select("Force physique faible.:Attaque à distance.:Bon commerçant.:Défense magique élevée.") == 3)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "4. Dans quelle ville résident les Mages?";
+			next;
+			if (select("Prontera:Morroc:Alberta:Geffen") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "5. Laquelle des cartes suivantes n'a rien à voir avec l'INT?";
+			next;
+			if (select("Andre Egg Card:Soldier Andre Card:Baby Desert Wolf Card:Elder Willow Card") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "6. En quoi les Mages sont-ils meilleurs par rapport aux autres métiers?";
+			next;
+			if (select("Capacités vocales exceptionnelles:Capacités théâtrales exceptionnelles:Capacités en danse exceptionnelles:Capacités magiques exceptionnelles") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "7. Quel est le bonus d'INT conféré à un Mage ayant atteint le Niveau de Job 40?";
+			next;
+			if (select("8:7:6:5") == 4)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "8. Quel équipement un Mage ne peut-il pas porter?";
+			next;
+			if (select("Knife:Boys Cap:Sandle:Eye of Dullahan") == 2)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "9. Quel est le catalyseur nécessaire pour fabriquer la solution n°3 de l'épreuve pour devenir Mage?";
+			next;
+			if (select("Gemme Bleue:Gemme Rouge:Gemme Jaune:Gemme Rouge") == 1)
+				set .@wizard_t,.@wizard_t+10;
+			mes "[Raulel]";
+			mes "10. Quelle carte n'a rien à voir avec la magie?";
+			next;
+			if (select("Marduk Card:Magnolia Card:Willow Card:Maya Card") == 2)
+				set .@wizard_t,.@wizard_t+10;
+		}
+		mes "[Raulel]";
+		if (WIZ_Q == 4) {
+			mes "Vous avez répondu à toutes les questions... C'est déjà ça. Haha...";
+			next;
+			mes "[Raulel]";
+			mes "Votre score est de... " + .@wizard_t + "points.....";
+			if (.@wizard_t == 100) {
+				set WIZ_Q,5;
+				mes "Hahahahahahah~ Bien joué, vous avez réussi la seconde épreuve.";
+				mes "Vous n'avez pas réussi du premier coup, mais ça ira pour cette fois...";
+				next;
+				mes "[Raulel]";
+				mes "*renifle* Ne vous détendez pas trop vite, il vous reste à passer la troisième épreuve.";
+				mes "Je vous suggère de vous reposer un peu avant de passer la dernière épreuve. Vous allez en avoir besoin. Hahahahaha~";
+				close;
+			}
+			else if (.@wizard_t == 90) {
+				set WIZ_Q,5;
+				mes "Hahaha~ Vous n'avez fait qu'un seule faute, et comme je suis de bonne humeur aujourd'hui on va dire que ça suffira.";
+				mes "Vous avez réussi la seconde épreuve! Pas du premier coup mais bon, vous ne pouvez pas être aussi parfait que moi...";
+				next;
+				mes "[Raulel]";
+				mes "*renifle* Ne vous détendez pas trop vite, il vous reste à passer la troisième épreuve.";
+				mes "Je vous suggère de vous reposer un peu avant de passer la dernière épreuve. Vous allez en avoir besoin. Hahahahaha~";
+				close;
+			}
+			else if (.@wizard_t == 80) {
+				set WIZ_Q,5;
+				mes "Pff... Ce n'est pas terrible.... Mais comme je suis de bonne humeur aujourd'hui, on va dire que ça suffira.";
+				mes "Vous avez réussi la seconde épreuve! Pas du premier coup mais bon, vous ne pouvez pas être aussi parfait que moi...";
+				next;
+				mes "[Raulel]";
+				mes "*renifle* Ne vous détendez pas trop vite, il vous reste à passer la troisième épreuve.";
+				mes "Je vous suggère de vous reposer un peu avant de passer la dernière épreuve. Vous allez en avoir besoin. Hahahahaha~";
+				close;
+			}
+			else {
+				mes "Vous avez échoué. Retournez étudier, crétin!";
+				next;
+				mes "[Raulel]";
+				mes "*kof* *kof* Vous pensiez réellement que vous pourriez devenir Sorcier avec un niveau aussi médiocre?";
+				mes "Hors de ma vue! Si vous étiez un Sorcier, je n'hésiterais pas à vous punir comme il se doit pour cette démonstration de nullité extrême!";
+				close;
+			}
+		}
+		mes "Humm... Bon travail, vous avez répondu à toutes les questions. Voyons voir le résultat à présent. Hahahahahahahah~";
+		next;
+		mes "[Raulel]";
+		mes "Vous avez obtenu... " + .@wizard_t + " points!";
+		if (.@wizard_t == 100) {
+			set WIZ_Q,5;
+			mes "*kof* *kof* Bravo, vous avez réussi la seconde épreuve.";
+			next;
+			mes "[Raulel]";
+			mes "Hahahaha~ Ne vous détendez pas trop vite, il vous reste à passer la troisième épreuve.";
+			mes "*renifle* Je vous suggère de vous reposer un peu avant de passer la dernière épreuve... Hahahahah~";
+			close;
+		}
+		else if (.@wizard_t == 90) {
+			set WIZ_Q,5;
+			mes "Hahaha~ Vous n'avez fait qu'un seule faute, et comme je suis de bonne humeur aujourd'hui on va dire que ça suffira.";
+			mes "Vous avez réussi la seconde épreuve! Pas du premier coup mais bon, vous ne pouvez pas être aussi parfait que moi...";
+			next;
+			mes "[Raulel]";
+			mes "*renifle* Ne vous détendez pas trop vite, il vous reste à passer la troisième épreuve.";
+			mes "Je vous suggère de vous reposer un peu avant de passer la dernière épreuve. Vous allez en avoir besoin. Hahahahaha~";
+			close;
+		}
+		else {
+			set WIZ_Q,4;
+			mes "Vous avez échoué. Retournez étudier, crétin!";
+			next;
+			mes "[Raulel]";
+			mes "*kof* *kof* Vous pensiez réellement que vous pourriez devenir Sorcier avec un niveau aussi médiocre?";
+			mes "Hors de ma vue! Si vous étiez un Sorcier, je n'hésiterais pas à vous punir comme il se doit pour cette démonstration de nullité extrême!";
+			close;
+		}
+	}
+	else if (WIZ_Q == 4) {
+		mes "[Raulel]";
+		mes "Hahahaha~ Vous n'abandonnez pas facilement, hein? *renifle* Quelle plaie...";
+		next;
+		mes "[Raulel]";
+		mes "Puisque vous semblez réellement penser que vous pouvez y arriver, je vais vous donner une autre chance. Après tout, ce n'est pas mon problème si vous vous tapez la honte après avoir exposé votre déficience mentale...";
+		next;
+		mes "[Raulel]";
+		mes "Si vous ne savez pas répondre à toutes les questions correctement, c'est que vous n'êtes pas fait pour être Sorcier. Croyez-moi, vous pouvez encore laisser tomber pendant qu'il en est temps! ~Hahahahaha";
+		next;
+		if (select("Je souhaite vivre comme un Mage normal.:Je souhaite continuer les épreuves.") == 1) {
+			mes "[Raulel]";
+			mes "Hahahaha~ Pourquoi ça ne me surprend même pas? C'est un très bon choix...*kof* *kof*";
+			mes "Si j'étais vous, j'abandonnerai définitivement ce rêve stupide que vous avez de devenir Sorcier. La Ma... Mag... *renifle* La Magie de Haut Niveau n'est pas faite pour vous.";
+			next;
+			mes "[Raulel]";
+			mes "Quittez cet endroit et ne vous retournez pas en partant. Vivez paisiblement, et contentez-vous des pouvoirs que vous possédez actuellement.";
+			close;
+		}
+		mes "[Raulel]";
+		mes "Hahahahahahaha~ Regardez-moi ce crétin!";
+		mes "Et bien, puisque vous avez l'air persuadé de votre valeur, voyons voir comment vous allez vous en sortir cette fois-ci! *renifle*";
+		next;
+		mes "[Raulel]";
+		mes "Commençons le test!";
+		goto L_AskQuestions;
+	}
+	else if (WIZ_Q == 5) {
+		mes "[Raulel]";
+		mes "J'espère que vous vous êtes bien reposé. Hahahahahah~";
+		mes "Commençons la dernière épreuve.";
+		next;
+		mes "[Raulel]";
+		mes "Est-ce que vous voulez quelques explications à propos de ce qui vous attend? Je ne vous cache pas que vous allez en baver...";
+		next;
+		if (select("Non, c'est bon, je suis prêt.:J'aimerais écouter les explications.") == 1) {
+			mes "[Raulel]";
+			mes "Vous êtes un peu tête brûlée, non? Le genre à se jeter au milieu d'un combat avant même d'avoir fait fonctionné ses cellules grises. Pourquoi ne pas aller faire un tour à la Cavalerie de Prontera? Je suis certain qu'ils ont de la place pour les gens dans votre genre. Enfin, ce n'est pas mon problème... *kof* si vous mourez comme un idiot.";
+			mes "Considérez-vous comme de la chair à pâté... les monstres vont vous mettre en pièce, j'espère que vous en êtes conscient. Hahahahahahahahaha~";
+			next;
+			set WIZ_Q,6;
+			savepoint "geffen",120,107;
+			mes "[Raulel]";
+			mes "Enfin, comme vous voulez. Je vous envoie vers la dernière épreuve à présent.";
+			mes "Oh, et si vous voyez une lumière blanche au bout d'un tunnel, ça veut dire que vous avez lamentablement échoué! Hahahahahah~";
+			close2;
+			warp "job_wiz",57,154;
+			end;
+		}
+		mes "[Raulel]";
+		mes "Vous avez raison de prendre votre temps. Je vais tout vous expliquer.";
+		mes "Cette dernière épreuve est très difficile, mais si vous faîtes tout ce que je dis, vous pourrez en venir à bout en un seul morceau.";
+		next;
+		mes "[Raulel]";
+		mes "La dernière épreuve comporte trois parties.";
+		mes "Vous allez être envoyé dans trois salles, dans cet ordre: Salle de l'Eau, Salle de la Terre, Salle du Feu. Dans chaque pièce, vous affronterez des monstres d'une certaine propriété élémentale.";
+		next;
+		mes "[Raulel]";
+		mes "En bref, si vous attaquez avec des sorts de la bonne propriété élémentale, opposée à celle des monstres... *renifle* vous n'aurez aucun mal à les battre. Hahaha~";
+		next;
+		mes "[Raulel]";
+		mes "Une fois que vous aurez vaincu tous les monstres d'une salle dans le temps qui vous est imparti, vous serez envoyé à la salle suivante.";
+		next;
+		mes "[Raulel]";
+		mes "Après avoir terminé les trois salles, l'épreuve sera finie.";
+		mes "Et vous deviendrez un Sorcier avec de supers pouvoirs magiques! Et... il n'y aura plus de retour possible pour vous vers une vie calme et tranquille.";
+		next;
+		mes "[Raulel]";
+		mes "Hahaha~ Vous avez l'air effrayé. Vous savez, il n'est pas trop tard. Vous pouvez retourner vivre votre petite vie tranquille et sans problème.";
+		mes "Si vous voulez, je peux vous renvoyer dans votre patelin... Qu'en dîtes-vous?";
+		next;
+		if (select("Continuer l'épreuve.:Je me sens un peu barbouillé...") == 1) {
+			set WIZ_Q,6;
+			savepoint "geffen",120,107;
+			mes "[Raulel]";
+			mes "Vous êtes vraiment déterminé. Très bien! Hahahahahaha~";
+			mes "*kof* *kof* Comme vous voulez, nous allons commencer la dernière épreuve!";
+			close2;
+			warp "job_wiz",57,154;
+			end;
+		}
+		set WIZ_Q,6;
+		mes "[Raulel]";
+		mes "Bon choix. Enfin, pour vous tout du moins. Hahahahah~";
+		mes "Retournez à votre paisible petite vie sans intérêt. La Magie de Haut Niveau n'est pas faite pour être maîtrisée par quelqu'un d'aussi banal que vous.";
+		close2;
+		warp "geffen",120,110;
+		end;
+	}
+	else if (WIZ_Q == 6) {
+		if (WIZ_Q2 == 6) {
+			mes "[Raulel]";
+			mes "Hahahahahaha~ Je n'ai jamais vu quelqu'un d'aussi... d'aussi... *renifle* tenace.";
+			mes "Alors vous voulez réessayer? Même si vous avez été ridiculisé par vos précédents échecs??";
+			next;
+			mes "[Raulel]";
+			mes "Très bien, voici une proposition. Puisque vous n'avez d'autre choix que de passer par moi pour la suite des épreuves, il est normal que vous deviez suivre chacune de mes paroles à la lettre...";
+			mes "Hahahahaha~ oui! Sachez que si vous échouez à nouveau, vous devrez me rapporter un ^3355FFWorn Out Scroll^000000 afin que je vous laisse repasser l'épreuve à nouveau.";
+			next;
+			set WIZ_Q2,WIZ_Q2+1;
+			mes "[Raulel]";
+			mes "Si vous n'obéissez pas, vous pouvez faire une croix sur votre carrière de Sorcier...";
+			mes "Bon, je vous renvoie à votre mort. Hahahaha~";
+			close2;
+			warp "job_wiz",57,154;
+			end;
+		}
+		else if (WIZ_Q2 > 6) {
+			mes "[Raulel]";
+			mes "Oh! Alors vous êtes de retour? Hahahahaha~";
+			mes "*kof* *kof* Vous voulez réessayer encore une fois? J'espère que vous avez apporté un ^3355FFWorn Out Scroll^000000...";
+			next;
+			if (select("Continuer l'épreuve.:Worn Out Scroll...") == 1) {
+				savepoint "geffen",120,107;
+				mes "[Raulel]";
+				mes "Hahaha~ Vous en avez dans le ventre, pas vrai?";
+				mes "Je vous renvoie une fois de plus à votre mort. Hahahahahahahahaha~";
+				close2;
+				warp "job_wiz",57,154;
+				end;
+			}
+			if (countitem(618) > 0) {
+				delitem 618,1; //Worn_Out_Scroll
+				mes "[Raulel]";
+				mes "Hahahahahahahaha~ *kof* *kof* Je crois qu'on va bien s'entendre tous les deux...";
+				mes "J'avais besoin de ça pour terminer mes recherches...";
+				next;
+				set WIZ_Q2,0;
+				set WIZ_Q,7;
+				mes "[Raulel]";
+				mes "Je vais dire à Catherine que vous avez réussi l'épreuve. En contrepartie, vous ne parlerez à personne de notre petit marché, d'accord? Hahahahahahahahah~";
+				mes "Après tout, vous avez déjà traversé pas mal d'épreuves. C'est ainsi que l'on sélectionne ceux qui méritent réllement de devenir Sorciers. Bonne chance à vous. Devenez plus fort, ça vaudrait mieux si vous voulez rester en vie. Hahahahahaha~";
+				close;
+			}
+		}
+		mes "[Raulel]";
+		mes "*renifle* Quoi? Vous voulez repasser le test?";
+		mes "Pff... Vous avez déjà échoué à l'épreuve pratique! Hahahahahahahaha~ Alors comme ça vous aimez la magie?";
+		next;
+		mes "[Raulel]";
+		mes "Puisque vous êtes si faible et que vous n'arrivez même pas à réussir l'épreuve finale, vous allez avoir le plaisir de passer un test supplémentaire!";
+		mes "*Kof* Si vous n'arrivez pas à l'épreuve pratique, essayez au moins de faire fonctionner votre cerveau. Hahahahahahah~";
+		next;
+		mes "[Raulel]";
+		mes "Bien, vous feriez mieux de répondre correctement à ces questions, si vous souhaitez devenir Sorcier. Hahahahahahaha~";
+		next;
+		mes "[Raulel]";
+		mes "1. Quel monstre possède un attribut différent des autres?";
+		next;
+		if (select("Mantis:Cornutus:Giearth:Caramel") == 2)
+			set .@wizard_t,.@wizard_t+20;
+		mes "[Raulel]";
+		mes "2. Quel monstre n'est pas looteur?";
+		next;
+		if (select("Yoyo:Magnolia:Metaller:Zerom") == 4)
+			set .@wizard_t,.@wizard_t+20;
+		mes "[Raulel]";
+		mes "3. Lequel de ces monstres ne détecte pas l'incantation de sortilèges?";
+		next;
+		if (select("Marina:Vitata:Scorpion:Giearth") == 1)
+			set .@wizard_t,.@wizard_t+20;
+		mes "[Raulel]";
+		mes "4. Quel est le sortilège le plus efficace contre une Marine Sphere?";
+		next;
+		if (select("Cold Bolt:Fire Bolt:Lightning Bolt:Stone Curse") == 3)
+			set .@wizard_t,.@wizard_t+20;
+		mes "[Raulel]";
+		mes "5. Quel monstre n'est pas immobile?";
+		next;
+		if (select("Hydra:Mandragora:Greatest General:Frilldora") == 4)
+			set .@wizard_t,.@wizard_t+20;
+		mes "[Raulel]";
+		mes "*Pff* Vous avez intérêt à avoir répondu correctement, j'ai pas que ça à faire que de poser des questions, moi.";
+		next;
+		mes "[Raulel]";
+		mes "Vous avez obtenu " + .@wizard_t + " points.";
+		if (.@wizard_t == 100) {
+			mes "Hahahahahaha~ *Kof* *kof* Si vous pouvez répondre à toutes les questions correctement, c'est que vous êtes prêt à passer l'épreuve pratique!";
+			next;
+		}
+		else if (.@wizard_t == 80) {
+			mes "Mouais...";
+			mes "C'est pas suffisant, mais vous pouvez recommencer le test si vous voulez.";
+			next;
+		}
+		else {
+			mes "C'est raté! Retournez étudier, crétin!";
+			next;
+			mes "[Raulel]";
+			mes "Vous manquez de... *renifle*... vous savez, ce qu'on appelle l'intelligence. C'est pour ça que vous échouez, et que vous échouerez encore. Hahahahahahahaha~";
+			close;
+		}
+		if (select("Commencer la dernière épreuve.:Est-ce que je peux avoir plus d'explications?") == 1) {
+			mes "[Raulel]";
+			mes "Personne ne va vous aider à devenir Sorcier. Hahahahahahahaha~";
+			mes "*Kof* *kof* Pas besoin de venir pleurer si vous êtes une lopette...";
+			next;
+			percentheal 100,100;
+			mes "[Raulel]";
+			mes "Oh! Si vous voyez une haute porte et que vous entendez une voix venue des profondeurs, ça veut sûrement dire que vous avez échoué dans votre sortilège d'invocation. Hahahahahahahahaha~";
+			close2;
+			warp "job_wiz",57,154;
+			end;
+		}
+		mes "[Raulel]";
+		mes "*Kof* *kof* Je dois vous expliquer la procédure. Cette dernière épreuve est assez difficile, mais si vous suivez mes conseils vous n'aurez pas de problème.";
+		next;
+		mes "[Raulel]";
+		mes "Vous allez être envoyé dans trois salles successivement. Dans l'ordre... *renifle* la Salle de l'Eau, la Salle de la Terre, et enfin la Salle du Feu. Chacune abrite des monstres de la propriété élémentale du nom de la salle.";
+		next;
+		mes "[Raulel]";
+		mes "Si vous utilisez les sortilèges appropriés, ça ne devrait pas être trop difficile. Hahahahahahaha~";
+		next;
+		mes "[Raulel]";
+		mes "Si vous réussissez à tuer tous les monstres dans le temps imparti, vous serez envoyé à la salle suivante.";
+		next;
+		mes "[Raulel]";
+		mes "Une fois les trois salles traversées, l'épreuve sera terminée. Vous deviendrez un Sorcier puissant, contrôlé par des pouvoirs démentiels! Il n'y aura plus aucun point de retour après cela.";
+		next;
+		mes "[Raulel]";
+		mes "Hahahahaha~ Vous avez l'air terrifié. Ce n'est pas trop tard, vous savez.";
+		mes "*Kof* *kof* Vous pouvez abandonner et retourner vivre dans votre petit patelin tranquille! Vous oublierez les formidables pouvoirs magiques, et reprendrez une vie normale. Qu'en dîtes-vous?";
+		next;
+		if (select("Passer l'épreuve pratique.:J'ai trop peur.") == 1) {
+			percentheal 100,100;
+			mes "[Raulel]";
+			mes "C'est l'heure pour vous de mourir... Ne revenez pas pleurer, je vous avais prévenu. Hahahahahahahahah~ *kof *kof*";
+			mes "C'est parti pour l'épreuve finale!";
+			close2;
+			warp "job_wiz",57,154;
+			end;
+		}
+		mes "[Raulel]";
+		mes "Venant de vous ça ne m'étonne même pas. Ça vous ressemble tellement! Hahahahahahahahaha~";
+		mes "Allez, retournez à votre petite vie tranquille, lopette!";
+		close2;
+		warp "geffen",120,110;
+		end;
+	}
+	else if (WIZ_Q == 7) {
+		mes "[Raulel]";
+		mes "Vous n'avez plus rien à faire avec moi. Mais puisque vous insistez, je peux vous faire repasser l'épreuve écrite. Hahahahaha~";
+		next;
+		mes "[Raulel]";
+		mes "Mais non je blague! Allez devenir Sorcier, et soyez prudent! De grands pouvoirs impliquent de grandes responsabilités...  Hahahahaha!";
+		close;
+	}
+}
+
+job_wiz,50,165,4	script	Assistante	700,{
+	mes "[Assistante]";
+	mes "Bienvenue dans l'Arène de l'épreuve pratique de magie pour apprentis Sorciers.";
+	mes "Si vous souhaitez accéder à l'épreuve, veuillez entrer dans la salle d'attente.";
+	next;
+	mes "[Assistante]";
+	mes "Si une personne est déjà en train de passer le test, veuillez attendre.";
+	mes "Vous serez appelé dès que ce sera à vous.";
+	next;
+	mes "[Assistante]";
+	mes "La durée moyenne d'une épreuve varie entre 5 et 10 minutes. Si vous souhaitez quitter l'arène, déconnectez-vous.";
+	close;
+}
+
+job_wiz,50,165,4	script	Salle d'Attente#wiz	700,{
+OnInit:
+	waitingroom "Salle d'Attente",20,"Salle d'Attente#wiz::OnStartArena",1;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	killmonsterall "job_wiz";
+	warpwaitingpc "job_wiz",114,169;
+	donpcevent "Salle de l'Eau::OnEnable";
+	disablenpc "Salle d'Attente#wiz";
+	disablewaitingroomevent;
+	end;
+
+OnStart:
+	enablewaitingroomevent;
+	end;
+}
+
+// Water Room (Test 2 part 1)
+//==========================================================
+job_wiz,1,1,1	script	Salle de l'Eau	66,{
+OnInit:
+	disablenpc "Salle de l'Eau";
+	end;
+
+OnEnable:
+	enablenpc "Salle de l'Eau";
+	set .MyMobs,8;
+	monster "job_wiz",109,174,"Phen",1158,1,"Salle de l'Eau::OnMyMobDead";
+	monster "job_wiz",118,174,"Clam",1074,1,"Salle de l'Eau::OnMyMobDead";
+	monster "job_wiz",109,165,"Vadon",1066,1,"Salle de l'Eau::OnMyMobDead";
+	monster "job_wiz",118,165,"Cornutus",1067,1,"Salle de l'Eau::OnMyMobDead";
+	monster "job_wiz",101,157,"Marina",1141,1,"Salle de l'Eau::OnMyMobDead";
+	monster "job_wiz",126,157,"Marin",1242,1,"Salle de l'Eau::OnMyMobDead";
+	monster "job_wiz",98,170,"Magnolia",1138,1,"Salle de l'Eau::OnMyMobDead";
+	monster "job_wiz",129,170,"Obeaune",1044,1,"Salle de l'Eau::OnMyMobDead";
+	initnpctimer;
+	end;
+
+OnDisable:
+	killmonsterall "job_wiz";
+	disablenpc "Salle de l'Eau";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		set WIZ_Q2,WIZ_Q2+1;
+		mapannounce "job_wiz",strcharinfo(0)+" a réussi à éliminer tous les monstres.",bc_map;
+		donpcevent "Salle de l'Eau#Door::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer1000:
+	mapannounce "job_wiz","Salle de l'Eau",bc_map;
+	end;
+
+OnTimer2000:
+	mapannounce "job_wiz","Vous avez 3 minutes - Début de l'Epreuve",bc_map;
+	end;
+
+OnTimer3000:
+	mapannounce "job_wiz","Veuillez éliminer tous les monstres dans le temps imparti.",bc_map;
+	end;
+
+OnTimer33000:
+	mapannounce "job_wiz","2 minutes et 30 secondes restantes",bc_map;
+	end;
+
+OnTimer63000:
+	mapannounce "job_wiz","2 minutes restantes",bc_map;
+	end;
+
+OnTimer93000:
+	mapannounce "job_wiz","1 minute et 30 secondes restantes",bc_map;
+	end;
+
+OnTimer123000:
+	mapannounce "job_wiz","1 minute restante",bc_map;
+	end;
+
+OnTimer153000:
+	mapannounce "job_wiz","30 secondes restantes",bc_map;
+	end;
+
+OnTimer173000:
+	mapannounce "job_wiz","10 secondes restantes",bc_map;
+	end;
+
+OnTimer183000:
+	mapannounce "job_wiz","Temps écoulé.",bc_map;
+	donpcevent "Salle de l'Eau::OnDisable";
+	end;
+
+OnTimer184000:
+	enablenpc "Salle de l'Eau#Failed";
+	end;
+
+OnTimer185000:
+	mapannounce "job_wiz","Candidat suivant, veuillez entrer.",bc_map;
+	end;
+
+OnTimer186000:
+	disablenpc "Salle de l'Eau#Failed";
+	donpcevent "Salle de l'Eau::OnDisable";
+	donpcevent "Salle d'Attente#wiz::OnStart";
+	end;
+}
+
+job_wiz,1,2,1	script	Salle de l'Eau#Door	66,{
+OnInit:
+	disablenpc "Salle de l'Eau#Door";
+	end;
+
+OnEnable:
+	enablenpc "Salle de l'Eau#Door";
+	donpcevent "Salle de l'Eau::OnDisable";
+	set .MyMobs,5;
+	monster "job_wiz",114,169,"Marine Sphere",1142,1,"Salle de l'Eau#Door::OnMyMobDead";
+	monster "job_wiz",112,169,"Hydra",1068,1,"Salle de l'Eau#Door::OnMyMobDead";
+	monster "job_wiz",116,169,"Hydra",1068,1,"Salle de l'Eau#Door::OnMyMobDead";
+	monster "job_wiz",114,171,"Hydra",1068,1,"Salle de l'Eau#Door::OnMyMobDead";
+	monster "job_wiz",114,167,"Hydra",1068,1,"Salle de l'Eau#Door::OnMyMobDead";
+	initnpctimer;
+	end;
+
+OnDisable:
+	killmonsterall "job_wiz";
+	disablenpc "Salle de l'Eau#Door";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "job_wiz",strcharinfo(0)+" a réussi à éliminer tous les monstres.",bc_map;
+		percentheal 100,100;
+		warp "job_wiz",116,97;
+		donpcevent "Salle de l'Eau#Door::OnDisable";
+		donpcevent "Salle de la Terre::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer1000:
+	mapannounce "job_wiz","Le monstre gardien a été invoqué. Vous avez 1 minute.",bc_map;
+	end;
+
+OnTimer30000:
+	mapannounce "job_wiz","30 secondes restantes",bc_map;
+	end;
+
+OnTimer50000:
+	mapannounce "job_wiz","10 secondes restantes",bc_map;
+	end;
+
+OnTimer60000:
+	mapannounce "job_wiz","Temps écoulé.",bc_map;
+	donpcevent "Salle de l'Eau#Door::OnDisable";
+	end;
+
+OnTimer61000:
+	enablenpc "Salle de l'Eau#Failed";
+	end;
+
+OnTimer62000:
+	mapannounce "job_wiz","Candidat suivant, veuillez entrer.",bc_map;
+	end;
+
+OnTimer63000:
+	disablenpc "Salle de l'Eau#Failed";
+	donpcevent "Salle de l'Eau#Door::OnDisable";
+	donpcevent "Salle d'Attente#wiz::OnStart";
+	end;
+}
+
+job_wiz,114,169,0	script	Salle de l'Eau#Failed	-1,16,16,{
+OnInit:
+	disablenpc "Salle de l'Eau#Failed";
+	end;
+
+OnTouch:
+	mapannounce "job_wiz",strcharinfo(0)+" a échoué.",bc_map;
+	warp "geffen",120,110;
+	end;
+}
+
+// Earth Room (Test 2 part 2)
+//==========================================================
+job_wiz,1,3,1	script	Salle de la Terre	66,{
+OnInit:
+	disablenpc "Salle de la Terre";
+	end;
+
+OnEnable:
+	enablenpc "Salle de la Terre";
+	set .MyMobs,10;
+	monster "job_wiz",111,102,"Yoyo",1057,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",120,102,"Deniro",1105,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",111,102,"Caramel",1103,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",120,102,"Hode",1127,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",111,93,"Savage",1166,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",120,93,"Giearth",1121,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",107,98,"Bigfoot",1060,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",124,98,"Orc Warrior",1023,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",104,86,"Vitata",1176,1,"Salle de la Terre::OnMyMobDead";
+	monster "job_wiz",127,86,"Mantis",1139,1,"Salle de la Terre::OnMyMobDead";
+	initnpctimer;
+	end;
+
+OnDisable:
+	killmonsterall "job_wiz";
+	disablenpc "Salle de la Terre";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "job_wiz",strcharinfo(0) + " a réussi à éliminer tous les monstres.",bc_map;
+		donpcevent "Salle de la Terre#Door::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer1000:
+	mapannounce "job_wiz","Salle de la Terre",bc_map;
+	end;
+
+OnTimer2000:
+	mapannounce "job_wiz","Vous avez 3 minutes - Début de l'Epreuve",bc_map;
+	end;
+
+OnTimer3000:
+	mapannounce "job_wiz","Veuillez éliminer tous les monstres dans le temps imparti.",bc_map;
+	end;
+
+OnTimer33000:
+	mapannounce "job_wiz","2 minutes et 30 secondes restantes",bc_map;
+	end;
+
+OnTimer63000:
+	mapannounce "job_wiz","2 minutes restantes",bc_map;
+	end;
+
+OnTimer93000:
+	mapannounce "job_wiz","1 minute et 30 secondes restantes",bc_map;
+	end;
+
+OnTimer123000:
+	mapannounce "job_wiz","1 minute restante",bc_map;
+	end;
+
+OnTimer153000:
+	mapannounce "job_wiz","30 secondes restantes",bc_map;
+	end;
+
+OnTimer173000:
+	mapannounce "job_wiz","10 secondes restantes",bc_map;
+	end;
+
+OnTimer183000:
+	mapannounce "job_wiz","Temps écoulé.",bc_map;
+	donpcevent "Salle de la Terre::OnDisable";
+	end;
+
+OnTimer184000:
+	enablenpc "Salle de la Terre#Failed";
+	end;
+
+OnTimer185000:
+	mapannounce "job_wiz","Candidat suivant, veuillez entrer.",bc_map;
+	end;
+
+OnTimer186000:
+	disablenpc "Salle de la Terre#Failed";
+	donpcevent "Salle de la Terre::OnDisable";
+	donpcevent "Salle d'Attente#wiz::OnStart";
+	end;
+}
+
+job_wiz,1,4,1	script	Salle de la Terre#Door	66,{
+OnInit:
+	disablenpc "Salle de la Terre#Door";
+	end;
+
+OnEnable:
+	enablenpc "Salle de la Terre#Door";
+	donpcevent "Salle de la Terre::OnDisable";
+	set .MyMobs,7;
+	monster "job_wiz",116,97,"Flora",1118,1,"Salle de la Terre#Door::OnMyMobDead";
+	monster "job_wiz",114,95,"Mandragora",1020,1,"Salle de la Terre#Door::OnMyMobDead";
+	monster "job_wiz",118,95,"Mandragora",1020,1,"Salle de la Terre#Door::OnMyMobDead";
+	monster "job_wiz",114,99,"Mandragora",1020,1,"Salle de la Terre#Door::OnMyMobDead";
+	monster "job_wiz",118,99,"Mandragora",1020,1,"Salle de la Terre#Door::OnMyMobDead";
+	monster "job_wiz",116,94,"Mandragora",1020,1,"Salle de la Terre#Door::OnMyMobDead";
+	monster "job_wiz",116,100,"Mandragora",1020,1,"Salle de la Terre#Door::OnMyMobDead";
+	initnpctimer;
+	end;
+
+OnDisable:
+	killmonsterall "job_wiz";
+	disablenpc "Salle de la Terre#Door";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "job_wiz",strcharinfo(0) + " a réussi à éliminter tous les monstres.",bc_map;
+		percentheal 100,100;
+		warp "job_wiz",46,99;
+		donpcevent "Salle de la Terre#Door::OnDisable";
+		donpcevent "Salle du Feu::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer1000:
+	mapannounce "job_wiz","Le monstre gardien a été invoqué. Vous avez 1 minute.",bc_map;
+	end;
+
+OnTimer30000:
+	mapannounce "job_wiz","30 secondes restantes",bc_map;
+	end;
+
+OnTimer50000:
+	mapannounce "job_wiz","10 secondes restantes",bc_map;
+	end;
+
+OnTimer60000:
+	mapannounce "job_wiz","Temps écoulé.",bc_map;
+	donpcevent "Salle de la Terre#Door::OnDisable";
+	end;
+
+OnTimer61000:
+	donpcevent "Salle de la Terre#Failed::OnEnable";
+	end;
+
+OnTimer62000:
+	mapannounce "job_wiz","Candidat suivant, veuillez entrer.",bc_map;
+	end;
+
+OnTimer63000:
+	disablenpc "Salle de la Terre#Failed";
+	donpcevent "Salle de la Terre#Door::OnDisable";
+	donpcevent "Salle d'Attente#wiz::OnStart";
+	end;
+}
+
+job_wiz,116,97,0	script	Salle de la Terre#Failed	-1,16,16,{
+OnInit:
+	disablenpc "Salle de la Terre#Failed";
+	end;
+
+OnTouch:
+	mapannounce "job_wiz",strcharinfo(0) + " a échoué.",bc_map;
+	warp "geffen",120,110;
+	end;
+}
+
+// Fire Room (Test 2 part 3)
+//==========================================================
+job_wiz,1,5,1	script	Salle du Feu	66,{
+OnInit:
+	disablenpc "Salle du Feu";
+	end;
+
+OnEnable:
+	enablenpc "Salle du Feu";
+	set .MyMobs,8;
+	monster "job_wiz",58,110,"Zerom",1178,1,"Salle du Feu::OnMyMobDead";
+	monster "job_wiz",33,110,"Goblin",1123,1,"Salle du Feu::OnMyMobDead";
+	monster "job_wiz",40,103,"Scorpion",1001,1,"Salle du Feu::OnMyMobDead";
+	monster "job_wiz",51,103,"Frilldora",1119,1,"Salle du Feu::OnMyMobDead";
+	monster "job_wiz",40,92,"PecoPeco",1019,1,"Salle du Feu::OnMyMobDead";
+	monster "job_wiz",51,92,"Elder Willow",1033,1,"Salle du Feu::OnMyMobDead";
+	monster "job_wiz",37,89,"Metaller",1058,1,"Salle du Feu::OnMyMobDead";
+	monster "job_wiz",54,89,"Desert Wolf",1106,1,"Salle du Feu::OnMyMobDead";
+	initnpctimer;
+	end;
+
+OnDisable:
+	killmonsterall "job_wiz";
+	disablenpc "Salle du Feu";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "job_wiz",strcharinfo(0) + " a réussi à éliminer tous les monstres.",bc_map;
+		donpcevent "Salle du Feu#Door::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer1000:
+	mapannounce "job_wiz","Salle du Feu",bc_map;
+	end;
+
+OnTimer2000:
+	mapannounce "job_wiz","Vous avez 3 minutes - Début de l'Epreuve",bc_map;
+	end;
+
+OnTimer3000:
+	mapannounce "job_wiz","Veuillez éliminer tous les monstres dans le temps imparti.",bc_map;
+	end;
+
+OnTimer33000:
+	mapannounce "job_wiz","2 minutes et 30 secondes restantes",bc_map;
+	end;
+
+OnTimer63000:
+	mapannounce "job_wiz","2 minutes restantes",bc_map;
+	end;
+
+OnTimer93000:
+	mapannounce "job_wiz","1 minute et 30 secondes restantes",bc_map;
+	end;
+
+OnTimer123000:
+	mapannounce "job_wiz","1 minute restante",bc_map;
+	end;
+
+OnTimer153000:
+	mapannounce "job_wiz","30 secondes restantes",bc_map;
+	end;
+
+OnTimer173000:
+	mapannounce "job_wiz","10 secondes restantes",bc_map;
+	end;
+
+OnTimer183000:
+	mapannounce "job_wiz","Temps écoulé.",bc_map;
+	donpcevent "Salle du Feu::OnDisable";
+	end;
+
+OnTimer184000:
+	donpcevent "Salle du Feu#Failed::OnEnable";
+	end;
+
+OnTimer185000:
+	mapannounce "job_wiz","Candidat suivant, veuillez entrer.",bc_map;
+	end;
+
+OnTimer186000:
+	disablenpc "Salle du Feu#Failed";
+	donpcevent "Salle du Feu::OnDisable";
+	donpcevent "Salle d'Attente#wiz::OnStart";
+	end;
+}
+
+job_wiz,1,6,1	script	Salle du Feu#Door	66,{
+OnInit:
+	disablenpc "Salle du Feu#Door";
+	end;
+
+OnEnable:
+	enablenpc "Salle du Feu#Door";
+	donpcevent "Salle du Feu::OnDisable";
+	set .MyMobs,3;
+	monster "job_wiz",44,99,"Greatest General",1277,1,"Salle du Feu#Door::OnMyMobDead";
+	monster "job_wiz",43,99,"Horong",1129,1,"Salle du Feu#Door::OnMyMobDead";
+	monster "job_wiz",45,99,"Horong",1129,1,"Salle du Feu#Door::OnMyMobDead";
+	initnpctimer;
+	end;
+
+OnDisable:
+	killmonsterall "job_wiz";
+	disablenpc "Salle du Feu#Door";
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "job_wiz","Félicitations, " + strcharinfo(0) + ". Vous avez réussi l'épreuve pratique.",bc_map;
+		set WIZ_Q,7;
+		donpcevent "Salle du Feu#Door::OnDisable";
+		donpcevent "Aide à l'Epreuve#wiz::OnEnable";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer1000:
+	mapannounce "job_wiz","Le monstre gardien a été invoqué. Vous avez 2 minutes.",bc_map;
+	end;
+
+OnTimer30000:
+	mapannounce "job_wiz","1 minute et 30 secondes restantes",bc_map;
+	end;
+
+OnTimer60000:
+	mapannounce "job_wiz","1 minute restante",bc_map;
+	end;
+
+OnTimer90000:
+	mapannounce "job_wiz","30 secondes restantes",bc_map;
+	end;
+
+OnTimer110000:
+	mapannounce "job_wiz","10 secondes restantes",bc_map;
+	end;
+
+OnTimer120000:
+	mapannounce "job_wiz","Temps écoulé.",bc_map;
+	donpcevent "Salle du Feu#Door::OnDisable";
+	end;
+
+OnTimer121000:
+	enablenpc "Salle du Feu#Failed";
+	end;
+
+OnTimer122000:
+	mapannounce "job_wiz","Candidat suivant, veuillez entrer.",bc_map;
+	end;
+
+OnTimer123000:
+	disablenpc "Salle du Feu#Failed";
+	donpcevent "Salle du Feu#Door::OnDisable";
+	donpcevent "Salle d'Attente#wiz::OnStart";
+}
+
+job_wiz,46,99,0	script	Salle du Feu#Failed	-1,16,16,{
+OnInit:
+	disablenpc "Salle du Feu#Failed";
+	end;
+
+OnTouch:
+	warp "geffen",120,110;
+	end;
+}
+
+job_wiz,1,7,1	script	Aide à l'Epreuve#wiz	66,{
+	end;
+
+OnInit:
+	disablenpc "Aide à l'Epreuve#wiz";
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	disablenpc "Aide à l'Epreuve#wiz";
+	end;
+
+OnTimer2000:
+	mapannounce "job_wiz","Veuillez retourner à la Tour des Sorciers.",bc_map;
+	end;
+
+OnTimer4000:
+	mapannounce "job_wiz","Fin de l'épreuve. Candidat suivant, veuillez patienter.",bc_map;
+	end;
+
+OnTimer5000:
+	areawarp "job_wiz",33,82,57,113,"gef_tower",110,30;
+	end;
+
+OnTimer7000:
+	mapannounce "job_wiz","Candidat suivant, veuillez entrer.",bc_map;
+	end;
+
+OnTimer9000:
+	donpcevent "Aide à l'Epreuve#wiz::OnDisable";
+	donpcevent "Salle d'Attente#wiz::OnStart";
+	stopnpctimer;
+	end;
+}
+
+gef_tower,107,36,4	script	Chien Blanc#wiz	81,{
+	if (BaseJob != Job_Mage) {
+		if (BaseJob == Job_Wizard) {
+			mes "[Maria]";
+			mes "Plutôt que de rester planté ici, pourquoi n'iriez-vous pas étudier ou vous entraîner?";
+			next;
+			mes "[Maria]";
+			mes "N'oubliez pas que les Sorciers doivent faire grandir leurs pouvoirs chaque jour.";
+			close2;
+			cutin "job_wizard_maria01",255;
+			end;
+		}
+		else if (BaseClass == Job_Novice) {
+			mes "[Chien]";
+			mes "Comment?! Un gosse!";
+			mes "Alors, ça t'amuse un chien qui parle?";
+		}
+		else {
+			cutin "job_wizard_maria02",2;
+			mes "[Chien]";
+			mes "Pff... Pourquoi est-ce que personne ne fait jamais d'incantation ici?";
+			mes "*Pff* Qu'est-ce qu'on s'ennuie... Hé, vous, vous ne voudriez pas faire me plaisir et escalader la Tour via l'extérieur?";
+		}
+		next;
+		mes "[Chien]";
+		mes "*Aboie* Du balais!";
+		mes "Je n'ai pas le temps pour des gens comme vous!";
+		close2;
+		cutin "job_wizard_maria02",255;
+		end;
+	}
+	if (WIZ_Q == 0) {
+		cutin "job_wizard_maria01",2;
+		mes "[Chien]";
+		mes "Ah... Je sais ce que vous allez dire. Vous voulez devenir Sorcier, c'est ça?";
+		next;
+		mes "[Chien]";
+		mes "Adressez-vous à Catherine. Elle vous aidera.";
+		next;
+		mes "[Chien]";
+		mes "Ah, et si vous avez des questions à propos des épreuves pour devenir Sorcier, n'hésitez pas.";
+		next;
+		switch(select(".......:Un chien me parle...")) {
+		case 1:
+			mes "[Chien]";
+			mes "...*aboie*...? Quoi?? Pourquoi vous me regardez comme ça?!";
+			mes "Vous n'avez jamais vu un chien qui parle?";
+			next;
+			mes "[Chien]";
+			mes "*Aboie* Ce n'est pas commun, c'est sûr. grogne~";
+			mes "...Oui, je suppose que c'est même assez rare...*grrr*...Mais arrêtez de me fixer comme ça pour l'amour du ciel!";
+			next;
+			mes "[Chien]";
+			mes "Mon nom est Maria Splodofska. Vous pouvez m'appeler Maria.";
+			mes "J'aide les jeunes Mages qui souhaitent devenir apprentis Sorciers.";
+			next;
+			cutin "job_wizard_maria03",2;
+			mes "[Maria]";
+			mes "*Aboie* Bon, et donc... La raison pour laquelle je suis devenue un chien est très simple. En fait j'aidais mon petit ami sur une expérience pendant son Examen Final de Magie. Bref, et *Grrrr* il m'a accidentellement transformée en chien.";
+			mes "En théorie, le sortilège aurait dû se dissiper au bout de quelques mois, et j'aurais dû retrouver mon apparence normale. Mais ça fait déjà presque un an, et je ne sais pas pourquoi je suis encore comme ça!";
+			next;
+			cutin "job_wizard_maria01",2;
+			mes "[Maria]";
+			mes "Enfin... ça ne vous concerne pas de toutes façons.";
+			mes "Bon, où en étions-nous?";
+			next;
+			break;
+		case 2:
+			cutin "job_wizard_maria02",2;
+			mes "[Chien]";
+			mes "*Aboie* *aboie* *aboie* Et bien, quoi?! Oui, je sais, je suis un chien!";
+			next;
+			cutin "job_wizard_maria01",2;
+			mes "[Chien]";
+			mes "Mon nom est Maria Splodofska. Les gens m'appellent Maria.";
+			mes "J'aide les jeunes Mages comme vous qui souhaitent devenir apprentis Sorciers.";
+			next;
+			cutin "job_wizard_maria03",2;
+			mes "[Chien appelé 'Maria']";
+			mes "*Aboie* Bon, et donc... La raison pour laquelle je suis devenue un chien est très simple. En fait j'aidais mon petit ami sur une expérience pendant son Examen Final de Magie. Bref, et *Grrrr* il m'a accidentellement transformée en chien.";
+			mes "En théorie, le sortilège aurait dû se dissiper au bout de quelques mois, et j'aurais dû retrouver mon apparence normale. Mais ça fait déjà presque un an, et je ne sais pas pourquoi je suis encore comme ça!";
+			next;
+			cutin "job_wizard_maria02",2;
+			mes "[Chien appelé 'Maria']";
+			mes "Je ne suis pas un 'chien' appelé 'Maria'!! Oh!! Vous m'écoutez, oui?!!";
+			next;
+			mes "[Chien... 'Maria'...]";
+			mes "..........";
+			next;
+			mes "[Maria]";
+			mes "...*aboie* *aboie* *aboie*... J'en ai marre de cette situation!! Pff... Laissez tomber.";
+			next;
+			break;
+		}
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "Comme je vous l'ai dit, si vous voulez devenir Sorcier, parlez à Catherine.";
+		mes "C'est une Sorcière qui vient juste d'obtenir son diplôme.";
+		next;
+		mes "[Maria]";
+		mes "Je peux vous en dire plus à propos de la formation, mais je ne voudrais pas vous retenir si vous êtes occupé.";
+		mes "Qu'en pensez-vous? Vous voulez en savoir plus à propos des Mages qui souhaitent devenir Sorciers?";
+		next;
+		switch(select("Oui, s'il vous plaît!:Non, merci.:Un chien... me parle...")) {
+		case 1:
+			cutin "job_wizard_maria01",2;
+			mes "[Maria]";
+			mes "D'accord, je vais vous expliquer comme ça se déroule.";
+			next;
+			mes "[Maria]";
+			mes "Il y a trois épreuves, que vous devez réussir afin d'obtenir votre diplôme de Sorcier.";
+			mes "La première épreuve est assez simple, elle consiste à rapporter des objets magiques.";
+			next;
+			mes "[Maria]";
+			mes "Pour commencer la première épreuve, vous devez d'abord vous inscrire auprès de Catherine.";
+			mes "Elle vous dira d'aller chercher, soit des gemmes, soit des pierres élémentales.";
+			next;
+			mes "[Maria]";
+			mes "La seconde épreuve est un test écrit à propos de la magie.";
+			mes "C'est Raulel, le Sorcier un peu sombre là bas dans le coin de la pièce, qui est chargé de cette partie.";
+			next;
+			mes "[Maria]";
+			mes "On vous posera dix questions à propos de la magie, des monstres, et des magiciens.";
+			mes "Vous devez répondre juste aux dix questions, sinon vous échouerez à cette épreuve...";
+			next;
+			mes "[Maria]";
+			mes "La troisième épreuve est un test de pratique de la magie. Vous devrez combattre des monstres.";
+			next;
+			mes "[Maria]";
+			mes "Vous serez envoyé dans trois pièces successivement, chacune renfermant des monstres d'une certaine propriété élémentale. Vous devrez les attaquer avec les sortilèges appropriés.";
+			next;
+			mes "[Maria]";
+			mes "Voilà, c'est à peu près tout. Vous pouvez aller vous inscrire maintenant.";
+			next;
+			mes "[Maria]";
+			mes "Ne vous en faîtes pas trop, et ne lésinez pas sur l'entraînement.";
+			close2;
+			cutin "job_wizard_maria01",255;
+			end;
+		case 2:
+			mes "[Maria]";
+			mes "Vraiment? Vous pouvez aller vous inscrire dans ce cas.";
+			close2;
+			cutin "job_wizard_maria01",255;
+			end;
+		case 3:
+			cutin "job_wizard_maria02",2;
+			mes "[Maria]";
+			mes "Je ne suis pas un CHIEN!! AHRRRRHHGNNN~";
+			next;
+			mes "[Maria]";
+			mes "Soyez maudis! J'espère que vous ECHOUEREZ!! CASSEZ-VOUS!!";
+			close2;
+			cutin "job_wizard_maria01",255;
+			warp "gef_dun00",116,102;
+			end;
+		}
+	}
+	else if (WIZ_Q == 1) {
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "Vous avez l'air perdu...";
+		mes "Vous vous êtes inscrit, et maintenant vous cherchez les objets à rapporter, c'est ça?";
+		next;
+		mes "[Maria]";
+		mes "Ce n'est que la première épreuve, essayez de la faire vous-même sans demander de l'aide aux autres.";
+		next;
+		mes "[Maria]";
+		mes "D'après ce que j'ai entendu, vous devez réunir certaines gemmes... Je peux vous aider indirectement, en vous donnant certains conseils.";
+		next;
+		mes "[Maria]";
+		mes "Tout d'abord, pour les Gemmes Rouges, vous devriez vous rendre dans les Egouts de Prontera.";
+		mes "Vous pouvez obtenir ces gemmes en chassant les monstres Thief Bugs et Thief Bug eggs, qui y sont présents en abondance.";
+		next;
+		mes "[Maria]";
+		mes "Les Gemmes Jaune sont quant à elles très faciles à trouver dans le désert.";
+		mes "Les Condors, les Picky, et parfois les monstres Golems en possèdent.";
+		next;
+		mes "[Maria]";
+		mes "Enfin... *wouf* concernant les Gemmes Bleues, essayez d'aller sur l'île de Byalan.";
+		mes "Les Cornutus, Vadon, et des monstres tels que les Mars en possèdent.";
+		next;
+		mes "[Maria]";
+		mes "Bien sûr, vous pouvez également acheter directement les Gemmes Bleues dans la boutique de magie au Sud-Est de Geffen, ou encore à Yuno...";
+		mes "Mais si vous allez les chercher vous-même, ce sera plus gratifiant.";
+		next;
+		mes "[Maria]";
+		mes "Faîtes de votre mieux! Ces épreuves ne sont de pures bases pour vous apprendre le métier de Sorcier.";
+		close2;
+		cutin "job_wizard_maria01",255;
+		end;
+	}
+	else if (WIZ_Q == 2) {
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "Vous avez l'air perdu...";
+		mes "Vous vous êtes inscrit, et maintenant vous cherchez les objets à rapporter, c'est ça?";
+		next;
+		mes "[Maria]";
+		mes "Ce n'est que la première épreuve, essayez de la faire vous-même sans demander de l'aide aux autres.";
+		next;
+		mes "[Maria]";
+		mes "D'après ce que j'ai entendu, vous devez réunir certaines pierres élémentales... Je peux vous aider indirectement, en vous donnant certains conseils.";
+		next;
+		mes "[Maria]";
+		mes "Bien, vous trouverez des Crystal Blue dans le donjon de Byalan.";
+		mes "Cornutus, Kukre, Marina, Vadon... tous ces monstres en possèdent!";
+		next;
+		mes "[Maria]";
+		mes "En ce qui concerne les Green Live, il faudra vous intéresser aux monstres de types insectes.";
+		mes "Essayez de chasser des Horn, Mantis, ou des Vitata.";
+		next;
+		mes "[Maria]";
+		mes "Oh et *wouf*, pour les Red Blood, j'ai entendu dire qu'on pouvait en obtenir en attaquant des Elder Willows, Metallers ou des Scorpions du désert.";
+		next;
+		mes "[Maria]";
+		mes "Enfin pour les Wind of Verdure, les monstres Hornet, Stainer et Steel Chonchon sont ceux que vous devez chercher.";
+		next;
+		mes "[Maria]";
+		mes "Faîtes de votre mieux! Ces épreuves ne sont de pures bases pour vous apprendre le métier de Sorcier.";
+		close2;
+		cutin "job_wizard_maria01",255;
+		end;
+	}
+	else if (WIZ_Q == 3) {
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "Ne vous réjouissez pas trop vite après avoir réussi la première épreuve. Continuez de faire de votre mieux, il reste deux épreuves.";
+		close2;
+		cutin "job_wizard_maria01",255;
+		end;
+	}
+	else if (WIZ_Q == 4) {
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "ZzzzZzzzZzzz...";
+		next;
+		cutin "job_wizard_maria02",2;
+		mes "[Maria]";
+		mes "*marmonne*...Blizadris... t'es nulle...Zzz...";
+		close2;
+		cutin "job_wizard_maria02",255;
+		end;
+	}
+	else if (WIZ_Q == 5) {
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "Oh, vous allez bien?";
+		next;
+		mes "[Maria]";
+		mes "Faîtes de votre mieux.";
+		mes "Raulel vous attend.";
+		close2;
+		cutin "job_wizard_maria01",255;
+		end;
+	}
+	else if (WIZ_Q == 6) {
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "*Aboie*...Vous abandonnez?";
+		mes "*Soupir*...Comment pouvez-vous vouloir devenir Sorcier alors que vous êtes si faible?";
+		next;
+		mes "[Maria]";
+		mes "Bon, vous savez que chaque pièce abrite un type de monstre aux propriétés semblables...";
+		mes "Vous devez bien connaître les attributs de vos différents sortilèges, et ça ira mieux!";
+		next;
+		mes "[Maria]";
+		mes "Vous devez également vous méfier des monstres qui lancent eux-mêmes des sortilèges.";
+		mes "Tuez les monstres le plus vite possible pour éviter de vous retrouver dans une position difficile.";
+		next;
+		mes "[Maria]";
+		mes "*Grrr* Quoi qu'il en soit, reprenez le test.";
+		mes "Ne soyez pas faible *wouf* et retournez-y! *Aboie* *Aboie* Allez, zou! *aboie*";
+		close2;
+		cutin "job_wizard_maria01",255;
+		end;
+	}
+	else if (WIZ_Q == 7) {
+		cutin "job_wizard_maria01",2;
+		mes "[Maria]";
+		mes "Comme je le pensais, vous avez réussi les épreuves! C'est super! *Wouf*";
+		mes "Vous allez maintenant devenir Sorcier.";
+		next;
+		mes "[Maria]";
+		mes "Félicitations. Donnez toujours le meilleur de vous-même.";
+		close2;
+		cutin "job_wizard_maria01",255;
+		end;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.1 Now using the initnpctimer command, donpcevent,
+//= and new waitingroom event commands.  No more addtimer spamming.
+//= No longer have to talk to the npc to take the test.  Just enter the chat room.
+//= 1.2 Changed global variable names to unique ones.
+//= 1.2a Rollback from the wrong Kashy's fix
+//= 1.2b Fixed issue with duplicating monsters thx to Bison.[kobra_k88]
+//= 1.2c changed one Horong to Frilldora (now 3rd room contains 1 agressive mob.)
+//= 1.2d more simplified fire room - removed agressive Desert Wolf [Lupus]
+//= 1.3 Added Baby Class support. 1.5 Fixed possible EXP abuse [Lupus]
+//= 1.6 Added a func which prevent advanced classes passing
+//= 2nd Job Quests again. It also guides adv classes where to go. [Lupus]
+//= 1.7 Replaced 2 Hodes with 2 Horong's (according to the official guide) [Lupus]
+//= 1.8 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 2.1 Changed numbers to constants. [Vicious]
+//= 2.2 Merged back JFunc [Lupus] 2.2a Removed extra MES, added missing NEXT
+//= 2.3 Bigfoot monster summon corrected [Zairik]

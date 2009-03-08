@@ -1,0 +1,1287 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Iria et Myllena
+//===== eAthena Script =======================================
+//= Blacksmith Quest
+//===== By: ==================================================
+//= EREMES THE CANIVALIZER(Aegis)
+//= Translated by: yoshiki.
+//= Converted by: Komurka.
+//= Optimized and further edited by kobra_k88.
+//= Further bugfixed and tested by Lupus
+//===== Current Version: =====================================
+//= 2.6
+//===== Compatible With: =====================================
+//= eAthena  SVN
+//===== Description: =========================================
+//= [Aegis Conversion]
+//= Job Change quest for Blacksmith class.
+//===== Additional Comments: =================================
+//= Changed some npc names to the iRO names. Changed some variable
+//= names and labels. Edited some text.[kobra_k88]
+//= Removed "if(JobLevel > 48) goto higher". It was a left over line.
+//= Thx to "Decker".[kobra_k88]
+//= Fixed some typos, thanks to Riotblade [celest]
+//= 1.3-1.5 Added Baby Class support [Lupus]
+//= 1.6 Added a func which prevent advanced classes passing
+//= 2nd Job Quests again. It also guides adv classes where
+//= to go. [Lupus]
+//= 1.7 item quantity/ids typos fix
+//= 1.8 Moved the Quest to Einbroch [Poki#3]
+//= 2.0 Changed numbers to constants. [Vicious]
+//= 2.1 Removed Duplicates [Silent]
+//= 2.2 Merged Jfunc, changed job numbers to constants [Lupus]
+//= 2.3 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 2.4 Several bugfixes with the help of Barron-Monster. [L0ne_W0lf]
+//= 2.4a Changed a BaseJob to baseclass. [L0ne_W0lf]
+//= 2.4b Further bug fixes with teh hel of Barron-Monster. [L0ne_W0lf]
+//= 2.4c More fixes courtosy of Micktu. [L0ne_W0lf]
+//= 2.4d Fixed an incorrect answer in the quiz. (Trojal) [L0ne_W0lf]
+//= 2.4e Touched up a few issues as pointed out by Ultramage. [L0ne_W0lf]
+//= 2.5 Krongast is in Lighthalzen. (DarkValmir) [L0ne_W0lf]
+//= 2.6 Fixed 4 bugs [Lupus]
+//= 2.6a Typo fix [Yommy]
+//==============================================================
+
+ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
+	if (Upper == 1) {
+		mes "[Forgeron Altiregen]";
+		mes "Hé, je n 'ai pas le temps de bavasser. Je suis quelqu'un de très occupé, voyez-vous. Et tous ces Marchands qui travaillent dur pour devenir Forgerons...";
+		next;
+		mes "[Forgeron Altiregen]";
+		mes "Attendez une minute, je crois vous avoir déjà vu quelque part.";
+		mes "Hum.....";
+		next;
+		mes "[Forgeron Altiregen]";
+		mes "Vous êtes celui qui a cassé mon arme avant de prendre la fuite? Ou bien celui qui me harcelait pour que je lui forge une épée? Je n'arrive plus à me souvenir...";
+		next;
+		mes "[Forgeron Altiregen]";
+		mes ".......";
+		mes "J'ai une vague impression de déjà vu...";
+		next;
+		mes "[Forgeron Altiregen]";
+		mes "Argh!! Ça m'énerve! Je suis pourtant certain que ce n'est pas notre première rencontre~";
+		close;
+	}
+	mes "[Forgeron Altiregen]";
+	mes "Bienvenue! Nous sommes les maîtres des métaux, nous les Forgerons!";
+	mes "Nos capacités dans la création d'armes sont en quelque sorte une forme d'art!";
+	next;
+	mes "[Forgeron Altiregen]";
+	mes "Ces armes peuvent ensuite être revendues à grand bénéfices...";
+	next;
+	if (BaseClass == Job_Novice) {
+		if (sex == 0) {
+			mes "[Altiregen]";
+			mes "Oh~";
+			mes "Bonjour jeune demoiselle! Intéressée par le métier de Forgeron?";
+			next;
+			mes "[Altiregen]";
+			mes "Si vous souhaitez rejoindre les rangs des Forgeron, il vous faudra d'abord apprendre le métier de Marchand! Pour cela, allez à Alberta vous adresser à la Guilde Marchande.";
+			close;
+		}
+		close;
+	}
+	else if (BaseClass == Job_Swordman) {
+		mes "[Forgeron Altiregen]";
+		mes "Bonjour! Vous venez commander une arme? Désolé mais pour l'instant, j'ai de la paperasse à finir, donc je n'ai pas le temps pour forger.";
+		close;
+	}
+	else if (BaseClass == Job_Archer) {
+		mes "[Forgeron Altiregen]";
+		mes "Hummm, désolé, mais nous n'embauchons que des Marchands.";
+		close;
+	}
+	else if (BaseClass == Job_Mage) {
+		mes "[Forgeron Altiregen]";
+		mes "Vous cherchez de l'entraînement? Notre guilde ne peut fournir aucun support aux magiciens pour ce genre de choses.";
+		close;
+	}
+	else if (BaseClass == Job_Acolyte) {
+		mes "[Forgeron Altiregen]";
+		mes "Oh! Une personne de la sainte église...! Faîtes moi une faveur et bénissez la lame que je suis en train de forger!";
+		close;
+	}
+	else if (BaseClass == Job_Thief) {
+		mes "[Forgeron Altiregen]";
+		mes "Désolé, mais ceci est un lieu de travail, il n'y a rien à dérober. Néanmoins, nous pouvons forger des dagues.";
+		close;
+	}
+	else if (BaseJob == Job_Alchemist) {
+		mes "[Forgeron Altiregen]";
+		mes "Alors, comment se porte le commerce de potions ces temps-ci? Enfin, mon atelier de forge n'est plus vraiment très actif.";
+		close;
+	}
+	else if (BaseJob == Job_Blacksmith) {
+		mes "[Forgeron Altiregen]";
+		mes "Hé! ça fait un bail! En train de faire une commission pour Christopher? Je crois que mon marteau commence à se rouiller après tout ce travail administratif.";
+		close;
+	}
+	else if (BaseJob == Job_Merchant) {
+		if (SkillPoint) {
+			mes "[Forgeron Altiregen]";
+			mes "Vous ne pouvez pas devenir Forgeron si vous n'avez pas utilisé tous vos points de compétence. Je vous prie de revenir après avoir intelligemment réparti vos points.";
+			close;
+		}
+		if (BSMITH_Q == 0) {
+			mes "[Forgeron Altiregen]";
+			mes "Salut camarade Marchand! Êtes-vous prêt à laisser tomber le commerce de pacotille et vous engager à rejoindre l'élite des Forgerons?";
+			mes "Si oui, écrivez votre nom et votre Niveau de Job sur cette feuille s'il vous plaît.";
+			next;
+			switch(select("S'engager.:Quels sont les pré-requis?:Euh... je dois y réfléchir.")) {
+			case 1:
+				if (SkillPoint) {
+					mes "[Forgeron Altiregen]";
+					mes "Vous ne pouvez pas devenir Forgeron si vous n'avez pas utilisé tout vos points de compétence. Je vous prie de revenir après avoir intelligemment réparti vos points.";
+					close;
+				}
+				else if (JobLevel > 39 && BSMITH_Q == 0) {
+					mes "[Forgeron Altiregen]";
+					mes "Hummm...";
+					mes "Votre Niveau de Job a l'air satisfaisant.";
+					next;
+					mes "[Forgeron Altiregen]";
+					mes "Parfait, mais nous n'acceptons n'importe qui!";
+					mes "Nous devons vérifier vos aptitudes et votre détermination.";
+					next;
+					mes "^3355FF*fouille dans ses papiers*^000000";
+					next;
+					mes "[Forgeron Altiregen]";
+					mes "Hum, le responsable de la Guilde des Forgerons se nomme ^8E6B23Geschupenschte^000000.";
+					mes "Il manque sans arrêt de main d'oeuvre. Rejoignez-le pour l'aider, ce sera votre première épreuve.";
+					next;
+					set BSMITH_Q,1;
+					mes "[Forgeron Altiregen]";
+					mes "Soyez prudent, et bonne chance!";
+					close;
+				}
+				else if (JobLevel < 40) {
+					mes "[Forgeron Altiregen]";
+					mes "Vous devez vous entraîner d'avantage en tant que Marchand. Nous n'acceptons pas les Marchands en dessous du Niveau de Job 40.";
+					next;
+					mes "[Forgeron Altiregen]";
+					mes "Nous avons des règles strictes, c'est comme ça! Désolé, revenez nous voir plus tard.";
+					close;
+				}
+			case 2:
+				mes "[Forgeron Altiregen]";
+				mes "Les pré-requis?";
+				mes "Premièrement, avoir atteint le Niveau de Job 40 au minimum. Ensuite, réussir les tâches que je vous confirai.";
+				next;
+				mes "[Forgeron Altiregen]";
+				mes "C'est tout. Les épreuves sont un peu compliquées, mais tout à fait réalisables.";
+				mes "Ceci inclue la livraison d'objets, une interrogation écrite à propos de la provenance d'objets locaux de certaines régions, et enfin des tests sur votre connaissance du métier de Forgeron.";
+				close;
+			case 3:
+				mes "[Forgeron Altiregen]";
+				mes "Humm...";
+				mes "Très bien, à la prochaine.";
+				close;
+			}
+		}
+		else if (BSMITH_Q > 0  && BSMITH_Q < 8) {
+			mes "[Forgeron Altiregen]";
+			mes "Vous n'êtes pas encore parti? Allez à Einbech pour trouver ^8E6B23Geschupenschte^000000. Aidez-le, et revenez me voir ensuite.";
+			close;
+		}
+		else if (BSMITH_Q > 8 && BSMITH_Q < 15) {
+			mes "[Forgeron Altiregen]";
+			mes "Comment s'est passé le boulot que ^8E6B23Geschupenschte^000000 vous a confié?";
+			close;
+		}
+		else if (BSMITH_Q == 15) {
+			mes "[Forgeron Altiregen]";
+			mes "Félicitations! vous avez réussi les épreuves de Geshupenschte!";
+			next;
+			mes "[Forgeron Altiregen]";
+			mes "Hum? Vous avez l'air surpris. Vous ne saviez pas qu'il y avait encore d'autres épreuves?";
+			mes "Haha, ne vous inquiétez pas, vous n'allez pas avoir à voyager très loin pour l'épreuve suivante.";
+			mes "Le responsable pour l'épreuve suivante est Mitmayer, allez lui parler dès maintenant.";
+			next;
+			if (select("C'est pénible, mais je vais le faire.:......Je ne veux plus voyager T.T") == 1) {
+				set BSMITH_Q,16;
+				mes "[Forgeron Altiregen]";
+				mes "J'espère bien que vous allez le faire, car la guilde des Forgerons n'aime pas ternir son image en embauchant des incapables!";
+				next;
+				mes "[Forgeron Altiregen]";
+				mes "Si une telle chose se passait, je vois déjà toute notre organisation s'écrouler!";
+				mes "Bien..... Allez-y!";
+				close;
+			}
+			mes "[Forgeron Altiregen]";
+			next;
+			mes "[Forgeron Altiregen]";
+			mes "COMMENT OSEZ-VOUS INSULTER NOTRE GUILDE DE LA SORTE!";
+			mes "Allez-vous en maintenant! Et ne vous avisez même plus de rêver à devenir Forgeron!";
+			next;
+			mes "[Forgeron Altiregen]";
+			mes "Comment imaginez-vous devenir Forgeron si vous êtes incapable d'effectuer ces taches anodines!?";
+			close;
+		}
+		else if (BSMITH_Q == 16) {
+			mes "[Forgeron Altiregen]";
+			mes "Hum? N'avez-vous rien à faire de mieux que de traîner ici?";
+			mes "Désolé, mais vous avez encore une épreuve à passer.";
+			close;
+		}
+		else if (BSMITH_Q == 17 && countitem(1005) > 0 && JobLevel > 39) {
+			mes "[Forgeron Altiregen]";
+			mes "Ouah, je peux apercevoir la flamme dans vos yeux! Vous avez réussi!!";
+			mes "Je vais vous accorder le pouvoir de modeler les métaux!";
+			next;
+			set .@joblvl,JobLevel;
+			callfunc "Job_Change",Job_Blacksmith;
+			callfunc "F_ClearJobVar";		// clears all job variables for the current player
+			mes "[Forgeron Altiregen]";
+			mes "N'oubliez pas! Nous sommes les artistes qui intègrent l'esthétique aux métaux! Ne vous avisez pas de l'oublier!";
+			next;
+			delitem 1005,1; //Hammer_Of_Blacksmith
+			mes "[Forgeron Altiregen]";
+			mes "Voici un petit cadeau pour marquer vos débuts en tant que Forgeron! Félicitations!";
+			if (.@joblvl > 48)
+				getitem 999,30; //Steel
+			else 
+				getitem 999,5; //Steel
+			close;
+		}
+	}
+}
+
+ein_in01,201,27,3	script	Geshupenschte#alberta	63,{
+	mes "[Geschupenschte]";
+	mes "Bonjour mon cher!";
+	mes "Je suis le forgeron ^8E6B23Geschupenschte^000000,";
+	mes "Ravi de vous rencontrer!";
+	next;
+	if (BaseJob == Job_Merchant) {
+		mes "[Geschupenschte]";
+		mes "Hoho!! Un marchand! Excellent! J'ai justement besoin d'aide!!";
+		next;
+		if (BSMITH_Q == 0) {
+			mes "[Geschupenschte]";
+			mes "Bien sûr... je ne veux pas vous déranger tant vous êtes occupé. Continuez sur votre route s'il le faut!";
+			next;
+			mes "[Geschupenschte]";
+			mes "Après tout...";
+			mes "Je suis bien placé pour savoir ce que c'est que d'être occupé~";
+			close;
+		}
+		else if (BSMITH_Q == 1) {
+			mes "[Geschupenschte]";
+			mes "Vous êtes celui que la Guilde à envoyé, non?";
+			mes "Ah, les gens commandent tant d'objets... mais nous n'avons pas assez de personnes pour les livrer!";
+			next;
+			mes "[Geschupenschte]";
+			mes "Donc, vous ETES celui envoyé par la guilde, n'est-ce pas?";
+			mes "Oh oui, heureusement...";
+			next;
+			mes "[Geschupenschte]";
+			mes "L'autre jour ils nous ont envoyé un gamin avec deux mains gauches... Une vraie plaie!";
+			mes "Heureusement vous êtes un peu plus compétent, n'est-ce pas?";
+			mes "Bien! Maintenant, je vais vous poser quelques questions!";
+			next;
+			if (select("Très bien.:Un instant, je vais me préparer.") == 1) {
+L_AskQuestions:
+				if (rand(2)) {
+					mes "[Geschupenschte]";
+					mes "1. Quels ville et objet local ne vont pas ensemble?";
+					next;
+					if (select("Morroc - Thief Clothes:Alberta - Two Hand Axe:Comodo - Berserk Potion:Alberta - Swordmace") == 2)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "2. Quel statut négatif peut être infligé quand on utilise la capacité ^8E6B23Hammer Fall^000000?";
+					next;
+					if (select("Stun:Blind:Silence:Sleep") == 1)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "3. Laquelle de ces compétences ne peuvent être utilisées par un Marchand?";
+					next;
+					if (select("Vending:Discount:Overcharge:Increase AGI") == 4)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "4. Où sont vendues les Gemmes Bleues?";
+					next;
+					if (select("Alberta:Morroc:Geffen:Prontera") == 3)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "5. Où se situe l'épicerie de Geffen à partir de la Tour?";
+					next;
+					if (select("à 8 heures:à 11 heures:à 6 heures:à 5 heures") == 1)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "6. Quelle arme ne peut être utilisée par un Marchand?";
+					next;
+					if (select("Stiletto:Ring Pommel Saber:Chain:Bible") == 4)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "7. Lequel de ces équipements possède la défense la plus élevée?";
+					next;
+					if (select("Panties:Mink Coat:Wooden Mail:Silk Robe") == 2)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "8. Combien de fois peut-on raffiner ^8E6B23sans risque^000000 une arme de niveau 3?";
+					next;
+					if (select("+ 3:+ 4:+ 5:+ 6") == 3)
+						set .@black_q,.@black_q+10;
+					mes "9. Que peut-on réaliser avec des ^8E6B23Trunks?^000000";
+					next;
+					if (select("Sakkat:Ghost Bandana:Majestic Goat:Antler") == 1)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "10. Qu'est-ce qui est le plus important pour un marchand?";
+					next;
+					select("L'entraide:L'honneur:L'argent:L'honnêteté");
+					set .@black_q,.@black_q+10;
+				}
+				else {
+					mes "[Geschupenschte]";
+					mes "1. Quels ville et objet local ne correspondent pas?";
+					next;
+					if (select("Al De Baran - Yggdrasil Leaf:Alberta - Hammer:Comodo - Berserk Potion:Al De Baran - Hammer") == 4)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "2. A combien se vend un Jellopy?";
+					next;
+					if (select("1 Zeny:2 Zenys:3 Zenys:4 Zenys") == 3)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "3. Qu'est ce qui est nécessaire pour utiliser la compétence ^8E6B23Vending^000000?";
+					next;
+					if (select("Avoir une charrette.:Avoir des objets à vendre.:Avoir équipé une arme.:Porter une armure.") == 1)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "4. Où se situe la Guilde des Marchands?";
+					next;
+					if (select("Alberta:Morroc:Geffen:Prontera") == 1)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "5. Où se situe l'armurerie de Morroc à partir du centre ville?";
+					next;
+					if (select("à 7 heures:à 11 heures: à 6 heures:à 5 heures") == 4)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "6. Laquelle de ces armes un marchand ne peut-il pas équiper?";
+					next;
+					if (select("Main Gauche:Claymore:Chain:Two handed Axe") == 2)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "7. Quel armure possède la défense la plus élevée?";
+					next;
+					if (select("Panties:Mink Coat:Wooden Mail:Silk Robe") == 2)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "8. Combien de fois peut-on raffiner ^8E6B23sans risque^00000 une arme de niveau 3?";
+					next;
+					if (select("+ 3:+ 4:+ 5:+ 6") == 3)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "9. Quel monstre ne lâche pas d'Iron Ore?";
+					next;
+					if (select("Chon Chon:Steel Chon Chon:Zerom:Anolian") == 4)
+						set .@black_q,.@black_q+10;
+					mes "[Geschupenschte]";
+					mes "10. Qu'y a-t-il de plus important pour un marchand?";
+					next;
+					select("L'honnêteté:L'entraide:L'argent:La notoriété");
+					set .@black_q,.@black_q+10;
+				}
+				mes "[Geschupenschte]";
+				mes "Bien!";
+				next;
+				mes "[Geschupenschte]";
+				mes "Voyons voir.... votre score est de" + .@black_q + " points.";
+				if (.@black_q == 100) {
+					set BSMITH_Q,3;
+					mes "Oh ho ho~";
+					mes "Avec un score pareil, vous n'aurez aucun problème pour devenir Forgeron!";
+					next;
+					mes "[Geschupenschte]";
+					mes "Je vais maintenant vous confier un petit travail!";
+					mes "Donnez-moi quelques minutes pour tout préparer, et quand vous reviendrez je serai prêt!";
+					close;
+				}
+				set BSMITH_Q,2;
+				mes ".............";
+				next;
+				mes "[Geschupenschte]";
+				if (BSMITH_Q == 2) {
+					mes "Comment dire cela sans vous froisser...";
+					mes "Vous avez encore échoué!";
+					mes "Si vous continuez à rater l'épreuve, je ne pourrais pas vous confier des taches plus intéressantes. Retournez étudier!";
+					close;
+				}
+				mes "Humm...";
+				mes "Désolé mon ami, je ne peux pas vous embaucher.";
+				mes "Vous devez acquérir plus de connaissances, autrement vous ne pourrez jamais devenir Forgeron. Retournez étudier!";
+				close;
+			}
+			mes "[Geschupenschte]";
+			mes "Entendu, revenez quand vous serez prêt.";
+			mes "Je vous attendrai ici même.";
+			close;
+		}
+		else if (BSMITH_Q == 2) {
+			mes "[Geschupenschte]";
+			mes "Alors, j'espère que vous avez étudié depuis la dernière fois?";
+			next;
+			mes "[Geschupenschte]";
+			mes "Je comprends parfaitement qu'on ne puisse pas répondre juste à tous les coups, donc je vais vous aider un peu...";
+			next;
+			mes "[Geschupenschte]";
+			mes "Vous avez droit à une réponse fausse!";
+			mes "Très bien, commençons l'interrogation~";
+			next;
+			goto L_AskQuestions;
+		}
+		else if (BSMITH_Q == 3) {
+			mes "[Geschupenschte]";
+			mes "Humm...";
+			mes "Où en étions-nous?...";
+			next;
+			mes "^3355FF*fouille dans ses papiers*";
+			mes "*bruissement de feuilles*^000000";
+			next;
+			mes "[Geschupenschte]";
+			mes "Oh! Voilà, c'est ça!";
+			mes "Cette commande a accumulé un gros retard...";
+			next;
+			mes "[Geschupenschte]";
+			mes "Très bien, rapportez-moi...";
+			next;
+			switch(rand(1,5)) {
+			//Steel, Rotten_Bandage, Blue_Gemstone, Arc_Wand
+			case 1: setarray .@items[0], 999,1, 930,1, 717,2, 1610,1, 4; break;
+			//Sparkling_Dust, Skel_Bone, Zargon, Gladius
+			case 2: setarray .@items[0], 1001,2, 932,1, 912,1, 1219,1, 5; break;
+			//Coal, Shell, Boody_Red, Tsurugi
+			case 3: setarray .@items[0], 1003,1, 935,2, 990,2, 1119,1, 6; break;
+			//Iron_Ore, Eye_Bandage, Blue_Gemstone, Arbalest
+			case 4: setarray .@items[0], 1002,1, 2212,1, 717,2, 1713,1, 7; break;
+			//Iron, Green_Herb, Animal's_Skin, Ring_Pommel_Saber
+			default: setarray .@items[0], 998,1, 511,1, 919,2, 1122,1, 8; break;
+			}
+			set BSMITH_Q,.@items[8];
+			mes "[Geschupenschte]";
+			mes "^8E6B23"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
+			mes "^8E6B23"+.@items[3]+" "+getitemname(.@items[2])+"^000000,";
+			mes "^8E6B23"+.@items[5]+" "+getitemname(.@items[4])+"^000000, et";
+			mes "^8E6B23"+.@items[7]+" "+getitemname(.@items[6])+"^000000, achetable en boutique.";
+			next;
+			mes "[Geschupenschte]";
+			mes "Allez chercher ces objets, ce sera votre épreuve, et ça me permettra d'économiser un peu d'argent sur cette commande. Hé, qu'est-ce que vous croyez, je ne suis pas toujours un gars sympa! C'est une épreuve!";
+			next;
+			mes "[Geschupenschte]";
+			mes "Très bien~";
+			mes "Bonne chance pour votre première épreuve!";
+
+
+			close;
+		}
+		else if (BSMITH_Q > 3 && BSMITH_Q < 9) {
+			switch(BSMITH_Q) {
+			case 4: setarray .@items[0], 999,1, 930,1, 717,2, 1610,1, 9; break;
+			case 5: setarray .@items[0], 1001,2, 932,1, 912,1, 1219,1, 10; break;
+			case 6: setarray .@items[0], 1003,1, 935,2, 990,2, 1119,1, 11; break;
+			case 7: setarray .@items[0], 1002,1, 2212,1, 717,2, 1713,1, 12; break;
+			case 8: setarray .@items[0], 998,1, 511,1, 919,2, 1122,1, 13; break;
+			}
+			mes "[Geschupenschte]";
+			mes "Ah, vous êtes de retour!";
+			mes "Avez-vous apporté tout ce que je vous ai demandé?";
+			next;
+			if (countitem(.@items[0]) >= .@items[1] && countitem(.@items[2]) >= .@items[3] && countitem(.@items[4]) >= .@items[5] && countitem(.@items[6]) >= .@items[7]) {
+				mes "[Geschupenschte]";
+				mes "Attendez...";
+				mes "N'avais-je pas demandé 3 Steel?";
+				next;
+				mes "[Geschupenschte]";
+				mes "Oh, je suppose que deux suffiront après tout. Voyons voir...";
+				mes "Très bien, vous avez tout! Donnez-moi juste une minute...";
+				next;
+				mes "[Geschupenschte]";
+				mes "Vérifiez bien que vous ne portez ^FF0000pas plus d' 1 "+getitemname(.@items[6])+"^000000 sur vous.";
+				next;
+				if (select("Oh, donnez-moi un instant.:C'est bon, j'ai vérifié.") == 1) {
+					mes "[Geschupenschte]";
+					mes "Hummm, si vous avez un doute, mettez les objets de votre inventaire dans votre Stock Kafra.";
+					close;
+				}
+				mes "[Geschupenschte]";
+				mes "D'accord.";
+				mes "Parfait~!!";
+				next;
+				mes "[Geschupenschte]";
+				mes "^3355FF*Clang...!*^000000";
+				next;
+				mes "[Geschupenschte]";
+				mes "^3355FF*Crash Crash!*^000000";
+				next;
+				delitem .@items[0],.@items[1];
+				delitem .@items[2],.@items[3];
+				delitem .@items[4],.@items[5];
+				delitem .@items[6],.@items[7];
+				set BSMITH_Q,.@items[8];
+				mes "[Geschupenschte]";
+				mes "Wooooo~~~";
+				mes "Et voilà...";
+				switch(BSMITH_Q) {
+				case 9:
+					mes "Bien, allez voir ^8E6B23Baisulist^000000 à Geffen dans le Royaume de Rune-Midgard. Donnez-lui ceci, puis rapportez-moi le reçu.";
+					getitem 1610,1; //Arc_Wand
+					next;
+					mes "[Geschupenschte]";
+					mes "Humm...?";
+					mes "Qu'est-ce que vous regardez comme ça?";
+					mes "Cette Arc Wand n'a plus rien à voir avec une banale cane!";
+					next;
+					mes "[Geschupenschte]";
+					mes "COMMENT CELA!? Aucune différence?";
+					mes "Observez attentivement où sont mes mains.";
+					mes "Regardez la cannelure intégrée!?";
+					mes "C'est la ^3355FFSUPER Geshupenschte ARC WAND MARK II!!^000000";
+					next;
+					mes "[Geshupenschte]";
+					mes "Ressentez la différence! Quasiment aucune inertie!";
+					next;
+					mes "[Geschupenschte]";
+					mes "Quoi qu'il en soit, apportez ceci à ^8E6B23Baisulist^000000 à Geffen dans le Royaume de Rune-Midgard,";
+					break;
+				case 10:
+					mes "Bien, allez voir ^8E6B23Wickebine^000000 à Morroc dans le Royaume de Rune-Midgard. Donnez-lui ceci, puis rapportez-moi le reçu.";
+					getitem 1219,1; //Gladius
+					next;
+					mes "[Geschupenschte]";
+					mes "Humm...?";
+					mes "Qu'est-ce que vous regardez comme ça?";
+					mes "Ce Gladius n'a plus rien à voir avec une banale dague!";
+					next;
+					mes "QUOI!? IL N'Y A RIEN DE DIFFERENT!?";
+					mes "Observez attentivement la lame!";
+					mes "NE VOYEZ VOUS PAS CES SUPERBES DESSINS?!";
+					mes "^3355FFULTRA GLADIUS Geshupenschte MARK II!!^000000";
+					next;
+					mes "[Geshupenschte]";
+					mes "N'est-ce pas magnifique!?";
+					next;
+					mes "[Geschupenschte]";
+					mes "Quoi qu'il en soit, apportez ceci à ^8E6B23Wickebine^000000 à Morroc dans le Royaume de Rune-Midgard,";
+					break;
+				Case 11:
+					mes "Bien, allez voir ^8E6B23Krongast^000000 à Lighthalzen. Donnez-lui ceci, puis rapportez-moi le reçu.";
+					getitem 1119,1; //Tsurugi
+					next;
+					mes "[Geschupenschte]";
+					mes "Humm...?";
+					mes "Ce Tsurugi n'a plus rien à voir avec une banale épée!";
+					next;
+					mes "COMMENT!? RIEN NE SEMBLE DIFFERENT!?";
+					mes "Observez attentivement la lame!";
+					mes "Regardez ces beaux dessins!";
+					mes "^3355FFULTRA Geshupenschte TSURUGI MARK II!!!^000000";
+					next;
+					mes "[Geshupenschte]";
+					mes "N'est-ce pas magnifique!?";
+					next;
+					mes "[Geschupenschte]";
+					mes "Quoi qu'il en soit, apportez ceci à ^8E6B23Krongast^000000 à Lighthalzen";
+					break;
+				case 12:
+					mes "Bien, allez voir ^8E6B23Talpiz^000000 à Payon dans le Royaume de Rune-Midgard. Donnez-lui ceci, puis rapportez-moi le reçu.";
+					getitem 1713,1; //Arbalest
+					next;
+					mes "[Geschupenschte]";
+					mes "Humm...?";
+					mes "Qu'est-ce que vous regardez comme ça?";
+					mes "Cette Arbalette n'a plus rien à voir avec un banal arc!";
+					next;
+					mes "^3355FFCOMMENT CELA!? AUCUNE DIFFERENCE!?";
+					mes "OBSERVEZ L'ENCOCHE OU S'INSERENT LES FLECHES!!";
+					mes "REGARDEZ COMME IL EST PERSONNALISE!!!!!";
+					mes "C'est l'ARBALEST MASTER ARCHER MARK II de Geshupenschte!!!^000000";
+					next;
+					mes "[Geshupenschte]";
+					mes "Vous voyez comme cet arc est bien fait!";
+					next;
+					mes "[Geschupenschte]";
+					mes "Quoi qu'il en soit, apportez ceci à ^8E6B23Talpiz^000000 à Payon dans le Royaume de Rune-Midgard,";
+					break;
+				case 13:
+					mes "Bien, allez voir ^8E6B23Bismarc^000000 à Hugel. Donnez-lui ceci, puis rapportez-moi le reçu.";
+					getitem 1122,1; //Ring_Pommel_Saber
+					next;
+					mes "[Geschupenschte]";
+					mes "Humm...?";
+					mes "Qu'est-ce que vous regardez comme ça?";
+					mes "Ce Ring Pommel Saber n'a plus rien à voir avec une banale épée!";
+					next;
+					mes "QUOI!? RIEN NE SEMBLE DIFFERENT!?";
+					mes "Regardez attentivement les extrémités des pointes!!";
+					mes "L'antidote et le poison des herbes vertes y a été mélangé!";
+					mes "^3355FFANTI POISON Geshupenschte MORNING STAR MARK II!!!!!^000000";
+					next;
+					mes "[Geshupenschte]";
+					mes "Vous ne comprenez pas!? Lorsque que vous êtes empoisonné, vous n'avez qu'à vous viser vous-même avec!";
+					mes "La blessure ..... va probablement s'agrandir! Mais le poison, lui, sera éliminé grâce au pouvoir des herbes vertes imbibé sur la lame!";
+					next;
+					mes "[Geschupenschte]";
+					mes "Quoi qu'il en soit, apportez ceci à ^8E6B23Bismarc^000000 à Hugel";
+				}
+				mes "et n'oubliez pas de me rapporter le reçu!";
+				close;
+			}
+			else {
+				mes "[Geschupenschte]";
+				mes "Vous n'avez toujours pas rapporté les objets que je vous ai demandé?! ... Il me faut:";
+				next;
+				mes "[Geschupenschte]";
+				mes "^8E6B23"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
+				mes "^8E6B23"+.@items[3]+" "+getitemname(.@items[2])+"^000000,";
+				mes "^8E6B23"+.@items[5]+" "+getitemname(.@items[4])+"^000000, et";
+				mes "^8E6B23"+.@items[7]+" "+getitemname(.@items[6])+"^000000, achetable en boutique.";
+				next;
+				mes "[Geschupenschte]";
+				mes "Rapportez-moi tout ça aussi vite que possible, les commandes sont déjà suffisamment en retard! N'oubliez pas que c'est une épreuve! Vous ne pourrez jamais devenir Forgeron si vous n'arrivez pas à accomplir cette tâche.";
+				close;
+			}
+		}
+		else if (BSMITH_Q > 8 && BSMITH_Q < 14) {
+			mes "[Geschupenschte]";
+			mes "Qu'est-ce que vous faîtes encore là? Dépêchez-vous de livrer la commande! Ne me dîtes pas que vous avez oublié où vous deviez aller?";
+			next;
+			mes "[Geschupenschte]";
+			if (BSMITH_Q == 9) {
+				mes "Allez à Geffen, à 11 heures de la Tour, pour trouver ^8E6B23Baisulist^000000. Et n'oubliez pas le reçu!";
+			}
+			else if (BSMITH_Q == 10) {
+				mes "Allez trouver ^8E6B23Wickebine^000000 à Morroc. Et n'oubliez pas le reçu!";
+			}
+			else if (BSMITH_Q == 11) {
+				mes "Allez à Lighthalzen, à 6 heures du centre ville, pour trouver ^8E6B23Krongast^000000 près de l'armurerie. Et n'oubliez pas le reçu!";
+			}
+			else if (BSMITH_Q == 12) {
+				mes "Allez à Payon, à 5 heures du centre ville, pour trouver ^8E6B23Talpiz^000000. Et n'oubliez pas le reçu!";
+			}
+			else {
+				mes "Allez à Hugel, à 1 heures du centre ville, pour trouver ^8E6B23Bismarc^000000 près du zeppelin. Et n'oubliez pas le reçu!";
+			}
+			close;
+		}
+		else if (BSMITH_Q == 14) {
+			mes "[Geschupenschte]";
+			mes "Hummm...?";
+			mes "Vous avez terminé votre livraison?";
+			mes "Donnez-moi le reçu s'il vous plaît~";
+			next;
+			if (select("Très bien monsieur, le voilà.:Reçu? Euh... je l'ai mis quelque part...") == 1) {
+				if (countitem(1073) > 0) {
+					set BSMITH_Q,15;
+					delitem 1073,1; //Merchant_Voucher_1
+					mes "[Geschupenschte]";
+					mes "Oh ho ho~";
+					mes "Parfait!";
+					mes "Vous êtes un gars en qui on peut avoir confiance!";
+					next;
+					mes "[Geschupenschte]";
+					mes "Très bon travail!";
+					mes "Retournez voir ^8E6B23Altiregen^000000 à Einbroch.";
+					next;
+					mes "[Geschupenschte]";
+					mes "Je suis sûr que vous ferez un très bon Forgeron!";
+					close;
+				}
+				set BSMITH_Q,3;
+				mes "[Geschupenschte]";
+				mes "Vous voulez dire que...";
+				mes "Vous ne savez pas ce que vous avez fait du reçu? ...";
+				next;
+				mes "[Geschupenschte]";
+				mes "Le reçu est l'essence même du marchand! La ligne de vie des forgerons!";
+				mes "Vous savez quoi? Vous allez devoir..... TOUT RECOMMENCER!!";
+				close;
+			}
+			mes "[Geschupenschte]";
+			mes "Bien, prévenez moi si vous retrouvez le reçu. J'ESPERE que vous en avez un.";
+			close;
+		}
+		else if (BSMITH_Q == 15) {
+			mes "[Geschupenschte]";
+			mes "Merci beaucoup! Retournez à Einbroch pour voir ^8E6B23Altiregen^000000!";
+			close;
+		}
+		mes "[Geschupenschte]";
+		mes "Humm...?";
+		mes "Votre épreuve est terminée, je n'ai plus besoin de vous pour l'instant.";
+		close;
+	}
+	else {
+		mes "[Geschupenschte]";
+		mes "Être un Forgeron c'est vraiment génial! Vous ne pensez pas?";
+		mes "Mwahahahahah!!";
+		close;
+	}
+}
+
+geffen,46,164,1	script	Baisulist#BLS	69,{
+	if (BSMITH_Q == 9 && countitem(1610) > 0) {
+		mes "[Baisulist]";
+		mes "Oh, bonjour! Vous êtes venu pour livrer ma commande? C'était une Arc Wand...";
+		next;
+		mes "[Baisulist]";
+		mes "Vous êtes sûr que c'est ce que j'ai commandé? Je veux dire, si elle n'est pas parfaitement neuve, vous n'aurez qu'à la reprendre!";
+		next;
+		if (select("Je l'ai peut-être utilisée en chemin...:Parfaitement neuve et rutilante!") == 1) {
+			mes "[Baisulist]";
+			mes "Bon... Je suppose que je devrais attendre encore pour que ma commande soit livrée~";
+			close;
+		}
+		mes "[Baisulist]";
+		mes "Wahou! Elle est finalement arrivée?!";
+		mes "Merci! J'attendais depuis si longtemps!";
+		set BSMITH_Q,14;
+		delitem 1610,1; //Arc_Wand
+		next;
+		mes "[Baisulist]";
+		mes "J'avais commandé ceci à la guilde des Forgerons de Geffen, mais comme la Guilde a déménagé à Einbroch récemment, j'avais peur qu'ils aient égaré ma commande.";
+		next;
+		mes "[Baisulist]";
+		mes "Merci d'être venu d'aussi loin!";
+		mes "Ah aussi, n'oubliez pas de punir Geshupenschte à ma place! Comment peut-on livrer avec autant de retard!";
+		next;
+		mes "[Baisulist]";
+		mes "Ah, attendez une seconde, je vais vous donner un reçu~";
+		next;
+		getitem 1073,1; //Merchant_Voucher_1
+		mes "[Baisulist]";
+		mes "Voilà, tout est ok! Au revoir et bonne chance~";
+		mapannounce "geffen","Hé, " +strcharinfo(0)+ ", merci pour la livraison~",bc_map;
+		close;
+	}
+	else if (BSMITH_Q == 14) {
+		mes "[Baisulist]";
+		mes "Merci beaucoup pour avoir enfin livré ma commande tant attendue~";
+		close;
+	}
+	else {
+		mes "[Baisulist]";
+		mes "Maintenant que j'y pense, ça fait bien longtemps que je ne suis plus allé à Alberta. Je suis un peu déçu des derniers services de livraison que j'ai passé avec la Guilde des Forgerons...";
+		next;
+		mes "[Baisulist]";
+		mes "J'ai commandé quelque chose à la Guilde des Forgerons de Geffen, mais apparemment la Guilde a déménagé à Einbroch récemment, et j'ai bien peur qu'ils aient égaré ma commande...";
+		next;
+		mes "[Baisulist]";
+		mes "Hum... J'espère que je recevrai bientôt ma commande...";
+		close;
+	}
+}
+
+morocc,27,112,4	script	Wickebine#BLS	725,{
+	if (BSMITH_Q == 10 && countitem(1219) > 0) {
+		cutin "Job_Black_hucke01",2;
+		mes "[Wickebine]";
+		mes "...!";
+		mes "Enfin!";
+		next;
+		mes "[Wickebine]";
+		mes "Ma livraison est finalement arrivée!?!";
+		mes "Donnez la moi!!";
+		mes "Je ne veux pas d'une vieille dague pourrie, je vous préviens!";
+		next;
+		if (select("Euh...:Ce Gladius est absolument neuf!") == 1) {
+			cutin "Job_Black_hucke03",2;
+			mes "[Wickebine]";
+			mes "Oooh...!";
+			mes "Dépêchez-vous bon sang! J'attends mon Gladius tout neuf~";
+			next;
+			mes "- elle a l'air contrariée -";
+			close2;
+			cutin "Job_Black_hucke03",255;
+			end;
+		}
+		cutin "Job_Black_hucke02",2;
+		mes "[Wickebine]";
+		mes "Hah hah hah!";
+		mes "Enfin...";
+		mes "Voyons voir...!";
+		next;
+		mes "- elle a l'air très heureuse -";
+		next;
+		set BSMITH_Q,14;
+		delitem 1219,1; //Gladius
+		cutin "Job_Black_hucke01",2;
+		mes "[Wickebine]";
+		mes "Vous êtes envoyé par la Guildes des Forgerons d'Einbroch? Veuillez transmettre ce message à votre supérieur, Geschupenschte...";
+		next;
+		cutin "Job_Black_hucke03",2;
+		mes "[Wickebine]";
+		mes "'^660000Vous êtes en RETARD!";
+		mes "Savez-vous depuis combien de temps j'ATTENDAIS cette commande?!^000000'";
+		next;
+		cutin "Job_Black_hucke02",2;
+		mes "[Wickebine]";
+		mes "Enfin, ce Gladius semble d'excellente qualité. Dîtes lui que je suis satisfaite de la qualité de cette forge.";
+		next;
+		getitem 1073,1; //Merchant_Voucher_1
+		emotion e_lv;
+		mes "[Wickebine]";
+		mes "Voici votre reçu. Heureusement qu'il y a des gens comme vous qui font du bon boulot.";
+		mapannounce "morocc","Merci pour la livraison, " + strcharinfo(0) + "~!",bc_map;
+		close2;
+		cutin "Job_Black_hucke02",255;
+		end;
+	}
+	else if (BSMITH_Q == 14) {
+		emotion e_lv;
+		cutin "Job_Black_hucke02",2;
+		mes "[Wickebine]";
+		mes "Merci beaucoup pour avoir enfin livré ma commande tant attendue~";
+		close2;
+		cutin "Job_Black_hucke02",255;
+		end;
+	}
+	else {
+		cutin "Job_Black_hucke03",2;
+		mes "[Wickebine]";
+		mes "...";
+		next;
+		mes "[Wickebine]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Wickbine]";
+		mes "En retard.";
+		mes "Ils sont en retard,";
+		mes "en retard,";
+		mes "en retard~!";
+		next;
+		mes "[Wickebine]";
+		mes "Quand diable ma livraison arrivera-t-elle? La Guilde des Forgerons gérée par Geshupenschte est SYSTEMATIQUEMENT EN RETARD!";
+		next;
+		emotion e_lv;
+		mes "[Wickebine]";
+		mes "Tout cela est vraiment décevant...";
+		close2;
+		cutin "Job_Black_hucke03",255;
+		end;
+	}
+}
+
+lighthalzen,209,80,4	script	Krongast#BLS	734,{
+	if (BSMITH_Q == 11 && countitem(1119) > 0) {
+		mes "[Krongast]";
+		mes "Ohhhhhh~";
+		mes "Serait-ce ma commande?";
+		mes "Formidable!";
+		mes "Faîtes-moi voir cela?";
+		next;
+		mes "[Krongast]";
+		mes "Vous êtes sûr que c'est ce que j'ai commandé? Un Tsurugi tout neuf! Hors de question qu'on essaye de me refiler de la vieille camelote!";
+		next;
+		if (select("Euh... et bien...:Nos armes sont certifiées neuves!") == 1) {
+			mes "[Krongast]";
+			mes "Hummmmm!";
+			mes "Veuillez transmettre le message à qui de droit: j'en ai marre d'attendre! J'estime avoir été suffisamment patient, et maintenant j'aimerais bien recevoir ma commande!!";
+			close;
+		}
+		mes "[Krongast]";
+		mes "Vous avez bien vérifié? Bon alors parfait, je le prends!";
+		next;
+		set BSMITH_Q,14;
+		delitem 1119,1; //Tsurugi
+		mes "[Krongast]";
+		mes "Oh ho...";
+		mes "Génial...";
+		mes "Encore mieux que ce que j'espérais.";
+		next;
+		mes "[Krongast]";
+		mes "Grâce à cette épée, mes mouvements seront encore plus rapides, précis et puissants! Je vais pouvoir mettre en pratique mes derniers apprentissages!";
+		next;
+		mes "[Krongast]";
+		mes "Tenez, voici votre reçu.";
+		next;
+		getitem 1073,1; //Merchant_Voucher_1
+		mes "[Krongast]";
+		mes "Merci à vous!";
+		mapannounce "lighthalzen",strcharinfo(0)+"... merci pour la livraison!",bc_map;
+		close;
+	}
+	else if (BSMITH_Q == 14) {
+		mes "[Krongast]";
+		mes "Merci beaucoup pour avoir enfin livré ma commande tant attendue~";
+		close;
+	}
+	else {
+		mes "[Krongast]";
+		mes "...";
+		next;
+		mes "[Krongast]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Krongast]";
+		mes "Quand diable cette épée va-t-elle arriver!?";
+		mes "Je dois m'entraîner à mes dernières compétences, et sans une ^2F4F4Ffine lame^000000 c'est impossible.";
+		next;
+		mes "[Krongast]";
+		mes "Ahhhhhhh!";
+		mes "Il me faut cette épée!";
+		close;
+	}
+}
+
+payon,214,79,4	script	Talpiz#BLS	59,{
+	if (BSMITH_Q == 12 && countitem(1713) > 0) {
+		mes "[Talpiz]";
+		mes "Oh~";
+		mes "Serait-ce enfin la livraison de ma commande?";
+		next;
+		mes "[Talpiz]";
+		mes "Assurez-vous que c'est bien ce que j'ai commandé. Je ne veux pas qu'on me refile une banale arbalète, vu?";
+		next;
+		if (select("Oh, je me suis trompé de livraison!:Celle-ci est spéciale et toute neuve.") == 1) {
+			mes "[Talpiz]";
+			mes "Hummmm.";
+			mes "Mais dépêchez-vous bon sang! Allez chercher ma commande! J'ai déjà attendu trop longtemps...";
+			close;
+		}
+		mes "[Talpiz]";
+		mes "Faîtes voir?...";
+		next;
+		set BSMITH_Q,14;
+		delitem 1713,1; //Arbalest
+		mes "[Talpiz]";
+		mes "Whoua....";
+		mes "Pas mal......Pas mal du tout même!!";
+		next;
+		mes "[Talpiz]";
+		mes "Observez ces courbes!! C'est superbe! Je l'adore~";
+		next;
+		mes "[Talpiz]";
+		mes "Merci! C'est vraiment du travail de qualité. Je pourrais en tirer un bon prix à la revente quand je n'en aurais plus besoin.";
+		next;
+		getitem 1073,1; //Merchant_Voucher_1
+		mes "[Talpiz]";
+		mes "Tenez!";
+		mes "Voici votre reçu.";
+		mes "J'apprécie votre travail.";
+		mapannounce "payon","Merci, " +strcharinfo(0)+ ", pour la livraison~",bc_map;
+		close;
+	}
+	else if (BSMITH_Q == 14) {
+		mes "[Talpiz]";
+		mes "Merci beaucoup pour avoir enfin livré ma commande tant attendue! Quel merveilleux travail~";
+		close;
+	}
+	else {
+		mes "[Talpiz]";
+		mes "Pff...";
+		mes "Quand diable ma commande arrivera-t-elle?";
+		next;
+		mes "[Talpiz]";
+		mes "Une Arbalète de haute qualité spécialement forgée pour moi... Il n'y a personne d'autre qui puisse le réaliser, à part 'lui'!";
+		next;
+		mes "[Talpiz]";
+		mes "Mais, QUAND VA-T-IL VENIR?!";
+		mes "Ahhhhhh...";
+		mes "Cette attente est insupportable!";
+		close;
+	}
+}
+
+hugel,168,183,1	script	Bismarc#BLS	118,{
+	if (BSMITH_Q == 13 && countitem(1122) > 0) {
+		mes "[Bismarc]";
+		mes "Êtes vous un ange? ... Ah... non...";
+		mes "Est-ce le Ring Pommel Saber que j'ai commandé? C'est mon seul espoir...";
+		next;
+		mes "[Bismarc]";
+		mes "^666666*le poison...*^000000 J'ai besoin de ce que j'ai commandé... pour arrêter... ce poison...";
+		next;
+		if (select("Oups, je me suis trompé de commande.:I'm sure this is the one.") == 1) {
+			mes "[Bismarc]";
+			mes "N-Nooon...";
+			mes "Dépêchez-vous...!";
+			mes "J'ai besoin de cette épée... pour...";
+			mes "l'an...ti...d-dote!";
+			next;
+			mes "^3355FFIl est agonisant...!";
+			mes "Vous feriez mieux de vous dépêcher.^000000";
+			close;
+		}
+		mes "[Bismarc]";
+		mes "^666666*Ghklk*^000000";
+		mes "Donnez-le moi...!";
+		mes "Je vous en prrriie!";
+		next;
+		set BSMITH_Q,14;
+		delitem 1122,1; //Ring_Pommel_Saber
+		mes "^3355FFBismarc se frappe lui-même avec le Ring Pommel Saber dont la lame a été imbibée du pouvoir des Herbes Vertes.^000000";
+		next;
+		mes "[Bismarc]";
+		mes "^666666*AARRRGHHH*^000000";
+		mes "*halètement*";
+		next;
+		mes "[Bismarc]";
+		mes "S'il vous plaît...";
+		mes "Aidez-moi...";
+		mes "Le poison est en train de ronger mon corps...";
+		next;
+		mes "[Bismarc]";
+		mes "AARRRGHHH!!";
+		mes "CA BRULE!!!";
+		next;
+		mes "[Bismarc]";
+		mes "*souffre*";
+		mes "Pfiou... je... je sens que l'antidote fait effet...";
+		next;
+		getitem 1073,1; //Merchant_Voucher_1
+		mes "[Bismarc]";
+		mes "Tenez... le reçu... Prenez-le!";
+		mapannounce "hugel","Merci, " +strcharinfo(0)+ ", vous m'avez sauvé la vie...",bc_map;
+		close;
+	}
+	else if (BSMITH_Q == 14) {
+		mes "[Bismarc]";
+		mes "Merci... vous m'avez sauvé la vie!";
+		close;
+	}
+	else {
+		mes "[Bismarc]";
+		mes "^666666*Ghyklk*^000000";
+		mes "^666666*Huk Hukk*^000000";
+		mes "Quand diable ma livraison arrivera-t-elle?...";
+		next;
+		mes "[Bismarc]";
+		mes "Le poison... dans mon corps...";
+		mes "La douleur! ... est si grande...";
+		mes "Oh seigneur...";
+		next;
+		mes "[Bismarc]";
+		mes "J'ai besoin de cet antidote!";
+		close;
+	}
+}
+
+ein_in01,24,41,5	script	Mitmayer#moc	726,{
+	if (BSMITH_Q == 16) {
+		emotion e_hmm;
+		mes "[Mitmayer]";
+		mes "Oh... alors vous êtes l'un des aspirants au métier de Forgeron?";
+		mes "Bien... héhé...";
+		mes "Comme vous avez pu vous en rendre compte au cours des précédentes épreuves que vous avez passées, on ne devient pas Forgeron en claquant des doigts!";
+		next;
+		mes "[Mitmayer]";
+		mes "Je suis chargé d'évaluer vos connaissances à propos des métaux et du métier de Forgeron. Vous sentez-vous prêt à débuter le test?";
+		next;
+		if (select("Oui:Non, pas encore~") == 1) {
+			mes "[Mitmayer]";
+			mes "Très bien...";
+			mes "Ce test est relativement simple. Je vais vous poser cinq questions, et évidement je ne vous donnerai aucun indice!";
+			next;
+			set .@blackss_te,0;
+			mes "[Mitmayer]";
+			mes "Ok, c'est parti. Si vous n'obtenez pas suffisamment de bonnes réponses, vous échouerez! Alors réfléchissez bien avant de répondre.";
+			next;
+			switch(rand(1,3)) {
+			case 1:
+				mes "[Mitmayer]";
+				mes "1. Quelle capacité est nécessaire pour apprendre ^8E6B23Discount?^000000";
+				next;
+				if (select("Push Cart Niveau 3:Item Appraisal:Mammonite Niveau 10:Enlarge Weight Niveau 3") == 4)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "2. Quel est le statut négatif que vous pouvez infliger lorsque vous utilisez la compétence ^8E6B23Hammerfall^000000?";
+				next;
+				if (select("Stun:Blindness:Chaos:Silence") == 1)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "3. Combien de Zenys sont consommés lors de l'utilisation de Mammonite Niveau 10?";
+				next;
+				if (select("900 Zenys:1000 Zenys:2000 Zenys:100 000 Zenys") == 2)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "4. Quel est le taux d'économie lorsque la compétence ^8E6B23Discount^000000 est maîtrisée?";
+				mes "skill is mastered?";
+				next;
+				if (select("21 % :22 % :23 % :24 % ") == 4)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "5. Quel est le pourcentage maximum de gains lorsque vous vendez des objets si vous maîtrisez la compétence ^8E6B23Overcharge^000000?";
+				next;
+				if (select("21 % :22 % :23 % :24 % ") == 3)
+					set .@blackss_te,.@blackss_te+20;
+				break;
+			case 2:
+				mes "[Mitmayer]";
+				mes "1. Quel monstre donne des Steel?";
+				next;
+				if (select("Zerom:Chon Chon:Skel Worker:Requiem") == 3)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "2. A partir de quelle pierre peut-on obtenir des Red Bloods?";
+				next;
+				if (select("Flame Heart:Rough Wind:Great Nature:Mystic Frozen") == 1)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "3. Quel est le minerais que l'on possède généralement le plus dans notre Stockage Kafra?";
+				next;
+				select("Wind of Verdure:Red Blood:Green Live:Crystal Blue");
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "4. Quel type de monstre est sensible face à des armes enchantées par l'élément Vent?";
+				next;
+				if (select("Feu:Eau:Terre:Vent") == 2)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "5. Combien faut-il d'Iron Ore pour fabriquer 1 Steel?";
+				next;
+				if (select("5 Iron Ore :4 Iron Ore:3 Iron Ore:6 Iron Ore") == 1)
+					set .@blackss_te,.@blackss_te+20;
+				break;
+			case 3:
+				mes "[Mitmayer]";
+				mes "1. Que faîtes-vous si vous croisez des personnes en détresse?";
+				next;
+				switch(select("Demander ce dont elles ont besoin.:Discuter un instant avec elles.:Les ignorer.:Leur donner des objets.")) {
+				case 1:
+				case 2:
+					set .@blackss_te,.@blackss_te+20;
+					break;
+				default:
+					break;
+				}
+				mes "[Mitmayer]";
+				mes "2. Où apprend-on les compétences ^8E6B23Crazy Uproar^000000 et ^8E6B23Change Cart^000000?";
+				next;
+				if (select("Al De Baran:Alberta:Morroc:Izlude") == 2)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "3. Dans quelle direction se situe la Guilde des Forgerons à partir du centre ville d'Einbroch?";
+				next;
+				if (select("à 11 heures:à 5 heures:à 7 heures:à 12 heures") == 2)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "4. Dans quelle ville avez-vous le plus de chance de croiser un Forgeron?";
+				next;
+				if (select("Prontera:Morroc:Alberta:Einbroch") == 4)
+					set .@blackss_te,.@blackss_te+20;
+				mes "[Mitmayer]";
+				mes "5. Laquelle de ces statistiques affecte la réussite des forges?";
+				next;
+				if (select("STR :DEX:AGI :VIT ") == 2)
+					set .@blackss_te,.@blackss_te+20;
+				break;
+			}
+			mes "[Mitmayer]";
+			mes "Ah...";
+			mes "Le quiz est terminé. Voyons voir...";
+			next;
+			mes "[Mitmayer]";
+			mes "Vous avez obtenu...";
+			mes ""+ .@blackss_te +" points...";
+			if (.@blackss_te > 70) {
+				mes "Pas mal!";
+				mes "Félicitations!";
+				mes "Vous avez réussi!";
+				next;
+				mes "[Mitmayer]";
+				mes "Cependant, ne laissez pas le succès vous monter à la tête. La vie de Forgeron n'est pas une partie de plaisir. Je vous donne cette enclume, en tant que preuve que vous avez réussi mon épreuve.";
+				set BSMITH_Q,17;
+				getitem 1005,1; //Hammer_Of_Blacksmith
+				next;
+				mes "[Mitmayer]";
+				mes "Rapportez cette enclume à Altiregen. Ne la perdez pas! Je vous souhaite bonne chance pour la suite!";
+				close;
+			}
+			mes "Raté! Retournez étudier!!";
+			next;
+			mes "[Mitmayer]";
+			mes "Ce n'est pas suffisant... Si vous n'avez qu'un petit pois dans la tête, vous risquez de vous retrouver du mauvais côté de l'enclume, si vous voyez ce que je veux dire!";
+			close;
+		}
+		mes "[Mitmayer]";
+		mes "Entendu.";
+		mes "Préparez-vous et revenez me voir quand vous serez prêt...";
+		close;
+	}
+	else if (BSMITH_Q == 17) {
+		emotion e_hmm;
+		mes "[Mitmayer]";
+		mes "Vous avez réussi mon épreuve. Pourquoi ne retournez-vous pas voir M. Altiregen?";
+		next;
+		mes "[Mitmayer]";
+		mes "Et n'oubliez pas de lui rapporter l'enclume que je vous ai donnée!";
+		next;
+		mes "[Mitmayer]";
+		mes "Oh, et assurez-vous d'avoir réparti tous vos points de compétence~";
+		close;
+	}
+	else {
+		emotion e_hmm;
+		mes "[Mitmayer]";
+		mes "Quand j'étais à Morroc, je souffrait de la chaleur cuisante du soleil. Maintenant j'étouffe dans le brouillard d'Einbroch!";
+		next;
+		mes "[Mitmayer]";
+		mes "Ceci dit je dois admettre que cette ville est le lieu parfait pour nous autres Forgerons, grâce à l'abondance des minerais et du haut développement des équipements et des machines.";
+		next;
+		mes "[Mitmayer]";
+		mes "Et pour ce qui est de la chaleur, après tout, nous les Forgerons sommes exposés en permanence à de hautes températures, puisque nous travaillons chaque jour avec le feu!";
+		next;
+		mes "[Mitmayer]";
+		mes "Devenir beau et bronzé n'est pas si mal..... Je trouve que ça donne une allure athlétique et saine.";
+		close;
+	}
+}
+
+geffen_in,109,170,3	script	Forgeron#gef	726,{
+	mes "[Forgeron]";
+	mes "Bienvenue! Nous sommes les maîtres des métaux, les forgerons!";
+	mes "Nos connaissances dans la création d'armes est en quelque sorte une forme d'art!";
+	mes "Êtes-vous venu visiter la Guilde des Forgerons?";
+	next;
+	mes "[Forgeron]";
+	mes "Je vous remercie de l'intérêt que vous portez à notre guilde, mais je suis au regret de vous dire que la Guilde des Forgerons a déménagé vers des bâtiments plus spacieux situés à ^3131FFEinbroch dans la République de Schwaltzvalt^000000.";
+	mes "Si vous souhaitez débuter votre entraînement, rendez-vous là-bas";
+	next;
+	mes "[Forgeron]";
+	mes "Vous pouvez vous rendre en République de Schwaltzvalt en empruntant le nouveau et formidable Système de Transport Aérien!";
+	mes "Sinon, je peux vous conduire à Izlude, d'où vous pourrez emprunter le Zeppelin.";
+	next;
+	switch(select("Système... quoi?:Aller à Izlude!:Non, merci.")) {
+	case 1:
+		mes "[Forgeron]";
+		mes "Le Système de Transport Aérien!";
+		mes "C'est vraiment une chose formidable. Rien à voir avec ces stupides téléportations magiques.";
+		mes "Le dirigeable est une énorme machine flottante qui vous permettra de rejoindre votre destination en un rien de temps.";
+		next;
+		mes "[Forgeron]";
+		mes "La République de Schwaltzvalt a développé ce système de dirigeables pour concurrencer le Royaume de Rune Midgard et son réseau de téléportation.";
+		next;
+		mes "[Forgeron]";
+		mes "Imaginez-vous! Le ciel bleu avec ses nuages blancs à perte de vue. Le vent caressant vos cheveux...";
+		mes "J'adore cette sensation!";
+		next;
+		mes "[Forgeron]";
+		mes "A ^3131FFIzlude^000000, vous pourrez emprunter ^3131FFZeppelin^000000 qui pourra vous mener à ^3131FFYuno, en République de Schwaltzvalt^000000.";
+		next;
+		mes "[Forgeron]";
+		mes "Prenez le dirigeable jusqu'à Yuno, puis effectuez un changement pour emprunter la ^3131FFseconde ligne de dirigeables^000000 vers Einbroch.";
+		mes "Faîtes attention à ^3131FFne pas sortir de l'enceinte de l'aéroport^000000 quand vous effectuerez votre changement.";
+		next;
+		mes "[Forgeron]";
+		mes "Ça a l'air compliqué, mais vous comprendrez quand vous serez arrivé à l'aéroport. Pour résumer, il y a deux dirigeables. L'un joignant Izlude à Yuno, et l'autre traverse entièrement la République de Schwarzwald, c'est à dire Yuno, Hugel, Lighthalzen et Einbroch.";
+		mes "Quand vous arriverez à la Guilde des Forgerons, passez le bonjour de ma part à mes collègues!";
+		close;
+	case 2:
+		if (Zeny < 600) {
+			mes "[Forgeron]";
+			mes "Excusez-moi, mais vous n'avez pas assez d'argent.";
+			close;
+		}
+		set zeny,zeny-600;
+		warp "izlude",94,103;
+		end;
+	case 3:
+		mes "[Forgeron]";
+		mes "Prenez soin de vous!";
+		close;
+	}
+}
