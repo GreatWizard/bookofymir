@@ -1,0 +1,96 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Acolyte Skill Quest
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quest for skills: Holy Light
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Fixed a typo in job check. (Bugreport:1531) [L0ne_W0lf]
+//============================================================
+
+prt_church,173,23,4	script	Acolyte Klift#qsk_al	79,{
+	mes "[Acolyte Klift]";
+	if(sex==1) mes "Ahh... Mon Frère!";
+	if(sex==0) mes "Ahh... Ma Soeur!";
+	mes "Je suis assignée au Sanctuaire afin de venir en aide à mes camarades Prêtres et Acolytes.";
+	mes "Je suis fatigué de devoir sans cesse venir en aide aux brebis égarées, mais je suis ici pour vous assister.";
+	next;
+	switch(select("^3355FFA Propos des Compétences Cachées^000000 ..:Apprendre ^3355FFHoly Light^000000:Mettre fin à la conversation")) {
+	case 1:
+		mes "[Acolyte Klift]";
+		mes "Nous autres frères Prêtres et Acolytes sommes souvent confrontés à de grands danger, dans notre lutte éternelle contre le mal.";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Au cours de leur apprentissage au Clergé, les Acolytes sont amenés à maîtriser leur force intérieure afin d'apprendre une attaque spéciale très utile en combat.";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Cette compétence spéciale se nomme ^3355FFHoly Light^000000. Cette attaque est particulièrement efficace contre les morts-vivants!.";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Si vous souhaitez apprendre cette compétence, vous devez me rapporter les objets suivants:";
+		mes "^FF33551 Opal^000000";
+		mes "^FF33551 Crystal Blue^000000";
+		mes "^FF33551 Rosary^000000 ";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Vous devez également avoir atteint au moins le ^5555FFniveau de Job 30^000000 si vous êtes Acolyte. Cette limite ne s'applique pas si vous êtes déjà Prêtre ou Moine.";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Revenez quand vous aurez rassemblé les objets. Je vous attends ici.";
+		close;
+	case 2:
+		if (getskilllv("AL_HOLYLIGHT") == 1) {
+			mes "[Acolyte Klift]";
+			if(sex==1) mes "Mon Frère, vous possédez déjà la compétence Holy Light.";
+			if(sex==0) mes "Ma Soeur, vous possédez déjà la compétence Holy Light.";
+			mes "Je prie pour que vous utilisiez vos pouvoirs pour le bien...";
+			close;
+		}
+		else {
+			if (countitem(727) > 0 && countitem(991) > 0 && countitem(2608) > 0) {
+				if ((JobLevel > 29 && BaseJob == Job_Acolyte) || BaseJob == Job_Monk || BaseJob == Job_Priest) {
+					mes "[Acolyte Klift]";
+					mes "Votre foi a prouvé que vous êtes digne d'acquérir la compétence Holy Light. Utilisez vos pouvoirs avec sagesse...";
+					next;
+					delitem 727,1; //White_Jewel
+					delitem 991,1; //Crystal_Blue
+					delitem 2608,1; //Rosary
+					skill 156,1,0;
+					mes "[Acolyte Klift]";
+					mes "Je le sens, ça y est... Vous avez réussi à libérer votre force intérieure";
+					mes "Vous pouvez maintenant utiliser ^5555FFHoly Light^000000! Faîtes en bon usage.";
+					close;
+				}
+			}
+			mes "[Acolyte Klift]";
+			mes "Oh, il est clair que... vous n'êtes pas encore prêt à recevoir la compétence Holy Light.";
+			next;
+			mes "[Acolyte Klift]";
+			mes "N'oubliez pas d'apporter tous les objets requis. A fortiori, ne négligez pas votre entraînement.";
+			close;
+		}
+	case 3:
+		mes "[Acolyte Klift]";
+		mes "Je comprends votre zèle. Vous avez encore toute la vie devant vous pour vous entraîner et gagner de l'expérience. Que Dieu vous bénisse...";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= v1.0a Now using functions found in "Global_Functions.txt"
+//= for class checks.
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed an exploit [Lupus]
+//= 1.4a changed perm. variables to temp ones [Lupus]
+//============================================================

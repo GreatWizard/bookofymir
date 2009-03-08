@@ -1,0 +1,1095 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena et Irreal, corrigé par Fern
+//===== eAthena Script ======================================= 
+//= The Airship System Script
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.1b
+//===== Compatible With: ===================================== 
+//= eAthena SVN 3422+(Requires jA Script System)
+//===== Description: ========================================= 
+//= The Airship System used in the official servers, however this
+//= one is still about 25% custom and is missing some npcs.
+//===== Additional Comments: ================================= 
+//= 0.1 Added first version, it might be a little buggy [MasterOfMuppets]
+//= 0.1a Fixed the Airport Staff#Iz which was [MasterOfMuppets]
+//= 	 warping you to the same location as Airport Staff#Ein
+//= 0.2 Implemented some more airship NPCs, more are to come.
+//= 0.3 Implemented some more NPCs [MasterOfMuppets]
+//= 0.4 Implemented two mini games scripted by Dj-Yhn [MasterOfMuppets]
+//= 0.5 Removed Duplicates [Silent]
+//= 0.5a Fixed a typo [Evera] 
+//= 0.5b Fixed appledice bugs [Lupus]
+//= 0.6 Added Rachel to the international route [Playtester]
+//= 0.7 Implemented Few Missings NPCs like (Pilot, Aanos, etc...).
+//=	Corrected Dialogs from some NPCs.
+//=	Added sistem to work with the "How Does the Airship Work" Quest [Samuray22]
+//= 0.8 Moved Gambling NPC Kaci since it's part of a quest. [SinSloth]
+//= 0.8b Fixed a Little Bug with the "How Does the Airship Work" Quest. [Samuray22]
+//= 0.9 Fixed a incorrect variable changed form "mob_inv" to "mobinv". [Samuray22]
+//= 0.9b Fixed a typo and bad variable use in the Typing Challenge [ultramage]
+//= 1.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 1.1 Touch-ups, and changed references of "Yuno" to "Juno",  [L0ne_W0lf]
+//= 1.1a Small fix to comparison check. [Paradox924X]
+//= 1.1b Small fix to zeny check. [Kisuka]
+//============================================================ 
+
+//============================================================ 
+//= The Airship System (Juno -> Hugel -> Einbroch -> Lighthalzen -> repeat)
+//============================================================ 
+
+airplane,243,74,4	script	#AirshipWarp-1	45,2,2,{
+OnTouch:
+	if($@airplanelocation == 1)warp "einbroch",90,275;
+	if($@airplanelocation == 2)warp "yuno",85,265;
+	if($@airplanelocation == 3)warp "lighthalzen",302,75;
+	if($@airplanelocation == 4)warp "hugel",182,150;
+	end;
+
+OnHide:
+	misceffect 16;
+	end;
+OnUnhide:
+	misceffect 215;
+	end;
+}
+
+airplane,243,29,4	script	#AirshipWarp-2	45,2,2,{
+OnTouch:
+	if($@airplanelocation == 1)warp "einbroch",90,275;
+	if($@airplanelocation == 2)warp "yuno",85,265;
+	if($@airplanelocation == 3)warp "lighthalzen",302,75;
+	if($@airplanelocation == 4)warp "hugel",182,150;
+	end;
+
+OnHide:
+	misceffect 16;
+	end;
+OnUnhide:
+	misceffect 215;
+	end;
+}
+
+airplane,1,1,0	script	EinYuno_Airship	-1,{
+OnInit:
+while(1)
+{
+	initnpctimer;
+	setnpctimer 0;
+	set $@airplanelocation,0;
+	donpcevent "#AirshipWarp-1::OnHide";
+	donpcevent "#AirshipWarp-2::OnHide";
+	disablenpc "#AirshipWarp-1";
+	disablenpc "#AirshipWarp-2";
+	mapannounce "airplane","Le zeppelin décolle maintenant en direction d'Hugel.",1,0xBA55D3;
+	end;
+OnTimer15000:
+	mapannounce "airplane","Nous volons en direction d'Hugel.",1,0xBA55D3;
+	end;
+OnTimer30000:
+	mapannounce "airplane","Nous allons bientôt atterrir à Hugel.",1,0xBA55D3;
+	end;
+OnTimer45000:
+	set $@airplanelocation,4;
+	enablenpc "#AirshipWarp-1";
+	enablenpc "#AirshipWarp-2";
+	donpcevent "#AirshipWarp-1::OnUnhide";
+	donpcevent "#AirshipWarp-2::OnUnhide";	
+	mapannounce "airplane","Bienvenue à Hugel. Passez un agréable séjour.",1,0xBA55D3;
+	end;
+OnTimer55000:
+	mapannounce "airplane","Nous sommes actuellement à Hugel. Le zeppelin va bientôt décoller.",1,0xBA55D3;
+	end;
+OnTimer65000:
+	set $@airplanelocation,0;
+	donpcevent "#AirshipWarp-1::OnHide";
+	donpcevent "#AirshipWarp-2::OnHide";
+	disablenpc "#AirshipWarp-1";
+	disablenpc "#AirshipWarp-2";
+	mapannounce "airplane","Le zeppelin décolle maintenant en direction d'Einbroch.",1,0x00FF00;
+	end;
+OnTimer80000:
+	mapannounce "airplane","Nous volons en direction d'Einbroch.",1,0x00FF00;
+	end;
+OnTimer95000:
+	mapannounce "airplane","Nous allons bientôt atterrir à Einbroch.",1,0x00FF00;
+	end;
+OnTimer110000:
+	set $@airplanelocation,1;
+	enablenpc "#AirshipWarp-1";
+	enablenpc "#AirshipWarp-2";
+	donpcevent "#AirshipWarp-1::OnUnhide";
+	donpcevent "#AirshipWarp-2::OnUnhide";
+	mapannounce "airplane","Nous sommes actuellement à Einbroch. Passez un agréable séjour.",1,0x00FF00;
+	end;
+OnTimer120000:
+	mapannounce "airplane","Nous sommes actuellement à Einbroch. Le zeppelin va bientôt décoller.",1,0x00FF00;
+	end;
+OnTimer130000:
+	set $@airplanelocation,0;
+	donpcevent "#AirshipWarp-1::OnHide";
+	donpcevent "#AirshipWarp-2::OnHide";
+	disablenpc "#AirshipWarp-1";
+	disablenpc "#AirshipWarp-2";
+	mapannounce "airplane","Le zeppelin décolle maintenant en direction de Lighthalzen.",1,0xFF8600;
+	end;
+OnTimer145000:
+	mapannounce "airplane","Nous volons en direction de Lighthalzen.",1,0xFF8600;
+	end;
+OnTimer160000:
+	mapannounce "airplane","Nous allons bientôt atterrir à Lighthalzen.",1,0xFF8600;
+	end;
+OnTimer175000:
+	set $@airplanelocation,3;
+	enablenpc "#AirshipWarp-1";
+	enablenpc "#AirshipWarp-2";
+	donpcevent "#AirshipWarp-1::OnUnhide";
+	donpcevent "#AirshipWarp-2::OnUnhide";
+	mapannounce "airplane","Nous sommes actuellement à Lighthalzen. Passez un agréable séjour.",1,0xFF8600;
+	end;
+OnTimer185000:
+	mapannounce "airplane","Nous sommes actuellement à Lighthalzen. Le zeppelin va bientôt décoller.",1,0xFF8600;
+	end;
+OnTimer195000:
+	set $@airplanelocation,0;
+	donpcevent "#AirshipWarp-1::OnHide";
+	donpcevent "#AirshipWarp-2::OnHide";
+	disablenpc "#AirshipWarp-1";
+	disablenpc "#AirshipWarp-2";
+	mapannounce "airplane","Le zeppelin décolle maintenant en direction de Yuno.",1,0x70DBDB;
+	end;
+OnTimer210000:
+	mapannounce "airplane","Nous volons en direction de Yuno.",1,0x70DBDB;
+	end;
+OnTimer225000:
+	mapannounce "airplane","Nous allons bientôt atterrir à Yuno.",1,0x70DBDB;
+	end;
+OnTimer240000:
+	set $@airplanelocation,2;
+	enablenpc "#AirshipWarp-1";
+	enablenpc "#AirshipWarp-2";
+	donpcevent "#AirshipWarp-1::OnUnhide";
+	donpcevent "#AirshipWarp-2::OnUnhide";
+	mapannounce "airplane","Nous sommes actuellement à Yuno. Passez un agréable séjour.",1,0x70DBDB;
+	end;
+OnTimer250000:
+	mapannounce "airplane","Nous sommes actuellement à Yuno. Le zeppelin va bientôt décoller.",1,0x70DBDB;
+	end;
+OnTimer260000:
+	stopnpctimer;
+}
+}
+
+//C4644E
+
+//============================================================ 
+//= Some normal NPCS (airplane)
+//============================================================ 
+
+airplane,240,64,5	script	Sortie#01::Exit2	857,{
+	end;
+}
+
+airplane,247,64,5	duplicate(Exit2)	Sortie#02	857
+
+airplane,240,39,1	duplicate(Exit2)	Sortie#03	857
+
+airplane,247,39,1	duplicate(Exit2)	Sortie#04	857
+
+airplane,100,69,2	script	Personnel de Bord#01::Airship Crew	852,{
+
+	mes "[Personnel de Bord]";
+	mes "Lorsque nous atterrirons à votre destination, merci d'emprunter les escaliers de sortie si vous souhaitez quitter le dirigeable.";
+	mes "Merci de votre compréhension.";
+	close;
+}
+
+airplane,250,59,3	script	Personnel de Bord::AirshipInfo	67,{
+
+	mes "[Personnel de Bord]";
+	mes "Bienvenue à bord.";
+	mes "Puis-je vous aider ou vous informer sur quelque chose?";
+	next;
+	menu "Les règles à bord de l'appareil.",s_Use,"La cabine du capitaine.",s_Capt,"Les équipements.",s_Faci,"Rien, merci.",-;
+
+	mes "[Personnel de Bord]";
+	mes "Bien, j'espère que vous apprécierez le vol à bord du dirigeable.";
+	mes "Passez une bonne journée.";
+	close;
+
+s_Use:
+	mes "[Personnel de Bord]";
+	mes "Quand vous entendrez une annonce disant que nous sommes arrivés à votre destination,";
+	mes "veuillez employer une des sorties situées aux extrémités Nord et Sud du dirigeable.";
+	next;
+	mes "[Personnel de Bord]";
+	mes "Si vous manquez votre arrêt, ne vous inquiétez pas.";
+	mes "Le dirigeable ne change pas d'itinéraire, de cette façon, vous aurez une autre occasion de descendre à bon port.";
+	close;
+
+s_Capt:
+	mes "[Personnel de Bord]";
+	mes "La Cabine du capitaine est située à l'avant du dirigeable.";
+	mes "Vous pourrez y rencontrer le capitaine et le pilote de l'appareil.";
+	close;
+
+s_Faci:
+	mes "[Personnel de Bord]";
+	mes "Le dirigeable offre divers jeux pour le divertissement de tous nos passagers.";
+	mes "Nous vous invitons à tenter votre chance en utilisant vos compétences dans ces mini jeux~";
+	close;
+
+}
+
+airplane,50,66,4	script	Meltz::AirshipApples	86,{
+
+	mes "[Meltz]";
+	mes "Bienvenue à la boutique de Meltz, où vous pourrez acheter des Pommes ou en faire du Jus de Pommes.";
+	next;
+	menu "Acheter des Pommes.",s_Buy,"Faire des Jus de Pommes.",s_Juice,"Partir.",-;
+
+s_Cancel:
+	mes "[Meltz]";
+	mes "Merci d'être venu.";
+	mes "Revenez quand vous voulez, ou si vous avez envie de croquer une Pomme pendant une pause~";
+	close;
+
+s_Buy:
+	mes "[Meltz]";
+	mes "Entrez le nombre de Pommes que vous souhaitez acheter.";
+	mes "Chaque Pomme est au prix de 15 Zenys et vous pouvez en acheter jusqu'à 500 à la fois. Veuillez entrer \"0\" si vous changez d'avis.";
+	next;
+	input @tempapple;
+	if(!@tempapple)goto s_Cancel;
+	if(@tempapple > 0 && @tempapple < 501)goto s_AppleBuy;
+	if(@tempapple < 0)close;
+	mes "[Meltz]";
+	mes "Vous ne pouvez acheter que 500 Pommes au maximum. " + @tempapple + " est supérieur à 500.";
+	close;
+
+s_AppleBuy:
+	mes "[Meltz]";
+	mes "Un total de ^FF0000" + @tempapple + "^000000 Pommes.";
+	mes "Pour un prix de ^FF0000" + @tempapple * 15 + "^000000 zenys.";
+	mes "Voulez vous autre chose?";
+	next;
+	menu "Oui",-,"Non",s_Cancel;
+
+	if(zeny < (@tempapple * 15))goto s_NEnoughZeny;
+	mes "[Meltz]";
+	mes "Merci d'être venu.";
+	mes "J'espère que vous apprécierez la saveur de ces Pommes~!";
+	getitem 512,@tempapple;
+	set zeny,zeny - (@tempapple * 15);
+	close;
+
+s_NEnoughZeny:
+	mes "[Meltz]";
+	mes "Je suis désolé, mais il semble que vous n'ayez pas assez d'argent.";
+	mes "Revenez quand vous voulez, ou si vous avez envie de croquer une Pomme pendant une pause~";
+	close;
+
+s_Juice:
+	mes "[Meltz]";
+	mes "D'accord, il me faudrait ^FF00003 Pommes et 1 Bouteille Vide^000000 pour vous faire 1 Jus de Pommes.";
+	mes "Cela vous convient?";
+	next;
+	menu "Oui",-,"Non",s_Cancel;
+
+	if(countitem(512) < 3 || !countitem(713))goto s_Material;
+	mes "[Meltz]";
+	mes "Merci, attendez un moment je vous prie.";
+	next;
+	mes "*Grind grind*";
+	mes "*Grind grind*";
+	mes "*Clang...!*";
+	next;
+	mes "[Meltz]";
+	mes "Et voila~";
+	mes "J'espère que ça vous plaît!";
+	mes "Revenez quand vous voulez si vous avez besoin de Pommes ou de Jus de Pommes~";
+	delitem 512,3;
+	delitem 713,1;
+	getitem 531,1;
+	close;
+
+s_Material:
+	mes "[Meltz]";
+	mes "Je suis désolé mais vous n'avez pas les ingrédients nécessaires pour faire une bouteille de Jus de Pommes.";
+	mes "Rappelez vous, j'ai besoin de 3 Pommes et d'1 Bouteille Vide pour faire 1 Jus de Pommes.";
+	close;
+
+}
+
+airplane,80,71,4	script	Zerta	834,{
+	mes "[Zerta]";
+	mes "Oh, bonjour aventurier.";
+	mes "Je suis actuellement en voyage sacré, offrant mes prières au continent de Rune-Midgard.";
+	close;
+}
+
+airplane,65,63,4	script	Maelin	714,{
+	mes "[Maelin]";
+	mes "Hum, ce dirigeable va bien à Lutie, n'est-ce pas?";
+	mes "J'ai attendu si longtemps, mais je n'ai jamais rien entendu à propos de Lutie.";
+	close;
+}
+
+airplane,72,34,2	script	Aanos	702,{
+	mes "[Aanos]";
+	mes "Oh wahouu~";
+	mes "Le ciel semble si différent et si beau vu d'ici!";
+	close;
+}
+
+airplane,32,61,4	script	Nils::TypingContest	49,{
+	callfunc "F_ClearGarbage"; //Clear outdated, unused variables
+loopback:
+	mes "[Nils]";
+	mes "Bienvenue à l'^FF0000incroyable défi dactylographique^000000!";
+	mes "Aimeriez-vous jouer à un jeu de dactylographie rapide?";
+	next;
+	menu "Jouer à l'^FF0000incroyable défi dactylographique^000000.",s_Play,"Lire les règles.",s_Info,"Voir les records.",s_Record,"Partir.",-;
+
+	mes "[Nils]";
+	mes "Revenez faire une partie quand vous voulez.";
+	mes "Je serai là~";
+	close;
+
+s_Play:
+	mes "[Nils]";
+	mes "D'accord, nous avons un nouveau challenger!";
+	mes "Saisissez le texte suivant aussi rapidement que vous pouvez, sans faire de fautes! C'est parti~!";
+	next;
+	//below arrays are for simplified entering of new lines ;P
+	//first lines array
+	setarray $@textstringsa$[0],"^00FFFFCommec'estpasévident^0000delirecequiest",
+	"^993366hfjdkeldjsieldjs^663366hfjdjeiskdlefvbd",
+	"^00FFFFCoboman no chikara-yumei na",
+	"^993366poring drops chonchon picky dokebi",
+	"^00FFFFcallipygian salacious lascivious",
+	"^663366EcRiRE AveC dES mAjuSCulEs PaRTouT",
+	"^00CCFFNe fiates psa aettntoin",
+	"^FF33CCQd on c pa ecrir normalman",
+	"^FF33CCLiGhTsPeEd RiGhT SPEed leFT TURn",
+	"^00CCFFMais il est naze ce mec! J'avance et",
+	"^00CCFFPar le pouvoir de^000000",
+	"^00CCFF...silencieux. bienveillance tranquille...";
+	//second lines array
+	setarray $@textstringsb$[0],"marquédanscettephrase.",
+	"",
+	"chikara-dalookii na chikara da ze!",
+	"lunatic isis alice munak yoyo smokie",
+	"licentious prurient concupiscent",
+	"çA fAIt MaL aUX yEuX De tOUt Le MoNdE!!",
+	"^0000FFmêem aevc totues ces fatues",
+	"^990066i fo éviT Dcrir com sa car",
+	"RiGhT BuRn OrIGInAL GaNgSteR SmACk",
+	"AAHHHHH. BAAAM~!",
+	"p-po-por-po-por-pori-poring",
+	"compagnon d'âme... merveille. énigme...";
+	//for the few 3-liners... =X
+	setarray $@textstringsc$[0],"Je vais écrire comme ceci.",
+	"Bravo",
+	"COBO ON!",
+	"",
+	"",
+	"",
+	"vosu cpomrenenz ce qiu ets écirt.",
+	"LE SMS SAY LE MALE",
+	"",
+	"J'ai mal!!!",
+	"DU DIEU-PORING. VOUS NE PASSEREZ PAS!",
+	"j'aime les nuages.";
+	//comparisation strings
+	setarray $@compstring$[0],"Commec'estpasévidentdelirecequiest marquédanscettephrase. Je vais écrire comme ceci.",
+	"hfjdkeldjsieldjshfjdjeiskdlefvbd Bravo",
+	"Coboman no chikara-yumei na chikara-dalookii na chikara da ze! COBO ON",
+	"poring drops chonchon picky dokebi lunatic isis alice munak yoyo smokie",
+	"callipygian salacious lascivious licentious prurient concupiscent",
+	"EcRiRE AveC dES mAjuSCulEs PaRTouT çA fAIt MaL aUX yEuX De tOUt Le MoNdE!!",
+	"Ne fiates psa aettntoin mêem aevc totues ces fatues vosu cpomrenenz ce qiu ets écirt.",
+	"Qd on c pa ecrir normalman i fo éviT Dcrir com sa car LE SMS SAY LE MALE",
+	"LiGhTsPeEd RiGhT SPEed leFT TURn RiGhT BuRn OrIGInAL GaNgSteR SmACk",
+	"Mais il est naze ce mec! J'avance et AAHHHHH. BAAAM~! J'ai mal!!!",
+	"Par le pouvoir de p-po-por-po-por-pori-poring DU DIEU-PORING. VOUS NE PASSEREZ PAS!",
+	"...silencieux. bienveillance tranquille... compagnon d'âme... merveille. énigme... j'aime les nuages.";
+
+	//lengths
+	setarray $@lengths[0],20,32,73,73,65,66,67,55,67,66,67,69;
+
+	//	initnpctimer;
+	// pick 2 distinct phrases and initialize related variables
+	set @index,rand(1,getarraysize($@textstringsa$))-1;
+	set @string1a$,$@textstringsa$[@index];
+	set @string1b$,$@textstringsb$[@index];
+	set @string1c$,$@textstringsc$[@index];
+	set @typingstring1$,$@compstring$[@index];
+
+	set @index2,rand(1,getarraysize($@textstringsa$))-1;
+	while (@index2 == @index) {
+		set @index2,rand(1,getarraysize($@textstringsa$))-1;
+	}
+	set @string2a$,$@textstringsa$[@index2];
+	set @string2b$,$@textstringsb$[@index2];
+	set @string2c$,$@textstringsc$[@index2];
+	set @typingstring2$,$@compstring$[@index2];
+
+	set @typingkeys,$@lengths[@index]+$@lengths[@index2];
+	set @start,gettime(3)*60*60+gettime(2)*60+gettime(1);
+
+	mes "[Nils]";
+	mes @string1a$;
+	if(@string1b$ != "")mes @string1b$;
+	if(@string1c$ != "")mes @string1c$;
+	input @comparisonvar$[1];
+	next;
+	mes "^000000[Nils]";
+	mes @string2a$;
+	if(@string2b$ != "")mes @string2b$;
+	if(@string2c$ != "")mes @string2c$;
+	input @comparisonvar$[2];
+	next;
+	if(@comparisonvar$[1] != @typingstring1$ || @comparisonvar$[2] != @typingstring2$) goto s_Fail;
+	set @time,(gettime(3)*60*60+gettime(2)*60+gettime(1))-@start; //seconds taken
+	set @mypoints,(@typingkeys * 100) / @time;
+	mes "[Nils]";
+	mes "Vous avez mis ^FF0000" + @time + " secondes pour tout saisir,^000000";
+	mes "ce qui vous fait un score de ^0000FF" + @mypoints + "^000000 points";
+	next;
+	if(@mypoints <= $TypingRecord)goto loopback;
+	mes "[Nils]";
+	mes "Félicitations!";
+	mes "C'est un nouveau record.";
+	mes "Je vais l'inscrire dans la liste des meilleurs scores tout de suite.";
+	set $TypingRecord,@mypoints;
+	set $TypingRecord$,strcharinfo(0);
+	close;
+
+s_Fail:
+	mes "^000000[Nils]";
+	mes "Je suis désolé mais vous n'avez pas saisi tous les caractères correctement.";
+	mes "Mais rappelez-vous, avec de l'entraînement, ce sera parfait!";
+	close;
+
+s_Info:
+	mes "[Nils]";
+	mes "L'incroyable défi dactylographique est un jeu où vous devez saisir un texte donné aussi rapidement que possible.";
+	mes "Le nom du meilleur joueur est inscrit sur ce tableau.";
+	mes "Si vous voulez être connu, tentez votre chance!";
+	next;
+	mes "[Nils]";
+	mes "Sachez seulement que vous devez saisir tout le texte sur UNE SEULE ligne.";
+	mes "Donc n'appuyez pas sur Entrée, cliquez simplement sur 'OK'.";
+	close;
+
+s_Record:
+	mes "[Nils]";
+	mes "^0000FF" + $TypingRecord$ + "^000000 est le champion actuel, avec un total de ^0000FF" + $TypingRecord + "^000000 points.";
+	mes "Vous le battrez la prochaine fois~";
+	close;
+
+}
+
+airplane_01,221,158,6	script	Pilote#air-0::Pilot	852,{
+	set @pilot, rand(1,4);
+	if (@pilot == 1) {
+		mes "[Pilote]";
+		mes "Longitude, 131 degrés Est.";
+		mes "Latitude, 37 degrés Nord.";
+		mes "Nous sommes sur le bon chemin capitaine.";
+		close;
+	} else if(@aa == 2) {
+		mes "[Pilote]";
+		mes "C'est vraiment nuageux aujourd'hui.";
+		mes "C'est toujours dur de piloter quand les cieux ne sont pas clairs.";
+		mes "Voila pourquoi nous avons un radar.";
+		close;
+	} else if(@aa == 3) {
+		mes "[Pilote]";
+		mes "Le capitaine est un homme bon, et je ne vois personne d'autre qui pourrait commander ce vaisseau.";
+		mes "Mais il est assez dur, il ne se laisse pas faire.";
+		next;
+		mes "[^ff0000Tarlock^000000]";
+		mes "^ff0000Hé...!^000000";
+		mes "^ff0000Moins de bavardages et plus de pilotage!^000000";
+		next;
+		mes "[Pilote]";
+		mes "B-bien reçu, mon capitaine!";
+		mes "(Vous voyez ce que je veux dire?)";
+		close;
+	}
+		mes "[Pilote]";
+		mes "Cet uniforme est vraiment pimpant, mais il est trop étouffant pour être porté en dehors du dirigeable.";
+		next;
+		mes "[Pilote]";
+		mes "...";
+		mes "......";
+		mes "Peu de passagers viennent dans cette salle.";
+		mes "Et puis, le capitaine EST un renne.";
+		mes "Je pourrais, à la limite, me balader en caleçon.";
+		next;
+		//Emotion "Pilot#airplane_01" ET_HUK
+		mes "[Pilote]";
+		mes "Oh...! Bonjour!";
+		mes "V-v-vous appréciez le voyage?!";
+		close;
+}
+
+//============================================================ 
+//= The Airship System (Izlude -> Yuno -> Rachel -> Repeat)
+//============================================================ 
+
+airplane_01,243,74,4	script	#AirshipWarp-3	45,2,2,{
+OnTouch:
+	if($@airplanelocation2 == 1)warp "izlude",202,56;
+	if($@airplanelocation2 == 2)warp "yuno",20,265;
+	if($@airplanelocation2 == 3)warp "ra_fild12",292,204;
+	end;
+
+OnHide:
+	misceffect 16;
+	end;
+OnUnhide:
+	misceffect 215;
+	end;
+}
+
+airplane_01,243,29,4	script	#AirshipWarp-4	45,2,2,{
+OnTouch:
+	if($@airplanelocation2 == 1)warp "izlude",202,56;
+	if($@airplanelocation2 == 2)warp "yuno",20,265;
+	if($@airplanelocation2 == 3)warp "ra_fild12",292,204;
+	end;
+
+OnHide:
+	misceffect 16;
+	end;
+OnUnhide:
+	misceffect 215;
+	end;
+}
+
+airplane_01,1,1,0	script	YunoIzl_Airship	-1,{
+OnInit:
+while(1)
+{
+	disablenpc "Quest_Izl";
+	initnpctimer;
+	setnpctimer 0;
+	set $@airplanelocation2,0;
+	donpcevent "#AirshipWarp-3::OnHide";
+	donpcevent "#AirshipWarp-4::OnHide";
+	disablenpc "#AirshipWarp-3";
+	disablenpc "#AirshipWarp-4";
+	mapannounce "airplane_01","Le zeppelin décolle maintenant en direction d'Izlude.",1,0x00FF00;
+	end;
+OnTimer15000:
+	set $@mobinv, $@mobinv+1;
+	set $@mobrand, rand(1,3);
+	if($@mobinv >= 9 && $@mobrand == 3) {
+		stopnpctimer;
+		enablenpc "Quest_Izl";
+		donpcevent "Quest_Izl::OnInvasion";
+	}
+	mapannounce "airplane_01","Nous volons en direction d'Izlude.",1,0x00FF00;
+	end;
+OnTimer30000:
+	mapannounce "airplane_01","Nous allons bientôt atterrir à Izlude.",1,0x00FF00;
+	end;
+OnTimer45000:
+	set $@airplanelocation2,1;
+	enablenpc "#AirshipWarp-3";
+	enablenpc "#AirshipWarp-4";
+	donpcevent "#AirshipWarp-3::OnUnhide";
+	donpcevent "#AirshipWarp-4::OnUnhide";	
+	mapannounce "airplane_01","Bienvenue à Izlude. Passez un agréable séjour.",1,0x00FF00;
+	end;
+OnTimer55000:
+	mapannounce "airplane_01","Nous sommes actuellement à Izlude. Le zeppelin va bientôt décoller.",1,0x00FF00;
+	end;
+OnTimer65000:
+	set $@airplanelocation2,0;
+	donpcevent "#AirshipWarp-3::OnHide";
+	donpcevent "#AirshipWarp-4::OnHide";
+	disablenpc "#AirshipWarp-3";
+	disablenpc "#AirshipWarp-4";
+	mapannounce "airplane_01","Le zeppelin décolle maintenant en direction de Yuno.",1,0x70DBDB;
+	end;
+OnTimer80000:
+	mapannounce "airplane_01","Nous volons en direction de Yuno.",1,0x70DBDB;
+	end;
+OnTimer95000:
+	mapannounce "airplane_01","Nous allons bientôt atterrir à Yuno.",1,0x70DBDB;
+	end;
+OnTimer110000:
+	set $@airplanelocation2,2;
+	enablenpc "#AirshipWarp-3";
+	enablenpc "#AirshipWarp-4";
+	donpcevent "#AirshipWarp-3::OnUnhide";
+	donpcevent "#AirshipWarp-4::OnUnhide";
+	mapannounce "airplane_01","Bienvenue à Yuno. Passez un agréable séjour.",1,0x70DBDB;
+	end;
+OnTimer120000:
+	mapannounce "airplane_01","Nous sommes actuellement à Yuno. Le zeppelin va bientôt décoller.",1,0x70DBDB;
+	end;
+OnTimer130000:
+	set $@airplanelocation2,0;
+	donpcevent "#AirshipWarp-3::OnHide";
+	donpcevent "#AirshipWarp-4::OnHide";
+	disablenpc "#AirshipWarp-3";
+	disablenpc "#AirshipWarp-4";
+	mapannounce "airplane_01","Le zeppelin décolle maintenant en direction de Rachel.",1,0xFF8600;
+	end;
+OnTimer145000:
+	mapannounce "airplane_01","Nous volons en direction de Rachel.",1,0xFF8600;
+	end;
+OnTimer160000:
+	mapannounce "airplane_01","Nous allons bientôt atterrir à Rachel.",1,0xFF8600;
+	end;
+OnTimer175000:
+	set $@airplanelocation2,3;
+	enablenpc "#AirshipWarp-3";
+	enablenpc "#AirshipWarp-4";
+	donpcevent "#AirshipWarp-3::OnUnhide";
+	donpcevent "#AirshipWarp-4::OnUnhide";
+	mapannounce "airplane_01","Bienvenue à Rachel. Passez un agréable séjour.",1,0xFF8600;
+	end;
+OnTimer185000:
+	mapannounce "airplane_01","Nous sommes actuellement à Rachel. Le zeppelin va bientôt décoller.",1,0xFF8600;
+	end;
+OnTimer195000:
+ 	stopnpctimer;
+}
+OnReturn:
+	killmonsterall "airplane_01";
+	set $@mobinv, 0;
+	mapannounce "airplane_01","L'invasion de monstres a été stoppée. Le dirigeable est de nouveau dans une situation normale.",1,0x00FF00;
+	startnpctimer;
+	end;
+}
+
+//============================================================ 
+//= Some normal NPCS (airplane_01)
+//============================================================ 
+
+airplane_01,240,64,5	duplicate(Exit2)	Sortie#05	857
+
+airplane_01,247,64,5	duplicate(Exit2)	Sortie#06	857
+
+airplane_01,240,39,1	duplicate(Exit2)	Sortie#07	857
+
+airplane_01,247,39,1	duplicate(Exit2)	Sortie#08	857
+
+airplane_01,100,69,2	duplicate(Airship Crew)	Personnel de Bord#02	852
+
+airplane_01,250,59,3	duplicate(AirshipInfo)	Personnel de Bord#info	67
+
+airplane_01,50,66,4	duplicate(AirshipApples)	Meltz	86
+
+airplane_01,32,61,4	duplicate(TypingContest)	Nils	49	
+
+airplane_01,221,158,6	duplicate(Pilot)	Pilote#air-1	852
+
+
+airplane_01,83,61,2	script	Dianne	72,{
+	mes "[Dianne]";
+	mes "Comme c'est étrange!";
+	mes "Je suis allée rendre visite au Capitaine du dirigeable, mais tout ce que j'ai pu voir, c'est cet étrange renne.";
+	mes "Oh! Vous pensez que...";
+	close;
+OnTouch:
+	Emotion 28, "Dianne";
+	end;
+}
+
+airplane_01,69,63,2	script	Vieil Homme#06	55,{
+
+	mes "[Mendel]";
+	mes "Comme prévu, les repas en vol trois étoiles sont vraiment les meilleurs.";
+	mes "^111111*Harrrumph*^000000 J'aurais vraiment dû amener mon chef, j'aurais pu apprécier un vrai repas. ";
+	close;
+
+}
+
+airplane_01,33,68,4	script	Clarice	74,{
+	mes "[Clarice]";
+	mes "Bonjour, Je m'appelle Clarice~";        //petit délire tout seul sur ' Bonjour je suis l'ours Gaby '
+	mes "Aimeriez-vous parier quelques Pommes dans un jeu de dés amical?";
+	next;
+	callfunc "applegamble","Clarice";
+	end;
+}
+
+airplane_01,71,31,6	script	Shimizu	106,{
+	mes "[Shimizu]";
+	mes "Enfin, après cinq ans d'attente...";
+	mes "Je vais avoir ma revanche!";
+	next;
+	mes "[Shimizu]";
+	mes "J'ai juste...";
+	mes "À m'assurer de ne pas manquer l'arrêt.";
+	mes "Mais bientôt, très bientôt, la vengeance sera mienne!";
+	close;
+}
+
+//============================================================ 
+//= The Izlude Airship Staff
+//============================================================
+
+izlude,201,54,3	script	Hôtesse#izl	91,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bienvenue à l'Aéroport International.";
+	mes "En quoi puis-je vous aider?";
+	next;
+	if (select("Embarquer:Annuler") == 1) {
+				mes "[Personnel de l'Aéroport]";
+				mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
+		next;
+		if (select("Oui:Non") == 1) {
+			if(countitem(7311) > 0) {
+				delitem 7311,1;
+				warp "airplane_01",224,64;
+				close;
+			}
+			if(Zeny >= 1200) {
+				set Zeny, Zeny - 1200;
+				warp "airplane_01",224,64;
+				close;
+			}
+			mes "[Personnel de l'Aéroport]";
+			mes "Vous n'avez pas assez d'argent.";
+			close;
+		}
+	}
+	mes "[Personnel de l'Aéroport]";
+	mes "Merci. Passez une agréable journée!";
+	close;
+}
+
+//============================================================ 
+//= The Hugel Airship Staff
+//============================================================
+
+hugel,182,150,3	script	Hôtesse#hu	91,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bienvenue à l'Aéroport International.";
+	mes "En quoi puis-je vous aider?";
+	next;
+	if (select("Embarquer:Annuler") == 1) {
+		mes "[Personnel de l'Aéroport]";
+		mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
+		next;
+		if (select("Oui:Non") == 1) {
+			if(countitem(7311) > 0) {
+				delitem 7311,1;
+				warp "airplane",224,64;
+				close;
+			}
+			if(Zeny >= 1200) {
+				set Zeny, Zeny - 1200;
+				warp "airplane",224,64;
+				close;
+			}
+			mes "[Personnel de l'Aéroport]";
+			mes "Vous n'avez pas assez d'argent.";
+			close;
+		}
+	}
+	mes "[Personnel de l'Aéroport]";
+	mes "Merci. Passez une agréable journée!";
+	close;
+}
+
+//============================================================ 
+//= The Rachel Airship Staff
+//============================================================
+
+ra_fild12,295,208,3	script	Hôtesse#ra	45,1,1,{
+OnTouch:
+	mes "Les frais d'embarquement sont de 1200 Zenys, mais si vous avez obtenu un billet gratuit vous n'aurez pas à payer ces frais. Voulez-vous prendre le zeppelin?";
+	next;
+	if (select("Oui:Non") == 1) {
+		if (countitem(7311) > 0) {
+			delitem 7311,1;
+			warp "airplane_01",224,64;
+			close;
+		}
+		if (Zeny >= 1200) {
+			set Zeny, Zeny - 1200;
+			warp "airplane_01",224,64;
+			close;
+		}
+		mes "Vous n'avez pas assez d'argent.";
+		close;
+	}
+	mes "Merci. Passez une bonne journée.";
+	close;
+}
+
+//============================================================ 
+//= Juno Airport NPCs
+//============================================================
+
+y_airport,144,63,4	script	Hôtesse#Ein	91,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bonjour!";
+	mes "Souhaitez-vous aller à ^FF0000Einbroch^000000, ^FF0000Hugel^000000 ou ^FF0000Lighthalzen^000000?";
+	next;
+	if (select("Oui.:Non.") == 1) {
+		mes "[Personnel de l'Aéroport]";
+		mes "Merci. Passez une agréable journée!";
+		close2;
+		warp "yuno",57,240;
+		end;
+	}
+	mes "[Personnel de l'Aéroport]";
+	mes "Merci. Passez une agréable journée!";
+	close;
+}
+	
+y_airport,141,63,4	script	Hôtesse#Izl	91,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bonjour!";
+	mes "Souhaitez-vous aller à ^FF0000Izlude^000000 ou ^FF0000Rachel^000000?";
+	next;
+	if (select("Oui.:Non.") == 1) {
+		mes "[Personnel de l'Aéroport]";
+		mes "Merci. Passez une agréable journée!";
+		close2;
+		warp "yuno",50,240;
+		end;
+	}
+	mes "[Personnel de l'Aéroport]";
+	mes "Merci. Passez une agréable journée!";
+	close;
+}
+
+yuno,14,262,3	script	Hôtesse#yuno01::Airship Staff	91,{
+	mes "[Personnel de l'Aéroport]";
+	mes "Bienvenue dans l'Aéroport de Yuno.";
+	mes "Passez par cette porte si vous souhaitez monter à bord du dirigeable qui volera en direction d'Izlude, au Royaume de Rune-Midgard.";
+	next;
+	mes "[Personnel de l'Aéroport]";
+	mes "Autrement, si la ville de Yuno est votre destination,";
+	mes "veuillez descendre ces escaliers et demander au personnel d'arrivée de vous mener au terminal.";
+	mes "Merci, et faites bon voyage.";
+	close;
+}
+
+yuno,88,263,5	duplicate(Airship Staff)	Hôtesse#yuno02	91
+
+//============================================================ 
+//= Apple Gambling Function
+//============================================================
+
+function	script	applegamble	{
+
+	switch(select("Jouer au jeu de dés.:Lire les règles du jeu de dés.:Partir.")){
+	case 3:
+		mes "["+getarg(0)+"]";
+		mes "Je serai toujours là si vous voulez faire une partie de dés.";
+		mes "Vous n'aurez qu'à venir me parler si vous avez une soudaine envie de jouer, d'accord?";
+		close;
+	case 2:
+		mes "["+getarg(0)+"]";
+		mes "Les règles de ce jeu sont assez simples.";
+		mes "Tout d'abord, vous devez miser des Pommes.";
+		mes "50 Pommes au maximum pour chaque partie.";
+		mes "Pour que cela reste légal, je ne peux accepter que des Pommes.";
+		next;
+		mes "["+getarg(0)+"]";
+		mes "Mais maintenant, si votre argent vous brûle les poches, allez voir Fruitz et vous pourrez acheter autant de Pommes que vous le désirez, playah~";
+		next;
+		mes "["+getarg(0)+"]";
+		mes "Après, je commencerai la partie en lançant deux dés à 6 faces.";
+		mes "Quand mon tour sera terminé, vous lancerez ces deux dés à 6 faces.";
+		mes "Enfin, nous aurons tous les deux le choix de lancer un troisième dé.";
+		next;
+		mes "["+getarg(0)+"]";
+		mes "Encore une chose importante.";
+		mes "Si votre total est supérieur à 12, vous éclatez, ce qui veut dire que vous perdez.";
+		mes "Sinon, le joueur ayant fait le plus haut score est le gagnant. C'est bon?";
+		next;
+		mes "["+getarg(0)+"]";
+		mes "Maintenant, vous seul choisissez de lancer ou non le troisième dé.";
+		mes "Ensuite, en fonction de votre résultat, je lancerai mon troisième dé... Ou peut être que non.";
+		next;
+		mes "["+getarg(0)+"]";
+		mes "Si vous gagnez, vous recevrez deux fois votre mise en Pommes.";
+		mes "Mais si nous sommes ex-aequo, vous recevrez les Pommes que vous aviez misées. Facile, non?";
+		close;
+	case 1:
+		break;
+	}
+	mes "["+getarg(0)+"]";
+	mes "Ooh, vous voulez donc jouer avec moi?";
+	mes "Génial! Combien de Pommes voulez-vous miser?";
+	mes "Rappelez vous, 50 Pommes au maximum par partie. Si vous changez d'avis, saisissez '0'.";
+	next;
+L_Input:
+	input @amount;
+	if(@amount == 0) {
+		mes "["+getarg(0)+"]";
+		mes "Vous avez changé d'avis?";
+		mes "Je comprends. Bon et bien, J'espère que nous jouerons une autre fois.";
+		close;
+	}
+	if(@amount > 50) set @amount,50;
+	mes "["+getarg(0)+"]";
+	mes "Vous avez misé ^FF0000"+@amount+"^000000 Pommes.";
+	mes "C'est bon?";
+	next;
+	if(select("Oui:Non")==2){
+		mes "["+getarg(0)+"]";
+		mes "Hum, il y a une erreur?";
+		mes "Très bien, saisissez le nombre de Pommes que vous souhaitez parier.";
+		next;
+		goto L_Input;
+	}
+	if(countitem(512)<@amount){
+		//more apples then in inventory
+		//-Improvised-
+		mes "["+getarg(0)+"]";
+		mes "Ooh...";
+		mes "Mais vous n'avez pas autant de Pommes que ça, si?";
+		close;
+	}
+	delitem 512,@amount;
+	mes "["+getarg(0)+"]";
+	mes "Bien!";
+	mes "Nous pouvons commencer la partie! Je lance les dés en premier~";
+	next;
+	mes "^0000FF*Roulement et grondement*";
+	set @table1,rand(1,6);
+	set @table2,rand(1,6);
+	set @tablesub,@table1+@table2;
+	next;
+	mes "J'ai obtenu "+@table1+" et "+@table2+", ce qui me donne un total de "+@tablesub+".";
+	mes "C'est votre tour maintenant.";
+	mes strcharinfo(0)+".";
+	next;
+	menu "Lancer le dés.",-;
+
+	mes "^0000FF*Roulement et grondement*";
+	set @player1,rand(1,6);
+	set @player2,rand(1,6);
+	set @playersub,@player1+@player2;
+	next;
+	mes "["+getarg(0)+"]";
+	mes strcharinfo(0)+",";
+	mes "Vous avez fait "+@player1+" et "+@player2+", ce qui vous donne un total de ^FF0000"+@playersub+"^000000.";
+	next;
+	mes "["+getarg(0)+"]";
+	if(@playersub == @tablesub) {
+		mes "Bien, bien, bien.";
+		mes "Nous avons tous les deux un total de "+@playersub+".";
+		mes "Que choisissez-vous?";
+		mes "Allez-vous lancer le troisième dé?";
+		mes strcharinfo(0)+"?";
+	} else if(@playersub > @tablesub) {
+		mes "Puisque mon score n'est que de ^0000FF"+@tablesub+"^000000, vous avez un avantage puisque votre score, lui, est de ^FF0000"+@playersub+"^000000.";
+		mes "Voulez-vous lancer le troisième dé?";
+		mes "Rappelez-vous, vous perdrez si vous faîtes un score total supérieur à 12.";
+	} else if(@tablesub > @playersub) {
+		mes "Puisque j'ai fait ^0000FF"+@tablesub+"^000000, j'ai un avantage sur vous car vous n'avez fait que ^FF0000"+@playersub+"^000000.";
+		mes "Voulez-vous lancer le troisième dé?";
+		mes "Rappelez-vous, vous perdrez si vous faîtes un score total supérieur à 12.";
+	}
+	next;
+	if(select("Lancer un autre dé.:Non, je préfère arrêter là.")==2){
+		mes "["+getarg(0)+"]";
+		mes "Vous ne lancez pas le dernier dé?";
+		if(@tablesub == @playersub) {
+			mes "Espérez que je dépasse 12 ce qui me ferait perdre, sinon je gagnerai à coup sûr!";
+			mes "D'accord, je lance le dé, alors...";
+			next;
+			goto L_Table3;
+		} else if(@tablesub < @playersub) {
+			next;
+			mes "["+getarg(0)+"]";
+			mes "Bien, je vois que vous ne prenez pas le risque de faire plus de 12.";
+			mes "Je vais lancer le dé pour voir qui gagnera.";
+			next;
+			goto L_Table3;
+		} else if(@tablesub > @playersub) {
+		//you have a lower sub total then table, and do not roll 3th -Improvised-
+			mes "["+getarg(0)+"]";
+			mes "Vous ne lancez pas le dernier dé?";
+			mes "Bien, dans ce cas, je ne lance pas le dé non plus.";
+			next;
+			mes "["+getarg(0)+"]";
+			mes "Ce qui me fait un total de ^0000FF"+@tablesub+"^000000 contre vos ^FF0000"+@playersub+"^000000 points.";
+			mes "Je suis désolée, mais vous avez perdu, "+strcharinfo(0)+". Vous aurez plus de chance la prochaine fois.";
+		}
+		close;
+	}
+	mes "^0000FF*Roulement et grondement*";
+	set @player3,rand(1,6);
+	set @playersub,@playersub+@player3;
+	if(@playersub > 12) {
+	//player bust --Improvised--
+		next;
+		mes "["+getarg(0)+"]";
+		mes "Oh... Vous avez fait ^FF000"+@player3+"^000000, ce qui fait un total de ^FF0000"+@playersub+"^000000.";
+		mes "C'est plus que 12, donc vous perdez.";
+		mes "Je suis désolée, mais vous avez perdu, "+strcharinfo(0)+".";
+		close;
+	}
+	next;
+	mes "["+getarg(0)+"]";
+	mes "Oh hé! Vous avez fait";
+	if(@playersub >= @tablesub) {
+		mes " ^FF0000"+@player3+"^000000, ce qui vous donne un total de ^FF0000"+@playersub+"^000000.";
+		mes "Là, si je ne lance pas le dé, je perds!";
+		mes "Je vais le lancer...";
+		next;
+		goto L_Table3;
+	} else if(@playersub < @tablesub) {
+		//player's sub together with 3th die is still too low
+		//--Improvised--
+		mes " ^FF0000"+@player3+"^000000, ce qui vous donne un total de ^FF0000"+@playersub+"^000000.";
+		mes "Mais ce n'est toujours pas assez pour dépasser mon score de ^0000FF"+@tablesub+"^000000.";
+		mes "Je suis désolée "+strcharinfo(0)+", mais vous avez perdu.";
+		mes "C'est pas de chance, je suppose...";
+		close;
+	}
+L_Table3:
+	mes "^0000FF*Roulement et grondement*";
+	set @table3,rand(1,6);
+	set @tablesub,@tablesub+@table3;
+	next;
+	if(@tablesub > 12) {
+		mes "["+getarg(0)+"]";
+		mes "Hein? J'ai fait ^0000FF"+@table3+"^000000, ce qui me donne un total de ^0000FF"+@tablesub+"^000000.";
+		mes "J'ai horreur de dire ça, mais c'est trop, et j'ai perdu.";
+		mes "Prenez votre gain "+strcharinfo(0)+", avant que je ne pleure~!";
+		close2;
+		getitem 512,@amount*2;
+		end;
+	}
+	mes "["+getarg(0)+"]";
+	if(@tablesub < @playersub) {
+		mes "J'ai fait "+@table3+", ce qui me donne un total de ^0000FF"+@tablesub+"^000000.";
+		mes "Mais... Ce n'est toujours pas assez pour dépasser votre score de ^FF0000"+@playersub+"^000000.";
+		mes "Il semblerait que je ne puisse rivaliser avec vous, "+strcharinfo(0)+"...";
+		close2;
+		getitem 512,@amount*2;
+		end;
+	} else if(@tablesub > @playersub) {
+	mes "J'ai fait ^0000FF"+@table3+"^000000, ce qui me donne un total de ^0000FF"+@tablesub+"^000000, qui est un score supérieur au votre, qui était de ^FF0000"+@playersub+"^000000.";
+	mes "Je suis désolée "+strcharinfo(0)+", mais vous avez perdu.";
+	mes "C'est pas de chance, je suis désolée...";
+	close;
+	} else if(@tablesub == @playersub) {
+		//Result = tie, --Improvised--
+		mes "J'ai fait ^0000FF"+@table3+"^000000, ce qui me donne un total de ^0000FF"+@tablesub+"^000000, me permettant d'égaliser avec vous.";
+		mes "Bien, cette partie ne fera ni gagnant, ni perdant, "+strcharinfo(0)+".";
+		mes "Bien joué!";
+		close2;
+		getitem 512,@amount;
+		end;
+	}
+}
+

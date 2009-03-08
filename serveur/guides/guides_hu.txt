@@ -1,0 +1,150 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Hugel Guides
+//===== By: ==================================================
+//= erKURITA; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= Guides for the City of Hugel.
+//===== Additional Comments: =================================
+//= 1.0 Started the script. [erKURITA]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+hugel,98,56,3	script	Vieille Dame#huge	863,0,0,{
+	mes "[Vieille Dame]";
+	mes "Oh, bonjour~ Vous avez l'air d'être un jeune aventurier en pleine forme!";
+	mes "Bienvenue à Hugel. J'ai l'honneur d'être votre guide dans notre magnifique village.";
+	mes "Si vous êtes perdus ou que vous souhaitez un renseignement, n'hésitez pas à vous adresser à moi.";
+	while(1) {
+		next;
+		switch(select("Guide du Village:Effacer les Informations de la Mini-Map:Astuce:Annuler")) {
+		case 1:
+			mes "[Vieille Dame]";
+			mes "Je peux vous indiquer la position de n'importe quel bâtiment à Hugel.";
+			mes "Où souhaitez-vous aller?";
+			if (.@compass_check == 0) {
+				mes "Voulez-vous que je laisse des indications sur votre Mini-Map?";
+				next;
+				if (select("Oui:Non") == 1) set .@compass_check,1;
+			}
+			set .@loop,1;
+			while(.@loop) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("Eglise:Auberge:Bar:Aéroport:Armurerie:Boutique:Farces & Attrapes:^3131FFGuilde des Chasseurs^000000:^3131FFExpédition vers le Temple d'Odin^000000:Courses de Monstres:Maison Bingo:Annuler")) {
+				case 1:
+					mes "[Vieille Dame]";
+					mes "L'Eglise d'Hugel est un saint lieu où règne le bonheur, choisi par de nombreuses personnes afin de s'y marier.";
+					mes "Elle est située à l'Est d'Hugel, et au Sud de l'Aéroport.";
+					if (.@compass_check)
+						viewpoint 1,156,116,2,0xFF0000;
+					break;
+				case 2:
+					mes "[Vieille Dame]";
+					mes "L'Hôtel n'est qu'à quelques pas d'ici. Continuez simplement cette rue vers le Nord et vous y êtes!";
+					mes "C'est un endroit très convenable, vous pourrez vous y reposer le temps de votre séjour dans notre ville.";
+					if (.@compass_check)
+						viewpoint 1,104,79,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[Vieille Dame]";
+					mes "Le Bar est situé à l'Est de là où nous sommes. C'est un très bon endroit pour y faire des rencontres et s'amuser!";
+					if (.@compass_check)
+						viewpoint 1,129,66,4,0x99FFFF;
+					break;
+				case 4:
+					mes "[Vieille Dame]";
+					mes "L'Aéroport vous permettra de voler vers d'autres contrées!";
+					if (.@compass_check)
+						viewpoint 1,178,146,5,0x0000FF;
+					break;
+				case 5:
+					mes "[Vieille Dame]";
+					mes "L'Armurerie propose toutes sortes d'armes et d'armures pour votre usage personnel.";
+					if (.@compass_check)
+						viewpoint 1,70,158,6,0x00FF00;
+					break;
+				case 6:
+					mes "[Vieille Dame]";
+					mes "La Boutique vend de nombreux consommables très pratiques tels que des potions par exemple!";
+					if (.@compass_check)
+						viewpoint 1,93,167,7,0x00FF00;
+					break;
+				case 7:
+					mes "[Vieille Dame]";
+					mes "La Boutique de Farces et Attrapes propose des petits feux d'artifices ces jours-ci, très agréables pour égayer vos soirées!";
+					if (.@compass_check)
+						viewpoint 1,91,105,8,0xFF99FF;
+					break;
+				case 8:
+					mes "[Vieille Dame]";
+					mes "La Guilde des Hunter est située au Nord Est d'Hugel. Aiguisez vos yeux!";
+					if (.@compass_check)
+						viewpoint 1,206,228,9,0xFF9900;
+					break;
+				case 9:
+					mes "[Vieille Dame]";
+					mes "J'ai entendu dire qu'un homme proposait une expédition vers le Temple d'Odin, vers l'Ouest.";
+					mes "Je me demande bien ce que ça peut être... humm.";
+					if (.@compass_check)
+						viewpoint 1,52,91,10,0xFFFFFF;
+					break;
+				case 10:
+					mes "[Vieille Dame]";
+					mes "La Course de Monstres est une nouvelle attraction, n'hésitez pas à y faire un tour!";
+					mes "J'adore y jouer, c'est vraiment amusant vous savez?";
+					mes "Oh, vous n'avez pas encore essayé? Croyez-moi, vous allez adorer ça!";
+					if (.@compass_check)
+						viewpoint 1,58,72,11,0xFF9900;
+					break;
+				case 11:
+					mes "[Vieille Dame]";
+					mes "Vous aimez les jeux de hasard? Si oui, alors faîtes un tour à la Maison Bingo d'Euklan!";
+					if (.@compass_check)
+						viewpoint 1,55,209,12,0x66FFFF;
+					break;
+				case 12:
+					mes "[Vieille Dame]";
+					mes "N'hésitez pas à me demander si vous voulez que j'efface les informations de votre Mini-Map.";
+					set .@loop,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,156,116,2,0xFF0000;
+			viewpoint 2,104,79,3,0xFF00FF;
+			viewpoint 2,129,66,4,0x99FFFF;
+			viewpoint 2,178,146,5,0x0000FF;
+			viewpoint 2,70,158,6,0x00FF00;
+			viewpoint 2,93,167,7,0x00FF00;
+			viewpoint 2,91,105,8,0xFF99FF;
+			viewpoint 2,206,228,9,0xFF9900;
+			viewpoint 2,52,91,10,0xFFFFFF;
+			viewpoint 2,58,72,11,0xFF9900;
+			viewpoint 2,55,209,12,0x66FFFF;
+			set .@compass_check,0;
+			mes "[Vieille Dame]";
+			mes "Toutes les indications ont été effacées.";
+			break;
+		case 3:
+			mes "[Vieille Dame]";
+  			mes "Votre Mini-Map est située dans le coin haut droit de votre écran.";
+			mes "Si vous ne la voyez pas, pressez Ctrl + Tab ou cliquez sur le bouton 'Map' dans votre fenêtre d'informations.";
+			next;
+			mes "[Vieille Dame]";
+ 			mes "Sur votre Mini-Map, cliquez sur '+' ou '-' pour modifier le zoom.";
+			mes "J'espère que vous apprécierez votre séjour à Hugel.";
+			break;
+		case 4:
+			mes "[Vieille Dame]";
+			mes "Ce travail est vraiment amusant. Hohoho~";
+			close;
+		}
+	}
+}

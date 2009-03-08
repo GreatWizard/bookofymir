@@ -1,0 +1,396 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Juno City
+//===== By: ================================================== 
+//= KitsuneStarwind, kobra_k88, L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.4a
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= NPCs for the City of Juno
+//===== Additional Comments: ================================= 
+//= Added additional npcs.  Added Metto quest. [kobra_k88]
+//= Moved item quest to quest folder. Re-edited a majority of the npcs. [kobra_k88]
+//=a Removed duplicate npcs already found in the sage quest.
+//= Fixed & Spellchecked [massdriller]
+//= 1.3 Started updating Juno NPCs based on iRO. 10% complete.
+//= 1.3.2 Started updating Juno NPCs based on iRO. 30% complete.
+//= 1.3.3 Removed Noyee	NPC (it's implemented in sleipnir_seal.txt)
+//= 1.4 Updated to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Added Juno Airship Representative.
+//= 1.4a Corrected a Typo error (bugreport:716) [Samuray22]
+//============================================================ 
+
+// Juno
+//============================================================ 
+yuno,184,173,4	script	Freidrich#juno	729,{
+	if (rand(1,5) == 1) {
+		mes "[Freidrich]";
+		mes "^3355FFYuno^000000 est maintenue en lévitation par une force ancienne et mystérieuse.";
+		next;
+		mes "[Freidrich]";
+		mes "Ce pouvoir viendrait d'une relique provenant d'une ancienne civilisation nommée ^3355FFJuperos^000000 qui existait ici, bien avant Yuno.";
+		next;
+		mes "[Freidrich]";
+		mes "Des recherches ont révélées que la source du pouvoir de Yuno serait basée sur des ^3355FFmorceaux du coeur d'Ymir^000000. J'ai entendu dire que la source du pouvoir se trouverait encore là où Juperos a jadis existé.";
+		next;
+		mes "[Freidrich]";
+		mes "Depuis, de nombreux professeurs sont venus à Yuno pour chercher et étudier cette source de pouvoir. Notre cité est donc un lieu de rencontre privilégiée pour les chercheurs.";
+		close;
+	}
+	else {
+		mes "[Freidrich]";
+		mes "Yuno, la Cité des Sages, est composée de trois grandes îles.";
+		next;
+		mes "[Freidrich]";
+		mes "L'île de Gloire - Solomon";
+		mes "L'ile de la Prospérité - Minetta";
+		mes "L'île de la Sagesse - Snottra";
+		next;
+		mes "[Freidrich]";
+		mes "L'emplacement de chaque île est:";
+		mes "Nord-Ouest: Solomon";
+		mes "Nord-Est: Snottra";
+		mes "Sud: Minetta";
+		close;
+	}
+}
+	
+yuno,337,227,4	script	Grand Mère#juno	103,{
+	mes "[Grand Mère]";
+	if (rand(1,50) == 1) {
+		if (Zeny > 999) {
+			mes "Vous aimez les bonbons?";
+			next;
+			mes "^3355FFLa Grand Mère vous tend quelques bonbons^000000.";
+			next;
+			mes "[Grand Mère]";
+			mes "Vous en voulez un?";
+			next;
+			mes "[Grand Mère]";
+			mes "Je vous donne un bonbon contre ^3355FF1000 Zenys^000000.";
+			mes "Vous acceptez?";
+			next;
+			if (select("Accepter:Ne pas accepter") == 1) {
+				mes "[Grand Mère]";
+				mes "*Glousse*";
+				mes "Tenez mon petit~";
+				set zeny,zeny-1000;
+				getitem 529,1; //Candy
+				next;
+				mes "[Grand Mère]";
+				mes "*Glousse*";
+				mes "Et bien...";
+				mes "A bientôt ~";
+				close;
+			}
+			mes "[Grand Mère]";
+			mes "Pourquoi n'avez-vous pas accepté le bonbon que je vous offrais?";
+			close;
+		}
+		else {
+			mes "*Glousse*";
+			mes "Le temps est venu...";
+			mes "...";
+			close;
+		}
+	}
+	else {
+		mes "Vous voilà donc... Je suis une Sage ancienne qui peut prédire l'avenir.";
+		next;
+		mes "[Grand Mère]";
+		mes "Avez-vous entendu parler du monstre dont le nom court aux abords de Yuno depuis si longtemps?";
+		mes "Il se nomme ^FF3355'Le Seigneur de la Mort'^000000. La rumeur dit qu'il vient du monde des trépassés.";
+		next;
+		mes "[Grand Mère]";
+		mes "Il apporte avec lui de nombreux autres fantômes qui tentent d'emmener les vivants dans le monde sombre et glacial des morts.";
+		next;
+		mes "[Grand Mère]";
+		mes "Je sais que tu as déjà choisi si tu allais te battre contre Le Seigneur de la Mort.";
+		mes "Il te reste maintenant à réfléchir sur les raisons de ton choix...";
+		close;
+	}
+}
+
+yuno,328,239,4	script	Guerrier#juno	732,{
+	mes "[Sergiof]";
+	mes "Mon nom est Sergiof. Je suis le garde du corps de la Vieille Sagesse.";
+	next;
+	mes "[Sergiof]";
+	mes "Laissez-moi vous parler du ^5533FF'Grand Peco'^000000, qui est un Peco Peco de haut niveau.";
+	mes "Le Grand Peco est plus rapide qu'un Peco Peco, mais a plus souvent des tendances agressives.";
+	next;
+	mes "[Sergiof]";
+	mes "Il attaque sa cible en utilisant son bec solide. Il est toujours accompagné par un grand nombre de Peco Peco.";
+	next;
+	mes "[Sergiof]";
+	mes "Allez maintenant... Adieu...";
+	close;
+}
+
+yuno,343,68,4	script	Ninno#juno	730,{
+	mes "[Ninno]";
+	if (rand(1,1000) == 1) {
+		mes "Vous êtes quelqu'un de très chanceux, vous savez? Je suis là pour vous révéler la vérité, à vous et à vous seul... Vous n'aviez qu'^FF33551 chance sur 1000^000000 de me rencontrer, et pourtant nous voici face à face.";
+		next;
+		mes "[Ninno]";
+		mes "Vous devez maintenant connaître la vérité... Le monde dans lequel vous pensez vivre n'est en fait qu'illusion. Tout a été fabriqué pour tromper votre esprit! Il est temps pour vous de voir la réalité telle qu'elle est réellement!";
+		next;
+		mes "[Ninno]";
+		mes "Ouvrez vos yeux! Ne vous laissez plus manipuler par la réalité virtuelle!";
+		close2;
+		warp "prontera",182,206;
+		end;
+	}
+	mes "N'avez-vous jamais entendu parler d'un roi Égyptien qui se faisait passer pour le fils d'un dieu?";
+	mes "Il s'appelait ^5533FF'Pharaoh'^000000.";
+	next;
+	mes "[Ninno]";
+	mes "Les rumeurs disent que c'était un grand sorcier qui utilisait ses pouvoirs afin de jeter des malédictions à des personnes innocentes.";
+	mes "Certaines personnes disent qu'il rode encore, jetant des mauvais sorts aux gens.";
+	next;
+	mes "[Ninno]";
+	mes "L'avez-vous déjà vu?";
+	close;
+}
+
+yuno,165,111,4	script	Sage#juno	123,,{
+	mes "[Le Morpheus]";
+	if (rand(1,50) == 25) {
+		if (Zeny > 4999) {
+			mes "Regardez mes mains. Je tiens deux herbes différentes...";
+			next;
+			mes "[Le Morpheus]";
+			mes "L'une est ^3355FFBleue^000000... Elle vous fera oublier la vraie vérité, et laissera votre esprit aveuglé dans la réalité virtuelle.";
+			next;
+			mes "[Le Morpheus]";
+			mes "L'autre est ^FF3355Rouge^000000... Elle te révélera la vraie vérité.";
+			next;
+			mes "[Le Morpheus]";
+			mes "Peu importe laquelle vous choisirez, cela vous coûtera ^3355FF5000 Zenys^000000.";
+			next;
+			if (select("Choisir l'^FF3355Herbe Rouge^000000:Choisir l'^3355FFHerbe Bleue^000000") == 1) {
+				mes "[Le Morpheus]";
+				mes "Vous avez choisi d'oublier, et de rester dans la réalité virtuelle.";
+				set zeny,zeny-5000;
+				getitem 507,1; //Red_Herb
+				close2;
+				warp "prontera",182,206;
+				end;
+			}
+			mes "[Le Morpheus]";
+			mes "Vous allez maintenant voir la vraie vérité.";
+			set zeny,zeny-5000;
+			getitem 510,1; //Blue_Herb
+			close2;
+			warp "pay_dun03",200,222;
+			end;
+		}
+		else {
+			mes "Hum. Je suis désolé de vous dire que vous avez raté une occasion unique.";
+			close;
+		}
+	}
+	else {
+		mes "^3355FFApocalypse^000000...";
+		mes "Il était chef des gardiens de la porte, et en charge de l'ordre public de la ville de Yuno, au temps civilisations anciennes...";
+		next;
+		mes "[Le Morpheus]";
+		mes "C'était un peu comme un robot... Après avoir vécu longtemps, son I.A. s'est complètement déréglée, il ne pouvait plus reconnaître les alliés des ennemis.";
+		mes "Alors sans sa capacité de distinction...";
+		next;
+		mes "[Le Morpheus]";
+		mes "... il est devenu un monstre qui s'attaque à n'importe qui.";
+		close;
+	}
+}
+	
+yuno,157,205,4	script	Artisan de Yuno#juno	54,{
+	mes "[Artisan]";
+	mes "~(marmonne dans sa barbe...)~";
+	next;
+	mes "[Artisan]";
+	mes "Oh, bonjour! Je me présente: je suis un artisan qui essaie de perpétuer les devoirs et traditions des maîtres artisans, ici à Yuno.";
+	next;
+	switch(select("Au sujet des équipements.:Au sujet des objets précieux.:Au sujet de la cuisine traditionelle.")) {
+	case 1:
+		mes "[Artisan]";
+		mes "Pour les Croisés, je leur suggère de chercher le ^5533FFHoly Guard^000000 et le ^5533FFHoly Avenger^000000.";
+		mes "Ce sont tous deux des équipements légers et remarquablement utiles.";
+		next;
+		mes "[Artisan]";
+		mes "Ils possèdent en plus la propriété Sacrée, ce qui les rend encore plus puissants contre les morts-vivants et les fantômes.";
+		next;
+		mes "[Artisan]";
+		mes "J'ai entendu dire qu'ils sont assez rares et que seuls quelques élus ont la possibilité de se les procurer.";
+		close;
+	case 2:
+		mes "[Artisan]";
+		mes "Je connais un objet très spécial, il s'agit d'un rouleau magique appellé ^5533FF'Worn-Out Magic Scroll'^000000.";
+		mes "Pour le décrire, il y a un cercle tracé dans un autre cercle... et une étoile...";
+		next; 
+		mes "[Artisan]";
+		mes "Bien que ce rouleau soit très usé car ancien, il a de la valeur aux yeux des Sages, qui l'utilisent dans leurs recherches.";
+		mes "Apparemment, il peut être utilisé pour des sortilèges de très haut niveau.";
+		close;
+	case 3:
+		mes "[Artisan]";
+		mes "^5533FF'Les Gâteaux de Riz'^000000!! Un met traditionnel qui a été le préféré de beaucoup de gens durant des années!";
+		mes "C'est un moyen de rappeler aux gens ces vieux marchés et foires traditionnels.";
+		next;
+		mes "[Artisan]";
+		mes "Ah... Les Gâteaux de Riz... J'en mangerais bien un là, maintenant...";
+		close;
+	case 4:
+		mes "[Artisan]";
+		mes "Même si Yuno est connue comme la cité des Sages, vous vous apercevrez bien vite que la ville est aussi la résidence de gens bons et intègres qui vivent des vies ordinaires.";
+		next;
+		mes "[Artisan]";
+		mes "Je vous souhaite d'apprécier tout ce que cette cité unique peut vous offrir.";
+		close;
+	}
+}
+
+yuno,150,283,4	script	Soldat de Yuno#juno	105,{
+	mes "[Soldat de Yuno]";
+	mes "Bienvenue à Yuno, la Cité des Esprits Nobles.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Près de Yuno, on peut parfois croiser des monstres nommés 'Lava Golem'.";
+	mes "Ces Golems sont faits d'une pierre de feu dont le pouvoir a été amplifié par du roc fondu.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "De la lave s'échappe de son corps, qui est si chaud que les lames de vos armes peuvent fondre en arrivant à son contact.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Faîtes bien attention si vous rencontrez ce monstre...";
+	close;
+}
+	
+yuno,165,283,4	script	Soldat de Yuno#2juno	105,{
+	mes "[Soldat de Yuno]";
+	mes "Bienvenue à Yuno, la Cité des Esprits Nobles.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Geographer...";
+	mes "Ce monstre ressemble à une simple fleur au sol...";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Etrangement, il peut s'étirer sur une longue distance! Attention de ne pas trop vous en approcher...";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Le nom de ce monstre provient d'une histoire qui raconte qu'un pauvre géographe s'est un jour fait mangé par un monstre-plante, au cours de ses investigations.";
+	close;
+}
+	
+yuno,227,292,4	script	Soldat de Yuno#3juno	105,{
+	mes "[Soldat de Yuno]";
+	mes "Bienvenue à Yuno, la Cité des Esprits Nobles.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Près de Yuno, on peut parfois croiser un ange déchu dont le nom est 'False Angel'.";
+	mes "Il semble innocent à première vue, faisant semblant d'envoyer des bénédictions sur les aventuriers, avant de les attaquer par derrière!";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Ne soyez pas trompé par son apparence, ou vous vous retrouverez dans les ennuis jusqu'au cou!";
+	close;
+}
+	
+yuno,165,228,4	script	Soldat de Yuno#4juno	105,{
+	mes "[Soldat de Yuno]";
+	mes "Bienvenue à Yuno, la Cité des Esprits Nobles.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Près de Yuno, on rencontre parfois des monstres nommés 'Goat', des espèces d'antilopes qui vivent dans les hautes montages.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Même si arrivez à éviter leurs coups de cornes, faîtes bien attention à leurs pattes!";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Les pattes d'une Goat sont très puissantes à force d'escalader les falaises...";
+	close;
+}
+	
+yuno,150,228,4	script	Soldat de Yuno#5juno	105,{
+	mes "[Soldat de Yuno]";
+	mes "Bienvenue à Yuno, la Cité des Esprits Nobles.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Avez-vous déjà vu un Large Jellopy?";
+	mes "Cela ressemble à un Jellopy, mais c'est énooooorme!";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "J'ai du mal à croire que cela puisse exister...";
+	close;
+}
+	
+yuno,334,182,4	script	Soldat de Yuno#6juno	105,{
+	mes "[Soldat de Yuno]";
+	mes "Bienvenue à Yuno, la Cité des Esprits Nobles.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Parmi les armes des Sages, il existe une dague très particulière...";
+	mes "La 'Dagger of Counter'.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Son usage est réservé aux Sages, Sorciers et Soul Linkers.";
+	mes "Elle permet d'infliger de nombreux coups critiques. Un Sage se battant avec une telle dague a un style unique pendant le combat!";
+	close;
+}	
+	
+yuno,263,320,4	script	Soldat de Yuno#7juno	105,{
+	mes "[Soldat de Yuno]";
+	mes "Bienvenue à Yuno, la Cité des Esprits Nobles.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "Il existe un Bouclier Saint nommé 'Sacred Mission', équipable uniquement par les Croisés.";
+	next;
+	mes "[Soldat de Yuno]";
+	mes "C'est un bouclier long et étroit, avec une aile d'ange gravée au centre. Il est particulièrement efficace contre les monstres Morts-Vivants.";
+	close;
+}
+
+yuno,142,183,5	script	Informations Aéroport	100,{
+	mes "[Informations Aéroport]";
+	mes "Bonjour! Je suis ici pour vous informer à propos de l'Aéroport de Yuno, qui sera accessible au puclic dans un futur proche.";
+	next;
+	mes "[Informations Aéroport]";
+	mes "Malheureusement, les travaux ne sont pas encore terminés, et les plateformes ne sont pas encore aux normes de sécurité.";
+	mes "Cependant, nous ressentons l'avide besoin que nos clients éprouvent envers le progrès.";
+	next;
+	mes "[Informations Aéroport]";
+	mes "L'Aéroport que nous sommes en train de développer vous permettra de voyager vers n'importe quelle ville du continent. Vous pourrez également apprécier les magnifiques paysages lors d'une croisière dans le ciel. Nous proposerons également une large gamme de produits exclusifs à bord.";
+	next;
+	mes "[Informations Aéroport]";
+	mes "Une fois l'Aéroport en fonctionnement, nous promettons à nos clients qu'ils bénéficieront des meilleurs services en terme de voyage!";
+	mes "En attendant que tout soit opérationnel, nous vous proposons un service spécial de téléportation.";
+	next;
+	mes "[Informations Aéroport]";
+	mes "Le prix du service de téléportation est de 1800 Zenys quelle que soit la destination. Où souhaiteriez-vous aller?";
+	next;
+	switch(select("Prontera:Izlude:Geffen:Morroc:Payon:Alberta:Comodo:Annuler")) {
+	case 1: callsub S_Warp,"prontera",116,72;
+	case 2: callsub S_Warp,"izlude",94,103;
+	case 3: callsub S_Warp,"geffen",120,39;
+	case 4: callsub S_Warp,"morocc",156,46;
+	case 5: callsub S_Warp,"payon",69,100;
+	case 6: callsub S_Warp,"alberta",117,56;
+	case 7: callsub S_Warp,"comodo",209,143;
+	case 8: close;
+	}
+
+S_Warp:
+	if (Zeny >= 1800) {
+		set zeny,zeny-1800;
+		warp getarg(0),getarg(1),getarg(2);
+		end;
+	}
+	else {
+		mes "[Informations Aéroport]";
+		mes "J'ai le regret de vous informer que vous n'avez pas assez d'argent sur vous pour ce service.";
+		close;
+	}
+}

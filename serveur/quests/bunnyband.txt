@@ -1,0 +1,208 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Bunny Band Quest
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= v1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quest to obtain a Bunny Band headgear.
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//	Changed @BUNYBAN back to a BUNYBAND, it hsoudl be this way.
+//	Removed duplicates. NPC is ALberta-only.
+//============================================================ 
+
+alberta,26,229,0	script	Employée Kafra#bunny	83,{
+	if (BUNYBND == 1) {
+		mes "[Employée Kafra]";
+		mes "Bonjour~!";
+		mes "Voulez-vous participer à l'Evènement Spécial ^529DFFQuête du Bunny Band^000000 proposé par la Corporation Kafra?";
+		next;
+		switch(select("Participer.:Informations.:Annuler")) {
+		case 1:
+			mes "[Employée Kafra]";
+			mes "Très bien~";
+			mes "Voyons voir si vous";
+			mes "avez apporté tout";
+			mes "ce qu'il faut...";
+			next;
+			if (countitem(949) < 100) {
+				mes "[Employée Kafra]";
+				mes "Ooh, je suis désolée";
+				mes "mais vous devez";
+				mes "apporter au moins";
+				mes "100 Feathers.";
+				close;
+			}
+			if (countitem(706) == 0) {
+				mes "[Employée Kafra]";
+				mes "Ooh, je suis désolée";
+				mes "mais vous devez";
+				mes "apporter au moins";
+				mes "1 Four-Leaf Clover.";
+				close;
+			}
+			if (countitem(722) == 0) {
+				mes "[Employée Kafra]";
+				mes "Ooh, je suis désolée";
+				mes "mais vous devez";
+				mes "apporter au moins";
+				mes "1 Pearl.";
+				close;
+			}		
+			if (countitem(2213) == 0) {
+				mes "[Employée Kafra]";
+				mes "Ooh, je suis désolée";
+				mes "mais vous devez";
+				mes "apporter au moins";
+				mes "1 Kitty Band.";
+				close;
+			}
+			mes "[Employée Kafra]";
+			mes "Oh, je vois que vous avez rassemblé tous les objets nécessaires pour fabriquer un Bunny Band.";
+			mes "Veuillez patienter juste un petit instant...";
+			next;
+			if (countitem(949) < 100) {
+				mes "[Employée Kafra]";
+				mes "Hum? Je suis désolée,";
+				mes "mais vous n'avez pas";
+				mes "tous les objets nécessaires.";
+				mes "Il faut au moins 100 Feathers";
+				mes "pour que je fabrique";
+				mes "le Bunny Band...";
+				close;
+			}
+			if (countitem(706) < 1) {
+				mes "[Employée Kafra]";
+				mes "Hum? Je suis désolée,";
+				mes "mais vous n'avez pas";
+				mes "tous les objets nécessaires.";
+				mes "Il faut au moins 1 Four-Leaf Clover";
+				mes "pour que je fabrique";
+				mes "le Bunny Band...";
+				close;
+			}
+			if (countitem(722) < 1) {
+				mes "[Employée Kafra]";
+				mes "Hum? Je suis désolée,";
+				mes "mais vous n'avez pas";
+				mes "tous les objets nécessaires.";
+				mes "Il faut au moins 1 Pearl in";
+				mes "pour que je fabrique";
+				mes "le Bunny Band...";
+				close;
+			}
+			if (countitem(2213) < 1) {
+				mes "[Employée Kafra]";
+				mes "Hum? Je suis désolée,";
+				mes "mais vous n'avez pas";
+				mes "tous les objets nécessaires.";
+				mes "Il faut au moins 1 Kitty Band";
+				mes "pour que je fabrique";
+				mes "le Bunny Band...";
+				close;
+			}
+			delitem 949,100; //Feather
+			delitem 706,1; //Four_Leaf_Clover
+			delitem 722,1; //Scarlet_Jewel
+			delitem 2213,1; //Cat_Hairband
+			mes "[Employée Kafra]";
+			mes "Ah, et voilà votre Bunny Band~";
+			mes "Tenez, prenez-le!";
+			mes "J'espère que vous en serez satisfait.";
+			getitem 2214,1; //Bunny_Band
+			set BUNYBND,0;
+			next;
+			mes "[Employée Kafra]";
+			mes "Nous apprécions que vous ayez participé à cet évènement spécial~";
+			close;
+		case 2:
+			mes "[Employée Kafra]";
+			mes "Pour remercier nos utilisateurs d'avoir recours aux services de la Corporation Kafra, nous avons préparé une petite attraction spécialement pour eux...";
+			next;
+			mes "[Employée Kafra]";
+			mes "La ^FF0000Quête du Bunny Band ^529DFF!!!^000000 (Sponsorisée par l'Association des Marchands d'Alberta)";
+			mes "Cette quête permet aux participants d'obtenir un chapeau unique, le ^FF0000Bunny Band^000000!";
+			next;
+			mes "[Employée Kafra]";
+			mes "Tout ce que vous avez à faire, est de réunir certains objets et de les apporter à un représentant de la Kafra Corp. tel que moi par exemple.";
+			mes "Nous fabriquerons avec soin un Bunny Band rien que pour vous!";
+			next;
+			mes "[Employée Kafra]";
+			mes "Voici les objets dont vous aurez besoin si vous souhaitez un Bunny Band:";
+			mes "^5555FF100 Feather^000000,";
+			mes "^5555FF1 Four Leaf Clover^000000,";
+			mes "^5555FF1 Pearl^000000,";
+			mes "^5555FF1 Kitty Band^000000.";
+			next;
+			mes "[Employée Kafra]";
+			mes "Une fois que vous aurez réuni tous ces objets, parle à un représentant de la Kafra Corp.";
+			mes "Nous sommes en service dans la plupart des villes à travers Rune Midgard.";
+			close;
+		case 3:
+			close;
+		}
+	}
+	mes "[Employée Kafra]";
+	mes "Bonjour~!";
+	mes "Voulez-vous participer à l'Evènement Spécial ^529DFFQuête du Bunny Band^000000 proposé par la Corporation Kafra? (Sponsorisée par l'Association des Marchands d'Alberta)";
+	next;
+	switch(select("Participer:Informations:Annuler")) {
+	case 1:
+		set BUNYBND,1;
+		mes "[Employée Kafra]";
+		mes "Super! Merci de vouloir";
+		mes "participer à l'évènement!";
+		mes "Si vous ne le savez pas";
+		mes "déjà, vous devrez pour cela";
+		mes "rapporter plusieurs objets";
+		mes "afin de fabriquer un Bunny Band...";
+		next;
+		mes "[Employée Kafra]";
+		mes "100 Feathers,";
+		mes "1 Four-Leaf Clover,";
+		mes "1 Kitty Band and";
+		mes "1 Pearl. voilà, c'est tout!";
+		mes "Bonne chance, je vous attends ici~";
+		close;
+	case 2:
+		mes "[Employée Kafra]";
+		mes "Pour remercier nos utilisateurs d'avoir recours aux services de la Corporation Kafra, nous avons préparé une petite attraction spécialement pour eux...";
+		next;
+		mes "[Employée Kafra]";
+		mes "La ^FF0000Quête du Bunny Band ^529DFF!!!^000000 (Sponsorisée par l'Association des Marchands d'Alberta)";
+		mes "Cette quête permet aux participants d'obtenir un chapeau unique, le ^FF0000Bunny Band^000000!";
+		next;
+		mes "[Employée Kafra]";
+		mes "Tout ce que vous avez à faire, est de réunir certains objets et de les apporter à un représentant de la Kafra Corp. tel que moi par exemple.";
+		mes "Nous fabriquerons avec soin un Bunny Band rien que pour vous!";
+		next;
+		mes "[Employée Kafra]";
+		mes "Voici les objets dont vous aurez besoin si vous souhaitez un Bunny Band:";
+		mes "^5555FF100 Feather^000000,";
+		mes "^5555FF1 Four Leaf Clover^000000,";
+		mes "^5555FF1 Pearl^000000,";
+		mes "^5555FF1 Kitty Band^000000.";
+		next;
+		mes "[Employée Kafra]";
+		mes "Une fois que vous aurez réuni tous ces objets, parle à un représentant de la Kafra Corp.";
+		mes "Nous sommes en service dans la plupart des villes à travers Rune Midgard.";
+		close;
+	case 3:
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.1 using duplicate command
+//= 1.2 Fixed NPC location, removed NPC dupes [Lupus]
+//= 1.3 RE-Fixed exploit V_V, also cleared used VAR [Lupus]
+//= 1.4 replaced BUNYBND with @BUNYBND [Lupus]
+//============================================================ 

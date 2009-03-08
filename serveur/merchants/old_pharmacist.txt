@@ -1,0 +1,255 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Old Pharmacist
+//===== By: ==================================================
+//= DZeroX
+//===== Current Version: =====================================
+//= 1.3
+//===== Compatible With: =====================================
+//= eAthena SVN Trunk
+//===== Description: =========================================
+//= Trade in items for potions
+//===============================
+//= Breakdown of arguments used
+//= arg(0): Herb required.
+//= arg(1): Zeny cost.
+//= arg(2): Potion given.
+//===== Additional Comments: =================================
+//= 1.0 - Fully working. [DZeroX]
+//= 1.0a - Minor fixes [Lupus]
+//= 1.1 - Added changed the dialogs and name to fit the
+//=       the official information. [DZeroX]
+//= 1.1a Removed .GATs [Lupus]
+//= 1.1b Fixed a bug in Orange Potion creating. Copy&Pasting = bad. [L0ne_W0lf]
+//= 1.2 Added checkweight, and input min/max values. [L0ne_W0lf]
+//= 1.3 Fixed minor condition check bug. (bugreport:597) [L0ne_W0lf]
+//============================================================
+
+alberta_in,16,28,4	script	Vieux Pharmacien	61,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Attendez! -";
+		mes "- Vous portez actuellement trop d'objets sur vous. -";
+		mes "- Revenez après en avoir déposé dans votre Stock Kafra. -";
+		close;
+	}
+	mes "[Vieux Pharmacien]";
+	mes "Hummm... que voulez-vous...?";
+	switch(select("Fabriquer une Potion","Discuter","Des Informations","Non, rien")) {
+		case 1:
+			next;
+			set .@weight,MaxWeight-Weight;
+			if ((.@weight) < 10000) {
+				mes "[Vieux Pharmacien]";
+				mes "Et bien! Vous êtes bien trop chargé! Revenez quand vous aurez déposé quelques petites choses...";
+				close;
+			} else {
+				mes "[Vieux Pharmacien]";
+				mes "Avez-vous tout ce qu'il faut? Si oui, quelle potion souhaitez-vous?";
+				switch(select("Potion Rouge","Potion Orange","Potion Jaune","Potion Blanche","Potion Bleue","Potion Verte","Rien, j'ai changé d'avis")) {
+					case 1:
+						callsub L_making,507,3,501;
+					case 2:
+						next;
+						mes "[Vieux Pharmacien]";
+						if (countitem(507) < countitem(713)) {
+							set .@max,countitem(507);
+						}
+						else if (countitem(508) < countitem(713)) {
+							set .@max,countitem(508);
+						}
+						else {
+							set .@max,countitem(713);
+						}
+						if ((countitem(507) < 1) || (countitem(508) < 1) || (countitem(713) == 0)) {
+							mes "Jeune crétin! Que voulez-vous que je fasse si vous ne m'apportez pas tous les ingrédients!";
+							close;
+						}
+						if (Zeny < 3) {
+							mes "Vous n'avez pas assez de zeny pour faire toutes ces potions, espèce d'imbécile!!";
+							close;
+						}
+						mes "Combien en voulez-vous?";
+						switch(select("Autant que possible.","Je veux choisir la quantité.","Non, rien finalement.")) {
+							case 1:
+								next;
+								if ((countitem(507) < .@max) || (countitem(508) < .@max) || (countitem(713) < .@max) || (Zeny < .@max*3)) {
+									mes "[Vieux Pharmacien]";
+									mes "Jeune crétin! Que voulez-vous que je fasse si vous ne m'apportez pas tous les ingrédients!";
+									close;
+								}
+								set Zeny,Zeny-(.@max*5);
+								delitem 507,.@max;
+								delitem 508,.@max;
+								delitem 713,.@max;
+								getitem 502,.@max; 
+								mes "[Vieux Pharmacien]";
+								mes "Tenez, c'est pour vous.";
+								mes "Mais n'en abusez pas! Ce n'est pas bon pour la digestion.";
+								close;
+							case 2:
+								next;
+								mes "[Vieux Pharmacien]";
+								mes "Donnez-moi un chiffre entre 1 et 100. Dîtes 0 si vous voulez annuler.";
+								mes "Vous pouvez obtenir "+.@max+" potions au maximum, avec ce que vous avez apporté.";
+								input .@amount,0,101;
+								if (.@amount == 0) {
+									next;
+									mes "[Vieux Pharmacien]";
+									mes "Espèce d'indécis!";
+									close;
+								}
+								if (.@amount > 100) {
+									next;
+									mes "[Vieux Pharmacien]";
+									mes "Vous êtes sourd ou quoi? J'ai dit que je ne pouvais pas en faire plus de 100.";
+									close;
+								}
+								if ((countitem(507) < .@amount) || (countitem(508) < .@amount) || (countitem(713) < .@amount) || (Zeny < .@amount*3)) {
+									next;
+									mes "[Vieux Pharmacien]";
+									mes "Jeune crétin! Que voulez-vous que je fasse si vous ne m'apportez pas tous les ingrédients!";
+									close;
+								}
+								next;
+								set Zeny,Zeny-(.@amount*5);
+								delitem 507,.@amount;
+								delitem 508,.@amount;
+								delitem 713,.@amount;
+								getitem 502,.@amount; 
+								mes "[Vieux Pharmacien]";
+								mes "Tenez, c'est pour vous.";
+								mes "Mais n'en abusez pas! Ce n'est pas bon pour la digestion.";
+								close;
+							case 3:
+								next;
+								mes "[Vieux Pharmacien]";
+								mes "Espèce d'indécis!";
+								close;
+						}
+					case 3:
+						callsub L_making,508,10,503;
+					case 4:
+						callsub L_making,509,20,504;
+					case 5:
+						callsub L_making,510,30,505;
+					case 6:
+						callsub L_making,511,3,506;
+					case 7:
+						mes "[Vieux Pharmacien]";
+						mes "Allez vous-en jeune crétin!!";
+						close;
+					}
+				}
+		case 2:
+			mes "[Vieux Pharmacien]";
+			mes "Une bonne Herbe Médicinale bien choisie peut revigorer la Vie ou le Mana de quelqu'un.";
+			mes "~Soupir~ Je commence à regretter ma jeunesse....";
+			mes "Je dois me faire vieux.....";
+			next;
+			mes "[Vieux Pharmacien]";
+			mes "... Une potion est une forme 'simple d'utilisation' des herbes médicinales, ..... ni plus ni moins.";
+			close;
+		case 3:
+			mes "[Vieux Pharmacien]";
+			mes "~Soupir~... vous autres jeunes gens pouvez vous montrer bien enquiquinants...";
+			mes "Très bien, je vais vous expliquer les rudiments sur les potions....";
+			next;
+			mes "[Vieux Pharmacien]";
+			mes "Même si vous pouvez consommer telles quelles les diverses Herbes que vous";
+			mes "trouvez à Rune-Midgard... leur effet bénéfique se voit multiplié si vous";
+			mes "fabriquez des potions à partir de ces herbes.";
+			next;
+			mes "[Vieux Pharmacien]";
+			mes "J'utilise un processus de fabrication de potions à partir d'herbes que j'ai inventé moi-même.";
+			mes "Je peux vous fabriquer n'importe quelle potion, moyennant quelques zeny.";
+			next;
+			mes "[Vieux Pharmacien]";
+			mes "^FF5533Potion Rouge^000000 - 2 Herbes Rouges, 1 Bouteille Vide, 2 Zenys.";
+			mes "^FF8000Potion Orange^000000 - 1 Herbe Rouge, 1 Herbe Jaune, 1 Bouteille Vide, 5 Zenys.";
+			mes "^E8CF20Potion Jaune^000000 - 2 Herbes Jaunes, 1 Bouteille Vide, 10 Zenys.";
+			next;
+			mes "[Vieux Pharmacien]";
+			mes "^999999White Potion^000000 - 2 Herbes Blanches, 1 Bouteille Vide, 20 Zenys.";
+			mes "^3355FFBlue Potion^000000 - 2 Herbes Bleues, 1 Bouteille Vide, 30 Zenys.";
+			mes "^00B000Green Potion^000000 - 2 Herbes Vertes, 1 Bouteille Vide, 3 Zenys.";
+			close;
+		case 4:
+			mes "[Vieux Pharmacien]";
+			mes "C'est tout ce que vous racontez?!";
+			close;
+	}
+	
+L_making:
+	next;
+	mes "[Vieux Pharmacien]";
+	if ((countitem(getarg(0))/2) < countitem(713)) {
+		set .@max,countitem(getarg(0))/2;
+	} else {
+		set .@max,countitem(713);
+	}
+	if ((countitem(getarg(0)) < 2) || (countitem(713) == 0)) {
+		mes "Jeune crétin! Que voulez-vous que je fasse si vous ne m'apportez pas tous les ingrédients!";
+		close;
+	}
+	if (Zeny < 3) {
+		mes "Vous n'avez pas assez de Zenys pour faire toutes ces potions, espèce d'imbécile!!";
+		close;
+	}
+	mes "Combien en voulez-vous?";
+	switch(select("Autant que possible.","Je veux choisir la quantité.","Non, rien finalement.")) {
+		case 1:
+			next;
+			if ((countitem(getarg(0)) < .@max*2) || (countitem(713) < .@max) || (Zeny < .@max*getarg(1))) {
+				mes "[Vieux Pharmacien]";
+				mes "Jeune crétin! Que voulez-vous que je fasse si vous ne m'apportez pas tous les ingrédients!";
+				close;
+			}
+			set Zeny,Zeny-(.@max*getarg(1));
+			delitem getarg(0),.@max*2;
+			delitem 713,.@max;
+			getitem getarg(2),.@max; 
+			mes "[Vieux Pharmacien]";
+			mes "Tenez, c'est pour vous.";
+			mes "Mais n'en abusez pas! Ce n'est pas bon pour la digestion.";
+			close;
+		case 2:
+			next;
+			mes "[Vieux Pharmacien]";
+			mes "Donnez-moi un chiffre entre 1 et 100. Dîtes 0 si vous voulez annuler.";
+			mes "Vous pouvez obtenir "+.@max+" potions au maximum, avec ce que vous avez apporté.";
+			input .@amount;
+			if (.@amount == 0) {
+				next;
+				mes "[Vieux Pharmacien]";
+				mes "Espèce d'indécis!";
+				close;
+			}
+			if (.@amount > 100) {
+				next;
+				mes "[Vieux Pharmacien]";
+				mes "Vous êtes sourd ou quoi? J'ai dit que je ne pouvais pas en faire plus de 100.";
+				close;
+			}
+			if ((countitem(getarg(0)) < .@amount*2) || (countitem(713) < .@amount) || (Zeny < .@amount*getarg(1))) {
+				next;
+				mes "[Vieux Pharmacien]";
+				mes "Jeune crétin! Que voulez-vous que je fasse si vous ne m'apportez pas tous les ingrédients!";
+				close;
+			}
+			next;
+			set Zeny,Zeny-(.@amount*getarg(1));
+			delitem getarg(0),.@amount*2;
+			delitem 713,.@amount;
+			getitem getarg(2),.@amount; 
+			mes "[Vieux Pharmacien]";
+			mes "Tenez, c'est pour vous.";
+			mes "Mais n'en abusez pas! Ce n'est pas bon pour la digestion.";
+			close;
+		case 3:
+			next;
+			mes "[Vieux Pharmacien]";
+			mes "Allez vous-en jeune crétin!!";
+			close;
+	}
+}

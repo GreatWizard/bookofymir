@@ -1,0 +1,231 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Priest Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quests for skills: Redempito
+//===== Additional Comments: ================================= 
+//= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.5 Replaced effect numerics with constants. [L0ne_W0lf]
+//============================================================
+
+prt_church,111,112,1	script	Soeur Linus	79,{
+	if (BaseJob == Job_Priest) {
+		if (PRIEST_SK == 100) {
+			if (getskilllv("PR_REDEMPTIO") == 0) {
+				mes "[Soeur Linus]";
+				mes "Hum? Nous sommes-nous déjà rencontrés? Tous les Prêtres se ressemblent ces derniers temps. Ah, vous êtes l'un de ceux à qui j'ai enseigné Redemptio?";
+				next;
+				mes "[Soeur Linus]";
+				mes "Ah, vous avez oublié, vous dîtes? Ce n'est pas un problème, je peux vous l'enseigner à nouveau. Cette compétence vous permet de faire revivre les Membres de votre Groupe en sacrifiant votre vie pour la leur.";
+				next;
+				mes "[Soeur Linus]";
+				mes "^3131FFOh, être saint et vénérable, nous prions pour toi. Fais preuve de pitié, et guide-nous vers ta lumière. Donne-nous la force de marcher sur le chemin de l'amour et du sacrifice. Redemptio!^000000";
+				skill "PR_REDEMPTIO",1,0;
+				next;
+				mes "[Soeur Linus]";
+				mes "Voilà...";
+				mes "Vous devriez à nouveau pouvoir utiliser Redemptio à présent. J'espère que vous en ferez bon usage au cours de vos aventures~";
+				close;
+			}
+			else {
+				mes "[Soeur Linus]";
+				mes "Je prierai toujours pour votre sécurité. Faîtes bien attention à vous, j'espère que vous apporterez de l'amour et la compassion à tous ceux que vous rencontrerez au cours de vos voyages.";
+				close;
+			}
+		}
+		else if (PRIEST_SK == 0) {
+			set redemp,1014;
+			if (getskilllv("PR_REDEMPTIO")) {
+				mes "[Soeur Linus]";
+				mes "Je prierai toujours pour votre sécurité. Faîtes bien attention à vous, j'espère que vous apporterez de l'amour et la compassion à tous ceux que vous rencontrerez au cours de vos voyages.";
+				set PRIEST_SK,100;
+				close;
+			}
+			mes "[Soeur Linus]";
+			mes "Fais preuve de pitié, et répand ta lumière à travers le monde. Guide-la par ton infinie sagesse...";
+			mes "Bénis-la, qu'elle soit à jamais protégée par ta grâce.";
+			next;
+			select("Pour qui priez-vous, ma soeur?");
+			mes "[Soeur Linus]";
+			mes "Oh! Vous m'avez surprise! Pour qui je prie? Et bien, lorsque j'étais jeune, j'ai rencontré une none charmante et joyeuse, mais aussi un peu effrontée. J'ai de nombreux souvenirs heureux en sa compagnie.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Un jour, un groupe d'aventuriers vint à l'Eglise de Prontera dans l'espoir de recruter un Prêtre pour les accompagner à ^3131DDGlast Heim^000000. Ce devait être le destin, car elle était la seule disponible.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Je me souviens qu'elle était si déterminée à rejoindre ce groupe d'aventuriers, nous n'avions d'autres choix que de la laisser partir. Cependant, nombre d'entre nous pensions que c'était beaucoup trop dangereux...";
+			next;
+			mes "[Soeur Linus]";
+			mes "J'ai entendu dire que, au début, leur équipe réussit à exterminer de nombreux monstres. Accompagner des aventuriers aussi dégourdis n'a pas dû être simple pour elle...";
+			next;
+			mes "[Soeur Linus]";
+			mes "Puis, une tragédie survint.";
+			mes "Entourés par des monstres errants, les aventuriers tombèrent rapidement, les uns après les autres. Bientôt, la jeune none se tint seule devant le danger.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Seul devant l'impossible, la pauvre jeune femme n'avait d'autre choix que de tenter un geste désespéré. Elle commença à changer l'ancien sortilège sacré...";
+			next;
+			select("Ancien sortilège...?");
+			mes "[Soeur Linus]";
+			mes "Oui! ^FF0000Redemptio^000000!";
+			mes "Un sortilège que seuls les Prêtres les plus talentueux peuvent utiliser! Elle était là, une si jeune none inexpérimentée, mais elle essaya malgré tout!";
+			next;
+			mes "[Soeur Linus]";
+			mes "Redemptio ne doit être lancé qu'en dernier recours. Il permet de sauver noblement les vies de ses compagnons, au prix du ^3131FFsacrifice de sa propre vie^000000.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Oui, je me souviens de ce jour où nous avions étudié le sortilège Redemptio. Elle avait été particulièrement attentive, alors qu'habituellement elle rêvassait lors des études...";
+			next;
+			mes "[Soeur Linus]";
+			mes "Elle a réussi, miraculeusement, à sauver ses compagnons d'infortune, grâce à Redemptio. Heureusement, ces derniers disposaient de Feuilles de l'Yggdrasil, l'arbre sacré, et ils purent la sauver à leur tour.";
+			mes "Ils retournèrent tous chez eux sains et saufs.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Grâce à son action héroïque, elle fût promue Haute Prêtresse, malgré les nombreuses erreurs qu'elle avait commises par le passé. Maintenant, elle voyage de par le monde, aidant les aventuriers du mieux qu'elle peut.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Mais pour moi, elle restera toujours mon amie d'enfance, joyeuse et pleine de cran.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Attendez, vous n'avez toujours pas répondu à ma question. Pourquoi priez-vous pour cette none? Est-elle en danger?";
+			next;
+			mes "[Soeur Linus]";
+			mes "Et bien, il y a quelques mois, elle était en mission à ^3131FFLighthalzen^000000, une ville de la République de Schwaltzvalt. J'étais inquiète car je n'avais pas eu de ses nouvelles depuis longtemps.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Je viens ici prier pour elle chaque jour, et j'espère qu'elle reviendra en bonne santé, partager ses histoires d'aventures avec moi. Ooh, nous parlerons toute la nuit durant! Ce sera si amusant!";
+			next;
+			mes "[Soeur Linus]";
+			mes "Oh, je dois faire attention à ce que je dis! Je suis désolée de vous avoir retenu si longtemps avec mes histoires. Je prierai pour que vos voyages se déroulent sans encombres~";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Avant de partir, pourriez-vous me donner le nom de la Haute Prêtresse dont vous parlez? Si je la voix, je lui demanderai de vous donner de ses nouvelles.";
+			next;
+			mes "[Soeur Linus]";
+			mes "Oh, merci! Son nom est Haut Prêtresse Sorin. Hum, ^3131FFMargaretha Sorin^000000. Si vous la rencontrez un jour, dîtes-lui que je prie chaque jour pour elle.";
+			set PRIEST_SK,1;
+			close;
+		}
+		else if (PRIEST_SK == 1) {
+			mes "[Soeur Linus]";
+			mes "Oh, bonjour~";
+			mes "Comment allez-vous aujourd'hui?";
+			next;
+			if (select("Apprenez-moi ^3131FFRedemptio^000000 s'il vous plaît.:Annuler.") == 1) {
+				mes "[Soeur Linus]";
+				mes "Ooh, Redemptio est un sortilège vraiment utile, mais très difficile à apprendre et à utiliser~";
+				mes "Mais si vous y parvenez, vous pourrez faire revivre tous les Membres de votre Groupe grièvement blessés.";
+				next;
+				mes "[Soeur Linus]";
+				mes "Bien sûr, ce sortilège présente le désavantage que vous devez ^3131FFsacrifier votre propre vie^000000. Mais si vous souhaitez toujours apprendre ce sortilège, vous devrez avant tout connaître la compétence ^3131FFResurrection au Niveau 1^000000.";
+				next;
+				mes "[Soeur Linus]";
+				mes "Ah, et vous devrez également m'apporter";
+				mes "^3131FF30 Bouteilles d'Eau Sacrée et";
+				mes "20 Gemmes Bleues^000000.";
+				set PRIEST_SK,2;
+				next;
+				mes "[Soeur Linus]";
+				mes "Si vous échouez au cours de l'apprentissage de Redemptio, vous perdrez 1 Bouteille d'Eau Sacrée et 1 Gemme Bleue, et vous devrez essayer à nouveau...";
+				close;
+			}
+			mes "[Soeur Linus]";
+			mes "Prier m'apporte beaucoup de paix et de réconfort. C'est peut-être pour cela que j'ai choisi de devenir Soeur...";
+			close;
+		}
+		else if (PRIEST_SK == 2) {
+			if (getskilllv("ALL_RESURRECTION") > 0) {
+				if (countitem(523) > 29 && countitem(717) > 19) {
+					mes "[Soeur Linus]";
+					mes "Ooh, on dirait que vous avez apporté tout ce qui est nécessaire pour apprendre Redemptio.";
+					mes "Êtes-vous sûr de vouloir essayer. Si vous échouez, vous perdrez 1 Bouteille d'Eau Sacrée et 1 Gemme Bleue, d'accord?";
+					next;
+					mes "[Soeur Linus]";
+					mes "Maintenant, concentrez-vous et répétez cette prière après moi.";
+					next;
+					mes "[Soeur Linus]";
+					mes "^3131FFOh, être saint et vénérable, nous prions pour toi. Fais preuve de pitié, et guide-nous vers ta lumière. Donne-nous la force de marcher sur le chemin de l'amour et du sacrifice. Redemptio!^000000";
+					next;
+					set .@redem_s,JobLevel+getskilllv("ALL_RESURRECTION");
+					set .@red_suc,rand(1,100);
+					if( .@redem_s < 31 ) {
+						if( .@red_suc > 20 && .@red_suc < 41 )
+							set .@success,1;
+					} else if( .@redem_s < 41 ) {
+						if( .@red_suc > 10 && .@red_suc < 41 )
+							set .@success,1;
+					} else {
+						if( .@red_suc > 10 && .@red_suc < 51 )
+							set .@success,1;
+					}
+
+					if (.@success) {
+						specialeffect2 EF_HEALSP;
+						mes "[Soeur Linus]";
+						mes "Félicitations!";
+						mes "Vous avez appris Redemptio!";
+						mes "Souvenez-vous: n'utilisez ce sortilège qu'en derniers recours.";
+						delitem 717,20; //Blue_Gemstone
+						delitem 523,30; //Holy_Water
+						set PRIEST_SK,100;
+						skill "PR_REDEMPTIO",1,0;
+						close;
+					}
+					else {
+						specialeffect2 EF_POISONHIT;
+						mes "[Soeur Linus]";
+						mes "Oh non! Je suis désolée, mais vous n'avez pas réussi à apprendre Redemptio. Je vous attendrai ici, si vous souhaitez essayer à nouveau, d'accord?";
+						delitem 717,1; //Blue_Gemstone
+						delitem 523,1; //Holy_Water
+						close;
+					}
+
+				}
+				else {
+					mes "[Soeur Linus]";
+					mes "Si vous souhaitez essayer à nouveau d'apprendre Redemptio, veuillez m'apporter";
+					mes "^3131FF20 Gemmes Bleues^000000 et";
+					mes "^3131FF30 Bouteilles d'Eau Sacrée^000000. Ah, et";
+					mes "vous devrez avoir appris ^3131FFResurrection au Niveau 1^000000.";
+					close;
+				}
+			}
+			else {
+				mes "[Soeur Linus]";
+				mes "Si vous souhaitez essayer à nouveau d'apprendre Redemptio, veuillez m'apporter";
+				mes "^3131FF20 Gemmes Bleues^000000 et";
+				mes "^3131FF30 Bouteilles d'Eau Sacrée^000000. Ah, et";
+				mes "vous devrez avoir appris ^3131FFResurrection au Niveau 1^000000.";
+				close;
+			}
+		}
+	}
+	else {
+		mes "[Soeur Linus]";
+		mes "Fais preuve de pitié, et répand ta lumière à travers le monde. Guide-la par ton infinie sagesse...";
+		mes "Bénis-la, qu'elle soit à jamais protégée par ta grâce.";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//============================================================

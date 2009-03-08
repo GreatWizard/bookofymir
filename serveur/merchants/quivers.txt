@@ -1,0 +1,154 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script =======================================
+//= Arrow Quiver Event
+//===== By: ==================================================
+//= Muad_Dib (Prometheus Project); L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= [Aegis COnversion]
+//= Turns arrows into Arrow Quivers.
+// Breakdown of Subroutine "S_BuyQuiver"
+// arg(0): Type of Arrow to be packaged (item ID)
+// arg(1): How many of each 'getarg(0)' arrow per quiver
+// arg(2): The cost of making a 'getarg(0)' quiver.
+// arg(3): The quiver given by the NPC. (item ID)
+//===== Additional Comments: =================================
+//= 07/06/05 : Added 1st Version. [Muad_Dib]
+//= Converted to eAthena format by Dr.Evil
+//= added prize to quest - 500 Zeny
+//= Fixed a few spelling errors. [Nexon]
+//= 1.1 Added Holy Arrow Quivers [Playtester]
+//= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Removed "Holy Arrows" from the list.
+//============================================================
+
+payon_in01,5,134,5	script	Jaax	89,{
+	if (checkweight(1201,1) == 0) {
+		mes "[Jaax]";
+		mes "Hé, on dirait que t'as mal au dos. Pourquoi n'irais-tu pas déposer quelques objets dans ton Stock Kafra?";
+		close;
+	}
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 2000) {
+		mes "[Jaax l'Inventeur]";
+		mes "Hé, on dirait que t'as mal au dos. Pourquoi n'irais-tu pas déposer quelques objets dans ton Stock Kafra?";
+		close;
+	}
+	mes "[Jaax l'Inventeur]";
+	mes "Mon nom est Jaax.";
+	mes "Sans fausse modestie, je peux vous affirmer que je suis certainement ^996600le plus grand inventeur contemporain.^000000";
+	next;
+	mes "[Jaax l'Inventeur]";
+	mes "Cette fois-ci, j'ai fait des inventions vraiment extraordinaires. Je les appelle...";
+	mes "^996600les Carquois Magiques^000000!! On se souviendra de mon invention dans l'histoire, comme une révolution dans le monde de l'archerie!";
+	Emotion e_no1;
+	next;
+	mes "[Jaax l'Inventeur]";
+	mes "J'ai étudié la magie et les carquois pendant des années, travaillant jour et nuit jusqu'à arriver  à trouver comment réunir plus de flèches grâce à la magie! Avec mes carquois magiques, vous pourrez transporter plus de flèches, sans que ce soit plus lourd!";
+	next;
+	mes "[Jaax l'Inventeur]";
+	mes "Voulez-vous essayer l'un de mes carquois?";
+	mes "Je suis certain que quelqu'un comme vous saura apprécier mon génie à sa juste valeur!";
+	next;
+	switch(select("Carquois Normal:Carquois de Flèches de Métal:Carquois de Flèches d'Acier:Carquois de Flèches en Oridecon:Carquois de Flèches de Feu:Carquois de Flèches d'Argent:Carquois de Flèches de Vent:Carquois de Flèches de Pierre:Carquois de Flèches de Cristal:Carquois de Flèches de l'Ombre:Carquois de Flèches Immatérielles:Carquois de Flèches Rouillées")) {
+	case 1: callsub S_BuyQuiver,1750,500,500,12004;
+	case 2: callsub S_BuyQuiver,1770,500,500,12005;
+	case 3: callsub S_BuyQuiver,1753,500,500,12006;
+	case 4: callsub S_BuyQuiver,1765,500,500,12007;
+	case 5: callsub S_BuyQuiver,1752,500,500,12008;
+	case 6: callsub S_BuyQuiver,1751,500,500,12009;
+	case 7: callsub S_BuyQuiver,1755,500,500,12010;
+	case 8: callsub S_BuyQuiver,1756,500,500,12011;
+	case 9: callsub S_BuyQuiver,1754,500,500,12012;
+	case 10: callsub S_BuyQuiver,1767,500,500,12013;
+	case 11: callsub S_BuyQuiver,1757,500,500,12014;
+	case 12: callsub S_BuyQuiver,1762,500,500,12015;
+	}
+	//This doesn't seem to be accessable...
+	//mes "[Jaax l'Inventeur]";
+	//mes "Is there";
+	//mes "anything you want?";
+	//close;
+
+S_BuyQuiver:
+	if (countitem(getarg(0)) > 499) {
+		mes "[Jaax l'Inventeur]";
+		mes "Excellent!";
+		mes "Je peux vous faire des carquois pouvant stocker jusqu'à "+getarg(1)+" de vos "+getitemname(getarg(0))+" pour seulement ^FF3131"+getarg(2)+" Zenys^000000.";
+		next;
+		switch(select("Faire le plus de Carquois possible:Acheter 1 Carquois:Annuler")) {
+		case 1:
+			set .@arrows,countitem(getarg(0));
+			set .@quiver,.@arrows / getarg(1);
+			set .@arrows_used,.@quiver * getarg(1);
+			set .@arrow_zeny01,.@quiver * getarg(2);
+			mes "Nombre de Flèches: ^3131FF"+.@arrows+" ^000000";
+			mes "Nombre de Carquois achetables au maximum: ^3131FF"+.@quiver+" ^000000";
+			mes "Tarif: ^3131FF"+.@arrow_zeny01+" Zenys^000000";
+			next;
+			mes "[Jaax l'Inventeur]";
+			mes "Voulez-vous acheter autant de Carquois que possible?";
+			next;
+			if (select("Oui:Annuler") == 1) {
+				if (.@arrow_zeny01 < Zeny) {
+					mes "[Jaax l'Inventeur]";
+				mes "Et voilà pour vous!";
+				mes "Souvenez-vous que ^FF0000vous ne pourrez pas utiliser un Carquois si vous portez déjà 90% de votre charge maximale^000000.";
+					set zeny,zeny-.@arrow_zeny01;
+					delitem getarg(0),.@arrows_used; //Arrow
+					getitem getarg(3),.@quiver; //Quiver
+					next;
+					mes "[Jaax l'Inventeur]";
+					mes "A bientôt.";
+					close;
+				}
+				else {
+					mes "[Jaax l'Inventeur]";
+					mes "Je suis désolé, mais vous n'avez pas assez d'argent. Je ne peux pas donner mes carquois gratuitement, vous savez. Je dois rentabiliser les années de travail qu'il m'a fallut pour inventer cette technologie révolutionnaire!";
+					close;
+				}
+			}
+			mes "[Jaax l'Inventeur]";
+			mes "Vous avez changé d'avis?";
+			mes "Alors que la gloire de posséder un Carquois était là, à portée de main?";
+			close;
+		case 2:
+			if (zeny > getarg(2)) {
+				mes "[Jaax l'Inventeur]";
+				mes "Et voilà pour vous!";
+				mes "Souvenez-vous que ^FF0000vous ne pourrez pas utiliser un Carquois si vous portez déjà 90% de votre charge maximale^000000.";
+				set zeny,zeny-getarg(2);
+				delitem getarg(0),getarg(1); //Arrow
+				getitem getarg(3),1; //Quiver
+				next;
+				mes "[Jaax l'Inventeur]";
+				mes "A bientôt.";
+				close;
+			}
+			else {
+				mes "[Jaax l'Inventeur]";
+				mes "Vous n'avez pas les "+getarg(2)+" Zenys nécessaires.";
+				mes "Je ne pensais pas que vous étiez si...";
+				mes "^333333radin^000000.";
+				close;
+			}
+		case 3:
+			mes "[Jaax l'Inventeur]";
+			mes "Comment...?";
+			mes "Ne voyez-vous pas que mon invention va révolutionner le monde!";
+			close;
+		}
+	}
+	else {
+		mes "[Jaax l'Inventeur]";
+		mes "Vous pouvez transporter au maximum 500 Flèches dans ce Carquois. Je l'ai fabriqué de façon à ce que le Carquois soit plus léger que si vous transportiez vos flèches séparément.";
+		next;
+		mes "[Jaax l'Inventeur]";
+		mes "C'est un miracle de la science! Je peux vous fabriquer un carquois si vous m'apportez au moins 500 Flèches et 500 Zenys par Carquois.";
+		close;
+	}
+}

@@ -1,0 +1,112 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Aldebaran 
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= 'Doctor Band', 'Feather Bonnet', 'Opera Masque', 'Sakkat Hat' Quests.
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 Fixed Doctor Band items [Lupus]
+//= 1.2 Removed Duplicates [Silent]
+//= 1.3 Updated headgear NPC. [L0ne_W0lf]
+//============================================================ 
+
+
+//=======================================================================================================//
+//			'Doctor Band', 'Feather Bonnet', 'Opera Masque', 'Sakkat Hat' Quest
+//=======================================================================================================//
+aldeba_in,152,166,4	script	Marchand#01	86,{
+	mes "[Marchand]";
+	mes "Muhahaha! Je suis le Très Célèbre et Enigmatique Marchand d'Aldebaran!";	
+	next;
+	mes "[Marchand]";
+	mes "Je suis sans cesse à la recherche d'objets uniques dans Rune Midgard!";
+	next;
+	mes "[Marchand]";
+	mes "Jetez un oeil à ma collection d'objets rares!!";
+	next;
+	mes " (1) ^3355FFDoctor Band^000000:";
+	mes "1 Red Bandana + 50 Irons + 1 Cracked Diamond + 3500 Zenys";
+	mes " (2)^3355FFFeather Bonnet^000000:";
+	mes "1 Romantic Gent + 300 Feather of Birds + 500 Zenys";
+	mes " (3) ^3355FFPhantom of Opera^000000:";
+	mes "20 Iron + 1 Singing Plant + 5000 Zenys ";
+	mes " (4) ^3355FFSakkat^000000:";
+	mes "120 Trunks + 10000 Zenys";
+	next;
+	switch(select(" Doctor Band : Feather Bonnet : Phantom of Opera : Sakkat ")) {
+	case 1:
+		if ((countitem(2275) > 0) && (countitem(998) > 49) && (countitem(733) > 0) && (Zeny > 3499)) {
+			delitem 2275,1;  //Red_Bandana
+			delitem 998,50;  //Iron
+			delitem 733,1;  //Crystal_Jewel___
+			set Zeny,Zeny-3500;
+			mes "[Marchand]";
+			mes "Hum.... Est-ce que vous possédez une licence médicale? J'ai entendu parler d'un physicien qui joue les médecins à ses heures...";
+			next;
+			mes "[Marchand]";
+			mes "Enfin vous faîtes bien ce que vous voulez, hein... Tenez.";
+			getitem 2273,1; // Doctor_Cap
+			close;
+		}
+		else {
+			mes "[Marchand]";
+			mes "Espèce d'idiot! Vérifiez au moins que vous avez les objets avant de vous pointer ici! ... Quel imbécile... J'te jure...";
+			close;
+		}
+	case 2:
+		if ((countitem(2247) > 0) && (countitem(916) > 299) && (Zeny > 499)) {
+			delitem 2247,1;  //Oldman's_Romance
+			delitem 916,300;  //Feather_Of_Birds
+			set Zeny,Zeny-500;
+			mes "[Marchand]";
+			mes "Ooh~! Vous avez le sens de la mode, vous! Je sais que vous avez passé du temps à rassembler tous les objets nécessaires à la création de ce bonnet, mais je vous garantie que vous ne serez pas déçu! Tenez.";
+			getitem 5018,1; // Feather_Bonnet
+			close;
+		}
+		else {
+			mes "[Marchand]";
+			mes "Espèce d'idiot! Vérifiez au moins que vous avez les objets avant de vous pointer ici! ... Quel imbécile... J'te jure...";
+			close;
+		}
+	case 3:
+		if ((countitem(998) > 19) && (countitem(707) > 0) && (Zeny > 4999)){ //Iron Singing_Plant 
+			delitem 998,20;  //Iron
+			delitem 707,1;  //Singing_Plant
+			set Zeny,Zeny-5000;
+			mes "[Marchand]";
+			mes "C'est un masque très élégant, quoi qu'un peu étrange... On dirait qu'il émet des ondes bizarres. Qu'en pensez-vous?";
+			getitem 2281,1; // Phantom_Of_Opera
+			close;
+		}
+		else {
+			mes "[Marchand]";
+			mes "Espèce d'idiot! Vérifiez au moins que vous avez les objets avant de vous pointer ici! ... Quel imbécile... J'te jure...";
+			close;
+		}
+	case 4:
+		if ((countitem(1019) > 119) && (Zeny > 9999)){ //Wooden_Block 
+			delitem 1019,120;  //Wooden_Block
+			set Zeny,Zeny-10000;
+			mes "[Marchand]";
+			mes "Si vous avez la chance de pouvoir visiter le Village de Payon, vous devriez aller rencontrer l'homme qui a fabriqué ce Sakkat.";
+			mes "Et vous savez quoi? J'ai l'exclusivité sur ce produit! Il ne vend ses Sakkat qu'à moi!";
+			next;
+			mes "[Marchand]";
+			mes "Je suis le seul marchand de Rune Midgard a pouvoir estimer la qualité et la valeur d'un Sakkat. De part sa rareté, le Sakkat est devenu un chapeau très populaire!";
+			getitem 2280,1; // Sahkkat
+			close;
+		}
+		else {
+			mes "[Marchand]";
+			mes "Espèce d'idiot! Vérifiez au moins que vous avez les objets avant de vous pointer ici! ... Quel imbécile... J'te jure...";
+			close;
+		}
+	}
+}
