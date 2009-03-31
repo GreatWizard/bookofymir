@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script ======================================= 
 //= Kafra Express - Broadcasting Module
 //===== By: ================================================== 
@@ -33,15 +35,15 @@ function	script	F_keBroadcast	{
 
 	if ($@kebc_showOnline) {
 		set @kmenu, select(
-			"- Return",
-			"- Map Broadcasts ("+getarg(0)+"/"+getmapusers(getarg(0))+" "+$@ked_users$+")",
-			"- Global Broadcasts ("+getusers(1)+" "+$@ked_users$+")"
+			"- Retour",
+			"- Annonces sur la Map ("+getarg(0)+"/"+getmapusers(getarg(0))+" "+$@ked_users$+")",
+			"- Annonces Globales ("+getusers(1)+" "+$@ked_users$+")"
 		);
 	} else {
 		set @kmenu, select(
-			"- Return",
-			"- Map Broadcasts ("+getarg(0)+")",
-			"- Global Broadcasts"
+			"- Retour",
+			"- Annonces sur la Map ("+getarg(0)+")",
+			"- Annonces Globales"
 		);
 	}
 	switch(@kmenu) {
@@ -53,7 +55,7 @@ function	script	F_keBroadcast	{
 	case 3:
 		SF_calcPrice(1);
 		set @map$,"";
-		SF_broadcasts("Global");
+		SF_broadcasts("Globale");
 		break;
 	}
 return;
@@ -63,14 +65,14 @@ function	SF_broadcasts	{
 
 	do {
 		switch (select (
-			"- Cancel "+getarg(0)+" Broadcast",
-			"- Party request Broadcast ("+@partycost+"z)",
-			"- PvP challenge Broadcast ("+@pvpcost+"z)",
-			"- General Broadcast ("+@cost+"z)",
-			"- General Anonymous Broadcast ("+@anoncost+"z)"
+			"- Annuler votre Annonce ("+getarg(0)+") ",
+			"- Recherche de Groupe ("+@partycost+"z)",
+			"- Recherche d'un Adversaire en PvP ("+@pvpcost+"z)",
+			"- Annonce Générale ("+@cost+"z)",
+			"- Annonce Générale Anonyme ("+@anoncost+"z)"
 		)) {
 		case 2:	//Party
-			SF_doBroadcast $@kebc_partyCost,@map$,"The "+jobname(class)+" "+strcharinfo(0)+" (levels "+baselevel+"/"+joblevel+") is looking for a party to join.",0;
+			SF_doBroadcast $@kebc_partyCost,@map$,""+strcharinfo(0)+": "+jobname(class)+" (Niveaux "+baselevel+"/"+joblevel+") cherche un Groupe.",0;
 			break;
 		case 3:	//Pvp
 			if ($@kewp_advanced == 0)
@@ -78,15 +80,15 @@ function	SF_broadcasts	{
 			else {
 				do {
 					set @kmenu, select (
-						"- Cancel",
-						"- advertise all levels rooms",
-						"- advertise levels "+($@kewp_baseLv1-$@kewp_range)+"-"+($@kewp_baseLv1+$@kewp_range)+" rooms",
-						"- advertise levels "+($@kewp_baseLv2-$@kewp_range)+"-"+($@kewp_baseLv2+$@kewp_range)+" rooms",
-						"- advertise levels "+($@kewp_baseLv3-$@kewp_range)+"-"+($@kewp_baseLv3+$@kewp_range)+" rooms",
-						"- advertise levels "+($@kewp_baseLv4-$@kewp_range)+"-"+($@kewp_baseLv4+$@kewp_range)+" rooms",
-						"- advertise levels "+($@kewp_baseLv5-$@kewp_range)+"-"+($@kewp_baseLv5+$@kewp_range)+" rooms",
-						"- advertise levels "+($@kewp_baseLv6-$@kewp_range)+"-"+($@kewp_baseLv6+$@kewp_range)+" rooms",
-						"- advertise levels "+($@kewp_baseLv7-$@kewp_range)+"-"+($@kewp_baseLv7+$@kewp_range)+" rooms"
+						"- Annuler",
+						"- Arènes Tous Niveaux",
+						"- Arènes de Niveaux "+($@kewp_baseLv1-$@kewp_range)+" à "+($@kewp_baseLv1+$@kewp_range)+"",
+						"- Arènes de Niveaux "+($@kewp_baseLv2-$@kewp_range)+" à "+($@kewp_baseLv2+$@kewp_range)+"",
+						"- Arènes de Niveaux "+($@kewp_baseLv3-$@kewp_range)+" à "+($@kewp_baseLv3+$@kewp_range)+"",
+						"- Arènes de Niveaux "+($@kewp_baseLv4-$@kewp_range)+" à "+($@kewp_baseLv4+$@kewp_range)+"",
+						"- Arènes de Niveaux "+($@kewp_baseLv5-$@kewp_range)+" à "+($@kewp_baseLv5+$@kewp_range)+"",
+						"- Arènes de Niveaux "+($@kewp_baseLv6-$@kewp_range)+" à "+($@kewp_baseLv6+$@kewp_range)+"",
+						"- Arènes de Niveaux "+($@kewp_baseLv7-$@kewp_range)+" à "+($@kewp_baseLv7+$@kewp_range)+""
 					);
 					switch (@kmenu) {
 					case 2: //All levels
@@ -120,10 +122,10 @@ function	SF_broadcasts	{
 			}
 			break;
 		case 4:	//General
-			SF_doBroadcast $@kebc_cost,@map$,"(From "+strcharinfo(0)+") ",1;
+			SF_doBroadcast $@kebc_cost,@map$,"(De "+strcharinfo(0)+") ",1;
 			break;
 		case 5:	//Anonymous
-			SF_doBroadcast $@kebc_anonCost,@map$,"(Anonymous) ",1;
+			SF_doBroadcast $@kebc_anonCost,@map$,"(Anonyme) ",1;
 			break;
 		default:
 			return;
@@ -158,18 +160,18 @@ function	SF_doBroadcast {
 	} else
 		set @msg$,getarg(2);
 
-	mes "Broadcast '"+@msg$+"'?";
+	mes "Diffuser '"+@msg$+"'?";
 	switch (select(
-		"- Cancel Broadcast",
-		"- Broadcast Message"
+		"- Annuler l'Annonce",
+		"- Diffuser l'Annonce"
 	)) {
 	case 2:
 		if (!(callfunc("F_keCharge",@cost,$@kebc_discount,1))) {
-			callfunc "F_keIntro", e_pif, "You don't have enough Zeny...";
+			callfunc "F_keIntro", e_pif, "Vous n'avez pas assez d'argent...";
 			return;
 		}
 
-		callfunc "F_keIntro", e_what, "Broadcasting...";
+		callfunc "F_keIntro", e_what, "Annonce en cours de diffusion...";
 		if (getarg(1)=="")
 			announce @msg$,16;
 		else
@@ -184,39 +186,39 @@ function	SF_doBroadcast {
 //Does the second part of PvP Room Advertising. Level is the level group to
 //advertise (1->8 where 8 is free for all)
 function	SF_bcPvp {
-	set @msg$, "advertising";
+	set @msg$, "tous niveaux";
 	set @lvls$, "";
 	if (getarg(3)) {
 		if (BaseLevel < getarg(2) || BaseLevel > getarg(3)) {
-			callfunc "F_keIntro", e_bzz, "You can only broadcast requests for PvP rooms you can enter!";
+			callfunc "F_keIntro", e_bzz, "Vous pouvez passer des Annonces uniquement pour les salles PvP que vous pouvez vous-même rejoindre!";
 			return;
 		}
-		set @msg$,"levels "+getarg(2)+"-"+getarg(3);
-		set @lvls$,"(levels "+getarg(2)+"-"+getarg(3)+") ";
+		set @msg$,"de Niveaux "+getarg(2)+" à "+getarg(3);
+		set @lvls$,"(de Niveaux "+getarg(2)+" à "+getarg(3)+") ";
 	}
 	set @pvpcost,getarg(0);
 	switch(select(
-		"- Cancel (PvP Rooms "+@msg$+")",
-		"- advertise 'Room Sandwich'",
-		"- advertise 'Room Rock On'",
-		"- advertise 'Four Room'",
-		"- advertise 'Room Undercross'",
-		"- advertise 'Room Compass'"
+		"- Annuler (PvP Rooms "+@msg$+")",
+		"- Arène Sandwich",
+		"- Arène Rock On",
+		"- Arène Four",
+		"- Arène Undercross",
+		"- Arène Compass"
 	)) {
 	case 2:	//Sandwich
-		SF_doBroadcast @pvpcost,@map$,"The "+jobname(class)+" "+strcharinfo(0)+" is looking for PvP challengers "+@lvls$+"in the 'Room Sandwich'!",0;
+		SF_doBroadcast @pvpcost,@map$,""+strcharinfo(0)+": "+jobname(class)+" cherche des adversaires "+@lvls$+" dans l'Arène Sandwich!",0;
 		break;
 	case 3:	//Rockon
-		SF_doBroadcast @pvpcost,@map$,"The "+jobname(class)+" "+strcharinfo(0)+" is looking for PvP challengers "+@lvls$+"in the 'Room Rock On'!",0;
+		SF_doBroadcast @pvpcost,@map$,""+strcharinfo(0)+": "+jobname(class)+" cherche des adversaires "+@lvls$+" dans l'Arène Rock On!",0;
 		break;
 	case 4:	//Room Four
-		SF_doBroadcast @pvpcost,@map$,"The "+jobname(class)+" "+strcharinfo(0)+" is looking for PvP challengers "+@lvls$+"in the 'Four Room'!",0;
+		SF_doBroadcast @pvpcost,@map$,""+strcharinfo(0)+": "+jobname(class)+" cherche des adversaires "+@lvls$+" dans l'Arène Four!",0;
 		break;
 	case 5:	//Undercross
-		SF_doBroadcast @pvpcost,@map$,"The "+jobname(class)+" "+strcharinfo(0)+" is looking for PvP challengers "+@lvls$+"in the 'Room Undercross'!",0;
+		SF_doBroadcast @pvpcost,@map$,""+strcharinfo(0)+": "+jobname(class)+" cherche des adversaires "+@lvls$+" dans l'Arène Undercross!",0;
 		break;
 	case 6:	//Compass
-		SF_doBroadcast @pvpcost,@map$,"The "+jobname(class)+" "+strcharinfo(0)+" is looking for PvP challengers "+@lvls$+"in the 'Room Compass'!",0;
+		SF_doBroadcast @pvpcost,@map$,""+strcharinfo(0)+": "+jobname(class)+" cherche des adversaires "+@lvls$+" dans l'Arène Compass!",0;
 		break;
 	}
 } //SF_ end

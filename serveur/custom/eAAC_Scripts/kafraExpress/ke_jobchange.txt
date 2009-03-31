@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= Kafra Express - Job Changing Module
 //===== By: ==================================================
@@ -64,7 +66,7 @@ function	script	F_keJobChange	{
 	return;
 L_FAIL:
 	//Dead End
-	callfunc "F_keIntro", e_swt2, "I cannot change you from your current job.";
+	callfunc "F_keIntro", e_swt2, "Je ne peux pas changer votre profession.";
 	return;
 
 //Handles changing to 1st job.
@@ -161,13 +163,13 @@ function SF_to2ndJob {
 
 			if (roclass(@classes[0]) == -1)
 			{	//Can't upgrade?
-				callfunc "F_keIntro", e_swt2, "I cant' change you from your current job.";
+				callfunc "F_keIntro", e_swt2, "Je ne peux pas changer votre profession.";
 				return;
 			}
 
 			SF_getJobNames 2;
 			set @submenu, select(
-				"- Cancel job change",
+				"- Annuler le changement de profession",
 				@names$[0],@names$[1]
 			);
 			if (@submenu > 1)
@@ -205,17 +207,17 @@ function SF_testChangeJob {
 		set @fail, @fail|4;	
 	if (@fail > 0) {
 		if (@fail&1)
-			mes "You need "+getarg(0)+"z for the conversion process.";
+			mes "Vous devez fournir "+getarg(0)+"z pour le changement de profession.";
 		if (@fail&2)
-			mes "You need to be at least Lv "+getarg(1)+".";
+			mes "Vous devez avoir atteint au minimum le Niveau de Base "+getarg(1)+".";
 		if (@fail&4)
-			mes "You need at least job Lv "+getarg(2)+".";
-		callfunc "F_keIntro", e_pif, "Sorry, you don't qualify for a job change yet.";
+			mes "Vous devez avoir atteint au minimum le Niveau de Job "+getarg(2)+".";
+		callfunc "F_keIntro", e_pif, "Désolée, vous n'êtes pas qualifié pour changer de profession.";
 		return 0;
 	}
 
 	if (SkillPoint > 0 && $@kejc_skillsPolicy == 0) {
-		callfunc "F_keIntro", e_dots, "Sorry, use your remaining Skill points before being able to change class.";
+		callfunc "F_keIntro", e_dots, "Désolée, veuillez utiliser vos Points de Compétences restants avant de changer de profession.";
 		return 0;
 	}
 	return 1;
@@ -243,60 +245,60 @@ function SF_changeJob {
 	set @resetLv,getarg(6);
 
 	if (roclass(@newjob) == -1) { //Invalid job?
-		callfunc "F_keIntro", -1, "I can't change you to this job...";
+		callfunc "F_keIntro", -1, "Je ne peux pas vous attribuer cette profession...";
 		return 0;
 	}
 
 	set @jobStr$, jobname(roclass(@newjob));
 	if (@wipeSkill == 0 && SkillPoint > 0 && $@kejc_skillsPolicy == 1) {
 		set @selection, select(
-			"- Do not change yet.",
-			"- Change to "+@jobStr$+" (skill points lost)",
-			"- View details"
+			"- Ne pas changer de profession.",
+			"- Devenir "+@jobStr$+" (points de compétences perdus)",
+			"- Voir les détails"
 		);
 	} else {
 		set @selection, select(
-			"- Cancel",
-			"- Change to "+@jobStr$,
-			"- View details"
+			"- Annuler",
+			"- Devenir "+@jobStr$,
+			"- Voir les détails"
 		);
 	}
 	switch (@selection) {
 		case 3: //Details
-			mes "Okay.. listen up:";
+			mes "Très bien... Voici tous les détails:";
 			next;
 			mes "["+@name$+"]";
-			mes "Changing to "+@jobStr$+" now means:";
+			mes "Si vous devenez "+@jobStr$+" cela signifie que:";
 			if (@wipeSkill == 0 && SkillPoint > 0 && $@kejc_skillsPolicy == 1)
-				mes "- You will lose your "+SkillPoint+" unused skill points.";
+				mes "- Vous perdrez vos "+SkillPoint+" Points de Compétences non utilisés.";
 			else if (@wipeSkill == 1)
-				mes "- You will lose all your skills.";
+				mes "- Vous perdrez toutes vos compétences.";
 			if (@resetLv)
-				mes "- Your base level will be reset to 1.";
+				mes "- Votre Niveau de Base reviendra à 1.";
 			if (@cost > 0)
-				mes "- You will be charged "+@cost+"z.";
+				mes "- Vous devrez payer "+@cost+" Zenys.";
 			else if (@cost < 0)
-				mes "- You will be awarded with "+(0-@cost)+"z.";
+				mes "- Vous recevrez "+(0-@cost)+" Zenys.";
 			if (@weapon > 0) {
 				if (@weapon2 > 0 && $@kejc_wBonusLv) {
 					if (JobLevel < $@kejc_wBonusLv) {
-						mes "- You will receive a "+getitemname(@weapon)+"["+getitemslots(@weapon)+"].";
-						mes "- If you wait until Job Lv"+$@kejc_wBonusLv+", you can receive instead a "+getitemname(@weapon2)+"["+getitemslots(@weapon2)+"].";
+						mes "- Vous recevrez l'objet: "+getitemname(@weapon)+"["+getitemslots(@weapon)+"].";
+						mes "- Si vous attendez le Niveau de Job "+$@kejc_wBonusLv+", vous recevrez à la place l'objet: "+getitemname(@weapon2)+"["+getitemslots(@weapon2)+"].";
 					} else {
-						mes "- You will receive a "+getitemname(@weapon2)+"["+getitemslots(@weapon2)+"] for reaching Job Lv"+$@kejc_wBonusLv+".";
+						mes "- Vous recevrez l'objet: "+getitemname(@weapon2)+"["+getitemslots(@weapon2)+"] pour avoir atteint le Niveau de Job "+$@kejc_wBonusLv+".";
 					}
 				} else
-					mes "- You will receive a "+getitemname(@weapon)+".";
+					mes "- Vous recevrez l'objet: "+getitemname(@weapon)+".";
 			}
-			mes "So... will you change?";
+			mes "Alors... souhaitez-vous changer de profession?";
 			if (select(
-				"- Cancel",
-				"- Change to "+@jobStr$
+				"- Annuler",
+				"- Devenir "+@jobStr$
 			) != 2) {
-				callfunc "F_keIntro", e_dots, "...alright.";
+				callfunc "F_keIntro", e_dots, "...très bien.";
 				return 0;
 			}
-			callfunc "F_keIntro", -1, "Enjoy your new Job.";
+			callfunc "F_keIntro", -1, "J'espère que vous apprécierez votre nouvelle profession.";
 		case 2: //Change
 			//Set/Unset job path variables as needed.
 			if($@kejc_upperPolicy) {
@@ -332,7 +334,7 @@ function SF_changeJob {
 			}
 			jobchange roclass(@newjob);
 			if ($@kejc_announce)
-				announce strcharinfo(0)+" has been promoted to "+@jobStr$+"!",8;
+				announce strcharinfo(0)+" est devenu "+@jobStr$+"!",8;
 			set Zeny,Zeny-@cost;
 			emotion e_grat;	
 			return 1;

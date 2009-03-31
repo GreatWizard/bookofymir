@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= Kafra Express - Refining Module
 //===== By: ==================================================
@@ -29,11 +31,11 @@ function SF_sellOres;
 
 	do {
 		set @kmenu, select(
-			"- Return",
-			"- Refine Equipment",
-			"- Repair Equipment",
-			"- Buy Ores",
-			"- Purify Ores"
+			"- Retour",
+			"- Raffiner un Equipement",
+			"- Réparer un Equipement",
+			"- Acheter des Minerais",
+			"- Raffiner des Minerais"
 		);
 		switch(@kmenu) {
 		case 2: //Refine
@@ -56,7 +58,7 @@ function SF_sellOres;
 function	SF_refine {
 	do {
 		set @part, select(
-			"- Cancel upgrading",
+			"- Annuler le raffinement",
 			"- "+getequipname(1),
 			"- "+getequipname(2),
 			"- "+getequipname(3),
@@ -72,13 +74,13 @@ function	SF_refine {
 		if (@part == 0)
 			break;
 		if (getequipisequiped(@part) == 0) {
-			callfunc "F_keIntro", e_swt, "There is nothing to refine there...";
+			callfunc "F_keIntro", e_swt, "Il n'y a rien à raffiner ici...";
 		} else
 		if(getequipisenableref(@part) == 0 && $@kerf_refineAll == 0) {
-			callfunc "F_keIntro", -1, "Sorry, this item cannot be refined.";
+			callfunc "F_keIntro", -1, "Désolée, mais cet objet ne peut pas être raffiné.";
 		} else
 		if(getequiprefinerycnt(@part) >= $@kerf_maxLv) {
-			callfunc "F_keIntro", -1, "This item cannot be refined further.";
+			callfunc "F_keIntro", -1, "Cet objet a atteint sa limite de raffinement.";
 			break;
 		} else {
 			switch (getequipweaponlv(@part))
@@ -109,31 +111,31 @@ function	SF_refine {
 				if ($@kerf_safe==0 && getequippercentrefinery(@part) < 100) {
 					if ($@kerf_showChance) {
 						if (select(
-							"- Return ("+(100-getequippercentrefinery(@part))+"% chance refine will fail)",
-							"- Refine (Need "+getitemname(@mat)+" and "+@cost+"z)") != 2)
+							"- Annuler ("+(100-getequippercentrefinery(@part))+"% chance que le raffinement échoue)",
+							"- Raffiner (Fournir "+getitemname(@mat)+" et "+@cost+" Zenys)") != 2)
 							break;
 					} else {
 						if (select(
-							"- Return (Upgrade not safe, item might break!)",
-							"- Refine (Need "+getitemname(@mat)+" and "+@cost+"z)") != 2)
+							"- Annuler (le raffinement peut casser votre objet!)",
+							"- Raffiner (Fournir "+getitemname(@mat)+" et "+@cost+" Zenys)") != 2)
 							break;
 					}
 				} else {
 					if (select(
-						"- Refine (Need "+getitemname(@mat)+" and "+@cost+"z)",
-						"- Cancel") != 1)
+						"- Raffiner (Fournir "+getitemname(@mat)+" et "+@cost+" Zenys)",
+						"- Annuler") != 1)
 						break;
 				}
 				if (getequiprefinerycnt(@part) >= $@kerf_maxLv) {
-					callfunc "F_keIntro", e_ok, "This item has reached it's maximum level.";
+					callfunc "F_keIntro", e_ok, "Cet objet a atteint sa limite de raffinement.";
 					break;
 				}
 				if (countitem(@mat) < 1) {
-					callfunc "F_keIntro", e_ag, "Sorry, you don't have the materials I need.";
+					callfunc "F_keIntro", e_ag, "Désolée, vous n'avez pas les matériaux requis.";
 					break;
 				}
 				if (!(callfunc("F_keCharge",@cost,$@kerf_discount,1))) {
-					callfunc "F_keIntro", e_ag, "Sorry, you don't have enough zeny.";
+					callfunc "F_keIntro", e_ag, "Désolée, vous n'avez pas assez d'argent.";
 					break;
 				}
 				delitem @mat,1;
@@ -142,7 +144,7 @@ function	SF_refine {
 					emotion e_rock;
 				} else {
 					failedrefitem @part;
-					callfunc "F_keIntro", e_swt, "...sorry.";
+					callfunc "F_keIntro", e_swt, "...désolée.";
 					break;
 				}
 			} while (1);
@@ -157,7 +159,7 @@ function	SF_repair {
 	do {
 		set @broken1,getbrokenid(1);
 		if(@broken1==NULL) {
-			callfunc "F_keIntro", -1, "You don't need anything repaired for now.";
+			callfunc "F_keIntro", -1, "Vous n'avez rien à réparer pour le moment.";
 			return;
 		}
 		set @broken2,getbrokenid(2);
@@ -171,9 +173,9 @@ function	SF_repair {
 		set @broken10,getbrokenid(10);
 
 		if ($@kerf_repairSteel)
-			set @str$,"- Cancel (Repairing costs "+@cost+"z and 1 "+getitemname(999);
+			set @str$,"- Annuler (la réparation nécessite "+@cost+" Zenys et 1 "+getitemname(999);
 		else
-			set @str$,"- Cancel (Repairing costs "+@cost+"z)";
+			set @str$,"- Annuler (la réparation nécessite "+@cost+" Zenys)";
 
 		set @idRepair, select(
 			@str$,
@@ -191,11 +193,11 @@ function	SF_repair {
 		set @idRepair, @idRepair-1;
 		if (@idRepair == 0) break;
 		if ($@kerf_repairSteel && countitem(999) < 1) {
-			callfunc "F_keIntro", e_ag, "Sorry, you don't have the materials I need.";
+			callfunc "F_keIntro", e_ag, "Désolée, vous n'avez pas les matériaux requis.";
 			return;
 		}
 		if (!(callfunc("F_keCharge", $@kerf_repairCost, $@kerf_repairDiscount,1))) {
-			callfunc "F_keIntro", e_ag, "Sorry, you don't have enough zeny.";
+			callfunc "F_keIntro", e_ag, "Désolée, vous n'avez pas assez d'argent.";
 			return;
 		}
 		if ($@kerf_repairSteel) delitem 999,1;
@@ -208,22 +210,22 @@ function	SF_repair {
 function SF_purify {
 	if ($@kerf_purifyAll) {
 		set @submenu, select (
-			"- Return",
-			"- Purify "+getitemname(984)+" (need 5 "+getitemname(756)+")",
-			"- Purify "+getitemname(985)+" (need 5 "+getitemname(757)+")",
-			"- Purify "+getitemname(998)+" (need 2 "+getitemname(1002)+")",
-			"- Temper "+getitemname(999)+" (need 5 "+getitemname(998)+", 1 "+getitemname(1003)+")",
-			"- Temper "+getitemname(994)+" (need 10 "+getitemname(990)+")",
-			"- Temper "+getitemname(995)+" (need 10 "+getitemname(991)+")",
-			"- Temper "+getitemname(996)+" (need 10 "+getitemname(992)+")",
-			"- Temper "+getitemname(997)+" (need 10 "+getitemname(993)+")",
-			"- Temper "+getitemname(1000)+" (need 10 "+getitemname(1001)+")"
+			"- Retour",
+			"- Purifier de l'"+getitemname(984)+" (nécessite 5 "+getitemname(756)+")",
+			"- Purifier de l'"+getitemname(985)+" (nécessite "+getitemname(757)+")",
+			"- Purifier de l'"+getitemname(998)+" (nécessite "+getitemname(1002)+")",
+			"- Forger un "+getitemname(999)+" (nécessite 5 "+getitemname(998)+", 1 "+getitemname(1003)+")",
+			"- Forger un "+getitemname(994)+" (nécessite 10 "+getitemname(990)+")",
+			"- Forger un "+getitemname(995)+" (nécessite 10 "+getitemname(991)+")",
+			"- Forger un "+getitemname(996)+" (nécessite 10 "+getitemname(992)+")",
+			"- Forger un "+getitemname(997)+" (nécessite 10 "+getitemname(993)+")",
+			"- Forger un "+getitemname(1000)+" (nécessite "+getitemname(1001)+")"
 		);
 	} else {
 		set @submenu, select(
-			"- Return",
-			"- Purify "+getitemname(984)+" (need 5 "+getitemname(756)+")",
-			"- Purify "+getitemname(985)+" (need 5 "+getitemname(757)+")"
+			"- Retour",
+			"- Purifier de l'"+getitemname(984)+" (nécessite 5 "+getitemname(756)+")",
+			"- Purifier de l'"+getitemname(985)+" (nécessite 5 "+getitemname(757)+")"
 		);
 	}
 	switch (@submenu) {
@@ -252,7 +254,7 @@ function SF_purify {
 		set @count,countitem(@rough1);
 		set @count2,countitem(@rough2);
 		if (@count < @qty || @count2 < @qty2) {
-			callfunc "F_keIntro", e_ag, "Sorry, you don't have the materials I need.";
+			callfunc "F_keIntro", e_ag, "Désolée, vous n'avez pas les matériaux requis.";
 			return;
 		}
 		set @count, @count/@qty;
@@ -291,7 +293,7 @@ function SF_purify {
 	}
 	set @count,countitem(@rough);
 	if (@count < @qty) {
-		callfunc "F_keIntro", e_ag, "Sorry, you don't have the materials I need.";
+		callfunc "F_keIntro", e_ag, "Désolée, vous n'avez pas les matériaux requis.";
 		return;
 	}
 	set @count, @count/@qty;
@@ -304,9 +306,9 @@ function SF_purify {
 function SF_sellOres {
 	do {
 		set @submenu, select(
-			"- Return",
-			"- Buy "+getitemname(1010)+" (200z each)",
-			"- Buy "+getitemname(1011)+" (1000z each)"
+			"- Retour",
+			"- Acheter du "+getitemname(1010)+" (200 Zenys pièce)",
+			"- Acheter de l'"+getitemname(1011)+" (1000 Zenys pièce)"
 		);
 		switch (@submenu) {
 		case 2: //Phracon
@@ -323,11 +325,11 @@ function SF_sellOres {
 		input @qty;
 		set @cost,@cost*@qty;
 		if (@qty < 1) {
-			callfunc "F_keIntro", e_pif, "That is NOT a valid quantity...";
+			callfunc "F_keIntro", e_pif, "Cette quantité n'est pas valide...";
 		} else if (@cost > Zeny) {
-			callfunc "F_keIntro", e_ag, "Sorry, you don't have enough zeny.";
+			callfunc "F_keIntro", e_ag, "Désolée, vous n'avez pas assez d'argent.";
 		} else if (@cost < 0) {
-			callfunc "F_keIntro", e_swt2, "Sorry, that's too much! Try buying less...";
+			callfunc "F_keIntro", e_swt2, "Désolée, cette quantité est trop importante! Essayez d'en acheter moins...";
 		} else {
 			set Zeny,Zeny-@cost;
 			getitem @mat,@qty;

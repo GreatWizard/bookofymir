@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script ======================================= 
 //= Kafra Express - Uncarder Module
 //===== By: ================================================== 
@@ -25,8 +27,8 @@ function SF_uncard;
 
 	do {
 		set @kmenu, select(
-			"- Return",
-			"- See Price Specifics",
+			"- Retour",
+			"- Voir le détail des Prix",
 			"- "+getequipname(1),
 			"- "+getequipname(2),
 			"- "+getequipname(3),
@@ -41,28 +43,28 @@ function SF_uncard;
 		if (@kmenu == 1)
 			return;
 		if (@kmenu == 2) {	//Details
-			mes "Okay, listen up...";
+			mes "Très bien, écoutez-moi bien...";
 			next;
 			mes "["+@name$+"]";
 			if ($@keuc_BaseCost)
-				mes "The base cost is of "+$@keuc_BaseCost+"z.";
-			mes "Each card to be removed incurs a cost of +"+$@keuc_CardCost+"z.";
-			mes "The refine level of the compounded equipment can incur an additional cost:";
-			mes "Armors: "+$@keuc_UpgradeCostA+"z per level.";
-			mes "Lv1 Weapons: "+$@keuc_UpgradeCostW1+"z per level.";
-			mes "Lv2 Weapons: "+$@keuc_UpgradeCostW2+"z per level.";
-			mes "Lv3 Weapons: "+$@keuc_UpgradeCostW3+"z per level.";
-			mes "Lv4 Weapons: "+$@keuc_UpgradeCostW4+"z per level.";
+				mes "Le prix de base est de "+$@keuc_BaseCost+" Zenys.";
+			mes "Chaque carte qui doit être enlevée ajoute un prix de +"+$@keuc_CardCost+" Zenys.";
+			mes "Le niveau de raffinage de l'équipement concerné peut entraîner une hausse du prix:";
+			mes "Armures: "+$@keuc_UpgradeCostA+" Zenys par niveau.";
+			mes "Armes de Niveau 1: "+$@keuc_UpgradeCostW1+" Zenys par niveau.";
+			mes "Armes de Niveau 2: "+$@keuc_UpgradeCostW2+" Zenys par niveau.";
+			mes "Armes de Niveau 3: "+$@keuc_UpgradeCostW3+" Zenys par niveau.";
+			mes "Armes de Niveau 4: "+$@keuc_UpgradeCostW4+" Zenys par niveau.";
 
 			if ($@keuc_Mat1 && $@keuc_Qty1) {
-				mes "The materials needed are:";
+				mes "Les matériaux requis sont:";
 				mes "- "+$@keuc_Qty1+" "+getitemname($@keuc_Mat1)+".";
 			}
 			if ($@keuc_Mat2 && $@keuc_Qty2)
 				mes "- "+$@keuc_Qty2+" "+getitemname($@keuc_Mat2)+".";
 			
 			if ($@keuc_Fail1Chance || $@keuc_Fail2Chance)
-				mes "There is a chance the process might fail and you'll lose your items.";
+				mes "Il y a un risque que le processus échoue et que vous perdiez tous vos objets.";
 
 			next;
 			callfunc "F_keIntro", -1, "";
@@ -78,7 +80,7 @@ function SF_uncard;
 function SF_uncard {
 	set @part, getarg(0);
 	if(getequipcardcnt(@part) == 0) {
-		callfunc "F_keIntro", e_ag, "There are no cards to remove there!";
+		callfunc "F_keIntro", e_ag, "Il n'y a pas de carte à retirer là dessus!";
 		return 0;
 	} 
 	set @cost, $@keuc_BaseCost;
@@ -107,9 +109,9 @@ function SF_uncard {
 	
 	if ($@keuc_Fail1Chance) {
 		set @failsave, select(
-			"- Cancel",
-			"- Remove cards ("+@price+"z, item gets priority)",
-			"- Remove cards ("+@price+"z, cards get priority)"
+			"- Annuler",
+			"- Retirer les cartes ("+@price+" Zenys, l'objet en priorité)",
+			"- Retirer les cartes ("+@price+" Zenys, les cartes en priorité)"
 		);
 	} else {
 		set @failsave, select(
@@ -123,12 +125,12 @@ function SF_uncard {
 
 	if (($@keuc_Mat1 && countitem($@keuc_Mat1) < $@keuc_Qty1)
 		|| ($@keuc_Mat2 && countitem($@keuc_Mat2) < $@keuc_Qty2)) {
-		callfunc "F_keIntro", e_pif, "You do not have all the materials I need...";
+		callfunc "F_keIntro", e_pif, "Vous n'avez pas tous les matériaux nécessaires...";
 		return 0;
 	}
 	
 	if (!(callfunc("F_keCharge",@cost,$@keuc_discount,1))) {
-		callfunc "F_keIntro", e_ag, "Sorry, you don't have enough zeny.";
+		callfunc "F_keIntro", e_ag, "Désolée, mais vous n'avez pas assez d'argent.";
 		return 0;
 	}
 	
@@ -153,12 +155,12 @@ function SF_uncard {
 	}
 	failedremovecards @part,@failtype;
 	if (@failtype == 1)
-		mes "The cards were lost...";
+		mes "Les cartes sont perdues...";
 	if (@failtype == 2)
-		mes "The item was lost...";
+		mes "L'équipement a été perdu...";
 	if (@failtype == 0)
-		mes "Lost the cards and item...";
-	callfunc "F_keIntro", e_swt, "...oops.";
+		mes "Les cartes et l'équipement ont été perdus...";
+	callfunc "F_keIntro", e_swt, "...oups.";
 	return 1;
 }
 

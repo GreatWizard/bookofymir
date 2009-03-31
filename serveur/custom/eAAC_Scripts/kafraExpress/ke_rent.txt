@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script ======================================= 
 //= Kafra Express - Rental Module
 //===== By: ================================================== 
@@ -27,22 +29,22 @@ function	script	F_keRent	{
 		set @falconCost,callfunc("F_keCost",$@kert_falconCost,100);
 		set @pecoCost,callfunc("F_keCost",$@kert_pecoCost,100);
 		set @kmenu, select (
-			"- Cancel",
-			"- Rent a Cart ("+@cartCost+"z)",
-			"- Rent a Falcon ("+@falconCost+"z)",
-			"- Rent a PecoPeco ("+@pecoCost+"z)"
+			"- Annuler",
+			"- Louer une Charrette ("+@cartCost+"z)",
+			"- Louer un Faucon ("+@falconCost+"z)",
+			"- Louer un PecoPeco ("+@pecoCost+"z)"
 		);
 	}
 	switch (@kmenu) {
 	case 2: //Cart
 		if (getskilllv("MC_PUSHCART")==0) {
-			callfunc "F_keIntro", -1, "Sorry, only those with the skill 'Pushcart' may rent a Cart.";
+			callfunc "F_keIntro", -1, "Désolée, vous devez avoir appris la compétence 'Pushcart' pour pouvoir louer une Charrette.";
 		} else 
 		if (checkcart()) {
-			callfunc "F_keIntro", -1, "You are already equipped.";
+			callfunc "F_keIntro", -1, "Vous possédez déjà une Charrette.";
 		} else
 		if (!(callfunc("F_keCharge",$@kert_cartCost,100,1))) {
-			callfunc "F_keIntro", e_an, "Sorry, but you don't have enough Zeny.";
+			callfunc "F_keIntro", e_an, "Désolée, mais vous n'avez pas assez d'argent.";
 		} else {
 			setcart;
 			emotion e_ok;
@@ -50,13 +52,13 @@ function	script	F_keRent	{
 		break;
 	case 3: //Falcon
 		if (getskilllv("HT_FALCON")==0) {
-			callfunc "F_keIntro", -1, "Sorry, only those with the skill 'Falcon Taming' may rent a Falcon.";
+			callfunc "F_keIntro", -1, "Désolée, vous devez avoir appris la compétence 'Falcon Taming' pour pouvoir louer un Faucon.";
 		} else
 		if (checkfalcon()) {
-			callfunc "F_keIntro", -1, "You are already equipped.";
+			callfunc "F_keIntro", -1, "Vous possédez déjà un Faucon.";
 		} else
 		if (!(callfunc("F_keCharge",$@kert_falconCost,100,1))) {
-			callfunc "F_keIntro", e_an, "Sorry, but you don't have enough Zeny.";
+			callfunc "F_keIntro", e_an, "Désolée, mais vous n'avez pas assez d'argent.";
 		} else {
 			setfalcon;
 			emotion e_ok;
@@ -64,13 +66,13 @@ function	script	F_keRent	{
 		break;
 	case 4: //pecopeco
 		if (getskilllv("KN_RIDING")==0) {
-			callfunc "F_keIntro", -1, "Sorry, only those with the skill 'PecoPeco Riding' may rent a PecoPeco.";
+			callfunc "F_keIntro", -1, "Désolée, vous devez avoir appris la compétence 'PecoPeco Riding' pour pouvoir louer un PecoPeco.";
 		} else
 		if (checkriding()) {
-			callfunc "F_keIntro", -1, "You are already equipped.";
+			callfunc "F_keIntro", -1, "Vous possédez déjà un PecoPeco.";
 		} else
 		if (!(callfunc("F_keCharge",$@kert_pecoCost,100,1))) {
-			callfunc "F_keIntro", e_an, "Sorry, but you don't have enough Zeny.";
+			callfunc "F_keIntro", e_an, "Désolée, mais vous n'avez pas assez d'argent.";
 		} else {
 			setriding;
 			emotion e_ok;

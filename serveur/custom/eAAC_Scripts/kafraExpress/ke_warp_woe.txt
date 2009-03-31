@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script ======================================= 
 //= Kafra Express - WoE Warping Module
 //===== By: ================================================== 
@@ -22,11 +24,11 @@ OnInit:	//Load Config
 
 function	script	F_keWarpWOE	{
 	if ($@kewg_check && getcharid(2) <= 0) {
-		callfunc "F_keIntro", e_srt, "Sorry, these warps are only available to people who belong to a Guild.";
+		callfunc "F_keIntro", e_srt, "Désolée, ces portails ne sont disponibles que pour les personnes qui font partie d'une Guilde.";
 		return;
 	}
 	if ($@kewg_checkAgit && agitcheck() == 0) {
-		callfunc "F_keIntro", e_srt, "Sorry, these warps are only enabled during the Guild Wars.";
+		callfunc "F_keIntro", e_srt, "Désolée, ces portails ne sont disponibles que durant les Guerres de l'Emperium.";
 		return;
 	}
 
@@ -36,31 +38,31 @@ function	script	F_keWarpWOE	{
 	do {
 		if ($@kewg_showOnline) {
 			set @kmenu, select(
-				"- Cancel",
-				"- Al De Baran Guild ("+($@kewg_alDeBaran*@cost/100)+"z/"+(getmapusers("alde_gld")
+				"- Annuler",
+				"- Châteaux d'Al De Baran ("+($@kewg_alDeBaran*@cost/100)+"z/"+(getmapusers("alde_gld")
 					+getmapusers("aldeg_cas01")+getmapusers("aldeg_cas02")+getmapusers("aldeg_cas03")
 					+getmapusers("aldeg_cas04")+getmapusers("aldeg_cas05"))+" "+$@ked_users$+")",
-				"- Geffen Guild ("+($@kewg_geffen*@cost/100)+"z/"+(getmapusers("gef_fild13")
+				"- Châteaux de Geffen ("+($@kewg_geffen*@cost/100)+"z/"+(getmapusers("gef_fild13")
 					+getmapusers("gefg_cas01")+getmapusers("gefg_cas02")+getmapusers("gefg_cas03")
 					+getmapusers("gefg_cas04")+getmapusers("gefg_cas05"))+" "+$@ked_users$+")",
-				"- Payon Guild ("+($@kewg_payon*@cost/100)+"z/"+(getmapusers("pay_gld")
+				"- Châteaux de Payon ("+($@kewg_payon*@cost/100)+"z/"+(getmapusers("pay_gld")
 					+getmapusers("payg_cas01")+getmapusers("payg_cas02")+getmapusers("payg_cas03")
 					+getmapusers("payg_cas04")+getmapusers("payg_cas05"))+" "+$@ked_users$+")",
-				"- Prontera Guild ("+($@kewg_prontera*@cost/100)+"z/"+(getmapusers("prt_gld")
+				"- Châteaux de Prontera ("+($@kewg_prontera*@cost/100)+"z/"+(getmapusers("prt_gld")
 					+getmapusers("prtg_cas01")+getmapusers("prtg_cas02")+getmapusers("prtg_cas03")
 					+getmapusers("prtg_cas04")+getmapusers("prtg_cas05"))+" "+$@ked_users$+")",
-//				"- Guild Dungeons ("+(getmapusers("gld_dun01")+getmapusers("gld_dun02")
+//				"- Donjons des Châteaux ("+(getmapusers("gld_dun01")+getmapusers("gld_dun02")
 //					+getmapusers("gld_dun03")+getmapusers("gld_dun04"))+" "+$@ked_users$+")",
-				"- See "+$@ked_users$+" distribution"
+				"- Voir la distribution des "+$@ked_users$+""
 			);
 		} else {
 			set @kmenu, select(
-				"- Cancel",
-				"- Al De Baran Guild ("+($@kewg_alDeBaran*@cost/100)+"z)",
-				"- Geffen Guild ("+($@kewg_geffen*@cost/100)+"z)",
-				"- Payon Guild ("+($@kewg_payon*@cost/100)+"z)",
-				"- Prontera Guild ("+($@kewg_prontera*@cost/100)+"z)"
-//				,"- Guild Dungeons"
+				"- Annuler",
+				"- Châteaux d'Al De Baran ("+($@kewg_alDeBaran*@cost/100)+"z)",
+				"- Châteaux de Geffen ("+($@kewg_geffen*@cost/100)+"z)",
+				"- Châteaux de Payon ("+($@kewg_payon*@cost/100)+"z)",
+				"- Châteaux de Prontera ("+($@kewg_prontera*@cost/100)+"z)"
+//				,"- Donjons des Châteaux"
 			);
 		}
 		switch (@kmenu) {
@@ -80,39 +82,39 @@ function	script	F_keWarpWOE	{
 			SF_dungeons();
 			break;
 		case 7: //Info
-			mes "The current distribution of "+$@ked_users$+" is as follows:";
+			mes "La distribution actuelle des "+$@ked_users$+" est celle-ci:";
 			next;
 			mes "[Al De Baran]";
-			mes "- Guild Grounds: "+getmapusers("alde_gld");
-			mes "- Castle 1 - Noisyubantian: "+getmapusers("aldeg_cas01");
-			mes "- Castle 2 - Hohensyubangawoo: "+getmapusers("aldeg_cas02");
-			mes "- Castle 3 - Nyirenverk: "+getmapusers("aldeg_cas03");
-			mes "- Castle 4 - Byirtsburi: "+getmapusers("aldeg_cas04");
-			mes "- Castle 5 - Rotenburk: "+getmapusers("aldeg_cas05");
+			mes "- Zone des Châteaux: "+getmapusers("alde_gld");
+			mes "- Château 1 - Noisyubantian: "+getmapusers("aldeg_cas01");
+			mes "- Château 2 - Hohensyubangawoo: "+getmapusers("aldeg_cas02");
+			mes "- Château 3 - Nyirenverk: "+getmapusers("aldeg_cas03");
+			mes "- Château 4 - Byirtsburi: "+getmapusers("aldeg_cas04");
+			mes "- Château 5 - Rotenburk: "+getmapusers("aldeg_cas05");
 			next;
 			mes "[Geffen]";
-			mes "- Guild Grounds: "+getmapusers("gef_fild13");
-			mes "- Castle 1 - Reprion: "+getmapusers("gefg_cas01");
-			mes "- Castle 2 - Yolbriger: "+getmapusers("gefg_cas02");
-			mes "- Castle 3 - Isinlife: "+getmapusers("gefg_cas03");
-			mes "- Castle 4 - Berigel: "+getmapusers("gefg_cas04");
-			mes "- Castle 5 - Melsedetsu: "+getmapusers("gefg_cas05");
+			mes "- Zone des Châteaux: "+getmapusers("gef_fild13");
+			mes "- Château 1 - Reprion: "+getmapusers("gefg_cas01");
+			mes "- Château 2 - Yolbriger: "+getmapusers("gefg_cas02");
+			mes "- Château 3 - Isinlife: "+getmapusers("gefg_cas03");
+			mes "- Château 4 - Berigel: "+getmapusers("gefg_cas04");
+			mes "- Château 5 - Melsedetsu: "+getmapusers("gefg_cas05");
 			next;
 			mes "[Payon]";
-			mes "- Guild Grounds: "+getmapusers("pay_gld");
-			mes "- Castle 1 - Mingting: "+getmapusers("payg_cas01");
-			mes "- Castle 2 - Tiantan: "+getmapusers("payg_cas02");
-			mes "- Castle 3 - Fuying: "+getmapusers("payg_cas03");
-			mes "- Castle 4 - Honglou: "+getmapusers("payg_cas04");
-			mes "- Castle 5 - Zhulinxian: "+getmapusers("payg_cas05");
+			mes "- Zone des Châteaux: "+getmapusers("pay_gld");
+			mes "- Château 1 - Mingting: "+getmapusers("payg_cas01");
+			mes "- Château 2 - Tiantan: "+getmapusers("payg_cas02");
+			mes "- Château 3 - Fuying: "+getmapusers("payg_cas03");
+			mes "- Château 4 - Honglou: "+getmapusers("payg_cas04");
+			mes "- Château 5 - Zhulinxian: "+getmapusers("payg_cas05");
 			next;
 			mes "[Prontera]";
-			mes "- Guild Grounds: "+getmapusers("prt_gld");
-			mes "- Castle 1 - Creamhilt: "+getmapusers("prtg_cas01");
-			mes "- Castle 2 - Sbanhealt: "+getmapusers("prtg_cas02");
-			mes "- Castle 3 - Lazrigees: "+getmapusers("prtg_cas03");
-			mes "- Castle 4 - Squagul: "+getmapusers("prtg_cas04");
-			mes "- Castle 5 - Guindull: "+getmapusers("prtg_cas05");
+			mes "- Zone des Châteaux: "+getmapusers("prt_gld");
+			mes "- Château 1 - Creamhilt: "+getmapusers("prtg_cas01");
+			mes "- Château 2 - Sbanhealt: "+getmapusers("prtg_cas02");
+			mes "- Château 3 - Lazrigees: "+getmapusers("prtg_cas03");
+			mes "- Château 4 - Squagul: "+getmapusers("prtg_cas04");
+			mes "- Château 5 - Guindull: "+getmapusers("prtg_cas05");
 			next;
 			callfunc "F_keIntro", -1, "";
 			break;
@@ -124,19 +126,19 @@ function SF_dungeons {
 	do {
 		if ($@kewg_showOnline) {
 			set @submenu, select(
-				"- Cancel",
-				"- Baldur Dungeon ("+($@kewg_baldur*@cost/100)+"z/"+getmapusers("gld_dun01")+" "+$@ked_users$+")",
-				"- Luina Dungeon ("+($@kewg_luina*@cost/100)+"z/"+getmapusers("gld_dun02")+" "+$@ked_users$+")",
-				"- Valkyrie Dungeon ("+($@kewg_valkyrie*@cost/100)+"z/"+getmapusers("gld_dun03")+" "+$@ked_users$+")",
-				"- Britoniah Dungeon ("+($@kewg_britoniah*@cost/100)+"z/"+getmapusers("gld_dun04")+" "+$@ked_users$+")"
+				"- Annuler",
+				"- Donjon de Baldur ("+($@kewg_baldur*@cost/100)+"z/"+getmapusers("gld_dun01")+" "+$@ked_users$+")",
+				"- Donjon de Luina ("+($@kewg_luina*@cost/100)+"z/"+getmapusers("gld_dun02")+" "+$@ked_users$+")",
+				"- Donjon de Valkyrie ("+($@kewg_valkyrie*@cost/100)+"z/"+getmapusers("gld_dun03")+" "+$@ked_users$+")",
+				"- Donjon de Britoniah ("+($@kewg_britoniah*@cost/100)+"z/"+getmapusers("gld_dun04")+" "+$@ked_users$+")"
 			);
 		} else {
 			set @submenu, select(
-				"- Cancel",
-				"- Baldur Dungeon ("+($@kewg_baldur*@cost/100)+"z)",
-				"- Luina Dungeon ("+($@kewg_luina*@cost/100)+"z)",
-				"- Valkyrie Dungeon ("+($@kewg_valkyrie*@cost/100)+"z)",
-				"- Britoniah Dungeon ("+($@kewg_britoniah*@cost/100)+"z)"
+				"- Annuler",
+				"- Donjon de Baldur ("+($@kewg_baldur*@cost/100)+"z)",
+				"- Donjon de Luina ("+($@kewg_luina*@cost/100)+"z)",
+				"- Donjon de Valkyrie ("+($@kewg_valkyrie*@cost/100)+"z)",
+				"- Donjon de Britoniah ("+($@kewg_britoniah*@cost/100)+"z)"
 			);
 	}
 	switch (@submenu) {

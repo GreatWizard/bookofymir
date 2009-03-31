@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= Kafra Expres - Stat/Skill Market Module
 //===== By: ==================================================
@@ -23,13 +25,13 @@ function	script	F_keStatMarket	{
 	set @discount,callfunc("F_keCost",100,$@kesm_discount);
 	do {
 		set @kmenu, select (
-			"- Return",
-			"- Buy Stat points ("+($@kesm_stBuyPrice*@discount/100)+"z each)",
-			"- Sell Stat points (up to "+StatusPoint+"/"+$@kesm_stSellPrice+"z each)",
-			"- Buy Skill points ("+($@kesm_skBuyPrice*@discount/100)+"z each)",
-			"- Sell Skill points (up to "+SkillPoint+"/"+$@kesm_skSellPrice+"z each)",
-			"- Trade Stats -> Skill ("+$@kesm_skTradePrice+" stats/skill)",
-			"- Trade Skills -> Stats ("+$@kesm_stTradePrice+" stats/skill)"
+			"- Retour",
+			"- Acheter un Point de Statistique ("+($@kesm_stBuyPrice*@discount/100)+"z/point)",
+			"- Vendre un Point de Statistique (jusqu'à "+StatusPoint+"/"+$@kesm_stSellPrice+"z/point)",
+			"- Acheter un Point de Compétence ("+($@kesm_skBuyPrice*@discount/100)+"z/point)",
+			"- Vendre un Point de Compétence (jusqu'à "+SkillPoint+"/"+$@kesm_skSellPrice+"z/point)",
+			"- Echanger des Stats contre des Compétences ("+$@kesm_skTradePrice+" stats/skill)",
+			"- Echanger des Compétences contre des Stats ("+$@kesm_stTradePrice+" stats/skill)"
 		);
 		if (@kmenu > 1)
 			input @qty;
@@ -70,23 +72,23 @@ function	script	F_keStatMarket	{
 		}
 		if (@qty < @min) {
 			if (@min == 1)
-				callfunc "F_keIntro", e_dots, "Was that supposed to be funny?";
+				callfunc "F_keIntro", e_dots, "C'est supposé me faire rire?";
 			else
-				callfunc "F_keIntro", e_dots, "That is not enough to buy a single skill...";
+				callfunc "F_keIntro", e_dots, "Ce n'est pas assez pour acheter un seul point de compétence...";
 		} else 
 		if (@qty > @max) {
 			if (@max == 9999)
-				callfunc "F_keIntro", e_X, "You can't buy that many!";
+				callfunc "F_keIntro", e_X, "Vous ne pouvez pas en acheter autant!";
 			else
-				callfunc "F_keIntro", e_X, "You don't have that many to sell...";
+				callfunc "F_keIntro", e_X, "Vous n'en avez pas assez pour vendre tout ça...";
 		} else
 		if (@cost < 0) {
-			callfunc "F_keIntro", e_swt2, "That is too much for a single transaction! Try a smaller quantity... please?";
+			callfunc "F_keIntro", e_swt2, "C'est beaucoup trop pour une seule transaction! Essayez d'entrer une quantité plus raisonnable...";
 		} else {
 			switch(@kmenu) {
 			case 2: //Buy Stat
 				if (!(callfunc("F_keCharge",@cost,$@kesm_discount,1))) {
-					callfunc "F_keIntro", e_X, "You do not have enough zeny to buy that many.";
+					callfunc "F_keIntro", e_X, "Vous n'avez pas assez d'argent pour acheter tout ça.";
 					break;
 				}
 				set StatusPoint,StatusPoint+@qty;
@@ -99,7 +101,7 @@ function	script	F_keStatMarket	{
 				break;
 			case 4: //Buy Skill
 				if (!(callfunc("F_keCharge",@cost,$@kesm_discount,1))) {
-					callfunc "F_keIntro", e_X, "You do not have enough zeny to buy that many.";
+					callfunc "F_keIntro", e_X, "Vous n'avez pas assez d'argent pour acheter tout ça.";
 					break;
 				}
 				set SkillPoint,SkillPoint+@qty;
