@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= Kafra Express - Stylist Module
 //===== By: ==================================================
@@ -42,21 +44,21 @@ function	script	F_keStylist	{
 	do {
 		if ($@kedy_enableHairstyle) {
 			set @kmenu, select(
-				"- Return",
-				"- Change hairstyle (current is "+getlook(1)+"/max is "+$@kedy_styles+")",
-				"- Change hairstyle (by wheel)",
-				"- Dye hair (current is "+getlook(6)+"/max is "+$@kedy_hair+")",
-				"- Dye hair (by wheel)",
-				"- Dye clothes (current is "+getlook(7)+"/max is "+@maxCDye+")",
-				"- Dye clothes (by wheel)"
+				"- Retour",
+				"- Choisir une de Coupe de Cheveux (actuellement n°"+getlook(1)+"/"+$@kedy_styles+")",
+				"- Parcourir les Coupes de Cheveux",
+				"- Choisir une Couleur de Cheveux (actuellement n°"+getlook(6)+"/"+$@kedy_hair+")",
+				"- Parcourir les Couleurs de Cheveux",
+				"- Choisir une Couleur de Vêtements (actuellement n°"+getlook(7)+"/"+@maxCDye+")",
+				"- Parcourir les Couleurs de Vêtements"
 			);
 		} else {
 			set @kmenu, select(
-				"- Return",
-				"- Dye hair (current is "+getlook(6)+"/max is "+$@kedy_hair+")",
-				"- Dye hair (by wheel)",
-				"- Dye clothes (current is "+getlook(7)+"/max is "+@maxCDye+")",
-				"- Dye clothes (by wheel)"
+				"- Retour",
+				"- Choisir une Couleur de Cheveux (actuellement n°"+getlook(6)+"/"+$@kedy_hair+")",
+				"- Parcourir les Couleurs de Cheveux",
+				"- Choisir une Couleur de Vêtements (actuellement n°"+getlook(7)+"/"+@maxCDye+")",
+				"- Parcourir les Couleurs de Vêtements"
 			);
 			if (@kmenu > 1)
 				set @kmenu, @kmenu+2;
@@ -89,7 +91,7 @@ function	script	F_keStylist	{
 function	SF_inputpalette {
 	input @pal;
 	if (@pal < 0 || @pal > getarg(1)) {
-		callfunc "F_keIntro", e_swt2, "Sorry, we do not have that dye available.";
+		callfunc "F_keIntro", e_swt2, "Désolée, cette couleur n'est pas disponible.";
 		return;
 	}
 	setlook getarg(0),@pal;
@@ -106,15 +108,15 @@ function	SF_wheelpalette {
 	do {
 		if (@dir > 0)
 			set @submenu, select(
-				"Next",
-				"Previous",
-				"Done (current is "+@pal+")"
+				"Suivant",
+				"Précédent",
+				"C'est parfait! (choix n°"+@pal+")"
 			);
 		else
 			set @submenu, select(
-				"Previous",
-				"Next",
-				"Done (current is "+@pal+")"
+				"Précédent",
+				"Suivant",
+				"C'est parfait! (choix n°"+@pal+")"
 			);
 		switch (@submenu) {
 		case 2: //Swap direction

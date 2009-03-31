@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= Kafra Express - Stat/Reset Module
 //===== By: ==================================================
@@ -26,11 +28,11 @@ function	script	F_keStats	{
 	set @discount,callfunc("F_keCost",100,$@kest_discount);
 	do {
 		set @kmenu, select(
-			"- Return",
-			"- Raise Stats",
-			"- Reset Stats ("+$@kest_stResetCost+"z+"+$@kest_BaseLvCost+"/blv)",
-			"- Reset Skills ("+$@kest_skResetCost+"z+"+$@kest_JobLvCost+"/jlv)",
-			"- Reset Both ("+$@kest_resetCost+"z+"+$@kest_BothLvCost+"/lv)"
+			"- Retour",
+			"- Augmenter les Stats",
+			"- Réinitialiser les Stats ("+$@kest_stResetCost+"z+"+$@kest_BaseLvCost+"/blv)",
+			"- Réinitialiser les Skills ("+$@kest_skResetCost+"z+"+$@kest_JobLvCost+"/jlv)",
+			"- Tout Réinitialiser ("+$@kest_resetCost+"z+"+$@kest_BothLvCost+"/lv)"
 		);
 		switch (@kmenu) {
 		case 2: //Stat raising
@@ -56,9 +58,9 @@ function	script	F_keStats	{
 			break;
 		}
 		if (@reset > 0) {
-			if (select("- Cancel","- Reset for "+(@cost*@discount/100)+"z") == 2) {
+			if (select("- Annuler","- Réinitialiser pour "+(@cost*@discount/100)+"z") == 2) {
 				if (!(callfunc("F_keCharge",@cost,$@kest_discount,1))) { 
-					callfunc "F_keIntro", e_an, "Sorry, you don't have enough Zeny.";
+					callfunc "F_keIntro", e_an, "Désolée, vous n'avez pas assez d'argent.";
 				} else {
 					if (@reset&1)
 						ResetStatus;
@@ -82,13 +84,13 @@ function	script	F_keStats	{
 function SF_statRaise {
 	do {
 		set @submenu, select(
-			"- Return",
-			"- Raise Strength",
-			"- Raise Agility",
-			"- Raise Vitality",
-			"- Raise Intelligence",
-			"- Raise Dexterity",
-			"- Raise Luck"
+			"- Retour",
+			"- Augmenter la Force",
+			"- Augmenter l'Agilité",
+			"- Augmenter la Vitalité",
+			"- Augmenter l'Intelligence",
+			"- Augmenter la Dextérité",
+			"- Augmenter la Chance"
 		);
 		switch (@submenu) {
 		case 2:
@@ -114,9 +116,9 @@ function SF_statRaise {
 		}
 		input @qty;
 		if (@qty <1) {
-			callfunc "F_keIntro", e_swt, "I don't lower stats, try resetting them.";
+			callfunc "F_keIntro", e_swt, "Je ne peux pas abaisser vos statistiques, essayez de les réinitialiser.";
 		} else if (@qty >100) {
-			callfunc "F_keIntro", e_swt2, "Sorry... I can only raise stats up to 100 at a time.";
+			callfunc "F_keIntro", e_swt2, "Désolée... Je ne peux pas augmenter les statistiques de plus de 100 à la fois.";
 		} else {
 			do {
 				statusup @stat;

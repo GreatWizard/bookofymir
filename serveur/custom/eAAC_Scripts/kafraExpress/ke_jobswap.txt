@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= Kafra Express - Job Swapping Module
 //===== By: ==================================================
@@ -45,9 +47,9 @@ function SF_getJobNames;
 	{	//Qualifies for Reverting
 		do {
 			set @revertmenu, select(
-				"- Return",
-				"- Return to previous class",
-				"- Change into another class"
+				"- Retour",
+				"- Retour à la profession précédente",
+				"- Changer de profession"
 			);
 			switch (@revertmenu) {
 			case 2:	//Revert
@@ -68,7 +70,7 @@ function SF_getJobNames;
 		return;
 	}
 
-	callfunc "F_keIntro", e_swt2, "There are no available jobs of your level.";
+	callfunc "F_keIntro", e_swt2, "Il n'existe pas de profession disponible à votre niveau.";
 	return;
 
 //SubFunction SF_canRevert, specifies if the character can revert to previous job.
@@ -170,7 +172,7 @@ function SF_switch {
 
 		do {
 			set @kmenu, select(
-				"- Cancel job change",
+				"- Annuler le changement de profession",
 				@names$[0], @names$[1], @names$[2], @names$[3],
 				@names$[4], @names$[5], @names$[6], @names$[7],
 				@names$[8], @names$[9], @names$[10], @names$[11],
@@ -253,13 +255,13 @@ function SF_calcSwapCost {
 //Checks if the player qualifies for job changing.
 function SF_testSwap {
 	if (JobLevel < getarg(0)) {
-		callfunc "F_keIntro", e_dots, "You need to be at least Job Lv "+getarg(0)+" before exchanging.";
+		callfunc "F_keIntro", e_dots, "Vous devez avoir atteint au minimum le Niveau de Job "+getarg(0)+".";
 		return 0;
 	}
 	
 	set @cost, callfunc("F_keCost",getarg(1),$@kejs_swapDiscount);
 	if (Zeny < @cost) {
-		callfunc "F_keIntro", e_dots, "You need "+@cost+"z to be able to change.";
+		callfunc "F_keIntro", e_dots, "Vous devez fournir "+@cost+" Zenys.";
 		return 0;
 	}
 	return 1;
@@ -275,7 +277,7 @@ function SF_swapJob {
 	set @preserve, getarg(2);
 
 	if (Class == @newjobId) {
-		callfunc "F_keIntro", e_meh, "Um... you are already that class!";
+		callfunc "F_keIntro", e_meh, "Hum... vous exercez déjà cette profession!";
 		return 0;
 	}
 
@@ -284,11 +286,11 @@ function SF_swapJob {
 	set @newjoblv, JobLevel*@preserve/100;
 	
 	if (@newjoblv > 1) {
-		if (select("- Cancel", "- Change to a Lv"+@newjoblv+" "+@newJob$+" ("+@cost+"z)") != 2)
+		if (select("- Annuler", "- Devenir un "+@newJob$+" de Niveau "+@newjoblv+" ("+@cost+" Zenys)") != 2)
 			return 0;
 	} else {
 		set @newjoblv,1;
-		if (select("- Cancel", "- Change to "+@newJob$+" ("+@cost+"z)") != 2)
+		if (select("- Annuler", "- Devenir un "+@newJob$+" ("+@cost+" Zenys)") != 2)
 			return 0;
 	}
 
@@ -296,7 +298,7 @@ function SF_swapJob {
 	set @skillpoint, skillpointcount() -JobLevel -@basic +@newjoblv;	//Preserve holds the final amount of SkillPoints you should have.
 
 	if (@skillpoint < 0) {
-		callfunc "F_keIntro", e_gasp, "You need "+(-@skillpoint)+" more skill points to change class!";
+		callfunc "F_keIntro", e_gasp, "Vous avez besoin de "+(-@skillpoint)+" Points de Compétence supplémentaires pour changer de profession!";
 		return 0;
 	}
 
@@ -312,7 +314,7 @@ function SF_swapJob {
 			set kej_prev_dye,getlook(7);
 	}
 	if ($@kejs_announce)
-		announce strcharinfo(0)+" has changed from "+@oldJob$+" to "+@newJob$+"...",16;
+		announce strcharinfo(0)+" a changé de profession, passant de "+@oldJob$+" à "+@newJob$+"...",16;
 		
 	if ($@kejs_resetDye)
 		setlook 7,0;
@@ -332,18 +334,18 @@ function SF_swapJob {
 //Reverts to the previous job.
 function SF_revertJob {
 	if (@thisJob == @prevJob) {
-		callfunc "F_keIntro", e_no, "Hmm... You can't go back, because your previous class is the same as your current one??";
+		callfunc "F_keIntro", e_no, "Hum... Vous ne pouvez pas revenir en arrière, car votre précédente profession est la même que votre profession actuelle.";
 		return 0;
 	}
 	set @newjob$, jobname(kej_prev_job);
 	
 	set @cost,callfunc("F_keCost",$@kejs_revertCost,$@kejs_revertDiscount);
 
-	if (select("- Cancel","- Return to a Lv"+kej_prev_joblv+" "+@newjob$+" ("+@cost+"z)") != 2)
+	if (select("- Annuler","- Redevenir un "+@newjob$+" de Niveau "+kej_prev_joblv+" ("+@cost+" Zenys)") != 2)
 		return 0;
 
 	if (!(callfunc("F_keCharge",$@kejs_revertCost,$@kejs_revertDiscount,1))) {
-		callfunc "F_keIntro", -1, "Sorry, you need "+@cost+"z before you can revert to a Lv"+kej_prev_joblv+" "+@newjob$+".";
+		callfunc "F_keIntro", -1, "Désolée, vous devez payer "+@cost+" Zenys avant de pouvoir devenir un "+@newjob$+" de Niveau "+kej_prev_joblv+".";
 		return 0;
 	}
 	set @thisJobId, Class;
@@ -376,7 +378,7 @@ function SF_revertJob {
 	sc_end -1;
 
 	if ($@kejs_announce)
-		announce strcharinfo(0)+" has changed from "+jobname(@thisJobId)+" to "+@newjob$+"...",16;
+		announce strcharinfo(0)+" a changé de profession, passant de "+jobname(@thisJobId)+" à "+@newjob$+"...",16;
 	return 1;
 }	
 

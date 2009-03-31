@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://bookofymir.free.fr/
+//traduit par Myllena
 //===== eAthena Script ======================================= 
 //= Kafra Express - Warping Town Module
 //===== By: ================================================== 
@@ -54,7 +56,7 @@ function	script	F_keWarpTown	{
 	do {
 		if ($@kewt_showOnline) {
 			set @kmenu, select(
-				"- Cancel",
+				"- Annuler",
 				"- Alberta ("+@cost+"z/"+(getmapusers("alberta")+getmapusers("alberta_in"))+" "+$@ked_users$+")",
 				"- Al De Baran ("+@cost+"z/"+(getmapusers("aldebaran")+getmapusers("aldeba_in"))+" "+$@ked_users$+")",
 				"- Amatsu ("+@cost+"z/"+(getmapusers("amatsu")+getmapusers("ama_in01")+getmapusers("ama_in02"))
@@ -92,7 +94,7 @@ function	script	F_keWarpTown	{
 			);
 		} else {
 			set @kmenu, select(
-				"- Cancel",
+				"- Annuler",
 				"- Alberta ("+@cost+"z)",
 				"- Al De Baran ("+@cost+"z)",
 				"- Amatsu ("+@cost+"z)",
@@ -186,7 +188,7 @@ function	script	F_keWarpTown	{
 			if (SF_check(0x10000)) {
 				if (nif_q_done != 1) {
 					mes "...?";
-					callfunc "F_keIntro", e_no, "For some reason I can't warp you there!";
+					callfunc "F_keIntro", e_no, "Je ne peux pas vous téléporter ici!";
 				} else
 					callfunc "F_keWarp",$@kewt_niflCost,$@kewd_discount,e_yawn,"niflheim",194,185;
 			}
@@ -220,7 +222,7 @@ function	script	F_keWarpTown	{
 //traveller's mode.
 function SF_check {
 	if ($@kewt_travel && !((kewt_travel|#kewt_travel)&getarg(0))) {
-		callfunc "F_keIntro", e_sry, "Sorry, but we can only warp you to towns you have saved in at least once.";
+		callfunc "F_keIntro", e_sry, "Désolée, mais je ne peux vous emmener dans une ville que vous n'avez pas déjà visitée.";
 		return 0;
 	}
 	return 1;
@@ -233,7 +235,7 @@ function SF_warp {
 	if (@cost > Zeny && $@kewt_free)
 		set @cost, Zeny;
 	if (!(callfunc("F_keCharge",@cost,getarg(1),1))) {
-		callfunc "F_keIntro", e_an, "You don't have enough Zeny...";
+		callfunc "F_keIntro", e_an, "Vous n'avez pas assez d'argent...";
 		return;
 	}
 	emotion getarg(2);
