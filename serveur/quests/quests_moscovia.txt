@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= Kisuka
 //===== Current Version: ===================================== 
-//= 1.1
+//= 1.2
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -15,6 +15,7 @@
 //===== Additional Comments: ================================= 
 //= 1.0 First version. [Kisuka]
 //= 1.1 Small fixes on The Moving Island. [Kisuka]
+//= 1.2 Fixed a "player not attached" error. [brianluau]
 //============================================================ 
 
 //============================================================================
@@ -3051,7 +3052,8 @@ mosk_fild01,86,104,3	script	Aged Stranger#npc	963,{
 		mes "only his own.-";
 		set mos_whale_edq,14;
 		close2;
-		donpcevent "#Island Control Tower::OnEnable";
+		sleep2 20000;
+		set mos_whale_edq,15;
 		end;
 	}
 	else if (mos_whale_edq == 14) {
@@ -3163,7 +3165,7 @@ mosk_fild01,86,104,3	script	Aged Stranger#npc	963,{
 			mes "in all Moscovia! Absolutely...";
 			next;
 			mes "[Aged Stranger]";
-			mes "Hm... If you grent my request, I";
+			mes "Hm... If you grant my request, I";
 			mes "will make this instrument for you.";
 			next;
 			mes "["+strcharinfo(0)+"]";
@@ -3538,7 +3540,7 @@ mosk_fild01,86,104,3	script	Aged Stranger#npc	963,{
 					next;
 					mes "[Aged Stranger]";
 					mes "You've done well. I don't need to";
-					mes "teach you any more. Your ability";
+					mes "teach you anymore. Your ability";
 					mes "will be improved with more practice.";
 					next;
 					mes "[Aged Stranger]";
@@ -3582,7 +3584,7 @@ mosk_fild01,86,104,3	script	Aged Stranger#npc	963,{
 					next;
 					mes "[Aged Stranger]";
 					mes "You've done well. I don't need to";
-					mes "teach you any more. Your ability";
+					mes "teach you anymore. Your ability";
 					mes "will be improved with more practice.";
 					next;
 					mes "[Aged Stranger]";
@@ -3654,7 +3656,7 @@ mosk_fild01,86,104,3	script	Aged Stranger#npc	963,{
 					next;
 					mes "[Aged Stranger]";
 					mes "You've done well. I don't need to";
-					mes "teach you any more. Your ability";
+					mes "teach you anymore. Your ability";
 					mes "will be improved with more practice.";
 					next;
 					mes "[Aged Stranger]";
@@ -3698,7 +3700,7 @@ mosk_fild01,86,104,3	script	Aged Stranger#npc	963,{
 					next;
 					mes "[Aged Stranger]";
 					mes "You've done well. I don't need to";
-					mes "teach you any more. Your ability";
+					mes "teach you anymore. Your ability";
 					mes "will be improved with more practice.";
 					next;
 					mes "[Aged Stranger]";
@@ -3813,7 +3815,7 @@ mosk_fild01,86,104,3	script	Aged Stranger#npc	963,{
 		mes "If you want, I can send you back";
 		mes "to the mainland. What'll it be?";
 		next;
-		switch(select("Look around.:Go back to the mainland.:Venture into the unkown.")) {
+		switch(select("Look around.:Go back to the mainland.:Venture into the unknown.")) {
 		case 1:
 			mes "[Aged Stranger]";
 			mes "Well, well... Do as you please.";
@@ -4011,7 +4013,7 @@ mosk_in,131,92,3	script	Csar Alexsay III#npc	965,{
 				delitem 7762,40;
 				mes "[Csar Alexsay III]";
 				mes "Good,";
-				mes "I won't doubt you any more.";
+				mes "I won't doubt you anymore.";
 				mes "Because you've proven yourself,";
 				mes "you can remain a free traveler.";
 				next;
@@ -4104,7 +4106,7 @@ mosk_in,131,92,3	script	Csar Alexsay III#npc	965,{
 		mes "in the name of the people.";
 		next;
 		mes "[Csar Alexsay III]";
-		mes "Here,take it.";
+		mes "Here, take it.";
 		mes "I give it as an atonement";
 		mes "to make my people happy.";
 		set mos_nowinter,21;
@@ -4260,7 +4262,7 @@ mosk_in,131,92,3	script	Csar Alexsay III#npc	965,{
 				next;
 				mes "[Csar Alexsay III]";
 				mes "Hm. This is also my first time";
-				mes "seeing this kind of muscial";
+				mes "seeing this kind of musical";
 				mes "instrument. So mysterious... Hey!";
 				mes "Can you play it?";
 				next;
@@ -4339,7 +4341,7 @@ mosk_in,131,92,3	script	Csar Alexsay III#npc	965,{
 			}else{
 				mes "[Csar Alexsay III]";
 				mes "What are you doing? Can you play it";
-				mes "without even holding the muscial instrument???";
+				mes "without even holding the musical instrument???";
 				next;
 				mes "[Csar Alexsay III]";
 				mes "Don't be impudent with me! Do it right!";
@@ -4480,7 +4482,7 @@ mosk_in,127,89,3	script	Prime Minister Dmitree#m	967,{
 		mes "[Prime Minister Dmitree]";
 		mes "You are in trouble if";
 		mes "you conspire against the Csar,";
-		mes "so, make your actions carefull,";
+		mes "so, make your actions carefully,";
 		mes "and if you want to clean yourself";
 		mes "from suspicion... do everything you";
 		mes "can to prove your innocence.";
@@ -4590,7 +4592,7 @@ mosk_in,127,89,3	script	Prime Minister Dmitree#m	967,{
 		else if (mos_whale_edq == 39) {
 			mes "[Prime Minister Dmitree]";
 			mes "I don't want to hear your terrible ";
-			mes "performance any more so, go out away.";
+			mes "performance anymore so, go out away.";
 			close;
 		}
 		else if (mos_whale_edq == 40) {
@@ -4884,28 +4886,6 @@ OnTimer300000:
 	end;
 }
 
-mosk_fild01,21,21,0	script	#Island Control Tower	-1,{
-OnInit:
-	disablenpc "#Island Control Tower";
-	stopnpctimer;
-	end;
-
-OnEnable:
-	enablenpc "#Island Control Tower";
-	initnpctimer;
-	end;
-
-OnDisable:	
-	disablenpc "#Island Control Tower";
-	stopnpctimer;
-	end;
-
-OnTimer20000:
-	set mos_whale_edq,15;
-	disablenpc "#Island Control Tower";
-	end;
-}
-
 //============================================================================
 // Help Mikhail
 //============================================================================
@@ -5041,7 +5021,7 @@ mosk_in,144,279,5	script	Gallina#mos	959,{
 	}else{
 		mes "[Gallina]";
 		mes "I'm always trying to prepare a new dish.";
-		mes "What do you think of 'the most spicy chilli hotcake in the world'?";
+		mes "What do you think of 'the most spicy chili hotcake in the world'?";
 		mes "I think that will be great!";
 		close;
 	}
@@ -5220,7 +5200,7 @@ mosk_in,148,274,1	script	Anna#mos	958,{
 				mes "But among our villagers, the lady of ^3131FFInn 'Sticky Herb Tree'^000000 has held Mikhail dear.";
 				next;
 				mes "[Anna]";
-				mes "I have no idea any more.";
+				mes "I have no idea anymore.";
 				next;
 				mes "- Anna sticks her tongue out. -";
 				next;
@@ -6096,7 +6076,7 @@ mosk_in,147,202,3	script	Victor#mos	968,{
 		mes "There's a large island near Moscovia. It takes so much time to reach there by a boat. So nobody wants to go there. ";
 		next;
 		mes "[Victor]";
-		mes "If you go deep into it's forest, you can find a swamp where sticky weeds are growing.";
+		mes "If you go deep into its forest, you can find a swamp where sticky weeds are growing.";
 		next;
 		mes "[Victor]";
 		mes "The way to go there is full of danger. Do think that a timid boy like Mikhail can go there?";
@@ -6123,7 +6103,7 @@ mosk_in,147,202,3	script	Victor#mos	968,{
 		mes "There's a large island near Moscovia. It takes so much time to reach there by a boat. So nobody wants to go there.";
 		next;
 		mes "[Victor]";
-		mes "If you go deep into it's forest, you can find a swamp where sticky weeds are growing.";
+		mes "If you go deep into its forest, you can find a swamp where sticky weeds are growing.";
 		next;
 		mes "[Victor]";
 		mes "You should bring ^3131FF'10 sticky herbs'^000000 and ^3131FF 1 medicine bowl^000000 to me.";
@@ -6211,7 +6191,7 @@ OnTouch:
 		mes "Oh, I got a good night's sleep. How long did I sleep?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Althought I was forced to stay here, it's true that it's got great facilities.";
+		mes "Although I was forced to stay here, it's true that it's got great facilities.";
 		mes "I feel refreshed.";
 		next;
 		mes "["+strcharinfo(0)+"]";
@@ -6238,9 +6218,9 @@ mosk_dun03,153,90,3	script	Bubbling Swamp#mos1	844,{
 	if (mos_swan == 10) {
 		mes "- You feel sticky just looking at this swamp. -";
 		next;
-		mes "- Gas bubbles are rising. The atomosphere here is pretty scary -";
+		mes "- Gas bubbles are rising. The atmosphere here is pretty scary -";
 		next;
-		mes "["+PcName+"]";
+		mes "["+strcharinfo(0)+"]";
 		mes "I don't see any traces of Mikhail. I think I should go back and check his house one more time.";
 		set mos_swan,11;
 		close;
@@ -6267,6 +6247,7 @@ mosk_dun03,153,90,3	script	Bubbling Swamp#mos1	844,{
 				close;
 			}else{
 				getitem 7763,1;
+				set mos_swan,mos_swan+1;
 				close;
 			}
 		}else{
@@ -6398,7 +6379,7 @@ mosk_in,211,259,5	script	Larissa#mos_01	960,{
 				switch(select("Caviar:Mushrooms:Honey:Strawberry jam:Sour cream")) {
 				case 1:
 					mes "[Larissa]";
-					mes "Ok. you want caviar. Forturnately, I still have a little left.";
+					mes "Ok. you want caviar. Fortunately, I still have a little left.";
 					mes "Hoohoo, this'll be luxurious..";
 					mes "Here we go. It's all done!";
 					delitem 7031,1;
@@ -6574,9 +6555,9 @@ mosk_fild01,113,108,3	script	Big Squirrel#mos	111,{
 		mes "- after using the kafra service -";
 		close;
 	}
-	mes "- It's an extroardinary big squirrel. -";
+	mes "- It's an extraordinary big squirrel. -";
 	next;
-	mes "- When the animal comes across you, it starts to sniffle and purse up it's lips. -";
+	mes "- When the animal comes across you, it starts to sniffle and purse up its lips. -";
 	next;
 	if (countitem(1026) > 19) {
 		switch(select("Give acorns to it.:Ignore it.:Ask about the squirrel.")) {
@@ -6896,9 +6877,9 @@ OnTouch:
 		mes "- after using the kafra service -";
 		close;
 	}
-	mes "- It's an extroardinary big squirrel. -";
+	mes "- It's an extraordinary big squirrel. -";
 	next;
-	mes "- When the animal comes across you, it starts to sniffle and purse up it's lips. -";
+	mes "- When the animal comes across you, it starts to sniffle and purse up its lips. -";
 	next;
 	if (countitem(1026) > 19) {
 		switch(select("Give acorns to it.:Ignore it.:Ask about the squirrel.")) {
@@ -7374,7 +7355,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "But, the problem is...";
 			next;
 			mes "[Baba Yaga, the Horrible]";
-			mes "I am not able to get the materials neccessary";
+			mes "I am not able to get the materials necessary";
 			mes "because I don't feel good.";
 			next;
 			mes "[Baba Yaga, the Horrible]";
@@ -7449,7 +7430,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "The problem is...";
 			next;
 			mes "[Baba Yaga, the Horrible]";
-			mes "I am not able to get the materials neccessary";
+			mes "I am not able to get the materials necessary";
 			mes "because I don't feel good.";
 			next;
 			mes "[Baba Yaga, the Horrible]";
@@ -7605,7 +7586,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 		next;
 		mes "[Baba Yaga, the Horrible]";
 		mes "Next is for";
-		mes "someting hot.";
+		mes "something hot.";
 		mes "1 Detonator";
 		mes "5 Red Blood,";
 		mes "and 10 Burning Hearts.";
@@ -7630,7 +7611,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "[Baba Yaga, the Horrible]";
 			mes "^ff000010 Fine Grit,";
 			mes "1 Detonator,";
-			mes "5 Boody Red,";
+			mes "5 Red Blood,";
 			mes "10 Burning Heart^000000 and,";
 			mes "a 1, 2, or 3 carat";
 			mes "^ff00001 Diamond^000000.";
@@ -7650,7 +7631,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "[Baba Yaga, the Horrible]";
 			mes "^ff000010 Fine Grit,";
 			mes "1 Detonator,";
-			mes "5 Bloody Red,";
+			mes "5 Red Blood,";
 			mes "10 Burning Heart^000000 and,";
 			mes "a 1, 2, or 3 carat";
 			mes "^ff0000Diamond^000000.";
@@ -7718,7 +7699,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "[Baba Yaga, the Horrible]";
 			mes "You can find a funny-shaped bottle";
 			mes "in the dragon's lair.";
-			mes "It's a gourd bottle, that can";
+			mes "It's a gourd bottle that can";
 			mes "contain people's speech.";
 			mes "I must have this.";
 			next;
@@ -7753,7 +7734,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "[Baba Yaga, the Horrible]";
 			mes "^ff000010 Fine Grit,";
 			mes "1 Detonator,";
-			mes "5 Boody Red";
+			mes "5 Red Blood";
 			mes "10 Burning Hearts^000000 and";
 			mes "a 1, 2, or 3 carat";
 			mes "^ff0000Diamond^000000.";
@@ -7815,12 +7796,12 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "Have you heard the story of";
 			mes "a dragon sleeping for a long time?";
 			mes "Next thing that I need is";
-			mes "somwthing from that dragon, kkkk.";
+			mes "something from that dragon, kkkk.";
 			next;
 			mes "[Baba Yaga, the Horrible]";
 			mes "You can find a funny-shaped bottle";
 			mes "in the dragon's lair.";
-			mes "It's a gourd bottle, that can";
+			mes "It's a gourd bottle that can";
 			mes "contain people's speech.";
 			mes "I must have this.";
 			next;
@@ -7854,7 +7835,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			mes "[Baba Yaga, the Horrible]";
 			mes "^ff000010 Fine Grit,";
 			mes "1 Detonator,";
-			mes "5 Boody Red,";
+			mes "5 Red Blood,";
 			mes "10 Burning Hearts^000000 and";
 			mes "a 1, 2, or 3 carat";
 			mes "^ff0000Diamond^000000.";
@@ -7904,7 +7885,7 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 			next;
 			mes "[Baba Yaga, the Horrible]";
 			mes "The next thing that we have to do";
-			mes "is to recieve sincere speechs from";
+			mes "is to receive sincere speeches from";
 			mes "people with this bottle.";
 			next;
 			mes "[Baba Yaga, the Horrible]";
@@ -8084,8 +8065,8 @@ mosk_in,215,46,5	script	Baba Yaga, the Horrible	970,{
 		mes "in the center of the town.";
 		next;
 		mes "[Baba Yaga, the Horrible]";
-		mes "If you do this, what the viallagers want";
-		mes "will be happeing,";
+		mes "If you do this, what the villagers want";
+		mes "will be happening,";
 		mes "forever.";
 		set mos_nowinter,19;
 		getitem 7765,1;
@@ -8143,7 +8124,7 @@ mosk_in,217,45,0	script	#book_russia	111,{
 		mes "has 2 features as follows.";
 		mes "First, it changes natural phenomenon.";
 		mes "Unlike the idea from foolish scholars,";
-		mes "this world is composed of invisable and precise orders.";
+		mes "this world is composed of invisible and precise orders.";
 		mes "The things that people call";
 		mes "miracles are made by stimulating";
 		mes "them or simply altering their arrangement.";
@@ -8151,7 +8132,7 @@ mosk_in,217,45,0	script	#book_russia	111,{
 		mes "changing are included in them and";
 		mes "they require a high level of comprehension.";
 		mes "The orders of this world are not simply aligned.";
-		mes "It is amost impossible to observe";
+		mes "It is almost impossible to observe";
 		mes "the smallest and detailed part of";
 		mes "them and completely understand their structure";
 		mes "However, it is not that difficult";
@@ -8244,7 +8225,7 @@ mosk_in,217,45,0	script	#book_russia	111,{
 			mes "has 2 features as follows.";
 			mes "First, it changes natural phenomenon.";
 			mes "Unlike the idea from foolish scholars,";
-			mes "this world is composed of invisable and precise orders.";
+			mes "this world is composed of invisible and precise orders.";
 			mes "The things that people call";
 			mes "miracles are made by stimulating";
 			mes "them or simply altering their arrangement.";
@@ -8252,7 +8233,7 @@ mosk_in,217,45,0	script	#book_russia	111,{
 			mes "changing are included in them and";
 			mes "they require a high level of comprehension.";
 			mes "The orders of this world are not simply aligned.";
-			mes "It is amost impossible to observe";
+			mes "It is almost impossible to observe";
 			mes "the smallest and detailed part of";
 			mes "them and completely understand their structure";
 			mes "However, it is not that difficult";
@@ -8690,7 +8671,7 @@ mosk_in,221,43,0	script	#bowl	111,{
 						break;
 					case 4:
 						if (.@nankai == 8) {
-							mes "-I put the Boody Red in the pot.-";
+							mes "-I put the Red Blood in the pot.-";
 							mes "The smell has been changed a little.-";
 							specialeffect EF_SMOKE;
 							set .@maho,.@maho+1;
@@ -8698,7 +8679,7 @@ mosk_in,221,43,0	script	#bowl	111,{
 							next;
 						}else{
 							specialeffect EF_POISONHIT;
-							mes "-I put the Boody Red in the pot.";
+							mes "-I put the Red Blood in the pot.";
 							mes "The smell gets worse.-";
 							set .@nankai,.@nankai+1;
 							next;
@@ -8744,7 +8725,7 @@ mosk_in,221,43,0	script	#bowl	111,{
 						next;
 						break;
 					case 4:
-						mes "-I put the Boody Red in the pot.";
+						mes "-I put the Red Blood in the pot.";
 						mes "The smell gets worse.-";
 						specialeffect EF_POISONHIT;
 						set .@nankai,.@nankai+1;
@@ -8771,7 +8752,7 @@ mosk_in,221,43,0	script	#bowl	111,{
 			case 2:
 				set .@nankai,.@nankai+1;
 				mes "-I pour water in the pot a little.";
-				mes "The smell gest better.-";
+				mes "The smell gets better.-";
 				next;
 				break;
 			case 3:
@@ -9668,7 +9649,7 @@ mosk_in,131,92,3	script	#Csar	-1,7,7,{
 		next;
 		if (countitem(7762) > 39) {
 			if(select("Montrer les pilons de Baba Yaga.:Ne rien faire.") == 1) {
-				mes "[" + PcName + "]";
+				mes "["+strcharinfo(0)+"]";
 				mes "Le voici!";
 				next;
 				mes "-Vous lui donnez les pilons de Baba Yaga.-";
