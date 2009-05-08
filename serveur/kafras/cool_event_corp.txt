@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= Gepard
 //===== Current Version: ===================================== 
-//= 1.4
+//= 1.5
 //===== Compatible With: ===================================== 
 //= eAthena
 //===== Description: ========================================= 
@@ -19,83 +19,68 @@
 //= 1.3 Added cutins, closed Kafra Password exploit
 //=	until we got a client/packet based password support [Lupus]
 //= 1.4 Added Veins Cool Event Corp. Staff. [L0ne_W0lf]
+//= 1.5 Cool Event Corp staff is now more iRO like. [L0ne_W0lf]
 //============================================================ 
 
 hugel,88,168,4	script	Cool Event Corp.::CoolEventCorpStaffHugel	874,{
-
 	cutin "zonda_01",2;
 	mes "[Cool Event Corp.]";
 	mes "Bienvenue à la Cool Event Corp.";
 	mes "Notre équipe se surpasse sans cesse pour vous fournir un service de qualité!";
 	mes "Que puis-je pour vous aujourd'hui?";
 	next;
-
 	switch(select("Sauvegarder:Ouvrir mon Stock:Louer une Charrette:Mot de Passe du Stock:Annuler")){
 	case 1:
 		mes "[Cool Event Corp.]";
 		mes "Votre Point de Sauvegarde a été enregistré ici, dans le village d'Hugel.";
 		mes "Merci d'avoir utilisé les Services de la Cool Event Corp~";
-		emotion e_thx;
 		savepoint "hugel",96,155;
 		close2;
-		cutin "", 255;
-		end;
+		break;
 	case 2:
 		mes "[Cool Event Corp.]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Je suis désolée, mais vous devez être un Novice de Niveau de Job 6 au minimum pour pouvoir consulter votre stock.";
-			emotion e_sry;
+			mes "Je suis désolé, mais vous devez être un Novice de Niveau de Job 6 au minimum pour pouvoir consulter votre stock.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(Zeny < 40){
-			mes "Je suis désolée, mais vous n'avez pas assez d'argent pour utiliser le service de Stockage.";
+			mes "Je suis désolé, mais vous n'avez pas assez d'argent pour utiliser le service de Stockage.";
 			mes "Le prix d'accès au Stock est de 40 Zenys.";
-			emotion e_cash;
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		set Zeny, Zeny - 40;
-		set RESRVPTS, RESRVPTS + 4;
 		mes "Voici votre Stock personnel.";
 		mes "Merci d'avoir utilisé les services de la Cool Event Corp.";
 		mes "Nous espérons vous revoir très bientôt. Bonne journée~";
-
 		callfunc("F_CheckKafCode");	//check your storage password, if set
 		close2;
 		openstorage;
-		cutin "", 255;
-		end;
+		break;
 
 	case 3:
 		mes "[Cool Event Corp.]";
 		if(BaseClass != Job_Merchant){
-			mes "Je suis désolée, mais la location de Charrettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
-			emotion e_sry;
+			mes "Je suis désolé, mais la location de Charrettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Je suis désolée, mais il vous faut apprendre la compétence Pushcart afin de pouvoir louer une Charrette.";
+			mes "Je suis désolé, mais il vous faut apprendre la compétence Pushcart afin de pouvoir louer une Charrette.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(checkcart() == 1){
-			mes "Désolée... Mais vous avez déjà une Charrette....";
+			mes "Désolé... Mais vous avez déjà une Charrette....";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(countitem(7061)){
 			delitem 7061,1;
 			setcart;
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		mes "La location de Charrette coûte 800 Zenys.";
 		mes "Acceptez-vous ce tarif?";
@@ -103,23 +88,14 @@ hugel,88,168,4	script	Cool Event Corp.::CoolEventCorpStaffHugel	874,{
 		if(select("Oui, merci.:Non.") == 1){
 			if(Zeny < 800){
 				mes "[Cool Event Corp.]";
-				mes "Je suis désolée, mais vous n'avez pas assez d'argent pour payer les 800 Zenys nécessaires à la location d'une Charrette.";
-				emotion e_cash;
-				close2;
-				cutin "", 255;
-				end;
+				mes "Je suis désolé, mais vous n'avez pas assez d'argent pour payer les 800 Zenys nécessaires à la location d'une Charrette.";
 			} else {
 				set Zeny, Zeny - 800;
-				set RESRVPTS, RESRVPTS + 80;
 				setcart;
-				close2;
-				cutin "", 255;
-				end;
 			}
 		}
 		close2;
-		cutin "", 255;
-		end;
+		break;
 	case 4:
 		callfunc("F_SetKafCode","[Cool Event Corp.]","Cool Event Corp.");
 		//the function closes msg and remoes cutins
@@ -129,84 +105,91 @@ hugel,88,168,4	script	Cool Event Corp.::CoolEventCorpStaffHugel	874,{
 		mes "La Cool Event Corp. se donne toujours au maximum pour vous offrir les meilleurs services.";
 		mes "Aidez-vous à nous améliorer en nous faisant part de vos opinions et suggestions. Merci.";
 		close2;
-		cutin "", 255;
-		end;
 	}
+	cutin "", 255;
+	end;
 }
 
 rachel,109,138,5	script	Cool Event Corp.::CoolEventCorpStaffRachel	874,{
-
 	cutin "zonda_01",2;
 	mes "[Cool Event Corp.]";
 	mes "Bienvenue à la Cool Event Corp.";
 	mes "Notre équipe se surpasse sans cesse pour vous fournir un service de qualité!";
 	mes "Que puis-je pour vous aujourd'hui?";
 	next;
-
 	switch(select("Sauvegarder:Ouvrir mon Stock:Louer une Charrette:Mot de Passe du Stock:Annuler")){
 	case 1:
 		mes "[Cool Event Corp.]";
 		mes "Votre Point de Sauvegarde a été enregistré ici, dans la ville de Rachel.";
 		mes "Merci d'avoir utilisé les Services de la Cool Event Corp~";
-		emotion e_thx;
 		savepoint "rachel",113,137;
 		close2;
-		cutin "", 255;
-		end;
+		break;
 	case 2:
 		mes "[Cool Event Corp.]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Je suis désolée, mais vous devez être un Novice de Niveau de Job 6 au minimum pour pouvoir consulter votre stock.";
-			emotion e_sry;
+			mes "Je suis désolé, mais vous devez être un Novice de Niveau de Job 6 au minimum pour pouvoir consulter votre stock.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(Zeny < 40){
-			mes "Je suis désolée, mais vous n'avez pas assez d'argent pour utiliser le service de Stockage.";
+			mes "Je suis désolé, mais vous n'avez pas assez d'argent pour utiliser le service de Stockage.";
 			mes "Le prix d'accès au Stock est de 40 Zenys.";
-			emotion e_cash;
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
-		set Zeny, Zeny - 40;
-		set RESRVPTS, RESRVPTS + 4;
 		mes "Voici votre Stock personnel.";
 		mes "Merci d'avoir utilisé les services de la Cool Event Corp.";
 		mes "Nous espérons vous revoir très bientôt. Bonne journée~";
 		callfunc("F_CheckKafCode");	//check your storage password, if set
 		close2;
 		openstorage;
-		cutin "", 255;
-		end;
+		break;
 	case 3:
+		mes "Veuillez choisir votre destination.";
+		next;
+		if (select("Veins -> 2200 z:Annuler") == 1) {
+			if ((countitem(7060) != 0) || (Zeny >= 2200)) {
+				if (countitem(7060) != 0) {
+					delitem 7060,1;
+				}
+				else {
+					set Zeny,Zeny-2200;
+				}
+				warp "veins",205,101;
+				cutin "",255;
+				end;
+			}
+			else {
+				mes "[Cool Event Corp.]";
+				mes "Je suis désolé, mais vous n'avez pas assez d'argent pour utiliser le service de Teleport.";
+				mes "Le prix pour se téléporter à Rachel est de 2200 Zenys";
+			}
+		}
+		close2;
+		break;
+	case 4:
 		mes "[Cool Event Corp.]";
 		if(BaseClass != Job_Merchant){
-			mes "Je suis désolée, mais la location de Charrettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
-			emotion e_sry;
+			mes "Je suis désolé, mais la location de Charrettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Je suis désolée, mais il vous faut apprendre la compétence Pushcart afin de pouvoir louer une Charrette.";
+			mes "Je suis désolé, mais il vous faut apprendre la compétence Pushcart afin de pouvoir louer une Charrette.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(checkcart() == 1){
-			mes "Désolée... Mais vous avez déjà une Charrette....";
+			mes "Désolé... Mais vous avez déjà une Charrette....";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(countitem(7061)){
 			delitem 7061,1;
 			setcart;
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		mes "La location de Charrette coûte 800 Zenys.";
 		mes "Acceptez-vous ce tarif?";
@@ -214,110 +197,109 @@ rachel,109,138,5	script	Cool Event Corp.::CoolEventCorpStaffRachel	874,{
 		if(select("Oui, merci.:Non.") == 1){
 			if(Zeny < 800){
 				mes "[Cool Event Corp.]";
-				mes "Je suis désolée, mais vous n'avez pas assez d'argent pour payer les 800 Zenys nécessaires à la location d'une Charrette.";
-				emotion e_cash;
-				close2;
-				cutin "", 255;
-				end;
+				mes "Je suis désolé, mais vous n'avez pas assez d'argent pour payer les 800 Zenys nécessaires à la location d'une Charrette.";
 			} else {
 				set Zeny, Zeny - 800;
-				set RESRVPTS, RESRVPTS + 80;
 				setcart;
-				close2;
-				cutin "", 255;
-				end;
 			}
 		}
 		close2;
-		cutin "", 255;
-		end;
-	case 4:
+		break;
+	case 5:
 		callfunc("F_SetKafCode","[Cool Event Corp.]","Cool Event Corp.");
 		//the function closes msg and remoes cutins
-	case 5:
+	case 6:
 	default:
 		mes "[Cool Event Corp.]";
 		mes "La Cool Event Corp. se donne toujours au maximum pour vous offrir les meilleurs services.";
 		mes "Aidez-vous à nous améliorer en nous faisant part de vos opinions et suggestions. Merci.";
 		close2;
-		cutin "", 255;
-		end;
 	}
+	cutin "", 255;
+	end;
 }
 
 veins,208,128,5	script	Cool Event Corp.::CoolEventCorpStaffVeins	874,{
-
 	cutin "zonda_01",2;
 	mes "[Cool Event Corp.]";
 	mes "Bienvenue à la Cool Event Corp.";
 	mes "Notre équipe se surpasse sans cesse pour vous fournir un service de qualité!";
 	mes "Que puis-je pour vous aujourd'hui?";
 	next;
-
 	switch(select("Sauvegarder:Ouvrir mon Stock:Louer une Charrette:Mot de Passe du Stock:Annuler")){
 	case 1:
 		mes "[Cool Event Corp.]";
 		mes "Votre Point de Sauvegarde a été enregistré ici, dans le village de Veins.";
 		mes "Merci d'avoir utilisé les Services de la Cool Event Corp~";
-		emotion e_thx;
 		savepoint "veins",204,103;
 		close2;
-		cutin "", 255;
-		end;
+		break;
 	case 2:
 		mes "[Cool Event Corp.]";
 		if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-			mes "Je suis désolée, mais vous devez être un Novice de Niveau de Job 6 au minimum pour pouvoir consulter votre stock.";
-			emotion e_sry;
+			mes "Je suis désolé, mais vous devez être un Novice de Niveau de Job 6 au minimum pour pouvoir consulter votre stock.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(Zeny < 40){
-			mes "Je suis désolée, mais vous n'avez pas assez d'argent pour utiliser le service de Stockage.";
+			mes "Je suis désolé, mais vous n'avez pas assez d'argent pour utiliser le service de Stockage.";
 			mes "Le prix d'accès au Stock est de 40 Zenys.";
-			emotion e_cash;
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		set Zeny, Zeny - 40;
-		set RESRVPTS, RESRVPTS + 4;
 		mes "Voici votre Stock personnel.";
 		mes "Merci d'avoir utilisé les services de la Cool Event Corp.";
 		mes "Nous espérons vous revoir très bientôt. Bonne journée~";
 		callfunc("F_CheckKafCode");	//check your storage password, if set
 		close2;
 		openstorage;
-		cutin "", 255;
-		end;
+		break;
 	case 3:
+		mes "Veuillez choisir votre destination.";
+		next;
+		if (select("Rachel -> 2200 z:Annuler") == 1) {
+			if ((countitem(7060) != 0) || (Zeny >= 2200)) {
+				if (countitem(7060) != 0) {
+					delitem 7060,1;
+				}
+				else {
+					set Zeny,Zeny-2200;
+				}
+				warp "rachel",115,125;
+				cutin "",255;
+				end;
+			}
+			else {
+				mes "[Cool Event Corp.]";
+				mes "Je suis désolé, mais vous n'avez pas assez d'argent pour utiliser le service de Teleport.";
+				mes "Le prix pour se téléporter à Rachel est de 2200 Zenys";
+			}
+		}
+		close2;
+		break;
+	case 4:
 		mes "[Cool Event Corp.]";
 		if(BaseClass != Job_Merchant){
-			mes "Je suis désolée, mais la location de Charrettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
-			emotion e_sry;
+			mes "Je suis désolé, mais la location de Charrettes n'est proposée qu'aux Marchands, Forgerons et Alchimistes.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "Je suis désolée, mais il vous faut apprendre la compétence Pushcart afin de pouvoir louer une Charrette.";
+			mes "Je suis désolé, mais il vous faut apprendre la compétence Pushcart afin de pouvoir louer une Charrette.";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(checkcart() == 1){
-			mes "Désolée... Mais vous avez déjà une Charrette....";
+			mes "Désolé... Mais vous avez déjà une Charrette....";
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		if(countitem(7061)){
 			delitem 7061,1;
 			setcart;
 			close2;
-			cutin "", 255;
-			end;
+			break;
 		}
 		mes "La location de Charrette coûte 800 Zenys.";
 		mes "Acceptez-vous ce tarif?";
@@ -325,33 +307,24 @@ veins,208,128,5	script	Cool Event Corp.::CoolEventCorpStaffVeins	874,{
 		if(select("Oui, merci.:Non.") == 1){
 			if(Zeny < 800){
 				mes "[Cool Event Corp.]";
-				mes "Je suis désolée, mais vous n'avez pas assez d'argent pour payer les 800 Zenys nécessaires à la location d'une Charrette.";
-				emotion e_cash;
+				mes "Je suis désolé, mais vous n'avez pas assez d'argent pour payer les 800 Zenys nécessaires à la location d'une Charrette.";
 				close2;
-				cutin "", 255;
-				end;
 			} else {
 				set Zeny, Zeny - 800;
-				set RESRVPTS, RESRVPTS + 80;
-				setcart;
-				close2;
-				cutin "", 255;
-				end;
 			}
 		}
 		close2;
-		cutin "", 255;
-		end;
-	case 4:
+		break;
+	case 5:
 		callfunc("F_SetKafCode","[Cool Event Corp.]","Cool Event Corp.");
 		//the function closes msg and remoes cutins
-	case 5:
+	case 6:
 	default:
 		mes "[Cool Event Corp.]";
 		mes "La Cool Event Corp. se donne toujours au maximum pour vous offrir les meilleurs services.";
 		mes "Aidez-vous à nous améliorer en nous faisant part de vos opinions et suggestions. Merci.";
 		close2;
-		cutin "", 255;
-		end;
 	}
+	cutin "", 255;
+	end;
 }
