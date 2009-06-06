@@ -1,3 +1,5 @@
+//= Le Livre d'Ymir http://www.bookofymir.net/
+//= traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Mercenary related NPCs
 //===== By: ================================================== 
@@ -16,23 +18,18 @@
 //= 1.2 Removed redundent input. [L0ne_W0lf]
 //============================================================ 
 
-prontera,41,337,5	script	Mercenary Manager#Spear	105,{
+prontera,41,337,5	script	Loueur de Mercenaires::Mercenary Manager#Spear	105,{
 	set .@faith_lancer, mercenary_get_faith(SPEAR_MERC_GUILD);
-	mes "[Mercenary Manager]";
-	mes "Welcome to the";
-	mes "Spear Mercenary Guild.";
-	mes "What can I do for you?";
+	mes "[Loueur de Mercenaires]";
+	mes "Bienvenue à la Guilde des Lanciers Mercenaires. Que puis-je faire pour vous?";
 	next;
-	switch( select("Hire Mercenary:Mercenary Info:Nothing:10th Grade Mercenaries") )
+	switch( select("Embaucher un mercenaire:Informations sur les mercenaires:Rien:Mercenaires de Rang 10") )
 	{
 	case 1:
-		mes "[Mercenary Manager]";
-		mes "You want to hire a";
-		mes "Spear Mercenary?";
-		mes "Which Grade were you";
-		mes "interested in hiring?";
+		mes "[Loueur de Mercenaires]";
+		mes "Vous voulez louer un Lancier Mercenaire? Quel rang vous intéresse?";
 		next;
-		set .@Grade, select("1st Grade Spear Mercenary:2nd Grade Spear Mercenary:3rd Grade Spear Mercenary:4th Grade Spear Mercenary:5th Grade Spear Mercenary:6th Grade Spear Mercenary:7th Grade Spear Mercenary:8th Grade Spear Mercenary:9th Grade Spear Mercenary");
+		set .@Grade, select("Mercenaire de Rang 1:Mercenaire de Rang 2:Mercenaire de Rang 3:Mercenaire de Rang 4:Mercenaire de Rang 5:Mercenaire de Rang 6:Mercenaire de Rang 7:Mercenaire de Rang 8:Mercenaire de Rang 9");
 		set .@BaseLevel, 5 + (.@Grade * 10);
 		if( .@BaseLevel > 90 )
 			set .@BaseLevel, 90;
@@ -48,177 +45,95 @@ prontera,41,337,5	script	Mercenary Manager#Spear	105,{
 		else
 			set .@FaithCost, 0;
 
-		mes "[Mercenary Manager]";
+		mes "[Loueur de Mercenaires]";
 		if( .@Grade == 1 )
-			mes "So you want to hire a 1st";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 1";
 		else if( .@Grade == 2 )
-			mes "So you want to hire a 2nd";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 2";
 		else if( .@Grade == 3 )
-			mes "So you want to hire a 3rd";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 3";
 		else
-			mes "So you want to hire a " + .@Grade + "th";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang " + .@Grade + "?";
 
-		mes "Grade Spear Mercenary?";
-		mes "You need to have attained";
-		mes "Base Level " + .@BaseLevel + " or higher, and";
-		mes "must pay the " + .@ZenyCost + ",000 zeny fee.";
+		mes "Il vous faut un niveau de base de " + .@BaseLevel + " ou plus pour cela, et vous devrez payer à la Guilde la somme de " + .@ZenyCost + ",000 zeny.";
 		next;
-		if( select("Yes:No") == 2 )
+		if( select("Oui:Non") == 2 )
 		{
-			mes "[Mercenary Manager]";
-			mes "Oh, really? Well, now";
-			mes "might not be a good time";
-			mes "for you to consider hiring";
-			mes "a Mercenary, but please feel";
-			mes "free to come back if your";
-			mes "needs change. Thank you~";
+			mes "[Loueur de Mercenaires]";
+			mes "Oh, vraiment? Eh bien, vous pensez peut-être que ce n'est pas le bon moment pour louer les services d'un mercenaire, mais vous pourrez toujours revenir si jamais vous changez d'avis. Merci~";
 		}
 		else if( .@FaithCost && .@faith_lancer < .@FaithCost )
 		{
-			mes "[Mercenary Manager]";
-			mes "Oh... Your Loyalty rating";
-			mes "with the Spear Mercenary";
-			mes "Guild isn't high enough to";
-			mes "hire this Mercenary. Please";
-			mes "come back after you earn";
-			mes "" + .@FaithCost + " or more Loyalty with us.";
+			mes "[Loueur de Mercenaires]";
+			mes "Oh... Votre Loyauté envers la Guilde des Lanciers Mercenaires n'est pas assez élevée pour louer ses services. Vous devriez revenir quand vous aurez au moins " + .@FaithCost + " points de Loyauté de plus.";
 		}
 		else if( BaseLevel < .@BaseLevel )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but your Base";
-			mes "Level isn't high enough";
-			mes "to hire this Mercenary.";
-			mes "Please come back to me";
-			mes "once you reach Base Level " + .@BaseLevel + ".";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais votre niveau de base n'est pas assez élevé pour louer les services de ce mercenaire. Revenez quand vous serez de niveau " + .@BaseLevel + ".";
 		}
 		else if( Zeny < .@ZenyCost * 1000 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but you";
-			mes "don't have enough zeny";
-			mes "to hire this Mercenary.";
-			mes "The hiring fee is " + .@ZenyCost + ",000 zeny.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous n'avez pas assez d'argent pour louer les services de ce Mercenaire. Vous devrez nous verser la somme de " + .@ZenyCost + ",000 zeny.";
 		}
 		else
 		{
-			mes "[Mercenary Manager]";
-			mes "Great! Our Mercenaries";
-			mes "are sincere and devoted";
-			mes "to protecting their clients.";
-			mes "Summoned Mercenaries will";
-			mes "offer their support to you for";
-			mes "30 minutes. Take care now.";
+			mes "[Loueur de Mercenaires]";
+			mes "Excellent! Nos Mercenaires sont sincères et dévoués au service de leur client. Les mercenaires invoqués vous offriront leurs services pendant 30 minutes. Faites bien attention à vous.";
 			set Zeny, Zeny - (.@ZenyCost * 1000);
 			getitem 12172 + .@Grade, 1;
 		}
 		close;
 	case 2:
-		mes "[Mercenary Manager]";
-		mes "Mercenaries are soldiers";
-		mes "that will fight at your side";
-		mes "on the battlefield, but there";
-		mes "are a few terms and conditions";
-		mes "you must fulfill to hire them.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les Mercenaires sont des soldats qui se battent à vos côtés sur le champ de bataille, mais vous devez remplir certaines conditions pour pouvoir en embaucher.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You must fulfill a level";
-		mes "requirement and pay a zeny";
-		mes "fee to hire a Mercenary.";
-		mes "Higher grade Mercenaries";
-		mes "will also require that you";
-		mes "build a Loyalty rating with us.";
+		mes "[Loueur de Mercenaires]";
+		mes "Votre niveau doit être suffisamment élevé et vous devrez verser une certaine somme à la guilde pour louer les services d'un mercenaire. Les mercenaires de haut rang nécessitent aussi d'avoir acquis un certain nombre de points de loyauté avec notre guilde.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Mercenary contracts can't be";
-		mes "transferred to other people,";
-		mes "and we only allow a 5 Base Level difference between the Mercenary";
-		mes "and client so you can't hire one much stronger than you.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les Contrats de Mercenaires ne peuvent être transmis à d'autres personnes, et il ne doit pas y avoir plus de 5 niveaux d'écart entre le mercenaire et son client.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Well, you can figure out the";
-		mes "details when you actually form";
-		mes "a contract with one of our";
-		mes "Mercenaries, and receive";
-		mes "the Summon Scroll that will";
-		mes "call a Mercenary to your side.";
+		mes "[Loueur de Mercenaires]";
+		mes "Tous les détails sont indiqués sur contrat que vous recevrez si vous louez les services d'un mercenaire, et que vous pourrez utiliser pour l'invoquer à vos côtés.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You can't give this scroll";
-		mes "to anyone else, and the";
-		mes "Mercenary will only remain";
-		mes "with you for 30 minutes after";
-		mes "you summon him. Don't forget";
-		mes "about the time limit, okay?";
+		mes "[Loueur de Mercenaires]";
+		mes "Ce contrat est strictement personnel, et le mercenaire ne vous assistera que 30 minutes après avoir été invoqué. Alors n'oubliez pas la limite de temps, d'accord?";
 		close;
 	case 3:
-		mes "[Mercenary Manager]";
-		mes "No? You didn't need any";
-		mes "help? Well, feel free to";
-		mes "ask me if you have any";
-		mes "questions about Mercenaries.";
+		mes "[Loueur de Mercenaires]";
+		mes "Non? Vous n'avez pas besoin de mon aide? Eh bien, n'hésitez pas si vous avez des questions à propos des Mercenaires.";
 		close;
 	case 4:
-		mes "[Mercenary Manager]";
-		mes "10th Grade Mercenaries are";
-		mes "the best we have to offer,";
-		mes "and we use different criteria";
-		mes "for our clients to hire them.";
-		mes "There's no zeny fee, but you";
-		mes "must have 500 Loyalty.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les mercenaires de Rang 10 sont notre meilleure offre, mais nos clients doivent respecter un certain nombre de critères pour pouvoir les embaucher. Vous n'aurez pas besoin de nous verser d'argent, mais vous devrez avoir au moins 500 points de Loyauté.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Once you make a contract";
-		mes "with a 10th Grade Mercenary,";
-		mes "your Loyalty rating will be";
-		mes "decreased by 400. In other";
-		mes "words, you pay 400 Loyalty";
-		mes "to hire a 10th Grade Mercenary.";
+		mes "[Loueur de Mercenaires]";
+		mes "Une fois le contrat signé, vos points de Loyauté seront diminués de 400. En d'autres mots, vous devrez payer 400 points de loyauté pour louer les services d'un Mercenaire de Rang 10.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You must also be at";
-		mes "Base Level 90 or higher to";
-		mes "hire a 10th Grade Mercenary.";
-		mes "Are you still interested in";
-		mes "forming this contract?";
+		mes "[Loueur de Mercenaires]";
+		mes "Vous devez avoir un niveau de base de 90 ou plus pour pouvoir embaucher un Mercenaire de Rang 10. Voulez-vous toujours signer un contrat avec l'un d'entre eux?";
 		next;
-		if( select("Yes:No") == 2 )
+		if( select("Oui:Non") == 2 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I understand... It takes";
-			mes "hard work and sacrifice to";
-			mes "even reach the point where";
-			mes "you can hire a 10th Grade";
-			mes "Mercenary. Have you considered";
-			mes "hiring a lower grade Mercenary?";
+			mes "[Loueur de Mercenaires]";
+			mes "Je comprends... Cela demande du temps et des sacrifices pour ne serait-ce qu'avoir la possibilité d'embaucher un Mercenaire de Rang 10. Peut-être seriez-vous intéressé par un autre Mercenaire?";
 		}
 		else if( .@faith_lancer < 500 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but your";
-			mes "Loyalty rating is too";
-			mes "low to hire a 10th Grade";
-			mes "Mercenary. You must have";
-			mes "500 or more Loyalty to";
-			mes "form a contract with one.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous n'avez pas encore acquis assez de Points de Loyauté envers notre guilde pour pouvoir embaucher un Mercenaire de Rang 10. Il vous faut au moins 500 Points de Loyauté pour pouvoir signer un contrat avec l'un d'entre eux.";
 		}
 		else if( BaseLevel < 90 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but you must";
-			mes "be at Base Level 90 or";
-			mes "higher to form a contract";
-			mes "with a 10th Grade Mercenary.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous devez être au moins de niveau 90 pour pouvoir signer un contrat avec un Mercenaire de Rang 10.";
 		}
 		else
 		{
-			mes "[Mercenary Manager]";
-			mes "Congratulations! It looks";
-			mes "like you're planning in taking";
-			mes "on some very dangerous work";
-			mes "since you're hiring a 10th";
-			mes "Grade Mercenary. I wish you";
-			mes "the best of luck with him.";
+			mes "[Loueur de Mercenaires]";
+			mes "Félicitaions! On dirait que vous vous apprêtez à faire quelque chose de dangereux, si vous avez besoin d'un Mercenaire de Rang 10. Je vous souhaite bonne chance!";
 
 			mercenary_set_faith SPEAR_MERC_GUILD,-400;
 			getitem 12182,1;
@@ -227,23 +142,18 @@ prontera,41,337,5	script	Mercenary Manager#Spear	105,{
 	}
 }
 
-izlude,47,139,5	script	Mercenary Manager#Sword	734,{
+izlude,47,139,5	script	Loueur de Mercenaires::Mercenary Manager#Sword	734,{
 	set .@faith_sword, mercenary_get_faith(SWORD_MERC_GUILD);
-	mes "[Mercenary Manager]";
-	mes "Welcome to the";
-	mes "Sword Mercenary Guild.";
-	mes "Did you have any questions?";
+	mes "[Loueur de Mercenaires]";
+	mes "Bienvenue à la Guilde des Epéistes Mercenaires. Je peux peut-être répondre à vos question...";
 	next;
-	switch( select("Hire Mercenary:Mercenary Info:Nothing:10th Grade Mercenaries") )
+	switch( select("Embaucher un mercenaire:Informations sur les mercenaires:Rien:Mercenaires de Rang 10") )
 	{
 	case 1:
-		mes "[Mercenary Manager]";
-		mes "You want to hire a";
-		mes "Sword Mercenary?";
-		mes "Which Grade were you";
-		mes "interested in hiring?";
+		mes "[Loueur de Mercenaires]";
+		mes "Vous voulez louer un Epéiste Mercenaire? Quel rang vous intéresse?";
 		next;
-		set .@Grade, select("1st Grade Sword Mercenary:2nd Grade Sword Mercenary:3rd Grade Sword Mercenary:4th Grade Sword Mercenary:5th Grade Sword Mercenary:6th Grade Sword Mercenary:7th Grade Sword Mercenary:8th Grade Sword Mercenary:9th Grade Sword Mercenary");
+		set .@Grade, select("Mercenaire de Rang 1:Mercenaire de Rang 2:Mercenaire de Rang 3:Mercenaire de Rang 4:Mercenaire de Rang 5:Mercenaire de Rang 6:Mercenaire de Rang 7:Mercenaire de Rang 8:Mercenaire de Rang 9");
 		set .@BaseLevel, 5 + (.@Grade * 10);
 		if( .@BaseLevel > 90 )
 			set .@BaseLevel, 90;
@@ -259,177 +169,95 @@ izlude,47,139,5	script	Mercenary Manager#Sword	734,{
 		else
 			set .@FaithCost, 0;
 
-		mes "[Mercenary Manager]";
+		mes "[Loueur de Mercenaires]";
 		if( .@Grade == 1 )
-			mes "So you want to hire a 1st";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 1";
 		else if( .@Grade == 2 )
-			mes "So you want to hire a 2nd";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 2";
 		else if( .@Grade == 3 )
-			mes "So you want to hire a 3rd";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 3";
 		else
-			mes "So you want to hire a " + .@Grade + "th";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang " + .@Grade + "?";
 
-		mes "Grade Sword Mercenary?";
-		mes "You need to have attained";
-		mes "Base Level " + .@BaseLevel + " or higher, and";
-		mes "must pay the " + .@ZenyCost + ",000 zeny fee.";
+		mes "Il vous faut un niveau de base de " + .@BaseLevel + " ou plus pour cela, et vous devrez payer à la Guilde la somme de " + .@ZenyCost + ",000 zeny.";
 		next;
-		if( select("Yes:No") == 2 )
+		if( select("Oui:Non") == 2 )
 		{
-			mes "[Mercenary Manager]";
-			mes "Oh, really? Well, now";
-			mes "might not be a good time";
-			mes "for you to consider hiring";
-			mes "a Mercenary, but please feel";
-			mes "free to come back if your";
-			mes "needs change. Thank you~";
+			mes "[Loueur de Mercenaires]";
+			mes "Oh, vraiment? Eh bien, vous pensez peut-être que ce n'est pas le bon moment pour louer les services d'un mercenaire, mais vous pourrez toujours revenir si jamais vous changez d'avis. Merci~";
 		}
 		else if( .@FaithCost && .@faith_sword < .@FaithCost )
 		{
-			mes "[Mercenary Manager]";
-			mes "Oh... Your Loyalty rating";
-			mes "with the Sword Mercenary";
-			mes "Guild isn't high enough to";
-			mes "hire this Mercenary. Please";
-			mes "come back after you earn";
-			mes "" + .@FaithCost + " or more Loyalty with us.";
+			mes "[Loueur de Mercenaires]";
+			mes "Oh... Votre Loyauté envers la Guilde des Epéistes Mercenaires n'est pas assez élevée pour louer ses services. Vous devriez revenir quand vous aurez au moins " + .@FaithCost + " points de Loyauté de plus.";
 		}
 		else if( BaseLevel < .@BaseLevel )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but your Base";
-			mes "Level isn't high enough";
-			mes "to hire this Mercenary.";
-			mes "Please come back to me";
-			mes "once you reach Base Level " + .@BaseLevel + ".";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais votre niveau de base n'est pas assez élevé pour louer les services de ce mercenaire. Revenez quand vous serez de niveau " + .@BaseLevel + ".";
 		}
 		else if( Zeny < .@ZenyCost * 1000 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but you";
-			mes "don't have enough zeny";
-			mes "to hire this Mercenary.";
-			mes "The hiring fee is " + .@ZenyCost + ",000 zeny.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous n'avez pas assez d'argent pour louer les services de ce Mercenaire. Vous devrez nous verser la somme de " + .@ZenyCost + ",000 zeny.";
 		}
 		else
 		{
-			mes "[Mercenary Manager]";
-			mes "Great! Our Mercenaries";
-			mes "are sincere and devoted";
-			mes "to protecting their clients.";
-			mes "Summoned Mercenaries will";
-			mes "offer their support to you for";
-			mes "30 minutes. Take care now.";
+			mes "[Loueur de Mercenaires]";
+			mes "Excellent! Nos Mercenaires sont sincères et dévoués au service de leur client. Les mercenaires invoqués vous offriront leurs services pendant 30 minutes. Faites bien attention à vous.";
 			set Zeny, Zeny - (.@ZenyCost * 1000);
 			getitem 12162 + .@Grade, 1;
 		}
 		close;		
 	case 2:
-		mes "[Mercenary Manager]";
-		mes "Mercenaries are soldiers";
-		mes "that will fight at your side";
-		mes "on the battlefield, but there";
-		mes "are a few terms and conditions";
-		mes "you must fulfill to hire them.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les Mercenaires sont des soldats qui se battent à vos côtés sur le champ de bataille, mais vous devez remplir certaines conditions pour pouvoir en embaucher.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You must fulfill a level";
-		mes "requirement and pay a zeny";
-		mes "fee to hire a Mercenary.";
-		mes "Higher grade Mercenaries";
-		mes "will also require that you";
-		mes "build a Loyalty rating with us.";
+		mes "[Loueur de Mercenaires]";
+		mes "Votre niveau doit être suffisamment élevé et vous devrez verser une certaine somme à la guilde pour louer les services d'un mercenaire. Les mercenaires de haut rang nécessitent aussi d'avoir acquis un certain nombre de points de loyauté avec notre guilde.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Mercenary contracts can't be";
-		mes "transferred to other people,";
-		mes "and we only allow a 5 Base Level difference between the Mercenary";
-		mes "and client so you can't hire one much stronger than you.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les Contrats de Mercenaires ne peuvent être transmis à d'autres personnes, et il ne doit pas y avoir plus de 5 niveaux d'écart entre le mercenaire et son client.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Well, you can figure out the";
-		mes "details when you actually form";
-		mes "a contract with one of our";
-		mes "Mercenaries, and receive";
-		mes "the Summon Scroll that will";
-		mes "call a Mercenary to your side.";
+		mes "[Loueur de Mercenaires]";
+		mes "Tous les détails sont indiqués sur contrat que vous recevrez si vous louez les services d'un mercenaire, et que vous pourrez utiliser pour l'invoquer à vos côtés.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You can't give this scroll";
-		mes "to anyone else, and the";
-		mes "Mercenary will only remain";
-		mes "with you for 30 minutes after";
-		mes "you summon him. Don't forget";
-		mes "about the time limit, okay?";
+		mes "[Loueur de Mercenaires]";
+		mes "Ce contrat est strictement personnel, et le mercenaire ne vous assistera que 30 minutes après avoir été invoqué. Alors n'oubliez pas la limite de temps, d'accord?";
 		close;
 	case 3:
-		mes "[Mercenary Manager]";
-		mes "No? You didn't need any";
-		mes "help? Well, feel free to";
-		mes "ask me if you have any";
-		mes "questions about Mercenaries.";
+		mes "[Loueur de Mercenaires]";
+		mes "Non? Vous n'avez pas besoin de mon aide? Eh bien, n'hésitez pas si vous avez des questions à propos des Mercenaires.";
 		close;
 	case 4:
-		mes "[Mercenary Manager]";
-		mes "10th Grade Mercenaries are";
-		mes "the best we have to offer,";
-		mes "and we use different criteria";
-		mes "for our clients to hire them.";
-		mes "There's no zeny fee, but you";
-		mes "must have 500 Loyalty.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les mercenaires de rang 10 sont notre meilleure offre, mais nos clients doivent respecter un certain nombre de critères pour pouvoir les embaucher. Vous n'aurez pas besoin de nous verser d'argent, mais vous devrez avoir au moins 500 points de Loyauté.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Once you make a contract";
-		mes "with a 10th Grade Mercenary,";
-		mes "your Loyalty rating will be";
-		mes "decreased by 400. In other";
-		mes "words, you pay 400 Loyalty";
-		mes "to hire a 10th Grade Mercenary.";
+		mes "[Loueur de Mercenaires]";
+		mes "Une fois le contrat signé, vos points de Loyauté seront diminués de 400. En d'autres mots, vous devrez payer 400 points de loyauté pour louer les services d'un Mercenaire de Rang 10.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You must also be at";
-		mes "Base Level 90 or higher to";
-		mes "hire a 10th Grade Mercenary.";
-		mes "Are you still interested in";
-		mes "forming this contract?";
+		mes "[Loueur de Mercenaires]";
+		mes "Vous devez avoir un niveau de base de 90 ou plus pour pouvoir embaucher un Mercenaire de Rang 10. Voulez-vous toujours signer un contrat avec l'un d'entre eux?";
 		next;
-		if( select("Yes:No") == 2 )
+		if( select("Oui:Non") == 2 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I understand... It takes";
-			mes "hard work and sacrifice to";
-			mes "even reach the point where";
-			mes "you can hire a 10th Grade";
-			mes "Mercenary. Have you considered";
-			mes "hiring a lower grade Mercenary?";
+			mes "[Loueur de Mercenaires]";
+			mes "Je comprends... Cela demande du temps et des sacrifices pour ne serait-ce qu'avoir la possibilité d'embaucher un Mercenaire de Rang 10. Peut-être seriez-vous intéressé par un autre Mercenaire?";
 		}
 		else if( .@faith_sword < 500 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but your";
-			mes "Loyalty rating is too";
-			mes "low to hire a 10th Grade";
-			mes "Mercenary. You must have";
-			mes "500 or more Loyalty to";
-			mes "form a contract with one.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous n'avez pas encore acquis assez de Points de Loyauté envers notre guilde pour pouvoir embaucher un Mercenaire de Rang 10. Il vous faut au moins 500 Points de Loyauté pour pouvoir signer un contrat avec l'un d'entre eux.";
 		}
 		else if( BaseLevel < 90 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but you must";
-			mes "be at Base Level 90 or";
-			mes "higher to form a contract";
-			mes "with a 10th Grade Mercenary.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous devez être au moins de niveau 90 pour pouvoir signer un contrat avec un Mercenaire de Rang 10.";
 		}
 		else
 		{
-			mes "[Mercenary Manager]";
-			mes "Congratulations! It looks";
-			mes "like you're planning in taking";
-			mes "on some very dangerous work";
-			mes "since you're hiring a 10th";
-			mes "Grade Mercenary. I wish you";
-			mes "the best of luck with him.";
+			mes "[Loueur de Mercenaires]";
+			mes "Félicitaions! On dirait que vous vous apprêtez à faire quelque chose de dangereux, si vous avez besoin d'un Mercenaire de Rang 10. Je vous souhaite bonne chance!";
 
 			mercenary_set_faith SWORD_MERC_GUILD,-400;
 			getitem 12172,1;
@@ -438,24 +266,18 @@ izlude,47,139,5	script	Mercenary Manager#Sword	734,{
 	}
 }
 
-pay_arche,99,167,4	script	Mercenary Manager#Bow	732,{
+pay_arche,99,167,4	script	Loueur de Mercenaires::Mercenary Manager#Bow	732,{
 	set .@faith_archer,  mercenary_get_faith(ARCH_MERC_GUILD);
-	mes "[Mercenary Manager]";
-	mes "Welcome to the";
-	mes "Bow Mercenary Guild.";
-	mes "How can I be of service?";
+	mes "[Loueur de Mercenaires]";
+	mes "Bienvenue à la Guilde des Archers Mercenaires! Que puis-je faire pour vous?";
 	next;
-	switch( select("Hire Mercenary:Mercenary Info:Nothing:10th Grade Mercenaries") )
+	switch( select("Embaucher un mercenaire:Informations sur les mercenaires:Rien:Mercenaires de rang 10") )
 	{
 	case 1:
-		mes "[Mercenary Manager]";
-		mes "You want to hire";
-		mes "a Bow Mercenary?";
-		mes "Which Grade were you";
-		mes "interested in hiring?";
+		mes "[Loueur de Mercenaires]";
+		mes "Vous voulez louer un Archer Mercenaire? Quel rang vous intéresse?";
 		next;
-
-		set .@Grade, select("1st Grade Bow Mercenary:2nd Grade Bow Mercenary:3rd Grade Bow Mercenary:4th Grade Bow Mercenary:5th Grade Bow Mercenary:6th Grade Bow Mercenary:7th Grade Bow Mercenary:8th Grade Bow Mercenary:9th Grade Bow Mercenary");
+		set .@Grade, select("Mercenaire de Rang 1:Mercenaire de Rang 2:Mercenaire de Rang 3:Mercenaire de Rang 4:Mercenaire de Rang 5:Mercenaire de Rang 6:Mercenaire de Rang 7:Mercenaire de Rang 8:Mercenaire de Rang 9");
 		set .@BaseLevel, 5 + (.@Grade * 10);
 		if( .@BaseLevel > 90 )
 			set .@BaseLevel, 90;
@@ -471,178 +293,95 @@ pay_arche,99,167,4	script	Mercenary Manager#Bow	732,{
 		else
 			set .@FaithCost, 0;
 
-		mes "[Mercenary Manager]";
+		mes "[Loueur de Mercenaires]";
 		if( .@Grade == 1 )
-			mes "So you want to hire a 1st";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 1";
 		else if( .@Grade == 2 )
-			mes "So you want to hire a 2nd";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 2";
 		else if( .@Grade == 3 )
-			mes "So you want to hire a 3rd";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang 3";
 		else
-			mes "So you want to hire a " + .@Grade + "th";
+			mes "Alors vous voulez embaucher un Mercenaire de Rang " + .@Grade + "?";
 
-		mes "Grade Bow Mercenary?";
-
-		mes "You need to have attained";
-		mes "Base Level " + .@BaseLevel + " or higher, and";
-		mes "must pay the " + .@ZenyCost + ",000 zeny fee.";
+		mes "Il vous faut un niveau de base de " + .@BaseLevel + " ou plus pour cela, et vous devrez payer à la Guilde la somme de " + .@ZenyCost + ",000 zeny.";
 		next;
-		if( select("Yes:No") == 2 )
+		if( select("Oui:Non") == 2 )
 		{
-			mes "[Mercenary Manager]";
-			mes "Oh, really? Well, now";
-			mes "might not be a good time";
-			mes "for you to consider hiring";
-			mes "a Mercenary, but please feel";
-			mes "free to come back if your";
-			mes "needs change. Thank you~";
+			mes "[Loueur de Mercenaires]";
+			mes "Oh, vraiment? Eh bien, vous pensez peut-être que ce n'est pas le bon moment pour louer les services d'un mercenaire, mais vous pourrez toujours revenir si jamais vous changez d'avis. Merci~";
 		}
 		else if( .@FaithCost && .@faith_archer < .@FaithCost )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but your";
-			mes "Loyalty rating is too";
-			mes "low to hire this Bow";
-			mes "Mercenary. Come back";
-			mes "again when you have";
-			mes "" + .@FaithCost + " or more Loyalty.";
+			mes "[Loueur de Mercenaires]";
+			mes "Oh... Votre Loyauté envers la Guilde des Archers Mercenaires n'est pas assez élevée pour louer ses services. Vous devriez revenir quand vous aurez au moins " + .@FaithCost + " points de Loyauté de plus.";
 		}
 		else if( BaseLevel < .@BaseLevel )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but your Base";
-			mes "Level isn't high enough";
-			mes "to hire this Mercenary.";
-			mes "Please come back to me";
-			mes "once you reach Base Level " + .@BaseLevel + ".";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais votre niveau de base n'est pas assez élevé pour louer les services de ce mercenaire. Revenez quand vous serez de niveau " + .@BaseLevel + ".";
 		}
 		else if( Zeny < .@ZenyCost * 1000 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but you";
-			mes "don't have enough zeny";
-			mes "to hire this Mercenary.";
-			mes "The hiring fee is " + .@ZenyCost + ",000 zeny.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous n'avez pas assez d'argent pour louer les services de ce Mercenaire. Vous devrez nous verser la somme de " + .@ZenyCost + ",000 zeny.";
 		}
 		else
 		{
-			mes "[Mercenary Manager]";
-			mes "Great! Our Mercenaries";
-			mes "are sincere and devoted";
-			mes "to protecting their clients.";
-			mes "Summoned Mercenaries will";
-			mes "offer their support to you for";
-			mes "30 minutes. Take care now.";
+			mes "[Loueur de Mercenaires]";
+			mes "Excellent! Nos Mercenaires sont sincères et dévoués au service de leur client. Les mercenaires invoqués vous offriront leurs services pendant 30 minutes. Faites bien attention à vous.";
 			set Zeny, Zeny - (.@ZenyCost * 1000);
 			getitem 12152 + .@Grade, 1;
 		}
 		close;
 	case 2:
-		mes "[Mercenary Manager]";
-		mes "Mercenaries are soldiers";
-		mes "that will fight at your side";
-		mes "on the battlefield, but there";
-		mes "are a few terms and conditions";
-		mes "you must fulfill to hire them.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les Mercenaires sont des soldats qui se battent à vos côtés sur le champ de bataille, mais vous devez remplir certaines conditions pour pouvoir en embaucher.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You must fulfill a level";
-		mes "requirement and pay a zeny";
-		mes "fee to hire a Mercenary.";
-		mes "Higher grade Mercenaries";
-		mes "will also require that you";
-		mes "build a Loyalty rating with us.";
+		mes "[Loueur de Mercenaires]";
+		mes "Votre niveau doit être suffisamment élevé et vous devrez verser une certaine somme à la guilde pour louer les services d'un mercenaire. Les mercenaires de haut rang nécessitent aussi d'avoir acquis un certain nombre de points de loyauté avec notre guilde.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Mercenary contracts can't be";
-		mes "transferred to other people,";
-		mes "and we only allow a 5 Base Level difference between the Mercenary";
-		mes "and client so you can't hire one much stronger than you.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les Contrats de Mercenaires ne peuvent être transmis à d'autres personnes, et il ne doit pas y avoir plus de 5 niveaux d'écart entre le mercenaire et son client.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Well, you can figure out the";
-		mes "details when you actually form";
-		mes "a contract with one of our";
-		mes "Mercenaries, and receive";
-		mes "the Summon Scroll that will";
-		mes "call a Mercenary to your side.";
+		mes "[Loueur de Mercenaires]";
+		mes "Tous les détails sont indiqués sur contrat que vous recevrez si vous louez les services d'un mercenaire, et que vous pourrez utiliser pour l'invoquer à vos côtés.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You can't give this scroll";
-		mes "to anyone else, and the";
-		mes "Mercenary will only remain";
-		mes "with you for 30 minutes after";
-		mes "you summon him. Don't forget";
-		mes "about the time limit, okay?";
+		mes "[Loueur de Mercenaires]";
+		mes "Ce contrat est strictement personnel, et le mercenaire ne vous assistera que 30 minutes après avoir été invoqué. Alors n'oubliez pas la limite de temps, d'accord?";
 		close;
 	case 3:
-		mes "[Mercenary Manager]";
-		mes "No? You didn't need any";
-		mes "help? Well, feel free to";
-		mes "ask me if you have any";
-		mes "questions about Mercenaries.";
+		mes "[Loueur de Mercenaires]";
+		mes "Non? Vous n'avez pas besoin de mon aide? Eh bien, n'hésitez pas si vous avez des questions à propos des Mercenaires.";
 		close;
 	case 4:
-		mes "[Mercenary Manager]";
-		mes "10th Grade Mercenaries are";
-		mes "the best we have to offer,";
-		mes "and we use different criteria";
-		mes "for our clients to hire them.";
-		mes "There's no zeny fee, but you";
-		mes "must have 500 Loyalty.";
+		mes "[Loueur de Mercenaires]";
+		mes "Les mercenaires de rang 10 sont notre meilleure offre, mais nos clients doivent respecter un certain nombre de critères pour pouvoir les embaucher. Vous n'aurez pas besoin de nous verser d'argent, mais vous devrez avoir au moins 500 points de Loyauté.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "Once you make a contract";
-		mes "with a 10th Grade Mercenary,";
-		mes "your Loyalty rating will be";
-		mes "decreased by 400. In other";
-		mes "words, you pay 400 Loyalty";
-		mes "to hire a 10th Grade Mercenary.";
+		mes "[Loueur de Mercenaires]";
+		mes "Une fois le contrat signé, vos points de Loyauté seront diminués de 400. En d'autres mots, vous devrez payer 400 points de loyauté pour louer les services d'un Mercenaire de Rang 10.";
 		next;
-		mes "[Mercenary Manager]";
-		mes "You must also be at";
-		mes "Base Level 90 or higher to";
-		mes "hire a 10th Grade Mercenary.";
-		mes "Are you still interested in";
-		mes "forming this contract?";
+		mes "[Loueur de Mercenaires]";
+		mes "Vous devez avoir un niveau de base de 90 ou plus pour pouvoir embaucher un Mercenaire de Rang 10. Voulez-vous toujours signer un contrat avec l'un d'entre eux?";
 		next;
-		if( select("Yes:No") == 2 )
+		if( select("Oui:Non") == 2 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I understand... It takes";
-			mes "hard work and sacrifice to";
-			mes "even reach the point where";
-			mes "you can hire a 10th Grade";
-			mes "Mercenary. Have you considered";
-			mes "hiring a lower grade Mercenary?";
+			mes "[Loueur de Mercenaires]";
+			mes "Je comprends... Cela demande du temps et des sacrifices pour ne serait-ce qu'avoir la possibilité d'embaucher un Mercenaire de Rang 10. Peut-être seriez-vous intéressé par un autre Mercenaire?";
 		}
 		else if( .@faith_archer < 500 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but your";
-			mes "Loyalty rating is too";
-			mes "low to hire a 10th Grade";
-			mes "Mercenary. You must have";
-			mes "500 or more Loyalty to";
-			mes "form a contract with one.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous n'avez pas encore acquis assez de Points de Loyauté envers notre guilde pour pouvoir embaucher un Mercenaire de Rang 10. Il vous faut au moins 500 Points de Loyauté pour pouvoir signer un contrat avec l'un d'entre eux.";
 		}
 		else if( BaseLevel < 90 )
 		{
-			mes "[Mercenary Manager]";
-			mes "I'm sorry, but you must";
-			mes "be at Base Level 90 or";
-			mes "higher to form a contract";
-			mes "with a 10th Grade Mercenary.";
+			mes "[Loueur de Mercenaires]";
+			mes "Je suis désolé mais vous devez être au moins de niveau 90 pour pouvoir signer un contrat avec un Mercenaire de Rang 10.";
 		}
 		else
 		{
-			mes "[Mercenary Manager]";
-			mes "Congratulations! It looks";
-			mes "like you're planning in taking";
-			mes "on some very dangerous work";
-			mes "since you're hiring a 10th";
-			mes "Grade Mercenary. I wish you";
-			mes "the best of luck with him.";
+			mes "[Loueur de Mercenaires]";
+			mes "Félicitaions! On dirait que vous vous apprêtez à faire quelque chose de dangereux, si vous avez besoin d'un Mercenaire de Rang 10. Je vous souhaite bonne chance!";
 
 			mercenary_set_faith ARCH_MERC_GUILD,-400;
 			getitem 12162,1;
@@ -653,55 +392,41 @@ pay_arche,99,167,4	script	Mercenary Manager#Bow	732,{
 
 // Mercenary Merchant NPCs
 //============================================================
-prontera,30,337,4	script	Mercenary Merchant#Spear::MercMerchant	700,{
-	mes "[Mercenary Goods Merchant]";
-	mes "Hello, I sell goods";
-	mes "that Mercenaries can";
-	mes "use. Is there anything";
-	mes "in particular that";
-	mes "you're looking for?";
+prontera,30,337,4	script	Marchand (Mercenaires)::MercMerchant	700,{
+	mes "[Marchand pour Mercenaires]";
+	mes "Bonjour, je vends des potions que peuvent utiliser les Mercenaires. Est-ce que vous cherchez quelque chose en particulier?";
 	next;
 	switch(select("Mercenary Red Potion:Mercenary Blue Potion:Mercenary Concentration Potion:Mercenary Awakening Potion:Mercenary Berserk Potion")) {
 	case 1: 
-		mes "[Mercenary Goods Merchant]";
-		mes "Mercenary Red Potions";
-		mes "each cost 1,750 zeny.";
-		mes "How many would you like?";
+		mes "[Marchand pour Mercenaires]";
+		mes "Les Mercenary Red Potions coûtent chacune 1.750 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12184,1750;
 	case 2:
-		mes "[Mercenary Goods Merchant]";
-		mes "Mercenary Blue Potions";
-		mes "each cost 3,500 zeny.";
-		mes "How many would you like?";
+		mes "[Marchand pour Mercenaires]";
+		mes "Les Mercenary Blue Potions coûtent chacune 3.500 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12185,3000;
 	case 3:
-		mes "[Mercenary Goods Merchant]";
-		mes "Mercenary Concentration";
-		mes "Potions each cost 560 zeny.";
-		mes "How many would you like?";
+		mes "[Marchand pour Mercenaires]";
+		mes "Les Mercenary Concentration Potions coûtent chacune 560 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12241,560;
 	case 4:
-		mes "[Mercenary Goods Merchant]";
-		mes "Mercenary Awakening";
-		mes "Potions each cost 1,050 zeny.";
-		mes "How many would you like?";
+		mes "[Marchand pour Mercenaires]";
+		mes "Les Mercenary Awakening Potions coûtent chacune 1.050 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12242,1050;
 	case 5:
-		mes "[Mercenary Goods Merchant]";
-		mes "Mercenary Beserk Potions";
-		mes "each cost 2,100 zeny.";
-		mes "How many would you like?";
+		mes "[Marchand pour Mercenaires]";
+		mes "Les Mercenary Beserk Potions coûtent chacune 2.100 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12243,2100;
 	}
 }
 
-izlude,56,139,4	duplicate(MercMerchant)	Mercenary Merchant#Sword	892
-pay_arche,102,167,5	duplicate(MercMerchant)	Mercenary Merchant#Bow	879
+izlude,56,139,4	duplicate(MercMerchant)	Marchand (Mercenaires)::Mercenary Merchant#Sword	892
+pay_arche,102,167,5	duplicate(MercMerchant)	Marchand (Mercenaires)::Mercenary Merchant#Bow	879
 
 // Function for selling items.
 //============================================================
@@ -709,72 +434,48 @@ function	script	F_PurchaseMercItem	{
 	input .@input;
 	if( .@input == 0 )
 	{
-		mes "[Mercenary Goods Merchant]";
-		mes "You changed your mind?";
-		mes "Alright, feel free to come";
-		mes "back to me whenever you want";
-		mes "to buy any Mercenary Potions.";
+		mes "[Marchand pour Mercenaires]";
+		mes "Vous avez changé d'avis? Eh bien, revenez quand vous voulez si vous avez besoin de potions pour Mercenaires.";
 	}
 	else if( .@input < 0 || .@input > 10000 )
 	{
-		mes "[Mercenary Goods Merchant]";
-		mes "I'm sorry, but you";
-		mes "can only buy up to";
-		mes "10,000 of these potions";
-		mes "at a time. Please enter";
-		mes "a number from 1 to 10,000.";
+		mes "[Marchand pour Mercenaires]";
+		mes "Je suis désolée mais je ne peux pas vous en vendre plus de 10.000 à la fois. Alors, combien en voulez-vous?";
 	}
 	else if( set(.@total_po, .@input * getarg(1)) > Zeny )
 	{
-		mes "[Mercenary Goods Merchant]";
-		mes "I'm sorry, but you don't";
-		mes "have enough zeny for this";
-		mes "many potions. Well, I'll be";
-		mes "be here when you're ready";
-		mes "to purchase something";
-		mes "for your Mercenaries.";
+		mes "[Marchand pour Mercenaires]";
+		mes "Je suis désolée mais vous semblez ne pas avoir assez de zenys pour en acheter autant. Je serai toujours ici si vous voulez revenir plus tard pour acheter quelque chose pour vos mercenaires.";
 	}
 	else if( checkweight(getarg(0), .@input) == 0 )
 	{
-		mes "[Mercenary Goods Merchant]";
-		mes "If I gave you that many";
-		mes "potions, you wouldn't be";
-		mes "able to carry them with you.";
-		mes "Please come back after";
-		mes "you free up some space";
-		mes "in your Inventory.";
+		mes "[Marchand pour Mercenaires]";
+		mes "Vous ne pourriez pas les porter si je vous vendais autant de potions. Vous devriez revenir après vous être débarrassé du superflu.";
 	}
 	else
 	{
-		mes "[Mercenary Goods Merchant]";
+		mes "[Marchand pour Mercenaires]";
 		if( .@input == 1 )
 		{
-			mes "Here's your Mercenary";
 			switch( getarg(0) )
 			{
-			case 12148: mes "Red Potion. Thank you, and"; break;
-			case 12149: mes "Blue Potion. Thank you, and"; break;
-			case 12241: mes "Concentration Potion."; break;
-			case 12242: mes "Awakening Potion."; break;
-			case 12243: mes "Berserk Potion. Thank"; break;
+			case 12148: mes "Et voilà vos Red Potions. Merci, et à bientôt!"; break;
+			case 12149: mes "Et voilà vos Blue Potions. Merci, et à bientôt!"; break;
+			case 12241: mes "Et voilà vos Concentration Potions. Merci, et à bientôt!"; break;
+			case 12242: mes "Et voilà vos Awakening Potions. Merci, et à bientôt!"; break;
+			case 12243: mes "Et voilà vos Berserk Potions. Merci, et à bientôt!"; break;
 			}
-			mes "please come again when";
-			mes "you need more potions";
-			mes "for your Mercenaries.";
 		}
 		else
 		{
-			mes "Here you are, this is exactly";
 			switch( getarg(0) )
 			{
-			case 12148: mes "" + .@input + " Mercenary Red Potions."; mes "Thank you, and please come"; break;
-			case 12149: mes "" + .@input + " Mercenary Blue Potions."; mes "Thank you, and please come"; break;
-			case 12241: mes "" + .@input + " Mercenary Concentration"; mes "Potions. Thank you, and please"; break;
-			case 12242: mes "" + .@input + " Mercenary Awakening"; mes "Potions. Thank you, and please"; break;
-			case 12243: mes "" + .@input + " Mercenary Berserk Potions."; mes "Thank you, and please come"; break;
+			case 12148: mes "Et voilà: exactement " + .@input + " Mercenary Red Potions. Merci, et à bientôt!"; break;
+			case 12149: mes "Et voilà: exactement " + .@input + " Mercenary Blue Potions. Merci, et à bientôt!"; break;
+			case 12241: mes "Et voilà: exactement " + .@input + " Mercenary Concentration Potions. Merci, et à bientôt!"; break;
+			case 12242: mes "Et voilà: exactement " + .@input + " Mercenary Awakening Potions. Merci, et à bientôt!"; break;
+			case 12243: mes "Et voilà: exactement " + .@input + " Mercenary Berserk Potions. Merci, et à bientôt!"; break;
 			}
-			mes "again when you need more";
-			mes "potions for your Mercenaries.";
 		}
 		set Zeny, Zeny - .@total_po;
 		getitem getarg(0), .@input;
