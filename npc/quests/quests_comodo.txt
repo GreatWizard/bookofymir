@@ -1,9 +1,11 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par Etna, corrigé par Myllena
 //===== eAthena Script ======================================= 
 //= Quest NPCs related to Comodo
 //===== By: ================================================== 
 //= kobra_k88; L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.5b
+//= 1.5a
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -26,1077 +28,541 @@
 //= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
 //= 1.5 Rescripted Headgear Quests 1 to Aegis 10.3 Standards. [Samuray22]
 //= 1.5a Fixed a bad countitem. (bugreport:840) [Samuray22]
-//= 1.5b Fixed stripped hairband and blue hairband checking the wrong amount of items, bugreport:1674 [Brainstorm]
-//= 1.6 Updated headgear quest NPCs. [L0ne_W0lf]
 //============================================================ 
 
 // Headgear Quests 1
 // Cross Hat, Bulb Hairband, Striped Hairband, Blue Hairband
 //============================================================ 
-comodo,228,159,3	script	Hair Ornament Girl	700,{
-	mes "[Hair Ornament Girl]";
-	if (Sex == 1) {
-		mes "Oh, hello!";
-		mes "Would you like to order a hairband? They're great presents to give to your girlfriend, and show that you're thinking of her.";
-	}
-	else {
-		mes "Hello~!";
-		mes "I think one of these will suit a pretty girl like you very well. Would you like to order a hairband?";
+comodo,228,159,4	script	Lydia#cmd	700,{
+	mes "[Lydia]";
+	if(Sex == 1) {
+		mes "Oh! Salut. Vous voulez en faire un?";
+		mes "Si vous voulez faire un cadeau à votre petite amie, ce bandeau est celui qu'il vous faut!";
+	} else {
+		mes "Hé! Regardez-moi. Je pense que cela vous conviendra mieux~";
+		mes "Vous voulez commander un bandeau?";
 	}
 	next;
-	mes "[Hair Ornament Girl]";
-	mes "If you give me a few simple items then I can make a gorgeous Hair Band. If you have any questions, go ahead and have a look.";
+	mes "[Lydia]";
+	mes "Si vous me donnez les objets nécessaires, je vous fais un magnifique bandeau à cheveux~";
+	mes "Jetez un coup d'oeil à ceux-ci.";
 	next;
-	switch(select("Cross Hat:Bulb Band:Stripe Hairband:Blue Hairband")) {
-	case 1:
-		if ((countitem(2608) > 0) && (countitem(7069) > 499)) {
-			mes "[Hair Ornament Girl]";
-			mes "You've chosen the Cross Hat?";
-			mes "If you brought all the required items, I will make it for you~";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "But before I can make it, can you check that the items are right?";
-			mes "If it is a forged, upgraded item or has monster cards in it, then those cards and upgrades will be lost.";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "It's better to bring just to keep the requested items in your inventory. Did you check? Then let's make it, okay?";
-			next;
-			switch(select("No.:Yes.")) {
-			case 1:
-				mes "[Hair Ornament Girl]";
-				mes "Ah, alright. I guess you should put all your other things into Kafra Storage first. Okay then, see you soon.";
-				mes "See you soon~";
-				close;
-			case 2:
-				mes "^3355FFSwish swish snip snip^000000";
-				next;
-				delitem 2608,1;  //Rosary
-				delitem 7069,500;  //Broken_Armor_Piece
-				mes "[Hair Ornament Girl]";
-				mes "Look at this! Well done~";
-				mes "Please come again~ hoooo!";
-				getitem 5036,1; // Cross_Band
-				close;
-			}
-		}
-		else {
-			mes "[Hair Ornament Girl]";
-			mes "Oh, you've chosen Cross Hat?";
-			mes "There are some items needed to make this headband.";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "I'll need...";
-			mes "^3355FF1 Rosary^000000";
-			mes "^3355FF500 Destroyed Armor^000000";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "If you bring all the items then I will make it for you right away.";
-			mes "See you then~";
-			close;
-		}
+	switch(select("Cross Hat:Bulb Band:Striped Hairband:Blue Hairband")) {
+	case 1:	
+		callsub L_select,1,2608,1,7069,500,0,0,5036; //Cross Band (1) = Rosary (1) + Destroyed Armor (500)
 	case 2:
-		if ((countitem(2233) > 0) && (countitem(746) > 19)) {
-			mes "[Hair Ornament Girl]";
-			mes "You've chosen Bulb band?";
-			mes "If you brought all the required items, I will make it for you~";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "But before I can make it, can you check that the items are right?";
-			mes "If it is a forged, upgraded item or has monster cards in it, then those cards and upgrades will be lost.";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "It's better to bring just to keep the requested items in your inventory. Did you check? Then let's make it, okay?";
-			next;
-			switch(select("No.:Yes.")) {
-			case 1:
-				mes "[Hair Ornament Girl]";
-				mes "Ah, alright. I guess you should put all your other things into Kafra Storage first. Okay then, see you soon.";
-				close;
-			case 2:
-				mes "^3355FFSwish swish snip snip^000000";
-				next;
-				delitem 2233,1;  //Circlet_
-				delitem 746,20;  //Glass_Bead
-				mes "[Hair Ornament Girl]";
-				mes "Look at this! Well done~";
-				mes "Please come again~ hoooo!";
-				getitem 5034,1; // Light_Bulb_Band
-				close;
-			}
-		}
-		else {
-			mes "[Hair Ornament Girl]";
-			mes "Oh, you've chosen Bulb Band?";
-			mes "There are some required items needed to make this headband.";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "I'll need...";
-			mes "^3355FF1 Slotted Circlet^000000";
-			mes "^3355FF20 Glass Bead^000000";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "If you bring all the items then I will make it for you right away.";
-			mes "See you then~";
-			close;
-		}
+		callsub L_select,2,2233,1,746,20,0,0,5034; //Bulb Band (1) = Circlet (1) + Glass Bead (20)
 	case 3:
-		if (countitem(1099) > 1499) {
-			mes "[Hair Ornament Girl]";
-			mes "You've chosen Stripe band?";
-			mes "If you brought all the required items, I will make it for you~";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "You want me to make it now?";
-			next;
-			switch(select("No.:Yes.")) {
-			case 1:
-				mes "[Hair Ornament Girl]";
-				mes "See you later then~";
-				close;
-			case 2:
-				mes "^3355FFSwish swish snip snip^000000";
-				next;
-				delitem 1099,1500;  //Worn_Out_Prison_Uniform
-				mes "[Hair Ornament Girl]";
-				mes "Look at this! Well done~";
-				mes "Please come again~";
-				getitem 5049,1; // Stripe_Band
-				close;
-			}
-		}
-		else {
-			mes "[Hair Ornament Girl]";
-			mes "Oh, you've chosen the Stripe band? There are some required items needed to make this headband.";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "I'll need...";
-			mes "^3355FF1500 Worn-out Prison Uniform^000000";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "If you bring all the items then I will make it for you right away.";
-			mes "See you then~";
-			close;
-		}
+		callsub L_select,3,1099,1499,0,0,0,0,5049; //Stripe Band (1) = Worn Out Prison Uniform (1500)
 	case 4:
-		if ((countitem(2211) > 0) && (countitem(978) > 0) && (countitem(7003) > 299)) {
-			mes "[Hair Ornament Girl]";
-			mes "You've chosen Blue Hairband?";
-			mes "If you brought all the required items, I will make it for you~";
+		callsub L_select,4,2211,1,978,1,7003,299,5052; //Blue hair band (1) = Bandana (1) + Cobaltblue Dyestuffs (1) + Anolian Skin (300)
+	}
+L_select:
+	mes "[Lydia]";
+	if((getarg(0) == 1 && countitem(2608) > 0 && countitem(7069) > 499) ||
+	   (getarg(0) == 2 && countitem(2233) > 0 && countitem(746) > 19) || 
+	   (getarg(0) == 3 && countitem(1099) > 1499) ||
+	   (getarg(0) == 4 && countitem(2211) > 0 && countitem(978) > 0 && countitem(7003) > 299)) {
+		mes "Hum~ Vous avez choisi "+getitemname(getarg(7))+"?";
+		mes "Vous avez apporté tous les objets exigés. Je vais vous le faire~";
+		next;
+		if(getarg(0) != 3) {
+			mes "[Lydia]";
+			mes "Mais, avant que je ne m'y mette, pouvez-vous vérifier une dernier fois vos matériaux? Si l'un d'entre eux est forgé ou s'il contient des cartes, ces avantages seront perdus.";
 			next;
-			mes "[Hair Ornament Girl]";
-			mes "But before I can make it, can you check that the items are right?";
-			mes "If it is a forged, upgraded item or has monster cards in it, then those cards and upgrades will be lost.";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "It's better to bring just to keep the requested items in your inventory. Did you check? Then let's make it, okay?";
-			next;
-			switch(select("No.:Yes.")) {
-			case 1:
-				mes "[Hair Ornament Girl]";
-				mes "Ah, alright. I guess you should put all your other things into Kafra Storage first. Okay then, see you soon.";
-				close;
-			case 2:
-				mes "^3355FFSwish swish snip snip^000000";
-				next;
-				delitem 2211,1;  //Bandana
-				delitem 978,1;  //Cobaltblue_Dyestuffs
-				delitem 7003,300;  //Anolian_Skin
-				mes "[Hair Ornament Girl]";
-				mes "Look, at this! Well done!";
-				mes "Please come again~ ";
-				getitem 5052,1; // Blue_Hair_Band
-				close;
-			}
 		}
-		else {
-			mes "[Hair Ornament Girl]";
-			mes "Oh, you've chosen Blue Hairband?";
-			mes "There are some required items needed to make this headband.";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "I'll need...";
-			mes "^3355FF1 Bandana^000000";
-			mes "^3355FF1 Cobaltblue Dyestuffs^000000";
-			mes "^3355FF300 Anolian Skin^000000";
-			next;
-			mes "[Hair Ornament Girl]";
-			mes "If you bring all the items then I will make it for you right away.";
-			mes "See you then~";
+		mes "[Lydia]";
+		mes "Il vaut mieux apporter uniquement les objets demandés. Avez-vous vérifié? Alors nous le faisons? Ok?";
+		next;
+		if(select("Non.:Oui.") == 1) {
+			mes "[Lydia]";
+			mes "D'accord. Vous voulez poser certains de vos objets dans votre Stock? Je comprends~";
+			mes "À bientôt~";
 			close;
 		}
+			mes "[Lydia]";
+			mes "^3355FFHum. Piece of cake.^000000"; //myllena: gné?
+			next;
+			delitem getarg(1),getarg(2);
+			if(getarg(3) != 0) delitem getarg(3),getarg(4);
+			if(getarg(5) != 0) delitem getarg(5),getarg(6);
+			mes "[Lydia]";
+			mes "Regardez, ça! Parfait~";
+			mes "S'il vous plait, revenez me voir~ hoooo!";
+			getitem getarg(7),1;
+			close;
 	}
+		mes "Hum~ Vous avez choisi "+getitemname(getarg(7))+"?";
+		mes "Il me faut certains objets pour le faire.";
+		next;
+		mes "[Lydia]";
+		mes "Pour faire un "+getitemname(getarg(7))+"... J'aurais besoin de:";
+		mes "^3355FF"+getitemname(getarg(1))+"^000000 "+getarg(2)+"";
+		if(getarg(3) > 0) mes "^3355FF"+getitemname(getarg(3))+"^000000 "+getarg(4)+"";
+		if(getarg(5) > 0) mes "^3355FF"+getitemname(getarg(5))+"^000000 "+getarg(6)+"";
+		mes "Voilà, c'est tout!";
+		next;
+		mes "[Lydia]";
+		mes "Si vous m'apportez tous les objets, je vous le ferais immédiatement.";
+		mes "Hoo~ à plus tard~";
+		close;
 }
 
 // Headgear Quests 2
 // 'Mine Helmet', 'Parcel Hat', 'Money Loser's Grief', 'Phantom of the Opera Mask'
 //============================================================ 
-comodo,273,137,4	script	Traveler#head	702,{
-	mes "[Isac Mari]";
-	mes "I travel around the world, and collect many interesting stories from people. Sometimes they teach me how to make special items.";
+comodo,274,137,5	script	Mari Isac	702,{
+	mes "[Mari Isac]";
+	mes "Je voyage dans le monde entier, et j'arrive à entendre beaucoup d'histoires intéressantes des gens que je rencontre. Parfois ils m'apprennent même comment faire des objets spéciaux.";
 	next;
-	mes "[Isac Mari]";
-	mes "I know how to make all sorts of worldly hats. But right now, I can't make these since I don't have the right items.";
+	mes "[Mari Isac]";
+	mes "Seriez-vous intéressés par certains articles que j'ai appris à faire?";
+M_Menu:
 	next;
-	switch(select("Mine Helmet:Parcel Hat:Grief for Greed:Opera Phantom Mask")) {
-	case 1:
-		if ((countitem(5009) > 0) && (countitem(5028) > 0) && (countitem(999) > 24) && (countitem(747) > 0)) {
-			mes "[Isac Mari]";
-			mes "Mine Helmet was designed for the miners in the coal mines to have light in the dark. If you brought all the required items, I will go ahead and make it for you~";
+	menu "Dîtes-m'en plus.",M_0, "Oui, fabriquez-m'en un s'il vous plaît.",M_1;
+
+	M_0:
+		menu "Mine Hat",-, "Parcel Hat",sM_Parcel, "Grief for Greed",sM_Money, "Opera Phantom Mask",sM_Phantom;
+
+			mes "[Mari Isac]";
+			mes "J'ai appris à faire le Mine Hat quand je me suis rendu aux anciennes mines de charbon, près de Geffen.";
 			next;
-			mes "[Isac Mari]";
-			mes "But can you check that the items in your inventory aren't upgraded or have cards compounded into them? If any of the required items have forged upgrades or cards, those will be lost once I create the Mine Hat.";
+			mes "[Mari Isac]";
+			mes "Les deux choses les plus importantes dont un mineur a besoin sont d'avoir de la lumière et de se protéger la tête.";
+			mes "Un mineur très inventif a été en mesure de créer quelque chose qui combine ces deux points essentiels.";
 			next;
-			mes "[Isac Mari]";
-			mes "It's better to keep only the items used to make the Mine Hat in your inventory. Did you check? If so, let's get started.";
+			mes "[Mari Isac]";
+			mes "Il a attaché une lumière à son casque de sûreté et a appelé ça un Mine Hat.";
+			mes "Cela signifie que les mineurs n'ont plus à se soucier du transport des lampes et peuvent travailler plus efficacement.";
 			next;
-			switch(select("Give me a minute~!:Let's make the Mine Hat.")) {
-			case 1:
-				mes "[Isac Mari]";
-				mes "Alright. Please check your items again. It's much better to be safe than sorry.";
-				close;			break;
-			case 2:
-				mes "^3355FF*Thook Thook*";
-				mes "*Pop!*^000000";
-				next;
-				mes "[Isac Mari]";
-				mes "Whew! This is pretty hard!";
-				next;
-				delitem 5009,1;  //Safety_Helmet
-				delitem 5028,1;  //Candle
-				delitem 747,1;  //Crystal_Mirror
-				delitem 999,25;  //Steel
-				mes "[Isac Mari]";
-				mes "I'm not quite sure if this is the right one, but it looks about right. Ha ha~";
-				getitem 5031,1; // Mine_Helm
-				close;
-			}
-		}
-		else {
-			mes "[Isac Mari]";
-			mes "I hear Mine Helmets are used in the mines near Geffen. As you know, it's not possible to work without light, even though it attracts monsters in the caves.";
+			mes "[Mari Isac]";
+			mes "Quoi qu'il en soit, si vous voulez que je vous fasse un Mine Hat, vous devrez m'apporter ces articles:";
+			mes "^5555FF1 Safety Helmet^000000,";
+			mes "^5555FF1 Candle^000000,";
+			mes "^5555FF1 Crystal Mirror^000000,";
+			mes "^5555FF25 Steel^000000.";
 			next;
-			mes "[Isac Mari]";
-			mes "One day, a miner remodeled his own Safety Helmet so that he could work with both hands. Since then, it's been called the Mine Helm.";
+			goto M_0;
+		sM_Parcel:
+			mes "[Mari Isac]";
+			mes "J'ai appris à faire le Parcel Hat quand j'ai voyagé à Alberta. Là bas, ils ont une manière unique de distribuer le courrier et les marchandises.";
 			next;
-			mes "[Isac Mari]";
-			mes "If you want to make Mine Helmet,";
-			mes "^3355FF1 Safety Helmet^000000";
-			mes "^3355FF1 Candle^000000 ";
-			mes "^3355FF1 Crystal Mirror^000000";
-			mes "^3355FF25 Steel^000000";
-			mes "is needed to create it.";
+			mes "[Mari Isac]";
+			mes "Au lieu d'utiliser une poche ou un sac pour porter les colis lors des livraisons, ils utilisent un chapeau spécial, appelé Parcel Hat. Ce chapeau permet de porter de nombreux articles sur la tête. Bien sûr, ils doivent avoir le bon équilibre pour l'utiliser.";
 			next;
-			mes "[Isac Mari]";
-			mes "If you bring all the items then I will make it for you right away. See you later~";
+			mes "[Mari Isac]";
+			mes "Quoi qu'il en soit, si vous voulez que je vous fasse un Parcel Hat, vous devrez m'apporter ces articles.";
+			mes "^5555FF150 Fabric^000000,";
+			mes "^5555FF100 Resin^000000,";
+			mes "^5555FF1 Cobaltblue Dyestuffs^000000.";
+			next;
+			goto M_0;
+		sM_Money:
+			mes "[Mari Isac]";
+			mes "J'ai appris comment faire le Grief for Greed lors de mon voyage à Morocc.";
+			next;
+			mes "[Mari Isac]";
+			mes "Il y a longtemps un marchand honnête est entré en conflit avec une guilde un peu louche. À la différence de cette guilde de voyous, le marchand n'a pas escroqué ou trompé les gens.";
+			next;
+			mes "[Mari Isac]";
+			mes "À cause de cela, ils ont attaqué le magasin du commerçant et ont pris toutes ses marchandises.";
+			next;
+			mes "[Mari Isac]";
+			mes "Le marchand a été dévasté par la perte de son magasin. Dans sa tristesse, il a utilisé les morceaux et les pièces qui ont été laissés dans son magasin pour créer un nouvel objet.";
+			next;
+			mes "[Mari Isac]";
+			mes "Il a créé le Grief for Greed, un symbole de sa grande tristesse. Quand les gens voient cet objet sur la tête d'une personne, ils ne peuvent s'empêcher de se sentir compatissants envers son porteur.";
+			next;
+			mes "[Mari Isac]";
+			mes "Beaucoup de négociants le portent maintenant, pensant que ça va les aider pour marchander. Naturellement, c'est également un rappel du triste conte des négociants honnêtes.";
+			next;
+			mes "[Mari Isac]";
+			mes "Quoi qu'il en soit, si vous voulez que je vous fasse un Grief for Greed, vous devrez m'apporter ces articles.";
+			mes "^5555FF1 Circlet [1]^000000,";
+			mes "^5555FF1 Gold^000000,";
+			mes "^5555FF20 Steel^000000,";
+			mes "^5555FF80 Feathers^000000,";
+			mes "^5555FF800 Sticky Mucus^000000.";
+			next;
+			goto M_0;
+		sM_Phantom:
+			mes "[Mari Isac]";
+			mes "J'ai appris comment faire l'Opera Phantom Mask quand j'ai voyagé à Al De Baran. L'histoire cachée derrière ce masque est celle de l'amour pur d'un homme...";
+			next;
+			mes "[Mari Isac]";
+			mes "Il y avait par le passé, un homme qui était amoureux d'une belle chanteuse d'opéra. Malheureusement, l'homme avait un visage terriblement défiguré et était forcé de porter un masque.";
+			next;
+			mes "[Mari Isac]";
+			mes "Il avait honte de son apparence et ne pouvait pas se résoudre à déclarer sa flamme à la chanteuse. Du coup, il observait sa belle de loin, en admirant chaque nuance de sa beauté et de sa grâce.";
+			next;
+			mes "[Mari Isac]";
+			mes "Il s'est caché dans les entrailles de l'opéra, et de temps en temps, il chantait sa chanson d'amour triste. Beaucoup de personnes l'ont entendu, et ont cru qu'il y avait un fantôme hantant le théâtre de l'opéra.";
+			next;
+			mes "[Mari Isac]";
+			mes "La chanteuse a également entendu sa chanson, et à travers elle, elle a pu ressentir la douleur du chanteur, et l'amour qui lui était destiné. Ils finirent par se rencontrer, et la chanteuse l'accepta pour ce qu'il était, malgré son apparence.";
+			next;
+			mes "[Mari Isac]";
+			mes "Depuis ce jour, le conte du fantôme masqué est toujours romancé.";
+			next;
+			mes "[Mari Isac]";
+			mes "Quoi qu'il en soit, si vous voulez que je vous fasse un Opera Phantom Mask, vous devrez m'apporter ces articles.";
+			mes "^5555FF1 Opera Masque^000000,";
+			mes "^5555FF50 Horrendous Hairs^000000.";
+			goto M_0;
+
+	M_1:
+		menu "Mine Hat",-, "Parcel Hat",sM_MakePar, "Grief for Greed",sM_MakeMon, "Opera Phantom Mask",sM_MakePhan;
+
+			if(countitem(5009)<1 || countitem(5028)<1 || countitem(747)<1 || countitem(999)<25) goto ssL_NoItems;
+			delitem 5009, 1;
+			delitem 5028, 1;
+			delitem 747, 1;
+			delitem 999, 25;
+			mes "[Mari Isac]";
+			mes "Vous pouvez y aller. Profitez de votre Mine Hat";
+			getitem 5031,1;
 			close;
-		}
-	case 2:
-		if ((countitem(1059) > 149) && (countitem(907) > 99) && (countitem(978) > 0)) {
-			mes "[Isac Mari]";
-			mes "Parcel Hat seems to be useful for business people to carry around their products. If you brought everything I need, I will make it for you.";
-			mes "If you brought all the required items, I will make it for you~";
-			next;
-			mes "[Isac Mari]";
-			mes "But can you check that the items in your inventory aren't upgraded or have cards compounded into them? If any of the required items have forged upgrades or cards, those will be lost once I create the Parcel Hat.";
-			next;
-			mes "[Isac Mari]";
-			mes "It's better to keep only the items used to make the Parcel Hat in your inventory. Did you check? If so, let's get started.";
-			next;
-			switch(select("Give me a minute~!:Let's make the Parcel Hat.")) {
-			case 1:
-				mes "[Isac Mari]";
-				mes "Alright. Please check your items again. It's much better to be safe than sorry.";
-				close;
-			case 2:
-				mes "^3355FF*Thook Thook*";
-				mes "*Pop!*^000000";
-				next;
-				mes "[Isac Mari]";
-				mes "Oh...";
-				mes "I think I messed up!";
-				mes "No, wait, I think I can fix this...";
-				next;
-				delitem 1059,150;  //Transparent_Cloth
-				delitem 907,100;  //Resin
-				delitem 978,1;  //Cobaltblue_Dyestuffs
-				mes "[Isac Mari]";
-				mes "Well...";
-				mes "Um, it looks like a Parcel Hat. So that's good enough for me! Ha ha~";
-				getitem 5023,1; // Hat_Of_Bundle
-				close;
-			}
-		}
-		else {
-			mes "[Isac Mari]";
-			mes "I heard that around Alberta, Merchants are always selling goods from their carts in the middle of the streets.";
-			next;
-			mes "[Isac Mari]";
-			mes "But in the East side of the country, they use a different way to transfer goods.";
-			next;
-			mes "[Isac Mari]";
-			mes "Goods would be packed into a bundle and placed on top of the head so you wouldn't need to carry things by hand. But it's hard to keep your balance.";
-			next;
-			mes "[Isac Mari]";
-			mes "I'll need...";
-			mes "^3355FF150 Fabric^000000";
-			mes "^3355FF100 Resin^000000 and";
-			mes "^3355FF1 Cobaltblue Dyestuffs^000000";
-			mes "to make a Parcel Hat.";
-			next;
-			mes "[Isac Mari]";
-			mes "If you bring all the items then I will make it for you right away. See you later~!";
+		sM_MakePar:
+			if(countitem(1059)<150 || countitem(907)<100 || countitem(978)<1) goto ssL_NoItems;
+			delitem 1059, 150;
+			delitem 907, 100;
+			delitem 978, 1;
+			mes "[Mari Isac]";
+			mes "Vous pouvez y aller. Profitez de votre Parcel Hat!";
+			getitem 5023,1;
 			close;
-		}
-	case 3:
-		if ((countitem(2233) > 0) && (countitem(969) > 0) && (countitem(949) > 79) && (countitem(999) > 19) && (countitem(938) > 799)) {
-			mes "[Isac Mari]";
-			mes "Grief for Greed...";
-			mes "If you brought all the required items, I'll go ahead and make it for you~";
-			next;
-			mes "[Isac Mari]";
-			mes "[Isac Mari]";
-			mes "But can you check that the items in your inventory aren't upgraded or have cards compounded into them? If any of the required items have forged upgrades or cards, those will be lost once I create the Money Loser's Grief.";
-			next;
-			mes "[Isac Mari]";
-			mes "It's better to keep only the items used to make the Grief for Greed in your inventory. Did you check? If so, let's get started.";
-			next;
-			switch(select("Give me a minute~!:Let's make the Grief for Greed.")) {
-			case 1:
-				mes "[Isac Mari]";
-				mes "Alright. Please check your items again. It's much better to be safe than sorry.";
-				close;
-			case 2:
-				mes "^3355FF*Thook Thook*";
-				mes "*Pop!*^000000";
-				next;
-				mes "[Isac Mari]";
-				mes "Whew! This is pretty hard!";
-				next;
-				delitem 2233,1;  //Circlet_
-				delitem 969,1;  //Gold
-				delitem 949,80;  //Feather
-				delitem 999,20;  //Steel
-				delitem 938,800;  //Sticky_Mucus
-				mes "[Isac Mari]";
-				mes "I might have made a few mistakes, but it looks good enough. Here you go, your own Grief for Greed hat!";
-				getitem 5021,1; // Bankruptcy_Of_Heart
-				close;
-			}
-		}
-		else {
-			mes "[Isac Mari]";
-			mes "Grief for Greed...";
-			mes "There's a tale of an honest Merchant that lived in Morroc long ago who had a quarrel with a bad guild.";
-			next;
-			mes "[Isac Mari]";
-			mes "Because the honest Merchant was not cheating people by his prices, his street stall was attacked by the bad guild and all his goods were taken.";
-			next;
-			mes "[Isac Mari]";
-			mes "So, the honest Merchant lost everything except some broken items. To express his sadness, he took these broken items and created this magnificent hat, the Grief for Greed.";
-			next;
-			mes "[Isac Mari]";
-			mes "This special hat appeals to people's sympathies, making them buy more goods to support the inner goodness of honest Merchants.";
-			next;
-			mes "[Isac Mari]";
-			mes "For this hat, I'll need...";
-			mes "^3355FF1 Slotted Circlet^000000";
-			mes "^3355FF1 Gold^000000";
-			mes "^3355FF20 Steel^000000";
-			mes "^3355FF80 Feather^000000";
-			mes "^3355FF800 Sticky Mucus^000000";
-			next;
-			mes "[Isac Mari]";
-			mes "If you bring all the items then I will make it for you right away. See you later~";
+		sM_MakeMon:
+			if(countitem(2233)<1 || countitem(969)<1 || countitem(999)<20 || countitem(949)<80 || countitem(938)<800) goto ssL_NoItems;
+			delitem 2233, 1;
+			delitem 969, 1;
+			delitem 999, 20;
+			delitem 949, 80;
+			delitem 938, 800;
+			mes "[Mari Isac]";
+			mes "Vous pouvez y aller. Profitez de votre Grief for Greed!";
+			getitem 5021,1;
 			close;
-		}
-	case 4:
-		if ((countitem(2281) > 0) && (countitem(1048) > 49)) {
-			mes "[Isac Mari]";
-			mes "Opera Phantom Mask...";
-			mes "Frightening, but also tragic and romantic. If you brought all the required items, I will make it for you~";
-			next;
-			mes "[Isac Mari]";
-			mes "But can you check that the items in your inventory aren't upgraded or have cards compounded into them? If any of the required items have forged upgrades or cards, those will be lost once I create the Opera Masque.";
-			next;
-			mes "[Isac Mari]";
-			mes "It's better to keep only the items used to make the Mine Hat in your inventory. Did you check? If so, let's get started.";
-			next;
-			switch(select("Give me a minute~!:Let's make the Opera Masque.")) {
-			case 1:
-				mes "[Isac Mari]";
-				mes "Alright. Please check your items again. It's much better to be safe than sorry.";
-				close;
-			case 2:
-				mes "^3355FF*Thook Thook*";
-				mes "*Pop!*^000000";
-				next;
-				mes "[Isac Mari]";
-				mes "Whew! This is pretty hard!";
-				next;
-				delitem 2281,1;  //Phantom_Of_Opera
-				delitem 1048,50;  //Slender_Snake
-				mes "[Isac Mari]";
-				mes "I'm not quite sure if this is the right one.";
-				mes "But it looks fine. Ha ha";
-				getitem 5043,1; // Opera_Ghost_Mask
-				close;
-			}
-		}
-		else {
-			mes "[Isac Mari]";
-			mes "Opera Phantom Mask...";
-			mes "Behind this mask is a story about a man's love and personal tragedy.";
-			next;
-			mes "[Isac Mari]";
-			mes "You may know him as the Phantom of the Opera. He was a musical genius that brought terror to the stage, because his scarred face forced him to live outside of society.";
-			next;
-			mes "[Isac Mari]";
-			mes "However, he fell in love with a beautiful singer and used his talents to propel her to new heights of fame. He finally revealed himself to her.";
-			next;
-			mes "[Isac Mari]";
-			mes "In the end...";
-			mes "She deeply cared for him, but was in love with another singer. The Phantom disappeared, perhaps to haunt some other place, and all that was left of him was his mask...";
-			next;
-			mes "[Isac Mari]";
-			mes "The mask that he was wearing is differently shaped that other opera masks, and was made to cover his particular facial scarring.";
-			next;
-			mes "[Isac Mari]";
-			mes "If you want to make Phantom of Opera. You will need:";
-			mes "^3355FF1 Opera Masque^000000";
-			mes "^3355FF50 Horrendous Hair^000000";
-			next;
-			mes "[Isac Mari]";
-			mes "If you bring all the items then I will make it for you right away. See you later~";
+		sM_MakePhan:
+			if(countitem(2281)<1 || countitem(1048)<50) goto ssL_NoItems; 
+			delitem 2281,1;
+			delitem 1048, 50;
+			mes "[Mari Isac]";
+			mes "Vous pouvez y aller. Profitez de votre Opera Phantom Mask!";
+			getitem 5043, 1;
 			close;
-		}
-	}
+
+		ssL_NoItems:
+			mes "[Mari Isac]";
+			mes "Vous ne semblez pas avoir tout ce dont j'ai besoin pour faire ce chapeau. Revenez quand ce sera le cas, s'il vous plaît.";
+			close;
 }
 
 // Doomed Swords - Comodo Portion. (Continued in Juno)
 //============================================================ 
-comodo,206,310,4	script	Campground Boy#cmd	704,{
+comodo,206,310,4	script	Garçon du Camping#cmd	704,{
 	if (dmdswrd_Q < 4) {
 		switch(dmdswrd_Q) {
 		case 0:
 			mes "[Rochito]";
-			mes "Bread, fruits, vegetables...";
-			mes "Bleh. All that other food is";
-			mes "nothing compared to the ";
-			mes "hearty flavor of meat. Yeap,";
-			mes "BBQ camping in Comodo is";
-			mes "heaven to a meat lover like me~";
+			mes "Pain, fruits, légumes ... Bof. Tous ces aliments ne valent rien comparé à la chaleureuse saveur de la viande. Ouaip, le camping BBQ de Comodo est un paradis pour un amoureux de la viande comme moi~";
 			next;
-			if (select("BBQ Camping...?:Cancel") == 1) {
+			if (select("Le Camping BBQ...?:Partir.") == 1) {
 				mes "[Rochito]";
-				mes "Yeah man... You can eat";
-				mes "Komodoru meat all day when";
-				mes "you go BBQ camping. Komodoru";
-				mes "is an animal native to Comodo";
-				mes "and every part of it is delicious. Every. Single. Morsel.";
+				mes "Ouais mec... Vous pouvez manger la viande Komodoru toute la journée quand vous allez au camping BBQ. Le Komodoru est un animal originaire de Comodo, et chaque partie de celui-ci est délicieuse. Chaque. Simple. Morceau.";
 				next;
 				mes "[Rochito]";
-				mes "What makes this meat even";
-				mes "more delicious is the special";
-				mes "Koserahserah seasoning they";
-				mes "use. That stuff is almost...";
-				mes "addictive. Without it, we";
-				mes "can't start our barbeque!";
+				mes "Ce qui rend cette viande encore plus délicieuse, c'est l'assaisonnement spécial qu'ils utilisent, le Koserahserah. Ce truc est presque... une drogue. Sans cela, nous ne pouvons pas commencer notre barbecue!";
 				next;
 				mes "[Rochito]";
-				mes "If we settled on anything";
-				mes "less than the very best BBQ,";
-				mes "then our comrades that died";
-				mes "to help ^FF0000banish that witch^000000 would";
-				mes "surely be ashamed of us!";
+				mes "Si nous nous étions installés ailleurs qu'au BBQ, nos camarades qui sont morts, en aidant à ^FF0000bannir cette sorcière^000000, auraient sûrement honte de nous!";
 				next;
 				mes "[Rochito]";
-				mes "Say, would you do us a favor?";
-				mes "The Chief of Comodo was going";
-				mes "to bring the Koserahserah and";
-				mes "join us for our barbeque, but";
-				mes "we're guessing he's got to";
-				mes "cancel because of his duties.";
+				mes "Dites, seriez-vous d'accord pour nous rendre un petit service? Le Chef de Comodo allait apporter le Koserahserah et nous rejoindre pour notre barbecue, mais nous supposons qu'il a dû se décommander en raison de ses fonctions.";
 				next;
 				mes "[Rochito]";
-				mes "Let's see, our Chief lives to";
-				mes "the west of these campgrounds.";
-				mes "Would you visit him and see";
-				mes "what's taking him so long";
-				mes "to get over here?";
+				mes "Il habite à l'ouest de ces terrains de camping. Voulez-vous lui rendre visite et voir ce qui l'empêche de venir ici?";
 				set dmdswrd_Q,1;
 				close;
 			}
 			mes "[Rochito]";
-			mes "You know, people gather";
-			mes "on these campgrounds in";
-			mes "memory and respect of those";
-			mes "that have fallen in battle";
-			mes "against the witch of Comodo.";
+			mes "Vous savez, les gens se réunissent sur ces terrains de camping à la mémoire et à l'égard de ceux qui sont tombés dans la bataille contre la sorcière de Comodo.";
 			next;
 			mes "[Rochito]";
-			mes "Long before Comodo was";
-			mes "built inside this huge cave,";
-			mes "this witch used to live in here.^FFFFFF ^000000 A lot of people died trying to";
-			mes "get rid of her, but there're^FFFFFF ^000000 rumors that she's still around...";
+			mes "Il y a longtemps, Comodo a été construite dans cette immense caverne, où cette sorcière avait pris l'habitude de vivre. Beaucoup de personnes sont mortes en essayant de ^FFFFFFse débarrasser d'elle^000000, mais il y a des ^FFFFFFrumeurs qui courent comme quoi elle serait toujours là^000000...";
 			close;
 		case 1:
 			mes "[Rochito]";
-			mes "Komodoru meat is especially";
-			mes "great when it's seasoned with";
-			mes "Koserahserah. That flavoring";
-			mes "is one of Comodo's claims to";
-			mes "fame! You should try some~";
+			mes "La viande de Komodoru est particulièrement bonne quand elle est relevée avec du Koserahserah. Cet assaisonnement fait la renomée et la fierté de Comodo! Vous devriez essayer un de ces quatre~";
 			next;
 			mes "[Rochito]";
-			mes "Speaking of which, our Chief";
-			mes "still hasn't come and brought";
-			mes "the Koserahserah! Would you";
-			mes "see what's taking him so long?";
-			mes "His house is located west of";
-			mes "these campgrounds.";
+			mes "En parlant de ça, notre chef n'est toujours pas venu apporter le Koserahserah! Pouvez-vous aller voir ce qui lui prend autant de temps? Sa maison est située à l'ouest de ces terrains de camping.";
 			close;
 		case 2:
 			mes "[Rochito]";
-			mes "Oh, hey, you're back.";
-			mes "Did you speak to our";
-			mes "Chief? Don't tell me";
-			mes "he had to cancel--we've";
-			mes "been planning this outing";
-			mes "with him for a quite a while...";
+			mes "Oh, hé, vous êtes de retour. Avez-vous parlé à notre Chef? Ne me dites pas qu'il a dû annuler... nous avions planifié cette sortie avec lui depuis un moment...";
 			next;
-			mes "^3355FFYou give Rochito the";
-			mes "Koserahserah seasoning,";
-			mes "and explain why the Chief";
-			mes "cannot attend the barbeque.^000000";
+			mes "^3355FFVous donnez l'assaisonnement de Koserahserah à Rochito et expliquez pourquoi le Chef ne peut pas participer au barbecue.^000000";
 			next;
 			mes "[Rochito]";
-			mes "Awww, nuts. I guess he's";
-			mes "got responsbilities, but it's";
-			mes "still a little disappointing.";
-			mes "He's a buddy, after all. Well,";
-			mes "at least he was kind enough";
-			mes "to send the Koserahserah.";
+			mes "Ah, zut! Je suppose qu'il a des responsabilités, mais je suis un peu déçu. Enfin, c'est un pote. Il a quand même eu la gentillesse d'envoyer le Koserahserah.";
 			next;
 			mes "[Rochito]";
-			mes "It's really too bad that";
-			mes "he can't join us. Ah, I've got";
-			mes "an idea! Would you please bring";
-			mes "this bottle to Tausupa, er, our";
-			mes "Chief? It's Mureuchieligu, a";
-			mes "special vintage wine~";
+			mes "C'est vraiment dommage qu'il ne puisse pas se joindre à nous. Oh, j'ai une idée! S'il vous plaît, apportez cette bouteille à Tausupa à notre Chef!";
 			next;
-			mes "^3355FFYou've received a bottle";
-			mes "of Mureuchieligu wine to";
-			mes "deliver to the Comodo Chief.^000000";
+			mes "[Rochito]";
+			mes "Qu'est-ce que le Tausupa? C'est un Mureuchieligu, un vin spécial grand cru~";
+			next;
+			mes "^3355FFVous avez reçu une bouteille de vin Mureuchieligu à remettre au Chef de Comodo.^000000";
 			set dmdswrd_Q,3;
 			close;
 		case 3:
 			mes "[Rochito]";
-			mes "I know that I should be";
-			mes "delivering that bottle of";
-			mes "wine to the Chief myself,";
-			mes "but I've got to tend to this";
-			mes "barbeque. I hope you ";
-			mes "understand...";
+			mes "Je sais que je devrais livrer cette bouteille de vin au chef moi-même, mais je dois m'occuper du barbecue. J'espère que vous comprenez...";
 			next;
 			mes "[Rochito]";
-			mes "Anyway, you'd be doing";
-			mes "me a huge favor if you";
-			mes "spoke to the Chief, and gave";
-			mes "him my thanks, along with";
-			mes "that bottle of Mureuchieligu.";
+			mes "Quoi qu'il en soit, vous me feriez une énorme faveur si vous alliez voir le chef, pour lui transmettre mes remerciements avec cette bouteille de Mureuchieligu.";
 			close;
 		}
 	}
 	else {
 		mes "[Rochito]";
-		mes "Oh, hey there~";
-		mes "Thanks for helping us";
-		mes "out earlier. I wish the";
-		mes "Chief would join us in our";
-		mes "barbeque, but I understand";
-		mes "that he has to protect Comodo.";
+		mes "Oh, hé là~ merci de nous avoir aidés. J'aimerais que le Chef nous rejoigne pour notre barbecue, mais il doit protéger Comodo.";
 		next;
 		mes "[Rochito]";
-		mes "Hey, you know what?";
-		mes "I can't exactly repay you";
-		mes "with, you know, actual stuff,";
-		mes "but I can give you a hot tip.";
-		mes "There's some guy at the local";
-		mes "Pub with some precious info.";
+		mes "Hé, vous savez quoi? Je ne peux pas vraiment vous récompenser, vous savez, mais je peux vous donner un bon tuyau. Il y a un gars au bar local, c'est une vraie mine d'informations... parfois précieuses!";
 		next;
 		mes "[Rochito]";
-		mes "Yeah, supposedly, this";
-		mes "guy knows more about the";
-		mes "cave that Comodo was built";
-		mes "in... Anyway, I really get the";
-		mes "feeling that it just might";
-		mes "lead to something, you know?";
+		mes "Oui, soit-disant que ce gars en saurait plus sur la caverne où Comodo a été construite... Quoi qu'il en soit, j'ai vraiment l'impression que ça pourrait aboutir à quelque chose. Pourquoi ne pas aller lui rendre visite?";
 		close;
 	}
 }
 
-comodo,204,310,4	script	Camping Youth#cmd	65,{
+comodo,204,310,4	script	Jeune Campeur#cmd	65,{
 	if (dmdswrd_Q < 5) {
 		switch(dmdswrd_Q) {
 		case 0:
 		case 1:
 			mes "[Rockha]";
-			mes "Oh man...";
-			mes "I'm so excited!";
-			mes "My buddies and I've";
-			mes "been planning to get";
-			mes "together for this barbeque";
-			mes "for such a long time~";
+			mes "Oh mec... Je suis si excité! Mes copains et moi avions prévu de nous réunir pour ce barbecue depuis si longtemps~";
 			next;
-			switch(select("Buddies...?:Cancel")) {
+			switch(select("Copains...?:Partir.")) {
 			case 1:
 				mes "[Rockha]";
-				mes "Yeah, some of us know";
-				mes "each other when we fought";
-				mes "together in the War of the";
-				mes "Witch. In fact, one of them";
-				mes "is the Chief of this village!";
-				mes "Huh, why isn't he here yet?";
+				mes "Ouais, certains d'entre nous se sont connus lors de la Guerre contre la Sorcière, où nous nous sommes battus ensemble. En fait, l'un d'entre eux est le Chef de ce village! Hein, pourquoi n'est-il pas encore là?";
 				next;
 				mes "[Rockha]";
-				mes "Anyway, even though";
-				mes "our stations in life have";
-				mes "changed, thankfully we're";
-				mes "still friends. It's kinda weird, though, being on a first name";
-				mes "basis with a village chief.";
+				mes "Quoi qu'il en soit, même si nos rangs dans la vie ont changé, nous sommes toujours amis. C'est un peu bizarre, de faire partie du cercle amical du chef du village.";
 				next;
 				mes "[Rockha]";
-				mes "Makes me feel...";
-				mes "Important. I'm hobnobbing";
-				mes "with a major political figure,";
-				mes "after all. Amazing where your";
-				mes "friends can end up in life...";
+				mes "Je me sens... Important. Je suis lié d'amitié avec une importante personnalité politique, après tout. C'est excellent de voir ses amis réussir dans la vie...";
 				close;
 			}
 			mes "[Rockha]";
-			mes "I've almost forgotten";
-			mes "how much I love hanging";
-			mes "out with these guys. We";
-			mes "should have barbeques";
-			mes "together all the time~";
+			mes "J'ai presque oublié combien j'aime traîner avec ces types. Nous devrions faire des barbecues ensembles tout le temps~";
 			close;
 		case 2:
 			mes "[Rockha]";
-			mes "Wha--? Tausupa can't come,";
-			mes "but he still sent us all of this Koserahserah? What a guy...";
-			mes "I guess... That gives us";
-			mes "a reason to hold another";
-			mes "barbeque here soon, right?";
+			mes "Wha...? Tausupa ne peut pas venir? Mais il nous envoie quand même le Koserahserah! Ha ce type... je suppose... que ça nous donne une bonne raison de refaire bientôt un barbecue, non?";
 			close;
 		case 3:
 			mes "[Rockha]";
-			mes "Hey, when you deliver";
-			mes "that wine to Tausupa, the";
-			mes "Village Chief, would you let";
-			mes "him know that we miss the guy?";
-			mes "He may be busy, but he'll always^FFFFFF ^000000 be our irreplaceable buddy.";
+			mes "Hé, quand vous livrerez ce vin à Tausupa, le Chef de Village, faites-lui savoir qu'il nous manque. Même s'il est souvent occupé, il reste un pote irremplaçable.";
 			close;
 		case 4:
 			mes "[Rockha]";
-			mes "Oh hey, you spoke";
-			mes "to Tausupa? Ah, it's";
-			mes "too bad that he's busy,";
-			mes "but it's great to hear that";
-			mes "he'll enjoy our gift. Okay~";
-			mes "I believe it's time to eat!";
+			mes "Oh hé, vous avez parlé à Tausupa? Oh, c'est dommage qu'il soit occupé, mais c'est super de savoir qu'il aime notre cadeau. Bien~ je crois qu'il est temps de manger!";
 			next;
 			mes "[Rockha]";
-			mes "But before that, let's";
-			mes "make a toast... to Tausupa!";
-			mes "Guardian of Comodo, and";
-			mes "one of the best friends that";
-			mes "a guy can have! Cheers!";
-			mes "Hahahaha hahahaha~!";
+			mes "Mais avant cela, nous allons faire un toast... à Tausupa! Gardien de Comodo, et un des meilleurs amis qu'un gars puisse avoir! À la vôtre! Hahahaha hahahaha~!";
 			set dmdswrd_Q,5;
 			next;
 			mes "[Rockha]";
-			mes "Ahh, you know what would";
-			mes "make this meal perfect?";
-			mes "Some of that legendary";
-			mes "^3355FFComodo Cheese^000000 that I heard";
-			mes "about from ^3355FFToruna^000000. Sure, it";
-			mes "might not exist, but still...!";
+			mes "Ahh, vous savez ce qui rendrait ce repas parfait? Un morceau du légendaire ^3355FFFromage de Comodo^000000 dont ^3355FFToruna^000000 m'a parlé. Bien sûr, il n'existe peut-être pas, enfin...!";
 			close;
 		}
 	}
 	else {
 		mes "[Rockha]";
-		mes "You know, you're a really";
-		mes "chill person. Thanks for";
-		mes "helping us keep in touch";
-		mes "with our old friend, the";
-		mes "Village Chief. Man, being";
-		mes "responsible must be rough...";
+		mes "Vous savez, vous êtes une personne vraiment pleine de fraîcheur. Merci de nous aider à rester en contact avec notre vieil ami, le chef du village. Avoir tant de responsabilité c'est pas évident...";
 		next;
 		mes "[Rockha]";
-		mes "There's two things that";
-		mes "would make our barbeque";
-		mes "absolutely perfect--having";
-		mes "the Village Chief here, and";
-		mes "some of that legendary Comodo^FFFFFF ^000000 Cheese that ^3355FFToruna^000000 told me about.";
+		mes "Il y a deux choses qui rendraient notre barbecue absolument parfait... avoir le chef de village ici, et un morceau du légendaire ^FFFFFFFromage de Comodo^000000 dont m'a parlé ^3355FFToruna^000000.";
 		close;
 	}
 }
 
-comodo,209,305,4	script	Camping Maiden#cmd	71,{
+comodo,209,305,4	script	Campeuse#cmd	71,{
 	mes "[Emralhandas]";
-	mes "Rockha, let me pour";
-	mes "you another drink. We";
-	mes "always dreamed of this";
-	mes "during the War of the Witch...";
-	mes "Having a good time, all of us";
-	mes "together in a time of peace~";
+	mes "Rockha, laissez-moi vous servir une autre boisson. Nous en rêvions toujours pendant la Guerre contre la Sorcière... C'est amusant, nous semblons tous partager un moment de paix~";
 	next;
-	if (select("War of the Witch?:Cancel") == 1) {
+	if (select("Guerre contre la Sorcière?:Partir.") == 1) {
 		mes "[Emralhandas]";
-		mes "Before I tell you about the";
-		mes "War of the Witch, I guess";
-		mes "I should tell you about the";
-		mes "quest to retrieve 4 rare swords";
-		mes "of power, said to be the most";
-		mes "powerful weapons ever made.";
+		mes "Avant que je ne vous parle de la Guerre contre la Sorcière, je dois vous parler des trois épées. Elles sont réputées pour être les armes les plus puissantes jamais forgées."; //myllena: trois et pas quatre?
 		next;
 		mes "[Emralhandas]";
-		mes "Now, all 4 swords were";
-		mes "successfully found 10 years";
-		mes "after the search began. Then,";
-		mes "4 protectors were chosen to";
-		mes "ensure that the swords did";
-		mes "not fall into the wrong hands.";
+		mes "Ces trois épées ont été retrouvées 10 ans après que les recherches aient commencé. Ensuite, trois protecteurs ont été choisis pour veiller à ce que les épées ne tombent pas entre de mauvaises mains."; //myllena: idem
 		next;
 		mes "[Emralhandas]";
-		mes "You might not think so just";
-		mes "by looking at us, but we were";
-		mes "the protectors--me, Rockha,";
-		mes "Rochito, and Tausupa, the chief";
-		mes "of this village. Now, we guarded these weapons very carefully...";
+		mes "Vous ne pouvez pas le deviner comme ça, seulement en nous regardant, mais nous somme les protecteurs... moi, Rockha Rochito, et Tausupa, le chef de ce village. Nous surveillons ces armes très attentivement...";
 		next;
 		mes "[Emralhandas]";
-		mes "However, that didn't deter";
-		mes "Mariposum, ancient witch of";
-		mes "Comodo, from attacking us and";
-		mes "trying to steal the swords. She";
-		mes "was incredibly powerful, and";
-		mes "we needed an army to fight her.";
+		mes "Cependant, cela n'a pas dissuadé Mariposum, la sorcière antique de Comodo, de nous attaquer et essayer de voler les épées. Elle était incroyablement puissante et nous avons eu besoin d'une armée pour nous battre contre elle.";
 		next;
 		mes "[Emralhandas]";
-		mes "That was the War of the";
-		mes "Witch, basically. Mariposum";
-		mes "with her own strange weapon";
-		mes "of mass destruction against the";
-		mes "four of us backed by a large";
-		mes "force of courageous soldiers.";
+		mes "Telle était la Guerre contre la Sorcière, dans le fond. Mariposum et sa propre arme étrange de destruction massive, contre nous trois, soutenus par une grande force de soldats courageux.";
 		next;
 		mes "[Emralhandas]";
-		mes "Many of our comrades died...";
-		mes "But finally we succeeded in";
-		mes "imprisoning the witch by using";
-		mes "the power of the swords. Yeah,";
-		mes "if it weren't for Tausupa, we'd";
-		mes "never have been able to do it.";
+		mes "Plusieurs de nos camarades sont morts... Mais finalement nous avons réussi à emprisonner la sorcière en employant la puissance des épées. Ouais, sans Tausupa, nous n'aurions jamais été capables de réussir.";
 		close;
 	}
 	mes "[Emralhandas]";
-	mes "Rockha, we still have";
-	mes "to finish our mission:";
-	mes "eat all of the barbeque";
-	mes "that that we possibly can!";
-	mes "Let's just stuff ourselves...";
-	mes "All the way until tommorrow!";
+	mes "Rockha, nous devons encore finir notre mission: manger autant de barbecue que nous le pouvons! Goinfrons-nous... jusqu'à s'en faire péter le bide!";
 	close;
 }
 
-comodo,209,314,4	script	Campground Lad#cmd	706,{
+comodo,209,314,4	script	Garçon du Camping#02cmd	706,{
 	if (dmdswrd_Q < 4) {
 		switch(dmdswrd_Q) {
 		case 0:
 		case 1:
 			mes "[Rotute]";
-			mes "Years ago, there was a huge";
-			mes "quest to retrieve 4 rare swords";
-			mes "of incredible power, supposedly";
-			mes "the strongest swords ever made!";
-			mes "But you know, there's a strange";
-			mes "rumor about a secret 5th sword.";
+			mes "Il y a des années, une énorme expédition a eu lieu pour rechercher trois épées rares, d'une puissance incroyable, sûrement les meilleures épées jamais forgées! Mais vous savez, une rumeur étrange court au sujet d'une cinquième épée secrète.";
 			next;
 			mes "[Rotute]";
-			mes "This 5th sword is supposed";
-			mes "to be hidden near Glastheim.";
-			mes "If it does exist, it might have";
-			mes "the power to change the world!";
-			mes "Isn't that freakin' scary?";
+			mes "La cinquième épée est censée être cachée près de Glast Heim. Si elle existe, elle aurait peut-être le pouvoir de changer le monde! N'est-ce pas effrayant?";
 			close;
 		case 2:
 		case 3:
 			mes "[Rotute]";
-			mes "Hey, isn't that Koserahserah?";
-			mes "That's the best seasoning that";
-			mes "you can have for meat dishes!";
-			mes "Oh, you got that from the Chief";
-			mes "to give to Rochito? Wow, they";
-			mes "must be really good friends...";
+			mes "Hé, n'est-ce pas du Koserahserah? C'est le meilleur assaisonnement pour relever les plats de viande! Ah, vous l'avez obtenu du chef pour le donner à Rochito? Wouah, ils doivent vraiment être de bons amis...";
 			close;
 		}
 	}
 	else {
 		mes "[Rotute]";
-		mes "Hello, thanks for helping";
-		mes "out Rockha, Rochito and";
-		mes "Emralhandas. They've known";
-		mes "me since I was born, so it's";
-		mes "like they're family to me.";
+		mes "Bonjour, merci d'aider Rockha, Rochito et Emralhandas. Ils me connaissent depuis que je suis né, ils sont un peu comme ma famille.";
 		next;
 		mes "[Rotute]";
-		mes "One of the reasons that";
-		mes "they brought me here to";
-		mes "Comodo was so that I could";
-		mes "finally meet Tausupa. But...";
-		mes "I guess he's too busy now.";
-		mes "Still, I like this place!";
+		mes "Ils m'ont amené à Comodo pour que je puisse rencontrer Tausupa. Mais... Je sais qu'il est beaucoup trop occupé. Cependant, j'aime cet endroit!";
 		close;
 	}
 }
 
-comodo,221,310,4	script	BBQ Boy#cmd	86,{
+comodo,221,310,4	script	Garçon du BBQ#cmd	86,{
 	mes "[Rinta]";
-	mes "I didn't mean to,";
-	mes "but I accidentally";
-	mes "eavesdropped on those";
-	mes "people over there. Are";
-	mes "they really old friends";
-	mes "with our Village Chief?";
+	mes "Je ne voulais pas, mais j'ai accidentellement écouté ces gens là-bas. Sont-ils vraiment de vieux amis de notre Chef de Village?";
 	next;
 	mes "[Rinta]";
-	mes "In that case, they must";
-	mes "be getting the special";
-	mes "treatment usually reserved";
-	mes "for visiting dignitaries and";
-	mes "the like. Or something like that.";
+	mes "Dans ce cas, ils doivent avoir droit à des traitements de faveur. Ou quelque chose comme ça.";
 	close;
 }
 
-comodo,218,309,4	script	BBQ Visitor#cmd	90,{
+comodo,218,309,4	script	Visiteur du BBQ#cmd	90,{
 	mes "[Razy]";
-	mes "Those people over there";
-	mes "are friends of the Village";
-	mes "Chief? I was wondering about";
-	mes "them for the longest time...";
-	mes "I didn't even know our Chief";
-	mes "had friends outside of Comodo.";
+	mes "Ces gens là-bas sont-ils des amis du chef de village? Je m'interroge à leur sujet depuis longtemps... Je ne savais même pas que notre chef avait des amis en dehors de Comodo.";
 	next;
 	mes "[Razy]";
-	mes "You know, they kind of";
-	mes "strike me as old war buddies,";
-	mes "sprinkling their conversations";
-	mes "with words like ''mission'' all";
-	mes "the time. Then, there's those";
-	mes "little scars they all have...";
+	mes "Vous savez, ils me donnent l'impression d'être de vieux copains de guerre, à parler tout le temps de 'mission'. Et puis, il y a ces petites cicatrices qu'ils ont tous...";
 	close;
 }
 
-comodo,216,310,4	script	BBQ Papa#cmd::CmdFamily	50,{
-	mes "[BBQ Boy]";
-	mes "D-daddy! Is what those";
-	mes "people talking about true?";
-	mes "Was there really an evil";
-	mes "witch here in our village?";
+comodo,216,310,4	script	Le père#cmd::CmdFamily	50,{
+	mes "[Le fils]";
+	mes "P-papa! Est-ce que ces personnes disent vrai? Y avait-il vraiment une mauvaise sorcière, ici, dans notre village?";
 	next;
-	mes "[BBQ Mama]";
-	mes "Honey...";
-	mes "I'm sure those";
-	mes "good people were";
-	mes "just kidding around~";
-	mes "How can that be true?";
+	mes "[La mère]";
+	mes "Chéri... Je suis sûr qu'ils plaisantent à ce sujet~ Comment cela peut-il être vrai?";
 	next;
-	mes "[BBQ Papa]";
-	mes "Now, now, don't tell";
-	mes "me my little man is afraid";
-	mes "of something like a little";
-	mes "witch. It's just an old fairy";
-	mes "tale, son: no reason to";
-	mes "feel frightened at all.";
+	mes "[Le père]";
+	mes "Hé ben! Ne me dites pas que mon petit homme a peur d'une petite sorcière. C'est juste un vieux conte de fées, fiston. Il n'y a pas de quoi être effrayé.";
 	next;
-	mes "[BBQ Boy]";
-	mes "No, Daddy, I'm not";
-	mes "scared! But if the witch";
-	mes "really lived here, then her";
-	mes "home is somewhere around";
-	mes "here in Comodo, right? I'm";
-	mes "gonna go find it someday!";
+	mes "[Le fils]";
+	mes "Non, papa, je n'ai pas peur! Mais si la sorcière a vraiment vécu ici, sa maison doit être quelque part par ici à Comodo, non? J'irai à sa recherche un jour!";
 	next;
-	mes "[BBQ Mama]";
-	mes "Oh, but I'm sure our";
-	mes "Chief would already know";
-	mes "something about that witch";
-	mes "if she truly exists. Anyway,";
-	mes "let's hurry and eat before";
-	mes "the barbeque burns, okay?";
+	mes "[La mère]";
+	mes "Oh, mais si elle existe vraiment, je suis sûr que notre Chef connaît quelque chose au sujet de cette sorcière. Quoi qu'il en soit, dépêchons-nous et mangeons avant que ça refroidisse, ok?";
 	next;
-	mes "[BBQ Boy]";
-	mes "Yay, barbeque!";
-	mes "Mmmmm... Someday,";
-	mes "if that witch is real,";
-	mes "I'm gonna find out";
-	mes "all about her!";
+	mes "[Le fils]";
+	mes "Ouais, barbecue! Huuum... Un jour, si cette sorcière existe, je connaitrais tout d'elle!";
 	close;
 }
 
-comodo,215,307,4	duplicate(CmdFamily)	BBQ Mama#cmd	74
+comodo,215,307,4	duplicate(CmdFamily)	La mère#cmd	74
 
-comodo,213,310,4	duplicate(CmdFamily)	BBQ Boy#cmd2	706
+comodo,213,310,4	duplicate(CmdFamily)	Le fils#cmd2	706
 
-cmd_in02,32,140,4	script	Chief#cmd	49,{
+cmd_in02,32,140,4	script	Chef#cmd	49,{
 	if (dmdswrd_Q > 4) {
 		mes "[Tausupa]";
-		mes "Maybe you can't tell because";
-		mes "of the way the light reflects,";
-		mes "but Comodo is actually built";
-		mes "inside a huge cave, giving the";
-		mes "illusion of an eternal night.";
-		mes "It's quite beautiful, really...";
+		mes "Peut-être que ça vous semble invraisemblable à cause des lumières qui se reflètent, mais Comodo est, en réalité, construite à l'intérieur d'une énorme caverne, donnant l'illusion d'une nuit éternelle. C'est très beau, vraiment...";
 		next;
 		mes "[Tausupa]";
-		mes "People come from all over";
-		mes "the world to experience the";
-		mes "excitement and beauty of";
-		mes "our unique little village.";
-		mes "We've become quite";
-		mes "the tourist attraction~";
+		mes "Les gens viennent de partout dans le monde pour ressentir l'excitation et la beauté de notre petit village unique. Il est devenu un vrai lieu touristique~";
 		close;
 	}
 	else if (dmdswrd_Q > 2 && dmdswrd_Q < 5) {
 		switch(dmdswrd_Q) {
 		case 3:
 			mes "[Tausupa]";
-			mes "Oh, how are my friends";
-			mes "doing? I really wish that";
-			mes "I could have delivered that";
-			mes "Koserahserah personally,";
-			mes "but I can't shirk my duties as";
-			mes "Village Chief and protector.";
+			mes "Oh, comment vont mes amis? Je regrette vraiment de ne pas pouvoir leur apporter le Koserahserah moi-même, mais je ne peux pas me soustraire à mes devoirs de Chef de Village et de protecteur.";
 			next;
-			mes "^3355FFYou give Tausupa the";
-			mes "Meruchieligu wine that";
-			mes "Rochito asked you to deliver.^000000";
+			mes "^3355FFVous donnez la bouteille de Mureuchieligu à Tausupa, comme vous l'a demandé Rochito.^000000"; //myllena: Mureuchieligu et pas Meruchieligu...
 			next;
 			mes "[Tausupa]";
-			mes "Ah... How very kind of";
-			mes "them! They really sent me";
-			mes "this wine? I'm truly touched...";
-			mes "Rockha must have chosen";
-			mes "this--I'll be sure to enjoy it.";
+			mes "Oh... Comme c'est gentil de leur part! Ils m'ont vraiment envoyé ce vin? Je suis vraiment touché... Rockha doit l'avoir choisi... je suis sûr de l'apprécier.";
 			next;
 			mes "[Tausupa]";
-			mes "Would you please express my";
-			mes "thanks to my friends, ^3355FFRochito^000000,";
-			mes "and ^3355FFRockha^000000? It's been far too";
-			mes "long since I've seen them, but";
-			mes "I hope that I get a chance to";
-			mes "visit them someday soon.";
+			mes "Pourriez-vous exprimer mes remerciements à mes amis, ^3355FFRochito^000000 et ^3355FFRockha^000000, s'il vous plait? Cela fait beaucoup trop longtemps que je ne les ai vus, mais j'espère avoir l'occasion de leur rendre visite bientôt.";
 			set dmdswrd_Q,4;
 			close;
 		case 4:
 			mes "[Tausupa]";
-			mes "Would you please express my";
-			mes "thanks to my friends, ^3355FFRochito^000000,";
-			mes "and ^3355FFRockha^000000? It's been far too";
-			mes "long since I've seen them, but";
-			mes "I hope that I get a chance to";
-			mes "visit them someday soon.";
+			mes "Pourriez-vous exprimer mes remerciements à mes amis, ^3355FFRochito^000000 et ^3355FFRockha^000000, s'il vous plait? Cela fait beaucoup trop longtemps que je ne les ai vus, mais j'espère avoir l'occasion de leur rendre visite bientôt.";
 			close;
 		}
 	}
 	else {
 		mes "[Tausupa]";
-		mes "Greetings, adventurer,";
-		mes "I am Tausupa, the Chief of";
-		mes "Comodo, a city famous for its^FFFFFF ^000000 beauty and nightlife. I hope you";
-		mes "enjoy your stay, whether you are^FFFFFF ^000000 seeking excitement or relaxation~";
+		mes "Salutations, aventurier! Je suis Tausupa, le chef de Comodo, une ville célèbre pour sa beauté et sa vie nocturne. J'espère que vous apprécierez votre séjour, à la recherche d'excitation ou de détente~";
 		next;
-		switch(select("About Casino:About Banished Witch:Cancel")) {
+		switch(select("A propos du Casino.:A propos de la sorcière bannie.:Partir.")) {
 		case 1:
 			mes "[Tausupa]";
-			mes "Ah yes, Comodo is world";
-			mes "famous for its Casino. There";
-			mes "are many games that you can";
-			mes "enjoy, but you'll need to use";
-			mes "the Casino's special Eulwo^FFFFFF ^000000 currency and conversion system...";
+			mes "Ah oui, Comodo est de renommée mondiale pour son casino. Il y a beaucoup de jeux que vous pouvez apprécier, mais vous devrez employer le système spécial de devise et de conversion d'Eulwo du casino...";
 			close;
 		case 2:
 			switch(dmdswrd_Q) {
 			case 0:
 				mes "[Tausupa]";
-				mes "Banished witch...?";
-				mes "Ah ha ha, do not worry,";
-				mes "my friend, that is merely";
-				mes "a very old tale. Not worth";
-				mes "your concern at all...";
+				mes "La Sorcière Bannie...? Oh ha ha, ne vous inquiétez pas mon ami, c'est simplement un très vieux conte. Pas de quoi s'attarder là-dessus...";
 				close;
 			case 1:
 				mes "[Tausupa]";
-				mes "Ah, judging from the scent";
-				mes "of BBQ meat on your clothes,";
-				mes "I'm guessing that you ran into";
-				mes "Rochito in the campgrounds, ";
-				mes "right? He must have told you^FFFFFF ^000000 that old story about the witch...";
+				mes "Ah, à en juger par l'odeur de viande sur vos vêtements, je suppose que vous avez rencontré Rochito au camping, non? Il a dû vous raconter la vieille histoire de la sorcière...";
 				next;
 				mes "[Tausupa]";
-				mes "I'd like nothing better";
-				mes "than to join them, but I must";
-				mes "stay here. The witch does exist, and one my jobs is to make sure";
-				mes "that she does not revive by using my sword's power to suppress her.";
+				mes "Rien ne me ferait plus plaisir que d'aller les rejoindre, mais je dois rester ici. La sorcière existe vraiment, et je dois m'assurer qu'elle ne revienne pas. Si tel était le cas, je devrais la supprimer en utilisant la puissance de mon épée.";
 				next;
 				mes "[Tausupa]";
-				mes "Although I planned to see";
-				mes "them today, my duties must";
-				mes "take priority. Would you please";
-				mes "take this seasoning to Rochito";
-				mes "and let him know that I can't";
-				mes "come, and that I'm sorry...?";
+				mes "Même si j'avais prévu de les voir aujourd'hui, mes fonctions sont prioritaires. Voulez-vous, s'il vous plaît, prendre cet assaisonnement pour Rochito, et dites-lui que je ne peux pas venir, et que je suis désolé...?";
 				next;
-				mes "^3355FFYou have received";
-				mes "the Koserahserah";
-				mes "seasoning from the Chief.^000000";
+				mes "^3355FFVous obtenez l'assaisonnement de Koserahserah de la part du chef.^000000";
 				next;
 				mes "[Tausupa]";
-				mes "Thank you so much...";
-				mes "I understand that my";
-				mes "friends cannot begin the";
-				mes "barbeque without Comodo's";
-				mes "world famous seasoning...";
+				mes "Merci beaucoup... Je comprends que mes amis ne peuvent pas commencer le barbecue sans l'assaisonnement de renommée mondiale de Comodo...";
 				set dmdswrd_Q,2;
 				close;
 			case 2:
 				mes "[Tausupa]";
-				mes "Please take this special";
-				mes "Koserserah seasoning to";
-				mes "my friend ^3355FFRochito^000000 at the";
-				mes "barbeque campground. Thanks";
-				mes "again for your help, adventurer. ^FFFFFF ^000000";
+				mes "Veuillez prendre cet assaisonnant spécial de Koserserah pour mon ami ^3355FFRochito^000000 qui se trouve au barbecue du terrain de camping. Merci encore pour votre aide, aventurier.";
 				close;
 			}
 		case 3:
 			mes "[Tausupa]";
-			mes "Maybe you can't tell because";
-			mes "of the way the light reflects,";
-			mes "but Comodo is actually built";
-			mes "inside a huge cave, giving the";
-			mes "illusion of an eternal night.";
-			mes "It's quite beautiful, really...";
+			mes "Peut-être ne vous en rendez-vous pas compte à cause de la façon dont la lumière reflète, mais Comodo est en réalité construite à l'intérieur d'une énorme caverne, donnant l'illusion d'une nuit éternelle. C'est magnifique, vraiment...";
 			next;
 			mes "[Tausupa]";
-			mes "People come from all over";
-			mes "the world to experience the";
-			mes "excitement and beauty of";
-			mes "our unique little village.";
-			mes "We've become quite";
-			mes "the tourist attraction~";
+			mes "Les gens viennent de partout et sont excités devant la beauté de notre petit village, unique en son genre. Nous sommes devenus une véritable attraction touristique~";
 			close;
 		}
 	}	
@@ -1104,136 +570,65 @@ cmd_in02,32,140,4	script	Chief#cmd	49,{
 
 comodo,88,97,4	script	Toruna#cmd	109,{
 	mes "[Toruna]";
-	mes "When I think about it,";
-	mes "there are many fascinating";
-	mes "facts about Comodo. Can";
-	mes "you believe this entire city";
-	mes "is built inside a natural cave?";
+	mes "Quand j'y pense, il y a beaucoup de faits fascinants sur Comodo. Pouvez-vous croire que cette ville entière est construite à l'intérieur d'une caverne naturelle?";
 	next;
-	switch(select("This cave is huge!:This place sure is strange...:Cancel")) {
+	switch(select("Cette grotte est énorme!:Cet endroit est vraiment étrange...:Annuler.")) {
 	case 1:
 		mes "[Toruna]";
-		mes "Oh, this is a huge cave,";
-		mes "but it's not impossible for";
-		mes "nature to create something";
-		mes "of this size and scale if given";
-		mes "thousands, maybe even millions";
-		mes "of years. Let me explain...";
+		mes "Oh, c'est une caverne énorme, mais ce n'est pas impossible pour la nature de créer quelque chose de cette taille et de cette ampleur sur des milliers, peut-être même des millions d'années. Laissez-moi vous expliquer...";
 		next;
 		mes "[Toruna]";
-		mes "Now, water is known as";
-		mes "a universal solvent: running";
-		mes "water will carve its own path";
-		mes "in rock, given enough time.";
-		mes "Now, keep in mind that this";
-		mes "cave was once solid limestone.";
+		mes "Maintenant, l'eau est connue comme dissolvant universel: au fil du temps, l'eau creuse son propre chemin dans la roche. Maintenant, gardez à l'esprit que cette caverne était par le passé un bloc de calcaire.";
 		next;
 		mes "[Toruna]";
-		mes "Years and years of running";
-		mes "water from the rains and the";
-		mes "water table have broken down";
-		mes "this giant pocket of limestone,";
-		mes "clearing out this huge, open";
-		mes "area, the Comodo Cave.";
+		mes "Durant des années et des années le passage des eaux de pluie et de la nappe phréatique a détruit cette poche géante de calcaire, creusant cet énorme espace ouvert, la Caverne de Comodo.";
 		next;
 		mes "[Toruna]";
-		mes "That may sound incredulous,";
-		mes "but cracks in limestone grow";
-		mes "into faults, then spacious gaps";
-		mes "over years and years of erosion. Now, isn't natural science just";
-		mes "amazing? You've got to agree...";
+		mes "Cela peut sembler difficile à croire, mais les fissures se développent dans les failles du calcaire, et après des années et des années d'érosion, des trous spacieux se forment. La nature n'est-elle pas incroyable?";
 		close;
 	case 2:
 		if (dmdswrd_Q == 5 || dmdswrd_Q == 6) {
 			switch(dmdswrd_Q) {
 			case 5:
 				mes "[Toruna]";
-				mes "Yes, that is rather";
-				mes "peculiar. What's also";
-				mes "strange is this rumor I've";
-				mes "been hearing about. Now, are^FFFFFF ^000000 you familiar with Comodo Cheese?";
+				mes "Oui, c'est assez curieux. Ce qui est aussi étrange, c'est cette rumeur dont j'ai entendu parler. Est-ce que vous connaissez le fromage de Comodo ?";
 				next;
 				mes "[Toruna]";
-				mes "It's this urban legend";
-				mes "about this magnificent cheese";
-				mes "that you can only find in Comodo. Now, not too many people believe";
-				mes "it. I mean, you need goats or cows";
-				mes "in order to make any cheese.";
+				mes "C'est cette légende urbaine au sujet d'un magnifique fromage qu'on ne peut trouver qu'à Comodo. De nos jours, peu de personnes y croient. Je veux dire, pour faire n'importe quel fromage il faut des chèvres, des brebis ou des vaches.";
 				next;
 				mes "[Toruna]";
-				mes "However, there's this";
-				mes "strange man that insists";
-				mes "on its existence. The locals";
-				mes "here chalk him up to be some";
-				mes "sort of common loon, but who";
-				mes "knows? Maybe it does exist...";
+				mes "Cependant, il y a cet homme étrange qui insiste sur son existence. Les gens du pays disent que c'est une sorte d'imbécile heureux, mais qui sait? Peut-être qu'il existe vraiment...";
 				set dmdswrd_Q,6;
 				next;
 				mes "[Toruna]";
-				mes "Well, you can decide for";
-				mes "yourself whether he's off";
-				mes "his rocker. The last time";
-				mes "I saw him, he was in the";
-				mes "Comodo Bar, so you can";
-				mes "probably find him there.";
+				mes "Eh bien, vous pouvez décider par vous-même s'il n'est pas dans son fauteuil à bascule. La dernière fois je l'ai vu, il était au Bar de Comodo, donc vous pouvez probablement le trouver là-bas.";
 				close;
 			case 6:
 				mes "[Toruna]";
-				mes "Well, I like to think of";
-				mes "Comodo as unique. What's";
-				mes "really strange are some of";
-				mes "the locals in this area. I've";
-				mes "already told you about the";
-				mes "man in the Comodo Bar, yes?";
+				mes "Eh bien, je me plais à penser que Comodo est unique. Ce qui est vraiment étrange, ce sont certains habitants de cette région. Je vous ai déjà parlé de l'homme au Bar de Comodo, oui?";
 				next;
 				mes "[Toruna]";
-				mes "He keeps insisting";
-				mes "that there is a special";
-				mes "kind of cheese in Comodo";
-				mes "that you cannot get anywhere";
-				mes "else. It sounds crazy, but his";
-				mes "claim may be worth verifying...";
+				mes "Il continue d'insister sur le fait qu'il y a un fromage spécial à Comodo que vous ne pouvez pas obtenir ailleurs. Cela semble fou, mais son affirmation mériterait d'être vérifiée...";
 				close;
 			}
 		}
 		else {
 			mes "[Toruna]";
-			mes "Ah, did you know that";
-			mes "before it was an exotic";
-			mes "village of excitement and";
-			mes "leisure, Comodo was once";
-			mes "a haven for evil creatures, ruled^FFFFFF ^000000 by a witch named Meropusum?";
+			mes "Oh, savez-vous qu'avant d'être un village exotique d'animation et de loisirs, Comodo était un havre pour les créatures du mal, gouverné par une sorcière nommée Mariposum?"; //myllena: Mariposum à la place de Meropusum
 			next;
 			mes "[Toruna]";
-			mes "This witch lay dormant for";
-			mes "years until she was awoken";
-			mes "somehow years ago. She was";
-			mes "a huge threat to the people, but then she was finally defeated";
-			mes "in the famous War of the Witch.";
+			mes "Cette sorcière a sommeillé pendant des années, jusqu'à ce qu'elle ait été éveillée, de façon inconnue, il y a des années. Elle a été une énorme menace pour la population, mais elle a finalement été battue durant la célèbre Guerre de la Sorcière.";
 			next;
 			mes "[Toruna]";
-			mes "One of the heroes of that";
-			mes "war became the current Chief";
-			mes "of this village, and it was";
-			mes "through his leadership that";
-			mes "Comodo grew into a thriving";
-			mes "tourist attraction.";
+			mes "Un des héros de cette guerre est devenu le chef actuel de ce village, et c'est sous sa direction que la ville de Comodo s'est développée, notamment en proposant des attractions touristiques.";
 			next;
 			mes "[Toruna]";
-			mes "However, the threat of";
-			mes "Meropusum still exists,";
-			mes "so I would be careful when";
-			mes "exploring the uninhabited";
-			mes "areas of the Comodo region.";
+			mes "Cependant, la menace de Mariposum existe toujours. Soyez donc prudent en explorant les secteurs inhabités de la région de Comodo."; //myllena: même remarque
 			close;
 		}
 	case 3:
 		mes "[Toruna]";
-		mes "There's much to do";
-		mes "in this city of Comodo,";
-		mes "as well as much to learn";
-		mes "about it. I can never tire of";
-		mes "visiting this exotic city...";
+		mes "Il y a beaucoup à faire dans cette ville de Comodo, ainsi que beaucoup à apprendre sur elle. Je ne me lasse pas de visiter cette ville exotique...";
 		close;
 	}
 }
@@ -1243,48 +638,24 @@ comodo,164,291,4	script	Rakusa#cmd	73,{
 		switch(dmdswrd_Q) {
 		case 6:
 			mes "[Rakusa]";
-			mes "See that guy sitting";
-			mes "over there? All he does";
-			mes "is talk about Comodo Cheese,";
-			mes "just mumbling nonsense about";
-			mes "its incredible flavors all day";
-			mes "long. He's nuts, I tell you.";
+			mes "Vous voyez ce type assis là-bas? Tout ce qu'il fait, c'est de parler du fromage de Comodo, marmonnant des paroles nonsensiques à propos de son incroyable saveur toute la journée. Il est dingue, je vous dis.";
 			next;
 			mes "[Rakusa]";
-			mes "First of all, you need";
-			mes "freakin' milk to make any";
-			mes "cheese. You see any cows";
-			mes "around here? Nope, I thought";
-			mes "so! Still, I think he really";
-			mes "believes that it exists...";
+			mes "Tout d'abord, vous avez besoin de lait pour faire n'importe quel fromage. Vous voyez des vaches par ici? Non! Cependant, il soutient que ce fromage existe réellement...";
 			set dmdswrd_Q,7;
 			close;
 		case 7:
 			mes "[Rakusa]";
-			mes "Damn it! I know for a fact";
-			mes "that the idea of Comodo even";
-			mes "having a cheese is crazy, but";
-			mes "that guy's talking has gotten";
-			mes "me curious now! Maybe it does";
-			mes "exist? How would it even taste?";
+			mes "Zut! Je sais avec certitude que l'idée du fromage de Comodo est folle, mais ma conversation avec ce type m'a rendu curieux maintenant! Peut-être qu'il existe vraiment? Quel goût peut-il avoir?";
 			close;
 		}
 	}
 	else {
 		mes "[Rakusa]";
-		mes "You know, Comodo has";
-		mes "a reputation for offering";
-		mes "high class recreation, so";
-		mes "people forget that we actually";
-		mes "have two dangerous dungeons.";
+		mes "Vous savez, Comodo a une réputation de grande classe, offrant des loisirs, de sorte que les gens oublient que nous avons deux dangereux donjons.";
 		next;
 		mes "[Rakusa]";
-		mes "You adventurers need to";
-		mes "be extra careful if you explore";
-		mes "the caves--the monsters there";
-		mes "are unusually strong. Make";
-		mes "sure that you're well prepared";
-		mes "before you even think of going!";
+		mes "Vous, aventurier, devez être extrêmement prudent si vous explorez les grottes... les monstres sont très forts. Assurez-vous que vous êtes bien préparé avant même de penser à y aller!";
 		close;
 	}
 }
@@ -1294,49 +665,27 @@ comodo,169,284,4	script	Kichiri#cmd	98,{
 		switch(dmdswrd_Q) {
 		case 7:
 			mes "[Kichiri]";
-			mes "Freakin' ^3355FFMagatu^000000...!";
-			mes "Can he talk about anything else";
-			mes "aside from Comodo Cheese?";
-			mes "I don't see why he's so excited";
-			mes "about the stuff! Everyone knows";
-			mes "it's just an old wive's tale.";
+			mes "Fanatique ^3355FFMagatu^000000...!";
+			mes "Peut-il parler d'autre chose en dehors du fromage de Comodo? Je ne vois pas pourquoi il est tellement emballé à ce sujet! Tout le monde sait que ce sont juste des rumeurs de bonnes-femmes.";
 			next;
 			mes "[Kichiri]";
-			mes "Would you do";
-			mes "me a favor and get";
-			mes "Magatu to shut up?";
-			mes "I just want to drink";
-			mes "my alcohol in peace!";
+			mes "Vous me rendiez service si vous arriviez à faire taire Magatu? Je veux juste boire de l'alcool en paix!";
 			set dmdswrd_Q,8;
 			close;
 			break;
 		case 8:
 			mes "[Kichiri]";
-			mes "Cripes! Now Magatu's";
-			mes "got me wondering! I mean,";
-			mes "just because I've never seen";
-			mes "Comodo Cheese doesn't mean";
-			mes "it doesn't exist, right? Curses!^FFFFFF ^000000 Now I'm thinking about it too!";
+			mes "Grr! Maintenant Magatu me fait douter! Je veux dire, ce n'est pas parce que je n'ai jamais vu le fromage de Comodo qu'il n'existe pas, hein? Malédictions! Maintenant j'y pense aussi!";
 			close;
 			break;
 		}
 	}
 	else {
 		mes "[Kichiri]";
-		mes "There's more to do than";
-		mes "gambling in Comodo, you";
-		mes "know. Sometimes, I love";
-		mes "to watch the Dancers on";
-		mes "stage in the middle of the";
-		mes "village. They're so glamorous~";
+		mes "Il n'y a pas que le jeu à Comodo, vous savez. Parfois, j'aime regarder les danseuses sur la scène au milieu du village. Elles sont tellement glamour~";
 		next;
 		mes "[Kichiri]";
-		mes "I hear that the Dance";
-		mes "Academy only accepts female";
-		mes "Archers to become prospective";
-		mes "Dancers. I guess that makes";
-		mes "sense--they're tone and fit,";
-		mes "but not musclebound either...";
+		mes "J'ai entendu dire que l'Académie de Danse accepte seulement des Archères pour devenir d'éventuelles Danseuses. Je suppose que cela a un sens... elles sont toniques et en forme, mais pas trop raides non plus...";
 		close;
 	}
 }
@@ -1346,60 +695,29 @@ comodo,163,280,4	script	Magatu#cmd	55,{
 		switch(dmdswrd_Q) {
 		case 8:
 			mes "[Magatu]";
-			mes "Comodo Cheese...";
-			mes "It really exists...!";
-			mes "And I'm so close to";
-			mes "having the proof! Oh...";
-			mes "That look in your eyes...";
-			mes "Y-you really believe me!";
+			mes "Fromage de Comodo... Il existe vraiment...! Et je suis si proche d'en avoir la preuve! Oh... Ce regard dans vos yeux... V-vous me croyez vraiment!";
 			next;
 			mes "[Magatu]";
-			mes "At long last, not only";
-			mes "someone who believes me,";
-			mes "but an adventurer to boot!";
-			mes "Great, this is perfect! Now,";
-			mes "listen, you want to learn more";
-			mes "about Comodo Cheese, right?";
+			mes "Enfin, non seulement quelqu'un qui me croit, mais un aventurier par-dessus le marché! Super, c'est parfait! Maintenant, écoutez, vous voulez en apprendre plus sur le fromage de Comodo, non?";
 			next;
 			mes "[Magatu]";
-			mes "Well, I happen to know";
-			mes "someone who knows someone";
-			mes "that might be able to give you";
-			mes "the chance to try it for yourself! His name is ^3355FFManzi^000000 , and you can";
-			mes "find him in Comodo's Casino.";
+			mes "Eh bien, je connais quelqu'un qui connaît quelqu'un qui pourrait être en mesure de vous donner la chance d'y goûter! Son nom est ^3355FFManzi^000000, et vous pouvez le trouver dans le casino de Comodo.";
 			next;
 			mes "[Magatu]";
-			mes "Oh, here, before I forget,";
-			mes "take my lucky bottle cap!";
-			mes "Show this to Manzi, and he'll";
-			mes "know that I sent you, and that";
-			mes "you want to learn more about";
-			mes "the elusive Comodo Cheese.";
+			mes "Oh, par ici! Avant que je n'oublie, prenez mon bouchon de bouteille porte-bonheur! Montrez-le à Manzi et il saura que je vous ai envoyé, et que vous voulez en savoir plus sur l'insaisissable fromage de Comodo.";
 			next;
-			mes "^3355FFYou have received";
-			mes "Magatu's lucky bottle";
-			mes "cap to present to Manzi.";
+			mes "^3355FFVous avez reçu le bouchon de bouteille porte-bonheur de Magatu, à présenter à Manzi.^000000";
 			set dmdswrd_Q,9;
 			close;
 		case 9:
 			mes "[Magatu]";
-			mes "Oh, don't forget to";
-			mes "show my lucky bottle cap";
-			mes "to Manzi, okay? You can find";
-			mes "him inside Comodo's Casino~";
-			mes "Good luck, and I hope you get";
-			mes "to try that Comodo Cheese~";
+			mes "Oh, n'oubliez pas de montrer mon bouchon de bouteille porte-bonheur à Manzi, ok? Vous pouvez le trouver à l'intérieur du Casino de Comodo~ Bonne chance, et j'espère que vous arriverez à goûter le fromage de Comodo~";
 			close;
 		}
 	}
 	else {
 		mes "[Magatu]";
-		mes "It's true, it really";
-		mes "exists... Comodo Cheese!";
-		mes "Its flavor must be incomparably";
-		mes "delicious if adventurers have";
-		mes "quested to obtain it for so";
-		mes "many generations...";
+		mes "C'est vrai, il existe vraiment... Le fromage de Comodo! Son goût doit être incomparablement délicieux pour que des aventuriers le recherchent depuis de si nombreuses générations...";
 		close;
 	}
 }
@@ -1409,86 +727,42 @@ cmd_in02,189,99,4	script	Manzi#cmd	85,{
 		switch(dmdswrd_Q) {
 		case 9:
 			mes "["+strcharinfo(0)+"]";
-			mes "Excuse, but I'm";
-			mes "looking for someone";
-			mes "named Manzi. Do you";
-			mes "know where I can find him?";
+			mes "Excusez-moi, mais je suis à la recherche d'une personne nommée Manzi. Savez-vous où je peux le trouver?";
 			next;
 			mes "[Manzi]";
-			mes "Hey guy, I'm right here.";
-			mes "So what exactly do you";
-			mes "want? I'm, um, not in";
-			mes "trouble or anything, am I?";
+			mes "Hé mec, je suis ici. Alors, que voulez-vous exactement? Je n'ai pas, euh, d'ennui ou quoi que ce soit, n'est-ce pas?";
 			next;
-			mes "^3355FFYou give Manzi the";
-			mes "lucky bottle cap that you";
-			mes "received from Magatsu.^000000";
+			mes "^3355FFVous donnez à Manzi le bouchon de bouteille porte-bonheur que vous avez reçu de Magatu.^000000"; //myllena: Magatu et pas Magatsu
 			next;
 			mes "[Manzi]";
-			mes "Whoa, Magatsu gave you";
-			mes "this? Ah, okay, so you must";
-			mes "be looking for that Comodo";
-			mes "Cheese he keeps talking about.";
-			mes "Alright, I owe him a favor, so";
-			mes "I'll tell you who to talk to...";
+			mes "Whoa, Magatu vous a donné ceci? Ah, ok, vous devez donc être à la recherche du fromage de Comodo, dont il continue de parler. Bon, je lui dois une faveur, donc je vais vous dire à qui parler...";
 			next;
 			mes "[Manzi]";
-			mes "From the Casino, go north";
-			mes "towards the center of the";
-			mes "village, and then look to";
-			mes "the right where you'll see";
-			mes "the Dance Stage. You'll see";
-			mes "this old woman right there.";
+			mes "Du casino, allez au nord vers le centre du village, et regardez alors vers la droite où vous verrez la scène de danse. Vous pourrez voir cette vieille dame à droite.";
 			next;
 			mes "[Manzi]";
-			mes "Don't be fooled by the";
-			mes "way she looks--that old";
-			mes "lady is one of Comodo's";
-			mes "wisest elders. Ask her";
-			mes "about the cheese, and";
-			mes "let her know I sent you~";
+			mes "Ne vous laissez pas berner par la manière dont elle attend... cette vieille dame est l'une des aînées les plus sages de Comodo. Interrogez-la au sujet du fromage, et faites-lui savoir que je vous ai envoyé~";
 			next;
 			mes "[Manzi]";
-			mes "Ah, she won't take you";
-			mes "very seriously unless you";
-			mes "show her this. Magatsu gave";
-			mes "you his lucky bottle cap, so I'm^FFFFFF ^000000 gonna give you my lucky coin!";
-			mes "The old crone'll recognize it~";
+			mes "Ah, elle ne vous prendra pas très au sérieux à moins que vous lui montriez ceci. Tout comme Magatu, qui vous a donné son bouchon de bouteille porte-bonheur, je vais vous donner ma pièce de monnaie porte-bonheur! La vieille femme l'identifiera~";
 			next;
 			set dmdswrd_Q,10;
-			mes "^3355FFYou received Manzi's";
-			mes "''lucky coin.'' Strangely";
-			mes "enough, both sides";
-			mes "are heads.";
+			mes "^3355FFVous avez reçu 'la pièce de monnaie porte-bonheur' de Manzi. Curieusement, les deux côtés sont des têtes.^000000";
 			close;
 		case 10:
 			mes "[Manzi]";
-			mes "Look for the old crone";
-			mes "near the Dance Stage here";
-			mes "in Comodo and ask her about";
-			mes "Comodo Cheese, alright? Ah,";
-			mes "and try not to insult her, kay?";
-			mes "It'll make me look bad~";
+			mes "Cherchez la vieille bique près de la scène de danse, ici à Comodo, et interrogez-la au sujet du fromage de Comodo, d'accord? Oh et essayez de ne pas l'insulter, ok? Je ne veux pas être mal vu~";
 			close;
 		}
 	}
 	else {
 		if (Class == Job_Novice) {
 			mes "[Manzi]";
-			mes "What th...?";
-			mes "What's a kid like";
-			mes "you doing in a Casino?";
-			mes "Sure, it's not against the";
-			mes "rules, but I think you oughta";
-			mes "scram and play somewhere else!";
+			mes "Qu...? Qu'est-ce qu'un gamin comme vous fait dans un casino? Bien sûr, ce n'est pas contre les règles, mais je pense que vous feriez mieux de filer et aller jouer ailleurs!";
 			close;
 		}
 		mes "[Manzi]";
-		mes "Hey, have a good time in";
-		mes "the Casino, but don't go buck";
-		mes "wild. You wanna walk out of";
-		mes "here with the shirt on your back,^FFFFFF ^000000 you know? Some people don't";
-		mes "even leave here with that...";
+		mes "Hé bien, profitez d'un agréable moment au casino, mais contrôlez-vous. Vous voulez sortir d'ici avec votre chemise sur le dos, n'est-ce pas? Certaines personnes partent d'ici sans...";
 		close;
 	}
 }
@@ -1499,233 +773,113 @@ comodo,187,153,4	script	Hullaris#cmd	701,{
 		case 10:
 			mes "[Hullaris]";
 			mes "Hula~hula~hula~";
-			mes "Love togther, love together,";
-			mes "we've groovin' on some more~";
-			mes "Love togther, love together,";
-			mes "we've living on the floor~";
+			mes "L'amour toujours, l'amour toujours,";
+			mes "Dansons encore un p'tit tour~";
+			mes "Toi et moi, mon amour,";
+			mes "Virevoltons encore p'tit tour~";
 			next;
-			if (select("Present Muzi's Coin:Um... Comodo Cheese?") == 1) {
-				mes "^3355FFYou present Muzi's lucky";
-				mes "coin to the old woman.^000000";
+			if (select("Présenter la pièce de monnaie de Manzi.:Hum... le fromage de Comodo?") == 1) {
+				mes "^3355FFVous présentez la pièce de monnaie porte-bonheur de Manzi à la vielle femme.^000000";
 				next;
 				mes "[Hullaris]";
-				mes "Love! Love!";
-				mes "Love together~";
-				mes "Love! Love!";
-				mes "Love togeth-hm?";
-				mes "Oh, that's um, Muzi's";
-				mes "cheat coin, isn't it?";
+				mes "L'amour, l'amour!";
+				mes "L'amour toujours~";
+				mes "L'amour, l'amour!";
+				mes "L'amour touj... hum?";
+				mes "Oh, c'est euh, la pièce de monnaie truquée de Manzi, n'est-ce pas?";
 				next;
 				mes "[Hullaris]";
-				mes "He always said that he";
-				mes "might send someone with";
-				mes "that coin to me as a sign";
-				mes "of his trust in that person.";
-				mes "I suppose, then, that I'm";
-				mes "at your service. Now...";
+				mes "Il a toujours dit qu'il pourrait m'envoyer quelqu'un avec cette pièce de monnaie, pour prouver sa confiance en cette personne. Je suppose, alors, que je suis à votre service. Maintenant...";
 				next;
 				mes "[Hullaris]";
-				mes "What exactly did you need?";
-				mes "I'm guessing you've come";
-				mes "here to ask me something";
-				mes "about Comodo. As one of the";
-				mes "oldest elders, I know more";
-				mes "about this village than most...";
+				mes "De quoi exactement avez-vous besoin? Je devine que vous êtes venu ici pour me demander quelque chose sur Comodo. En tant qu'une des aînées les plus anciennes, j'en sais plus au sujet de ce village que la plupart des...";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "Actually, I was hoping";
-				mes "you can tell me about";
-				mes "Comodo Cheese. If it really";
-				mes "exists, I'd like to know";
-				mes "where I can get some.";
+				mes "En réalité, j'espérais que vous pourriez me parler du fromage de Comodo. S'il existe vraiment, je voudrais savoir où je peux m'en procurer.";
 				next;
 				mes "[Hullaris]";
-				mes "Oh... That. First of all,";
-				mes "Comodo Cheese does exist,";
-				mes "and it's as precious as the";
-				mes "legends say. However, it's";
-				mes "not a true cheese, although^FFFFFF ^000000 you may think so from its taste.";
+				mes "Oh... Ça. Tout d'abord, le fromage de Comodo existe, et il est aussi précieux que les légendes l'indiquent. Cependant, ce n'est pas un vrai fromage, bien qu'on puisse le penser à son goût.";
 				next;
 				mes "[Hullaris]";
-				mes "Yes, it's a very rare, natural";
-				mes "substance and isn't made from";
-				mes "cow or goat milk or anything";
-				mes "like that. However, Comodo";
-				mes "Cheese isn't merely food.";
-				mes "No, it's much more...";
+				mes "Oui, c'est une substance très rare et naturelle, qui n'est pas à base de lait de vache, de chèvre, ou autre. Cependant, le fromage de Comodo n'est pas simplement de la nourriture. Non, il est beaucoup plus...";
 				next;
 				mes "[Hullaris]";
-				mes "Those that eat Comodo";
-				mes "Cheese find that their";
-				mes "true potential is unlocked.";
-				mes "Comodo Cheese's true name";
-				mes "is the ^3355FFAwakening Stone^000000. Now,";
-				mes "doesn't that sound impressive?";
+				mes "Ceux qui mangent du fromage de Comodo constatent que leur vrai potentiel se révèle. Le vrai nom du fromage de Comodo est la ^3355FFPierre de Réveil^000000. Alors, cela ne semble pas impressionnant?";
 				next;
 				mes "[Hullaris]";
-				mes "The Awakening Stone is";
-				mes "one of the keys to obtaining";
-				mes "some kind of forbidden power.";
-				mes "That's why only the bravest";
-				mes "adventurers can expect the";
-				mes "chance of ever eating it.";
+				mes "La Pierre de Réveil est l'une des clés qui permet d'obtenir une sorte de pouvoir interdit. C'est pourquoi, seuls les aventuriers les plus courageux peuvent espérer avoir la chance d'en manger.";
 				next;
 				mes "[Hullaris]";
-				mes "Do you really wish to";
-				mes "eat the Comodo Cheese and";
-				mes "see where its power may lead";
-				mes "you? If so, you'll have to endure great challenges to obtain it...";
+				mes "Souhaitez-vous vraiment manger du fromage de Comodo et voir où sa puissance peut vous mener? Si oui, vous devrez supporter de grands défis pour l'obtenir...";
 				next;
 				mes "[Hullaris]";
-				mes "When you've decided";
-				mes "to pursue the Awakening";
-				mes "Stone, seek out a man named";
-				mes "^3355FFNigirboran^000000. He will judge";
-				mes "whether you are worthy";
-				mes "of the Comodo Cheese...";
+				mes "Quand vous aurez décidé de poursuivre la Pierre de Réveil, cherchez un homme appelé ^3355FFNigirboran^000000. Il jugera si vous êtes digne du fromage de Comodo...";
 				set dmdswrd_Q,11;
 				next;
 				mes "[Hullaris]";
-				mes "Now, you should be";
-				mes "able to find Nigiroban";
-				mes "training somewhere in one";
-				mes "of Comodo's Dungeon Caves.";
-				mes "I'll send him a message to";
-				mes "let him know you're coming...";
+				mes "Alors, vous devriez pouvoir trouver Nigirboran s'exerçant quelque part dans une des cavernes souterraines de Comodo. Je lui enverrai un message pour lui faire savoir que vous venez..."; //myllena: Nigirboran et pas Nigiroban
 				close;
 			}
 			mes "[Hullaris]";
-			mes "Love! Love!";
-			mes "Love together~";
-			mes "Love! Love!";
-			mes "Love togeth-hm?";
+			mes "L'amour, l'amour!";
+			mes "L'amour toujours~";
+			mes "L'amour, l'amour!";
+			mes "L'amour touj... hum?";
 			if (sex) {
-				mes "Boy, you're ruining";
-				mes "my groove! Now beat it!";
+				mes "Garçon, vous ruinez mon groove! Battez le rythme!";
 			}
 			else {
-				mes "Girl, you're ruining";
-				mes "my groove! Get away~";
+				mes "Jeune fille, vous ruinez mon groove! Partez~";
 			}
 			close;
 		case 11:
 			mes "[Hullaris]";
-			mes "Do you really wish to";
-			mes "eat the Comodo Cheese and";
-			mes "see where its power may lead";
-			mes "you? If so, you'll have to endure great challenges to obtain it...";
+			mes "Souhaitez-vous vraiment manger du fromage de Comodo et voir où sa puissance peut vous mener? Si oui, vous devrez supporter de grands défis pour l'obtenir...";
 			next;
 			mes "[Hullaris]";
-			mes "When you've decided";
-			mes "to pursue the Awakening";
-			mes "Stone, seek out a man named";
-			mes "^3355FFNigirboran^000000. He will judge";
-			mes "whether you are worthy";
-			mes "of the Comodo Cheese...";
+			mes "Quand vous aurez décidé de poursuivre la Pierre de Réveil, cherchez un homme appelé ^3355FFNigirboran^000000. Il jugera si vous êtes digne du fromage de Comodo...";
 			next;
 			mes "[Hullaris]";
-			mes "Now, you should be";
-			mes "able to find Nigiroban";
-			mes "training somewhere in one";
-			mes "of Comodo's Dungeon Caves.";
-			mes "I'll send him a message to";
-			mes "let him know you're coming...";
+			mes "Alors, vous devriez pouvoir trouver Nigirboran s'exerçant quelque part dans une des cavernes souterraines de Comodo. Je lui enverrai un message pour lui faire savoir que vous venez..."; //myllena: idem ci-dessus
 			close;
 		case 12:
 			mes "[Hullaris]";
-			mes "Hmm? So you've failed";
-			mes "Nigirboran's test, have";
-			mes "you? Well, you better train";
-			mes "until you can pass it. Otherwise, eating Comodo Cheese could";
-			mes "mean your death, you know.";
+			mes "Hum? Donc vous avez échoué à l'épreuve de Nigirboran, n'est-ce pas? Et bien, entraînez-vous d'avantage, jusqu'à ce que vous puissiez la réussir. Autrement, manger du fromage de Comodo pourrait vous conduire à la mort, vous savez.";
 			close;
 		case 13:
 			mes "[Hullaris]";
-			mes "Ah, you've returned.";
-			mes "So were you able to pass";
-			mes "Nigirboran's little test? An";
-			mes "adventurer like you should";
-			mes "be able to have no problem";
-			mes "with it. I've got faith in you~";
+			mes "Ah, vous de retour. Alors, avez-vous été capable de passer le petit test de Nigirboran? Un aventurier comme vous n'a pas dû avoir trop de difficulté. J'ai foi en vous~";
 			next;
-			mes "^3355FFYou present the token that";
-			mes "signifies that you passed";
-			mes "Nigirboran's test to Hullaris.^000000";
+			mes "^3355FFVous présenter la preuve symbolisant que vous avez passé le test de Nigirboran à Hullaris.^000000";
 			next;
 			mes "[Hullaris]";
-			mes "Ah, I was right after all.";
-			mes "I'm glad to see that you've";
-			mes "proven worthy of eating this";
-			mes "Comodo Cheese, or more";
-			mes "accurately, the Awakening";
-			mes "Stone. Here, let me get it...";
+			mes "Ah, j'ai eu raison après tout. Je suis heureux de voir que vous vous êtes montré digne de manger du fromage de Comodo, ou plus précisément, la Pierre de Réveil. Approchez, laissez-moi le prendre...";
 			next;
 			mes "[Hullaris]";
-			mes "There you are...";
-			mes "Only brave and worthy";
-			mes "adventurers are allowed to";
-			mes "eat this. Understand that";
-			mes "eating Comodo Cheese is";
-			mes "a rare and coveted honor!";
+			mes "Là vous êtes... Seuls les aventuriers courageux et digne sont autorisés à manger cela. Comprenez que manger du fromage de Comodo est un honneur rare et convoité!";
 			next;
-			mes "^3355FFHullaris carefully";
-			mes "hands you a plate of";
-			mes "Comodo Cheese. You enjoy";
-			mes "the rich, smooth flavor of";
-			mes "each and every morsel...";
-			mes "It's sublimely delicious!^000000";
+			mes "^3355FFHullaris vous remet soigneusement une assiette de fromage de Comodo. Vous appréciez la saveur riche et douce de chaque morceau... Il est sublime, délicieux !^000000";
 			next;
-			mes "^3355FFAfter you finish eating the";
-			mes "Comodo Cheese, you feel";
-			mes "a subtle, yet definite energy";
-			mes "gently pulsing through your";
-			mes "body. You feel a powerful, yet";
-			mes "quiet confidence of being able";
-			mes "to accomplish anything.^000000";
+			mes "^3355FFAprès avoir fini de manger le fromage de Comodo, vous sentez une énergie subtile, qui fait doucement palpiter votre corps. Vous ressentez une puissance, un apaisement, et la certitude de pouvoir accomplir quoi que ce soit.^000000";
 			set dmdswrd_Q,14;
 			next;
 			mes "[Hullaris]";
-			mes "Hahahah! So what";
-			mes "do you think? It's great,";
-			mes "isn't it? It's unreal, how";
-			mes "delicious it is. All other";
-			mes "foods can never match the";
-			mes "quality of Comodo Cheese~";
+			mes "Hahahah! Alors, qu'en pensez-vous? C'est génial, n'est-ce pas? C'est irréel, tellement il est délicieux. Tous les autres aliments ne sont pas comparables face à la qualité du fromage de Comodo~";
 			next;
 			mes "[Hullaris]";
-			mes "Now, I know that you probably";
-			mes "have things to do, but might";
-			mes "I suggest that you visit the";
-			mes "town of Al De Baran? There's";
-			mes "a man there that can tell you";
-			mes "about the Slate of Muriniel.";
+			mes "Bon, je sais que vous avez probablement des choses à faire, mais pourrais-je vous suggérer de visitiez la ville d'Al de Baran? Il y a un homme là-bas qui peut vous parler du Sceau de Muriniel.";
 			next;
 			mes "[Hullaris]";
-			mes "You've already eaten the";
-			mes "Awakening Stone, so you may";
-			mes "as well obtain the other things";
-			mes "that you need to earn one of";
-			mes "the three forbidden swords.";
-			mes "It's just a thought...";
+			mes "Vous avez déjà mangé la Pierre de Réveil, donc vous pouvez aussi obtenir les autres choses dont vous aurez besoin pour gagner une des trois épées interdites. C'est juste une pensée...";
 			close;
 		}
 	}
 	else {
 		mes "[Hullaris]";
-		mes "Ah... Dance.";
-		mes "It's more than just a form";
-		mes "of entertainment. It's art,";
-		mes "it's seduction, it's battle,";
-		mes "and it's love. Only a true";
-		mes "Dancer can understand this...";
+		mes "Ah... La danse. C'est plus qu'une simple forme de divertissement. C'est l'art, c'est la séduction, c'est la bataille, et c'est l'amour. Seul un vrai danseur peut le comprendre...";
 		next;
 		mes "[Hullaris]";
-		mes "You know, Comodo is famous";
-		mes "for its Dance Academy and the";
-		mes "Dancers that have been trained";
-		mes "there. If you know any female";
-		mes "Archers, why don't you suggest";
-		mes "visiting the school to them?";
+		mes "Vous savez, Comodo est célèbre pour son académie de danse et ses danseuses. Si vous connaissez des Archères, pourquoi ne leur proposez-vous pas de visiter l'école?";
 		close;
 	}
 }
@@ -1735,229 +889,104 @@ beach_dun3,30,220,4	script	Nigirboran#cmd	704,{
 		switch(dmdswrd_Q) {
 		case 11:
 			mes "[Nigirboran]";
-			mes "You're the one that";
-			mes "Hullaris sent? So you're";
-			mes "here to earn the right to";
-			mes "eat the Awakening Stone...";
-			mes "Or Comodo Cheese, as it's";
-			mes "more commonly known.";
+			mes "Vous êtes celui que Hullaris a envoyé? Ainsi vous êtes ici pour gagner le droit de manger la Pierre de Réveil... ou le fromage de Comodo, comme on le connaît généralement.";
 			next;
 			mes "[Nigirboran]";
-			mes "Yes, it has many names...";
-			mes "But it's more than a mere";
-			mes "tasty treat--the Awakening";
-			mes "Stone can help you access";
-			mes "your true potential. But if you're not prepared... then you'll die.";
+			mes "Oui, il a beaucoup de noms... Mais c'est plus qu'un simple festin savoureux... la Pierre de Réveil peut vous aider à avoir accès à votre vrai potentiel. Mais si vous n'êtes pas bien préparé... alors vous mourrez.";
 			next;
 			mes "[Nigirboran]";
-			mes "If your mind and body";
-			mes "aren't sufficiently trained,";
-			mes "your body will reject the";
-			mes "Comodo Cheese and you";
-			mes "would die a slow, painful,";
-			mes "yet incredibly flavorful death.";
+			mes "Si votre esprit et votre corps ne sont pas suffisamment entraînés, votre organisme rejettera le fromage de Comodo et vous mourrez d'une mort lente, douloureuse, et cependant incroyablement savoureuse...";
 			next;
 			mes "[Nigirboran]";
-			mes "But I'm sure that won't";
-			mes "happen to you! If Hullaris";
-			mes "sent you to me, you must";
-			mes "have a fighting chance, right?";
-			mes "So come back when you're";
-			mes "ready for the testing~";
+			mes "Mais je suis sûr que cela ne vous arrivera pas! Si Hullaris vous a envoyé me voir, vous devez avoir une chance, non? Donc, revenez quand vous serez prêt pour la mise à l'épreuve~";
 			set dmdswrd_Q,12;
 			close;
 		case 12:
 			mes "[Nigirboran]";
-			mes "Good, you have returned--";
-			mes "I'd expect nothing less of";
-			mes "a brave and daring adventurer.";
-			mes "Now hold still as I gauge your";
-			mes "body's internal energies and see^FFFFFF ^000000 if it can handle Comodo Cheese...";
+			mes "Bien, vous êtes revenu... Je n'en attendais pas moins d'un aventurier courageux et audacieux... Maintenant, tenez-vous tranquille, je vais mesurer les énergies internes de votre corps et voir s'il peut supporter le fromage de Comodo...";
 			next;
 			mes "[Nigirboran]";
-			mes "Alright.";
-			mes "Are you ready?";
-			mes "Now... Brace yourself!";
-			mes "Heeeeeyah! Hoooo-HAH!";
+			mes "Bien. Est-ce que vous êtes prêt? Bon... Préparez-vous! Heeeeeyah! Hoooo-HAH!";
 			next;
 			if (JobLevel > 20 && BaseLevel > 25) {
 				switch(rand(1,3)) {
 				case 1:
-					mes "^3355FFA powerful current of";
-					mes "warmth immediately coarses";
-					mes "through your body from head";
-					mes "to toe, and you struggle to";
-					mes "keep yourself from writhing.^000000";
+					mes "^3355FFUn puissant courant de chaleur vous traverse le corps, de la tête aux pieds, et vous luttez pour ne pas vous tortiller.^000000";
 					next;
 					mes "[Nigirboran]";
-					mes "Hmm... Your body seems";
-					mes "well trained, but your mind";
-					mes "is still reeling from the test.";
-					mes "If you ate the Comodo Cheese";
-					mes "now, you'd be reduced to an";
-					mes "incoherent invalid...";
+					mes "Hum... Votre corps semble bien entraîné, mais votre esprit est encore ébranlé par l'essai. Si vous mangiez du fromage de Comodo maintenant, vous risqueriez un terrible handicap...";
 					next;
 					mes "[Nigirboran]";
-					mes "Go and train yourself";
-					mes "a little more, and try";
-					mes "to improve your mind's";
-					mes "sense of clarity. When";
-					mes "you feel ready, come";
-					mes "back to me once more.";
+					mes "Allez vous entraîner un peu plus, et essayer d'ouvrir votre esprit d'avantage. Lorsque vous vous sentirez prêt, revenez me voir.";
 					close;
 				case 2:
-					mes "^3355FFA powerful current of";
-					mes "warmth immediately coarses";
-					mes "through your body from head";
-					mes "to toe, and you struggle to";
-					mes "keep yourself from writhing.^000000";
+					mes "^3355FFUn puissant courant de chaleur vous traverse le corps, de la tête aux pieds, et vous luttez pour ne pas vous tortiller.^000000";
 					next;
 					mes "[Nigirboran]";
-					mes "Huh. Your body is";
-					mes "strong, but your spirit";
-					mes "is weak. You need more";
-					mes "training. If you were to eat";
-					mes "the Comodo Cheese now...";
-					mes "You would evaporate.";
+					mes "Hum. Votre corps est fort, mais votre esprit est faible. Vous avez besoin de plus de formation. Si vous deviez manger du fromage de Comodo maintenant... Vous vous évaporeriez.";
 					next;
 					mes "[Nigirboran]";
-					mes "But don't lose heart,";
-					mes "it's too early for you";
-					mes "to give up. Go out and";
-					mes "train some more, and then";
-					mes "come back to me when you";
-					mes "feel like you're ready.";
+					mes "Mais ne perdez pas courage, c'est trop tôt pour que vous renonciez. Sortez, entraînez-vous d'avantage, et revenez me voir quand vous vous sentirez prêt.";
 					close;
 				case 3:
-					mes "^3355FFA powerful current of";
-					mes "warmth immediately coarses";
-					mes "through your body from head";
-					mes "to toe, and you struggle to";
-					mes "keep yourself from writhing.^000000";
+					mes "^3355FFUn puissant courant de chaleur vous traverse le corps, de la tête aux pieds, et vous luttez pour ne pas vous tortiller.^000000";
 					next;
 					mes "[Nigirboran]";
-					mes "Yes... Yes...";
-					mes "Your mind, soul, and body";
-					mes "seem well trained. I think you";
-					mes "can eat the Comodo Cheese";
-					mes "without any ill effect. Good,";
-					mes "good, I think you're ready.";
+					mes "Oui... Oui...";
+					mes "Votre esprit, vôtre âme, et vôtre corps semblent bien entraînés. Je pense que vous pouvez manger du fromage de Comodo sans aucune conséquence néfaste. Bien, Bien, je pense que vous êtes prêts.";
 					next;
 					mes "[Nigirboran]";
-					mes "Here, take this little";
-					mes "token to Hullaris. That";
-					mes "will prove to her that";
-					mes "you've passed my little";
-					mes "test. Congratulations~";
+					mes "Tenez, prenez ce petit symbole pour Hullaris. Cela lui prouvera que vous avez passé ma petite épreuve. Félicitations~";
 					next;
-					mes "^3355FFYou've received";
-					mes "a token button to";
-					mes "present to Hullaris";
-					mes "from Nigirboran.^000000";
+					mes "^3355FFVous avez reçu un badge symbolique, à présenter à Hullaris de la part de Nigirboran.^000000";
 					set dmdswrd_Q,13;
 					next;
 					mes "[Nigirboran]";
-					mes "Ah, I almost forgot";
-					mes "to ask you. Why do you";
-					mes "seek the Comodo Cheese,";
-					mes "or the Awakening Stone?";
-					mes "Are you seeking one of";
-					mes "the 3 forbidden swords?";
+					mes "Oh, j'allais oublier... Pourquoi cherchez-vous le fromage de Comodo, ou la Pierre de Réveil? Cherchez-vous l'une des trois épées interdites?"; //myllena: à partir d'ici ça parle bien de trois épées, et pas quatre
 					next;
 					mes "[Nigirboran]";
-					mes "I don't know all the details,";
-					mes "but I do know that you'll need";
-					mes "the ^3355FFAwakening Stone^000000, the ^3355FFBook^000000";
-					mes "^3355FFof the Lamb^000000 and the ^3355FFSlate of^000000";
-					mes "^3355FFMurniel^000000 to even have a chance^FFFFFF ^000000 of obtaining one of those swords.";
+					mes "Je ne connais pas tous les détails, mais je sais que vous aurez besoin de la ^3355FFPierre de Réveil^000000, du ^3355FFLivre de l'Agneau^000000 et du ^3355FFSceau de Muriniel^000000 pour avoir ne serait-ce qu'une chance d'obtenir l'une de ces épées."; //myllena: Muriniel et pas Murniel
 					next;
 					mes "[Nigirboran]";
-					mes "Let's see... After you";
-					mes "speak to Hullaris, you";
-					mes "should go to Al De Baran";
-					mes "and find someone named";
-					mes "^3355FFMeteurengut^000000 to learn about";
-					mes "the Slate of Muriniel.";
+					mes "Voyons voir... Après avoir parlé à Hullaris, vous devrez vous rendre à Al De Baran, et trouver quelqu'un nommé ^3355FFMeteurengut^000000, pour vous renseigner sur le Sceau de Muriniel.";
 					next;
 					mes "[Nigirboran]";
-					mes "Anyway, I wish you";
-					mes "the best of luck in";
-					mes "accomplishing your";
-					mes "goals. Godspeed...";
+					mes "Quoi qu'il en soit, je vous souhaite beaucoup de chance dans l'accomplissement de vos objectifs. Bonne chance...";
 					close;
 				}
 			}
 			else {
-				mes "^3355FFA torrent of warmth";
-				mes "coarses through your";
-				mes "entire body, and you";
-				mes "immediately faint from";
-				mes "the rush of energy.^000000";
+				mes "^3355FFUn torrent de chaleur passe à travers l'ensemble de votre corps, et vous sentez immédiatement votre énergie se décroître.^000000";
 				next;
 				mes "[Nigirboran]";
-				mes "Goodness...!";
-				mes "Your mind and body";
-				mes "are far too weak to";
-				mes "handle the Comodo Cheese";
-				mes "now. You must seriously";
-				mes "train yourself much more...";
+				mes "Mon Dieu...! Votre esprit et votre corps sont beaucoup trop faibles pour manipuler le fromage de Comodo maintenant. Vous devez sérieusement vous entraîner d'avantage...";
 				next;
 				mes "[Nigirboran]";
-				mes "After you've developed";
-				mes "some more strength, come";
-				mes "back to me. You can retake";
-				mes "this little test anytime~";
+				mes "Quand vous aurez développé un peu plus de force, revenez me voir. Vous pouvez reprendre ce petit test n'importe quand~";
 				close;
 			}
 		case 13:
 			mes "[Nigirboran]";
-			mes "I don't know all the details,";
-			mes "but I do know that you'll need";
-			mes "the ^3355FFAwakening Stone^000000, the ^3355FFBook^000000";
-			mes "^3355FFof the Lamb^000000 and the ^3355FFSlate of^000000";
-			mes "^3355FFMurniel^000000 to even have a chance";
-			mes "of obtaining a forbidden sword.";
+			mes "Je ne connais pas tous les détails, mais je sais que vous aurez besoin de la ^3355FFPierre de Réveil^000000, du ^3355FFLivre de l'Agneau^000000 et du ^3355FFSceau de Muriniel^000000, pour espérer avoir la possibilité d'obtenir une épée interdite."; //myllena: Muriniel et pas Murniel
 			next;
 			mes "[Nigirboran]";
-			mes "Let's see... After you";
-			mes "speak to Hullaris, you";
-			mes "should go to Al De Baran";
-			mes "and find someone named";
-			mes "^3355FFMeteurengut^000000 to learn about";
-			mes "the Slate of Muriniel.";
+			mes "Voyons voir... Après avoir parlé à Hullaris, vous devrez vous rendre à Al De Baran, et trouver quelqu'un nommé ^3355FFMeteurengut^000000, pour vous renseigner sur le Sceau de Muriniel.";
 			next;
 			mes "[Nigirboran]";
-			mes "Anyway, I wish you";
-			mes "the best of luck in";
-			mes "accomplishing your";
-			mes "goals. Godspeed...";
+			mes "Quoi qu'il en soit, je vous souhaite beaucoup de chance dans l'accomplissement de vos objectifs. Bonne chance...";
 			close;
 		case 14:
 			mes "[Nigirboran]";
-			mes "Somewhere in ^3355FFAl De Baran^000000,";
-			mes "you'll find a man named";
-			mes "^3355FFMeteurengut^000000. He should be";
-			mes "able to help you learn more";
-			mes "about the Slate of Muriniel.";
+			mes "Quelque part à Al De Baran, vous trouverez un homme du nom de Meteurengut. Il devrait être en mesure de vous aider à en apprendre plus sur le Sceau de Muriniel.";
 			close;
 		}
 	}
 	else {
 		mes "[Nigirboran]";
-		mes "Oh... Hello there.";
-		mes "I guess you could say";
-		mes "that I'm something of";
-		mes "a trainer here in Comodo.";
-		mes "My name is Nigirboran.";
-		mes "I know it's hard to say...";
+		mes "Oh... Bonjour. Je suis sûr que vous pensez que je suis une sorte d'entraîneur, ici, à  Comodo. Mon nom est Nigirboran. Je sais que c'est difficile à prononcer...";
 		next;
 		mes "[Nigirboran]";
-		mes "If Hullaris hasn't sent";
-		mes "you, then I don't think";
-		mes "I can be of any real help";
-		mes "for you. That seems to be";
-		mes "the case, so I'd appreciate";
-		mes "it if you'd let me train...";
+		mes "Si Hullaris ne vous a pas envoyé, alors je ne pense pas pouvoir vous aider. Cela semble être le cas, donc j'apprécierais que vous me laissiez m'exercer...";
 		close;
 	}
 }
@@ -1967,84 +996,42 @@ aldebaran,44,53,4	script	Meteurengut#cmd	64,{
 		switch(dmdswrd_Q) {
 		case 14:
 			mes "[Meteurengut]";
-			mes "Ah. Your body is surrounded";
-			mes "by the glow of one that has";
-			mes "eaten of the Awakening Stone.";
-			mes "That alone may prove your value";
-			mes "as an adventurer, but are you";
-			mes "free from your selfish desires?";
+			mes "Ah. Votre corps est entouré par l'éclat de celui qui a mangé de la Pierre de Réveil. Il se peut que vous ayez prouvé votre valeur en tant qu'aventurier, mais êtes-vous libéré de la convoitise humaine, de vos désirs égoïstes?";
 			next;
 			mes "[Meteurengut]";
-			mes "Even just the smallest";
-			mes "taint of greed or jealousy";
-			mes "can prove to be a corruptive";
-			mes "influence when power is not";
-			mes "tempered by wisdom and a";
-			mes "sense of true compassion.";
+			mes "Même les plus petites traces de cupidité, ou de jalousie, peuvent s'avérer être une influence corruptive, lorsque le pouvoir n'est pas tempéré par la sagesse et le sens de la véritable compassion.";
 			next;
 			mes "[Meteurengut]";
-			mes "Others like you have come";
-			mes "before me in hopes of learning";
-			mes "about the Slate of Muriniel and";
-			mes "eventually obtaining one of the";
-			mes "three accursed blades. You are probably no different from them...";
+			mes "D'autres, comme vous, sont venus me voir dans l'espoir de se renseigner sur le Sceau de Muriniel, et d'obtenir, par la suite, une des trois lames maudites. Vous n'êtes probablement pas différents d'eux...";
 			next;
 			mes "[Meteurengut]";
-			mes "The Slate of Muriniel is an";
-			mes "alchemic artifact that can";
-			mes "help one access unimaginable";
-			mes "power, originally developed";
-			mes "by a master of alchemy that was";
-			mes "known as Rikaseh Sumarecon.";
+			mes "Le Sceau de Muriniel est un artefact alchimique, qui peut aider à accéder à une puissance inimaginable. Cet artefact a été créé par un maître de l'alchimie, connu sous le nom de Rikaseh Sumarecon.";
 			next;
 			mes "[Meteurengut]";
-			mes "Sumarecon had two apprentices,";
-			mes "and after he had passed down the secrets of the Slate of Muriniel";
-			mes "to only one of his proteges, his other protege killed him and the";
-			mes "other student out of jealousy.";
+			mes "Sumarecon a eu deux apprentis, et après qu'il ait transmis les secrets du Sceau de Muriniel à l'un de ses deux étudiants, son autre protégé fou de jalousie, a tué non seulement son camarade, mais aussi son maître.";
 			next;
 			mes "[Meteurengut]";
-			mes "Sumarecon's secrets were";
-			mes "thought to be lost forever...";
-			mes "Fortunately, years later, an";
-			mes "Alchemist named Kuprite found";
-			mes "Sumarecon's secret documents";
-			mes "containing his knowledge.";
+			mes "Les secrets de Sumarecon auraient été perdus à jamais... Heureusement, des années plus tard, un alchimiste, appelé Kuprite, a trouvé les documents secrets de Sumarecon contenant ses connaissances.";
 			next;
 			mes "[Meteurengut]";
-			mes "Kuprite then taught these";
-			mes "secrets to a select group of";
-			mes "Alchemy students, one of which";
-			mes "was my ancestor, Burukesaemu.";
-			mes "And so, because of my lineage,";
-			mes "I have learned those secrets.";
+			mes "Kuprite a alors appris ces secrets à un groupe d'élite d'étudiants en Alchimie, dont un était mon ancêtre, Burukesaemu. Et ainsi, en raison de ma lignée, j'ai appris ces secrets.";
 			next;
 			mes "[Meteurengut]";
-			mes "If you wish for me to";
-			mes "reproduce the Slate of";
-			mes "Muriniel for you, then";
-			mes "please bring me the items";
-			mes "I require to complete the";
-			mes "secret alchemic procedure.";
+			mes "Si vous souhaitez que je vous reproduise le Sceau de Muriniel, alors apportez-moi, s'il vous plaît, les articles que j'exige pour remplir le procédé alchimique secret.";
 			next;
 			mes "[Meteurengut]";
-			mes "I shall need";
+			mes "J'ai besoin de";
 			mes "^3355FF1 Sapphire^000000,";
 			mes "^3355FF1 Shining Stone^000000,";
 			mes "^3355FF1 Rough Elunium^000000,";
-			mes "^3355FF1 Emerald^000000, and";
+			mes "^3355FF1 Emerald^000000, et";
 			mes "^3355FF1 Blue Gemstone^000000.";
 			set dmdswrd_Q,15;
 			close;
 		case 15:
 			if (countitem(717) > 0 && countitem(726) > 0 && countitem(721) > 0 && countitem(640) > 0 && countitem(757) > 0) {
 				mes "[Meteurengut]";
-				mes "You've already found";
-				mes "all of the items I require to";
-				mes "create the Slate of Muriniel?";
-				mes "Fantastic. Now I can begin work";
-				mes "on this. However, there is one";
-				mes "more thing I must ask of you.";
+				mes "Vous avez déjà trouvé tous les articles que j'exige pour créer le Sceau de Muriniel? Fantastique. Maintenant je peux commencer le travail. Cependant, il y a encore une chose que je dois vous demander.";
 				delitem 717,1; //Blue_Gemstone
 				delitem 726,1; //Blue_Jewel
 				delitem 721,1; //Azure_Jewel
@@ -2053,45 +1040,27 @@ aldebaran,44,53,4	script	Meteurengut#cmd	64,{
 				set dmdswrd_Q,16;
 				next;
 				mes "[Meteurengut]";
-				mes "Would you please bring me";
-				mes "^3355FF1 Cobweb^000000? You can obtain";
-				mes "them by slaying spiders in";
-				mes "Muriniel Pass which is on the";
-				mes "way to Al De Baran from here.";
+				mes "M'apporteriez-vous ^3355FF1 Cobweb^000000, s'il vous plaît? Vous pouvez en obtenir sur les araignées dans le passage de Muriniel, qui se trouve sur le chemin d'Al De Baran en partant d'ici.";
 				next;
 				mes "[Meteurengut]";
-				mes "I'd have asked for it";
-				mes "sooner, but I need to prepare";
-				mes "all of these stones, and I need";
-				mes "the freshest Cobwebs I can get.";
-				mes "I'll make sure that these stones^FFFFFF ^000000 are ready when you return.";
+				mes "Je vous l'aurais bien demandé plus tôt, mais je dois préparer toutes ces pierres, et j'ai besoin des toiles d'araignée les plus fraîches possible. Je vais faire en sorte que ces pierres soient prêtes à votre retour.";
 				close;
 			}
 			mes "[Meteurengut]";
-			mes "If you wish for me to";
-			mes "reproduce the Slate of";
-			mes "Muriniel for you, then";
-			mes "please bring me the items";
-			mes "I require to complete the";
-			mes "secret alchemic procedure.";
+			mes "Si vous souhaitez que je vous reproduise le Sceau de Muriniel, alors apportez-moi, s'il vous plaît, les articles que j'exige pour remplir le procédé alchimique secret.";
 			next;
 			mes "[Meteurengut]";
-			mes "I shall need";
+			mes "J'ai besoin de";
 			mes "^3355FF1 Sapphire^000000,";
 			mes "^3355FF1 Shining Stone^000000,";
 			mes "^3355FF1 Rough Elunium^000000,";
-			mes "^3355FF1 Emerald^000000, and";
+			mes "^3355FF1 Emerald^000000, et";
 			mes "^3355FF1 Blue Gemstone^000000.";
 			close;
 		case 16:
 			if (countitem(1025) > 0) {
 				mes "[Meteurengut]";
-				mes "I see that you've brought";
-				mes "me a Cobweb. It's hard to";
-				mes "believe, but it's integreal to";
-				mes "creating the Slate of Muriniel.";
-				mes "Now, if you'll wait a moment,";
-				mes "I shall complete the slate...";
+				mes "Je vois que vous m'avez apporté une Cobweb. C'est difficile à croire, mais elle est nécessaire pour créer le Sceau de Muriniel. Bon, attendez un moment, je vais terminer le sceau...";
 				next;
 				delitem 1025,1; //Spiderweb
 				mes "*^3355FFClang Clang Clang!*";
@@ -2100,88 +1069,42 @@ aldebaran,44,53,4	script	Meteurengut#cmd	64,{
 				set dmdswrd_Q,17;
 				next;
 				mes "[Meteurengut]";
-				mes "*Whew* It's finished.";
-				mes "Please take care of this";
-				mes "slate, and know that I am";
-				mes "entrusting you with an artifact";
-				mes "that can help you access power";
-				mes "beyond your imagination...";
+				mes "*Pfiou* C'est fini.";
+				mes "Veuillez prendre soin de ce sceau, et sachez que je vous confie un artefact qui peut vous aider à accéder à un pouvoir qui dépasse votre imagination...";
 				next;
-				mes "^3355FFYou have received";
-				mes "the Slate of Muriniel.^000000";
+				mes "^3355FFVous avez reçu le Sceau de Muriniel.^000000";
 				next;
 				mes "[Meteurengut]";
-				mes "There. You have eaten of";
-				mes "the Awakening Stone and you";
-				mes "possess the Slate of Muriniel.";
-				mes "Now, you must try to obtain the";
-				mes "^3355FFBook of the Lamb^000000 if you are";
-				mes "questing for a doomed sword...";
+				mes "Alors. Vous avez mangé de la Pierre de Réveil, et vous possédez le Sceau de Muriniel. Maintenant, vous devez essayer d'obtenir le Livre de l'Agneau, si vous recherchez une épée damnée...";
 				next;
 				mes "[Meteurengut]";
-				mes "I know very little about";
-				mes "that artifact, and its secrets";
-				mes "are as well guarded as that of";
-				mes "the Slate of Muriniel. However,";
-				mes "I do know that a man in Morroc^FFFFFF ^000000 can create the Book of the Lamb...";
+				mes "Je sais très peu de choses sur cet artefact, et ses secrets sont bien gardés, comme ceux du Sceau de Muriniel. Cependant, je sais qu'un homme à Morroc peut créer le Livre de l'Agneau...";
 				next;
 				mes "[Meteurengut]";
-				mes "If that man is still in";
-				mes "Morroc, then he will probably";
-				mes "recognize the subtle emanation";
-				mes "of the Awakening Stone and the";
-				mes "Slate of Muriniel from you. Best^FFFFFF ^000000 of luck to you, adventurer...";
+				mes "Si cet homme est toujours à Morroc, alors il identifiera probablement l'émanation subtile de la Pierre de Réveil et du Sceau de Muriniel qui émane de vous. Bonne chance à vous, aventurier...";
 				close;
 			}
 			mes "[Meteurengut]";
-			mes "Ah, have you brought a";
-			mes "Cobweb? I know it sounds";
-			mes "strange, but I really need the";
-			mes "unique energy found only in";
-			mes "fresh Cobwebs to finish the";
-			mes "Slate of Muriniel for you...";
+			mes "Oh, avez-vous apporté une Cobweb? Je sais que cela semble étrange, mais j'ai vraiment besoin de l'énergie unique trouvée dans les toiles d'araignée fraîches pour finir le Sceau de Muriniel...";
 			close;
 		case 17:
 			mes "[Meteurengut]";
-			mes "You've eaten of the";
-			mes "Awakening Stone and";
-			mes "now possess the Slate of";
-			mes "Muriniel. Now, all you must";
-			mes "do is obtain the Book of the";
-			mes "Lamb. I know little about it...";
+			mes "Vous avez mangé de la Pierre de Réveil et possédez le Sceau de Muriniel. Maintenant, il vous reste à obtenir le Livre de l'Agneau. J'en sais peu à son sujet...";
 			next;
 			mes "[Meteurengut]";
-			mes "All I can tell you is that";
-			mes "there should be a man in";
-			mes "Morroc that can create it";
-			mes "for you. A man like that can";
-			mes "sense the Slate of Muriniel,";
-			mes "so he may call out to you...";
+			mes "Tout ce que je peux vous dire, c'est qu'il doit y avoir un homme à Morroc qui peut le créer pour vous. Un homme comme ça peut sentir le Sceau de Muriniel, donc il devrait vous interpeler...";
 			close;
 		}
 	}
 	else {
 		mes "[Meteurengut]";
-		mes "The ^3355FFSlate of Muriniel^000000";
-		mes "is an ancient artifact";
-		mes "that can only be created";
-		mes "by the power of Alchemy.";
-		mes "It is one of the best kept";
-		mes "secrets of my family...";
+		mes "Le Sceau de Muriniel est un ancien artefact qui ne peut être créé que par la puissance de l'Alchimie. Il est l'un des secrets les mieux gardés de ma famille...";
 		next;
 		mes "[Meteurengut]";
-		mes "I'm responsible for guarding";
-		mes "the secrets of its creation, but^FFFFFF ^000000 I must also share the power";
-		mes "of the slate with those that";
-		mes "prove themselves worthy of it.";
+		mes "Je suis le gardien des secrets de sa création, mais je dois aussi partager la puissance du sceau, avec ceux qui s'en montrent dignes.";
 		next;
 		mes "[Meteurengut]";
-		mes "After all, power is useless";
-		mes "if it is never used. However,";
-		mes "if power is never balanced with";
-		mes "wisdom and compassion, then";
-		mes "it will inevitably do more harm";
-		mes "than good in the very end...";
+		mes "Après tout, la puissance est inutile si elle n'est jamais utilisée. Cependant, si le pouvoir n'est jamais en équilibre avec la sagesse et la compassion, il va inévitablement faire plus de mal que de bien au final...";
 		close;
 	}
 }
@@ -2191,42 +1114,19 @@ morocc,201,30,4	script	Zaka#cmd	99,{
 		switch(dmdswrd_Q) {
 		case 17:
 			mes "[Zaka]";
-			mes "...You there! Hold it!";
-			mes "Yes, I can feel it from";
-			mes "you... The power of the";
-			mes "Awakening Stone... And...";
-			mes "The Slate of Muriniel?";
-			mes "Finally, you've come.";
+			mes "...Vous là! Attendez! Oui, je peux le sentir, ça émane de vous... le pouvoir de la Pierre de Réveil... et... le Sceau de Muriniel? Finalement, vous êtes venu.";
 			next;
 			mes "[Zaka]";
-			mes "I'm fully aware that only";
-			mes "those that seek to own one";
-			mes "of the doomed swords would";
-			mes "trouble themselve to obtain";
-			mes "those items. All that is left for^FFFFFF ^000000 you is the Book of the Lamb...";
+			mes "Je suis entièrement conscient, que seulement ceux qui cherchent à posséder une des épées maudites se donneraient autant de mal pour obtenir ces artéfacts. Il ne vous manque plus que le Livre de l'Agneau...";
 			next;
 			mes "[Zaka]";
-			mes "I've been waiting for so";
-			mes "long for the opportunity to";
-			mes "create the Book of the Lamb.";
-			mes "If you really want the book,";
-			mes "I will help you so long as";
-			mes "you will help me.";
+			mes "J'ai attendu si longtemps l'occasion de créer le Livre de l'Agneau. Si vous voulez vraiment le livre, je vous aiderai, à condition que vous m'aidiez en retour.";
 			next;
 			mes "[Zaka]";
-			mes "However, creating the book";
-			mes "is a complicated process and";
-			mes "requires multiple stages of";
-			mes "preparation. Therefore, I shall";
-			mes "ask you to bring me the items";
-			mes "I require in separate batches.";
+			mes "Cependant, créer ce livre est un processus compliqué qui exige de multiples étapes de préparation. Donc, je vous demanderai de m'apporter les articles que j'exige, en plusieurs fois.";
 			next;
 			mes "[Zaka]";
-			mes "Alright...";
-			mes "What was it now?";
-			mes "Ah, yes. The first thing";
-			mes "I need is ^3355FF2 Snake Scales^000000,";
-			mes "so please bring those soon.";
+			mes "Bien... Par quoi on commence? Oh, oui. En premier lieu, j'ai besoin de ^3355FF2 Snake Scales^000000, apportez-les moi rapidement s'il vous plaît.";
 			set dmdswrd_Q,18;
 			close;
 		case 18:
@@ -2234,170 +1134,80 @@ morocc,201,30,4	script	Zaka#cmd	99,{
 				delitem 926,2; //Scale_Of_Snakes
 				set dmdswrd_Q,19;
 				mes "[Zaka]";
-				mes "Ah, you've brought";
-				mes "the Snake Scales? Good,";
-				mes "let me take them now and";
-				mes "begin work on the Book of";
-				mes "the Lamb. Now, I need you";
-				mes "to bring me ^3355FF1 Scale Shell^000000.";
+				mes "Oh, avez-vous apporté les Snake Scales? Bien, passez-les-moi que je commence à travailler sur le Livre de l'Agneau. Maintenant, j'ai besoin que vous m'apportiez ^3355FF1 Scale Shell^000000.";
 				next;
 				mes "[Zaka]";
-				mes "I know it would be more";
-				mes "convenient for you if I told";
-				mes "you everything I needed at";
-				mes "once, but actually, this way";
-				mes "is much more convenient for";
-				mes "me. I'll be waiting right here!";
+				mes "Je sais qu'il serait plus pratique pour vous que je vous dise tout ce dont j'ai besoin en une seule fois, mais en fait, cette façon est beaucoup plus pratique pour moi. Je vous attends ici!";
 				close;
 			}
 			mes "[Zaka]";
-			mes "The first thing I'll";
-			mes "need to begin creating";
-			mes "the Book of the Lamb is";
-			mes "^3355FF2 Snake Scales^000000. Come back";
-			mes "to me once you get them,";
-			mes "alright? I'll be right here.";
+			mes "Pour commencer à créer le Livre de l'Agneau, il me faut ^3355FF2 Snake Scales^000000. Revenez me voir une fois que vous les aurez, ok? Je serai ici.";
 			close;
 		case 19:
 			if (countitem(936) > 0) {
 				mes "[Zaka]";
-				mes "Oh, nice! You've brought";
-				mes "this Scale Shell for me,";
-				mes "right? Great, great, this will";
-				mes "help enhance the book's";
-				mes "physical durability, but it";
-				mes "still needs magic durability...";
+				mes "Oh, bien! Vous avez apporté cette Scale Shell pour moi, non? Super, formidable, ceci va me permettre d'améliorer la résistance physique du livre, mais il a encore besoin de résistance magique...";
 				next;
 				mes "[Zaka]";
-				mes "Next, you need to bring";
-				mes "me ^3355FF1 Shining Shell^000000. Hurry";
-				mes "and bring you to me before";
-				mes "I finish this part of the process, okay? Wait, actually, I think";
-				mes "you can take your time...";
+				mes "Ensuite, vous devez m'apporter ^3355FF1 Shining Shell^000000. Dépêchez-vous et apportez-le moi avant que je ne finisse cette partie du processus, ok? Attendez, en réalité, je pense que vous pouvez prendre votre temps...";
 				delitem 936,1; //Scales_Shell
 				set dmdswrd_Q,20;
 				close;
 			}
 			mes "[Zaka]";
-			mes "I'll be waiting right";
-			mes "here while you go and";
-			mes "look for a ^3355FFScale Shell^000000";
-			mes "that you can bring to me.";
-			mes "I'll need that in order to";
-			mes "finish this Book of the Lamb.";
+			mes "Je vais attendre ici pendant que vous aller me chercher un ^3355FFScale Shell^000000. J'en aurai besoin pour finir le Livre de l'Agneau.";
 			close;
 		case 20:
 			if (countitem(954) > 0) {
 				mes "[Zaka]";
-				mes "Ah, you're just in time!";
-				mes "Have you got the Shining";
-				mes "Scale? Perfect. Now, there";
-				mes "is just one more item that";
-				mes "I want to ask you to bring me:";
-				mes "^3355FF1 Stinky Scale^000000. Easy, right?";
+				mes "Ah, vous arrivez juste à temps! Avez-vous le Shining Scale? Parfait. Alors, il y a encore une chose que je vais vous demander de m'apporter: ^3355FF1 Stinky Scale^000000. Facile, non?";
 				delitem 954,1; //Shining_Scales
 				set dmdswrd_Q,21;
 				next;
 				mes "[Zaka]";
-				mes "The energy of a Stinky";
-				mes "Scale can be used to";
-				mes "regulate the power of";
-				mes "incredibly potent artifacts.";
-				mes "Without that item, the Book";
-				mes "of the Lamb isn't much use...";
+				mes "L'énergie d'un Stinky Scale peut être utilisée pour réguler le pouvoir de cet incroyable et puissant artefact. Sans cet élément, le Livre de l'Agneau n'est pas très utile...";
 				close;
 			}
 			mes "[Zaka]";
-			mes "If you want me to";
-			mes "finish this Book of";
-			mes "the Lamb, you need";
-			mes "to come back here with";
-			mes "^3355FF1 Shining Scale^000000. There's";
-			mes "no way to work around it...";
+			mes "Si vous voulez que je finisse le Livre de l'Agneau, vous devez revenir ici avec ^3355FF1 Shining Scale^000000. Il n'y a pas moyen de travailler sans ça...";
 			close;
 		case 21:
 			if (countitem(959) > 0) {
 				mes "[Zaka]";
-				mes "What's that sme--?";
-				mes "Oh, right. I asked you to";
-				mes "bring me a Stinky Scale.";
-				mes "Now I can finally complete";
-				mes "this Book of the Lamb! I've";
-				mes "been looking forward to this...";
+				mes "Qu'est-ce que...? Oh, bien. Je vous ai demandé de m'apporter une Stinky Scale. Alors, je peux finalement achever le Livre de l'Agneau! J'ai attendu ça avec impatience...";
 				next;
-				mes "^3355FFZaka completes";
-				mes "the creation of the";
-				mes "Book of the Lamb.^000000";
+				mes "^3355FFZaka termine de créer le Livre de l'Agneau.^000000";
 				delitem 959,1; //Rotten_Scale
 				set dmdswrd_Q,22;
 				next;
 				mes "[Zaka]";
-				mes "What...?!";
-				mes "That's it? Well, um,";
-				mes "it's done. That felt";
-				mes "rather anticlimatic, but";
-				mes "I can finally see this";
-				mes "thing with my own eyes!";
+				mes "Quoi...?! Voilà? Bien, heu, il est fait. Cela n'a pas été facile, mais je peux enfin voir ce livre de mes propres yeux!";
 				next;
 				mes "[Zaka]";
-				mes "Alright, you've eaten of the";
-				mes "Awakening Stone, obtained the";
-				mes "Slate of Muriniel, and now have";
-				mes "the Book of the Lamb. You're";
-				mes "getting very close to owning";
-				mes "one of the doomed swords.";
+				mes "Bien, vous avez mangé de la Pierre de Réveil, obtenu le Sceau de Muriniel, et avez maintenant le Livre de l'Agneau. Il ne vous manque plus grand chose pour posséder l'une des épées damnées.";
 				next;
 				mes "[Zaka]";
-				mes "There is man that you";
-				mes "must find in Comodo named";
-				mes "^3355FFWon^000000. He will judge you, and";
-				mes "then give you the proof that";
-				mes "shows you are qualified to";
-				mes "be a doomed sword bearer.";
+				mes "Vous devez trouver un homme, à Comodo, nommé ^3355FFWon^000000. Il vous jugera, et vous donnera ensuite la preuve de votre qualification pour être le porteur d'une épée damnée.";
 				next;
 				mes "[Zaka]";
-				mes "He looks like a simple";
-				mes "man, but he is a true living";
-				mes "legend renown for his wisdom.";
-				mes "If you really want a doomed";
-				mes "sword, you need to speak to";
-				mes "Won and ask him to guide you.";
+				mes "Il ressemble à un homme simple, mais il est une véritable légende vivante, renommé pour sa sagesse. Si vous voulez vraiment une épée damnée, vous devez parler à Won et lui demander de vous guider.";
 				close;
 			}
 			mes "[Zaka]";
-			mes "The last thing that I need";
-			mes "to complete the Book of the";
-			mes "Lamb is ^3355FF1 Stinky Scale^000000. Please";
-			mes "bring that to me as soon as";
-			mes "you can. Thank you for being";
-			mes "patient, young adventurer.";
+			mes "La dernière chose dont j'ai besoin pour terminer le Livre de l'Agneau est ^3355FF1 Stinky Scale^000000. Veuillez m'apporter cela dès que vous pourrez. Merci d'être patient, jeune aventurier.";
 			close;
 		case 22:
 			mes "[Zaka]";
-			mes "Now, you need to visit a";
-			mes "man named ^3355FFWon^000000 in Comodo";
-			mes "in order to get the proof that";
-			mes "shows that you're qualified to";
-			mes "possess a doomed sword.";
-			mes "Hopefully, you'll get it...";
+			mes "Maintenant, vous devez rendre visite à un homme appelé ^3355FFWon^000000, à Comodo, afin d'obtenir la preuve qui montrera que vous êtes qualifié pour posséder une épée damnée. Si tout va bien, vous l'obtiendrez...";
 			close;
 		}
 	}
 	else {
 		mes "[Zaka]";
-		mes "Have you heard that swords";
-		mes "with the power to change the";
-		mes "world actually exist? It's true";
-		mes "that three swords contain this";
-		mes "immense power, but they are";
-		mes "also bound to powerful curses.";
+		mes "Avez-vous entendu dire que les épées avec le pouvoir de changer le monde existent vraiment? Ces trois épées possèderaient un immense pouvoir, mais seraient également liées à de puissantes malédictions.";
 		next;
 		mes "[Zaka]";
-		mes "Therefore, the Mysteltainn,";
-		mes "Ogretooth, and Executioner";
-		mes "have all been sealed away.";
-		mes "Only a truly great adventurer";
-		mes "can release these doomed^FFFFFF ^000000 swords and actually wield them...";
+		mes "Par conséquent, les épées Mysteltainn, Ogretooth, et Executioner ont toutes été scellées, loin. Seul un grand aventurier peut libérer ces épées damnées et réellement les utiliser...";
 		close;
 	}
 }
@@ -2407,105 +1217,48 @@ comodo,232,87,4	script	Won#cmd	106,{
 		switch(dmdswrd_Q) {
 		case 22:
 			mes "[Won]";
-			mes "Hmm...? It's been a while";
-			mes "since someone came here to";
-			mes "get the qualification to own a";
-			mes "doomed sword. Yeah, I know";
-			mes "that's why you're here...";
+			mes "Hum...? Ça faisait longtemps, que personne n'était venu ici pour obtenir la qualification de posséder une arme damnée. Ouais, je sais pourquoi vous êtes ici...";
 			next;
 			mes "[Won]";
-			mes "To a man like me, the";
-			mes "presenses of the Book of the";
-			mes "Lamb, the Slate of Muriniel,";
-			mes "and one that has eaten of the";
-			mes "Awakening Stone are unmistakable. ^FFFFFF ^000000";
+			mes "Pour un homme comme moi, les présences du Livre de l'Agneau, du Sceau de Muriniel, et de celui qui a mangé de la Pierre de Réveil sont indéniables.";
 			next;
 			mes "[Won]";
-			mes "Now, listen. I personally";
-			mes "don't care why you want a";
-			mes "doomed sword. If you abuse";
-			mes "its power, you'll pay the price";
-			mes "eventually. I'm only here to";
-			mes "make sure you're up to snuff.";
+			mes "Maintenant, écoutez. Je ne me soucie pas personnellement de ce qui vous pousse à vouloir une épée damnée. Si vous abusez de son pouvoir, vous finirez par en payer le prix. Je ne suis là que pour m'assurer que vous êtes à la hauteur.";
 			next;
 			mes "[Won]";
-			mes "Of course, I also want to";
-			mes "make sure that you don't bring";
-			mes "great suffering to the world";
-			mes "using a doomed sword. So I'm";
-			mes "going to check if you're, you";
-			mes "know, balanced and all that.";
+			mes "Naturellement, je veux également m'assurer que vous n'apporterez pas la grande douleur au monde en utilisant une épée damnée. Ainsi je vais vérifier si vous êtes équilibré, et tout ça.";
 			next;
 			mes "[Won]";
-			mes "Alright, let me take";
-			mes "a look into your eyes...";
-			mes "Yeah, alright. You seem to";
-			mes "understand the value of the";
-			mes "Awakening Stone, Book of the^FFFFFF ^000000 Lamb, and the Slate of Muriniel.";
+			mes "Bien, laissez-moi jeter un coup d'oeil dans vos yeux... Ouais, bien. Vous semblez comprendre la valeur de la Pierre de Réveil, du Livre de l'Agneau, et du Sceau de Muriniel.";
 			next;
 			mes "[Won]";
-			mes "Yeah, I can't sense any";
-			mes "ill intent from you at all.";
-			mes "That's very good. Huh, you";
-			mes "seem pretty experienced in battle, so I'm sure you have the stamina";
-			mes "to handle to a doomed sword...";
+			mes "Ouais, je ne sens aucune mauvaise intention en vous. C'est très bien. Euh, vous semblez assez expérimenté au combat, je suis sûr que vous avez l'endurance nécessaire pour manipuler une épée damnée...";
 			next;
 			mes "[Won]";
-			mes "Ah, but most importantly,";
-			mes "you don't strike me as crazy";
-			mes "at all. Alright, we're done here. Take this Stamp of Muriniel:";
-			mes "it's the official qualification";
-			mes "token to own a doomed sword.";
+			mes "Ah, mais le plus important, c'est que vous ne me semblez pas du tout être une personne insensée. Bien, nous avons fini. Prenez cette Médaille de Muriniel: c'est le signe officiel de votre qualification à posséder une épée damnée.";
 			next;
-			mes "^3355FFYou receive the";
-			mes "Stamp of Muriniel.^000000";
+			mes "^3355FFVous recevez la Médaille de Muriniel.^000000";
 			set dmdswrd_Q,23;
 			next;
 			mes "[Won]";
 			mes "Mysteltainn, Executioner,";
-			mes "and Ogretooth... These are";
-			mes "the forbidden blades, the";
-			mes "doomed swords. Remember";
-			mes "that you cannot choose";
-			mes "which weapon you'll wield...";
+			mes "et Ogretooth... Ce sont les lames interdites, les épées damnées. Rappelez-vous que vous ne pouvez pas choisir l'arme que vous utiliserez...";
 			next;
 			mes "[Won]";
-			mes "These swords have a will";
-			mes "of their own. The doomed";
-			mes "sword that finds you most";
-			mes "worthy of it will choose you.";
-			mes "You can understand that, right?";
+			mes "Ces épées ont leur propre volonté. L'épée damnée qui vous trouve le plus digne d'elle vous choisira. Vous comprenez, non?";
 			next;
 			mes "[Won]";
-			mes "Now that you have this";
-			mes "qualification, I'm supposed";
-			mes "to direct you to the Sages";
-			mes "that can help lead you to";
-			mes "the doomed swords.";
+			mes "Maintenant que vous avez cette qualification, je suis censé vous orienter vers les Sages qui peuvent vous aider à manier les épées damnées.";
 			next;
 			mes "[Won]";
-			mes "The first Sage that you";
-			mes "must visit is ^3355FFSage Yklah^000000";
-			mes "in the city of ^3355FFJuno^000000 in the";
-			mes "Schwaltzvalt Republic.";
-			mes "Your quest to obtain a";
-			mes "doomed sword isn't over yet...";
+			mes "Le premier Sage que vous devez rencontrer est le ^3355FFSage Yklah^000000, dans la ville de ^3355FFYuno^000000, en République de Schwaltzvalt. Votre quête pour obtenir une épée damnée n'est pas encore terminée...";
 			close;
 		case 23:
 			mes "[Won]";
-			mes "Now that you have this";
-			mes "qualification, I'm supposed";
-			mes "to direct you to the Sages";
-			mes "that can help lead you to";
-			mes "the doomed swords.";
+			mes "Maintenant que vous avez cette qualification, je suis censé vous orienter vers les Sages qui peuvent vous aider à manier les épées damnées.";
 			next;
 			mes "[Won]";
-			mes "The first Sage that you";
-			mes "must visit is ^3355FFSage Yklah^000000";
-			mes "in the city of ^3355FFJuno^000000 in the";
-			mes "Schwaltzvalt Republic.";
-			mes "Your quest to obtain a";
-			mes "doomed sword isn't over yet...";
+			mes "Le premier Sage que vous devez rencontrer est le ^3355FFSage Yklah^000000, dans la ville de ^3355FFYuno^000000, en République de Schwaltzvalt. Votre quête pour obtenir une épée damnée n'est pas encore terminée...";
 			close;
 		case 24:
 			mes "1 2 3 4 5 6 7 8 9 10 1 2 3 4 5";
@@ -2514,27 +1267,13 @@ comodo,232,87,4	script	Won#cmd	106,{
 	}
 	else {
 		mes "[Won]";
-		mes "The visitors and even the";
-		mes "people that live here always";
-		mes "seem to be having such a good";
-		mes "time, just lounging in leisure.";
-		mes "It's hard to believe the War";
-		mes "of the Witch even happened...";
+		mes "Les visiteurs et même les personnes qui vivent ici semblent toujours s'amuser, passant d'un loisirs à l'autre. Il est difficile de croire que la Guerre de la Sorcière ce soit produite...";
 		next;
 		mes "[Won]";
-		mes "But not everyone here in";
-		mes "Comodo can afford to relax";
-		mes "so easily. I, for one, have";
-		mes "the responsibility of seeking";
-		mes "out those that are worthy of,^FFFFFF ^000000 well, I don't know if I can say...";
+		mes "Mais tout le monde, ici à Comodo, ne peut pas se permettre de se détendre si facilement. Moi, pour ma part, j'ai la responsabilité de rechercher ceux qui sont dignes de, eh bien, je ne sais pas si je peux le dire...";
 		next;
 		mes "[Won]";
-		mes "You just have to";
-		mes "trust that I've got an";
-		mes "incredibly important";
-		mes "job to do. I mean, sure,";
-		mes "it doesn't look like I'm doing";
-		mes "anything right now, but...";
+		mes "Vous devez croire que j'ai un travail incroyablement important à faire. Je veux dire, bien sûr, ça n'en a pas l'air, là, tout de suite, mais...";
 		close;
 	}
 }
