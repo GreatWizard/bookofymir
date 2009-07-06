@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par Myllena
 //===== eAthena Script =======================================
 //= eAthena Jobchanger AKA Job Master
 //===== By: ==================================================
@@ -17,12 +19,12 @@
 //= 1.5 Rewrite everything from scratch. [Lance]
 //= 1.5a fixed Baby -> Super Baby change. Switched to JobName() [Lupus]
 //============================================================
-prontera,153,193,6	script	Job Master	123,{
-	mes "^ff0000[Job Master]^000000";
+prontera,153,193,6	script	Changement de Métier	123,{
+	mes "^ff0000[Changement de Métier]^000000";
 	if(Upper == 1 && Class >= Job_Lord_Knight) goto L_noReq;
 	if(SkillPoint != 0){
-		mes "I'm sorry, please use up all your skill points before changing jobs";
-		mes "Please come again soon!";
+		mes "Je suis désolée, mais il vous reste des Points de Compétence à répartir.";
+		mes "Veuillez revenir une fois ceci fait!";
 		close;
 	}
 	if(JobLevel < 10) goto L_LvError;
@@ -32,7 +34,7 @@ prontera,153,193,6	script	Job Master	123,{
 		case Job_Novice:
 			skill 142,1,0;
 			skill 143,1,0;
-			mes "Welcome, please select the job you wish to change into";
+			mes "Bienvenue, veuillez sélectionner la classe vers laquelle vous souhaitez évoluer.";
 			if(lastJob != 0 && Class == Job_Novice_High){
 				switch(lastJob){
 					case Job_Knight:
@@ -62,7 +64,7 @@ prontera,153,193,6	script	Job Master	123,{
 						break;
 							}
 			} else {
-				switch(select("Swordsman","Mage","Archer","Acolyte","Merchant","Thief",
+				switch(select("Épéiste","Mage","Archer","Acolyte","Marchand","Voleur",
 					"Super Novice","Taekwon","Gunslinger","Ninja")){
 						case 7:
 							if(Class == Job_Novice_High) goto L_noReq;
@@ -88,8 +90,8 @@ prontera,153,193,6	script	Job Master	123,{
 							break;
 					}
 			}
-			mes "Are you sure you want to change to " + JobName(@target_job) + "?";
-			if(select("No","Yes") == 2){
+			mes "Êtes-vous certain de vouloir devenir " + JobName(@target_job) + "?";
+			if(select("Non","Oui") == 2){
 				callfunc "Job_Change", @target_job;
 				if(@target_job == Job_Gunslinger || @target_job == Job_Ninja || @target_job == Job_Taekwon) {
 					callfunc "F_ClearJobVar";
@@ -151,12 +153,12 @@ prontera,153,193,6	script	Job Master	123,{
 							set @job_opt[1], Job_Soul_Linker;
 							break;
 					}
-					mes "Welcome, please select the job you wish to change into";
+					mes "Bienvenue, veuillez sélectionner la classe vers laquelle vous souhaitez évoluer.";
 					set @target_job, @job_opt[select(JobName(@job_opt[0]), JobName(@job_opt[1]))-1];
 					if(Class > Job_Novice_High && Class < Job_Lord_Knight) set @target_job, @target_job + 4001;
 				}
-				mes "Are you sure you want to change to " + JobName(@target_job) + "?";
-				if(select("No","Yes")==2){
+				mes "Êtes-vous certain de vouloir devenir " + JobName(@target_job) + "?";
+				if(select("Non","Oui")==2){
 					callfunc "Job_Change", @target_job;
 					if(@target_job == Job_Star_Gladiator || @target_job == Job_Soul_Linker) {
 						callfunc "F_ClearJobVar";
@@ -168,8 +170,8 @@ prontera,153,193,6	script	Job Master	123,{
 			}
 			if(checkfalcon() || checkcart() || checkriding()) goto L_remove;
 			if((Class >=Job_Knight) && (Class <=Job_Crusader2)){
-				mes "Do you want to reborn?";
-				if(select("Yes","No")==1){
+				mes "Souhaitez-vous renaître?";
+				if(select("Oui","Non")==1){
 					if(BaseLevel < 99 || JobLevel < 50) goto L_cantCh;
 					set lastJob, Class;
 					if(Class == Job_Knight2){
@@ -187,7 +189,7 @@ prontera,153,193,6	script	Job Master	123,{
 				close;
 			}
 	}
-	mes "I'm sorry, there are no further classes for your job.";
+	mes "Je suis désolée, mais il n'y a plus d'évolution après votre métier actuel.";
 	close;
 
 L_GivePlat:
@@ -236,28 +238,28 @@ L_sThief:
 	close;
 
 L_cantCh:
-	mes "I'm sorry, you do not meet the requirements to change";
-	mes "Please come again soon!";
+	mes "Je suis désolée, mais vous ne remplissez pas les conditions permettant un changement de métier.";
+	mes "Revenez plus tard!";
 	close;
 
 L_LvError:
-	mes "I'm sorry, you do not seem to have enough Job Levels";
-	mes "Please come again soon!";
+	mes "Je suis désolée, mais vous n'avez pas assez de Niveaux de Job.";
+	mes "Revenez plus tard!";
 	close;
 
 L_BvError:
-	mes "I'm sorry, you do not seem to have enough Base Levels";
-	mes "Please come again soon!";
+	mes "Je suis désolée, mais vous n'avez pas assez de Niveaux de Base.";
+	mes "Revenez plus tard!";
 	close;
 
 L_noReq:
-	mes "I'm sorry, you do not meet the requirements to change";
-	mes "Please come again soon!";
+	mes "Je suis désolée, mais vous ne remplissez pas les conditions permettant un changement de métier.";
+	mes "Revenez plus tard!";
 	close;
 
 L_remove:
-	mes "Please remove your cart,falcon or peco";
-	mes "Please come again soon!";
+	mes "Veuillez retirer votre charrette, ou renvoyer votre Faucon ou votre Peco.";
+	mes "Merci, revenez plus tard!";
 	close;
 
 OnInit:
