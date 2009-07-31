@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88; L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 2.0
+//= 2.1
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -28,6 +28,7 @@
 //= 1.8a More bug fixes care of Crashy. [L0ne_W0lf]
 //= 1.9 Changed Marthilda to Mathilda. [L0ne_W0llf]
 //= 2.0 Fixed High Acolytesnot being given holy light. [L0ne_W0lf]
+//= 2.1 Added Quest Log commands. [L0ne_W0lf]
 //============================================================ 
 
 prt_church,184,41,4	script	Père Mareusis#aco	60,{
@@ -112,14 +113,17 @@ prt_church,184,41,4	script	Père Mareusis#aco	60,{
 				default:
 					set job_acolyte_q,2;
 					mes "Rendez visite à ^000077Père Rubalkabara^000000, membre de la paroisse de Prontera, puis revenez me voir. Vous le trouverez en train de pratiquer l'ascétisme non loin de l'^000077Abbaye de Saint Capitolina^000000, à 1 jour de marche au Nord puis 2 jours de marche à l'Est, en partant de la ville de Prontera...";
+					setquest 1001;
 					break;
 				case 1:
 					set job_acolyte_q,3;
 					mes "Rendez visite à ^000077Mère Mathilda^000000 puis revenez me voir. Vous la trouverez en train de pratiquer l'ascétisme dans le ^000077Désert de Sograt^000000, à 1 jour de marche au Nord de la ville de Morroc. Morroc se situe au Sud-Ouest de Prontera.";
+					setquest 1002;
 					break;
 				case 2:
 					set job_acolyte_q,4;
 					mes "Rendez visite à ^000077Père Yosuke^000000 puis revenez ici. Vous le trouverez en train de pratiquer l'ascétisme sur ^000077une toute petite île^000000, à 1 jour de marche au Nord puis 2 jours de marche à l'Ouest, en partant de la ville de Prontera...";
+					setquest 1003;
 					break;
 				}
 				next;
@@ -183,6 +187,9 @@ prt_church,184,41,4	script	Père Mareusis#aco	60,{
 		skill 143,0,0;
 		callfunc "Job_Change",Job_Acolyte;
 		callfunc "F_ClearJobVar";
+		completequest 1001;
+		completequest 1002;
+		completequest 1003;
 		mes "[Père Mareusis]";
 		mes "N'oubliez jamais que vous êtes redevable à Dieu, qui prend soin de nous tous, en tout temps.";
 		next;
