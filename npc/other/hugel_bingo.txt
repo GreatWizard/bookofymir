@@ -28,7 +28,7 @@ que_bingo,48,84,5	script	Salle d'Attente du Bingo	124,{
 OnInit:
 	set $hu_bingoa,0;
 	set $hu_bingob,0;
-	waitingroom "Salle d'Attente du Bingo - 5 Personnes",50,"Salle d'Attente du Bingo::OnWarp",5;
+	waitingroom "Salle d'Attente du Bingo à 5",50,"Salle d'Attente du Bingo::OnWarp",5;
 	end;
 	
 OnWarp:
@@ -89,7 +89,7 @@ L_Fill:
 	set @bingo_fill,callfunc("Func_Bingo",@bingo_case);
 	if(!@bingo_fill)
 	{
-		mes "Soit vous avez déjà utilisé ce nombre, soit celui-ci dépasse la limite. Essayez avec un autre nombre.";
+		mes "Vous avez déjà utilisé ce nombre, ou celui-ci dépasse la limite. Essayez avec un autre nombre.";
 		next;
 	}
 	else if(@bingo_fill)
@@ -807,7 +807,7 @@ OnTouch:
 	end;
 
 OnTimer1000:
-	mapannounce "que_bingo","Eukran: Oua! Bingo! On a un Bingo!",1,0xFFAB54;
+	mapannounce "que_bingo","Eukran: Ouiii! Bingo! On a un Bingo!",1,0xFFAB54;
 	end;
 
 OnTimer5000:
@@ -1017,10 +1017,10 @@ function	script	Func_Bingo	{
 
 function	script	Func_BingoResult	{
 
-	if(getarg(0) == 1 || getarg(0) == 21) mapannounce "que_bingo","Eukran: Le "+getarg(0)+"er numéro est "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
-	else if(getarg(0) == 2 || getarg(0) == 22) mapannounce "que_bingo","Eukran: The "+getarg(0)+"nd numéro est "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
-	else if(getarg(0) == 3 || getarg(0) == 23) mapannounce "que_bingo","Eukran: The "+getarg(0)+"ème numéro est "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
-	else mapannounce "que_bingo","Eukran: The "+getarg(0)+"ème numéro est "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
+	if(getarg(0) == 1 || getarg(0) == 21) mapannounce "que_bingo","Eukran: Le "+getarg(0)+"er numéro est le "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
+	else if(getarg(0) == 2 || getarg(0) == 22) mapannounce "que_bingo","Eukran: Le "+getarg(0)+"nd numéro est le "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
+	else if(getarg(0) == 3 || getarg(0) == 23) mapannounce "que_bingo","Eukran: Le "+getarg(0)+"ème numéro est le "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
+	else mapannounce "que_bingo","Eukran: Le "+getarg(0)+"ème numéro est le "+$bingo[getarg(0) -1]+". Vérifiez bien vos grilles!",4,0xFFAB54;
 	enablenpc ""+getarg(0)+"a#bingo";
 	enablenpc ""+getarg(0)+"b#bingo";
 	enablenpc ""+getarg(0)+"c#bingo";
@@ -1066,7 +1066,7 @@ que_bingo,54,17,5	script	Propriétaire de la Salle	712,{
 		mes "Si vous avez 5 cases de suite de cochées, que ce soit horizontalement, ou verticalement, ou en diagonale, alors criez le plus vite possible le mot ''Bingo.''";
 		next;
 		mes "[Propriétaire de la Salle]";
-		mes "Si vous êtes le premier à crier ''Bingo,'' vous gagnez! Mais si quelqu'un a été plus rapide, c'est perdu. Le prix d'inscription pour une partie est de 1,000 zenys~";
+		mes "Si vous êtes le premier à crier ''Bingo'', vous gagnez! Mais si quelqu'un a été plus rapide, c'est perdu. Le prix d'inscription pour une partie est de 1,000 zenys~";
 		close;
 	break;
 	case 2:
@@ -1082,10 +1082,10 @@ que_bingo,54,17,5	script	Propriétaire de la Salle	712,{
 		mes "A chaque partie de Bingo gagnée, vous recevez des ''Marvelous Medals'', qui ne peuvent être utilisées que dans cette salle de jeu. Vous ne pouvez pas non plus les échanger avec d'autres joueurs.";
 		next;
 		mes "[Propriétaire de la Salle]";
-		mes "Normalement, vous gagnez 1 Marvelous Medal quand vous remportez la partie, mais dans certains cas vous pourrez en gagner jusqu'à 50 d'un coup!Vous pourrez aussi en gagner en pariant dans la course de monstres.";
+		mes "Normalement, vous gagnez 1 Marvelous Medal quand vous remportez la partie, mais dans certains cas vous pourrez en gagner jusqu'à 50 d'un coup! Vous pourrez aussi en gagner en pariant dans la course de monstres.";
 		next;
 		mes "[Propriétaire de la Salle]";
-		mes "Récoltez autant de Marvelous Medals que vous pouvez, et échangez-les contre des récompenses dans l'Arène de la Course de Monstres. J'ai entendu dire que quelqu'un les échangeait aussi à Einbroch mais je n'en sais pas plus.";
+		mes "Récoltez autant de Marvelous Medals que vous pouvez, et échangez-les contre des récompenses dans l'Arène de la Course de Monstres. J'ai entendu dire que quelqu'un en cherchait aussi à Einbroch mais je n'en sais pas plus.";
 		close;
 	break;
 	}
