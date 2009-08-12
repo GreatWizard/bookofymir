@@ -14,7 +14,7 @@
 //===== By: ================================================== 
 //= Kisuka
 //===== Current Version: ===================================== 
-//= 1.6
+//= 1.7
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -29,6 +29,7 @@
 //= 1.4 Added 'Koshei the Immortal' quest. [Kisuka]
 //= 1.5 Fixes to 'Koshei the Immortal' quest. [Kisuka]
 //= 1.6 Added 'tides' to Ibanoff & Fixed time check for Marozka. [Kisuka]
+//= 1.7 Fixes on donpcevents and fixed some left over aegis stuff. [Kisuka]
 //============================================================ 
 
 //============================================================================
@@ -8648,13 +8649,13 @@ mosk_dun01,45,259,0	script	Mur#rus04	111,{
 				}
 				mes "- Le vent s'apaise tandis qu'une très jeune femme apparaît. -";
 				donpcevent "Maria Morevna#rus46::OnEnable";
-				donpcevent "Maria Morevna#rus46::Freezed";
+				donpcevent "Maria Morevna#rus46::OnFreezed";
 				next;
 				mes "[Maria Morevna]";
 				mes "Merci!";
 				mes "Je suis libre, enfin! Maintenant, je peux..................... aaaaak!!!....";
 				next;
-				donpcevent "Maria Morevna#rus46::Death";
+				donpcevent "Maria Morevna#rus46::OnDeath";
 				mes "- Maria tombe à la renverse! -";
 				next;
 				mes "["+ strcharinfo(0) +"]";
@@ -8682,7 +8683,7 @@ mosk_dun01,45,259,0	script	Mur#rus04	111,{
 				mes "Grisloup...";
 				mes "Penses-tu être de taille à m'affronter?!";
 				next;
-				donpcevent "Grisloup#rus05::Firehit";
+				donpcevent "Grisloup#rus05::OnFirehit";
 				mes "- Encore étourdi par l'attaque de Koshei, Grisloup vous murmure quelque chose... -";
 				next;
 				mes "[Grisloup]";
@@ -8804,7 +8805,7 @@ mosk_dun01,45,259,0	script	Mur#rus04	111,{
 				close;
 			}
 			mes "- Les blessures sur son corps s'estompent. La malédiction semble levée! -";
-			donpcevent "Maria Morevna#rus46::Absorbspirits";
+			donpcevent "Maria Morevna#rus46::OnAbsorbspirits";
 			next;
 			mes "["+ strcharinfo(0) +"]";
 			mes "Bien! Ensuite...";
@@ -8833,7 +8834,7 @@ mosk_dun01,45,259,0	script	Mur#rus04	111,{
 				next;
 			}
 			mes "- !! -";
-			donpcevent "Maria Morevna#rus46::Resurrection";
+			donpcevent "Maria Morevna#rus46::OnResurrection";
 			next;
 			mes "[Grisloup]";
 			mes "Ça fonctionne!";
@@ -9017,7 +9018,7 @@ OnDisable:
 	disablenpc "Grisloup#rus05";
 	end;
 
-Firehit:
+OnFirehit:
 	specialeffect 49;
 	end;
 
@@ -9047,21 +9048,21 @@ OnDisable:
 	disablenpc "Maria Morevna#rus46";
 	end;
 
-Freezed:
+OnFreezed:
 	specialeffect 134;
 	end;
 
-Death:
+OnDeath:
 	specialeffect 1;
 	specialeffect 212;
 	specialeffect 372;
 	end;
 
-Absorbspirits:
+OnAbsorbspirits:
 	specialeffect 253;
 	end;
 
-Resurrection:
+OnResurrection:
 	specialeffect 77;
 	end;
 
@@ -10173,7 +10174,7 @@ mosk_fild02,157,233,0	script	Bergère#rus10	69,{
 			mes "Hum, le nom me dit quelque chose, mais je n'arrive pas à m'en rappeler. Vous devriez aller du côté des marécages, voir si vous pouvez trouver quelque chose.";
 			next;
 			mes "[Bergère]";
-			mes "Ah, et tant que vous y êtes, pourriez-vous ramasser quelques Branches Pointues et me les rapporter? Il me faudrait ^0000ff50 Branches Pointues^000000...";
+			mes "Ah, et tant que vous y êtes, pourriez-vous ramasser quelques Branches Pointues et me les rapporter? Il me faudrait ^0000ff25 Branches Pointues^000000...";
 			next;
 			mes "[Bergère]";
 			mes "Je suis une très bonne joueuse de flute. Si vous m'en apportez assez, je pourrai confectionner une flute et vous jouer de douces mélodies. S'il vous plaît~!";
@@ -12618,7 +12619,7 @@ OnTouch:
 			input .@input$;
 			if (.@input$ == "La bonne nourriture a le goût d'orange" || .@input$ == "La bonne nourriture a le gout d'orange") { // j'ai laissé la possibilité de l'écrire sans accent circonflexe vu que je ne sais pas trop comment eA gère ça [No Healing]
 				mes "["+ strcharinfo(0) +"]";
-				mes ""+ inputstr +" !!!";
+				mes ""+ .@input$ +" !!!";
 				specialeffect 304;
 				next;
 				mes "- Vous prononcez la formule magique en toute hâte et la vache est entourée d'une lumière jaunâtre avant de disparaître! -";
@@ -12627,7 +12628,7 @@ OnTouch:
 				next;
 			}else{
 				mes "["+ strcharinfo(0) +"]";
-				mes ""+ inputstr +" !!!";
+				mes ""+ .@input$ +" !!!";
 				next;
 				mes "[Vache]";
 				mes "...Meuh...";
@@ -12732,7 +12733,7 @@ OnTouch:
 			input .@input$;
 			if (.@input$ == "La bonne nourriture a le goût d'orange" || .@input$ == "La bonne nourriture a le gout d'orange") {
 				mes "["+ strcharinfo(0) +"]";
-				mes ""+ inputstr +" !!!";
+				mes ""+ .@input$ +" !!!";
 				specialeffect 304;
 				next;
 				mes "- Vous prononcez la formule magique en toute hâte et la vache est entourée d'une lumière jaunâtre avant de disparaître! -";
@@ -12741,7 +12742,7 @@ OnTouch:
 				next;
 			}else{
 				mes "["+ strcharinfo(0) +"]";
-				mes ""+ inputstr +" !!!";
+				mes ""+ .@input$ +" !!!";
 				next;
 				mes "[Vache]";
 				mes "...Meuh...";
@@ -12846,7 +12847,7 @@ OnTouch:
 			input .@input$;
 			if (.@input$ == "La bonne nourriture a le goût d'orange" || .@input$ == "La bonne nourriture a le gout d'orange") {
 				mes "["+ strcharinfo(0) +"]";
-				mes ""+ inputstr +" !!!";
+				mes ""+ .@input$ +" !!!";
 				specialeffect 304;
 				next;
 				mes "- Vous prononcez la formule magique en toute hâte et la vache est entourée d'une lumière jaunâtre avant de disparaître! -";
@@ -12855,7 +12856,7 @@ OnTouch:
 				next;
 			}else{
 				mes "["+ strcharinfo(0) +"]";
-				mes ""+ inputstr +" !!!";
+				mes ""+ .@input$ +" !!!";
 				next;
 				mes "[Vache]";
 				mes "...Meuh...";
@@ -13484,20 +13485,20 @@ amatsu,233,234,3	script	Éditions Momotaro::Momotoro Publisher#rus42	757,{
 		input .@input$;
 		if (.@input$ == "Baba Yaga") {
 			mes "["+ strcharinfo(0) +"]";
-			mes "Je m'appelle "+ inputstr +".";
+			mes "Je m'appelle "+ .@input$ +".";
 			next;
 			mes "[Éditions Momotaro]";
-			mes ""+ inputstr +" ... Ah, voilà!";
+			mes ""+ .@input$ +" ... Ah, voilà!";
 			next;
 		}else{
 			mes "["+ strcharinfo(0) +"]";
-			mes "Je m'appelle "+ inputstr +" ";
+			mes "Je m'appelle "+ .@input$ +" ";
 			next;
 			mes "[Éditions Momotaro]";
-			mes ""+ inputstr +" ... Alors, voyons...";
+			mes ""+ .@input$ +" ... Alors, voyons...";
 			next;
 			mes "[Éditions Momotaro]";
-			mes "Hum? Je suis désolée mais je n'ai rien de réservé au nom de "+ inputstr +". Est-ce que vous pourriez vérifier?";
+			mes "Hum? Je suis désolée mais je n'ai rien de réservé au nom de "+ .@input$ +". Est-ce que vous pourriez vérifier?";
 			close;
 		}
 		mes "[Éditions Momotaro]";
