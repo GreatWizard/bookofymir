@@ -132,6 +132,7 @@ OnTimer374000:
 OnTimer375000:
 	mapwarp "force_2-1","prt_are_in",126,139,0,0;
 	donpcevent "Minilover#arena::Onfailclearstage";
+	donpcevent "#arn_timer_60::Onon"; // Bufix (je rajoute cette ligne là mais ça aurait aussi bien pu être ailleurs) [No Healing]
 	end;
 	
 Ontimeroff:
@@ -744,7 +745,7 @@ Onon:
 OnMobDeath:
 	set $force_06_60,$force_06_60 -1;
 	if ($force_06_60 < 1) {	
-		set door, 1;	
+//		set door, 1;	Bufix: On vire cette ligne qui ne sert à rien (reste de conversion Aegis) et qui fait planter le script avec des @killmonster [No Healing]
 		donpcevent "Minilover#arena::On06_end";
 		donpcevent "arena#60::Onreset_06";
 	}
@@ -1047,7 +1048,7 @@ Onstop:
 prt_are_in,1,1,1	script	arn_warp_60	-1,{
 
 Onout:
-	areawarp "prt_are_in",23,131,20,20,"arena_room",100,75;
+	areawarp "prt_are_in",14,126,29,143,"arena_room",100,75; // Bugfix: coordonnées du warp [No Healing]
 	end;
 }
 
