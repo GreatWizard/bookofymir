@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Feast Day Of Ramadan Idul Fitri Event
 //===== By: ================================================== 
@@ -14,39 +16,35 @@
 
 
 prontera,146,92,3	script	Cellerb	58,{
-	set @npcname$,"[Staff Idul Fitri]";
+	set @npcname$,"[Personnel de la Fête de l'Aïd]";
 	mes @npcname$;
 	if((gettime(6)==10 && (gettime(5)==24 || gettime(5)==25))==0) {
-		mes "Congratulation! Celebrate Feast Day Of Ramadan Idul Fitri 1427 H.";
+		mes "Bonjour! Et bonne Fête de l'Aïd."; // J'ai supprimé l'année [No Healing]
 		specialeffect EF_SANDMAN;
 		close;	
 	}
 	mes "Haii......^FF8800"+strcharinfo(0)+"^000000!!";
-	mes "First day of Idulfitri has arrived.";
-	mes "Congratulation celebrate him.";
-	mes "There is event special today.";
+	mes "C'est le premier jour de l'Aïd, un jour de fête et de réjouissances. Nous organisons un évènement spécial aujourd'hui.";
 	next;
 	mes @npcname$;
-	mes "Event today .....^009500Idul Fitri Quest!^000000";
+	mes "Il s'agit de .....^009500La Quête de l'Aïd!^000000";
 	next;
 	mes @npcname$;
-	mes "If you interest to follow this event, I will cook it to you.";
+	mes "Je peux vous cuisiner quelque chose si vous voulez participer à la fête.";
 	next;
 
-	switch(select("Allright. I like that!!","Next time.... Thanks.")){
+	switch(select("D'accord, je suis partant!","Une prochaine fois peut-être. Merci.")){
 	case 1:
 		mes @npcname$;
-		mes "I have something that might interest you.";
-		mes "I need all of the following items:";
-		mes "^D5A500Ketupat Sayur Ingredient :^000000";
+		mes "J'ai un petit quelque chose dont vous me direz des nouvelles! J'ai simplement besoin des ingrédients suivants pour le préparer:";
+		mes "^D5A500Ingrédients du Ketupat Sayur:^000000";
 		mes "^00B6FF~5 Ketupat, 5 Carrot~,^000000";
 		mes "^CC6633~5 Sweet Potato, 10 Meat~,^000000";
 		mes "^000088~2 Green Herb, 5 Stem~.^000000";
 		next;
 		mes @npcname$;
 		if ( (countitem(552)<5 || countitem(515)<5 ||countitem(516)<5 || countitem(517)<10 || countitem(511)<2 || countitem(905)<5) ) { 
-			mes "You don't have enough items.";
-			mes "Come back when you have them all.";
+			mes "Vous n'avez pas tous les ingrédients. Revenez quand vous les aurez.";
 			close;
 		}
 		delitem 552,5;
@@ -55,22 +53,21 @@ prontera,146,92,3	script	Cellerb	58,{
 		delitem 517,10;
 		delitem 511,2;
 		delitem 905,5;
-		mes "I see you already have all the items you need.";
-		mes "Just a moment, please!!";
+		mes "Je vois que vous avez tous les ingrédients dont j'ai besoin. Donnez-moi une petite minute!";
 		next;
-		mes "^009500-Plupping snapping bubbling~^000000";
-		mes "^009500-Clinking clingking~^000000";
-		mes "^009500-Clang clang~^000000";
+		mes "^009500*Coupe* *Rappe* *Bout*^000000";
+		mes "^009500*Touille* *Touille*^000000";
+		mes "^009500*Clang* *Clang*^000000";
 		getitem 583,1;
 		next;
 		mes @npcname$;
-		mes "We appreciate your participation in this special event.";
+		mes "Merci d'avoir participé à la fête!";
 		emotion e_thx;
 		close;
 
 	case 2:	
 		mes @npcname$;
-		mes "Oh well, maybe you will participate in tommorow's quest.";
+		mes "Peut-être participerez-vous à la fête de demain.";
 		emotion e_hmm;
 		close;
 	}
