@@ -1,3 +1,5 @@
+//= Le Livre d'Ymir http://www.bookofymir.net/
+//= traduit par No Healing
 //===== eAthena Script ========================================
 //= Izlude Party Arena 
 //===== By: ==================================================
@@ -19,7 +21,7 @@ arena_room,162,88,3	script	Ponox	124,{
 	end;
 	
 OnInit:
-	waitingroom "Time Force Battle - Last Party !",11,"Ponox::OnStartArena",5;
+	waitingroom "Combat par Equipe!",11,"Ponox::OnStartArena",5;
 	enablewaitingroomevent;
 	end;
 
@@ -37,34 +39,29 @@ Onstart:
 	end;
 }
 
-prt_are_in,76,87,3	script	Helper#party	 67,4,4,{
+prt_are_in,76,87,3	script	Guide::Helper#party	 67,4,4,{
 
 	if($arn_partywait == 0)
 	{
 		set $arn_partywait,1;
 		emotion e_gasp,0;
-		mes "[Helper Iriff]";
-		mes "Good day, challengers!";
-		mes "You are in the party arena waiting room.";
+		mes "[Guide Iriff]";
+		mes "Bienvenue aux participants! Vous vous trouvez dans la salle d'attente de l'Arène par Equipe.";
 		next;
-		mes "[Helper Iriff]";
-		mes "Only one person at a time is allowed to stay in this waiting room.";
-		mes "Would you like to start a battle now?";
+		mes "[Guide Iriff]";
+		mes "Les joueurs doivent entrer dans la salle d'attente un par un. Voulez-vous commencer le combat dès maintenant?";
 		next;
-		switch( select( "No","Yes" ) )
+		switch( select( "Non","Oui" ) )
 		{
 			case 1:
 				set $arn_partywait,0;
-				mes "[Helper Iriff]";
-				mes "I see.";
-				mes "However, please remember you have only a limited amount of time.";
+				mes "[Guide Iriff]";
+				mes "Comme vous voulez. Mais rappelez-vous bien que le temps est compté.";
 				close;
 		
 			case 2:
-				mes "[Helper Iriff]";
-				mes "Thank you, let me start a battle.";
-				mes "A warp portal leading to the arena room will be open.";
-				mes "I hope you will survive until the end of the battle and engrave your name on the list of honor...";
+				mes "[Guide Iriff]";
+				mes "Merci. Le combat va commencer. Un portail vers l'Arène va s'ouvrir. J'espère que vous réussirez à survivre aux combats, et que votre nom sera gravé dans le Temple de la Renommée...";
 				close2;
 				donpcevent "toarena#party::OnEnter";
 				donpcevent "Helper#party::OnStop";
@@ -163,69 +160,69 @@ OnStart:
 	end;
 	
 OnTimer2000:
-	mapannounce "force_1-2","Good day, my name is Slipslowrun! I am here to assist you in the party arena battles!",bc_all;
+	mapannounce "force_1-2","Bonjour. Je m'appelle Slipslowrun! Mon rôle est de vous assister dans l'Arène par Equipe!",bc_all;
 	donpcevent "arena_compass::OnStart";
 	end;
 	
 OnTimer3000:
-	mapannounce "force_1-2","The goal of the party arena is eliminating every monster in each room.",bc_all;
+	mapannounce "force_1-2","Vous devrez éliminer les monstres dans chacune des salles.",bc_all;
 	end;
 	
 OnTimer4000:
-	mapannounce "force_1-2","There is no order to enter one among 3 rooms at 3 direction. But remember you will eliminate all monsters in a room in order to procceed to the next step.",bc_all;
+	mapannounce "force_1-2","Vous pouvez emprunter n'importe lequel des trois portails de cette salle. Cependant, gardez à l'esprit que vous devrez éliminer tous les monstres de la salle avant de pouvoir continuer.",bc_all;
 	end;
 
 OnTimer5000:
-	mapannounce "force_1-2","You have 10 minutes from now. I expect you will do your best! ",bc_all;
+	mapannounce "force_1-2","Vous avez 10 minutes à partir de maintenant. Faites de votre mieux!",bc_all;
 	end;
 	
 OnTimer60000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 9 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 9 minutes",bc_all;
 	end;
 
 OnTimer120000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 8 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 8 minutes",bc_all;
 	end;
 
 OnTimer180000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 7 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 7 minutes",bc_all;
 	end;
 	
 OnTimer240000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 6 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 6 minutes",bc_all;
 	end;
 
 OnTimer300000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 5 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 5 minutes ",bc_all;
 	end;
 
 OnTimer360000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 4 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 4 minutes",bc_all;
 	end;
 
 OnTimer420000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 3 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 3 minutes",bc_all;
 	end;
 
 OnTimer480000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 2 minutes ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 2 minutes",bc_all;
 	end;
 
 OnTimer540000:
 	if(!getmapusers("force_1-2")) donpcevent "Slipslowrun#party::OnFail";
-	mapannounce "force_1-2","Remaining Time : 1 minute ",bc_all;
+	mapannounce "force_1-2","Temps Restant: 1 minute",bc_all;
 	end;
 
 OnTimer600000:
-	mapannounce "force_1-2","Time is over! Please make sure you do not leave anything behind you before you leave .",bc_all;
+	mapannounce "force_1-2","Le temps est écoulé! Assurez-vous de n'avoir rien laissé derrière vous avant de sortir.",bc_all;
 	end;
 	
 OnTimer605000:
@@ -263,55 +260,55 @@ OnTimeoff:
 	end;
 
 On01_end:
-	mapannounce "force_1-2","A door to the east room has opened!",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir à l'est!",bc_all;
 	end;
 
 On02_end:
-	mapannounce "force_1-2","A door to the west room has opened!",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir à l'ouest!",bc_all;
 	end;
 
 On03_end:
-	mapannounce "force_1-2","A door to the south room has opened!",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir au sud!",bc_all;
 	end;
 
 On04_start:
-	mapannounce "force_1-2","A door to the 4th room at the east has opened!",bc_all;
+	mapannounce "force_1-2","Un portail vers la quatrième salle à l'est vient de s'ouvrir!",bc_all;
 	end;
 
 On04_end1:
-	mapannounce "force_1-2","A warp portal at the west has opened! Please clear the 5th room at the end of the west hall! ",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir à l'ouest! Vous devez tuer tous les monstres de la cinquième salle de la galerie ouest!",bc_all;
 	end;
 
 On04_end2:
-	mapannounce "force_1-2","A warp portal at the west north room has opened! ",bc_all;
+	mapannounce "force_1-2","Un portail vers la salle nord vient de s'ouvrir!",bc_all;
 	end;
 
 On05_end1:
-	mapannounce "force_1-2","A door to the east room has opened~",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir à l'est~",bc_all;
 	end;
 
 On05_end2:
-	mapannounce "force_1-2","A door to the north room has opened~",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir au nord~",bc_all;
 	end;
 
 On06_end:
-	mapannounce "force_1-2","A door to the east room has opened~",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir à l'est~",bc_all;
 	end;
 
 On07_end:
-	mapannounce "force_1-2","A door at the north has opened~",bc_all;
+	mapannounce "force_1-2","Un portail vient de s'ouvrir au nord~",bc_all;
 	end;
 
 On08_end:
-	mapannounce "force_1-2","A door to the west hall has opened~",bc_all;
+	mapannounce "force_1-2","Un portail vers la galerie ouest vient de s'ouvrir~",bc_all;
 	end;
 	
 On09_end:
-	mapannounce "force_1-2","A west exit has opened!",bc_all;
+	mapannounce "force_1-2","Une sortie à l'ouest vient de s'ouvrir!",bc_all;
 	end;
 	
 On10_end:
-	mapannounce "force_1-2","Boss stage cleared! An exit at the east has opened! Thank you.",bc_all;
+	mapannounce "force_1-2","Boss éliminé! Une sortie à l'est vient de s'ouvrir! Merci.",bc_all;
 	end;
 }
 
@@ -955,7 +952,7 @@ Onon:
 	}
 	if(.arn_skel != 10)
 	{
-		monster "force_1-2",rand(162,184),rand(122,185),"Skel Prisoner",1479,1,"force_08mob#party::OnMobDeath";
+		monster "force_1-2",rand(162,184),rand(122,185),"Skeleton Prisoner",1479,1,"force_08mob#party::OnMobDeath";
 		set .arn_skel,.arn_skel +1;
 		set $force_08_pt,$force_08_pt +1;
 	}
@@ -1098,35 +1095,35 @@ OnTouch:
 force_1-2,63,94,1	script	force_exitmob#party	111,{
 
 Onon:
-	monster "force_1-2",95,177,"Farewell",1393,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"I hate you",1543,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"I like chocolate",1472,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"You like it, huh?",1472,1,"force_exitmob-#party::OnMobDeath";
-	monster "force_1-2",95,177,"Sorry",1420,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Adieu",1393,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"J'vous déteste!",1543,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"J'aime le chocolat!",1472,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"T'aimes ça, hein?",1472,1,"force_exitmob-#party::OnMobDeath";
+	monster "force_1-2",95,177,"Désolé",1420,1,"force_exitmob#party::OnMobDeath";
 	monster "force_1-2",95,177,"Tristram II",1562,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"I am hungry",1468,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Bye",1419,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Take care",1394,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Sexy Body",1578,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Pressure",1471,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Take it easy",1491,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Are you gonna hurt me?",1555,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Merchant",1428,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Ms. Kim",1472,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Martial Art",1472,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Part-timer",1420,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"J'ai faim",1468,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Salut",1419,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"A la prochaine!",1394,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Je suis Sexy",1578,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Pression",1471,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Cool, mec!",1491,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Me faites pas mal!",1555,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Marchand",1428,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Mme. Kim",1472,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Art Martial",1472,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Intérimaire",1420,1,"force_exitmob#party::OnMobDeath";
 	monster "force_1-2",95,177,"Boss",1562,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Old Yellow Box",1474,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Bat",1419,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Vieille Boîte Jaune",1474,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Chauve-Souris",1419,1,"force_exitmob#party::OnMobDeath";
 	monster "force_1-2",95,177,"Extra",1394,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Milk Merchant",1578,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Marchande de Lait",1578,1,"force_exitmob#party::OnMobDeath";
 	monster "force_1-2",95,177,"Darling",1471,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Oh noes!",1491,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"I am not a Wraith",1566,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Mom Wraith",1566,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Dad Wraith",1566,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Book[3]",1478,1,"force_exitmob#party::OnMobDeath";
-	monster "force_1-2",95,177,"Exchange Diary",1478,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Oh non!",1491,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Pas un Spectre!",1566,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Fantôme de Maman",1566,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Fantôme de Papa",1566,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Livre [3]",1478,1,"force_exitmob#party::OnMobDeath";
+	monster "force_1-2",95,177,"Livre de Comptes",1478,1,"force_exitmob#party::OnMobDeath";
 	end;
 	
 OnReset:
@@ -1134,29 +1131,26 @@ OnReset:
 	end;
 }
 
-prt_are_in,181,135,3	script	Staff#party-1	67,{
+prt_are_in,181,135,3	script	Personnel::Staff#party-1	67,{
 
-	mes "[Staff]";	
-	mes "You did a good job.";	
-	mes "Even if you have failed to clear a time attack battle, I will reward you with a small amount of arena points.";	
+	mes "[Personnel]";	
+	mes "Vous avez fait du très beau travail. Même si vous n'avez pas réussi à terminer à temps, je vais vous récompenser avec quelques Points de l'Arène.";	
 	next;
 	if (arena_point == 30000) {	
-		mes "[Staff]";	
-		mes "Uh huh!";	
-		mes "You already have enough arena points.";	
-		mes "Please spend some arena points later. When I see you next time, I will make sure to give you some reward.";	
+		mes "[Personnel]";
+		mes "Uh uh! Vous avez déjà suffisamment de Points de l'Arène. Vous devriez en dépenser pour que je puisse vous récompenser la prochaine fois.";	
 		next;
 	}
 	else set arena_point, arena_point + 1;
-	mes "[Staff]";	
-	mes "Let me guide you outside. I hope you had a good time.";	
+	mes "[Personnel]";	
+	mes "Laissez-moi vous reconduire à l'extérieur. J'espère que vous avez passé un agréable moment.";	
 	close2;
 	specialeffect2 EF_HIT5;
 	warp "arena_room",100,75;
 	end;
 }
 
-prt_are_in,77,135,3	script	Staff#party-2	67,{
+prt_are_in,77,135,3	script	Personnel::Staff#party-2	67,{
 
 	if($arena_minptend < $arena_minptst)
 	{
@@ -1185,49 +1179,47 @@ prt_are_in,77,135,3	script	Staff#party-2	67,{
 		}
 	}
 	set @gappt,(60 * $top_ptmin + $top_ptsec) - (60 * @record_minpt + @record_secpt);
-	mes "[Staff]";	
-	mes "Wow, you did a good job~ ";	
-	mes "Your name is...^3131FF" + strcharinfo(0) +"^000000, isn't it?";	
-	mes "^3131FF"+ strcharinfo(0) +"^000000, total time you spent to pass the battle..";	
+	mes "[Personnel]";
+	mes "Huhu, Vous avez fait du très beau travail~ ";	
+	mes "Vous vous appelez...^3131FF" + strcharinfo(0) +"^000000, n'est-ce pas?";	
+	mes "^3131FF"+ strcharinfo(0) +"^000000, vous avez complété le jeu en...";	
 	next;
-	mes "[Staff]";	
-	mes "is "+@record_minpt+"minutes "+@record_secpt+"seconds.";	
-	mes "Congratulations!";	
+	mes "[Personnel]";
+	mes @record_minpt+" minutes "+@record_secpt+" secondes.";	
+	mes "Féliciations!";	
 	next;
-	mes "[Staff]";	
-	mes "The fastest party among people who cleared party arena time force battle is ^3131FF"+$arena_pttopn$+"^000000.";	
+	mes "[Personnel]";
+	mes "Le record de l'Arène par Equipe est détenu par ^3131FF"+$arena_pttopn$+"^000000.";	
 	next;
-	mes "[Staff]";	
-	mes "^3131FF"+$arena_pttopn$+"^000000's running time was ^3131FF"+$top_ptmin+"^000000minutes ^3131FF"+$top_ptsec+"^000000seconds.";	
+	mes "[Personnel]";
+	mes "L'équipe ^3131FF"+$arena_pttopn$+"^000000 a complété le jeu en ^3131FF"+$top_ptmin+"^000000 minutes ^3131FF"+$top_ptsec+"^000000 secondes.";	
 	next;
 	set .arn_party,getcharid(1);
 	if (@gappt < 0) {
-		mes "[Staff]";	
-		mes "Although you failed to make a new record, I hope you will succeed next time.";	
+		mes "[Personnel]";
+		mes "Vous n'avez pas établi de nouveau record, mais vous ferez peut-être mieux la prochaine fois.";	
 		next;
 		if (arena_point > 29980) {	
-			mes "[Staff]";	
-			mes "Then let me reward you with some arena points....eh?";	
-			mes "Your arena points have exceeded the maximum amount. I cannot give you more points until you spend some points.";	
+			mes "[Personnel]";
+			mes "Laissez-moi vous récompenser en vous donnant quelques Points de l'Arène....eh?";	
+			mes "Vous avez déjà atteint le nombre maximum de points. Je ne peux pas vous en donner plus tant que vous n'en aurez pas dépensé quelques uns.";	
 			next;
-			mes "[Staff]";	
-			mes "You can check the amount of arena points you have in the arena waiting room.";	
+			mes "[Personnel]";
+			mes "Vous pouvez consulter votre nombre actuel de points dans la salle d'attente.";	
 			next;
-			mes "[Staff]";	
-			mes "I hope you had a good time and let me guide you to the entrance of arena.";	
-			mes "Thank you.";	
+			mes "[Personnel]";
+			mes "J'espère que vous avez passé un agréable moment. Laissez-moi vous reconduire à l'extérieur. Merci.";	
 			close2;
 		}
 		else
 		{
 			set arena_point, arena_point + 40;
-			mes "[Staff]";	
-			mes "Let me reward you some arena points.";	
-			mes "If you wish to check the amount of arena points you have, please go talk to ^3131FFVendigos^000000 at the arena entrance.";	
+			mes "[Personnel]";
+			mes "Laissez-moi vous récompenser en vous donnant quelques Points de l'Arène.";	
+			mes "Vous pouvez consulter votre nombre actuel de points en vous adressant à ^3131FFVendigos^000000 à l'entrée de l'arène.";	
 			next;
-			mes "[Staff]";	
-			mes "Let me guide you to the entrance of arena.";	
-			mes "See you later~";	
+			mes "[Personnel]";
+			mes "Laissez-moi vous reconduire à l'extérieur. A bientôt~";	
 			close2;
 		}
 		if(getpartyleader(.arn_party,2) == getcharid(0))
@@ -1244,49 +1236,48 @@ prt_are_in,77,135,3	script	Staff#party-2	67,{
 	else
 	{
 		emotion e_omg;
-		mes "[Staff]";	
-		mes "Wow! You have renewed the record!";	
-		mes "What a great job!";	
+		mes "[Personnel]";
+		mes "Huhu! Vous venez d'établir un nouveau record! Vous avez vraiment fait du très bon travail!";
 		next;
 		if(getpartyleader(.arn_party,2) == getcharid(0))
 		{
-			mes "[Staff]";
-			mes "You can record you and your party members on ^FF0000the hall of Arena Time Force Battle party ^000000.";
-			mes "When you enter a name, the name will be remained on the top unless someone make a new record.";
+			mes "[Personnel]";
+			mes "Vous pouvez inscrire votre nom pour qu'il soit affiché dans notre ^FF0000Temple de la Renommée^000000.";
+			mes "Ce nom sera visible par tous jusqu'à ce qu'un nouveau record soit établi.";
 			next;
-			mes "[Staff]";
-			mes "Please enter a name within 10 letters which can represent you and your party members.";
+			mes "[Personnel]";
+			mes "Veuillez nous indiquer un nom de 10 lettres au plus pour vous représenter ainsi que les membres de votre équipe.";
 			next;
-			switch( select( "Ok.","Let me think." ) ) 
+			switch( select( "D'accord.","Laissez-moi y réfléchir." ) ) 
 			{
 				case 1:
 					input .@arnparty$;
-					mes "[Staff]";
-					mes "You have entered ^3131FF"+.@arnparty$+"^000000. Is it correct?";
+					mes "[Personnel]";
+					mes "Voulez-vous valider le nom de ^3131FF"+.@arnparty$+"^000000?";
 					next;
-					switch( select( "Yes","No" ) )
+					switch( select( "Oui","Non" ) )
 					{
 						case 1:
 							set $top_ptmin, @record_minpt;
 							set $top_ptsec, @record_secpt;
 							set $arena_pttopn$,.@arnparty$;	
 							donpcevent "Vendigos::Onlinerec_pt";
-							mes "[Staff]";
-							mes "Your record has been entered.";
+							mes "[Personnel]";
+							mes "Votre record a été enregistré.";
 							next;
 							break;
 							
 						case 2:
-							mes "[Staff]";
-							mes "Please take your time and think up a nice name.";
+							mes "[Personnel]";
+							mes "Prenez votre temps pour penser à un autre nom.";
 							close;
 						
 					}
 					break;
 
 				case 2:
-					mes "[Staff]";
-					mes "Please take your time and think up a nice name.";
+					mes "[Personnel]";
+					mes "Comme vous voulez, mais faites au plus vite.";
 					close;
 				
 			}
@@ -1294,32 +1285,27 @@ prt_are_in,77,135,3	script	Staff#party-2	67,{
 
 		}
 		if (arena_point > 29900) {	
-			mes "[Staff]";	
-			mes "Then let me reward you with some arena points....eh?";	
-			mes "Your arena points have exceeded the maximum amount. I cannot give you more points until you spend some points.";	
+			mes "Laissez-moi vous récompenser en vous donnant quelques Points de l'Arène....eh?";	
+			mes "Vous avez déjà atteint le nombre maximum de points. Je ne peux pas vous en donner plus tant que vous n'en aurez pas dépensé quelques uns.";	
 			next;
-			mes "[Staff]";	
-			mes "You can check the amount of arena points you have in the arena waiting room.";	
+			mes "[Personnel]";
+			mes "Vous pouvez consulter votre nombre actuel de points dans la salle d'attente.";	
 			next;
-			mes "[Staff]";	
-			mes "I hope you had a good time and let me guide you to the entrance of arena.";	
-			mes "Thank you.";	
+			mes "[Personnel]";
+			mes "J'espère que vous avez passé un agréable moment. Laissez-moi vous reconduire à l'extérieur. Merci.";	
 			close2;
 		}
 		else
 		{
-			mes "[Staff]";
-			mes "Let me reward you with some arena points.";	
-			mes "At the same time, since you have renewed the record you will receive an extra amount of the points this time.";	
+			mes "[Personnel]";
+			mes "Laissez-moi vous récompenser en vous donnant quelques Points de l'Arène. Vous recevrez des points supplémentaires pour avoir battu le record précédent.";	
 			next;
-			set arena_point, arena_point + 100;
-			mes "[Staff]";	
-			mes "Let me reward you some arena points.";	
-			mes "If you wish to check the amount of arena points you have, please go talk to ^3131FFVendigos^000000 at the arena entrance.";	
+			set arena_point, arena_point + 50;
+			mes "[Personnel]";
+			mes "Vous pouvez consulter votre nombre actuel de points en vous adressant à ^3131FFVendigos^000000 à l'entrée de l'arène.";	
 			next;
-			mes "[Staff]";	
-			mes "Let me guide you to the entrance of arena.";	
-			mes "See you later~";	
+			mes "[Personnel]";
+			mes "Laissez-moi vous reconduire à l'extérieur. A bientôt~";	
 			close2;
 		}
 		if(getpartyleader(.arn_party,2) == getcharid(0))
@@ -1342,15 +1328,15 @@ OnEnter:
 	end;
 
 OnTimer2000:
-	mapannounce "prt_are_in","This broadcast informs you about the restriction for party arena.",0,0xFFCE00;
+	mapannounce "prt_are_in","Ce message marque la fin du jeu dans l'Arène par Equipe.",0,0xFFCE00;
 	end;
 
 OnTimer3000:
-	mapannounce "prt_are_in","For a smooth game play, exit warp portal will be activated in 1 minute.",0,0xFFCE00;
+	mapannounce "prt_are_in","Vous serez automatiquement reconduit vers la sortie dans une minute.",0,0xFFCE00;
 	end;
 
 OnTimer4000:
-	mapannounce "prt_are_in","Please proceed your battle quickly as possible in order to avoid disadvantage. Thank you for your cooperation.",0,0xFFCE00;
+	mapannounce "prt_are_in","Veuillez sortir dès que possible afin d'éviter d'être pénalisé. Merci de votre coopération.",0,0xFFCE00;
 	end;
 
 OnTimer60000:
@@ -1376,19 +1362,19 @@ Onout:
 force_1-2,62,104,4	script	cast#pt	139,{
 
 Ontimeover1:
-	mapannounce "force_2-1","Arena will be reactivated due to an error occurred during battle.",0,0xFFCE00;
+	mapannounce "force_2-1","L'Arène va être remise à zéro du fait d'une erreur pendant le combat.",0,0xFFCE00;
 	end;
 
 Onnomal1:
-	mapannounce "force_2-1","Arena will be reactivated.",0,0xFFCE00;
+	mapannounce "force_2-1","L'Arène va être remise à zéro.",0,0xFFCE00;
 	end;
 
 Onnomal2:
-	mapannounce "force_2-1","Arena will be reactivated.",0,0xFFCE00;
+	mapannounce "force_2-1","L'Arène va être remise à zéro.",0,0xFFCE00;
 	end;
 
 Ontimeover2:
-	mapannounce "force_2-1","Arena will be reactivated due to an error occurred in the waiting room.",0,0xFFCE00;
+	mapannounce "force_2-1","L'Arène va être remise à zéro du fait d'une erreur dans la salle d'attente.",0,0xFFCE00;
 	end;
 }
 

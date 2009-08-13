@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Arena Warps
 //===== By: ==================================================
@@ -28,36 +30,34 @@ arena_room,123,88,0	warp	arn_room_3_1	1,1,arena_room,153,87
 arena_room,150,87,0	warp	arn_room_3_2	1,1,arena_room,120,87
 prt_are_in,54,13,0	warp	toarn_room	1,1,arena_room,100,77
 
-sec_in02,79,180,3	script	#arenacontrol	81,{
+sec_in02,79,180,3	script	Arène::#arenacontrol	81,{
+	if (!getgmlevel()) end; // Bugfix: petite sécurité si les joueurs ont accès à sec_in02 (vu que c'est un bug officiel, ça ne sera pas fixé sur eA *sigh*). [No Healing]
 
 DLGTEMP:
 	input @input_arena;
 	if (@input_arena < 0 || @input_arena > 2000) goto DLGTEMP;	//CHECK
 	if (@input_arena == 0)
 	{
-		mes "Error!";
+		mes "Erreur!";
 		close;
 	}
 	else if (@input_arena == 1357)
 	{
-		mes "Opening Control Panel";	
-		mes "' A - R - E - N - A '";	
+		mes "Panneau de Contrôle de l'";	
+		mes "' A - R - E - N - E '";	
 		next;
-		mes "Please select a";	
-		mes "state for the arena.";	
+		mes "Veuillez choisir une nouvelle option pour l'Arène.";	
 		next;
-		switch( select( "Open.","Closed.") )
+		switch( select( "Ouverte.","Fermée.") )
 		{
 			case 1:
-				mes "Currently";	
-				mes "opening arena.";	
+				mes "L'Arène vient d'ouvrir!";	
 				misceffect EF_ENHANCE;	//CHECK
 				enablenpc "welcome_arena";
 				next;
 				break;
 			case 2:
-				mes "Currently";	
-				mes "closing arena.";	
+				mes "L'Arène vient de fermer!";	
 				misceffect EF_EXIT;	//CHECK
 				disablenpc "welcome_arena";
 				next;
@@ -66,7 +66,7 @@ DLGTEMP:
 	}
 	else
 	{
-		mes "Closing control panel.";	
+		mes "Mot de passe incorrect.";	
 		close;
 	}
 }
