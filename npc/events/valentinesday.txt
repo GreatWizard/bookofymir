@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Valentine Event Script
 //===== By: ==================================================
@@ -18,29 +20,20 @@
 // Stephen - Valentine Event Chocolate seller ------------------
 alberta,26,243,4	script	Stephen	58,{
 	mes "[Stephen]";
-	mes "Guess what I've got?";
-	mes "A tasty treat not easily found in Rune-Midgard....";
+	mes "Devinez ce que j'ai là? Une douceur très difficile à trouver dans Rune-Midgard...";
 	next;
 	mes "[Stephen]";
-	mes "Chocolate!";
-	mes "That's right, don't you love chocolate.... I do.";
-	mes "And you are in luck, because I'm selling them for only 5,000 zeny a piece!";
+	mes "Du chocolat!";
+	mes "Vous aimez le chocolat, n'est-ce pas? Moi j'adore! Et vous avez de la chance car j'en vend pour 5.000 zenys pièce!";
 	next;
-	menu "I want some chocolate!",M_CHOCO,"No thanks.",-;
+	menu "Je veux du chocolat!",M_CHOCO,"Non merci.",-;
 	mes "[Stephen]";
-	mes "You don't want any chocolate?";
-	mes "I'm telling you! You'll regret it!";
-	mes "You better get some now... you won't come across Chocolate like this ever again!";
-	mes "Think it over and visit me again sometime.";
+	mes "Vous ne voulez pas de chocolat? Je vais vous dire quoi: je suis sûr que vous le regretterez! Vous feriez mieux de m'en acheter maintenant, l'opportunité ne se représentera peut-être pas de sitôt! Pensez-y et revenez me voir quand vous aurez changé d'avis.";
 	close;
 
 M_CHOCO:
 	mes "[Stephen]";
-	mes "Hah!";
-	mes "I knew it!";
-	mes "But I can't sell you more then 5 at once....but, if you really need more....";
-	mes "you can come back again.";
-	mes "So how many do you want?";
+	mes "Ah! Je le savais! Cependant, je ne peux pas en vendre plus de 5 à la fois. Mais vous pourrez toujours revenir si vous en voulez plus. Alors, combien en voulez-vous?";
 	next;
 	set @needmon,0;
 	input @flag_num;
@@ -51,90 +44,83 @@ M_CHOCO:
 	set Zeny,Zeny - @needmon;
 	getitem 558,@flag_num;
 	mes "[Stephen]";
-	mes "There you go!";
-	mes "You can give that to someone as a gift, or enjoy it yourself!";
-	mes "Mmm....sweet chocolate...";
-	mes "Visit me anytime...!";
+	mes "Et voilà pour vous! Vous pouvez l'offrir à quelqu'un, ou vous régaler avec.";
+	mes "Hmm... Du chocolat...";
+	mes "A bientôt!";
 	close;
 
 L_ERR:
 	mes "[Stephen]";
-	mes "I'm sorry but I can't give you that many.";
+	mes "Je suis désole mais je ne peux pas vous en vendre autant.";
 L_NONE:
 	close;
 
 L_NOTENO:
 	mes "[Stephen]";
-	mes "I'm sorry but it seems you can't afford to buy these off me.";
+	mes "Je suis désolé mais on dirait que vous ne pouvez pas vous en offrir autant.";
 	close;
 }
 
 // Jainie -- Gives information about Valentine Event ------------------------
 alberta,29,243,4	script	Jainie	53,{
 	mes "[Jainie]";
-	mes "You know what? The chocolate that my boyfriend sells are from me!";
-	mes "I made them by myself.";
+	mes "Devinez quoi! C'est moi qui confectionne les chocolats que vend mon petit ami. Je les fais moi-même.";
 	next;
 	mes "[Jainie]";
-	mes "You know ... In cetain countries, there's a tradition of presenting chocolates to a person that you love...";
-	mes "They call it, ^3355FFValentine's Day^000000.";
+	mes "Vous savez, dans certains pays on a l'habitude d'offrir du chocolat à ceux que l'on aime un jour dans l'année. On appelle ce jour la ^3355FFSaint Valentin^000000.";
 	next;
 	mes "[Jainie]";
-	mes "So I gave him my delicious chocolate...";
-	mes "And then he made me cook a lot more...";
-	mes "And now he is selling them to everyone.";
-	mes "I guess he really enjoyed it.";
-	mes "But, I do feel good when people buy something I have made.";
+	mes "C'est pour ça que je lui ai donné mes délicieux chocolats. Mais après cela, il a voulu que j'en fasse d'autres, encore, et encore... Et maintenant il les vend à tout le monde. J'imagine qu'il les a vraiment aimés, mais ça me gêne quand même un peu de vendre ce que j'ai fait par amour...";
 	next;
 	mes "[Jainie]";
-	mes "It would be great if you bought some too...";
-	mes "I will be making chocolates for a while so...";
+	mes "Vous devriez en acheter vous aussi... De toutes façons je suis partie pour en faire pendant un bon bout de temps.";
 	close;
 }
 
-// Carl Orleans -- Valentine Event Chocolate maker ------------------
-prt_castle,54,34,4	script	Carl Orleans	47,{
-	mes "[Carl Orleans]";
-	mes "Yes?";
+// Charles Orleans -- Valentine Event Chocolate maker ------------------
+prt_castle,54,34,4	script	Charles Orleans	47,{
+	mes "[Charles Orleans]";
+	mes "Oui?";
 	next;
-	menu "I want some hand made chocolate...",-,"I'm lost, sorry to bother you.",M_WAT;
+	menu "Je voudrais du chocolat maison...",-,"Qu'est-ce que vous faites?",M_WAT;
      
-	mes "[Carl Orleans]";
-	mes "Well, I just might be able to fulfill your needs...";
+	mes "[Charles Orleans]";
+	mes "Eh bien, je vais peut-être pouvoir vous aider...";
 	next;
 	if (countitem(558) >=3) goto L_ENO;
-	mes "I'm sorry you do not have enough Chocolate Bars to do this";
+	mes "[Charles Orleans]";
+	mes "Oh, mais vous n'avez pas assez de Barres de Chocolat pour ça. Je ne peux rien faire, désolé.";
 	close;
 
 L_ENO:
 	delitem 558,3;
-	mes "[Carl Orleans]";
-	mes "You got 3 pieces of pure chocolate I see.";
-	mes "Give them to me...";
+	mes "[Charles Orleans]";
+	mes "Vous avez 3 morceaux de chocolat pur cacao. Bien, donnez-les moi...";
 	next;
-	mes "Ok, now I will only create my special hand made chocolates if you promise to use it wisely.";
+	mes "[Charles Orleans]";
+	mes "D'accord, je vais préparer mon célèbre chocolat, mais vous devez me promettre d'en faire bon usage, d'accord?";
 	next;
-	mes "....Hmmmmmm.....";
-	mes "Well...";
+	mes "[Charles Orleans]";
+	mes "....Hum.....";
+	mes "Ca y est presque...";
 	next;
-	mes "Here.";
+	mes "[Charles Orleans]";
+	mes "Et voilà!";
 	getitem 559,1;
-	mes "I hope you give it to someone special, because its a special chocolate.";
-	mes "As you know... only I can create this.";
+	mes "J'espère que vous l'offrirez à quelqu'un qui vous est cher, car il s'agit de chocolat très spécial. Comme vous le savez, je suis le seul à pouvoir le préparer.";
 	next;
-	mes "Enjoy.";
+	mes "[Charles Orleans]";
+	mes "Bon appétit!";
 	close;
 
 M_WAT:
-	mes "[Carl Orleans]";
-	mes "Oh..well, if you want me to make some of my special Hand Made Chocolate....";
-	mes "You will need to give me at least ^0000FF 3 Chocolates^000000.";
+	mes "[Charles Orleans]";
+	mes "Oh... Eh bien, si vous voulez que je vous prépare mes chocolats très spéciaux, il faudra que vous me rapportiez au moins 3 barres de ^0000FFChocolat^000000.";
 	next;
-	mes "[Carl Orleans]";
-	mes "That's right, only ^0000FF 3 Chocolates^000000";
-	mes "Bring them to me and you'll get what you came for.";
+	mes "[Charles Orleans]";
+	mes "Vous avez bien entendu, seulement ^0000FF 3 Chocolats^000000. Apportez-les moi, et je vous préparerai ce que vous êtes venu chercher.";
 	next;
-	mes "[Carl Orleans]";
-	mes "See You.";
+	mes "[Charles Orleans]";
+	mes "A bientôt.";
 	close;
 }
