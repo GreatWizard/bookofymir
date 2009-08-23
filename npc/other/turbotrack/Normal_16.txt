@@ -6,7 +6,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.3
+//= 1.4
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -17,6 +17,7 @@
 //= 1.1 Fixed small official bug. [L0ne_W0lf]
 //= 1.2 Replaced effect numerics with constants. [L0ne_W0lf]
 //= 1.3 Fixed a little mistake [akrus]
+//= 1.4 Corrected issue with top record setting. [L0ne_W0lf]
 //============================================================
 
 turbo_room,91,135,3	script	Mode Normal - 16 Joueurs::Normal mode - 16 person	124,{
@@ -151,7 +152,7 @@ OnEnable:
 
 OnDisable:
 	stopnpctimer;
-	disablenpc "Master#e16"; // Bugfix: disablenpc "Master#e8"; -> disablenpc "Master#e16"; [No Healing]
+	disablenpc "Master#e16";
 	end;
 
 OnTimer7000:
@@ -947,7 +948,7 @@ turbo_n_16,384,167,1	script	Aide aux Vainqueurs::Winner Helper#TBT_n_16	47,{
 		next;
 		if (tt_rank > $ttranks[1]) {
 			setarray $ttranks[0],$ttranks[0],tt_rank,$ttranks[1],$ttranks[2],$ttranks[3],$ttranks[4];
-			setarray $ttnames$[9],strcharinfo(0); // Bugfix $ttnames -> $ttnames$ [No Healing]
+			setarray $ttnames$[9],strcharinfo(0);
 			mes "[Guide]";
 			mes "Félicitations! Vous venez de passer premier au classement pour avoir remporté le plus grand nombre de courses!";
 			donpcevent "TBT_Guide#Broadcast::Onnew_top1";
@@ -966,7 +967,7 @@ turbo_n_16,384,167,1	script	Aide aux Vainqueurs::Winner Helper#TBT_n_16	47,{
 		}
 		else if (tt_rank > $ttranks[2]) {
 			setarray $ttranks[0],$ttranks[0],$ttranks[1],tt_rank,$ttranks[3],$ttranks[4],$ttranks[5];
-			setarray $ttnames$[10],strcharinfo(0); // Bugfix $ttnames -> $ttnames$ [No Healing]
+			setarray $ttnames$[10],strcharinfo(0);
 			mes "[Guide]";
 			mes "Félicitations! Vous venez de passer second au classement des cinq joueurs ayant remporté le plus grand nombre de courses!";
 			donpcevent "TBT_Guide#Broadcast::Onnew_top2";
@@ -985,7 +986,7 @@ turbo_n_16,384,167,1	script	Aide aux Vainqueurs::Winner Helper#TBT_n_16	47,{
 		}
 		else if (tt_rank > $ttranks[3]) {
 			setarray $ttranks[0],$ttranks[0],$ttranks[1],$ttranks[2],tt_rank,$ttranks[4],$ttranks[5];
-			setarray $ttnames$[11],strcharinfo(0); // Bugfix $ttnames -> $ttnames$ [No Healing]
+			setarray $ttnames$[11],strcharinfo(0);
 			mes "[Guide]";
 			mes "Félicitations! Vous venez de passer troisième au classement des cinq joueurs ayant remporté le plus grand nombre de courses!";
 			donpcevent "TBT_Guide#Broadcast::Onnew_top3";
@@ -1004,7 +1005,7 @@ turbo_n_16,384,167,1	script	Aide aux Vainqueurs::Winner Helper#TBT_n_16	47,{
 		}
 		else if (tt_rank > $ttranks[4]) {
 			setarray $ttranks[0],$ttranks[0],$ttranks[1],$ttranks[2],$ttranks[3],tt_rank,$ttranks[5];
-			setarray $ttnames$[12],strcharinfo(0); // Bugfix $ttnames -> $ttnames$ [No Healing]
+			setarray $ttnames$[12],strcharinfo(0);
 			mes "[Guide]";
 			mes "Félicitations! Vous venez de passer quatrième au classement des cinq joueurs ayant remporté le plus grand nombre de courses!";
 			donpcevent "TBT_Guide#Broadcast::Onnew_top4";
@@ -1023,7 +1024,7 @@ turbo_n_16,384,167,1	script	Aide aux Vainqueurs::Winner Helper#TBT_n_16	47,{
 		}
 		else if (tt_rank > $ttranks[5]) {
 			setarray $ttranks[0],$ttranks[0],$ttranks[1],$ttranks[2],$ttranks[3],$ttranks[4],tt_rank;
-			setarray $ttnames$[13],strcharinfo(0); // Bugfix $ttnames -> $ttnames$ [No Healing]
+			setarray $ttnames$[13],strcharinfo(0);
 			mes "[Guide]";
 			mes "Félicitations! Vous venez de passer cinquième au classement des cinq joueurs ayant remporté le plus grand nombre de courses!";
 			donpcevent "TBT_Guide#Broadcast::Onnew_top5";
