@@ -1,0 +1,94 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par Myllena
+//===== eAthena Script ======================================= 
+//= Baphomet Jr. taming item quest.
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= Book of Devil		(MISC_QUEST | 256)
+//===== Additional Comments: ================================= 
+//= 1.0 ????
+//= 1.1 Optimized Book of Devil quest. used bit-wise var. [Lupus]
+//============================================================ 
+
+//=============================================================
+//Quest for Book of Devil
+//=============================================================
+niflheim,184,199,5	script	Petite Fille#02	793,{
+	mes "[Sairin]";
+	if(MISC_QUEST & 256){
+		mes "Merci encore!";
+		close;
+	}
+	if(@niflheimlost == 2){
+		mes "Vous l'avez trouvé??";
+		mes "Oh merci!";
+		mes "Tenez, prenez ceci en guise de remerciements.";
+		getitem 642,1;//Items: Book of Devil,
+		set MISC_QUEST,MISC_QUEST | 256;
+		set @niflheimlost,0;
+		close;
+	}
+	if(@niflheimlost == 1){
+M_YES:
+		set @niflheimlost,1;
+		mes "Trouvez-le s'il vous plaît, et dites-lui où je suis! La dernière fois que je l'ai vu, il n'était pas loin de cette ville, vers l'ouest...";
+		close;
+	}
+	mes "S'il vous plaît, est-ce que vous pourriez m'aider?";
+	if(BaseJob==Job_Novice){
+		mes "Oh... toi aussi tu es perdu...";
+		close;
+	}
+	next;
+	menu "Oui",-, "Non",M_NO;
+
+	mes "[Sairin]";
+	mes "Mon ami et moi on était partis se balader, et puis d'un coup on s'est retrouvés dans un endroit étrange.";
+	next;
+	mes "[Sairin]";
+	mes "Après, j'ai trouvé une poupée par terre. Et quand je l'ai ramassée, elle s'est transformée en fantôme!";
+	next;
+	mes "[Sairin]";
+	mes "J'ai crié et j'ai couru aussi vite que j'ai pu! Quand je me suis arrêtée de courir, je me suis retrouvée  dans cette ville bizarre...";
+	next;
+	mes "[Sairin]";
+	mes "Personne ici ne veut m'aider, et il y a des fantômes partout! Vous pourriez m'aider à retrouver mon ami?";
+	next;
+	menu "Bien sûr",M_YES, "Non",M_NO;
+M_NO:
+	close;
+}
+
+nif_fild01,213,268,5	script	Petit Garçon#bd	797,{
+	if(MISC_QUEST & 256){
+L_DONE:
+		set @niflheimlost,2;
+		mes "[Marius]";
+		mes "Merci de nous avoir aidés!";
+		close;
+	}
+	if(@niflheimlost == 2) goto L_PART2;
+	if(@niflheimlost == 1){
+		mes "[Marius]";
+		mes "Qui êtes-vous?";
+		mes "...";
+		mes "Vous avez trouvé Sairin?";
+		mes "Elle s'est réfugiée à Niflheim?";
+		next;
+L_PART2:
+		mes "[Marius]";
+		mes "Pourriez-vous lui dire que je suis en chemin?";
+		mes "Je ne vais pas très vite, et c'est très important qu'elle sache que je vais bien.";
+		next;
+		menu "Oui",L_DONE, "Non",-;
+		close;	
+	}
+	mes "[Marius]";
+	mes "Sairin... Où es-tu?";
+	close;
+}
