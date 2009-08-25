@@ -63,12 +63,13 @@ prt_church,166,176,3	script	Adoption#1	61,{
 		mes "Voulez-vous remettre à zéro l'adoption en train de se dérouler?";
 		next;
 		menu "Oui",-,"Non",L_SKIP;
-		callfunc "AdoptReset","GM reset";
+		callfunc "AdoptReset","un GM en a décidé ainsi...";
 		close;
 	}
 L_SKIP:
 
 	if($@AdoptionActive == 1) goto A_Cannot;
+	set @AdoptionReady,0; // Bugfix: sans ça le script foire après une adoption qui a échoué [No Healing]
 	mes "[Oliver]";
 	if (Upper==2) goto A_YouBaby;
 	if (getchildid()>0 && getskilllv(410)<=0) goto A_GetSkill;
@@ -186,10 +187,10 @@ A_Noring:
 	next;
 	mes "[Inanna]";
 	mes "Vous ne méritez pas de pouvoir adopter un enfant.";
-	callfunc "AdoptReset","le premier parent n'a pas son alliance.";
+	callfunc "AdoptReset","le premier parent ne porte pas son alliance.";
 	close;
 A_Wedring:
-	if ( countitem(2634)>0 || countitem(2635)>0 ) goto A_Wedringpassed;
+	if ( isequipped(2634) || isequipped(2635) ) goto A_Wedringpassed; // Bugfix: il faut que le ring soir équippé [No Healing]
 	goto A_Noring;
 A_Wedringpassed:
 	mes "[Inanna]";
@@ -201,6 +202,7 @@ A_Wedringpassed:
 	next;
 	input $@ParentTwo$;
 	set $@ParentOne$, strcharinfo(0);
+	set $@parentRID1,getcharid(3); // Bugfix, cf plus bas [No Healing]
 	mes "[Inanna]";
 	mes "Votre partenaire a cinq minutes pour se présenter devant moi avant que la procédure d'adoption ne soit annulée.";
 	next;
@@ -242,7 +244,7 @@ A_agree:
 	callfunc "AdoptReset","le deuxième parent n'a pas le niveau requis.";
 	close;
 A_lvltwo:
-	if ( countitem(2634)>0 || countitem(2635)>0 ) goto A_Wedringtwo;
+	if ( isequipped(2634)>0 || isequipped(2635)>0 ) goto A_Wedringtwo; // Bugfix: il faut que le ring soit équippé [No Healing]
 	mes "[Inanna]";
 	mes "Désolée, mais vous n'avez pas l'alliance, preuve de votre mariage.";
 	callfunc "AdoptReset","le deuxième parent n'a pas son alliance.";
@@ -361,6 +363,7 @@ A_FinalYesP:
 	close;
 A_ParentTwoEnd:
 	if (@regged>1) goto A_AlreadyReged;
+	set $@parentRID2,getcharid(3); // Bugfix, cf plus bas [No Healing]
 	mes "[Inanna]";
 	mes "Ravie de vous reparler, "+$@ParentTwo$;
 	mes "Nous entrons dans la procédure finale d'adoption.";
@@ -383,22 +386,23 @@ A_AlreadyReged:
 	close;
 A_BabyEnd:
 	if (@regged>1) goto A_AlreadyReged;
+	set $@parentRID3,getcharid(3); // Bugfix, cf plus bas [No Healing]
 	mes "[Inanna]";
 	mes "Ravie de te reparler, "+$@Baby$;
 	mes "Nous entrons dans la procédure finale d'adoption.";
 	next;
 	mes "[Inanna]";
-	mes "Vous savez que vous ne pouvez être adopté qu'une seule dois, donc si vous êtes adopté par "+$@ParentOne$+" et "+$@ParentTwo$+", vous ne pourrez plus jamais être adopté."; 
+	mes "Tu sais que tu ne peux être adopté qu'une seule dois, donc si tu es adopté par "+$@ParentOne$+" et "+$@ParentTwo$+", tu ne pourras plus jamais être adopté."; 
 	next;
 	mes "[Inanna]";
-	mes "Êtes-tu sûr de vouloir être adopté?";
+	mes "Es-tu sûr de vouloir être adopté?";
 	next;
 	menu "Oui",A_FinalYesB,"Non",-;
 	mes "[Inanna]";
 	mes "Je n'en crois pas mes oreilles! Après tout ce temps, le dossier d'adoption rempli... Te désister, maintenant!";
-	mes "Êtes-vous certain de vouloir arrêter la procédure?";
+	mes "Es-tu certain de vouloir arrêter la procédure?";
 	next;
-	menu "Oui, je ne veux pas adopter.",A_Failend,"Non, je me suis trompé.",A_BabyEnd;
+	menu "Oui, je ne veux pas être adopté.",A_Failend,"Non, je me suis trompé.",A_BabyEnd;
 A_FinalYesB:
 	mes "[Inanna]";
 	mes "Très bien, tout est fin prêt, il ne reste plus que quelques étapes!";
@@ -433,9 +437,25 @@ A_YouBaby:
 	close;
 
 THEEND:
-	logmes "Adoption: "+$@Baby$+" a été adopté par "+$@ParentOne$+" et "+$@ParentTwo$+".";
-	atcommand "@adopt "+$@ParentOne$+","+$@ParentTwo$+","+$@Baby$; // Bugfix - la commande NPC "adopt" ne passait pas (en même temps je ne vois plus ce NPC sur la SVN d'eA.ws :x) [No Healing]
-	announce $@ParentOne$+" et "+$@ParentTwo$+" viennent d'adopter "+$@Baby$,5;
+// Gros bugfix sur tout ce label: tout d'abord la commande NPC "adopt" n'existe plus, contrairement à ce qui est dans doc/script_commands.txt, j'ai donc
+// remplacé celle-ci par un atcommand "@adopt". Ensuite, cette commande ne marche que si les parents ont un niveau supérieur à 70, et que toute la future
+// famille a un niveau supérieur à 70. D'autre part, selon pc_can_Adopt (map/pc.c), les parents doivent être dans la même équipe et porter leur alliance
+// [No Healing]
+	if ( getcharid(1,$@ParentOne$) != getcharid(1,$@ParentTwo$) || getcharid(1,$@ParentOne$) != getcharid(1,$@Baby$) ){
+		next;
+		mes "[Inanna]";
+		mes "Oh, je suis désolée mais vous devez tous être dans la même équipe pour pouvoir adopter un enfant. Je ne vous l'avais pas dit? Quelle étourdie je fais!";
+		}
+	if ( rid2name($@parentRID1) == $@ParentOne$ && rid2name($@parentRID2) == $@ParentTwo$ && rid2name($@parentRID3) == $@Baby$ ) {
+		logmes "Adoption: "+$@Baby$+" a été adopté par "+$@ParentOne$+" et "+$@ParentTwo$+".";
+		atcommand "@adopt "+$@ParentOne$+","+$@ParentTwo$+","+$@Baby$;
+		announce $@ParentOne$+" et "+$@ParentTwo$+" viennent d'adopter "+$@Baby$,5;
+		}
+	else {
+		next;
+		mes "[Inanna]";
+		mes "Oh, je suis désolée mais il y a quelque qui ne va pas. Avez-vous enlevé votre anneau de mariage? Ou alors est-ce que l'un des membres de la future famille n'est pas ici avec nous? Voyons voir...";
+		}
 	deltimer "timeadopt::OnAdopt";
 	set $@AdoptionActive, 0;
 	set $@ParentOne$, null;
