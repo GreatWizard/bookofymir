@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par Etna
 //===== eAthena Script ======================================= 
 //= Bandit Beard Quest
 //===== By: ================================================== 
@@ -17,61 +19,57 @@
 //= 1.3 Removed duplicates [L0ne_W0lf]
 //============================================================
 
-umbala,126,129,4	script	Bearded Man#bandit	120,{
+umbala,126,129,4	script	Homme barbu#bandit	120,{
 	if(BEARD_QUEST == 4 ) goto L_MAKE;
 	if(BEARD_QUEST >= 5 ) goto L_DONE;
 	if(BEARD_QUEST >= 1 ) goto L_THREAD;
 
-	mes "[Bearded Man]";
-	mes "Beards! Get your wonderful beards!";
-	mes "Would you like a beard?";
+	mes "[Homme barbu]";
+	mes "Barbe! Qui veut une magnifique barbe?";
+	mes "Voulez-vous une barbe?";
 	next;
-	menu "Yes, I'd like some facial hair!",-,"No thanks, thats gross!",M_NO;
+	menu "Oui, je voudrais des poils sur le visage!",-,"Non merci, ça fait négligé!",M_NO;
 
-	mes "[Bearded Man]";
-	mes "HoHo~ So you want some whiskers.";
+	mes "[Homme barbu]";
+	mes "HoHo~ Vous voulez des moustaches.";
 	emotion 18;
-	mes "Well I would give you my beards but there not cheap.";
-	mes "Matter of fact I have only one left...";
-	mes "but I'm not selling it.";
-	mes "But don't get mad! I can make you one.";
+	mes "Eh bien, je pourrai vous donner ma barbe, mais elle n'est pas bon marché. En fait, il ne m'en reste qu'une seule... mais je ne la vends pas. Mais ne vous fâchez pas! Je peux vous en fabriquer une.";
 	next;
 	set BEARD_QUEST,1;
 L_THREAD:
-	mes "[Bearded Man]";
-	mes "I would need some ^8080FFThread^000000 for the Beard.";
-	mes "Talk to my friend in Izlude for some ^8080FFThread^000000.";
+	mes "[Homme barbu]";
+	mes "J'ai besoin de ^8080FFFil^000000 pour la barbe.";
+	mes "Allez voir mon collègue d'Izlude pour le ^8080FFFil^000000.";
 	next;
 
-	mes "[Bearded Man]";
-	mes "Also I would need you to get me some things for the beard.";
-	mes "They are:";
+	mes "[Homme barbu]";
+	mes "J'aurais également besoin des choses suivantes pour la barbe:";
 L_LIST:
-	mes "^8080FFElastic Band^000000";
+	mes "^8080FF1 Elastic Band^000000";
 	mes "^8080FF5 Animal Skins^000000";
-	mes "^8080FFBlack Dye Stuff^000000";
-	mes "^8080FFGranpa Beard^000000";
-	mes "^8080FF100 sticky Mucus^000000";
-	mes "^8080FFCounteragent^000000";
-	mes " and one ^8080FF2 Carat Diamond^000000";
+	mes "^8080FF1 Black Dyestuff^000000";
+	mes "^8080FF1 Grandpa Beard^000000";
+	mes "^8080FF100 Sticky Mucus^000000";
+	mes "^8080FF1 Counteragent^000000";
+	mes "^8080FF1 2carat Diamond^000000";
 	close;
 
 M_NO:
-	mes "[Bearded Man]";
-	mes "Fine, be that way!";
+	mes "[Homme barbu]";
+	mes "Très bien, comme vous voulez!";
 	emotion 7;
 	close;
 
 L_DONE:
-	mes "[Bearded Man]";
-	mes "Sorry, I can only make one per person.";
-	mes "We don't want too many beards now. Right?";
+	mes "[Homme barbu]";
+	mes "Désolé, je peux seulement en faire une par personne.";
+	mes "Nous ne voulons pas voir des barbes partout. Pas vrai?";
 	emotion 29;
 	close;
 
 L_MAKE:
-	mes "[Bearded Man]";
-	mes "Let's make you your beard!";
+	mes "[Homme barbu]";
+	mes "Faisons votre barbe!";
 	next;
 	if(countitem(7200) < 1 || countitem(919) < 1 ||	countitem(983) < 1 || countitem(2241) < 1 ||
 	countitem(938) < 100 || countitem(973) < 1 || countitem(731) < 1) goto L_NOITEMS;
@@ -82,129 +80,129 @@ L_MAKE:
 	delitem 938, 100;
 	delitem 973, 1;
 	delitem 731, 1;
-	mes "^8080FF~You see him cutting and sewing the beard together~^000000";
+	mes "^8080FF~Vous le voyez découper et coudre de la barbe~^000000";
 	next;
-	mes "^8080FF~He hands you the finished beard~^000000";
+	mes "^8080FF~Il vous donne la barbe une fois terminée~^000000";
 	next;
 	getitem 2237, 1;
 	set BEARD_QUEST, 5;
-	mes "[Bearded Man]";
-	mes "Have a nice day!";
+	mes "[Homme barbu]";
+	mes "Bonne journée!";
 	emotion 29;
 	close;
 
 L_NOITEMS:
-	mes "[Bearded Man]";
-	mes "What the hell! I can't make a beard without the items!";
-	mes "Here is the list again:";
+	mes "[Homme barbu]";
+	mes "Diable! Je ne peux pas faire une barbe sans les objets!";
+	mes "Revoici la liste:";
 	emotion 23;
 	goto L_LIST;
 }  
 
 //Master Tailor----------
-izlude_in,123,175,4	script	Master Tailor#bandit	50,{
-	mes "[Master Tailor]";
-	mes "Good evening! I am the Master Tailor!";
+izlude_in,123,175,4	script	Maître Tailleur#bandit	50,{
+	mes "[Maître Tailleur]";
+	mes "Bonsoir! Je suis le maître tailleur!";
 	if(BEARD_QUEST != 1 ) close;
 
 	next;
-	mes "[Master Tailor]";
-	mes "What? A Bearded Man sent you...";
-	mes "Well I'm sorry to say that I am out of ^8080FFThread^000000.";
-	mes "But I have the address to where I get the shipments.";
-	mes "It is in Al de Baran Karfa Inc. warehouse area.";
-	mes "The address is: Al de Baran 59, 221";
-	mes "See you later.";
+	mes "[Maître Tailleur]";
+	mes "Comment? Un homme barbu vous envoie...";
+	mes "Et bien, je suis navré, je n'ai plus de ^8080FFFil^000000.";
+	mes "Mais j'ai l'adresse de mon fournisseur.";
+	mes "C'est l'entrepôt de la Corporation Karfa à Al de Baran.";
+	mes "L'adresse est: Al de Baran 59,221";
+	mes "À plus tard.";
 	set BEARD_QUEST, 2;
 	close;
 }
 // Karfa Thread Clerk---
-aldeba_in,70,179,5	script	Karfa Clerk#bandit	113,{
-	mes "[Karfa Clerk]";
+aldeba_in,70,179,5	script	Employée Karfa#bandit	113,{
+	mes "[Employée Karfa]";
 	if(BEARD_QUEST == 3 ) goto L_REPEAT;
 	if(BEARD_QUEST > 3 ) goto L_DONE;
 
-	mes "What can I do for you?";
+	mes "Que puis-je pour vous?";
 	next;
 	if(BEARD_QUEST == 2 ) goto L_DELIVERY;
 
-	menu "What's in the boxes?",-,"Nothing.",M_NOPE;
+	menu "Qu'y a t-il dans ces caisses?",-,"Rien.",M_NOPE;
 
-	mes "[Karfa Clerk]";
-	mes "They're empty.";
+	mes "[Employée Karfa]";
+	mes "Elles sont vides.";
 M_NOPE:
 	close;
 
 L_DELIVERY:
 
-	mes "[Karfa Clerk]";
-	mes "Sorry but we have not received any ^8080FFThread^000000.";
-	mes "Our shipments have been put off until its safe.";
-	mes "You see we get our ^8080FFThread^000000 from Alberta and a monsters keeps attacking our merchants.";
+	mes "[Employée Karfa]";
+	mes "Désolée mais nous n'avons pas reçu de ^8080FFFil^000000.";
+	mes "Nos expéditions sont perturbées en cette période d'insécurité.";
+	mes "Vous savez, nous nous procurons le ^8080FFFil^000000 à Alberta, mais les monstres attaquent nos négociants.";
 	next;
-	mes "[Karfa Clerk]";
-	mes "Now this monsters has not been doing this before.";
-	mes "It may have to do with the warmer months.";
-	mes "Please help us out!";
+	mes "[Employée Karfa]";
+	mes "Avant les monstres ne faisaient pas celà.";
+	mes "C'est peut être dû à cette canicule.";
+	mes "Sil vous plait, aider nous!";
 	set BEARD_QUEST,3;
 	next;
-	mes "[Karfa Clerk]";
+	mes "[Employée Karfa]";
 L_REPEAT:
-	mes "Oh by the way, that Thread Merchant is somewhere around Alberta 60 and 100...";
+	mes "Oh d'ailleurs, le vendeur de Fil se trouve aux coordonnées 60 et 100 d'Alberta...";
 L_DONE:
-	mes "Thank You!";
+	mes "Merci!";
 	close;
 }
 
 //Thread Merchant ------
-alberta,65,123,6	script	Man#bandit	85,{
+alberta,65,123,6	script	Homme#bandit	85,{
 	if(BEARD_QUEST == 3 && $@beardMobD) goto L_KILLED;
 	if(BEARD_QUEST > 3) goto L_DONE;
 
-	mes "[Thread Merchant]";
-	mes "ARGGG!! I can never get my stuff to Al de Baran!";
-	mes "I keep getting mobbed by some bugs.";
-	mes "They steal all my supplies and ^8080FFThread^000000.";
+	mes "[Marchand de Fil]";
+	mes "ARGGG!! Je ne pourrai jamais faire mes livraisons à Al de Baran!";
+	mes "Je continue de me faire assaillir par les insectes.";
+	mes "Ils volent toutes mes provisions et le ^8080FFFil^000000.";
 	next;
-	mes "[Thread Merchant]";
+	mes "[Marchand de Fil]";
 
-	if(BEARD_QUEST != 3) mes "What am I to do?";
+	if(BEARD_QUEST != 3) mes "Que dois-je faire?";
 	if(BEARD_QUEST != 3) close;
 
-	if($@beardmob > 0) mes "Kill! Kill them already!!!";
+	if($@beardmob > 0) mes "Les tuer! Encore et encore!!!";
 	if($@beardmob > 0) close;
-	mes "Are you here to help me?";
+	mes "Êtes-vous ici pour m'aider?";
 	emotion 1;
 	next;
-	menu "Yes",-,"No",M_NO;
+	menu "Oui",-,"Non",M_NO;
 
-	mes "[Thread Merchant]";
-	mes "Oh thank the Gods!";
-	mes "If you can only just kill the bugs I would be able to make my delivery.";
+	mes "[Marchand de Fil]";
+	mes "Oh merci mon Dieu!";
+	mes "Si vous pouviez seulement tuer les monstres-insectes, je pourrais effectuer ma livraison.";
 	next;
-	mes "[Thread Merchant]";
-	mes "Oh NO! Here they come!!";
+	mes "[Marchand de Fil]";
+	mes "Oh NON! Les voici qui arrivent!!";
 	emotion 19;
 	donpcevent "BRDQ_MOBS::OnStart";
 	close;
 
 L_KILLED:
 	set $@beardMobD,0;
-	mes "[Thread Merchant]";
-	mes "Thank you for killing the Thief Bugs.";
-	mes "As a token of my gratitude here is a box full of ^8080FFThread^000000.";
+	mes "[Marchand de Fil]";
+	mes "Merci d'avoir tué ces monstres-insectes.";
+	mes "En témoignage de ma gratitude voici une boîte pleine de ^8080FFFil^000000.";
 	set BEARD_QUEST,4;
 	close;
 
 L_DONE:
-	mes "[Thread Merchant]";
-	mes "Thank you again!";
+	mes "[Marchand de Fil]";
+	mes "Merci encore!";
 	emotion 15;
 	close;
 
 M_NO:
-	mes "[Thread Merchant]";
-	mes "What to do...";
+	mes "[Marchand de Fil]";
+	mes "Que faire...";
 	close;
 }
 
