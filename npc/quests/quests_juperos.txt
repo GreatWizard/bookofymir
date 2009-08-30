@@ -1174,7 +1174,7 @@ yuno_in04,118,116,4	script	Morceau de Papier	111,{
 			mes "^8B6914...";
 			mes "Je ne peux oublier ton sourire.";
 			mes "Peu importe si tu me détestes, j'aurai toujours des sentiments pour toi.";
-			mes "Tu es les plus important... celui qui compte le plus à mes yeux, à mon coeur.^000000";
+			mes "Tu es le plus important... celui qui compte le plus à mes yeux, à mon coeur.^000000";
 			next;
 			mes "^8B6914Je sais que nous avons eu des différents mais je t'en prie, ne refuse pas mon amour.";
 			mes "J'espère que tu pourras me pardonner... pour nous.";
@@ -1230,9 +1230,9 @@ juperos_01,79,92,4	script	Sculpture	844,{
 
 juperos_01,215,127,4	script	Statue Etrange	844,{
 
-	mes "^3355FFC'est le buste d'une machine humanoïde avec un morceau d'armoirie qui ne vous est pas inconnu et d'étranges caractères gravé au milieu.^000000";
+	mes "^3355FFC'est le buste d'une machine humanoïde avec un morceau d'armoirie qui ne vous est pas inconnu et d'étranges caractères gravés au milieu.^000000";
 	next;
-	mes "^3355FFLa forme entière de la statue est ahurissante, mais vous remarquez que son bras allongé pointe vers l'Ouest.^000000";
+	mes "^3355FFLa forme entière de la statue est ahurissante, mais vous remarquez que ses bras tendus pointent vers l'Ouest.^000000";
 	close;
 }
 
@@ -1319,7 +1319,7 @@ OnEnable:
 
 OnTimer5000:
 	set .MyMobs,3;
-	monster "juperos_02",24,275,"1ier Gardien de la Porte",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
+	monster "juperos_02",24,275,"1er Gardien de la Porte",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
 	monster "juperos_02",240,29,"2ème Gardien de la Porte",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
 	monster "juperos_02",282,183,"3ème Gardien de la Porte",1674,1,"3F Gate Switch#jupe::OnMyMobDead";
 	stopnpctimer;
@@ -1361,7 +1361,7 @@ OnTimer7000:
 	end;
 
 OnTimer9000:
-	mapannounce "juperos_02","Vous êtes autorisés à pénétrer la zone suivant pour un court laps de temps. Veuillez utiliser le portail situé au centre de la carte.",bc_map,"0xE559A2";
+	mapannounce "juperos_02","Vous êtes autorisés à pénétrer dans la zone suivante pour un court laps de temps. Veuillez utiliser le portail situé au centre de la carte.",bc_map,"0xE559A2";
 	end;
 
 OnTimer9001:
@@ -1855,7 +1855,7 @@ OnEnable:
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area1","Je n'en revient pas d'une telle lâcheté...",bc_map,"0xFF0000";
+	mapannounce "jupe_area1","Je n'en reviens pas d'une telle lâcheté...",bc_map,"0xFF0000";
 	set $@JupreArea1InUse,0;
 	end;
 
@@ -2452,15 +2452,15 @@ OnMyMobDead:
 //============================================================
 // Move to Elevator
 //============================================================
-jupe_area1,112,162,0	script	Lever#ufe	844,{
+jupe_area1,112,162,0	script	Levier#ufe	844,{
 	mes "^3355FFOn dirait une sorte de levier, mais vous n'avez aucune idée de ce à quoi il peut servir.^000000";
 	next;
 	switch(select("Tirer le levier.:Annuler.")) {
 	case 1:
 		if($@JupreArea1InUse == 1) close;
 		initnpctimer;
-		donpcevent "LeverWarp#ufe::OnEnable";
-		disablenpc "Lever#ufe";
+		donpcevent "LevierWarp#ufe::OnEnable";
+		disablenpc "Levier#ufe";
 		close;
 	case 2:
 		mes "[" + strcharinfo(0) + "]";
@@ -2470,19 +2470,19 @@ jupe_area1,112,162,0	script	Lever#ufe	844,{
 	close;
 
 OnTimer3000:
-	enablenpc "Lever#ufe";
+	enablenpc "Levier#ufe";
 	stopnpctimer;
 	end;
 }
 
-jupe_area1,117,157,0	script	LeverWarp#ufe	139,2,2,{
+jupe_area1,117,157,0	script	LevierWarp#ufe	139,2,2,{
 OnInit:
-	disablenpc "LeverWarp#ufe";
+	disablenpc "LevierWarp#ufe";
 	end;
 
 OnEnable:
-	enablenpc "LeverWarp#ufe";
-	specialeffect 561; //"LeverWarp#ufe" 561
+	enablenpc "LevierWarp#ufe";
+	specialeffect 561; //"LevierWarp#ufe" 561
 	soundeffectall "jupe_warp.wav",0;
 	initnpctimer;
 	end;
@@ -2493,7 +2493,7 @@ OnTouch:
 
 OnTimer3000:
 	stopnpctimer;
-	disablenpc "LeverWarp#ufe";
+	disablenpc "LevierWarp#ufe";
 	end;
 }
 
@@ -2928,7 +2928,7 @@ OnEnable:
 	end;
 
 OnTimer300000:
-	mapannounce "jupe_area2","Je n'en revient pas d'une telle lâcheté...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Je n'en reviens pas d'une telle lâcheté...",bc_map,"0xFF0000";
 	set $@JupreArea2InUse,0;
 	end;
 
@@ -3480,7 +3480,7 @@ OnEnable:
 	end;
 
 OnTimer2000:
-	mapannounce "jupe_area2","Je ne pourrai jamais jamais en paix...",bc_map,"0xFF0000";
+	mapannounce "jupe_area2","Je ne pourrai jamais être en paix...",bc_map,"0xFF0000";
 	end;
 
 OnTimer4000:
@@ -3529,15 +3529,15 @@ OnMyMobDead:
 //============================================================
 // Move to Elevator
 //============================================================
-jupe_area2,51,162,0	script	Lever#ufe2	844,{
+jupe_area2,51,162,0	script	Levier#ufe2	844,{
 	mes "^3355FFOn dirait une sorte de levier, mais vous n'avez aucune idée de ce à quoi il peut servir.^000000";
 	next;
 	switch(select("Tirer le levier.:Annuler.")) {
 	case 1:
 		if($@JupreArea2InUse == 1) close;
 		initnpctimer;
-		donpcevent "LeverWarp#ufe2::OnEnable";
-		disablenpc "Lever#ufe2";
+		donpcevent "LevierWarp#ufe2::OnEnable";
+		disablenpc "Levier#ufe2";
 		close;
 	case 2:
 		mes "[" + strcharinfo(0) + "]";
@@ -3547,19 +3547,19 @@ jupe_area2,51,162,0	script	Lever#ufe2	844,{
 	close;
 
 OnTimer3000:
-	enablenpc "Lever#ufe2";
+	enablenpc "Levier#ufe2";
 	stopnpctimer;
 	end;
 }
 
-jupe_area2,46,157,0	script	LeverWarp#ufe2	139,2,2,{
+jupe_area2,46,157,0	script	LevierWarp#ufe2	139,2,2,{
 OnInit:
-	disablenpc "LeverWarp#ufe2";
+	disablenpc "LevierWarp#ufe2";
 	end;
 
 OnEnable:
-	enablenpc "LeverWarp#ufe2";
-	specialeffect 561; //"LeverWarp#ufe2" 561
+	enablenpc "LevierWarp#ufe2";
+	specialeffect 561; //"LevierWarp#ufe2" 561
 	soundeffectall "jupe_warp.wav",0;
 	initnpctimer;
 	end;
@@ -3570,7 +3570,7 @@ OnTouch:
 
 OnTimer3000:
 	stopnpctimer;
-	disablenpc "LeverWarp#ufe2";
+	disablenpc "LevierWarp#ufe2";
 	end;
 }
 
@@ -4012,7 +4012,7 @@ OnTimer5000:
 	end;
 
 OnTimer8000:
-	mapannounce "jupe_ele","En ce lieus s'épanouissent toutes les peurs des hommes.",bc_map,"0xFF0000";
+	mapannounce "jupe_ele","En ce lieu s'épanouissent toutes les peurs des hommes.",bc_map,"0xFF0000";
 	end;
 
 OnTimer11000:
