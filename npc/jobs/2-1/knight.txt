@@ -7,7 +7,7 @@
 //= Converted by kobra_k88
 //= Further bugfixed and tested by Lupus
 //===== Current Version: ===================================== 
-//= 2.8
+//= 2.9
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -37,6 +37,7 @@
 //= 2.7 Deleted unused variables. [Samuray22]
 //= 2.7a Corrected a Typo error ";;". [Samuray22]
 //= 2.8 Now uses enable and disable waitingroomevent. [L0ne_W0lf]
+//= 2.9 Added Quest Log commands. [Kisuka]
 //============================================================ 
 
 prt_in,88,101,4	script	Capitaine Herman#knt	56,{
@@ -137,6 +138,7 @@ prt_in,88,101,4	script	Capitaine Herman#knt	56,{
 					close;
 				}
 				set KNIGHT_Q,1;
+				setquest 9000;
 				mes "[Capitaine Herman]";
 				mes "Voyons voir...";
 				mes "Votre nom est " + strcharinfo(0) + "...";
@@ -470,6 +472,7 @@ prt_in,88,101,4	script	Capitaine Herman#knt	56,{
 		mes "[Capitaine Herman]";
 		mes "Vous n'avez pas réussi toutes les épreuves à la perfection, mais vous ave toutes les qualités pour devenir Chevalier.";
 		next;
+		completequest 9012;
 		callfunc "Job_Change",Job_Knight;
 		callfunc "F_ClearJobVar";		// clears all job variables for the current player
 		mes "[Capitaine Herman]";
@@ -577,6 +580,11 @@ prt_in,75,107,4	script	Sir Andrew#knt	65,{
 			case 2: setarray .@items[0], 1042,5, 950,5, 1032,5, 966,5, 7031,5, 946,5, 3; break;
 			}
 			set KNIGHT_Q,.@items[12];
+			if(KNIGHT_Q == 2) {
+				changequest 9000,9001;
+			}else{
+				changequest 9000,9002;
+			}
 			mes "^236B8E"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
 			mes "^236B8E"+.@items[3]+" "+getitemname(.@items[2])+"^000000,";
 			mes "^236B8E"+.@items[5]+" "+getitemname(.@items[4])+"^000000,";
@@ -619,6 +627,11 @@ prt_in,75,107,4	script	Sir Andrew#knt	65,{
 			delitem .@items[6],.@items[7];
 			delitem .@items[8],.@items[9];
 			delitem .@items[10],.@items[11];
+			if(KNIGHT_Q == 2) {
+				changequest 9001,9003;
+			}else{
+				changequest 9002,9003;
+			}
 			set KNIGHT_Q,4;
 			mes "[Sir Andrew]";
 			mes "Vous avez bien travaillé et avez réussi la première épreuve! Néanmoins, vous ne devez pas vous réjouir trop vite.";
@@ -917,6 +930,7 @@ L_AskQuestions:
 				close;
 			}
 			set KNIGHT_Q,6;
+			changequest 9003,9004;
 			mes "[Sir Siracuse]";
 			mes "Bon et bien, mon test touche à sa fin.";
 			next;
@@ -1045,6 +1059,7 @@ prt_in,79,94,4	script	Sir Windsor#knt	733,{
 			mes "...";
 			next;
 			set KNIGHT_Q,7;
+			changequest 9004,9005;
 			mes "[Sir Windsor]";
 			mes "...";
 			mes "......";
@@ -1089,7 +1104,7 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 	mes "[Sir Windsor]";
 	mes "...Questions?";
 	next;
-	switch(select("Quel sorte d'épreuve est-ce?:Comment débuter l'épreuve?:Je peux partir?.:Non.")) {
+	switch(select("Quelle sorte d'épreuve est-ce?:Comment débuter l'épreuve?:Je peux partir?.:Non.")) {
 	case 1:
 		mes "[Sir Windsor]";
 		mes "...";
@@ -1116,6 +1131,9 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 		next;
 		mes "[Sir Windsor]";
 		mes "..........";
+		if(checkquest(9006) == -1) {
+			changequest 9005,9006;
+		}
 		close;
 	case 2:
 		mes "[Sir Windsor]";
@@ -1129,7 +1147,7 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 		mes "...Allez dans la salle d'attente.";
 		next;
 		mes "[Sir Windsor]";
-		mes "...Ca va commencer.";
+		mes "...Ça va commencer.";
 		next;
 		mes "[Sir Windsor]";
 		mes "...";
@@ -1142,6 +1160,9 @@ job_knt,89,106,4	script	Knight Windsor#knt	733,{
 		next;
 		mes "[Sir Windsor]";
 		mes "...";
+		if(checkquest(9006) == -1) {
+			changequest 9005,9006;
+		}
 		close;
 	case 3:
 		mes "[Sir Windsor]";
@@ -1171,6 +1192,9 @@ OnStartArena:
 	killmonster "job_knt", "Knight1::OnMyMobDead";
 	killmonster "job_knt", "Knight2::OnMyMobDead";
 	killmonster "job_knt", "Knight3::OnMyMobDead";
+	if(checkquest(9006) == -1) {
+		changequest 9005,9006;
+	}
 	warpwaitingpc "job_knt",43,146;
 	donpcevent "Knight1::OnEnable";
 	disablewaitingroomevent;
@@ -1339,6 +1363,9 @@ OnMyMobDead:
 		mes "...Allez voir Amy Beatrice maintenant.";
 		close2;
 		set KNIGHT_Q,8;
+		if(checkquest(9007) == -1) {
+			changequest 9006,9007;
+		}
 		warp "prt_in",80,100;
 		donpcevent "Knight3::OnDisable";
 		donpcevent "Windsor Benedict#knt::OnStart";
@@ -1443,6 +1470,9 @@ prt_in,69,107,6	script	Lady Amy#knt	728,{
 		mes "Pourquoi êtes vous venu voir Amy?";
 		next;
 		if (select("C'est Sir Windsor qui m'a dis--:Oh, comme ça.") == 1) {
+			if(checkquest(9008) == -1) {
+				changequest 9007,9008;
+			}
 			mes "[Lady Amy]";
 			mes "Oh!";
 			mes "N'en dites pas plus.";
@@ -1570,6 +1600,7 @@ L_AskQuestions:
 			next;
 			if (.@knight_t == 100) {
 				set KNIGHT_Q,10;
+				changequest 9008,9009;
 				mes "[Lady Amy]";
 				mes "Beau travail! C'est un sans faute. Continuez ainsi et vous deviendrez l'un des meilleurs chevaliers de la région.";
 				next;
@@ -1582,6 +1613,7 @@ L_AskQuestions:
 			}
 			else if (.@knight_t == 90) {
 				set KNIGHT_Q,10;
+				changequest 9008,9009;
 				mes "[Lady Amy]";
 				mes "Pas mal. Pas aussi bien que ce que j'espérais, mais vous avez quand même réussi.";
 				mes "Voyez avec Sir Edmond pour l'épreuve suivante.";
@@ -1760,6 +1792,7 @@ prt_in,70,99,6	script	Sir Edmond#knt	734,{
 			mes "Donc commençons l'épreuve maintenant.";
 			close2;
 			set KNIGHT_Q,11;
+			changequest 9009,9010;
 			warp "job_knt",143,57;
 			end;
 		}
@@ -1869,6 +1902,7 @@ OnInit:
 	end;
 OnTouch:
 	set KNIGHT_Q,12;
+	changequest 9010,9011;
 	warp "prt_in",80,100;
 	end;
 }
@@ -2180,6 +2214,7 @@ L_AskQuestions:
 			next;
 			if (.@knight_t == 0) {
 				set KNIGHT_Q,14;
+				changequest 9011,9012;
 				mes "[Sir Gray]";
 				mes "Je suis ravi d'avoir eu la chance de discuter avec quelqu'un comme vous. Vous me rappelez ma propre jeunesse. Heh heh heh.";
 				next;

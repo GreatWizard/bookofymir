@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= nestor_zulueta (Fusion), converted by Darkchild
 //===== Current Version: ===================================== 
-//= 2.8
+//= 2.9
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -17,6 +17,7 @@
 //= 2.6 Corrected a bug in advanced class checking. [L0ne_W0lf]
 //= 2.7 Added missing checkweights. [L0ne_W0lf]
 //= 2.8 Fixed minor typo in test section. [L0ne_W0lf]
+//= 2.9 Added Quest Log commands. [Kisuka]
 //============================================================ 
 
 alde_alche,27,185,5	script	Alchimiste#am	744,{
@@ -136,14 +137,17 @@ alde_alche,27,185,5	script	Alchimiste#am	744,{
 				switch(rand(1,3)) {
 				case 1:
 					set ALCH_Q,1;
+					setquest 2028;
 					mes "^551A8B7 Berserk Potions^000000.";
 					break;
 				case 2:
 					set ALCH_Q,2;
+					setquest 2029;
 					mes "^551A8B100 Mini Furnaces^000000.";
 					break;
 				case 3:
 					set ALCH_Q,3;
+					setquest 2030;
 					mes "^551A8B7500 Fire Arrows^000000.";
 				}
 				next;
@@ -172,6 +176,15 @@ alde_alche,27,185,5	script	Alchimiste#am	744,{
 			mes "[Parmy Gianino]";
 			mes "Très bien, maintenant vous devez apprendre les bases du métier d'Alchimiste: le mode opératoire pour le mélange des produits chimiques et des médicaments.";
 			set ALCH_Q,4;
+			if(checkquest(2028) != -1) {
+				changequest 2028,2031;
+			}
+			else if(checkquest(2029) != -1) {
+				changequest 2029,2031;
+			}
+			else {
+				changequest 2030,2031;
+			}
 			next;
 			mes "[Parmy Gianino]";
 			mes "Mais avant cela, allez parler à Raspuchin. Je ne suis pas très sûr de savoir ce dont il va vous parler mais... il souhaite parler à tous les nouveaux arrivants, c'est ainsi.";
@@ -190,6 +203,15 @@ alde_alche,27,185,5	script	Alchimiste#am	744,{
 			mes "[Parmy Gianino]";
 			mes "Très bien, maintenant vous devez apprendre les bases du métier d'Alchimiste: le mode opératoire pour le mélange des produits chimiques et des médicaments.";
 			set ALCH_Q,4;
+			if(checkquest(2028) != -1) {
+				changequest 2028,2031;
+			}
+			else if(checkquest(2029) != -1) {
+				changequest 2029,2031;
+			}
+			else {
+				changequest 2030,2031;
+			}
 			next;
 			mes "[Parmy Gianino]";
 			mes "Mais avant cela, allez parler à Raspuchin. Je ne suis pas très sûr de savoir ce dont il va vous parler mais... il souhaite parler à tous les nouveaux arrivants, c'est ainsi.";
@@ -577,6 +599,7 @@ L_AskQuestions:
 		mes "Maintenant vas voir Darwin!";
 		mes "Il t'enseignera comment on conduit une expérience. Dis-lui juste que c'est moi qui t'envoie.";
 		set ALCH_Q,6;
+		changequest 2031,2032;
 		close;
 	}
 	else if (ALCH_Q == 5) {
@@ -700,6 +723,7 @@ alde_alche,13,15,7	script	Etudiant#am	750,{
 			mes "^551A8B1 Yellow Herb^000000 et";
 			mes "^551A8B1 White Herb^000000.";
 			set ALCH_Q,7;
+			changequest 2032,2033;
 			next;
 			mes "[Darwin]";
 			mes "Lorsque vous aurez tout ceci, revenez me voir.";
@@ -989,6 +1013,7 @@ alde_alche,13,15,7	script	Etudiant#am	750,{
 			mes "Beau travail.";
 			mes "C'est vraiment bien réussi, étant donné que c'était votre première fois. Vous pouvez garder ce que vous venez de fabriquer, cela vous fera un souvenir.";
 			set ALCH_Q,8;
+			changequest 2033,2035;
 			next;
 			mes "[Darwin]";
 			mes "Maintenant, allez voir Van Helmont pour continuer votre apprentissage.";
@@ -1129,6 +1154,7 @@ alde_alche,79,19,5	script	Alchimiste#am3	748,{
 			next;
 			mes "[Van Helmont]";
 			set ALCH_Q,9;
+			changequest 2035,2036;
 			mes "Bien, à plus tard.";
 			mes "Allez, allez, du balais! Je n'ai pas que ça à faire!";
 			close;
@@ -1210,6 +1236,7 @@ alde_alche,79,19,5	script	Alchimiste#am3	748,{
 			mes "Allez donc parler à Nicholas. Il s'occupera de la suite de votre apprentissage.";
 			next;
 			set ALCH_Q,20;
+			changequest 2036,2037;
 			mes "[Van Helmont]";
 			mes "Qu'est-ce que vous faites encore ici?";
 			mes "Dehors! Nous avons tous deux d'importantes choses à faire, n'est-ce pas?!";
@@ -1331,10 +1358,14 @@ alde_alche,101,184,4	script	Maître Alchimiste#am	122,{
 			cutin "",255;
 			end;
 		}
+		if(checkquest(2039) != -1) {
+			changequest 2039,2040;
+		}
 		mes "Ah, très bon travail.";
 		mes "Je peux voir que vous avez appris toutes les bases de l'Alchimie!";
 		next;
 		set ALCH_Q,0;
+		completequest 2040;
 		set .@jlevel,JobLevel;
 		callfunc "Job_Change",Job_Alchemist;
 		callfunc "F_ClearJobVar";
@@ -1515,6 +1546,7 @@ alde_alche,145,19,1	script	Chercheur#am	57,{
 		mes "Revenez me voir après avoir terminé votre apprentissage auprès d'eux. D'ailleurs, ils m'ont fait part de leur besoin de certains matériaux, je vais vous les remettre.";
 		next;
 		set ALCH_Q,23;
+		changequest 2037,2038;
 		mes "[Nicholas Flamel]";
 		mes "1 Mixture,";
 		mes "5 Burnt Tree,";
@@ -1539,6 +1571,7 @@ alde_alche,145,19,1	script	Chercheur#am	57,{
 	}
 	else if (ALCH_Q == 24) {
 		set ALCH_Q,40;
+		changequest 2038,2039;
 		mes "[Nicholas Flamel]";
 		mes "Ah, vous êtes de retour!";
 		mes "Je viens de recevoir un message de Bain et Bajin. Ils me font savoir qu'ils ont été ravis de l'aide que vous leur avez apportée.";

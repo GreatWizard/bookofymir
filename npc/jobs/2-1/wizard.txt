@@ -6,7 +6,7 @@
 //= (Aegis) Translated by yoshiki, converted by kobra_k88
 //= Further bugfixed and tested by Lupus
 //===== Current Version: ===================================== 
-//= 2.9
+//= 3.0
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -25,6 +25,7 @@
 //= 2.8 Fixed donpcevent to doevent. (bugreport:2311) [SoulBlaker]
 //= 2.9 Reverted the change of donpcevent to doevent. [L0ne_W0lf]
 //=     Was probably cuased by a warp BEFORE a percentheal
+//= 3.0 Added Quest Log commands. [Kisuka]
 //============================================================ 
 
 gef_tower,111,37,4	script	Catherine	70,{
@@ -135,6 +136,7 @@ gef_tower,111,37,4	script	Catherine	70,{
 					mes "Allez parler à l'homme situé dans le coin de la pièce, c'est lui qui est en charge de la suite des examens.";
 					mes "Soyez prudent, nous avons perdu... un certain nombre de jeunes Mages, à cause de la difficulté des épreuves.";
 					set WIZ_Q,3;
+					setquest 9015;
 					close;
 				}
 				mes "[Catherine]";
@@ -149,12 +151,14 @@ gef_tower,111,37,4	script	Catherine	70,{
 				mes "La liste des objets que vous devez rapporter est la suivante...";
 				if (rand(1)) {
 					set WIZ_Q,1;
+					setquest 9013;
 					mes "10 ^3355FFGemmes Rouges^000000,";
 					mes "10 ^3355FFGemmes Bleues^000000, et";
 					mes "10 ^3355FFGemmes Jaunes^000000.";
 				}
 				else {
 					set WIZ_Q,2;
+					setquest 9014;
 					mes "5 ^3355FFCrystal Blue^000000,";
 					mes "5 ^3355FFGreen Live^000000,";
 					mes "5 ^3355FFRed Blood^000000, et";
@@ -189,6 +193,7 @@ gef_tower,111,37,4	script	Catherine	70,{
 			delitem 717,10; //Blue_Gemstone
 			delitem 715,10; //Yellow_Gemstone
 			set WIZ_Q,3;
+			changequest 9013,9015;
 			mes "[Catherine]";
 			mes "Bravo, vous avez réussi la première épreuve.";
 			mes "Mais ne vous reposez pas sur vos lauriers, il reste encore les deux autres tâches à accomplir.";
@@ -226,6 +231,7 @@ gef_tower,111,37,4	script	Catherine	70,{
 			delitem 990,5; //Boody_Red
 			delitem 992,5; //Wind_Of_Verdure
 			set WIZ_Q,3;
+			changequest 9014,9015;
 			mes "[Catherine]";
 			mes "Bravo, vous avez réussi la première épreuve.";
 			mes "Mais ne vous reposez pas sur vos lauriers, il reste encore les deux autres tâches à accomplir.";
@@ -371,6 +377,7 @@ gef_tower,111,37,4	script	Catherine	70,{
 		mes "[Catherine]";
 		mes "Bon, pas la peine d'attendre plus longtemps. Tenez, voici votre diplôme de Sorcier.";
 		next;
+		completequest 9018;
 		callfunc "Job_Change",Job_Wizard;
 		callfunc "F_ClearJobVar";		// clears all job variables for the current player
 		mes "[Catherine]";
@@ -492,6 +499,9 @@ gef_tower,102,24,2	script	Sorcier Sombre	735,{
 		mes "[Raulel]";
 		mes "*renifle* Commençons le test!";
 		mes "Si vous ne répondez pas à toutes mes questions correctement, vous échouerez. Hahahahahahahahaha~";
+		if(checkquest(9016) == -1) {
+			changequest 9015,9016;
+		}
 		next;
 		mes "[Raulel]";
 		mes "*kof* *kof* C'est parti!";
@@ -662,6 +672,7 @@ L_AskQuestions:
 			mes "Votre score est de... " + .@wizard_t + "points.....";
 			if (.@wizard_t == 100) {
 				set WIZ_Q,5;
+				changequest 9016,9017;
 				mes "Hahahahahahah~ Bien joué, vous avez réussi la seconde épreuve.";
 				mes "Vous n'avez pas réussi du premier coup, mais ça ira pour cette fois...";
 				next;
@@ -672,6 +683,7 @@ L_AskQuestions:
 			}
 			else if (.@wizard_t == 90) {
 				set WIZ_Q,5;
+				changequest 9016,9017;
 				mes "Hahaha~ Vous n'avez fait qu'un seule faute, et comme je suis de bonne humeur aujourd'hui on va dire que ça suffira.";
 				mes "Vous avez réussi la seconde épreuve! Pas du premier coup mais bon, vous ne pouvez pas être aussi parfait que moi...";
 				next;
@@ -682,6 +694,7 @@ L_AskQuestions:
 			}
 			else if (.@wizard_t == 80) {
 				set WIZ_Q,5;
+				changequest 9016,9017;
 				mes "Pff... Ce n'est pas terrible.... Mais comme je suis de bonne humeur aujourd'hui, on va dire que ça suffira.";
 				mes "Vous avez réussi la seconde épreuve! Pas du premier coup mais bon, vous ne pouvez pas être aussi parfait que moi...";
 				next;
@@ -705,6 +718,7 @@ L_AskQuestions:
 		mes "Vous avez obtenu... " + .@wizard_t + " points!";
 		if (.@wizard_t == 100) {
 			set WIZ_Q,5;
+			changequest 9016,9017;
 			mes "*kof* *kof* Bravo, vous avez réussi la seconde épreuve.";
 			next;
 			mes "[Raulel]";
@@ -714,6 +728,7 @@ L_AskQuestions:
 		}
 		else if (.@wizard_t == 90) {
 			set WIZ_Q,5;
+			changequest 9016,9017;
 			mes "Hahaha~ Vous n'avez fait qu'un seule faute, et comme je suis de bonne humeur aujourd'hui on va dire que ça suffira.";
 			mes "Vous avez réussi la seconde épreuve! Pas du premier coup mais bon, vous ne pouvez pas être aussi parfait que moi...";
 			next;
@@ -1471,6 +1486,7 @@ OnMyMobDead:
 	if (.MyMobs < 1) {
 		mapannounce "job_wiz","Félicitations, " + strcharinfo(0) + ". Vous avez réussi l'épreuve pratique.",bc_map;
 		set WIZ_Q,7;
+		changequest 9017,9018;
 		donpcevent "Salle du Feu#Door::OnDisable";
 		donpcevent "Aide à l'Epreuve#wiz::OnEnable";
 		stopnpctimer;
