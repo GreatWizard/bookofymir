@@ -7,7 +7,7 @@
 //= Converted by: kobra_k88.
 //= Further bugfixed and tested by Lupus
 //===== Current Version: ===================================== 
-//= 2.4b
+//= 2.5
 //===== Compatible With: ===================================== 
 //= eAthena  SVN
 //===== Description: ========================================= 
@@ -30,6 +30,7 @@
 //= 2.4 Changed Marthilda to Mathilda. [L0ne_W0llf]
 //= 2.4a Deleted unused variables. [Samuray22]
 //= 2.4b Corrected a Typo error ";;". [Samuray22]
+//= 2.5 Added Quest Log commands. [Kisuka]
 //==========================================================
 
 prt_church,16,41,4	script	Evêque#prst	60,{
@@ -238,6 +239,7 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 					close;
 				}
 				set PRIEST_Q,1;
+				setquest 8009;
 					mes "[Evêque Paul]";
 				if (sex)
 					mes "Je vais à présent vous expliquer en quoi consistent les Trois Epreuves de l'Entraînement de Prêtre. Ces épreuves vous apporteront beaucoup de souffrance, mais je suis sûr que vous pouvez les réussir, Frère " + strcharinfo(0) + ".";
@@ -267,6 +269,7 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 					mes "Je n'ai aucun doute concernant votre réussite. Cependant, l'aide d'un Frère ou d'une Soeur peut vous faciliter la tâche.";
 					next;
 					set PRIEST_Q,5;
+					changequest 8009,8011;
 					mes "[Evêque Paul]";
 					mes "Êtes-vous prêt pour l'Entraînement Spirituel?";
 					next;
@@ -302,6 +305,7 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 				next;
 				mes "[Evêque Paul]";
 				mes "Que Dieu vous bénisse...";
+				changequest 8009,8010;
 				close;
 			}
 			mes "[Evêque Paul]";
@@ -378,6 +382,7 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 	}
 	else if (PRIEST_Q == 4) {
 		set PRIEST_Q,5;
+		changequest 8010,8011;
 		mes "[Evêque Paul]";
 		mes "Vous avez accompli votre pèlerinage.";
 		mes "Toutes mes félicitations.";
@@ -472,6 +477,7 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 		next;
 		mes "[Evêque Paul]";
 		mes "Dieu, accorde ton pouvoir à ton serviteur ici présent.";
+		changequest 8015,8016;
 		if (sex)
 			mes "Laisse-le propager ton message aux confins de la terre.";
 		else
@@ -481,6 +487,7 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 		mes "Fais de ce serviteur l'instrument de ton travail miraculeux...";
 		next;
 		set .@joblvl,JobLevel;
+		completequest 8016;
 		callfunc "Job_Change",Job_Priest;
 		callfunc "F_ClearJobVar";		// clears all job variables for the current player
 		mes "[Evêque Paul]";
@@ -677,6 +684,9 @@ prt_church,27,24,1	script	Soeur Cecilia	79,{
 		close;
 	}
 	else if (PRIEST_Q == 7) {
+		if(checkquest(8014) == -1) {
+			changequest 8013,8014;
+		}
 		mes "Bienvenue! Je suis si heureuse que vous soyez revenu! Maintenant, il ne vous reste plus qu'une épreuve à accomplir avant de devenir Prêtre.";
 		next;
 L_AskQuestions:
@@ -800,6 +810,7 @@ L_AskQuestions:
 		mes "......";
 		next;
 		set PRIEST_Q,8;
+		changequest 8014,8015;
 		mes "[Soeur Cecilia]";
 		mes "Vous êtes arrivé si loin...";
 		mes "Pourquoi vouloir tourner le dos à tout cela...?";
@@ -920,6 +931,7 @@ job_prist,24,187,4	script	Peter S. Alberto	110,{
 			mes "Maintenant...";
 			mes "Allez-y!";
 			close2;
+			changequest 8011,8012;
 			warp "job_prist",24,44;
 			donpcevent "Zombie_Generator#prst::OnEnable";
 			donpcevent "Peter S. Alberto::OnDisable";
@@ -959,6 +971,9 @@ job_prist,24,187,4	script	Peter S. Alberto	110,{
 			mes "Allez-y...";
 			mes "Tuez ces créatures bâtardes!";
 			close2;
+			if(checkquest(8012) == -1) {
+				changequest 8011,8012;
+			}
 			warp "job_prist",24,44;
 			donpcevent "Zombie_Generator#prst::OnEnable";
 			donpcevent "Peter S. Alberto::OnDisable";
@@ -1646,6 +1661,9 @@ OnTouch:
 	}
 	else if (BaseClass == Job_Acolyte) {
 		set PRIEST_Q,7;
+		if(checkquest(8012) != -1) {
+			changequest 8012,8013;
+		}
 		warp "prt_church",16,37;
 		donpcevent "Mummy_Generator::OnDisable";
 	}

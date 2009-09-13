@@ -5,104 +5,87 @@
 //===== By: ==================================================
 //= eAthena dev team
 //===== Current Version: =====================================
-//= 1.2a
+//= 1.3
 //===== Compatible With: =====================================
-//= eAthena 1.0+
+//= eAthena SVN
 //===== Description: =========================================
-//= Turns bullets/spheres into packs/casings.
+//= Turns bullets into magazines/packs.
 //===== Additional Comments: =================================
 //= 1.0 First version. [SinSloth]
 //= 1.1 Optimized version - Reduced to only one function [SinSloth]
 //= 1.2 Optimized^2, corrected npc's name [ultramage]
 //= 1.2a Optimized. Please, ommit extra NPC names [Lupus]
+//= 1.3 Updated to match AEGIS script. [Kisuka]
 //============================================================
 
 que_ng,187,149,3	script	Kenny	83,{
-
-	mes "[Kenny]";	
-	mes "Bonjour, mon nom est Kenny.";
-	if(BaseJob != Job_Gunslinger) {
-		mes "Je peux fabriquer des ^0000FFBullet Casings^000000";
-		mes "et des ^0000FFSphere Packs^000000!";
+	if(BaseJob == Job_Gunslinger) {
+		mes "[Kenny]";
+		mes "Bienvenue dans mon magasin. Je propose des cartouches et autres munitions pour les Gunslingers. Pour éviter de se retrouver à court de munitions, rien de tel que des packs et des cartouches, qui vous permettront d'en transporter un grand nombre pour un faible poids. Qu'est-ce qui vous intéresse en particulier?";
 		next;
-		mes "[Kenny]";
-		mes "Mais vous n'êtes pas Gunslinger alors ça ne vous intéressera sûrement pas...";
-		close;
+		switch(select("Pack de Sphères de Vent:Pack de Sphères d'Ombre:Pack de Sphères de Poison:Pack de Sphères d'Eau:Pack de Sphères de Feu:Cartouches:Cartouches Perforantes:Cartouches d'Argent:Annuler")) {
+		case 1: callfunc "Func_Casing",13204,12144; break;
+		case 2: callfunc "Func_Casing",13206,12145; break;
+		case 3: callfunc "Func_Casing",13205,12146; break;
+		case 4: callfunc "Func_Casing",13207,12147; break;
+		case 5: callfunc "Func_Casing",13203,12148; break;
+		case 6: callfunc "Func_Casing",13200,12149; break;
+		case 7: callfunc "Func_Casing",13202,12150; break;
+		case 8: callfunc "Func_Casing",13201,12151; break;
+		case 9:
+			mes "[Kenny]";
+			mes "Bien. Si vous trouvez que transporter des munitions par milliers est fatigant, n'hésitez pas à revenir me voir. Mes packs sont la solution idéale pour résoudre ce problème.";
+			close;
+		}
 	}
-	mes "Je peux fabriquer des ^0000FFBullet Casings^000000 ";
-	mes "et des ^0000FFSphere Packs^000000 pour vous!";
+	mes "[Kenny]";
+	mes "Bienvenue dans ma boutique.";
+	mes "Je propose des cartouches et autres munitions pour les Gunslingers.";
+	mes "Mais je pense que mes services ne vous seront pas très utiles, aventurier.";
 	next;
-	switch(select("Lightning Sphere Pack","Blind Sphere Pack","Poison Sphere Pack","Freezing Sphere Pack","Flare Sphere Pack","Bullet Casing","Shell of Blood Casing","Silver Bullet Casing","Annuler")) {
-	case 1: callfunc "Func_Casing",13204,12144; break;
-	case 2: callfunc "Func_Casing",13206,12145; break;
-	case 3: callfunc "Func_Casing",13205,12146; break;
-	case 4: callfunc "Func_Casing",13207,12147; break;
-	case 5: callfunc "Func_Casing",13203,12148; break;
-	case 6: callfunc "Func_Casing",13200,12149; break;
-	case 7: callfunc "Func_Casing",13202,12150; break;
-	case 8: callfunc "Func_Casing",13201,12151; break;
-	default:
-		mes "[Kenny]";
-		mes "D'accord, pas de problème.";
-		mes "Revenez quand vous voulez!";
-		close;
-	}
+	mes "[Kenny]";
+	mes "Si vous connaissez des Gunslingers, n'hésitez pas à leur recommander notre magasin!";
 	close;
 }
 
 function	script	Func_Casing	{
-
 	mes "[Kenny]";
-	mes "Combien en voulez-vous?";
+	mes "Vous pouvez échanger";
+	mes "500 "+getitemname(getarg(0))+"s";
+	mes "et 500 Zenys pour obtenir 1 "+getitemname(getarg(1))+".";;
 	next;
 	mes "[Kenny]";
-	mes "" +getitemname(getarg(1))+ " nécessite";
-	if(getarg(0) == 13202) 
-		mes "500 Shells of Blood";
-	else
-		mes "500 " +getitemname(getarg(0))+ "s";
-	mes "et 500 Zenys pièce.";
-	next;
-	mes "[Kenny]";
-	mes "Vous pouvez en échanger 50 au maximum.";
+	mes "Je ne peux pas vous plus de 50 packs à la fois. Veuillez à présent entrer le nombre de packs que vous souhaitez.";
 	mes "Entrez 0 si vous voulez annuler.";
 	next;
 	input .@amount;
-	mes "[Kenny]";
-	if(.@amount < 1) {
-		mes "D'accord, pas de problème.";
-		mes "Revenez quand vous voulez!";
+	if(.@amount > 50 || .@amount == 0) {
+		mes "[Kenny]";
+		mes "Veuillez réessayer en spécifiant un nombre compris entre 1 et 50.";
 		close;
 	}
-	if(.@amount > 50)	{
-		mes "Choisissez un nombre compris entre 1 et 50.";
+	if (countitem(getarg(0)) >= (500*.@amount)) {
+		if (Zeny >= (500*.@amount)) {
+			if (checkweight(getarg(1),.@amount) == 0) {
+				mes "[Kenny]";
+				mes "Hé, vous portez déjà bien trop de choses. Vous n'aurez pas la place de porter mes packs en plus de tout votre barda, alors allez vous décharger et revenez me voir, ok?";
+				close;
+			}else{
+				mes "[Kenny]";
+				mes "Très bien, voici vos packs! Merci d'avoir utilisé mes services. Revenez quand vous voulez, et utilisez vos munitions avec sagesse.";
+				set Zeny,Zeny-500*.@amount;
+				delitem getarg(0),500*.@amount;
+				getitem getarg(1),.@amount;
+				close;
+			}
+		}else{
+			mes "[Kenny]";
+			mes "Vous n'avez pas assez d'argent pour tout ça...";
+			close;
+		}
+	}else{
+		mes "[Kenny]";
+		mes "Désolé, mais vous n'avez pas assez de munitions pour effectuer cet échange.";
 		close;
 	}
-	//Weight checking
-	if(checkweight(getarg(1), .@amount) != 1)	{
-		mes "Vous portez déjà trop de choses...";
-		close;
-	}
-	
-	//Materials checking
-	if(countitem(getarg(0)) < .@amount * 500) {
-		mes "Désolé, mais vous devez fournir au moins 500 Bullets ou 500 Spheres ainsi que 500 zenys pour que je puisse créer 1 Bullet Casing ou 1 Sphere Pack.";
-		close;
-	}
-	
-	//Zeny checking
-	if(Zeny < .@amount * 500) {
-		mes "Vous n'avez pas assez d'argent pour tout ça...";
-		close;
-	}
-
-	mes "Et voilà~!";
-	if(getarg(1) < 12149)
-		mes "Voici vos Packs~";
-	else
-		mes "Voici vos Casings~";
-	set Zeny, Zeny - .@amount * 500;
-	delitem getarg(0), .@amount * 500;
-	getitem getarg(1), .@amount;
-	close;
 }

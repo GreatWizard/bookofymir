@@ -5,38 +5,26 @@
 //===== By: ================================================== 
 //= Some people & eAthena Dev Team
 //===== Current Version: ===================================== 
-//= 1.2
+//= 1.3
 //===== Compatible With: ===================================== 
-//= Any eAthena Version; Niflheim Required
+//= eAthena SVN
 //===== Description: ========================================= 
-//= Amatsu Town NPCs : Revision 2 (Fox quest fix)
-//= Translated by Makenshi and dj
-//= Revisions and edits by Valaris and Darkchild
-//= 1.01 event_sushi -> ama_sushi fixed
-//=      and other fixes, thanks to Shinomori
-//= 1.02 Fixed & Spell Checked [massdriller]
-//= 1.03 Fixed 2 NPC names, slight optimization [Lupus]
-//= 1.04 Fixed a few typos [Nexon]
-//= 1.05 Changed all breaks to ends. [Skotlex]
-//= 1.06 The Captain now uses iRO dialog [MasterOfMuppets]
-//= 1.07 Implemented a missing NPC [MasterOfMuppets]
-//= 1.08 Removed Duplicates [Silent]
-//= 1.1 Split quests into quests/quests_amatsu.txt [Evera]
-//= 1.2	Fixed missing name [Evera]
-//=====================================================================
-alberta,245,93,4	script	Walter Moers#01	709,{
+//= [Aegis Conversion]
+//= Amatsu Town Script
+//===== Additional Comments: ================================= 
+//= 1.3 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
+//=	Moved elemental stone trader to 'elemental_trader.txt'
+//============================================================
+
+// Amatsu Transportation
+//=====================================================
+alberta,245,93,3	script	Capitaine#ama1	709,{
 	mes "[Walter Moers]";
 	mes "Bonjour! Saviez-vous que par delà l'océan vit un peuple mystérieux, à la culture et aux légendes totalement inconnues du Royaume de Rune-Midgard?";
 	mes "En avez-vous déjà entendu parler?";
 	next;
-	menu "A propos d'Amatsu...",L1,"Aller à Amatsu",L2,"Annuler",-;
-		mes "[Walter Moers]";
-		mes "Si vous êtes un véritable aventurier,";
-		mes "vous devriez visiter d'autres continents.";
-		mes "Il n'y a rien de plus excitant que de découvrir de nouvelles cultures...";
-		mes "Enfin, vous faites ce que vous voulez!";
-		close;
-	L1:
+	switch(select("A propos d'Amatsu...:Aller à Amatsu:Annuler")) {
+	case 1:
 		mes "[Walter Moers]";
 		mes "La légende raconte qu'un marin s'étant perdu en mer, alors qu'il dérivait au milieu des eaux, l'a découvert...";
 		mes "Au milieu du brouillard et de la tempête, le bateau fût irrémédiablement perdu.";
@@ -71,14 +59,14 @@ alberta,245,93,4	script	Walter Moers#01	709,{
 		mes "Vous pouvez faire un petit investissement si vous voulez...";
 		mes "Si vous voulez aller à Amatsu, faites-moi signe...!";
 		close;
-	L2:
+	case 2:
 		mes "[Walter Moers]";
 		mes "Oui, Amatsu est un endroit super!";
-		mes "Mais l'océan peut se réveller traître, ce n'est pas facile de le traverser.";
+		mes "Mais l'océan peut se révéler traître, ce n'est pas facile de le traverser.";
 		mes "J'espère que le prix du voyage vous convient.";
 		next;
 		mes "[Walter Moers]";
-		mes "Le voyage coûte 10 000 zeny.";
+		mes "Le voyage coûte 10 000 Zenys.";
 		mes "Nos navires de commerce sont robustes!";
 		mes "Et les cabines des passagers sont confortables.";
 		next;
@@ -86,38 +74,41 @@ alberta,245,93,4	script	Walter Moers#01	709,{
 		mes "Alors, prêt à partir?";
 		mes "Avez-vous assez d'argent pour le voyage?";
 		next;
-		menu "Oui",Lgo,"Non",-;
-			mes "[Walter Moers]";
-			mes "Pas attiré par ce nouveau continent?";
-			mes "Les gens n'aiment pas beaucoup s'aventurer trop loin de la côte.";
-			close;
-		Lgo:
-			if (Zeny < 10000) {
+		if (select("Tous à bord!:Non.") == 1) {
+			if (Zeny > 9999) {
 				mes "[Walter Moers]";
+				mes "Tout le monde à bord!";
+				close2;
+				set zeny,zeny-10000;
+				warp "amatsu",197,83;
+				end;
+			}
+			mes "[Walter Moers]";
 				mes "Avez-vous oublié ce que j'ai dit?";
 				mes "C'est 10 000 Zenys. Si vous ne pouvez pas me payer, vous n'avez qu'à aller faire un tour dans le bateau échoué et espérer que la chance soit avec vous durant votre chasse au trésor...";
-				close;
-			}
-			set Zeny, Zeny-10000;
-			mes "[Walter Moers]";
-			mes "Tout le monde à bord!";
-			close2;
-			warp "amatsu",197,83;
-			end;		
+			close;
+		}
+		mes "[Walter Moers]";
+		mes "Si vous êtes un véritable aventurier,";
+		mes "vous devriez visiter d'autres continents.";
+		mes "Il n'y a rien de plus excitant que de découvrir de nouvelles cultures...";
+		mes "Enfin, vous faites ce que vous voulez!";
+		close;
+	case 3:
+		mes "[Walter Moers]";
+		mes "Pas attiré par ce nouveau continent?";
+		mes "Les gens n'aiment pas beaucoup s'aventurer trop loin de la côte.";
+		close;
+	}
 }
-//=====================================================================
-amatsu,194,79,4	script	Walter Moers#02	709,{
+
+amatsu,194,79,5	script	Capitaine#ama2	709,{
 	mes "[Walter Moers]";
 	mes "Prêt à partir?";
 	mes "Je suppose que votre visite d'Amatsu a été un plaisir!";
 	mes "Vous voulez vraiment partir?";
 	next;
-	menu "Il est temps de rentrer chez soi!",L1,"Je vais rester encore un peu",-;
-		mes "[Walter Moers]";
-		mes "Nous restons amarrés.";
-		mes "Il est encore temps d'acheter des souvenirs!";
-		close;
-	L1:
+	if (select("Retourner à Alberta:Annuler") == 1) {
 		mes "[Walter Moers]";
 		mes "Très bien! Reçu cinq sur cinq!";
 		mes "Le bateau du retour est prêt à partir.";
@@ -125,11 +116,27 @@ amatsu,194,79,4	script	Walter Moers#02	709,{
 		close2;
 		warp "alberta",243,91;
 		end;
+	}
+	mes "[Walter Moers]";
+	mes "Nous restons amarrés.";
+	mes "Il est encore temps d'acheter des souvenirs!";
+	close;
 }
-//=====================================================================
-// Amatsu Citizen
-//=====================================================================
-amatsu,179,107,4	script	John	86,{
+
+// Generic Amatsu NPCs
+//=====================================================
+amatsu,230,160,3	script	Jeune Fille#ama	757,{
+	mes "[Yuuko]";
+	mes "Je viens chercher de l'eau à ce puits tous les jours.";
+	mes "Mais s'il pleut ou qu'il y a du brouillard, mieux vaut éviter de trop s'en approcher.";
+	next;
+	mes "[Yoruko]";
+	mes "On dirait que tout au fond du puits, quelqu'un ou quelque chose essaye d'escalader les murs.";
+	mes "Ça me file la chair de poule...";
+	close;
+}
+	
+amatsu,179,107,4	script	John#ama	86,{
 	mes "[John]";
 	mes "Hé, vous!";
 	mes "Vous me ressemblez.";
@@ -160,56 +167,8 @@ amatsu,179,107,4	script	John	86,{
 	mes "Mon plus grand rêve aurait été de devenir un chef de renom à Amatsu, mais... Je crois qu'il faut oublier maintenant.";
 	close;
 }
-//=====================================================================
-amatsu,185,116,4	script	Ralph	765,{
-	mes "[Ralph]";
-	mes "Kof kof! J'suis vieux et inutile.";
-	mes "Cette fois ci, je ne rentre plus chez moi, même si j'tousse. Kof kof!";
-	next;
-	menu "Arrêtez de boire et rentrez chez vous.",L1,"Venez on va se mettre une mine!",L2;
-L2:
-	mes "[Ralph]";
-	mes "Hahaha! Un bon p'tit gars!";
-	mes "Kof kof, mais, kof, j'te donnerai pas mon verre, kof kof.";
-	next;
-	mes "[Ralph]";
-	mes "Mais si tu veux m'acheter à boire, j'y réfléchirais.";
-	mes "Haha! Kof kof kof.";
-	close;
-L1:
-	mes "[Ralph]";
-	mes "Quoi?!";
-	mes "Tu veux que j'rentre et que ma femme me batte à coups de poings?!";
-	mes "Kof kof. Tu m'croiras pas si tu vois pas ma femme de tes propres yeux.";
-	mes "Quand elle était jeune, elle castagnait dur, elle a même attrapé des tigres une fois!";
-	next;
-	mes "[Ralph]";
-	mes "J'étais à Co... Comudo ou une ville dans c'genre là.";
-	mes "J'avais perdu un  peu d'argent au casino, et elle m'a fait ma fête... Kof kof.";
-	next;
-	mes "[Ralph]";
-	mes "J'suis fatigué de la vie.";
-	mes "Que diable valent quelques zeny?!";
-	mes "Kof kof.. kof..";
-	mes "...........................";
-	mes "........kof kof kof..............";
-	close;
-}
-//=====================================================================
-amatsu,217,179,0	script	Hashey	760,{
-	mes "[Hashey]";
-	mes "Mon mari est accroc aux paris d'argent, ça me tracasse énormément.";
-	mes "Il est allé dans cette ville lointaine, il a perdu beaucoup de zeny encore une fois.";
-	mes "Et quand il est revenu...";
-	next;
-	mes "[Hahsey]";
-	mes "J'étais en colère, et j'ai encore perdu l'esprit et fait des choses irrationnelles.";
-	mes "Il est sûrement encore en train de boire à la maison.";
-	mes "Quelle misère...";
-	close;
-}
-//=====================================================================
-amatsu,205,163,4	script	Mimi	759,{
+	
+amatsu,205,163,3	script	Mimi#ama	759,{
 	mes "[Mimi]";
 	mes "Pfiou...";
 	mes "Avez-vous vu Miss Amatsu près des docks?";
@@ -223,234 +182,58 @@ amatsu,205,163,4	script	Mimi	759,{
 	mes "Les femmes doivent toujours faire attention à leur apparence, hihihihihi...";
 	close;
 }
-//=====================================================================
-amatsu,230,160,4	script	Yoruko	757,{
-	mes "[Yoruko]";
-	mes "Je viens chercher de l'eau à ce puits tous les jours.";
-	mes "Mais s'il pleut ou qu'il y a du brouillard, mieux vaut éviter de trop s'en approcher.";
+	
+amatsu,185,115,3	script	Home soûl#ama	765,{
+	mes "[Kosake]";
+	mes "*Hips*...Ma femme est...";
+	mes "...comme un homme...*Hips*...";
+	mes "Je crois que je vais...*Hips*...pas rentrer chez moi aujourd'hui...Hips";
 	next;
-	mes "[Yoruko]";
-	mes "On dirait que tout au fond du puits, quelqu'un ou quelque chose essaye d'escalader les murs.";
-	mes "Ça me file la chair de poule...";
+	if (select("Arrêtez de boire et rentrez chez vous.:Venez on va se mettre une mine!") == 1) {
+		mes "[Kosake]";
+		mes "Quoi?!";
+		mes "Tu veux que j'rentre et que ma femme me batte à coups de poings?!";
+		mes "Tu m'croiras pas si tu vois pas ma femme de tes propres yeux.";
+		next;
+		mes "[Kosake]";
+		mes "Quand elle était jeune, elle castagnait dur, elle a même attrapé des tigres une fois!";
+		next;
+		mes "[Home soûl]";
+		mes "J'étais à Co... Comudo ou une ville dans c'genre là.";
+		mes "J'avais perdu un peu d'argent au casino, et elle m'a fait ma fête... *Hips*";
+		next;
+		mes "[Home soûl]";
+		mes "Je suis fatigué~~ de~~ la vie~~~";
+		mes "Que diable valent quelques zeny~~~~ ";
+		mes "*Hips*...... *Hips*.......";
+		mes ".......................";
+		mes "........Z.z..z...zzz...";
+		close;
+	}
+	mes "[Kosake]";
+	mes "Hahaha! Un bon p'tit gars!";
+	mes "*Hips*... mais *hips* j'te donnerai pas mon verre.";
+	next;
+	mes "[Kosake]";
+	mes "Mais si tu veux m'acheter à boire, j'y réfléchirais.";
+	mes "...Héhéhé...*Hips*..";
 	close;
 }
-//=====================================================================
-amatsu,119,164,4	script	Gardien#03	767,{
-	mes "[Gardien]";
-	mes "Etes-vous de Rune-Midgard?";
-	mes "Bienvenue dans la ville d'Amatsu.";
-	mes "La politesse veut que les visiteurs, aillent saluer le Maître d'Amatsu en arrivant en ville!";
+	
+amatsu,217,179,1	script	Grand-mère#ama	760,{
+	mes "[Hatsue]";
+	mes "Mon mari est accroc aux paris d'argent, ça me tracasse énormément.";
+	mes "Il est allé dans cette ville lointaine, il a perdu beaucoup de zenys encore une fois.";
+	mes "Et quand il est revenu...";
 	next;
-	mes "[Gardien]";
-	mes "Le Maître est un homme bon.";
-	mes "Il s'est beaucoup investi pour la ville.";
-	mes "Et même au delà, sur les autres continents, il sait faire toutes sortes de choses.";
+	mes "[Hatsue]";
+	mes "J'étais en colère, et j'ai encore perdu l'esprit et fait des choses irrationnelles.";
+	mes "Il est sûrement encore en train de boire à la maison.";
+	mes "Quelle misère...";
 	close;
 }
-//=====================================================================
-amatsu,112,164,4	script	Gardien#04	767,{
-	mes "[Gardien]";
-	mes "Ici se trouve le plus beau château de tout Amatsu, que l'on appelle le Château du Lac Oriental.";
-	mes "En temps normal, les visiteurs ne sont pas autorisés à aller et venir comme bon leur semble.";
-	next;
-	mes "[Gardien]";
-	mes "D'après vos vêtements, on dirait que vous venez d'un autre continent.";
-	mes "Par le passé, le Maître permettait exceptionnellement aux voyageurs d'aller et venir à leur guise.";
-	mes "Vous pouvez entrer si vous le désirez.";
-	close;
-}
-
-//=====================================================================
-ama_in02,207,40,6	script	Gardien#05	767,{
-	mes "[Gardien]";
-	mes "Bienvenue.";
-	mes "Le Maître a spécialement autorisé les invités d'autres continents d'aller et venir à leur guise.";
-	next;
-	mes "[Gardien]";
-	mes "Je vous invite à visiter notre ville, et à séjourner un moment avant de repartir.";
-	close;
-}
-//=====================================================================
-ama_in02,207,49,6	script	Gardien#06	767,{
-	mes "[Gardien]";
-	mes "Le Maître est vraiment un homme bon.";
-	mes "Qui aurait cru qu'une seule personne puisse faire de cette petite ville ce qu'elle est devenue aujourd'hui?";
-	next;
-	mes "[Gardien]";
-	mes "Il a même accepté un déchet insignifiant comme moi. Je lui suis vraiment redevable.";
-	mes "Mais je ne sais pas ce qui a pu se passer, récemment ses expressions semblent différentes de par le passé.";
-	close;
-}
-//=====================================================================
-ama_in02,187,57,2	script	Soldat#01	767,{
-	mes "[Ichiro]";
-	mes "Bienvenue.";
-	mes "Notre Maître a déjà fait préparer des chambres pour les invités.";
-	next;
-	mes "[Ichiro]";
-	mes "Si vous avez besoin de quoi que ce soit, n'hésitez pas à nous appeler, et n'oubliez pas de remercier notre Maître par la suite.";
-	mes "Tous ces préparatifs ont été ordonnés par le Maître.";
-	close;
-}
-//=====================================================================
-ama_in02,37,157,4	script	Soldat#03	767,{
-	mes "[Sbarro]";
-	mes "Voici le terrain d'entraînement de nos soldats.";
-	mes "Vous pouvez aller y jeter un oeil...";
-	next;
-	mes "[Sbarro]";
-	mes "Mais récemment, l'atmosphère est pesante. Les soldats ne sont plus aussi joyeux qu'avant.";
-	mes "Comment dire...? Ils ont l'air déprimés.";
-	mes "Et certains d'entre eux ont même déserté...";
-	mes "Ils ont peut-être déménagé vers d'autres continents.";
-	next;
-	mes "[Sbarro]";
-	mes "Je croise aussi des personnes étranges.";
-	mes "J'ai entendu dire que les clients au premier étage viennent de très loin, et ont des comportements suspicieux.";
-	mes "J'ai déjà ordonné aux soldats de surveiller leurs mouvements...";
-	next;
-	mes "[Sbarro]";
-	mes "Le Maître doit sûrement avoir ses raisons d'agir ainsi, de laisser les étrangers aller et venir.";
-	mes "Haha, on dirait que je parle un peu trop.";
-	mes "A plus tard...";
-	close;
-}
-//=====================================================================
-ama_in02,32,51,6	script	Shiro	767,{
-	mes "[Shiro]";
-	mes "Kof kof, kof kof, kof... quoi?! ... laissez-moi tranquille!";
-	mes "Allez donc voir ailleurs si j'y suis...";
-	mes "Kof kof, kof kof, kof... aïe, mes pauvres poumons.";
-	next;
-	mes "[Shiro]";
-	mes "Le médicament de ce fichu médecin ne fonctionne pas du tout!";
-	mes "Je n'aurais pas dû faire confiance à ces gens du continent...";
-	mes "Kof kof, kof kof, kof...";
-	next;
-	mes "[Shiro]";
-	mes "Bon sang! Je suis de plus en plus faible...";
-	mes "Mon corps n'a plus d'énergie...";
-	mes "Est-ce qu'un rhume est vraiment si grave d'habitude?";
-	mes "Kof kof... kof kof...";
-	close;
-}
-//=====================================================================
-ama_in02,40,167,3	script	Soldat#04	767,{
-	mes "[Kuro]";
-	mes "Chut... pas un mot.";
-	mes "Je vais vous raconter une histoire.";
-	next;
-	mes "[Kuro]";
-	mes "Une rumeur court à Amatsu...";
-	mes "La vérité est que le Maître actuel ne serait pas le vrai Maître de la ville... chut, ne dites rien!";
-	mes "Pas de panique, continuez de m'écouter.";
-	next;
-	mes "[Kuro]";
-	mes "Derrière notre Maître bon et généreux, se cache un autre Maître, calculateur à tous les niveaux, qui utilise notre Maître comme une marionnette, caché, quelque part.... contrôlant toutes les affaires de la ville.";
-	next;
-	mes "[Kuro]";
-	mes "Vous ne me croyez pas? Pourtant c'est la vérité! Je l'ai vu de mes yeux, le visage de l'autre Maître qui regardait la ville de haut avec un sourire démoniaque!!";
-	mes "Mais tout ce que je t'ai dit aujourd'hui, ça reste entre nous, ok?";
-	close;
-}
-//=====================================================================
-ama_in02,32,167,5	script	Kukuro	767,{
-	mes "[Kukuro]";
-	mes "Ce type est toujours en train de gémir ou de baragouiner que notre Maître est un imposteur.";
-	mes "Moi, ça ne me fait pas rire du tout.";
-	next;
-	mes "[Kukuro]";
-	mes "Même si c'est vrai que certains évènements étranges se sont produits récemment, en ce moment même, l'intérieur du château est encore sous contrôle.";
-	next;
-	mes "[Kukuro]";
-	mes "De temps en temps, vous entendrez peut-être un cri terrifiant. Je ne sais pas ce qui ne colle pas chez sa mère, de nombreux médecins sont déjà venus l'examiner.";
-	mes "Mais on dirait qu'il n'y a pas grand espoir pour elle...";
-	close;
-}
-//=====================================================================
-ama_in02,42,34,2	script	Soldat#05	767,{
-	mes "[Hakiro]";
-	mes "Reposez-vous un moment avant de repartir, le Maître a déjà fait préparer quelques chambres pour les visiteurs.";
-	next;
-	mes "[Hakiro]";
-	mes "Si vous avez une question, n'hésitez pas à venir me voir quand vous voulez.";
-	mes "Et s'il vous plaît, ne dérangez pas les autres visiteurs...";
-	next;
-	mes "[Hakiro]";
-	mes "Je vous souhaite une bonne journée.";
-	close;
-}
-
-//=====================================================================
-ama_in02,203,156,4	script	Soldat#06	767,{
-	mes "[Hakiro]";
-	mes "Le Maître est ici.";
-	mes "Si vous souhaitez le saluer, vous pouvez entrer en silence.";
-	next;
-	mes "[Hakiro]";
-	mes "Le Maître n'est pas de très bonne humeur aujourd'hui.";
-	mes "Ne faites ou dites rien qui pourrait être insultant.";
-	mes "Normalement, il est heureux d'accueillir les visiteurs.";
-	mes "Mais je ne sais pas ce qui s'est passé aujourd'hui...";
-	close;
-}
-
-//=====================================================================
-ama_in02,195,156,4	script	Soldat#07	767,{
-	mes "[Kuro]";
-	mes "Bon sang, peut-être que le Maître traverse un moment difficile ces temps-ci.";
-	mes "D'habitude c'est quelqu'un de très sympathique...";
-	next;
-	mes "[Kuro]";
-	mes "Des rumeurs étranges circulent à son sujet, mais moi, je crois toujours en mon Maître, car il est celui qui a métamorphosé notre ville.";
-	mes "Je suis devenu un soldat pour le servir.";
-	close;
-}
-
-ama_in01,169,173,0	script	Miko	769,{
-	mes "[Tokari]";
-	mes "Je ne suis pas vraiment une Miko.";
-	mes "Mon ami, Takikuwi m'a dit d'essayer ces vêtements, et m'a ammenée ici... ";
-	next;
-	mes "[Tokari]";
-	mes "Même s'il a des requêtes un peu étranges parfois, c'est un ami très drôle!";
-	mes "Parfois je ne comprends pas vraiment ce qu'il a derrière la tête, mais c'est un très bon ami.";
-	next;
-	mes "[Tokari]";
-	mes "Si vous avez d'autres questions, posez-les d'abord à Takikuwi.";
-	mes "Même à propos de choses dont personne n'a entendu parler, peu importe si c'est étrange ou inquiétant...";
-	mes "Il saura... Il sait toujours tout!";
-	close;
-}
-
-amatsu,269,221,1	script	Hutari Sioko	758,{
-	mes "[Hutari Sioko]";
-	mes "Ravie de vous rencontrer.";
-	mes "Mon nom est Hutari Sioko, et mon passe-temps favori est la musique... écouter de la musique classique très précisément.";
-	next;
-	mes "[Hutari Sioko]";
-	mes "Il y a une légende à propos de l'arbre sur la grande colline de notre ville.";
-	mes "La connaissez-vous?";
-	next;
-	mes "[Hutari Sioko]";
-	mes "Selon la légende, si vous avouez votre amour à l'être aimé sous cet arbre, votre couple vivra heureux pour toujours.";
-	next;
-	mes "[Hutari Sioko]";
-	mes "Mais votre déclaration ne doit pas se faire à n'importe quel moment.";
-	mes "Ce doit impérativement être un Samedi Soir, sinon rien ne se produira.";
-	next;
-	mes "[Hutari Sioko]";
-	mes "De plus, la réponse de l'être aimé à cette déclaration doit se faire avant la nuit du Dimanche suivant.";
-	next;
-	emotion e_lv;
-	mes "[Hutari Sioko]";
-	mes "Si vous avez un admirateur secret...";
-	mes "Pourquoi ne pas lui proposer une rencontre sous cet arbre?";
-	mes "Je parie qu'un heureux évènement se produira.";
-	close;
-}
-
-amatsu,287,266,3	script	Jyaburo	766,{
+	
+amatsu,287,266,3	script	Jyaburo#ama	766,{
 	mes "[Jyaburo]";
 	mes "Cet endroit est spécial pour ma femme et moi.";
 	next;
@@ -482,84 +265,185 @@ amatsu,287,266,3	script	Jyaburo	766,{
 	close;
 }
 
-amatsu,274,178,0	script	Sakura Seiichi	735,{
-	mes "[Sakura Seiichi]";
-	mes "Oh... Je ne suis pas quelqu'un de louche, ne soyez pas surpris, je suis juste une vétérinaire comme un autre, qui gagne sa vie en soignant les animaux.";
+// Legendary Tree
+//=====================================================
+amatsu,269,221,1	script	Fiancée#ama	758,{
+	set jap_tree,1;
+	mes "[Hutari Shioko]";
+	mes "Ravie de vous rencontrer.";
+	mes "Mon nom est Hutari Sioko, et mon passe-temps favori est la musique... écouter de la musique classique très précisément.";
 	next;
-	mes "[Sakura Seiichi]";
-	mes "Mais... Connaissez vous le cerisier sur la colline, et son histoire?";
-	mes "Peut-être est-ce la première fois que vous en entendez parler?";
+	mes "[Hutari Shioko]";
+	mes "Il y a une légende à propos de l'arbre sur la grande colline de notre ville.";
+	mes "La connaissez-vous?";
 	next;
-	mes "[Sakura Seiichi]";
-	mes "La raison pour laquelle cet arbre peut maintenir une jeunesse et une beauté éternelle... repose sur un secret... qui dit... que ce serait grâce à des personnes déjà mortes, enterrées en dessous...";
+	mes "[Hutari Shioko]";
+	mes "Selon la légende, si vous avouez votre amour à l'être aimé sous cet arbre, votre couple vivra heureux pour toujours.";
 	next;
-	menu "Ces personnes enterrées doivent souffrir, non?",-,"C'est quoi ces conneries encore...",L2;
-
-	mes "[Sakura Seiichi]";
-	mes "... Peut-être ...";
-	mes "Quoi qu'il en soit, vous me croyez?";
-	mes "Vous voulez parier...?";
+	mes "[Hutari Shioko]";
+	mes "Mais votre déclaration ne doit pas se faire à n'importe quel moment.";
+	mes "Ce doit impérativement être un Samedi Soir, sinon rien ne se produira.";
 	next;
-	emotion e_dots;
-	mes "[Sakura Seiichi]";
-	mes "Et si.......";
-	mes "............";
-	mes "............";
+	mes "[Hutari Shioko]";
+	mes "De plus, la réponse de l'être aimé à cette déclaration doit se faire avant la nuit du Dimanche suivant.";
 	next;
-	mes "^6633FFSon rire s'éteint peu à peu^000000";
-	mes "^6633FFEmporté par le vent,^000000";
-	mes "^6633FFJusqu'à ce que plus un son ne se fasse entendre,^000000";
-	mes "^6633FFComme si elle ne se souvenait plus^000000";
-	mes "^6633FFDe ce qu'elle allait dire...^000000";
-	close;
-L2:
-	mes "[Sakura Seiichi]";
-	mes "Très bien, je suppose que vous allez bien pour l'instant...";
-	mes "Mais faites attention, un jour cela vous arrivera à vous aussi...";
-	next;
-	emotion e_dots;
-	mes "[Sakura Seiichi]";
-	mes "Hahaha... Hahahaha.....";
-	mes "...............";
-	mes "...........";
-	next;
-	mes "^6633FFSon rire s'éteint peu à peu^000000";
-	mes "^6633FFEmporté par le vent,^000000";
-	mes "^6633FFJusqu'à ce que plus un son ne se fasse entendre.^000000";
-	mes "^6633FFVous ne comprenez pas pourquoi elle vous a dit cela.^000000";
+	emotion e_lv2;
+	mes "[Hutari Shioko]";
+	mes "Si vous avez un admirateur secret...";
+	mes "Pourquoi ne pas lui proposer une rencontre sous cet arbre?";
+	mes "Je parie qu'un heureux évènement se produira.";
 	close;
 }
+	
+amatsu,243,202,3	script	Professeur de Théâtre#ama	760,{
+	set jap_tree,2;
+	mes "[Garakame sensei]";
+	mes "Ce lieu est vraiment magnifique, et c'est surtout grâce au cerisier qui fleurit éternellement.";
+	mes "Notre ville est à l'origine de cette pièce de théâtre qui est devenue très célèbre, 'La Dryade Blanche'.";
+	next;
+	if (Sex) {
+		mes "[Garakame sensei]";
+		mes "Si vous connaissez une jeune fille possédant des talents d'actrice, pouvez-vous lui suggérer de venir me voir? Je cherche une personne qui puisse jouer le rôle de la Dryade Blanche.";
+		next;
+		mes "[Garakame sensei]";
+		mes "La Dryade Blanche est en fait une nymphe qui a élu domicile dans le cerisier... Il est vraiment difficile de trouver quelqu'un qui puisse jouer ce rôle...";
+		close;
+	}
+	emotion e_gasp;
+	mes "[Garakame sensei]";
+	mes "Seriez-vous intéressée par le théâtre? Je cherche quelqu'un qui soit passionné par le jeu d'acteur, et qui puisse comprendre ma vision du théâtre.";
+	next;
+	mes "[Garakame sensei]";
+	mes "Lorsque vous montez sur scène, vous devez votre personnage. Votre jeu doit toucher le coeur des gens, l'âme du public.";
+	next;
+	mes "[Garakame sensei]";
+	mes "La vie de tout un chacun est une pièce de théâtre, pas vrai? Profitez de votre vie comme vous êtes, et lorsque vous vous sentirez prête à monter sur les planches, revenez me voir.";
+	close;
+}
+	
+amatsu,283,203,1	script	Bonubonu#ama1	1323,{
+	end;
+}
 
-amatsu,283,203,1	script	PokePoke	738,{
+amatsu,283,203,1	script	Bonubonu#ama2	111,{
+	set jap_tree,3;
 	emotion e_swt2;
-	mes "[Pokepoke]";
+	mes "[Bonubonu]";
 	mes "L'arbre qui est sur cette colline est là depuis bien longtemps.";
 	mes "Profondément enraciné, et fleurissant chaque année. Le Roi des Cerisiers.";
 	next;
 	emotion e_swt2;
-	mes "[Pokepoke]";
+	mes "[Bonubonu]";
 	mes "Je suis redevable à cet arbre.";
 	mes "Chaque fois que je me sens triste ou chagriné, je m'assois toujours ici, sous son ombre.";
 	next;
 	emotion e_swt2;
-	mes "[Pokepoke]";
+	mes "[Bonubonu]";
 	mes "Peu importe ce qui arrive, je peux oublier tous mes soucis...";
 	mes "Cet arbre prend soin de nous et nous fait oublier nos tracas...";
 	mes "Un arbre magique...";
 	next;
 	emotion e_swt2;
-	mes "[Pokepoke]";
+	mes "[Bonubonu]";
 	mes "Si vous êtes triste ou chagriné, asseyez-vous donc sous cet arbre.";
 	mes "Cet arbre magique et merveilleux...";
 	close;
 }
-
-amatsu,261,197,4	script	Cerisier Légendaire	111,{
-	mes "^0000FFComme elle vient de le dire, cet arbre est très célèbre car de nombreux couples s'y sont confessés leur amour.";
-	mes "Parfois vous pouvez encore y apercevoir quelqu'un en train d'y dessiner un coeur avec le nom de leur aimé à l'intérieur.^000000";
+	
+amatsu,274,178,7	script	Vétérinaire#ama	735,{
+	set jap_tree,4;
+	mes "[Sakura Seiichi]";
+	mes "Ah... Je ne suis pas quelqu'un de méchant, ne vous affolez pas. Je suis juste un vétérinaire, tout ce qu'il y a de plus ordinaire. Mon travail est de soigner les animaux malades.;
 	next;
-	mes "^0000FFMais il n'y a pas que pour les confessions d'amour.";
-	mes "Parfois les gens se retrouvent simplement ici pour discuter et débattre de sujets importants.";
-	mes "Dans un si bel endroit, peu importe la gravité de ce dont on parle, on finit toujours pas se mettre d'accord.^000000";
+	mes "[Sakura Seiichi]";
+	mes "A ce propos... Êtes-vous au courant? De l'histoire à propos du cerisier sur la coline... Je suppose que vous n'en avez pas encore entendu parler...";
+	next;
+	mes "[Sakura Seiichi]";
+	mes "Cet arbre a un secret pour garder sa beauté et sa blancheur. Ce secret c'est... qu'il y a des corps enterrés en dessous... de cet arbre...";
+	next;
+	if (select("C'est affreux!:Vous plaisantez?") == 1) {
+		mes "[Sakura Seiichi]";
+		mes "Kuhuhu... On peut dire ça...";
+		mes "D'ailleurs... Voudriez-vous... parier là dessus...?";
+		next;
+		emotion e_dots;
+		mes "[Sakura Seiichi]";
+		mes "Si je..........";
+		mes "............";
+		mes ".........";
+		next;
+		mes "^3355FFSa voix se perd alors qu'une bourrasque de vent se lève...";
+		mes "Qui est cet homme, et que vous a-t-il dit? Vous ne pouvez pas vous en souvenir...^000000";
+		close;
+	}
+	mes "[Sakura Seiichi]";
+	mes "Pensez ce que vous voulez, ça m'est égal. Mais un jour, peut-être que c'est vous qui serrez enterré sous cet arbre...";
+	next;
+	emotion e_dots;
+	mes "[Sakura Seiichi]";
+	mes "Haha... Hahaha.....";
+	mes "...............";
+	mes "...........";
+	next;
+	mes "^3355FFSon rire se perd alors qu'une bourrasque de vent se lève...";
+	mes "Qui est cet homme, et que vous a-t-il dit? Vous ne pouvez pas vous en souvenir...^000000";
 	close;
 }
+	
+amatsu,262,197,1	script	Cerisier Légendaire	111,{
+	if (jap_tree == 1) {
+		mes "^3355FFComme elle vient de le dire, cet arbre est très célèbre car de nombreux couples s'y sont confessés leur amour.";
+		mes "Parfois vous pouvez encore y apercevoir quelqu'un en train de dessiner sur l'écorce, un coeur avec le nom de leur aimé à l'intérieur.^000000";
+		next;
+		mes "^3355FFMais il n'y a pas que pour les confessions d'amour.";
+		mes "Parfois les gens se retrouvent simplement ici pour discuter et débattre de sujets importants.";
+		mes "Dans un si bel endroit, peu importe la gravité de ce dont on parle, on finit toujours pas se mettre d'accord.^000000";
+		close;
+	}
+	else if (jap_tree == 2) {
+		mes "^3355FFLa pièce de théâtre légendaire, 'La Dryade Blanche'.....";
+		mes "Je suis presque sûr de ne jamais en avoir entendu parler, et pourtant ce nom me semble familier. La nymphe du cerisier... Je me demande ce qui lui arrive dans la pièce?^000000";
+		next;
+		if (Sex) {
+			mes "^3355FFJ'aimerais bien trouver une personne talentueuse qui pourrait exercer son art sur les planches, et l'aider jusqu'à ce qu'elle puisse jouer cette pièce. Mais c'est plus facile à dire qu'à faire.^000000";
+			close;
+		}
+		mes "^3355FFPeut-être que j'ai du talent pour le théâtre et que je ne m'en suis jamais rendue compte? Je me disais, peut-être qu'avec le costume je me sentirais en mesure de jouer la 'Dryade Blanche'...^000000";
+		close;
+	}
+	else if (jap_tree == 3) {
+		mes "^3355FFA la différence des autres cerisiers, celui-ci possède un parfum extrêmement prononcé. Je me sens... relaxé. Ce parfum... c'est comme s'il avait effacé tous mes fardeaux.^000000";
+		next;
+		mes "^3355FFMême si ça n'a duré qu'un instant, j'ai pu oublier toutes les misères de la vie. J'aimerais revenir m'assoir sous cet arbre...^000000";
+		close;
+	}
+	else if (jap_tree == 4) {
+		mes "^3355FFCe parfum entêtant me donne le vertige. Cet arbre n'est pas comme les autres cerisiers, ses pétales d'un blanc si chatoyant... ce n'est pas normal.^000000";
+		next;
+		mes "^3355FFC'est comme si mon âme allait être aspirée si je restais ici plus longtemps. Rien qu'un bref regard vers cet arbre et je sens que je dois m'en aller d'ici au plus vite.^000000";
+		close;
+	}
+	mes "^3355FFIl y a un cerisier en haut de cette coline. Il ne ressemble pas aux autres arbres. On dirait qu'il a une longue histoire...^000000";
+	next;
+	mes "^3355FFY a-t-il des gens qui vivent par ici? J'ai aperçu quelqu'un en bas de la coline. Je devrais aller lui poser des questions à propos de cet arbre.^000000";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= Amatsu Town NPCs : Revision 2 (Fox quest fix)
+//= Translated by Makenshi and dj
+//= Revisions and edits by Valaris and Darkchild
+//= 1.01 event_sushi -> ama_sushi fixed
+//=      and other fixes, thanks to Shinomori
+//= 1.02 Fixed & Spell Checked [massdriller]
+//= 1.03 Fixed 2 NPC names, slight optimization [Lupus]
+//= 1.04 Fixed a few typos [Nexon]
+//= 1.05 Changed all breaks to ends. [Skotlex]
+//= 1.06 The Captain now uses iRO dialog [MasterOfMuppets]
+//= 1.07 Implemented a missing NPC [MasterOfMuppets]
+//= 1.08 Removed Duplicates [Silent]
+//= 1.1 Split quests into quests/quests_amatsu.txt [Evera]
+//= 1.2	Fixed missing name [Evera]
+//============================================================

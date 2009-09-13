@@ -9,7 +9,7 @@
 //= Optimized and further edited by kobra_k88.
 //= Further bugfixed and tested by Lupus
 //===== Current Version: =====================================
-//= 2.6
+//= 2.7
 //===== Compatible With: =====================================
 //= eAthena  SVN
 //===== Description: =========================================
@@ -40,6 +40,7 @@
 //= 2.5 Krongast is in Lighthalzen. (DarkValmir) [L0ne_W0lf]
 //= 2.6 Fixed 4 bugs [Lupus]
 //= 2.6a Typo fix [Yommy]
+//= 2.7 Added Quest Log commands. [Kisuka]
 //==============================================================
 
 ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
@@ -150,6 +151,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 					mes "Il manque sans arrêt de main d'oeuvre. Rejoignez-le pour l'aider, ce sera votre première épreuve.";
 					next;
 					set BSMITH_Q,1;
+					setquest 2000;
 					mes "[Forgeron Altiregen]";
 					mes "Soyez prudent, et bonne chance!";
 					close;
@@ -199,6 +201,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 			next;
 			if (select("C'est pénible, mais je vais le faire.:......Je ne veux plus voyager T.T") == 1) {
 				set BSMITH_Q,16;
+				changequest 2013,2014;
 				mes "[Forgeron Altiregen]";
 				mes "J'espère bien que vous allez le faire, car la guilde des Forgerons n'aime pas ternir son image en embauchant des incapables!";
 				next;
@@ -227,6 +230,9 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 			mes "[Forgeron Altiregen]";
 			mes "Ouah, je peux apercevoir la flamme dans vos yeux! Vous avez réussi!!";
 			mes "Je vais vous accorder le pouvoir de modeler les métaux!";
+			if(checkquest(2015) != -1) {
+				changequest 2015,2016;
+			}
 			next;
 			set .@joblvl,JobLevel;
 			callfunc "Job_Change",Job_Blacksmith;
@@ -235,6 +241,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 			mes "N'oubliez pas! Nous sommes les artistes qui intègrent l'esthétique aux métaux! Ne vous avisez pas de l'oublier!";
 			next;
 			delitem 1005,1; //Hammer_Of_Blacksmith
+			completequest 2016;
 			mes "[Forgeron Altiregen]";
 			mes "Voici un petit cadeau pour marquer vos débuts en tant que Forgeron! Félicitations!";
 			if (.@joblvl > 48)
@@ -391,6 +398,11 @@ L_AskQuestions:
 				mes "Voyons voir.... votre score est de" + .@black_q + " points.";
 				if (.@black_q == 100) {
 					set BSMITH_Q,3;
+					if(checkquest(2001) != -1) {
+						changequest 2001,2002;
+					}else{
+						changequest 2000,2002;
+					}
 					mes "Oh ho ho~";
 					mes "Avec un score pareil, vous n'aurez aucun problème pour devenir Forgeron!";
 					next;
@@ -400,6 +412,9 @@ L_AskQuestions:
 					close;
 				}
 				set BSMITH_Q,2;
+				if(checkquest(2001) == -1) {
+					changequest 2000,2001;
+				}
 				mes ".............";
 				next;
 				mes "[Geschupenschte]";
@@ -449,15 +464,15 @@ L_AskQuestions:
 			next;
 			switch(rand(1,5)) {
 			//Steel, Rotten_Bandage, Blue_Gemstone, Arc_Wand
-			case 1: setarray .@items[0], 999,1, 930,1, 717,2, 1610,1, 4; break;
+			case 1: setarray .@items[0], 999,1, 930,1, 717,2, 1610,1, 4; changequest 2002,2003; break;
 			//Sparkling_Dust, Skel_Bone, Zargon, Gladius
-			case 2: setarray .@items[0], 1001,2, 932,1, 912,1, 1219,1, 5; break;
+			case 2: setarray .@items[0], 1001,2, 932,1, 912,1, 1219,1, 5; changequest 2002,2004; break;
 			//Coal, Shell, Boody_Red, Tsurugi
-			case 3: setarray .@items[0], 1003,1, 935,2, 990,2, 1119,1, 6; break;
+			case 3: setarray .@items[0], 1003,1, 935,2, 990,2, 1119,1, 6; changequest 2002,2005; break;
 			//Iron_Ore, Eye_Bandage, Blue_Gemstone, Arbalest
-			case 4: setarray .@items[0], 1002,1, 2212,1, 717,2, 1713,1, 7; break;
+			case 4: setarray .@items[0], 1002,1, 2212,1, 717,2, 1713,1, 7; changequest 2002,2006; break;
 			//Iron, Green_Herb, Animal's_Skin, Ring_Pommel_Saber
-			default: setarray .@items[0], 998,1, 511,1, 919,2, 1122,1, 8; break;
+			default: setarray .@items[0], 998,1, 511,1, 919,2, 1122,1, 8; changequest 2002,2007; break;
 			}
 			set BSMITH_Q,.@items[8];
 			mes "[Geschupenschte]";
@@ -527,6 +542,9 @@ L_AskQuestions:
 				case 9:
 					mes "Bien, allez voir ^8E6B23Baisulist^000000 à Geffen dans le Royaume de Rune-Midgard. Donnez-lui ceci, puis rapportez-moi le reçu.";
 					getitem 1610,1; //Arc_Wand
+					if(checkquest(2003) != -1) {
+						changequest 2003,2008;
+					}
 					next;
 					mes "[Geschupenschte]";
 					mes "Humm...?";
@@ -548,6 +566,9 @@ L_AskQuestions:
 				case 10:
 					mes "Bien, allez voir ^8E6B23Wickebine^000000 à Morroc dans le Royaume de Rune-Midgard. Donnez-lui ceci, puis rapportez-moi le reçu.";
 					getitem 1219,1; //Gladius
+					if(checkquest(2004) != -1) {
+						changequest 2004,2009;
+					}
 					next;
 					mes "[Geschupenschte]";
 					mes "Humm...?";
@@ -568,6 +589,9 @@ L_AskQuestions:
 				Case 11:
 					mes "Bien, allez voir ^8E6B23Krongast^000000 à Lighthalzen. Donnez-lui ceci, puis rapportez-moi le reçu.";
 					getitem 1119,1; //Tsurugi
+					if(checkquest(2005) != -1) {
+						changequest 2005,2010;
+					}
 					next;
 					mes "[Geschupenschte]";
 					mes "Humm...?";
@@ -587,6 +611,9 @@ L_AskQuestions:
 				case 12:
 					mes "Bien, allez voir ^8E6B23Talpiz^000000 à Payon dans le Royaume de Rune-Midgard. Donnez-lui ceci, puis rapportez-moi le reçu.";
 					getitem 1713,1; //Arbalest
+					if(checkquest(2006) != -1) {
+						changequest 2006,2011;
+					}
 					next;
 					mes "[Geschupenschte]";
 					mes "Humm...?";
@@ -607,6 +634,9 @@ L_AskQuestions:
 				case 13:
 					mes "Bien, allez voir ^8E6B23Bismarc^000000 à Hugel. Donnez-lui ceci, puis rapportez-moi le reçu.";
 					getitem 1122,1; //Ring_Pommel_Saber
+					if(checkquest(2007) != -1) {
+						changequest 2007,2012;
+					}
 					next;
 					mes "[Geschupenschte]";
 					mes "Humm...?";
@@ -675,6 +705,21 @@ L_AskQuestions:
 				if (countitem(1073) > 0) {
 					set BSMITH_Q,15;
 					delitem 1073,1; //Merchant_Voucher_1
+					if(checkquest(2008) != -1) {
+						changequest 2008,2013;
+					}
+					else if(checkquest(2009) != -1) {
+						changequest 2009,2013;
+					}
+					else if(checkquest(2010) != -1) {
+						changequest 2010,2013;
+					}
+					else if(checkquest(2011) != -1) {
+						changequest 2011,2013;
+					}
+					else {
+						changequest 2012,2013;
+					}
 					mes "[Geschupenschte]";
 					mes "Oh ho ho~";
 					mes "Parfait!";
@@ -1186,6 +1231,7 @@ ein_in01,24,41,5	script	Mitmayer#moc	726,{
 				mes "Cependant, ne laissez pas le succès vous monter à la tête. La vie de Forgeron n'est pas une partie de plaisir. Je vous donne cette enclume, en tant que preuve que vous avez réussi mon épreuve.";
 				set BSMITH_Q,17;
 				getitem 1005,1; //Hammer_Of_Blacksmith
+				changequest 2014,2015;
 				next;
 				mes "[Mitmayer]";
 				mes "Rapportez cette enclume à Altiregen. Ne la perdez pas! Je vous souhaite bonne chance pour la suite!";

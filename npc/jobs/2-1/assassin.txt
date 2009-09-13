@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88
 //===== Current Version: ===================================== 
-//= 3.2
+//= 3.3
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -47,6 +47,7 @@
 //= 3.1a Follow up fix. Forgot to replace a label. [L0ne_W0lf]
 //= 3.1b Fixed waiting room not enabled in some situations [Zephyrus]
 //= 3.2 Fixed a question having all correct answers. [brianluau]
+//= 3.3 Added Quest Log commands. [Kisuka]
 //============================================================ 
 
 in_moc_16,19,33,1	script	Guildien#asn	55,{
@@ -124,10 +125,12 @@ in_moc_16,19,33,1	script	Guildien#asn	55,{
 		mes "......";
 		next;
 		delitem 1008,1; //Frozen_Heart
+		changequest 8007,8008;
 		mes "[Assassin Expert 'Huey']";
 		mes "Très bien!";
 		mes "Vous avez été accepté!";
 		next;
+		completequest 8008;
 		callfunc "Job_Change",Job_Assassin;
 		callfunc "F_ClearJobVar";		// clears all job variables for the current player
 		mes "[Assassin Expert 'Huey']";
@@ -246,6 +249,11 @@ in_moc_16,19,33,1	script	Guildien#asn	55,{
 					mes "Ça fait très longtemps que je n'avais pas eu d'invité. Je vous envoie au bureau.";
 					close2;
 					set ASSIN_Q,0;
+					if(checkquest(8000) != -1) {
+						changequest 8000,8001;
+					}else{
+						setquest 8001;
+					}
 					warp "in_moc_16",19,76;
 					end;
 				case 2:
@@ -519,6 +527,7 @@ OnTouch:
 				close2;
 				set ASSIN_Q3,1;
 				set ASSIN_Q,1;
+				changequest 8001,8002;
 				warp "in_moc_16",19,144;
 				end;
 			}
@@ -534,6 +543,7 @@ OnTouch:
 				close2;
 				set ASSIN_Q3,2;
 				set ASSIN_Q,1;
+				changequest 8001,8002;
 				warp "in_moc_16",19,144;
 				end;
 			}
@@ -557,6 +567,7 @@ OnTouch:
 				set ASSIN_Q,0;
 				set ASSIN_Q3,0;
 				set ASSIN_Q2,0;
+				erasequest 8001;
 				warp "moc_fild16",206,229;
 				end;
 			}
@@ -580,6 +591,7 @@ OnTouch:
 				next;
 				set ASSIN_Q3,1;
 				set ASSIN_Q,1;
+				changequest 8001,8002;
 				warp "in_moc_16",19,144;
 				end;
 			}
@@ -593,6 +605,7 @@ OnTouch:
 				next;
 				set ASSIN_Q3,2;
 				set ASSIN_Q,1;
+				changequest 8001,8002;
 				warp "in_moc_16",19,144;
 				end;
 			}
@@ -917,6 +930,7 @@ L_AskQuestions:
 			mes "Voyons voir... vous avez totalisé " + .@assassin_t + "% de bonnes réponses...";
 			if (.@assassin_t > 80) {
 				set ASSIN_Q2,5;
+				changequest 8002,8003;
 				mes "Bien joué. Vous avez réussi.";
 				next;
 				mes "[L'Anonyme]";
@@ -949,6 +963,7 @@ L_AskQuestions:
 			mes "Voyons voir... vous avez totalisé... " + .@assassin_t + " points...";
 			if (.@assassin_t > 80) {
 				set ASSIN_Q2,5;
+				changequest 8002,8003;
 				next;
 				mes "[L'Anonyme]";
 				mes "Vous n'avez pas échoué cette fois-ci! Mais vous n'avez pas encore fini. Il vous faut réussir un autre examen. Dans la salle suivante, vous serez informés sur le prochain test.";
@@ -1097,6 +1112,7 @@ OnTouch:
 		set ASSIN_Q,0;
 		set ASSIN_Q3,0;
 		set ASSIN_Q2,0;
+		changequest 8003,8000;
 		warp "in_moc_16",19,13;
 		end;
 	}
@@ -1170,6 +1186,7 @@ OnMyMobDead:
 	if (.MyMobs < 1) {
 		mapannounce "in_moc_16","Vous vous débrouillez plutôt bien. Continuez!!",bc_map;
 		set ASSIN_Q,3;
+		changequest 8003,8004;
 		donpcevent "timestopper#1::OnEnable";
 		donpcevent "Gardien de la Porte#ASN::OnEnable";
 		donpcevent "Beholder#ASNTEST::OnResetmob";
@@ -1425,6 +1442,7 @@ OnTouch:
 			set ASSIN_Q,0;
 			set ASSIN_Q2,0;
 			set ASSIN_Q3,0;
+			changequest 8004,8000;
 			savepoint "in_moc_16",18,14;
 			warp "in_moc_16",18,14;
 			donpcevent "Salle d'Attente#ASNTEST::OnStart";
@@ -1492,6 +1510,7 @@ OnTouch:
 	mes "Vous pouvez à présent vous rendre dans la salle de notre Maître de Guilde. Bonne chance!!";
 	close2;
 	set ASSIN_Q,5;
+	changequest 8004,8005;
 	warp "in_moc_16",181,183;
 	end;
 }
@@ -1501,6 +1520,7 @@ OnTouch:
 	if (ASSIN_Q == 5 || ASSIN_Q == 6) {
 		warp "in_moc_16",181,183;
 		set ASSIN_Q,ASSIN_Q+1;
+		changequest 8005,8006;
 	}
 	else {
 		mapannounce "in_moc_16",strcharinfo(0)+" est entré dans la 'salle du Maître de Guilde.'",bc_map;
@@ -1982,6 +2002,7 @@ OnTouch:
 		mes "Vous, " + strcharinfo(0) + ", avez choisi de vivre comme un Assassin. Puissiez-vous apprendre nos méthodes et être un exemple honorable pour les autres.";
 		savepoint "morocc",100,100;
 		getitem 1008,1; //Frozen_Heart
+		changequest 8006,8007;
 		next;
 		mes "[Maître de Guilde]";
 		mes "Bien, vous devriez tous retournez à vos occupations. Je vais aussi vous renvoyer à l'entrée. On y va...";

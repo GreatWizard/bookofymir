@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88
 //===== Current Version: ===================================== 
-//= 2.3
+//= 2.4
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -32,6 +32,7 @@
 //= 2.1 Added missing close. [L0ne_W0lf]
 //= 2.2 Updated Gotan to be compliant with misc_quiest var. [L0ne_W0lf]
 //= 2.3 Updated heardgear Quest NPCs. [L0ne_W0lf]
+//= 2.4 Updated 'Doll Quest' to match AEGIS script. [Kisuka]
 //============================================================ 
 
 
@@ -40,8 +41,7 @@
 //						Doll Quest
 //=======================================================================================================//
 alberta,117,135,0	script	Elin	96,{
-	set .@weight,MaxWeight-Weight;
-	if ((.@weight) < 10000) {
+	if (checkweight(1201,1) == 0) {
 		mes "[Elin]";
 		mes "Attendez un peu!!";
 		mes "Vous portez trop de choses!";
@@ -61,20 +61,22 @@ alberta,117,135,0	script	Elin	96,{
 	}
 	next;
 	mes "[Elin]";
-	mes "Vous savez, j'aimerais tellement tellement avoir une nouvelle poupée! J'espère que mon papa m'en offrira une à mon anniversaire...!";
-	switch(select("Hum, j'espère aussi qu'il t'en offrira une.","Et si je t'en offrais une maintenant?")) {
+	mes "Vous savez, j'aimerais tellement avoir une nouvelle poupée! J'espère que mon papa m'en offrira une à mon anniversaire...!";
+	switch(select("J'espère aussi qu'il t'en offrira une.","Et si je t'en offrais une maintenant?")) {
 		case 1:
-			next;
 			mes "[Elin]";
 			mes "Voui, j'espère qu'il me donnera une Poupée de Yoyo. Ils sont trop mignons!";
 			close;
 		case 2:
-			next;
 			set .@weight,MaxWeight-Weight;
-			if ((.@weight) < 10000) {
+			if ((.@weight) < 1000) {
 				mes "[Elin]";
-				mes "Hou, vous me semblez bien chargé!";
-				mes "Je n'accepterais votre poupée que si vous vous allégez.";
+				if (Sex == 1) {
+					mes "Hou, vous me semblez bien chargé!";
+					mes "Je n'accepterais votre poupée que si vous vous allégez.";
+				} else {
+					mes "Vous transportez toujours autant de choses sur vous? Vous devriez vous décharger d'abord, sinon je n'accepterais pas votre poupée...";
+				}
 				close;
 			}
 			mes "[Elin]";
@@ -82,33 +84,49 @@ alberta,117,135,0	script	Elin	96,{
 				mes "Oh mon Dieu!";
 				mes "Vraiment? Vous êtes vraiment un amour~!";
 			} else {
-				mes "vous voulez vraiment?";
+				mes "Vous voulez vraiment?";
 				mes "Vous allez me donner une poupée? Youhooooouuuuu~";
 			}
 			next;
 			mes "[Elin]";
-			mes "Quel genre de poupée allez vous me donner? Vous allez vraiment m'en offrir une?";
-			switch(select("Poupée de Poring","Poupée de Chonchon","Puppet","Poupée de Rocker","Poupée de Spore","Poupée d'Osiris","Poupée de Baphomet","Poupée de Racoon","Poupée de YoYo","Je suis aussi adorable qu'une poupée, moi T.T")) {
+			mes "Quel genre de poupée allez-vous me donner? Vous allez vraiment m'en offrir une?";
+			switch(select("Poupée de Poring","Poupée de Chonchon","Pantin","Poupée de Rocker","Poupée de Spore","Poupée d'Osiris","Poupée de Baphomet","Poupée de Racoon","Poupée de YoYo","Je suis aussi adorable qu'une poupée, moi T.T")) {
 				case 1:
-					next;
 					if (countitem(741) >= 1) {
+						delitem 741,1;	// Poring_Doll
 						mes "[Elin]";
-						mes "Youpi, c'est une Poupée de Poring!";
+						mes "Ah...";
+						mes "J'ai déjà plein de poupée de Poring...";
 						next;
-						delitem 741,1;
-						getitem 529,1;
 						mes "[Elin]";
-						mes "Merci pour la poupée!";
+						if (Sex == 1) {
+							mes "Mais comme vous avez l'air d'un gentil garçon, je vais l'accepter! Hé hé, elle est douce et mole, tout comme les Poring~";
+						} else {
+							mes "Mais comme vous avez l'air d'une gentille fille, je vais l'accepter! Hé hé, elle est douce et mole, tout comme les Poring~";
+						}
+						next;
+						mes "[Elin]";
+						mes "Ooh, laissez-moi vous donner quelque chose en remerciement. Vous savez, je cache des bonbons dans ma robe, comme ça je peux en manger quand je veux! Bien sûr maman ne sait rien de tout ça.";
+						next;
+						getitem 529,1;	// Candy
+						mes "[Elin]";
+						if (Sex == 1) {
+							mes "Je ne sais pas si vous n'êtes pas trop vieux pour manger des bonbons, en fait?";
+						} else {
+							mes "Maman dit qu'il ne faut pas manger trop de bonbons, sinon ça apporte plein de problèmes!";
+						}
+						next;
+						mes "[Elin]";
+						mes "Merci beaucoup pour la poupée Poring!";
 						close;
 					} else {
 						mes "[Elin]";
 						if (Sex == 1) {
-							mes "Aww...?";
-							mes "Vous me taquiniez seulement?";
+							mes "Ah...?";
+							mes "Vous vous moquez de moi?";
 						} else {
-							mes "Aww...";
-							mes "Vous savez que vous n'êtes pas gentil!";
-							mes "?";
+							mes "Ah...";
+							mes "Vous êtes en train de vous moquer de moi?";
 						}
 						next;
 						mes "[Elin]";
@@ -116,260 +134,229 @@ alberta,117,135,0	script	Elin	96,{
 						close;
 					}
 				case 2:
-					next;
 					if (countitem(742) >= 1) {
+						delitem 742,1;	// Chonchon_Doll
 						mes "[Elin]";
-						mes "Eh .... une Poupée de Chonchon ... ...";
+						mes "Agh--!";
+						mes "Une poupée de Ch... Ch.... Chonchon?!";
 						next;
 						mes "[Elin]";
-						mes "Oh bien, puisque vous me le donnez je suppose qu'il faut que je vous récompense ....";
-						next;
-						delitem 742,1;
-						getitem 530,1;
-						mes "[Elin]";
-						mes "Si j'en mangeais trop, je serais pleine de caries.";
 						if (Sex == 1) {
-							mes "Vous aussi monsieur.";
+							mes "C'est... gentil... Je... Je vais la prendre!";
 						} else {
-							mes "Vous aussi madame.";
+							mes "C'est... gentil... Je... Je vais la prendre!";
 						}
-						mes "Ne mangez pas trop de bonbons, ok?";
-						mes "Et merci en tout cas ...";
 						next;
 						mes "[Elin]";
-						mes "(Chonchon ... *rumine rumine*)";
+						mes "Hum~";
+						mes "Laissez-moi vous offrir quelque chose en retour...";
+						next;
+						getitem 530,1;	// Candy_Striper
+						mes "[Elin]";
+						mes "Maman dit toujours que si on en mange trop, nos dents se mettent à pourrir...";
+						next;
+						mes "[Elin]";
+						mes "Et..";
+						mes "Hum...";
+						mes "Merci pour la poupée!";
 						close;
 					} else {
 						mes "[Elin]";
-						mes "De toutes façons, les Poupées de Chonchon sont moches, mais vous m'avez encore menti! Comment pouvez-vous faire ça?!";
+						mes "Les Chonchon sont moches, mais ce n'est pas une raison pour me mentir! Pourquoi vous êtes aussi méchant avec moi?!";
 						next;
 						mes "[Elin]";
-						mes "Waaaaaaaaaaaaaaaaah~~";
+						mes "Waaaaaaaaah~~";
 						close;
 					}
 				case 3:
-					next;
 					if (countitem(740) >= 1) {
+						delitem 740,1;	// Stuffed_Doll
 						mes "[Elin]";
-						mes "Wow--! C'est un lapin!";
-						mes "C'est trop chou!!";
-						if (Sex == 1) {
-							mes "Merci beaucoup monsieur!";
-						} else {
-							mes "Merci beaucoup madame!";
-						}
+						mes "Wahou...!";
+						mes "On dirait un petit lapin!";
 						next;
 						mes "[Elin]";
-						mes "Trop doux~";
-						mes "Oh oui! Laissez-moi vous donner un cadeau aussi!";
-						mes "Ummm ... trouvé!";
-						mes "Prenez ceci!";
+						mes "J'aime beaucoup cette poupée~ Hé héhé! Merci beaucoup~";
 						next;
-						delitem 740,1;
-						getitem 530,1;
 						mes "[Elin]";
-						mes "Je l'ai eu du Père Noël. C'est un sucre d'orge~";
-						if (Sex == 1) {
-							mes "Mangez-en aussi monsieur.";
-						} else {
-							mes "Mangez-en aussi madame.";
-						}
-						mes "Merci beaucoup pour la poupée lapin!";
-						mes "Je lui ferai un câlin avant de m'endormir tous les soirs~";
+						mes "Ooh ooh!";
+						mes "J'ai quelque chose pour vous!";
+						mes "Hum, où est-ce que je l'ai mis... Ah!";
+						next;
+						getitem 530,1;	// Candy_Striper
+						mes "[Elin]";
+						mes "La voilà! C'est une sucrerie que m'a donné le Père Noël. Goutez, c'est très bon! Oh, et merci pour la poupée!";
 						close;
 					} else {
 						mes "[Elin]";
-						mes "Awww, vous me faisiez marcher?";
-						mes "Pourquoi vous moquez vous de moi comme ça?";
+						mes "Ah, c'était une plaisanterie? Ce... ce n'est pas gentil! Pourquoi vous vous moquez de moi?";
 						next;
 						mes "[Elin]";
-						mes "*^CCCCCCSniff...^000000*";
+						mes "^666666*Sniff...*^000000";
 						next;
 						mes "[Elin]";
-						mes "Waaaaaaaaaaaaaaaaah~~";
+						mes "Waaaaaaaaah~~";
 						close;
 					}
 				case 4:
-					next;
 					if (countitem(752) >= 1) {
+						delitem 752,1;	// Grasshopper_Doll
 						mes "[Elin]";
-						mes "Ah, une Poupée de Rocker.";
-						mes "Je déteste ces bestioles mais la poupée est mignonne.";
+						mes "Ooh! Une poupée de Rocker!";
+						mes "Je n'aime pas les sauterelles en temps normal, mais les Rocker, ils chantent et ils dansent, ils sont trop cools~";
 						next;
 						mes "[Elin]";
-						mes "Merci~";
-						mes "Je devrais vous donner quelque chose moi aussi.";
-						mes "Hmm, je ne devrais pas prendre autant de choses à mon oncle ...";
+						mes "Hum, je devrais vous donner quelque chose en remerciement, hein? Voyons voir, mon grand père m'avait donné ça...";
 						next;
-						delitem 752,1;
-						getitem 532,7;
+						getitem 532,7;	// Banana_Juice
 						mes "[Elin]";
-						mes "Nous en avons des tonnes à la maison.";
-						mes "Donc je peux en partager un peu avec vous~";
-						mes "Merci pour la poupée!";
+						mes "On en a plein à la maison, alors je vous en donne un, ok? Oh, et merci pour la poupée~ J'adore les poupées, elles sont trop mignonnes!";
 						close;
 					} else {
 						mes "[Elin]";
-						mes "Awww...";
+						mes "Ah...";
 						next;
 						mes "[Elin]";
-						mes "Vous n'avez vraiment pas de poupée...?";
-						mes "J'étais tellement excitée, mais...";
+						mes "Vous n'avez pas la poupée sur vous? Je me faisais une joie de la voir...";
 						close;
 					}
 				case 5:
-					next;
 					if (countitem(743) >= 1) {
+						delitem 743,1;	// Spore_Doll
 						mes "[Elin]";
-						mes "Blahh ....";
-						mes "C'est un champignon...";
-						mes "Maman m'a toujours recommandé de ne pas manger de champignons...";
+						mes "C'est un champignon?";
+						mes "Beeeerk!";
+						mes "Maman m'a forcée à manger des champignons ce midi...";
 						next;
 						mes "[Elin]";
-						mes "Je la prends de toutes façons puisque la poupée semble mignonne.";
-						mes "Mais je ne mangerai jamais de champignons ...";
-						mes "Hmm, je dois vous donner un cadeau aussi.";
+						mes "Mais bon, cette poupée est mignonne quand même alors je la garde! Mais je ne mangerai plus jamais de champignons, jamais! Hé hé~";
 						next;
-						delitem 743,1;
-						getitem 538,5;
+						getitem 538,5;	// Well_Baked_Cookie
 						mes "[Elin]";
-						mes "Maman a fait ça.";
-						if (Sex == 1) {
-							mes "Prenez le, monsieur!";
-						} else {
-							mes "Prenez le, madame!";
-						}
+						mes "Héhé~ Ma maman a cuisiné ça! Ils sont vraiment bons. J'adore les cookies. Goûtez! Je suis sûre que vous aimerez aussi! Hé hé!";
 						next;
-						mes "[Litte Kid]";
-						mes "Merci pour la poupée~";
+						mes "[Elin]";
+						mes "Merci pour la poupée! J'en prendrai le plus grand soin!";
 						close;
 					} else {
 						mes "[Elin]";
-						mes "Eh...?";
-						mes "Vous n'avez pas de poupée?";
+						mes "Hein...?";
+						mes "Vous n'avez pas la poupée?";
 						next;
 						mes "[Elin]";
-						mes "Awww...";
-						mes "Ce n'est pas bien de taquiner les gens comme ça. *^CCCCCCSniff, sniff^000000*";
+						mes "Ah...";
+						mes "Ce n'est pas gentil de se moquer des gens comme ça. ^666666*Sniff, sniff*^000000";
 						close;
 					}
 				case 6:
-					next;
 					if (countitem(751) >= 1) {
+						delitem 751,1;	// Osiris_Doll
 						mes "[Elin]";
-						mes "Yay! C'est une Poupée d'Osiris!";
+						mes "Ahhhhh!";
+						mes "Qu'est-ce que c'est que ce truc?! Ça fait trop peur!";
 						next;
-						delitem 751,1;
-						getitem 522,2;
 						mes "[Elin]";
-						mes "Merci pour la poupée!";
+						mes "Je n'avais jamais vue de poupée comme ça avant. Vous l'avez eue où? Hum? Comme je n'avais jamais vu de poupée comme ça, je la monterai à mon papa ce soir. Héhé~! Il sera surpris!";
+						next;
+						mes "[Elin]";
+						mes "Tenez, comme vous m'avez donné une poupée spéciale, je vais vous donner moi aussi quelque chose de spécial.";
+						next;
+						getitem 522,2;	// Fruit_Of_Mastela
+						mes "[Elin]";
+						mes "Je l'ai trouvé quand je suis partie dans la forêt en cachette l'autre jour. Je l'ai ramassé parce qu'il avait de jolies couleurs!";
+						if (Sex == 1) {
+							mes "Comme il y en a deux, vous pouvez partager avec votre petite amie. Hé hé~!";
+						} else {
+							mes "Comme il y en a deux, vous pouvez partager avec votre petit ami. Hé hé~!";
+						}
 						close;
 					} else {
 						mes "[Elin]";
-						mes "Awww...";
-						mes "Pourquoi vous vous moquer de moi?";
+						mes "Ah...";
+						mes "Pourquoi vous vous moquez de moi?";
 						close;
 					}
 				case 7:
-					next;
 					if (countitem(750) >= 1) {
+						delitem 750,1;	// Baphomet_Doll
 						mes "[Elin]";
-						mes "Yay! C'est une Poupée de Baphomet!";
+						mes "Hein?";
+						mes "C'est une petite chèvre...";
 						next;
-						delitem 750,1;
-						getitem 525,5;
 						mes "[Elin]";
-						mes "Merci pour la poupée!";
+						mes "Elle est bizarre. Mignonne mais bizarre, et un peu effrayante aussi. Comme vous m'avez donné une poupée spéciale, je vais vous donner moi aussi quelque chose de spécial.";
+						next;
+						getitem 525,5;	// Panacea
+						mes "[Elin]";
+						mes "Mon père m'en a donné quand j'étais très malade. Maintenant je vais mieux, alors vous pouvez les utiliser si vous attrapez une maladie~";
+						next;
+						mes "[Elin]";
+						mes "Hé hé~";
+						mes "Merci pour la poupée. J'y ferai très attention!";
 						close;
 					} else {
 						mes "[Elin]";
-						mes "Vous racontez des mensonges! Pourquoi vous prétendez être gentil?!";
+						mes "Espèce de menteur! Pourquoi vous faites semblant d'être gentil?!";
 						close;
 					}
 				case 8:
-					next;
 					if (countitem(754) >= 1) {
+						delitem 754,1;	// Raccoondog_Doll
 						mes "[Elin]";
-						mes "Ah, c'est une Poupée de Racoon~";
-						mes "Je hais les Smokies, mais la poupée est vraiment trop chou!";
+						mes "Héhé, c'est une poupée de raton-laveur. Elle est vraiment très très mignonne~";
 						next;
 						mes "[Elin]";
-						mes "C'est trop mignon~";
-						if (Sex == 1) {
-							mes "Merci beaucoup, monsieur!";
-						} else {
-							mes "Merci beaucoup, madame!";
-						}
+						mes "Je n'aime pas trop les Smokie en fait, mais la poupée est vraiment jolie!";
 						next;
-						delitem 754,1;
-						getitem 539,3;
+						getitem 539,3;	// Piece_Of_Cake
 						mes "[Elin]";
-						mes "Laissez-moi vous donner les gâteaux fait maison de ma mamie!";
-						if (Sex == 1) {
-							mes "Vous aimez les sucreries, monsieur?";
-						} else {
-							mes "Vous aimez les sucreries, madame?";
-						}
-						mes "C'est vraiment délicieux à manger~";
+						mes "Tenez, je vous donne un peu de gâteau que ma grand-mère a fait. Il est vraiment très bon. Je ne sais pas si vous aimez les choses sucrées, mais moi j'adore ça! Goûtez-en, vous verrez c'est très bon!";
 						next;
 						mes "[Elin]";
-						mes "Merci pour cette adorable poupée!";
+						mes "Hé hé~";
+						mes "Merci pour la poupée, je la rangerai dans ma chambre!";
 						close;
 					} else {
 						mes "[Elin]";
-						mes "Hey! Comment pouvez-vous dire des choses pareilles? Vous vous moquez de moi?!";
+						mes "Hé! Pourquoi vous dites des choses qui sont fausses? Vous vous moquez de moi?!";
 						close;
 					}
 				case 9:
-					next;
 					if (countitem(753) >= 1) {
+						delitem 753,1;	// Monkey_Doll
 						mes "[Elin]";
-						mes "Wow--!!!";
-						mes "C'est un singe! Trop chou~";
-						if (Sex == 1) {
-							mes "Merci beaucoup monsieur!";
-						} else {
-							mes "Merci beaucoup madame!";
-						}
-						mes "Je la voulais vraiment~";
+						mes "Wahouuu~!";
 						next;
 						mes "[Elin]";
-						mes "C'est vraiment trop mignon~";
-						mes "C'est bon!";
-						mes "En guise de remerciement je voudrais vous donner ça.";
-						next;
-						delitem 753,1;
-						getitem 608,1;
-						mes "[Elin]";
-						mes "Papa l'a eu pendant un de ses voyages.";
-						mes "C'est une graine d'une certaine sorte.";
-						mes "Nous avons essayé de la planter à la maison mais elle n'a pas voulu pousser.";
-						if (Sex == 1) {
-							mes "Je vous la donne monsieur!";
-						} else {
-							mes "Je vous la donne madame!";
-						}
+						mes "C'est un petit singe! Il est trop mignon! Vous allez vraiment me le donner? Youpi! Merci beaucoup! Je l'aime vraiment beaucoup! Hé hé!";
 						next;
 						mes "[Elin]";
-						mes "Merci beaucoup pour la poupée!";
+						mes "Comme vous m'avez donné une très jolie poupée, je vais vous remercier en vous donnant quelque chose moi aussi!";
+						next;
+						getitem 608,1;	// Seed_Of_Yggdrasil
+						mes "[Elin]";
+						mes "Mon papa l'a rapporté de l'un de ses voyages. On dirait une espèce de graine d'arbre. J'ai essayé de la planter devant la maison, mais comme rien n'a poussé je l'ai ressortie de la terre. Vous voulez essayer?";
+						next;
+						mes "[Elin]";
+						mes "Héhé~";
+						mes "Merci pour la poupée. Je la serrerai contre moi tous les soirs en m'endormant!";
 						close;
 					} else {
 						mes "[Elin]";
-						mes "Hey...";
+						mes "Hé...";
 						mes "Pourquoi vous moquer de moi?!";
 						close;
 					}
 				case 10:
-					next;
 					mes "["+strcharinfo(0)+"]";
 					mes "Je suis aussi adorable qu'une poupée...";
 					next;
 					mes "[Elin]";
-					mes "Quuuuuuuoooooooooooiiiiiiiiii...?";
+					mes "Whaaaaaaaaaaat...?";
 					next;
 					mes "[Elin]";
-					mes "^3355FFQue venez vous^000000";
-					mes "^3355FFde dire?!^000000";
+					mes "^3355FFQu'est-ce que vous^000000";
+					mes "^3355FFvenez de dire?!^000000";
 					close;
 			}
 	}

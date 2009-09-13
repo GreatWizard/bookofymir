@@ -6,7 +6,7 @@
 //= Made by: Black Dragon
 //= Converted by: Shin
 //===== Current Version: ===================================== 
-//= 3.1
+//= 3.2
 //===== Compatible With: ===================================== 
 //= eAthena  SVN
 //===== Description: ========================================= 
@@ -32,6 +32,7 @@
 //= 2.9a Deleted unused variables. [Samuray22]
 //= 3.0 Updated waiting room. (Removes global var) [L0ne_W0lf]
 //= 3.1 Adding Hermemton's changes. [L0ne_W0lf]
+//= 3.2 Added Quest Log commands. [Kisuka]
 //============================================================
 
 
@@ -145,6 +146,7 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 					delitem 1004, 1;
 					delitem 1009, 1;
 					set CRUS_Q,4;
+					setquest 3009;
 					mes "[Michael Halig]";
 					mes "Moorenak et d'autres comme lui vont tester les limites de tes capacités, et t'aider à trouver ta voie. Reviens me voir quand tu auras fini leurs tests...";
 					close;
@@ -160,6 +162,7 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 				set .@cru_m1,rand(1,3);
 				if(.@cru_m1 == 1) {
 					set CRUS_Q, 1;
+					setquest 3006;
 					mes "10 ^3355FF"+getitemname(957)+"^000000";
 					mes "10 ^3355FF"+getitemname(959)+"^000000";
 					mes "10 ^3355FF"+getitemname(1099)+"^000000";
@@ -168,6 +171,7 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 				}
 				else if(.@cru_m1 == 2) {
 					set CRUS_Q, 2;
+					setquest 3007;
 					mes "10 ^3355FF"+getitemname(932)+"^000000";
 					mes "10 ^3355FF"+getitemname(1043)+"^000000";
 					mes "10 ^3355FF"+getitemname(1098)+"^000000";
@@ -176,6 +180,7 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 				}
 				else {
 					set CRUS_Q, 3;
+					setquest 3008;
 					mes "10 ^3355FF"+getitemname(958)+"^000000";
 					mes "10 ^3355FF"+getitemname(930)+"^000000";
 					mes "10 ^3355FF"+getitemname(1041)+"^000000";
@@ -234,6 +239,15 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 			delitem @item3, 10;
 			delitem @item4, 10;
 			set CRUS_Q, 4;
+			if(checkquest(3006) != -1) {
+				changequest 3006,3009;
+			}
+			else if(checkquest(3007) != -1) {
+				changequest 3007,3009;
+			}
+			else {
+				changequest 3008,3009;
+			}
 			mes "[Michael Halig]";
 			mes "Moorenak et d'autres comme lui t'aideront à tester les limites de tes capacités et à trouver ta voie. Reviens me voir quand tu auras accompli leurs tâches...";
 			close;
@@ -262,6 +276,7 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 		mes "Ensemble, préparons nous, et soyons victorieux du mal et de la tyrannie!";
 		next;
 		set .@Joblevel,JobLevel;
+		completequest 3015;
 		callfunc "Job_Change",Job_Crusader;
 		callfunc "F_ClearJobVar";		//clears all job variables for the current player
 		mes "[Michael Halig]";
@@ -355,6 +370,7 @@ prt_castle,164,32,1	script	Murnak Mijoul	733,{
 			mes "Tu ne dois pas oublier une chose. Sous aucune condition tu n'est autorisé à tuer un des monstres.";
 			next;
 			set CRUS_Q,5;
+			changequest 3009,3010;
 			mes "[Murnak Mijoul]";
 			mes "Bien alors...";
 			mes "Bonne chance.";
@@ -684,6 +700,7 @@ C_Questions:
 		mes "est de " + .@cru_t + " points...";
 		if(.@cru_t == 100) {
 			set CRUS_Q, 8;
+			changequest 3011,3013;
 			mes "Superbe! Il est maintenant temps pour toi de passer la prochaine épreuve.";
 			next;
 			mes "[Gabriel Valentine]";
@@ -695,6 +712,7 @@ C_Questions:
 		}
 		else if(.@cru_t == 90) {
 			set CRUS_Q, 8;
+			changequest 3011,3013;
 			mes "Bien joué~  Il est maintenant temps pour toi de passer la prochaine épreuve.";
 			next;
 			mes "[Gabriel Valentine]";
@@ -706,6 +724,7 @@ C_Questions:
 		}
 		else if (.@cru_t == 80 && CRUS_Q == 7) {
 			set CRUS_Q,8;
+			changequest 3011,3013;
 			mes "Il semblerait que tu te sois beaucoup préparé, alors pour cette fois, je te laisserai passer.";
 			mes "Dépêche toi et vas passer le prochain test.";
 			next;
@@ -715,6 +734,9 @@ C_Questions:
 			close;
 		}
 		set CRUS_Q,7;
+		if(checkquest(3011) != -1) {
+			changequest 3011,3012;
+		}
 		mes "Hummm... Quel dommage.";
 		mes "Vas étudier un peu plus et";
 		mes "repasse le test, d'accord?";
@@ -814,8 +836,11 @@ prt_castle,35,151,5	script	Bliant Piyord#1	751,{
 			mes "Ce test va juger tes capacités lors d'une bataille. Seuls ceux qui ont de grandes habilités au combat pourront devenir Croisés.";
 			next;
 			mes "[Bliant Piyord]";
-			mes "Pour passer ce test, rapporte";
-			mes "1 ^3355FFHoly Water^000000. Nous l'utiliserons avant le test pour te purifier.";
+			mes "Pour réussir cette épreuve, rapporte";
+			mes "1 ^3355FFBouteille d'Eau Bénite^000000. Nous l'utiliserons avant le test pour te purifier.";
+			if(checkquest(3013) != -1) {
+				changequest 3013,3014;
+			}
 			next;
 			mes "[Bliant Piyord]";
 			mes "Bien alors...";
@@ -1141,6 +1166,7 @@ OnDead:
 job_cru,98,105,4	script	 Summoner#cr5	45,3,3,{
 OnTouch:
 	set CRUS_Q,6;
+	changequest 3010,3011;
 	warp "prt_castle",164,28;
 	end;
 }
@@ -1232,7 +1258,10 @@ OnMonster3:
 
 OnDead:
 	set .MyMonsterCount,.MyMonsterCount+1;
-	if (.MyMonsterCount >= 10) set CRUS_Q,10;
+	if (.MyMonsterCount >= 10) {
+		set CRUS_Q,10;
+		changequest 3014,3015;
+	}
 	end;
 
 OnEnd:

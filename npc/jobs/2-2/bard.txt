@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= Muad_Dib(The Prometheus Project), Lupus, Samuray22
 //===== Current Version: ===================================== 
-//= 2.4
+//= 2.5
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -23,6 +23,7 @@
 //=	- Fixed some indentation.
 //=	- Changed item names to item IDs
 //= 2.4 Fixed hang up on bard quest. ($kiN.) [L0ne_W0lf]
+//= 2.5 Added Quest Log commands. [Kisuka]
 //============================================================
 
 //=============== Ayealo ============================
@@ -150,6 +151,7 @@ comodo,226,123,5	script	Barde	741,{
 					mes "Cela serait tellement mieux si plus de gens voyageaient, et chantaient...";
 					mes "Bon, ce n'est pas si mal que ça, en ce moment... humhum.";
 					set BARD_Q,1;
+					setquest 3000;
 					close2;
 					cutin "job_bard_aiolo01",255;
 					end;
@@ -205,6 +207,7 @@ comodo,226,123,5	script	Barde	741,{
 				mes "[Lalo]";
 				mes "Essaye d'en trouver une que j'aime, et ne te contente pas d'acheter n'importe quelle fleur, d'accord?";
 				set BARD_Q,2;
+				changequest 3000,3001;
 				close2;
 				cutin "job_bard_aiolo01",255;
 				end;
@@ -407,6 +410,7 @@ comodo,226,123,5	script	Barde	741,{
 		mes "Vas là-bas, et rapporte-moi un cadeau!";
 		next;
 		set BARD_Q,3;
+		changequest 3001,3002;
 		set xmas_npc,1;
 		mes "[Lalo]";
 		mes "Si tu deviens ami avec ^008800Jack Frost^000000, il te donnera quelque chose.";
@@ -426,6 +430,9 @@ comodo,226,123,5	script	Barde	741,{
 			mes "Alors, veux-tu essayer de chanter...?";
 			mes "Je vais chanter une courte mélodie...";
 			mes "et tu essayeras ensuite.";
+			if(checkquest(3003) == -1) {
+				changequest 3002,3003;
+			}
 			next;
 			mes "[Lalo]";
 			mes "C'est parti.";
@@ -815,6 +822,7 @@ B_Change:
 					cutin "job_bard_aiolo01",255;
 					end;
 				}
+				completequest 3003;
 				callfunc "Job_Change",Job_Bard;
 				callfunc "F_ClearJobVar";		//clears all job variables for the current player
 				mes "[Lalo]";
@@ -827,6 +835,7 @@ B_Change:
 				cutin "job_bard_aiolo01",255;
 				end;
 			}
+			changequest 3003,3004;
 			mes "[Lalo]";
 			mes "Hum... Très bien, rapporte moi quelques Trunks.";
 			mes "Peu importe de quel genre, tant qu'il y en a 60 du même type...";
@@ -916,6 +925,7 @@ B_Change:
 	end;
 
 S_ChangeJob:
+		completequest 3004;
 		callfunc "Job_Change",Job_Bard;
 		callfunc "F_ClearJobVar";
 		mes "[Lalo]";

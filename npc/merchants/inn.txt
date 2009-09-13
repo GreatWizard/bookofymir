@@ -6,7 +6,7 @@
 //= Darkchild (1.1)
 //= Playtester (1.2)
 //===== Current Version: ===================================== 
-//= 2.8
+//= 2.9
 //===== Compatible With: ===================================== 
 //= eAthena 1.0+
 //===== Description: ========================================= 
@@ -45,6 +45,7 @@
 //= 2.6 Updated Alberta inn to official. [L0ne_W0lf]
 //= 2.7 Removed Morroc Inns as per episode 12.1. [L0ne_W0lf]
 //= 2.8 Removed Moscovia Inn; Its in quests/quest_moscovia.txt [Kisuka]
+//= 2.9 Added switch menus, updated to match AEGIS scripts. [Kisuka]
 //============================================================ 
 
 
@@ -119,38 +120,36 @@ lhz_in02,230,284,4	script	Employée de l'Hôtel#01	86,{
 	mes "[Employée de l'Hôtel]";
 	mes "Bienvenue à l'Hôtel Dragon Royal, où vous pourrez profiter des meilleurs services en matière d'hôtellerie.";
 	next;
-	menu "Sauvegarder",s_Save,"Louer une Chambre -> 5000 Zenys",s_Rest,"Rien, merci",-;
-
-	mes "[Employée de l'Hôtel]";
-	mes "Merci, passez une bonne journée.";
-	close;
-
-s_Save:
-	savepoint "lhz_in02",209,275;
-	mes "[Employée de l'Hôtel]";
-	mes "Votre point de sauvegarde";
-	mes "a été enregistré.";
-	mes "Merci, je reste";
-	mes "à votre disposition.";
-	close;
-
-s_Rest:
-	if(Zeny < 5000)goto s_NEnoughZ;
-	set Zeny,Zeny - 5000;
-	mes "[Employée de l'Hôtel]";
-	mes "Merci~";
-	mes "J'espère que vous apprécierez votre séjour à l'Hôtel Dragon Royal.";
-	close2;
-	warp "lhz_in02",219,150;
-	percentheal 100,100;
-	sc_start SC_BLESSING,240000,10;
-	skilleffect AL_BLESSING,0;
-	end;
-
-s_NEnoughZ:
-	mes "[Employée de l'Hôtel]";
-	mes "Je suis désolée, mais vous n'avez pas assez d'argent. Revenez quand vous en aurez!";
-	close;
+	switch(select("Sauvegarder:Louer une Chambre -> 5000 Zenys:Rien, merci")) {
+	case 1:
+		savepoint "lhz_in02",209,275;
+		mes "[Employée de l'Hôtel]";
+		mes "Votre point de sauvegarde";
+		mes "a été enregistré à l'Hôtel Dragon Royal.";
+		mes "Passez un agréable séjour en ville~";
+		close;
+	case 2:
+		if(Zeny < 5000) {
+			mes "[Employée de l'Hôtel]";
+			mes "Je suis désolé, mais vous n'avez pas assez d'argent pour louer une chambre.";
+			mes "Le prix de ce service est de 5000 Zenys.";
+			close;
+		}
+		set Zeny,Zeny - 5000;
+		mes "[Employée de l'Hôtel]";
+		mes "Merci~";
+		mes "J'espère que vous apprécierez votre séjour à l'Hôtel Dragon Royal.";
+		close2;
+		warp "lhz_in02",219,150;
+		percentheal 100,100;
+		sc_start SC_BLESSING,240000,10;
+		skilleffect AL_BLESSING,0;
+		end;
+	case 3:
+		mes "[Employée de l'Hôtel]";
+		mes "Merci, passez une bonne journée.";
+		close;
+	}
 }
 
 //======================== Hugel ====================================
@@ -168,16 +167,15 @@ ve_in,157,219,5	script	Aubergiste#master	709,{
 	mes "la plus confortable";
 	mes "de la ville de Veins~";
 	next;
-	menu "Sauvegarder",Msave, "Louer une Chambre -> 5000 Zenys",Mrent, "Rien, merci",Mend;
-
-	Msave:
+	switch(select("Sauvegarder:Louer une Chambre -> 5000 Zenys:Rien, merci")) {
+	case 1:
 		mes "[Aubergiste]";
 		mes "Votre point de sauvegarde";
 		mes "a été enregistré à Veins.";
 		mes "Passez un agréable séjour en ville~";
 		savepoint "ve_in",157,209;
 		close;
-	Mrent:
+	case 2:
 		mes "[Aubergiste]";
 		if(Zeny < 5000){
 			mes "Je suis désolé, mais vous n'avez pas assez d'argent pour louer une chambre.";
@@ -189,9 +187,11 @@ ve_in,157,219,5	script	Aubergiste#master	709,{
 		set Zeny,Zeny - 5000;
 		percentheal 100,100;
 		warp "ve_in",184,228;
-
-	Mend:
+	case 3:
+		mes "[Aubergiste]";
+		mes "Revenez quand vous voulez.";
 		close;
+	}
 }
 
 //======================= Inn Function ==============================
@@ -201,9 +201,8 @@ function	script	F_InnMaid	{
 	mes "l'"+getarg(1)+".";
 	mes "Que puis-je pour vous?";
 	next;
-	menu "Sauvegarder",Msave, "Louer une Chambre -> 5000 Zenys",Mrent, "Rien, merci",Mend;
-
-	Msave:
+	switch(select("Sauvegarder:Louer une Chambre -> 5000 Zenys:Rien, merci")) {
+	case 1:
 		mes getarg(0);
 		mes "Votre point de sauvegarde";
 		mes "a été enregistré.";
@@ -211,7 +210,7 @@ function	script	F_InnMaid	{
 		mes "à votre disposition.";
 		savepoint getarg(2),getarg(3),getarg(4);
 		close;
-	Mrent:
+	case 2:
 		mes getarg(0);
 		if(Zeny < 5000){
 			mes "Je suis désolée, mais le coût de";
@@ -227,7 +226,7 @@ function	script	F_InnMaid	{
 		set Zeny,Zeny - 5000;
 		percentheal 100,100;
 		return;
-
-	Mend:
+	case 3:
 		close;
+	}
 }

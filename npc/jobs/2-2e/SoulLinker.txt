@@ -6,7 +6,7 @@
 //===== By: ================================================== 
 //= Celestria & Samuray22
 //===== Current Version: ===================================== 
-//= 1.4
+//= 1.5
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -22,6 +22,7 @@
 //=	No longer used a global var, uses an NPC var instead.
 //= 1.3a Deleted Empty Color Tag. (bugreport:1572) [Samuray22]
 //= 1.4 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 1.5 Added Quest Log commands. [Kisuka]
 //============================================================ 
 
 morocc_in,174,30,6	script	Enfant#link1	716,{
@@ -100,6 +101,7 @@ morocc_in,174,30,6	script	Enfant#link1	716,{
 					close;
 				}
 				set SOUL_Q,1;
+				setquest 6005;
 				mes "[Enfant]";
 				mes "Alors vous souhaitez devenir un Soul Linker? Super!";
 				mes "Très bien, pour l'instant vous devrez me rapporter certains objets. Ne vous inquiétez pas, je vous expliquerai plus tard pourquoi j'en ai besoin.";
@@ -133,6 +135,7 @@ morocc_in,174,30,6	script	Enfant#link1	716,{
 						delitem 929,1; //Immortal_Heart
 						delitem 748,1; //Witherless_Rose
 						set SOUL_Q,2;
+						changequest 6005,6006;
 						mes "[Enfant]";
 						mes "Parfait, vous avez apporté tout ce qu'il fallait. Avant de commencer, permettez-moi de me présenter. Mon nom est Maia, et telle  que vous me voyez, j'ai plus de trois cent ans.";
 						next;
@@ -232,6 +235,7 @@ OnTouch:
 			mes "Pour l'instant il ne sont que quelques uns, mais si vous continuez de vous entraîner, vous deviendrez capable de faire appel à de nombreuses âmes, en tant que Soul Linker.";
 			next;
 			set SOUL_Q,3;
+			changequest 6006,6007;
 			mes "[Maia]";
 			mes "Nous ne pouvons rester ici que trois minutes. Je vous suggère de parler à ces âmes, pendant que vous en avez l'opportunité.";
 			close;
@@ -269,6 +273,7 @@ OnTouch:
 			mes "[Maia]";
 			mes "Les morts qui souhaitent continuer de se battre... combattront pour vous! Utilisez vos pouvoirs de Soul Linker avec sagesse, dans des buts justes.";
 			next;
+			completequest 6008;
 			callfunc "Job_Change",Job_Soul_Linker;
 			callfunc "F_ClearJobVar";		// clears all job variables for the current player
 			set SOUL_Q,0;
@@ -339,6 +344,9 @@ job_soul,30,35,6	script	Âme#link4	827,{
 		mes "[Âme d'un Moine]";
 		mes "Vous... Vous avez l'air fort. Si seulement je pouvais vous transmettre la force d'esprit que j'ai réussi à acquérir depuis tout ce temps passé ici...";
 		set SOUL_Q,4;
+		if(checkquest(6008) == -1) {
+			changequest 6007,6008;
+		}
 		next;
 		mes "[Âme d'un Moine]";
 		mes "Merci de m'avoir écouté.";
@@ -372,6 +380,9 @@ job_soul,30,25,7	script	Âme#link5	754,{
 		mes "[Âme d'un Sage]";
 		mes "Tout ceci pour vous rappeler que rien n'est plus important que la famille ou les amis.";
 		set SOUL_Q,4;
+		if(checkquest(6008) == -1) {
+			changequest 6007,6008;
+		}
 		next;
 		mes "[Âme d'un Sage]";
 		mes "Merci de m'avoir écouté.";
@@ -407,6 +418,9 @@ job_soul,25,30,5	script	Âme#link7	744,{
 		mes "[Âme d'une Alchimiste]";
 		mes "Bien sûr, tout le monde fait des erreurs... Mais lorsqu'elles coûtent la vie à des personnes, jamais on ne se pardonne.";
 		set SOUL_Q,4;
+		if(checkquest(6008) == -1) {
+			changequest 6007,6008;
+		}
 		next;
 		mes "[Âme d'une Alchimiste]";
 		mes "Merci de m'avoir écoutée.";
