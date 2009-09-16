@@ -1,3 +1,6 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
+// Bugfix dans tout le fichier: les variables quiz1 à quiz5 ont été changées en variable serveur permanentes ($quiz1, etc) [No Healing]
 //===== eAthena Script ======================================= 
 //= Quiz (Revolution) Part 1
 //===== By: ================================================== 
@@ -13,7 +16,7 @@
 //============================================================ 
 
 //=========================================================================================================================================
-prontera,152,286,4	script	Receptionist::RecepQuiz	755,{
+prontera,152,286,4	script	Réceptioniste du Quiz::RecepQuiz	755,{
 
 if (countitem(1201) > 3) goto M_MaxItem;
 if (checkweight(1201,3) == 0 ) goto L_OverWeight;
@@ -21,86 +24,53 @@ if (checkweight(1201,3) == 0 ) goto L_OverWeight;
 
 if(BaseLevel < 20){
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "Hello";
-			mes "This is Tsuji who is in charge of";
-			mes "receiving application forms for";
-			mes "Quiz Revolution event.";
+			mes "Bonjour. Je m'appelle Tsuji. J'ai pour tâche d'accueillir ceux qui souhaitent participer à la Course du Quiz.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "Zonda corporation has prepared";
-			mes "^0000ffQuiz Revolution^000000 event to";
-			mes "provide fun and excitement";
-			mes "to all of you.";
-			mes "Please read the following explanation and";
-			mes "participate in this event.";
+			mes "La Société Zonda organise une fête très spéciale: la ^0000ffCourse du Quiz^000000, pour le plus grand bonheur de tous.";
+			mes "Ecoutez bien ce que je vais vous dire si vous désirez participer.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "This Quiz Revolution event is..";
-			mes "operated in a different way compared to the previous one.";
-			mes "The event will only be open for those who wish to participate in the game.";
-			mes "Also, the ^006400Quiz Tickets^000000 will be given to those who";
-			mes "pass simple tests to check if the player is worthy of";
-			mes "playing the game.";
+			mes "La Course du Quiz est ouverte à ceux qui désirent participer. Des ^006400Tickets du Quiz^000000 seront distribués à ceux qui réussissent l'examen de passage, qui servira à déterminer si vous méritez ou non de participer.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "The assessment will be made through";
-			mes "^006400four simple tests^000000";
-			mes "For the ones who pass all four tests";
-			mes "will receive the quiz ticket of the";
-			mes "Quiz Revolution event.";
+			mes "Ce test ce compose de ^006400quatre épreuves simples^000000. Ceux qui les passent toutes recevront un ticket qui leur permettra de participer à la course.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "Hmm?! Wait a sec.";
-			mes "If you wish to join Quiz Revolution event";
-			mes "you should have base level";
-			mes "20 or above.";
-			mes "Please go and return after raising the";
-			mes "level to the expected point.";
+			mes "Hum?! Une petite minute. Vous devez avoir un Niveau de Base de 20 ou plus pour pouvoir participer. Vous devriez revenir quand votre niveau sera suffisamment élevé.";
 			close;
 
 } else if (quiz_rvl > 2) {
 
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "The event for all of you!";
-			mes "Quiz Revolution is about to start.";
-			mes "Please show us a lot of";
-			mes "participation.";
-			mes "And don't forget to bring the admission ticket~~";
+			mes "Attention! Qu'on se le dise, la Course du Quiz est sur le point de commencer! Nous espérons vous voir nombreux. N'oubliez pas votre ticket d'admission pour participer.~";
 			close;
 
 } else if (quiz_rvl == 2) {
 
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "You have already passed the first test.";
-			mes "Please visit 'Payon' and find";
-			mes "'Seeil'.";
-			mes "Seeil will give the second test.";
+			mes "Vous avez passé la première épreuve. Vous devez maintenant vous rendre à Payon et trouver Seeil. Seeil vous fera passer la seconde épreuve.";
 			close;
 
 } else if (quiz_rvl == 1) {
 
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "^0000ff" +strcharinfo(0)+ "^000000.";
-			mes "You have to take the retest";
-			mes "to pass the test.";
-			mes "Will you accept it?";
+			mes "^0000ff" +strcharinfo(0)+ "^000000, vous devez de nouveau passer l'épreuve. Voulez-vous le faire maintenant?";
 			next;
-				menu "Yes",-,"No",sM1_No;
+				menu "Oui",-,"Non",sM1_No;
 
 
 						mes "^2f4f4f[Tsuji]^000000";
-						mes "Very well.";
-						mes "I hope you pass the test this time..";
-						mes "Here are the questions.";
+						mes "Très bien. J'espère que vous réussirez cette fois. Voici les questions.";
 						set @test_soonsu, rand(2);
 						set @score_test, 0;
 						next;
 
 							if (@test_soonsu == 0){
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "1st question.";
-								mes "Ragnarok is a MMORPG game.";
-								mes "Please choose O and X.";
+								mes "1ère question.";
+								mes "Ragnarok est un jeu en ligne.";
+								mes "Choisissez O (oui) ou X (non).";
 
 								next;
 									menu "O",-,"X",X1;
@@ -110,7 +80,7 @@ if(BaseLevel < 20){
 								X1:
 								mes "^2f4f4f[Tsuji]^000000";
 								mes "2nd question.";
-								mes "Ragnarok's monetary unit is 'Zeny'.";
+								mes "L'argent dans Ragnarok est le 'Zeny'.";
 								next;
 									menu "O",-,"X",X2;
 
@@ -118,17 +88,16 @@ if(BaseLevel < 20){
 
 								X2:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "3rd question.";
-								mes "If an unknown person is attacking a monster";
-								mes "you have to attack the same monster together.";
+								mes "3ème question.";
+								mes "Si un inconnu attaque un monstre, vous pouvez vous aussi l'attaquer.";
 								next;
 									menu "O",X3,"X",-;
 
 									set @score_test, @score_test + 10;
 								X3:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "4th question.";
-								mes "'Payon' is the capital of 'Rune Midgarts'.";
+								mes "4ème question.";
+								mes "'Payon' est la capitale de 'Rune Midgard'.";
 								next;
 									menu "O",X4,"X",-;
 
@@ -136,8 +105,8 @@ if(BaseLevel < 20){
 
 								X4:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "5th question.";
-								mes "There are ships in 'Alberta'.";
+								mes "5ème question.";
+								mes "Il y a des bateaux à 'Alberta'.";
 								next;
 									menu "O",-,"X",X5;
 
@@ -145,10 +114,8 @@ if(BaseLevel < 20){
 
 								X5:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "6th question.";
-								mes "A job class that can use";
-								mes "'Grand Cross' is";
-								mes "'Lord Knight'.";
+								mes "6ème question.";
+								mes "Les Seigneurs Chevaliers peuvent utiliser la compétence 'Grand Cross'.";
 								next;
 									menu "O",X6,"X",-;
 
@@ -156,9 +123,8 @@ if(BaseLevel < 20){
 
 								X6:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "7th question.";
-								mes "When 'Bard' screams, the oppenet can be 'sturn status'";
-								mes "in regular probability.";
+								mes "6ème question.";
+								mes "Les Bardes peuvent assommer leurs opposants en criant.";
 								next;
 									menu "O",X7,"X",-;
 
@@ -166,9 +132,8 @@ if(BaseLevel < 20){
 
 								X7:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "8th question.";
-								mes "'Baphomet'is a tool";
-								mes "for killing mosquitos.";
+								mes "8ème question.";
+								mes "Un 'Baphomet' sert à tuer les moustiques.";
 								next;
 									menu "O",X8,"X",-;
 
@@ -176,9 +141,8 @@ if(BaseLevel < 20){
 
 								X8:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "9th question.";
-								mes "'Swordman' can class change to";
-								mes "'Ambernite'.";
+								mes "9ème question.";
+								mes "Les 'Epéistes' peuvent changer de classe et devenir 'Ambernite'.";
 								next;
 									menu "O",X9,"X",-;
 
@@ -186,9 +150,7 @@ if(BaseLevel < 20){
 
 								X9:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "The last question.";
-								mes "A fine horse, which appears in North european Myth";
-								mes "'Sleipnir' has five legs.";
+								mes "Enfin, Sleipnir, le cheval des légendes scandinaves, a cinq jambes.";
 								next;
 									menu "O",X0,"X",-;
 
@@ -200,9 +162,8 @@ if(BaseLevel < 20){
 							} else if (@test_soonsu == 1){
 
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "1st question.";
-								mes "Ragnarok is a MMORPG game.";
-								mes "Please choose O and X.";
+								mes "1ère question.";
+								mes "Ragnarok est un jeu en ligne. Choisissez O (vrai) ou X (faux).";
 								next;
 									menu "O",-, "X",X1_1;
 
@@ -211,17 +172,15 @@ if(BaseLevel < 20){
 								X1_1:
 								mes "^2f4f4f[Tsuji]^000000";
 								mes "2nd question.";
-								mes "'Valkyrie' who appears in North european Myth";
-								mes "is the godess of Love.";
+								mes "'Valkyrie' est la déesse de l'amour de la mythologie scandinave.";
 								next;
 									menu "O",X1_2,"X",-;
 										set @score_test, @score_test + 10;
 
 								X1_2:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "3rd question.";
-								mes "'Bethoven' composed the classic";
-								mes "'Moon Light sonata'.";
+								mes "3ème question.";
+								mes "'Au Clair de la Lune' a été composé par Beethoven.";
 								next;
 									menu "O",-, "X",X1_3;
 
@@ -229,27 +188,24 @@ if(BaseLevel < 20){
 
 								X1_3:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "4th question.";
-								mes "Orcs that exsits in the world of Ragnarok";
-								mes "are divided into 7 types.";
+								mes "4ème question.";
+								mes "Il y a 7 différents types d'Orcs dans le monde de Ragnarok.";
 								next;
 									menu "O",X1_4,"X",-;
 										set @score_test, @score_test + 10;
 
 								X1_4:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "5th question.";
-								mes "'Cobolt Card' can be installed";
-								mes "into";
-								mes "shield items.";
+								mes "5ème question.";
+								mes "Les 'Cobolt Card' sont faites pour les boucliers.";
 									next;
 									menu "O",X1_5,"X",-;
 										set @score_test, @score_test + 10;
 
 								X1_5:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "6th question.";
-								mes "'Katar'is exclusive use of Assassins.";
+								mes "6ème question.";
+								mes "Seuls les Assassins peuvent utiliser un Katar.";
 								next;
 									menu "O",-, "X",X1_6;
 
@@ -257,34 +213,31 @@ if(BaseLevel < 20){
 
 								X1_6:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "7th questino.";
-								mes "'Emperium' is a material for";
-								mes "refining.";
+								mes "7ème question.";
+								mes "L'Emperium est un minerai utilisé pour raffiner des armes.";
 									next;
 									menu "O",X1_7,"X",-;
 										set @score_test, @score_test + 10;
 
 								X1_7:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "8th question.";
-								mes "'Payon' is a village of bandits.";
+								mes "8ème question.";
+								mes "'Payon' est la ville des voleurs.";
 									next;
 									menu "O",X1_8,"X",-;
 										set @score_test, @score_test + 10;
 
 								X1_8:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "9th question.";
-								mes "'Prontera' is the only place where";
-								mes "to class change into 'Swordman'.";
+								mes "9ème question.";
+								mes "'Prontera' est le seul endroit où l'on peut devenir Epéiste.";
 								next;
 									menu "O",X1_9,"X",-;
 										set @score_test, @score_test + 10;
 
 								X1_9:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "The last question.";
-								mes "A monster 'Merman' is a human type.";
+								mes "Enfin, les 'Merman' sont de type Demi-Humain.";
 								next;
 									menu "O",-, "X",X0;
 
@@ -294,9 +247,8 @@ if(BaseLevel < 20){
 
 								} else if (@test_soonsu == 2){
 
-								mes "1st question.";
-								mes "Ragnarok is a MMORPG game.";
-								mes "Please choose O and X.";
+								mes "1ère question.";
+								mes "Ragnarok est un jeu en ligne. Choisissez O (vrai) ou X (faux).";
 								next;
 									menu "O",-, "X",X2_1;
 
@@ -305,7 +257,7 @@ if(BaseLevel < 20){
 								X2_1:
 								mes "^2f4f4f[Tsuji]^000000";
 								mes "2nd question.";
-								mes "The cloesest village from Pyramid Dugeon is 'Morroc'.";
+								mes "Morroc est le village le plus proche du Donjon des Pyramides.";
 								next;
 									menu "O",-, "X",X2_2;
 
@@ -313,56 +265,48 @@ if(BaseLevel < 20){
 
 								X2_2:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "3rd question.";
-								mes "A merchant association is located in 'Al De Baran'.";
+								mes "3ème question.";
+								mes "La guilde des Marchands se trouve à 'Al De Baran'.";
 								next;
 									menu "O",X2_3,"X",-;
 										set @score_test, @score_test + 10;
 
 								X2_3:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "4th question.";
-								mes "Acolyte can";
-								mes "class change to";
-								mes "'Sage' and 'Priest'.";
+								mes "4ème question.";
+								mes "Les Acolytes peuvent devenir Sages ou Prêtres.";
 								next;
 									menu "O",X2_4,"X",-;
 										set @score_test, @score_test + 10;
 
 								X2_4:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "5th question.";
-								mes "When reached base level 10";
-								mes "can be class changed to 1st job10.";
+								mes "5ème question.";
+								mes "Les Novices ayant un Niveau de Base de 10 ou plus peuvent changer de profession.";
 								next;
 									menu "O",X2_5,"X",-;
 										set @score_test, @score_test + 10;
 
 								X2_5:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "6th question.";
-								mes "'Bowling Bash' can not be activated";
-								mes "without equip";
-								mes "'Two handed sword'.";
+								mes "6ème question.";
+								mes "Il faut une épée à deux mains pour utiliser la compétence 'Bowling Bash'.";
 								next;
 									menu "O",X2_6,"X",-;
 										set @score_test, @score_test + 10;
 
 								X2_6:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "7th question.";
-								mes "When Priest uses 'Signum Crusis'";
-								mes "all monsters' defense will decrease";
-								mes "in regular probability.";
+								mes "7ème question.";
+								mes "Les Prêtres peuvent faire baisser la défense des monstres avec la compétence 'Signum Crusis'.";
 								next;
 									menu "O",X2_7,"X",-;
 										set @score_test, @score_test + 10;
 
 								X2_7:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "8th question.";
-								mes "'Wizard' will use a Blue gemstone";
-								mes "when casts 'Fire Pillar'.";
+								mes "8ème question.";
+								mes "Les Sorciers ont besoin d'une Gemme Bleue pour utiliser la compétence 'Fire Pillar'.";
 								next;
 									menu "O",-, "X",X2_8;
 
@@ -370,20 +314,16 @@ if(BaseLevel < 20){
 
 								X2_8:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "9th question.";
-								mes "A name of Assassin's exclusive weapon'";
-								mes "'Katar' that gives";
-								mes "additional 50% damage to human type";
-								mes "is 'Infiltrator'.";
+								mes "9ème question.";
+								mes "L'Infiltrator est un Katar permettant aux assassins de faire 50% de dommages supplémentaires sur les Demi-Humains.";
 								next;
 									menu "O",X2_9,"X",-;
 										set @score_test, @score_test + 10;
 
 								X2_9:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "10th question.";
-								mes "'Fire' is the most effective";
-								mes "property against to 'water'.";
+								mes "10ème question.";
+								mes "Le Feu est l'élément le plus efficace conte l'Eau.";
 								next;
 									menu "O",X0,"X",-;
 										set @score_test, @score_test + 10;
@@ -391,15 +331,13 @@ if(BaseLevel < 20){
 
 							X0:
 							mes "^2f4f4f[Tsuji]^000000";
-							mes "Well done~";
-							mes "You have solved all the 10 questions.";
-							mes "Let me check";
-							mes "how many you got?";
-							mes "^ff0000If you don't get a perfect score, you have to re-test~^000000";
+							mes "Bien joué~";
+							mes "Vous avez répondu à toutes les questions. Laissez-moi regarder. Alors, combien avez-vous fait?";
+							mes "^ff0000Si vous n'avez pas un score parfait, vous devrez repasser l'épreuve~^000000";
 							next;
 							mes "^2f4f4f[Tsuji]^000000";
-							mes "Wait a moment please.";
-							mes "Grading.";
+							mes "Un petit moment s'il vous plaît.";
+							mes "*Vérifie la copie*.";
 							mes ". . . . . . . . . . . . . . .";
 							mes ". . . . . . . . . . . . . . .";
 							mes ". . . . . . . . . . . . . . .";
@@ -410,55 +348,36 @@ if(BaseLevel < 20){
 							mes ". . . . . . . . . . . . . . .";
 							next;
 							mes "^2f4f4f[Tsuji]^000000";
-							mes "OK, finished grading.";
-							mes "I will tell your score.";
+							mes "Bien, j'ai fini de corriger. Je vais vous donner votre score.";
 							next;
 								if (@score_test > 99) {
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "Your score is ^2f4f4f" + @score_test + "^000000!";
-									mes "You have";
-									mes "qualified to participate in";
-									mes "Quiz Revolution.";
-									mes "You have cleared the 1st test!";
+									mes "Vous avez fait un score de ^2f4f4f" + @score_test + "^000000!";
+									mes "Vous êtes reçu, et vous avez remporté la première épreuve pour participer à la Course du Quiz.";
 									next;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "This is a reward";
-									mes "from us.";
-									mes "Please accept it.";
+									mes "Voici une petite récompense de notre part. Allez-y, prenez-la!";
 									set quiz_rvl,2;
 									getitem 501,10; //Red_Potion
 									next;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "Now, the 2nd test is";
-									mes "ready.";
-									mes "Go to 'Payon' and meet";
-									mes "'Seeil'.";
-									mes "You can get the 2nd test";
-									mes "from him.";
+									mes "Bien, maintenant il ne vous reste plus qu'à aller à Payon et chercher Seeil pour passer la seconde épreuve.";
 									next;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "You have no business with me";
-									mes "Have a good day.";
+									mes "Vous en avez maintenant terminé avec moi. Passez une bonne journée!";
 									close;
 									}
 								} else	{
 									set quiz_rvl,1;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "You score is ^2f4f4f" + @score_test + "^000000.";
-									mes "You did not get a perfect score.";
-									mes "I do not tell you";
-									mes "where you got wrong.";
-									mes "You have to take the test again.";
+									mes "Vous avez fait un score de ^2f4f4f" + @score_test + "^000000.";
+									mes "Vous n'avez pas fait un score parfait. Cependant, je ne vais pas vous dire où vous vous êtes trompé. Il va vous falloir repasser l'épreuve.";
 									close;
 									}
 
 					sM1_No:
 						mes "^2f4f4f[Tsuji]^000000";
-						mes "Oh, really?";
-						mes "Well, it's up to you.";
-						mes "Too bad.";
-						mes "If you change your mind,";
-						mes "let me know.";
+						mes "Oh, vraiment? Bien, c'est vous qui décidez. Vous savez où me trouver si vous changez d'avis.";
 						close;
 
 
@@ -466,71 +385,38 @@ if(BaseLevel < 20){
 
 
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "Hello";
-			mes "This is Tsuji who is in charge of";
-			mes "receiving application forms for";
-			mes "Quiz Revolution event.";
+			mes "Bonjour. Je m'appelle Tsuji. J'ai pour tâche d'accueillir ceux qui souhaitent participer à la Course du Quiz.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "Zonda corporation has prepared";
-			mes "^0000ffQuiz Revolution^000000 event to";
-			mes "provide fun and excitement";
-			mes "to all of you.";
-			mes "Please read the following explanation and";
-			mes "participate in this event.";
+			mes "La Société Zonda organise une fête très spéciale: la ^0000ffCourse du Quiz^000000, pour le plus grand bonheur de tous.";
+			mes "Ecoutez bien ce que je vais vous dire si vous désirez participer.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "This Quiz Revolution event is..";
-			mes "operated in a different way compared to the previous one.";
-			mes "The event will only be open for those who wish to participate in the game.";
-			mes "Also, the ^006400Quiz Tickets^000000 will be given to those who";
-			mes "pass simple tests to check if the player is worthy of";
-			mes "playing the game.";
+			mes "La Course du Quiz est ouverte à ceux qui désirent participer. Des ^006400Tickets du Quiz^000000 seront distribués à ceux qui réussissent l'examen de passage, qui servira à déterminer si vous méritez ou non de participer.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "The assessment will be made through";
-			mes "^006400four simple tests^000000";
-			mes "For the ones who pass all four tests";
-			mes "will receive the quiz ticket of the";
-			mes "Quiz Revolution event.";
+			mes "Ce test ce compose de ^006400quatre épreuves simples^000000. Ceux qui les passent toutes recevront un ticket qui leur permettra de participer à la course.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "There is a saying,";
-			mes "^dc143c'No pain no gain!'^000000";
-			mes "Hmm.. I don't think I know exactly what it means.";
-			mes "Anyway, I hope you pass all the tests";
-			mes "and receive the quiz ticket";
-			mes "required for the Quiz Revolution event.";
+			mes "Comme on dit, ^dc143c'Il n'y a pas de joie sans peine!'^000000 Hum... en fait, je ne suis pas certain de savoir ce que ça signifie. Quoi qu'il en soit, vous recevrez un ticket si vous passez toutes les épreuves.";
 			next;
 			mes "^2f4f4f[Tsuji]^000000";
-			mes "So~ Will you now take the";
-			mes "four test to attain the quiz ticket for";
-			mes "the Quiz Revolution event?";
+			mes "Alors~ Allez-vous passer les épreuves pour pouvoir participer à la Course du Quiz?";
 			next;
-				menu "Yes",-,"No",sM2_No;
+				menu "Oui",-,"Non",sM2_No;
 
 
 						mes "^2f4f4f[Tsuji]^000000";
-						mes "Good.";
-						mes "The first one is the ^191970'knowledge test'^000000.";
-						mes "I give out the questions and the player has to choose";
-						mes "an answer using O and X.";
+						mes "Bien. La première épreuve consiste en un ^191970Test de Culture Générale^000000. Je vais vous poser un certain nombre de questions, et vous devrez me dire si c'est vrai (O) ou faux (X).";
 						next;
 						mes "^2f4f4f[Tsuji]^000000";
-						mes "For your information, the player must get ^dc143ceverything right^000000, ";
-						mes "to become eligible for the quiz event";
-						mes "so please take your time solving questions.";
+						mes "Vous devrez avoir répondu correctement à ^dc143ctoutes les questions^000000 pour pouvoir participer à la Course du Quiz, alors prenez votre temps avant de réponde.";
 						next;
 						mes "^2f4f4f[Tsuji]^000000";
-						mes "I wish many players participate";
-						mes "Quiz Revolution event.";
-						mes "I will try to give out easy";
-						mes "questions. Muhaha!";
+						mes "Je veux vous voir nombreux à participer à la Course du Quiz, alors je vais essayer de vous poser des questions faciles. Muhaha!";
 						next;
 						mes "^2f4f4f[Tsuji]^000000";
-						mes "Then let us start.";
-						mes "Read the question carefully and choose";
-						mes "the right answer.";
+						mes "Bien, commençons. Lisez bien la question et choisissez la bonne réponse.";
 						set @test_soonsu, rand(2);
 						set @score_test, 0;
 						next;
@@ -538,9 +424,8 @@ if(BaseLevel < 20){
 
 							if (@test_soonsu == 0) {
 							mes "^2f4f4f[Tsuji]^000000";
-								mes "1st question.";
-								mes "Ragnarok is a MMORPG game.";
-								mes "Please choose O and X.";
+								mes "1ère question.";
+								mes "Ragnarok est un jeu en ligne. Choisissez O (vrai) ou X (faux).";
 								next;
 									menu "O",-, "X",X3_1;
 
@@ -549,7 +434,7 @@ if(BaseLevel < 20){
 								X3_1:
 								mes "^2f4f4f[Tsuji]^000000";
 								mes "2nd question.";
-								mes "Ragnarok's monetary unit is 'Zeny'.";
+								mes "L'argent dans Ragnarok est le 'Zeny'.";
 									next;
 									menu "O",-, "X",X3_2;
 
@@ -557,9 +442,8 @@ if(BaseLevel < 20){
 
 								X3_2:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "3rd question.";
-								mes "If an unknown person is attacking a monster";
-								mes "you have to attack the same monster together.";
+								mes "3ème question.";
+								mes "Si un inconnu attaque un monstre, vous pouvez vous aussi l'attaquer.";
 									next;
 									menu "O",X3_3, "X",-;
 
@@ -567,8 +451,8 @@ if(BaseLevel < 20){
 
 								X3_3:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "4th question.";
-								mes "'Payon' is the capital of 'Rune Midgarts'.";
+								mes "4ème question.";
+								mes "'Payon' est la capitale de 'Rune Midgard'.";
 									next;
 									menu "O",-, "X",X3_4;
 
@@ -576,8 +460,8 @@ if(BaseLevel < 20){
 
 								X3_4:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "5th question.";
-								mes "There are ships in 'Alberta'.";
+								mes "5ème question.";
+								mes "Il y a des bateaux à 'Alberta'.";
 									next;
 									menu "O",-, "X",X3_5;
 
@@ -585,10 +469,8 @@ if(BaseLevel < 20){
 
 								X3_5:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "6th question.";
-								mes "A job class that can use";
-								mes "'Grand Cross' is";
-								mes "'Lord Knight'.";
+								mes "6ème question.";
+								mes "Les Seigneurs Chevaliers peuvent utiliser la compétence 'Grand Cross'.";
 								next;
 									menu "O",X3_6, "X",-;
 
@@ -596,9 +478,8 @@ if(BaseLevel < 20){
 
 								X3_6:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "7th question.";
-								mes "When 'Bard' screams, the oppenet can be 'sturn status'";
-								mes "in regular probability.";
+								mes "7ème question.";
+								mes "Les Bardes peuvent assommer leurs opposants en criant.";
 									next;
 									menu "O",X3_7, "X",-;
 
@@ -606,9 +487,8 @@ if(BaseLevel < 20){
 
 								X3_7:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "8th question.";
-								mes "'Baphomet'is a tool";
-								mes "for killing mosquitos.";
+								mes "8ème question.";
+								mes "Un 'Baphomet' sert à tuer les moustiques.";
 									next;
 									menu "O",X3_8, "X",-;
 
@@ -616,9 +496,8 @@ if(BaseLevel < 20){
 
 								X3_8:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "9th question.";
-								mes "'Swordman' can class change to";
-								mes "'Ambernite'.";
+								mes "9ème question.";
+								mes "Les 'Epéistes' peuvent changer de classe et devenir 'Ambernite'.";
 									next;
 									menu "O",X3_9, "X",-;
 
@@ -627,8 +506,7 @@ if(BaseLevel < 20){
 								X3_9:
 								mes "^2f4f4f[Tsuji]^000000";
 								mes "The last question.";
-								mes "A fine horse, which appears in North european Myth";
-								mes "'Sleipnir' has five legs.";
+								mes "Enfin, Sleipnir, le cheval des légendes scandinaves, a cinq jambes.";
 									next;
 									menu "O",Y0, "X",-;
 
@@ -640,9 +518,8 @@ if(BaseLevel < 20){
 							} else if (@test_soonsu == 1) {
 
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "1st question.";
-								mes "Ragnarok is a MMORPG game.";
-								mes "Please choose O and X.";
+								mes "1ère question.";
+								mes "Ragnarok est un jeu en ligne. Choisissez O (vrai) ou X (faux).";
 									next;
 									menu "O",-, "X",X4_1;
 
@@ -651,8 +528,7 @@ if(BaseLevel < 20){
 								X4_1:
 								mes "^2f4f4f[Tsuji]^000000";
 								mes "2nd question.";
-								mes "'Valkyrie' who appears in North european Myth";
-								mes "is the godess of Love.";
+								mes "'Valkyrie' est la déesse de l'amour de la mythologie scandinave.";
 									next;
 									menu "O",X4_2, "X",-;
 
@@ -660,9 +536,8 @@ if(BaseLevel < 20){
 
 								X4_2:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "3rd question.";
-								mes "'Bethoven' composed the classic";
-								mes "'Moon Light sonata'.";
+								mes "3ème question.";
+								mes "'Au Clair de la Lune' a été composé par Beethoven.";
 									next;
 									menu "O",-, "X",X4_3;
 
@@ -670,9 +545,8 @@ if(BaseLevel < 20){
 
 								X4_3:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "4th question.";
-								mes "Orcs that exsits in the world of Ragnarok";
-								mes "are divided into 7 types.";
+								mes "4ème question.";
+								mes "Il y a 7 différents types d'Orcs dans le monde de Ragnarok.";
 									next;
 									menu "O",X4_4, "X",-;
 
@@ -680,10 +554,8 @@ if(BaseLevel < 20){
 
 								X4_4:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "5th question.";
-								mes "'Cobolt Card' can be installed";
-								mes "into";
-								mes "shield items.";
+								mes "5ème question.";
+								mes "Les 'Cobolt Card' sont faites pour les boucliers.";
 									next;
 									menu "O",X4_5, "X",-;
 
@@ -691,8 +563,8 @@ if(BaseLevel < 20){
 
 								X4_5:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "6th question.";
-								mes "'Katar'is exclusive use of Assassins.";
+								mes "6ème question.";
+								mes "Seuls les Assassins peuvent utiliser un Katar.";
 									next;
 									menu "O",-, "X",X4_6;
 
@@ -700,9 +572,8 @@ if(BaseLevel < 20){
 
 								X4_6:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "7th questino.";
-								mes "'Emperium' is a material for";
-								mes "refining.";
+								mes "7ème question.";
+								mes "L'Emperium est un minerai utilisé pour raffiner des armes.";
 									next;
 									menu "O",X4_7, "X",-;
 
@@ -710,8 +581,8 @@ if(BaseLevel < 20){
 
 								X4_7:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "8th question.";
-								mes "'Payon' is a village of bandits.";
+								mes "8ème question.";
+								mes "'Payon' est la ville des voleurs.";
 									next;
 									menu "O",X4_8, "X",-;
 
@@ -719,9 +590,8 @@ if(BaseLevel < 20){
 
 								X4_8:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "9th question.";
-								mes "'Prontera' is the only place where";
-								mes "to class change into 'Swordman'.";
+								mes "9ème question.";
+								mes "'Prontera' est le seul endroit où l'on peut devenir Epéiste.";
 									next;
 									menu "O",X4_9, "X",-;
 
@@ -729,8 +599,7 @@ if(BaseLevel < 20){
 
 								X4_9:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "The last question.";
-								mes "A monster 'Merman' is a human type.";
+								mes "Enfin, les 'Merman' sont de type Demi-Humain.";
 									next;
 									menu "O",-, "X",Y0;
 
@@ -741,9 +610,8 @@ if(BaseLevel < 20){
 							} else if (@test_soonsu == 2) {
 
 
-								mes "1st question.";
-								mes "Ragnarok is a MMORPG game.";
-								mes "Please choose O and X.";
+								mes "1ère question.";
+								mes "Ragnarok est un jeu en ligne. Choisissez O (vrai) ou X (faux).";
 									next;
 									menu "O",-, "X",X5_1;
 
@@ -752,7 +620,7 @@ if(BaseLevel < 20){
 								X5_1:
 								mes "^2f4f4f[Tsuji]^000000";
 								mes "2nd question.";
-								mes "The cloesest village from Pyramid Dugeon is 'Morroc'.";
+								mes "Morroc est le village le plus proche du Donjon des Pyramides.";
 								next;
 									menu "O",-, "X",X5_2;
 
@@ -760,8 +628,8 @@ if(BaseLevel < 20){
 
 								X5_2:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "3rd question.";
-								mes "A merchant association is located in 'Al De Baran'.";
+								mes "3ème question.";
+								mes "La guilde des Marchands se trouve à 'Al De Baran'.";
 								next;
 									menu "O",X5_3, "X",-;
 
@@ -769,10 +637,8 @@ if(BaseLevel < 20){
 
 								X5_3:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "4th question.";
-								mes "Acolyte can";
-								mes "class change to";
-								mes "'Sage' and 'Priest'.";
+								mes "4ème question.";
+								mes "Les Acolytes peuvent devenir Sages ou Prêtres.";
 								next;
 									menu "O",X5_4, "X",-;
 
@@ -780,9 +646,8 @@ if(BaseLevel < 20){
 
 								X5_4:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "5th question.";
-								mes "When reached base level 10";
-								mes "can be class changed to 1st job10.";
+								mes "5ème question.";
+								mes "Les Novices ayant un Niveau de Base de 10 ou plus peuvent changer de profession.";
 								next;
 									menu "O",X5_5, "X",-;
 
@@ -790,10 +655,8 @@ if(BaseLevel < 20){
 
 								X5_5:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "6th question.";
-								mes "'Bowling Bash' can not be activated";
-								mes "without equip";
-								mes "'Two handed sword'.";
+								mes "6ème question.";
+								mes "Il faut une épée à deux mains pour utiliser la compétence 'Bowling Bash'.";
 								next;
 									menu "O",X5_6, "X",-;
 
@@ -801,10 +664,8 @@ if(BaseLevel < 20){
 
 								X5_6:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "7th question.";
-								mes "When Priest uses 'Signum Crusis'";
-								mes "all monsters' defense will decrease";
-								mes "in regular probability.";
+								mes "7ème question.";
+								mes "Les Prêtres peuvent faire baisser la défense des monstres avec la compétence 'Signum Crusis'.";
 								next;
 									menu "O",X5_7, "X",-;
 
@@ -812,9 +673,8 @@ if(BaseLevel < 20){
 
 								X5_7:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "8th question.";
-								mes "'Wizard' will use a Blue gemstone";
-								mes "when casts 'Fire Pillar'.";
+								mes "8ème question.";
+								mes "Les Sorciers ont besoin d'une Gemme Bleue pour utiliser la compétence 'Fire Pillar'.";
 								next;
 									menu "O",-, "X",X5_8;
 
@@ -822,11 +682,8 @@ if(BaseLevel < 20){
 
 								X5_8:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "9th question.";
-								mes "A name of Assassin's exclusive weapon'";
-								mes "'Katar' that gives";
-								mes "additional 50% damage to human type";
-								mes "is 'Infiltrator'.";
+								mes "9ème question.";
+								mes "L'Infiltrator est un Katar permettant aux assassins uniquement de faire 50% de dommages supplémentaires sur les Demi-Humains.";
 								next;
 									menu "O",X5_9, "X",-;
 
@@ -834,9 +691,8 @@ if(BaseLevel < 20){
 
 								X5_9:
 								mes "^2f4f4f[Tsuji]^000000";
-								mes "10th question.";
-								mes "'Fire' is the most effective";
-								mes "property against to 'water'.";
+								mes "10ème question.";
+								mes "Le Feu est l'élément le plus efficace conte l'Eau.";
 								next;
 									menu "O",Y0, "X",-;
 
@@ -846,15 +702,13 @@ if(BaseLevel < 20){
 
 							Y0:
 							mes "^2f4f4f[Tsuji]^000000";
-							mes "Well done~";
-							mes "You have solved all the 10 questions.";
-							mes "Let me check";
-							mes "how many you got?";
-							mes "^ff0000If you don't get a perfect score, you have to re-test~^000000";
+							mes "Bien joué~";
+							mes "Vous avez répondu à toutes les questions. Laissez-moi regarder. Alors, combien avez-vous fait?";
+							mes "^ff0000Si vous n'avez pas un score parfait, vous devrez repasser l'épreuve~^000000";
 							next;
 							mes "^2f4f4f[Tsuji]^000000";
-							mes "Wait a moment please.";
-							mes "Grading.";
+							mes "Un petit moment s'il vous plaît.";
+							mes "*Vérifie la copie*.";
 							mes ". . . . . . . . . . . . . . .";
 							mes ". . . . . . . . . . . . . . .";
 							mes ". . . . . . . . . . . . . . .";
@@ -865,85 +719,66 @@ if(BaseLevel < 20){
 							mes ". . . . . . . . . . . . . . .";
 							next;
 							mes "^2f4f4f[Tsuji]^000000";
-							mes "OK, finished grading.";
-							mes "I will tell your score.";
+							mes "Bien, j'ai fini de corriger. Je vais vous donner votre score.";
 							next;
 								if (@score_test > 99) {
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "Your score is ^2f4f4f" + @score_test + "^000000!";
-									mes "You have";
-									mes "qualified to participate in";
-									mes "Quiz Revolution.";
-									mes "You have cleared the 1st test!";
+									mes "Vous avez fait un score de ^2f4f4f" + @score_test + "^000000!";
+									mes "Vous êtes reçu, et vous avez remporté la première épreuve pour participer à la Course du Quiz.";
 									next;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "This is a reward";
-									mes "from us.";
-									mes "Please accept it.";
+									mes "Voici une petite récompense de notre part. Allez-y, prenez-la!";
 									set quiz_rvl,2;
 									getitem 501,10; //Red_Potion
 									next;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "Now, the 2nd test is";
-									mes "ready.";
-									mes "Go to 'Payon' and meet";
-									mes "'Seeil'.";
-									mes "You can get the 2nd test";
-									mes "from him.";
+									mes "Bien, maintenant il ne vous reste plus qu'à aller à Payon et chercher Seeil pour passer la seconde épreuve.";
 									next;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "You have no business with me";
-									mes "Have a good day.";
+									mes "Vous en avez maintenant terminé avec moi. Passez une bonne journée!";
 									close;
 								} else {
 									set quiz_rvl,1;
 									mes "^2f4f4f[Tsuji]^000000";
-									mes "You score is ^2f4f4f" + @score_test + "^000000.";
-									mes "You did not get a perfect score.";
-									mes "I do not tell you";
-									mes "where you got wrong.";
-									mes "You have to take the test again.";
+									mes "Vous avez fait un score de ^2f4f4f" + @score_test + "^000000.";
+									mes "Vous n'avez pas fait un score parfait. Cependant, je ne vais pas vous dire où vous vous êtes trompé. Il va vous falloir repasser l'épreuve.";
 									close;
 									}
 
 
 					sM2_No:
 						mes "^2f4f4f[Tsuji]^000000";
-						mes "Oh, really?";
-						mes "Well, it's up to you.";
-						mes "Too bad.";
-						mes "If you change your mind,";
-						mes "let me know.";
+						mes "Oh, vraiment? Bien, c'est vous qui décidez. Vous savez où me trouver si vous changez d'avis.";
 						close;
 	}
 }
 M_MaxItem:
 			mes "^2f4f4f[Tsuji]^000000";
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 
 L_OverWeight:
 			mes "^2f4f4f[Tsuji]^000000";
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 }
 
 //======================================payon=================================
-payon,85,133,4	duplicate(RecepQuiz)	Receptionist#2	755
+payon,85,133,4	duplicate(RecepQuiz)	Réceptioniste du Quiz::Receptionist#2	755
 //======================================geffen================================
-geffen,111,104,4	duplicate(RecepQuiz)	Receptionist#3	755
+geffen,111,104,4	duplicate(RecepQuiz)	Réceptioniste du Quiz::Receptionist#3	755
 //====================================morocc==================================
-morocc,148,272,5	duplicate(RecepQuiz)	Receptionist#4	755
+morocc,148,272,5	duplicate(RecepQuiz)	Réceptioniste du Quiz::Receptionist#4	755
 //=============================Alberta========================================
-alberta,29,241,4	duplicate(RecepQuiz)	Receptionist#5	755
+alberta,29,241,4	duplicate(RecepQuiz)	Réceptioniste du Quiz::Receptionist#5	755
 //============================================================================
 
 //===================Quiz Revolution 2nd quest collecting job items==================
@@ -953,31 +788,21 @@ if (checkweight(1201,3) == 0 ) goto L_OverWeight;
 
 	if (quiz_rvl > 13) {
 		mes "[Seeil]";
-		mes "How was the last test? I hope you do this";
-		mes "one well.";
+		mes "Comment s'est passé le dernier test? J'espère que vous ferez aussi bien cette fois-ci.";
 		close;
 	} else if (quiz_rvl == 13) {
 		mes "[Seeil]";
-		mes "Since you have cleared the conditions to receive the";
-		mes "last test, please go and visit Radeng in Prontera.";
-		mes "During that time, I will transfer";
-		mes "will transfer all";
-		mes "your data.";
+		mes "Vous pouvez désormais passer l'épreuve finale. Vous devriez donc vous rendre à Prontera pour trouver Radeng. Je lui ferai parvenir mon rapport vous concernant pendant ce temps.";
 		next;
 		mes "[Seeil]";
-		mes "So this is the last one. Show me some spirit!";
-		mes "This is a present to encourage you! Take it!";		
+		mes "Allez, c'est la dernière, courage! Voici un petit quelque chose pour vous motiver. Allez-y, prenez-le!";		
 		set quiz_rvl,14;
 		getitem 503,10; //Yellow_Potion
 		close;
 
 	} else if (quiz_rvl > 6) && (quiz_rvl < 13) {
 		mes "[Seeil]";
-		mes "Eh? You didn't finish the marathon test and";
-		mes "came out in the middle of the test.";
-		mes "Oh my.. I don't know how you came out, but";
-		mes "this can't be like this. I will send you";
-		mes "once again!";
+		mes "Eh? Vous n'avez pas terminé le marathon! Vous êtes sorti au milieu de l'épreuve! Je ne sais pas comment vous vous y êtes pris pour sortir de là mais... Hum... Bon, je vais vous renvoyer là-bas. Mais plus de coups fourrés, c'est compris?";
 		close2;
 		set quiz_rvl,6;
 		warp "quiz_test",385,388;
@@ -985,44 +810,29 @@ if (checkweight(1201,3) == 0 ) goto L_OverWeight;
 
 	} else if (quiz_rvl == 6) {
 		mes "[Seeil]";
-		mes "Ho.. You are fast. Well...";
-		mes "All the preparations have been made so I can send";
-		mes "you to the next stage. This will test your patience";
-		mes "and endurance. It will not be require to use your brain";
-		mes "this time. All you have to do is.. just run.";
+		mes "Oh... Vous avez fait vite... Bon... Tout est prêt, je peux vous faire passer l'épreuve suivante. Le but est de tester votre patience et votre endurance. Vous n'aurez pas à vous creuser les méninges cette fois. il vous faudra juste... courir.";
 		next;
 		mes "[Seeil]";
-		mes "You can't come back from there until";
-		mes "you finish. Are you ready?";
-		mes "Will you take the third test";
-		mes "now?";
+		mes "Vous ne pourrez pas revenir avant d'avoir terminé. Etes-vous prêt? Voulez-vous passer la troisième épreuve maintenant?";
 		next;
-		menu "Take the test",-,"Refuse to take the test",M2_S;
+		menu "Passer l'épreuve",-,"Attendre un peu",M2_S;
 
 				mes "[Seeil]";
-				mes "Okay! I hope you do well and";
-				mes "pass the test.";
-				mes "Go for it!";
+				mes "D'accord! J'espère que vous vous en sortirez et que vous réussirez l'épreuve. C'est parti!";
 				close2;
 				warp "quiz_test",385,388;
 				end;
 
 			M2_S:
 				mes "[Seeil]";
-				mes "Oh my gosh, you are not ready";
-				mes "yet. I don't have any intention to";
-				mes "force you so whenever you are ready";
-				mes "please come back to me. Ha ha ha.";
+				mes "Quoi? Vous n'êtes pas encore prêt? Je ne veux pas vous forcer la main, mais vous feriez mieux de vous préparer rapidement et de revenir me voir.";
 				close;
 
 				
 	} else if (quiz_rvl == 3) {
 		if (countitem(902) > 39) && (countitem(908) > 39) && (countitem(909) > 39) {
 			mes "[Seeil]";
-			mes "Wow. You have collected the requested items.";
-			mes "So I will keep my promise. Before that";
-			mes "this is a present for you.. Please";
-			mes "take it.";
+			mes "Ouah! Vous avez tous les objets requis. D'accord, je vais tenir ma promesse. Mais avant cela, voici un petit quelque chose pour vous. Prenez-le, allez-y!";
 			delitem 902,40;
 			delitem 908,40;
 			delitem 909,40;
@@ -1030,27 +840,18 @@ if (checkweight(1201,3) == 0 ) goto L_OverWeight;
 			getitem 502,10; //Orange_Potion
 			next;
 			mes "[Seeil]";
-			mes "Then come back after a while and talk to me.";
-			mes "I need to prepare somethings for the third test";
-			mes "so... please go and do something";
-			mes "to kill some time.";
+			mes "Bien, allez faire un tour et revenez ensuite. J'ai quelques petits préparatifs à faire pour la troisième épreuve.";
 			close;
 		}
 
 		mes "[Seeil]";
-		mes "You are under a test which you are required to bring";
-		mes "^FF0000Tree Root^000000, ^FF0000Spawn^000000,";
-		mes "^FF0000Jellopy^000000, 40ea each.";
-		mes "Go for it!";
+		mes "Euh.. Je vous rappelle que vous êtes en train de passer une épreuve: vous devez me ramener ^FF000040 Tree Root^000000, ^FF000040 Spawn^000000, et ^FF000040 Jellopy^000000. Allez, dépêchez-vous!";
 		close;
 
 	} else if (quiz_rvl == 4) {
 		if (countitem(905) > 39) && (countitem(920) > 39) && (countitem(909) > 39) {
 			mes "[Seeil]";
-			mes "Ho. You have collected the required items.";
-			mes "I will keep my promise too. Before that";
-			mes "this is a present for you. Please";
-			mes "take it.";
+			mes "Ouah! Vous avez tous les objets requis. D'accord, je vais tenir ma promesse. Mais avant cela, voici un petit quelque chose pour vous. Prenez-le, allez-y!";
 			delitem 905,40;
 			delitem 920,40;
 			delitem 909,40;
@@ -1058,28 +859,19 @@ if (checkweight(1201,3) == 0 ) goto L_OverWeight;
 			getitem 502,10;  //Orange_Potion
 			next;
 			mes "[Seeil]";
-			mes "Then come back to me after a while.";
-			mes "I have somethings to prepare so";
-			mes "please go and do somethings to kill";
-			mes "time.";
+			mes "Bien, allez faire un tour et revenez ensuite. J'ai quelques petits préparatifs à faire pour la troisième épreuve.";
 			close;
 		}
 
 		mes "[Seeil]";
-		mes "You are under a test which you are required to bring";
-		mes "^FF0000Stem^000000, ^FF0000Claw of Wolves^000000, ^FF0000Jellopy^000000";
-		mes "40 ea each.";
-		mes "Go for it.";
+		mes "Euh.. Je vous rappelle que vous êtes en train de passer une épreuve: vous devez me ramener ^FF000040 Stem^000000, ^FF000040 Claw of Wolves^000000, et ^FF000040 Jellopy^000000. Allez, dépêchez-vous!";
 		close;
 
 	} else if (quiz_rvl == 5) {
 		if (countitem(940) > 39) && (countitem(916) > 39) && (countitem(909) > 39) {
 
 			mes "[Seeil]";
-			mes "Ho. You have collected the required items.";
-			mes "I will keep my promise too. Before that";
-			mes "this is a present for you. Please";
-			mes "take it.";
+			mes "Ouah! Vous avez tous les objets requis. D'accord, je vais tenir ma promesse. Mais avant cela, voici un petit quelque chose pour vous. Prenez-le, allez-y!";
 			delitem 940,40;
 			delitem 916,40;
 			delitem 909,40;
@@ -1087,125 +879,84 @@ if (checkweight(1201,3) == 0 ) goto L_OverWeight;
 			getitem 502,10;  //Orange_Potion
 			next;
 			mes "[Seeil]";
-			mes "Then come back to me after a while.";
-			mes "I have somethings to prepare so";
-			mes "please go and do somethings to kill";
-			mes "time.";
+			mes "Bien, allez faire un tour et revenez ensuite. J'ai quelques petits préparatifs à faire pour la troisième épreuve.";
 			close;
 			}
 
 		mes "[Seeil]";
-		mes "You are under a test which you are required to bring";
-		mes "^FF0000Grasshopper's Leg^000000, FF0000Feather of Birds^000000, ^FF0000Jellopy^000000";
-		mes "40ea each.";
-		mes "Go for it!";
+		mes "Euh.. Je vous rappelle que vous êtes en train de passer une épreuve: vous devez me ramener ^FF000040 Grasshopper's Leg^000000, FF000040 Feather of Birds^000000, et ^FF000040 Jellopy^000000. Allez, dépêchez-vous!";
 		close;
 
 
 	} else if (quiz_rvl == 2) {
 
 		mes "[Seeil]";
-		mes "Hmm? You are the one Tsuji sent?";
-		mes "Your name is... " +strcharinfo(0)+ " Right? Okay...";
-		mes "Confirmed. You look about the same as Tsuji";
-		mes "described to me. Well, shall we start the";
-		mes "test?";
+		mes "Hum? Vous êtes envoyé par Tsuji, c'est ça? Voyons voir... Votre nom est... " +strcharinfo(0)+ ", c'est ça? Bien... Vous ressemblez à celui dont m'a parlé Tsuji. Bon, pouvons-nous commencer l'épreuve?";
 		next;
 		mes "[Seeil]";
-		mes "It isn't that tough. All you have";
-		mes "to do is bring specified items";
-		mes "Life isn't that hard~";
+		mes "Elle n'est pas si difficile. Vous n'aurez qu'à me rapporter quelques objets. Ca devrait être une partie de plaisir~";
 		set @japtem,rand(2);
 		next;
 		
 			if (@japtem == 0) {
 				set quiz_rvl,3;
 				mes "[Seeil]";
-				mes "Bring ^FF0000Tree Root ^000000 40ea, ^FF0000Spawn";
-				mes "^000000 40ea, and ^FF0000Jellopy^000000 40ea";
-				mes "I told ya. It's is not so hard, is it?";
-				mes "I would like to specify some items hard to find";
-				mes "but seniors told me not ";
-				mes "to do so~ Hehe.";
+				mes "Rapportez-moi ^FF000040 Tree Root ^000000, ^FF000040 Spawn^000000, et ^FF000040 Jellopy^000000. Je vous avez dit que ce serait facile! Je n'avais pas raison? Je voulais vous demander de me rapporter quelque chose de plus difficile à trouver, mais les grands pontes de la société m'ont dit de ne pas le faire~ Hehe.";
 				next;
 				mes "[Seeil]";
-				mes "Well, bring it as soon as you can. This is";
-				mes "an easy test, but there is a time limit.";
-				mes "Sooner the better, that is what";
-				mes "I mean~";
+				mes "Bien, rapportez-moi tout ça aussi vite que possible. C'est une épreuve facile, mais le temps est limité. Le plus tôt sera le mieux~";
 				close;
 				}
 
 			else if (@japtem == 1) {
 				set quiz_rvl,4;
 				mes "[Seeil]";
-				mes "Bring ^FF0000Stem^000000 40ea, ^FF0000Wolf Claw^000000 40ea,";
-				mes "and ^FF0000Jellopy^000000 40ea.";
-				mes "I told ya. It's is not so hard, is it?";
-				mes "I would like to specify some items hard to find";
-				mes "but seniors told me not ";
-				mes "to do so~ Hehe.";
+				mes " Rapportez-moi ^FF000040 Stem^000000, ^FF000040 Wolf Claw^000000, et ^FF000040 Jellopy^000000. Je vous avez dit que ce serait facile! Je n'avais pas raison? Je voulais vous demander de me rapporter quelque chose de plus difficile à trouver, mais les grands pontes de la société m'ont dit de ne pas le faire~ Hehe.";
 				next;
 				mes "[Seeil]";
-				mes "Well, bring it as soon as you can. This is";
-				mes "an easy test, but there is a time limit.";
-				mes "Sooner the better, that is what";
-				mes "I mean~";
+				mes "Bien, rapportez-moi tout ça aussi vite que possible. C'est une épreuve facile, mais le temps est limité. Le plus tôt sera le mieux~";
 				close;
 				}
 
 			else if (@japtem == 2) {
 				set quiz_rvl,5;
 				mes "[Seeil]";
-				mes "^FF0000Grasshopper's Leg^000000 40ea, ^FF0000Feather of Birds^000000 40ea,";
-				mes "and ^FF0000Jellopy^000000 40ea.";
-				mes "I told ya. It's is not so hard, is it?";
-				mes "I would like to specify some items hard to find";
-				mes "but seniors told me not ";
-				mes "to do so~ Hehe.";
+				mes "Rapportez-moi ^FF000040 Grasshopper's Leg^000000, ^FF000040 Feather of Birds^000000, et ^FF000040 Jellopy^000000. Je vous avez dit que ce serait facile! Je n'avais pas raison? Je voulais vous demander de me rapporter quelque chose de plus difficile à trouver, mais les grands pontes de la société m'ont dit de ne pas le faire~ Hehe.";
 				next;
 				mes "[Seeil]";
-				mes "Well, bring it as soon as you can. This is";
-				mes "an easy test, but there is a time limit.";
-				mes "Sooner the better, that is what";
-				mes "I mean~";
+				mes "Bien, rapportez-moi tout ça aussi vite que possible. C'est une épreuve facile, mais le temps est limité. Le plus tôt sera le mieux~";
 				close;
 				}
 	} else {
 
 	mes "[Seeil]";
-	mes "Call me Seeil=Lanchest";
-	mes "I am here to test the ones who";
-	mes "wishes to join in the quiz event.";
+	mes "Appelez-moi Seeil Lanchest. Je suis ici pour tester ceux qui veulent participer au Quiz.";
 	next;
 	mes "[Seeil]";
-	mes "I am in charge of second and third test";
-	mes "so in order to get a test from me, you have to";
-	mes "pass the first test which is given";
-	mes "by Tsuji.";
+	mes "Je suis ici pour vous faire passer le second et le troisième test. Mais vous devrez d'abord aller trouver Tsuji pour passer la première épreuve.";
 	close;
 }
 M_MaxItem:
 			mes "^800000[Seeil]^000000";
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 
 L_OverWeight:
 			mes "^800000[Seeil]^000000";
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 }
 
 //=========================================================================================================================================================
-prontera,116,266,5	script	Receptionist	109,{
+prontera,116,266,5	script	Réceptioniste du Quiz::Receptionist	109,{
 
 if (countitem(1201) > 3) goto M_MaxItem;
 if (checkweight(1201,3) == 0 ) goto L_OverWeight;
@@ -1215,8 +966,7 @@ if(quiz_rvl == 18) {
 
 			mes "^800000[Radeng]^000000";
 			mes "^6b8e23" + strcharinfo(0)+ "^000000?";
-			mes "'Go look for ^b8860b'Kantryl'^000000 ";
-			mes "at Izlude.";
+			mes "'Allez trouver ^b8860b'Kantryl'^000000 à Izlude.";
 			close;
 
 
@@ -1226,29 +976,17 @@ if(quiz_rvl == 18) {
 			if (countitem(955) > 19) && (countitem(913) > 19) && (countitem(729) > 0) {
 
 				mes "^800000[Radeng]^000000";
-				mes "Oh~";
-				mes "You are here!";
-				mes "Let me check whether";
-				mes "you brought the right thing.";
+				mes "Oh~ C'est vous! Laissez-moi voir si vous avez tout ce que je vous avais demandé.";
 				next;
 				mes "^800000[Radeng]^000000";
-				mes "Yes,that's right.";
-				mes "You brought the right thing.";
-				mes "Please, wait a second and..";
-				mes "I have to";
-				mes "put you on the list.";
+				mes "Oui, c'est bon, vous avez tout. Une petite minute, je rajoute votre nom sur la liste.";
 				next;
 				mes "^800000[Radeng]^000000";
-				mes "You are..^6b8e23" + strcharinfo(0)+ "^000000 ..right?";
-				mes "Hm...";
-				mes "Well done.";
-				mes "And this is compensation for the";
-				mes "ones who have passed the test.";
+				mes "Vous êtes...^6b8e23" + strcharinfo(0)+ "^000000, c'est ça?";
+				mes "Hum... Bien. Voici un petit quelque chose pour ceux qui ont passé l'épreuve.";
 				next;
 				mes "^800000[Radeng]^000000";
-				mes "All you have to do is";
-				mes "meeting ^b8860b'Kantryl'^000000";
-				mes "at Izlude.";
+				mes "Vous devez maintenant aller voir ^b8860b'Kantryl'^000000 à Izlude.";
 				delitem 955,20;
 				delitem 913,20;
 				delitem 729,1;
@@ -1256,29 +994,22 @@ if(quiz_rvl == 18) {
 				getitem 504,10;  //White_Potion
 				next;
 				mes "^800000[Radeng]^000000";
-				mes "Goodbye~~.";
+				mes "Au revoir~";
 				close;
 			}
 			mes "^800000[Radeng]^000000";
-			mes "Oh~~";
-			mes "You are here!";
-			mes "Let me check whether";
-			mes "You brought the right thing.";
+			mes "Oh~ C'est vous! Laissez-moi regarder si vous avez tout ce que je vous ai demandé.";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "oh my....";
+			mes "Oh...";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "Seems like you didn't prepare";
-			mes "what I asked you for.";
-			mes "I'll tell you what items you have to bring.";
-			mes "I'm not going to tell you again.";
-			mes "So please remember.";
+			mes "On dirait qu'il vous en manque encore. Bon, je vais vous redonner la liste. Je ne me répèterai pas, alors écoutez attentivement.";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "The items are";
+			mes "Il me faut:";
 			mes "^19197020 Warm peeling^000000";
-			mes "^19197020Tooth of Bat^000000";
+			mes "^19197020 Tooth of Bat^000000";
 			mes "^1919701 Zircon^000000";
 			close;
 
@@ -1290,17 +1021,10 @@ if(quiz_rvl == 18) {
 } if(quiz_rvl == 16) {
 			if (countitem(1055) > 29) && (countitem(940) > 29) && (countitem(948) > 29) && (countitem(730) > 0) {
 				mes "^800000[Radeng]^000000";
-				mes "Oh~~~";
-				mes "You are here!";
-				mes "Let me check whether ";
-				mes "you brought the right thing.";
+				mes "Oh~ C'est vous! Laissez-moi regarder si vous m'avez bien tout rapporté.";
 				next;
 				mes "^800000[Radeng]^000000";
-				mes "Yes,that's right.";
-				mes "You brought the right thing.";
-				mes "Please, wait a second and..";
-				mes "I have to";
-				mes "put you on the list.";
+				mes "C'est bon. Vous m'avez tout apporté. Une petite minute, je rajoute votre nom sur la liste.";
 				next;
 				set quiz_rvl,18;
 				getitem 504,10;  //White_Potion
@@ -1309,43 +1033,32 @@ if(quiz_rvl == 18) {
 				delitem 948,30;
 				delitem 730,1;
 				mes "^800000[Radeng]^000000";
-				mes "You are..^6b8e23" + strcharinfo(0)+ "^000000..right?";
-				mes "Hm...";
-				mes "Well done.";
-				mes "And this is compensation for the";
-				mes "ones who have passed the test.";
+				mes "Vous êtes...^6b8e23" + strcharinfo(0)+ "^000000, c'est ça?";
+				mes "Hum... Bien joué. Voici un petit quelque chose pour ceux qui ont passé l'épreuve.";
 				next;
 				mes "^800000[Radeng]^000000";
-				mes "All you have to do is";
-				mes "meeting ^b8860b'Kantryl'^000000";
-				mes "at Izlude.";
+				mes "Vous devez maintenant aller parler à ^b8860b'Kantryl'^000000 à Izlude.";
 				next;
 				mes "^800000[Radeng]^000000";
-				mes "Goodbye";
+				mes "Au revoir~";
 				close;
 			}
 			mes "^800000[Radeng]^000000";
-			mes "Oh~~~";
-			mes "You are here!";
-			mes "Let me check whether";
-			mes "you brought the right thing.";
+			mes "Oh~ C'est vous! Laissez-moi regarder si vous avez tout ce que je vous ai demandé.";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "Oh my....";
+			mes "Oh...";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "Seems like you didn't prepare";
-			mes "what I asked you for..";
-			mes "I'll tell you what items you have to bring..";
-			mes "I'm not going to tell you again.";
-			mes "So please remember..";
+			mes "On dirait qu'il vous en manque encore. Bon, je vais vous redonner la liste. Je ne me répèterai pas, alors écoutez attentivement.";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "^191970Earthwarm Peeling^000000 30";
-			mes "^191970Grasshopper's Leg^000000 30";
-			mes "^191970Bear's Footskin^000000 30";
-			mes "^1919701carat Diamond^000000 1.";
-			mes "Try hard.";
+			mes "Il me faut:";
+			mes "^19197030 Earthwarm Peeling^000000";
+			mes "^19197030 Grasshopper's Leg^000000";
+			mes "^19197030 Bear's Footskin^000000";
+			mes "^1919701 1 carat Diamond^000000";
+			mes "Bon courage.";
 			close;
 
 
@@ -1354,79 +1067,46 @@ if(quiz_rvl == 18) {
 	
 } else if(quiz_rvl == 15) {
 			mes "^800000[Radeng]^000000";
-			mes "You are....";
-			mes "the one who left before I tell you the score";
-			mes "Aren't you?";
-			mes "Can't tell you failed. So...";
+			mes "Vous êtes... Ah oui, celui qui est parti avant que je ne vous donne le résultat, c'est ça? Vous n'avez pas vraiment échoué alors...";
 			next;
-			mes "If ^800000[Radeng]^000000";
-			mes "^191970Earthwarm Peeling^000000 30";
-			mes "^191970Grasshopper's Leg^000000 30";
-			mes "^191970Bear's Footskin^000000 30";
-			mes "^1919701carat Diamond^000000 1";
-			mes "is prepared,";
-			mes "You are pass.";
+			mes "^800000[Radeng]^000000";
+			mes "Rapportez-moi";
+			mes "^19197030 Earthwarm Peeling^000000";
+			mes "^19197030 Grasshopper's Leg^000000";
+			mes "^19197030 Bear's Footskin^000000";
+			mes "^1919701 1 carat Diamond^000000";
+			mes "et vous aurez réussi l'épreuve.";
 			set quiz_rvl,16;
 			close;
 
 } else if(quiz_rvl == 14) {
 			mes "^800000[Radeng]^000000";
-			mes "Hello";
-			mes "I'm 'Radeng'.";
-			mes "I'm in charge of 4th test.";
-			mes "You seem to have finished";
-			mes "3rd test!";
+			mes "Bonjour. Je m'appelle Radeng. Je suis en charge de la quatrième épreuve. On dirait que vous avez réussi l'épreuve précédente!";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "Then,let's start 4th test.";
-			mes "the last barrier of quiz revolution.";
-			mes "First of all,";
-			mes "I will briefly go over about the test.";
+			mes "Bien, dans ce cas, passons à la dernière épreuve de la Course du Quiz. Tout d'abord, je vais vous l'expliquer brièvement.";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "you have to do quiz and collect items";
-			mes " ";
-			mes "You have to answer 10 mulptiple choice questions";
-			mes "and the amount of required items changes ";
-			mes "depending on score you acheive.";
+			mes "Vous devrez me rapporter certains objets, et répondre à 10 questions à choix multiple. Le nombre d'objets à me rapporter variera en fonction du nombre de questions auxquelles vous aurez répondu.";
 			mes " ";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "First,";
-			mes "If you clear all 10 questions";
-			mes "you are pass with";
-			mes "pretest of collecting items.";
+			mes "Vous devez tout d'abord répondre aux 10 questions.";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "Second,";
-			mes "If you score between 50~90";
-			mes "required items are";
-			mes "not so much.";
+			mes "Après cela, je calculerai le nombre d'objets que vous devrez me ramener. Avec un score compris entre 50 et 90 vous n'aurez pas grand chose à me rapporter, mais vous en aurez beaucoup plus avec un score de 0 à 40.";
 			next;
 			mes "^800000[Radeng]^000000";
-			mes "Third,";
-			mes "If you score between 0~40";
-			mes "required items will be";
-			mes "vast.";
+			mes "Voilà, c'est à peu près tout ce qu'il y avait à savoir à propos de la quatrième épreuve. Bien, commençons!";
 			next;
-			mes "^800000[Radeng]^000000";
-			mes "Well, this is all about";
-			mes "4th test.";
-			mes "Then, let's start!";
-			next;
-				menu "Yes",-,"No",M_No;
+				menu "Oui",-,"Non",M_No;
 
 						mes "^800000[Radeng]^000000";
-						mes "Well,now";
-						mes "10 questions will be presented.";
-						mes "Look carefully through ";
-						mes "questions and";
-						mes "choose the right answer.";
+						mes "Bon, je vais vous poser les 10 questions. Ecoutez attentivement et choisissez la bonne réponse.";
 						next;
 						mes "^800000[Radeng]^000000";
-						mes "1st question.";
-						mes "How many jobs";
-						mes "are in the game?";
+						mes "1ère question.";
+						mes "Combien de professions y a-t-il dans le jeu?";
 						set @score_test2, 0;
 						next;
 							menu "22",sM1_1,"28",sM1_1,"32",sM1_1,"34",-;
@@ -1436,51 +1116,44 @@ if(quiz_rvl == 18) {
 						sM1_1:
 	
 						mes "^800000[Radeng]^000000";
-						mes "2nd question.";
-						mes "The name of santa NPC";
-						mes "which links christmas town";
-						mes "'Lutie' and 'Aldebaran'?";
+						mes "2nde question.";
+						mes "Quel nom porte le Père Noël à Al de Baran qui peut vous conduire à Lutie?";
 						next;
-							menu "Warp Santa",sM1_2, "Link Santa",-, "Lutie Santa",sM1_2, "Hulk Santa",sM1_2;
+							menu "Mr. Claus",sM1_2, "M. Noël",-, "Santa Claus",sM1_2, "Mr. Noël",sM1_2;
 								
 								set @score_test2, @score_test2 + 10;
 
 						sM1_2:
 						mes "^800000[Radeng]^000000";
-						mes "3rd question.";
-						mes "What job level at least you have to be";
-						mes "to learn novice skill";
-						mes "'Pretend dead'?";
+						mes "3ème question.";
+						mes "Quel est le Niveau de Classe nécessaire pour apprendre la compétence de Novice 'Play Dead'?";
 						next;
-							menu "Job level4",sM1_3,"Job level5",sM1_3,"Job level6",sM1_3,"Job level7",-;
+							menu "Niveau 4",sM1_3,"Niveau 5",sM1_3,"Niveau 6",sM1_3,"Niveau 7",-;
 								
 								set @score_test2, @score_test2 + 10;
 
 						sM1_3:
 						mes "^800000[Radeng]^000000";
-						mes "4th question.";
-						mes "Require items";
-						mes "to raise Poring?";
+						mes "4ème question.";
+						mes "De quoi raffolent les Porings?";
 						next;
-							menu "Unripe Apple",-,"Rippen Apple",sM1_4, "Delicious looking Apple",sM1_4, "Apple",sM1_4;
+							menu "Pommes Vertes",-,"Pommes Trop Mûres",sM1_4, "Pommes Appétissantes",sM1_4, "Pommes",sM1_4;
 					
 								set @score_test2, @score_test2 + 10;
 
 						sM1_4:
 						mes "^800000[Radeng]^000000";
-						mes "5th question";
-						mes "What doll can you buy";
-						mes "from NPC?";
+						mes "5ème question.";
+						mes "Quelle poupée pouvez-vous acheter auprès d'un NPC?";
 						next;
-							menu "Doll",-,"Baphomet Doll",sM1_5,"Yoyo Doll",sM1_5,"Rocker Doll",sM1_5;
+							menu "Poupée",-,"Poupée de Baphomet",sM1_5,"Poupée de Yoyo",sM1_5,"Poupée de Rocker",sM1_5;
 							
 								set @score_test2, @score_test2 + 10;
 
 						sM1_5:
 						mes "^800000[Radeng]^000000";
-						mes "6th question.";
-						mes "Name of monster which drop";
-						mes "'Big Ribbon'?";
+						mes "6ème question.";
+						mes "Sur quel monstre pouvez-vous trouver des 'Big Ribbon'?";
 						next;
 							menu "Eclipse",sM1_6,"Dragon Fly",sM1_6,"Vocal",sM1_6,"Toad,",-;
 							
@@ -1488,164 +1161,129 @@ if(quiz_rvl == 18) {
 
 						sM1_6:
 						mes "^800000[Radeng]^000000";
-						mes "Choose the monster that has smiliar size and form of";
-						mes "Pring.";
+						mes "Choisissez le monstre qui a la même taille et le même élément que les Porings.";
 						next;
-							menu "Pupa",sM1_7,"Fabre",sM1_7,"Wander Man",-,"Golem",sM1_7;
+							menu "Pupa",sM1_7,"Fabre",sM1_7,"Baba Yaga",-,"Golem",sM1_7;
 						
 								set @score_test2, @score_test2 + 10;
 
 						sM1_7:
 						mes "^800000[Radeng]^000000";
-						mes "8th question.";
-						mes "When can Green Herb work";
-						mes "it's efficacy?";
+						mes "8ème question.";
+						mes "Qu'est-ce que les Herbes Vertes permettent de soigner?";
 						next;
-							menu "Silence",sM1_8,"Sleep",sM1_8,"Poison",-,"Chaos",sM1_8;
+							menu "Silence",sM1_8,"Sommeil",sM1_8,"Poison",-,"Chaos",sM1_8;
 							
 								set @score_test2, @score_test2 + 10;
 
 						sM1_8:
 						mes "^800000[Radeng]^000000";
-						mes "9th question.";
-						mes "Which weapon gives biggest damages";
-						mes "to small sized monsters?";
+						mes "9ème question.";
+						mes "Quelle arme est la plus efficace contre des monstres de petite taille?";
 						next;
-							menu "Dagger",-,"Two hand Sword",sM1_9,"Katar",sM1_9,"One hand Sword",sM1_9;
+							menu "Dagues",-,"Epées à 2 Mains",sM1_9,"Katars",sM1_9,"Epées à 1 Main",sM1_9;
 							
 								set @score_test2, @score_test2 + 10;
 
 						sM1_9:
 						mes "^800000[Radeng]^000000";
-						mes "Last question!!";
-						mes "What is not neccesary when learnig";
-						mes "First-aid treatment?";
+						mes "Dernière question!";
+						mes "Quel objet est requis pour apprendre la compétence 'Premiers Soins'?";
 						next;
-							menu "Clover",sM1_0,"Red Herb",sM1_0,"Novice Nametag",-,"Sterilized Bandages",sM1_0;
+							menu "Trèfle",sM1_0,"Herbe Rouge",sM1_0,"Badge de Novice",-,"Pansements Stérilisés",sM1_0;
 							
 								set @score_test2, @score_test2 + 10;
 
 						sM1_0:
 						mes "^800000[Radeng]^000000";
-						mes "You finished answering all questions.";
-						mes "Wonder what your score is.";
-						mes "10points for 1 question.";
-						mes "Please wait a second.";
+						mes "Vous avez répondu à toutes les questions. Je vais calculer votre score. Vous obtiendrez 10 points par bonne réponse. Donnez-moi une minute.";
 						next;
 						mes "^800000[Radeng]^000000";
-						mes "Please, wait a second and..";
-						mes "Grading.";
-						mes ". . . . . . . . . . . . . . .";
-						mes ". . . . . . . . . . . . . . .";
+						mes "Encore un petit instant...";
+						mes "*Corrige* . . . . . . . . .";
+						mes ". . . . . . . . . . . . . .";
+						mes ". . . . . . . . . . . . . .";
 						next;
 						mes "^800000[Radeng]^000000";
-						mes "OK.";
-						mes "Your score is" + strcharinfo(0)+ "";
-						mes "" + @score_test2 + "!" ;
+						mes "Bien. Vous avez fait un score de " + @score_test2 + " points!" ;
 						set quiz_rvl,15;
 						next;
 							if (@score_test2 > 40) && (@score_test2 < 90)goto L_Passed;
 							if (@score_test2 >= 90)goto L_Perfect;
 								mes "^800000[Radeng]^000000";
-								mes "Your score is too low.";
-								mes "Like as I told you before,";
-								mes "you have to bring a lot of";
-								mes "items to pass the test.";
-								mes " ";
+								mes "Votre score est très bas. Comme je vous l'avais dit, vous devrez donc me rapporter un grand nombre d'objets pour réussir l'épreuve.";
 								next;
 								mes "^800000[Radeng]^000000";
-								mes "Required items are";
-								mes "^191970Earthworm Peeling^000000 30";
-								mes "^191970Grasshopper's Leg^000000 30";
-								mes "^191970Bear's Footskin^000000 30";
-								mes "^1919701Carat Diamond^000000 1";
-								mes "";
+								mes "Il faudra me rapporter:";
+								mes "^19197030 Earthworm Peeling^000000";
+								mes "^19197030 Grasshopper's Leg^000000";
+								mes "^19197030 Bear's Footskin^000000";
+								mes "^1919701 1 Carat Diamond^000000";
 								next;
 								mes "^800000[Radeng]^000000";
-								mes "I'm sorry.";
-								mes "If you have scored just a little bit higher..";
-								mes ".........";
-								mes "Then,go look for items..";
+								mes "Je suis désolé. Si vous aviez eu simplement quelques points de plus...";
+								mes "Bien, rapportez-moi ces objets.";
 								set quiz_rvl,16;
 								close;
 
 						L_Passed:
 
 								mes "^800000[Radeng]^000000";
-								mes "You did fine. ";
-								mes "But as I told you before";
-								mes "you need to bring";
-								mes "some more items.";
+								mes "Vous avez fait un très bon score. Mais comme je vous l'avais dit, vous devrez maintenant me rapporter quelques objets.";
 								mes " ";
 								next;
 								mes "^800000[Radeng]^000000";
-								mes "Required items are";
-								mes "^191970Worm Peeling^000000 20";
-								mes "^191970Tooth of Bat^000000 20";
-								mes "^191970Zircon^000000 1.";
+								mes "Il me faudra:";
+								mes "^19197020 Worm Peeling^000000";
+								mes "^19197020 Tooth of Bat^000000";
+								mes "^1919701 Zircon^000000.";
 								next;
 								mes "^800000[Radeng]^000000";
-								mes "I'm sorry~";
-								mes "If you have scored just a little bit higher..";
-								mes "you could have passed.";
-								mes "(KeKeke)";
-								mes "Then,go look for items..";
+								mes "Je suis désolé. Si vous aviez eu juste quelques points de plus l'épreuve aurait déjà pu être terminée. Bien, allez me chercher ces objets.";
 								set quiz_rvl,17;
 								close;
 
 						L_Perfect:
 								mes "^800000[Radeng]^000000";
-								mes "Wow!You got it all right!.";
-								mes "Fantastic!!!!";
-								mes "For those of who ";
-								mes "got all right need no assignment";
-								mes " ";
+								mes "Oh! Vous avez répondu correctement à toutes les questions, c'est formidable! Eh bien, vous n'aurez aucun objet à me rapporter.";
 								next;	
 								mes "^800000[Radeng]^000000";
-								mes "" + strcharinfo(0)+ "";
-								mes "Have passed all tests.";
-								mes "Congratulations";
-								mes "And this is your compensation ";
-								mes "";
+								mes "" + strcharinfo(0)+ ", vous venez de réussir la dernière épreuve. Félicitations! Voici un petit quelque chose pour vous.";
 								set quiz_rvl,18;
 								getitem 504,10;  //White_Potion
 								next;
 								mes "^800000[Radeng]^000000";
-								mes "Now, go look for";
-								mes "^b8860b'Kantryl'^000000.";
-								mes "at Izlude.";
+								mes "Maintenant, allez trouver ^b8860b'Kantryl'^000000 à Izlude.";
 								close;
 	
 
 					M_No:
 						mes "^800000[Radeng]^000000";
-						mes "Come back if you change your mind.";
+						mes "Revenez me voir si vous changez d'avis.";
 						close;
 } else {
 			mes "^800000[Radeng]^000000";
-			mes "Hello~~~";
-			mes "Please join at comming";
-			mes "Quiz Revolution~";
-			mes "Register will be made";
-			mes "by receptionist in every town.";
+			mes "Bonjour~";
+			mes "Voulez-vous participer à la Course du Quiz?~";
+			mes "Nous prenons les inscriptions dans toutes les villes.";
 			close;
 }
 M_MaxItem:
-			mes "^800000[Radeng]^000000";		
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+			mes "^800000[Radeng]^000000";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 
 L_OverWeight:
 			mes "^800000[Radeng]^000000";
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 }
 
@@ -1658,89 +1296,63 @@ if (checkweight(1201,3) == 0 ) goto L_OverWeight;
 
 if(quiz_rvl == 20) {
 		mes "[Kantryl]";
-		mes "I see that you have already givin me a";
-		mes "notice of absence...";
-		mes "Well,  but I can't give you entry ticket.";
-		mes "who Knows~~";
-		mes "Wait untill quiz starts";
-		mes "You may catch a fortune.";
+		mes "Je vois que vous avez un mot d'excuse... Malheureusement je ne peux pas vous donner de billet d'entrée. Qui sait? Attendez que la course commence, vous aurez peut-être de la chance.";
 		close;
 
 }else if(quiz_rvl == 19) {
 		mes "[Kantryl]";
-		mes "You have already received an entry ticket.";
-		mes "It's impossible getting";
-		mes "another one.";
+		mes "Vous avez déjà reçu un billet d'entrée. Je ne peux pas vous en donner un second.";
 		next; 
 		mes "[Kantryl]";
-		mes "For reference, number of particapants are";
+		mes "Au passage, le nombre de participants aux différentes courses sera de:";
 		next;
 		mes "[Kantryl]";
-		mes "1st Quiz Revolution - " + quiz1 + "/200";
-		mes "2nd Quiz Revolution - " + quiz2 + "/200";
-		mes "3rd Quiz Revolution - " + quiz3 + "/200";
-		mes "4th Quiz Revolution - " + quiz4 + "/200";
-		mes "5th Quiz Revolution - " + quiz5 + "/200";
-		mes "keep it in your mind.";
+		mes "1ère Course du Quiz - " + $quiz1 + "/200";
+		mes "2nde Course du Quiz - " + $quiz2 + "/200";
+		mes "3ème Course du Quiz - " + $quiz3 + "/200";
+		mes "4ème Course du Quiz - " + $quiz4 + "/200";
+		mes "5ème Course du Quiz - " + $quiz5 + "/200";
+		mes "Gardez bien cela à l'esprit.";
 		close;
 
 
 } else if(quiz_rvl == 18) {
 
 		mes "[Kantryl]";
-		mes "You are " + strcharinfo(0)+ ".";
-		mes "Who finished the test.right?";
-		mes "Would you please make a decision ";
-		mes "whether you will join or not join the";
-		mes "Quiz Revolution.";
+		mes "Vous êtes " + strcharinfo(0)+ ", c'est cela? Vous venez de passer toutes les épreuves. Il va maintenant falloir que vous décidiez si vous allez participer ou non à la Course du Quiz.";
 		next;
 		mes "[Kantryl]";
-		mes "Would you like to join?";
-		mes "If you say yes, you can register at";
-		mes "Quiz Revolution";
-		mes "If you choose ^FF0000'NO,I won't join'^000000";
-		mes " then ^FF0000'You can't join'^000000";
-		mes "Please make a right decision.";
+		mes "Voulez-vous participer à la course? Je pourrais vous inscrire dès maintenant. Cependant, si vous refusez, vous ne pourrez pas y participer, alors faites le bon choix.";
 		next;
 		mes "[Kantryl]";
-		mes "If you haven't made up your mind,";
-		mes "say yes for now";
-		mes "and can change later on.";
-		mes "Take it easy.";
+		mes "Si vous n'avez pas encore fait votre choix, ça n'est pas grave, vous pourrez choisir la course plus tard. Par contre, si vous choisissez de ne pas participer, ce sera votre décision finale.";
 		next;
-			menu "Join", -, "Not join.",NJ;
+			menu "Participer", -, "Ne pas participer.",NJ;
 
 
 				mes "[Kantryl]";
-				mes "Itis to 1~5 round";
-				mes "first 200 have chance.";
-				mes ""+ strcharinfo(0)+ ",when do you want to join?";
-				mes "It is ^FF0000Impossible to cancel^000000";
-				mes "So please make right decision.";
+				mes "Il y aura 5 différentes courses, auxquelles jusqu'à 200 aventuriers pourront participer.";
+				mes ""+ strcharinfo(0)+ ", à quelle course voulez-vous participer? ^FF0000Vous ne pourrez pas changer d'avis^000000 alors ne vous trompez pas.";
 				next;
 				mes "[Kantryl]";
-				mes "1st Quiz Revolution - " + quiz1 + "/200";
-				mes "2nd Quiz Revolution - " + quiz2 + "/200";
-				mes "3rd Quiz Revolution - " + quiz3 + "/200";
-				mes "4th Quiz Revolution - " + quiz4 + "/200";
-				mes "5th Quiz Revolution - " + quiz5 + "/200";
+				mes "1ère Course du Quiz - " + $quiz1 + "/200";
+				mes "2nde Course du Quiz - " + $quiz2 + "/200";
+				mes "3ème Course du Quiz - " + $quiz3 + "/200";
+				mes "4ème Course du Quiz - " + $quiz4 + "/200";
+				mes "5ème Course du Quiz - " + $quiz5 + "/200";
 				next;
-				menu "Join 1st round",-,"Join 2nd round",s2nd,"Join 3rd round",s3nd,"Join 4th round",s4nd,"Join 5th round",s5nd;
+				menu "Participer à la 1ère Course",-," Participer à la 2nde Course",s2nd," Participer à la 3ème Course",s3nd," Participer à la 4ème Course",s4nd," Participer à la 5ème Course",s5nd;
 				
-						if(quiz1 > 199){
+						if($quiz1 > 199){
 							mes "[Kantryl]";
-							mes "I'm sorry. We are all full at";
-							mes "1st round of quiz revolution";
-							mes "No more applicants for 1st round.";
+							mes "Je suis désolé. La 1ère Course du Quiz est complète. Nous ne pouvons pas prendre de nouvelles inscriptions.";
 							close;
 
       						}
 						mes "[Kantryl]";
-						mes "Hm..."+ strcharinfo(0)+" ";
-						mes "I have received your application";
-						mes "Try hard and study hard.";
+						mes "Bien..."+ strcharinfo(0)+", vous êtes désormais inscrit. Bonne chance à vous!";
 						set quiz_rvl,19;
-						set quiz1,quiz1 + 1;
+						set $quiz1,$quiz1 + 1;
 						getitem 7280,1; //Quiz_Ticket01
 						close;
 
@@ -1748,41 +1360,33 @@ if(quiz_rvl == 20) {
 
 
 					s2nd:
-						if(quiz2 > 199){
-								mes "[Kantryl]";
-							mes "I'm sorry. We are all full at";
-							mes "2nd round of quiz revolution";
-							mes "No more applicants for 2nd round.";
+						if($$quiz2 > 199){
+							mes "[Kantryl]";
+							mes "Je suis désolé. La 2nde Course du Quiz est complète. Nous ne pouvons pas prendre de nouvelles inscriptions.";
 							close;
 						}
 					
 						mes "[Kantryl]";
-						mes "Hm..."+ strcharinfo(0)+"";
-						mes "I have received your application";
-						mes "Try hard and study hard.";
+						mes "Bien..."+ strcharinfo(0)+", vous êtes désormais inscrit. Bonne chance à vous!";
 						set quiz_rvl,19;
-						set quiz2,quiz2 + 1;
+						set $quiz2,$quiz2 + 1;
 						getitem 7281,1;  //Quiz_Ticket02
 						close;
 					
 
 
 					s3nd:
-						if(quiz3 > 199){
-								mes "[Kantryl]";
-							mes "I'm sorry. We are all full at";
-							mes "3rd round of quiz revolution.";
-							mes "No more applicants for 3rd round.";
+						if($quiz3 > 199){
+							mes "[Kantryl]";
+							mes "Je suis désolé. La 3ème Course du Quiz est complète. Nous ne pouvons pas prendre de nouvelles inscriptions.";
 							close;
 						}
 						
 						
 						mes "[Kantryl]";
-						mes "Hm..." + strcharinfo(0)+ "";
-						mes "I have received your application.";
-						mes "Try hard and study hard.";
+						mes "Bien..."+ strcharinfo(0)+", vous êtes désormais inscrit. Bonne chance à vous!";
 						set quiz_rvl,19;
-						set quiz3,quiz3 + 1;
+						set $quiz3,$quiz3 + 1;
 						getitem 7282,1;  //Quiz_Ticket03
 						close;
 					
@@ -1790,20 +1394,16 @@ if(quiz_rvl == 20) {
 
 							
 					s4nd:
-						if(quiz4 > 199){
-								mes "[Kantryl]";
-							mes "I'm sorry. We are all full at";
-							mes "4th round of quiz revolution.";
-							mes "No more applicants for 4th round..";
+						if($quiz4 > 199){
+							mes "[Kantryl]";
+							mes "Je suis désolé. La 4ème Course du Quiz est complète. Nous ne pouvons pas prendre de nouvelles inscriptions.";
 							close;
 						}
 					
 						mes "[Kantryl]";
-						mes "Hm..." + strcharinfo(0)+ "";
-						mes "I have received your application.";
-						mes "Try hard and study hard.";
+						mes "Bien..."+ strcharinfo(0)+", vous êtes désormais inscrit. Bonne chance à vous!";
 						set quiz_rvl,19;
-						set quiz4,quiz4 + 1;
+						set $quiz4,$quiz4 + 1;
 						getitem 7283,1;  //Quiz_Ticket04
 						close;
 						
@@ -1811,20 +1411,16 @@ if(quiz_rvl == 20) {
 
 					
 					s5nd:
-						if(quiz5 > 199){
-								mes "[Kantryl]";
-							mes "I'm sorry. We are all full at";
-							mes "5th round of quiz revolution.";
-							mes "No more applicants for 5th round..";
+						if($quiz5 > 199){
+							mes "[Kantryl]";
+							mes "Je suis désolé. La 5ème Course du Quiz est complète. Nous ne pouvons pas prendre de nouvelles inscriptions.";
 							close;
 						}
 
 						mes "[Kantryl]";
-						mes "Hm..." + strcharinfo(0)+ "";
-						mes "I have received your application.";
-						mes "Try hard and study hard.";
+						mes "Bien..."+ strcharinfo(0)+", vous êtes désormais inscrit. Bonne chance à vous!";
 						set quiz_rvl,19;
-						set quiz5,quiz5 + 1;
+						set $quiz5,$quiz5 + 1;
 						getitem 7284,1;  //Quiz_Ticket05
 						close;
 						
@@ -1833,65 +1429,48 @@ if(quiz_rvl == 20) {
 
 			NJ:
 				mes "[Kantryl]";
-				mes "Ok,if that's how you think.";
-				mes "Choice is on you";
-				mes "Good job any way.";
+				mes "Bien, si c'est ce que vous voulez... Quoi qu'il en soit, encore bravo!";
 				set quiz_rvl,20;
 				next;
 				mes "[Kantryl]";
-				mes "Actually,we have plan to";
-				mes "allowed for those of who didn't ";
-				mes "apply previously unless they have an entry ticket.";
-				mes "If you have any chance to get an entry ticket,";
-				mes "you are always welcome.";
+				mes "En fait, nous autoriserons peut-être à participer ceux qui ont refusé si ils réussissent à se procurer un billet d'entrée. Alors à bientôt, peut-être.";
 				next;
 				mes "[Kantryl]";
-				mes "Go ask for the ones";
-				mes "who changed their mind.";
-				mes "If you are lucky,";
-				mes "you'll get the chance.";
+				mes "Demandez à ceux qui auront changé d'avis si vous voulez tout de même participer.";
 				close;
 } else {
 		mes "[Kantryl]";
-		mes "Hello~";
-		mes "I'm Kantryl=Ranegalf.";
-		mes "I help the ones who have passsed the test";
-		mes "to take a formal step.";
+		mes "Bonjour~";
+		mes "Je m'appelle Kantryl Ranegalf. Je suis ici pour valider l'inscription de ceux qui ont passé toutes les épreuves.";
 		next;
 		mes "[Kantryl]";
-		mes "It is impossible  to accept";
-		mes "applications from those of who didn't";
-		mes "finish the test.";
-		mes "Go look for our staff in every";
-		mes "Midgarts";
-		mes "and take a test.";
+		mes "Cependant, je ne peux pas inscrire ceux qui ne les ont pas passées. Vous devriez vous adresser à notre équipe disséminée un peu partout dans Midgard et passer les épreuves.";
 		next;
 		mes "[Kantryl]";
-		mes "At that time, I'll gladly";
-		mes "welcome you and accept the application.";
+		mes "Je serai alors heureux de valider votre inscription.";
 		close;
 }
 M_MaxItem:
-			mes "[Kantryl]";		
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+			mes "[Kantryl]";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 
 L_OverWeight:
 			mes "[Kantryl]";
-	  		mes "- Wait a minute !! -";
-		 	mes "- You currently have too many items that -";
-	   		mes "- you can't receive an item. -";
-			mes "- Please loose some weight -";
-	   		mes "- and try again. -";
+	  		mes "- Une petite minute! -";
+		 	mes "- Vous portez trop d'objets -";
+	   		mes "- sur vous. Vous ne pourriez -";
+			mes "- pas recevoir de nouveaux -";
+	   		mes "- objets. Revenez plus tard! -";
 			close;
 }
 
 //============================================================================================================================
-quiz_test,387,350,4	script	"From somewhere::race_monk	45,2,2,{
+quiz_test,387,350,4	script	::race_monk	45,2,2,{
 OnTouch:
 
 	if (quiz_rvl == 6) {
@@ -1911,7 +1490,7 @@ OnTouch:
 		warp "quiz_test",385,388;
 		end;
 	}else if (quiz_rvl == 10) {
-		announce "You are almost there. Show me your spirit.",bc_blue|bc_map;
+		announce "Vous êtes presque arrivé. Un peu de nerf!",bc_blue|bc_map;
 		set quiz_rvl,11;
 		warp "quiz_test",385,388;
 		end;
@@ -1921,11 +1500,8 @@ OnTouch:
 		end;
 	}else if (quiz_rvl == 12) {
 		mes "[Seeil]";
-		mes "You have worked hard and finished.";
-		mes "It wasn't that hard as you thought, huh?";
-		mes "All you have to do is run in circle... Well,";
-		mes "come in front of me.";
-		announce "Congratulations! " +strcharinfo(0)+ ", you have passed the test!",bc_blue|bc_map;
+		mes "Vos efforts ont été couronnés de succès. Mais ce n'était pas si dur que ça en fin de compte, si? Tout ce que vous aviez à faire était de courir en rond... Bien, approchez-vous s'il-vous-plaît.";
+		announce "Félicitations! " +strcharinfo(0)+ ", vous venez de passer l'épreuve!",bc_blue|bc_map;
 		close2;
 		set quiz_rvl,13;
 		warp "payon",109,115;
@@ -1936,184 +1512,184 @@ OnTouch:
 //=============================hiddenwarp=================================================================
 
 //-----------------------------1111-----------------------------------------------------------------------
-quiz_test,82,384,4	script	Pit::ham_quiz#1-1	-1,0,0,{
+quiz_test,82,384,4	script	::ham_quiz#1-1	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,83,384,4	script	Pit::ham_quiz#1-2	-1,0,0,{
+quiz_test,83,384,4	script	::ham_quiz#1-2	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,82,385,4	script	Pit::ham_quiz#1-3	-1,0,0,{
+quiz_test,82,385,4	script	::ham_quiz#1-3	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,83,385,4	script	Pit::ham_quiz#1-4	-1,0,0,{
+quiz_test,83,385,4	script	::ham_quiz#1-4	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 //-----------------------------2222-----------------------------------------------------------------------
-quiz_test,38,388,4	script	Pit::ham_quiz#2-1	-1,0,1,{
+quiz_test,38,388,4	script	::ham_quiz#2-1	-1,0,1,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,39,388,4	script	Pit::ham_quiz#2-2	-1,0,1,{
+quiz_test,39,388,4	script	::ham_quiz#2-2	-1,0,1,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,38,386,4	script	Pit::ham_quiz#2-3	-1,0,0,{
+quiz_test,38,386,4	script	::ham_quiz#2-3	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,39,386,4	script	Pit::ham_quiz#2-4	-1,0,0,{
+quiz_test,39,386,4	script	::ham_quiz#2-4	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 //-----------------------------3333-----------------------------------------------------------------------
-quiz_test,11,158,4	script	Pit::ham_quiz#3-1	-1,1,0,{
+quiz_test,11,158,4	script	::ham_quiz#3-1	-1,1,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,11,159,4	script	Pit::ham_quiz#3-2	-1,1,0,{
+quiz_test,11,159,4	script	::ham_quiz#3-2	-1,1,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,13,159,4	script	Pit::ham_quiz#3-3	-1,0,0,{
+quiz_test,13,159,4	script	::ham_quiz#3-3	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,13,158,4	script	Pit::ham_quiz#3-4	-1,0,0,{
+quiz_test,13,158,4	script	::ham_quiz#3-4	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 //-----------------------------4444-----------------------------------------------------------------------
-quiz_test,11,30,4	script	Pit::ham_quiz#4-1	-1,3,0,{
+quiz_test,11,30,4	script	::ham_quiz#4-1	-1,3,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,11,31,4	script	Pit::ham_quiz#4-2	-1,3,0,{
+quiz_test,11,31,4	script	::ham_quiz#4-2	-1,3,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,15,30,4	script	Pit::ham_quiz#4-3	-1,0,0,{
+quiz_test,15,30,4	script	::ham_quiz#4-3	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,15,30,4	script	Pit::ham_quiz#4-4	-1,0,0,{
+quiz_test,15,30,4	script	::ham_quiz#4-4	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 //-----------------------------5555-----------------------------------------------------------------------
-quiz_test,70,12,4	script	Pit::ham_quiz#5-1	-1,0,1,{
+quiz_test,70,12,4	script	::ham_quiz#5-1	-1,0,1,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,71,12,4	script	Pit::ham_quiz#5-2	-1,0,1,{
+quiz_test,71,12,4	script	::ham_quiz#5-2	-1,0,1,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,70,10,4	script	Pit::ham_quiz#5-3	-1,0,0,{
+quiz_test,70,10,4	script	::ham_quiz#5-3	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,71,10,4	script	Pit::ham_quiz#5-4	-1,0,0,{
+quiz_test,71,10,4	script	::ham_quiz#5-4	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 //---------------------------6666-------------------------------------------------------------------------
-quiz_test,186,11,4	script	Pit::ham_quiz#6-1	-1,2,3,{
+quiz_test,186,11,4	script	::ham_quiz#6-1	-1,2,3,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,189,11,4	script	Pit::ham_quiz#6-2	-1,0,3,{
+quiz_test,189,11,4	script	::ham_quiz#6-2	-1,0,3,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 //---------------------------7777-------------------------------------------------------------------------
-quiz_test,387,43,4	script	Pit::ham_quiz#7-1	-1,1,0,{
+quiz_test,387,43,4	script	::ham_quiz#7-1	-1,1,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,387,42,4	script	Pit::ham_quiz#7-2	-1,1,0,{
+quiz_test,387,42,4	script	::ham_quiz#7-2	-1,1,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,389,43,4	script	Pit::ham_quiz#7-3	-1,0,0,{
+quiz_test,389,43,4	script	::ham_quiz#7-3	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
 
-quiz_test,389,42,4	script	Pit::ham_quiz#7-4	-1,0,0,{
+quiz_test,389,42,4	script	::ham_quiz#7-4	-1,0,0,{
 OnTouch:
-	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	announce ""+strcharinfo(0)+" vient de tomber dans un trou et doit recommencer depuis le début!",bc_blue|bc_map;
 	warp "quiz_test",387,387;
 	end;
 }
@@ -2129,7 +1705,7 @@ OnTouch:
 // 6 = Clear with collecting job item. start Marathon test
 // 7~12 =Checking Marathon quest occasionally.
 // 13 = Use after clearing Marathon quest
-// 14 = Clear 3rd quest, start Radeng(4th) quest
+// 14 = Clear 3ème quest, start Radeng(4th) quest
 // 15 = check after reporting errors of Radeng
 // 16 = randomly collecting job items at Radeng quest 1
 // 17 = randomly collecting job items at Radeng quest 2
