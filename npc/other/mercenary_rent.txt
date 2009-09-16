@@ -392,41 +392,41 @@ pay_arche,99,167,4	script	Loueur de Mercenaires::Mercenary Manager#Bow	732,{
 
 // Mercenary Merchant NPCs
 //============================================================
-prontera,30,337,4	script	Marchand (Mercenaires)::MercMerchant	700,{
-	mes "[Marchand pour Mercenaires]";
+prontera,30,337,4	script	Marchande (Mercenaires)::MercMerchant	700,{
+	mes "[Marchande pour Mercenaires]";
 	mes "Bonjour, je vends des potions que peuvent utiliser les Mercenaires. Est-ce que vous cherchez quelque chose en particulier?";
 	next;
 	switch(select("Mercenary Red Potion:Mercenary Blue Potion:Mercenary Concentration Potion:Mercenary Awakening Potion:Mercenary Berserk Potion")) {
 	case 1: 
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Les Mercenary Red Potions coûtent chacune 1.750 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12184,1750;
 	case 2:
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Les Mercenary Blue Potions coûtent chacune 3.500 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12185,3000;
 	case 3:
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Les Mercenary Concentration Potions coûtent chacune 560 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12241,560;
 	case 4:
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Les Mercenary Awakening Potions coûtent chacune 1.050 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12242,1050;
 	case 5:
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Les Mercenary Beserk Potions coûtent chacune 2.100 zeny. Combien en voulez-vous?";
 		next;
 		callfunc "F_PurchaseMercItem",12243,2100;
 	}
 }
 
-izlude,56,139,4	duplicate(MercMerchant)	Marchand (Mercenaires)::Mercenary Merchant#Sword	892
-pay_arche,102,167,5	duplicate(MercMerchant)	Marchand (Mercenaires)::Mercenary Merchant#Bow	879
+izlude,56,139,4	duplicate(MercMerchant)	Marchande (Mercenaires)::Mercenary Merchant#Sword	892
+pay_arche,102,167,5	duplicate(MercMerchant)	Marchande (Mercenaires)::Mercenary Merchant#Bow	879
 
 // Function for selling items.
 //============================================================
@@ -434,27 +434,27 @@ function	script	F_PurchaseMercItem	{
 	input .@input;
 	if( .@input == 0 )
 	{
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Vous avez changé d'avis? Eh bien, revenez quand vous voulez si vous avez besoin de potions pour Mercenaires.";
 	}
 	else if( .@input < 0 || .@input > 10000 )
 	{
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Je suis désolée mais je ne peux pas vous en vendre plus de 10.000 à la fois. Alors, combien en voulez-vous?";
 	}
 	else if( set(.@total_po, .@input * getarg(1)) > Zeny )
 	{
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Je suis désolée mais vous semblez ne pas avoir assez de zenys pour en acheter autant. Je serai toujours ici si vous voulez revenir plus tard pour acheter quelque chose pour vos mercenaires.";
 	}
 	else if( checkweight(getarg(0), .@input) == 0 )
 	{
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		mes "Vous ne pourriez pas les porter si je vous vendais autant de potions. Vous devriez revenir après vous être débarrassé du superflu.";
 	}
 	else
 	{
-		mes "[Marchand pour Mercenaires]";
+		mes "[Marchande pour Mercenaires]";
 		if( .@input == 1 )
 		{
 			switch( getarg(0) )
