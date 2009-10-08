@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par Leonid et Myllena
 //===== eAthena Script ======================================= 
 //= Hunter Job Quest
 //===== By: ================================================== 
@@ -55,141 +57,135 @@
 
 // Notices in the old Hunter Guild.
 //============================================================ 
-in_hunter,99,99,4	script	Hunter Info#hnt::HntNotice	727,{
+in_hunter,99,99,4	script	Informations#hnt::HntNotice	727,{
 	mes "============ Notice ============";
-	mes "We would like to inform that the Hunter Job Change Location";
-	mes "has been moved to ^ff0000Hugel^000000 in the Schwaltzvalt Republic.";
+	mes "Nous vous informons que vous devez maintenant vous rendre à ^ff0000Hugel^000000 dans la République de Schwaltzvalt pour le changement de classe en Chasseur.";
 	next;
-	mes "You can now use the Hugel airline, so please use the airship to visit Hugel.";
+	mes "Vous pouvez désormais utiliser la ligne aérienne Hugel, alors veuillez utiliser le dirigeable pour visiter la ville.";
 	next;
-	mes "You will find the new Job Change Location at ^ff0000 Hugel 208 222 ^000000.";
+	mes "Vous trouverez le nouvel emplacement pour le changement de classe à ^ff0000 Hugel 208 222 ^000000.";
 	next;
-	mes "^804000(You found a tiny line written at the end of the notice.)^000000";
+	mes "^804000(Vous apercevez une petite ligne écrite en bas de la notice.)^000000";
 	mes " ";
 	mes " ";
 	mes " ";
-	mes "I, the Falcon breeder have moved out as well.";
+	mes "Le dresseur de faucons se trouve là-bas également.";
 	close;
 }
 
-pay_fild10,148,252,3	duplicate(HntNotice)	Job Change Location#hu	857
+pay_fild10,148,252,3	duplicate(HntNotice)	Informations#hu	857
 
 // Actual Job quest start
 //============================================================ 
-hu_in01,386,373,4	script	Hunter Guildsman#hnt	727,{
+hu_in01,386,373,4	script	Chasseresse Sherin#hnt	727,{
 	if (Upper == 1) {
-		mes "[Hunter Sherin]";
-		mes "Oh, how have you been? It's been a long time, hasn't it?";
+		mes "[Chasseresse Sherin]";
+		mes "Oh, comment allez-vous? Ça fait longtemps, n'est-ce pas?";
 		next;
-		mes "[Hunter Sherin]";
-		mes "...Wait.";
-		mes "Oops! I'm sorry, I could have sworn that we've met before. Huh. How weird.";
+		mes "[Chasseresse Sherin]";
+		mes "...Attendez.";
+		mes "Oups! Je suis désolée, j'aurais parié que nous nous étions déjà rencontrés. C'est bizarre.";
 		close;
 	}
 	if (BaseJob == Job_Archer && JobLevel < 40) {
-		mes "[Hunter Guildsman]";
-		mes "Eh? You haven't had enough training as an Archer yet. To become a Hunter, you must gain a certain level of experience as an Archer first.";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Hé? Vous ne vous êtes pas encore assez entraîné. Pour être un Chasseur, vous devez d'abord acquérir un certain niveau d'expérience en tant qu'Archer.";
 		next;
-		mes "[Hunter Guildsman]";
-		mes "Go out and train yourself a bit more. You'll need to be at least Job Level 40 before you'll be ready to become a Hunter. Of course, you can train more than that if you want.";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Sortez d'ici et entraînez vous un peu plus. Vous aurez besoin d'avoir un Niveau de Job d'au moins 40 avant de pouvoir devenir un Chasseur pour de bon. Bien entendu, vous pouvez atteindre un niveau plus important si vous le souhaitez.";
 		next;
-		mes "[Hunter Guildsman]";
-		mes "See you next time~";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "A la prochaine...";
 		close;
 	}
 	if (SkillPoint) {
-		mes "[Hunter Sherin]";
-		mes "You can't change jobs without using all your skill points. Please use all of your skill points before applying to change jobs~";
+		mes "[Chasseresse Sherin]";
+		mes "Vous ne pouvez pas changer de classe sans avoir utilisé tous vos Points de Compétence. Veuillez tous les répartir et revenez me voir...";
 		close;
 	}
 	if (BaseClass == Job_Novice) {
-		mes "[Hunter Guildsman]";
-		mes "You must be...";
-		mes "a Novice? Wow, you've got a long way ahead of you. I don't think there's much you can do here.";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Vous devez être... un Novice?";
+		mes "Hé bien, vous avez fait un bien long chemin. Mais je ne vois pas vraiment ce que vous pourriez faire ici.";
 		close;
 	}
 	else if (BaseClass == Job_Swordman) {
-		mes "[Hunter Guildsman]";
-		mes "You have chosen the path of the sword. I can respect the strength of your blade. Of course, from far away, you can't really afford to throw your sword at enemies, can you?";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Vous avez choisi la voie de l'épée. Je ne peux que respecter la force de votre lame. Bien sûr, vous ne pouvez pas vraiment vous permettre de jeter votre épée à l'ennemi, n'est-ce pas?";
 		close;
 	}
 	else if (BaseClass == Job_Mage) {
-		mes "[Hunter Guildsman]";
-		mes "You deal with magic? It must feel great to be able to wield mystic power.";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Vous faites de la magie? Ce doit être grandiose d'être capable d'utiliser des pouvoirs mystiques.";
 		close;
 	}
 	else if (BaseClass == Job_Acolyte) {
-		mes "[Hunter Guildsman]";
-		mes "Oh, a person who serves God! Nice to meet you. There aren't many people like you that visit this place~ Hehe.";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Oh, un servant de Dieu! Heureux de faire votre connaissance. Il n'y a pas beaucoup de personnes comme vous qui visitent cet endroit... héhé.";
 		close;
 	}
 	else if (Baseclass == Job_Merchant) {
-		mes "[Hunter Guildsman]";
+		mes "[Membre de la Guilde des Chasseurs]";
 		mes "Oh...";
-		mes "How's your business coming along?";
+		mes "Comment vont les affaires?";
 		close;
 	}
 	else if (BaseClass == Job_Thief) {
-		mes "[Hunter Guildsman]";
-		mes "Agh?!";
-		mes "This place doesn't have anything worth stealing or anyone worth killing!!";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Hein?!";
+		mes "Cet endroit n'a rien qui vaut la peine d'être volé et personne qui mérite d'être tué... allez-vous en!!";
 		close;
 	}
 	else if (BaseJob == Job_Dancer || BaseJob == Job_Bard) {
-		mes "[Hunter Guildsman]";
-		mes "Phew...sometimes it is really hard for being a hunter, you know...";
-		mes "So how do you like your bohemian life? Yeah, I am envious of you for having so much freedom...";
+		mes "[Membre de la Guilde des Chasseurs]";
+		mes "Fiou... parfois c'est vraiment difficile d'être un chasseur, vous savez...";
+		mes "Alors vous aimez la vie de Bohème? Ouais, je vous envie d'avoir autant de liberté...";
 		close;
 	}
 	else if (BaseJob == Job_Hunter) {
-		mes "[Hunter Sherin]";
-		mes "Oh~ " + strcharinfo(0) + "!!";
-		mes "Long time no see~ What brings you here? Did your Falcon run away or something?";
+		mes "[Chasseresse Sherin]";
+		mes "Oh... " + strcharinfo(0) + "!!";
+		mes "Ça faisait longtemps... Qu'est-ce qui vous amène ici? Votre faucon se serait-il échappé?";
 		next;
-		mes "[Hunter Sherin]";
-		mes "I don't really have any official notices from the guild at the moment, so I hope you didn't come here just for that...";
+		mes "[Chasseresse Sherin]";
+		mes "Je n'ai pas réellement de nouveautés de la part de la guilde pour l'instant, donc j'espère que vous n'êtes pas venu ici pour ça...";
 		close;
 	}
 	else if (BaseJob == Job_Archer) {
 		if (SkillPoint) {
-			mes "[Hunter Sherin]";
-			mes "You can't apply to change jobs if you still have unused skill points. Use your remaining skill points first.";
+			mes "[Chasseresse Sherin]";
+			mes "Vous ne pouvez pas faire une demande de changement de classe si vous avez encore des Points de Compétence inutilisés. Utilisez d'abord tous vos Points de Compétence.";
 			close;
 		}
 		else if (HNTR_Q == 17 && countitem(1007) == 0) {
-			mes "[Hunter Sherin]";
-			mes "Hmm... I've been informed that you passed the test. But you don't have the necessary 'Necklace of Wisdom (Penetration)' that proves your accomplishment.";
+			mes "[Chasseresse Sherin]";
+			mes "Hum... j'ai été informée que vous vous aviez réussi l'examen. Mais vous ne possédez pas le 'Necklace of Wisdom' nécessaire qui atteste de votre réussite.";
 			next;
-			mes "[Hunter Sherin]";
-			mes "I'll let you change your job, but you must bring back a 'Necklace of Wisdom (Penetration),' no matter what it takes.";
+			mes "[Chasseresse Sherin]";
+			mes "Je peux vous permettre de changer de classe, mais vous devez impérativement me rapporter un 'Necklace of Wisdom'.";
 			close;
 		}
 		else if (HNTR_Q == 17 && countitem(1007) > 0 && JobLevel > 39) {
-			mes "[Hunter Sherin]";
-			mes "Oh...?";
-			mes "You passed";
-			mes "the job test?!";
-			mes "Congratulations~!!";
+			mes "[Chasseresse Sherin]";
+			mes "Oh...? Vous avez réussi l'examen du changement de classe? Félicitations...!!";
 			next;
-			mes "[Hunter Sherin]";
-			mes "Well then,";
-			mes "I will now change";
-			mes "your job to a Hunter~";
+			mes "[Chasseresse Sherin]";
+			mes "Bien dans ce cas, je vais maintenant vous changer en Chasseur.";
 			next;
 			delitem 1007,1; //Penetration
-			mes "[Hunter Sherin]";
-			mes "Tada~ Congratulations!";
-			mes "You look great as a Hunter!!";
+			mes "[Chasseresse Sherin]";
+			mes "Tadam... Félicitations!";
+			mes "Vous êtes impressionant en Chasseur!!";
 			set .@joblvl,joblevel;
 			completequest 4013;
 			callfunc "Job_Change",Job_Hunter;
 			callfunc "F_ClearJobVar";		// clears all job variables for the current player
 			next;
-			mes "[Hunter Sherin]";
-			mes "Become a noble person and become a worthy representative of our Hunter Guild. Show your love of nature as a Hunter~";
+			mes "[Chasseresse Sherin]";
+			mes "Devenez une personne noble et un digne représentant de notre Guilde de Chasseurs. Montrez votre amour de la nature...";
 			next;
-			mes "[Hunter Sherin]";
-			mes "And also, here is a little reward for all the effort you put in. It's from me, of course~";
+			mes "[Chasseresse Sherin]";
+			mes "Et aussi, voici une petit présent pour récompenser tous vos efforts. C'est de ma part, bien entendu...";
 			if (.@joblvl > 49)
 				getitem 1718,1; //Hunter_Bow
 			else
@@ -197,277 +193,264 @@ hu_in01,386,373,4	script	Hunter Guildsman#hnt	727,{
 			close;
 		}
 		else if (JobLevel > 39 && HNTR_Q == 0) {
-			mes "[Hunter Guildsman]";
-			mes "Oh, you're an Archer! It seems as if you've trained enough as an Archer... You came here to become a Hunter, right?";
+			mes "[Membre de la Guilde des Chasseurs]";
+			mes "Oh, vous êtes un Archer! Il semblerait que vous vous soyez entraîné suffisamment... Vous êtes venu ici pour devenir un Chasseur, n'est-ce pas?";
 			next;
-			switch(select("Yes. That's what I'm here for.:What are the requirements to change jobs?:....I don't want to change yet.")) {
+			switch(select("Oui. C'est pour ça que je suis ici.:Quelles sont les prérequis?:....Je ne suis pas encore prêt.")) {
 			case 1:
-				mes "[Hunter Guildsman]";
-				mes "Hehe~";
-				mes "I was right! Let me put you on the candidate list. Let's see~*";
+				mes "[Membre de la Guilde des Chasseurs]";
+				mes "Héhé...";
+				mes "J'avais raison! Laissez-moi vous inscrire sur la liste des candidats. Voyons voir...*";
 				next;
-				mes "[Hunter Guildsman]";
-				mes "Hmm... Let's start with the interview. Wait and relax a moment. No need to worry, I'll prepare everything~";
+				mes "[Membre de la Guilde des Chasseurs]";
+				mes "Hum... Commençons par l'entretien. Patientez et détendez vous un instant. Pas besoin de vous inquiétez, je vais tout préparer...";
 				next;
-				mes "^3355FF*Gathers and flips through papers*^000000";
+				mes "^3355FF*Rassemble et feuillette des papiers*^000000";
 				next;
-				mes "^3355FF*Rummage rummage*^000000";
+				mes "^3355FF*Fouille fouille*^000000";
 				next;
-				mes "[Hunter Guildsman]";
+				mes "[Membre de la Guilde des Chasseurs]";
 				mes "Ah!";
-				mes "Here they are: the interview questions~ First of all, my name is 'Sherin.' Nice to meet you!";
+				mes "Les voilà: les questions de l'entretien... Tout d'abord, mon nom est Sherin. Heureuse de faire votre connaissance!";
 				next;
-				mes "[Hunter Sherin]";
-				mes "Well then,";
-				mes "shall we begin?";
+				mes "[Chasseresse Sherin]";
+				mes "Bien dans ce cas, que diriez-vous de commencer?";
 				next;
-				if (select("Yes~ Let's start now.:No, I'll be back later.") == 1) {
+				if (select("Oui... commençons tout de suite.:Non, je reviendrai plus tard.") == 1) {
 					if(checkquest(4000) == -1) {
 						setquest 4000;
 					}
-					mes "[Hunter Sherin]";
-					mes "Listen carefully to the scenarios I describe. When I ask a question, you choose an answer. Pretty simple, don't you think?";
+					mes "[Chasseresse Sherin]";
+					mes "Je vais vous décrire plusieurs énoncés. Ecoutez-les attentivement. Quand je vous poserai une question, vous devrez choisir une réponse. Plutôt simple, non?";
 					next;
-					mes "[Hunter Sherin]";
-					mes "I just want to know how you think about life, and why you want to become a Hunter, so there's no need to be nervous.";
+					mes "[Chasseresse Sherin]";
+					mes "Je veux simplement savoir ce que vous pensez de la vie en général, et pourquoi vous souhaitez devenir un Chasseur, il n'y a pas de quoi être nerveux.";
 					next;
 L_AskQuestions:
-					mes "[Hunter Sherin]";
-					mes "Well then,";
-					mes "let's begin.";
+					mes "[Chasseresse Sherin]";
+					mes "Bien, commençons dans ce cas.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "You are an Archer, and you don't know where you should go to hunt. What do you do?";
+					mes "[Chasseresse Sherin]"; //myllena
+					mes "Vous êtes un Archer, et vous ne savez pas où vous devez aller chasser. Que faites-vous?";
 					next;
-					switch(select("Scream out loud asking where you should go.:Quietly ask a person passing by.:Wander around alone and search for a place.")) {
+					switch(select("Demander où vous pourriez aller en hurlant.:Demander calmement à une personne de passage.:Chercher autour de vous un bon endroit.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Hunter Sherin]";
-					mes "So you've decided on a place to hunt. You're going to hunt the monsters known as Hodes in the Sograt Desert.";
+					mes "[Chasseresse Sherin]";
+					mes "Donc vous avez choisi un endroit où aller chasseur. Vous allez chasser les monstres connus sous le nom de Hodes dans le Désert de Sograt.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "But you are in Payon!!";
-					mes "How do you go to the desert?";
+					mes "[Chasseresse Sherin]";
+					mes "Mais vous êtes à Payon!!";
+					mes "Comment allez-vous vous rendre dans le désert?";
 					next;
-					switch(select("Ask a Priest to open a free warp portal.:Use the Kafra service.:Walk with a friend.")) {
+					switch(select("Je demande à un Prêtre d'ouvrir un portail pour y être téléporté.:J'utilise le service de la Kafra.:Je marche avec un ami.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Hunter Sherin]";
-					mes "There is no Priest to ask for a warp, and no friend is around to walk with you. You must use the Kafra service, but you have no Zeny!";
+					mes "[Chasseresse Sherin]";
+					mes "Il y a aucun Prêtre à solliciter pour une téléportation, et aucun ami pour vous accompagner. Vous êtes obligé d'utiliser le service de la Kafra, mais vous n'avez pas de Zeny!";
 					next;
-					mes "[Hunter Sherin]";
-					mes "How would you go";
-					mes "about to make the";
-					mes "Zeny that you need?";
+					mes "[Chasseresse Sherin]";
+					mes "Que faites-vous pour obtenir les Zeny dont vous avez besoin?";
 					next;
-					switch(select("Beg here and there.:Sell items I do not need.:Hunt at a nearby field.")) {
+					switch(select("Je demander ici et là.:Je vends des objets qui ne me sont pas utiles.:Je pars chasser dans un endroit proche.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Hunter Sherin]";
-					mes "So you finally arrive at the Sograt Desert. But you realize that Hodes are a bit too strong for you to hunt alone.";
+					mes "[Chasseresse Sherin]";
+					mes "Et vous arrivez enfin dans le Désert de Sograt. Mais vous vous rendez compte que vous ne pouvez pas tuer les Hodes seuls car ils sont un peu trop forts pour vous.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "What is your";
-					mes "solution to this";
-					mes "situation?";
+					mes "[Chasseresse Sherin]";
+					mes "Que feriez-vous face à cette situation?";
 					next;
-					if (select("Attack a Hode from the top of a hill.:Go back to town.:Attack someone else's Hode.") == 2)
+					if (select("J'attaquerais un Hode d'en haut d'une colline.:Je retournerais en ville.:J'attaquerais le Hode de quelqu'un d'autre.") == 2)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Hunter Sherin]";
-					mes "Let's say you were having too much trouble hunting Hodes and returned to town. Now you are out of HP and a Priest happens to be around. How would you ask for a Heal?";
+					mes "[Chasseresse Sherin]";
+					mes "Disons que vous avez eu beaucoup de soucis à tuer des Hodes et que vous êtes retourné en ville. Désormais vous n'avez plus de HP et un Prêtre semble se trouver dans les environs. Comment lui demanderiez-vous de vous soigner?";
 					next;
-					if (select("Would it be possible to get a Heal, please?:Heal, please.:Heal me.") == 1)
+					if (select("Serait-il possible d'être soigné, s'il-vous-plaît?:Soins, svp.:Soignez-moi.") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Hunter Sherin]";
-					mes "This time, you found a rare item while you were going through your inventory. You go out to sell the item, and there are many people with stores and chatrooms open.";
+					mes "[Chasseresse Sherin]";
+					mes "Cette fois, vous avez trouvé un objet rare en fouillant dans votre inventaire. Vous voulez vendre votre objet, et vous trouvez de nombreuses personnes qui ont ouvert leur boutique et des fenêtres de discussion.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "What is the";
-					mes "best way to";
-					mes "sell your item?";
+					mes "[Chasseresse Sherin]";
+					mes "Quel est le meilleur moyen pour vendre votre objet?";
 					next;
-					switch(select("Scream out loud to everyone in sight.:Open a chatroom and wait.:Look to see if anyone already wants it.")) {
+					switch(select("Hurler à vue.:Ouvrir une fenêtre de discussion et attendre.:Regarder si quelqu'un est intéressé par l'objet.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Hunter Sherin]";
-					mes "While you are waiting, someone is begging for items and Zeny. What should you do?";
+					mes "[Chasseresse Sherin]";
+					mes "Pendant que vous attendez, quelqu'un demande des objets et des Zeny. Que devriez-vous faire?";
 					next;
-					if (select("Give some of my items and Zeny.:Ignore and walk away.:Tell the person about a good place to hunt.") == 1)
+					if (select("Lui donner quelques uns de mes objets et des Zeny.:L'ignorer et continuer mon chemin.:Lui conseiller un bon endroit où aller chasser.") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Hunter Sherin]";
-					mes "By now, you decide to go to the Maze by yourself.";
+					mes "[Chasseresse Sherin]";
+					mes "Dans l'immédiat, vous décidez de vous rendre seul au Labyrinthe.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "But on your way, you run";
-					mes "into someone that is lost.";
-					mes "What should you do?";
+					mes "[Chasseresse Sherin]";
+					mes "Mais sur votre chemin, vous rencontrez une personne qui s'est perdue. Que devriez-vous faire?";
 					next;
-					switch(select("Tell them which way to go.:Guide them to their destination.:Ignore.")) {
+					switch(select("Lui indiquer la route à prendre.:L'escorter personnellement jusqu'à destination.:L'ignorer.")) {
 					case 1:
 					case 2:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Hunter Sherin]";
-					mes "After meeting this lost person, you decide to get back to hunting. Just then, you find that someone is attacking a boss!";
+					mes "[Chasseresse Sherin]";
+					mes "Après avoir rencontré cette personne, vous décidez de retourner. Au même moment, vous trouver quelqu'un entrain de combattre un gros Monstre!";
 					next;
-					mes "[Hunter Sherin]";
-					mes "What should you do?";
+					mes "[Chasseresse Sherin]";
+					mes "Que feriez-vous?";
 					next;
-					if (select("Watch, then attack when asked for help.:Attack and see what happens.:Just go back to town.") == 1)
+					if (select("L'observer, puis attaquer s'il demande de l'aide.:Attaquer et observer ce qui se passe.:Retourner en ville.") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Hunter Sherin]";
-					mes "You are now very exhausted after your day of hunting. It's time to go back to town.";
+					mes "[Chasseresse Sherin]";
+					mes "Vous êtes maintenant épuisé après la dure journée de chasse. Il est temps de retourner en ville.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "But what's this!? You find an expensive item lying on the floor! What should you do with it?";
+					mes "[Chasseresse Sherin]";
+					mes "Mais qu'est-ce que c'est!? Vous trouvez un objet coûteux par terre! Que devriez-vous faire avec cet objet?";
 					next;
-					switch(select("Pick it up and keep it.:Try to find the owner.:Just walk by.")) {
+					switch(select("Le prendre et le garder.:Essayer de trouver à qui il appartient.:Passer mon chemin.")) {
 					case 2:
 					case 3:
 						set .@hunter_t,.@hunter_t+10;
 					default:
 						break;
 					}
-					mes "[Hunter Sherin]";
-					mes "Okay, this is the end of the test!";
+					mes "[Chasseresse Sherin]";
+					mes "Ok, c'est la fin de l'examen!";
 					next;
 					if (.@hunter_t == 100) {
 						set HNTR_Q,2;
 						changequest 4000,4001;
-						mes "[Hunter Sherin]";
-						mes "Well done! Your answers show you've got the right outlook on life. You definitely have the right qualities to become a Hunter~";
+						mes "[Chasseresse Sherin]";
+						mes "Bien joué! Vos réponses montrent que vous avez une juste conception de la vie. Vous possédez sans aucun doute les qualités requises pour devenir un Chasseur...";
 						next;
-						mes "[Hunter Sherin]";
-						mes "I'm glad to say you've passed the interview~ Now, go to that person in the corner and confirm which item is necessary for your job change test~";
+						mes "[Chasseresse Sherin]";
+						mes "Je suis heureuse de vous dire que vous avez réussi l'entretien... Maintenant, allez voir la personne située là bas, dans le coin de la pièce. Elle vous indiquera la suite des épreuves...";
 						close;
 					}
 					else if (.@hunter_t == 90) {
 						set HNTR_Q,2;
 						changequest 4000,4001;
-						mes "[Hunter Sherin]";
-						mes "Well, I'm looking at your answers and your score isn't perfect. But I'll let you pass anyway. I don't know what our Guildmaster will think, though.";
+						mes "[Chasseresse Sherin]";
+						mes "Bien, je suis en train de regarder vos réponses et vos résultats ne sont pas satisfaisants. Mais je vais malgré tout vous permettre de valider votre examen. Bien que je ne sache pas ce qu'en pensera notre Maître de Guilde.";
 						next;
-						mes "[Hunter Sherin]";
-						mes "Just remember to always keep basic etiquette in mind. Try harder in the following tests and make me happy, okay?";
+						mes "[Chasseresse Sherin]";
+						mes "Gardez les bases en mémoire. Faites mieux à la prochaine épreuve, d'accord?";
 						close;
 					}
 					set HNTR_Q,1;
-					mes "[Hunter Sherin]";
-					mes "Hmm... I don't think this'll work out. You can't become a Hunter without knowing basic etiquette.";
+					mes "[Chasseresse Sherin]";
+					mes "Hum... de cette façon ça ne peut pas fonctionner. Vous ne pouvez pas devenir un Chasseur sans connaître les bases.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "Think about how you answered the questions one more time. In order to value nature, you must first value your relationship with others.";
+					mes "[Chasseresse Sherin]";
+					mes "Réfléchissez sérieusement aux réponses que vous m'avez données. Afin d'évaluer la nature, vous devez d'abord évaluer vos relations avec les autres.";
 					next;
-					mes "[Hunter Sherin]";
-					mes "Then, you'll be more in tune with nature and with other people. It's this kind of harmony that makes the best Hunters.";
+					mes "[Chasseresse Sherin]";
+					mes "Ainsi, vous serez plus en harmonie avec la nature et les personnes qui vous entourent. C'est ce genre d'harmonie qui fait les meilleurs Chasseurs.";
 					close;
 				}
-				mes "[Hunter Sherin]";
-				mes "Okay...";
-				mes "Come back";
-				mes "when you're ready~";
+				mes "[Chasseresse Sherin]";
+				mes "Ok... Revenez quand vous serez prêt...";
 				close;
 			case 2:
-				mes "[Hunter Guildsman]";
-				mes "Job change";
-				mes "requirements?";
-				mes "First...";
-				mes "You must be an Archer.";
+				mes "[Membre de la Guilde des Chasseurs]";
+				mes "Les exigences pour le changement de classe?";
+				mes "Premièrement... vous devez être un Archer...";
 				next;
-				mes "[Hunter Guildsman]";
-				mes "Second...";
-				mes "You must be";
-				mes "at least Job Level 40.";
+				mes "[Membre de la Guilde des Chasseurs]";
+				mes "Deuxièmement... votre Niveau de Job doit être d'au moins 40.";
 				next;
-				mes "[Hunter Guildsman]";
-				mes "Third...";
-				mes "You must bring all of the items that will be requested by the guild. You can worry about that later.";
+				mes "[Membre de la Guilde des Chasseurs]";
+				mes "Troisièmement... vous devez rapporter tous les objets qui vous seront demandés par la guilde.";
 				next;
-				mes "[Hunter Guildsman]";
-				mes "Fourth...";
-				mes "You've gotta pass the test administered by the guild. If you have had enough training as an Archer, you should be able to pass the test~";
+				mes "[Membre de la Guilde des Chasseurs]";
+				mes "Quatrièmement... vous devez passer l'examen donné par la guilde. Si vous vous êtes assez entraîné en tant qu'Archer, vous devriez le réussir sans problème...";
 				break;
 			case 3:
-				mes "[Hunter Guildsman]";
-				mes "Okay then,";
-				mes "see you next time~";
+				mes "[Membre de la Guilde des Chasseurs]";
+				mes "Bien dans ce cas, à la prochaine...";
 				close;
 			}
 		}
 		else if (JobLevel > 39 && HNTR_Q == 1) {
-			mes "[Hunter Sherin]";
-			mes "Welcome back...!";
-			mes "Well, let's start with the interview. This time, carefully think about the answers to each question.";
+			mes "[Chasseresse Sherin]";
+			mes "Bienvenue de nouveau...!";
+			mes "Bien, commençons l'entretien. Cette fois-ci, réfléchissez bien aux réponses pour chaque question.";
+			next;
+			mes "[Chasseresse Sherin]";
+			mes "Bien dans ce cas, commençons.";
+			next;
+			mes "[Chasseresse Sherin]"; //myllena ici aussi
+			mes "Vous êtes un Archer, et vous ne savez pas où vous pourriez aller chasser. Que faites-vous?";
 			next;
 			goto L_AskQuestions;
 		}
 		else if (HNTR_Q > 2 && HNTR_Q < 10) {
-			mes "[Hunter Sherin]";
-			mes "Just give the item to the Demon Hunter, the guy who's all the way to the left in this area~";
+			mes "[Chasseresse Sherin]";
+			mes "Donnez simplement l'objet au Chasseur de Démons, qui se trouve au fond à gauche de la salle...";
 			next;
-			mes "[Hunter Sherin]";
+			mes "[Chasseresse Sherin]";
 			if (sex)
-				mes "If you decide to become a Hunter, promise to come visit me. I want to see you as a Hunter. You would look great!!";
+				mes "Si vous décidez de devenir un Chasseur, promettez-moi de venir me rendre visite. J'aimerais vous voir en Chasseur. Vous devriez être formidable!!";
 			else
-				mes "If you decide to become a Hunter, come and visit me, okay? You're pretty, but... You'd be even prettier as a Hunter. Hehe~";
+				mes "Si vous décidez de devenir une Chasseresse, venez me rendre visite, d'accord? Vous êtes mignonne, mais... vous devriez l'être encore plus en Chasseresse. Héhé...";
 			close;
 		}
 		else if (HNTR_Q == 2) {
-			mes "[Hunter Sherin]";
+			mes "[Chasseresse Sherin]";
 			mes "????";
 			next;
-			mes "[Hunter Sherin]";
-			mes "You weren't able to find the Demon Hunter? That guy is just to the left! Hehe~";
+			mes "[Chasseresse Sherin]";
+			mes "Vous n'avez pas été capable de trouver le Chasseur de Démons? Il se trouve juste à gauche! Héhé...";
 			next;
-			mes "[Hunter Sherin]";
-			mes "I want to see you become a Hunter...! Waaah~ I think you'd look great, so please hurry!";
+			mes "[Chasseresse Sherin]";
+			mes "J'aimerais vous voir devenir un Chasseur...! Waaah... Je pense que vous seriez formidable, alors dépêchez-vous!";
 			close;
 		}
-		mes "[Hunter Sherin]";
-		mes "Hmm, I think you're supposed to visit someone else, not me. Like our Guildmaster who's out for business, you know?";
+		mes "[Chasseresse Sherin]";
+		mes "Hum, vous êtes sensé rencontrer quelqu'un d'autre, pas moi. Comme notre Maître de Guilde qui est absent pour affaires, vous savez?";
 		next;
-		mes "[Hunter Sherin]";
-		mes "I heard he's at the Payon Central Palace... Or in the Archer Village, one of those two places. Try visiting those places and find him, okay?";
+		mes "[Chasseresse Sherin]";
+		mes "J'ai entendu dire qu'il était dans le Palais Central de Payon... ou au Village des Archers, à un de ces deux endroits. Essayez d'aller là-bas et trouvez-le, d'accord?";
 		close;
 	}
-	mes "[Hunter Guildsman]";
-	mes "Eh? You haven't trained enough as an Archer. To become a Hunter, you need to gain more experience as an Archer first.";
+	mes "[Membre de la Guilde des Chasseurs]";
+	mes "Hein? Vous ne vous êtes pas assez entraîné en tant qu'Archer. Pour devenir un Chasseur, vous devez d'abord gagner plus d'expérience en tant qu'Archer.";
 	next;
-	mes "[Hunter Guildsman]";
-	mes "Well then, go train some more. You must be at least Job Level 40 to be exact. Of course, you can always go higher. See you next time~";
+	mes "[Membre de la Guilde des Chasseurs]";
+	mes "Bien dans ce cas, allez vous entraînez davantage. Votre Niveau de Job doit être d'au moins 40 pour être exacte. Bien entendu, vous pouvez toujours viser plus haut. A la prochaine...";
 	close;
 }
 
-hu_in01,382,382,4	script	Guild Receptionist#hnt	732,{
+hu_in01,382,382,4	script	Réceptionniste de la Guilde#hnt	732,{
 	if (HNTR_Q == 2) {
-		mes "[Guild Receptionist]";
-		mes "Greetings. They call me... ^660000The Demon Hunter^000000. I am the one in charge of processing applications. Your name is ... " + strcharinfo(0) + ", correct?";
+		mes "[Réceptionniste de la Guilde]";
+		mes "Salutations. On m'appelle... ^660000Le Chasseur de Démons^000000. Je suis la personne chargée de traiter les candidatures. Votre nom est ... " + strcharinfo(0) + ", c'est ça?";
 		next;
-		if (select("Yes, that is correct.:Nope~~(heeheehee)") == 1) {
+		if (select("Oui, tout à fait.:Non...(héhéhé)") == 1) {
 L_GiveQuestItems:
-			mes "[Demon Hunter]";
-			mes "Okay. These are the items you need for the test. Since we provide all the arrows you will be using for this test, we need you to get the materials to make them.";
+			mes "[Chasseur de Démons]";
+			mes "Ok. Voici les objets dont vous aurez besoin pour l'examen. Puisque nous fournissons toutes les flèches que vous utiliserez pour l'examen, nous avons besoin des matériaux pour les fabriquer.";
 			next;
-			mes "[Demon Hunter]";
-			mes "You see, we're having some financial problems. Let's see, we're short on these items...";
+			mes "[Chasseur de Démons]";
+			mes "Vous voyez, nous avons quelques soucis financiers. Voyons voir, il nous manque ces objets...";
 			next;
 			switch(rand(1,7)) {
 			//Claw_Of_Desert_Wolf, Wooden_Block, White_Herb
@@ -485,32 +468,32 @@ L_GiveQuestItems:
 			//Porcupine_Spike, Yoyo_Tailm Acorn
 			case 7: setarray .@items[0], 1027,2, 942,1, 1026,1, 9; changequest 4001,4008; break;
 			}
-			mes "[Demon Hunter]";
-			mes "Hmm. ^660000"+.@items[1]+" "+getitemname(.@items[0])+"^000000 to use for arrow tips. ^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 to use here and there. And ^660000"+.@items[5]+" "+getitemname(.@items[4])+"^000000 please.";
+			mes "[Chasseur de Démons]";
+			mes "Hum. Il vous faudra: ^660000"+.@items[1]+" "+getitemname(.@items[0])+"^000000 pour fabriquer la pointe des flèches, mais aussi ^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 pour diverses autres utilisations. Ah, et aussi ^660000"+.@items[5]+" "+getitemname(.@items[4])+"^000000 s'il vous plaît.";
 			set HNTR_Q,.@items[6];
 			next;
-			mes "[Demon Hunter]";
-			mes "Oh right. Our Guildmaster has gone on an official trip to the Payon Central Palace. You have to go visit him because the one that administers the test.";
+			mes "[Chasseur de Démons]";
+			mes "Notre maître de guilde est parti en voyage d'affaire au Palais Central de Payon. Vous devez aller le rencontrer, c'est lui qui administre l'examen.";
 			next;
-			mes "[Demon Hunter]";
-			mes "Alright then, come back to me when you have everything ready~";
+			mes "[Chasseur de Démons]";
+			mes "Bien donc, revenez me voir quand tout sera prêt...";
 			close;
 		}
-		mes "[Demon Hunter]";
-		mes "Hey, stop messing around.";
-		mes "Your name is " + strcharinfo(0) + ", right?";
+		mes "[Chasseur de Démons]";
+		mes "Hé, arrêtez de me déranger.";
+		mes "Votre nom est " + strcharinfo(0) + ", n'est-ce pas?";
 		next;
-		if (select("Yes...:Hehehe. I keep telling you, it's not~~") == 1) {
-			mes "[Demon Hunter]";
-			mes "Okay, then. These are the items you need for the test. Since we provide all of the necessary arrows you'll use for the test, we need you to get the materials to make them.";
+		if (select("Oui...:Je vous le répète, ce n'est pas ça...") == 1) {
+			mes "[Chasseur de Démons]";
+			mes "Ok. Voici les objets dont vous aurez besoin pour l'examen. Puisque nous fournissons toutes les flèches que vous utiliserez pour l'examen, nous avons besoin des matériaux pour les fabriquer.";
 			next;
-			mes "[Demon Hunter]";
-			mes "You see, right now we're having some financial problems. Let's see, we're short on these items...";
+			mes "[Chasseur de Démons]";
+			mes "Vous voyez, nous avons quelques soucis financiers. Voyons voir, il nous manque ces objets...";
 			next;
 			goto L_GiveQuestItems;
 		}
-		mes "[Demon Hunter]";
-		mes "Leave if you plan to trifle me your petty tricks. Do you not realize that you are toying with ^660000The Demon Hunter^000000?!'";
+		mes "[Chasseur de Démons]";
+		mes "Si tu crois que tes petites blagues minables peuvent m'amuser, tu te fourres le doigt dans l'oeil jusqu'au coude. Dehors, bouffon! On ne plaisante pas avec le ^660000Chasseur de Démons^000000!'";
 		close2;
 		warp "hugel",208,223;
 		end;
@@ -532,12 +515,12 @@ L_GiveQuestItems:
 		//Porcupine_Spike, Yoyo_Tailm Acorn
 		case 9: setarray .@items[0], 1027,2, 942,1, 1026,1, 11; break;
 		}
-		mes "[Demon Hunter]";
-		mes "Hmm?";
+		mes "[Chasseur de Démons]";
+		mes "Hum?";
 		next;
 		if (countitem(.@items[0]) >= .@items[1] && countitem(.@items[2]) >= .@items[3] && countitem(.@items[4]) >= .@items[5]) {
-			mes "[Demon Hunter]";
-			mes "You brought all of the necessary materials... You can get directions to the testing area from our Guildmaster who is currently in the Payon Central Palace.";
+			mes "[Chasseur de Démons]";
+			mes "Bien... vous avez apportez tous les matériaux nécessaires... vous pouvez à présent vous rendre auprès de notre Maître de Guilde afin de passer l'épreuve suivante. Il se trouve actuellement à Payon, dans le Palais Central.";
 			set HNTR_Q,.@items[6];
 			if(checkquest(4002) != -1) {
 				changequest 4002,4009;
@@ -565,79 +548,77 @@ L_GiveQuestItems:
 			delitem .@items[4],.@items[5];
 			close;
 		}
-		mes "[Demon Hunter]";
-		mes "You don't have all";
-		mes "of the required materials...";
+		mes "[Chasseur de Démons]";
+		mes "Vous n'avez pas tous les matériaux requis...";
 		next;
-		mes "[Demon Hunter]";
-		mes "The items you need are";
+		mes "[Chasseur de Démons]";
+		mes "Rapportez-moi:";
 		mes "^660000"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
-		mes "^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 and";
+		mes "^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 et";
 		mes "^660000"+.@items[5]+" "+getitemname(.@items[4])+"^000000.";
-		mes "Come back once you have";
-		mes "gathered all the items.";
+		mes "Revenez quand vous aurez rassemblé tous ces matériaux, et pas avant!";
 		close;
 	}
 	else if (HNTR_Q > 9 && HNTR_Q < 17) {
-		mes "[Demon Hunter]";
-		mes "Hmm? You didn't go to the Guildmaster either in Payon Central Palace or at the Archer Guild? He should be at one of the two places, so go look for him.";
+		mes "[Chasseur de Démons]";
+		mes "Hum? Vous n'avez pas trouvé notre Maître de Guilde? Il se trouve soit dans le Palais Central de Payon, soit au Village des Archers. Allez le chercher!";
 		close;
 	}
 	else if (HNTR_Q == 17) {
-		mes "[Demon Hunter]";
-		mes "Ooh. You passed the test. Congratulations~ You should go talk to Sherin now.";
+		mes "[Chasseur de Démons]";
+		mes "Ooh. Vous avez réussi toutes les épreuves. Félicitations~ Vous devez aller parler à Sherin à présent.";
 		close;
 	}
 	else {
-		mes "[Guild Receptionist]";
-		mes "If you wish to change your job to a Hunter, you must register first.";
+		mes "[Réceptionniste de la Guilde]";
+		mes "Si vous souhaitez devenir un Chasseur, inscrivez-vous auprès de Sherin.";
 		close;
 	}
 }
 				
-payon_in03,131,7,3	script	Hunter#htnGM	59,{
+payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 	if (HNTR_Q == 10) {
-		mes "[Hunter Guildmaster]";
-		mes "Hmpf. You must be here for the Hunter job test. Let me tell you about the testing process. What would you like to know?";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Humpf. Vous devez être ici pour l'épreuve du métier de Chasseur, c'est ça? Je vais vous expliquer le déroulement de la prochaine épreuve. Que souhaitez-vous savoir?";
 		next;
-		switch(select("What is the test?:What are the passing requirements?:Any warnings?:Begin test.")) {
+		switch(select("En quoi consiste l'épreuve?:Comment réussir l'épreuve?:Quels sont vos conseils?:Commencer l'épreuve.")) {
 		case 1:
-			mes "[Hunter Guildmaster]";
-			mes "You have to hunt down certain monsters with a particular name. But you must avoid all the traps while you're at it.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous devrez chasser des monstres possédant un nom bien particulier. Vous devrez également éviter tous les pièges.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "This is to test your ability to move swiftly and locate targets in various situations.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Cette épreuve va tester votre capacité à vous déplacer avec fluidité, et à localiser des cibles précises en toutes circonstances.";
 			close;
 		case 2:
-			mes "[Hunter Guildmaster]";
-			mes "Within the time limit, starting in the 6 o'clock direction of the map, you must hunt the target monsters and then hit the escape switch that will appear in the center of the map.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous allez commencer au bas d'une salle. Vous devrez chasser tous les monstres portant un nom bien particulier dans le temps imparti. Une fois ceci fait, un portail s'ouvrira au centre de la pièce.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "You will pass if you are able to escape in the 12 o'clock direction of the map after you hit the switch.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous devrez également éviter tous les pièges.";
 			close;
 		case 3:
-			mes "[Hunter Guildmaster]";
-			mes "Hmm. Warnings... Well, if you fall into a trap, you have to start from the beginning. Also, only one person can take the test at a time.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Hum. Voici quelques recommandations... Tout d'abord sachez que si vous tombez dans un piège, vous devrez recommencer depuis le début! Une seule personne peut passer cette épreuve à la fois.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "I will send you to the testing place. There will be a waiting room, but if someone else is taking the test, you must wait in the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Je vous enverrai dans la zone de l'épreuve. Vous y trouverez une Salle d'Attente: si quelqu'un d'autre occupe la pièce de l'épreuve, vous devrez attendre qu'il ait terminé.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "If the person in front succeeds, resigns or fails, the next person waiting in the chatroom is sent to the testing area. If nobody is waiting, the test will begin as soon as you enter the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Si la personne avant vous réussi, échoue, ou abandonne l'épreuve, la personne suivante dans la Salle d'Attente pourra rejoindre la zone de l'épreuve. Si vous êtes tout seul, vous rejoindrez immédiatement la zone de l'épreuve après être entré dans la Salle d'Attente.";
 			close;
 		case 4:
 			if (.@a0) {
-				mes "[Hunter Guildmaster]";
-				mes "Okay. I'll send you to the testing area right now. Don't blame me if you get lost or confused because you didn't listen to my explanation.";
+				mes "[Maître de la Guilde des Chasseurs]";
+				mes "Très bien. Je vous envoie immédiatement dans la zone de l'épreuve. Ne venez pas vous plaindre si vous n'avez pas écouté mes explications.";
 				next;
 			}
-			mes "[Hunter Guildmaster]";
-			mes "Okay. Best of luck.";
-			mes "I'll send you right now.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Bonne chance.";
+			mes "Je vous envoie immédiatement dans la zone de l'épreuve.";
 			next;
 		}
-		mes "[Hunter Guildmaster]";
-		mes "Well, then. Your arrows are probably still being made, so you can use mine to take the test.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Tenez ces quelques flèches, elles vous seront utiles!";
 		set HNTR_Q,12;
 		changequest 4009,4011;
 		getitem 1751,200; //Silver_Arrow
@@ -646,162 +627,158 @@ payon_in03,131,7,3	script	Hunter#htnGM	59,{
 		end;
 	}
 	else if (HNTR_Q > 1 && HNTR_Q < 10) {
-		mes "[Hunter Guildmaster]";
-		mes "Mmm...?";
-		mes "What is an Archer";
-		mes "visiting me for?";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Mum...?";
+		mes "Qu'est-ce qu'un Archer vient faire par ici?";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "I wasn't notified about anything in particular from the Hunter Guild. You're not trying to skip the middle part of the Hunter test, are you?";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Personne dans la Guilde des Chasseurs ne m'a mis au courant. Vous ne seriez pas en train d'essayer de vous défiler des épreuves pour devenir Chasseur par hasard?";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Go gather the items for the test, and come back after you've visited the Hunter Guild.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Retournez passer les épreuves, et revenez quand vous aurez réussi.";
 		close;
 	}
 	else if (HNTR_Q == 11) {
-		mes "[Hunter]";
-		mes "Hmm? Can I help you? If you wish to change jobs, you should visit the person at the Archer Guild, not me.";
+		mes "[Chasseur]";
+		mes "Hum? En quoi puis-je vous aider? Si vous souhaitez devenir Chasseur, vous devriez vous adresser aux personnes de la Guilde, pas à moi.";
 		close;
 	}
 	else if (HNTR_Q > 11 && HNTR_Q < 16) {
-		mes "[Hunter Guildmaster]";
-		mes "Hmm. You're the Archer that almost gave up on changing jobs. You do have everything ready, right? Then I'll send you to take the test right away.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Hum. Vous êtes l'Archer dont on m'a parlé. Vous avez bien terminé votre apprentissage du métier de Chasseur, pas vrai? Mais il vous reste encore une dernière épreuve.";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "If you have any";
-		mes "questions, ask now.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Si vous avez des questions, c'est le moment.";
 		next;
-		switch(select("What is the test?:What are the passing requirements?:Any warnings?:Begin test.")) {
+		switch(select("Une épreuve?:En quoi cela va consister?:Avez-vous des recommandations?Commencer l'épreuve.")) {
 		case 1:
-			mes "[Hunter Guildmaster]";
-			mes "You have to hunt down certain monsters with a particular name, but you also avoid all the traps at the same time. This is to test your ability to move swiftly and locate targets in various situations.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous devrez chasser un certain type de monstre, mais également éviter les pièges. Ceci nous permettra de mesurer votre capacité à vous déplacer avec agilité, et localiser les cibles dans différentes situations.";
 			close;
 		case 2:
-			mes "[Hunter Guildmaster]";
-			mes "Within the given time, you will start at the 6 o'clock direction of the map, hunt the target monsters, and then hit the escape switch that will appear in the center of the map.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous commencerez dans la direction sud d'une pièce. Vous devrez chasser les monstres, activer un levier qui apparaîtra au centre de la pièce.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "You will pass if you are able to escape in the 12 o'clock direction of the map after you hit the switch.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous réussirez si vous êtes capable de vous échaper via la sortie au nord de la pièce, après avoir activé le levier.";
 			close;
 		case 3:
-			mes "[Hunter Guildmaster]";
-			mes "Hmm. Warnings... Well, if you fall into a trap, you have to start from the beginning. Also, only one person can take the test at a time.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Hum. Des recommandations... Et bien, si vous tombez dans un piège, vous devrez recommencer depuis le début. Alors faîtes bien attention.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "I'll send you to the testing place. There is a waiting room, but if someone else is taking the test, you must wait in the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Une seule personne à la fois peut passer l'épreuve. Une salle d'attente est prévue si plusieurs personnes sont inscrites à l'épreuve.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "If the person in front succeeds, resigns or fails, the next person waiting in the chatroom is sent to the testing area. If nobody is waiting, the test will begin as soon as you enter the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit à la pièce de l'épreuve après être entré dans la salle d'attente.";
 			close;
 		case 4:
-			mes "[Hunter Guildmaster]";
-			mes "Okay. Good luck.";
-			mes "I'll send you right now.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Très bien. Bonne chance.";
+			mes "Je vais vous conduire dans la zone de l'épreuve.";
 			next;
 		}
-		mes "[Hunter Guildmaster]";
-		mes "Eh? Why won't I give you Silver Arrows? Don't expect anything when you don't bring any materials.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Que... Comment? Pourquoi je vous donnerais des Flèches d'Argent? N'attendez rien de ma part, vous devez apporter votre matériel.";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Anyway, I believe you've prepared it yourself. Let's begin now.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Vous avez besoin de plus de temps pour vous préparer?";
 		next;
-		if (select("Okay. Let's start...:Ah, wait a sec.") == 1) {
-			mes "[Hunter Guildmaster]";
-			mes "Okay!! I hope";
-			mes "you will pass this time!";
+		if (select("Non, commençons.:Ah, oui, attendez!") == 1) {
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Très bien!! J'espère que vous réussirez!";
 			close2;
 			set HNTR_Q,12;
 			warp "job_hunte",176,22;
 			end;
 		}
-		mes "[Hunter Guildmaster]";
-		mes "Then hurry and finish";
-		mes "all of your preparations.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Hâtez-vous de terminer de vous préparer. On ne vous attendra pas dans la bataille!";
 		close;
 	}
 	else if (HNTR_Q == 16) {
-		mes "[Hunter Guildmaster]";
-		mes "Wow, you came back in one piece!";
-		mes "I mean, good job. I'll give you the item which proves that you have passed the test.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Oh, vous êtes revenu en un seul morceau!";
+		mes "Euh je veux dire... bon travail. Voici un petit quelque chose qui prouvera que vous avez réussi cette épreuve auprès de mes collègues.";
 		set HNTR_Q,17;
 		savepoint "payon",104,99;
 		getitem 1007,1; //Penetration
 		changequest 4012,4013;
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Okay, here it is. Now, go back to the Hunter Guild. I have some more business left to do here, but I hope you can become a Hunter soon.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Retournez voir les membres de la Guilde des Chasseurs. J'ai du travail... J'espère que vous deviendrez Chasseur très bientôt.";
 		close;
 	}
 	else if (HNTR_Q == 17) {
-		mes "[Hunter Guildmaster]";
-		mes "I see you aren't in a hurry to become a Hunter? When I first became a Hunter, I ran around for a month wildly brandishing my bow because I was so happy. Hehe~";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "N'êtes-vous pas pressé de devenir Chasseur? Pendant le mois qui a suivi l'obtention de mon diplome, j'étais tout fou, à courir ça et là à brandir mon arc à la moindre occasion. J'étais si heureux~";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Now, you should go back to the Hunter Guild~";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Vous devriez retourner parler à mes collègues~";
 		close;
 	}
 	else {
-		mes "[Hunter]";
-		mes "...Can I help you?";
-		mes "I'm here for official business and am busy at the moment. If you'll excuse me...";
+		mes "[Chasseur]";
+		mes "...En quoi puis-je vous aider?";
+		mes "Je suis occupé pour le moment. Si vous voulez bien m'excuser...";
 		close;
 	}
 }
 
-payon_in02,21,31,1	script	Hunter#htnGM2	59,{
+payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 	cutin "job_huntermaster",2;
 	if (HNTR_Q == 11) {
-		mes "[Hunter Guildmaster]";
-		mes "Mmm. I see you're here for the Hunter job test. Let me explain the testing process. What would you like to know?";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Hum... Je vois que vous êtes ici pour devenir Chasseur. Laissez-moi vous expliquer en quoi va consister l'épreuve. Que souhaitez-vous savoir?";
 		next;
-		switch(select("What is the test?:What are the passing requirements?:Any warnings?:Begin test.")) {
+		switch(select("En quoi consiste l'épreuve?:Comment réussir l'épreuve?:Quels sont vos conseils?:Commencer l'épreuve.")) {
 		case 1:
-			mes "[Hunter Guildmaster]";
-			mes "You have to hunt down certain monsters with a particular name, but you must avoid all of the traps here at the same time.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous devrez chasser des monstres possédant un nom bien particulier. Vous devrez également éviter tous les pièges.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "This is to test your ability to move swiftly and locate targets in various situations.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Cette épreuve va tester votre capacité à vous déplacer avec fluidité, et à localiser des cibles précises en toutes circonstances.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 2:
-			mes "[Hunter Guildmaster]";
-			mes "Within the given time, you will start in the 6 o'clock direction of the map, hunt the target monsters, and hit the escape switch that will appear in the center of the map.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous commencerez dans la direction sud d'une pièce. Vous devrez chasser les monstres, activer un levier qui apparaîtra au centre de la pièce.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "You will pass if you are able to escape in the 12 o'clock direction of the map when the switch is activated.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous réussirez si vous êtes capable de vous échaper via la sortie au nord de la pièce, après avoir activé le levier.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 3:
-			mes "[Hunter Guildmaster]";
-			mes "Mmm. Warnings... Well, if you fall into a trap, you have to start the test over from the beginning. And only one person can take the test at a time.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Hum. Des recommandations... Et bien, si vous tombez dans un piège, vous devrez recommencer depuis le début. Alors faîtes bien attention.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "I'll send you to the testing place. There is a waiting room, but if someone else is taking the test, you must wait in the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Une seule personne à la fois peut passer l'épreuve. Une salle d'attente est prévue si plusieurs personnes sont inscrites à l'épreuve.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "If the person currently taking the test passes or fails, the next person waiting in the chatroom is sent to the testing area. If nobody is waiting, the test will begin as soon as you enter the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit à la pièce de l'épreuve après être entré dans la salle d'attente.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 4:
 			if (.@a0) {
-				mes "[Hunter Guildmaster]";
-				mes "...Okay. I'll send you to the testing area right now. Don't blame me if you get lost or confused because you didn't listen to the explanation.";
+				mes "[Maître de la Guilde des Chasseurs]";
+				mes "Très bien. Je vous envoie immédiatement dans la zone de l'épreuve. Ne venez pas vous plaindre si vous n'avez pas écouté mes explications.";
 				next;
 			}
-			mes "[Hunter Guildmaster]";
-			mes "Okay, best of luck.";
-			mes "I'll send you right now.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Très bien. Bonne chance.";
+			mes "Je vais vous conduire dans la zone de l'épreuve.";
 			next;
 		}
-		mes "[Hunter Guildmaster]";
-		mes "Well, your arrows are probably still being made, so you can use mine to take the test.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Tenez ces quelques flèches, elles vous seront utiles!";
 		getitem 1751,200; //Silver_Arrow
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Good luck.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Bonne chance.";
 		set HNTR_Q,12;
 		changequest 4010,4011;
 		warp "job_hunte",176,22;
@@ -809,140 +786,127 @@ payon_in02,21,31,1	script	Hunter#htnGM2	59,{
 		end;
 	}
 	else if (HNTR_Q > 1 && HNTR_Q < 10) {
-		mes "[Hunter Guildmaster]";
-		mes "Mmm...?";
-		mes "Why is an Archer";
-		mes "visiting me?";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Mum...?";
+		mes "Qu'est-ce qu'un Archer vient faire par ici?";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "I wasn't notified by the Hunter Guild about anything. You're not trying to skip the middle part of the Hunter test, are you?";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Personne dans la Guilde des Chasseurs ne m'a mis au courant. Vous ne seriez pas en train d'essayer de vous défiler des épreuves pour devenir Chasseur par hasard?";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Stop by once you have gathered all the items needed for the test.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Retournez passer les épreuves, et revenez quand vous aurez réussi.";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q == 10) {
-		mes "[Hunter]";
-		mes "Mmm?";
-		mes "Can I help you";
-		mes "with something?";
-		mes "Oh, you must be";
-		mes "a Hunter applicant.";
+		mes "[Chasseur]";
+		mes "Hum?";
+		mes "En quoi puis-je vous aider?";
+		mes "Oh, vous devez être un candidat au métier de Chasseur.";
 		next;
-		mes "[Hunter]";
-		mes "If you wish to change jobs, I think you need to go visit the person at Payon Central Palace.";
+		mes "[Chasseur]";
+		mes "Si tel est le cas, vous devriez rendre visite à la personne en charge de cela, au Palais Central de Payon.";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q > 11 && HNTR_Q < 16) {
-		mes "[Hunter Guildmaster]";
-		mes "Mmm? Aren't you the Archer who gave up last time? Now you're ready, right? Then I'll send you to the job change area right now.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Hum? N'êtes-vous pas l'Archer qui a abandonné la dernière fois? Vous êtes prêt maintenant, n'est-ce pas? Je vais vous envoyer vers la zone de l'épreuve.";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "If you still";
-		mes "have questions,";
-		mes "feel free to ask.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Si vous avez encore des questions, n'hésitez pas.";
 		next;
-		switch(select("What is the test?:What are the requirements to pass the test?:Any warnings?:Begin test.")) {
+		switch(select("En quoi consiste l'épreuve?:Comment réussir l'épreuve?:Quels sont vos conseils?:Commencer l'épreuve.")) {
 		case 1:
-			mes "[Hunter Guildmaster]";
-			mes "You have to hunt down certain monsters with a particular name, but you must avoid all of the traps here at the same time.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous devrez chasser un certain type de monstre, mais également éviter les pièges.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "This is to test your ability to move swiftly and locate targets in various situations.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Ceci nous permettra de mesurer votre capacité à vous déplacer avec agilité, et localiser les cibles dans différentes situations.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 2:
-			mes "[Hunter Guildmaster]";
-			mes "Within the given time, you will start in the 6 o'clock direction of the map, hunt the target monsters, and hit the escape switch that will appear in the center of the map.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous commencerez dans la direction sud d'une pièce. Vous devrez chasser les monstres, activer un levier qui apparaîtra au centre de la pièce.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "You will pass if you are able to escape in the 12 o'clock direction of the map when the switch is activated.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Vous réussirez si vous êtes capable de vous échapper via la sortie au nord de la pièce, après avoir activé le levier.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 3:
-			mes "[Hunter Guildmaster]";
-			mes "Mmm. Warnings... Well, if you fall into a trap, you have to start the test over from the beginning. And only one person can take the test at a time.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Hum. Des recommandations... Et bien, si vous tombez dans un piège, vous devrez recommencer depuis le début. Alors faîtes bien attention.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "I'll send you to the testing place. There is a waiting room, but if someone else is taking the test, you must wait in the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Une seule personne à la fois peut passer l'épreuve. Une salle d'attente est prévue si plusieurs personnes sont inscrites à l'épreuve.";
 			next;
-			mes "[Hunter Guildmaster]";
-			mes "If the person currently taking the test passes or fails, the next person waiting in the chatroom is sent to the testing area. If nobody is waiting, the test will begin as soon as you enter the chatroom.";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit à la pièce de l'épreuve après être entré dans la salle d'attente.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
 		case 4:
-			mes "[Hunter Guildmaster]";
-			mes "Okay, good luck.";
-			mes "I'll send you right now...";
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Très bien. Bonne chance.";
+			mes "Je vais vous conduire dans la zone de l'épreuve.";
 			next;
 		}
-		mes "[Hunter Guildmaster]";
-		mes "Eh? Why don't I give you any Silver Arrows? Well, you shouldn't expect to get anything when you didn't even bring the materials.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Que... Comment? Pourquoi je vous donnerais des Flèches d'Argent? N'attendez rien de ma part, vous devez apporter votre matériel.";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Well...";
-		mes "I believe";
-		mes "you're ready.";
-		mes "Let's begin.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Vous avez besoin de plus de temps pour vous préparer?";
 		next;
-		if (select("Yes, let's start.:Ah, wait a moment.") == 1) {
-			mes "[Hunter Guildmaster]";
-			mes "Okay!! Now...";
-			mes "Pass this time!";
+		if (select("Non, commençons.:Ah, oui, attendez!") == 1) {
+			mes "[Maître de la Guilde des Chasseurs]";
+			mes "Très bien!! J'espère que vous réussirez!";
 			close2;
 			cutin "job_huntermaster",255;
 			set HNTR_Q,12;
 			warp "job_hunte",176,22;
 			end;
 		}
-		mes "[Hunter Guildmaster]";
-		mes "*Sigh...*";
-		mes "Come back when";
-		mes "you're done with";
-		mes "your preparations.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "*Soupir...*";
+		mes "Hâtez-vous de terminer de vous préparer. On ne vous attendra pas dans la bataille!";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q == 16) {
-		mes "[Hunter Guildmaster]";
-		mes "Wow. You're back in one piece!";
-		mes "I mean, good job. Well then, I'll give you the item which serves as proof that you passed the test.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Oh, vous êtes revenu en un seul morceau!";
+		mes "Euh je veux dire... bon travail. Voici un petit quelque chose qui prouvera que vous avez réussi cette épreuve auprès de mes collègues.";
 		set HNTR_Q,17;
 		savepoint "payon",104,99;
 		getitem 1007,1; //Penetration
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Well...";
-		mes "There you go.";
-		mes "Now hurry back to the Hunter Guild, and join us~";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Bien...";
+		mes "Et voilà.";
+		mes "Retournez voir les membres de la Guilde des Chasseurs. J'ai du travail... J'espère que vous deviendrez Chasseur très bientôt~";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q == 17) {
-		mes "[Hunter Guildmaster]";
-		mes "I see you're not in a hurry to become a Hunter. I was running around with joy, wildly brandishing my bow the first month I became a Hunter. Hehe~";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "N'êtes-vous pas pressé de devenir Chasseur? Pendant le mois qui a suivi l'obtention de mon diplôme, j'étais tout fou, à courir ça et là à brandir mon arc à la moindre occasion. J'étais si heureux~";
 		next;
-		mes "[Hunter Guildmaster]";
-		mes "Now hurry~";
-		mes "They're waiting";
-		mes "for you back";
-		mes "at the Hunter Guild.";
+		mes "[Maître de la Guilde des Chasseurs]";
+		mes "Vous devriez retourner parler à mes collègues~";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else {
-		mes "[Hunter]";
-		mes "What do you want? I'm on an official trip and am busy at the moment. Now if you'll excuse me.";
+		mes "[Chasseur]";
+		mes "...En quoi puis-je vous aider?";
+		mes "Je suis occupé pour le moment. Si vous voulez bien m'excuser...";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
@@ -953,43 +917,42 @@ job_hunte,178,32,1	script	Guide#hnt	107,5,2,{
 OnTouch:
 	if (HNTR_Q == 12) {
 		mes "[Guide]";
-		mes "Good day. Welcome to the Hunter testing site. The test begins when you enter the next room.";
+		mes "Bonjour. Bienvenue dans la zone des épreuves pour devenir Chasseur. Le test commencera lorsque vous entrerez dans la salle suivante.";
 		next;
 		mes "[Guide]";
-		mes "As explained before, hunt 4 or more of the monsters named ^3355FFJob change monster^000000. Upon doing so, a switch in the center of the map will then appear.";
+		mes "Comme il vous a déjà été expliqué, vous devrez chasser les monstres dont le nom est ^3355FFChangement de Classe^000000. Une fois ceci fait, un levier apparaîtra au centre de la pièce.";
 		next;
 		mes "[Guide]";
-		mes "When you destroy the switch, the exit will appear in the 12 o'clock direction of the map. Complete everything within the given time and escape.";
+		mes "Vous devrez activer ce levier pour que la sortie vous soit accessible, au nord de la pièce. Tout devra évidemment être accompli durant le temps imparti.";
 		next;
 		mes "[Guide]";
-		mes "If you faint in the middle, fall into a trap, or go over the time limit, you'll fail. Then you must then retake the test.";
+		mes "Si vous échouez, que vous tombez dans un piège ou que vous dépassez la limite de temps, vous devrez recommencer du début.";
 		next;
 		mes "[Guide]";
-		mes "We will provide the arrows, so just make sure that you bring a bow. Well, then. Please enter when you are ready.";
+		mes "Nous vous fournirons les flèches, mais n'oubliez pas d'apporter votre propre arc. Entrez dès que vous êtes prêt.";
 		savepoint "job_hunte",176,22;
 		close;
 	}
 	else if (HNTR_Q > 12 && HNTR_Q < 16) {
 		mes "[Guide]";
-		mes "Hmm...";
-		mes "Did you mess up?";
-		mes "I'll recover some";
-		mes "of your HP and SP for now.";
+		mes "Hum...";
+		mes "Vous avez eu quelques soucis on dirait.";
+		mes "Reposez-vous un instant.";
 		percentheal 100,100;
 		next;
 		mes "[Guide]";
-		mes "If it's too hard, it wouldn't hurt to try again next time. Would you like to resign for now?";
+		mes "Si c'est trop difficile, peut-être devriez-vous laisser tomber?";
 		next;
-		switch(select("Keep trying.:Resign.")) {
+		switch(select("Réessayer.:Abandonner.")) {
 		case 1:
 			mes "[Guide]";
-			mes "Okay. Do your best and become a great Hunter. Please enter the waiting room. If someone is already taking the test, you must wait until that person is done.";
+			mes "D'accord. Faîtes de votre mieux pour devenir un bon Chasseur. Entrez dans la salle d'attente. Si quelqu'un est actuellement en train de passer l'épreuve, vous devrez attendre qu'il ait fini et ce sera à vous juste après.";
 			close;
 		case 2:
-			mapannounce "job_hunte",strcharinfo(0)+ " has resigned. Next person, please enter.",bc_map;
+			mapannounce "job_hunte",strcharinfo(0)+ " a abandonné. Candidat suivant, veuillez entrer.",bc_map;
 			mes "[Guide]";
-			mes "Very well. I'll send you to Payon. Hope to see you next time. Don't forget to save when you leave.";
-			// donpcevent "Waiting Room#hnt::OnStart";
+			mes "Très bien, je vais vous renvoyer à Payon. J'espère tout de même vous revoir une prochaine fois.";
+			// donpcevent "Salle d'Attente#hnt::OnStart";
 			close2;
 			set HNTR_Q,13;
 			savepoint "payon",104,99;
@@ -998,7 +961,7 @@ OnTouch:
 	}
 	else if (HNTR_Q > 15) {
 		mes "[Guide]";
-		mes "You shouldn't be here. How about finding the required job change item first?";
+		mes "Vous ne devriez pas être ici.";
 		close2;
 		savepoint "payon",104,99;
 		warp "payon_in02",21,27;
@@ -1006,11 +969,11 @@ OnTouch:
 	end;
 }
 
-job_hunte,178,38,1	script	Waiting Room#hnt	66,{
+job_hunte,178,38,1	script	Salle d'Attente#hnt	66,{
 	end;
 
 OnInit:
-	waitingroom "Waiting Room", 10,"Waiting Room#hnt::OnStartArena",1;
+	waitingroom "Salle d'Attente", 10,"Salle d'Attente#hnt::OnStartArena",1;
 	enablewaitingroomevent;
 	end;
 
@@ -1031,69 +994,69 @@ OnInit:
 	end;
 
 OnEnable:
-	donpcevent "Switch#hnt::OnDisable";
+	donpcevent "Levier#hnt::OnDisable";
 	enablenpc "Manager#hnt";
 	set .MyMobs,6;
 	initnpctimer;
 	// Target Mosnters
-	monster "job_hunte",67,80,"Job Change Monster",1015,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",114,78,"Job Change Monster",1015,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",89,127,"Job Change Monster",1002,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",53,73,"Job Change Monster",1041,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",125,70,"Job Change Monster",1016,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",90,92,"Job Change Monster",1015,1,"Manager#hnt::OnMyMobDead";
+	monster "job_hunte",67,80,"Changement de Classe",1015,1,"Manager#hnt::OnMyMobDead";
+	monster "job_hunte",114,78,"Changement de Classe",1015,1,"Manager#hnt::OnMyMobDead";
+	monster "job_hunte",89,127,"Changement de Classe",1002,1,"Manager#hnt::OnMyMobDead";
+	monster "job_hunte",53,73,"Changement de Classe",1041,1,"Manager#hnt::OnMyMobDead";
+	monster "job_hunte",125,70,"Changement de Classe",1016,1,"Manager#hnt::OnMyMobDead";
+	monster "job_hunte",90,92,"Changement de Classe",1015,1,"Manager#hnt::OnMyMobDead";
 	// Decoy Monsters
-	monster "job_hunte",85,100,"Job Test Monster",1016,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",72,102,"Job Test Monster",1041,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",108,103,"Job Test Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",88,127,"Job Test Monster",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",125,69,"Job Test Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Job Tester Monster",1016,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,106,"Job Tester Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,73,"Job Tester Monster",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",125,70,"Job Tester Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",90,91,"Job Tester Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",67,80,"Hunter Change Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Hunter Change Monster",1016,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,106,"Hunter Change Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,73,"Hunter Change Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",125,70,"Hunter Change Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",90,91,"Job Transfer Monster",1041,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",85,100,"Job Transfer Monster",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",72,102,"Job Transfer Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",108,103,"Job Transfer Monster",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Job Transfer Monster",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",85,100,"Changement de Chasse",1016,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",72,102,"Changement de Chasse",1041,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",108,103,"Changement de Chasse",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",88,127,"Changement de Chasse",1002,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",125,69,"Changement de Chasse",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"Cible de l'Epreuve",1016,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,106,"Cible de l'Epreuve",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,73,"Cible de l'Epreuve",1002,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",125,70,"Cible de l'Epreuve",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",90,91,"Cible de l'Epreuve",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",67,80,"Chargement de Classe",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"Chargement de Classe",1016,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,106,"Chargement de Classe",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,73,"Chargement de Classe",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",125,70,"Chargement de Classe",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",90,91,"Cible Epreuve Chasseur",1041,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",85,100,"Cible Epreuve Chasseur",1002,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",72,102,"Cible Epreuve Chasseur",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",108,103,"Cible Epreuve Chasseur",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"Cible Epreuve Chasseur",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",112,139,"Binnie",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",112,139,"Darrel",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",112,139,"Rex",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",112,139,"Anselmo",1015,1,"Manager#hnt::OnMyMobDead2";
 	monster "job_hunte",90,91,"Anolian",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,73,"Monster Sample",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,106,"Not Me",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Help Me",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",72,102,"Do Not Hit Me",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",108,103,"Attack Speed 184",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,73,"Pas moi, idiot!",1002,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",53,106,"Pas Moi",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"A l'Aide",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",72,102,"Ne Me Frappe Pas",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",108,103,"Vitesse d'Attaque 184",1015,1,"Manager#hnt::OnMyMobDead2";
 	end;
 
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 3) {
-		mapannounce "job_hunte","Okay, good job... Now, find the switch in the center of the map!! Be careful of the traps!!",bc_map;
+		mapannounce "job_hunte","Très bien, bon travail... Maintenant trouvez le levier au centre de la pièce!! Faîtes attention aux pièges!!",bc_map;
 		set HNTR_Q,14;
-		donpcevent "switch#hnt::OnEnable";
+		donpcevent "Levier#hnt::OnEnable";
 		donpcevent "Manager#hnt::OnDisable";
 	}
 	else {
-		mapannounce "job_hunte","Okay~ You're almost there!!",bc_map;
+		mapannounce "job_hunte","Très bien~ Vous y êtes presque!!",bc_map;
 	}
 	end;
 
 OnMyMobDead2:
-	mapannounce "job_hunte",strcharinfo(0)+ "!! You made a mistake...Please try again.",bc_map;
+	mapannounce "job_hunte",strcharinfo(0)+ "!! Vous avez fait une erreur... Vous devrez réessayer.",bc_map;
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
 	donpcevent "Manager#hnt::OnReset";
-	donpcevent "Waiting Room#hnt::OnStart";
+	donpcevent "Salle d'Attente#hnt::OnStart";
 	end;
 
 OnReset:
@@ -1105,67 +1068,67 @@ OnDisable:
 	end;
 
 OnTimer1000:
-	mapannounce "job_hunte","The test shall now begin.",bc_map;
+	mapannounce "job_hunte","L'épreuve va commencer.",bc_map;
 	end;
 
 OnTimer3000:
-	mapannounce "job_hunte","As mentioned before, only hunt the monsters labeled 'Job change monster'.",bc_map;
+	mapannounce "job_hunte","Vous ne devez attaquer que les monstres portant le nom 'Changement de Classe'.",bc_map;
 	end;
 
 OnTimer5000:
-	mapannounce "job_hunte","***** Be careful of the traps when hunting. *****",bc_map;
+	mapannounce "job_hunte","***** Faîtes très attention aux pièges. *****",bc_map;
 	end;
 
 OnTimer7000:
-	mapannounce "job_hunte","Once you hunt 4 'Job change monster' the switch in the center will begin to operate.",bc_map;
+	mapannounce "job_hunte","Une fois que vous aurez tué tous les monstres 'Changement de Classe', un levier apparaîtra au centre de la pièce.",bc_map;
 	end;
 
 OnTimer9000:
-	mapannounce "job_hunte","When you activate the escape switch, exit the testing area through the warp portal in the 12 o'clock direction.",bc_map;
+	mapannounce "job_hunte","Lorsque vous activerez le levier, la sortie apparaîtra au nord de la pièce.",bc_map;
 	end;
 
 OnTimer11000:
-	mapannounce "job_hunte","Everything must be completed within 3 minutes.",bc_map;
+	mapannounce "job_hunte","Vous disposez de 3 minutes en tout et pour tout.",bc_map;
 	end;
 
 OnTimer13000:
-	mapannounce "job_hunte","You will have 3 minutes from now on. You will be notified after each minute passes.",bc_map;
+	mapannounce "job_hunte","Le temps est décompté à partir de maintenant. Des indications temporelles vous seront données régulièrement.",bc_map;
 	end;
 
 OnTimer14000:
-	mapannounce "job_hunte"," ****** 3 minutes remaining. ****** ",bc_map;
+	mapannounce "job_hunte"," ****** 3 minutes restantes. ****** ",bc_map;
 	end;
 
 OnTimer74000:
-	mapannounce "job_hunte"," ****** 2 minutes remaining. ****** ",bc_map;
+	mapannounce "job_hunte"," ****** 2 minutes restantes. ****** ",bc_map;
 	end;
 
 OnTimer134000:
-	mapannounce "job_hunte"," ****** 1 minute remaining. ****** ",bc_map;
+	mapannounce "job_hunte"," ****** 1 minute restante. ****** ",bc_map;
 	end;
 
 OnTimer164000:
-	mapannounce "job_hunte"," ****** 30 seconds remaining. ****** ",bc_map;
+	mapannounce "job_hunte"," ****** 30 secondes restantes. ****** ",bc_map;
 	end;
 
 OnTimer187000:
-	mapannounce "job_hunte"," Test ends in 5 seconds...",bc_map;
+	mapannounce "job_hunte"," L'épreuve prendra fin dans 5 secondes...",bc_map;
 	end;
 
 OnTimer188000:
-	mapannounce "job_hunte"," Test ends in 4 seconds...",bc_map;
+	mapannounce "job_hunte"," L'épreuve prendra fin dans 4 secondes...",bc_map;
 	end;
 
 OnTimer189000:
-	mapannounce "job_hunte"," Test ends in 3 seconds...",bc_map;
+	mapannounce "job_hunte"," L'épreuve prendra fin dans 3 secondes...",bc_map;
 	end;
 
 OnTimer191000:
-	mapannounce "job_hunte"," Test ends in 2 seconds...",bc_map;
+	mapannounce "job_hunte"," L'épreuve prendra fin dans 2 secondes...",bc_map;
 	end;
 
 OnTimer192000:
-	mapannounce "job_hunte"," Test ends in 1 second.",bc_map;
+	mapannounce "job_hunte"," L'épreuve prendra fin dans 1 seconde.",bc_map;
 	end;
 
 OnTimer193000:
@@ -1173,7 +1136,7 @@ OnTimer193000:
 	end;
 
 OnTimer194000:
-	mapannounce "job_hunte"," Time's up. Please try again.",bc_map;
+	mapannounce "job_hunte"," Le temps imparti est écoulé. Vous avez échoué.",bc_map;
 	end;
 
 OnTimer195000:
@@ -1182,50 +1145,45 @@ OnTimer195000:
 
 OnTimer197000:
 	donpcevent "Manager#hnt::OnReset";
-	donpcevent "Waiting Room#hnt::OnStart";
+	donpcevent "Salle d'Attente#hnt::OnStart";
 	end;
 }
 
-job_hunte,93,101,1	script	Switch#hnt	723,1,1,{
+job_hunte,93,101,1	script	Levier#hnt	723,1,1,{
 OnTouch:
-	mes "^3355FFThere are 3 buttons";
-	mes "on the escape switch.^000000";
+	mes "^3355FFC'est un levier possédant trois positions.^000000"; //myllena: j'ai légèrement modifié le texte ici
 	set HNTR_Q,15;
 	next;
-	switch(select("Escape:Cancel:Re-test")) {
+	switch(select("L'actionner:Ne pas y toucher:Donner un coup dedans")) {
 	case 1:
-		mes "^3355FFThe Escape Warp Portal";
-		mes "has now been activated.^000000";
+		mes "^3355FFLa sortie est à présent accessible.^000000";
 		close2;
-		mapannounce "job_hunte"," !! Escape Warp Portal activation complete. !! ",bc_map;
+		mapannounce "job_hunte"," !! La sortie est à présent accessible. !! ",bc_map;
 		enablenpc "exit#hnttest";
 		end;
 	case 2:
-		mes "^3355FFCanceling";
-		mes "Operation.^000000";
+		mes "^3355FFOpération annulée.^000000";
 		close2;
-		mapannounce "job_hunte"," !! Operation has been cancelled. !! ",bc_map;
+		mapannounce "job_hunte"," !! Opération annulée. !! ",bc_map;
 		end;
 	case 3:
-		mapannounce "job_hunte"," !! Cancellation warp activating... !! ",bc_map;
-		mes "^3355FFYou will soon be";
-		mes "returned to the";
-		mes "waiting room.^000000";
+		mapannounce "job_hunte"," !! opération annulée... !! ",bc_map;
+		mes "^3355FFVous allez être renvoyé dans la salle d'attente.^000000";
 		close2;
 		set HNTR_Q,13;
 		warp "job_hunte",176,22;
 		donpcevent "Manager#hnt::OnReset";
-		donpcevent "Waiting Room#hnt::OnStart";
+		donpcevent "Salle d'Attente#hnt::OnStart";
 		end;
 	}
 
 OnDisable:
 	disablenpc "exit#hnttest";
-	disablenpc "Switch#hnt";
+	disablenpc "Levier#hnt";
 	end;
 
 OnEnable:
-	enablenpc "Switch#hnt";
+	enablenpc "Levier#hnt";
 	end;
 }
 
@@ -1236,7 +1194,7 @@ OnInit:
 
 OnTouch:
 	donpcevent "Manager#hnt::OnReset";
-	donpcevent "Waiting Room#hnt::OnStart";
+	donpcevent "Salle d'Attente#hnt::OnStart";
 	set HNTR_Q,16;
 	changequest 4011,4012;
 	savepoint "payon",104,99;
@@ -1250,143 +1208,143 @@ OnTouch:
 job_hunte,52,140,0	script	1-1::HntTrap	-1,0,1,{
 OnTouch:
 	switch(rand(200)) {
-	default:
-	case 1: mapannounce "job_hunte",strcharinfo(0) + ", you have fallen into a trap. You will be returned to the starting point.",bc_map; break;
-	case 2: mapannounce "job_hunte",strcharinfo(0) + ", yes you! Go back and start over!",bc_map; break;
-	case 3: mapannounce "job_hunte",strcharinfo(0) + " has failed!...well...you will if you don't start over...",bc_map; break;
-	case 4: mapannounce "job_hunte",strcharinfo(0) + ", has failed me! Go back to where you started!",bc_map; break;
-	case 5: mapannounce "job_hunte",strcharinfo(0) + ", you have blundered into a trap. I'm sorry, but for now, YOU LOSE.",bc_map; break;
-	case 6: mapannounce "job_hunte",strcharinfo(0) + ", what are you doing!? Go back and do it again!",bc_map; break;
-	case 7: mapannounce "job_hunte",strcharinfo(0) + ", come on! You can do better then this!! Try again!",bc_map; break;
-	case 8: mapannounce "job_hunte",strcharinfo(0) + ", has fallen into a trap...again. But don't worry, you're getting better.",bc_map; break;
-	case 9: mapannounce "job_hunte",strcharinfo(0) + ", fail, fail, fail... Go back to where you started!",bc_map; break;
-	case 10: mapannounce "job_hunte",strcharinfo(0) + "... aww~ Try again! You can do it!",bc_map; break;
-	case 11: mapannounce "job_hunte",strcharinfo(0) + ", @#$%#^!@ and you wanna be a what? Hunter? Get back there!",bc_map; break;
-	case 12: mapannounce "job_hunte",strcharinfo(0) + " was defeated by the forces of evil. Don't give up, hero!",bc_map; break;
-	case 13: mapannounce "job_hunte","I put a spell on you " + strcharinfo(0) + " and now you're mine! Go start over now.",bc_map; break;
-	case 14: mapannounce "job_hunte",strcharinfo(0) + ". G'day mate, welcome to the land down under. As a present, I'll send you to the starting point...",bc_map; break;
-	case 15: mapannounce "job_hunte","That's my nest " + strcharinfo(0) + "! dont step there, squawk~ Start over.",bc_map; break;
-	case 16: mapannounce "job_hunte",strcharinfo(0) + ", another archer down. 3 more to go!",bc_map; break;
-	case 17: mapannounce "job_hunte",strcharinfo(0) + ", have you got what it takes? Then try again.",bc_map; break;
-	case 18: mapannounce "job_hunte","Alas, " + strcharinfo(0) + ", you have fallen prey to the most feared of traps. The dreaded stink bomb! Run run run awaaaaaay!",bc_map; break;
-	case 19: mapannounce "job_hunte",strcharinfo(0) + " had too much prune juice to drink today. Back to the starting point~",bc_map; break;
-	case 20: mapannounce "job_hunte","No.... " + strcharinfo(0) + ", you have fallen into a trap. You will be returned to the starting point.",bc_map; break;
-	case 21: mapannounce "job_hunte","Meow *pounce* look my kitties we'll have some" + strcharinfo(0) + "stew. Back to the starting point if you don't want to become stew!",bc_map; break;
-	case 22: mapannounce "job_hunte","Sorry " + strcharinfo(0) + ", but you've actually found a BAD secret. You will be returned to the starting point.",bc_map; break;
-	case 23: mapannounce "job_hunte",strcharinfo(0) + ", silly Archer...your tenacity is touching. But it's back to the start for you...",bc_map; break;
-	case 24: mapannounce "job_hunte",strcharinfo(0) + ", you've fallen and you can't get up. You'll be carried back to the starting point.",bc_map; break;
-	case 25: mapannounce "job_hunte","Skip a turn " + strcharinfo(0) + ", go back to start.",bc_map; break;
-	case 26: mapannounce "job_hunte",strcharinfo(0) + ", nya nya, heh heh heh. You will be returned to the starting point.",bc_map; break;
-	case 27: mapannounce "job_hunte","Practice is over " + strcharinfo(0) + ". This time show me for real.",bc_map; break;
-	case 28: mapannounce "job_hunte",strcharinfo(0) + ", this is a Poring jellopy raid...Get out! Start from the beginning if you wish to continue.",bc_map; break;
-	case 29: mapannounce "job_hunte","Disconnected from server. " + strcharinfo(0) + ", you have to start over.",bc_map; break;
-	case 30: mapannounce "job_hunte",strcharinfo(0) + ", what does this button do...oops! I'm afraid you have to start over.",bc_map; break;
-	case 31: mapannounce "job_hunte",strcharinfo(0) + ", you have entered the bonus round! Aaaand, you lost. You will be returned to the starting point.",bc_map; break;
-	case 32: mapannounce "job_hunte","Oh, no " + strcharinfo(0) + ", you've stepped on a hive of bees. You narrowly escaped, all the way back to the beginning.",bc_map; break;
-	case 33: mapannounce "job_hunte",strcharinfo(0) + ", wait wait. That's a trap! Oh wait, that's dog. . . .",bc_map; break;
-	case 34: mapannounce "job_hunte","Stop " + strcharinfo(0) + "! For stepping on that trap, I shall punish you!",bc_map; break;
-	case 35: mapannounce "job_hunte",strcharinfo(0) + ", I'll be back. . . I hope you will too.",bc_map; break;
-	case 36: mapannounce "job_hunte",strcharinfo(0) + ", Come with me if you want to live. . to the starting point.",bc_map; break;
-	case 37: mapannounce "job_hunte",strcharinfo(0) + ", my... precious! Go back to the starting point.",bc_map; break;
-	case 38: mapannounce "job_hunte","Follow the yellow brick road... No wait, " + strcharinfo(0) + "!! Not that way...Back to the starting point it is.",bc_map; break;
-	case 39: mapannounce "job_hunte",strcharinfo(0) + ", you've really go to get the hang of this 'in tune with nature' thing. Now, you're lost!",bc_map; break;
-	case 40: mapannounce "job_hunte",strcharinfo(0) + ", it's only a story...not real. But you will be returned to the starting point.",bc_map; break;
-	case 41: mapannounce "job_hunte",strcharinfo(0) + ", you have fallen into a trap. And the trap...has fallen into you. Returning you to the starting point.",bc_map; break;
-	case 42: mapannounce "job_hunte","Fear not " + strcharinfo(0) + ", for you too, shall learn the powers of the dark side. You will now be returned to the starting point.",bc_map; break;
-	case 43: mapannounce "job_hunte",strcharinfo(0) + ", fell into a trap. Quite easily too, I'm afraid. But this hero won't be beaten that easily!",bc_map; break;
-	case 44: mapannounce "job_hunte"," Tip of the day: Do not step on the traps. You will be returned to the starting point.",bc_map; break;
-	case 45: mapannounce "job_hunte",strcharinfo(0) + " fell into a trap. Once again, for clarity's sake, the name is " + strcharinfo(0) + ".",bc_map; break;
-	case 46: mapannounce "job_hunte","Oy oy, " + strcharinfo(0) + ".. I've seen blind Porings get further! Go back to the starting point.",bc_map; break;
-	case 47: mapannounce "job_hunte","MY EYES!! " + strcharinfo(0) + ", you... you.. stepped on them. Go try again...I'd cry for you if I could even shed tears...",bc_map; break;
-	case 48: mapannounce "job_hunte",strcharinfo(0) + ", where are you? Right...NOT at the place where'd you be if you passed the test.",bc_map; break;
-	case 49: mapannounce "job_hunte"," Wow, they actually paid a guy to think of these comments. " + strcharinfo(0) + ", you can go back to the starting point.",bc_map; break;
-	case 50: mapannounce "job_hunte"," My word, " + strcharinfo(0) + "! You've precariously fallen into a trap! You will be returned back to the start. Cheerio~!",bc_map; break;
-	case 51: mapannounce "job_hunte",strcharinfo(0) + ", do you have any idea where you're going? Start over *sigh*.",bc_map; break;
-	case 52: mapannounce "job_hunte",strcharinfo(0) + ", do you like green tea ice cream? No? Go back to the starting point...*hmph*",bc_map; break;
-	case 53: mapannounce "job_hunte","Oh, no.. " + strcharinfo(0) + ", are you hurt? Come now, let's go back to the starting point.",bc_map; break;
-	case 54: mapannounce "job_hunte","Hi " + strcharinfo(0) + ", how are you? Here's a present~ a free warp! Back to the starting point.",bc_map; break;
-	case 55: mapannounce "job_hunte",strcharinfo(0) + ".......... did you know that that was a trap? I hope so, otherwise, I guess you'd be pretty embarassed.",bc_map; break;
-	case 56: mapannounce "job_hunte",strcharinfo(0) + ", what do you think of the interior design? I worked very hard on it... and this lovely feature that sends you back to the starting point.",bc_map; break;
-	case 57: mapannounce "job_hunte","BOOM BAM BOOM! " + strcharinfo(0) + ", you have fallen into my trap! But I won't kill you...just...humiliate you...",bc_map; break;
-	case 58: mapannounce "job_hunte","Oh, " + strcharinfo(0) + ".. You can do better. Try again!",bc_map; break;
-	case 59: mapannounce "job_hunte","Hello, this is your local Kafra worker... " + strcharinfo(0) + ", your mommy is waiting for you at the checkout line.",bc_map; break;
-	case 60: mapannounce "job_hunte",strcharinfo(0) + ", if you do well. I'll have a nice present waiting for you... What is it? You'll see if you pass~ Go try again now!",bc_map; break;
-	case 61: mapannounce "job_hunte",strcharinfo(0) + " faaaaaaaaaaaaaaaaailed.. Hehe, just kidding. You will be returned to the starting point so try again!",bc_map; break;
-	case 62: mapannounce "job_hunte",strcharinfo(0) + ", you fell into a trap. You should watch your feet more. What? Invisible? That's baby talk! Now go try again!",bc_map; break;
-	case 63: mapannounce "job_hunte"," Sorry, " + strcharinfo(0) + ", you have fallen into a trap. But I'll be nice and send you to the starting point.",bc_map; break;
-	case 64: mapannounce "job_hunte",strcharinfo(0) + ", HAHAHAHAHAHA!!!! I can't believe you fell for that one!",bc_map; break;
-	case 65: mapannounce "job_hunte",strcharinfo(0) + ", I was just about to tell you about that one...but, I didn't? Back to start.",bc_map; break;
-	case 66: mapannounce "job_hunte",strcharinfo(0) + "...I'm sorry my friend, but you lose. But don't worry, its not like this message is broadcast or anything.",bc_map; break;
-	case 67: mapannounce "job_hunte",strcharinfo(0) + ", I'm not so sure that you qualify for this anymore... Try again and prove me wrong.",bc_map; break;
-	case 68: mapannounce "job_hunte",strcharinfo(0) + ", OW...now that's gotta hurt. Back to the start~",bc_map; break;
-	case 69: mapannounce "job_hunte",strcharinfo(0) + ", I find your lack of faith disturbing... Let's start over.",bc_map; break;
-	case 70: mapannounce "job_hunte",strcharinfo(0) + ", your eyes can deceive you. Don't trust them. Stretch out with your feelings. Try again now.",bc_map; break;
-	case 71: mapannounce "job_hunte",strcharinfo(0) + ", if you once start down the dark path, forever it will dominate your destiny. You shall be returned to the starting point.",bc_map; break;
-	case 72: mapannounce "job_hunte",strcharinfo(0) + ", size doesn't matter. But, the number of traps that caught you do. Try again and win this time!",bc_map; break;
-	case 73: mapannounce "job_hunte",strcharinfo(0) + ", try not. Do or do not. There is no try.",bc_map; break;
-	case 74: mapannounce "job_hunte",strcharinfo(0) + ", that is why you fail. Now try again!",bc_map; break;
-	case 75: mapannounce "job_hunte",strcharinfo(0) + ", look. If its made of metal and looks like it has teeth, you shouldn't put your foot in it. So simple, really...",bc_map; break;
-	case 76: mapannounce "job_hunte",strcharinfo(0) + ", you are beaten. It is useless to resist.",bc_map; break;
-	case 77: mapannounce "job_hunte",strcharinfo(0) + ", I'm looking forward to completing your training. In time you will call me Master.",bc_map; break;
-	case 78: mapannounce "job_hunte",strcharinfo(0) + ", your overconfidence is your weakness.",bc_map; break;
-	case 79: mapannounce "job_hunte",strcharinfo(0) + ", watch your step. This place can be a little rough.",bc_map; break;
-	case 80: mapannounce "job_hunte",strcharinfo(0) + ", oh I told you it was dangerous here.",bc_map; break;
-	case 81: mapannounce "job_hunte",strcharinfo(0) + ", everything is proceeding as I have foreseen.",bc_map; break;
-	case 82: mapannounce "job_hunte",strcharinfo(0) + ", you should have not come back.",bc_map; break;
-	case 83: mapannounce "job_hunte",strcharinfo(0) + ", there are alternatives to fighting. But not to losing to this test. Now try again!",bc_map; break;
-	case 84: mapannounce "job_hunte",strcharinfo(0) + ", now that's a name I haven't heard in a while...let's hope I don't hear it again~!",bc_map; break;
-	case 85: mapannounce "job_hunte",strcharinfo(0) + ", we do not train to be merciful here, mercy is for the weak!",bc_map; break;
-	case 86: mapannounce "job_hunte",strcharinfo(0) + ", defeat does not exist here, does it?!",bc_map; break;
-	case 87: mapannounce "job_hunte",strcharinfo(0) + ", concentrate. Focus your powers!",bc_map; break;
-	case 88: mapannounce "job_hunte",strcharinfo(0) + ", am I going mad, or did the word -think- escape your lips?",bc_map; break;
-	case 89: mapannounce "job_hunte",strcharinfo(0) + ", you're just stalling now.",bc_map; break;
-	case 90: mapannounce "job_hunte",strcharinfo(0) + ", life isn't always fair.",bc_map; break;
-	case 91: mapannounce "job_hunte",strcharinfo(0) + ".... Uhhh...it's not OUR fault....",bc_map; break;
-	case 92: mapannounce "job_hunte",strcharinfo(0) + ", survivability takes priority.",bc_map; break;
-	case 93: mapannounce "job_hunte",strcharinfo(0) + ", people have the strength to overcome their obstacles...everyone can.",bc_map; break;
-	case 94: mapannounce "job_hunte",strcharinfo(0) + ", there is happiness for those who accept their fate, and there is glory for those who resist their fate.",bc_map; break;
-	case 95: mapannounce "job_hunte",strcharinfo(0) + ", some things are real and some things are false. Can't you tell the difference?",bc_map; break;
-	case 96: mapannounce "job_hunte",strcharinfo(0) + ", we are having fun aren't we? Everyday here is like a dream. I really hope it's going to be like this forever.",bc_map; break;
-	case 97: mapannounce "job_hunte",strcharinfo(0) + ", I'll give you just one piece of advice... dying hurts like hell.",bc_map; break;
-	case 98: mapannounce "job_hunte",strcharinfo(0) + ", don't give up the ghost! Just be more careful...",bc_map; break;
-	case 99: mapannounce "job_hunte",strcharinfo(0) + ", death is a gift given at birth. But...these traps won't kill you, don't worry.",bc_map; break;
-	case 100: mapannounce "job_hunte",strcharinfo(0) + ", I was counting on you from the beginning. But I guess you're gonna make me wait longer...",bc_map; break;
-	case 101: mapannounce "job_hunte",strcharinfo(0) + ", always with the end comes hope and rebirth. But it's back to the beginning for you~",bc_map; break;
-	case 102: mapannounce "job_hunte",strcharinfo(0) + ", have I ever told you about the power held in a single tear? Its okay to shed one now, I know its hard...",bc_map; break;
-	case 103: mapannounce "job_hunte",strcharinfo(0) + ", happiness often sneaks in through a door you didn't know you left open. Sort of like...hidden traps!",bc_map; break;
+	default: //myllena: je me suis permise quelques libertés humoristiques sur les phrases ci-dessous
+	case 1: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Vous allez être renvoyé au point de départ.",bc_map; break;
+	case 2: mapannounce "job_hunte",strcharinfo(0) + ", oui vous! Retournez au point de départ et recommencez!",bc_map; break;
+	case 3: mapannounce "job_hunte",strcharinfo(0) + " a échoué!...enfin...ce sera le cas si vous ne recommencez pas...",bc_map; break;
+	case 4: mapannounce "job_hunte",strcharinfo(0) + " a échoué! Revenez au point de départ!",bc_map; break;
+	case 5: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Je suis désolé, mais vous avez encore PERDU.",bc_map; break;
+	case 6: mapannounce "job_hunte",strcharinfo(0) + ", qu'est-ce que vous faites!? Retournez au point de départ et recommencez!",bc_map; break;
+	case 7: mapannounce "job_hunte",strcharinfo(0) + ", allez! Vous pouvez faire mieux que ça!! Essayez encore!",bc_map; break;
+	case 8: mapannounce "job_hunte",strcharinfo(0) + ", est tombé dans un piège... encore une fois. Mais ne vous inquiétez pas, vous vous améliorez.",bc_map; break;
+	case 9: mapannounce "job_hunte",strcharinfo(0) + ", échoue, échoue, échoue... Revenez au point de départ!",bc_map; break;
+	case 10: mapannounce "job_hunte",strcharinfo(0) + "... arf.. Essayez encore! Vous pouvez y arriver!",bc_map; break;
+	case 11: mapannounce "job_hunte",strcharinfo(0) + ", @#$%#^!@ et voulez être un quoi? Chasseur? Recommencez!",bc_map; break;
+	case 12: mapannounce "job_hunte",strcharinfo(0) + " a été battu par les forces du mal. N'abandonnez pas, héros!",bc_map; break;
+	case 13: mapannounce "job_hunte","Je vous ai envoyé un sortilège " + strcharinfo(0) + " et vous m'appartenez désormais! Recommencez maintenant.",bc_map; break;
+	case 14: mapannounce "job_hunte",strcharinfo(0) + ". Salut camarade, bienvenue dans le royaume souterrain. Pour vous récompenser, je vais vous renvoyer au point de départ...",bc_map; break;
+	case 15: mapannounce "job_hunte","C'est mon territoire ici " + strcharinfo(0) + "! ne vous approchez-pas, recommencez du début.",bc_map; break;
+	case 16: mapannounce "job_hunte",strcharinfo(0) + ", vous avez abattu un autre archer. Il vous en reste 3!",bc_map; break;
+	case 17: mapannounce "job_hunte",strcharinfo(0) + ", vous avez saisi ce qu'il faut faire? Alors réessayez.",bc_map; break;
+	case 18: mapannounce "job_hunte","Hélas, " + strcharinfo(0) + ", vous êtes tombé en proie au plus redouté des pièges. La redoutable bombe puante! Courrez courrez courrez viiiiiite!",bc_map; break;
+	case 19: mapannounce "job_hunte",strcharinfo(0) + " avait bu trop de jus de pruneau aujourd'hui. Retour au point de départ~",bc_map; break;
+	case 20: mapannounce "job_hunte","Non.... " + strcharinfo(0) + ", vous êtes tombé dans un piège. Vous allez être reconduit au point de départ.",bc_map; break;
+	case 21: mapannounce "job_hunte","Miaou *bondit* Regardez mes chatons, nous allons goûter du ragoût de " + strcharinfo(0) + ". Si vous ne voulez pas finir en civet, retournez au point de départ!",bc_map; break;
+	case 22: mapannounce "job_hunte","Désolé " + strcharinfo(0) + ", mais vous venez de découvrir un MAUVAIS secret. Vous allez être reconduit au point de départ.",bc_map; break;
+	case 23: mapannounce "job_hunte",strcharinfo(0) + ", stupide Archer... votre ténacité est touchante... Mais pas de pitié pour les croissants, ZOU, au point de départ...",bc_map; break;
+	case 24: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé et vous ne pouvez plus vous relever. Vous allez être transporté au point de départ.",bc_map; break;
+	case 25: mapannounce "job_hunte","Sautez votre tour, " + strcharinfo(0) + ", retournez à la case départ.",bc_map; break;
+	case 26: mapannounce "job_hunte",strcharinfo(0) + ", nya nya, hé hé hé. Vous allez être reconduit au point de départ.",bc_map; break;
+	case 27: mapannounce "job_hunte","L'entraînement est terminé " + strcharinfo(0) + ". Il est l'heure de passer aux choses sérieuses.",bc_map; break;
+	case 28: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes encore plus nul qu'un Poring avec une jambe de bois... Sortez! Retournez au début.",bc_map; break;
+	case 29: mapannounce "job_hunte","Déconnecté du serveur. " + strcharinfo(0) + ", vous devez recommencer du début.",bc_map; break;
+	case 30: mapannounce "job_hunte","Tiens? Que fait ce bouton? ... Oups! " + strcharinfo(0) + ", j'ai peur que vous deviez recommencer du début.",bc_map; break;
+	case 31: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes entré dans la zone bonus! Eeeeet, vous êtes perdu! Vous allez être reconduit au point de départ.",bc_map; break;
+	case 32: mapannounce "job_hunte","Oh, non " + strcharinfo(0) + ", vous vous êtes cogné contre un essaim d'abeilles. Vous vous en êtes sorti de justesse, et maintenant direction le début.",bc_map; break;
+	case 33: mapannounce "job_hunte",strcharinfo(0) + ", attendez, attendez. C'est un piège! Oh, ah non... C'est juste un chien...",bc_map; break;
+	case 34: mapannounce "job_hunte","Stop " + strcharinfo(0) + "! Pour avoir marché dans ce piège, au nom de Payon, je vais vous punir!",bc_map; break;
+	case 35: mapannounce "job_hunte",strcharinfo(0) + ", je reviendrai... Et j'espère que vous aussi.",bc_map; break;
+	case 36: mapannounce "job_hunte",strcharinfo(0) + ", venez avec moi si vous souhaitez rester en vie... jusqu'au point de départ.",bc_map; break;
+	case 37: mapannounce "job_hunte",strcharinfo(0) + ", mon... précieux! Retournez au point de départ.",bc_map; break;
+	case 38: mapannounce "job_hunte","Suivez le lapin blanc, " + strcharinfo(0) + "!! Non, attendez... Pas par ici... Retour au point de départ.",bc_map; break;
+	case 39: mapannounce "job_hunte",strcharinfo(0) + ", vous n'avez pas pu vous en empêcher, avouez! Et maintenant vous êtes perdu!",bc_map; break;
+	case 40: mapannounce "job_hunte",strcharinfo(0) + ", tout ceci n'est qu'une histoire... Ce n'est pas réel. Mais vous allez être reconduit au point de départ.",bc_map; break;
+	case 41: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Et le piège... s'est refermé sur vous. Retournez au point de départ.",bc_map; break;
+	case 42: mapannounce "job_hunte","N'ayez crainte " + strcharinfo(0) + ", vous apprendrez vous aussi les pouvoirs du côté obscur. Vous allez être reconduit au départ.",bc_map; break;
+	case 43: mapannounce "job_hunte",strcharinfo(0) + ", est tombé dans un piège. Et de façon complètement stupide, j'en ai bien peur. Mais il en faut plus pour décourager ce héros!",bc_map; break;
+	case 44: mapannounce "job_hunte","Astuce du jour: ne tombez pas dans les pièges. Vous allez être reconduit au point de départ.",bc_map; break;
+	case 45: mapannounce "job_hunte",strcharinfo(0) + " est tombé dans un piège. Encore une fois. Vous devriez avoir honte, " + strcharinfo(0) + ".",bc_map; break;
+	case 46: mapannounce "job_hunte","Hoy hoy, " + strcharinfo(0) + "... J'ai vu des Porings aveugles s'en sortir mieux que vous! Retournez au point de départ.",bc_map; break;
+	case 47: mapannounce "job_hunte","MES YEUX!! " + strcharinfo(0) + ", idiot, qu'avez-vous fait... ?! Réessayez encore...",bc_map; break;
+	case 48: mapannounce "job_hunte",strcharinfo(0) + ", où êtes-vous passé? Ah... Non, ce n'est PAS par ici.",bc_map; break;
+	case 49: mapannounce "job_hunte","Wahou, et dire que quelqu'un s'est réellement fait suer à traduire ces commentaires. " + strcharinfo(0) + ", vous pouvez retourner au point de départ.",bc_map; break;
+	case 50: mapannounce "job_hunte","Nom de Zeus, " + strcharinfo(0) + "! Vous êtes tombé dans un piège comme un idiot! C'est vraiment pas l'pied~!",bc_map; break;
+	case 51: mapannounce "job_hunte",strcharinfo(0) + ", avez-vous ne serait-ce qu'une idée de ce que vous faites ici? Recommencez encore *soupire*.",bc_map; break;
+	case 52: mapannounce "job_hunte",strcharinfo(0) + ", est-ce que vous aimez la glace au thé vert? Non? Pas de chance, retournez au point de départ...*humph*",bc_map; break;
+	case 53: mapannounce "job_hunte","Oh, non... " + strcharinfo(0) + ", êtes-vous blessé? Venez par ici, retournons au point de départ.",bc_map; break;
+	case 54: mapannounce "job_hunte","Bonjour " + strcharinfo(0) + ", comment allez-vous? Voici un cadeau pour vous~ une téléportation gratuite... Pour le point de départ!",bc_map; break;
+	case 55: mapannounce "job_hunte",strcharinfo(0) + ".......... saviez-vous qu'il s'agissait d'un piège? J'espère pour vous, sinon ma foi je suppose que vous seriez assez embarrassé.",bc_map; break;
+	case 56: mapannounce "job_hunte",strcharinfo(0) + ", que pensez-vous de la décoration intérieure? J'ai travaillé très dur pour tout agencer avec goût et harmonie... Et ce joli petit piège va vous renvoyer au point de départ.",bc_map; break;
+	case 57: mapannounce "job_hunte","BOUM BAM BOUM! " + strcharinfo(0) + ", vous êtes tombé dans un piège! Mais je ne vais pas vous tuer... Juste... Vous humilier...",bc_map; break;
+	case 58: mapannounce "job_hunte","Oh, " + strcharinfo(0) + "... Vous pouvez faire mieux que ça. Essayez encore!",bc_map; break;
+	case 59: mapannounce "job_hunte","Bonjour, ici l'Hôtesse Kafra... Le petit " + strcharinfo(0) + " est attendu par sa maman à l'accueil.",bc_map; break;
+	case 60: mapannounce "job_hunte",strcharinfo(0) + ", si vous réussissez, je vous donnerai un petit cadeau... Ce que c'est? Vous le saurez quand vous réussirez~ Réessayez à présent!",bc_map; break;
+	case 61: mapannounce "job_hunte",strcharinfo(0) + " a échoué. Héhé, c'est une blague. Vous allez être reconduit au point de départ. Essayez à nouveau!",bc_map; break;
+	case 62: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Vous devriez quand même regarder où vous mettez les pieds. Comment? Invisible? Détail! Maintenant, recommencez!",bc_map; break;
+	case 63: mapannounce "job_hunte","Désolé, " + strcharinfo(0) + ", vous êtes tombé dans un piège. Mais je suis gentil, je vais vous reconduire au point de départ.",bc_map; break;
+	case 64: mapannounce "job_hunte",strcharinfo(0) + ", HAHAHAHAHAHA!!!! Je ne peux pas croire que vous êtes tombé dans celui-là!",bc_map; break;
+	case 65: mapannounce "job_hunte",strcharinfo(0) + ", quel dommage, j'allais justement vous prévenir... Retour au départ.",bc_map; break;
+	case 66: mapannounce "job_hunte",strcharinfo(0) + "...Je suis désolé mon ami, vous avez échoué. Mais ne vous inquiétez pas, ceci reste entre nous...",bc_map; break;
+	case 67: mapannounce "job_hunte",strcharinfo(0) + ", quelle performance pitoyable... Réessayez et prouvez-moi que vous n'êtes pas une mauviette.",bc_map; break;
+	case 68: mapannounce "job_hunte",strcharinfo(0) + ", Oh... ça doit faire mal. Retour au point de départ~",bc_map; break;
+	case 69: mapannounce "job_hunte",strcharinfo(0) + ", je trouve que vous manquez de dynamisme. Recommencez du début.",bc_map; break;
+	case 70: mapannounce "job_hunte",strcharinfo(0) + ", vos yeux vous ont trompé. Ne vous fiez pas à votre vision, mais à votre intuition. Détendez-vous et réessayez.",bc_map; break;
+	case 71: mapannounce "job_hunte",strcharinfo(0) + ", si vous laissez le côté obscur vous envahir, à tout jamais il voilera votre coeur et dominera votre destin. Vous allez être reconduit au point de départ.",bc_map; break;
+	case 72: mapannounce "job_hunte",strcharinfo(0) + ", la taille n'a pas d'importance, vous savez. Par contre, le nom de pièges dans lequel vous tombez, oui. Réessayez et prouvez votre valeur!",bc_map; break;
+	case 73: mapannounce "job_hunte",strcharinfo(0) + ", n'essayez pas. Faites-le, ou ne le faites pas. Mais il n'y a pas de place à l'essai.",bc_map; break;
+	case 74: mapannounce "job_hunte",strcharinfo(0) + ", encore et toujours, perdu! Maintenant réessayez!",bc_map; break;
+	case 75: mapannounce "job_hunte",strcharinfo(0) + ", regardez. Si c'est en métal et que ça a des petites pointes en forme de dents, vous ne devez pas poser le pied dessus. C'est pourtant simple...",bc_map; break;
+	case 76: mapannounce "job_hunte",strcharinfo(0) + ", Vous avez échoué. Inutile de protester.",bc_map; break;
+	case 77: mapannounce "job_hunte",strcharinfo(0) + ", j'espère qu'un jour vous arriverez à terminer votre entraînement. Alors vous m'appellerez Maître.",bc_map; break;
+	case 78: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes trop sûr de vous. C'est ce qui constitue votre plus grande faiblesse.",bc_map; break;
+	case 79: mapannounce "job_hunte",strcharinfo(0) + ", faites attention où vous mettez les pieds. Le terrain est pas mal accidenté par ici.",bc_map; break;
+	case 80: mapannounce "job_hunte",strcharinfo(0) + ", oh, je vous avais prévenu que c'était dangereux.",bc_map; break;
+	case 81: mapannounce "job_hunte",strcharinfo(0) + ", tout se déroule selon mon plan... Le monde sera bientôt mien... HAHAHA...!",bc_map; break;
+	case 82: mapannounce "job_hunte",strcharinfo(0) + ", vous n'auriez pas du revenir.",bc_map; break;
+	case 83: mapannounce "job_hunte",strcharinfo(0) + ", il n'y a pas d'alternatives au combat. Mais avant ça, vous devez réussir cette épreuve. Maintenant, réessayez!",bc_map; break;
+	case 84: mapannounce "job_hunte",strcharinfo(0) + ", c'est un nom que j'ai pas mal entendu ces derniers temps... espérons que je ne l'entende pas une fois de plus~!",bc_map; break;
+	case 85: mapannounce "job_hunte",strcharinfo(0) + ", nous ne nous entraînons pas pour faire preuve de pitié ici. La pitié, c'est pour les faibles!",bc_map; break;
+	case 86: mapannounce "job_hunte",strcharinfo(0) + ", échouer encore et encore ne vous fera pas sortir d'ici plus vite, vous savez?!",bc_map; break;
+	case 87: mapannounce "job_hunte",strcharinfo(0) + ", un peu de concentration! Rassemblez vos forces et réessayez!",bc_map; break;
+	case 88: mapannounce "job_hunte",strcharinfo(0) + ", je vais finir par me fâcher... Est-ce que le mot -réfléchir- fait partie de votre vocabulaire?",bc_map; break;
+	case 89: mapannounce "job_hunte",strcharinfo(0) + ", il y a eu un bug dans la matrice... Recommencez.",bc_map; break;
+	case 90: mapannounce "job_hunte",strcharinfo(0) + ", oui, je sais, la vie est injuste... Mais vous devez recommencer.",bc_map; break;
+	case 91: mapannounce "job_hunte",strcharinfo(0) + ".... Uhhh... ne me regardez pas comme ça, ce n'est pas MOI qui suis tombé dans ce piège....",bc_map; break;
+	case 92: mapannounce "job_hunte",strcharinfo(0) + ", essayez de survivre encore un peu pour recommencer.",bc_map; break;
+	case 93: mapannounce "job_hunte",strcharinfo(0) + ", rassemblez votre force pour surmonter les obstacles qui se dressent devant vous. Vous en êtes capable... Tout le monde le peut.",bc_map; break;
+	case 94: mapannounce "job_hunte",strcharinfo(0) + ", le bonheur vient à ceux qui acceptent leur destin, et la gloire vient à ceux qui leur résiste.",bc_map; break;
+	case 95: mapannounce "job_hunte",strcharinfo(0) + ", certaines choses sont vraies, et d'autres sont fausses. N'arrivez-vous pas à faire la part des choses?",bc_map; break;
+	case 96: mapannounce "job_hunte",strcharinfo(0) + ", on s'amuse bien, pas vrai? Tous les jours ressemblent à un rêve éveillé. J'espère que cela continuera pour toujours.",bc_map; break;
+	case 97: mapannounce "job_hunte",strcharinfo(0) + ", voici un petit conseil, entre nous... Mourir, ça fait vraiment très mal.",bc_map; break;
+	case 98: mapannounce "job_hunte",strcharinfo(0) + ", n'abandonnez pas! Soyez un peu plus prudent...",bc_map; break;
+	case 99: mapannounce "job_hunte",strcharinfo(0) + ", la mort n'est pas un présent que l'on reçoit à la naissance. Mais... ces pièges ne vont pas vous tuer, ne vous inquiétez pas.",bc_map; break;
+	case 100: mapannounce "job_hunte",strcharinfo(0) + ", je comptais sur vous depuis le début. Mais je suppose que vous allez encore me faire attendre...",bc_map; break;
+	case 101: mapannounce "job_hunte",strcharinfo(0) + ", la fin est synonyme d'espoir et de renaissance. Mais pour vous, c'est retour au début~",bc_map; break;
+	case 102: mapannounce "job_hunte",strcharinfo(0) + ", vous ai-je déjà parlé du pouvoir contenu dans une seule larme? Vous pouvez en verser quelques unes à présent...",bc_map; break;
+	case 103: mapannounce "job_hunte",strcharinfo(0) + ", le bonheur se glisse parfois à travers une porte entrouverte. Un peu comme... les pièges cachés!",bc_map; break;
 	case 104: mapannounce "job_hunte",strcharinfo(0) + ", ....Chii?",bc_map; break;
-	case 105: mapannounce "job_hunte",strcharinfo(0) + ", Mine! Mine! Mine! Mine!",bc_map; break;
-	case 106: mapannounce "job_hunte",strcharinfo(0) + ", it's time to duel!",bc_map; break;
-	case 107: mapannounce "job_hunte",strcharinfo(0) + ", I choose you!...wait... uagh...not you!...",bc_map; break;
-	case 108: mapannounce "job_hunte",strcharinfo(0) + ", this isn't the time to be complimenting it!",bc_map; break;
-	case 109: mapannounce "job_hunte",strcharinfo(0) + "...Oh great, what else could go wrong today?",bc_map; break;
-	case 110: mapannounce "job_hunte",strcharinfo(0) + ", don't worry, I always keep a spare. We're not running out of traps anytime soon...",bc_map; break;
-	case 111: mapannounce "job_hunte",strcharinfo(0) + ", when bad things happen, don't give up. The day will come when you will look back and laugh at them. But not today.",bc_map; break;
-	case 112: mapannounce "job_hunte",strcharinfo(0) + ", don't worry about it. We're good at fighting losing battles, remember?",bc_map; break;
-	case 113: mapannounce "job_hunte",strcharinfo(0) + ", you remember how it was like when you felt really slick? That feeling won't come back for a while...",bc_map; break;
-	case 114: mapannounce "job_hunte",strcharinfo(0) + ", you must forget about your past for the sake of your own happiness.",bc_map; break;
-	case 115: mapannounce "job_hunte",strcharinfo(0) + ", if you can fool your friends, you can fool your enemies.",bc_map; break;
-	case 116: mapannounce "job_hunte",strcharinfo(0) + ", this world is made up of love and peace!",bc_map; break;
-	case 117: mapannounce "job_hunte",strcharinfo(0) + ", if you fail, you must drink this.....*evil grin*",bc_map; break;
-	case 118: mapannounce "job_hunte",strcharinfo(0) + ", don't say we didn't warn you!",bc_map; break;
-	case 119: mapannounce "job_hunte",strcharinfo(0) + ", curiosity killed the cat. Lucky for me I'm not a cat. Oh, and um, you too of course.",bc_map; break;
-	case 120: mapannounce "job_hunte",strcharinfo(0) + ", STUDY!STUDY!STUDY!STUDY!STUDY!STUDY!STUDY!STUDY!STUDY!STUDY!",bc_map; break;
-	case 121: mapannounce "job_hunte",strcharinfo(0) + ", how you like me now? That's right, that was MY trap!",bc_map; break;
-	case 122: mapannounce "job_hunte",strcharinfo(0) + "...brilliant...just absolutely...genius. Sorry, I was talking about all these crazy traps.",bc_map; break;
-	case 123: mapannounce "job_hunte",strcharinfo(0) + ", it's time to bust out of that trap, Houdini-style! Hey, wait...come back!",bc_map; break;
-	case 124: mapannounce "job_hunte",strcharinfo(0) + ", it looks like you could really be in trouble this time...no worries, just try this again!",bc_map; break;
-	case 125: mapannounce "job_hunte",strcharinfo(0) + "...not smooth, dude. Go for it again, one more time!",bc_map; break;
-	case 126: mapannounce "job_hunte",strcharinfo(0) + ",it looks like you could really be in a pickle. Back to the starting point...",bc_map; break;
-	case 127: mapannounce "job_hunte",strcharinfo(0) + ", just think of it as Karma. Someday, you'll be setting hundreds of traps of your own...",bc_map; break;
-	case 128: mapannounce "job_hunte",strcharinfo(0) + ", bad news dude...its another trap. You'll get the hang of this, I believe in you!",bc_map; break;
-	case 129: mapannounce "job_hunte",strcharinfo(0) + ", don't give up! The world still needs you!",bc_map; break;
-	case 130: mapannounce "job_hunte",strcharinfo(0) + ", it's okay to cry. Just not too loudly.",bc_map; break;
-	case 131: mapannounce "job_hunte",strcharinfo(0) + "...oh man. It's tiring setting up all these traps. You guys have got to stop falling into them!",bc_map; break;
+	case 105: mapannounce "job_hunte",strcharinfo(0) + ", à moi! C'est à moi, à moi, à moi!",bc_map; break;
+	case 106: mapannounce "job_hunte",strcharinfo(0) + ", c'est l'heure du... du... du duel!",bc_map; break;
+	case 107: mapannounce "job_hunte",strcharinfo(0) + ", vous avez été choisi! ... Attendez... Je me suis trompé de texte!...",bc_map; break;
+	case 108: mapannounce "job_hunte",strcharinfo(0) + ", ce n'est pas le moment d'admirer le paysage!",bc_map; break;
+	case 109: mapannounce "job_hunte",strcharinfo(0) + "...Oh super. Que pouvait-il arriver de pire aujourd'hui?",bc_map; break;
+	case 110: mapannounce "job_hunte",strcharinfo(0) + ", ne vous inquiétez pas. La justice triomphe toujours. Et nous n'avons bientôt plus de pièges en stock...",bc_map; break;
+	case 111: mapannounce "job_hunte",strcharinfo(0) + ", même lorsque de mauvaises choses se produisent, n'abandonnez pas. Le jour viendra où vous regarderez vos échecs passés en riant. Mais pas aujourd'hui.",bc_map; break;
+	case 112: mapannounce "job_hunte",strcharinfo(0) + ", ne vous inquiétez pas. On ne peut pas gagner à tous les coups, pas vrai?",bc_map; break;
+	case 113: mapannounce "job_hunte",strcharinfo(0) + ", qu'est-ce que vous avez mangé ce matin? Vous êtes sûr que ça n'a pas atteint votre cerveau en plus de votre système digestif?...",bc_map; break;
+	case 114: mapannounce "job_hunte",strcharinfo(0) + ", vous devez oublier le passé, dans votre propre intérêt et si vous souhaitez trouver le bonheur un jour.",bc_map; break;
+	case 115: mapannounce "job_hunte",strcharinfo(0) + ", si vous pouvez tomper vos amis, vous saurez tromper vos ennemis.",bc_map; break;
+	case 116: mapannounce "job_hunte",strcharinfo(0) + ", ce monde est fait d'amour et de paix!",bc_map; break;
+	case 117: mapannounce "job_hunte",strcharinfo(0) + ", si vous échouez, vous devez boire... ceci *ricanement*",bc_map; break;
+	case 118: mapannounce "job_hunte",strcharinfo(0) + ", n'allez pas dire qu'on ne vous avait pas prévenu!",bc_map; break;
+	case 119: mapannounce "job_hunte",strcharinfo(0) + ", la curiosité est un vilain défaut.",bc_map; break;
+	case 120: mapannounce "job_hunte",strcharinfo(0) + ", retourner étudier! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER!",bc_map; break;
+	case 121: mapannounce "job_hunte",strcharinfo(0) + ", comment me trouvez-vous? ...!",bc_map; break;
+	case 122: mapannounce "job_hunte",strcharinfo(0) + "...magnifique... tout simplement brillant... du pur génie. Ah, désolé, je parlais de la conception de mon dernier piège.",bc_map; break;
+	case 123: mapannounce "job_hunte",strcharinfo(0) + ", et c'est le buuuuut! En plein dans le piège, bien joué! Hé... Revenez!",bc_map; break;
+	case 124: mapannounce "job_hunte",strcharinfo(0) + ", on dirait que vous êtes vraiment dans de beaux draps maintenant. Mais ne vous inquiétez pas trop... recommencez encore une fois!",bc_map; break;
+	case 125: mapannounce "job_hunte",strcharinfo(0) + "... pas terrible dis donc. Et c'est reparti pour un tour!",bc_map; break;
+	case 126: mapannounce "job_hunte",strcharinfo(0) + ", est-ce que vous aimez les bretzels? Moi j'adore ça!",bc_map; break;
+	case 127: mapannounce "job_hunte",strcharinfo(0) + ", consolez-vous en vous disant qu'un jour, c'est vous qui poserez des centaines de pièges...",bc_map; break;
+	case 128: mapannounce "job_hunte",strcharinfo(0) + ", mauvaise nouvelle... il s'agissait d'un piège. Vous pouvez y arriver, j'ai foi en vous!",bc_map; break;
+	case 129: mapannounce "job_hunte",strcharinfo(0) + ", n'abandonnez pas! Le monde a encore besoin de vous!",bc_map; break;
+	case 130: mapannounce "job_hunte",strcharinfo(0) + ", vous pouvez pleurer si vous voulez, ça restera entre nous.",bc_map; break;
+	case 131: mapannounce "job_hunte",strcharinfo(0) + "... Pff.... J'en ai marre de devoir réinstaller ces pièges à chaque fois. Arrêtez de tomber dedans, aussi!",bc_map; break;
 	}
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
 	donpcevent "Manager#hnt::OnReset";
-	donpcevent "Waiting Room#hnt::OnStart";
+	donpcevent "Salle d'Attente#hnt::OnStart";
 	end;
 }
 
@@ -1618,11 +1576,11 @@ job_hunte,65,92,0	duplicate(HntTrap)	57-3	-1,0,0
 
 job_hunte,65,93,0	script	57-4::HntTrap2	-1,{
 OnTouch:
-	mapannounce "job_hunte",strcharinfo(0) + ", has failed me! Go back to where you started!",bc_map;
+	mapannounce "job_hunte",strcharinfo(0) + ", a échoué! Retournez au début!",bc_map;
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
 	donpcevent "Manager#hnt::OnReset";
-	donpcevent "Waiting Room#hnt::OnStart";
+	donpcevent "Salle d'Attente#hnt::OnStart";
 	end;
 }
 
