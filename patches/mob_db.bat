@@ -1,2 +1,2 @@
-test2.exe
+mob_db.exe
 @pause
