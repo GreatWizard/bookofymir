@@ -12,6 +12,6 @@ UPDATE mob_db SET kName = "Méduse" WHERE ID = 1749;
 UPDATE mob_db SET kName = "Cœur-de-Glace" WHERE ID = 1823;
 UPDATE mob_db SET kName = "Plante Luminescente" WHERE ID = 1878;
 UPDATE mob_db SET kName = "Cœur-de-Glace" WHERE ID = 1887;
-UPDATE mob_db SET kName = "Dogue des Enfens" WHERE ID = 1866;
+UPDATE mob_db SET kName = "Dogue des Enfers" WHERE ID = 1866;
 UPDATE mob_db SET kName = "Cristal Rose" WHERE ID = 1915;
 UPDATE mob_db SET kName = "Cristal Bleu" WHERE ID = 1914;
