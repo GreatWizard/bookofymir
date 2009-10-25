@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= 2006 Halloween Event
 //===== By: ==================================================
@@ -20,209 +22,183 @@
 //============================================================
 
 // Pumpkin Mojo quest (Event 1)
-prontera,162,69,5	script	Gloomy Jack#06_hw	1130,2,2,{
+prontera,162,69,5	script	Jack le Funeste::Gloomy Jack#06_hw	1130,2,2,{
 	end;
 
 OnTouch:
-	mes "[Cool Devi]";
-	mes "If you have something to say to him,";
-	mes "just talk to me.";
-	mes "You won't even understand what stupid pumkin headed Jack is saying.";
+	mes "[P'tit Diab']";
+	mes "Vous feriez mieux de m'en parler d'abord si vous avez quelque chose à lui dire. Vous ne comprendriez pas ce que cette stupide tête de citrouille raconte.";
 	close;
 }
 
-prontera,164,69,3	script	Cool Devi#06_hw	738,{
+prontera,164,69,3	script	P'tit Diab'::Cool Devi#06_hw	738,{
 	set .@now_weight,MaxWeight-Weight;
 	if (.@now_weight < 2000 || checkweight(1201,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets en ce moment. Revenez après vous être débarrassé du superflu.^000000";
 		close;
 	}
 	if (countitem(7609) > 0) {
-		mes "[Gloomy Jack]";
-		mes "Oh wait, is that a Pumpkin Mojo you are carrying?";
+		mes "[Jack le Funeste]";
+		mes "Oh attendez, c'est un Pumpkin Mojo que vous avez là?";
 		mes " ";
-		mes "[Cool Devi]";
-		mes "Says he.";
+		mes "[P'tit Diab']";
+		mes "Enfin... C'est ce que cette face de citrouille raconte (je traduis).";
 		next;
-		mes "[Gloomy Jack]";
-		mes "Give it to me. I'll pay you back.";
+		mes "[Jack le Funeste]";
+		mes "Donnez-la moi! Je vous paierai en retour.";
 		mes " ";
-		mes "[Cool Devi]";
-		mes "Says he...";
-		mes "I just can guess what he will say next. So what do you say?";
+		mes "[P'tit Diab']";
+		mes "(Je traduis toujours.)";
+		mes "J'imagine déjà ce qu'il va dire ensuite... Alors, qu'est-ce que vous en pensez?";
 		next;
-		if (select("What will he say?:I also know about it.") == 1) {
+		if (select("Qu'est-ce qu'il va dire?:J'ai moi aussi ma petite idée.") == 1) {
 			mes "[" + strcharinfo(0) + "]";
-			mes "What will he say?";
+			mes "Qu'est-ce qu'il va dire?";
 			next;
-			mes "[Cool Devi]";
-			mes "Jack is not like others. He is halloween Jack.";
-			mes "but one day, he lost his Pumpkin Mojo and turned into depressed Jack..";
-			mes "Pumpkin Mojo was his all.";
+			mes "[P'tit Diab']";
+			mes "Jack n'est pas comme les autres. C'est un Jack d'Halloween, mais un jour il perdit son Pumpkin Mojo et commença à déprimer. C'était tout pour lui.";
 			next;
-			mes "[Cool Devi]";
-			mes "Well, actually that's the main reason Jack came to town.";
-			mes "To find his Pumpkin Mojo. Most suspicious suspect is ^4d4dffDelightful Lude^000000, the one known as Halloween monster";
+			mes "[P'tit Diab']";
+			mes "En fait c'est pour ça qu'il est venu dans cette ville. Pour trouver son Pumpkin Mojo. Il suspecte fortement un petit ^4d4dffLude^000000 d'avoir fait le coup.";
 			next;
-			mes "[Cool Devi]";
-			mes "Why don't you give him back the 'Pumpkin Mojo'.";
-			mes "Don't worry he will compensate you.";
+			mes "[P'tit Diab']";
+			mes "Pourquoi vous ne lui rendez pas le 'Pumpkin Mojo'? Ne vous en faites pas, il vous récompensera.";
 			next;
 			mes "[" + strcharinfo(0) + "]";
-			mes "Compensate?With what?";
+			mes "Récompenser? Avec quoi?";
 			next;
-			mes "[Cool Devi]";
-			mes "If you bring ^4d4dff 1 Pumpkin Mojo^000000 and a pumpkin head that we gave out to you last year,";
-			mes "he will make it to ^00ff00the most fantastic pumpkin hat^000000.";
-			mes "Or if you don't have pumpkin head, you can just bring a ^3d3dff Pumpkin Mojo, a pumpkin, and a cap ^000000.";
+			mes "[P'tit Diab']";
+			mes "Si vous lui apportez ^4d4dff 1 Pumpkin Mojo^000000 et la tête de citrouille qu'il vous a offerte l'année dernière, il vous fabriquera le plus merveilleux des ^00ff00chapeaux en forme de citrouille^000000.";
+			mes "Ou si vous n'avez pas de Tête de Citrouille, apportez-lui un ^3d3dff Pumpkin Mojo, une Citrouille, et un Chapeau^000000.";
 			next;
-			mes "[Cool Devi]";
-			mes "Well, that Pumpkin Mojo is useless if you just carry it. ";
-			mes "Give it to Jack. Don't you feel pity for him?.";
+			mes "[P'tit Diab']";
+			mes "Pour vous, un Pumpkin Mojo serait complètement inutile, alors pourquoi ne pas le donner à Jack? Regardez-le: il ne vous fait pas pitié?";
 			close;
 		}
-		mes "[Cool Devi]";
-		mes "Oh~Great.";
-		mes "Then, let me see what you got.";
+		mes "[P'tit Diab']";
+		mes "Oh~ Bien. Dans ce cas, voyons ce que vous avez là.";
 		next;
 		if ((countitem(7609) > 0) && (countitem(5134) > 0)) {
-			mes "[Gloomy Jack]";
-			mes "Oh, you brought the pumpkin head!";
-			mes "I'll make you to nicer one.";
+			mes "[Jack le Funeste]";
+			mes "Oh, vous avez apporté la tête de citrouille! Je vais vous en fabriquer une autre, plus belle encore.";
 			mes " ";
-			mes "[Cool Devi]";
-			mes "says he.";
+			mes "[P'tit Diab']";
+			mes "(Je traduis.)";
 			next;
-			if (select( "No, I'll come back later.:Oh, good. Make it now!") == 1) {
-				mes "[Gloomy Jack]";
+			if (select( "Non merci, je reviendrai plus tard.:Oh, fantastique!") == 1) {
+				mes "[Jack le Funeste]";
 				mes "Huh?";
 				mes " ";
-				mes "[Cool Devi]";
-				mes "What? Look at Jack. He has got so dissapointed.";
-				mes "Promise me to give the Pumpkin Mojo back to Jack later someday, will you?";
+				mes "[P'tit Diab']";
+				mes "Quoi? Regardez-le: il a l'air vraiment déçu. Promettez-moi de revenir et de lui rendre son Pumpkin Mojo bientôt, d'accord?";
 				close;
 			}
-			mes "[Gloomy Jack]";
-			mes "Thanks for giving my thing back, I'll make your hat prettier.";
+			mes "[Jack le Funeste]";
+			mes "Merci de m'avoir rendu ce qui m'appartenait. Je vais vous fabriquer le plus beau des chapeaux.";
 			mes " ";
-			mes "[Cool Devi]";
-			mes "says he.";
+			mes "[P'tit Diab']";
+			mes "(Je traduis.)";
 			next;
 			specialeffect EF_LEVEL99;
-			mes "[Excited Jack]";
+			mes "[Jack, excité]";
 			mes "Lalala~ lalala~";
 			mes " ";
-			mes "(He starts singing. On a sudden, Jack's aura appeared.)";
+			mes "(Il commence à chanter, quand soudain une aura l'entoure.)";
 			delitem 7609,1; //Pumpkin_Mojo
 			delitem 5134,1; //Pumpkin_Hat
 			getitem 5202,1; //Pumpkin_Hat_
 			next;
 			specialeffect EF_HIT2;
-			mes "[Gloomy Jack]";
-			mes "My aura is not like it used to be. Maybe I need more Pumpkin Mojo.";
+			mes "[Jack le Funeste]";
+			mes "Mon aura est différente d'avant. Peut-être ai-je besoin d'autres Pumpkin Mojo...";
 			mes " ";
-			mes "[Cool Devi]";
-			mes "says he...";
+			mes "[P'tit Diab']";
+			mes "(Je traduis.)";
 			next;
-			mes "[Cool Devi]";
-			mes "Oh~poor Jack.";
-			mes "Well, someday he'll get back all his Pumpkin Mojo back.";
+			mes "[P'tit Diab']";
+			mes "Oh~ Pauvre Jack. Peut-être qu'un jour il aura retrouvé tous ses Pumpkin Mojo.";
 			close;
 		}
 		else if ((countitem(7609) > 0) && (countitem(535) > 0) && (countitem(2226) > 0)) {
-			mes "[Gloomy Jack]";
-			mes "Wow!";
-			mes "I'll turn your hat to very cool one.";
+			mes "[Jack le Funeste]";
+			mes "Ouah! Je vais vous faire un chapeau magnifique.";
 			mes " ";
-			mes "[Cool Devi]";
-			mes "says he...";
+			mes "[P'tit Diab']";
+			mes "(Je traduis.)";
 			next;
-			if (select( "No, I'll come back later.:Oh,good. Make it now!") == 1) {
-				mes "[Gloomy Jack]";
+			if (select( "Non, je reviendrai plus tard.:Oh, fantastique!") == 1) {
+				mes "[Jack le Funeste]";
 				mes "Huh?";
 				mes " ";
-				mes "[Cool Devi]";
-				mes "What? Look at Jack. He has got so dissapointed.";
-				mes "Promise me to give the Pumpkin Mojo back to Jack later someday,will you?";
+				mes "[P'tit Diab']";
+				mes "Quoi? Regardez-le: il a l'air vraiment déçu. Promettez-moi de revenir et de lui rendre son Pumpkin Mojo bientôt, d'accord?";
 				close;
 			}
-			mes "[Gloomy Jack]";
-			mes "Thanks for giving my thing back, I'll make your hat prettier.";
+			mes "[Jack le Funeste]";
+			mes "Merci de m'avoir rendu ce qui m'appartenait. Je vais vous fabriquer le plus beau des chapeaux.";
 			mes " ";
-			mes "[Cool Devi]";
-			mes "says he.";
+			mes "[P'tit Diab']";
+			mes "(Je traduis.)";
 			next;
 			specialeffect EF_LEVEL99;
-			mes "[Excited Jack]";
+			mes "[Jack, excité]";
 			mes "Lalala~ lalala~";
 			mes " ";
-			mes "(He starts singing. On a sudden, Jack's aura appeared.)";
+			mes "(Il commence à chanter, quand soudain une aura l'entoure.)";
 			delitem 7609, 1;//Pumpkin_Mojo
 			delitem 535, 1;//Pumpkin
 			delitem 2226, 1;//Cap
 			getitem 5202, 1;//Pumpkin_Hat_
 			next;
 			specialeffect EF_HIT2;
-			mes "[Gloomy Jack]";
-			mes "My aura is not like it used to be. Maybe I need more Pumpkin Mojo.";
+			mes "[Jack le Funeste]";
+			mes "Mon aura est différente d'avant. Peut-être ai-je besoin d'autres Pumpkin Mojo...";
 			mes " ";
-			mes "[Cool Devi]";
-			mes "says he...";
+			mes "[P'tit Diab']";
+			mes "(Je traduis.)";
 			next;
-			mes "[Cool Devi]";
-			mes "Oh~poor Jack.";
-			mes "Well, someday he'll get back all his Pumpkin Mojo back.";
+			mes "[P'tit Diab']";
+			mes "Oh~ Pauvre Jack. Peut-être qu'un jour il aura retrouvé tous ses Pumpkin Mojo.";
 			close;
 		}
 		else {
-			mes "[Cool Devi]";
-			mes "Hey,there. You don't seem to have all materials for the fantastic hat. ";
+			mes "[P'tit Diab']";
+			mes "Ah, mais on dirait qu'il vous manque quelques objets pour pouvoir fabriquer ce chapeau.";
 			close;
 		}
 	}
 	else {
-		mes "[Gloomy Jack]";
-		mes "Hey,there. Why don't you come here and listen to my story.";
+		mes "[Jack le Funeste]";
+		mes "Eh, vous! Venez écouter mon histoire.";
 		mes " ";
-		mes "[Cool Devi]";
-		mes "Says he.";
+		mes "[P'tit Diab']";
+		mes "(Je traduis.)";
 		next;
-		mes "[Gloomy Jack]";
-		mes "I used to be very famous. But now.....";
+		mes "[Jack le Funeste]";
+		mes "J'étais connu avant, mais maintenant...";
 		mes " ";
-		mes "[Cool Devi]";
-		mes "Says he...";
-		mes "Well, I'll just tell you without translating.";
+		mes "[P'tit Diab']";
+		mes "(Je traduis.)";
+		mes "Bon, je vais vous dire la suite moi-même: je la connais.";
 		next;
-		mes "[Cool Devi]";
-		mes "Jack is not like others. He is halloween Jack.";
-		mes "but one day, he lost his Pumpkin Mojo and turned into depressed Jack..";
-		mes "Pumpkin Mojo was his all.";
+		mes "[P'tit Diab']";
+		mes "Jack n'est pas comme les autres. C'est un Jack d'Halloween, mais un jour il perdit son Pumpkin Mojo et commença à déprimer. C'était tout pour lui.";
 		next;
-		mes "[Cool Devi]";
-		mes "Well, actually that's the main reason Jack came to town.";
-		mes "To find his Pumpkin Mojo. Most suspicious suspect is ^4d4dffDelightful Lude^000000, the one known as Halloween monster.";
+		mes "[P'tit Diab']";
+		mes "En fait c'est pour ça qu'il est venu dans cette ville. Pour trouver son Pumpkin Mojo. Il suspecte fortement un petit ^4d4dffLude^000000 d'avoir fait le coup.";
 		next;
-		mes "[Cool Devi]";
-		mes "Why don't you give him back the 'Pumpkin Mojo'.";
-		mes "Don't worry he will compensate you.";
+		mes "[P'tit Diab']";
+		mes "Pourquoi vous ne lui rendez pas le 'Pumpkin Mojo'? Ne vous en faites pas, il vous récompensera.";
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "Compensate? With what?";
+		mes "Récompenser? Avec quoi?";
 		next;
-		mes "[Cool Devi]";
-		mes "If you bring ^4d4dff 1 Pumpkin Mojo^000000 and a pumpkin head that we gave out to you last year,";
-		mes "he will make it to ^00ff00the most fantastic pumpkin hat^000000.";
-		mes "Or if you don't have pumpkin head, you can just bring a ^3d3dff Pumpkin Mojo, a pumpkin, and a cap ^000000.";
+		mes "[P'tit Diab']";
+		mes "Si vous lui apportez ^4d4dff 1 Pumpkin Mojo^000000 et la tête de citrouille qu'il vous a offerte l'année dernière, il vous fabriquera le plus merveilleux des ^00ff00chapeaux en forme de citrouille^000000.";
+		mes "Ou si vous n'avez pas de Tête de Citrouille, apportez-lui un ^3d3dff Pumpkin Mojo, une Citrouille, et un Chapeau^000000.";
 		next;
-		mes "[Cool Devi]";
-		mes "Well, that Pumpkin Mojo is useless if you just carry it. ";
-		mes "Give it to Jack. Don't you feel pity for him?.";
+		mes "[P'tit Diab']";
+		mes "Pour vous, un Pumpkin Mojo serait complètement inutile, alors pourquoi ne pas le donner à Jack? Regardez-le: il ne vous fait pas pitié?";
 		close;
 	}
 }
@@ -231,84 +207,61 @@ prontera,164,69,3	script	Cool Devi#06_hw	738,{
 geffen,145,132,3	script	Hoirin#06_hw	729,{
 	set .@now_weight,MaxWeight-Weight;
 	if (.@now_weight < 2000 || checkweight(1201,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets en ce moment. Revenez après vous être débarrassé du superflu.^000000";
 		close;
 	}
 	if (halloween < 100) {
 		mes "[Hoirin]";
-		mes "Pumpkin is the gift that God had sent us.";
-		mes "It provides good nutrition and helps you to stay healthy!";
-		mes "Bravo~bravo~!";
+		mes "Les citrouilles sont un don des dieux. Elles sont nourrissantes et pleines de vitamines. Merci! Merci!";
 		next;
 		mes "[Hoirin]";
-		mes "I, Hoirin have always thought about a ";
-		mes "way to eat pumpkin more deliciously.";
-		mes "But all of a sudden, I realized.";
+		mes "J'ai longtemps cherché un moyen de les rendre encore plus délicieuses, quand soudain une idée m'est venue.";
 		next;
 		mes "[Hoirin]";
-		mes "If I have that! I can make best the Pumpkin pie!!!!!";
+		mes "J'ai enfin trouvé! Je peux faire les meilleures Tartes à la Citrouille au monde!";
 		next;
-		if (select( "What's that?:Ignore.") == 1) {
+		if (select( "Comment ça?:L'ignorer.") == 1) {
 			mes "[Hoirin]";
-			mes "What's the first image you see when you think of pumpkin?";
-			mes "I see Jack! I think Jack is the most evolved form of pumpkin!";
-			mes "I wonder what does Jack have something special? Can you imagine?";
+			mes "Quelle est la première chose qui vous vient à l'esprit quand vous pensez à des tartes à la citrouille? Jack! C'est la forme la plus évoluée des citrouilles. Vous ne pensez pas qu'il a quelque chose de spécial? Moi si.";
 			next;
 			mes "[Hoirin]";
-			mes "I always prefer unique pumpkin dish! Recently, I found out that there are many kinds of Jack in the world ";
-			mes "and the extreme class Jack has blue aura around his body!";
+			mes "J'ai toujours aimé les mets rares. Récemment, j'ai découvert qu'il existait plusieurs sortes de Jacks, y compris la plus rare et la plus délicieuse: celle des jacks entourés d'une espèce d'aura bleue.";
 			next;
 			mes "[Hoirin]";
-			mes "Guess what?! it was Halloween Jack!";
-			mes "Halloween Jack has somthing that is concentrated with pumpkin.";
-			mes "It is called ^4d4dffPumpkin Mojo^000000. Only if i have it, i can finish making my special pie.";
+			mes "Et devinez quoi? Ce sont les Jacks d'Halloween! Ils ont un espèce de concentré dans leur citrouille qu'on appelle le ^4d4dffPumpkin Mojo^000000. Si seulement j'en avais... Je pourrais faire mes délicieuses tartes.";
 			next;
 			mes "[Hoirin]";
-			mes "Bring me the ingredients!";
-			mes "I'll make you a very special pie right away!";
-			mes "You'll get addicted to it.";
-			mes "Don't be surprised after trying it.";
+			mes "Apportez-moi les ingrédients, et je vous ferai une tarte dans la minute! Croyez-moi, vous en deviendrez accro immédiatement, alors ne soyez pas surpris quand vous en goûterez!";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			mes "......................";
-			mes "You seem to be such a passionate person.";
-			mes "So, what's the ingredient anyway.?";
+			mes "Vous avez l'air de quelqu'un de passionné... Mais quel est l'ingrédient dont vous avez besoin au fait?";
 			next;
 			mes "[Hoirin]";
-			mes "Good question!";
-			mes "To make my special Pumpkin pie, I need";
+			mes "Bonne question! Pour faire mes Tartes à la Citrouille, il me faut:";
 			mes "^4d4dff 1 Pumpkin Mojo";
 			mes "2 Pumpkin";
 			mes "2 Egg^000000";
 			mes "";
 			next;
 			mes "[Hoirin]";
-			mes "Just Bring Pumpkin Mojo, Pumpkin, and a Egg.";
-			mes "Leave the rest for me..You'll get to try the best pumkin pie!";
+			mes "Apportez-moi le Pumpkin Mojo, les Citrouilles, et les Oeufs, et je ferai le reste. Vous goûterez aux meilleures Tartes à la Citrouille!";
 			set halloween, 100;
 			close;
 		}
 		mes "[Hoirin]";
-		mes "Hm..You'll regret it!";
-		mes "Hoirin's pumpkin pie is just so delicious.";
+		mes "Hum... Vous le regretterez, croyez-moi! Les Tartes à la Citrouille de la Mère Hoirin sont si délicieuses...";
 		close;
 	}
 	else {
 		mes "[Hoirin]";
-		mes "So, did you bring all materials?";
-		mes "Were there anything hard to find?";
+		mes "Alors, est-ce que vous avez tous les ingrédients? Avez-vous eu du mal à vous les procurer?";
 		next;
-		switch(select( "I brought all ingredients.:How can I get eggs?:No,I'm just passing by.")) {
+		switch(select( "J'ai tous les ingrédients.:Où puis-je trouver des oeufs?:Non, je ne fais que passer.")) {
 		case 1:
 			if ((countitem(7609) > 0) && (countitem(535) > 1) && (countitem(574) > 1)) {
 				mes "[Hoirin]";
-				mes "You are right!";
-				mes "You brought all things right. Give it to me!!";
+				mes "Oui, vous avez tous les ingrédients! Donnez-les moi.";
 				specialeffect2 EF_HIT1;
 				next;
 				specialeffect EF_PIERCESELF;
@@ -317,9 +270,8 @@ geffen,145,132,3	script	Hoirin#06_hw	729,{
 				mes "Abracadabra~~!";
 				next;
 				mes "[Hoirin]";
-				mes "Ta-da(h)!";
-				mes "Here it is~ help yourself.";
-				mes "It'll be good for your health. I added extra nutrient in it.";
+				mes "Ta-da!";
+				mes "Et voilà! Faites-vous plaisir: c'est bon pour la santé, j'y ai ajouté quelques petits trucs à moi...";
 				delitem 7609,1; //Pumpkin_Mojo
 				delitem 535,2; //Pumpkin
 				delitem 574,2; //Egg
@@ -328,47 +280,41 @@ geffen,145,132,3	script	Hoirin#06_hw	729,{
 			}
 			else {
 				mes "[Hoirin]";
-				mes "No!! This is not enough. I need";
+				mes "Non! Ca ne suffit pas! j'ai besoin de:";
 				mes "^4d4dff 1 Pumpkin Mojo";
 				mes "2 Pumpkin";
 				mes "2 Egg^000000";
-				mes " at least.";
+				mes "minimum.";
 				close;
 			}
 		case 2:
 			if (halloween == 100) {
 				mes "[Hoirin]";
-				mes "Egg?";
-				mes "Well, actually I know someone who can help you.";
-				mes "There's a man who raise many chickens.";
+				mes "Des Oeufs? Eh bien je connais peut-être quelqu'un qui peut vous aider. Il élève des poules...";
 				next;
 				mes "[Hoirin]";
-				mes "I can send you to where he is if you want.";
-				mes "^4d4dffBut only for once^000000.";
+				mes "Je peux vous conduire à lui si vous voulez, mais ^4d4dffseulement pour cette fois^000000.";
 				next;
-				if (select("Send me.:It's ok.") == 1) {
+				if (select("Allons-y.:Je me débrouillerai.") == 1) {
 					mes "[Hoirin]";
-					mes "Ok, go get the eggs.";
+					mes "Bien, allez chercher les oeufs.";
 					set halloween, 101;
 					close2;
 					warp "nif_fild01", 162, 113;
 					end;
 				}
 				mes "[Hoirin]";
-				mes "Do you think you can go without my help?!";
-				mes "Ok! go ahead.";
-				mes "Do you know where it is?";
+				mes "Vous pensez pouvoir vous y rendre par vos propres moyens? Bien, tant mieux! Vous savez où c'est, n'est-ce pas?";
 				close;
 			}
 			else {
 				mes "[Hoirin]";
-				mes "if you go to ^4d4dfffarm of Skelington Town at Neiflheim^000000, you'll meet Chicken Masta. He raises chickens.";
+				mes "Si vous vous rendez à la ^4d4dffFerme de Skelington à Niflheim^000000, vous trouverez le Gars aux Poulets. Il élève des poules.";
 				close;
 			}
 		case 3:
 			mes "[Hoirin]";
-			mes "Next time, don't forget to bring ";
-			mes "all the ingredients for pumpkin pie!";
+			mes "La prochaine fois, n'oubliez pas de m'apporter tous les ingrédients pour la tarte aux citrouilles!";
 			close;
 		}
 	}
@@ -379,55 +325,42 @@ nif_in,18,34,5	script	Loli Ruri#06_hw	1505,2,2,{
 
 OnTouch:
 	mes "[Deviruchi]";
-	mes "Hey there, if you have something to say to Loli Ruri, talk to me.";
-	mes "She's not used to human language.";
+	mes "Eh, vous! Si vous voulez parler à Loli Ruri, dites-le moi: elle ne parle pas le langage des humains.";
 	close;
 }
 
 nif_in,19,32,3	script	Deviruchi#06_hw	738,{
 	set .@now_weight,MaxWeight-Weight;
 	if (.@now_weight < 2000 || checkweight(1201,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets en ce moment. Revenez après vous être débarrassé du superflu.^000000";
 		close;
 	}
 	mes "[Loli Ruri]";
-	mes "Devi~Where's the pumpkin pie?";
-	mes "Humans make them, don't they?";
-	mes "Do you have it then?";
+	mes "Devi~ Où sont les tartes aux citrouilles? Les humains le fabriquent, alors vous en avez, non?";
 	mes " ";
 	mes "[Deviruchi]";
-	mes "Says she.";
+	mes "(Je traduis.)";
 	next;
 	mes "[Deviruchi]";
-	mes "If you have a pumpinkin pie, can I have one?";
-	mes "Cause we are the victim if Loli Ruri gets mad.";
+	mes "Si vous avez des tartes à la citrouille, je pourrais les avoir? Parce que croyez-moi, on aura vraiment des problèmes si Loli Ruri s'énerve.";
 	next;
 	mes "[Deviruchi]";
-	mes "Well I'm not saying that I want it for free.";
-	mes "Don't worry, I won't let you down.";
+	mes "Je ne dis pas que je les veux gratuitement, ne vous en faites pas.";
 	next;
-	switch(select( "Give him the pumpkin pie.:Do not give him the pumpkin pie.:Huh? What pumkin pie?")) {
+	switch(select( "Lui donner une tarte.:Ne pas lui donner.:Hein? Quelle tarte à la citrouille?")) {
 	case 1:
 		if (countitem(12192) > 0) {
 			mes "[Loli Ruri]";
-			mes "Thanks for the pumkin pie!";
-			mes "Here, take this.";
+			mes "Merci pour la tarte! Voilà, prenez ça.";
 			mes " ";
 			mes "[Deviruchi]";
-			mes "Says she.";
+			mes "(Je traduis.)";
 			next;
 			mes "[Deviruchi]";
-			mes "As I promised, I'll give you something worth the pie.";
-			mes "Hang on....";
+			mes "Comme promis je vais vous donner quelque chose en échange. Attendez...";
 			next;
 			mes "[Deviruchi]";
-			mes "Hmm...This would be good.";
-			mes "Here take this, and thanks again~";
+			mes "Hum... Ca devrait faire l'affaire. Voilà, prenez ça, et encore merci~";
 			delitem 12192, 1;//Pumpkin_Pie
 			set @hw_temp,rand(1,3);
 			if (@hw_temp == 2) getitem 12130,1; //Cookie_Bag
@@ -436,174 +369,141 @@ nif_in,19,32,3	script	Deviruchi#06_hw	738,{
 		}
 		else {
 			mes "[Loli Ruri]";
-			mes "Are you kidding me?";
-			mes "Where's the pumpkin pie! Don't try to lie to me!";
+			mes "Vous vous moquez de moi?! Où est la tarte?! Ne me mentez pas!";
 			mes " ";
 			mes "[Deviruchi]";
-			mes "Say she..Seems like she's very angry...You are in trouble.";
+			mes "(Je traduis.) On dirait qu'elle est vraiment énervée... Vous allez avoir des problèmes!";
 			next;
 			mes "[Loli Ruri]";
-			mes "Devi!!!!!You are the one who told me that I can get the pumpkin pie if I stand here and wait.";
-			mes "Watch your back!";
+			mes "Devi! C'est toi qui m'a dit que je pourrais avoir des tartes en restant, alors gare à toi!";
 			mes " ";
 			mes "[Deviruchi]";
-			mes "Says she..Huh?!!Me?!!";
+			mes "(Je traduis.) Euh... Quoi? Moi?!";
 			next;
 			mes "[" + strcharinfo(0) + "]";
-			mes "Poor Devi~";
-			mes "You shouldn't have lied~";
-			mes "Wish you a luck.";
+			mes "Pauvre Devi~";
+			mes "Tu n'aurais pas dû mentir~";
+			mes "Bonne chance!";
 			close;
 		}
 	case 2:
 		mes "[Loli Ruri]";
-		mes "I want to eat pumpkin pie. Can I have one?Please~~~~";
+		mes "Je veux une tarte à la citrouille! Oui, j'en veux une! Dîtes, je peux en avoir une? S'il vous plaît~~~~";
 		mes " ";
 		mes "[Deviruchi]";
-		mes "Says he.....Give me if you have one.";
+		mes "(Je traduis.) Donnez-en moi une si vous en avez.";
 		close;
 	case 3:
 		mes "[Deviruchi]";
-		mes "There's a man who makes a very special pumpkin pie.";
-		mes "No one can forget what it taste like.";
+		mes "Il y a un type qui fabrique des tartes à la citrouille vraiment inoubliables: tout le monde en adore le goût.";
 		next;
 		mes "[Deviruchi]";
-		mes "Lori Ruri is waiting here for someone who will get the pie for him.";
-		mes "Can you get her one?";
-		mes "I'll treat you back.";
+		mes "Lori Ruri attend que quelqu'un lui en apporte une. Vous pouvez lui en avoir? Je vous paierai.";
 		close;
 	}
 }
 
 // Creation of Pumpkin Pie (Event 2)
-nif_fild01,165,115,3	script	Chicken Masta#06_hw	794,{
+nif_fild01,165,115,3	script	Gars aux Poulets::Chicken Masta#06_hw	794,{
 	set .@now_weight,MaxWeight-Weight;
 	if (.@now_weight < 2000 || checkweight(1201,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets en ce moment. Revenez après vous être débarrassé du superflu.^000000";
 		close;
 	}
 	if (halloween == 101) {
-		mes "[Chicken Masta]";
-		mes "Where did the chicken have gone?!";
-		mes "Oh, hey stranger. How can I help you?";
+		mes "[Gars aux Poulets]";
+		mes "Où est-ce que ce satané poulet est passé? Oh, hé, vous, l'étranger! Je peux vous aider?";
 		next;
-		mes "[Chicken Masta]";
-		mes "This town is too dangerous for you to hang around.";
-		mes "You'd better go back to where you came from....";
+		mes "[Gars aux Poulets]";
+		mes "Cette ville est trop dangereuse pour vous. Vous feriez mieux de retourner d'où vous venez.";
 		next;
-		mes "[Chicken Masta]";
-		mes "...Are you looking for eggs?";
-		mes "Recently, people are asking me for eggs to make some kind of pie....are you one of them?";
+		mes "[Gars aux Poulets]";
+		mes "...Est-ce que vous voulez des oeufs?";
+		mes "Depuis quelque temps tout le monde en veut... Vous aussi, n'est-ce pas?";
 		next;
-		if (select( "Actually, yes. I came here to get some eggs.:Nope.") == 1) {
-			mes "[Chicken Masta]";
-			mes "Ok. But some of my chickens ran away,";
-			mes "so I have no eggs much left.";
-			mes "1000 zeny for 2 eggs! how's that?";
+		if (select( "Oui, c'est ça.:Non.") == 1) {
+			mes "[Gars aux Poulets]";
+			mes "D'accord, mais mes poules se sont enfuies, alors il ne me reste plus beaucoup d'oeufs. 1000 zenys pour 2 oeufs! Qu'est-ce que vous en dites?";
 			next;
-			switch(select( "Ok,I'll take it.:I'll just buy one.:Whew~it's too expensive.")) {
+			switch(select( "D'accord, je suis preneur.:Je n'en prendrai qu'un.:C'est trop cher.")) {
 			case 1:
 				if (Zeny > 1999) {
-					mes "[Chicken Masta]";
-					mes "Thanks.";
-					mes "Here are the eggs.";
+					mes "[Gars aux Poulets]";
+					mes "Merci, voilà les oeufs.";
 					set Zeny,Zeny-2000;
 					set halloween, 102;
 					getitem 574,2; //Egg
 					close;
 				}
 				else {
-					mes "[Chicken Masta]";
-					mes "Hey this is not enough~";
-					mes "1000zeny per each, so if you buy two,that means 2000zeny.";
+					mes "[Gars aux Poulets]";
+					mes "Eh, ça ne fait pas le compte, ça! C'est 1000 zenys pièce, alors ça fera 2000 zenys si vous en voulez deux.";
 					close;
 				}
 			case 2:
 				if (Zeny > 999) {
-					mes "[Chicken Masta]";
-					mes "Thanks.";
-					mes "Here are the eggs.";
+					mes "[Gars aux Poulets]";
+					mes "Merci, voilà l'oeuf.";
 					set Zeny,Zeny-1000;
 					set halloween, 102;
 					getitem 574,1; //Egg
 					close;
 				}
 				else {
-					mes "[Chicken Masta]";
-					mes "You don't seem to have enough money...";
-					mes "It's 1000 zeny per each.";
+					mes "[Gars aux Poulets]";
+					mes "Eh, ça ne fait pas le compte, ça! C'est 1000 zenys pièce.";
 					close;
 				}
 			case 3:
-				mes "[Chicken Masta]";
-				mes "Well...I know it's liitle bit expensive but as I told you, my chickens ran away.";
-				mes "You have to understand.";
+				mes "[Gars aux Poulets]";
+				mes "Je sais que c'est un peu cher mais comme je vous l'ai dit, mes poules se sont enfouies, alors vous comprenez...";
 				close;
 			}
 		}
-		mes "[Chicken Masta]";
-		mes "Let me tell you just one thing!";
-		mes "If you don't want to die,";
-		mes "you'd better run away. It's too dangerous in here.";
+		mes "[Gars aux Poulets]";
+		mes "Laissez-moi vous dire une petite chose quand même. Si vous ne voulez pas mourir, vous feriez mieux de partir d'ici au plus vite. Cet endroit est très dangereux.";
 		close;
 	}
 	else if (halloween == 102) {
-		mes "[Chicken Masta]";
-		mes "Do you need eggs?...";
-		mes "Then, help me first.";
-		mes "8 of my chickens ran away.";
-		mes "I just don't know where they are.";
+		mes "[Gars aux Poulets]";
+		mes "Vous voulez des oeufs? Bien dans ce cas, il va d'abord falloir me donner un petit coup de main. J'ai huit poules qui se sont enfuies et je n'arrive pas à les retrouver.";
 		next;
-		mes "[Chicken Masta]";
-		mes "I don't expect all chickens to come back home.";
-		mes "Only if you find me one of them, I'll sell three eggs for you.";
+		mes "[Gars aux Poulets]";
+		mes "Et j'imagine qu'elles ne reviendront pas toutes seules... Si vous en trouvez une je vous donnerai trois oeufs.";
 		next;
-		mes "[Chicken Masta]";
-		mes "Isn't it a great deal?";
-		mes "Chickens must be around here somewhere.";
+		mes "[Gars aux Poulets]";
+		mes "Alors, ce n'est pas une bonne affaire? Les poules doivent bien être quelque part...";
 		next;
-		mes "[Chicken Masta]";
-		mes "You don't have to bring back chickens to me if you find one,";
-		mes "Just insert the word ^4d4dff'Return'^000000.";
+		mes "[Gars aux Poulets]";
+		mes "Vous n'aurez pas besoin de me les rapporter vous-même si vous en trouvez - dites leur juste: ^4d4dff'Retourne au poulailler'^000000.";
 		mes ".........";
 		next;
-		mes "[Chicken Masta]";
-		mes "It's a spell to make chickens to go back home.";
+		mes "[Gars aux Poulets]";
+		mes "C'est une formule magique pour les faire revenir automatiquement.";
 		mes ".........";
-		mes "Don't forget the word 'Return'!";
+		mes "N'oubliez pas – c'est: 'Retourne au poulailler'!";
 		next;
-		mes "[Chicken Masta]";
-		mes "I hope you can find my chickens.";
+		mes "[Gars aux Poulets]";
+		mes "J'espère que vous trouverez mes poules.";
 		close;
 	}
 	else if (halloween == 103) {
-		mes "[Chicken Masta]";
-		mes "Oh, you came back. I've been waiting for you.";
-		mes "And thanks for the chickens you sent me.";
-		mes "They are saftly kept in the henhouse, in case of running away again.";
+		mes "[Gars aux Poulets]";
+		mes "Oh, vous revoilà, je vous attendais. Merci d'avoir retrouvé mes poules. Je les ai enfermées dans le poulailler, au cas où elles voudraient encore s'enfuir.";
 		next;
-		mes "[Chicken Masta]";
-		mes "I didn't forget what we have promised.";
-		mes "Tell me how many eggs you want.";
-		mes "It's 1000zeny per each.";
-		mes "And maximum 3 is all you can get.";
+		mes "[Gars aux Poulets]";
+		mes "Je n'ai pas oublié ma promesse. Dites-moi combien d'oeufs vous voulez. C'est 1000 zenys pièce, et je ne peux vous en vendre que 3 au plus.";
 		next;
 		while(1) {
 			input .@input;
 			if (.@input == 0) {
-				mes "[Chicken Masta]";
-				mes "You don't have to buy it, if you don't need it.";
+				mes "[Gars aux Poulets]";
+				mes "Je ne vous oblige pas à en acheter.";
 				close;
 			}
 			else if (@input > 3) {
-				mes "[Chicken Masta]";
-				mes "What did I tell you.";
-				mes "I'm going to sell only three eggs.";
+				mes "[Gars aux Poulets]";
+				mes "Qu'est-ce que je vous ai dit? Je ne peux vous en vendre que trois.";
 				next;
 			}
 			else
@@ -611,46 +511,41 @@ nif_fild01,165,115,3	script	Chicken Masta#06_hw	794,{
 		}
 		set .@hw_egg, .@input * 1000;
 		if (Zeny < @hw_egg) {
-			mes "[Chicken Masta]";
-			mes "You don't seem to have enough zeny.";
+			mes "[Gars aux Poulets]";
+			mes "On dirait que vous n'avez pas assez d'argent sur vous...";
 			close;
 		}
-		mes "[Chicken Masta]";
-		mes "Here you are.";
-		mes "But no more.";
-		mes "If you want more eggs, find me more chickens.";
+		mes "[Gars aux Poulets]";
+		mes "Voilà, mais je ne peux pas vous en vendre plus, hein. Il faudra retrouver d'autres poules si vous en voulez encore.";
 		set Zeny,Zeny-@hw_egg;
 		getitem 574, @input;//Egg
 		set halloween, 102;
 		close;
 	}
 	else {
-		mes "[Chicken Masta]";
-		mes "Where did the chicken have gone?!";
-		mes "Oh, hey stranger. How can I help you?";
+		mes "[Gars aux Poulets]";
+		mes "Où est-ce que ce satané poulet est passé? Oh, hé, vous, l'étranger! Je peux vous aider?";
 		next;
-		mes "[Chicken Masta]";
-		mes "This town is too dangerous for you to hang around.";
-		mes "You'd better go back to where you came from....";
+		mes "[Gars aux Poulets]";
+		mes "Cette ville est trop dangereuse pour vous. Vous feriez mieux de retourner d'où vous venez.";
 		close;
 	}
 }
 
-nif_fild01,167,113,3	script	Masta's chicken#06_hw01	800,{
-	mes "Drowsing chicken.";
+nif_fild01,167,113,3	script	Poule de Skelington::Masta's chicken#06_hw01	800,{
+	mes "Clok!";
 	close;
 }
 
 -	script	HwChicken::HwChicken	-1,{
 	if ((halloween == 102) || (halloween == 103)) {
-		mes "Oh, this must be Chicken Masta's chicken.";
-		mes "I should insert the magic word.";
+		mes "Oh, elle doit appartenir au Gars aux Poulets. Je devrais prononcer la formule magique.";
 		next;
 		input @inputstr$;
-		if( @inputstr$ == "Return" ) {
+		if( @inputstr$ == "Retourne au poulailler" ) {
 			emotion e_omg;
 			specialeffect EF_TELEPORTATION;
-			mes "The magic spell has been casted.";
+			mes "Le sort a été lancé.";
 			set halloween, 103;
 			disablenpc "Masta's chicken#"+strnpcinfo(1);
 			close2;
@@ -660,12 +555,13 @@ nif_fild01,167,113,3	script	Masta's chicken#06_hw01	800,{
 		}
 		else {
 			mes "[" + strcharinfo(0) + "]";
-			mes "Hm...I must have misspelled.";
+			if (sex) mes "Hum... Je me suis surement trompé quelque part.";
+			else mes "Hum... Je me suis surement trompée quelque part.";
 			close;
 		}
 	}
 	else {
-		mes "Drowsing chicken.";
+		mes "Clok!";
 		close;
 	}
 }
@@ -673,14 +569,13 @@ nif_fild01,167,113,3	script	Masta's chicken#06_hw01	800,{
 -	script	HwChicken2::HwChicken2	-1,{
 	set @egg_temp,rand(1,4);
 	if( @egg_temp == 3) {
-		mes "As soon as you got close to the chicken and touched it, it disappeared completely.";
-		mes "You got an 'egg' in the place where the chicken disappeared.";
+		mes "La poule disparait sitôt que vous vous approchez, en laissant un Oeuf derrière elle.";
 		disablenpc "Chicken#"+strnpcinfo(1);
 		getitem 574,1; //Egg
 		close;
 	}
 	else {
-		mes "As soon as you got close to the chicken and touched it, it disappeared completely.";
+		mes "La poule disparait sitôt que vous vous approchez.";
 		disablenpc "Chicken#"+strnpcinfo(1);
 		close;
 	}
@@ -689,14 +584,13 @@ nif_fild01,167,113,3	script	Masta's chicken#06_hw01	800,{
 -	script	HwChicken3::HwChicken3	-1,{
 	set @egg_temp,rand(1,4);
 	if( @egg_temp == 3) {
-		mes "As soon as you got close to the chicken and touched it, it disappeared completely.";
-		mes "You got an 'egg' in the place where the chicken disappeared.";
+		mes "La poule disparait sitôt que vous vous approchez, en laissant un Oeuf derrière elle.";
 		disablenpc "Chicken#"+strnpcinfo(1);
 		getitem 574,1; //Egg
 		close;
 	}
 	else {
-		mes "As soon as you got close to the chicken and touched it, it disappeared completely.";
+		mes "La poule disparait sitôt que vous vous approchez.";
 		disablenpc "Chicken#"+strnpcinfo(1);
 		close;
 	}
@@ -710,14 +604,14 @@ OnInit:
 }
 
 
-nif_fild01,270,145,3	duplicate(HwChicken)	Masta's chicken#06_hw02	800
-nif_fild01,219,267,4	duplicate(HwChicken)	Masta's chicken#06_hw03	800
-nif_fild01,199,240,5	duplicate(HwChicken)	Masta's chicken#06_hw04	800
-nif_fild01,316,97,6	duplicate(HwChicken)	Masta's chicken#06_hw05	800
-nif_fild01,147,343,7	duplicate(HwChicken)	Masta's chicken#06_hw06	800
-nif_fild01,185,325,8	duplicate(HwChicken)	Masta's chicken#06_hw07	800
-nif_fild01,133,105,1	duplicate(HwChicken)	Masta's chicken#06_hw08	800
-nif_fild01,331,329,2	duplicate(HwChicken)	Masta's chicken#06_hw09	800
+nif_fild01,270,145,3	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw02	800
+nif_fild01,219,267,4	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw03	800
+nif_fild01,199,240,5	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw04	800
+nif_fild01,316,97,6	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw05	800
+nif_fild01,147,343,7	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw06	800
+nif_fild01,185,325,8	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw07	800
+nif_fild01,133,105,1	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw08	800
+nif_fild01,331,329,2	duplicate(HwChicken)	Poule de Skelington::Masta's chicken#06_hw09	800
 
 pay_dun03,1,1,0	script	#06_hw_timer01	-1,{
 OnInit:
@@ -857,47 +751,47 @@ OnTimer4200000:
 }
 
 
-pay_dun03,151,138,3	duplicate(HwChicken3)	Chicken#06_hw_p01	800
-pay_dun03,151,138,3	duplicate(HwChicken2)	Chicken#06_hw_p02	800
-pay_dun03,152,138,3	duplicate(HwChicken2)	Chicken#06_hw_p03	800
-pay_dun03,154,138,3	duplicate(HwChicken2)	Chicken#06_hw_p04	800
-pay_dun03,155,138,3	duplicate(HwChicken2)	Chicken#06_hw_p05	800
-pay_dun03,157,138,3	duplicate(HwChicken2)	Chicken#06_hw_p06	800
-pay_dun03,158,138,3	duplicate(HwChicken3)	Chicken#06_hw_p07	800
-pay_dun03,150,137,3	duplicate(HwChicken2)	Chicken#06_hw_p08	800
-pay_dun03,153,137,3	duplicate(HwChicken2)	Chicken#06_hw_p09	800
-pay_dun03,156,137,3	duplicate(HwChicken3)	Chicken#06_hw_p10	800
-pay_dun03,159,137,3	duplicate(HwChicken2)	Chicken#06_hw_p11	800
-pay_dun03,149,136,3	duplicate(HwChicken2)	Chicken#06_hw_p12	800
-pay_dun03,152,136,3	duplicate(HwChicken3)	Chicken#06_hw_p13	800
-pay_dun03,157,136,3	duplicate(HwChicken2)	Chicken#06_hw_p14	800
-pay_dun03,160,136,3	duplicate(HwChicken2)	Chicken#06_hw_p15	800
-pay_dun03,149,135,3	duplicate(HwChicken3)	Chicken#06_hw_p16	800
-pay_dun03,151,135,3	duplicate(HwChicken2)	Chicken#06_hw_p17	800
-pay_dun03,152,135,3	duplicate(HwChicken2)	Chicken#06_hw_p18	800
-pay_dun03,153,135,3	duplicate(HwChicken3)	Chicken#06_hw_p19	800
-pay_dun03,156,135,3	duplicate(HwChicken2)	Chicken#06_hw_p20	800
-pay_dun03,157,135,3	duplicate(HwChicken2)	Chicken#06_hw_p21	800
-pay_dun03,158,135,3	duplicate(HwChicken3)	Chicken#06_hw_p22	800
-pay_dun03,160,135,3	duplicate(HwChicken2)	Chicken#06_hw_p23	800
-pay_dun03,149,134,3	duplicate(HwChicken2)	Chicken#06_hw_p24	800
-pay_dun03,152,134,3	duplicate(HwChicken3)	Chicken#06_hw_p25	800
-pay_dun03,157,134,3	duplicate(HwChicken2)	Chicken#06_hw_p26	800
-pay_dun03,160,134,3	duplicate(HwChicken2)	Chicken#06_hw_p27	800
-pay_dun03,149,133,3	duplicate(HwChicken3)	Chicken#06_hw_p28	800
-pay_dun03,160,133,3	duplicate(HwChicken2)	Chicken#06_hw_p29	800
-pay_dun03,150,132,3	duplicate(HwChicken2)	Chicken#06_hw_p30	800
-pay_dun03,153,132,3	duplicate(HwChicken3)	Chicken#06_hw_p31	800
-pay_dun03,156,132,3	duplicate(HwChicken2)	Chicken#06_hw_p32	800
-pay_dun03,159,132,3	duplicate(HwChicken2)	Chicken#06_hw_p33	800
-pay_dun03,151,131,3	duplicate(HwChicken2)	Chicken#06_hw_p34	800
-pay_dun03,152,131,3	duplicate(HwChicken2)	Chicken#06_hw_p35	800
-pay_dun03,153,131,3	duplicate(HwChicken3)	Chicken#06_hw_p36	800
-pay_dun03,154,131,3	duplicate(HwChicken2)	Chicken#06_hw_p37	800
-pay_dun03,155,131,3	duplicate(HwChicken2)	Chicken#06_hw_p38	800
-pay_dun03,156,131,3	duplicate(HwChicken3)	Chicken#06_hw_p39	800
-pay_dun03,157,131,3	duplicate(HwChicken2)	Chicken#06_hw_p40	800
-pay_dun03,158,131,3	duplicate(HwChicken3)	Chicken#06_hw_p41	800
+pay_dun03,151,138,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p01	800
+pay_dun03,151,138,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p02	800
+pay_dun03,152,138,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p03	800
+pay_dun03,154,138,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p04	800
+pay_dun03,155,138,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p05	800
+pay_dun03,157,138,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p06	800
+pay_dun03,158,138,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p07	800
+pay_dun03,150,137,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p08	800
+pay_dun03,153,137,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p09	800
+pay_dun03,156,137,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p10	800
+pay_dun03,159,137,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p11	800
+pay_dun03,149,136,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p12	800
+pay_dun03,152,136,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p13	800
+pay_dun03,157,136,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p14	800
+pay_dun03,160,136,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p15	800
+pay_dun03,149,135,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p16	800
+pay_dun03,151,135,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p17	800
+pay_dun03,152,135,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p18	800
+pay_dun03,153,135,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p19	800
+pay_dun03,156,135,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p20	800
+pay_dun03,157,135,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p21	800
+pay_dun03,158,135,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p22	800
+pay_dun03,160,135,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p23	800
+pay_dun03,149,134,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p24	800
+pay_dun03,152,134,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p25	800
+pay_dun03,157,134,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p26	800
+pay_dun03,160,134,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p27	800
+pay_dun03,149,133,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p28	800
+pay_dun03,160,133,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p29	800
+pay_dun03,150,132,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p30	800
+pay_dun03,153,132,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p31	800
+pay_dun03,156,132,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p32	800
+pay_dun03,159,132,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p33	800
+pay_dun03,151,131,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p34	800
+pay_dun03,152,131,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p35	800
+pay_dun03,153,131,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p36	800
+pay_dun03,154,131,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p37	800
+pay_dun03,155,131,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p38	800
+pay_dun03,156,131,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p39	800
+pay_dun03,157,131,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_p40	800
+pay_dun03,158,131,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_p41	800
 
 // Payon Field chickens
 pay_fild08,1,1,0	script	#06_hw_timer02	-1,{
@@ -995,51 +889,46 @@ OnTimer6000000:
 	end;
 }
 
-pay_fild08,147,353,3	duplicate(HwChicken3)	Chicken#06_hw_pf01	800
-pay_fild08,147,354,3	duplicate(HwChicken2)	Chicken#06_hw_pf02	800
-pay_fild08,147,355,3	duplicate(HwChicken2)	Chicken#06_hw_pf03	800
-pay_fild08,148,352,3	duplicate(HwChicken3)	Chicken#06_hw_pf04	800
-pay_fild08,148,356,3	duplicate(HwChicken2)	Chicken#06_hw_pf05	800
-pay_fild08,149,351,3	duplicate(HwChicken2)	Chicken#06_hw_pf06	800
-pay_fild08,149,354,3	duplicate(HwChicken3)	Chicken#06_hw_pf07	800
-pay_fild08,149,357,3	duplicate(HwChicken2)	Chicken#06_hw_pf08	800
-pay_fild08,150,351,3	duplicate(HwChicken2)	Chicken#06_hw_pf09	800
-pay_fild08,150,357,3	duplicate(HwChicken3)	Chicken#06_hw_pf10	800
-pay_fild08,151,351,3	duplicate(HwChicken2)	Chicken#06_hw_pf11	800
-pay_fild08,151,353,3	duplicate(HwChicken2)	Chicken#06_hw_pf12	800
-pay_fild08,151,355,3	duplicate(HwChicken3)	Chicken#06_hw_pf13	800
-pay_fild08,151,357,3	duplicate(HwChicken2)	Chicken#06_hw_pf14	800
-pay_fild08,152,351,3	duplicate(HwChicken2)	Chicken#06_hw_pf15	800
-pay_fild08,152,357,3	duplicate(HwChicken3)	Chicken#06_hw_pf16	800
-pay_fild08,153,351,3	duplicate(HwChicken2)	Chicken#06_hw_pf17	800
-pay_fild08,153,357,3	duplicate(HwChicken2)	Chicken#06_hw_pf18	800
-pay_fild08,154,351,3	duplicate(HwChicken3)	Chicken#06_hw_pf19	800
-pay_fild08,154,353,3	duplicate(HwChicken2)	Chicken#06_hw_pf20	800
-pay_fild08,154,355,3	duplicate(HwChicken2)	Chicken#06_hw_pf21	800
-pay_fild08,154,357,3	duplicate(HwChicken3)	Chicken#06_hw_pf22	800
-pay_fild08,155,350,3	duplicate(HwChicken2)	Chicken#06_hw_pf23	800
-pay_fild08,155,352,3	duplicate(HwChicken2)	Chicken#06_hw_pf24	800
-pay_fild08,155,354,3	duplicate(HwChicken3)	Chicken#06_hw_pf25	800
-pay_fild08,155,356,3	duplicate(HwChicken2)	Chicken#06_hw_pf26	800
-pay_fild08,155,358,3	duplicate(HwChicken3)	Chicken#06_hw_pf27	800
+pay_fild08,147,353,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf01	800
+pay_fild08,147,354,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf02	800
+pay_fild08,147,355,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf03	800
+pay_fild08,148,352,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf04	800
+pay_fild08,148,356,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf05	800
+pay_fild08,149,351,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf06	800
+pay_fild08,149,354,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf07	800
+pay_fild08,149,357,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf08	800
+pay_fild08,150,351,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf09	800
+pay_fild08,150,357,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf10	800
+pay_fild08,151,351,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf11	800
+pay_fild08,151,353,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf12	800
+pay_fild08,151,355,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf13	800
+pay_fild08,151,357,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf14	800
+pay_fild08,152,351,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf15	800
+pay_fild08,152,357,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf16	800
+pay_fild08,153,351,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf17	800
+pay_fild08,153,357,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf18	800
+pay_fild08,154,351,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf19	800
+pay_fild08,154,353,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf20	800
+pay_fild08,154,355,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf21	800
+pay_fild08,154,357,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf22	800
+pay_fild08,155,350,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf23	800
+pay_fild08,155,352,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf24	800
+pay_fild08,155,354,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf25	800
+pay_fild08,155,356,3	duplicate(HwChicken2)	Poulet::Chicken#06_hw_pf26	800
+pay_fild08,155,358,3	duplicate(HwChicken3)	Poulet::Chicken#06_hw_pf27	800
 
 prontera,155,285,3	script	Familier#06_hw01::HWFamiDup	799,{
 	mes "[Familier]";
-	mes "Hello.";
-	mes "I'm Loli Ruri's faithful and cute Familiar.";
-	mes "Do you have an invitation from Loli Ruri?";
-	mes "That's a kind of^4d4dffa special ticket to Nifflheim^000000..";
+	mes "Bonjour. Je suis le mignon petit Familier de Loli Ruri. Est-ce que vous avez une invitation de Loli Ruri? Il s'agit d'un ^4d4dffbillet spécial pour Niflheim^000000..";
 	next;
-	if (select( "Yes, I do.:No, I don't.") == 1) {
+	if (select( "Oui, j'en ai une.:Non, je n'en ai pas.") == 1) {
 		mes "[Familier]";
-		mes "Do you want to go to Nifflheim?";
-		mes "It's available during Halloween.";
+		mes "Voulez-vous aller à Niflheim? Vous pouvez pendant Halloween.";
 		next;
-		if (select( "Yes, I do:No, I don't.") == 1) {
+		if (select( "Oui:Non") == 1) {
 			if (countitem(7460) > 0) {
 				mes "[Familier]";
-				mes "I checked your ticket.";
-				mes "You can go there now";
+				mes "Je viens de voir votre invitation, vous pouvez vous y rendre maintenant.";
 				delitem 7460,1; //Nifl_Express_Ticket
 				close2;
 				warp "nif_in", 18, 20;
@@ -1047,23 +936,19 @@ prontera,155,285,3	script	Familier#06_hw01::HWFamiDup	799,{
 			}
 			else {
 				mes "[Familier]";
-				mes "You're a liar.";
-				mes "You don't have the ticket!";
-				mes "I'll suck up all your blood, you liar!";
+				if (sex) mes "Menteur! Vous n'avez pas d'invitation! Je vais vous sucer le sang, sale menteur!";
+				else mes "Menteuse! Vous n'avez pas d'invitation! Je vais vous sucer le sang, sale menteuse!";
 				percentheal -20,0;
 				emotion e_omg,1;
 				close;
 			}
 		}
 		mes "[Familier]";
-		mes "Ok.";
-		mes "Actually, it's useless to have a special ticket to Nifflheim.";
+		mes "Bien. On dirait que vous n'avez pas besoin de votre invitation alors...";
 		close;
 	}		
 	mes "[Familier]";
-	mes "Ok.";
-	mes "If you want to ask something, give a piece of pumpkin pie to Loli Ruri.";
-	mes "He likes it.";
+	mes "D'accord. Si vous avez besoin de quelque chose, offrez une part de tarte à la citrouille à Loli Ruri, elle adore ça.";
 	close;
 }
 payon,156,231,3	duplicate(HWFamiDup)	Familier#06_hw02	799
