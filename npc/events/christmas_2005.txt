@@ -405,6 +405,10 @@ prontera,155,285,3	script	Enjoy#enjoy	753,{
 			donpcevent "Mas#mas02::OnCommandOff";
 			donpcevent "Event#event02::OnCommandOff";
 			close2;
+// [No Healing] Je suis désolé mais la suite est stupide au niveau du script: on construit un nom de mob, qui est limité à 23 caractères,
+// à partir du nom du perso (lui-même limité à 23 ou 24 caractères) auquel on ajoute une string. Bref il y a tout à parier que le résultat
+// fera plus de 23 caractères et beuguera donc. Celui qui traduira ça fera comme il veut mais je pense qu'il faudrait carément virer la partie
+// strcharinfo(0) +"'s, qui ne sert pas à grand chose en fin de compte.
 			mapannounce "prontera", "Single soldiers "+ strcharinfo(0) +"'s sorrow spread all over the town.",bc_map,0x66FFCC;
 			monster "prontera",155,300,""+ strcharinfo(0) +"'s anguish",1062,1,"Enjoy#enjoy::OnMyMobDead";
 			monster "prontera",156,300,""+ strcharinfo(0) +"'s jealousy",1062,1,"Enjoy#enjoy::OnMyMobDead";
