@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Quest NPCs related to Prontera
 //===== By: ================================================== 
@@ -50,72 +52,61 @@
 
 // Prontera Culvert
 //============================================================ 
-prt_in,88,105,2	script	Recruiter	105,{
+prt_in,88,105,2	script	Recruteur::Recruiter	105,{
 	if (MISC_QUEST & 8) {
-		mes "[Recruiter]";
-		mes "Ah...";
-		mes "I know those eyes.";
-		mes "Full of compassion";
-		mes "...and courage.";
+		mes "[Recruteur]";
+		mes "Ah... Je connais ces yeux, pleins de compassion... et de courage.";
 		next;
-		mes "[Recruiter]";
-		mes "Of course you're a volunteer for campaign to reclaim the Prontera Culvert. Would you let me warp you there?";
+		mes "[Recruteur]";
+		mes "Bien sûr: vous êtes l'un des volontaires pour la Campagne des Egouts! Voulez-vous que je vous y conduise maintenant?";
 		next;
-		if (select("Warp to Culvert Entrance.:Quit.") == 1) {
+		if (select("Se rendre à l'entrée des égouts.:Quitter la conversation.") == 1) {
 			warp "prt_fild05",274,208;
 			end;
 		}
 		close;
 	}
-	mes "[Recruiter]";
-	mes "Ah, let me inform you that the Capital Defense Headquarter of the Rune-Midgarts Kingdom has now decided to recruit a punitive force due to the Prontera Culvert's situation.";
+	mes "[Recruteur]";
+	mes "Ah, laissez-moi vous parler de la situation dans les égouts. Le Quartier Général de la Défense de la Capitale du Royaume de Rune-Midgard a décidé de recruter une force punitive pour régler ce problème.";
 	next;
-	switch(select("Volunteer.:Situation...?:Quit.")) {
+	switch(select("Se porter volontaire.:Quelle est la situation...?:Quitter la conversation.")) {
 	case 1:
 		callsub S_Volunteer;
-		mes "[Recruiter]";
-		mes "Are you ready, hero?";
-		mes "I will now warp you";
-		mes "to the Culvert.";
+		mes "[Recruteur]";
+		mes "Etes-vous prêt, héros? Je vais maintenant vous conduire à l'entrée des égouts.";
 		next;
 		warp "prt_fild05",274,208;
 		end;
 	case 2:
-		mes "[Recruiter]";
-		mes "Haven't you heard...?";
-		mes "The Prontera Culvert is infested with all kinds of filthy vermin!";
+		mes "[Recruteur]";
+		mes "Vous n'en avez pas encore entendu parler? Les égouts sont infectés par des insectes nocifs. Nous y avons trouvé des cafards, des larves, et plusieurs autres créatures.";
+		mes "C'est devenu un véritable problème... Vous n'en avez jamais entendu parler, vraiment?";
 		next;
-		mes "[Recruiter]";
-		mes "Due to the serious risk of water contamination, and the safety of Rune-Midgardians, the Culvert has been quarantined by royal decree.";
+		mes "[Recruteur]";
+		mes "A cause du grave risque de contamination des eaux, et du danger pour la sécurité de nos compatriotes, les égouts ont été placés en quarantaine par décret du Roi.";
 		next;
-		mes "[Recruiter]";
-		mes "Needless to say, this has caused shortages in the water supply in our kingdom. Indeed, such a crisis in these dark times...";
+		mes "[Recruteur]";
+		mes "Cela va sans dire, tout cela cause parfois des coupures dans l'approvisionnement en eau de notre royaume. Une telle crise en des temps si sombres...";
 		next;
-		mes "[Recruiter]";
-		mes "Our people";
-		mes "thirst for water...";
-		mes "But they thirst";
-		mes "even more...";
-		mes "For a hero!";
+		mes "[Recruteur]";
+		mes "Notre peuple a soif d'eau, mais plus encore il a soif de héros!";
 		next;
-		mes "[Recruiter]";
-		mes "Will you stand idly as the children of Rune-Midgarts suffer from parched throats and shed tears of dryness?! Would you bury our children?!";
+		mes "[Recruteur]";
+		mes "Resterez-vous à ne rien faire tandis que la gorge des enfants de Rune-Midgard se dessèche et qu'ils pleurent de soif? Seriez-vous prêt à enterrer vos propres enfants de vos mains?!";
 		next;
-		mes "[Recruiter]";
-		mes "Warriors! Rune-Midgarts is calling you! Cleanse this land's pestilence and cast out the vermin in the Culvert! Only you... Can make a difference.";
+		mes "[Recruteur]";
+		mes "Guerriers, Rune-Midgard vous appelle! Boutons la peste hors de ces terres, chassons la vermine hors de ces égouts! VOUS SEUL pouvez faire la différence!";
 		next;
-		if (select("Volunteer.:Quit.") == 1) {
+		if (select("Se porter volontaire.:Quitter la conversation.") == 1) {
 			callsub S_Volunteer;
-			mes "[Recruiter]";
-			mes "Adventurer...";
-			mes "I will now warp you";
-			mes "to the Prontera Culvert.";
+			mes "[Recruteur]";
+			mes "Aventurier... Je vais maintenant vous conduire à l'entrée des égouts.";
 			next;
 			warp "prt_fild05",274,208;
 			end;
 		}
-		mes "[Recruiter]";
-		mes "Hmpf. Well. The next time you take a drink of water, just remember that an average of nine and a half children just died... ^990000Of thirst^000000.";
+		mes "[Recruteur]";
+		mes "Humpf. Eh bien, la prochaine fois que vous boirez de l'eau, pensez qu'une moyenne de 9 enfants et demi, oui, parfaitement: 9 enfants et demis, viennent de mourir^990000Of de soif^000000 à cause de votre couardise!";
 		close;
 
 	case 3:
@@ -124,17 +115,14 @@ prt_in,88,105,2	script	Recruiter	105,{
 
 S_Volunteer:
 	set MISC_QUEST,MISC_QUEST | 8;
-	mes "[Recruiter]";
-	mes "Your registration...";
-	mes "is now complete.";
+	mes "[Recruteur]";
+	mes "Votre inscription est maintenant terminée.";
 	next;
-	mes "[Recruiter]";
-	mes "I would like to thank you for volunteering to do your part for our great kingdom. Here, take these provisions for your battles against the forces of darkness.";
+	mes "[Recruteur]";
+	mes "Au nom de notre glorieux Royaume, je vous remercie de vous être porté volontaire. Voilà, prenez ces rations pour vous aider dans votre combat contre les forces démoniaques qui ont envahies nos égouts.";
 	next;
-	mes "[Recruiter]";
-	mes "3 Red Potions, 1 Milk,";
-	mes "and 1 Orange Potion";
-	mes "...to give you hope.";
+	mes "[Recruteur]";
+	mes "3 Potions Rouges, 1 Bouteille de Lait, et 1 Potion Orange... pour vous donner du coeur à l'ouvrage.";
 	getitem 501,3; //Red_Potion
 	getitem 519,1; //Milk
 	getitem 502,1; //Orange_Potion
@@ -142,44 +130,39 @@ S_Volunteer:
 	return;
 }
 
-prt_fild05,270,212,5	script	Culvert Guardian	105,{
+prt_fild05,270,212,5	script	Garde des Egouts::Culvert Guardian	105,{
 	if(MISC_QUEST & 8) {
-		mes "[Culvert Guardian]";
-		mes "Ah, you're one of our volunteers. This is the entrance of the Prontera Culvert.";
-		mes "Do you wish to";
-		mes "go inside?";
+		mes "[Garde des Egouts]";
+		mes "Ah, vous êtes l'un des volontaires. Voici l'entrée des Egouts de Prontera. Voulez-vous vous rendre à l'intérieur?";
 		next;
-		if (select("Sure.:Quit.") == 1) {
+		if (select("Bien sûr!:Quitter la conversation.") == 1) {
 			warp "prt_sewb1",131,247;
 			end;
 		}
 		close;
 	}
-	mes "[Culvert Guardian]";
-	mes "I'm sorry, but we can only allow volunteers for the Culvert Campaign to enter.";
+	mes "[Garde des Egouts]";
+	mes "Je suis désolé mais seuls les volontaires pour la Campagne des Egouts peuvent entrer.";
 	next;
-	mes "[Culvert Guardian]";
-	mes "If you'd like to volunteer, please visit the ^000077Culvert Registrar^000000 located in the 11 O'clock direction of Prontera.";
+	mes "[Garde des Egouts]";
+	mes "Veuillez vous rendre au ^000077Bureau de Recrutement pour les Egouts^000000 qui se trouve au Nord-Ouest de Prontera si vous désirez vous porter volontaire.";
 	close;
 }
 
 // Ph.D Hat Quest
 //============================================================ 
-prt_in,38,108,4	script	Teacher	53,{
+prt_in,38,108,4	script	Enseignante::Teacher	53,{
 	if ((countitem(710) > 0) && (countitem(703) > 0) && (countitem(704) > 0) && (countitem(708) > 0)) {
-		mes "[Teacher]";
-		mes "Oh...";
-		mes "Those Flowers in your hand are...";
+		mes "[Enseignante]";
+		mes "Oh... Ces fleurs dans votre main, ce sont des...";
 		next;
-		switch(select("Show Flowers:Present Flowers:Cancel")) {
+		switch(select("Lui montrer les fleurs:Lui offrir les fleurs:Annuler")) {
 		case 1:
-			mes "[Teacher]";
-			mes "Ah...";
-			mes "Those are definitely the 4 kinds of Flowers I was looking for! Would you give them to me?";
+			mes "[Enseignante]";
+			mes "Ah... Ce sont bien les 4 types de fleurs que je recherche. Voudriez-vous me les donner? S'il vous plait...?";
 			next;
-			mes "[Teacher]";
-			mes "If you would...";
-			mes "I'll give you my precious item.";
+			mes "[Enseignante]";
+			mes "Je vous donnerai un de mes précieux objets en échange.";
 			close;
 		case 2:
 			if ((countitem(710) > 0) && (countitem(703) > 0) && (countitem(704) > 0) && (countitem(708) > 0)) {
@@ -188,60 +171,53 @@ prt_in,38,108,4	script	Teacher	53,{
 				delitem 704,1;  //Aloe
 				delitem 708,1;  //Ment
 				getitem 5012,1;	//Ph.D_Hat
-				mes "[Teacher]";
-				mes "I really really appreciate you what you've done for me. I'm truly grateful. I will give my precious item to you as promised.";
+				mes "[Enseignante]";
+				mes "J'apprécie vraiment ce que vous avez fait pour moi. Je vous en remercie vraiment. Comme promis, je vais vous donner un objet auquel je tiens tout particulièrement.";
 				next;
-				mes "[Teacher]";
-				mes "This is the Hat I've worn on my Graduation from my University. It reminds me of my happy school days. Please take this...";
+				mes "[Enseignante]";
+				mes "Voilà le chapeau que je portais quand j'ai obtenu mon diplôme à l'Université. Il me rappelle mes jours d'école. S'il vous plait, prenez-le...";
 				close;
 			}
 			else {
-				mes "[Teacher]";
-				mes "... Oh, I'm Sorry.";
-				mes "But that's not what I'm looking for. Maybe you need to study flowers a little bit?";
+				mes "[Enseignante]";
+				mes "... Oh, je suis désolée, mais ce n'est pas ce que je cherche. Peut-être voudriez-vous étudier un peu les fleurs?";
 				close;
 			}
 		}
 	}
 	else {
-		mes "[Teacher]";
-		mes "Don't you think...";
-		mes "Flowers are pretty?";
+		mes "[Enseignante]";
+		mes "Ne pensez-vous pas que les fleurs sont magnifiques?";
 		next;
-		switch(select("Talk:Quit")) {
+		switch(select("Parler:Quitter la conversation")) {
 		case 1:
-			mes "[Teacher]";
-			mes "When I was young,";
-			mes "I had no friends and";
-			mes "studied all the time.";
+			mes "[Enseignante]";
+			mes "Quand j'étais jeune, je n'avais aucun ami et je passais mon temps à étudier.";
 			next;
-			mes "[Teacher]";
-			mes "Sometimes I regret what I did when I was younger, but it's not a big deal now. Through hard study, I finished entire educational courses earlier than all the other students.";
+			mes "[Enseignante]";
+			mes "Je regrette parfois d'avoir été comme ça plus jeune, mais ça n'a plus beaucoup d'importance maintenant. Grâce à ça, j'ai pu terminer mes études beaucoup plus jeune que les autres étudiants.";
 			next;
-			mes "[Teacher]";
-			mes "However...";
-			mes "I was sad and sometimes lonely. Whenever the studying got too hard, I needed someone who would listen to me. Finally, one day, I met my best friend.";
+			mes "[Enseignante]";
+			mes "Cependant, j'étais parfois triste, et je me sentais seule. A chaque fois que je travaillais trop dur, il me fallait quelqu'un à qui parler. C'est alors que je rencontrai mes meilleures amies.";
 			next;
-			mes "[Teacher]";
-			mes "When I saw a Pretty Flower blooming in the abandoned Garden, I realized It was my friend which shared my fate.";
+			mes "[Enseignante]";
+			mes "Lorsque je vis une fleur splendide s'ouvrir dans le jardin abandonné, je compris que pour moi c'était une amie qui partageait mon destin.";
 			next;
-			mes "[Teacher]";
-			mes "Although it is a Common and Normal Flower to others, she gave me the reason to study again. I could achieve my goals because of her.";
+			mes "[Enseignante]";
+			mes "Même si pour les autres il ne s'agissait que d'une fleur quelconque, elle me donnait une raison de continuer à étudier. Je pouvais atteindre mes objectifs grâce à elle.";
 			next;
-			mes "[Teacher]";
-			mes "So recently...";
-			mes "I am trying to pay her back. Now I am studying Flowers, and plan to over the whole world with them.";
+			mes "[Enseignante]";
+			mes "Alors depuis peu j'essaie de lui rendre la pareille. J'étudie désormais les fleurs, et je projette d'en recouvrir le monde.";
 			next;
-			mes "[Teacher]";
-			mes "To accomplish my work...";
-			mes "I need bunches of flowers. But for someone who rarely goes outside, it is really hard to find all the flowers I need.";
+			mes "[Enseignante]";
+			mes "Mais pour ce faire, il me faut des fleurs. Pour quelqu'un qui sort rarement de chez elle, c'est très difficile de trouver toutes les fleurs dont j'ai besoin.";
 			next;
-			mes "[Teacher]";
-			mes "I need 1 ^3355FFIllusion Flower^000000 ,1 ^3355FFHinalle^000000,1 ^3355FFAloe^000000 and 1 ^3355FFMent^000000. If you can bring them to me, I'd give you my treasure...";
+			mes "[Enseignante]";
+			mes "Il me faut 1 ^3355FFIllusion Flower^000000 ,1 ^3355FFHinalle^000000,1 ^3355FFAloe^000000 et 1 ^3355FFMent^000000. Si vous pouviez mes les apporter, je vous donnerai mon petit trésor...";
 			close;
 		case 2:
-			mes "[Teacher]";
-			mes "One of these days I will cover this whole world with Flowers.";
+			mes "[Enseignante]";
+			mes "Un jour je recouvrirai le monde de fleurs...";
 			close;
 		}
 	}

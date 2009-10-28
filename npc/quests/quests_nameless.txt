@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Nameless Island Quests
 //===== By: ================================================== 
@@ -66,12 +68,10 @@ OnTouch:
 	if ((prt_curse == 36 || prt_curse == 45 || prt_curse == 56 || prt_curse == 61) && (aru_monas < 1)) {
 		hideoffnpc "Agent#Aru";
 		mes "[????]";
-		mes "Are you "+strcharinfo(0)+"?";
-		mes "I've been waiting for you.";
-		mes "^6B8E23Priest Bamph^000000 is expecting";
-		mes "your arrival at ^6B8E23Prontera";
-		mes "Church^000000. Please visit him";
-		mes "as soon as you can.";
+		mes "Etes-vous "+strcharinfo(0)+"?";
+		mes "Je vous attendais.";
+		mes "Le ^6B8E23Père Bamph^000000 attend votre venue à l'^6B8E23Eglise de Prontera^000000.";
+		mes "Vous devriez lui rendre visite dès que vous le pouvez.";
 		close2;
 		set aru_monas,1;
 		hideonnpc "Agent#Aru";
@@ -87,43 +87,30 @@ OnInit:
 	end;
 }
 
-cmd_in02,174,89,7	script	Ordinary Man#pc1	97,{
+cmd_in02,174,89,7	script	Homme Ordinaire#pc1	97,{
 	if (aru_monas < 2) {
 		mes "[Larjes]";
-		mes "Damn it, I lost again!";
-		mes "This game is rigged!";
-		mes "No matter what I try,";
-		mes "I can never seem to win!";
-		mes "But Comodo Hold 'Em";
-		mes "is so... It's so addicting!";
+		mes "Soyez maudits! Je viens encore de perdre!";
+		mes "Ce jeu est maudit! Quoi que je fasse, je perd toujours!";
+		mes "Mais les jeux de Comodo sont si... Ils sont comme une drogue pour moi!";
 		close;
 	}
 	else if (aru_monas == 2) {
 		mes "[Larjes]";
-		mes "Argh, I lost at this game";
-		mes "so many times that I've";
-		mes "completely lost track!";
-		mes "I've got to win sometime...";
+		mes "Argh, j'ai perdu tellement de fois à ce jeu que je ne compte même plus. Mais je gagnerai un jour, j'vous l'dis: un jour je gagnerai!";
 		next;
-		select("Excuse me.");
+		select("Excusez moi.");
 		mes "[Larjes]";
-		mes "Oh! Uh... Hmm...";
-		mes "How may I help you?";
+		mes "Oh! Euh... Hmm...";
+		mes "Je peux faire quelque chose pour vous?";
 		next;
-		select ("^6B8E23Priest Bamph^000000 sent me.");
+		select ("Le ^6B8E23Père Bamph^000000 m'envoie.");
 		mes "[Larjes]";
-		mes "Oh, I see. I apologize";
-		mes "if my screaming and yelling";
-		mes "made you a bit uncomfortable.";
-		mes "I'm just here to kill some";
-		mes "time... I now see firsthand";
-		mes "that gambling is truly evil!";
+		mes "Oh, je vois. Désolé si je vous ai fait peur à crier comme ça. C'est juste que... Bah, je suis là pour tuer le temps...";
+		mes "Enfin... C'était juste pour me rendre compte par moi-même que le jeu est vraiment une invention démoniaque, vous savez?";
 		next;
 		mes "[Larjes]";
-		mes "Er, would you come";
-		mes "over this way? I don't";
-		mes "want anyone else to";
-		mes "overhear us talking.";
+		mes "Bref, venez par là s'il-vous-plaît: je ne veux pas que tout le monde nous entende.";
 		close2;
 		set aru_monas,3;
 		warp "cmd_in02",110,53;
@@ -131,148 +118,96 @@ cmd_in02,174,89,7	script	Ordinary Man#pc1	97,{
 	}
 	else {
 		mes "[Larjes]";
-		mes "What?! I lost again?";
-		mes "How does... How does";
-		mes "this game even work?!";
+		mes "Quoi?! J'ai encore perdu?";
+		mes "Mais... c'est quoi les règles de ce jeu en fait?";
 		close;
 	}
 }
 
-cmd_in02,111,52,3	script	Ordinary Man#pc2	97,{
+cmd_in02,111,52,3	script	Homme Ordinaire#pc2	97,{
 	if (aru_monas < 3) {
 		mes "[Larjes]";
-		mes "^666666*Sigh...*^000000";
-		mes "This isn't good at all.";
-		mes "I don't know what to do...";
+		mes "^666666*Soupire...*^000000";
+		mes "Ça ne va pas du tout. Je ne sais pas quoi faire...";
 		close;
 	}
 	else if (aru_monas == 3) {
 		mes "[Larjes]";
-		mes "Good, no one should be";
-		mes "able to hear us from here.";
-		mes "After I sent a message to";
-		mes "the place, I found some";
-		mes "new information that should";
-		mes "really help my investigation.";
+		mes "Bon, personne ne devrait pouvoir nous entendre ici. Après avoir envoyé mon message j'ai appris quelque chose qui devrait vraiment faire avancer mon enquête.";
 		next;
 		mes "[Larjes]";
-		mes "I learned that two details";
-		mes "about the night when that";
-		mes "high ranking man vanished.";
-		mes "Firstly, he left the guards for";
-		mes "a bit to meet a woman. It's";
-		mes "always a woman, isn't it?";
+		mes "J'ai appris deux choses à propos de cette nuit où un homme de haut rang a disparu. Premièrement, il a échappé à la surveillance de ses gardes pendant un moment pour aller retrouver une femme. - Il y a toujours une femme dans l'histoire, n'est-ce pas?";
 		next;
 		mes "[Larjes]";
-		mes "Secondly, after he left to";
-		mes "meet that woman, some other";
-		mes "people came in, and then they";
-		mes "carried some really large";
-		mes "baggage with them when";
-		mes "they left to the west.";
+		mes "Ensuite, après qu'il ait rejoint cette femme, d'autres personnes sont arrivées, et elles transportaient une espèce de grosse malle quand elles sont sorties avant de filer vers l'ouest";
 		next;
 		mes "[Larjes]";
-		mes "Those bags were so big,";
-		mes "it's suspicious. It seems";
-		mes "like some organization has";
-		mes "kidnapped him, and wants to";
-		mes "bring him west for some reason.";
+		mes "Cette caisse était trop grosse, c'est suspect. Je dirais qu'un groupuscule l'a enlevé et l'a emmené vers l'ouest pour une raison qui m'échappe encore.";
 		next;
-		select("Why to the west?");
+		select("Pourquoi vers l'ouest?");
 		mes "[Larjes]";
-		mes "This is just a guess, but";
-		mes "I think whoever kidnapped";
-		mes "him are from ^2F4F2FArunafeltz^000000.";
-		mes "I'm prohibited from entering";
-		mes "Arunafeltz so I wasn't able";
-		mes "to investigate any further.";
+		mes "Ce n'est qu'une supposition, mais je pense que ceux qui l'ont enlevé sont d'^2F4F2FArunafeltz^000000. Malheureusement... Comment dire? Je ne suis plus autorisé à mettre les pieds en Arunafeltz, donc je n'ai pas pu creuser cette piste.";
 		set aru_monas,4;
 		close;
 	}
 	else {
 		mes "[Larjes]";
-		mes "I gambled away";
-		mes "this much money?";
-		mes "How am I gonna pay";
-		mes "off all of this debt?!";
+		mes "Je viens de perdre TOUT CA?";
+		mes "Mais comment est-ce-que je pourrai rembourser cette dette?!";
 		close;
 	}
 }
 
-ra_in01,308,59,1	script	Waiter#Aru	930,{
+ra_in01,308,59,1	script	Serveur#Aru	930,{
 	if (aru_monas < 7) {
-		mes "[Waiter]";
-		mes "Welcome to";
-		mes "Rachel's Palate, one";
-		mes "of Rachel's finest and";
-		mes "most exquisite restraunts.";
+		mes "[Serveur]";
+		mes "Bienvenue au Palais de Rachel, le restaurant le plus raffiné de la ville!";
 		if (aru_monas < 6) {
 			close;
 		}
 		if (aru_monas == 6) {
 			next;
-			mes "[Waiter]";
-			mes "What would you like";
-			mes "to order? Or... If I'm";
-			mes "not mistaken, you're";
-			mes "here for something else?";
+			mes "[Serveur]";
+			mes "Que voudriez-vous commander? A moins que vous ne soyez là pour autre chose... C'est le cas n'est-ce pas?";
 			next;
-			if (select("I'd like to order.:Yes, I've come for another reason.") == 1) {
-				mes "[Waiter]";
-				mes "Sure, no problem.";
-				mes "Did you come alone?";
+			if (select("Je voudrais commander.:Oui, je suis là pour autre chose.") == 1) {
+				mes "[Serveur]";
+				mes "Bien sûr, comme vous voulez. Une table pour une personne, c'est cela?";
 				next;
-				select("Yes.");
-				mes "[Waiter]";
-				mes "Right this way.";
+				select("Oui.");
+				mes "[Serveur]";
+				mes "Veuillez me suivre, je vous y conduis.";
 				close2;
 				set aru_monas,7;
 				warp "ra_in01",303,43;
 				end;
 			}
-			mes "[Waiter]";
-			mes "Hm, okay. Well, whatever";
-			mes "it is, I hope you enjoy your";
-			mes "stay at Rachel's Palate.";
+			mes "[Serveur]";
+			mes "Hmm, d'accord. Quoi que cela puisse être, passez un agréable moment à Palais de Rachel.";
 			close;
 		}
 	}
-	mes "[Waiter]";
-	mes "The food in this";
-	mes "restaurant is the";
-	mes "best in Rachel--no,";
-	mes "it is the best in all";
-	mes "of Arunafeltz!";
+	mes "[Serveur]";
+	mes "Nous avons la meilleure carte de tout Rachel - non: de tout Arunafeltz!";
 	close;
 }
 
-ra_in01,301,50,3	script	Normal-Looking Man	927,{
-	mes "[Normal-Looking Man]";
+ra_in01,301,50,3	script	Homme à l'Air Normal	927,{
+	mes "[Homme à l'Air Normal]";
 	mes "Mmm-Mmm!";
-	mes "I love the food in";
-	mes "this restaurant!";
-	mes "They don't serve";
-	mes "anything this this";
-	mes "good anywhere else!";
+	mes "J'ADORE la cuisine de ce restaurant. C'est quelque chose qu'on ne trouve nulle part ailleurs, vraiment.";
 	close;
 }
 
-ra_in01,301,52,3	script	Common-Looking Man	927,{
-	mes "[Common-Looking Man]";
-	mes "The food here isn't bad,";
-	mes "but my favorite restaurants";
-	mes "are over in Hugel. The food";
-	mes "over there is definitely best.";
+ra_in01,301,52,3	script	Homme à l'Air Ordinaire	927,{
+	mes "[Homme à l'Air Ordinaire]";
+	mes "La cuisine est infecte ici. Mes restaurants préférés sont à Hugel. Là au moins ils font de la vraie cuisine!";
 	close;
 }
 
-ra_in01,297,50,7	script	Suspicious-Looking Man	926,{
-	mes "[Suspicious-Looking Man]";
-	mes "Each dish has its own";
-	mes "unique taste that you must";
-	mes "learn to relish. Of course,";
-	mes "unhealthy junk food is the";
-	mes "exception to this rule.";
+ra_in01,297,50,7	script	Homme suspect	926,{
+	mes "[Homme suspect]";
+	mes "Chaque plat a une saveur qui lui est propre, et que vous devez apprendre à savourer - à part toute cette mal-bouffe pleine de graisse et d'hormones venue du Nouveau Monde, bien sûr!";
 	close;
 }
 
@@ -281,147 +216,77 @@ ra_in01,301,43,0	script	#Aru_conv	-1,3,3,{
 
 OnTouch:
 	if (checkweight(907,200) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute!";
+		mes "Vous avez trop d'objets sur vous en ce moment. Vous devriez revenir après avoir utilisé les services Kafra pour en déposer quelques uns.^000000";
 		close;
 	}
 	if (aru_monas == 7) {
-		mes "[Waiter]";
-		mes "What would you like to order?";
-		mes "Our special today is Fried";
-		mes "Veins Stripe Stickleback";
-		mes "since we received some";
-		mes "high quality fish from Veins";
-		mes "just this morning.";
+		mes "[Serveur]";
+		mes "Qu'est-ce que je peux vous servir?";
+		mes "Nous avons des épinoches frites à la mode de Veins comme plat du jour - nous venons d'avoir un arrivage de très bonne qualité, mais il n'y en aura que pour le déjeuner.";
 		next;
-		select("...Yes, that sounds good.");
-		mes "[Waiter]";
-		mes "Excellent choice.";
-		mes "Just to let you know,";
-		mes "that dish is ^9932CD3,000 zeny^000000.";
-		mes "I'll be right back.";
+		select("...Oui, ça à l'air appétissant.");
+		mes "[Serveur]";
+		mes "Très bon choix.";
+		mes "Pour votre information, nous faisons ce plat pour ^9932CD3,000 zenys^000000.";
+		mes "Je reviens tout de suite.";
 		next;
-		mes "^3355FFThe waiter took your";
-		mes "order, and left to go to";
-		mes "the kitchen. You decide to";
-		mes "eavesdrop on the people";
-		mes "talking at the next table";
-		mes "while you're waiting.^000000";
+		mes "^3355FFLe serveur note votre commande et se dirige vers la cuisine. Vous décidez d'écouter la conversation des personnes assises à une table adjacente en attendant.^000000";
 		next;
-		mes "[Husky Male Voice]";
+		mes "[Voix d'Homme Rauque]";
 		mes "...............................";
-		mes "I really saw it, the greatest";
-		mes "fish in the world! Last time";
-		mes "I went to Veins, I glimpsed";
-		mes "the Veins Golden Stripe";
-		mes "Stickleback! It's true!";
+		mes "J'vous dis que je l'ai vu, moi! Le plus gros poisson au monde! La dernière fois que j'suis allé à Veins, je l'ai aperçu! L'Épinoche Doré! J'vous jure!";
 		next;
-		mes "[Gloomy Male Voice]";
-		mes "So were you able to taste";
-		mes "that Veins Golden Stripe";
-		mes "Stickleback juice?";
+		mes "[Voix d'Homme Lugubre]";
+		mes "Alors est-ce que tu l'as goûté, ce jus d'épinoche doré de Veins?";
 		next;
-		mes "[Average Male Voice]";
-		mes "Aw man, if I did, that";
-		mes "would've been a once";
-		mes "in a lifetime experience!";
-		mes "Veins Golden Stripe";
-		mes "Sticklebacks are only";
-		mes "caught once a decade!";
+		mes "[Voix d'Homme Ordinaire]";
+		mes "Ah mon pote, si j'avais fait ça ça aurait été la plus grande expérience de toute ma vie! On en attrape qu'une fois tous les dix ans des poissons comme ça!";
 		next;
-		mes "[Husky Male Voice]";
-		mes "Oh yeah, that juice is";
-		mes "incredible. My voice even";
-		mes "changed after I drank it!";
-		mes "It was just... So profound.";
+		mes "[Voix d'Homme Rauque]";
+		mes "Ca c'est bien vrai! Ce jus est vraiment incroyable. Ma voix a même changé après en avoir bu. Elle est devenue si... profonde.";
 		next;
-		mes "[Average Male Voice]";
-		mes "Oh! So that's why";
-		mes "you sound different.";
+		mes "[Voix d'Homme Ordinaire]";
+		mes "Oh! C'est pour ça que tu ne parles plus de la même manière alors!";
 		next;
-		mes "[Gloomy Male Voice]";
-		mes "How did you get to drink";
-		mes "such rare juice? I mean,";
-		mes "there must be tons of people";
-		mes "in line with reservations,";
-		mes "just waiting to drink it!";
+		mes "[Voix d'Homme Lugubre]";
+		mes "Et comment tu as fait pour goûter à un jus aussi rare? Je veux dire... Il doit y avoir un bon paquet de gens qui attendent d'en boire.";
 		next;
-		mes "[Husky Male Voice]";
-		mes "I got damn lucky: I went";
-		mes "to this tavern in Veins, and";
-		mes "overheard that ^DB7093a group of";
-		mes "smugglers were arrested";
-		mes "by the guards at the";
-		mes "southeast beach^000000.";
+		mes "[Voix d'Homme Rauque]";
+		mes "J'ai eu un gros coup de bol: je suis entré dans cette taverne à Veins et j'ai entendu qu'une ^DB7093bande de trafiquants avait été arrêtée par les gardes sur une plage au sud^000000.";
 		next;
-		mes "[Husky Male Voice]";
-		mes "Then I started thinking:";
-		mes "maybe the smugglers were";
-		mes "fishing. So I checked the";
-		mes "beach to see if I could";
-		mes "find their fishing boat.";
+		mes "[Voix d'Homme Rauque]";
+		mes "Alors je me suis dit qu'ils étaient p'têtre en train de pêcher. j'suis donc allé sur la plage, voir si je pouvais trouver leur bateau.";
 		next;
-		mes "[Average Male Voice]";
-		mes "Man, you must be obsessed";
-		mes "with food. I mean, how else";
-		mes "would you figure out that the";
-		mes "smugglers were illegally";
-		mes "fishing so quickly?";
+		mes "[Voix d'Homme Ordinaire]";
+		mes "Toi, tu dois vraiment être obsédé par la bouffe. Je veux dire, je connais personne d'autre qui aurait conclu que les trafiquants étaient en train de pêcher illégalement aussi rapidement.";
 		next;
-		mes "[Husky Male Voice]";
-		mes "Ha, I guess you're right!";
-		mes "Anyway, there was only one";
-		mes "fishing boat, and the guards";
-		mes "were inspecting it. I was about";
-		mes "to turn back in disappointment";
-		mes "but then... I saw a fisherman!";
+		mes "[Voix d'Homme Rauque]";
+		mes "Ah, je suppose que tu dois avoir raison!";
+		mes "Bref, il n'y avait qu'un seul bateau de pêche, et les gardes étaient en train de l'examiner. J'allais filer en douce, un peu déçu, quand je suis tombé sur... un pêcheur!";
 		next;
-		mes "[Husky Male Voice]";
-		mes "Out of the corner of my eye,";
-		mes "I saw him bringing in his";
-		mes "catch for the day, Veins";
-		mes "Golden Strip Stickleback!";
-		mes "I bought all of his fish";
-		mes "right then and there.";
+		mes "[Voix d'Homme Rauque]";
+		mes "Et là je le voix, droit devant moi, qui rapporte sa prise du jour: un Épinoche Doré de Veins! Je lui ai acheté tout son poisson sur le coup.";
 		next;
-		mes "[Gloomy Male Voice";
-		mes "Boy, were you lucky.";
-		mes "And you never hestitate";
-		mes "to splurge when it comes";
-		mes "to food, do you? Heh heh~";
+		mes "[Voix d'Homme Lugubre]";
+		mes "T'as vraiment eu de la chance, petit. Et puis tu ne comptes jamais quand il s'agit de nourriture, pas vrai? Heh heh~";
 		next;
-		mes "[Husky Male Voice]";
-		mes "Oh, that wasn't even a";
-		mes "splurge. I'm sure you guys";
-		mes "would do the same thing";
-		mes "if you were in my situation.";
-		mes "I'm just grateful that I was";
-		mes "able to taste such rare fish.";
+		mes "[Voix d'Homme Rauque]";
+		mes "Oh, je n'ai pas payé tant que ça. Je suis sûr que vous auriez fait la même chose à ma place, les mecs. Mais je suis vraiment content d'avoir pu goûter à un poisson aussi rare.";
 		next;
 		mes "^3355FF...............................";
-		mes "Then, the men started";
-		mes "to compliment each other.^000000";
+		mes "Les hommes commencent alors à se faire des compliments les uns les autres.^000000";
 		next;
-		mes "[Waiter]";
-		mes "Ah, here's your Fried";
-		mes "Veins Stripe Stickleback.";
-		mes "Please enjoy your meal.";
+		mes "[Serveur]";
+		mes "Ah, Voilà votre épinoche frit à la mode de Veins. Bon appétit!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "^ff0000Veins^000000, huh? I might want";
-		mes "to check that place one";
-		mes "of these days to see if";
-		mes "I can find more of this fish.";
+		mes "^ff0000Veins^000000, hein? Il faudra que j'y aille un de ces jours, voir si je peux en apprendre plus sur ce poisson.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Whoa, this fish tastes...";
-		mes "I've never tasted anything";
-		mes "like it! It's almost like";
-		mes "a dessert. God, it's good!";
+		mes "Whoa, ce poisson est...";
+		mes "C'est la première fois que je goûte à quelque chose comme ça!";
+		mes "On dirait presque un dessert. Mon dieu, ce que c'est bon!";
 		if (Zeny >= 3000) {
 			set Zeny,Zeny-3000;
 			getitem 12052,4; //Vit_Dish02
@@ -432,446 +297,221 @@ OnTouch:
 	end;
 }
 
-ve_in,78,314,5	script	Magistrate#Aru	945,{
+ve_in,78,314,5	script	Magistrat#Aru	945,{
 	if (aru_monas < 8) {
 		mes "[Al Hamad]";
-		mes "Argh! Why must this";
-		mes "happen to me, especially";
-		mes "just when I'm about to";
-		mes "retire! A-ah! My ulcer...";
-		mes "Just all of a sudden, it--!";
+		mes "Argh! Pourquoi est-ce que ça m'arrive *à moi*? Je viens juste de prendre ma retraite! A-ah! Mon ulcère... Ça y a est, ça...";
 		close;
 	}
 	else if (aru_monas == 8) {
 		mes "[Al Hamad]";
-		mes "Man, this is probably";
-		mes "the biggest hassle of my";
-		mes "career. Why does this have";
-		mes "to happen now? Retirement";
-		mes "is so close, yet so far.";
+		mes "Mon garçon, c'est surement la plus grosse affaire de toute ma carrière. Et pourquoi est-ce que ça devait arriver maintenant! Je suis à deux doigts de la retraite, et pourtant il faut que je règle ça avant.";
 		next;
-		select("Are you in trouble?");
+		select("Vous avez un problème?");
 		mes "[Al Hamad]";
-		mes "Huh? You don't look like";
-		mes "you're from around here.";
-		mes "Listen, I appreciate your";
-		mes "concern, but I'm really not";
-		mes "comfortable talking to complete";
-		mes "strangers about my problems.";
+		mes "Huh? Vous n'avez pas l'air d'être du coin, vous. Ecoutez, j'apprécie que vous vous souciez de moi, mais ce n'est pas mon genre de parler de mes problèmes à de parfaits inconnus.";
 		set aru_monas,9;
 		close;
 	}
 	else if (aru_monas == 9) {
 		mes "[Al Hamad]";
-		mes "Unless you've got special";
-		mes "business here, you're not";
-		mes "allowed to enter this place.";
-		mes "We're here to keep the public";
-		mes "peace, and letting anyone";
-		mes "in here will cause trouble.";
+		mes "A moins que vous n'ayez des affaires à régler ici, nous ne pouvons pas vous permettre d'entrer. Nous somme là pour maintenir l'ordre public, et autoriser quelqu'un à entrer ne ferait que causer des problèmes.";
 		close;
 	}	
 	else if (aru_monas == 10) {
 		mes "[Al Hamad]";
-		mes "I thought I told you";
-		mes "that you weren't allowed";
-		mes "to come in here. Why do";
-		mes "you keep coming back?";
+		mes "Je vous ai dit que vous ne pouviez pas entrer. Pourquoi vous obstinez-vous à revenir sans cesse?";
 		next;
-		if (select("I'm sorry.:I want to know about the smugglers.") == 1) {
+		if (select("Je suis désolé.:Je veux en apprendre plus sur les trafiquants.") == 1) {
 			mes "[Al Hamad]";
-			mes "It's fine. Just leave,";
-			mes "and don't come back";
-			mes "unless you've got a";
-			mes "really good reason.";
+			mes "C'est bon. Mais partez maintenant, et ne revenez pas avant d'avoir une bonne raison.";
 			close;
 		}
 		mes "[Al Hamad]";
-		mes "Hey, how'd you find out";
-		mes "about the smugglers? Did";
-		mes "word spread around town?";
-		mes "Well, I'm sorry, but I can't";
-		mes "disclose any details about";
-		mes "an ongoing investigation.";
+		mes "Attendez, où avez-vous entendu parler des trafiquants? Est-ce qu'un bruit court en ville? Eh bien, je suis désolé, mais je ne peux divulguer aucun détail de l'enquête en cours.";
 		next;
 		mes "[Al Hamad]";
-		mes "^9370DBIf you insist on learning";
-		mes "more, then you'd need to";
-		mes "bring me a written order";
-		mes "from a higher ranking officer.^000000";
-		mes "Oh, and you're prohibited";
-		mes "asking anyone else, so behave.";
+		mes "^9370DBSi vous voulez vraiment en apprendre plus, alors vous devrez m'apporter un ordre écrit contre-signé par un officier de haut rang.^000000";
+		mes "Oh, il vous est interdit de questionner qui que ce soit à ce sujet, alors faites attention.";
 		set aru_monas,11;
 		close;
 	}
 	else if (aru_monas == 11) {
 		mes "[Al Hamad]";
-		mes "I don't blame you for";
-		mes "being curious, but getting";
-		mes "involved when you're not";
-		mes "supposed to will just cause";
-		mes "trouble. Be careful, got it?";
+		mes "Je ne vous reproche pas d'être curieux, mais vous mêler de cette histoire alors que vous n'êtes pas sensé le faire ne fera que de créer des problèmes. Soyez prudent, d'accord?";
 		close;
 	}
 	else if (aru_monas == 13) {
 		mes "[Al Hamad]";
-		mes "Huh, that's weird. You're not";
-		mes "even a citizen of Arunafeltz,";
-		mes "but somehow you know such";
-		mes "a high ranking priest. Alright,";
-		mes "I guess I can tell you more";
-		mes "about our investigation.";
+		mes "Huh, c'est étrange. Vous n'êtes même pas citoyen d'Arunafeltz, mais vous connaissez tout de même un prêtre de si haut rang. Très bien, je pense que je peux vous en apprendre un peu plus sur l'enquête.";
 		next;
 		mes "[Al Hamad]";
-		mes "I should let you know that";
-		mes "what I tell you might not be";
-		mes "worth all that trouble. This";
-		mes "information probably isn't";
-		mes "as valuable as you think.";
+		mes "Tout d'abord, gardez bien à l'esprit que ce que je vais vous dire n'en vaut probablement pas la peine. Tout cela n'a surement pas autant d'intérêt que vous le pensez..";
 		next;
 		mes "[Al Hamad]";
-		mes "The smugglers we caught are";
-		mes "the worst kind of scoundrels:";
-		mes "they deal in human trafficking, but we caught them this time when they";
-		mes "were crossing the ocean. Their background info is pretty typical.";
+		mes "Les trafiquants que nous avons appréhendé sont des félons de la pire espèce: ils se sont spécialisés dans l'enlèvement contre rançon. Nous les avons interceptés alors qu'ils naviguaient sur l'océan. Leur parcours criminel est malheureusement des plus banals.";
 		next;
 		mes "[Al Hamad]";
-		mes "Let's see... They kidnapped";
-		mes "some man from Comodo.";
-		mes "That's a place in the southwest";
-		mes "part of Rune-Midgarts. Anyway,";
-		mes "the smugglers thought he'd be";
-		mes "wealthy, so they set a trap.";
+		mes "Voyons... Ils ont enlevé un homme à Comodo, une ville dans les confins au Sud-Ouest de Rune-Midgard. Bref, les trafiquants pensaient qu'il était fortuné, et lui ont donc tendu un piège.";
 		next;
 		mes "[Al Hamad]";
-		mes "They lured him away from his";
-		mes "guards by sending a woman,";
-		mes "but when they captured him,";
-		mes "they found that he was not only";
-		mes "rich, he was also a high ranked";
-		mes "official of Rune-Midgarts.";
+		mes "Ils l'ont attiré hors de la surveillance de ses gardes en utilisant les charmes d'une femme, mais lorsqu'ils le capturèrent, ils réalisèrent qu'il n'était pas seulement riche, mais qu'il s'agissait aussi d'un officiel de haut rang de Rune-Midgard.";
 		next;
 		mes "[Al Hamad]";
-		mes "That's when they got sloppy:";
-		mes "they were so scared that the";
-		mes "kingdom's troops might pursue";
-		mes "them that they crossed the";
-		mes "ocean that we patrol. That's";
-		mes "where we caught them.";
+		mes "C'est alors qu'ils commirent l'erreur qui leur fut fatale: ils avaient si peur que les troupes du Royaume puissent les poursuivre qu'ils franchirent l'océan sur lequel nous patrouillons. C'est là que nous les avons capturés.";
 		next;
 		mes "[Al Hamad]";
-		mes "What I don't understand is";
-		mes "why they were so scared.";
-		mes "I mean, they mainly deal";
-		mes "in human trafficking so...";
-		mes "Kidnapping an official isn't";
-		mes "that big a difference, is it?";
+		mes "Ce que je ne parviens pas à comprendre, c'est pourquoi ils avaient si peur. Je veux dire, ils ont fait de l'enlèvement leur métier alors... Est-ce qu'enlever un officiel fait une si grosse différence?";
 		next;
 		mes "[Al Hamad]";
-		mes "We contacted the temple,";
-		mes "and reported the smugglers,";
-		mes "our investigation, and the";
-		mes "high ranking man from the";
-		mes "Rune-Midgarts kingdom.";
+		mes "Nous avons contacté le temple, et nous leur avons parlé des trafiquants, et de l'officiel de Rune-Midgard.";
 		next;
 		mes "[Al Hamad]";
-		mes "Then, some people from";
-		mes "the temple interrupted our";
-		mes "investigation, took away the";
-		mes "smugglers before we finished";
-		mes "our interrogations, and we";
-		mes "haven't seen them since.";
+		mes "C'est alors qu'un membre du temple pris les trafiquants à part et les emmena avant que nous n'ayons pu finir notre interrogatoire. Nous ne les avons pas revu depuis.";
 		next;
 		mes "[Al Hamad]";
-		mes "I asked an acquaintance that";
-		mes "works at the temple, but he";
-		mes "doesn't know what's going";
-		mes "on either. The ^32CD32Rune-Midgarts";
-		mes "official^000000 has gone missing too.";
-		mes "It's all very frustrating.";
+		mes "J'ai demandé ce qui se passait à quelqu'un que je connais au temple, mais il n'en avait aucune idée. L'^32CD32Officiel de Rune-Midgard^000000 a disparu lui aussi. Tout cela m'énerve!";
 		next;
 		mes "[Al Hamad]";
-		mes "That happens to be all";
-		mes "I know. Does this mean";
-		mes "we have to capture the";
-		mes "smugglers again? I don't";
-		mes "know what's going on...";
+		mes "Voilà, c'est tout ce que je sais. Est-ce qu'il va falloir qu'on recapture ces trafiquants? Je n'en sais rien. Je ne comprends pas ce qui se passe...";
 		next;
 		mes "[Al Hamad]";
-		mes "Even if I could make headway";
-		mes "into the investigation, I've";
-		mes "been ordered to stop by upper";
-		mes "management. It looks like";
-		mes "this case is more trouble";
-		mes "than it's worth to them?";
+		mes "Même si je pourrais pousser l'enquête, mes supérieurs m'ont ordonner d'arrêter de chercher. On dirait que c'est une affaire vraiment sérieuse...";
 		next;
 		mes "[Al Hamad]";
-		mes "I don't want to be involved";
-		mes "in this anymore. I should be";
-		mes "retired already! If you want to";
-		mes "learn more, your only choice";
-		mes "would be to find out on your";
-		mes "own. Fat chance, right?";
+		mes "Je ne veux plus rien avoir à faire avec tout ça. Je devrais déjà être à la retraite! Vous devrez vous débrouiller tout seul si vous voulez en apprendre plus. Bonne chance!";
 		set aru_monas,14;
 		close;
 	}
 	else if (aru_monas >= 14) {
 		mes "[Al Hamad]";
-		mes "I've suffered enough";
-		mes "already! Why can't this";
-		mes "case just be done?!";
+		mes "J'en ai déjà assez bavé. On ne pourrait pas juste classer cette affaire?";
 		close;
 	}
 }
 
-ve_in,81,296,3	script	Soldier#Aru	946,{
+ve_in,81,296,3	script	Soldat::Soldier#Aru	946,{
 	if (aru_monas < 9) {
 		mes "[Himus]";
-		mes "Huh. The magistrate";
-		mes "still seems pretty upset";
-		mes "over the case that happened";
-		mes "at least a few months ago...";
+		mes "Uh. Le Magistrat est encore énervé à cause de cette affaire qui s'est passée il y a plusieurs mois déjà...";
 		close;
 	}
 	else if (aru_monas == 9) {
 		mes "[Himus]";
-		mes "Hm? Oh, the magistrate";
-		mes "gave you the brush-off?";
-		mes "Well, he hasn't really been";
-		mes "himself ever since we arrested";
-		mes "those ^32CD32smugglers coming from";
-		mes "the south^000000 a few months ago.";
+		mes "Hum? Oh, le magistrat vous a envoyé promener? Il n'est plus lui-même depuis que nous avons arrêté ces ^32CD32traffiquants venus du Sud^000000 il y a quelques mois.";
 		next;
 		mes "[Himus]";
-		mes "Once we reported the arrest";
-		mes "to the temple, the pope's";
-		mes "soldiers came and took the";
-		mes "smugglers away. We have no";
-		mes "clue what happened to them";
-		mes "or where they even are now.";
+		mes "Après avoir signalé l'arrestation au Temple, les soldats de la Papesse sont venus et ont emmené les trafiquants. Nous n'avons aucune idée de ce qui leur est arrivé ensuite ou de où ils se trouvent maintenant.";
 		next;
 		mes "[Himus]";
-		mes "It might not seem like";
-		mes "a big deal to you, but";
-		mes "the magistrate is pretty";
-		mes "meticulous, and he hates";
-		mes "it when people interfere";
-		mes "with his job, you know?";
+		mes "Pour vous ça peut sembler être quelque chose d'insignifiant, mais le Magistrat est très méticuleux, et il a horreur que des gens interfèrent avec son travail, vous savez?";
 		next;
-		select("Who are the smugglers?");
+		select("Qui sont les trafiquants?");
 		mes "[Himus]";
-		mes "Well, I don't really know.";
-		mes "Maybe the magistrate would";
-		mes "know if he was able to finish";
-		mes "interrogating the smugglers.";
-		mes "I'm not sure if he did since the smugglers were taken away.";		
+		mes "Je ne sais vraiment pas. Le Magistrat le saurait surement si on lui avait laissé boucler l'enquête. Je ne sais pas si il a essayé de se renseigner depuis qu'on lui a retiré l'affaire.";		
 		set aru_monas,10;
 		close;
 	}
 	else if (aru_monas == 10) {
 		mes "[Himus]";
-		mes "The magistrate is about";
-		mes "to retire, so I hope he can";
-		mes "finally quit work and just";
-		mes "forget about this whole";
-		mes "business. He does nothing";
-		mes "but stress out about it!";
+		mes "Le Magistrat prendra bientôt sa retraite. J'espère qu'il pourra s'y faire et oublier toute cette histoire. Tout ça ne fait que ruiner sa santé...";
 		close;
 	}
 	else {
 		mes "[Himus]";
-		mes "Nice day, isn't it?";
+		mes "Il fait beau aujourd'hui, n'est-ce pas?";
 		close;		
 	}
 }
 
 ra_temple,165,57,5	script	Niren#ss	915,{
 	if (checkweight(907,200) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets sur vous en ce moment. Revenez après en avoir déposé quelques uns dans votre Stock.^000000";
 		close;
 	}
 	cutin "ra_gwoman",2;
-	mes "[High Priestess Niren]";
-	mes "So you wanted to talk to me?";
-	mes "I'm pretty tired right now, but";
-	mes "I can spare a moment or two.";
-	mes "What would you like to ask?";
+	mes "[Grande Prêtresse Niren]";
+	mes "Alors vous vouliez me parler? Je suis fatiguée, mais je peux vous accorder quelques minutes. Que vouliez-vous me demander?";
 	next;
-	switch(select("Ask About Veins Smugglers:As About Zhed")) {
+	switch(select("A propos des trafiquants de Veins:A propos de Zhed")) {
 	case 1:
 		if (aru_monas == 12) {
 			mes "[Niren]";
-			mes "Veins smugglers...";
-			mes "Would you explain";
-			mes "exactly what you mean";
-			mes "by Veins smugglers?";
+			mes "Les trafiquants de Veins... Voudriez-vous être plus précis s'il vous plait?";
 			next;
 			mes "[Niren]";
-			mes "Oh, them. Yes, I know";
-			mes "a little bit about them.";
-			mes "I'm afraid that I can't really";
-			mes "disclose certain information";
-			mes "about them since they're";
-			mes "a classified case...";
+			mes "Oh, eux. Oui j'en ai entendu parler. Cependant j'ai bien peur que je ne puisse rien vous dire à leur sujet. L'information est classée confidentielle...";
 			next;
 			mes "[Niren]";
-			mes "I'm afraid that I cannot give you information about them easily";
-			mes "as they mean a lot to us.";
+			mes "Je ne peux rien vous dire comme ça. Il s'agit d'un cas très sensible pour nous.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Actually, I was curious";
-			mes "about who they kidnapped.";
+			mes "En fait je me demandais qui ils avaient enlevé.";
 			next;
 			mes "[Niren]";
-			mes "Oh, well, I suppose";
-			mes "I can tell you more";
-			mes "about their captive.";
-			mes "But first, I'd like to";
-			mes "ask you for a favor.";
+			mes "Oh, eh bien je suppose que je peux vous en dire un peu plus à propos de celui qu'ils ont enlevé. Mais je dois d'abord vous demander de me rendre un service.";
 			next;
-			select("Accept:Do Not Refuse");
+			select("Accepter:Ne pas refuser"); // sic [No Healing]
 			mes "[Niren]";
-			mes "When we realized the";
-			mes "kind of hostage the";
-			mes "smugglers captured, we";
-			mes "didn't know what to do with";
-			mes "him. We've had too many";
-			mes "internal problems to handle...";
+			mes "Lorsque nous avons réalisé qui ils avaient enlevé, nous ne savions pas quoi faire. Nous avions déjà assez de problèmes comme ça...";
 			next;
 			mes "[Niren]";
-			mes "Still, we felt that we";
-			mes "could use him in our plan,";
-			mes "so we held him in a secret";
-			mes "place whose location is only";
-			mes "known to a few people. But";
-			mes "then... We lost all contact.";
+			mes "Cependant, nous avons pensé que nous pourrions l'utiliser dans notre plan, alors nous l'avons conduit dans un endroit secret connu seulement de quelques personnes, mais nous avons perdu tout contact.";
 			next;
 			mes "[Niren]";
-			mes "We sent investigators, but";
-			mes "we still have no idea what";
-			mes "happened. All they found was";
-			mes "a message left by one survivor:";
-			mes "''They're all demons.'' The";
-			mes "hostage is probably dead.";
+			mes "Nous avons envoyé des enquêteurs mais nous ne savons toujours pas ce qui s'est passé. Tout ce qu'ils ont trouvé était un message écrit par un survivant: ''Des démons! Ce sont tous des démons!'' L'otage est probablement mort.";
 			next;
 			mes "[Niren]";
-			mes "He may have been a high";
-			mes "ranking official, but we";
-			mes "were too preoccupied";
-			mes "with other matters. In fact,";
-			mes "I haven't gotten the chance";
-			mes "to think of what do with him...";
+			mes "Il s'agissait peut-être d'un officiel de haut-rang, mais nous avions d'autres problèmes à régler. En fait je n'ai même pas eu le temps de penser à ce qu'on allait en faire...";
 			next;
 			mes "[Niren]";
-			mes "I want to ask you to";
-			mes "go to that place, and";
-			mes "figure out what happened";
-			mes "there, and if that high ranking";
-			mes "official from Rune-Midgarts is";
-			mes "still alive. I doubt it, but...";
+			mes "Je voudrais vous demander de vous rendre là-bas et de découvrir ce qui s'est passé. Il faudrait qu'on sache si l'officiel de Rune-Midgard est toujours en vie. J'en doute, mais...";
 			next;
 			mes "[Niren]";
-			mes "The investigators we employ";
-			mes "in our temple usually pale";
-			mes "in comparison to you foreign";
-			mes "adventurers, so I have faith";
-			mes "that you can do it. Still,";
-			mes "it'll be quite dangerous.";
+			mes "Les enquêteurs au service du Temple font en général pâle figure face à vous autres, aventuriers étrangers, alors j'ai foi en vous. Néanmoins, ce sera peut-être dangereux.";
 			next;
 			mes "[Niren]";
-			mes "If you can do this, I'll";
-			mes "tell you the location of";
-			mes "that place: we usually call";
-			mes "it the monastery. It used to";
-			mes "be an actual monastery, but we";
-			mes "use it to hold captives now.";
+			mes "Si vous me promettez d'enquêter, je vous indiquerai où se trouve ce lieu. En général, nous l'appelons le Monastère. Il était très actif autrefois, mais aujourd'hui nous ne l'employons plus que pour isoler certains détenus.";
 			next;
 			mes "[Niren]";
-			mes "I'm sorry, but I can't tell";
-			mes "you anything else about that";
-			mes "old place. It's located to the";
-			mes "southwest of Veins across the";
-			mes "sea. You should be able to find";
-			mes "a boat at South Veins Beach.";
+			mes "Je suis désolée mais je ne peux rien vous dire de plus à propos de ce lieu. Il se trouve au sud-ouest de Veins, par-delà la mer. Vous devriez trouver un bateau caché sur la plage au sud de Veins.";
 			next;
 			mes "[Niren]";
-			mes "However... Never mind.";
-			mes "I'd like to help you more,";
-			mes "but I'd be compromising my";
-			mes "position. I'm sorry. Please";
-			mes "come back and tell me if";
-			mes "you learn anything there.";
+			mes "Je voudrais vous en dire plus, mais vue ma position je ne peux pas me le permettre, désolé. Revenez me trouver si vous découvrez quelque chose là-bas.";
 			set aru_monas,13;
 			next;
 			mes "[Niren]";
-			mes "I'll send a message to the";
-			mes "magistrate of Veins. If you";
-			mes "talk to him, he'll provide you";
-			mes "with some useful information";
-			mes "for your journey. Good luck.";
+			mes "Je vais de suite faire parvenir une missive au magistrat de Veins. Il vous aidera autant que possible pour votre voyage si vous allez le trouver. Bonne chance.";
 			close2;
 		}
 		else if (aru_monas < 18) {
 			mes "[Niren]";
-			mes "Going to the monastery";
-			mes "isn't the problem: coming";
-			mes "back here alive will probably";
-			mes "be the real challenge for you.";
+			mes "Aller au Monastère n'est pas le problème. Le tout est d'en revenir vivant.";
 			next;
 			mes "[Niren]";
-			mes "We can't send any troops";
-			mes "there until we understand";
-			mes "what they'd be confronting";
-			mes "there. That's why we need";
-			mes "you to investigate the area.";
+			mes "Nous ne pouvons pas y envoyer de troupes avant d'avoir compris ce qui s'y tramait. C'est pour ça que je veux que vous alliez y enquêter.";
 			close2;
 		}
 		else if (aru_monas < 25) {
 			mes "[Niren]";
-			mes "Still investigating the";
-			mes "monastery? Perhaps if";
-			mes "you found any records";
-			mes "left behind by one of";
-			mes "the residents over there...";
+			mes "Toujours à explorer le Monastère? Peut-être trouverez-vous des notes ou un indice laissés par un des résidents...";
 			close2;
 		}
 		else if (aru_monas == 25) {
 			if (countitem(7755) < 1) {
 				mes "[Niren]";
-				mes "Still investigating the";
-				mes "monastery? Perhaps if";
-				mes "you found any records";
-				mes "left behind by one of";
-				mes "the residents over there...";
+				mes "Toujours à explorer le Monastère? Peut-être trouverez-vous des notes ou un indice laissés par un des résidents...";
 				close2;
 			}
 			else {
 				mes "[Niren]";
-				mes "You found this journal";
-				mes "in the monastery? Perfect.";
-				mes "Let me read it, and see";
-				mes "what we can learn...";
+				mes "Vous avez trouvé ce journal dans le Monastère? Parfait. Laissez-moi le lire, et voir ce qu'on eut en apprendre...";
 				next;
 				mes "[Niren]";
-				mes "Hmm, this sounds really";
-				mes "bad. This is tragic, especially";
-				mes "we kept so many important";
-				mes "people over there. I'll request";
-				mes "to dispatch troops there right";
-				mes "away. Something must be done.";
+				mes "Hum, la situation a l'air vraiment mauvaise. C'est tragique, surtout quand on sait qu'on y a gardé des personnes si importantes. Je vais y envoyer des troupes au plus vite. Quelque chose doit être fait à ce sujet.";
 				next;
 				mes "[Niren]";
-				mes "There are too many problems";
-				mes "we have to confront now, but";
-				mes "this monastery issue needs";
-				mes "top priority. We won't be able";
-				mes "to handle it if another threat";
-				mes "comes from that place.";
+				mes "Nous devons faire face à de nombreux problèmes en ce moment, mais cette histoire au Monastère est une priorité absolue. Nous ne pourrions pas faire face à une nouvelle menace venant de cet endroit.";
 				delitem 7755,1; //Research_Note
 				set aru_monas,26;
 				getexp 500000,0;
@@ -880,485 +520,285 @@ ra_temple,165,57,5	script	Niren#ss	915,{
 		}
 		else {
 			mes "[Niren]";
-			mes "I suppose that Arunafeltz";
-			mes "and Rune-Midgarts will be too";
-			mes "busy with their own internal";
-			mes "issues to commit to war.";
-			mes "High Priest Zhed will be";
-			mes "glad to know about this.";
+			mes "Je suppose qu'Arunafeltz et Rune-Midgard auront trop à faire avec leurs problèmes internes pour déclarer une nouvelle guerre. Le Grand Prêtre Zhed sera heureux de l'apprendre.";
 			close2;
 		}
 		break;
 	case 2:
 		if (aru_em < 10) {
-			mes "[High Priestess Niren]";
-			mes "I'm sorry...";
-			mes "I really don't want";
-			mes "to think about Zhed";
-			mes "right now. He's just...";
+			mes "[Grande Prêtresse Niren]";
+			mes "Je suis désolée mais je ne veux vraiment pas parler de Zhed en ce moment. Il est...";
 			close2;
 		}
 		else if (aru_em == 10) {
-			mes "[High Priestess Niren]";
-			mes "You wanted to ask me about";
-			mes "Beken--High Priest Zhed?";
-			mes "I can't do anything for him.";
-			mes "He dug his own grave by";
-			mes "allowing you into the";
-			mes "holy ground, didn't he?";
+			mes "[Grande Prêtresse Niren]";
+			mes "Vous vouliez que je vous parle du Grand Prêtre Zhed? Je ne peux rien faire pour lui. Il a creusé sa propre tombe en vous admettant dans ce lieu sacré, n'est-ce pas?";
 			next;
-			mes "[High Priestess Niren]";
-			mes "I thought I warned you";
-			mes "before to stay out of trouble.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Je pensais vous avoir dit de vous tenir à l'écart des ennuis.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "I'm not here to discuss";
-			mes "that. But I happened to";
-			mes "hear that you're the only";
-			mes "person that can help him now.";
+			mes "Je ne veux pas parler de ça. Cependant, j'ai entendu dire que vous étiez la seule personne qui pourrait encore l'aider.";
 			next;
-			mes "[High Priestess Niren]";
+			mes "[Grande Prêtresse Niren]";
 			mes "...............................";
 			mes "...............................";
 			mes "...............................";
 			next;
-			mes "[High Priestess Niren]";
-			mes "It's true that Zhed and";
-			mes "I used to work well together,";
-			mes "but we no longer share the";
-			mes "same dream. You'd better find";
-			mes "someone else. Unlike him,";
-			mes "I actually want a war.";
+			mes "[Grande Prêtresse Niren]";
+			mes "C'est vrai que Zhed et moi avions l'habitude de travailler ensemble, mais nos divergences de points de vue sont devenues trop grandes. Contrairement à lui, je veux une guerre ouverte.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Weren't you guys friends?";
-			mes "Besides, you don't seem as";
-			mes "aggressive as those other";
-			mes "hard liner priests.";
+			mes "N'étiez pas vous amis? D'ailleurs vous ne semblez pas être aussi va-t-en-guerre que ces autres prêtres...";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Aggressive? Hmpf. If you";
-			mes "take a good look at those";
-			mes "moderates, you'll see that";
-			mes "they oppose war, but they're";
-			mes "also totally corrupt. In fact, they committed worse atrocities!";
+			mes "[Grande Prêtresse Niren]";
+			mes "Si vous observez ces prêtres modérés, vous vous apercevrez aussi qu'ils sont aussi corrompus jusqu'à la moelle. Ce sont eux qui ont commis les pires atrocités en fait!";
 			next;
-			mes "[High Priestess Niren]";
-			mes "The moderates conducted";
-			mes "inhumane testing on living";
-			mes "creatures, even humans!";
-			mes "And Zhed and I... Could do";
-			mes "nothing but pray to Freya.";
-			mes "Only war can this this chaos!";
+			mes "[Grande Prêtresse Niren]";
+			mes "Ils ont pratiqué des expériences sur des êtres vivants, y compris des humains! Et Zhed et moi... Nous ne pouvions que prier la déesse. Seule la guerre pourra mettre un terme à ce chaos!";
 			next;
-			mes "[High Priestess Niren]";
-			mes "We need to start all";
-			mes "over again. I can't help";
-			mes "Zhed. Please leave...";
+			mes "[Grande Prêtresse Niren]";
+			mes "Nous devons repartir de rien et tout reconstruire sur des bases saines. Je ne peux rien faire pour Zhed. Partez, maintenant...";
 			next;
-			mes "^3355FFIt doesn't look like";
-			mes "you can change High";
-			mes "Priestess Niren's mind.";
-			mes "For now, you'd better talk";
-			mes "to High Priest Zhed.^000000";
+			mes "^3355FFOn dirait que vous n'arriverez pas à faire changer d'avis la Grande Prêtresse. Vous feriez mieux d'aller parler à Zhed.^000000";
 			set aru_em,11;
 			close2;
 		}
 		else if ((aru_em == 11) || (aru_em == 12)) {
-			mes "[High Priestess Niren]";
-			mes "I already told you";
-			mes "how I feel about Zhed.";
-			mes "We were wrong all along...";
-			mes "This time, war is the answer.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Je vous ai déjà dit ce que je pensais de Zhed. Nous avons eu tort pendant tout ce temps... Cette fois la guerre est la seule solution.";
 			close2;
 		}
 		else if (aru_em == 13) {
-			mes "[High Priestess Niren]";
-			mes "I already told you";
-			mes "how I feel about Zhed.";
-			mes "We were wrong all along...";
-			mes "This time, war is the answer.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Je vous ai déjà dit ce que je pensais de Zhed. Nous avons eu tort pendant tout ce temps... Cette fois la guerre est la seule solution.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Fine. If you're so sure";
-			mes "of yourself, then you won't";
-			mes "mind reading this letter";
-			mes "from High Priest Zhed.";
+			mes "Vous avez l'air bien sûre de vous. Dans ce cas vous ne ferez aucune objection à lire la lettre du Grand Prêtre Zhed.";
 			next;
-			mes "^3355FFNiren angrily grabbed the";
-			mes "letter, ripped the envelope";
-			mes "open, and began to read his";
-			mes "message. Her stern face slowly";
-			mes "softened as she slowly scanned";
-			mes "what Zhed had to tell her.^000000";
+			mes "^3355FFNiren cous arrache la lettre des mains et commence à lire le message. Son visage grave se détend un peu à mesure qu'elle lit ce que Zhed avait à lui dire.^000000";
 			next;
-			mes "[High Priestess Niren]";
+			mes "[Grande Prêtresse Niren]";
 			mes ".................";
 			mes ".................";
 			mes ".................";
 			next;
-			mes "[High Priestess Niren]";
-			mes "That Zhed... He always";
-			mes "did have a way with words.";
-			mes "I suppose the old saying is";
-			mes "true: the pen truly is mightier";
-			mes "than the sword. *Sigh...*";
+			mes "[Grande Prêtresse Niren]";
+			mes "Ce Zhed... Il a toujours su s'y prendre avec les mots. Je suppose que le vieil adage dit vrai: la plume est toujours plus forte que l'épée. *Soupire...*";
 			next;
 			mes "[Sippie]";
-			mes "High Priestess";
-			mes "Niren? Are you okay?";
+			mes "Grande Prêtresse Niren? Est-ce que ça va?";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Oh, I'm fine,";
-			mes "thank you. I guess";
-			mes "I'm just a little tired.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Oh, je vais bien, merci. J'imagine que c'est un petit coup de fatigue.";
 			next;
-			mes "[High Priestess Niren]";
+			mes "[Grande Prêtresse Niren]";
 			mes "...............................";
-			mes "I have to admit, there's truth";
-			mes "in what Zhed's saying. We";
-			mes "have a duty to protect our";
-			mes "people, the pope, our holy";
-			mes "ground. But I need to think...";
+			mes "Je dois admettre qu'il y a une part de vérité dans ce que dit Zhed. Nous avons le devoir de protéger notre peuple, notre Papesse, notre Terre Sacrée... Mais il faut encore que j'y réfléchisse...";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Would you give me some";
-			mes "time to myself? I'll let you";
-			mes "know once I've made a decision.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Pourriez-vous me laisser un peu de temps? Je vous ferai alors part de ma décision.";
 			set aru_em,14;
 			close2;
 		}
 		else if (aru_em == 14) {
 			if (rand(1,10) == 1) {
-				mes "[High Priestess Niren]";
+				mes "[Grande Prêtresse Niren]";
 				mes "...................";
 				mes "...................";
 				mes "...................";
 				emotion e_dots;
 				next;
 				mes "[Sippie]";
-				mes "High Priestess Niren,";
-				mes "you must be really tired.";
-				mes "You look pale for some reason.";
+				mes "Grande Prêtresse Niren, vous devez être vraiment fatiguée: vous avez l'air toute pâle.";
 				emotion 19;
 				next;
-				mes "[High Priestess Niren]";
-				mes "I do feel rather drained.";
-				mes "I don't know why I've been";
-				mes "holding on to this hatred for";
-				mes "so long. I guess I can finally";
-				mes "just cast it to the winds...";
+				mes "[Grande Prêtresse Niren]";
+				mes "Je me sens plutôt soulagée. Je ne sais pas pourquoi j'ai porté toute cette haine en moi pendant si longtemps. J'imagine que je peux enfin la laisser s'envoler.";
 				next;
-				mes "[High Priestess Niren]";
-				mes "Adventurer...";
-				mes "What was your name?";
+				mes "[Grande Prêtresse Niren]";
+				mes "Aventurier... Quel est votre nom?";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "My name is "+strcharinfo(0)+".";
+				mes "Je m'appelle "+strcharinfo(0)+".";
 				next;
-				mes "[High Priestess Niren]";
-				mes "Adventurer...";
-				mes "You had the chance to talk";
-				mes "with our pope once, but I doubt";
-				mes "you'll be able to do so again";
-				mes "^3311FFin private^000000. You'll definitely";
-				mes "need our help for that end.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Aventurier... Vous avez eu l'honneur de parler à notre Papesse une fois, mais je ne pense pas que vous pourrez à nouveau le faire ^3311FFen privé^000000. Vous aurez vraiment besoin de notre aide pour cela.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "Does this mean that";
-				mes "you've decided to work";
-				mes "with Zhed again?";
+				mes "Est-ce que cela veut dire que vous avez de nouveau décidé de joindre vos efforts avec ceux de Zhed?";
 				next;
-				mes "^3355FFNiren quietly nodded";
-				mes "her head, and then";
-				mes "resumed talking.^000000";
+				mes "^3355FFNiren hoche rapidement de la tête et résume la conversation.^000000";
 				next;
-				mes "[High Priestess Niren]";
-				mes "I'm still not sure if";
-				mes "I can join him in the long";
-				mes "run. I mean, talking to the";
-				mes "pope might not result in";
-				mes "anything, actually. But";
-				mes "it's still worth a try.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Je ne sais pas si je pourrai le soutenir au long terme. Je veux dire, même en parlant au Papesse, il se pourrait que nous n'en retirions rien. Mais je peux au moins le tenter.";
 				next;
-				mes "[High Priestess Niren]";
-				mes "However, I've never";
-				mes "doubted Zhed's dedication";
-				mes "to Arunafeltz. He deserves";
-				mes "another chance from me.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Cependant, je n'ai jamais mis en cause la fidélité de Zhed envers Arunafeltz. Il mérite que je lui laisse une nouvelle chance.";
 				next;
-				mes "[High Priestess Niren]";
-				mes "Our pope is always surrounded ";
-				mes "by priests and followers sent";
-				mes "by High Priest Vildt. He always";
-				mes "manages to keep his eyes and";
-				mes "ears on her. We need to get";
-				mes "those spies away somehow...";
+				mes "[Grande Prêtresse Niren]";
+				mes "Notre Papesse est toujours entourée de prêtres et de suivants envoyés par le Grand Prêtre Vildt. Il s'arrange pour toujours garder un oeil sur elle. Nous devons trouver un moyen d'écarter ces espion...";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "What can we do";
-				mes "about them, then?";
+				mes "Qu'est-ce que je peux faire dans ce cas?";
 				next;
-				mes "[High Priestess Niren]";
-				mes "For now, just approach";
-				mes "the pope as if you just";
-				mes "wanted to leisurely chat.";
-				mes "While you're doing that,";
-				mes "try to gather information";
-				mes "from the priests around her.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Pour l'instant, contentez-vous d'approcher la Papesse comme si vous vouliez parler de choses anodines, et essayez de récolter des informations sur les prêtres qui l'entourent.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "Sure thing. You";
-				mes "can count on me!";
+				mes "C'est compris. Vous pouvez compter sur moi!";
 				emotion e_no1,1;
 				set aru_em,15;
 				close2;
 			}
 			else {
-				mes "[High Priestess Niren]";
-				mes "Ugh, this is giving me";
-				mes "a headache. There's";
-				mes "too much to consider...";
-				mes "Too much at stake here...";
+				mes "[Grande Prêtresse Niren]";
+				mes "Ugh, tout cela me donne la migraine. Il y a trop de choses qui entrent en ligne de compte...";
 				close2;
 			}
 		}
 		else if (aru_em == 15) {
-			mes "[High Priestess Niren]";
-			mes "Just approach the pope";
-			mes "for a chat, and see what";
-			mes "you can learn from the";
-			mes "other priests around her.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Essayez d'approcher la Papesse pour parler de choses badines, et voyez ce que vous pouvez apprendre sur les prêtres qui l'entourent.";
 			close2;
 		}
 		else if (aru_em == 16) {
-			mes "[High Priestess Niren]";
-			mes "How is the pope?";
-			mes "I haven't had the chance";
-			mes "to meet her recently, so...";
+			mes "[Grande Prêtresse Niren]";
+			mes "Comment va la Papesse? Je n'ai pas eu l'occasion de la voir récemment, alors...";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Well, she doesn't seem";
-			mes "very well, just like the";
-			mes "last time I saw her. I didn't";
-			mes "learn anything about all those";
-			mes "priests. Just that they've been";
-			mes "working in the temple non-stop.";
+			mes "Elle ne semble pas aller très bien, tout comme la dernière fois que vous l'avez vue. Je n'ai rien pu apprendre à propos de ces prêtres, mis à part qu'ils travaillent en permanence au Temple.";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Yes, they've been by her";
-			mes "side twenty-fours a day.";
-			mes "It's been like that for years.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Oui, ils sont à ses côtés 24 heures sur 24. Cela fait des années que c'est comme ça.";
 			next;
 			emotion e_wah;
 			mes "[Sippie]";
-			mes "Oh, High Priestess Niren,";
-			mes "I love working for you, but";
-			mes "sometimes I wish I could leave";
-			mes "just to see my family. Even";
-			mes "just once a year would be nice.";
+			mes "Oh, Grande Prêtresse Niren, j'adore travailler pour vous, mais j'aimerais pouvoir vous laisser pour aller rendre visite à ma famille. Même une fois de l'an...";
 			next;
 			emotion 5;
-			mes "[High Priestess Niren]";
+			mes "[Grande Prêtresse Niren]";
 			mes "...............................";
-			mes "You're absolutely right.";
-			mes "That gives me an idea.";
+			mes "Vous avez raison. Ca me donne une idée d'ailleurs.";
 			next;
 			emotion 2;
 			mes "[Sippie]";
-			mes "Huh? What is it?";
+			mes "Huh? Laquelle?";
 			next;
-			mes "[High Priestess Niren]";
-			mes "You all need a vacation.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Vous avez tous besoin de vacances.";
 			next;
-			mes "[High Priestess Niren]";
+			mes "[Grande Prêtresse Niren]";
 			mes ""+strcharinfo(0)+".";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Yes?";
+			mes "Oui?";
 			next;
-			mes "[High Priestess Niren]";
-			mes "I should reward everyone";
-			mes "in the Sky Garden for their";
-			mes "contribution. However,";
-			mes "they were hired by Vildt,";
-			mes "so I can't directly give them";
-			mes "leave for vacation. Hmm...";
+			mes "[Grande Prêtresse Niren]";
+			mes "Je devrais récompenser tous ceux du Jardin Céleste pour leur travail. Cependant, ils ont été mandatés par Vildt, alors je n'ai pas le pouvoir de leur accorder directement des vacances. Hum...";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Sippie...";
-			mes "I'll need a pen";
-			mes "and some paper.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Sippie... Il me faut une plume et du papier.";
 			next;
 			mes "[Sippie]";
-			mes "Yes, ma'am.";
-			mes "There you go!";
+			mes "Oui madame. Voilà!";
 			cutin "ra_gwoman",255;
 			next;
-			mes "^3355FF*Scribble Scribble*^000000";
-			mes "^3355FF*Scribble Scribble*^000000";
-			mes "^3355FF*Scribble Scribble*^000000";
-			mes "^3355FF*Scribble Scribble*^000000";
+			mes "^3355FF*Scratch Scratch*^000000";
+			mes "^3355FF*Scratch Scratch*^000000";
+			mes "^3355FF*Scratch Scratch*^000000";
+			mes "^3355FF*Scratch Scratch*^000000";
 			next;
 			cutin "ra_gwoman",2;
-			mes "[High Priestess Niren]";
-			mes "I administered a blessing";
-			mes "for a child from a native";
-			mes "family, and they were very";
-			mes "grateful since most of the";
-			mes "priests shun the natives.";
+			mes "[Grande Prêtresse Niren]";
+			mes "J'ai béni un enfant d'une famille d'autochtones, et ils me remercièrent vivement: la plupart des prêtres les méprisent.";
 			next;
-			mes "[High Priestess Niren]";
-			mes "It turns out that this";
-			mes "child is gifted at forgery.";
-			mes "She doesn't like being too";
-			mes "close to other people, but";
-			mes "that's beside the point.";
-			mes "Here, take this letter.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Cet enfant montra des talents certains de faussaire. Elle se sent mal à l'aise au contact des autres personnes mais... là n'est pas la question. Voilà, prenez cette lettre.";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Ah, and take this file that";
-			mes "contains a sample of Vildt's";
-			mes "handwriting. Bring them to";
-			mes "a girl named Ishmael in a";
-			mes "village in North Rachel.";
-			mes "I hope she'll help us...";
+			mes "[Grande Prêtresse Niren]";
+			mes "Ah, et prenez aussi ce document écrit de la main de Vildt. Apportez ça à une fille du nom de Ishmael dans un village au nord de Rachel. J'espère qu'elle voudra bien nous aider...";
 			set aru_em,17;
 			getitem 7343,1; //File02
 			close2;
 		}
 		else if (aru_em == 17) {
-			mes "[High Priestess Niren]";
-			mes "Please deliver my letter";
-			mes "and that file to Ishmael in";
-			mes "North Rachel. Hopefully,";
-			mes "she can use her talents";
-			mes "to help us out.";
+			mes "[Grande Prêtresse Niren]";
+			mes "S'il vous plait, apportez ma lettre à cette fille du nom d'Ishmael dans un village au nord de Rachel. Ses talents pourront peut-être nous aider.";
 			close2;
 		}
 		else if (aru_em == 19) {
 			if (countitem(7343) > 0) {
-				mes "[High Priestess Niren]";
-				mes "Have you met with Ishmael?";
+				mes "[Grande Prêtresse Niren]";
+				mes "Est-ce que vous avez rencontré Ishmael?";
 				next;
-				mes "^3355FFYou handed Niren the";
-				mes "file forged by Ishmael.^000000";
+				mes "^3355FFVous lui tendez le document écrit par Ishmael.^000000";
 				next;
 				emotion e_bzz;
-				mes "[High Priestess Niren]";
-				mes "Perfect! This forgery is";
-				mes "so well done, I'm sure";
-				mes "that even Vildt won't be";
-				mes "know if he wrote it or not.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Parfait! La copie est si parfaite que je suis sûre que même Vildt ne saurait plus si il l'a vraiment écrit ou non.";
 				next;
-				mes "[High Priestess Niren]";
+				mes "[Grande Prêtresse Niren]";
 				mes ""+strcharinfo(0)+"...";
-				mes "I'm going to use this to";
-				mes "send the priests and followers";
-				mes "on vacation. Then me and Zhed";
-				mes "can talk to the pope without";
-				mes "any unecessary interruptions.";
+				mes "Je vais utiliser ce papier pour envoyer les prêtres et les suivants en vacances. Zhed et moi pourront ensuite parler avec la Papesse sans être interrompus.";
 				next;
-				mes "[High Priestess Niren]";
-				mes "I really don't want to burden";
-				mes "our pope with what Zhed and I";
-				mes "have to say... But that's much";
-				mes "preferable to doing nothing";
-				mes "and experiencing the downfall";
-				mes "of our beloved Arunafeltz.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Je ne veux vraiment pas accabler la Papesse du poids de ce qu'on a à lui dire, mais c'est tout de même préférable au déclin de notre bien-aimée Arunafeltz.";
 				next;
-				mes "[High Priestess Niren]";
-				mes "Sippie, please";
-				mes "deliver this vacation";
-				mes "approval to the priests and";
-				mes "followers in the Sky Garden.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Sippie, s'il te plait, apporte cet ordre aux servants et aux prêtres du Jardin Céleste.";
 				next;
 				mes "[Sippie]";
-				mes "Yes, ma'am!";
+				mes "Oui, madame!";
 				next;
-				mes "[High Priestess Niren]";
-				mes ""+strcharinfo(0)+",";
-				mes "please go back to Zhed,";
-				mes "and let him know everything";
-				mes "is ready. Then I want you to";
-				mes "meet us in the ^3131FFSky Garden^000000.";
+				mes "[Grande Prêtresse Niren]";
+				mes ""+strcharinfo(0)+", retournez trouver Zhed et dites-lui que tout est prêt. Retrouvez-moi ensuite dans le ^3131FFJardin Céleste^000000.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "Yes!";
+				mes "Oui!";
 				next;
-				mes "[High Priestess Niren]";
-				mes "We need to hurry and";
-				mes "do this before High";
-				mes "Priest Vildt realizes";
-				mes "what we are doing.";
+				mes "[Grande Prêtresse Niren]";
+				mes "Nous devons nous dépêcher et mener tout cela à bien avant que le Grand Prêtre Vildt ne réalise ce que nous sommes en train de préparer.";
 				delitem 7343,1; //File02
 				set aru_em,20;
 				close2;
 			}
 			else {
-				mes "^3131FFYou seem to have";
-				mes "misplaced Ishmael's file.^000000";
+				mes "^3131FFOn dirait que vous avez égaré le document rédigé par Ishmael.^000000";
 				close2;
 			}
 		}
 		else if ((aru_em == 20) || (aru_em == 21)) {
-			mes "[High Priestess Niren]";
-			mes "Please hurry back";
-			mes "to High Priest Zhed.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Dépêchez-vous et retournez voir le Grand Prêtre Zhed.";
 			close2;
 		}
 		else if (aru_em == 22) {
-			mes "[High Priestess Niren]";
-			mes "I'm so proud of our pope!";
-			mes "Did you hear her wonderful";
-			mes "speech? Well, I should say";
-			mes "those are the words of Freya,";
-			mes "but... Well, you know. Hohoho!";
+			mes "[Grande Prêtresse Niren]";
+			mes "Je suis si fière de notre Papesse! Avez-vous entendu son merveilleux discours? En fait, ce sont les paroles de Freya, mais... eh bien, vous savez... Hohoho!";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Our priests may have acted";
-			mes "selfishly, but they are still";
-			mes "committed to Arunafeltz's";
-			mes "welfare. Things should";
-			mes "change for the better now.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Nos prêtres se sont peut-être comportés de façon égoïste mais je continue à penser qu'ils sont toujours dévoués envers Arunafeltz et sa prospérité. Tout ne peut aller que pour le mieux maintenant.";
 			next;
-			mes "[High Priestess Niren]";
-			mes "I'm ashamed that I strayed";
-			mes "from the path of peace and";
-			mes "almost endangered my country.";
-			mes "I'm glad Zhed brought me back";
-			mes "my senses. From now on, I'll";
-			mes "repent for my sins with Zhed.";
+			mes "[Grande Prêtresse Niren]";
+			mes "J'ai honte de m'être écartée du chemin de la paix au point d'avoir mis mon pays en danger. Je suis heureuse que Zhed m'ait ramenée à la raison. Je repentirai pour mes pêchers avec Zhed.";
 			next;
-			mes "[High Priestess Niren]";
-			mes "I hope the goddess can";
-			mes "forgive me. Ah, and you";
-			mes "should know that Zhed is";
-			mes "waiting for you. Why don't";
-			mes "you go see him now?";
+			mes "[Grande Prêtresse Niren]";
+			mes "J'espère que la Déesse pourra me pardonner. Ah, et vous devez savoir que Zhed vous attend. Pourquoi n'iriez-vous pas le voir maintenant?";
 			next;
-			mes "^3355FFNiren softly smiles";
-			mes "at you, and you realize";
-			mes "that it's the first time";
-			mes "that you've seen that";
-			mes "expression on her face.^000000";
+			mes "^3355FFNiren vous sourit tendrement. Vous réalisez alors que c'est la première fois que vous voyez cette expression sur son visage.^000000";
 			set aru_em,23;
 			getexp 1000000,0;
 			close2;
 		}
 		else if (aru_em > 21) {
-			mes "[High Priestess Niren]";
-			mes "Thanks to you and";
-			mes "Bekento, I think I've";
-			mes "finally found my way.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Merci à vous et Bekento. Je pense avoir enfin trouvé ma voie.";
 			close2;
 		}
 		else {
-			mes "[High Priestess Niren]";
-			mes "I'm sorry...";
-			mes "I really don't want";
-			mes "to think about Zhed";
-			mes "right now. He's just...";
+			mes "[Grande Prêtresse Niren]";
+			mes "Je suis désolée mais je ne veux vraiment pas parler de Zhed en ce moment. Il est...";
 			close2;
 		}
 	}
@@ -1366,127 +806,77 @@ ra_temple,165,57,5	script	Niren#ss	915,{
 	end;
 }
 
-ve_in,239,115,1	script	Drunkard#Aru	943,{
+ve_in,239,115,1	script	Alcoolique::Drunkard#Aru	943,{
 	if (aru_monas < 14) {
-		mes "[Drunkard]";
-		mes "Man, I feel great! Hah hah!";
-		mes "Hey, gimme one more drink!";
+		mes "[Alcoolique]";
+		mes "J'ai une de ces patates, mon pote! Haha! Allez, passe-moi en une autre!";
 		close;
 	}
 	if (aru_monas == 14) {
 		if (rachel_camel == 25) {
-			mes "[Drunkard]";
-			mes "So--*Hic* What I was...";
-			mes "Oog, dizzy... I say sayin',";
-			mes "that guy that ^32CD32snuck out to";
-			mes "sea on a boat^000000? You know";
-			mes "*Hic* why he came back";
-			mes "so early? You won't believe it!";
+			mes "[Alcoolique]";
+			mes "Alors-- *Hic* Qu'est-ce que je... Oog, ça tourbe... Ah oui, j'disais que ce type, là, celui qu'est ^32CD32parti en mer son son bateau^000000, eh bin il est déjà r'venu! *Hic* Et tu sais pourquoi? Ca tu ne vas pas le croire!!";
 			next;
-			mes "[Drunkard]";
-			mes "Hah hah! He--*Hic*";
-			mes "He thought he saw a ^DBDB70ghost^000000!";
-			mes "Bwah hah hah! Oooog... Hey...";
+			mes "[Alcoolique]";
+			mes "Hah hah! Il-- *Hic* Il raconte qu'il a vu un ^DBDB70fantôme^000000! Bwah hah hah! Oooog... Hé...";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "That's right!";
-			mes "Maybe I should check";
-			mes "on ^32CD32Kurdi's father since";
-			mes "he's a fisherman^000000";
+			mes "C'est vrai? Peut-être devrais-je demander au père de Kurdi puisque c'est un pêcheur.";
 			set aru_monas,15;
 			close;
 		}
 		else {
-			mes "[Drunkard]";
+			mes "[Alcoolique]";
 			mes "Zzzz...";
-			mes "Umm... Zzz...";
+			mes "Hum... Zzz...";
 			close;
 		}
 	}
 	else {
-		mes "[Drunkard]";
-		mes "Why?! Why can't I take";
-		mes "my boat out to sea? I hafta";
-		mes "catch fish to make a living!";
-		mes "What, they expect me to starve";
-		mes "to death or something?! Huh?!";
+		mes "[Alcoolique]";
+		mes "Pourquoi? Pourquoi que j'pourrais pas prendre mon bateau et aller en mer? J'dois ramener d'la poiscaille pour manger, moi! Tu veux que j'meurre de faim, c'est ça, hein?!";
 		close;
 	}
 }
 
-ve_fild07,125,128,0	script	Boat#Aru	111,{
+ve_fild07,125,128,0	script	Bateau::Boat#Aru	111,{
 	if (aru_monas < 16) {
-		mes "^3355FFThis boat seems to ";
-		mes "be in decent condition.";
-		mes "Who could its owner be?^000000";
+		mes "^3355FFCe bateau a l'air d'être en relativement bon état. A qui peut-il bien appartenir?^000000";
 		close;
 	}
 	if (aru_monas == 16) {
-		mes "^3355FFThis must be the boat that";
-		mes "Karyn was talking about.";
-		mes "It seems to be in pretty";
-		mes "good shape. Now, the";
-		mes "monastery should be";
-		mes "southwest from here...^000000";
+		mes "^3355FFCa doit être le bateau dont Karyn parlait. Il a l'air d'être en assez bon état. Bon, le monastère devrait se trouver quelque part au sud-ouest...^000000";
 		next;
 		hideoffnpc "Secret Agent#Aru";
 		next;
 		mes "[Larjes]";
-		mes "Long time no see,";
-		mes ""+strcharinfo(0)+".";
+		mes "Ca faisait longtemps, "+strcharinfo(0)+".";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Larjes!";
 		next;
 		mes "[Larjes]";
-		mes "I had a tough time following";
-		mes "you, you know? I actually";
-		mes "almost lost you once. You";
-		mes "must be wondering why";
-		mes "I'm here. If you'll listen,";
-		mes "I'll explain everything.";
+		mes "J'ai eu du mal à vous suivre, vous savez? Je vous ai presque perdu une fois. Mais vous devez vous demander ce que je fais là. Je vais tout vous expliquer, écoutez attentivement.";
 		next;
 		mes "[Larjes]";
-		mes "According to our investigation, Arunafeltz is definitely involved";
-		mes "in this case. We've been watching you since you're somehow related";
-		mes "to that high ranked official from Arunafeltz. I apologize for that.";
+		mes "D'après notre enquête, Arunafeltz est sans aucun doute possible mêlé à tout ça. Nous vous avons suivi puisque que vous êtes plus ou moins lié à ce dignitaire d'Arunafeltz. Je m'en excuse.";
 		next;
 		mes "[Larjes]";
-		mes "This is an international";
-		mes "incident, so to prevent any";
-		mes "intel leaks to Arunafeltz,";
-		mes "we've had to be much stricter";
-		mes "with securing and protecting";
-		mes "all information for this case.";
+		mes "Il s'agit d'un incident international - nous avons donc dû prendre des précautions toutes particulières afin d'empêcher des fuites vers Arunafeltz, et ne pas révêler nos informations.";
 		next;
 		mes "[Larjes]";
-		mes "Anyway, I've decided to";
-		mes "reveal myself to you since";
-		mes "I'm the only one that can help";
-		mes "you right now. You're thinking";
-		mes "of using that boat, aren't you?";
+		mes "Quoi qu'il en soit, j'ai décidé de vous en parler maintenant puisque je suis le seul à pouvoir vous aider à ce stade. Vous pensiez embarquer, n'est-ce pas?";
 		next;
 		mes "[Larjes]";
-		mes "If you don't have the skills,";
-		mes "knowledge, and preparation";
-		mes "to sail those waters ahead,";
-		mes "you'll probably wreck the";
-		mes "boat. You'll make it if you're lucky but... That's a lot of luck.";
+		mes "Sans aucune connaissance en matière de navigation, vous échoueriez le bateau bien vite. Vous pourriez vous en sortir avec de la chance mais... il vous en faudrait vraiment beaucoup.";
 		next;
 		mes "[Larjes]";
-		mes "I'll help you sail this";
-		mes "boat to get where you're";
-		mes "going. But if you fail, there's";
-		mes "a chance you might have to";
-		mes "sail this boat on your own if I'm not here. So, you ready to go?";
+		mes "Je vous aiderai à naviguer et à vous rendre là où vous voulez aller. Mais si nous échouons, il faudra peut-être que vous vous débrouilliez par vous même pour revenir. Alors, êtes-vous prêt à partir?";
 		next;
-		switch(select("Yes, I'm ready.:Give me more time.")) {
+		switch(select("Oui, allons-y.:Laissez-moi un peu plus de temps.")) {
 		case 1:
 			mes "[Larjes]";
-			mes "Alright, let's go.";
-			mes "Hold on to something:";
-			mes "this will probably be";
-			mes "a pretty rocky ride...";
+			mes "Bien, allons-y. Accrochez-vous à quelque chose, ce sera surement mouvementé...";
 			set aru_monas,17;
 			close2;
 			hideonnpc "Secret Agent#Aru";
@@ -1494,66 +884,49 @@ ve_fild07,125,128,0	script	Boat#Aru	111,{
 			end;
 		case 2:
 			mes "[Larjes]";
-			mes "Alright. Just let me know";
-			mes "whenever you're ready.";
+			mes "Bien, dites-moi quand vous serez prêt.";
 			close;
 		}
 	}
 	if (aru_monas < 20) {
-		mes "^3355FFThis is the boat that";
-		mes "can take you to the";
-		mes "monastery.^000000";
+		mes "^3355FFVoici le bateau qui peut vous permettre de vous rendre au Monastère.^000000";
 		next;
-		switch(select("Go to Monastery:Cancel")) {
+		switch(select("Se rendre au Monastère:Annuler")) {
 		case 1:
-			mes "^3355FFYou set sail for";
-			mes "the monastery...^000000";
+			mes "^3355FFVous voguez en direction du Monastère...^000000";
 			close2;
 			warp "nameless_i",257,217;
 			end;
 		case 2:
-			mes "^3355FFYou decide to";
-			mes "stay ashore.^000000";
+			mes "^3355FFVous décidez de rester sur la terre ferme.^000000";
 			close;
 		}
 	}
 	else {
-		mes "^3355FFThis is the boat that";
-		mes "can take you to the";
-		mes "monastery.^000000";
+		mes "^3355FFVoici le bateau qui peut vous permettre de vous rendre au Monastère.^000000";
 		next;
-		switch(select("Go to Monastery:Cancel")) {
+		switch(select("Se rendre au Monastère:Annuler")) {
 		case 1:
-			mes "^3355FFYou set sail for";
-			mes "the monastery...^000000";
+			mes "^3355FFVous voguez en direction du Monastère...^000000";
 			close2;
 			warp "nameless_n",257,217;
 			end;
 		case 2:
-			mes "^3355FFYou decide to";
-			mes "stay ashore.^000000";
+			mes "^3355FFVous décidez de rester sur la terre ferme.^000000";
 			close;
 		}
 	}
 }
 
-ve_fild07,128,130,1	script	Secret Agent#Aru	97,{
+ve_fild07,128,130,1	script	Agent Secret::Secret Agent#Aru	97,{
 	if (aru_monas == 16) {
 		mes "[Larjes]";
-		mes "Are you ready to go";
-		mes "aboard? I'll help you";
-		mes "sail to that monastery,";
-		mes "but if you fail while you're";
-		mes "there, I might not be here";
-		mes "when you come back.";
+		mes "Etes-vous prêt à partir? Je vous aiderai à vous rendre au Monastère mais je ne serai peut-être plus là quand vous reviendrez si jamais vous échouez.";
 		next;
-		switch(select("Yes, I'm ready.:Give me more time.")) {
+		switch(select("Oui, allons-y.:Laissez-moi un peu plus de temps.")) {
 		case 1:
 			mes "[Larjes]";
-			mes "Alright, let's go.";
-			mes "Hold on to something:";
-			mes "this will probably be";
-			mes "a pretty rocky ride...";
+			mes "Bien, allons-y. Accrochez-vous à quelque chose, ce sera surement mouvementé...";
 			set aru_monas,17;
 			close2;
 			hideonnpc "Secret Agent#Aru";
@@ -1561,8 +934,7 @@ ve_fild07,128,130,1	script	Secret Agent#Aru	97,{
 			end;
 		case 2:
 			mes "[Larjes]";
-			mes "Alright. Just let me know";
-			mes "whenever you're ready.";
+			mes "Bien, dites-moi quand vous serez prêt.";
 			close;
 		}
 	}
@@ -1576,50 +948,37 @@ OnInit:
 nameless_i,259,218,3	script	Larjes#Aru	97,{
 	if(aru_monas < 18) {
 		mes "[Larjes]";
-		mes "I don't like this place.";
-		mes "You'd be better be careful";
-		mes "around here with those weird";
-		mes "creatures running around.";
+		mes "Je n'aime pas cet endroit. Vous feriez mieux de faire très attention avec toutes ces créatures étranges dans les environs...";
 		close;
 	}
 	else if (aru_monas > 24) {
 		mes "[Larjes]";
-		mes "Good, you're back";
-		mes "I know that there's still";
-		mes "things on this island that";
-		mes "you want to investigate,";
-		mes "but did you want to leave";
-		mes "this place for a while?";
+		mes "Ah, vous revoilà! Je sais qu'il y a encore des choses que vous aimeriez voir sur l'île, mais voulez-vous retourner sur le continent quelque temps?";
 		next;
-		if(select("Yes:No")==1) {
+		if(select("Oui:Non")==1) {
 			mes "[Larjes]";
-			mes "Alight, let's go.";
+			mes "Bien, allons-y.";
 			close2;
 			warp "ve_fild07",130,130;
 			end;
 		}
 		mes "[Larjes]";
-		mes "Alright, but becareful.";
-		mes "Those creatures almost";
-		mes "got you once, you know.";
+		mes "Bien, mais faites attention. Ces créatures vous ont presque eu une fois, vous savez.";
 		close;
 	}
 	else {
 		mes "[Larjes]";
-		mes "Did you still want to";
-		mes "investigate the island?";
+		mes "Voulez-vous continuer à inspecter l'île?";
 		next;
-		if (select("No:Yes") == 1) {
+		if (select("Non:Oui") == 1) {
 			mes "[Larjes]";
-			mes "Alright, let's go.";
+			mes "Bien, allons-y.";
 			close2;
 			warp "ve_fild07",130,130;
 			end;
 		}
 		mes "[Larjes]";
-		mes "Alright, but be careful.";
-		mes "Those creatures almost";
-		mes "got you once, you know.";
+		mes "Bien, mais faites attention. Ces créatures vous ont presque eu une fois, vous savez.";
 		close;
 	}
 }
@@ -1629,17 +988,9 @@ nameless_i,212,184,0	script	#aru_clue1	-1,2,3,{
 
 OnTouch:
 	if (aru_monas == 17) {
-		mes "^3355FFThe village is totally";
-		mes "silent, as if all life had";
-		mes "abandoned it. You look";
-		mes "around and see that something";
-		mes "was here a few hours ago, but";
-		mes "it's somewhere else now.^000000";
+		mes "^3355FFLe village est complètement silencieux, comme si toute forme de vie l'avait déserté. Vous regardez autour de vous et vous apercevez que quelque chose vient de bouger...^000000";
 		next;
-		mes "^3355FFWhatever it was,";
-		mes "it definitely wasn't";
-		mes "human. What kind of";
-		mes "creature could it be?^000000";
+		mes "^3355FFQuoi que ce soit, ça n'était pas humain. Quel genre de créature cela pouvait-il bien être?^000000";
 		close;
 	}
 	end;
@@ -1650,11 +1001,7 @@ nameless_in,21,176,0	script	#aru_clue2	-1,2,2,{
 
 OnTouch:
 	if (aru_monas == 17) {
-		mes "^3355FFThere are traces of";
-		mes "humans around here,";
-		mes "along with some kind";
-		mes "of creature that you";
-		mes "can't clearly identify.^000000";
+		mes "^3355FFVous remarquez des traces appartenant à des humains, mêlées à celles de créatures que vous ne pouvez pas clairement identifier.^000000";
 		close;
 	}
 	end;
@@ -1665,55 +1012,36 @@ nameless_i,129,218,0	script	#aru_clue3	-1,4,3,{
 
 OnTouch:
 	if (aru_monas == 17) {
-		mes "^3355FFA strange scent strikes";
-		mes "you as you enter this field of";
-		mes "grass. A few ^32CD32animal corpses^3355FF";
-		mes "are strewn around the ground.^000000";
+		mes "^3355FFUne odeur étrange vous envahi les narines tandis que vous marchez sur l'herbe. Quelques ^32CD32cadavres d'animaux^3355FF jonchent le sol.^000000";
 		close;
 	}
 	end;
 }
 
-nameless_i,127,207,0	script	Dead Crow#Aru	111,{
+nameless_i,127,207,0	script	Cadavre de Corbeau::Dead Crow#Aru	111,{
 	if (aru_monas < 17) { 
-		mes "^3355FFThere is a dead crow on the ground.";
+		mes "^3355FFIl y a un corbeau mort par terre.";
 		close;
 	}
 	else if (aru_monas == 17) {
-		mes "^3355FFThe sight of this ^32CD32dead";
-		mes "crow^3355FF makes you feel";
-		mes "uneasy for some reason.^000000";
+		mes "^3355FFLa vue de ce ^32CD32corbeau mort^3355FF vous met mal à l'aise pour une raison inconnue.^000000";
 		next;
-		if (select("Ignore:Investigate") == 1) {
-			mes "^3355FFYou decide not to touch";
-			mes "the animal's carcass.^000000";
+		if (select("L'ignorer:L'examiner") == 1) {
+			mes "^3355FFVous décidez de ne pas toucher à la carcasse.^000000";
 			close;
 		}
-		mes "^3355FFYou notice some grass sap";
-		mes "on the crow's beak, so it";
-		mes "must have been nibbling on";
-		mes "some grass. Some feathers";
-		mes "are missing, revealing";
-		mes "scaly, snake-like skin.^000000";
+		mes "^3355FFVous remarquez des traces d'herbes sur le bec de l'oiseau. Il devait être en train d'en picorer. Quelques plumes manquent, révélant une peau écaillée, comme celle d'un serpent.^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Wait...";
-		mes "Did this grass...?";
+		mes "Attendez...";
+		mes "Est-ce que cette herbe...?";
 		next;
-		mes "^3355FFThis grass must be the";
-		mes "main ingredient of the";
-		mes "poison used to kill the";
-		mes "Gaebolg family princes.^000000";
+		mes "^3355FFCette herbe a dû être l'ingrédient principal du poison utilisé pour tuer les princes de la famille Gaebolg.^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Looks like I just hit";
-		mes "the jackpot. Huh?";
-		mes "Someone behi--";
+		mes "On dirait que je viens de tirer le gros lot! Huh? Quelqu'un est der...";
 		next;
-		mes "^3355FFA sharp, throbbing pain";
-		mes "assails the back of your";
-		mes "head as you fall into";
-		mes "unconsciousness...^000000";
+		mes "^3355FFVous ressentez une douleur aiguë derrière la tête avant de vous évanouir...^000000";
 		close2;
 		set aru_monas,18;
 		warp "nameless_in",15,60;
@@ -1730,8 +1058,7 @@ OnTouch:
 		warp "nameless_in",12,41;
 		end;
 	}
-	mes "^3355FFThe door won't budge:";
-	mes "you can't go through.^000000";
+	mes "^3355FFLa porte ne veut pas s'ouvrir. Il n'y a rien à faire.^000000";
 	close;
 }
 
@@ -1742,51 +1069,27 @@ OnTouch:
 	if (aru_monas == 18) {
 		disablenpc "aru_warp";
 		sc_start2 SC_Blind,600000,0,10000;
-		mes "^3355FFThe pressure on your";
-		mes "stomach and the blood";
-		mes "rushing to your head tells";
-		mes "you someone is carrying you";
-		mes "over his shoulder. He stops,";
-		mes "and you hear a faint voice.^000000";
+		mes "^3355FFVous avez un poids sur l'estomac et le sang vous monte à la tête. Vous vous rendez compte que quelqu'un vous porte sur son épaule. Il s'arrête, et vous l'entendez parler de très loin.^000000";
 		next;
-		mes "^3355FFThe faint voice steadily";
-		mes "grows stronger and more";
-		mes "distinct--someone's calling";
-		mes "your name. You feel cold water";
-		mes "trickle through your lips, and";
-		mes "then you regain your senses.^000000";
+		mes "^3355FFPuis la voix se fait plus forte et distincte. Quelqu'un vous appelle par votre nom. Vous sentez de l'eau fraiche couler sur vos lèvres, et vous commencez à retrouver vos esprits.^000000";
 		sc_end SC_BLIND;
 		next;
 		hideoffnpc "Larjes#Aru2";
-		mes "That was too close.";
-		mes "For a second there,";
-		mes "I thought I lost you.";
+		mes "Cette fois-ci, ça n'est pas passé loin. Pendant une seconde j'ai cru que je vous avais perdu.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Larjes...? What...";
-		mes "What happened?";
-		mes "Ugh, my head...";
+		mes "Larjes...? Que...";
+		mes "Qu'est-ce qui s'est passé?";
+		mes "Ugh, ma tête...";
 		next;
 		mes "[Larjes]";
-		mes "Try not to move for a while.";
-		mes "I had a bad feeling waiting";
-		mes "for you on the boat. Lucky";
-		mes "thing. When I found you,";
-		mes "these strange creatures";
-		mes "were savagely attacking you!";
+		mes "Essayez de ne pas bouger pendant un moment. J'avais un mauvais pressentiment en vous attendant près du bateau. Heureusement, je vous ai trouvé alors que ces créatures sauvages allaient vous attaquer brutalement!";
 		next;
 		mes "[" +strcharinfo(0)+ "]";
-		mes "You saved me?";
-		mes "Thank you. Do you";
-		mes "happen to know what";
-		mes "those creatures were?";
+		mes "Vous m'avez sauvé? Merci. Savez-vous ce qu'étaient ces créatures?";
 		next;
 		mes "[Larjes]";
-		mes "No clue. They looked";
-		mes "like humans, but... They";
-		mes "definitely weren't. Once";
-		mes "I killed them, they all";
-		mes "turned into sand.";
+		mes "Aucune idée. Elles avaient l'air humaines, mais... Elles ne l'étaient pas, ça j'en suis sûr. Elles sont tombées en poussière quand je les ai tuées.";
 		next;
 		hideoffnpc "Creature#Aru";
 		emotion e_omg,1;
@@ -1796,17 +1099,13 @@ OnTouch:
 		next;
 		mes "[" +strcharinfo(0)+ "]";
 		mes "!!!!?!?!!!!!!";
-		mes "Isn't... Isn't that...?";
+		mes "Est-ce... Est-ce que c'est...?";
 		next;
 		mes "[Larjes]";
-		mes "It seems it's just like the";
-		mes "creatures that kidnapped";
-		mes "you, but... I wonder why";
-		mes "he's not attacking us.";
+		mes "Il ressemble aux créatures qui vous ont attaquées, amis.. Je me demande pourquoi il ne nous fonce pas dessus.";
 		next;
 		mes "[" +strcharinfo(0)+ "]";
-		mes "I guess you'll have to go";
-		mes "right up to him and ask.";
+		mes "J'imagine qu'il va falloir lui demander.";
 		set aru_monas,19;
 		close;
 	}
@@ -1814,12 +1113,11 @@ OnTouch:
 
 nameless_in,13,58,6	script	Larjes#Aru2	97,{
 	mes "[Larjes]";
-	mes "Be careful. That guy";
-	mes "looks pretty dangerous.";
+	mes "Attention, ce type a l'air vraiment dangereux.";
 	close;
 }
 
-nameless_in,13,53,0	script	Creature#Aru	1864,{
+nameless_in,13,53,0	script	Créature::Creature#Aru	1864,{
 	end;
 
 OnInit:
@@ -1841,7 +1139,7 @@ OnTouch:
 		close2;
 		hideonnpc "Creature#Aru";
 		set @mymobcount,1;
-		monster "nameless_in",13,53,"Zombie",1864,1,"Creature#Aru::OnMyMobDead";
+		monster "nameless_in",13,53,"Zombie",1864,1,"Creature#Aru::OnMyMobDead"; // Ne pas changer
 		end;
 	}
 	end;
@@ -1869,19 +1167,13 @@ OnTouch:
 	if(aru_monas == 20) {
 		hideoffnpc "Larjes#Aru3";
 		mes "[" +strcharinfo(0)+ "]";
-		mes "What the hell...!?";
+		mes "Qu'est-ce que...!?";
 		next;
 		mes "[Larjes]";
-		mes "So... This is the";
-		mes "island's true nature.";
+		mes "Alors... Voilà le véritable visage de cette île.";
 		next;
 		mes "[Larjes]";
-		mes "Someone like me won't";
-		mes "survive long in a place";
-		mes "like this. I'm going to wait";
-		mes "for you in the boat. Learn";
-		mes "what you need to learn, and";
-		mes "then come back safe, "+strcharinfo(0)+".";
+		mes "Quelqu'un comme moi ne survivrait pas longtemps dans un endroit comme celui-ci. Je vais vous attendre près du bateau. Apprenez ce que vous pouvez apprendre, mais revenez entier, "+strcharinfo(0)+".";
 		set aru_monas,21;
 		hideonnpc "Larjes#Aru3";
 		close;
@@ -1900,128 +1192,87 @@ OnInit:
 nameless_n,259,218,3	script	Larjes#Boat1	97,{
 	if ((aru_monas == 23) && (countitem(7726))) {
 		mes "[Larjes]";
-		mes "I don't believe it...";
-		mes "That guy was Tristam III?!";
-		mes "This explains a lot, I suppose.";
-		mes "I'll report this along with the";
-		mes "voucher. So Arunafeltz was";
-		mes "behind that poison grass too.";
+		mes "Je n'arrive pas à y croire... Ce type était Tristam III?! Dans ce cas, ça explique beaucoup de choses, je suppose. Je vais faire mon compte-rendu là-dessus. Alors Arunafeltz était derrière les herbes empoisonnées aussi...";
 		next;
 		mes "[Larjes]";
-		mes "I'm shocked over this";
-		mes "whole debacle. I'm sure";
-		mes "the Rune-Midgarts royal family";
-		mes "will be in an uproar over this.";
-		mes "To think that we're involved";
-		mes "in something this huge...";
+		mes "Tout cela m'atterre. Je suis certain que la famille royale de Rune-Midgard ne prendra pas ça à la légère. Nous sommes impliqués dans quelque chose qui nous dépasse...";
 		next;
 		mes "[Larjes]";
-		mes "Anyway, we better get...";
-		mes "This is huge!";
+		mes "Nous ferions mieux de... C'est énorme!";
 		set aru_monas,24;
 		delitem 7726,1; //Token_Of_King
 		getexp 1000000,0;
 		close;
 	}
 	mes "[Larjes]";
-	mes "“Did you still want to";
-	mes "investigate the island?";
+	mes "“Voulez-vous continuer à inspecter l'île?";
 	next;
-	if(select("No:yes")==1) {
+	if(select("Non:Oui")==1) {
 		mes "[Larjes]";
-		mes "Alright, let's go.";
+		mes "Bien, allons-y.";
 		close2;
 		warp "ve_fild07",130,130;
 		end;
 	}
 	mes "[Larjes]";
-	mes "Alright, but becareful.";
-	mes "Those creatures almost";
-	mes "got you once, you know.";
+		mes "Bien, mais faites attention. Ces créatures vous ont presque eu une fois, vous savez.";
 	close;
 }
 
-abbey02,224,70,0	script	Book#Aru	111,{
+abbey02,224,70,0	script	Livre::Book#Aru	111,{
 	if (checkweight(7766,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets sur vous en ce moment. Revenez après en avoir déposé quelques uns dans votre Stock.^000000";
 		close;
 	}
 	if (aru_monas < 21) {
-		mes "^3355FFIt's just a bunch";
-		mes "of old, moldy books.^000000";
+		mes "^3355FFIl s'agit juste d'un tas de vieux livres rongés par la moisissure.^000000";
 		close;
 	}
 	else if (aru_monas == 21) {
-		mes "^3355FFThere's a book stained";
-		mes "with blood amongst all";
-		mes "these old, moldy books.^000000";
+		mes "^3355FFVous trouvez un livre tâché de sang parmi tous ces vieux livres rongés par la moisissure.^000000";
 		next;
-		if(select("Examine Book:Ignore")==1) {
+		if(select("Examiner le livre:L'ignorer")==1) {
 			Readbook 7755,1;
 			getitem 7755,1; // Reasearch_Note
 			set aru_monas,22;
 			close;
 		}
-		mes "^3355FFThat book was probably";
-		mes "worthless to you anyway.^000000";
+		mes "^3355FFCe livre ne vous sera certainement d'aucune utilité de toutes façons.^000000";
 		close;
 	}
 	else {
-		mes "^3355FFThere are old books";
-		mes "scattered all over here.^000000";
+		mes "^3355FFVous voyez de vieux livres éparpillés.^000000";
 		close;
 	}
 }
 
-abbey03,232,233,4	script	Man#Aru	956,{
+abbey03,232,233,4	script	Homme::Man#Aru	956,{
 	if (aru_monas < 22) {
-		mes "^3355FFYou find a man lying on";
-		mes "the floor, wearing torn";
-		mes "yet luxurious clothing.";
-		mes "He doesn't seem to be";
-		mes "breathing at all...^000000.";
+		mes "^3355FFVous voyez un homme couché par terre portant des vêtements déchirés mais néanmoins luxueux. Il n'a pas l'air de respirer...^000000.";
 		next;
-		mes "^3355FFHe's dead.^000000";
+		mes "^3355FFIl est mort.^000000";
 		close;
 	}
 	if (aru_monas == 22) {
-		mes "^3355FFYou find a man lying on";
-		mes "the floor, wearing torn";
-		mes "yet luxurious clothing.";
-		mes "He doesn't seem to be";
-		mes "breathing at all...^000000.";
+		mes "^3355FFVous voyez un homme couché par terre portant des vêtements déchirés mais néanmoins luxueux. Il n'a pas l'air de respirer...^000000.";
 		next;
-		mes "^3355FFYou bring your ears more";
-		mes "closely to his mouth: it";
-		mes "seems that he really is";
-		mes "still barely alive.^000000";
+		mes "^3355FFVous approchez l'oreille de sa bouche et vous sentez un faible soupir.^000000";
 		next;
-		if (select("Touch Him:Ignore Him") == 1) {
+		if (select("Le toucher:Le laisser là") == 1) {
 			mes "["+strcharinfo(0)+"]";
-			mes "This man...";
-			mes "He's so familiar";
-			mes "for some reason.";
+			mes "Cet homme... Il m'a l'air si familier... Je ne sais pas pourquoi.";
 			next;
-			mes "^3355FFAs you touch him, the";
-			mes "man suddenly jumps";
-			mes "up with a crazed yowl.^000000";
+			mes "^3355FFIl se relève d'un bond quand vous le touchez en poussant un cri dément.^000000";
 			initnpctimer;
 			hideonnpc "Man#Aru";
-			monster "abbey03",232,232,"Dead King",1875,1,"Man#Aru::OnMyMobDead";
+			monster "abbey03",232,232,"Roi Défunt",1875,1,"Man#Aru::OnMyMobDead";
 			close;
 		}
-		mes "^3355FFYou don't feel";
-		mes "comfortable enough";
-		mes "to touch this man.^000000";
+		mes "^3355FFVous vous sentez mal et décidez de ne pas le toucher.^000000";
 		close;
 	}
 	if (aru_monas > 22) {
-		mes "^3355FFHe's dead... Now...^000000";
+		mes "^3355FFIl est mort... Maintenant...^000000";
 		close;
 	}
 
@@ -2038,27 +1289,18 @@ OnTimer300000:
 	end;
 }
 
-abbey03,232,232,4	script	Dead Man#Aru	956,{
+abbey03,232,232,4	script	Cadavre::Dead Man#Aru	956,{
 	if (checkweight(7766,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets sur vous en ce moment. Revenez après en avoir déposé quelques uns dans votre Stock.^000000";
 		close;
 	}
 	if (aru_monas == 22) {
-		mes "^3355FFYou have no idea why";
-		mes "this dead man is moving";
-		mes "around, so you decided to";
-		mes "examine him. In his jacket,";
-		mes "you find a shining medal...^000000";
+		mes "^3355FFVous voulez savoir pourquoi ce cadavre pouvait bouger, alors vous décidez de l'examiner. Vous trouvez une médaille dorée dans sa veste...^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "This medal...";
-		mes "This means that";
-		mes "this man is...!";
+		mes "Cette médaille...";
+		mes "Ca voudrait dire que...";
+		mes "Cet homme serait...!";
 		set aru_monas,23;
 		getitem 7726,1; //Token_of_King
 		hideonnpc "Dead Man#Aru";
@@ -2079,44 +1321,23 @@ OnInit:
 
 ra_temple,168,54,3	script	Sippie#ss	917,{
 	mes "[Sippie]";
-	mes "Now I finally have some";
-	mes "time to take a break.";
-	mes "Too many followers are";
-	mes "crowding High Priestess";
-	mes "Niren, and they're giving";
-	mes "me so much work to do!";
+	mes "Je peux enfin prendre une pause! Il y a trop de gens autours de la Grande Prêtresse Niren - ça me donne tellement de travail!";
 	if (aru_em < 11) {
 		close;
 	}
 	else if (aru_em == 11) {
 		next;
 		mes "[Sippie]";
-		mes "Excuse me, but are you";
-		mes "a friend of our pope?";
-		mes "I think I saw you talk";
-		mes "to her a while ago...";
+		mes "Excusez-moi, mais êtes-vous un ami de notre Papesse? Je vous ai vu lui parler plus tôt...";
 		next;
 		mes "[Sippie]";
-		mes "I don't understand why";
-		mes "High Priestess Niren wants";
-		mes "to go to war. I actually think";
-		mes "that in her heart, she doesn't";
-		mes "want it. She's sweet and kind";
-		mes "once you get to know her.";
+		mes "Je ne comprends pas pourquoi la Grande Prêtresse Niren veut partir en guerre. En fait je pense qu'au fond de son coeur elle voudrait éviter cela. Elle est bonne et douce quand vous la connaissez.";
 		next;
 		mes "[Sippie]";
-		mes "She loves children...";
-		mes "She's like a mother to";
-		mes "all the kids in Arunafeltz.";
-		mes "She even brought our pope to";
-		mes "Rachel when she was a baby,";
-		mes "raising her like her own child.";
+		mes "Elle adore les enfants. C'est comme une mère pour tous les enfants d'Arunafeltz. Elle a même conduit notre Papesse à Rachel alors que ce n'était encore qu'un nourrisson, l'élevant comme son propre enfant.";
 		next;
 		mes "[Sippie]";
-		mes "If you didn't know she";
-		mes "was our pope, it'd be easy";
-		mes "to mistake her for High";
-		mes "Priestess Niren's daughter.";
+		mes "Si vous ne saviez pas que c'était notre Papesse, vous auriez pu la prendre pour la fille de la Grande prêtresse Niren.";
 		close;
 	}
 	else {
@@ -3026,47 +2247,47 @@ OnTouch:
 	end;
 
 OnTimer4000:
-	mapannounce "rachel","Pope: Citizens of Arunafeltz. High Priests and Priestesses.",bc_map,"0xFFCE00";
+	mapannounce "rachel","Papesse: Citoyens d'Arunafeltz, Prêtres et Prêtresses.",bc_map,"0xFFCE00";
 	end;
 
 OnTimer7000:
-	mapannounce "rachel","Pope: I appreciate you all for coming to the Sky Garden as I've asked.",bc_map,"0xFFCE00";
+	mapannounce "rachel","Papesse: Merci de vous être tous rendus au Jardin Céleste comme je l'avais demandé.",bc_map,"0xFFCE00";
 	end;
 
 OnTimer10000:
-	mapannounce "rachel","Pope: As the chosen vessel of Goddess Freya, I hereby announce the words I received from her yesterday.",bc_map,"0xFFCE00";
+	mapannounce "rachel","Papesse: En tant que vassal élue par la déesse Freya, je vous fais parvenir les paroles dont elle m'a fait grâce hier.",bc_map,"0xFFCE00";
 	end;
 
 OnTimer15000:
-	mapannounce "rachel","Pope: I have observed all that is happening in Arunafeltz.",bc_map,"0x66CCCC";
+	mapannounce "rachel","Papesse: J'ai observé les troubles d'Arunafeltz.",bc_map,"0x66CCCC";
 	end;
 
 OnTimer19000:
-	mapannounce "rachel","Pope: I am aware of the factioning between the High Priests, their selfish fighting, their failure to achieve solidarity.",bc_map,"0x66CCCC";
+	mapannounce "rachel","Papesse: Je connais les luttes et les déchirements entre les Prêtres, et leurs combats égoïstes, leur échec à célébrer la paix dans la communion.",bc_map,"0x66CCCC";
 	end;
 
 OnTimer23000:
-	mapannounce "rachel","Pope: However, I did not intervene for the sake of those that still pray for peace in Arunafeltz.",bc_map,"0x66CCCC";
+	mapannounce "rachel","Papesse: Je ne suis cependant pas intervenue par égard pour ceux qui prient encore pour la paix à Arunafeltz.",bc_map,"0x66CCCC";
 	end;
 
 OnTimer30000:
-	mapannounce "rachel","Pope: High Priest Zhed and High Priestess Niren, both of you must do your best to assist my vessel until the day of my arrival.",bc_map,"0x66CCCC";
+	mapannounce "rachel","Papesse: Grand Prêtre Zhed, Grande Prêtresse Niren, vous aurez tous deux pour tâche d'assister au mieux mon incarnation sur terre jusqu'à mon retour.",bc_map,"0x66CCCC";
 	end;
 
 OnTimer35000:
-	mapannounce "rachel","Pope: As for the other high priests, you have forgotten your duty to serve me, to enlighten my followers with my teachings. For pursuing your selfish desires, you will be all under Zhed and Niren's command.",bc_map,"0x66CCCC";
+	mapannounce "rachel","Papesse: Et quant aux autres Grands Prêtres, à tous ceux qui ont oublié leurs devoirs envers leur déesse et leur patrie, et leur tâche d'éclairer leur peuple en transmettant mes enseignements, je les place sous le commandement de Zhed et de Niren.",bc_map,"0x66CCCC";
 	end;
 
 OnTimer43000:
-	mapannounce "rachel","Pope: My followers in Arunafeltz, keep your faith in me, and keep your country strong.",bc_map,"0x66CCCC";
+	mapannounce "rachel","Papesse: Mes fidèles d'Arunafeltz, gardez foi en moi, et soyez fier de votre pays puissant.",bc_map,"0x66CCCC";
 	end;
 
 OnTimer47000:
-	mapannounce "rachel","Pope: Then, paradise will surely be yours.",bc_map,"0x66CCCC";
+	mapannounce "rachel","Papesse: Alors, les portes du Paradis s'ouvriront surement pour vous.",bc_map,"0x66CCCC";
 	end;
 
 OnTimer53000:
-	mapannounce "rachel","Citizens: Hail Freya! Hail to the Pope!",bc_map,"0x99CC00";
+	mapannounce "rachel","Citoyens: Gloire à Freya! Gloire à la Papesse!",bc_map,"0x99CC00";
 	stopnpctimer;
 	enablenpc "#em_end";
 	end;
