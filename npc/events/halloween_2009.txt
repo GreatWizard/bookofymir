@@ -1,0 +1,423 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
+//
+// NB: Nécessite d'avoir les monstres #3014 et 3015 et l'objet #5668
+//
+//===== eAthena Script =======================================
+//= iRO Halloween (2009)
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= iRO Halloween (2009)
+//= Quest for Weird Pumpkin Hat.
+//= Exchange treats for buffs.
+//= Summon event monsters in towns.
+//===== Notes: ===============================================
+//= You must enable the event items in item_db2.
+//= You must enable the event mobs in mob_db2, mob_avail, and
+//= their skills in mob_skill_db2.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Kisuka]
+//============================================================
+
+// Headgear Quest - Pumpkin Hat
+// ============================
+prontera,152,192,5	script	Chercheur aux Citrouilles::Pumpkin Hat Researcher	712,{
+	if(BaseLevel < 45) {
+		mes "[Chercheur aux Citrouilles]";
+		mes "Non merci: je ne veux pas adopter d'enfants. Va voir ailleurs, le Novice!";
+		next;
+		mes "[Chercheur aux Citrouilles]";
+		mes "Va tuer quelques Porings - on verra après...";
+		close;
+	}
+	mes "[Chercheur aux Citrouilles]";
+	mes "Dites, vous aimez les Tartes à la Citrouille?";
+	next;
+	mes "[Chercheur aux Citrouilles]";
+	mes "Je fais des recherches sur les Chapeaux Citrouille. Pourquoi vous n'écouteriez pas mon histoire?";
+	next;
+	while(1) {
+		switch(select("Ecouter son histoire.:A propos des Pumpkin Hat.:Obtenir un Pumpkin Hat.:Quitter la conversation.")) {
+			case 1:
+				mes "[Chercheur aux Citrouilles]";
+				mes "J'ai fait des recherches à propos d'un Pumpkin Hat amélioré, et j'ai découvert que le procédé pour le fabriquer était assez simple en fait.";
+				next;
+				mes "[Chercheur aux Citrouilles]";
+				mes "Je pourrai vous montrer si vous m'apportez ^4a4aff20 Jack o' Pumpkin^000000. C'est tentant, non?";
+				next;
+				break;
+			case 2:
+				mes "[Chercheur aux Citrouilles]";
+				mes "Les Pumpkin Hats sont vraiment puissants!";
+				next;
+				mes "[Chercheur aux Citrouilles]";
+				mes "Ils permettent aux Tartes à la Citrouille de restaurer un grand nombre de HP et de SP à ceux qui les portent.";
+				next;
+				mes "[Chercheur aux Citrouilles]";
+				mes "Tout ce qu'il me faut pour ça, c'est ^4a4aff20 Jack o' Pumpkin^000000s.";
+				next;
+				break;
+			case 3:
+				mes "[Chercheur aux Citrouilles]";
+				mes "Vous voulez un Pumpkin Hat? Bien, faites-moi voir les Jack o' Pumpkins que vous avez apporté.";
+				next;
+				if(countitem(1062) < 20) {
+					mes "[Chercheur aux Citrouilles]";
+					mes "Je vous ai dit que j'avais besoin de ^4a4aff20 Jack o' Pumpkin^000000. Je ne suis pas un dieu - je ne peux pas multiplier les citrouilles!";
+					next;
+					mes "[Chercheur aux Citrouilles]";
+					mes "Bon, allez chasser quelques monstres et revenez. Je vais rester ici un moment alors prenez votre temps.";
+					next;
+					break;
+				}else{
+					mes "[Chercheur aux Citrouilles]";
+					mes "J'espère qu'il vous sera utile. N'oubliez pas de le porter quand vous combattez afin de pouvoir trouver des Tartes à la Citrouille.";
+					delitem 1062,20;	// Jack o' Pumpkin
+					getitem 5668,1;		// Weird Pumpkin Hat
+					next;
+					mes "[Chercheur aux Citrouilles]";
+					mes "J'imagine que je devrais retourner à mes affaires maintenant.";
+					close;
+				}
+			case 4:
+				mes "[Chercheur aux Citrouilles]";
+				mes "Au revoir, à une prochaine fois! Je vous souhaite bonne chance...";
+				close;
+		}
+	}
+}
+
+// Buffs - Trick or Treaters
+// =========================
+-	script	Enfant::09Treats	706,2,2,{	
+OnTouch:
+	hideoffnpc ""+strnpcinfo(0)+"";
+	initnpctimer;
+	mes "[Enfant]";
+	mes "Houra! Houra! Houra!";
+	mes "Des bonbons ou une farce?";
+	next;
+	if(select("Farce.:Bonbons.") == 1) {
+		mes "[Enfant]";
+		mes "!!!!";
+		mes "Bien, alors moi aussi je vais vous faire une farce!";
+		sc_start SC_Stun,5000,0;
+		close;
+	}
+	mes "[Enfant]";
+	mes "Oh oui! Quel genre de bonbons vous avez?";
+	next;
+	switch(select("Bonbon:Sucre d'Orge:Cookies Cuits à point:Rien")) {
+		case 1:
+			if(countitem(529) > 0) {
+				mes "[Enfant]";
+				mes "Oui! Merci! Et parce que vous avez été gentil, voilà pour vous!";
+				sc_start SC_STRFood, 1800000, 5;
+				sc_start SC_INTFood, 1800000, 5;
+				sc_start SC_VITFood, 1800000, 5;
+				sc_start SC_AGIFood, 1800000, 5;
+				sc_start SC_DEXFood, 1800000, 5;
+				sc_start SC_LUKFood, 1800000, 5;
+				sc_start SC_FLEEFOOD, 1800000, 15;
+				delitem 529,1;	// Candy
+				close;
+			}else{
+				mes "[Enfant]";
+				mes "Je demande juste un Bonbon ou un Sucre d'Orge... Ou même un Cookie. Bon bah dans ce cas je vais devoir vous faire une farce!";
+				sc_start SC_Stun,5000,0;
+				close;
+			}
+		case 2:
+			if(countitem(530) > 0) {
+				mes "[Enfant]";
+				mes "Oui! Merci! Et parce que vous avez été gentil, voilà pour vous!";
+				sc_start SC_STRFood, 1800000, 5;
+				sc_start SC_INTFood, 1800000, 5;
+				sc_start SC_VITFood, 1800000, 5;
+				sc_start SC_AGIFood, 1800000, 5;
+				sc_start SC_DEXFood, 1800000, 5;
+				sc_start SC_LUKFood, 1800000, 5;
+				sc_start SC_FLEEFOOD, 1800000, 15;
+				delitem 530,1;	// Candy Cane
+				close;
+			}else{
+				mes "[Enfant]";
+				mes "Je demande juste un Bonbon ou un Sucre d'Orge... Ou même un Cookie. Bon bah dans ce cas je vais devoir vous faire une farce!";
+				sc_start SC_Stun,5000,0;
+				close;
+			}	
+		case 3:
+			if(countitem(538) > 0) {
+				mes "[Enfant]";
+				mes "Oui! Merci! Et parce que vous avez été gentil, voilà pour vous!";
+				sc_start SC_STRFood, 1800000, 5;
+				sc_start SC_INTFood, 1800000, 5;
+				sc_start SC_VITFood, 1800000, 5;
+				sc_start SC_AGIFood, 1800000, 5;
+				sc_start SC_DEXFood, 1800000, 5;
+				sc_start SC_LUKFood, 1800000, 5;
+				sc_start SC_FLEEFOOD, 1800000, 15;
+				delitem 528,1;	// Well-baked Cookie
+				close;
+			}else{
+				mes "[Enfant]";
+				mes "Je demande juste un Bonbon ou un Sucre d'Orge... Ou même un Cookie. Bon bah dans ce cas je vais devoir vous faire une farce!";
+				sc_start SC_Stun,5000,0;
+				close;
+			}	
+		case 4:
+			mes "[Enfant]";
+			mes "Je demande juste un Bonbon ou un Sucre d'Orge... Ou même un Cookie. Bon bah dans ce cas je vais devoir vous faire une farce!";
+			sc_start SC_Stun,5000,0;
+			close;
+	}
+OnInit:
+	hideonnpc "Trick or Treater#iRO1";
+	hideonnpc "Trick or Treater#iRO2";
+	hideonnpc "Trick or Treater#iRO3";
+	hideonnpc "Trick or Treater#iRO4";
+	hideonnpc "Trick or Treater#iRO5";
+	hideonnpc "Trick or Treater#iRO6";
+	hideonnpc "Trick or Treater#iRO7";
+	hideonnpc "Trick or Treater#iRO8";
+	end;
+	
+OnEnableTreat:
+	enablenpc ""+strnpcinfo(3)+"";
+	hideonnpc ""+strnpcinfo(3)+"";
+	end;
+	
+OnTimer15000:
+	hideonnpc ""+strnpcinfo(3)+"";
+	disablenpc ""+strnpcinfo(3)+"";
+	end;
+		
+OnTimer300000:
+	donpcevent ""+strnpcinfo(3)+"::OnEnableTreat";
+	stopnpctimer;
+	end;
+}
+prontera,151,173,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO1	706,2,2
+prontera,270,350,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO2	706,2,2
+prontera,234,310,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO3	706,2,2
+prontera,156,321,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO4	706,2,2
+prontera,156,283,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO5	706,2,2
+prontera,142,214,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO6	706,2,2
+prontera,134,125,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO7	706,2,2
+prontera,220,72,5	duplicate(09Treats)	Enfant::Trick or Treater#iRO8	706,2,2
+
+// Monster Summoning - Halloween Wizard
+// ====================================
+-	script	Sorcier d'Halloween::09HallowWiz	737,{
+	mes "[Sorcier d'Halloween]";
+	mes "...";
+	mes "Voulez-vous faire une farce à quelqu'un?";
+	next;
+	while(1) {
+		switch(select("Quelle farce?:Bien sûr.:Non.")) {
+			case 1:
+				mes "[Sorcier d'Halloween]";
+				mes "Je peux invoquer des monstres venus de contrées lointaines avec simplement quelques objets.";
+				next;
+				mes "[Sorcier d'Halloween]";
+				mes "Ca vous intéresse, non?";
+				next;
+				mes "[Sorcier d'Halloween]";
+				mes "Si vous me rapportez un Fabric, un Jack o' Pumpkins, un Worn Fabric, un une Crushed Pumpkins je pourrai invoquer ces monstres.";
+				next;
+				break;
+			case 2:
+				mes "[Sorcier d'Halloween]";
+				mes "Dans quelle ville voulez-vous faire une farce?";
+				next;
+				getmapxy(.@mapname$,.@mapx,.@mapy,0,""+strcharinfo(0)+"");
+				if (.@mapname$ == "prontera") {
+					switch(select("Geffen:Payon:Alberta:Aldebaran")) {
+						case 1:
+							set .@HallowTown,3;
+							break;
+						case 2:
+							set .@HallowTown,2;
+							break;
+						case 3:
+							set .@HallowTown,4;
+							break;
+						case 4:
+							set .@HallowTown,5;
+							break;
+					}
+				}
+				else if (.@mapname$ == "payon") {
+					switch(select("Prontera:Geffen:Alberta:Aldebaran")) {
+						case 1:
+							set .@HallowTown,1;
+							break;
+						case 2:
+							set .@HallowTown,3;
+							break;
+						case 3:
+							set .@HallowTown,4;
+							break;
+						case 4:
+							set .@HallowTown,5;
+							break;
+					}
+				}
+				else if (.@mapname$ == "geffen") {
+					switch(select("Prontera:Payon:Alberta:Aldebaran")) {
+						case 1:
+							set .@HallowTown,1;
+							break;
+						case 2:
+							set .@HallowTown,2;
+							break;
+						case 3:
+							set .@HallowTown,4;
+							break;
+						case 4:
+							set .@HallowTown,5;
+							break;
+					}
+				}
+				else if (.@mapname$ == "alberta") {
+					switch(select("Prontera:Geffen:Payon:Aldebaran")) {
+						case 1:
+							set .@HallowTown,1;
+							break;
+						case 2:
+							set .@HallowTown,3;
+							break;
+						case 3:
+							set .@HallowTown,2;
+							break;
+						case 4:
+							set .@HallowTown,5;
+							break;
+					}
+				}
+				else if (.@mapname$ == "aldebaran") {
+					switch(select("Prontera:Geffen:Payon:Alberta")) {
+						case 1:
+							set .@HallowTown,1;
+							break;
+						case 2:
+							set .@HallowTown,3;
+							break;
+						case 3:
+							set .@HallowTown,2;
+							break;
+						case 4:
+							set .@HallowTown,4;
+							break;
+					}
+				}
+				setarray .@HallowTowns$[1],"prontera","payon","geffen","alberta","aldebaran";
+				mes "[Sorcier d'Halloween]";
+				mes "Bien, maintenant, combien de Fabrics ou de Jack o' Pumpkins voulez-vous utiliser? Pas plus de 100, hein: après je ne m'y retrouve plus.";
+				next;
+				input .@input;
+				if (.@input == 0) {
+					mes "[Sorcier d'Halloween]";
+					mes "Vous ne savez pas? Ce n'est pas grave. Tenez-moi au courant.";
+					next;
+					break;
+				}
+				else if (.@input > 100) {
+					mes "[Sorcier d'Halloween]";
+					mes "Je vous ai dit: pas plus de 100! Vous n'avez pas écouté?";
+					next;
+					break;
+				}
+				else {
+					set .@fabric,countitem(1059);
+					set .@jack,countitem(1062);
+					set .@worn,countitem(6299);
+					set .@crushed,countitem(6298);
+					set .@whispers,0;
+					set .@darklords,0;
+
+					set .@total,.@fabric + .@jack + .@worn + .@crushed;
+
+					if(.@total < .@input) {
+						mes "[Sorcier d'Halloween]";
+						mes "Hum, vous feriez mieux de recompter: vous n'en avez pas assez sur vous. Huhuhuhuhuhu...";
+						next;
+						break;
+					}
+
+					if(.@fabric > 0) {
+						if(.@fabric >= .@input) {
+							delitem 1059,.@input;
+							set .@whispers,.@whispers+.@input;
+							set .@input,0;
+						}
+						else{
+							delitem 1059,.@fabric;
+							set .@input,.@input - .@fabric;
+							set .@whispers,.@whispers+.@fabric;
+						}
+					}
+					if(.@worn > 0 && .@input != 0) {
+						if(.@worn >= .@input) {
+							delitem 6299,.@fabric;
+							set .@whispers,.@whispers+.@input;
+							set .@input,0;
+						}
+						else{
+							delitem 6299,.@worn;
+							set .@input,.@input - .@worn;
+							set .@whispers,.@whispers+.@worn;
+						}
+					}
+					if(.@jack > 0 && .@input != 0) {
+						if(.@jack >= .@input) {
+							delitem 1062,.@input;
+							set .@darklords,.@darklords+.@input;
+							set .@input,0;
+						}
+						else{
+							delitem 1062,.@jack;
+							set .@input,.@input - .@jack;
+							set .@darklords,.@darklords+.@jack;
+						}
+					}
+					if(.@crushed > 0 && .@input != 0) {
+						if(.@crushed >= .@input) {
+							delitem 6298,.@input;
+							set .@darklords,.@darklords+.@input;
+							set .@input,0;
+						}
+						else{
+							delitem 6298,.@crushed;
+							set .@input,.@input - .@crushed;
+							set .@darklords,.@darklords+.@crushed;
+						}
+					}
+					if (.@input > 0) {
+						mes "Il y a un problème.";
+						close;
+					}
+					monster ""+.@HallowTowns$[.@HallowTown]+"",0,0,"Murmure d'Halloween",3014,.@whispers;
+					monster ""+.@HallowTowns$[.@HallowTown]+"",0,0,"Seigneur d'Halloween",3015,.@darklords;
+					mes "[Sorcier d'Halloween]";
+					mes "Et voilà! Imaginez leur tête là-bas! Muahahaha";
+					close;
+				}
+			case 3:
+				mes "[Sorcier d'Halloween]";
+				mes "Revenez si vous changez d'avis... Je vais rester ici un moment...";
+				mes "Kkkk...";
+				close;
+		}
+	}
+}
+prontera,156,195,5	duplicate(09HallowWiz)	Sorcier d'Halloween::Halloween Wizard#1	737
+geffen,133,122,5	duplicate(09HallowWiz)	Sorcier d'Halloween::Halloween Wizard#2	737
+payon,156,196,5	duplicate(09HallowWiz)	Sorcier d'Halloween::Halloween Wizard#3	737
+alberta,96,57,5	duplicate(09HallowWiz)	Sorcier d'Halloween::Halloween Wizard#4	737
+aldebaran,146,122,5	duplicate(09HallowWiz)	Sorcier d'Halloween::Halloween Wizard#5	737
