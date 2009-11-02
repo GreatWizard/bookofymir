@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Rachel Quests
 //===== By: ================================================== 
@@ -1154,7 +1156,7 @@ ra_fild01,245,325,3	script	Suspicious Man#ra_in01	934,{
 
 rachel,263,32,3	script	Kid#ra_in01	931,{
 	if (lost_boy < 7) {
-		mes "[Kid]";
+		mes "[Enfant]";
 		mes "Leave me alone!";
 		close;
 	}
@@ -1171,7 +1173,7 @@ rachel,263,32,3	script	Kid#ra_in01	931,{
 		mes "You must be";
 		mes "Phobe, right?";
 		next;
-		mes "[Kid]";
+		mes "[Enfant]";
 		mes "Yeah?";
 		mes "So what?";
 		next;
@@ -2448,13 +2450,13 @@ rachel,73,244,3	script	Lachellen	919,{
 }
 
 rachel,196,77,3	script	Kid#1rachel	921,{
-	mes "[Kid]";
+	mes "[Enfant]";
 	mes "Hey, have you seen";
 	mes "Bruspetti? She's really";
 	mes "nice and always buys me";
 	mes "lots and lots of cookies!";
 	next;
-	mes "[Kid]";
+	mes "[Enfant]";
 	mes "Hmm, I haven't seen";
 	mes "her in a while, though.";
 	mes "I heard she went traveling";
@@ -2464,14 +2466,14 @@ rachel,196,77,3	script	Kid#1rachel	921,{
 }
 
 rachel,151,155,3	script	Kid#2rachel	921,{
-	mes "[Kid]";
+	mes "[Enfant]";
 	mes "Oh wow! I wanna be an";
 	mes "adventurer like you when";
 	mes "I grow up! Go to all sorts";
 	mes "of places, visit different";
 	mes "towns. It sounds so fun!";
 	next;
-	mes "[Kid]";
+	mes "[Enfant]";
 	mes "Maybe if I find a really";
 	mes "nice place, maybe I'll just";
 	mes "stay and then move there.";
@@ -2479,7 +2481,7 @@ rachel,151,155,3	script	Kid#2rachel	921,{
 	mes "that did that, and moved";
 	mes "from Lighthalzen to here~";
 	next;
-	mes "[Kid]";
+	mes "[Enfant]";
 	mes "Yeah, as soon as I get";
 	mes "a chance, I'm gonna ditch";
 	mes "this town and see as much";
@@ -3900,19 +3902,18 @@ OnEnable:
 
 // Donation Lottery Quest/High Priest Quest
 //============================================================ 
-ra_temple,119,180,0	script	Temple Entrance#ra_tem	45,1,1,{
+ra_temple,119,180,0	script	Entrée du Temple::Temple Entrance#ra_tem	45,1,1,{
 OnTouch:
 	if ($rachel_donate >= 10000) {
 		if (MISC_QUEST & 8192) { warp "ra_temin",169,23; end; }
 
 		if (ra_tem_q < 10) {
-			mes "^3355FFThe temple's";
-			mes "entrance is locked.^000000";
+			mes "^3355FFL'entrée du Temple est fermée.^000000";
 			next;
-			select("Kick Door.:Smash Door with Weapon.");
+			select("Donner un coup d'épaule.:Frapper la porte avec une arme.");
 			donpcevent "Nemma#ra_temple::OnEmotion";
-			mes "[Priestess Nemma]";
-			mes "Please don't do that!";
+			mes "[Prêtresse Nemma]";
+			mes "Un peu de retenue, s'il vous plaît!";
 			close;
 		}
 	}
@@ -3925,84 +3926,44 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 	if ($rachel_donate < 10000) {
 		if (ra_have_donated == 0) {
 			cutin "ra_nemma03",2;
-			mes "[Priestess Nemma]";
-			mes "Good day, adventurer.";
-			mes "May I ask what brings";
-			mes "you to the temple today?";
+			mes "[Prêtresse Nemma]";
+			mes "Salutations, aventurier. Puis-je vous demander ce qui vous amène au temple aujourd'hui?";
 			next;
-			if (select("Just sight-seeing.:I came to pray.") == 1) {
+			if (select("Je ne fais que visiter.:Je viens prier.") == 1) {
 				cutin "ra_nemma01",2;
-				mes "[Priestess Nemma]";
-				mes "I guess most foreigners";
-				mes "aren't familiar with our";
-				mes "faith, so I suppose they";
-				mes "wouldn't come here to pray...";
-				mes "Well, I hope you enjoy your";
-				mes "time here, adventurer.";
+				mes "[Prêtresse Nemma]";
+				mes "J'imagine que la plupart des étrangers ne sont pas familiers avec notre religion, et ne viennent pas ici pour prier. J'espère que vous passerez un agréable moment au temple.";
 				goto L_End;
 			}
-			mes "[Priestess Nemma]";
-			mes "Oh! I'm glad to see that";
-			mes "our kind of spirituality is";
-			mes "practiced in other countries~";
-			mes "You know, we at the Temple of";
-			mes "Cheshrumnir will be hosting a";
-			mes "festival here at the temple.";
+			mes "[Prêtresse Nemma]";
+			mes "Oh! Je suis heureuse de voir que des habitants d'autres pays partagent notre religion. Vous savez, le temple de Cheshrumnir accueillera bientôt un festival.";
 			next;
 			cutin "ra_nemma01",2;
-			mes "[Priestess Nemma]";
-			mes "We're accepting donations";
-			mes "for the festival, so we'd be";
-			mes "grateful if you could make";
-			mes "a contribution. Regardless,";
-			mes "we invite you to celebrate the";
-			mes "grace of the goddess with us.";
+			mes "[Prêtresse Nemma]";
+			mes "Nous récoltons des fonds pour le festival, et nous serions heureux si vous offriez votre contribution. Quoi qu'il en soit, nous vous invitons à célébrer la grâce de la déesse avec nous.";
 			Emotion e_ho;
 			next;
-			mes "[Priestess Nemma]";
-			mes "There's one High Priest that";
-			mes "disagrees with collecting money";
-			mes "from the temple's patrons, but";
-			mes "it's up to you if you want to";
-			mes "give or not. If you donate, you";
-			mes "might be able to win a prize!";
+			mes "[Prêtresse Nemma]";
+			mes "L'un de nos Grand Prêtres s'oppose formellement à la collecte d'argent pour le festival, mais de toutes façons, c'est à vous de décider si vous voulez apporter votre contribution ou non. Ceux qui donnent au Temple pourront même remporter un prix!";
 			next;
-			mes "[Priestess Nemma]";
-			mes "You can use our Lottery Tickets";
-			mes "to win something nice from our";
-			mes "Temple Storage. However, you";
-			mes "donate the 50,000 zeny for each";
-			mes "Lottery Ticket, which also happens to be the minimum donation amount.";
+			mes "[Prêtresse Nemma]";
+			mes "Vous pouvez utiliser nos Billets de Tombola pour gagner l'un des prix. Vous aurez un Billet à chaque fois que vous donnerez 50,000 zenys, ce qui est aussi la somme minimale que nous acceptons pour chaque don.";
 			next;
 			cutin "ra_nemma03",2;
-			mes "[Priestess Nemma]";
-			mes "The prizes that are given to";
-			mes "donators are also randomly";
-			mes "chosen, so I have no way of";
-			mes "telling you what you'd get.";
-			mes "Would you be interested";
-			mes "in making a donation?";
+			mes "[Prêtresse Nemma]";
+			mes "Nous tirons au hasard les prix donnés aux mécènes, alors je ne peux pas vous dire ce que vous obtiendrez. Voulez-vous faire un don maintenant?";
 			next;
-			if (select("No, thanks.:Sure.") == 1) {
+			if (select("Non, pas maintenant.:D'accord!") == 1) {
 				cutin "ra_nemma01",2;
-				mes "[Priestess Nemma]";
-				mes "I understand. Well,";
-				mes "maybe some other time.";
-				mes "May Freya bless you on";
-				mes "all your journeys. May the";
-				mes "grace of the goddess always";
-				mes "support us in all that we do~";
+				mes "[Prêtresse Nemma]";
+				mes "Je comprends. Une autre fois peut-être. Que la déesse Fraya bénisse vos aventures. Puisse-t-elle vous soutenir dans tout ce que vous entreprenez~";
 				goto L_End;
 			}
-			mes "[Priestess Nemma]";
-			mes "Great! How much would you";
-			mes "like to donate? We can only";
-			mes "accept donations in increments";
-			mes "of 50,000 zeny, and we can only";
-			mes "accept up to 150,000 zeny at once. It's a bit complicated, I know...";
+			mes "[Prêtresse Nemma]";
+			mes "Fantastique! Combien voulez-vous donner au Temple? Nous n'acceptons que des dons de 50,000, 100,000, ou 150,000 zenys. Je sais, ce n'est pas très pratique parfois...";
 			next;
 
-			switch(select("50,000z - 1 Lottery Ticket:100,000z - 2 Lottery Ticket:150,000z - 3 Lottery Ticket:Cancel")) {
+			switch(select("50,000z - 1 Billet de Tombola:100,000z - 2 Billets de Tombola:150,000z - 3 Billets de Tombola:Annuler")) {
 
 			case 1:
 				callsub S_Donate,1,"50,000";
@@ -4018,12 +3979,8 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 
 			case 4:
 				cutin "ra_nemma02",2;
-				mes "[Priestess Nemma]";
-				mes "I understand that it takes";
-				mes "some thought to part with an";
-				mes "amount of money like 50,000";
-				mes "zeny. Even so, Freya is always";
-				mes "protecting you, wherever you go~";
+				mes "[Prêtresse Nemma]";
+				mes "Je comprends que vous ayez besoin de réfléchir avant de verser une telle somme. Quoi qu'il en soit, Freya sera toujours à vos côtés, où que vous alliez.~";
 				break;
 
 			}
@@ -4034,27 +3991,18 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 
 		else {
 			cutin "ra_nemma03",2;
-			mes "[Priestess Nemma]";
-			mes "Oh, you're " + strcharinfo(0) + "!";
-			mes "Welcome back! I remember";
-			mes "that you donated just a little";
-			mes "while ago. So what brings you";
-			mes "to the temple today, hmm?";
+			mes "[Prêtresse Nemma]";
+			mes "Oh, vous êtes " + strcharinfo(0) + ", n'est-ce pas? Soyez le bienvenu! Je me rappelle que vous avez fait un don il y a quelques temps. Dites-moi, qu'est-ce qui vous amène au temple aujourd'hui?";
 			next;
 
-			switch(select("I've come to donate again.:Just sight-seeing.:I came to attend the service.:I just wanted to see you again.")) {
+			switch(select("Je suis ici pour faire un autre don.:Je viens simplement visiter.:Je suis ici pour participer au service.:Je voulais simplement vous revoir.")) {
 
 			case 1:
-				mes "[Priestess Nemma]";
-				mes "You've come to make another";
-				mes "donation? Splendid! How much";
-				mes "would you like to donate this";
-				mes "time? Remember that we can only";
-				mes "accept donations in inrements of";
-				mes "50,000 zeny up to 150,000 zeny.";
+				mes "[Prêtresse Nemma]";
+				mes "Vous êtes ici pour faire un autre don? Merveilleux! Combien voulez-vous donner cette fois? Vous vous rappelez: nous n'acceptons que des dons de 50,000, 100,000, ou 150,000 zenys.";
 				next;
 
-				switch(select("50,000z - 1 Lottery Ticket:100,000z - 2 Lottery Ticket:150,000z - 3 Lottery Ticket:Cancel")) {
+			switch(select("50,000z - 1 Billet de Tombola:100,000z - 2 Billets de Tombola:150,000z - 3 Billets de Tombola:Annuler")) {
 
 				case 1:
 					callsub S_Donate,1,"50,000";
@@ -4070,45 +4018,29 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 
 				case 4:
 					cutin "ra_nemma02",2;
-					mes "[Priestess Nemma]";
-					mes "I understand that it takes";
-					mes "some thought to part with an";
-					mes "amount of money like 50,000";
-					mes "zeny. Even so, Freya is always";
-					mes "protecting you, wherever you go~";
+					mes "[Prêtresse Nemma]";
+					mes "Je comprends que vous ayez besoin de réfléchir avant de verser une telle somme. Quoi qu'il en soit, Freya sera toujours à vos côtés, où que vous alliez.~";
 					break;
 
 				}
 				goto L_End;
 
 			case 2:
-				mes "[Priestess Nemma]";
-				mes "Oh! If you'd like some";
-				mes "information about our temple,";
-				mes "why don't you ask Priestess";
-				mes "Pano at the Help Desk inside?";
+				mes "[Prêtresse Nemma]";
+				mes "Oh! Si vous désirez avoir plus d'informations à propos du temple, pourquoi ne vous adresseriez-vous pas à la Prêtresse Panno à l'accueil?";
 				next;
-				mes "[Priestess Nemma]";
-				mes "Penno will also redeem";
-				mes "your Lottery Tickets for";
-				mes "prizes, although she doesn't";
-				mes "really seem to enjoy that job.";
-				mes "Well, anyway, she'll help";
-				mes "you out. See you later!";
+				mes "[Prêtresse Nemma]";
+				mes "Panno pourra aussi échanger vos Billets de Tombola contre des prix, même si elle n'a pas vraiment l'air d'apprécier son travail. Mais elle pourra vous aider. A bientôt!";
 				break;
 
 			case 3:
-				mes "[Priestess Nemma]";
-				mes "You're here for the";
-				mes "service? That's great~";
-				mes "I hope you find the sense";
-				mes "of calm that you can only";
-				mes "get from goddess Freya~";
+				mes "[Prêtresse Nemma]";
+				mes "Vous êtes ici pour la cérémonie? Fantastique~ J'espère que vous ferez l'expérience de ce sentiment de sérénité que seule la déesse Freya peut vous offrir~";
 				break;
 
 			case 4:
-				mes "[Priestess Nemma]";
-				mes "Oh, how sweet of you~";
+				mes "[Prêtresse Nemma]";
+				mes "Oh, comme c'est charmant~";
 				break;
 
 			}
@@ -4122,181 +4054,108 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 	else {
 		if (MISC_QUEST & 8192) {
 			cutin "ra_nemma01",2;
-			mes "[Priestess Nemma]";
-			mes "Welcome to our temple!";
+			mes "[Prêtresse Nemma]";
+			mes "Bienvenue au temple!";
 			goto L_End;
 		}
 
 		if (ra_tem_q < 1) {
-			mes "[Priestess Nemma]";
-			mes "Hello, there!";
+			mes "[Prêtresse Nemma]";
+			mes "Oh, bonjour~";
 			mes "...............................";
-			mes "Um, for some reason, the";
-			mes "temple gate hasn't opened yet";
-			mes "But it should be open now. Well";
-			mes "this happens sometimes so...";
+			mes "Hum, pour une raison inconnue, le temple n'a pas encore ouvert ses portes, mais ça ne devrait pas tarder. Ca arrive parfois...";
 			next;
-			mes "[Priestess Nemma]";
-			mes "See, there's this auto locking";
-			mes "system that was added to the";
-			mes "gate when this temple was";
-			mes "built, but now it's more of";
-			mes "an annoyance than security.";
+			mes "[Prêtresse Nemma]";
+			mes "Vous voyez, les gens qui ont construit ce temple ont ajouté un dispositif pour le verrouiller automatiquement. De nos jours, c'est plus un inconvénient qu'un atout en matière de sécurité.";
 			next;
-			mes "[Priestess Nemma]";
-			mes "Every time someone messes";
-			mes "with the lock, or if it breaks,";
-			mes "we have to wait until it auto";
-			mes "resets itself before it works";
-			mes "again. No one can fix it";
-			mes "really quickly, you know...";
+			mes "[Prêtresse Nemma]";
+			mes "A chaque fois que quelqu'un trafique la serrure ou qu'il se dérègle, nous devons attendre qu'il se remette à zéro, et ce n'est jamais très rapide....";
 			next;
-			mes "[Priestess Nemma]";
-			mes "^333333*Sniff*^000000 What should I do?";
-			mes "The auto reset never takes";
-			mes "this long, and I really need";
-			mes "to go inside. ^333333*Sob*^000000 P-Panno!";
-			mes "Panno, I neeeed heeeeelp~!";
+			mes "[Prêtresse Nemma]";
+			mes "^333333*Sniff*^000000 Qu'est-ce que je pourrais bien faire? Ca ne prend jamais autant de temps d'habitude. Il faut vraiment que je me rendre à l'intérieur. ^333333*Sob*^000000 P-Panno! Panno, j'ai besoin d'aiiiddddeeee~!";
 			set ra_tem_q,1;
 			goto L_End;
 		}
 
 		else if ((ra_tem_q >= 1) && (ra_tem_q < 10)) {
-			mes "[Priestess Nemma]";
-			mes "If the gate's locked, then";
-			mes "I've just got to find that";
-			mes "secret entrance. Some kids";
-			mes "supposedly use it to enter";
-			mes "and play pranks in the temple,";
-			mes "but I don't know who they are...";
+			mes "[Prêtresse Nemma]";
+			mes "Si la porte reste fermée, je vais devoir trouver l'entrée secrète. Je sais qu'il y a des enfants qui l'utilisent pour entrer et jouer des farces à l'intérieur, mais je ne sais pas qui ils sont...";
 			next;
-			mes "[Priestess Nemma]";
-			mes "Panno would know";
-			mes "what to do... I think.";
-			mes "Ooh, Panno, help me!";
+			mes "[Prêtresse Nemma]";
+			mes "Panno saurait surement quoi faire... J'imagine. Ooh, Panno, à l'aide!";
 			goto L_End;
 		}
 
 		else if (ra_tem_q == 10) {
 			cutin "ra_nemma04",2;
-			mes "[Priestess Nemma]";
-			mes "Oh, "+strcharinfo(0)+"!";
-			mes "The gate just opened and";
-			mes "I was able to get inside";
-			mes "the temple! ^333333*Whew*^000000 I was";
-			mes "getting really worried";
-			mes "about it for awhile.";
+			mes "[Prêtresse Nemma]";
+			mes "Oh, "+strcharinfo(0)+"! La porte vient de s'ouvrir et j'ai pu me rendre à l'intérieur. ^333333*Whew*^000000 J'étais vraiment inquiète.";
 			next;
-			mes "[Priestess Nemma]";
-			mes "This is the first time that the";
-			mes "gate locked up since Panno";
-			mes "was assigned to her post in";
-			mes "the temple. I thought maybe";
-			mes "something happened and";
-			mes "she got in trouble, you know?";
+			mes "[Prêtresse Nemma]";
+			mes "C'est la première fois que la porte se verrouille depuis que Panno est à son poste. J'ai pensé que quelque chose avait pu lui arriver et qu'elle avait des problèmes.";
 			next;
 			cutin "ra_nemma02",2;
-			mes "[Priestess Nemma]";
-			mes "Wait, wait...";
-			mes "I'm outside. What if";
-			mes "the gate locks up again?";
-			mes "Oooh, what should I do?!";
+			mes "[Prêtresse Nemma]";
+			mes "Oh mais attendez... Je suis dehors. Qu'est-ce qui se passerait si la porte se fermait à nouveau? Oh, qu'est-ce que je devrais faire?";
 			goto L_End;
 		}
 
 		else if (ra_tem_q == 11) {
 			emotion e_ho;
 			cutin "ra_nemma03",2;
-			mes "[Priestess Nemma]";
-			mes "Hey, "+strcharinfo(0)+"~!";
-			mes "We reached our target!";
-			mes "Isn't that great? We're no";
-			mes "longer asking for donations,";
-			mes "but you can still redeem your";
-			mes "Lottery Tickets inside, okay?";
+			mes "[Prêtresse Nemma]";
+			mes "Oh, "+strcharinfo(0)+"~! Nous avons atteint le but que nous nous étions fixé. Nous ne recueillons plus de dons, mais vous pouvez toujours échanger vos Billets à l'intérieur.";
 			goto L_End;
 		}
 
 		else if (ra_tem_q == 12) {
-			mes "[Priestess Nemma]";
-			mes "Mmm... I know what";
-			mes "I can do! I can ask for";
-			mes "Firecrackers! Yes, that'll";
-			mes "be fun for the festival.";
-			mes "Hey, do you know where";
-			mes "those things are sold?";
+			mes "[Prêtresse Nemma]";
+			mes "Hum... Je sais ce que je vais faire. Je vais essayer de trouver des Feux d'Artifice! Ca sera bien pour le festival, non? Vous savez où on en vend?";
 			next;
 			cutin "ra_nemma01",2;
-			mes "[Priestess Nemma]";
-			mes "I, uh, can't give you";
-			mes "much... But if you would";
-			mes "bring me some Firecrackers,";
-			mes "then I'll pray for your good";
-			mes "fortune. Sorry, but that's";
-			mes "all I can really offer.";
+			mes "[Prêtresse Nemma]";
+			mes "Je ne pourrai pas vous en offrir beaucoup... Mais si vous m'apportez des Feux d'Artifice, je prierai pour votre salut! C'est tout ce que je peux faire pour vous.";
 			next;
 			cutin "ra_nemma04",2;
-			mes "[Priestess Nemma]";
-			mes "Hey, bring me";
-			mes "a lot of Firecrackers,";
-			mes "like, ^FF000020 of them^000000! Thank";
-			mes "you thank you thank you!";
+			mes "[Prêtresse Nemma]";
+			mes "Apportez-moi autant de Feux d'Artifice que vous pouvez! ^FF0000Au moins 20^000000! Merci, merci, merci!";
 			set ra_tem_q,13;
 			goto L_End;
 		}
 
 		else if (ra_tem_q == 13) {
-			mes "[Priestess Nemma]";
-			mes "Hey, did you bring me";
-			mes "^FF000020 Firecrackers^000000? Mmm?";
+			mes "[Prêtresse Nemma]";
+			mes "Oh, est-ce que vous avez mes ^FF000020 Feux d'Artifice^000000? Hum?";
 			next;
-			if(select("Yes.:No, not yet.") == 1) {
+			if(select("Oui.:Non, pas encore.") == 1) {
 				cutin "ra_nemma01",2;
-				mes "[Priestess Nemma]";
-				mes "Let's see...";
+				mes "[Prêtresse Nemma]";
+				mes "Alors, voyons...";
 				next;
 				if (countitem(12018) >= 20) {
 					cutin "ra_nemma04",2;
 					delitem 12018,20; //FireCracker";
 					getexp 200000,0;
 					set ra_tem_q,14;
-					mes "[Priestess Nemma]";
-					mes "Yay!";
-					mes "Firecrackers!";
-					mes "Oh, let me pray";
-					mes "for your good fortune!";
+					mes "[Prêtresse Nemma]";
+					mes "Oui! Des Feux d'Artifice! Oh, laissez-moi priez pour le salut de votre âme!";
 					next;
-					mes "^3355FFPriestess Nemma prayed";
-					mes "fervently for your good";
-					mes "fortune. It feels like";
-					mes "it's actually working...^000000";
+					mes "^3355FFLa prêtresse Nemma prie avec foi pour votre salut. Elle s'y applique vraiment...^000000";
 					next;
 					cutin "ra_nemma04",2;
-					mes "[Priestess Nemma]";
-					mes "I'm done!";
-					mes "Now it's time";
-					mes "to play! Hm, maybe";
-					mes "our pope would like";
-					mes "to see these too?";
+					mes "[Prêtresse Nemma]";
+					mes "C'est fait! Et maintenant, c'est le temps de la détente! Hum, peut-être que notre Papesse aimerait en voir aussi, non?";
 					goto L_End;
 				}
 				cutin "ra_nemma02",2;
-				mes "[Priestess Nemma]";
-				mes "Awww...";
-				mes "This isn't enough";
-				mes "Firecrackers. I mean,";
-				mes "I know it's like a donation,";
-				mes "but still. How much fun are";
-				mes "fireworks if there isn't a lot?";
+				mes "[Prêtresse Nemma]";
+				mes "Awww... Vous n'avez pas assez de Feux d'Artifice. Je veux dire... Je sais que c'est un don volontaire, mais ce n'est pas très drôle quand il n'y en a pas assez, n'est-ce pas?";
 			}
 
 			else {
 				cutin "ra_nemma01",2;
-				mes "[Priestess Nemma]";
-				mes "Awww...";
-				mes "Well, I don't really";
-				mes "have much to pay you";
-				mes "back with, anyway~";
+				mes "[Prêtresse Nemma]";
+				mes "Awww... Je n'aurais pas grand chose à vous offrir en échange de toutes façons~";
 			}
 			goto L_End;
 
@@ -4304,8 +4163,8 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 
 		else {
 			cutin "ra_nemma01",2;
-			mes "[Priestess Nemma]";
-			mes "Welcome to our temple!";
+			mes "[Prêtresse Nemma]";
+			mes "Bienvenue au temple!";
 		}
 		goto L_End;
 
@@ -4322,42 +4181,24 @@ OnEmotion:
 
 S_Donate:
 	cutin "ra_nemma01",2;
-	mes "[Priestess Nemma]";
-	mes "So, " + strcharinfo(0) + "...";
-	mes "I just want to make sure:";
-	mes "You want to donate "+getarg(1);
-	mes "zeny, and receive "+getarg(0)+" Lottery";
-	if(getarg(0) == 1) mes "Ticket. Is that correct?";
-	else mes "Tickets. Is that correct?";
+	mes "[Prêtresse Nemma]";
+	if(getarg(0) == 1) mes "Alors, " + strcharinfo(0) + "... Pour qu'on soit bien clairs: vous voulez donner "+getarg(1)+" zenys, en échange d'un Billet de Tombola, c'est cela?";
+	else mes "Alors, " + strcharinfo(0) + "... Pour qu'on soit bien clairs: vous voulez donner "+getarg(1)+" zenys, en échange de "+getarg(0)+" Billets de Tombola, c'est cela?";
 	next;
-	if (select("No:Yes") == 1) {
-		mes "[Priestess Nemma]";
-		mes "Oh, I see. Well, if you";
-		mes "don't have enough zeny with";
-		mes "you, then you can just come";
-		mes "back and donate later. Our";
-		mes "goddess Freya smiles on the";
-		mes "generous and rewards the patient!";
+	if (select("Non:Oui") == 1) {
+		mes "[Prêtresse Nemma]";
+		mes "Oh, je vois. Vous pourrez toujours revenir plus tard si vous n'avez pas assez de zenys sur vous. Notre déesse Freya aime ceux qui sont généreux et récompense ceux qui sont patients.";
 		return;
 	}
 	if (zeny >= getarg(0)*50000) {
 		if (!checkweight(7570,getarg(0))) {
 			cutin "ra_nemma02",2;
-			mes "[Priestess Nemma]";
-			mes "I can scarcely believe it...";
-			mes "You're carrying so much stuff,";
-			mes "you don't even have enough";
-			mes "room for a Lottery Ticket.";
-			mes "You'd better put some of";
-			mes "your things in Storage, yes?";
+			mes "[Prêtresse Nemma]";
+			mes "J'ai du mal à croire que vous portiez tant de choses que vous n'ayez même pas assez de place pour un simple Billet de Tombola. Vous feriez mieux de déposer quelques objets dans votre Stock, vous ne pensez pas?";
 			next;
 			cutin "ra_nemma01",2;
-			mes "[Priestess Nemma]";
-			mes "Don't worry, I'll still be";
-			mes "here after you make more";
-			mes "space available in your";
-			mes "Inventory. Hurry back, and";
-			mes "donate if you can, okay?";
+			mes "[Prêtresse Nemma]";
+			mes "Ne vous inquiétez pas, je serai encore là quand vous reviendrez après avoir fait le ménage dans votre inventaire. Dépêchez-vous qian-même de revenir, d'accord?";
 			return;
 		}
 		set $rachel_donate,$rachel_donate+getarg(0);
@@ -4366,89 +4207,58 @@ S_Donate:
 		set ra_have_donated,1;
 		if ($rachel_donate > 9999) {
 			cutin "ra_nemma03",2;
-			mes "[Priestess Nemma]";
-			mes "There you are~";
-			mes "Thanks so much for";
-			mes "your donation! I'm sure";
-			mes "that Freya is smiling down";
-			mes "upon you, and will reward";
-			mes "you for your generosity~";
+			mes "[Prêtresse Nemma]";
+			mes "Et voilà~ Merci beaucoup pour votre don. Je suis sûre que Freya vous observe et vous récompensera pour votre générosité~";
 			return;
 		}
 		else {
 			set .@Remaining,10000-$rachel_donate;
 			cutin "ra_nemma03",2;
-			mes "[Priestess Nemma]";
-			mes "Thank you so much! We'll be";
-			mes "continuing to accept donations";
-			mes "until we reach our target. Once";
-			mes "we receive "+.@Remaining+" more donations";
-			mes "in increments of 50,000 zeny,";
-			mes "our fundraiser will finish.";
+			mes "[Prêtresse Nemma]";
+			mes "Merci beaucoup! Nous continuerons à accepter des dons jusqu'à ce que nous ayons atteint notre objectif. Une fois que nous aurons reçus "+.@Remaining+" dons de plus, nous arrêterons de collecter de l'argent.";
 			next;
-			mes "[Priestess Nemma]";
-			mes "If you're feeling so";
-			mes "inclined, come back later";
-			mes "and make another contribution.";
-			mes "Thanks again, and may Freya";
-			mes "always watch over you.";
+			mes "[Prêtresse Nemma]";
+			mes "Si vous êtes d'humeur, vous pourrez toujours revenir plus tard pour faire un autre don. Encore merci. La déesse Freya vous récompensera.";
 			return;
 		}
 	}
 	else {
-		mes "[Priestess Nemma]";
-		mes "I'm sorry, but you have";
-		mes "less than "+@Donate$+" zeny...";
-		mes "I know it's asking a lot,";
-		mes "but those are the rules that";
-		mes "I've been told to follow, so...";
-		mes "Well, maybe another time, yes?";
+		mes "[Prêtresse Nemma]";
+		mes "Je suis désolée, mais vous n'avez pas "+@Donate$+" zenys sur vous... Je c'est que ça fait beaucoup, mais je dois suivre les règles... Ce sera peut-être pour une prochaine fois.";
 		return;
 	}
 
 }
 
-rachel,243,37,3	script	Kid#Candy Addict	921,{
+rachel,243,37,3	script	Enfant::Kid#Candy Addict	921,{
 	if ((ra_tem_q < 2) || (ra_tem_q > 9) || (MISC_QUEST & 8192)) {
-		mes "[Kid]";
-		mes "Hey! What's that";
-		mes "smile for? You're not";
-		mes "gonna come pat my head,";
-		mes "are you? No! I hate that!";
+		mes "[Enfant]";
+		mes "Eh! C'est quoi c'e sourire? Vous n'allez pas me tapoter la tête, si? Je déteste ça!";
 		next;
-		mes "[Kid]";
-		mes "Don't come here!";
-		mes "I don't want you to";
-		mes "pat my head! Grrr...";
-		mes "I-I'm warning you!";
+		mes "[Enfant]";
+		mes "Touchez pas à ma tête! Grrr... Je... Je vous préviens!";
 		next;
-		mes "[Kid]";
-		mes "Hey, look at your";
-		mes "clothes! Where did";
-		mes "you come from, huh?";
+		mes "[Enfant]";
+		mes "Eh, regardez vos fringues - vous venez d'où, hein?";
 		next;
-		mes "[Kid]";
-		mes "Are you from a";
-		mes "different country?";
+		mes "[Enfant]";
+		mes "Vous v'nez d'un autre pays, c'est ça?";
 		next;
-		mes "[Kid]";
-		mes "Huh, huh?";
-		mes "What country";
-		mes "are you from?";
+		mes "[Enfant]";
+		mes "Uh, uh? Vous v'nez d'où alors?";
 		next;
-		mes "[Kid]";
-		mes "Eh, whatever.";
+		mes "[Enfant]";
+		mes "Eh, peu importe...";
 		next;
-		mes "[Kid]";
-		mes "Oh hey, do";
-		mes "you like candy?";
+		mes "[Enfant]";
+		mes "Oh eh, vous aimez les bonbons?";
 
 		if (ra_tem_q == 1) {
 			next;
-			switch(select("Not at all.:Yeah.:Sure, I love the stuff~:Not much.")) {
+			switch(select("Pas du tout.:Oui:Bien sûr, j'adore~:Pas vraiment.")) {
 
 			case 1:
-				mes "[Kid]";
+				mes "[Enfant]";
 				mes "Hmpf! Okay.";
 				close;
 
@@ -4459,182 +4269,111 @@ rachel,243,37,3	script	Kid#Candy Addict	921,{
 				break;
 			
 			case 4:
-				mes "[Kid]";
-				mes "Oh. It's 'cause you're";
-				mes "a grown-up. Why don't";
-				mes "you like candies, anyway?";
+				mes "[Enfant]";
+				mes "Oh. C'est parce que vous êtes un grand. Mais pourquoi vous n'aimez pas les bonbons?";
 				next;
-				mes "[Kid]";
-				mes "Why, huh?";
-				mes "Tell me, tell";
-				mes "me, how come?";
+				mes "[Enfant]";
+				mes "Pourquoi, hein? Dites-moi pourquoi!";
 				close;
 
 			}
 
 
 			if (rand(1,2) != 2) {
-				mes "[Kid]";
-				mes "Oh yeah...?";
+				mes "[Enfant]";
+				mes "Ah oui...?";
 				next;
-				mes "[Kid]";
-				mes "But you're a grown-up,";
-				mes "aren't you? Heh heh heh!";
+				mes "[Enfant]";
+				mes "Mais vous êtes un grand, non? Heh heh heh!";
 				next;
-				mes "[Kid]";
-				mes "Candy is only for";
-				mes "kids! Hahahahaah!";
+				mes "[Enfant]";
+				mes "Les bonbons, c'est pour les enfants! Hahahahaah!";
 				next;
-				mes "[Kid]";
-				mes "I tricked you!";
-				mes "You big big dummy!";
+				mes "[Enfant]";
+				mes "Je t'ai eu, gros bêta!";
 			}
 
 			else {
-				mes "[Kid]";
-				mes "Oh, you do?";
-				mes "Does that mean";
-				mes "that you have";
-				mes "any candy, then?";
+				mes "[Enfant]";
+				mes "Oh, c'est vrai? Alors vous avez des bonbons, non?";
 				next;
-				mes "[Kid]";
-				mes "I want one!";
+				mes "[Enfant]";
+				mes "J'en veux un!";
 				next;
-				mes "[Kid]";
-				mes "Hurry, give me one!";
-				mes "Gimmie gimmie~!";
+				mes "[Enfant]";
+				mes "Allez, donnez-moi en un! Donnez! Donnez~!";
 				next;
 				if (countitem(529) > 0) {
-					mes "[Kid]";
-					mes "Mmm...";
-					mes "If you give me";
-					mes "some Candy, then I'll";
-					mes "tell you something";
-					mes "really cool, yeah?";
+					mes "[Enfant]";
+					mes "Hum... Si vous m'donnez un bonbon je vous raconterai un truc super-géant, d'accord?";
 					next;
-					if (select("Sure.:No.") == 1) {
-						mes "[Kid]";
-						mes "Yay~";
+					if (select("D'accord.:Non.") == 1) {
+						mes "[Enfant]";
+						mes "Ouais~";
 						next;
-						mes "[Kid]";
-						mes "Hah! Got you!";
-						mes "I didn't want any";
-						mes "candy anyway! Nyeh!";
-						mes "But I like you, so";
-						mes "I can tell you a secret!";
+						mes "[Enfant]";
+						mes "Ah, je vous ai eu! Je ne voulais pas de bonbons de toutes façons. *Niark* Mais je vous aime bien alors je vais vous dire un petit secret!";
 						next;
-						mes "[Kid]";
-						mes "Did you know that";
-						mes "they always leave one";
-						mes "of the windows to the temple";
-						mes "unlocked? You spy on the";
-						mes "priests inside. They're always";
-						mes "fighting! Isn't that bad?";
+						mes "[Enfant]";
+						mes "Est-ce que vous saviez qu'ils laissaient toujours une fenêtre du temple ouverte? Vous pouvez observer les prêtresses à l'intérieur - elles sont toujours à se battre!";
 						next;
-						mes "[Kid]";
-						mes "Oh well, they're adults,";
-						mes "so I dunno. Maybe they...";
-						mes "Mm. Well, I remember that";
-						mes "fighting is supposed to be bad.";
+						mes "[Enfant]";
+						mes "Oh enfin... Ce sont des adultes alors je ne sais pas. Peut-être que... Mais.. Se battre c'est toujours mal, non?";
 						next;
-						mes "[Kid]";
-						mes "Awww, nuts!";
-						mes "I just remembered!";
-						mes "If you have candy, it";
-						mes "must be from another";
-						mes "country! I should have";
-						mes "taken it from you. Dang it!";
+						mes "[Enfant]";
+						mes "Awww, mince! Je viens de me dire que si vous aviez un bonbon il devait venir d'un autre pays! J'aurais dû le prendre!";
 						next;
-						mes "[Kid]";
-						mes "Oooh, I hate you";
-						mes "now! Leave me alone!";
+						mes "[Enfant]";
+						mes "Oooh, je vous déteste maintenant! Laissez-moi tranquille!";
 						set ra_tem_q,2;
 						close;
 					}
-					mes "[Kid]";
-					mes "You don't wanna";
-					mes "share your candy?";
-					mes "Hmpf! I guess you";
-					mes "must really love it.";
-					mes "...You big greedy.";
+					mes "[Enfant]";
+					mes "Vous voulez pas me donner votre bonbon? Vous devez vraiment les aimer... Sale radin!";
 					close;
 				}
-				mes "[Kid]";
-				mes "Wait, you don't have";
-				mes "any Candy, huh? How can";
-				mes "you tell me you like Candy";
-				mes "when you don't carry any?";
-				mes "Look at this! My pockets";
-				mes "are full of candy!";
+				mes "[Enfant]";
+				mes "Attendez, vous n'avez pas de bonbons, vous! Pourquoi vous me dites que vous aimez les bonbons si vous n'en avez pas un seul? Regardez mes poches: elles sont pleines de bonbons!";
 				next;
-				mes "[Kid]";
-				mes "See?";
-				mes "Look at all";
-				mes "this candy!";
+				mes "[Enfant]";
+				mes "Regardez tout ça! Que des bonbons!";
 				next;
-				mes "[Kid]";
-				mes "Yeah, you have to";
-				mes "have at least this";
-				mes "much candy to say";
-				mes "that you like them.";
-				mes "Hee hee hee hee!";
+				mes "[Enfant]";
+				mes "Oui, vous devez avoir autant de bonbons pour pouvoir dire que vous les aimez! Hee hee hee hee!";
 				next;
-				mes "[Kid]";
-				mes "Oh hey...";
-				mes "Would you like to";
-				mes "have some candy?";
+				mes "[Enfant]";
+				mes "Oh hey... Vous voulez des bonbons?";
 				next;
-				mes "[Kid]";
-				mes "Haha! I tricked you!";
-				mes "I'm not gonna share";
-				mes "all this candy with you!";
-				mes "All of it is for me!";
+				mes "[Enfant]";
+				mes "Haha! J'vous ai eu! J'vais pas partager ces bonbons avec vous! C'est tout pour moi!";
 				next;
-				mes "[Kid]";
+				mes "[Enfant]";
 				mes "...............................";
-				mes "Um... Are you mad?";
+				mes "Hum... Vous êtes en colère?";
 				next;
-				mes "[Kid]";
-				mes "Oh...";
-				mes "You are mad";
-				mes "at me, aren't you?";
+				mes "[Enfant]";
+				mes "Oh... Vous êtes en colère après moi, c'est ça?";
 				next;
-				mes "[Kid]";
-				mes "Okay, okay.";
-				mes "I'll tell you a really";
-				mes "cool secret, so promise";
-				mes "that you won't be mad anymore.";
+				mes "[Enfant]";
+				mes "Okay, okay. Je vais vous dire un petit secret, comme ça vous serez plus en colère.";
 				next;
 
-				switch(select("No, thanks.:What's that?")) {
+				switch(select("Non, ça va.:Qu'est-ce que c'est?")) {
 
 				case 1:
-					mes "[Kid]";
-					mes "Please~";
+					mes "[Enfant]";
+					mes "S'il vous plait~";
 					break;
 
 				case 2:
-					mes "[Kid]";
-					mes "Did you know that";
-					mes "they always leave one";
-					mes "of the windows to the temple";
-					mes "unlocked? You spy on the";
-					mes "priests inside. They're always";
-					mes "fighting! Isn't that bad?";
+					mes "[Enfant]";
+					mes "Est-ce que vous saviez qu'ils laissaient toujours une fenêtre du temple ouverte? Vous pouvez observer les prêtresses à l'intérieur - elles sont toujours à se battre!";
 					next;
-					mes "[Kid]";
-					mes "Oh well, they're adults,";
-					mes "so I dunno. Maybe they...";
-					mes "Mm. Well, I remember that";
-					mes "fighting is supposed to be bad...";
+					mes "[Enfant]";
+					mes "Oh enfin... Ce sont des adultes alors je ne sais pas. Peut-être que... Mais.. Se battre c'est toujours mal, non?";
 					next;
-					mes "[Kid]";
-					mes "Now, I hope you";
-					mes "won't be mad at";
-					mes "me anymore...";
-					mes "If you're not,";
-					mes "then I'm gonna";
-					mes "be madder at you!";
+					mes "[Enfant]";
+					mes "Vous êtes plus en colère maintenant? Si c'est pas le cas c'est moi qui vais être en colère après vous!";
 					set ra_tem_q,2;
 					break;
 
@@ -4648,27 +4387,17 @@ rachel,243,37,3	script	Kid#Candy Addict	921,{
 	}
 
 	else if (ra_tem_q == 2) {
-		mes "[Kid]";
-		mes "You're leaving?";
-		mes "Don't you want to";
-		mes "watch me play Rock,";
-		mes "Paper, Scissors?";
+		mes "[Enfant]";
+		mes "Oh vous vous en allez? Vous ne voulez pas jouer à Pierre-Papier-Ciseaux?";
 		next;
-		mes "[Kid]";
-		mes "Hey! I don't like";
-		mes "the way you're looking";
-		mes "at me. I don't like you";
-		mes "watching me like that!";
-		mes "Why don't you go away?";
+		mes "[Enfant]";
+		mes "Eh, j'aime pas comment vous me regardez! Pourquoi vous partez pas?";
 		next;
-		mes "[Kid]";
-		mes "Gosh, I said, go away!";
+		mes "[Enfant]";
+		mes "Mais! j'vous ai dit de partir!";
 		next;
-		mes "[Kid]";
-		mes "If you're that bored,";
-		mes "why don't you peep through";
-		mes "the windows in the temple,";
-		mes "huh? Gosh! Some people!";
+		mes "[Enfant]";
+		mes "Si vous vous embêtez, pourquoi vous n'allez pas espionner dans le temple à travers la fenêtre? 'Tain, les gens, des fois!";
 		close;
 	}
 
@@ -4677,51 +4406,37 @@ rachel,243,37,3	script	Kid#Candy Addict	921,{
 ra_temple,67,209,0	script	zawa00	-1,3,3,{
 OnTouch:
 	if (ra_tem_q == 2) {
-		mes "^3355FFYou notice a slightly";
-		mes "open window that";
-		mes "you can easily enter.^000000";
+		mes "^3355FFVous remarquez qu'une fenêtre est entre-ouverte, par laquelle vous pouvez facilement entrer.^000000";
 		next;
-		if(select("Stay:Enter Through Window") == 2) {
-			mes "^3355FFYou pull the window,";
-			mes "and it smoothly opens.";
-			mes "This is probably what";
-			mes "those mischevious hits";
-			mes "have been using to enter";
-			mes "unnoticed into this temple.^000000";
+		if(select("Rester ici:Entrer en passant par la fenêtre") == 2) {
+			mes "^3355FFVous poussez la fenêtre et elle s'ouvre sans difficulté. C'est probablement par là que passent les gamins pour aller faire des blagues dans le temple.^000000";
 			close2;
 			warp "que_rachel",62,82;
 			end;
 		}
-		mes "^3355FFYou decide that it's";
-		mes "wrong to sneak into";
-		mes "a place. But what if";
-		mes "you don't get caught?^000000";
+		mes "^3355FFVous pensez que c'est mal de s'introduire comme ça dans un endroit. Mais après tout, peut-être ne vous feriez-vous pas prendre?^000000";
 		close;
 	}
 
 	else if ((ra_tem_q >= 3) && (ra_tem_q < 10)) {
-		mes "^3355FFWould you like to";
-		mes "enter the temple";
-		mes "through this window?^000000";
+		mes "^3355FFVoulez-vous entre dans le temple en passant par la fenêtre?^000000";
 		next;
-		if(select("Enter:Cancel") == 1) {
+		if(select("Entrer:Annuler") == 1) {
 			close2;
 			warp "que_rachel",62,82;
 			end;
 		}
-		mes "^3355FFUsing this window is";
-		mes "probably the only way";
-		mes "that you can enter.^000000";
+		mes "^3355FFC'est probablement le seul moyen d'entrer dans le temple...^000000";
 		close;
 	}
 
 	end;
 }
 
-que_rachel,63,82,0	script	Window#ra_temple	111,{
-	mes "^3355FFThis window it open^000000";
+que_rachel,63,82,0	script	Fenêtre::Window#ra_temple	111,{
+	mes "^3355FFCette fenêtre est ouverte.^000000";
 	next;
-	if(select("Stay:Exit Through Window") == 2) {
+	if(select("Rester ici:Sortir en passant par la fenêtre") == 2) {
 		close2;
 		warp "ra_temple",73,208;
 		end;
@@ -4732,8 +4447,7 @@ que_rachel,63,82,0	script	Window#ra_temple	111,{
 que_rachel,60,80,0	script	zawa01	-1,5,5,{
 OnTouch:
 	if (ra_tem_q == 2) {
-		mes "^3355FFIt's strangely";
-		mes "dark in here.^000000";
+		mes "^3355FFIl fait étrangement sombre ici.^000000";
 		set ra_tem_q,3;
 		close;
 	}
@@ -4744,11 +4458,7 @@ OnTouch:
 que_rachel,59,112,0	script	zawa02	-1,10,10,{
 OnTouch:
 	if (ra_tem_q == 3) {
-		mes "^3355FFYou hear some";
-		mes "noise from the hallway";
-		mes "towards the chapel. It";
-		mes "sounds like there are";
-		mes "several other people here.^000000";
+		mes "^3355FFVous entendez des bruits dans le couloir menant à la chapelle. On dirait que plusieurs personnes s'y trouvent.^000000";
 		set ra_tem_q,4;
 		close;
 	}
@@ -4760,8 +4470,7 @@ OnTouch:
 que_rachel,94,139,0	script	zawa03	-1,10,10,{
 OnTouch:
 	if (ra_tem_q == 4) {
-		mes "^3355FFYou hear noises of some";
-		mes "commotion from the stairs.^000000";
+		mes "^3355FFVous entendez des bruits de coups venant des escaliers.^000000";
 		set ra_tem_q,5;
 		close;
 	}
@@ -4775,12 +4484,9 @@ OnTouch:
 	if (ra_tem_q == 5) {
 		mes " ";
 		mes " ";
-		mes "^ff0000Crash!^000000";
+		mes "^ff0000Crac!^000000";
 		next;
-		mes "^3355FFYou hear something";
-		mes "fall from the stairs,";
-		mes "followed by noises that";
-		mes "sound like a scuffle.^000000";
+		mes "^3355FFVous entendez quelque chose tomber dans les escaliers, suivi d'un bruit de bagarre.^000000";
 		set ra_tem_q,6;
 		close;
 	}
@@ -4792,74 +4498,51 @@ OnTouch:
 que_rachel,28,315,0	script	Bloody Spot	-1,5,5,{
 OnTouch:
 	if (ra_tem_q == 6) {
-		mes "^3355FFThere's a spot on the";
-		mes "ground that's darker than";
-		mes "the rest of the floor...^000000";
+		mes "^3355FFVous voyez une tache sombre par terre...^000000";
 		next;
-		if (select("Investigate:Ignore") == 1) {
-			mes "^3355FFIt's too dark to";
-			mes "really see the spot^000000";
+		if (select("L'examiner:L'ignorer") == 1) {
+			mes "^3355FFIl fait trop sombre pour bien y voir.^000000";
 			next;
 			mes "...";
 			mes "......";
 			mes ".........";
 			next;
-			mes "^3355FFIt smells a little bit";
-			mes "like copper or iron. Blood";
-			mes "has probably been spilled here.^000000";
+			mes "^3355FFCa sent un peu le fer ou le cuivre. Du sang a probablement été versé ici.^000000";
 			set ra_tem_q,7;
 			close;
 		}
 
 		else {
-			mes "^3355FFYou decide that your";
-			mes "time would be better spent";
-			mes "investigating something else.^000000";
+			mes "^3355FFVous pensez que vous feriez mieux d'aller enquêter ailleurs.^000000";
 			close;
 		}
 
 	}
 
 	else if (ra_tem_q == 7) {
-		mes "^3355FFThis dark spot on the";
-		mes "ground is really creepy,";
-		mes "no matter how many";
-		mes "times you look at it.^000000.";
+		mes "^3355FFCette tache par terre vous donne vraiment la chair de poule, même si vous l'avez déjà vue plusieurs fois.^000000.";
 		next;
-		if (select("Investigate Again:Ignore") == 1) {
-			mes "^3355FFThe blood on the ground";
-			mes "hasn't dried up yet, but";
-			mes "it's probably cold by now.^000000";
+		if (select("L'examiner à nouveau:L'ignorer") == 1) {
+			mes "^3355FFLe sang par terre n'est pas encore sec, mais il doit déjà être froid.^000000";
 			next;
 			mes "...";
 			mes "......";
 			mes ".........";
 			next;
-			mes "^3355FFThe amount of blood";
-			mes "on the ground is more";
-			mes "than can be contained in just";
-			mes "one person. You'd better get";
-			mes "out of here before it's too late.^000000";
+			mes "^3355FFIl y a trop de sang par terre pour que ça ne soit celui que d'une seule personne. Vous feriez mieux de partir tant qu'il en est encore temps.^000000";
 			set ra_tem_q,8;
 			close;
 		}
 
 		else {
-			mes "^3355FFYou decide that your";
-			mes "time would be better spent";
-			mes "investigating something else.^000000";
+			mes "^3355FFVous pensez que vous feriez mieux d'aller enquêter ailleurs.^000000";
 			close;
 		}
 
 	}
 
 	else if (ra_tem_q == 8) {
-		mes "^3355FFThis blood stain on the";
-		mes "ground is a pretty bad";
-		mes "sign. You might have to";
-		mes "escape this place before";
-		mes "whatever caused this much";
-		mes "bleeding does the same to you.^000000";
+		mes "^3355FFLe sang par terre est de mauvaise augure. Vous feriez peut-être mieux de vous enfuir avant qu'il ne vous arrive la même chose qu'à ceux qui étaient là.^000000";
 		close;
 	}
 
@@ -4870,25 +4553,19 @@ que_rachel,170,37,0	script	nemma01::nemma01	-1,5,5,{
 OnTouch:
 	if (ra_tem_q == 8) {
 		mes "[???]";
-		mes "Only the goddess exists.";
+		mes "Seule la Déesse existe.";
 		next;
 		mes "[???]";
-		mes "Everyone must be";
-		mes "ready for her coming.";
+		mes "Tout le monde doit se tenir prêt pour sa venue.";
 		next;
 		mes "[???]";
-		mes "Izlude, my hometown,";
-		mes "I have come to this";
-		mes "place to build.";
+		mes "Izlude... Ma ville natale... Je suis venue ici pour construire quelque chose...";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Th-that's Priestess";
-		mes "Panno's voice! But isn't";
-		mes "she just outside the door?";
-		mes "What exactly was she saying?";
+		mes "C'est... C'est la voix de la prêtresse Panno! Mais elle est de ce côté-ci de la porte?! Qu'est-ce qu'elle raconte?";
 		set ra_tem_q,9;
 		close;
 	}
@@ -4902,52 +4579,39 @@ que_rachel,165,37,0	duplicate(nemma01)	nemma04	-1,5,5
 que_rachel,160,37,0	duplicate(nemma01)	nemma05	-1,5,5
 
 que_rachel,169,18,0	script	Quest Temple Exit#ra_tem	45,2,2,{
-	mes "^3355FFThe gate is closed.^000000";
+	mes "^3355FFLa porte est verrouillée.^000000";
 	next;
 
-	switch(select("Push Gate:Examine Gate:Kick Gate:Smash Gate with Weapon")) {
+	switch(select("Pousser la porte:Examiner la porte:Enfoncer la porte:Frapper la porte avec une arme")) {
 
 	case 1:
-		mes "^3355FFYou push the gate";
-		mes "with all of your might...";
+		mes "^3355FFVous poussez la porte de toutes vos forces...";
 		if (ra_tem_q == 9) {
 			close2;
 			set ra_tem_q,10;
 			warp "ra_temple",119,175;
 			end;
 		}
-		mes "But it won't even budge.^000000";
+		mes "Mais elle ne bouge pas.^000000";
 		break;
 
 	case 2:
-		mes "^3355FFThere's some strange";
-		mes "machinery installed on";
-		mes "the gate, and a slot where";
-		mes "it looks you you can insert";
-		mes "a card or permit. The lights";
-		mes "are on, so it must be working.^000000";
+		mes "^3355FFIl y a un mécanisme étrange sur la porte. Vous voyez aussi un emplacement où vous pourriez insérer une carte ou un permis. Il est allumé alors il doit toujours fonctionner.^000000";
 		break;
 
 	case 3:
-		mes "^3355FFYou angrily kick the gate...";
+		mes "^3355FFVous tentez d'enfoncer la porte...";
 		if (ra_tem_q == 9) {
 			close2;
 			set ra_tem_q,10;
 			warp "ra_temple",119,175;
 			end;
 		}
-		mes "But no matter how much rage";
-		mes "you put into your kick, the";
-		mes "gate refuses to open for you.";
-		mes "Oh, and your foot hurts too.^000000.";
+		mes "Mais malgré tous vos efforts elle refuse de s'ouvrir. Votre épaule commence par contre à vous faire souffrir.^000000.";
 		break;
 
 	case 4:
-		mes "^3355FFWait! That's not";
-		mes "a good idea. You can't";
-		mes "smash down the gate to";
-		mes "a holy place: heroes don't";
-		mes "specialize in desecration.^000000";
+		mes "^3355FFAttendez! Frapper la porte d'un temple avec une arme n'est pas une idée brillante... Un vrai héros ne profane pas un édifices religieux, voyons!^000000";
 		break;
 
 	}
@@ -4958,94 +4622,46 @@ que_rachel,169,18,0	script	Quest Temple Exit#ra_tem	45,2,2,{
 ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 	if ((ra_tem_q > 14) || (MISC_QUEST&8192)) set lost_boy,14;
 	if (checkweight(908,200) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous portez trop d'objets sur vous en ce moment. Revenez après en avoir déposé quelques uns dans votre Stock Kafra.^000000";
 		close;
 	}
 	if (lost_boy == 12) {
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "For some reason, you look";
-		mes "familiar to me. Are you supposed";
-		mes "to be here? Otherwise, you should";
-		mes "leave this place if you don't have";
-		mes "the proper authorization.";
+		mes "C'est étrange, j'ai l'impression de vous avoir déjà vu. Etes-vous ici pour une raison particulière? Je devrais vous demander de quitter ces lieux si vous n'avez pas les autorisations nécessaires.";
 		next;
-		select("I'm here on Vincent's behalf");
+		select("Je suis ici parce que Vincent me l'a demandé");
 		mes "[Grand Prêtre Zhed]";
-		mes "Vincent sent you? I see.";
-		mes "You must have been looking";
-		mes "for me. I am High Priest Zhed,";
-		mes "and I understand that you";
-		mes "have a package for me.";
+		mes "Vincent vous envoie? Je vois. Dans ce cas c'est moi que vous devez chercher. Je suis le Grand Prêtre Zhed, et je crois que vous avez quelque chose pour moi.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Usually, Vincent doesn't";
-		mes "trust strangers to deliver";
-		mes "these packages, but perhaps";
-		mes "this was necessitated by some";
-		mes "strange circumstance. Anyway,";
-		mes "let's see what he sent me...";
+		mes "Vincent ne fait pas confiance aux étrangers d'habitude, mais les circonstances font surement loi. Mais faites-moi voir tout ça...";
 		next;
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Hm? What's this?";
-		mes "Vincent sent a note?";
-		mes "I suppose this must be";
-		mes "important. Give me just a";
-		mes "moment to read this, please...";
+		mes "Hum? Qu'est-ce que...? Vincent m'envoie un mot? J'imagine que c'est important. Laissez-moi le temps de le lire s'il vous plait...";
 		next;
 		mes "[Grand Prêtre Zhed]";
 		mes "...............................";
-		mes "...Hrrrmm. Vincent. Now";
-		mes "I understand. So he was being";
-		mes "intentionally cold towards Jenny";
-		mes "and Phoebe so other people";
-		mes "wouldn't get suspicious...";
+		mes "...Hrrrmm. Vincent. Maintenant je comprends. Il a fait exprès de garder ses distances avec Jenny et Phoebe pour que personne n'ait de soupçons...";
 		next;
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Still, I don't think he";
-		mes "had to do that--it might";
-		mes "have been a little too";
-		mes "much. Well, I really";
-		mes "appreciate your help";
-		mes "in this matter, adventurer.";
+		mes "Mais je ne pense pas que c'était la peine... C'était peut-être même en faire un peu trop. Eh bien, j'apprécie que vous nous ayez aidé, aventurier.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "But tell me, did you only";
-		mes "help Vincent and risk your";
-		mes "life because you were being";
-		mes "paid? Were you only being";
-		mes "motivated by the money?";
+		mes "Mais dites-moi, avez-vous aidé Vincent et risqué votre vie uniquement pour l'argent?";
 		next;
-		select("Actually... I was just curious.");
+		select("En fait... J'étais simplement curieux.");
 		mes "[Grand Prêtre Zhed]";
-		mes "You were doing this just to";
-		mes "satisfy your curiosity? Heh";
-		mes "heh, that's very interesting.";
-		mes "That's also the best attitude";
-		mes "for a brave adventurer. I like";
-		mes "that. May I have your name?";
+		mes "Vous avez fait tout ceci pour satisfaire votre curiosité? Hehe, c'est intéressant. J'imagine que c'est aussi la meilleure attitude à avoir pour un aventurier. J'aime ça. Pourrais-je connaître votre nom?";
 		next;
 		select("Tell him your name.");
 		mes "[Grand Prêtre Zhed]";
-		mes ""+strcharinfo(0)+"...";
-		mes "Yes, that's a fine name.";
-		mes "It suits you well. I'll be sure";
-		mes "to remember that. Again, let";
-		mes "me thank you for risking your";
-		mes "life to retrive my belongings.";
+		mes ""+strcharinfo(0)+"... C'est un joli nom. Il vous va bien. Je ne l'oublierai pas. Laissez-moi vous remercier une nouvelle fois pour avoir risqué votre vie pour retrouver ce qui m'appartenait.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "I shall be praying for";
-		mes "Freya to guide and protect";
-		mes "you in your travels. Peace";
-		mes "be with you, "+strcharinfo(0)+".";
+		mes "Je prierai pour que Freya vous guide et vous protège dans vos voyages. Que la paix soit sur vous, "+strcharinfo(0)+".";
 		close2;
 		cutin "ra_gman",255;
 		set lost_boy,13;
@@ -5055,257 +4671,121 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 	}
 	else if ((lost_boy == 13) && (ra_tem_q < 14)) {
 		mes "[Grand Prêtre Zhed]";
-		mes "Ah, "+strcharinfo(0)+"...";
-		mes "I appreciate that you've";
-		mes "managed to retrieve my";
-		mes "belongings for me. You are";
-		mes "a truly talented adventurer.";
-		mes "May Freya protect you...";
+		mes "Ah, "+strcharinfo(0)+"... J'apprécie ce que vous avez fait pour retrouver ce qui m'appartenait. Vous êtes un aventurier de talent. Que Freya vous bénisse...";
 	}
 	else if ((lost_boy == 13) && (ra_tem_q == 14)) {
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Ah, good, I was hoping you'd";
-		mes "show up here sooner or later.";
-		mes "I have a favor to ask of you";
-		mes "since I'm too busy to do it";
-		mes "myself, and I trust you more";
-		mes "than any other adventurer.";
+		mes "Ah, bien, j'espérais vous revoir un jour ou l'autre. Je dois vous demander un service: je suis trop occupé pour m'en charger moi-même, et je vous fait plus confiance qu'aux autres aventuriers.";
 		next;
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "However, before I give you";
-		mes "the details, you must know";
-		mes "that this favor must be kept";
-		mes "secret. In other words, once";
-		mes "I explain the task, you must";
-		mes "accept my request.";
+		mes "Cependant, avant de vous donner tous les détails, vous devez me promettre de garder tout cela secret. En d'autres mots: vous n'aurez pas d'autre choix que d'accepter une fois que je vous airai expliqué.";
 		next;
-		if (select("Let me think about it.:Yes, sure.") == 1) {
+		if (select("Laissez-moi y réfléchier.:Oui, bien sûr.") == 1) {
 			mes "[Grand Prêtre Zhed]";
-			mes "I understand, but if you";
-			mes "change your mind, please";
-			mes "come back and let me know.";
-			mes "It's very hard for me to find";
-			mes "someone that I can really";
-			mes "rely on to do this for me...";
+			mes "Je comprends. Revenez ne voir si vous changez d'avis. J'aurais du mal à trouver quelqu'un d'autre, en qui j'ai confiance...";
 			close2;
 			cutin "ra_gman",255;
 			end;
 		}
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Ah, I'm relieved to see";
-		mes "that you accept. Don't worry,";
-		mes "this task isn't complicated,";
-		mes "nor will it require much";
-		mes "in the way of sacrifice.";
+		mes "Ah, ça me soulage d'entendre que vous acceptez. Ne vous inquiétez pas, cette tâche ne devrait pas être très difficile, et ne demandera pas de grands sacrifices.";
 		next;
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "As you may already know,";
-		mes "our country of Arunafeltz";
-		mes "worships the goddess Freya.";
-		mes "There's almost no separation";
-		mes "between politics, society,";
-		mes "and our religion, really.";
+		mes "Comme vous le savez peut-être, notre pays vénère la déesse Freya. Il n'y a presque aucune séparation entre le Temple et l'Etat.";
 		next;
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Now, the leader of our";
-		mes "national religion, our pope,";
-		mes "is a direct servant of Freya";
-		mes "and delivers her messages";
-		mes "to us. As such, she must live";
-		mes "by very strict guidelines.";
+		mes "Le guide de la religion d'Etat, notre Papesse, est une servante directe de Freya, et nous transmets ses paroles. En tant que telle, elle doit suivre des lignes de conduite très strictes.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Our pope is curious about";
-		mes "the outside world and wishes";
-		mes "to learn more about what lies";
-		mes "beyond Arunafeltz, but she";
-		mes "cannot come easily by this";
-		mes "sort of knowledge.";
+		mes "Notre Papesse s'intéresse au monde extérieur et voudrait en apprendre plus sur ce qui se passe par-delà les frontières, mais c'est très difficile pour elle.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Firstly, she cannot leave";
-		mes "Rachel, the place where the";
-		mes "spirit of goddess Freya dwells.";
-		mes "Secondly, all citizens and priests are forbidden to leave the city in";
-		mes "order to preserve our sanctity.";
+		mes "Tout d'abord, elle ne peut pas quitter Rachel, l'endroit où l'esprit de la déesse Freya demeure. D'autre part, les citoyens et les prêtres ont ordre de ne pas quitter la ville pour préserver leur sainteté.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "These are implicit rules that";
-		mes "normally aren't discussed openly,";
-		mes "but everyone follows them to";
-		mes "prevent from being stigmatized.";
-		mes "Frankly, I think it's somewhat shameful, but we're working on it.";
+		mes "Ce sont des règles tacites, dont personne ne parle ouvertement, mais que tout le monde suit pour ne pas être stigmatisé. Je pense que c'est très dommage, mais nous faisons ce qu'on peut.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Furthermore, our pope must";
-		mes "maintain her image of aloof";
-		mes "piety, so it'd be inappropriate of her to openly question outside";
-		mes "world affairs. Although, such";
-		mes "knowledge would benefit her...";
+		mes "Qui plus est, notre papesse doit préserver son image et maintenir l'impression qu'elle se trouve au-dessus des affaires du monde, alors il serait malvenu qu'elle pose ouvertement des questions à ce sujet, même si je pense qu'elle pourrait en tirer bénéfice...";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "That is why the high priests";
-		mes "decided to enlist a trustworthy";
-		mes "adventurer to inform our pope";
-		mes "about the outside world. Now";
-		mes "you understand why I've asked";
-		mes "you to keep all of this secret.";
+		mes "C'est pour cette raison que les Grands Prêtres ont décidé de confier à un aventurier de confiance la tâche de parler du monde extérieur à notre papesse. Vous comprenez maintenant pourquoi je vous ai demandé de garder le secret.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "You won't need to divulge";
-		mes "outrageous secrets or anything";
-		mes "like that. I presume mundane";
-		mes "details would be enough to";
-		mes "please her. Just let her be";
-		mes "able to envision your homeland.";
+		mes "Vous n'aurez pas à lui parler des crimes et des lourds secrets de ce monde. J'imagine que des détails mondains suffiront. Dépeignez-lui votre terre natale par exemple...";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Personally, I think it would";
-		mes "be refreshing for our pope to";
-		mes "hear a few of your stories as";
-		mes "she is always worshipping";
-		mes "our goddess on the behalf of";
-		mes "everyone in our glorious city.";
+		mes "Je pense à titre personnel qu'entendre quelques unes de vos histoires pourrait être divertissant pour la Papesse, et que ça la changera de ses prières quotidiennes pour le salut de notre glorieuse cité.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Unfortunately, I cannot escort";
-		mes "you to the priestess, but I will";
-		mes "relate the means to which you";
-		mes "can gain an audience with her.";
-		mes "First, you will need a ^FF0000High";
-		mes "Priest's Recommendation^000000.";
+		mes "Je ne peux malheureusement pas vous accompagner jusqu'à la Papesse, mais je vais vous dire comment obtenir une audience. Tout d'abord, il vous faudra une ^FF0000Lettre de Recommandation d'un Grand Prêtre^000000.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "I will write that for you, so";
-		mes "there's no need to concern";
-		mes "yourself with that. Next, you";
-		mes "will need to gather ^FF000040 Glacial";
-		mes "Hearts^000000 as symbolic proof of";
-		mes "your strength and purity.";
+		mes "Je vais vous en écrire une, alors vous n'avez pas à vous en faire pour ça. Ensuite, il vous faudra rassembler ^FF000040 Glacial Hearts^000000, symboles de force et de piété.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "While I finish writing this";
-		mes "recommendation, let me tell";
-		mes "you how to get to the pope's";
-		mes "office where you must go once";
-		mes "you gather 40 Glacial Hearts.";
+		mes "Une fois que vous vous serez procuré ces 40 Glacial Hearts et que j'aurai fini de rédiger cette lettre, vous devrez prendre un couloir à l'ouest de la chapelle, où vous trouverez une porte gardée par deux soldats.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Head west from the chapel";
-		mes "in the center of the temple,";
-		mes "and then enter a door guarded";
-		mes "by two soldiers. Show them your";
-		mes "recommendation and Glacial Hearts, and they should grant you passage.";
+		mes "Montrez-leur la lettre et les Glacial Hearts: ils vous laisseront alors passer.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Ah, here you are.";
-		mes "I've finished writing";
-		mes "your recommendation.";
-		mes "Well then, I guess I'll";
-		mes "see you after you've";
-		mes "completed this task.";
+		mes "Ah, voilà. La lettre est terminée. J'imagine que je vous reverrai quand vous vous serez acquitté de cette charge.";
 		next;
-		mes "^3355FFYou received a High";
-		mes "Priest's recommendation.^000000";
+		mes "^3355FFVous recevez une Lettre de Recommandation.^000000";
 		set ra_tem_q,15;
 		set lost_boy,14;
 	}
 	else if ((ra_tem_q == 15) || (ra_tem_q == 16)) {
 		mes "[Grand Prêtre Zhed]";
-		mes "Once you gather";
-		mes "^FF000040 Glacial Hearts^000000,";
-		mes "you can show them, along";
-		mes "with the recommendation I've";
-		mes "written for you, to the soldiers";
-		mes "guarding the pope's office.";
+		mes "Allez montrer la Lettre de Recommandation que j'ai écrite pour vous ainsi que les ^FF000040 Glacial Hearts^000000, une fois que vous les aurez trouvés, aux gardes à la porte du bureau de la Papesse.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "When you're ready to go";
-		mes "to the pope's office, just";
-		mes "head west from the chapel";
-		mes "to the center of the temple:";
-		mes "this is where the entrance is.";
+		mes "Lorsque vous serez prêt à vous rendre au bureau de la papesse, prenez le couloir à l'ouest de la chapelle au centre du temple. L'entrée se trouve là-bas.";
 	}
 	else if (ra_tem_q == 17) {
 		mes "[Grand Prêtre Zhed]";
-		mes "Ah, thank you so much";
-		mes "for spending some time";
-		mes "with the pope for me.";
-		mes "I can tell that she really";
-		mes "enjoyed speaking to you.";
+		mes "Ah, merci beaucoup d'avoir passé du temps avec la Papesse. Je sais qu'elle a beaucoup apprécié.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "I am curious, though...";
-		mes "Our pope is unaccustomed";
-		mes "to speaking with outsiders,";
-		mes "so I assume that you have";
-		mes "your own questions after";
-		mes "your conversation with her...";
+		mes "Je me demande cependant... Notre papesse n'a pas l'habitude de parler à des étrangers. J'imagine que vous aussi avez des questions après vous être entretenu avec elle...";
 		next;
-		select("Well, she did mention some Holy Ground...");
+		select("Eh bien, elle m'a parlé d'un Sanctuaire...");
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "What...?!";
-		mes "She mentioned";
-		mes "the Holy Ground...?!";
+		mes "Quoi...?! Elle a parlé du Sanctuaire...?!";
 		next;
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "The Holy Ground is a place";
-		mes "where all humans, including";
-		mes "the pope, have been forbidden.";
-		mes "We used to allow people to";
-		mes "visit in the past, but... ";
+		mes "Le Sanctuaire est un lieu où nul homme ne peut se rendre, y compris notre Papesse. Autrefois on pouvait le visiter mais maintenant... ";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Only the gods can access";
-		mes "that place now. Listen, if";
-		mes "the other priests ask about";
-		mes "your conversation with the";
-		mes "pope, please do not make any";
-		mes "mention of the Holy Ground.";
+		mes "Seuls les dieux peuvent désormais s'y rendre. Ecoutez, si vous parlez de cet entretien avec d'autres prêtres, ne mentionnez pas le Sanctuaire.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Please don't ask me";
-		mes "why, but believe me that";
-		mes "it's very important that";
-		mes "you feign ignorance of the";
-		mes "Holy Ground's existence!";
+		mes "Ne me demandez pas pourquoi, mais je pense qu'il vaut mieux que vous faisiez semblant de ne pas connaître l'existence du Sanctuaire.";
 		next;
 		mes "[????]";
-		mes "Excuse me, Zhed?";
-		mes "May I speak with you";
-		mes "for a moment? I need";
-		mes "to talk to you about";
-		mes "a private matter...";
+		mes "Excusez-moi, Zhed? Pourrais-je m'entretenir avec vous un instant? Je dois vous parler en privé...";
 		next;
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Er, yes, of course!";
-		mes "Excuse me for a moment...";
-		mes "While you're waiting for me,";
-		mes "why don't you relax in the";
-		mes "next room? Don't forget:";
-		mes "there is no Holy Ground.";
+		mes "Euh, oui, bien sûr. Veuillez m'excuser un moment. Pourquoi ne vous détendriez-vous pas pas la pièce voisine tandis que vous attendez que j'aie fini.";
 		close2;
 		cutin "",255;
-		select("Okay.");
+		select("D'accord.");
 		set ra_tem_q,18;
 		warp "ra_temin",297,156;
 		end;
 	}
 	else if (ra_tem_q == 18) {
 		mes "[Grand Prêtre Zhed]";
-		mes "I'm sorry, but we're not";
-		mes "quite finished with our";
-		mes "discussion. Why don't you";
-		mes "wait and relax in the next room";
-		mes "over there in the meantime?";
+		mes "Je suis désolé mais nous n'avons pas fini de parler. Pourquoi n'iriez-vous pas vous détendre dans la pièce voisine en attendant?";
 		close2;
 		cutin "",255;
 		warp "ra_temin",297,156;
@@ -5313,153 +4793,73 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 	}
 	else if (ra_tem_q == 19) {
 		mes "[Grand Prêtre Zhed]";
-		mes "I apologize for making";
-		mes "you wait for so long: I had";
-		mes "some crucial matters to";
-		mes "discuss. Now, that look";
-		mes "on your face tells me that";
-		mes "you have a pressing question.";
+		mes "Je suis désolé de vous avoir fait attendre si longtemps: je devais parler de choses de la plus haute importance. Mais vu vous expression, je crois deviner que vous avez une question à me poser.";
 		next;
-		select("Ask about Bekento");
+		select("A propos de Bekento");
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Bekento? Ah, you must";
-		mes "have been speaking to";
-		mes "High Priestess Niren.";
-		mes "She's the only one that";
-		mes "calls me that. You see, my";
-		mes "full name is Zhed Bekento.";
+		mes "Bekento? Ah, vous avez dû parler à la Grande prêtresse Niren. C'est la seule à m'appeler comme ça. Vous savez, mon véritable nom est Zhed Bekento.";
 		next;
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Speaking of which...";
-		mes "Did Niren ask you anything";
-		mes "or tell you something that";
-		mes "was out of the ordinary?";
+		mes "En parlant de ça... Est-ce que Niren vous a dit quelque chose ou vous a parlé de quoi que ce soit qui sorte de l'ordinaire?";
 		next;
-		mes "^3355FFAfter a little hesitation,";
-		mes "you tell High Priest Zhed";
-		mes "about your conversation";
-		mes "with High Priestess Niren.^000000";
+		mes "^3355FFAprès un court moment d'hésitation, vous parlez au Grand prêtre Zhed de votre conversation avec Niren.^000000";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Hmm, I see.";
-		mes "Yes. That sounds";
-		mes "like something she'd do.";
-		mes "I'll explain it all later, but";
-		mes "right now, I need to rest.";
-		mes "I'm getting old, you know.";
+		mes "Hum, je vois. C'est bien elle, ça. Je vous expliquerai tout ça plus tard. Pour l'instant, il faut que je me repose. Je me fais vieux, vous savez.";
 		next;
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Ah, but before you go, let";
-		mes "me warn you not to ^FF0000go near";
-		mes "the Holy Ground^000000. I repeat,";
-		mes "stay away from the Holy Ground.";
+		mes "Ah, mais avant que vous ne me quittiez, laissez-moi vous mettre en garde: ne vous approchez pas du ^FF0000Sanctuaire^000000. Je me permets d'insister.";
 		next;
-		mes "^3355FFThe Holy Ground...";
-		mes "Why is High Priest Zhed";
-		mes "so adamant about protecting";
-		mes "the Holy Ground? Regardless...";
-		mes "If you want to go there, then";
-		mes "just go there. Who'll stop you?^000000";
+		mes "^3355FFLe Sanctuaire... Pourquoi Zhed tient-il à ce que vous ne vous en approchiez pas? Peu importe. Si vous voulez y aller, qui pourra bien vous arrêter?^000000";
 		set ra_tem_q,20;
 	}
 	else if ((ra_tem_q >= 20) && (ra_tem_q < 22)) {
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Whatever you do, whatever";
-		mes "journeys you take, please";
-		mes "make sure that you stay";
-		mes "away from the Holy Ground!";
+		mes "Quoi que vous fassiez, où que vous alliez, tenez-vous à l'écart du Sanctuaire!";
 		next;
-		mes "^3355FFNow, more than ever,";
-		mes "you feel compelled to";
-		mes "enter the Holy Ground.^000000";
+		mes "^3355FFVous avez plus que jamais envie de vous rendre dans ce Sanctuaire.^000000";
 	}
 	else if (ra_tem_q == 23) {
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Oh, it's you.";
-		mes "Let me guess...";
-		mes "After everything I said,";
-		mes "you still went ahead and";
-		mes "visited the Holy Ground,";
-		mes "didn't you? Oh, well...";
+		mes "Oh, c'est vous... Laissez-moi deviner: vous avez ignoré tous mes avertissement et vous vous êtes rendu au Sanctuaire, n'est-ce pas? Eh bien...";
 		next;
-		select("Did something happen?");
+		select("Qu'est-ce qui s'est passé?");
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Well, honestly, I've been";
-		mes "temporarily suspended from";
-		mes "work, but no need to worry.";
-		mes "It's not your fault. I've been";
-		mes "in conflict with the other High";
-		mes "Priests for a while, anyway.";
+		mes "Eh bien à vrai dire j'ai été suspendu de ma charge temporairement. Mais ne vous en faites pas! Ce n'est pas de votre faute. Cela fait un certain temps que je m'oppose à d'autres prêtres de toutes façons.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Please don't worry about it.";
-		mes "If not this, they would have";
-		mes "found some other way to attack";
-		mes "me. It would only be a matter";
-		mes "of time. They're exaggerating";
-		mes "your intrusion for their benefit.";
+		mes "Ne vous en faites pas. Si il n'y avait pas eu cette histoire, ils auraient trouvé autre chose. Ce n'était qu'une question de temps. Ils utilisent cela dans leur intérêt.";
 		next;
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "All I want is for";
-		mes "Arunafeltz to be safe";
-		mes "and at peace. I hope this";
-		mes "land is not twisted by the";
-		mes "greedy humans. I hope all will";
-		mes "work according to Freya's will.";
+		mes "La seule chose que je veux, c'est la paix et la prospérité pour Arunafeltz. J'espère que cette terre ne souffrira pas de l'avidité humaine, et que tout se déroulera selon la volonté de Freaya.";
 		next;
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Ah, and please do not";
-		mes "blame Niren. She must have";
-		mes "her own reasons for her own";
-		mes "actions. She has changed";
-		mes "much but in the end, I think";
-		mes "that we are still friends.";
+		mes "N'en veuillez pas à Niren. Elle doit avoir ses propres raisons. Elle a beaucoup changé ces derniers temps mais je pense que nous sommes toujours amis.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "One last thing:";
-		mes "try not to let the";
-		mes "other priests catch you";
-		mes "doing anything forbidden.";
-		mes "It'd be a little embarassing";
-		mes "for me, you understand.";
+		mes "Une dernière chose: essayez de ne pas vous faire surprendre par d'autres prêtres à faire des choses interdites. Ce serait gênant pour moi, vous comprenez?";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Still, you were secretly";
-		mes "invited here, so I'm sure";
-		mes "that only a very few of them";
-		mes "would be able to recognize";
-		mes "you. In the end, you'll do";
-		mes "what you will, right?";
+		mes "Cependant, vous avez été convié secrètement là-bas donc je doute que beaucoup de prêtres puissent vous reconnaître. Mais vous n'en ferez qu'à votre tête de toutes façons, n'est-ce pas?";
 		next;
 		cutin "ra_gman2",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "...I think I know what";
-		mes "you saw in the Holy Ground.";
-		mes "I'm sure that you have much";
-		mes "to ask, but now isn't the time";
-		mes "to seek for answers. Please,";
-		mes "you must be patient.";
+		mes "...Je pense savoir ce que vous avez vu dans le Sanctuaire. Je me doute que vous avez beaucoup de questions, mais le temps n'est pas encore venu d'y répondre. Vous devez faire preuve de patience.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Until the right time";
-		mes "comes, I want you not";
-		mes "to tell anyone else what";
-		mes "you saw in the Holy Ground.";
+		mes "Je veux que vous ne parliez à personne de ce qui s'est pas dans le Sanctuaire jusqu'à ce que le temps soit venu.";
 		next;
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "Well then, adventurer,";
-		mes "thank you for coming by.";
-		mes "I need to go lay down now,";
-		mes "so if you'll let me rest...";
+		mes "Merci d'être venu, aventurier. Je dois m'allonger un peu maintenant. Merci de me laisser...";
 		close2;
 		set MISC_QUEST,MISC_QUEST | 8192;
 		set ra_tem_q,0;
@@ -5471,7 +4871,7 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 	else if (MISC_QUEST & 8192) {
 		// Start Veins "Thor Volcano Base" Quest Addition
 		if (rachel_camel == 25) {
-			// Start Nameless Island Access Quest Addition // Traduction par No Healing
+			// Start Nameless Island Access Quest Addition
 			if (aru_monas == 11) {
 				cutin "ra_gman",2;
 				mes "[Grand Prêtre Zhed]";
@@ -5510,232 +4910,99 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 			else if (aru_vol == 0) {
 				cutin "ra_gman",2;
 				mes "[Grand Prêtre Zhed]";
-				mes "Ah, it does my heart to";
-				mes "good to see you again.";
-				mes "Adventurers willing to work";
-				mes "so hard for the sake of world";
-				mes "peace like yourself are fairly";
-				mes "uncommon. I hope you know that.";
+				mes "Ah, ça me fait chaud au coeur de voir un aventurier tel que vous à nouveau. Peu de gens sont prêts à travailler si dur pour la paix dans le monde. Je suis certain que vous le savez.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "Huh...?";
-				mes "Please don't flatter";
-				mes "me like that! Saying";
-				mes "it like that is kind of";
-				mes "overdoing it, isn't it?";
+				mes "Huh...? Ne me flattez pas de la sorte s'il vous plaît. C'est en faire un peu trop, non?";
 				emotion 54,1;
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Not at all. In fact, I'm";
-				mes "sure that a place in";
-				mes "Valhalla has already";
-				mes "been secured for you";
-				mes "by the Valkyries. Now, how";
-				mes "may I help you, my friend?";
+				mes "Pas du tout. En fait je pense que les Valkyries vous ont déjà gardé une place au Valhalla. Mais en quoi puis-je vous aider, cher ami?";
 				next;
-				select("Mysterious Building in the Volcano:");
+				select("A propos du bâtiment étrange dans le volcan:");
 				mes "["+strcharinfo(0)+"]";
-				mes "Actually, I was wondering";
-				mes "if you knew of anything about";
-				mes "this facility inside Thor";
-				mes "Volcano near Veins. There";
-				mes "might be something big";
-				mes "going on over there.";
+				mes "En fait je me demandais si vous saviez quelque chose à propos de ce bâtiment dans le Volcan de Thor près de Veins. J'ai l'impression que quelque chose d'importance s'y prépare";
 				next;
-				mes "^3131FFYou told High Priest";
-				mes "Zhed about the shackled";
-				mes "child in Thor Volcano, and";
-				mes "how you found the building";
-				mes "hidden there. High Priest Zhed";
-				mes "seemed disturbed by your words.^000000";
+				mes "^3131FFVous parlez à Zhed du garçon enchaîné dans le Volcan et de comment vous avez trouvé l'édifice caché là-bas. Vos paroles semblent troubler le Grand Prêtre Zhed.^000000";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "I see. I have my suspicions";
-				mes "about what is happening. Now,";
-				mes "you're aware that Arunafeltz";
-				mes "is governed by our church,";
-				mes "and that our entire nation";
-				mes "worships the goddess Freya.";
+				mes "Je vois. J'ai ma petite idée à propos de ce qui s'y passe. Mais vous savez déjà que notre nation est gouvernée par le Temple et vénère la déesse Freya.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "The priests that lead this";
-				mes "nation are split into two main";
-				mes "factions: I am considered part";
-				mes "of the moderate faction, which";
-				mes "usually butts heads with the";
-				mes "jingoistic hard-liner faction.";
+				mes "Les prêtres à la tête de cette nation sont divisés en deux branches: les modérés, auxquels je me rattache, et les radicaux, qui sont beaucoup plus nationalistes, et avec lesquels nous entrons souvent en conflit.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "These hard-liner priests";
-				mes "are more than willing to use";
-				mes "violent methods if they believe";
-				mes "it to be the will of Freya, and";
-				mes "are the ones that established";
-				mes "the military camp  at Thor Volcano.";
+				mes "Les radicaux sont souvent enclins à utiliser des méthodes violentes lorsqu'ils pensent que ça peut servir la déesse. Je pense que ce sont eux qui ont bâti le camp militaire dans le Volcan de Thor.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Of course, it's also";
-				mes "considered a geology camp";
-				mes "since they're always monitoring";
-				mes "that place for volcanic activity,";
-				mes "but for all intents and purposes,";
-				mes "they are training men to fight.";
+				mes "Ils font passer ça pour un observatoire de géologie, et c'est vrai qu'ils monitorent en permanence l'activité volcanique, mais ils entrainent aussi en secret des hommes au combat.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "It scares me to think";
-				mes "about it, but I'm sure that";
-				mes "they have many military supplies";
-				mes "and machines of mass destruction";
-				mes "hidden over there in the camp.";
+				mes "La simple idée qu'ils aient des armes de destruction massive cachées dans le camp me fait trembler mais je suis certain que c'est le cas.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "Wait, what exactly do";
-				mes "they hope to accomplish";
-				mes "by fighting? How do they";
-				mes "intend to help the goddess";
-				mes "Freya by using violence?";
+				mes "Mais que pensent-ils pouvoir accomplir par la force? Pensent-ils que la force brute puisse servir la déesse Freya?";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "All the priests agree that";
-				mes "reassembling Ymir's Heart will";
-				mes "revive Freya. As you know, the";
-				mes "pieces are scattered all over";
-				mes "the world. Some are possessed";
-				mes "by the Rune-Midgarts Kingdom.";
+				mes "Tous les prêtres s'accordent à dire que celui qui rassemblera tous les morceaux du Coeur d'Ymir pourra faire revivre la déesse. Comme vous le savez, les pièces sont dispersées dans le monde, et certaines sont en possession du Royaume de Rune-Midgard.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "In the interest of avoiding";
-				mes "conflict, the moderate faction";
-				mes "of priests decided to hire";
-				mes "scientists to reproduce Ymir's";
-				mes "Heart, resulting in an";
-				mes "imitation of that artifact.";
+				mes "Afin de mettre un terme aux conflits, la branche modérée a décidé de louer les services de scientifiques pour cloner le Coeur d'Ymir et faire une copie de l'artefact.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "An imitation of Ymir's";
-				mes "Heart? I think I know of";
-				mes "a famous scientist from the";
-				mes "Schwartzvalt Republic that";
-				mes "was working on that! Let's";
-				mes "see, his name was...";
+				mes "Un clone du Coeur d'Ymir? Je crois que je connais un célèbre scientifique de la République de Schwaltzvalt qui travaillait là-dessus. Il s'appelait...";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "Isn't the scientist's name...";
+				mes "Il s'agissait de...";
 				input .@input$;
 				mes "^3131FF"+.@input$+"^000000?";
 				next;
 				if (.@input$ == "Varmunt") {
 					mes "[Grand Prêtre Zhed]";
-					mes "Oh, you've heard of him?";
-					mes "Yes, his name was Varmunt.";
-					mes "Unfortunately, he deliberately";
-					mes "destroyed the Imitation of";
-					mes "Ymir's Heart into pieces,";
-					mes "and then disappeared.";
+					mes "Oh, vous avez entendu parler de lui? Oui, il s'agissait bien de Varmunt. Malheureusement, il a volontairement détruit le Coeur d'Ymir qu'il avait créé et disparut.";
 					next;
 				}
 				else {
 					mes "[Grand Prêtre Zhed]";
 					mes ""+.@input$+"?";
-					mes "No, that wasn't him.";
-					mes "The man that created the";
-					mes "imitation of Ymir's Heart";
-					mes "was named Varmunt.";
-					mes "He was truly a genius.";
+					mes "Non, ce n'était pas lui. Il s'appelait Varmunt. C'était un véritable génie.";
 					next;
 				}
 				mes "[Grand Prêtre Zhed]";
-				mes "I'm not sure what happened";
-				mes "to Varmunt. All I know was that";
-				mes "something serious happened";
-				mes "in the Schwaltzvalt Republic,";
-				mes "and that he disappeared in";
-				mes "the fiasco. It's strange...";
+				mes "Je ne sais pas vraiment ce qui est arrivé à Varmunt. Ce sais simplement que quelque chose de grave est arrivé dans la République de Schwaltzvalt, et qu'il a disparu après le désastre...";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Although the working";
-				mes "Ymir's Heart imitation that";
-				mes "Varmunt had created was broken";
-				mes "into pieces, other scientists";
-				mes "managed to mostly reproduce";
-				mes "his work with unstable Ymir Hearts.";
+				mes "Même si les travaux de Varmunt ont été détruits, certains de nos scientifiques travaillent sur un nouveau clone à partir de morceaux instables.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Since our moderate faction,";
-				mes "was only able to provide";
-				mes "unstable Ymir Heart imitations,";
-				mes "the hard-liner faction quickly";
-				mes "gained more respectability than";
-				mes "us in the eyes of the people.";
+				mes "Mais comme nous n'avons pas eu de résultats concluants, la frange dure a gagné plus d'influence que nous auprès du peuple.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Despite our advanced weaponry";
-				mes "and armor, I'm afraid that our";
-				mes "country of Arunafeltz is not as";
-				mes "civilized and peaceful as I'd";
-				mes "like it to be, and the hard-liners";
-				mes "control our government now.";
+				mes "J'ai bien peur que notre pays ne soit pas aussi civilisé et pacifiste que je le voudrais. La frange dure contrôle désormais notre gouvernement.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Although the hard-liners";
-				mes "allowed us to continue";
-				mes "our research in faithfully";
-				mes "reproducing Ymir's Heart,";
-				mes "they've been developing their";
-				mes "military might unopposed.";
+				mes "Même si les radicaux nous ont permis de poursuivre les recherches, ils ont continué à développer leur forcer militaire sans opposition.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "So basically, the moderates";
-				mes "are trying to recreate Ymir's";
-				mes "Heart at research centers";
-				mes "in the Holy Ground and the";
-				mes "Schwaltzvalt Republic.";
+				mes "Les modérés tentent aujourd'hui de cloner le Coeur d'Ymir dans le Sanctuaire et dans la République de Schwaltzvalt.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "The hard-liners are";
-				mes "training soldiers and";
-				mes "storing up military supplies";
-				mes "and weapons in their camp";
-				mes "in Thor Volcano. However,";
-				mes "I don't know any more details.";
+				mes "Les radicaux entrainent des soldats et accumulent des armes dans le Volcan de Thor. Cependant, je n'en sais pas plus.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "This doesn't look good.";
-				mes "I mean, if they're gearing";
-				mes "up to take the Ymir Heart";
-				mes "Pieces by force, it'll be war";
-				mes "against the Schwalzvalt Republic";
-				mes "and the Rune-Midgarts Kingdom!";
+				mes "Toute cette histoire a l'air bien dangereuse... Je veux dire, si ils s'arment pour récupérer les différents morceaux du Coeur d'Ymir, ils vont entrer en guerre avec la République de Schwaltzvalt et le Royaume de Rune-Midgard!";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Seeing as I'm part of the";
-				mes "moderate faction, as well as";
-				mes "recently demoted, I just don't";
-				mes "have access to much information";
-				mes "about the hard-liners. However,";
-				mes "there may still be hope yet...";
+				mes "Puisque je fais partie de la frange modérée et que je viens de perdre ma chaire, je n'ai pas beaucoup d'informations sur les radicaux. Mais il reste eut-être de l'espoir...";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "War would be bad for all";
-				mes "parties involved. That is";
-				mes "why I'd like to ask you to";
-				mes "sneak into the camp at";
-				mes "Thor Volcano for the sake of";
-				mes "protecting international peace.";
+				mes "La guerre serait une tragédie pour tous les pays impliqués. C'est pourquoi je voudrais que vous vous infiltriez dans la Volcan de Thor et que vous observiez ce qui s'y passe, afin de préserver la paix.";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "I really want to know";
-				mes "more about what they're";
-				mes "planning to do, but that";
-				mes "place is heavily guarded!";
-				mes "How am I going to sneak in?";
+				mes "Je voudrais vraiment en apprendre plus, mais ce lieu est sous haute surveillance, vous savez? Comment vais-je pouvoir entrer?";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "You're right.";
-				mes "We'll have to think";
-				mes "of a really good way";
-				mes "for you to infiltrate";
-				mes "that place. Hmmmm...";
+				mes "Vous avez raison. Il faudra que nous pensiez à un moyen de vous faire entrer. Hummm...";
 				set aru_vol,1;
 				close2;
 				cutin "ra_gman",255;
@@ -5743,87 +5010,41 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 			}
 			else if ((aru_vol > 0) && (aru_vol < 5)) {
 				mes "[Grand Prêtre Zhed]";
-				mes "Hmm...";
+				mes "Hum...";
 				next;
-				switch(select("How to Sneak into the Camp :The Moderates:The Hard-Liners")) {
+				switch(select("Comment entrer dans le camp du Volcan?:A propos des modérés.:A propos des radicaux.")) {
 				case 1:
 					mes "[Grand Prêtre Zhed]";
-					mes "I still don't have any";
-					mes "ideas for sneaking into";
-					mes "the camp at Thor Volcano.";
-					mes "Give me a little more time,";
-					mes "and hopefully we can figure";
-					mes "something out together.";
+					mes "Je sais toujours pas comment vous faire entrer. Laissez-moi y réfléchir, je vais bien trouver quelque chose.";
 					break;
 				case 2:
 					mes "[Grand Prêtre Zhed]";
-					mes "We priests of the moderate";
-					mes "faction are opposed to war,";
-					mes "so we've been trying to";
-					mes "develop imitations of Ymir's";
-					mes "Heart for a long time. We've";
-					mes "yet to succeed, unfortunately.";
+					mes "Les prêtres modérés s'opposent à la guerre, et tentent de cloner le Coeur d'Ymir. Malheureusement, nous sommes loin d'avoir réussi.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "The hard-liners actually";
-					mes "opposed our efforts, but";
-					mes "they've let us continue since";
-					mes "they think they can eventually";
-					mes "use imitation Ymir Hearts for";
-					mes "military purposes.";
+					mes "Les radicaux sont en complet désaccord, mais ils nous laissent poursuivre nos recherches car ils pensent pouvoir utiliser le Coeur d'Ymir à des fins militaires.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "The Ymir Heart reproduction";
-					mes "project has been frustrating";
-					mes "the best minds in the world,";
-					mes "and some scientists have even";
-					mes "resorted to using forbidden";
-					mes "methods. It's a shame, really.";
+					mes "La question du clonage du Coeur d'Ymir est un problème qui se pose à tous les scientifiques. Certains en sont même venus à utiliser des techniques interdites pour arriver à leurs fins. C'est une honte.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Varmunt actually succeeded";
-					mes "in recreating Ymir's Heart,";
-					mes "but then he destroyed it and";
-					mes "he disappeared. He did it to";
-					mes "prevent war, but we could";
-					mes "really use his help now.";
+					mes "Varmunt a réussi à reproduire le Coeur d'Ymir, mais il l'a détruit et disparut juste après. Il l'a fait pour empêcher la guerre. Nous aurions maintenant grand besoin de ses compétences.";
 					break;
 				case 3:
 					mes "[Grand Prêtre Zhed]";
-					mes "The hard-liners are especially";
-					mes "fanatical in their devotion to";
-					mes "Freya, and will use any means";
-					mes "to further what they interpret";
-					mes "as her will. They're willing to";
-					mes "go to war for their beliefs.";
+					mes "Les radicaux sont des fanatiques dans leurs pratiques religieuses, et ils utiliseront n'importe quel moyen pour accomplir ce qu'ils pensent être la volonté de Freya. Ils sont prêts à partir en guerre pour leurs croyances.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "The fact that they've even";
-					mes "built a military camp in Thor";
-					mes "Volcano disturbs me greatly.";
-					mes "It's almost certain that they";
-					mes "intend to wage war against any";
-					mes "nation with a Ymir's Heart piece.";
+					mes "Le fait qu'ils aient même construit un camp dans le Volcan m'inquiète au plus au point. Il est presque certain maintenant qu'ils sont prêts à déclarer la guerre à toutes les nations possédant un morceau du Coeur d'Ymir.";
 					next;
 					mes "["+strcharinfo(0)+"]";
-					mes "Who is in charge of that";
-					mes "camp at Thor's Volcano?";
+					mes "Qui est responsable du camp?";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "High Priest Vildt.";
-					mes "He's in charge of all";
-					mes "important buildings in";
-					mes "Arunafeltz. His room is at";
-					mes "the other side of the building,";
-					mes "but it's always heavily guarded.";
+					mes "Le Grand Prêtre Vildt. C'est le régisseur de tous les édifices publics d'Arunafeltz. Il a un bureau de l'autre côté du bâtiment, mais il est gardé en permanence.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Vildt is one of the";
-					mes "highest ranking members";
-					mes "of the hard-liner priest";
-					mes "faction. He rarely makes it";
-					mes "his business to see anybody";
-					mes "that he sees as beneath him.";
+					mes "Vildt est l'un des membres de plus haut rang de la frange dure. Il ne rencontre que très rarement des personnes de rang moindre.";
 					break;
 				}
 				close2;
@@ -5834,14 +5055,10 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 				cutin "ra_gman",2;
 				if (countitem(7342) > 0) {
 					mes "["+strcharinfo(0)+"]";
-					mes "Would you please";
-					mes "take a look at this";
-					mes "file, High Priest Zhed?";
+					mes "Voudriez-vous regarder ce document, Grand Prêtre Zhed?";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Of course.";
-					mes "Let's see, what's";
-					mes "in this File Folder?";
+					mes "Bien sûr, laissez-moi voir ça.";
 					next;
 					mes "[Grand Prêtre Zhed]";
 					mes ".............";
@@ -5849,83 +5066,42 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 					mes "....................!";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "This is a geological";
-					mes "report about Thor Volcano?";
-					mes "Ah, I see. They must have";
-					mes "someone regularly check";
-					mes "to see if it will erupt.";
+					mes "Il s'agit d'un compte-rendu géologique à propos du Volcan de Thor? Ah, je vois. Il doivent avoir quelqu'un surveillant en permanence les éruptions.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Although it's fairly dangerous";
-					mes "to build a military camp there,";
-					mes "some weapon materials can";
-					mes "only be forged from the heat";
-					mes "coming from Thor's Volcano.";
+					mes "Même si construire un camp militaire là-bas était très dangereux, il existe certaines armes ne pouvant être forgées que dans le coeur du volcan.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Yes, I think it's also";
-					mes "likely that there are special";
-					mes "weapon crafting metals and";
-					mes "materials that can only be";
-					mes "found on the volcano. That";
-					mes "makes perfect sense.";
+					mes "Oui, je pense qu'on y trouve des minerais et des matériaux uniques pour la fabrication des armes. Ca parait logique.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Although the volcano is";
-					mes "dormant now, these reports";
-					mes "claim that the volcano is";
-					mes "either safe or ready to erupt";
-					mes "at any time. The data here";
-					mes "doesn't make any sense.";
+					mes "Même si le volcan est endormi, ces compte-rendus montrent qu'il peut entrer en éruption à tout moment. Mais les données sont contradictoires: ici on montre qu'il est presque éteint, et à tel autre endroit qu'il est prêt à entrer en éruption.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Hm. This is just a hunch,";
-					mes "but seeing these discrepancies";
-					mes "in his reports, I really think this geologist has an agenda against";
-					mes "the camp at Thor Volcano.";
+					mes "Hum. Ce n'est qu'une intuition mais à voir les divergences dans ce rapport, je pense que le géologue est contre l'installation du camp dans le volcan.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "You know, if that's true,";
-					mes "he might be able to help";
-					mes "you sneak into the camp.";
-					mes "Don't you think it's worth";
-					mes "checking out for now?";
+					mes "Si j'ai raison, il pourrait peut-être vous aider à entrer dans le camp. Je pense que ça vaut la peine d'essayer...";
 					next;
-					if (select("Yes:No") == 2) {
+					if (select("Je suis d'accord.:Je ne pense pas.") == 2) {
 						mes "[Grand Prêtre Zhed]";
-						mes "Well, you never know";
-						mes "until you ask. Besides,";
-						mes "I don't know if there's";
-						mes "any other way to sneak";
-						mes "into the Thor Volcano Camp...";
+						mes "Eh bien, vous ne pouvez jamais être certain avant d'avoir essayé. De plus, je ne pense pas qu'il y ait d'autres moyens d'entrer dans le camp...";
 						next;
 					}
 					mes "[Grand Prêtre Zhed]";
-					mes "I hope you'll go and talk";
-					mes "to the geologist. He should";
-					mes "be in Veins, the desert city";
-					mes "south of Rachel. He's your";
-					mes "best chance of entering the Thor";
-					mes "Volcano camp without suspicion.";
+					mes "J'espère que vous irez parler au géologue. Il devrait se trouver à Veins, la ville du désert au sud de Rachel. C'est l'opportunité pour vous de pouvoir entrer dans le camp du Volcan de Thor sans éveiller les soupçons.";
 					delitem 7342,1; //File01
 					set aru_vol,6;
 				}
 				else {
 					mes "["+strcharinfo(0)+"]";
-					mes "Huh...?";
-					mes "Where did I put";
-					mes "that File Folder?";
+					mes "Huh...? Où est-ce que j'ai bien pu mettre ces documents?";
 				}
 			}
 			else if (aru_vol == 6) {
 				cutin "ra_gman",2;
 				mes "[Grand Prêtre Zhed]";
-				mes "I hope you'll go and talk";
-				mes "to the geologist. He should";
-				mes "be in Veins, the desert city";
-				mes "south of Rachel. He's your";
-				mes "best chance of entering the Thor";
-				mes "Volcano camp without suspicion.";
+				mes "J'espère que vous irez parler au géologue. Il devrait se trouver à Veins, la ville du désert au sud de Rachel. C'est l'opportunité pour vous de pouvoir entrer dans le camp du Volcan de Thor sans éveiller les soupçons.";
 				close2;
 				cutin "ra_gman",255;
 				end;
@@ -5933,12 +5109,7 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 			else if ((aru_vol > 6) && (aru_vol < 26)) {
 				cutin "ra_gman",2;
 				mes "[Grand Prêtre Zhed]";
-				mes "I hope you'll go and talk";
-				mes "to the geologist. He should";
-				mes "be in Veins, the desert city";
-				mes "south of Rachel. He's your";
-				mes "best chance of entering the Thor";
-				mes "Volcano camp without suspicion.";
+				mes "J'espère que vous irez parler au géologue. Il devrait se trouver à Veins, la ville du désert au sud de Rachel. C'est l'opportunité pour vous de pouvoir entrer dans le camp du Volcan de Thor sans éveiller les soupçons.";
 				close2;
 				cutin "ra_gman",255;
 				end;
@@ -5946,42 +5117,19 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 			else if (aru_vol == 26) {
 				cutin "ra_gman",2;
 				mes "[Grand Prêtre Zhed]";
-				mes "Oh! You're back!";
-				mes "Was that geologist able";
-				mes "to help you sneak into";
-				mes "the Thor Volcano camp?";
+				mes "Oh! Vous êtes de retour! Est-ce que le géologue a pu vous faire entrer dans le camp du Volcan de Thor?";
 				next;
 				mes "["+strcharinfo(0)+"]";
-				mes "More than that. We've";
-				mes "convinced the camp that the";
-				mes "volcano is going to explode,";
-				mes "so they're scrambling to";
-				mes "evacuate. They're really";
-				mes "panicking over there!";
+				mes "Oui, et même plus! Nous avons réussi à les convaincre que le volcan allait entrer en irruption d'un moment à l'autre, et ils sont en ce moment en train de paniquer et d'évacuer la base!";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Hahaha! That's great!";
-				mes "Even if they do figure";
-				mes "out that they've been";
-				mes "fooled, it will take them";
-				mes "some time to realize it";
-				mes "in all that confusion.";
+				mes "Hahaha! Fantastique! Même si ils se rendent compte qu'ils ont été bernés, ça leur prendra du temps dans toute cette confusion.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Yes, it might not be the";
-				mes "perfect time to bring down";
-				mes "the hard-liner faction right";
-				mes "now, but the opportunity";
-				mes "should present itself soon.";
-				mes "Thank you for all your help.";
+				mes "Oui, même si ce n'est peut-être pas encore l'heure de réduire à néant l'influence des radicaux, cette opportunité devrait bientôt se présenter. Merci pour votre aide.";
 				next;
 				mes "[Grand Prêtre Zhed]";
-				mes "Please relax for a while,";
-				mes "and I'll take care of the rest.";
-				mes "When the time to strike comes,";
-				mes "I will be contacting you again.";
-				mes "Together, we can protect";
-				mes "peace between our nations.";
+				mes "Prenez un peu de repos: je m'occupe du reste. Je vous recontacterai. Ensemble, nous pourrons préserver la paix entre les nations.";
 				set aru_vol,27;
 				getexp 200000,0;
 				close2;
@@ -5992,272 +5140,131 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 				// Start Peace to Arunafeltz addition
 				if (aru_em < 7) {
 					mes "[Grand Prêtre Zhed]";
-					mes "I'll be sure to contact";
-					mes "you again for your help";
-					mes "when the time is right.";
-					mes "I'm sure there are others";
-					mes "that may need you now...";
+					mes "Je vous recontacterai quand le temps sera venu. J'imagine que d'autres ont besoin de votre aide...";
 				}
 				else if (aru_em == 8){
 					cutin "ra_gman",2;
-					mes "["+strcharinfo(0)+"]";
-					mes "Welcome, adventurer.";
-					mes "I'm glad to see that you're";
-					mes "here. I think... I think an";
-					mes "opportunity has arisen in";
-					mes "which I could use your";
-					mes "expert assistance.";
+					mes "[Grand Prêtre Zhed]";
+					mes "Bienvenue, aventurier. Je suis content de vous voir. Je pense que nous avons maintenant l'opportunité de mener à bien nos plans. J'aurai certainement besoin de votre aide.";
 					next;
 					cutin "ra_gman2",2;
 					mes "[Grand Prêtre Zhed]";
-					mes "Though, I fear that I may be";
-					mes "making the wrong decision.";
-					mes "After all, I no longer have";
-					mes "much influence among the";
-					mes "other priests... I can't help";
-					mes "but think I'm in the wrong.";
+					mes "Cependant, j'ai peur de prendre les mauvaises décisions. Je n'ai plus beaucoup d'influence auprès des autres prêtres... Je ne peux rien y faire, mais je ne peux m'empêcher de penser que je suis dans l'erreur.";
 					next;
 					mes "["+strcharinfo(0)+"]";
-					mes "Don't lose heart,";
-					mes "High Priest Zhed.";
-					mes "I... I believe in you!";
+					mes "Ne perdez pas espoir, Zhed. Moi, je crois en vous!";
 					next;
 					cutin "ra_gman",2;
 					mes "[Grand Prêtre Zhed]";
-					mes "I guess you're right.";
+					mes "J'imagine que vous avez raison.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "As you well know, the";
-					mes "highest authority in";
-					mes "Arunafeltz is our Pope,";
-					mes "the reincarnation of";
-					mes "our goddess Freya.";
+					mes "Comme vous le savez, le commandement suprême est entre les mains de la Papesse, la réincarnation de notre déesse Freya.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Unfortunately, she is too";
-					mes "young and innocent, and she";
-					mes "doesn't yet have the experience";
-					mes "to assert control, and stamp";
-					mes "out the in-fighting and";
-					mes "corruption among the priests.";
+					mes "Malheureusement, elle est trop jeune et innocente, et n'a pas l'expérience nécessaire pour s'affirmer et mettre un terme aux querelles intestines et à la corruption parmi les prêtres.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "In these desperate times,";
-					mes "we will need someone to";
-					mes "provide strong and confident";
-					mes "leadership to the people";
-					mes "of Arunafeltz before all";
-					mes "is lost to war and violence.";
+					mes "En ces temps de désespoir, nous avons besoin de quelqu'un de fort à notre tête, avant que la violence et la guerre n'ait ravagé notre nation.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "^333333*Sigh...*^000000";
-					mes "I know it may not be";
-					mes "right, but someone";
-					mes "must do something";
-					mes "before the other High";
-					mes "Priests ruin our nation.";
+					mes "^333333*Soupire...*^000000";
+					mes "Je sais... Peut-être n'est-ce pas juste, mais quelqu'un doit faire quelque chose avant que les autres prêtres ne ruinent notre nation.";
 					next;
 					Emotion e_omg,1;
 					mes "["+strcharinfo(0)+"]";
-					mes "Y-you're not thinking";
-					mes "of overthrowing the";
-					mes "pope are you? I-isn't";
-					mes "that a bit extreme?";
+					mes "Vous ne pensez pas à prendre la place de la Papesse quand même? Ne serait-ce pas trop... extrême?";
 					next;
 					cutin "ra_gman2",2;
 					Emotion e_swt;
 					mes "[Grand Prêtre Zhed]";
-					mes "What? No, no!";
-					mes "Don't jump to conclusions";
-					mes "like that! Don't misunderstand";
-					mes "me: I'm loyal to our pope.";
+					mes "Comment? Non, grands dieux! Ne tirez pas de conclusions trop hâtives! N'ayez aucune inquiétude: je suis loyal envers notre Papesse.";
 					next;
 					cutin "ra_gman",2;
 					mes "[Grand Prêtre Zhed]";
-					mes "I actually want to work";
-					mes "very closely with the pope,";
-					mes "in essense, rule together with";
-					mes "her by combining my experience";
-					mes "and her wisdom. It's ambitious,";
-					mes "but what else can I do?";
+					mes "En fait, je voudrais travailler aux côtés de la Papesse, afin de lui faire profiter de mon expérience et de m'appuyer sur sa sagesse. C'est ambitieux, mais pourrais-je faire d'autre?";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "You remember how you";
-					mes "stopped the hard-liner";
-					mes "priests from carrying out";
-					mes "their plans for war in the";
-					mes "Thor Volcano camp? That will";
-					mes "only stop them temporarily.";
+					mes "Vous savez... Vous avez peut-être réussi à mettre des bâtons dans les roues des radicaux par rapport à leur camp dans le Volcan de Thor, mais ça ne va les arrêter que temporairement.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "They'll eventually prepare";
-					mes "to act out in violence again.";
-					mes "We need a permanent solution";
-					mes "to ensure that this sort of";
-					mes "thing doesn't happen again.";
+					mes "Ils se remettront surement à préparer la guerre. Nous devons trouver une solution définitive à ce problème.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "We need to convince the";
-					mes "pope to finally act, and";
-					mes "give my policy of peace";
-					mes "her full support. Will";
-					mes "you help me to do this?";
+					mes "Nous devons convaincre la Papesse d'agir, et d'apporter son soutien à mon plan de paix. M'aiderez-vous dans cette tâche?";
 					next;
-					if (select("Yes:No") == 2) {
-						mes "Well... Asking for the";
-						mes "pope's support is the only";
-						mes "solution I've been able to";
-						mes "find. Do you have any ideas";
-						mes "for protecting peace here";
-						mes "in Arunafeltz?";
+					if (select("Oui:Non") == 2) {
+						mes "Je n'ai pas trouvé d'autre solution que de demander à la Papesse son soutien. Avez-vous d'autres idées pour préserver la paix dans Arunafeltz?";
 						next;
 						input .@input$;
 						mes "["+strcharinfo(0)+"]";
 						mes ""+.@input$+"?";
 						next;
 						mes "[Grand Prêtre Zhed]";
-						mes "Well, I don't know.";
-						mes "It's a good idea, but";
-						mes "I fear that it will only";
-						mes "be effective in the short";
-						mes "term. Why don't we just";
-						mes "try what I've proposed first?";
+						mes "Je ne sais pas... C'est une bonne idée mais j'ai peur que ça ne change rien au long terme. Pourquoi n'essaterions-nous pas d'abord mon idée?";
 						next;
 					}
 					mes "[Grand Prêtre Zhed]";
-					mes "Hmm, now how can";
-					mes "we convince the pope to";
-					mes "support us? Even as Freya's";
-					mes "reincarnation... She's just";
-					mes "a young girl. She probably";
-					mes "knows nothing of politics.";
+					mes "Hum, mais comment pourrions-nous convaincre la Papesse de nous apporter son soutien? Même si il s'agit de la réincarnation de Freya... Ce n'est qu'une petite fille. Elle ne connait probablement rien à la politique.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "It'd probably be best to";
-					mes "tell her exactly what is";
-					mes "happening. The full truth.";
-					mes "In my heart, I know that";
-					mes "would be best.";
+					mes "Je ferais probablement mieux de lui parler de ce qui s'est passé et de tout lui raconter.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "But... Maybe it would";
-					mes "be better if we sugar";
-					mes "coated it a little bit.";
-					mes "She might not be too";
-					mes "receptive to us if we";
-					mes "totally shock her.";
+					mes "Mais... Peut-être serait-il mieux de la protéger un peu. Elle pourrait ne pas nous écouter si nous la choquions.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Hmm... What do you";
-					mes "think? Should we stick";
-					mes "with the truth, or do you";
-					mes "think it'd be better if we";
-					mes "exaggerate and... lie when";
-					mes "we feel it's necessary?";
+					mes "Hum... Qu'en dites-vous? Devrions-nous lui dire toute la vérité ou devrions-nous mentir lorsque nous sentons que c'est nécessaire?";
 					next;
-					switch(select("Truth:Lies")) {
+					switch(select("Sire la vérité:Mentir")) {
 					case 1:
 						mes "[Grand Prêtre Zhed]";
-						mes "That's what I think too.";
-						mes "Although I'm worried about";
-						mes "how the pope will react at";
-						mes "our message, I should have";
-						mes "faith. I should have faith.";
+						mes "C'est ce que je pensais. Même si je suis un peu inquiet à propos de la réaction de la papesse, je garde la foi.";
 						next;
 						break;
 					case 2:
 						mes "[Grand Prêtre Zhed]";
-						mes "I suppose that you may";
-						mes "have a point. It might not";
-						mes "be a good idea to totally";
-						mes "expose her to the ugly";
-						mes "truth. I'll try to be as";
-						mes "honest as I can...";
+						mes "Vous avez peut-être raison. Peut-être ne devrions-nous pas lui exposer la vérité dans toute son atrocité. J'essayerai d'être aussi honnête que possible...";
 						next;
 						break;
 					}
 					mes "[Grand Prêtre Zhed]";
-					mes "Well, there's no time";
-					mes "to waste. The two of us may";
-					mes "not be enough to convince";
-					mes "the pope to act for peace.";
-					mes "I already have someone in";
-					mes "mind that might help us.";
+					mes "Il n'y a pas de temps à perdre. Nous ne serons pas trop de deux pour convaincre la Papesse d'oeuvrer dans le sens de la paix. Je connais quelqu'un d'autre qui pourrait nous aider d'ailleurs...";
 					next;
 					Emotion 52,1;
 					mes "["+strcharinfo(0)+"]";
-					mes "That sounds good.";
-					mes "Who is he?";
+					mes "De qui s'agit-il?";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "My old friend, High Priest";
-					mes "Niren. I'm not sure if she'll";
-					mes "help me after all that's";
-					mes "happened between us. She";
-					mes "may even think I deserve";
-					mes "to be excommunicated...";
+					mes "Mon amie de longue date, la Grande Prêtresse Niren. Je ne suis pas certain qu'elle nous aidera après ce qui s'est passé entre nous. Elle pense même peut-être que je devrais être excommunié...";
 					next;
 					Emotion e_no1,1;
 					mes "["+strcharinfo(0)+"]";
-					mes "Come on, it wouldn't";
-					mes "hurt to try! Besides,";
-					mes "Niren isn't a bad person.";
-					mes "Maybe she'll understand";
-					mes "the way you see things";
-					mes "if you explain them?";
+					mes "Ca ne coûte rien d'essayer! De plus, Niren n'a pas un mauvais fond. Peut-être comprendra-t-elle si vous lui expliquez?";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "You're right, of course.";
-					mes "I'm just grasping at straws";
-					mes "here, but she and I both used";
-					mes "to believe that peace was";
-					mes "possible. I don't know why";
-					mes "she joined the hard-liners...";
+					mes "Vous avez raison. Je me raccroche au passé, mais nous pensions tous deux autrefois que la paix était possible. Je ne sais pas pourquoi elle a rejoint les radicaux...";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes ""+strcharinfo(0)+"...";
-					mes "Would you please talk to";
-					mes "her, and just see how she's";
-					mes "doing? It might not be a good";
-					mes "time to mention our plan";
-					mes "right away, though...";
+					mes ""+strcharinfo(0)+"... Voudriez-vous bien aller lui parler et voir ce qu'elle en pense? Cependant, ce n'est peut-être pas le bon moment pour lui parler de son plan...";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "If you think that you";
-					mes "have a chance of convincing";
-					mes "her, then feel free and offer";
-					mes "my proposal. Her office is";
-					mes "located across from here,";
-					mes "but she's always very busy...";
+					mes "Si vous pensez que vous avez une chance de la convaincre, alors parlez-lui de ma proposition. Son bureau se trouve de l'autre côté du bâtiment, mais elle semble toujours être très occupée...";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "There's actually";
-					mes "a good chance that";
-					mes "she is away somewhere";
-					mes "on business. She is highly";
-					mes "loved by the people, you know.";
+					mes "Il y a de fortes chances pour qu'elle soit partie quelque part en mission. Elle est vraiment appréciée par ele peuple, vous savez.";
 					set aru_em,9;
 				}
 				else if ((aru_em == 9) || (aru_em == 10)) {
 					mes "[Grand Prêtre Zhed]";
-					mes "Please speak to Niren,";
-					mes "and she if she'd be willing";
-					mes "to help us convince the pope";
-					mes "to enforce peace in our nation.";
+					mes "Parlez à Niren, s'il vous plaît, et voyez si elle est prête à nous aider à convaincre la Papesse d'agir en faveur de la paix.";
 				}
 				else if (aru_em == 11) {
 					cutin "ra_gman",2;
 					mes "[Grand Prêtre Zhed]";
-					mes "Welcome back.";
-					mes "So did you get a chance";
-					mes "to speak to Niren? How did";
-					mes "she respond to my proposal?";
+					mes "Alors, avez-vous pu parler à Niren? Comment a-t-elle pris ma proposition?";
 					next;
-					mes "^3355FFYou explain Niren's reasons";
-					mes "for her disappointment in";
-					mes "the Moderate priest faction,";
-					mes "and tell Zhed that she intends";
-					mes "to carry out the plans for war.";
+					mes "^3355FFVous parlez à Zhed des raisons pour lesquelles Niren a pris ses distances avec les modérés, et pourquoi elle veut en venir aux armes.^000000";
 					next;
 					mes "[Grand Prêtre Zhed]";
 					mes "....................";
@@ -6265,75 +5272,41 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 					mes "....................";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Hmm... This explains why";
-					mes "she and some other high";
-					mes "priests started being absent";
-					mes "from their offices. Many of";
-					mes "them were invited over to";
-					mes "the Schwaltzvalt Republic...";
+					mes "Hum... Alors c'est pour ça qu'elle, et d'autres prêtres, ont dû s'absenter pendant un certain temps: ils étaient en voyage officiel dans la République de Schwaltzvalt...";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Regardless, I know for";
-					mes "a fact that war is never";
-					mes "a solution. It only brings";
-					mes "death and destruction.";
+					mes "Néanmoins, je sais par expérience que la guerre n'est jamais une solution: elle n'apporte que mort et destruction.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Give me a moment.";
-					mes "I'm going to write";
-					mes "a letter that I want";
-					mes "you to give to Niren.";
+					mes "Laissez-moi un moment. Je vais écrire une lettre que je veux que vous apportiez à Niren.";
 					set aru_em,12;
 				}
 				else if(aru_em == 12) {
 					cutin "ra_gman",2;
 					mes "[Grand Prêtre Zhed]";
-					mes "Please bring this letter";
-					mes "to Niren. I hope what";
-					mes "I have to say will help";
-					mes "her understand how I feel";
-					mes "about these plans for war.";
+					mes "Apportez cette lettre à Niren, s'il vous plaît. J'espère que ça l'aidera à comprendre ce que je ressens à propos de ces préparatifs de guerre.";
 					next;
-					mes "^3355FFYou received a letter for";
-					mes "Niren from High Priest Zhed.^000000";
+					mes "^3355FFVous recevez une lettre du Grand prêtre Zhed.^000000";
 					set aru_em,13;
 				}
 				else if((aru_em == 13) || (aru_em == 14)) {
 					mes "[Grand Prêtre Zhed]";
-					mes "Please deliver my";
-					mes "letter to Niren as";
-					mes "soon as you can.";
-					mes "I really appreciate";
-					mes "you helping me on this.";
+					mes "Remettez ma lettre à Niren aussi rapidement que possible. J'apprécie vraiment votre aide.";
 				}
 				else if ((aru_em > 14) && (aru_em < 20)) {
 					mes "[Grand Prêtre Zhed]";
-					mes "Great news! Niren just";
-					mes "sent me a reply: I can't";
-					mes "believe that she's willing";
-					mes "to help me! Would you please";
-					mes "give her any help that she";
-					mes "may need from now on?";
+					mes "J'ai de grandes nouvelles! Niren vient de me faire parvenir sa réponse: je n'arrive pas à croire qu'elle soit prête à nous aider. Pourriez-vous désormais lui offrir tout l'aide dont elle pourrait avoir besoin?";
 				}
 				else if(aru_em == 20) {
 					cutin "ra_gman",2;
 					mes "[Grand Prêtre Zhed]";
-					mes "Ah, I've been";
-					mes "waiting for you.";
+					mes "Ah, j'attendais votre visite.";
 					next;
 					mes "["+strcharinfo(0)+"]";
-					mes "High Priest Zhed,";
-					mes "everything's ready!";
-					mes "High Priest Niren managed";
-					mes "to send away all of those";
-					mes "followers that were near the";
-					mes "pope. You won't be interrupted.";
+					mes "Grand prêtre Zhed, tout est prêt! La Grand prêtresse Niren a réussi à se débarrasser de tous les adeptes qui sont constamment aux côtés de la Papesse. Vous ne serez pas interrompus.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "I hope we can get the pope";
-					mes "to understand the situation";
-					mes "of our nation. I only...";
-					mes "Oh, Freya help us...";
+					mes "J'espère que nous pourrons faire comprendre la situation à la Papesse. Que Freya nous vienne en aide...";
 					next;
 					mes "[Grand Prêtre Zhed]";
 					mes "..............";
@@ -6341,118 +5314,68 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 					mes "..............";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Alright, I'm ready.";
-					mes "Let's receive an";
-					mes "audience with the";
-					mes "pope, shall we?";
+					mes "Bien, je suis prêt. Il est temps d'avoir un entretien avec la Papesse, n'est-ce pas?";
 					set aru_em,21;
 				}
 				else if(aru_em == 21) {
 					mes "[Grand Prêtre Zhed]";
-					mes "I'm a little nervous";
-					mes "about talking so brazenly";
-					mes "to the pope, but I'm";
-					mes "ready to go meet her.";
+					mes "Je suis un peu inquiet à l'idée de parler sans ambages à la Papesse, mais je suis prêt à la rencontrer.";
 				}
 				else if (aru_em == 22) {
 					mes "[Grand Prêtre Zhed]";
-					mes "I believe that Niren";
-					mes "has something important";
-					mes "to tell you. Why don't";
-					mes "you speak to her before";
-					mes "coming back to me?";
+					mes "Je crois que Niren a quelque chose d'important à vous dire. Pourquoi n'iriez-vous pas la voir avant de revenir ici?";
 				}
 				else if (aru_em == 23) {
 					cutin "ra_gman",2;
 					mes "[Grand Prêtre Zhed]";
-					mes "I'm glad that everything";
-					mes "turned out great. Your";
-					mes "help was truly a blessing.";
-					mes "Although Schwaltzvalt will";
-					mes "continue their plans without";
-					mes "us, we've slowed them down.";
+					mes "Je suis content que tout se soit bien passé. Votre aide a été salutaire. Même si Schwaltzvalt continuera de suivre ses plans sans nous, nous les avons retardés.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Yes, without our support,";
-					mes "Schwaltzvalt won't have";
-					mes "any excuse to continue";
-					mes "their dangerous research";
-					mes "for a little while, at least.";
+					mes "Sans notre appui, Schwaltzvalt n'aura plus aucun prétexte pour continuer leurs dangereuses expériences. Pour un temps, tout du moins.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "Thor Volcano Camp";
-					mes "should close down soon,";
-					mes "now that we no longer";
-					mes "have any use for it.";
+					mes "Le camp du Volcan de Thor devrait fermer sous peu. Il n'a plus aucune raison d'être maintenant.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "I also underestimated our";
-					mes "pope. She is more dignified,";
-					mes "willed that I believed.";
-					mes "I owe her my apologies.";
+					mes "J'ai aussi sous-estimé notre Papesse. Elle a plus de clairvoyance et de sagesse que je ne le pensais. Je lui dois mes excuses.";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "We won't give up on";
-					mes "reviving our goddess Freya,";
-					mes "but we will retrieve Ymir's";
-					mes "Heart through diplomacy";
-					mes "rather than violence.";
-					mes "It won't be easy...";
+					mes "Nous n'abandonnons pas l'idée de faire revivre la déesse Freya grâce au Coeur d'Ymir, mais nous obtiendrons ses fragments grâce à la diplomatie plutôt que par la violence, même si ça ne sera pas chose facile...";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "You've been instrumental";
-					mes "in returning peace here in";
-					mes "Arunafeltz. I've even been";
-					mes "reinstated, and will be very";
-					mes "busy from now on, working";
-					mes "closely with the pope...";
+					mes "Vous avez joué un rôle clé dans le retour de la paix à Arunafeltz. J'ai repris mes fonctions au Temple, et je vais désormais être très occupé, aux côtés de la Papesse...";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "I know that the life of";
-					mes "adventuring beckons you.";
-					mes "I know she'd like to see";
-					mes "you before you leave, but";
-					mes "she's sleeping deeply after";
-					mes "that exhausting speech...";
+					mes "Je sais que votre vie d'aventurier vous appelle. Cependant, la papesse aimerait vous revoir avant que vous ne partiez, mais si elle dort maintenant, après son discours épuisant...";
 					next;
 					mes "[Grand Prêtre Zhed]";
-					mes "On behalf of our pope";
-					mes "and all the citizens of";
-					mes "Arunafeltz, I'd like to";
-					mes "thank you for your heroism.";
-					mes "Your place in Valhalla is";
-					mes "already assured, I'm sure.";
+					mes "Au nom de notre Papesse et de tous les citoyens d'Arunafeltz, j'aimerais vous remercier pour votre héroïsme. Vous avez déjà une place réservée au Valhalla, croyez-moi.";
 					set aru_em,24;
 					getexp 1500000,0;
 				}
 				else {
 					mes "[Grand Prêtre Zhed]";
-					mes "May Freya bless you";
-					mes "on all your journeys,";
-					mes "my good friend.";
+					mes "Que Freya vous bénisse dans toutes vos aventures, mon ami.";
 				}
 				// End Peace to Arunafeltz addition
 			}
 			else {
 				cutin "ra_gman",2;
 				mes "[Grand Prêtre Zhed]";
-				mes "Ugh...!";
-				mes "I've got such";
-				mes "a horrible headache!";
+				mes "Ugh...! J'ai une telle migraine!";
 			}
 		}
 		else {
 			cutin "ra_gman",2;
 			mes "[Grand Prêtre Zhed]";
-			mes "I should rest for now.";
-			mes "Please travel in safety.";
+			mes "Je devrais me reposer maintenant. Soyez prudent lors de vos voyages.";
 		}
 	// End Veins "Thor Volcano Base" Quest Addition.
 	}
 	else {
 		cutin "ra_gman",2;
 		mes "[Grand Prêtre Zhed]";
-		mes "May Freya be with you.";
+		mes "Que Freya vous garde.";
 	}
 	close2;
 	cutin "",255;
@@ -6463,65 +5386,43 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 	cutin "ra_fano03",2;
 	if (ra_tem_q >= 12 || MISC_QUEST & 8192) {
 		cutin "ra_fano03",2;
-		mes "[Priestess Panno]";
-		mes "Good day.";
-		mes "Have you come to";
-		mes "redeem Lottery Tickets?";
+		mes "[Prêtresse Panno]";
+		mes "Bonjour. Etes-vous ici pour échanger vos Billets de Tombola?";
 		next;
-		if (select("Yes:No") == 1) goto L_Lottery;
+		if (select("Oui:Non") == 1) goto L_Lottery;
 		if (ra_tem_q == 12) {
 			cutin "ra_fano01",2;
-			mes "[Priestess Panno]";
-			mes "I already told you";
-			mes "everything I know.";
-			mes "Remember to keep";
-			mes "quiet about what I said.";
+			mes "[Prêtresse Panno]";
+			mes "Je vous ai déjà dit tout ce que je sais. Mais restez discret à ce sujet s'il vous plaît.";
 			goto L_End;
 		}
 	}
 	else if (ra_tem_q < 2) {
-		mes "[Priestess Panno]";
-		mes "Greetings.";
-		mes "May Freya fill";
-		mes "your days with joy.";
-		mes "Laughter. And prosperity.";
+		mes "[Prêtresse Panno]";
+		mes "Bonjour. Puisse Freya vous apporter joie et félicité.";
 		next;
-		switch(select("Redeem Lottery Tickets:Temple Information:Hey, what's happening?")) {
+		switch(select("Echanger ses Billets de Tombola:Informations sur le temple:Eh, comment ça va?")) {
 		case 1:
 			cutin "ra_fano03",2;
-			mes "[Priestess Panno]";
-			mes "Fine. You really";
-			mes "want to exchange your";
-			mes "Lottery Tickets? It's my job";
-			mes "to ask and make sure, you";
-			mes "know, in case you were saving";
-			mes "them for some weird reason.";
+			mes "[Prêtresse Panno]";
+			mes "Bien. Vous êtes bien sûr de vouloir échanger vos Billets de Tombola? Je dois vous demander au cas où vous voudriez les garder pour une raison quelconque.";
 			next;
-			if (select("Yes:No") == 1) goto L_Lottery;
+			if (select("Oui:Non") == 1) goto L_Lottery;
 			cutin "ra_fano03",2;
-			mes "[Priestess Panno]";
-			mes "You can redeem your";
-			mes "Lottery Tickets at any";
-			mes "time, so please visit";
-			mes "me at your leisure.";
-			mes "Go with Freya.";
+			mes "[Prêtresse Panno]";
+			mes "Vous pourrez échanger vos Billets quand vous voudrez, alors revenez me vois quand vous aurez le temps. Allez en paix.";
 			goto L_End;
 
 		case 2:
 			cutin "ra_fano01",2;
-			mes "[Priestess Panno]";
-			mes "The Chapel is located";
-			mes "over the wall behind me.";
-			mes "Our pope's office and chambers";
-			mes "are upstairs. You can only go";
-			mes "there if you have special";
-			mes "authorization.";
+			mes "[Prêtresse Panno]";
+			mes "La Chapelle est située dans la pièce suivante. Le bureau de la Papesse ainsi que ses appartements se trouvent à l'étage. Vous ne pourrez vous y rendre qu'avec une autorisation spéciale.";
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "......";
 			mes ".........";
 			next;
-			mes "[Priestess Panno]";
+			mes "[Prêtresse Panno]";
 			mes "............";
 			mes ".........";
 			mes "......";
@@ -6530,79 +5431,51 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "...?";
 			next;
 			cutin "ra_fano02",2;
-			mes "[Priestess Panno]";
-			mes "You come to a temple";
-			mes "to pray, not to look";
-			mes "around. Or chit-chat";
-			mes "with the priestesses";
-			mes "like me. Don't forget it.";
+			mes "[Prêtresse Panno]";
+			mes "Vous êtes ici au temple pour prier, et non pour fouiner ou discuter avec des prêtresses telles que moi, ne l'oubliez pas.";
 			next;
 			cutin "ra_fano03",2;
-			mes "[Priestess Panno]";
-			mes "The offices for the High";
-			mes "Priests are located on each";
-			mes "side of the hallway. However,";
-			mes "you can only enter if you've";
-			mes "been permitted beforehand.";
+			mes "[Prêtresse Panno]";
+			mes "Les bureaux des Grands Prêtres se trouvent à chaque extrémité du bâtiment. Cependant, vous ne pourrez y entrer qu'après y avoir été convié.";
 			goto L_End;
 
 		case 3:
-			mes "[Priestess Panno]";
+			mes "[Prêtresse Panno]";
 			mes "......................";
-			mes "No chit-chat";
-			mes "inside the temple.";
+			mes "Pas de bavardages dans l'enceinte du temple.";
 			goto L_End;
 		}
 	}
 	else if (ra_tem_q == 10) {
-		mes "[Priestess Panno]";
-		mes "Good day.";
+		mes "[Prêtresse Panno]";
+		mes "Bonjour.";
 		next;
 
-		switch(select("Redeem Lottery Tickets:Temple Information:Hey, did you open the gate?")) {
+		switch(select("Echanger ses Billets de Tombola:Informations sur le temple:Eh, vous avez ouvert les portes?")) {
 
 		case 1:
 			cutin "ra_fano01",2;
-			mes "[Priestess Panno]";
-			mes "You... still have";
-			mes "Lottery Tickets from";
-			mes "making donations for";
-			mes "the festival? Look up the";
-			mes "word ''punctuality'' in the";
-			mes "dictionary. It might help you.";
+			mes "[Prêtresse Panno]";
+			mes "Vous... Vous avez encore des Billets obtenus en échanges de dons au Temple? Cherchez le mot ''Ponctualité'' dans un dictionnaire: ça vous ferait le plus grand bien.";
 			next;
-			mes "[Priestess Panno]";
-			mes "Fine. You really";
-			mes "want to exchange your";
-			mes "Lottery Tickets? It's my job";
-			mes "to ask and make sure, you";
-			mes "know, in case you were saving";
-			mes "them for some weird reason.";
+			mes "[Prêtresse Panno]";
+			mes "Bien. Vous êtes bien sûr de vouloir échanger vos Billets de Tombola? Je dois vous demander au cas où vous voudriez les garder pour une raison quelconque.";
 			next;
-			if (select("Yes:No") == 1) goto L_Lottery;
-			mes "[Priestess Panno]";
-			mes "You can redeem your";
-			mes "Lottery Tickets at any";
-			mes "time, so please visit";
-			mes "me at your leisure.";
-			mes "Go with Freya.";
+			if (select("Oui:Non") == 1) goto L_Lottery;
+			mes "[Prêtresse Panno]";
+			mes "Vous pourrez échanger vos Billets quand vous voudrez, alors revenez me vois quand vous aurez le temps. Allez en paix.";
 			goto L_End;
 
 		case 2:
 			cutin "ra_fano01",2;
-			mes "[Priestess Panno]";
-			mes "The Chapel is located";
-			mes "over the wall behind me";
-			mes "Our pope's office and chambers";
-			mes "are upstairs. You can only go";
-			mes "there if you have special";
-			mes "authorization.";
+			mes "[Prêtresse Panno]";
+			mes "La Chapelle est située dans la pièce suivante. Le bureau de la Papesse ainsi que ses appartements se trouvent à l'étage. Vous ne pourrez vous y rendre qu'avec une autorisation spéciale.";
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "......";
 			mes ".........";
 			next;
-			mes "[Priestess Panno]";
+			mes "[Prêtresse Panno]";
 			mes "............";
 			mes ".........";
 			mes "......";
@@ -6611,65 +5484,37 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "...?";
 			next;
 			cutin "ra_fano02",2;
-			mes "[Priestess Panno]";
-			mes "You come to a temple";
-			mes "to pray, not to look";
-			mes "around. Or chit-chat";
-			mes "with the priestesses";
-			mes "like me. Don't forget it.";
+			mes "[Prêtresse Panno]";
+			mes "Vous êtes ici au temple pour prier, et non pour fouiner ou discuter avec des prêtresses telles que moi, ne l'oubliez pas.";
 			next;
-			cutin "ra_fano02",2;
-			mes "[Priestess Panno]";
-			mes "The offices for the High";
-			mes "Priests are located on each";
-			mes "side of the hallway. However,";
-			mes "you can only enter if you've";
-			mes "been permitted beforehand.";
+			cutin "ra_fano03",2;
+			mes "[Prêtresse Panno]";
+			mes "Les bureaux des Grands Prêtres se trouvent à chaque extrémité du bâtiment. Cependant, vous ne pourrez y entrer qu'après y avoir été convié.";
 			goto L_End;
 
 		case 3:
 			cutin "ra_fano02",2;
-			mes "[Priestess Panno]";
-			mes "Gate...?";
+			mes "[Prêtresse Panno]";
+			mes "Les portes...?";
 			next;
-			select("The locked gate to the temple!");
-			mes "[Priestess Panno]";
-			mes "I don't know";
-			mes "what you mean.";
+			select("Elles étaient verrouillées!");
+			mes "[Prêtresse Panno]";
+			mes "Je ne vois pas de quoi vous voulez parlez.";
 			next;
-			select("Explain");
+			select("Expliquer");
 			mes "["+strcharinfo(0)+"]";
-			mes "I think that Priestess Nemma";
-			mes "has been worried about the";
-			mes "gate being broken, though";
-			mes "it hasn't been like that since";
-			mes "you've started your position";
-			mes "here at the temple.";
+			mes "Je crois que la Prêtresse Nemma s'inquiétait à propos du mécanisme de fermeture automatique de la porte. Ca semble être la première fois que ça arrive depuis que vous ayez pris vos fonctions au Temple.";
 			next;
-			mes "[Priestess Panno]";
-			mes "Worried...?";
-			mes "Yes, my twin sister";
-			mes "has been known to";
-			mes "do a lot of that, and cry";
-			mes "for my help. Am I right?";
+			mes "[Prêtresse Panno]";
+			mes "Elle s'inquiétait...? Oh, ma soeur jumelle a l'habitude de faire toute une histoire à propos de pas grand chose, et de m'appeler tout le temps à son secours.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "It's weird";
-			mes "...She said that the gate";
-			mes "should automatically fix";
-			mes "itself, but it hasn't been";
-			mes "doing it lately. She was";
-			mes "acting really funny..";
+			mes "C'est bizarre. Elle a dit que la porte devait se rouvrir toute seule, mais ce n'est pas ce qui s'est passé. Elle agissait de façon vraiment étrange...";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "She was talking about";
-			mes "the temple's history and";
-			mes "how the security system was";
-			mes "built. Then she mentioned you,";
-			mes "so I get the feeling you might";
-			mes "know something about this.";
+			mes "Elle m'a parlé de l'histoire du temple et du système de sécurité. Elle m'a aussi parlé de vous, alors je me demandais si vous saviez quelque chose.";
 			next;
-			mes "[Priestess Panno]";
+			mes "[Prêtresse Panno]";
 			mes ".........";
 			set ra_tem_q,11;
 			goto L_End;
@@ -6677,175 +5522,87 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 	}
 	else if (ra_tem_q == 11) {
 		mes "["+strcharinfo(0)+"]";
-		mes "I remember now...!";
-		mes "I was there when the gate";
-		mes "closed, and I heard someone";
-		mes "with your exact voice whisper";
-		mes "something to magically open";
-		mes "the gate! What's that all about?";
+		mes "Je me rappelle maintenant...! J'étais ici lorsque les portes se sont verrouillées, et j'ai entendu quelqu'un qui avait exactement la même voix que vous murmurer quelque chose pour que les portes s'ouvrent à nouveau, comme par magie. Qu'est-ce qui s'est passé?";
 		next;
-		mes "[Priestess Panno]";
+		mes "[Prêtresse Panno]";
 		mes "......";
 		mes ".........";
 		mes "............";
 		next;
-		mes "[Priestess Panno]";
+		mes "[Prêtresse Panno]";
 		mes "......";
 		mes ".........";
 		mes "............";
-		mes "We... I mean....";
+		mes "Nous... Je veux dire....";
 		next;
 		cutin "ra_fano01",2;
-		mes "[Priestess Panno]";
-		mes "Nemma and I are descended";
-		mes "from a family of great alchemists.";
-		mes "They went on a long, religious";
-		mes "pilgrimage and ended up here.";
-		mes "They are the ones that built";
-		mes "this temple and security system.";
+		mes "[Prêtresse Panno]";
+		mes "Nemma et moi descendons d'une grande famille d'alchimistes. Ils sont parti en pèlerinage, et après un long voyage sont arrivés ici. Ce sont eux qui ont bâti le temple et le système de sécurité.";
 		next;
-		mes "[Priestess Panno]";
-		mes "In a sense, this temple";
-		mes "is the tomb of our ancestors,";
-		mes "who left Rune-Midgarts and";
-		mes "built this city of Rachel about";
-		mes "a thousand years ago.";
+		mes "[Prêtresse Panno]";
+		mes "En un sens, ce temple est la tombe de nos aïeux, partis de Rune-Midgard pour bâtir la ville de Rachel il y a plus d'un siècle.";
 		next;
-		mes "[Priestess Panno]";
-		mes "Over the generations, many";
-		mes "Alchemists left Rune-Midgarts";
-		mes "and settled here, converting";
-		mes "the desert into green fields.";
-		mes "This temple was supposed";
-		mes "be a shelter from intruders.";
+		mes "[Prêtresse Panno]";
+		mes "Au fil des générations, de nombreux alchimistes ont quitté Rune-Midgard et sont venus s'installer ici, transformant le désert en champs de verdure. Ce temple était sensé être un refuge contre les envahisseurs.";
 		next;
-		mes "[Priestess Panno]";
-		mes "My ancestor designed the";
-		mes "temple security system to";
-		mes "require a special permit in";
-		mes "order to access the temple";
-		mes "But the invaders never came,";
-		mes "and we didn't need the permits.";
+		mes "[Prêtresse Panno]";
+		mes "Mes ancêtres ont imaginé un système de sécurité qui demanderait un permis pour pouvoir accéder au temple. Mes il n'y eut aucun envahisseur, et nous n'avions plus besoin de ces permis.";
 		next;
-		mes "[Priestess Panno]";
-		mes "The special permits were";
-		mes "disposed, but the automatic";
-		mes "security system was left on";
-		mes "the gate, just in case. Now,";
-		mes "I've heard that the security";
-		mes "system has been malfunctioning.";
+		mes "[Prêtresse Panno]";
+		mes "Ils furent alors retirés, mais le système de sécurité était toujours en place. J'ai entendu dire que depuis quelques temps, il fonctionnait de travers.";
 		next;
 		cutin "ra_fano03",2;
-		mes "[Priestess Panno]";
-		mes "However, that's not possible.";
-		mes "Even by today's standards, the";
-		mes "system is perfectly designed.";
-		mes "While I was praying in the";
-		mes "Chapel some time ago, I found";
-		mes "what is causing the gate problems.";
+		mes "[Prêtresse Panno]";
+		mes "Cependant il est si bien pensé que nous ne pouvons pas le désactiver complètement, même avec les moyens qu'on a de nos jours. Mais je crois avoir trouvé ce qui cause le disfonctionnement tandis que je priais dans la chapelle l'autre jour.";
 		next;
-		mes "[Priestess Panno]";
-		mes "Suddenly, the lights went";
-		mes "out, and I could only barely";
-		mes "see distinguish my surroundings.";
-		mes "I was about to go outside when";
-		mes "I heard a noise from the stairs.";
+		mes "[Prêtresse Panno]";
+		mes "La lumière s'est soudain éteinte, et je ne pouvais rien y voir. Cependant, j'ai entendu un bruit venant des étages alors que j'étais sur le point de sortir.";
 		next;
 		cutin "ra_fano02",2;
-		mes "[Priestess Panno]";
-		mes "From what I can tell,";
-		mes "someone is transporting";
-		mes "something out of the Holy";
-		mes "Grounds. I don't know what";
-		mes "they keep there, though.";
-		mes "I'm not a high rank Priestess.";
+		mes "[Prêtresse Panno]";
+		mes "D'après ce que je peux dire, quelqu'un transportait quelque chose hors du Sanctuaire. Mais je ne sais pas ce qui se trouve là-bas: je ne suis pas une Grande Prêtresse.";
 		next;
-		mes "[Priestess Panno]";
-		mes "I'm not sure if I want";
-		mes "to find out what's there";
-		mes "I heard something that";
-		mes "sounded like a horrible";
-		mes "monster's howl. It was";
-		mes "incredibly frightening.";
+		mes "[Prêtresse Panno]";
+		mes "Je ne suis pas certain de vouloir en apprendre plus d'ailleurs. Ca ressemblait au cri horrible d'un monstre. J'avais la chair de poule.";
 		next;
-		mes "[Priestess Panno]";
-		mes "I panicked, ran to";
-		mes "my desk at the front,";
-		mes "and just recited the secret";
-		mes "password passed down from my";
-		mes "ancestors to open the gate.";
+		mes "[Prêtresse Panno]";
+		mes "J'ai paniqué. J'ai couru à mon bureau, et j'ai prononcé le mot de passe secret de mes ancêtres pour ouvrir les portes.";
 		next;
 		cutin "ra_fano01",2;
-		mes "[Priestess Panno]";
-		mes "You see, my ancestors";
-		mes "included the secret password";
-		mes "and voice recognition feature";
-		mes "into the gate in case something";
-		mes "after they disposed of the";
-		mes "temple permits--just in case.";
+		mes "[Prêtresse Panno]";
+		mes "Vous savez, mes ancêtres ont inclus un système de reconnaissance vocale au cas où il y aurait un problème avec les permis.";
 		next;
-		mes "[Priestess Panno]";
-		mes "The real reason why the gate";
-		mes "is acting strangely is not";
-		mes "because the gate is broken,";
-		mes "but because someone is sneaking";
-		mes "in and out of the Holy Ground.";
+		mes "[Prêtresse Panno]";
+		mes "Les portes ne se verrouillent pas parce que le système est en panne, mais parce que quelqu'un ou quelque chose entre et sort du Sanctuaire.";
 		next;
-		mes "[Priestess Panno]";
-		mes "Whoever they are, they";
-		mes "must be using one of the";
-		mes "old temple permits in order";
-		mes "to cover their tracks. Now,";
-		mes "you know everything.";
+		mes "[Prêtresse Panno]";
+		mes "Qui que ce soit, il doit utiliser l'un des vieux permis du temple pour masquer ses traces. Voilà, vous savez tout.";
 		next;
 		cutin "ra_fano01",2;
-		mes "[Priestess Panno]";
-		mes "You'd better not";
-		mes "reveal what you learned";
-		mes "from me. Otherwise, I'm";
-		mes "sure we'll end up dead.";
-		mes "Excuse me now, I need";
-		mes "to get back to work.";
+		mes "[Prêtresse Panno]";
+		mes "Vous feriez mieux de ne pas répéter ce que je vous ai dit, ou vous finirez dans un cercueil. Veuillez maintenant m'excuser, j'ai du travail.";
 		set ra_tem_q,12;
 		goto L_End;
 	}
 	cutin "ra_fano02",2;
-	mes "[Priestess Panno]";
-	mes "This is a holy place";
-	mes "Behave yourself, and";
-	mes "respect those who have";
-	mes "come here just to worship.";
+	mes "[Prêtresse Panno]";
+	mes "Vous êtes dans un lieu sacré, alors comportez-vous avec dignité, et faites preuve de respect envers ceux qui sont venus ici pour prier.";
 	goto L_End;
 
 L_Lottery:
 	if(checkweight(607,1) == 0){
 		cutin "ra_fano02",2;
-		mes "[Priestess Panno]";
-		mes "You're carrying too much";
-		mes "right now. What are you";
-		mes "going to do if I give you";
-		mes "something large, unwieldy";
-		mes "and heavy? Put your junk";
-		mes "away in Storage first.";
+		mes "[Prêtresse Panno]";
+		mes "Vous portez bien trop de choses sur vous en ce moment. Pourquoi n'iriez-vous pas en déposer quelques unes dans votre Stock?";
 		goto L_End;
 	}
-	mes "[Priestess Panno]";
-	mes "Here we go";
-	mes "Excited? Mm";
-	mes "I can redeem only";
-	mes "1 Lottery Ticket at";
-	mes "a time. Your reward";
-	mes "for this ticket is...";
+	mes "[Prêtresse Panno]";
+	mes "Allos-y! Vous êtes excité? Je ne peux échanger qu'un billet à la fois. Votre récompense pour celui-ci est...";
 	next;
 	cutin "ra_fano02",2;
 	if (countitem(7570) > 0) {
-		mes "[Priestess Panno]";
-		mes "^FF0000This^000000. It's been in our";
-		mes "storage for a while, but";
-		mes "I hope this is acceptable";
-		mes "as a token of the temple's";
-		mes "gratitude. May Freya smile";
-		mes "upon you for your generosity...";
+		mes "[Prêtresse Panno]";
+		mes "^FF0000Ceci!^000000 Ca fait un moment que nous l'avons dans notre réserve. J'espère que vous n'êtes pas trop déçu. Que Freya récompense votre générosité...";
 		delitem 7570,1;
 		set .@bonus_donate,rand(100);
 		if (.@bonus_donate == 99) {
@@ -6865,24 +5622,18 @@ L_Lottery:
 		else getitem 547,1; //Condensed White Potion 39%
 		goto L_End;
 	}
-	mes "[Priestess Panno]";
-	mes "You...";
-	mes "Don't have any Lottery";
-	mes "Tickets to redeem.";
+	mes "[Prêtresse Panno]";
+	mes "Oh mais... Vous n'avez pas de billet à échanger.";
 	if ($rachel_donate > 9999) {
-		mes "We're not distributing";
-		mes "them now, but maybe you";
-		mes "can ask your friends for one.";
+		mes "Nous n'en distribuons plus en ce moment. Mais peut-être en reste-t-il à l'un de vos amis?";
 	}
 	else {
-		mes "You can obtain them from";
-		mes "Priestess Nemma at the temple";
-		mes "entrance after you donate zeny.";
+		mes "Vous pouvez en obtenir auprès de la Prêtresse Nemma à l'entrée du temple en échange de dons en argent.";
 	}
 	next;
 	cutin "ra_fano03",2;
-	mes "[Priestess Panno]";
-	mes "May Freya be with you.";
+	mes "[Prêtresse Panno]";
+	mes "Que Freya vous protège.";
 	goto L_End;
 
 L_End:
@@ -6891,31 +5642,21 @@ L_End:
 	end;
 }
 
-ra_temin,134,128,3	script	Pope's Office Guard#rac::raofficeguard	926,{
+ra_temin,134,128,3	script	Garde::raofficeguard	926,{
 	if ((ra_tem_q == 15) && (countitem(7561) > 39)) {
-		mes "[Pope's Office Guard]";
-		mes "Hm? What's that you have";
-		mes "there? Oh, you've gathered";
-		mes "40 Glacial Hearts and brought";
-		mes "a recommendation letter from";
-		mes "a High Priest? Most impressive.";
+		mes "[Garde du Bureau de la Papesse]";
+		mes "Hum? Qu'est-ce que vous avez là? Oh vous avez 40 Glacial Hearts, et une Lettre de Recommandation d'un Grand Prêtre? Impressionnant.";
 		next;
-		mes "[Pope's Office Guard]";
-		mes "I think I know why you're";
-		mes "here. Thanks for bringing";
-		mes "those to me, and I'll let you";
-		mes "enter and see the pope";
-		mes "Welcome, brave "+strcharinfo(0)+".";
+		mes "[Garde du Bureau de la Papesse]";
+		mes "Je crois savoir pourquoi vous êtes là. Je vais vous laisser entrer, "+strcharinfo(0)+".";
 		close2;
 		set ra_tem_q,16;
 		delitem 7561,40; //Ice_Heart
 		end;
 	}
 	else if (ra_tem_q == 16) {
-		mes "[Pope's Office Guard]";
-		mes "The pope is inside";
-		mes "expecting you, so please";
-		mes "don't keep her waiting long.";
+		mes "[Garde du Bureau de la Papesse]";
+		mes "La Papesse vous demande. Ne la faites pas attendre.";
 		close;
 	}
 	else if (MISC_QUEST & 8192) {
@@ -6924,25 +5665,19 @@ ra_temin,134,128,3	script	Pope's Office Guard#rac::raofficeguard	926,{
 			close;
 		}
 		else {
-			mes "[Pope's Office Guard]";
-			mes "I'm sorry, but outsiders";
-			mes "typically aren't allowed";
-			mes "to visit the pope without";
-			mes "special authorization.";
+			mes "[Garde du Bureau de la Papesse]";
+			mes "Je suis désolé mais les étrangers ne peuvent pas rencontrer la Papesse sans une autorisation au préalable.";
 			close;
 		}
 	}
 	else {
-		mes "[Pope's Office Guard]";
-		mes "I'm sorry, but the pope";
-		mes "is officiating a service";
-		mes "now. Please come back";
-		mes "after the service is ended.";
+		mes "[Garde du Bureau de la Papesse]";
+		mes "Je suis désolé mais la papesse célèbre un office en ce moment. Revenez lorsqu'il sera terminé s'il vous plait.";
 		close;
 	}
 }
 
-ra_temin,134,134,3	duplicate(raofficeguard)	Pope's Office Guard#2ra	926
+ra_temin,134,134,3	duplicate(raofficeguard)	Garde::Pope's Office Guard#2ra	926
 
 ra_temin,134,131,0	script	gyoin1#rachel	45,1,1,{
 OnTouch:
@@ -6976,139 +5711,89 @@ OnTouch:
 	end;
 }
 
-ra_temsky,95,99,6	script	Priest#1rachel	935,{
-	mes "[Priest]";
-	mes "May Freya be with you.";
+ra_temsky,95,99,6	script	Prêtre::Priest#1rachel	935,{
+	mes "[Prêtre]";
+	mes "Que Freya soit avec vous.";
 	close;
 }
 
-ra_temsky,93,97,6	script	Male Follower#1rachel::ramale	926,{
-	mes "[Male Follower]";
-	mes "May Freya be with you.";
+ra_temsky,93,97,6	script	Adepte::ramale	926,{
+	mes "[Adepte]";
+	mes "Que Freya soit avec vous.";
 	close;
 }
 
-ra_temsky,90,95,6	duplicate(ramale)	Male Follower#2rachel	926
-ra_temsky,98,59,6	duplicate(ramale)	Male Follower#3rachel	926
+ra_temsky,90,95,6	duplicate(ramale)	Adepte::Male Follower#2rachel	926
+ra_temsky,98,59,6	duplicate(ramale)	Adepte::Male Follower#3rachel	926
 
-ra_temsky,104,99,4	script	Priestess#1rachel	920,{
-	mes "[Priestess]";
-	mes "May Freya be with you.";
+ra_temsky,104,99,4	script	Prêtresse::Priestess#1rachel	920,{
+	mes "[Prêtresse]";
+	mes "Que Freya soit avec vous.";
 	close;
 }
 
-ra_temsky,106,97,4	script	Female Follower#1rachel::rafemale	916,{
-	mes "[Female Follower]";
-	mes "May Freya be with you.";
+ra_temsky,106,97,4	script	Adepte::rafemale	916,{
+	mes "[Adepte]";
+	mes "Que Freya soit avec vous.";
 	close;
 }
 
-ra_temsky,108,95,4	duplicate(rafemale)	Female Follower#2rachel	916
-ra_temsky,101,59,4	duplicate(rafemale)	Female Follower#3rachel	916
+ra_temsky,108,95,4	duplicate(rafemale)	Adepte::Female Follower#2rachel	916
+ra_temsky,101,59,4	duplicate(rafemale)	Adepte::Female Follower#3rachel	916
 
 ra_temsky,99,99,5	script	Papesse::Pope#rachel	936,{
 	if (ra_tem_q == 16) {
 		cutin "ra_bishop",2;
-		mes "^3355FFTh-this little";
-		mes "girl is the pope...?!^000000";
+		mes "^3355FFCette petite fille est la Papesse...?!^000000";
 		next;
 		mes "[Papesse]";
 		mes "...............................";
-		mes "..........................Um...";
-		mes "W-welcome. Is something";
-		mes "wrong? Oh, I know, it's my";
-		mes "eyes. I'm sorry if they";
-		mes "scare you a little bit.";
+		mes ".........................Hum...";
+		mes "Soyez le bienvenu. Est-ce que... Est-ce que quelque chose ne va pas? Oh, je sais, c'est mon regard. Je suis désolée si je vous intimide.";
 		next;
-		select("No, not at all...!");
+		select("Non pas du tout...!");
 		mes "[Papesse]";
 		mes "......";
 		mes "......";
-		mes "......You know, my appearance...";
+		mes "......Vous savez, mon apparence...";
 		next;
 		mes "[Papesse]";
-		mes "It's alright. Actually,";
-		mes "I'm used to it. People";
-		mes "are usually a little shocked";
-		mes "the first time they see me.";
-		mes "So... Um... Where do you";
-		mes "come from, "+strcharinfo(0)+"?";
+		mes "Ca ne fait rien. J'ai l'habitude. Les gens sont surpris la première fois qu'ils me voient. Alors... Hum... D'où venez-vous, "+strcharinfo(0)+"?";
 		next;
 		input @input$;
 		mes "[Papesse]";
 		mes @input$ +"...?";
-		mes "I think I might have heard";
-		mes "about that place before.";
-		mes "Wow... What did you do";
-		mes "when you lived there?";
+		mes "Je crois avoir déjà entendu parler de cet endroit dans le passé. Que faisiez-vous quand vous étiez encore là-bas?";
 		next;
 		input @input$;
 		mes "[Papesse]";
 		mes @input$ +"...?";
-		mes "Wow, that sounds quite";
-		mes "extraordinary. Ooh, ooh!";
-		mes "Tell me, how have you come";
-		mes "here to Rachel? I'm interested";
-		mes "in knowing more about you~";
+		mes "Ca semble merveilleux! Mais dites-moi: comment êtes-vous venu à Rachel? Je veux en apprendre plus à votre sujet~";
 		next;
-		mes "^3355FFYou and the pope";
-		mes "continued to comfortably";
-		mes "converse. As she spoke, she";
-		mes "seemed more like a young,";
-		mes "lonely girl than a solemn";
-		mes "religious figure for a nation.^000000";
+		mes "^3355FFVous continuez la conversation avec la Papesse. Elle apparait de plus en plus comme une petite fille solitaire que comme l'emblème religieuse d'une nation entière.^000000";
 		next;
 		mes "[Papesse]";
-		mes "...Wow, sometimes, I really";
-		mes "wish I could live like you.";
-		mes "You'd think being pope would";
-		mes "be great, but they make me work";
-		mes "all the time. And there are all";
-		mes "sorts of things I can't do.";
+		mes "...Parfois j'aimerais pouvoir vivre comme vous. Vous pensez peut-être qu'être Papesse est une chance, mais je ne fais que travailler. Il y a tellement de choses dont je dois m'occuper...";
 		next;
 		mes "[Papesse]";
-		mes "You know what's weird?";
-		mes "I think I'm the head of this";
-		mes "religion, but there's a sacred";
-		mes "place that even I'm not allowed";
-		mes "to visit. Isn't that so weird?";
+		mes "Mais il y a quelque chose que je trouve étrange... Je suis à la tête de cette religion, mais il y a un endroit saint que je ne suis même pas autorisée à visiter. N'est-ce pas étrange?";
 		next;
-		select("R-really...?");
+		select("Vraiment...?");
 		mes "[Papesse]";
-		mes "...Yeah. I don't know";
-		mes "much about, and I'm not";
-		mes "really supposed to talk";
-		mes "about it. We just call this";
-		mes "place the ''Holy Ground...''";
+		mes "...Oui. Je n'en sais pas grand chose, et je ne suis pas sensée en parler. Nous l'appelons le Sanctuaire...";
 		next;
-		select("Holy Ground?");
+		select("Le Sanctuaire?");
 		mes "[Papesse]";
-		mes "I'm sorry... I want";
-		mes "to tell you more, but...";
-		mes "That's all I know. I wonder...";
-		mes "I wonder what they could";
-		mes "be hiding over there...";
+		mes "Je suis désolée... Je voudrais vous en dire plus mais... C'est tout ce que je sais. Je me demande ce qui peut s'y cacher...";
 		next;
-		mes "[Priest]";
-		mes "I'm sorry to interrupt";
-		mes "your Excellency, but it's";
-		mes "time to officiate services.";
-		mes "Pardon me.";
+		mes "[Prêtre]";
+		mes "Je suis désolé de vous interrompre, votre Excellence, mais c'est l'heure du service. Excusez-moi.";
 		next;
 		mes "[Papesse]";
-		mes "Already?! Hmpf...";
-		mes "Oh, before I forget,";
-		mes "I needed to tell you that";
-		mes "High Priest Zhed wanted";
-		mes "to talk to you, "+strcharinfo(0)+".";
+		mes "Déjà?! Humpf... Oh, avant que je n'oublie, le Grand prêtre Zhed voudrait s'entretenir avec vous, "+strcharinfo(0)+".";
 		next;
 		mes "[Papesse]";
-		mes "I really want to thank";
-		mes "you for coming to speak";
-		mes "to me. I had a great time";
-		mes "learning. Now I have to";
-		mes "go officiate services, so...";
-		mes "This is goodbye for now...";
+		mes "Je tiens à vous remercier d'être venu parler avec moi. J'ai passé un agréable moment à apprendre de vous. Je dois maintenant célébrer l'office, alors... C'est un ''au revoir'' pour aujourd'hui...";
 		set ra_tem_q,17;
 		close2;
 		cutin "",255;
@@ -7131,7 +5816,7 @@ ra_temsky,99,99,5	script	Papesse::Pope#rachel	936,{
 			mes "Hum. Tout cela est si étrange pour moi. C'est ça me fait du bien de vous revoir.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "(^333333Je ne peux pas partir maintenant. Je vais vois si je peux apprendre quelque chose d'interressant de la Papesse...^000000)";
+			mes "(^333333Je ne peux pas partir maintenant. Je vais vois si je peux apprendre quelque chose d'intéressant de la Papesse...^000000)";
 			next;
 			switch(select("Ne vous sentez-vous pas seule?:Ne vous reposez-vous jamais?")) {
 			case 1:
@@ -7165,7 +5850,7 @@ ra_temsky,99,99,5	script	Papesse::Pope#rachel	936,{
 	end;
 }
 
-ra_temin,294,149,0	script	High Priestess Niren#ra	915,{
+ra_temin,294,149,0	script	Grande Prêtresse Niren::High Priestess Niren#ra	915,{
 	end;
 
 OnInit:
@@ -7186,17 +5871,9 @@ OnTimer120000:
 ra_temin,293,144,0	script	out1#rachel	-1,3,3,{
 OnTouch:
 	if (ra_tem_q == 18) {
-		mes "^3355FFIt sounds like they're";
-		mes "still talking. It'd be";
-		mes "best to patient and wait";
-		mes "just a little while longer.";
-		mes "Still... It's awfully boring.^000000";
+		mes "^3355FFOn dirait qu'ils sont toujours en train de parler. Le mieux serait d'attendre un peu plus longtemps... Même si c'est ennuyeux.^000000";
 		next;
-		mes "^3355FFA little eavesdropping";
-		mes "never hurt anyone. Maybe";
-		mes "you can hear them a little";
-		mes "better if you listen from";
-		mes "the left side of the wall.^000000";
+		mes "^3355FFVous pourriez tout aussi bien écouter ce qu'ils disent discrètement. Vous entendriez surement mieux si vous colliez votre oreille sur l'autre mur.^000000";
 		close2;
 		warp "ra_temin",300,153;
 		end;
@@ -7209,158 +5886,75 @@ OnTouch:
 ra_temin,288,151,0	script	hidden1#rachel	-1,1,6,{
 OnTouch:
 	if (ra_tem_q == 18) {
-		mes "^3355FFAt this distance you";
-		mes "can cleartly hear the";
-		mes "voices from the other";
-		mes "side of the wall...^000000";
+		mes "^3355FFA cette distance, vous pouvez entendre clairement la voix des deux interlocuteurs de l'autre côté du mur...^000000";
 		next;
 		mes "[????]";
-		mes "...Was it really";
-		mes "necessary to involve";
-		mes "an outsider in this";
-		mes "situation? Answer me!";
+		mes "...Etait-il indispensable de mêler un étranger à toutes ces histoires? Réponds-moi!";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Is this about the";
-		mes "accident? You know that";
-		mes "I've disagreed with the";
-		mes "actions that have led to";
-		mes "the mana leakage.";
+		mes "C'est à propos de l'accident? Tu sais que je me suis opposé aux actions qui ont conduit à ce désastre.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Even though I thought";
-		mes "it was a reckless decision,";
-		mes "I've closed the shrine and";
-		mes "did my best to cover up this";
-		mes "unfortunate accident.";
+		mes "Même si c'était une mesure radicale, j'ai fermé l'autel et fait en sorte de couvrir au mieux cet accident malheureux.";
 		next;
 		mes "[????]";
-		mes "I'm not blaming you. In";
-		mes "fact, I'll admit it: that was";
-		mes "our mistake. We caused";
-		mes "the monster infestation by";
-		mes "letting the mana leak.";
+		mes "Je ne te fais pas de reproches. En fait je l'admet: c'était notre erreur. Nous sommes à l'origine de l'invasion des monstres à cause des émanations de mana.";
 		next;
 		mes "[????]";
-		mes "But that's not related";
-		mes "to what I'm asking you!";
-		mes "Do you really think it's";
-		mes "alright to allow an outsider";
-		mes "to speak to our pope during";
-		mes "such a tumultuous time?!";
+		mes "Mais ce n'est pas ça que je te demande! Tu penses vraiment que c'est une bonne idée de laisser des étranger s'approcher de la Papesse en des temps si sombres?!";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Why not? I thought it'd";
-		mes "bring her great comfort.";
-		mes "She is very confused as to";
-		mes "why the Holy Ground has been";
-		mes "closed, and she cannot know";
-		mes "what is happening there.";
+		mes "Pourquoi pas? J'ai pensé que ça lui apporterait un peu de réconfort. Elle s'inquiète à propos du Sanctuaire et ne comprend pas ce qui s'y passe.";
 		next;
 		mes "[Grand Prêtre Zhed]";
-		mes "Again... I strongly";
-		mes "disagree with what is";
-		mes "secretly going on over";
-		mes "there. I know that I can't";
-		mes "officially oppose this";
-		mes "course of action, but...";
+		mes "Une fois de plus, je m'oppose à ce qui s'y trame en secret. Je sais que je ne peux pas prendre de position officielle à ce sujet, mais...";
 		next;
 		mes "[????]";
-		mes "There's nothing to worry";
-		mes "about! It'll all be over before";
-		mes "you know it. Besides, it's";
-		mes "too late to turn back now,";
-		mes "so I warn you: don't you";
-		mes "dare do anything foolish.";
+		mes "Il n'y a aucune raison de s'inquiéter. Tout sera terminé avant que tu ne t'en rendes compte. De plus, il est trop tard pour reculer. Alors je te préviens: ne fais rien de stupide!";
 		next;
-		mes "^3355FFSomeone's coming!";
-		mes "You'd better step away";
-		mes "from the wall and feign";
-		mes "ignorance as best you can!^000000";
+		mes "^3355FFQuelqu'un arrive. Vous feriez mieux de vous écarter du mur et de faire mine de rien avant de vous faire surprendre.^000000";
 		next;
 		hideoffnpc "High Priestess Niren#ra";
 		cutin "ra_gwoman",2;
-		mes "[High Priestess Niren]";
-		mes "Oh! You must be the one";
-		mes "High Priest Be- er, Zhed,";
-		mes "told me about. It's very nice";
-		mes "to meet you. High Priestess";
-		mes "Niren, at your service.";
+		mes "[Grande Prêtresse Niren]";
+		mes "Oh! Vous devez être celui dont le Grand Prêtre Be- euh, Zhed, ma parlé. Je suis heureuse de vous rencontrer. Grande Prêtresse Niren, à votre service.";
 		next;
-		mes "[High Priestess Niren]";
-		mes "I hear that you had the";
-		mes "privilege of speaking with";
-		mes "our pope, and that she had";
-		mes "a wonderful time. What did";
-		mes "you think of her, hm?";
+		mes "[Grande Prêtresse Niren]";
+		mes "J'ai appris que vous aviez eu l'honneur de vous entretenir avec notre papesse, et qu'elle a passé un très agréable moment. Que pensez-vous d'elle, dites-moi?";
 		next;
-		select("She's different than what I expected...");
+		select("Elle est différente de ce que j'imaginais...");
 		cutin "ra_gwoman2",2;
-		mes "[High Priestess Niren]";
-		mes "Ah, I know what you mean...";
-		mes "Usually, most outsiders tell";
-		mes "me that they expect our pope";
-		mes "to be a wizened old man.";
-		mes "But that's not the case";
-		mes "here in Arunafeltz.";
+		mes "[Grande Prêtresse Niren]";
+		mes "Ah, je vois ce que vous voulez dire... La plupart des étrangers s'attendent à trouver un vieux sage - mais ce n'est pas comme ça ici, à Arunafeltz.";
 		next;
 		cutin "ra_gwoman",2;
-		mes "[High Priestess Niren]";
-		mes "Usually, our pope is chosen";
-		mes "by her resemblance to our";
-		mes "goddess Freya. She must";
-		mes "have silvery blond hair, snowy";
-		mes "skin, and divinely colored";
-		mes "eyes. You saw, didn't you?";
+		mes "[Grande Prêtresse Niren]";
+		mes "On a l'habitude de choisir la papesse en fonction de sa ressemblance avec la déesse Freya. Elle doit avoir des cheveux blonds argentés, un teint d'albâtre, et des yeux aux couleurs divines. Vous les avez vus, n'est-ce pas?";
 		next;
-		mes "[High Priestess Niren]";
-		mes "I'm curious: what kinds";
-		mes "of things did you and the";
-		mes "pope talk about? As you know,";
-		mes "we priests are forbidden from";
-		mes "leaving Arunafeltz, so...";
+		mes "[Grande Prêtresse Niren]";
+		mes "Je me demande: de quel genre de choses avez-vous parlé? Comme vous le savez, nous autres prêtres ne pouvons pas quitter Arunafeltz, alors...";
 		next;
-		mes "^3355FFYou relate the details of";
-		mes "your talk with the pope, but";
-		mes "you make sure not to mention";
-		mes "anything about the Holy Ground";
-		mes "as High Priest Zhed had asked.^000000";
+		mes "^3355FFVous lui racontez en détail votre conversation, en prenant soin de ne pas parler de votre conversation à propos du Sanctuaire, comme Zhed vous l'avait demandé.^000000";
 		next;
-		mes "[High Priestess Niren]";
-		mes "Ah, that's fairly";
-		mes "interesting, your land.";
-		mes "Tell me, how did you come";
-		mes "to know Bekento, er, I mean,";
-		mes "High Priest Zhed?";
+		mes "[Grande Prêtresse Niren]";
+		mes "Ah, c'est très intéressant. Votre terre natale... Dites-moi, comment avez-vous connu Bekento, euh, le grand Prêtre Zhed je veux dire?";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "(^666666Bekento?^000000)";
 		next;
-		select("Explain how You Met High Priest Zhed");
+		select("Lui parler de votre rencontre");
 		cutin "ra_gwoman2",2;
-		mes "[High Priestess Niren]";
+		mes "[Grande Prêtresse Niren]";
 		mes ".........................";
-		mes "That's all? Hm? That's";
-		mes "pretty funny. ^333333*Sigh*^000000 I believe";
-		mes "he trusts people too much...";
-		mes "But that's only my opinion.";
+		mes "C'est tout? Hum? C'est assez drôle. ^333333*Soupire*^000000 J'imagine qu'il fait trop confiance aux gens. Mais c'est juste mon opinion...";
 		next;
 		cutin "ra_gwoman",2;
-		mes "[High Priestess Niren]";
-		mes "If you don't mind...";
-		mes "I want to give you a bit of";
-		mes "advice. Don't get too close";
-		mes "to High Priest Zhed. If you";
-		mes "do, you might end up getting";
-		mes "yourself in trouble.";
+		mes "[Grande Prêtresse Niren]";
+		mes "Si ça ne vous dérange pas, je vais vous donner un petit conseil. Ne soyez pas trop proche du Grand Prêtre Zhed. Vous pourriez avoir des ennuis.";
 		next;
 		cutin "",255;
 		hideonnpc "High Priestess Niren#ra";
-		mes "^3355FFHigh Priestess Niren left";
-		mes "as soon as she said those words.";
-		mes "What could she possibly mean?";
-		mes "For now, you may as well";
-		mes "talk to High Priest Zhed.^000000";
+		mes "^3355FFLa Grande Prêtresse Niren quitte la pièce après avoir prononcé ces paroles. Que peut-elle bien vouloir dire? Vous feriez mieux de retourner voir le Grand Prêtre Zhed.^000000";
 		set ra_tem_q,19;
 		close;
 	}
@@ -7372,22 +5966,13 @@ OnTouch:
 ra_temin,272,143,0	script	key1#rachel	-1,3,3,{
 OnTouch:
 	if (ra_tem_q == 20) {
-		mes "^3355FFYou find a small";
-		mes "shining object laid";
-		mes "on the floor.^000000";
+		mes "^3355FFVous voyez un objet brillant par terre.^000000";
 		next;
-		if (select("Ignore:Pick It Up") == 1) {
-			mes "^3355FFYou decided to ignore";
-			mes "the small shining object,";
-			mes "no matter how important it";
-			mes "may be to you in the future.^000000";
+		if (select("L'ignorer:Le ramasser") == 1) {
+			mes "^3355FFVous décidez de ne pas vous attarder sur cet objet, même si il pourrait vous être utile à l'avenir.^000000";
 			close;
 		}
-		mes "^3355FFUpon picking up the";
-		mes "object, you are able to";
-		mes "identify it as a small key.";
-		mes "Perhaps you can use it to";
-		mes "open some kind of lock.";
+		mes "^3355FFVous ramassez l'objet et vous apercevez qu'il s'agit d'une petite clé. Sans doute pour ouvrir une serrure...";
 		set ra_tem_q,21;
 		close;
 	}
@@ -7400,17 +5985,10 @@ OnTouch:
 	if ((ra_tem_q > 21) || (MISC_QUEST & 8192)) { warp "ra_san01",140,135; end; }
 
 	if (ra_tem_q == 21) {
-		mes "^3355FFThis must be the";
-		mes "entrance to the Holy";
-		mes "Ground. However, the";
-		mes "door in your way is locked.^000000.";
+		mes "^3355FFIl doit s'agir de l'entrée du Sanctuaire. Cependant, la porte semble fermée.^000000.";
 		next;
-		if (select("Quit:Use Small Key") == 2) {
-			mes "^3355FFYou insert the Small";
-			mes "Key that you found in";
-			mes "High Priest Zhed's room,";
-			mes "and find that it is able";
-			mes "to unlock this door.^000000";
+		if (select("Quitter:Utiliser la petite clé") == 2) {
+			mes "^3355FFVous insérez la petite clé trouvée dans la chambre du Grand Prêtre Zhed et ouvrez la porte.^000000";
 			close2;
 			warp "ra_san01",140,135;
 			end;
@@ -7418,7 +5996,7 @@ OnTouch:
 		close;
 	}
 
-	mes "^3355FFThe door is locked.^000000";
+	mes "^3355FFLa grille est baissée.^000000";
 	close;
 	
 }
@@ -7426,15 +6004,9 @@ OnTouch:
 que_san04,119,115,0	script	imir1#rachel	-1,2,2,{
 OnTouch:
 	if (ra_tem_q == 21) {
-		mes "^3355FFThis large area looks";
-		mes "like it was artificially build";
-		mes "for some reason-- it doesn't";
-		mes "seem like an area naturally";
-		mes "infested by monsters.^000000";
+		mes "^3355FFCe vaste édifice semble avoir été bâti pour une raison mystérieuse. Il ne semble pas y avoir de monstres.^000000";
 		next;
-		mes "^3355FFPerhaps if you explore";
-		mes "this place, you'll be able";
-		mes "to find something interesting.^000000";
+		mes "^3355FFPeut-être trouverez-vous quelque chose d'intéressant en explorant cet endroit.^000000";
 		close;
 	}
 	end;
@@ -7443,9 +6015,7 @@ OnTouch:
 que_san04,119,133,0	script	imir2#rachel	-1,20,5,{
 OnTouch:
 	if (ra_tem_q == 21) {
-		mes "^3355FFThere's something here";
-		mes "beneath the water. This";
-		mes "may warrant a closer look.^000000";
+		mes "^3355FFIl y a quelque chose sous l'eau qui attire votre attention.^000000";
 		close;
 	}
 	end;
@@ -7454,64 +6024,32 @@ OnTouch:
 que_san04,119,203,0	script	imir3#rachel	-1,7,7,{
 	OnTouch:
 		if (ra_tem_q == 21) {
-			mes "^3355FFNo wonder this object";
-			mes "in the water seems so";
-			mes "familiar: it's a Ymir's";
-			mes "Heart Piece! In fact, there's";
-			mes "dozens of them just lying here.^000000";
+			mes "^3355FFPas étonnant que cet objet sous l'eau vous semble si familier: c'est l'un des morceaux du Coeur d'Ymir! En fait, il y en a une douzaine ici!^000000";
 			next;
-			mes "^3355FFWhy would so many of these";
-			mes "powerful artifacts be here";
-			mes "in the Holy Ground? Perhaps";
-			mes "this is the secret that the";
-			mes "priests are trying to keep.^000000";
+			mes "^3355FFPourquoi d'aussi puissants artefacts seraient dans le Sanctuaire? Peut-être est-ce le secret que les prêtres tentent de préserver.^000000";
 			next;
 			hideoffnpc "High Priestess Niren#r2";
 			cutin "ra_gwoman",2;
-			mes "[High Priestess Niren]";
-			mes "How dare you intrude";
-			mes "the Holy Ground! Identify";
-			mes "yourself! I'll have you tried!";
+			mes "[Grande Prêtresse Niren]";
+			mes "Comment osez-vous pénétrer dans le Sanctuaire?! Identifiez-vous!";
 			next;
 			cutin "ra_gwoman2",2;
-			mes "[High Priestess Niren]";
-			mes "O-oh! It's you, the";
-			mes "adventurer recommended";
-			mes "by Bekento. Hm. I apologize";
-			mes "for snapping at you like";
-			mes "that. Didn't you know that";
-			mes "no one's allowed here?";
+			mes "[Grande Prêtresse Niren]";
+			mes "O-oh! C'est vous, l'aventurier recommandé par Bekento. Hum. Je m'excuse de vous avoir accueilli de la sorte. Mais ne savez-vous pas que l'entrée de cet endroit vous est interdite?";
 			next;
 			cutin "ra_gwoman",2;
-			mes "[High Priestess Niren]";
-			mes "Hmm. Well, you Rune-Midgarts";
-			mes "adventurers are famous for your";
-			mes "skills and abilities, but this";
-			mes "was not expected. I mean, we";
-			mes "made sure this place was";
-			mes "absolutely secure.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Hum. Vous autres, aventuriers de Rune-Midgard, êtes célèbres pour vos compétences et votre talent, mais je ne m'y attendais pas. J'ai tout fait pour que cet endroit soit complètement sécurisé.";
 			next;
 			cutin "ra_gwoman2",2;
-			mes "[High Priestess Niren]";
-			mes "What's done is done...";
-			mes "I warned Bekento that he";
-			mes "might cause trouble for you,";
-			mes "but it seems that you've";
-			mes "caused trouble for him.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Ce qui est fait est fait. J'avais mis en garde Bekento en lui disant qu'il allait vous causer des problèmes, mais on dirait que c'est vous qui allez lui en causer.";
 			next;
-			mes "[High Priestess Niren]";
-			mes "Understand this:";
-			mes "most intruders are";
-			mes "severely punished, but";
-			mes "because of my friendship";
-			mes "with Bekento, I'm letting";
-			mes "you off easy. Remember that.";
+			mes "[Grande Prêtresse Niren]";
+			mes "Comprenez-moi bien: les intrus sont d'habitude sévèrement punis, mais je vais vous laisser partir à cause l'amitié qui vous lie à Bekento. Souvenez-vous en.";
 			next;
 			sc_start SC_Blind,600000,0;
-			mes "^3355FFNiren began to chant";
-			mes "in a low voice, and your";
-			mes "eyelids grow heavier as you";
-			mes "grow drowsier and sleepier...^000000";
+			mes "^3355FFNiren entame un chant à voix basse, tandis que vos paupières se font de plus en plus lourdes. Vous vous endormez petit à petit...^000000";
 			set ra_tem_q,22;
 			close2;
 			hideonnpc "High Priestess Niren#r2";
@@ -7521,7 +6059,7 @@ que_san04,119,203,0	script	imir3#rachel	-1,7,7,{
 		end;
 }
 
-que_san04,122,200,4	script	High Priestess Niren#r2	915,{
+que_san04,122,200,4	script	Grande Prêtresse Niren::High Priestess Niren#r2	915,{
 	end;
 
 OnInit:
@@ -7541,16 +6079,10 @@ OnTimer120000:
 rachel,163,152,0	script	imir3#rachel2	-1,3,3,{
 OnTouch:
 	if (ra_tem_q == 22) {
-		mes "^3355FFYou feel a slight headache";
-		mes "after you recollect your senses.";
-		mes "Somehow, you're been brought";
-		mes "back to Rachel Town. How long";
-		mes "have you been unconscious?^000000";
+		mes "^3355FFVous avez une légère migraine tandis que vous recouvrez vos sens. Vous avez été reconduit dans la ville de Rachel d'une manière ou d'une autre. Combien de temps êtes-vous resté inconscient?^000000";
 		next;
 		sc_end SC_Blind;
-		mes "^3355FFIt would be best to";
-		mes "ask High Priest Zhed";
-		mes "about what had happened.^000000";
+		mes "^3355FFLe mieux serait d'aller demander au Grand prêtre Zhed ce qui s'est passé.^000000";
 		set ra_tem_q,23;
 		close;
 	}
@@ -7558,61 +6090,45 @@ OnTouch:
 	end;
 }
 
-//rachel,142,167,5	script	Seeking Follower#rachel	917,6,6,{
-rachel,142,167,5	script	Seeking Follower#rachel	916,6,6,{
+//rachel,142,167,5	script	Adepte::Seeking Follower#rachel	917,6,6,{
+rachel,142,167,5	script	Adepte::Seeking Follower#rachel	916,6,6,{
 	if ((lost_boy == 13) && (ra_tem_q == 20)) {
-		mes "[Arunafeltz Follower]";
-		mes "Excuse me, but";
-		mes "are you "+strcharinfo(0)+"?";
+		mes "[Adepte d'Arunafeltz]";
+		mes "Excusez-moi, mais est-ce que vous êtes "+strcharinfo(0)+"?";
 		next;
-		select("Yes.");
-		mes "[Arunafeltz Follower]";
-		mes "High Priest Zhed";
-		mes "would like to see";
-		mes "you right away, "+strcharinfo(0)+".";
+		select("Oui.");
+		mes "[Adepte d'Arunafeltz]";
+		mes "Le Grand Prêtre Zhed voudrait vous voir, "+strcharinfo(0)+".";
 		next;
-		select("May ask why?");
-		mes "[Arunafeltz Follower]";
-		mes "Well, I actually have no";
-		mes "idea. I'm only supposed to";
-		mes "inform you that he's looking";
-		mes "for you. Please visit High";
-		mes "Priest Zhed in the second";
-		mes "right room of the temple.";
+		select("Pourrais-je savoir pourquoi?");
+		mes "[Adepte d'Arunafeltz]";
+		mes "En fait, je l'ignore. Tout ce que je sais, c'est qu'il vous cherche. Veuillez aller le voir dans la seconde salle du temple.";
 		close;
 	}
 
 	else {
-		mes "[Arunafeltz Follower]";
-		mes "May Freya bless you";
-		mes "on your journeys...";
+		mes "[Adepte d'Arunafeltz]";
+		mes "Que Freya vous bénisse et vous protège dans vos aventures...";
 		close;
 	}
 
 OnTouch:
 	if ((lost_boy == 13) && (ra_tem_q == 20)) {
-		mes "[Arunafeltz Follower]";
-		mes "Excuse me, but";
-		mes "are you "+strcharinfo(0)+"?";
+		mes "[Adepte d'Arunafeltz]";
+		mes "Excusez-moi, mais est-ce que vous êtes "+strcharinfo(0)+"?";
 		next;
-		select("Yes.");
-		mes "[Arunafeltz Follower]";
-		mes "High Priest Zhed";
-		mes "would like to see";
-		mes "you right away, "+strcharinfo(0)+".";
+		select("Oui.");
+		mes "[Adepte d'Arunafeltz]";
+		mes "Le Grand Prêtre Zhed voudrait vous voir, "+strcharinfo(0)+".";
 		next;
-		select("May ask why?");
-		mes "[Arunafeltz Follower]";
-		mes "Well, I actually have no";
-		mes "idea. I'm only supposed to";
-		mes "inform you that he's looking";
-		mes "for you. Please visit High";
-		mes "Priest Zhed in the second";
-		mes "right room of the temple.";
+		select("Puis-de demander pourquoi?");
+		mes "[Adepte d'Arunafeltz]";
+		mes "En fait, je l'ignore. Tout ce que je sais, c'est qu'il vous cherche. Veuillez aller le voir dans la seconde salle du temple.";
 		close;
 	}
 
 }
+
 
 // End of Donation Lottery/High Priest quest
 //============================================================
