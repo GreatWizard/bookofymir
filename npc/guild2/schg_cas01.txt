@@ -2159,12 +2159,12 @@ OnStartArena:
 
 	set .msg,2;
 	if (.msg == 1) {
-		announce "Le Bastion [" + GetCastleName("schg_cas01") + "] de Nithafjoll a été conquis par la Guilde [" + getguildname(.@gid) + "].",bc_all;
+		announce "Le Bastion [" + GetCastleName("schg_cas01") + "] de Nithafjoll a été conquis par la Guilde [" + getguildname(.@gid) + "].",bc_all|bc_woe;
 		donpcevent "Manager#sch01_02::Onstart";
 	}
 	else if (.msg == 2) {
-		announce "La Guilde [" + getguildname(.@gid) + "] a conquis le Premier Bastion de Nithafjoll: " + GetCastleName("schg_cas01"),bc_all;
-		mapannounce "schg_cas01","L'Emperium a été détruit!",bc_map,"0x00FF00";
+		announce "La Guilde [" + getguildname(.@gid) + "] a conquis le Premier Bastion de Nithafjoll: " + GetCastleName("schg_cas01"),bc_all|bc_woe;
+		mapannounce "schg_cas01","L'Emperium a été détruit!",bc_map,"0x00FF00",FW_NORMAL,20,0,40;
 		if (agitcheck2()) {
 			donpcevent "Manager#sch01_02::Onreset";
 			initnpctimer;
@@ -2175,7 +2175,7 @@ OnStartArena:
 		}
 	}
 	else if (.msg == 0) {
-		announce "Le Bastion [" + GetCastleName("schg_cas01") + "] de Nithafjoll a été conquis par la Guilde [" + getguildname(.@gid) + "].",bc_all;
+		announce "Le Bastion [" + GetCastleName("schg_cas01") + "] de Nithafjoll a été conquis par la Guilde [" + getguildname(.@gid) + "].",bc_all|bc_woe;
 		donpcevent "Manager#sch01_02::Onreset";
 		stopnpctimer;
 		end;
@@ -2186,7 +2186,7 @@ OnStartArena:
 
 OnTimer10000:
 	donpcevent "Manager#sch01_02::Onchange";
-	mapannounce "schg_cas01","Réparez les Pierres Gardiennes ainsi que les Portes Barrières afin de sécuriser le Bastion!",bc_map,"0x00FF00";
+	mapannounce "schg_cas01","Réparez les Pierres Gardiennes ainsi que les Portes Barrières afin de sécuriser le Bastion!",bc_map,"0x00FF00",FW_NORMAL,20,0,40;
 	end;
 }
 
