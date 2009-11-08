@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Cash Hair Stylist
 //===== By: ================================================== 
@@ -12,77 +14,49 @@
 //= 1.0 First Version. [Kisuka]
 //============================================================
 
-itemmall,19,74,5	script	Stylist#cash	91,{
-	mes "[Stylist]";
-	mes "Hey, I'm Kaniki.";
-	mes "I'm here to start a new";
-	mes "trend by introducing my";
-	mes "special new hairstyles!";
-	mes "Give me a ^FF0000New Style Coupon^000000,";
-	mes "and I'll change your hair~";
+itemmall,19,74,5	script	Styliste::Stylist#cash	91,{
+	mes "[Styliste]";
+	mes "Bonjour je m'appelle Kaniki. Je suis sur le point de lancer une mode avec mes nouvelles coupes de cheveux! Je pourrais vous en faire une en échange d'un ^FF0000New Style Coupon^000000~";
 	next;
 	if (Sex == 1) {
 		mes "[Kaniki]";
-		mes "I have two special";
-		mes "hairstyles for men, the";
-		mes "Emergency Heal Perm";
-		mes "and the Aura Blade Cut.";
-		mes "and aura blade cut.";
+		mes "J'ai deux coupes pour homme toutes particulières: la coupe 'Soins d'Urgence' et la coupe 'Épée d'Énergie'. Je vous les montre.";
 		next;
 		cutin "hair_m_24.bmp",4;
 		mes "[Kaniki]";
-		mes "This is the Emergency";
-		mes "Heal Perm. It's a brand";
-		mes "new style I invented recently.";
-		mes "What do you think? Cool, huh?";
+		mes "Voici la première, la coupe 'Soins d'Urgence'. C'est un tout nouveau style que j'ai créé il y a peu. Qu'est-ce que vous en dites? Fun, non?";
 		next;
 		cutin "",255;
 		cutin "hair_m_25.bmp",4;
 		mes "[Kaniki]";
-		mes "Now this is the Aura";
-		mes "Blade Cut. You haven't";
-		mes "seen anything like it";
-		mes "before, haven't you?";
+		mes "Et voici la coupe 'Épée d'Énergie'. Aviez-vous déjà vu quelque chose comme ça auparavant?";
 		next;
 		cutin "",255;
 	}else{
 		mes "[Kaniki]";
-		mes "I have two new hairstyles for";
-		mes "women, the Assumptio Perm";
-		mes "and the Soul Changer Cut.";
-		mes "Do you want to see how";
-		mes "these styles look?";
+		mes "J'ai deux coupes pour femme toutes particulières: la coupe 'Assomption' et la coupe 'Échange d'Âmes'. Je vous les montre.";
 		next;
 		cutin "hair_f_24.bmp",4;
 		mes "[Kaniki]";
-		mes "This is the Assumptio";
-		mes "Perm. It'd really good";
-		mes "on you, wouldn't it?";
+		mes "Voici la première, la coupe 'Assomption'. Vous ne trouvez pas qu'elle vous irait parfaitement?";
 		next;
 		cutin "",255;
 		cutin "hair_f_25.bmp",4;
 		mes "[Kaniki]";
-		mes "Next is the Soul";
-		mes "Changer Cut. What do";
-		mes "you think? Isn't it nice?";
+		mes "Et voici la coupe 'Échange d'Âmes'. Qu'en dites-vous? Plutôt réussie, non?";
 		next;
 		cutin "",255;
 	}
 	mes "[Kaniki]";
-	mes "Have you decided";
-	mes "if you'd like me to";
-	mes "change your hairstyle?";
+	mes "Bien, vous êtes-vous décidé? Voulez-vous que je vous fasse l'une de ces coupes?";
 	next;
-	if(select("Change Hairstyle:Don't Change") == 1) {
+	if(select("Changer de coupe:Garder sa coupe actuelle") == 1) {
 		if (countitem(7622) > 0) {
 			mes "[Kaniki]";
-			mes "Great, you brought";
-			mes "a New Style Coupon!";
-			mes "Alright, which hairstyle";
-			mes "did you want to have?";
+			mes "Vous avez un New Style Coupon, magnifique! Bien, quelle coupe voudriez-vous que je vous fasse?";
 			next;
 			if (Sex == 1) {
-				if(select("Emergency Heal Perm:Aura Blade Cut") == 1) {
+				if(select("Soins d'Urgence:Épée d'Énergie") == 1) {
 					delitem 7622,1;	// New_Style_Coupon
 					setlook 1,24;
 				}else{
@@ -90,7 +64,7 @@ itemmall,19,74,5	script	Stylist#cash	91,{
 					setlook 1,25;
 				}
 			}else{
-				if(select("Assumptio Perm:Soul Changer Cut") == 1) {
+				if(select("Assomption:Échange d'Âmes") == 1) {
 					delitem 7622,1;	// New_Style_Coupon
 					setlook 1,24;
 				}else{
@@ -99,27 +73,15 @@ itemmall,19,74,5	script	Stylist#cash	91,{
 				}
 			}
 			mes "[Kaniki]";
-			mes "There--! It's done!";
-			mes "How do you like your";
-			mes "new hair? Well, I hope";
-			mes "to see you again. Take care!";
+			mes "Et voilà, c'est terminé! Alors, que pensez-vous de votre nouvelle coupe? J'espère vous revoir bientôt. Au revoir~";
 			close;
 		}else{
 			mes "[Kaniki]";
-			mes "I'm sorry, but I can";
-			mes "only provide my hairstyling";
-			mes "service if you bring a New";
-			mes "Style Coupon. Please come";
-			mes "back to me after you manage to";
-			mes "get one of those coupons, okay?";
+			mes "Je suis désolée mais je n'offre mes services qu'à ceux qui possèdent un New Style Coupon. Revenez quand vous en aurez un, d'accord?";
 			close;
 		}
 	}
 	mes "[Kaniki]";
-	mes "Really? Oh, that's too bad.";
-	mes "Well, if you ever change your";
-	mes "mind about updating your";
-	mes "hairstyle, come back";
-	mes "and let me know, okay?";
+	mes "Vraiment? Comme c'est dommage: je suis sûre que vous auriez fait tourner des têtes avec l'une de mes coupes... Eh bien, revenez si jamais vous changez d'avis et décidez qu'il est temps de vous faire une nouvelle coupe, d'accord?";
 	close;
 }
