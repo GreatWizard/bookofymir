@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Magican Class Tutorial and Job Specific Quest
 //===== By: ================================================== 
@@ -17,290 +19,199 @@
 
 
 //=================================================Sign====================================================
-geffen,61,174,4	script	Sign#M	111,{
-  mes "~sign reads...~";
-  mes "Greetings!! This is the Geffen Magic Academy.  Come in if you have an interest in all things magic!";
+geffen,61,174,4	script	Signe::Sign#M	111,{
+  mes "~Il est écrit...~";
+  mes "Bienvenue à l'Académie de Magie de Geffen!! Que ceux qui ont un intérêt particulier pour la magie n'hésitent pas à entrer!";
   close;
 }
 
 
 //=================================================New Mage Manager====================================================
-geffen,67,180,4	script	New Mage Manager#M	102,{
+geffen,67,180,4	script	Responsable des Mages::New Mage Manager#M	102,{ // NB: "Magicien" était trop long
 	mes "[Mana]";
 	if(Class == Job_Novice){
 		mes "[Mana]";
-		mes "You're not";
-		mes "ready yet.";
-		mes "Come back after";
-		mes "you've trained more.";
+		mes "Vous n'êtes pas encore prêt. Revenez quand vous vous serez entraîné encore un peu.";
 		close;
 	}
 	if(BaseClass != Job_Mage){
-		mes "Be more confident in your job.";
-		mes "Sometimes other jobs may seem";
-		mes "better but take a look back at yourself";
-		mes "a little more. You should regain confidence";
-		mes "by doing so.";
+		mes "Soyez fier de votre profession! Je sais que parfois les autres professions ont l'air plus attirantes, mais ce n'est pas forcément vrai. Prenez un peu le temps de regarder en vous. Vous devriez retrouver confiance.";
 		close;
 	}
 	if(eaclass()&(EAJL_UPPER|EAJL_2) && tu_magician01 < 7){
 		mes "[Mana]";
-		mes "My training isn't very helpful to those that are already skilled in magic. I'm afraid you'll have to rely on yourself to improve your skills.";
+		mes "Oh je suis désolée mais je ne peux pas faire grand chose pour ceux qui ont déjà maîtrisé l'art de la magie. Je crois bien que vous ne pourrez plus que compter sur vous même pour améliorer vos compétences désormais.";
 		close;
 	}
 	switch(tu_magician01){
 	case 0:
-		mes "Welcome!";
-		mes "I'm Mana, a trainer in charge of those who have justed joined the Mage Guild.";
+		mes "Bienvenue!";
+		mes "Je m'appelle Mana. Je suis responsable de l'entraînement des nouvelles recrues de la Guilde des Magiciens.";
 		next;
 		mes "[Mana]";
-		mes "I've only been doing this job for a little while, but I'm here to help you if you want to learn more about the Mage job.";
+		mes "Ça ne fait pas très longtemps que je fais ce travail, mais je peux vous aider si vous désirez en apprendre plus sur votre profession de Magicien.";
 		next;
-		if(select("Will you teach me?", "Perhaps later...")==2){
+		if(select("Pouvez-vous m'en dire plus?", "Plus tard, peut-être...")==2){
 			mes "[Mana]";
-			mes "Well, I guess";
-			mes "that should be fine.";
-			mes "I look forward to";
-			mes "meeting you again~";
+			mes "Comme vous voulez, j'imagine. J'espère tout de même vous revoir plus tard~";
 			close;
 		}
 		mes "[Mana]";
-		mes "Of course!";
-		mes "And don't worry,";
-		mes "Everyone is a beginner";
-		mes "at one point or another.";
-		mes "You can only get better!";
+		mes "Bien sûr!";
+		mes "Oh, et ne vous en faites pas: tout le mode a été un débutant un jour. Vous ne pouvez que vous améliorer!";
 		next;
 		mes "[Mana]";
-		mes "Alright,";
-		mes "shall we start";
-		mes "with the basics then?";
+		mes "Bien. Dans ce cas, commençons avec les bases.";
 		next;
 		mes "[Mana]";
-		mes "Instead of raw physical strength, Mages use the power of the elements: ^ff0000Fire^000000, ^5C4033Earth^000000, ^93DB70Wind^000000, ^0000FFWater^000000. Mages even have ^CFB53BGhost^000000 property spells.";
+		mes "Mas Magiciens n'utilisent pas la force physique mais le pouvoir des Éléments: le ^ff0000Feu^000000, la ^5C4033Terre^000000, le ^93DB70Vent^000000, et l'^0000FFEau^000000. En fait les Magiciens peuvent même utiliser des sorts de propriété ^CFB53BFantôme^000000.";
 		next;
 		mes "[Mana]";
-		mes "Now, if an enemy has an elemental property, it will be able to resist some elements and suspectible to others.";
+		mes "Maintenant, si un ennemi possède une propriété élémentale, il aura une résistance envers certains éléments, mais sera aussi plus vulnérable à d'autres.";
 		next;
 		mes "[Mana]";
-		mes "Listen carefully.";
-		mes "^FF0000Fire^000000 is strong against Earth but weak against Water.  Now, ^5C4033Earth^000000 is strong against Wind, but weak against Fire.";
+		mes "Écoutez attentivement.";
+		mes "Le ^FF0000Feu^000000 est puissant contre la Terre, mais faible contre l'Eau.  Maintenant, la ^5C4033Terre^000000 est puissante contre le Vent, mais faible contre le Feu.";
 		next;
 		mes "[Mana]";
-		mes "^0000FFWater^000000 is strong against Fire but weak against Wind. And finally, ^93DB70Wind^000000 is strong against Water but weak against Earth.";
+		mes "L'^0000FFEau^000000 est puissante contre le Feu, mais faible contre le Vent. Et finalement, le ^93DB70Vent^000000 est puissant contre l'Eau mais faible contre la Terre.";
 		next;
 		mes "[Mana]";
-		mes "Was I talking too much?";
-		mes "Let's take a break and continue later. I'm still new to this, so I'm a little bushed~!";
+		mes "Ça va, vous avez suivi?";
+		mes "Bon, faisons une pause. Nous reprendrons plus tard. Ça ne fait pas très longtemps que je fais ça alors je ne suis peut-être pas encore au point~";
 		set tu_magician01, 1;
 		getexp BaseLevel*30,BaseLevel*15;
 		//misceffect EF_HIT5;
 		close;
 		break;
 	case 1:
-		mes "Are you ready";
-		mes "to continue our";
-		mes "discussion on the elements?";
+		mes "Est-ce que vous êtes prêt à continuer notre discussion sur les éléments?";
 		next;
 		mes "[Mana]";
-		mes "Remember that each monster has an elemental property and that each property has a level. Understanding the elements will help you win battles.";
+		mes "Rappelez-vous: chaque monstre a une propriété élémentale et chaque propriété a un certain niveau. Une bonne compréhension des éléments vous aidera grandement dans la bataille.";
 		next;
 		mes "[Mana]";
-		mes "In other words, even the same properties";
-		mes "have different features that must be considered.";
-		mes "I will explain the properties now.";
+		mes "En d'autres mots, même des monstres qui ont la même propriété peuvent varier, et d'autres choses sont à prendre en considération. Je vais maintenant vous parler des propriétés.";
 		next;
 		while((1)){
-			switch(select("^ff0000Fire^000000", "^5C4033Earth^000000", "^93DB70Wind^000000", "^0000FFWater^000000", "^CFB53BGhost^000000", "Quit.")){
+			switch(select("^ff0000Feu^000000", "^5C4033Terre^000000", "^93DB70Vent^000000", "^0000FFEau^000000", "^CFB53BFantôme^000000", "Quitter la conversation.")){
 			case 1:
 				mes "[Mana]";
-				mes "In general, monsters that have the '^ff0000Fire^000000'";
-				mes "property have strong attacks.";
-				mes "Therefore, Mages who are generally physically weaker.";
-				mes "Even the slightest hit can be critical.";
+				mes "En règle générale, les monstres de propriété '^ff0000Feu^000000' ont une attaque puissante. Par conséquent, les Magiciens, qui en général n'ont pas une très bonne défense, devraient s'en méfier. Le moindre coup peut s'avérer critique.";
 				next;
 				mes "[Mana]";
-				mes "The skills with a '^ff0000fire^000000' property";
-				mes "are 'Sight', 'Fire Bolt' 'Fire Wall'"; // Trad: Feu Révélateur, Pluie de Feu, Mur de Feu
-				mes "and 'Fire Ball'."; // Trad: Boule de Feu
+				mes "Voici quelques compétences ayant l'élément '^ff0000Feu^000000': Feu Révélateur, Pluie de Feu, Mur de Feu, Boule de Feu.";
 				next;
 				mes "[Mana]";
-				mes "When fighting '^ff0000fire^000000' property monsters";
-				mes "...Usually when alone?";
-				mes "Use 'Frost Diver' to freeze the monster first."; // Trad: Gel
+				mes "Lorsque vous combattez des monstres de propriété '^ff0000Geu^000000', le mieux est d'utiliser d'abord le sort Gel afin de les immobiliser et de changer leur élément.";
 				next;
 				mes "[Mana]";
-				mes "If you fight '^ff0000fire^000000' with '^ff0000fire^000000'";
-				mes "it will do little or no damage at all.";
+				mes "Si vous utilisez des attaques de propriété '^ff0000Feu^000000' contre des monstres du même élément, vous ne ferez que très peu de dégâts, voire même aucun.";
 				next;
 				mes "[Mana]";
-				mes "The most distinctive of the '^ff0000fire^000000' property";
-				mes "skills is 'Fire Wall'. It can be used"; // Trad: Mur de Feu
-				mes "up to 3 times in one screen.";
+				mes "Parmi les compétences de type '^ff0000Feu^000000', celle qui se distingue le plus est surement la technique du Mur de Feu, qui peut être utilisée jusqu'à trois fois dans la zone.";
 				next;
 				mes "[Mana]";
-				mes "The 'Fire Wall' remains on the ground"; // Mur de Feu
-				mes "and any monster that runs into it will";
-				mes "be damaged. The monster then moves away";
-				mes "in the opposite direction from which";
-				mes "they approached.";
+				mes "Les Murs de Feu restent à l'endroit où vous les avez utilisé, et les monstres qui s'y heurtent seront blessés. En général, ils fuient ensuite dans la direction opposée.";
 				next;
 				mes "[Mana]";
-				mes "But 'Undead' monsters are only injured";
-				mes "slightly and still move in the same";
-				mes "direction so beware.";
+				mes "Cependant, les monstre de type 'Mort-Vivant' ne seront que faiblement blessés et continueront à avancer, alors prenez garde!";
 				set tu_mana,tu_mana|1;
 				next;
 				break;
 			case 2:
 				mes "[Mana]";
-				mes "Usually, '^5C4033Earth^000000' property monsters";
-				mes "have good targeting. So no matter how";
-				mes "how high your dodge rate is, even Mages";
-				mes "have a hard time avoiding the attacks.";
+				mes "En général, les monstres de propriété '^5C4033Terre^000000' sont très habiles, alors peu importe votre Taux d'Esquive, ils vous toucheront très certainement.";
 				next;
 				mes "[Mana]";
-				mes "'^5C4033Earth^000000'property spells include";
-				mes "'Stone Curse' but it is hard to"; // Trad: Pétrification
-				mes "classify it as '^5C4033Earth^000000' but for now";
-				mes "we'll leave it as is.";
+				mes "Parmi les sorts de propriété '^5C4033Terre^000000' on compte la Pétrification, même si c'est un sort très particulier. Nous allons donc le laisser de côté pour l'instant.";
 				next;
 				mes "[Mana]";
-				mes "'^5C4033Earth^000000' property monsters are";
-				mes "generally weak against 'Fire Wall'."; // Trad: Mur de Feu
+				mes "Les monstres de propriété '^5C4033Terre^000000' sont en général vulnérables face aux Murs de Feu.";
 				next;
 				mes "[Mana]";
-				mes "'^5C4033Earth^000000' is weak against '^ff0000fire^000000'";
-				mes "so 'Fire Wall' stops the monster and"; // Trad: Mur de Feu
-				mes "does damage.";
+				mes "La '^5C4033Terre^000000' est vulnérable au '^ff0000Feu^000000', alors les Murs de Feu bloquent les monstres et leur causent des dommages.";
 				next;
 				mes "[Mana]";
-				mes "In the same way '^ff0000fire^000000' property spells";
-				mes "such as 'Fire Ball' or 'Fire Bolt' can"; // Trad: Boule de Feu, Pluie de Feu
-				mes "be used to do damage the monsters also.";
+				mes "De même, les autres sorts de propriété '^ff0000Feu^000000' comme les Boules de Feu ou les Pluies de Feu peuvent être très utiles face à ces monstres.";
 				next;
 				mes "[Mana]";
-				mes "Oh..and";
-				mes "When you 'Stone Curse' a monster"; // Trad: Pétrification
-				mes "the monster becomes of '^5C4033earth^000000' property.";
-				mes "If you use this point very well, you can do";
-				mes "much more damange when battling.";
+				mes "Oh et lorsque vous utilisez un sort de Pétrification sur un monstre, il devient d'élément '^5C4033Terre^000000', alors utilisé à bon escient, il vous permettra de faire de plus gros dégâts lors de vos combats.";
 				set tu_mana,tu_mana|2;
 				next;
 				break;
 			case 3:
 				mes "[Mana]";
-				mes "Generally '^93DB70wind^000000' property monsters";
-				mes "avoid attacks very well.";
+				mes "En général, les monstres de type '^93DB70Vent^000000' sont très habiles à esquiver les attaques.";
 				next;
 				mes "[Mana]";
-				mes "But Mages never really attack directly";
-				mes "so there is no need to worry about";
-				mes "this aspect.";
+				mes "Cependant, comme les Magiciens n'attaquent jamais de front, vous n'aurez pas à vous en faire.";
 				next;
 				mes "[Mana]";
-				mes "But '^93DB70wind^000000' property monsters";
-				mes "are swift, so you must be careful when attacking.";
+				mes "Cependant, les monstres de type '^93DB70Vent^000000' sont très rapides, alors faites attention quand vous attaquez.";
 				next;
 				mes "[Mana]";
-				mes "'^93DB70Wind^000000' property skills include";
-				mes "'Lightning Bolt' and 'Thunder Storm'."; // Trad: Pluie d'Éclairs, Tempête Foudroyante
+				mes "Parmi les compétences de propriété '^93DB70Vent^000000' on compte les Pluies d'Éclairs et les Tempêtes Foudroyantes.";
 				next;
 				mes "[Mana]";
-				mes "When attacking '^93DB70wind^000000' property monsters";
-				mes "it is good to use '^5C4033earth^000000' property skills.";
-				mes "But while Wizards do have teh ability to do quite";
-				mes "some damage, Mages do not yet have the power to";
-				mes "'attack with an ^5C4033earth^000000' property skill.";
+				mes "L'idéal serait d'utiliser des compétences de type '^93DB70Terre^000000' face à des monstres de '^5C4033Vent^000000'. Cependant, contrairement aux Sorciers, les Magiciens n'ont pas de sort de Terre à leur disposition.";
 				next;
 				mes "[Mana]";
-				mes "So it is good to use a '^ff0000fire^000000' element";
-				mes "skill. '^93DB70Wind^000000' property or";
-				mes "'^0000FFwater^000000' property skills do little";
-				mes "or no damage to '^93DB70wind^000000' property monsters.";
+				mes "Le mieux est donc d'utiliser une compétence de type '^ff0000Feu^000000'. Des sorts de '^93DB70Vent^000000' ou d''^0000FFEau^000000' ne feraient que très peu de dommages, voire aucun.";
 				set tu_mana,tu_mana|4;
 				next;
 				break;
 			case 4:
 				mes "[Mana]";
-				mes "'^0000FFWater^000000' property monsters have";
-				mes "strong health. When battling such monsters";
-				mes "it usually takes longer than others.";
+				mes "Les monstres de type '^0000FFEau^000000' ont en général une grande Vitalité. Combattre ces monstres prend généralement plus de temps que pour les autres.";
 				next;
 				mes "[Mana]";
-				mes "But '^0000FFwater^000000' property monsters are";
-				mes "affected more by level then monsters of other";
-				mes "properties.";
+				mes "Cependant, les monstres de type '^0000FFEau^000000' sont plus affectés par les autres éléments.";
 				next;
 				mes "[Mana]";
-				mes "In other words a monster that is level 2 of the '^93DB70wind^000000'";
-				mes "property gets hit '150' by a '^5C4033earth^000000' property skill,";
-				mes "a level 2 '^0000FFwater^000000' property monster";
-				mes "will receive '175' damage from a '^93DB70wind^000000' property skill.";
+				mes "En d'autres mots, si un monstre de type '^93DB70Vent^000000' Niveau 2 reçoit 150 dommages par un sort de ^5C4033Terre^000000, un monstre de type '^0000FFEau^000000' Niveau 2recevra 175 dommages par un sort de ^93DB70Vent^000000.";
 				next;
 				mes "[Mana]";
-				mes "If you use these properties well you should be";
-				mes "able to fight '^0000FFwater^000000' property monsters quickly.";
+				mes "En utilisant les éléments à bon escient, vous pourrez vous débarrasser rapidement des monstres de type '^0000FFEau^000000'.";
 				next;
 				mes "[Mana]";
-				mes "'^0000FFWater^000000' property skills include 'Cold Bolt'"; // Trad: Pluie de Glace
-				mes "and 'Frost Driver'.";
-				mes "'^ff0000Fire^000000' property monsters are weak against these attacks.";
-				mes "Oh, and 'Frost Diver' has a special characteristic."; // Trad: Gel
+				mes "Parmi les sorts de type '^0000FFEau^000000', on compte les Pluies de Glace et les sorts de Gel. Les monstres de type '^ff0000Feu^000000' sont vulnérables à ceux-ci. Oh, et le sort de 'Gel' a quelques spécificités.";
 				next;
 				mes "[Mana]";
-				mes "When attacking a monster with 'Frost Driver'";
-				mes "there is a chance that the monster can be frozen.";
-				mes "At that time the monster temporarily turns into a";
-				mes "'^0000FFwater^000000' property.";
+				mes "En utilisant un sort de 'Gel' sur un monstre, vous aurez une chance de le geler, changeant son élément. Il deviendra alors temporairement de type '^0000FFEau^000000'.";
 				next;
 				mes "[Mana]";
-				mes "If you use this idea, then it should be easier to";
-				mes "fight the monsters.";
+				mes "En gardant cela en tête, vous pourrez utiliser cet effet pour vous aider à combattre les monstres.";
 				set tu_mana,tu_mana|8;
 				next;
 				break;
 			case 5:
 				mes "[Mana]";
-				mes "Let me explain a little about the '^CFB53Bghost^000000' property.";
-				mes "There aren't many '^CFB53Bghost^000000' property monsters";
-				mes "so it is a bit tedious.";
+				mes "Laissez-moi vous parler de l'élément '^CFB53BFantôme^000000', même si il n'y a pas beaucoup de monstres de cet élément.";
 				next;
 				mes "[Mana]";
-				mes "'^CFB53BGhost^000000' property magic includes";
-				mes "'Napalm Beat' and 'Soul Strike' and also"; // Trad: Choc Psychique, Brûlure Psychique
-				mes "the hard to classify 'Safety Wall'."; // Trad: Protection
+				mes "Parmi les sorts de propriété '^CFB53BFantôme^000000', on peut compter les Chocs Psychiques, les Brûlures Psychiques, et les sorts de Protection";
 				next;
 				mes "[Mana]";
-				mes "The first two are very useful when attacking '^CFB53Bghost^000000' property";
-				mes "monsters, but if the monster has no property, ";
-				mes "the skills may not do any damage whatsoever.";
+				mes "Les deux premiers sont très utiles face à des monstres de type '^CFB53BFantôme^000000', mais ils ne feront que très peu de dommages aux autres types, voire même aucun.";
 				next;
 				mes "[Mana]";
-				mes "So be careful when you choose to use them.";
-				mes "Mmm.. and 'Safety Wall' is a slightly different"; // Trad: Protection
-				mes "skill. It makes a are surrounded by a wall where";
-				mes "one person can enter and be protected from ";
-				mes "close physical attacks.";
+				mes "Faites donc bien attention quand vous les utilisez. Quant au sort de Protection... Il est très différent. Il crée un mur protecteur dans lequel quelqu'un peut se réfugier, et qui repousse les attaques physiques.";
 				next;
 				mes "[Mana]";
-				mes "But it cannot protect you from distant";
-				mes "attacks or strong monster's property attacks";
-				mes "so be careful when using the skill.";
+				mes "Cependant, il ne protège pas des attaques à distance ou des attaques magiques, alors soyez sur vos gardes.";
 				set tu_mana,tu_mana|16;
 				next;
 				break;
 			case 6:
 				mes "[Mana]";
-				mes "Really?";
-				mes "I'm a li~~~ ttle busy too so I can't explain it several times.";
-				mes "So listen carefully until you have absorbed all the";
-				mes "information this time.";
+				mes "Vraiment?";
+				mes "J'ai énormément de travail alors je ne pourrai pas l'expliquer à nouveau. Vous avez donc tout intérêt à bien écouter tout ce que je vous dis!";
 				next;
-				if(select("Then the explanation..", "Quit for sure.")==2){
+				if(select("Bien, les propriétés alors...", "Passer à autre chose.")==2){
 					mes "[Mana]";
-					mes "I'll move onto the next subject then.";
-					mes "Hoho..";
+					mes "Bon, dans ce cas je vais passer au sujet suivant.";
+					mes "Hoho...";
 					set tu_magician01, 2;
 					//misceffect EF_HIT5;
 					if(tu_mana&1){
@@ -326,119 +237,80 @@ geffen,67,180,4	script	New Mage Manager#M	102,{
 		}
 		break;
 	case 2:
-		mes "Do you understand the concept of properties now?";
-		mes "It may be a bit confusing, but over time";
-		mes "you should be able to get the hang of it.";
-		mes "Now I will explain about magic and skills.";
+		mes "J'imagine que vous comprenez maintenant le concept de propriété. C'est peut-être encore un peu confus, mais vous vous y ferez petit à petit. Laissez-moi maintenant vous parler de la magie et des compétences.";
 		//next;
 		//misceffect EF_SIGHT;
 		next;
 		mes "[Mana]";
-		mes "I'll first explain the basic skills.";
-		mes "'Fire Bolt' 'Cold Bolt'"; // Trad: Pluie de Feu, Pluie de Glace
-		mes "'Lightning Bolt' 'Napalm Beat'"; // Trad: Pluie d'Éclairs, Choc Psychique
-		mes "These are the four basic ones.";
+		mes "Je vais commencer par les autre sorts de base: Pluie de Feu, Pluie de Glace, Pluie d'Éclairs, et Choc Psychique.";
 		//next;
 		//misceffect EF_NAPALMBEAT;
 		next;
 		mes "[Mana]";
-		mes "These can damage one opponent or monster.";
-		mes "Most of the other skills require the";
-		mes "knowledge of these basic skills first.";
+		mes "Ils peuvent tous blesser un adversaire. Il vous faudra d'abord les apprendre avant de pouvoir maîtriser la plupart des autres sorts.";
 		//next;
 		//misceffect EF_LIGHTBOLT;
 		next;
 		mes "[Mana]";
-		mes "'Fire Bolt' has the '^ff0000fire^000000' property,"; // Trad: Pluie de Feu
-		mes "'Cold Bolt' has the '^0000FFwater^000000' property,"; // Trad: Pluie de Glace
-		mes "Lightning Bolt' has the '^93DB70wind^000000' property,"; // Trad: Pluie d'Éclairs
-		mes "and 'Napalm Beat' has the '^CFB53Bghost^000000' property."; // Choc Psychique
+		mes "Les 'Pluies de Feu' sont des sorts de '^ff0000Feu^000000'.";
+		mes "Les 'Pluies de Glace' sont des sorts d''^0000FFEau^000000'.";
+		mes "Les Pluies d'Éclairs' sont des sorts de '^93DB70Vent^000000'.";
+		mes "Enfin, les 'Chocs Psychiques' sont des sorts de propriété '^CFB53BFantôme^000000'.";
 		//next;
 		//misceffect EF_STONECURSE;
 		next;
 		mes "[Mana]";
-		mes "The damage that these skills can do";
-		mes "grows as the level of gets higher.";
-		mes "And there are some other basic skills";
-		mes "such as 'Sight', 'Stone Curse' and"; // Feu Révélateur', 'Pétrification
-		mes "'Increase SP Recovery'.";// Régénération Psychique
+		mes "Plus leur niveau est élevé, et plus leurs dommages seront conséquents. Il y a aussi d'autres sorts ou compétences, comme le 'Feu Révélateur', la 'Pétrification', ou la 'Régénération Psychique'.";
 		next;
 		mes "[Mana]";
-		mes "'Sight' reveals hidden enemies but the"; // Trad: Feu Révélateur
-		mes "range is not that great so be careful.";
+		mes "Le 'Feu Révélateur' vous permet de détecter les ennemis cachés, mais il a une courte portée alors faites bien attention.";
 		next;
 		mes "[Mana]";
-		mes "'Stone Curse', as mentioned before can"; // Trad: Pétrification
-		mes "curse a target with a certain chance.";
-		mes "But be aware that you need a 'Red Gemstone'";
-		mes "for the skill to work.";
+		mes "Le sort de 'Pétrification' peut comme je vous l'ai dit transformer en pierre un ennemi. Il vous faudra une Gemme Rouge pour l'utiliser.";
 		next;
 		mes "[Mana]";
-		mes "Opponents that are cursed with 'Stone Curse'"; // Trad: Pétrification
-		mes "become '^5C4033earth^000000' properties.";
-		mes "And a cursed enemy can't move on its";
-		mes "own free will.";
+		mes "Les ennemis pétrifiés prendront la propriété '^5C4033Terre^000000', et ils seront incapables de bouger.";
 		next;
 		mes "[Mana]";
-		mes "'Increase SP Recovery' is sort of hard";// Régénération Psychique
-		mes "to call a magic skill. It increases the";
-		mes "amount of SP you recover when sitting";
-		mes "down to rest.";
+		mes "La 'Régénération Psychique' n'est pas vraiment un sort. C'est plus une compétence qui vous permet de récupérer plus de SP lorsque vous vous reposez.";
 		next;
 		mes "[Mana]";
-		mes "So it will reduce the time you need to";
-		mes "sit and rest. It doesn't help you directly";
-		mes "when battling, but makes things a lot easier.";
+		mes "Elle permet donc de réduire votre temps de repos. Ça ne vous aide pas directement pendant la bataille, mais ça rend les choses beaucoup plus faciles ensuite.";
 		next;
 		mes "[Mana]";
-		mes "Mmm....";
-		mes "This should be enough explaining about the";
-		mes "basic skills. Now before we move onto the";
-		mes "higher level skills, here is an assignment";
-		mes "for you. Hoho..";
+		mes "Hum.... Vous devez maintenant en savoir assez sur les compétences de base. Mais avant que nous ne passions au sujet suivant, j'ai une petite mission pour vous.";
 		next;
 		mes "[Mana]";
-		mes "If you go north of here, Geffen, there is";
-		mes "a big bridge and monsters called a 'Chrysalide'.";
-		mes "They don't move and do not attack when";
-		mes "attacked.";
+		mes "Si vous sortez de la ville par la porte Nord, vous trouverez près du pont des monstres qu'on appelle des 'Chrysalides'. Elles sont immobiles et ne se défendent pas.";
 		next;
 		mes "[Mana]";
-		mes "Attack these 'Chrysalides' and gather 10 'Chrysalis'.";
-		mes "Be careful because these 'Chrysalides' may turn";
-		mes "into a 'Creamy'.";
+		mes "Attaquez-les et rapportez-moi 10 'Chrysalides'. Mais attention: ces monstres peuvent éclore et se transformer en 'Creamy'.";
 		next;
 		mes "[Mana]";
-		mes "It may be hard for you to fight a 'Creamy' yet";
-		mes "so if the 'Chrysalide' is acting weird be extra careful.";
+		mes "Je ne suis pas sûre que vous avez le niveau pour combattre un 'Creamy', alors faites bien attention si la 'Chrysalide' commence à se comporter bizarrement.";
 		set tu_magician01, 3;
 		getexp 400,200;
 		//misceffect EF_HIT5;
 		close;
 		break;
 	case 3:
-		mes "Ah~ You're here?";
-		mes "Let's see if you gathered all that's needed.";
+		mes "Ah~ Vous revoilà?";
+		mes "Voyons si vous avez tout ce que je vous avais demandé de rapporter.";
 		next;
 		if(countitem(915) < 10){
 			mes "[Mana]";
-			mes "Not quite enough.";
-			mes "Come back when you have gathered some more.";
-			mes "This is a bonus.";
+			mes "Oh, non ce n'est pas assez. Revenez quand vous aurez tout.";
+			mes "Un petit quelque chose pour vous au passage... Voilà, vous êtes maintenant de nouveau en plein forme!";
 			set tu_magician01, 4;
 			percentheal 100,0;
 			percentheal 0,100;
 			close;
 		} else {
 			mes "[Mana]";
-			mes "Oh you gathered them all.";
-			mes "Now are you more used to using these skills?";
-			mes "Once you have trained more, you can";
-			mes "combine different skills to form stronger attacks.";
+			mes "Oh vous avez tout! Est-ce que vous avez pu vous habituer un peu à utiliser vos compétences? Lorsque vous serez mieux entraîné, vous pourrez combiner vos sorts pour faire des attaques encore plus dévastatrices.";
 			next;
 			mes "[Mana]";
-			mes "Let's take a break now before we";
-			mes "move on to explain the other skills.";
+			mes "Bon, faisons une petite pose avant de poursuivre avec les autres compétences.";
 			set tu_magician01, 5;
 			getexp 400,200;
 			//misceffect EF_HIT5;
@@ -446,25 +318,19 @@ geffen,67,180,4	script	New Mage Manager#M	102,{
 		}
 		break;
 	case 4:
-		mes "Ah~ You're here?";
-		mes "Let's see if you gathered all that's needed.";
+		mes "Ah~ Vous revoilà?";
+		mes "Voyons si vous avez tout ce que je vous avais demandé de rapporter.";
 		next;
 		if(countitem(915) < 10){
 			mes "[Mana]";
-			mes "You need a little bit more.";
-			mes "You can do it!";
-			mes "'10 ^ff0000Chrysalis^000000', ok?";
+			mes "Il vous en faudra encore un peu plus. Je vous ai demandé de me rapporter '10 ^ff0000Chrysalides^000000'. Confiance, vous pouvez y arriver!";
 			close;
 		} else {
 			mes "[Mana]";
-			mes "Oh you gathered them all.";
-			mes "Now are you more used to using these skills?";
-			mes "Once you have trained more, you can";
-			mes "combine different skills to form stronger attacks.";
+			mes "Oh vous avez tout! Est-ce que vous avez pu vous habituer un peu à utiliser vos compétences? Lorsque vous serez mieux entraîné, vous pourrez combiner vos sorts pour faire des attaques encore plus dévastatrices.";
 			next;
 			mes "[Mana]";
-			mes "Let's take a break now before we";
-			mes "move on to explain the other skills.";
+			mes "Bon, faisons une petite pose avant de poursuivre avec les autres compétences.";
 			set tu_magician01, 5;
 			getexp 400,200;
 			//misceffect EF_HIT5;
@@ -472,154 +338,110 @@ geffen,67,180,4	script	New Mage Manager#M	102,{
 		}
 		break;
 	case 5:
-		mes "Now shall we discuss the more advanced skills?";
+		mes "Bien. Voulez-vous que l'on parler des compétences avancées?";
 		next;
 		while(1){
-			switch(select("Soul Strike", "Safety Wall", "Fire Ball", "Frost Diver", "Thunderstorm", "Fire Wall", "Energy Coat", "Quit.")){ // Trad: Brûlure Psychique, Protection, Boule de Feu, Gel, Tempête Foudroyante, Mur de Feu, Manteau Protecteur
+			switch(select("Brûlure Psychique", "Protection", "Boule de Feu", "Gel", "Tempête Foudroyante", "Mur de Feu", "Manteau Protecteur", "Quitter la conversation")){
 			case 1:
 				mes "[Mana]";
-				mes "'Soul Strike' is a '^CFB53Bghost^000000' property"; // Trad: Brûlure Psychique
-				mes "skill. Once you have leared a certain amount of";
-				mes "'Napalm Beat' you can learn it as well."; // Trad: Choc Psychique
+				mes "Les 'Brûlures Psychiques' sont un sort de propriété '^CFB53BFantôme^000000'. Vous pourrez l'apprendre après avoir maîtrisé à un certain degré les Chocs Psychiques.";
 				//next;
 				//misceffect EF_SOULSTRIKE;
 				next;
 				mes "[Mana]";
-				mes "When you train more the power of your";
-				mes "'Soul Strike' will become stronger and "; // Trad: Brûlure Psychique
-				mes "you will be able to cast it faster.";
+				mes "Au fur et à mesure que vous apprendrez à maîtriser ce sort, vos attaques seront plus rapides et plus puissantes.";
 				set tu_mana,tu_mana|1;
 				next;
 				break;
 			case 2:
 				mes "[Mana]";
-				mes "'Safety Wall' can be learned after you have "; // Trad: Protection
-				mes "trained a certain amount of 'Napalm Beat'"; // Trad: Choc Psychique
-				mes "and 'Soul Strike'. As mentioned before, it"; // Trad: Brûlure Psychique
-				mes "blocks most close range attacks.";
+				mes "Le sort de 'Protection' peut être appris une fois que vous avez maîtrisé les Chocs Psychiques et les Brûlures Psychiques à un certain degré. Comme je vous l'ai déjà dit, il sert à bloquer les attaques dans la mêlée.";
 				//next;
 				//misceffect EF_GLASSWALL;
 				next;
 				mes "[Mana]";
-				mes "But it does not block infinitely.  It will only";
-				mes "provide a shield for a certain amount of";
-				mes "attacks and time. Of course this varies";
-				mes "depending on how much you train.";
+				mes "Cependant, il ne pourra pas les bloquer éternellement. Il ne formera un bouclier que pendant un certain temps et pour un certain nombre de coups. Tout ceci dépend de votre entraînement avec ce sort.";
 				set tu_mana,tu_mana|2;
 				next;
 				break;
 			case 3:
 				mes "[Mana]";
-				mes "'Fire Ball' is a '^ff0000fire^000000' property skill"; // Trad: Boule de Feu
-				mes "and can be learned after a certain amount of 'Fire Bolt'."; // Trad: Pluie de Feu
+				mes "Les 'Boules de Feu' sont des sorts de propriété '^ff0000Feu^000000' et peuvent être apprises une fois que vous avez maîtrisé les 'Pluies de Feu' à un certain degré.";
 				//next;
 				//misceffect EF_FIREBALL;
 				next;
 				mes "[Mana]";
-				mes "If 'Fire Bolt' attacks one opponent 'Fire Ball'"; // TRad: Pluie de Feu, Boule de Feu
-				mes "attacks several within a certain range.";
+				mes "Alors que les 'Pluies de Feu' ne s'abattent que sur un seul ennemi, les 'Boules de Feu' touchent tous ceux à proximité.";
 				next;
 				set tu_mana,tu_mana|4;
 				break;
 			case 4:
 				mes "[Mana]";
-				mes "'Frost Diver' is a '^0000FFwater^000000' property"; // Trad: Gel
-				mes "skill and can learned after training with 'Cold Bolt'"; // Trad: Pluie de Glace
-				mes "While it can damage the opponent, the main";
-				mes "purpose is to freeze the enemy.";
+				mes "Le sort de 'Gel' est de propriété '^0000FFEau^000000', et peut être appris une fois que vous avez maîtrisé les 'Pluies de Glace' à un certain degré. Bien qu'il cause des dommages aux adversaire, son but premier et de les geler sur place.";
 				//next;
 				//misceffect EF_FROSTDIVER;
 				//misceffect EF_FROSTDIVER2;
 				next;
 				mes "[Mana]";
-				mes "Enemies hit by 'Frost Diver' will be damaged"; // Trad: Gel
-				mes "and freeze at the same time by a certain";
-				mes "amount of chance.";
+				mes "Les ennemis touchés par ce sort seront blessés et auront une chance d'être gelés.";
 				next;
 				mes "[Mana]";
-				mes "When the enemy is frozen it will change to";
-				mes "have the '^0000FFwater^000000' property.";
-				mes "The amount of damage and chance to be";
-				mes "frozen increases the more you train.";
+				mes "Lorsque cela arrive, son élément se changera en '^0000FFEau^000000'. Les dégâts causés et la chance de geler son adversaire augmentent au fur et à mesure que vous apprenez à maîtriser cette compétence.";
 				set tu_mana,tu_mana|8;
 				next;
 				break;
 			case 5:
 				mes "[Mana]";
-				mes "'Thunderstorm' is a '^93DB70wind^000000' property"; // Tempête Foudroyante
-				mes "skill and can be learned after training 'Lightning Bolt'."; // Trad: Pluie d'Éclairs
+				mes "La 'Tempête Foudroyante' est un sort de propriété '^93DB70Vent^000000', et peut être apprise une fois que vous avez maîtrisé les Pluies d'Éclairs.";
 				//next;
 				//misceffect EF_THUNDERSTORM;
 				next;
 				mes "[Mana]";
-				mes "While 'Lightning Bolt' attacks one particular"; // Trad: Pluie d'Éclairs
-				mes "enemy, 'Thunderstorm' attacks all enemies"; // Tempête Foudroyante
-				mes "within a certain range. It is somewhat similar";
-				mes "to how 'Fire Ball' works."; // Trad: Boule de Feu
+				mes "Si les Pluies d'Éclairs ne touchent qu'un seul ennemis, les Tempêtes Foudroyantes s'abattent sur tous ceux dans la zone. Elles fonctionnent à peu près de la même façon que les 'Boules de Feu'.";
 				set tu_mana,tu_mana|16;
 				next;
 				break;
 			case 6:
 				mes "[Mana]";
-				mes "'Fire Wall' is a '^ff0000fire^000000' property"; // Trad: Mur de Feu
-				mes "skill that can be learned after training 'Fire Ball'"; // Trad: Boule de Feu
-				mes "and 'Sight'."; // Trad: Feu Révélateur
+				mes "Le 'Mur de Feu' est un sort d'élément '^ff0000Feu^000000', comme vous vous en doutez. Vous pourrez l'apprendre après avoir maîtrisé les sorts 'Boule de Feu' et 'Feu Révélateur'";
 				//next;
 				//misceffect EF_FIREWALL;
 				next;
 				mes "[Mana]";
-				mes "'Fire Wall' works differently from the"; // Trad: Mur de Feu
-				mes "the other skills. While other skills attack";
-				mes "one particular opponent, 'Fire Wall'"; // Trad: Mur de Feu
-				mes "targets an area.";
+				mes "Les 'Mur de Feu' fonctionnent différemment des autres sorts. Là où les autres ciblent un ennemi en particulier, les 'Murs de Feu' ciblent une zone.";
 				next;
 				mes "[Mana]";
-				mes "So it is like....";
-				mes "     opponent";
+				mes "C'est un peu comme si on avait...";
+				mes "     Adversaire";
 				mes "     *********";
-				mes "          me";
+				mes "         Moi";
 				next;
 				mes "[Mana]";
-				mes "The target is not the enemy but rather the";
-				mes "space between yourself and the enemy.";
-				mes "or the floor. You can use it to make a ";
-				mes "'Fire Wall' between yourself and the enemy"; // Trad: Mur de Feu
-				mes "and block its path.";
+				mes "La cible n'est pas tant l'ennemi que l'espace qui vous sépare de lui. Vous pouvez utiliser ce sort pour créer un mur de flammes entre vous et lui pour bloquer son chemin.";
 				next;
 				mes "[Mana]";
-				mes "During that time, you can go ahead and use";
-				mes "a skill that will cause more damage safely.";
-				mes "Depending on how you use 'Fire Wall'"; // Trad: Mur de Feu
-				mes "it can be very powerful.";
+				mes "Vous pourrez pendant ce temps lancer un autre sort causant plus de dommages en toute sécurité. Ce sort peut être très puissant si vous en faites bon usage.";
 				set tu_mana,tu_mana|32;
 				next;
 				break;
 			case 7:
 				mes "[Mana]";
-				mes "'Energy Coat' is mmm....."; // Trad: Manteau Protecteur
-				mes "a unique skill and cannot be learned";
-				mes "in a normal way. You can only learn";
-				mes "the skill from 'Blizardis' who is at";
-				mes "the Mage Job Change Place.";
+				mes "'Le sort du 'Manteau Protecteur' est... Comment dire? Il s'agit d'une compétence qui ne peut pas être apprise de façon traditionnelle. Seul 'Blizardis' dans l'enceinte de la Guilde peut vous l'apprendre.";
 				//next;
 				//misceffect EF_ENERGYCOAT ;
 				next;
 				mes "[Mana]";
-				mes "'Blizardis' will tell you the details.";
+				mes "'Blizardis' vous donnera tous les détails.";
 				set tu_mana,tu_mana|64;
 				next;
 				break;
 			case 8:
 				mes "[Mana]";
-				mes "Did you understand the explanation?";
-				mes "Mmm....I wanted to give you something more";
-				mes "like a mission, but we need more information";
-				mes "before we do anything else.";
-				mes "I'll let you know when we are done.";
+				mes "Vous avez bien tout compris?";
+				mes "Hum.... Je voulais vous donner quelque chose à faire, une sorte de mission, mais il nous manque encore quelques informations. Je vous dirai quand nous les auront..";
 				next;
 				mes "[Mana]";
-				mes "Oh and this is a present.";
-				mes "Become a great Wizard~";
+				mes "Oh mais voilà un petit cadeau pour avoir été un Magicien si studieux~";
 				set tu_magician01, 6;
 				getitem 1604, 1;
 				//misceffect EF_HIT5;
@@ -653,31 +475,23 @@ geffen,67,180,4	script	New Mage Manager#M	102,{
 		close;
 		break;
 	case 6:
-		mes "Oh good, you came.";
-		mes "There are a lot of strange things going";
-		mes "on these days and we've been short on";
-		mes "hands. Recently something happened in Morroc.";
+		mes "Oh, vous êtes revenu. Bien.";
+		mes "Des choses étranges se trament de nos jours, et je suis à court de volontaires. Quelque chose est arrivé à Morroc il y a peu.";
 		next;
 		mes "[Mana]";
-		mes "So we received a couple requests from the Thief Guild.";
-		mes "But everyone is out doing work so we're having trouble.";
+		mes "Nous avons reçu des demande de la part de la Guilde des Voleurs, mais tout le monde ici est surchargé de travail. Nous avons donc un problème.";
 		next;
 		mes "[Mana]";
-		mes "If possible, do you think you can go?";
-		mes "Of course you will be compensated when you";
-		mes "return and we will give you some things to support you.";
-		mes "What would you like to do?";
+		mes "Est-ce que vous pensez que vous pourriez vous y rendre? Bien sûr vous serez récompensé et nous vous donnerons quelques objets qui vous aideront à votre retour si vous acceptez. Alors, qu'en dites-vous?";
 		next;
-		if(select("Do it.", "Don't do it.")==1){
+		if(select("J'accepte.", "Ce n'est pas pour moi.")==1){
 			mes "[Mana]";
-			mes "Hoho..of course...";
-			mes "I shall send you to Morroc.";
-			mes "Go meet 'Eirhan' in front of the Morroc Pyramid.";
-			mes "Thank you~";
+			mes "Hoho... Bien sûr...";
+			mes "Je vais vous envoyer à Morroc. Une fois là-bas, allez trouver 'Eirhan' près des Pyramides..";
+			mes "Merci~";
 			next;
 			mes "[Mana]";
-			mes "Oh and when you're done, make sure you  come back.";
-			mes "Hoho..";
+			mes "Oh et n'oubliez pas de revenir quand vous en aurez fini!";
 			set tu_magician01, 7;
 			emotion e_heh;
 			warp "morocc",182,286;
@@ -685,40 +499,27 @@ geffen,67,180,4	script	New Mage Manager#M	102,{
 		} else {
 			mes "[Mana]";
 			mes "Mmm....";
-			mes "Oh well. If you want to help later";
-			mes "feel free to come back. We're very";
-			mes "short on hands these days.";
+			mes "Oh d'accord. N'hésitez pas à revenir si vous changez d'avis. Nous manquons de mains fortes ici.";
 			close;
 		}
 		break;
 	case 7:
-		mes "I'm not sure what it may be.";
-		mes "But keep up the good work.";
+		mes "Je ne sais pas vraiment de quoi il s'agit. Mais continuez comme ça!";
 		mes "Hoho..";
 		close;
 		break;
 	case 27:
-		mes "I was told ahead of time that you";
-		mes "accomplished your mission very";
-		mes "well.. hoho.";
+		mes "J'ai entendu dire que vous avez mené à bien votre mission.";
 		next;
 		mes "[Mana]";
-		mes "It seems like a problemthe two";
-		mes "organizations that are secretly active ";
-		mes "may have caused.. ";
-		mes "I thought they were separate....";
+		mes "On dirait que ces deux sociétés secrètes étaient à l'origine du problème... Je pensais qu'il n'en existait plus.";
 		next;
 		mes "[Mana]";
-		mes "But it seems the two may have a deeper";
-		mes "relationship than I had thought.";
-		mes "Any more is out of your range..";
-		mes "so leave the rest to the guild.";
-		mes "Thank you very much.";
+		mes "On dirait que les deux avaient des liens plus intimes que je ne le pensais... Laissez la suite à la Guilde – c'est très compliqué et vous n'y comprendriez pas grand chose.";
+		mes "Merci de votre aide.";
 		next;
 		mes "[Mana]";
-		mes "Oh, and this is in appreciation";
-		mes "for helping the guild.";
-		mes "Hoho..";
+		mes "Oh, et voilà un petit quelque chose pour avoir rendu service à la guilde.";
 		set tu_magician01, 28;
 		getitem 2321, 1;
 		set Zeny, Zeny + 3000;
@@ -727,22 +528,17 @@ geffen,67,180,4	script	New Mage Manager#M	102,{
 		break;
 	default:
 		if(tu_magician01 < 27){
-			mes "Hmm....";
-			mes "I see....";
-			mes "There is something going on in the Rune";
-			mes "Midgard kingdom for sure. That is why our";
-			mes "guild is busy as well.";
+			mes "Hum....";
+			mes "Je vois....";
+			mes "Il y a quelque chose de pourri dans le Royaume de Rune Midgard... C'est pour cette raison que notre Guilde est tant sollicitée.";
 			next;
 			mes "[Mana]";
-			mes "Keep up with the good work please.";
+			mes "Continuez comme ça s'il vous plaît.";
 			mes "....";
-			mes "Ah..and 'Eirhan' is doing well also, right?";
-			mes "Hoho...";
+			mes "Ah... et comment va 'Eirhan'? Bien, 'espère!";
 			close;
 		} else {
-			mes "You seemed to have trained very well.";
-			mes "There is nothing much I can teach you.";
-			mes "You must seek your own ways of training now.";
+			mes "On dirait que vous avez mené à bien votre entrainement. Il n'y a plus grand chose que je puisse vous apprendre. Vous devez maintenant suivre votre propre chemin.";
 			close;
 		}
 	}
