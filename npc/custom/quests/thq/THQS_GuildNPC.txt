@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Treasure Hunter Script
 //===== Converted By =========================================
@@ -21,75 +23,75 @@
 //============================================================
 
 
-yuno_in01,124,164,6	script	Guild Leader	108,{
+yuno_in01,124,164,6	script	Maître de Guilde::Guild Leader	108,{
 	mes "[Keegan]";
-	mes "What brings you here? Have something to say?";
+	mes "Qu'est-ce qui vous amène? Avez-vous quelque chose à dire?";
 	next;
-	menu "I want to be a Treasure Hunter",-,"Take a New Quest.",N_NQuest,"Take me to the Official Shop.",N_OShop,"Nevermind.",N_NVM;
+	menu "Je veux Devenir un Chasseur de Trésor",-,"Je voudrais une nouvelle quête.",N_NQuest,"Conduisez-moi au magasin de guilde.",N_OShop,"Quitter la conversation.",N_NVM;
 	if(Event_THQS==1) goto N_AlreadyReg;
 	mes "[Keegan]";
-	mes "Well "+strcharinfo(0)+" if you want to be a Treasure Hunter first you must.";
+	mes "Eh bien, si vous voulez devenir un Chasseur de Trésors, "+strcharinfo(0)+", vous allez devenir un Chasseur de Trésors.";
 	mes " ";
-	mes "^FF00001.^000000 You well be changed ^FF000025,000z^000000 for basic training and your proof of being a member.";
+	mes "Vous devrez verser ^FF000025,000z^000000 zenys à la guilde pour votre entraînement et pour votre certificat de membre.";
 	mes " ";
-	mes "Umm... Well that is all you need to do. Hahaha.";
+	mes "Hum... En fait je crois que c'est tout. Hahaha.";
 	next;
-	menu "Pay ^FF000025,000z^000000.",-,"Thats way to high!!",N_HighPrice;
+	menu "Payer ^FF000025,000z^000000.",-,"C'est beaucoup trop!",N_HighPrice;
 	if (zeny < 25000) goto N_NoZeny;
 	set Zeny,Zeny-25000;
 	//getitem 7950, 1;
 	//getitem 7951, 1;
 	set Event_THQS,1;
 	mes "[Keegan]";
-	mes "Congratulations!";
+	mes "Félicitations!";
 	emotion 46;
 	next;
 	mes "[Keegan]";
-	mes "Welcome to the Guild of Treasure Hunters.";
-	mes "You may now take a Treasure Hunting Quest as you see fit.";
+	mes "Bienvenue dans la Guilde des Chasseurs de Trésors.";
+	mes "Vous pouvez désormais participer à toutes les quêtes que vous voulez.";
 	close;
 N_NoZeny:
 	mes "[Keegan]";
-	mes "Hmmm you don't seem to have ^FF000025,000z^000000 "+strcharinfo(0)+". Please come back when you do.";
+	mes "Hum... On dirait que vous n'avez pas les ^FF000025,000z^000000 "+strcharinfo(0)+". Revenez quand vous les aurez.";
 	close;
 N_HighPrice:
 	mes "[Keegan]";
-	mes "Well if you can't afford a small ^FF000025,000z^000000 you shouldent be a Treasure Hunter yet.";
+	mes "Eh bien, si vous ne pouvez même pas payer ^FF000025,000z^000000, vous n'avez rien à faire dans la guilde.";
 	close;
 N_AlreadyReg:
 	mes "[Keegan]";
-	mes "Ha ha ha...you are already a member.";
+	mes "Ha ha ha... Ce n'est pas drôle. Vous êtes déjà un membre...";
 	close;
 N_NQuest:
 	if (Event_THQS!=1) goto A_NeedReg;
 	mes "[Keegan]";
-	mes "Well "+strcharinfo(0)+" if you wish to take a quest go talk to the fellow Treasure Hunter in the other room there.";
+	mes "Eh bien, si vous désirez participer à une quête, "+strcharinfo(0)+", allez parler à la Gestionnaire des Quêtes dans l'autre pièce, là-bas.";
 	close;
 A_NeedReg:
 	mes "[Keegan]";
-	mes "Sorry you must be a member of the Treasure Hunter Guild if you wish to take a quest.";
+	mes "Désolé, mais vous devez faire partie de la Guilde des Chasseurs de Trésors si vous voulez participer à une quête.";
 	mes " ";
-	mes "Also now that you are a member feel free to use our shops anytime you wish.They are all located on this floor.";
+	mes "Nos magasins de guilde sont tous à cet étage, mais ils sont réservés aux membres.";
 	mes " ";
-	mes "We also have another shop for members only,in which we use little metal diamonds called Treasure Hunter Tokens to exchange for rare goods.";
+	mes "Vous ne pourrez payer qu'avec des Jetons de la Guilde, mais vous pourez obtenir des objets très rares.";
 	mes " ";
-	mes "You will even have access to our exclusive personal Dungeon.";
+	mes "Vous pourrez même peut-être accéder à notre propre donjon de guilde.";
 	close;
 N_OShop:
 	if (Event_THQS!=1) goto N_NeedMem;
 	mes "[Keegan]";
-	mes "Yes "+strcharinfo(0)+" I will take you to our shop right away!";
+	mes "Bien, je vous conduis immédiatement, "+strcharinfo(0)+"!";
 	next;
 	warp "prt_in",166,171;
 	close;
 	end;
 N_NeedMem:
 	mes "[Keegan]";
-	mes "Im sorry only members may visit our private shop.";
+	mes "Je suis désolé mais seuls les membres peuvent s'y rendre.";
 	close;
 N_NVM:
 	mes "[Keegan]";
-	mes "Alright come back when you have the free time to spare.";
+	mes "Comme vous voulez. Revenez quand vous aurez du temps libre.";
 	close;
 
 }
