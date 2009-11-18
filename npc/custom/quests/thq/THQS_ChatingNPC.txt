@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Treasure Hunter Script
 //===== Converted By =========================================
@@ -22,82 +24,77 @@
 
 
 //Entrance Flags
-yuno,48,101,6	script	Notice	722,{
-	mes "^FF0000[ Treasure Hunter Guild House ]^000000";
+yuno,48,101,6	script	Note::Notice	722,{
+	mes "^FF0000[Siège de la Guilde des Chasseurs de Trésors]^000000";
 	mes " ";
-	mes "Welcome to the Treasure Hunter's Guild House.";
-	mes "Feel free to drop in and look around";
-	mes "and feel free to become a memeber if you wish.";
+	mes "Bienvenue au Siège de la Guilde des Chasseurs de Trésors. N'hésitez pas à entrer et à la visiter. Qui sait, vous pourriez même nous rejoindre...";
 	mes " ";
-	mes "For membership applications please talk to Keegan";
-	mes "up the stairs and down the hall.";
+	mes "Ceux qui veulent adhérer à la Guilde doivent s'adresser à Keegan à l'étage.";
 	close;
 }
 //Saver Girl;
 yuno_in01,32,178,3	script	Ahlma	94,{
 	mes "[Ahlma]";
 	if (Event_THQS == 0) goto N_Member;
-	mes "Welcome to The Treasure Hunter Guild.";
-	mes "How may I help you?";
+	mes "Bienvenue à la Guilde des Chasseurs de Trésors. En quoi puis_je vous aider?";
 	next;
-	menu "Save",-,"Quit",N_Quit;
+	menu "Sauvegarder",-,"Quitter",N_Quit;
 	mes "[Ahlma]";
-	mes "Ok, saved. Thank you ~ See you soon~";
+	mes "Bien. Vous Point de Sauvegarde a été changé. Merci, et à bientôt~";
 	savepoint "yuno_in01",34,176;
 	close;
 N_Quit:
 	mes "[Ahlma]";
-	mes "Well if you think you are safe, good on you.";
+	mes "Tant mieux pour vous si vous pensez ne courir aucun risque.";
 	close;
 N_Member:
-	mes "Sorry, members only.";
+	mes "Désolé, mes services sont réservés aux membres.";
 	close;
 }
 //Retired Smile mask girl;
-yuno_in01,33,162,3	script	Smile Helper	92,{
+yuno_in01,33,162,3	script	Préposé au Sourire::Smile Helper	92,{
 	mes "[Smile Gal]";
-	mes "Oh man...I am so sick of";
-	mes "trading Mr. Smile masks for crap.";
+	mes "Oh mec... J'en ai jusque là d'échanger des masques de Visage Souriant contre cette camelote.";
 	mes " ";
-	mes "You ask me for one and you'll find yourself 10 pounds lighter!";
+	mes "Si quelqu'un m'en demande un encore une fois je lui refais le portrait direct!";
 	close;
 }
 //Usless Female Assasin;
 yuno_in01,22,162,6	script	Female Assasin	725,{
 	mes "[Sharlet]";
 	if (Event_THQS > 0) goto N_Member;
-	mes "Umm sorry I'm not gona waste my time talking to you if you arn't even a member!";
+	mes "Désolée mais je ne vais pas perdre mon temps à discuter avec vous si vous n'êtes pas un membre.";
 	close;
 N_Member:
 	set @TEMP,rand(1,2);
 	if (@TEMP == 1) goto N_Chat1;
 	if (@TEMP == 2) goto N_Chat2;
-	mes "How are you reading this???";
-	mes "Well unless you are reading the code :)";
+	mes "Vous arrivez à déchiffrer ça???";
+	mes "Je crois qu'il faut connaître le code :)";
 	close;
 N_Chat1:
-	mes "Ahh welcome fellow Treasure Hunter "+strcharinfo(0)+".";
-	mes "Did you hear about that brave man that went into Glast Heim alone?! He must be crazy.";
+	mes "Ah, bienvenue "+strcharinfo(0)+", le Chasseur de Trésor!";
+	mes "Vous avez entendu parler de ce type qui a été à Glast Heim tout seul?! Il doit être fou.";
 	close;
 N_Chat2:
-	mes ""+strcharinfo(0)+" don't you have something better you could be doing? Like a quest.";
+	mes "Vous n'avez rien de mieux à faire, "+strcharinfo(0)+"? Je ne sais pas moi... Une quête par exemple.";
 	close;
 }
 //another usless member
 yuno_in01,25,162,6	script	Female Wizard	123,{
 	mes "[Sasha]";
 	if (Event_THQS > 0) goto N_Member;
-	mes "Umm sorry I'm not gona waste my time talking to you if you arn't even a member!";
+	mes "Désolée mais je ne vais pas perdre mon temps à discuter avec vous si vous n'êtes pas un membre.";
 	close;
 N_Member:
 	set @TEMP,rand(2);
 	if (@TEMP == 1) goto N_Chat;
-	mes "Ahh welcome fellow Treasure Hunter "+strcharinfo(0)+".";
-	mes "Did you hear about that goat man running around in the trees?";
+	mes "Ah, bienvenue "+strcharinfo(0)+", le Chasseur de Trésor!";
+	mes "Vous avez entendu parler de ce type qui ressemble à un bouc qui se balade dans la forêt?";
 	mes " ";
-	mes "Aperently his name is Baphomet and he has been runing around the Forest Maze out side of prontera for quite some time now.";
+	mes "Apparemment, il s'appelle Baphomet. Ça fait un bout de temps qu'il traine dans la Forêt-Labyrinthe près de Prontera. Il a dû se perdre...";
 	close;
 N_Chat:
-	mes ""+strcharinfo(0)+" don't you have something better you could be doing? Like a quest.";
+	mes "Vous n'avez rien de mieux à faire, "+strcharinfo(0)+"? Je ne sais pas moi... Une quête par exemple.";
 	close;
 }
