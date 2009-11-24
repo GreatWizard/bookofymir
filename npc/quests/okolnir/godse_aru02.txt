@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Falicious Okolnir - Valfreja 2
 //===== By: ================================================== 
@@ -29,114 +31,110 @@ arug_cas02,349,347,3	script	Guide#gq_aru02	899,{
 	if (getcharid(2) == .@GID) {
 		if ($siz_aru02_on == 0) {
 			mes "[Guide]";
-			mes "This castle has a hidden secret.";
-			mes "That is the ^4d4dff'Okolnir'^000000.";
+			mes "Ce château renferme un secret bien gardé.";
+			mes "Il s'agit de l'^4d4dff'Okolnir'^000000.";
 			next;
-			switch(select("About Okolnir.:Go to Okolnir.:Cancel.")) {
+			switch(select("A propos d'Okolnir.:Se rendre à Okolnir.:Annuler.")) {
 			case 1:
 				mes "[Guide]";
-				mes "Okolnir is a kind of virtual realm...";
-				mes "I don't know how Okolnir exists, but I guess only Valkyrie knows.";
+				mes "Okolnir est une sorte de royaume imaginaire...";
+				mes "Je ne sais pas si il existe véritablement - je crois que seules les Valkyries ont la réponse à cette question.";
 				next;
 				mes "[Guide]";
-				mes "As you know this is a place to test the adventurers made by Valkyrie...";
-				mes "...you know the qualifications to enter Okolnir.";
+				mes "Il s'agit d'un lieu créé pour tester les aventuriers créé par les Valkyries...";
+				mes "Vous connaissez peut-être les pré-requis pour se rendre à Okolnir.";
 				next;
-				select("Qualifications?");
+				select("Des pré-requis?");
 				mes "[Guide]";
-				mes "Yes, Valkyrie definitely prefers strong adventurers.";
-				mes "Only the qualified can enter Okolnir and Valhalla.";
-				next;
-				mes "[Guide]";
-				mes "It only opens when everyone comes together to work it out.";
-				mes "The key is in the castle.";
+				mes "Oui, les Valkyries ne prêtent attention qu'à de braves et vaillants aventuriers.";
+				mes "Seuls ceux qui en sont dignes pourront accéder à Okolnir et au Valhalla.";
 				next;
 				mes "[Guide]";
-				mes "If a castle's ^4d4dffeconomy is over 65 and defense also over 30^000000, this will be acceptable to access Okolnir.";
+				mes "Ses portes ne s'ouvrent que lorsque tout le monde oeuvre dans ce but.";
+				mes "Ce château en est la clé.";
 				next;
 				mes "[Guide]";
-				mes "And, if you pass all of the tests given by Valkyrie in Okolnir!";
-				mes "You will also receive a mysterious gift.";
+				mes "Vous ne pourrez y accéder que lorsque ^4d4dffl'économie est supérieure à 65 et la défense supérieure à 30^000000.";
 				next;
 				mes "[Guide]";
-				mes "Would you like to try to enter here?";
+				mes "Vous recevrez une récompense si vous surmontez toutes les épreuves que vous réserve la Valkyrie d'Okolnir.";
+				next;
+				mes "[Guide]";
+				mes "Voudriez-vous tenter d'y accéder?";
 				close;
 			case 2:
 				set .@Defence,GetCastleData("arug_cas02",3);
 				set .@Economy,GetCastleData("arug_cas02",2);
 				if ((.@Economy > 64) && (.@Defence > 29)) {
 					mes "[Guide]";
-					mes "Great! Economy and Defense are OK.";
-					mes "You can enter Okolnir now....";
-					mes "Do you want to go there?";
+					mes "L'économie et la défense du château sont convenables... Vous pouvez vous y rendre.";
+					mes "Voulez-vous vous y rendre maintenant?";
 					next;
-					switch(select("Sure let's go there.:No.")) {
+					switch(select("Allons-y!:Non.")) {
 					case 1:
 						if (countitem(7839) > 0) {
 							delitem 7839,countitem(7839); //Crystal_Key
 						}
 						mes "[Guide]";
-						mes "Ok......";
-						mes "Please follow me...";
+						mes "Bien......";
+						mes "Veuillez me suivre...";
 						close2;
 						warp "que_qaru02",346,32;
 						end;
 					case 2:
 						mes "[Guide]";
-						mes "You can try this anytime in the future...";
-						mes "If you are ready to protect this castle.";
-						close;
+						mes "Vous pourrez vous y rendre quand vous voudrez... Tant que ce château reste le vôtre.";
+							close;
 					}
 				}
 				else {
 					mes "[Guide]";
-					mes "You are not qualified yet.";
-					mes "Please develop your castle more...";
+					mes "Vous ne pouvez pas encore vous y rendre. Il vous faudra d'abord consolider l'économie et les défenses de ce château.";
 					close;
 				}
 			}
 		}
 		else if ($siz_aru02_on == 1) {
 			mes "[Guide]";
-			mes "... OK...";
-			mes "Good luck.";
+			mes "... Bien...";
+			mes "Bonne chance.";
 			next;
-			switch(select("Enter now.:No.")) {
+			switch(select("S'y rendre maintenant.:Rester ici.")) {
 			case 1:
 				if (countitem(7839) > 0) {
 					delitem 7839,countitem(7839); //Crystal_Key
 				}
 				mes "[Guide]";
-				mes "Hope you get everything you want...";
+				mes "J'espère que vous y trouverez ce que vous cherchez...";
 				close2;
 				warp "que_qaru02",346,32;
 				end;
 			case 2:
 				mes "[Guide]";
-				mes "Really?";
-				mes "Sorry to hear that.";
+				mes "Vraiment?";
+				mes "J'espère que vous changerez d'avis.";
 				close;
 			}
 		}
 		else if ($siz_aru02_on == 2) {
 			mes "[Guide]";
-			mes "Building Okolnir needs quite a long time.";
-			mes "....even though it's only virtual...";
+			mes "Même si Okolnir est un royaume imaginaire, bâtir ce lieu demande énormément de temps.";
+			
 			next;
 			mes "[Guide]";
-			mes "It takes about 12 -13 hours to create the virtual realm.";
+			mes "Recréer ce royaume imaginaire prend environ 12 -13 heures.";
 			close;
 		}
 		else {
 			mes "[Guide]";
-			mes "You'll have to wait.";
+			mes "Il vous faudra encore attendre.";
 			close;
 		}
 	}
 	else {
 		mes "[Guide]";
-		mes "... I've never seen you before.";
-		mes "You are strangers here. You'd better get out of here right now.";
+		mes "... Je ne vous ai jamais vu auparavant.";
+		mes "Vous êtes un étranger en ces lieux. Vous feriez mieux de sortir sans attendre.";
 		close;
 	}
 	end;
@@ -155,151 +153,133 @@ OnInit:
 
 que_qaru02,345,23,0	warp	Gate02#gq_aru02	1,1,arug_cas02,349,355
 
-que_qaru02,345,82,3	script	Wish Maiden#gq_aru02	403,{
+que_qaru02,345,82,3	script	Dame aux Souhaits::Wish Maiden#gq_aru02	403,{
 	set .@GID, GetCastleData("arug_cas02",1);
 	if (getcharid(2) == .@GID) {
 		cutin "wish_maiden31",1;
 		if (strcharinfo(0) == getguildmaster(.@GID)) {
-			mes "[Wish Maiden]";
-			mes "I am... Wish maiden.";
-			mes "Mourning in this virtual realm, Okolnir.";
-			mes "On behalf of the humanbeings who defeated God here.";
+			mes "[Dame aux Souhaits]";
+			mes "Je suis la Dame aux Souhaits, celle qui porte le deuil dans ce royaume imaginaire au nom des êtres humains qui vainquirent ici les dieux.";
 			next;
 			if ((countitem(7835) > 0) && (countitem(7836) > 0) && (countitem(7837) > 0) && (countitem(7838) > 0) && (countitem(2513) > 0) && (countitem(7291) > 9) && (countitem(7293) > 9) && (countitem(7063) > 99) && (countitem(985) > 19)) {
 				cutin "wish_maiden11",1;
-				mes "[Wish Maiden]";
-				mes "Are you ready to endure the trials to get the Goddess' glory?";
+				mes "[Dame aux Souhaits]";
+				mes "Êtes-vous prêt à surmonter les épreuves qui vous attendent ici pour obtenir les splendeurs de la déesse?";
 				next;
-				switch(select("Yes, I am:Sorry, I'll try later")) {
+				switch(select("Oui, je suis prêt:Désolé, j'essaierai plus tard")) {
 				case 1:
 					cutin "wish_maiden12",1;
-					mes "[Wish Maiden]";
-					mes "I will test whether or not you deserve the Goddess shine...";
-					mes "Isn't it simple?";
+					mes "[Dame aux Souhaits]";
+					mes "Je vais vous mettre à l'épreuve afin de déterminer si vous méritez de recevoir la lumière divine...";
+					mes "Simple, n'est-ce pas?";
 					next;
-					mes "[Wish Maiden]";
-					mes "Okolnir is a virtual place.";
-					mes "There is no room for error there.";
-					mes "^ff0000You only have one hour.^000000";
+					mes "[Dame aux Souhaits]";
+					mes "Okolnir est un royaume imaginaire où il n'y a pas de place pour l'erreur.";
+					mes "^ff0000Vous n'aurez qu'une heure.^000000";
 					next;
 					cutin "wish_maiden31",1;
-					mes "[Wish Maiden]";
-					mes "If you have not finished in that time, Okolnir will be destroyed, and I will go to rest.";
-					mes "You will have to wait again...";
+					mes "[Dame aux Souhaits]";
+					mes "Si vous n'en avez pas terminé dans le temps imparti, Okolnir sera détruit, et vous retournerez dans le monde réel.";
+					mes "Il vous faudra alors patienter à nouveau avant d'y retourner...";
 					next;
-					mes "[Wish Maiden]";
-					mes "Are you ready to go through?";
-					mes "^4d4dffYou need to have 16 to 20 members present^000000.";
+					mes "[Dame aux Souhaits]";
+					mes "Êtes-vous prêt à relever ce défi?";
+					mes "^4d4dffIl faudra que 16 à 20 membres de la guilde soient présents^000000.";
 					next;
 					cutin "wish_maiden11",1;
-					mes "[Wish Maiden]";
-					mes "I will open the gate of Okolnir if your members are ready.";
+					mes "[Dame aux Souhaits]";
+					mes "Je vais vous ouvrir les portes d'Okolnir si les membres de votre guilde sont prêts.";
 					next;
-					switch(select("We are ready.:We need more time.")) {
+					switch(select("Nous sommes prêts.:Il nous faut plus de temps.")) {
 					case 1:
 						set .@saram,getmapusers("que_qaru02");
 						if (((.@saram > 15) && (.@saram < 21)) || (getgmlevel() == 99)) {
 							cutin "wish_maiden12",1;
-							mes "[Wish Maiden]";
-							mes "Now I will open the gate of Okolnir where I am.";
-							mes "I will wait for you on the top of Okolnir...";
+							mes "[Dame aux Souhaits]";
+							mes "Bien, dans ce cas je vais vous ouvrir les portes d'Okolnir.";
+							mes "Je vous attendrai au sommet d'Okolnir...";
 							next;
-							mes "[Wish Maiden]";
-							mes "I hope that you can complete all of the trials before the virtual Okolnir is destroyed...";
-							mes "Good luck.";
-							mapannounce "que_qaru02","Wish Maiden: The gate of Okolnir is open! Don't forget you only have one hour.",bc_map,"0x00ff00";
+							mes "[Dame aux Souhaits]";
+							mes "J'espère que vous pourrez compléter toutes les épreuves avant que le royaume ne soit détruit.";
+							mes "Bonne chance.";
+							mapannounce "que_qaru02","Dame aux Souhaits: Les portes d'Okolnir viennent de s'ouvrir! N'oubliez pas que vous n'avez qu'une heure.",bc_map,"0x00ff00";
 							close2;
 							set $gqse_aru02_pcc,.@saram;
 							set $siz_aru02_on,1;
 							donpcevent "#okolnir_aru02::OnEnable";
 							disablenpc "Wish Maiden#gq_aru02";
 							cutin "wish_maiden11",255;
-							announce "["+ strcharinfo(0) +"], of the guild ["+ GetGuildName(.@GID) +"] has opened the gates to the realm of Okolnir.",bc_all,"0x70dbdb";
+							announce "["+ strcharinfo(0) +"], de la guilde ["+ GetGuildName(.@GID) +"] vient d'ouvrir les portes du royaume d'Okolnir.",bc_all,"0x70dbdb";
 							end;
 						}
 						else {
 							cutin "wish_maiden13",1;
-							mes "[Wish Maiden]";
-							mes "You need to have 16 to 20 members present to open the gate of Okolnir.";
-							mes "Come back when you are ready.";
+							mes "[Dame aux Souhaits]";
+							mes "Il faut que de 16 à 20 membres de la guilde soient présents pour ouvrir les portes d'Okolnir.";
+							mes "Revenez quand vous serez prêt.";
 							close2;
 						}
 						break;
 					case 2:
 						cutin "wish_maiden13",1;
-						mes "[Wish Maiden]";
-						mes "Don't hesitate to try.";
-						mes "You should catch the chance when it comes to you.";
-						mes "Just gather your fellow members.";
-						close2;
+						mes "[Dame aux Souhaits]";
+						mes "Vous ne devriez pas hésiter et tenter votre chance tant que vous le pouvez. Vous n'avez qu'à rassembler les autres membres de votre guilde.";
+								close2;
 					}
 					break;
 				case 2:
 					cutin "wish_maiden32",1;
-					mes "[Wish Maiden]";
-					mes "... Are you afraid of";
-					mes "the trials facing you?";
+					mes "[Dame aux Souhaits]";
+					mes "Avez-vous peur des épreuves que j'ai préparées pour vous?";
+
 					mes "....";
 					next;
 					cutin "wish_maiden13",1;
-					mes "[Wish Maiden]";
-					mes "Do you think that you can defeat the Goddess shine easily?";
-					mes "I feel disappointed by all of you.";
-					mes "Just go away...";
-					close2;
+					mes "[Dame aux Souhaits]";
+					mes "Pensiez-vous pouvoir recevoir la lumière divine sans vous en montrer digne? Vous me décevez affreusement. Partez, maintenant.";
 				}
 			}
 			else {
 				cutin "wish_maiden11",1;
-				mes "[Wish Maiden]";
-				mes "Do you wish to enter?";
-				mes "Only those prepared may enter here.";
-				mes "You must bring several items to enter Okolnir.";
+				mes "[Dame aux Souhaits]";
+mes "Désirez-vous entrer?";
+				mes "Seuls ceux qui y seront préparés pourront pénétrer dans le royaume d'Okolnir. Vous devrez m'apportez plusieurs objets avant que je n'ouvre ses portes.";
 				next;
-				mes "[Wish Maiden]";
-				mes "Dusk Glow";
-				mes "Dawn Essence";
-				mes "Cold Moonlight";
-				mes "Hazy Starlight.";
+				mes "[Dame aux Souhaits]";
+				mes "1 Dusk Glow";
 				next;
-				mes "[Wish Maiden]";
-				mes "Please bring those four things, 10 Agate, 10 Rose Quartz, and 20 Elunium,";
-				mes "a Heavenly Maiden's Robe, as well as Soft feathers.";
+				mes "[Dame aux Souhaits]";
+				mes "En plus de cela, il me faudra 10 Agate, 10 Rose Quartz, 20 Elunium, 1 Heavenly Maiden's Robe, et des Soft feathers.";
 				next;
-				mes "[Wish Maiden]";
-				mes "Once all of those are prepared, the gate will open.";
+				mes "[Dame aux Souhaits]";
+				mes "J'ouvrirai les portes lorsque vous aurez tout cela.";
 				next;
-				mes "[Wish Maiden]";
+				mes "[Dame aux Souhaits]";
 				mes ".... ";
-				mes "...........The Goddess shines brightly down on you, you should be stronger to deserve it...";
+				mes "...........N'oubliez pas que la déesse a posé son regard sur vous. Vous devez faire preuve de vaillance et de bravoure pour mériter ses faveurs...";
 				next;
-				mes "[Wish Maiden]";
-				mes "Remember...";
-				mes "You need to collect many soft feathers.";
-				mes "I hope that your dreams come true.";
-				next;
-				mes "[Wish Maiden]";
-				mes "I will answer all your requests if you bring these to me.";
+				mes "[Dame aux Souhaits]";
+				mes "Gardez bien à l'esprit que vous devez m'apporter autant de Soft Feather que vous pouvez. J'espère que vos rêves se réaliseront.";				next;
+				mes "[Dame aux Souhaits]";
+				mes "Je répondrai à vos souhaits lorsque vous m'aurez apporté tout cela.";
 				close2;
 			}
 		}
 		else {
 			cutin "wish_maiden31",1;
-			mes "[Wish Maiden]";
-			mes "I am... Wish maiden.";
-			mes "Mourning in this virtual realm, Okolnir.";
-			mes "On behalf of the humanbeings who defeated God here.";
+			mes "[Dame aux Souhaits]";
+			mes "Je suis la Dame aux Souhaits, celle qui porte le deuil dans ce royaume imaginaire au nom des êtres humains qui vainquirent ici les dieux.";
 			next;
-			mes "[Wish Maiden]";
-			mes "Bring me the one who brought you to this place.";
-			mes ".. Deliver him to my will.";
+			mes "[Dame aux Souhaits]";
+			mes "Conduisez-moi à celui qui vous a introduit ici.";
+			mes ".. Laissez-moi décider de son sort.";
 			close2;
 		}
 	}
 	else {
 		cutin "wish_maiden13",1;
-		mes "[Wish Maiden]";
-		mes "...You are not qualified.";
+		mes "[Dame aux Souhaits]";
+		mes "...Vous n'êtes pas digne de vous trouver ici.";
 		close2;
 		percentheal -100,0;
 		cutin "wish_maiden11",255;
@@ -885,7 +865,7 @@ OnTouch:
 		}
 	}
 	else {
-		mes "There are too many people, you can't enter.";
+		mes "Il y a déjà trop de participants. Vous ne pouvez pas entrer.";
 		close;
 	}
 	end;
@@ -907,31 +887,31 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	mapannounce "que_qaru02","Wish Maiden: How does it feel to see shadows of the past. This is only the beginning.",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: Comment vous sentez-vous aux côtés des fantômes du passé? Ce n'est qu'un début...",bc_map,"0x00ff00";
 	end;
 
 OnTimer6000:
-	mapannounce "que_qaru02","Wish Maiden: The things you seeing are not real, don't be caught in the Mystic garden.",bc_map,"0x00ff00";
-	monster "que_qaru02",72,271,"Seyren Windsor",1640,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",63,282,"Kathryne Keyron",1645,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",59,294,"Cecil Damon",1644,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",46,300,"Margaretha Sorin",1643,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",51,285,"Eremes Guile",1641,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",51,262,"Howard Alt-Eisen",1642,1,"#gq_miromob2_aru02::OnMyMobDead";
+	mapannounce "que_qaru02","Dame aux Souhaits: Les choses que vous voyez ne sont pas réelles. Ne laissez pas votre esprit s'égarer dans le Jardin Mystique.",bc_map,"0x00ff00";
+	monster "que_qaru02",72,271,"--ja--",1640,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",63,282,"--ja--",1645,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",59,294,"--ja--",1644,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",46,300,"--ja--",1643,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",51,285,"--ja--",1641,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",51,262,"--ja--",1642,1,"#gq_miromob2_aru02::OnMyMobDead";
 
-	monster "que_qaru02",45,243,"Seyren Windsor",1640,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",82,249,"Kathryne Keyron",1645,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",102,248,"Cecil Damon",1644,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",90,260,"Margaretha Sorin",1643,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",90,280,"Eremes Guile",1641,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",102,300,"Howard Alt-Eisen",1642,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",45,243,"--ja--",1640,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",82,249,"--ja--",1645,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",102,248,"--ja--",1644,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",90,260,"--ja--",1643,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",90,280,"--ja--",1641,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",102,300,"--ja--",1642,1,"#gq_miromob2_aru02::OnMyMobDead";
 
-	monster "que_qaru02",63,282,"Seyren Windsor",1640,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",61,243,"Kathryne Keyron",1645,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",70,249,"Cecil Damon",1644,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",102,281,"Margaretha Sorin",1643,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",66,300,"Eremes Guile",1641,1,"#gq_miromob2_aru02::OnMyMobDead";
-	monster "que_qaru02",57,258,"Howard Alt-Eisen",1642,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",63,282,"--ja--",1640,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",61,243,"--ja--",1645,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",70,249,"--ja--",1644,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",102,281,"--ja--",1643,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",66,300,"--ja--",1641,1,"#gq_miromob2_aru02::OnMyMobDead";
+	monster "que_qaru02",57,258,"--ja--",1642,1,"#gq_miromob2_aru02::OnMyMobDead";
 	stopnpctimer;
 	end;
 
@@ -942,7 +922,7 @@ Onreset:
 
 OnMyMobDead:
 	if (mobcount("que_qaru02","#gq_miromob2_aru02::OnMyMobDead") == 0) {
-		mapannounce "que_qaru02","The Mystic garden exit is now open.",bc_map,"0x00ff00";
+		mapannounce "que_qaru02","La sortie du Jardin Mystique vient de s'ouvrir.",bc_map,"0x00ff00";
 		setcell "que_qaru02",58,302,63,302,cell_walkable,1;
 		setcell "que_qaru02",58,302,63,302,cell_shootable,1;
 		donpcevent "#Maze_Manager_aru02::OnDisable";
@@ -961,10 +941,10 @@ OnEnable:
 	enablenpc "Guard of Shadow#aru02_02";
 	enablenpc "Guard of Shadow#aru02_03";
 	enablenpc "Guard of Shadow#aru02_04";
-	enablenpc "Bloody Hunter#aru02_ac01";
-	enablenpc "Bloody Hunter#aru02_ac02";
-	enablenpc "Bloody Hunter#aru02_ac03";
-	enablenpc "Bloody Hunter#aru02_ac04";
+	enablenpc "Temple Guard#aru02_ac01";
+	enablenpc "Temple Guard#aru02_ac02";
+	enablenpc "Temple Guard#aru02_ac03";
+	enablenpc "Temple Guard#aru02_ac04";
 	enablenpc "Temple Keeper#aru02_ac01";
 	enablenpc "Temple Keeper#aru02_ac02";
 	initnpctimer;
@@ -991,10 +971,10 @@ OnDisable:
 	donpcevent "Guard of Shadow#aru02_02::OnDisable";
 	donpcevent "Guard of Shadow#aru02_03::OnDisable";
 	donpcevent "Guard of Shadow#aru02_04::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac01::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac02::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac03::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac04::OnDisable";
+	donpcevent "Temple Guard#aru02_ac01::OnDisable";
+	donpcevent "Temple Guard#aru02_ac02::OnDisable";
+	donpcevent "Temple Guard#aru02_ac03::OnDisable";
+	donpcevent "Temple Guard#aru02_ac04::OnDisable";
 	donpcevent "Temple Keeper#aru02_ac01::OnDisable";
 	donpcevent "Temple Keeper#aru02_ac02::OnDisable";
 	disablenpc "#to_agit_aru02_gate";
@@ -1021,43 +1001,43 @@ Onstop:
 	end;
 
 OnTimer1000:
-	mapannounce "que_qaru02","Wish Maiden : Do your best, Okolnir will disappear in one hour!",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: Okolnir disparaîtra dans une heure. Faites de votre mieux!",bc_map,"0x00ff00";
 	end;
 
 OnTimer1800000:
-	mapannounce "que_qaru02","Okolnir will disappear in 30 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 30 minutes.",bc_map,"0xff0000";
 	end;
 
 OnTimer2400000:
-	mapannounce "que_qaru02","Okolnir will disappear in 20 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 20 minutes.",bc_map,"0xff0000";
 	end;
 
 OnTimer3000000:
-	mapannounce "que_qaru02","Okolnir will disappear in 10 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 10 minutes.",bc_map,"0xff0000";
 	end;
 
 OnTimer3300000:
-	mapannounce "que_qaru02","Okolnir will disappear in 5 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 5 minutes.",bc_map,"0xff0000";
 	end;
 
 OnTimer3360000:
-	mapannounce "que_qaru02","Okolnir will disappear in 4 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 4 minutes.",bc_map,"0xff0000";
 	end;
 
 OnTimer3420000:
-	mapannounce "que_qaru02","Okolnir will disappear in 3 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 3 minutes.",bc_map,"0xff0000";
 	end;
 
 OnTimer3480000:
-	mapannounce "que_qaru02","Okolnir will disappear in 2 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 2 minutes.",bc_map,"0xff0000";
 	end;
 
 OnTimer3540000:
-	mapannounce "que_qaru02","Okolnir will disappear in 1 minutes.",bc_map,"0xff0000";
+	mapannounce "que_qaru02","Okolnir disparaîtra dans 1 minute.",bc_map,"0xff0000";
 	end;
 
 OnTimer3600000:
-	mapannounce "que_qaru02","Okolnir has begun to disappear.",bc_map,"0x4d4dff";
+	mapannounce "que_qaru02","Okolnir commence à disparaître.",bc_map,"0x4d4dff";
 	disablenpc "Wish Maiden#gq_aru02";
 	donpcevent "#gq_miromob2_aru02::Onreset";
 	disablenpc "Piamette#aru02";
@@ -1078,10 +1058,10 @@ OnTimer3600000:
 	donpcevent "Guard of Shadow#aru02_02::OnDisable";
 	donpcevent "Guard of Shadow#aru02_03::OnDisable";
 	donpcevent "Guard of Shadow#aru02_04::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac01::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac02::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac03::OnDisable";
-	donpcevent "Bloody Hunter#aru02_ac04::OnDisable";
+	donpcevent "Temple Guard#aru02_ac01::OnDisable";
+	donpcevent "Temple Guard#aru02_ac02::OnDisable";
+	donpcevent "Temple Guard#aru02_ac03::OnDisable";
+	donpcevent "Temple Guard#aru02_ac04::OnDisable";
 	donpcevent "Temple Keeper#aru02_ac01::OnDisable";
 	donpcevent "Temple Keeper#aru02_ac02::OnDisable";
 	disablenpc "#to_agit_aru02_gate";
@@ -1099,11 +1079,11 @@ OnTimer3600000:
 	end;
 
 OnTimer3605000:
-	mapannounce "que_qaru02","Wish Maiden: ... You will fall into a deep sleep within Okolnir... ",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: ... Vous sombrez dans un profond sommeil à l'intérieur d'Okolnir... ",bc_map,"0x00ff00";
 	end;
 
 OnTimer3608000:
-		mapannounce "que_qaru02","Wish Maiden: ..Have courage ... and await your chance again... ",bc_map,"0x00ff00";
+		mapannounce "que_qaru02","Dame aux Souhaits: ... Gardez courage ... et tentez à nouveau votre chance... ",bc_map,"0x00ff00";
 	end;
 
 OnTimer3610000:
@@ -1611,14 +1591,14 @@ OnMyMobDead:
 que_qaru02,132,172,0	script	windpath01_aru02	45,1,1,{
 OnTouch:
 	if (countitem(7839) > 0) {
-		mes "The Warp Gate responds to the Crystal Key.";
+		mes "La Clé de Cristal réagit au Portail.";
 		delitem 7839,1; //Crystal_Key
 		close2;
 		warp "que_qaru02",114,158;
 		end;
 	}
 	else {
-		mes "You need the Crystal Key to activate the Warp Gate.";
+		mes "Il vous faut une Clé de Cristal pour ouvrir ce Portail.";
 		close;
 	}
 }
@@ -1653,19 +1633,19 @@ OnTouch:
 	end;
 
 OnTimer2000:
-	mapannounce "que_qaru02","Piamette mumblings : ..There were six birds, Teo. But one is....",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette marmonne : ... Il y avait six oiseaux, Téo. Mais il y en a un qui...",bc_map,"0xdb7093";
 	end;
 
 OnTimer6000:
-	mapannounce "que_qaru02","Piamette mumblings : ...Shh.. Teo. The birds have returned..Are they birds that ran away before...? Or breakers who disguises themselves as good adventurers?",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette marmonne : ...Shh.. Téo. Les oiseaux sont tous revenus... Y a-t-il déjà eu des oiseux qui se soient enfuis...? Où bien est-ce à cause de ces casseurs déguisés en aventuriers?",bc_map,"0xdb7093";
 	end;
 
 OnTimer10000:
-	mapannounce "que_qaru02","Piamette mumblings : Ha! They are caged in.",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette marmonne : Ah! Ils sont en cage.",bc_map,"0xdb7093";
 	end;
 
 OnTimer14000:
-	mapannounce "que_qaru02","Piamette : Teo, Catch the birds! Put the cage away from here!",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Piamette : Téo, attrape ces oiseaux! Mets la cage ailleurs!",bc_map,"0x00ff00";
 	donpcevent "#gdtimer01_aru02::OnEnable";
 	stopnpctimer;
 	end;
@@ -1731,7 +1711,7 @@ OnTimer70000:
 
 OnTimer75000:
 	if ($gqse_aru02_gd < 6) {
-		mapannounce "que_qaru02","Piamette : Silly birds! Silly Teo! Why can't you put away the cage at once?!",bc_map,"0x00ff00";
+		mapannounce "que_qaru02","Piamette : Stupides oiseaux! Stupides Téo! Pourquoi tu ne les mets pas en cage maintenant?!",bc_map,"0x00ff00";
 		enablenpc "#aru02_cage01";
 		enablenpc "#aru02_cage02";
 		enablenpc "#aru02_cage03";
@@ -1768,25 +1748,25 @@ Onstop:
 	end;
 
 OnTimer4000:
-	mapannounce "que_qaru02","Piamette : All of them are caught!",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette : On les a tous attrapés!",bc_map,"0xdb7093";
 	end;
 
 OnTimer8000:
-	mapannounce "que_qaru02","Piamette : Let's call out the keeper of the key not to let the birds go far away.",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette : Appelons le Gardien des Clés pour que les oiseaux ne s'enfuient pas trop loin.",bc_map,"0xdb7093";
 	end;
 
 OnTimer12000:
-	mapannounce "que_qaru02","Piamette : The keeper of the key is protecting my cage.",bc_map,"0xdb7093";
-	monster "que_qaru02",108,151,"Key Stone",1905,1,"#gdtimer02_aru02::OnMyMobDead";
-	monster "que_qaru02",109,135,"Key Stone",1905,1,"#gdtimer02_aru02::OnMyMobDead";
-	monster "que_qaru02",115,116,"Key Stone",1905,1,"#gdtimer02_aru02::OnMyMobDead";
-	monster "que_qaru02",158,106,"Key Stone",1905,1,"#gdtimer02_aru02::OnMyMobDead";
-	monster "que_qaru02",163,133,"Key Stone",1905,1,"#gdtimer02_aru02::OnMyMobDead";
-	monster "que_qaru02",150,154,"Key Stone",1905,1,"#gdtimer02_aru02::OnMyMobDead";
+	mapannounce "que_qaru02","Piamette : Ouiii! Le Gardien des Clés surveille ma cage!",bc_map,"0xdb7093";
+	monster "que_qaru02",108,151,"Pierre des Clés",1905,1,"#gdtimer02_aru02::OnMyMobDead";
+	monster "que_qaru02",109,135,"Pierre des Clés",1905,1,"#gdtimer02_aru02::OnMyMobDead";
+	monster "que_qaru02",115,116,"Pierre des Clés",1905,1,"#gdtimer02_aru02::OnMyMobDead";
+	monster "que_qaru02",158,106,"Pierre des Clés",1905,1,"#gdtimer02_aru02::OnMyMobDead";
+	monster "que_qaru02",163,133,"Pierre des Clés",1905,1,"#gdtimer02_aru02::OnMyMobDead";
+	monster "que_qaru02",150,154,"Pierre des Clés",1905,1,"#gdtimer02_aru02::OnMyMobDead";
 	end;
 
 OnTimer112000:
-	mapannounce "que_qaru02","Piamette : Whooping fun times are back! Now, Go! I'll get back to!!",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette : Ouiii!!! On va encore s'amuser! Partez maintenant! Je vous rattrape!",bc_map,"0xdb7093";
 	killmonster "que_qaru02","#gdtimer02_aru02::OnMyMobDead";
 	enablenpc "#aru02_cage01";
 	enablenpc "#aru02_cage02";
@@ -1837,18 +1817,18 @@ Onreset:
 	end;
 
 OnTimer1000:
-	mapannounce "que_qaru02","Piamette : All the keeper of keys are dead now? Who freed my birds? Teo, who did it?",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette : Tous les Gardiens des Clés sont morts maintenant? Qui a libéré moi oiseaux? Hein? Téo, qui a fait ça?",bc_map,"0xdb7093";
 	end;
 
 OnTimer5000:
-	mapannounce "que_qaru02","Piamette : I'm pissed off now!",bc_map,"0xdb7093";
+	mapannounce "que_qaru02","Piamette : Je vais m'énerver maintenant!",bc_map,"0xdb7093";
 	disablenpc "Piamette#aru02";
-	monster "que_qaru02",131,135,"Angry Piamette",1930,1,"#piamette_aru02::OnMyMobDead";
+	monster "que_qaru02",131,135,"Piamette en Colère",1930,1,"#piamette_aru02::OnMyMobDead";
 	stopnpctimer;
 	end;
 
 OnMyMobDead:
-	mapannounce "que_qaru02","Piamette has been released, so the warp gate toward the South is working now.",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Piamette a été repoussée. Le Portail Sud vient de s'ouvrir.",bc_map,"0x00ff00";
 	enablenpc "windpath03_aru02";
 	enablenpc "windpath04_aru02";
 	donpcevent "#nm_switch_aru02::OnEnable";
@@ -1875,37 +1855,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -1932,37 +1912,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -1989,37 +1969,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -2046,37 +2026,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -2103,37 +2083,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -2160,37 +2140,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -2217,37 +2197,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -2274,37 +2254,37 @@ OnTouch:
 		warp "que_qaru02",103,153;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,1;
-		mapannounce "que_qaru02","Piamette : One white bird has dropped with its wing pierced by an arrow.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de tomber, une flèche dans l'aile.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 1) {
 		warp "que_qaru02",102,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,2;
-		mapannounce "que_qaru02","Piamette : One bird is caught in a snare, and dropped into a lake.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau est tombé dans un piège, et coule au fond du lac.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 2) {
 		warp "que_qaru02",113,111;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,3;
-		mapannounce "que_qaru02","Piamette : One bird has died trapped in it's cage.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir dans sa cage.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 3) {
 		warp "que_qaru02",161,105;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,4;
-		mapannounce "que_qaru02","Piamette : One bird was poisoned to death.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau vient de mourir empoisonné.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 4) {
 		warp "que_qaru02",168,135;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,5;
-		mapannounce "que_qaru02","Piamette : One bird vomited blood while singing seven days and seven nights.",bc_map,"0xdb7093";
+		mapannounce "que_qaru02","Piamette : Un petit oiseau a vomi du sang pendant sept jours et sept nuits en chantant.",bc_map,"0xdb7093";
 	}
 	else if ($gqse_aru02_gd == 5) {
 		warp "que_qaru02",150,159;
 		disablenpc "#getspell01_aru02";
 		set $gqse_aru02_gd,6;
-		mapannounce "que_qaru02","Piamette : The last one broke her neck wriggling to get out of from it's eggshell!",bc_map,"0xFF0000";
+		mapannounce "que_qaru02","Piamette : Le dernier petit oiseau vient de se briser le cou en se tortillant pour sortir de son oeuf!",bc_map,"0xFF0000";
 		donpcevent "#gdtimer02_aru02::OnEnable";
 		donpcevent "#gdtimer01_aru02::Onstop";
 	}
@@ -2493,15 +2473,15 @@ OnTouch:
 	end;
 
 OnTimer1000:
-	mapannounce "que_qaru02","Wish Maiden: Did you have a good time with Piamette?",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: Avez-vous passé du bon temps avec Piamette?",bc_map,"0x00ff00";
 	end;
 
 OnTimer4000:
-	mapannounce "que_qaru02","Wish Maiden: But it's the end. There will be summoned monsters coming soon...",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: Mais c'est terminé! Des créatures vont être bientôt invoquées...",bc_map,"0x00ff00";
 	end;
 
 OnTimer9000:
-	mapannounce "que_qaru02","Wish Maiden: So come here to me safely...",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: Venez jusqu'à moi...",bc_map,"0x00ff00";
 	end;
 
 OnTimer10000:
@@ -2533,63 +2513,63 @@ OnDisable:
 	end;
 
 OnTimer5000:
-	mapannounce "que_qaru02","The Western magic formation is working to summon Guard of Shadow.",bc_map,"0x4d4dff";
-	monster "que_qaru02",226,288,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",227,289,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",228,290,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",229,291,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",230,292,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",231,293,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",232,294,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",233,295,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",234,296,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",235,297,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",228,286,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",229,287,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",230,288,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",231,289,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",232,290,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",233,291,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",234,292,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",235,293,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",236,294,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",237,295,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",230,284,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",231,285,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",232,286,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",233,287,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",234,288,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",235,289,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",236,290,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",237,291,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",238,292,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",239,293,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	mapannounce "que_qaru02","L'Assemblée des Mages de l'Ouest invoque des Gardiens des Ombres.",bc_map,"0x4d4dff";
+	monster "que_qaru02",226,288,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",227,289,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",228,290,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",229,291,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",230,292,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",231,293,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",232,294,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",233,295,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",234,296,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",235,297,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",228,286,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",229,287,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",230,288,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",231,289,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",232,290,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",233,291,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",234,292,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",235,293,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",236,294,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",237,295,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",230,284,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",231,285,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",232,286,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",233,287,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",234,288,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",235,289,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",236,290,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",237,291,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",238,292,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",239,293,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
 	end;
 
 OnTimer25000:
 OnTimer55000:
 OnTimer85000:
 OnTimer120000:
-	monster "que_qaru02",226,294,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",227,294,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",228,294,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",229,294,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",230,295,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",231,296,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",231,297,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",231,298,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",231,299,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",230,300,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",229,301,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",228,301,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",227,301,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",226,301,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",225,300,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",224,299,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",224,298,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",224,297,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",224,296,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
-	monster "que_qaru02",225,295,"Guard of Shadow",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",226,294,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",227,294,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",228,294,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",229,294,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",230,295,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",231,296,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",231,297,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",231,298,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",231,299,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",230,300,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",229,301,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",228,301,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",227,301,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",226,301,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",225,300,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",224,299,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",224,298,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",224,297,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",224,296,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
+	monster "que_qaru02",225,295,"Gardien des Ombres",1752,1,"#nmsomaru02_jin01::OnMyMobDead";
 	end;
 
 OnTimer180000:
@@ -2602,16 +2582,16 @@ OnMyMobDead:
 
 que_qaru02,2,8,0	script	#aru02_stone01	844,{
 OnEnable:
-	monster "que_qaru02",227,294,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",229,294,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",231,296,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",231,298,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",230,300,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",228,301,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",226,301,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",224,299,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",224,297,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
-	monster "que_qaru02",225,295,"Western Magic Guardian",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",227,294,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",229,294,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",231,296,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",231,298,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",230,300,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",228,301,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",226,301,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",224,299,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",224,297,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
+	monster "que_qaru02",225,295,"Gardien de la Magie",1752,1,"#aru02_stone01::OnMyMobDead";
 	end;
 
 Onreset:
@@ -2640,63 +2620,63 @@ OnDisable:
 	end;
 
 OnTimer5000:
-	mapannounce "que_qaru02","The Eastern magic formation is working to summon Guard of Shadow.",bc_map,"0x4d4dff";
-	monster "que_qaru02",263,292,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",264,291,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",265,290,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",266,289,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",267,288,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",268,287,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",269,286,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",270,285,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",271,284,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",272,283,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",265,294,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",266,293,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",267,292,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",268,291,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",269,290,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",270,289,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",271,288,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",272,287,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",273,286,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",274,285,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",267,296,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",268,295,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",269,294,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",270,283,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",271,282,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",272,281,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",273,280,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",274,279,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",275,276,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",276,275,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	mapannounce "que_qaru02","L'Assemblée des Mages de l'Est invoque des Gardiens des Ombres.",bc_map,"0x4d4dff";
+	monster "que_qaru02",263,292,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",264,291,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",265,290,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",266,289,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",267,288,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",268,287,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",269,286,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",270,285,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",271,284,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",272,283,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",265,294,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",266,293,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",267,292,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",268,291,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",269,290,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",270,289,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",271,288,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",272,287,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",273,286,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",274,285,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",267,296,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",268,295,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",269,294,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",270,283,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",271,282,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",272,281,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",273,280,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",274,279,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",275,276,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",276,275,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
 	end;
 
 OnTimer25000:
 OnTimer55000:
 OnTimer85000:
 OnTimer120000:
-	monster "que_qaru02",274,301,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",275,301,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",276,301,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",277,301,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",278,300,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",279,299,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",279,298,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",279,297,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",279,296,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",278,295,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",277,294,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",276,294,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",275,294,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",274,294,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",273,295,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",272,296,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",272,297,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",272,298,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",272,299,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
-	monster "que_qaru02",273,300,"Bloody Hunter",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",274,301,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",275,301,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",276,301,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",277,301,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",278,300,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",279,299,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",279,298,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",279,297,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",279,296,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",278,295,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",277,294,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",276,294,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",275,294,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",274,294,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",273,295,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",272,296,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",272,297,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",272,298,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",272,299,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
+	monster "que_qaru02",273,300,"Chasseur Sanguinaire",1753,1,"#nmsomaru02_jin02::OnMyMobDead";
 	end;
 
 OnTimer180000:
@@ -2709,16 +2689,16 @@ OnMyMobDead:
 
 que_qaru02,2,9,0	script	#aru02_stone02	844,{
 OnEnable:
-	monster "que_qaru02",275,301,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",277,301,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",279,299,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",279,297,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",278,295,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",276,294,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",274,294,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",272,296,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",272,298,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
-	monster "que_qaru02",273,300,"Eastern Magic Guardian",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",275,301,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",277,301,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",279,299,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",279,297,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",278,295,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",276,294,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",274,294,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",272,296,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",272,298,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
+	monster "que_qaru02",273,300,"Gardien de la Magie",1753,1,"#aru02_stone02::OnMyMobDead";
 	end;
 
 Onreset:
@@ -2747,59 +2727,59 @@ OnDisable:
 	end;
 
 OnTimer5000:
-	mapannounce "que_qaru02","The Northern magic formation is working to summon Keeper of the temple.",bc_map,"0x4d4dff";
-	monster "que_qaru02",247,329,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",249,329,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",251,329,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",253,329,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",255,329,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",243,339,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",245,337,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",247,335,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",247,333,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",254,333,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",256,335,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",258,337,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",260,339,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	mapannounce "que_qaru02","L'Assemblée des Mages du Nord invoque des Gardiens du Temple.",bc_map,"0x4d4dff";
+	monster "que_qaru02",247,329,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",249,329,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",251,329,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",253,329,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",255,329,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",243,339,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",245,337,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",247,335,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",247,333,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",254,333,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",256,335,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",258,337,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",260,339,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
 	end;
 
 OnTimer120000:
-	monster "que_qaru02",251,343,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",252,343,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",255,341,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",255,340,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",254,337,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",253,336,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",250,336,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",249,337,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",248,340,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",248,341,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",251,343,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",252,343,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",255,341,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",255,340,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",254,337,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",253,336,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",250,336,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",249,337,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",248,340,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",248,341,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
 	end;
 
 OnTimer240000:
-	monster "que_qaru02",250,343,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",252,343,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",254,342,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",255,340,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",255,338,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",253,336,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",250,336,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",248,338,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",248,340,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",249,342,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",250,343,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",252,343,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",254,342,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",255,340,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",255,338,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",253,336,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",250,336,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",248,338,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",248,340,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",249,342,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
 	end;
 
 OnTimer360000:
-	monster "que_qaru02",250,343,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",252,343,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",254,342,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",255,340,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",255,338,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",253,336,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",251,336,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",249,337,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",248,339,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
-	monster "que_qaru02",248,341,"Keeper Of The Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",250,343,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",252,343,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",254,342,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",255,340,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",255,338,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",253,336,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",251,336,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",249,337,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",248,339,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
+	monster "que_qaru02",248,341,"Gardien du Temple",1933,1,"#nmsomaru02_jin03::OnMyMobDead";
 	stopnpctimer;
 	end;
 
@@ -2809,16 +2789,16 @@ OnMyMobDead:
 
 que_qaru02,2,10,0	script	#aru02_stone03	844,{
 OnEnable:
-	monster "que_qaru02",251,343,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",252,343,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",255,341,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",255,340,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",254,337,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",253,336,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",250,336,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",249,337,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",248,340,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
-	monster "que_qaru02",248,341,"Northern Magic Guardian",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",251,343,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",252,343,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",255,341,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",255,340,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",254,337,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",253,336,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",250,336,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",249,337,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",248,340,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
+	monster "que_qaru02",248,341,"Gardien de la Magie",1933,1,"#aru02_stone03::OnMyMobDead";
 	end;
 
 Onreset:
@@ -2837,7 +2817,7 @@ OnMyMobDead:
 	end;
 }
 
-que_qaru02,235,285,5	script	Guard of Shadow#aru02_01	1752,4,4,{
+que_qaru02,235,285,5	script	Gardien des Ombres::Guard of Shadow#aru02_01	1752,4,4,{
 OnInit:
 	disablenpc "Guard of Shadow#aru02_01";
 	end;
@@ -2849,16 +2829,16 @@ OnDisable:
 
 OnTouch:
 	disablenpc "Guard of Shadow#aru02_01";
-	monster "que_qaru02",234,284,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_01::OnMyMobDead";
-	monster "que_qaru02",235,285,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_01::OnMyMobDead";
-	monster "que_qaru02",236,286,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_01::OnMyMobDead";
+	monster "que_qaru02",234,284,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_01::OnMyMobDead";
+	monster "que_qaru02",235,285,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_01::OnMyMobDead";
+	monster "que_qaru02",236,286,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_01::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,224,290,5	script	Guard of Shadow#aru02_02	1752,4,4,{
+que_qaru02,224,290,5	script	Gardien des Ombres::Guard of Shadow#aru02_02	1752,4,4,{
 OnInit:
 	disablenpc "Guard of Shadow#aru02_02";
 	end;
@@ -2870,16 +2850,16 @@ OnDisable:
 
 OnTouch:
 	disablenpc "Guard of Shadow#aru02_02";
-	monster "que_qaru02",223,289,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_02::OnMyMobDead";
-	monster "que_qaru02",224,290,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_02::OnMyMobDead";
-	monster "que_qaru02",225,291,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_02::OnMyMobDead";
+	monster "que_qaru02",223,289,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_02::OnMyMobDead";
+	monster "que_qaru02",224,290,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_02::OnMyMobDead";
+	monster "que_qaru02",225,291,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_02::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,236,296,5	script	Guard of Shadow#aru02_03	1752,4,4,{
+que_qaru02,236,296,5	script	Gardien des Ombres::Guard of Shadow#aru02_03	1752,4,4,{
 OnInit:
 	disablenpc "Guard of Shadow#aru02_03";
 	end;
@@ -2891,16 +2871,16 @@ OnDisable:
 
 OnTouch:
 	disablenpc "Guard of Shadow#aru02_03";
-	monster "que_qaru02",235,295,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_03::OnMyMobDead";
-	monster "que_qaru02",236,296,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_03::OnMyMobDead";
-	monster "que_qaru02",237,297,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_03::OnMyMobDead";
+	monster "que_qaru02",235,295,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_03::OnMyMobDead";
+	monster "que_qaru02",236,296,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_03::OnMyMobDead";
+	monster "que_qaru02",237,297,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_03::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,225,303,5	script	Guard of Shadow#aru02_04	1752,4,4,{
+que_qaru02,225,303,5	script	Gardien des Ombres::Guard of Shadow#aru02_04	1752,4,4,{
 OnInit:
 	disablenpc "Guard of Shadow#aru02_04";
 	end;
@@ -2912,100 +2892,100 @@ OnDisable:
 
 OnTouch:
 	disablenpc "Guard of Shadow#aru02_04";
-	monster "que_qaru02",224,302,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_04::OnMyMobDead";
-	monster "que_qaru02",225,303,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_04::OnMyMobDead";
-	monster "que_qaru02",226,304,"Guard of Shadow",1752,1,"Guard of Shadow#aru02_04::OnMyMobDead";
+	monster "que_qaru02",224,302,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_04::OnMyMobDead";
+	monster "que_qaru02",225,303,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_04::OnMyMobDead";
+	monster "que_qaru02",226,304,"Gardien des Ombres",1752,1,"Guard of Shadow#aru02_04::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,266,296,3	script	Bloody Hunter#aru02_ac01	1753,4,4,{
+que_qaru02,266,296,3	script	Gardien du Temple::Temple Guard#aru02_ac01	1753,4,4,{
 OnInit:
-	disablenpc "Bloody Hunter#aru02_ac01";
+	disablenpc "Temple Guard#aru02_ac01";
 	end;
 
 OnDisable:
-	killmonster "que_qaru02","Bloody Hunter#aru02_ac01::OnMyMobDead";
-	disablenpc "Bloody Hunter#aru02_ac01";
+	killmonster "que_qaru02","Temple Guard#aru02_ac01::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac01";
 	end;
 
 OnTouch:
-	disablenpc "Bloody Hunter#aru02_ac01";
-	monster "que_qaru02",265,297,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac01::OnMyMobDead";
-	monster "que_qaru02",266,296,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac01::OnMyMobDead";
-	monster "que_qaru02",267,295,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac01::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac01";
+	monster "que_qaru02",265,297,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac01::OnMyMobDead";
+	monster "que_qaru02",266,296,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac01::OnMyMobDead";
+	monster "que_qaru02",267,295,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac01::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,271,283,3	script	Bloody Hunter#aru02_ac02	1753,4,4,{
+que_qaru02,271,283,3	script	Gardien du Temple::Temple Guard#aru02_ac02	1753,4,4,{
 OnInit:
-	disablenpc "Bloody Hunter#aru02_ac02";
+	disablenpc "Temple Guard#aru02_ac02";
 	end;
 
 OnDisable:
-	killmonster "que_qaru02","Bloody Hunter#aru02_ac02::OnMyMobDead";
-	disablenpc "Bloody Hunter#aru02_ac02";
+	killmonster "que_qaru02","Temple Guard#aru02_ac02::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac02";
 	end;
 
 OnTouch:
-	disablenpc "Bloody Hunter#aru02_ac02";
-	monster "que_qaru02",270,284,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac02::OnMyMobDead";
-	monster "que_qaru02",271,283,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac02::OnMyMobDead";
-	monster "que_qaru02",272,282,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac02::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac02";
+	monster "que_qaru02",270,284,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac02::OnMyMobDead";
+	monster "que_qaru02",271,283,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac02::OnMyMobDead";
+	monster "que_qaru02",272,282,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac02::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,270,307,3	script	Bloody Hunter#aru02_ac03	1753,4,4,{
+que_qaru02,270,307,3	script	Gardien du Temple::Temple Guard#aru02_ac03	1753,4,4,{
 OnInit:
-	disablenpc "Bloody Hunter#aru02_ac03";
+	disablenpc "Temple Guard#aru02_ac03";
 	end;
 
 OnDisable:
-	killmonster "que_qaru02","Bloody Hunter#aru02_ac03::OnMyMobDead";
-	disablenpc "Bloody Hunter#aru02_ac03";
+	killmonster "que_qaru02","Temple Guard#aru02_ac03::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac03";
 	end;
 
 OnTouch:
-	disablenpc "Bloody Hunter#aru02_ac03";
-	monster "que_qaru02",269,308,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac03::OnMyMobDead";
-	monster "que_qaru02",270,307,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac03::OnMyMobDead";
-	monster "que_qaru02",271,306,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac03::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac03";
+	monster "que_qaru02",269,308,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac03::OnMyMobDead";
+	monster "que_qaru02",270,307,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac03::OnMyMobDead";
+	monster "que_qaru02",271,306,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac03::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,279,300,3	script	Bloody Hunter#aru02_ac04	1753,4,4,{
+que_qaru02,279,300,3	script	Gardien du Temple::Temple Guard#aru02_ac04	1753,4,4,{
 OnInit:
-	disablenpc "Bloody Hunter#aru02_ac04";
+	disablenpc "Temple Guard#aru02_ac04";
 	end;
 
 OnDisable:
-	killmonster "que_qaru02","Bloody Hunter#aru02_ac04::OnMyMobDead";
-	disablenpc "Bloody Hunter#aru02_ac04";
+	killmonster "que_qaru02","Temple Guard#aru02_ac04::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac04";
 	end;
 
 OnTouch:
-	disablenpc "Bloody Hunter#aru02_ac04";
-	monster "que_qaru02",278,301,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac04::OnMyMobDead";
-	monster "que_qaru02",279,300,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac04::OnMyMobDead";
-	monster "que_qaru02",280,299,"Bloody Hunter",1753,1,"Bloody Hunter#aru02_ac04::OnMyMobDead";
+	disablenpc "Temple Guard#aru02_ac04";
+	monster "que_qaru02",278,301,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac04::OnMyMobDead";
+	monster "que_qaru02",279,300,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac04::OnMyMobDead";
+	monster "que_qaru02",280,299,"Chasseur Sanguinaire",1753,1,"Temple Guard#aru02_ac04::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,247,330,5	script	Temple Keeper#aru02_ac01	1933,4,4,{
+que_qaru02,247,330,5	script	Gardien du Temple::Temple Keeper#aru02_ac01	1933,4,4,{
 OnInit:
 	disablenpc "Temple Keeper#aru02_ac01";
 	end;
@@ -3017,16 +2997,16 @@ OnDisable:
 
 OnTouch:
 	disablenpc "Temple Keeper#aru02_ac01";
-	monster "que_qaru02",246,330,"Keeper Of The Temple",1933,1,"Temple Keeper#aru02_ac01::OnMyMobDead";
-	monster "que_qaru02",247,330,"Keeper Of The Temple",1933,1,"Temple Keeper#aru02_ac01::OnMyMobDead";
-	monster "que_qaru02",248,330,"Keeper Of The Temple",1933,1,"Temple Keeper#aru02_ac01::OnMyMobDead";
+	monster "que_qaru02",246,330,"Gardien du Temple",1933,1,"Temple Keeper#aru02_ac01::OnMyMobDead";
+	monster "que_qaru02",247,330,"Gardien du Temple",1933,1,"Temple Keeper#aru02_ac01::OnMyMobDead";
+	monster "que_qaru02",248,330,"Gardien du Temple",1933,1,"Temple Keeper#aru02_ac01::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,255,330,3	script	Temple Keeper#aru02_ac02	1933,4,4,{
+que_qaru02,255,330,3	script	Gardien du Temple::Temple Keeper#aru02_ac02	1933,4,4,{
 OnInit:
 	disablenpc "Temple Keeper#aru02_ac02";
 	end;
@@ -3038,16 +3018,16 @@ OnDisable:
 
 OnTouch:
 	disablenpc "Temple Keeper#aru02_ac02";
-	monster "que_qaru02",254,330,"Keeper Of The Temple",1933,1,"Temple Keeper#aru02_ac02::OnMyMobDead";
-	monster "que_qaru02",255,330,"Keeper Of The Temple",1933,1,"Temple Keeper#aru02_ac02::OnMyMobDead";
-	monster "que_qaru02",256,330,"Keeper Of The Temple",1933,1,"Temple Keeper#aru02_ac02::OnMyMobDead";
+	monster "que_qaru02",254,330,"Gardien du Temple",1933,1,"Temple Keeper#aru02_ac02::OnMyMobDead";
+	monster "que_qaru02",255,330,"Gardien du Temple",1933,1,"Temple Keeper#aru02_ac02::OnMyMobDead";
+	monster "que_qaru02",256,330,"Gardien du Temple",1933,1,"Temple Keeper#aru02_ac02::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	end;
 }
 
-que_qaru02,251,255,3	script	Wish Maiden#aru02_boss	1931,{
+que_qaru02,251,255,3	script	Dame aux Souhaits::Wish Maiden#aru02_boss	1931,{
 OnInit:
 	hideonnpc "Wish Maiden#aru02_boss";
 	end;
@@ -3063,11 +3043,11 @@ Onfight:
 	end;
 
 OnTimer1000:
-	mapannounce "que_qaru02","Wish Maiden : You guys reached here.. Are your guardians dead...?",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: Vous êtes arrivés jusqu'ici... Les gardiens sont-ils tous morts?",bc_map,"0x00ff00";
 	end;
 
 OnTimer4000:
-	mapannounce "que_qaru02","Wish Maiden : I sincerely welcome all your best efforts!",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: Que vos efforts soient récompensés! Soyez les bienvenus!",bc_map,"0x00ff00";
 	end;
 
 OnTimer5000:
@@ -3082,35 +3062,35 @@ OnMyMobDead:
 	if (mobcount("que_qaru02","Wish Maiden#aru02_boss::OnMyMobDead") == 0) {
 		donpcevent "#okolnir_aru02::Onstop";
 		donpcevent "Wish Maiden#aru02_gift::OnEnable";
-		mapannounce "que_qaru02","Wish Maiden : ..Good, you deserve the Goddess' shine.",bc_map,"0x00ff00";
+		mapannounce "que_qaru02","Dame aux Souhaits: ...Bien! Vous méritez les faveurs de la déesse.",bc_map,"0x00ff00";
 	}
 	end;
 }
 
-que_qaru02,252,340,3	script	Wish Maiden#aru02_gift	403,{
+que_qaru02,252,340,3	script	Dame aux Souhaits::Wish Maiden#aru02_gift	403,{
 	set .@GID, GetCastleData("arug_cas02",1);
 	if (getcharid(2) == .@GID) {
 		if (strcharinfo(0) == getguildmaster(.@GID)) {
 			if ((countitem(7835) > 0) && (countitem(7836) > 0) && (countitem(7837) > 0) && (countitem(7838) > 0) && (countitem(2513) > 0) && (countitem(7291) > 9) && (countitem(7293) > 9) && (countitem(7063) > 99) && (countitem(985) > 19)) {
 				cutin "wish_maiden12",1;
-				mes "[Wish Maiden]";
-				mes "As I declared, I will give the Goddess' shine to you.";
-				mes "You have the requirements to carry it...";
+				mes "[Dame aux Souhaits]";
+				mes "Comme promis, je vais vous offrir le joyau de la déesse.";
+				mes "Vous vous êtes montré digne de le porter...";
 				next;
-				mes "[Wish Maiden]";
-				mes "You will be granted the power of the great Valkyrie...";
+				mes "[Dame aux Souhaits]";
+				mes "Vous allez recevoir le pouvoir de la grande Valkyrie...";
 				next;
-				mes "[Wish Maiden]";
-				mes "I will give you some things for fun.";
-				mes "All of you enjoy them together...";
+				mes "[Dame aux Souhaits]";
+				mes "Je vais vous offrir quelques objets pour votre bon plaisir.";
+				mes "Puissiez-vous en faire bon usage...";
 				next;
-				mes "[Wish Maiden]";
-				mes "Go to Rachel and Juno to meet the Ravies sisters.";
+				mes "[Dame aux Souhaits]";
+				mes "Retournez à Rachel ou à Yuno, et allez trouver les soeurs Ravies.";
 				next;
 				cutin "wish_maiden32",1;
-				mes "[Wish Maiden]";
-				mes "I will open the gate for you to come back here.";
-				mes "...Okolnir won't last forever...";
+				mes "[Dame aux Souhaits]";
+				mes "J'ouvrirai le portail pour que vous puissiez revenir ici.";
+				mes "...Okolnir n'existera pas éternellement...";
 				delitem 7835,1; //Dusk_Glow
 				delitem 7836,1; //Dawn_Essence
 				delitem 7837,1; //Cold_Moonlight
@@ -3122,7 +3102,7 @@ que_qaru02,252,340,3	script	Wish Maiden#aru02_gift	403,{
 				delitem 985,20; //Elunium
 				getitem 2541,1; //Asprika
 				getitem 7840,1; //Valkyrie_Gift
-				announce "["+ strcharinfo(0) +"], of guild ["+ GetGuildName(.@GID) +"] has brought a Asprika into this world.",bc_all,"0x70dbdb";
+				announce "["+ strcharinfo(0) +"], de la guilde ["+ GetGuildName(.@GID) +"] vient de rapporter une Asprika dans ce monde.",bc_all,"0x70dbdb";
 				close2;
 				cutin "wish_maiden11",255;
 				disablenpc "Wish Maiden#aru02_gift";
@@ -3131,28 +3111,28 @@ que_qaru02,252,340,3	script	Wish Maiden#aru02_gift	403,{
 			}
 			else {
 				cutin "wish_maiden13",1;
-				mes "[Wish Maiden]";
-				mes "As I declared, you are worthy of holding the Asprika.";
-				mes "However, you do not have the requirements on you...";
+				mes "[Dame aux Souhaits]";
+				mes "Comme je vous l'avais dit, vous êtes maintenant digne de porter une Asprika.";
+				mes "Cependant, vous n'avez pas les objets requis sur vous...";
 				next;
-				mes "[Wish Maiden]";
-				mes "...Did you forget something?";
+				mes "[Dame aux Souhaits]";
+				mes "...Auriez-vous oublié quelque chose?";
 				close2;
 			}
 		}
 		else {
 			cutin "wish_maiden12",1;
-			mes "[Wish Maiden]";
-			mes "¸ All of you worked together as a team...";
-			mes "Humans are strong when they are united, but are easily swayed by lust.";
+			mes "[Dame aux Souhaits]";
+			mes "Vous avez tous réussi à travailler en équipe...";
+			mes "Les hommes sont forts lorsqu'ils sont unis, mais ils sont facilement corrompus par l'envie et la luxure.";
 			next;
-			mes "[Wish Maiden]";
-			mes "Humans are imperfect, so their chief god is there for them when they need help.";
+			mes "[Dame aux Souhaits]";
+			mes "Les hommes sont imparfaits - c'est pour cette raison que les dieux sont là pour les aider lorsque le besoin s'en fait sentir.";
 			mes "....";
 			next;
-			mes "[Wish Maiden]";
-			mes "Always be real.";
-			mes "Do not regret your actions...";
+			mes "[Dame aux Souhaits]";
+			mes "Regardez toujours la vérité en face.";
+			mes "Ne regrettez jamais vos actes...";
 			close2;
 		}
 	}
@@ -3174,7 +3154,7 @@ OnDisable:
 	end;
 
 OnTimer280000:
-	mapannounce "que_qaru02","Wish Maiden : ... Okolnir will soon disappear... I will send you back to where you originally came from.",bc_map,"0x00ff00";
+	mapannounce "que_qaru02","Dame aux Souhaits: ... Okolnir va bientôt disparaître... Je vais vous renvoyer là d'où vous venez.",bc_map,"0x00ff00";
 	end;
 
 OnTimer290000:
