@@ -167,7 +167,7 @@ niflheim,350,258,1	script	Âme Maudite#nif	802,{
 	mes "....Quoi qu'il arrive...";
 	mes "....Ne touchez PAS à mes livres...";
 	next;
-	switch(select("Prendre le 1er Livre.:Prendre le 2ème Livre.:Prendre le 3ième Livre.:Partir le plus vite possible.")) {
+	switch(select("Prendre le 1er Livre.:Prendre le 2ème Livre.:Prendre le 3ème Livre.:Partir le plus vite possible.")) {
 	case 1:
 		monster "niflheim",349,259,"--ja--",1478,1,"Âme Maudite#nif::OnMyMobDead";
 		mes "[Ashe Bruce]";
@@ -210,11 +210,16 @@ niflheim,350,258,1	script	Âme Maudite#nif	802,{
 			switch(rand(1,5)) {
 			case 1:
 				if (morison_meat < 15) {
+//
 // Bugfix - Quelques petites précisions sur les lignes commentées: le NPC set des variables correspondant à deux autres quêtes: la quête des obb d'une part
 // (ce qui supprime l'intro du perso d'Alberta), et la quête juice_maker de l'autre. C'est complètement absurde, et au moins dans le cas des obb ça pourrait 
 // causer des problèmes. Je supprime donc ces changements de variables. Je ne pense vraiment pas qu'il y ait une raison à cela. Si quelqu'un en connait une,
 // qu'il me le fasse savoir, mais pour l'instant tout ce que je vois c'est que ça peur faire planter d'autres quêtes, ou créer un exploit dans le cas de la
 // quête juice_maker. [No Healing]
+// EDIT - Selon iRo wiki (http://irowiki.org/wiki/Nifflheim) ce NPC n'a aucune récompense, et ne fait rien de particulier une fois qu'on a récité le chant.
+// Je laisse donc comme ça: je garde le check des variables, même si c'est stupide, pour conserver les variations sans conséquences des dialogues, mais je 
+// commente les "set" de celles-ci pour ne pas beuguer les autres quêtes. [No Healing]
+//
 //					set MISC_QUEST,MISC_QUEST | 1;
 					mes "[Ashe Bruce]";
 					mes "Vous... Vous avez levé la malédiction!";
