@@ -146,7 +146,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 		mes "[Chef Mahnsoo]";
 		mes "Félicitations!";
 		callfunc "Job_Change",Job_Merchant;
-		callfunc "F_ClearJobVar";
+//		callfunc "F_ClearJobVar"; // Je mets cette ligne plus bas par rapport au bugfix d'Etna [NoH]
 		if(checkquest(1009) != -1) {
 			completequest 1009;
 		}
@@ -167,12 +167,15 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 			mes "J'espère que vous pourrez m'aider encore la prochaine fois~";
 			set zeny,zeny+200;
 			set quest_alb_01,2;
+			next; // ajout d'Etna
 		}
-		else {
+		else if (job_merchant_q2 == 7 || job_merchant_q2 == 8){ // Etna: j'ai complété la condition, sinon il entrait là, même si on ne devait pas livrer le message
 			mes "[Chef Mahnsoo]";
 			mes "Mais qu'en est-il du message que je vous avais demandé de livrer? Vous avez oublié? Oh... Bon travail quand même!";
+			next; // ajout d'Etna
 		}
-		next;
+		callfunc "F_ClearJobVar";
+		// next; // Etna: désactivé et ajouté un next dans les 2 conditions précédentes pour éviter le double next inutile
 		mes "[Chef Mahnsoo]";
 		mes "Notre but est de contrôler 20 % du commerce mondial! Et nous avons besoin de gens jeunes, et ambitieux tels que vous!";
 		next;
