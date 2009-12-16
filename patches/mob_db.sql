@@ -178,7 +178,7 @@ UPDATE mob_db SET kName = "Mimic" WHERE ID = 1191;
 UPDATE mob_db SET kName = "Spectre" WHERE ID = 1192;
 UPDATE mob_db SET kName = "Toquant" WHERE ID = 1193;
 UPDATE mob_db SET kName = "Arclouse" WHERE ID = 1194;
-UPDATE mob_db SET kName = "Rideword" WHERE ID = 1195;
+UPDATE mob_db SET kName = "Verbousard" WHERE ID = 1195;
 UPDATE mob_db SET kName = "Squelette Prisonier" WHERE ID = 1196;
 UPDATE mob_db SET kName = "Prisonier Zombie" WHERE ID = 1197;
 UPDATE mob_db SET kName = "Cultiste" WHERE ID = 1198;
