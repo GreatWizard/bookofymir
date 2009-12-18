@@ -1,0 +1,152 @@
+Le Livre d'Ymir
+http://www.bookofymir.net/
+
+
+#####################################################################################################################################
+# 																    #
+# 					I. Récupérer les ressources du Livre d'Ymir.						    #
+# 																    #
+# La plupart de ceux qui liront ce fichier l'ont obtenu sur notre SVN directement et peuvent donc passer au paragraphe suivant.     #
+# Pour les autres, il existe un moyen très simple de télécharger et de maintenir à jour ces ressources: utiliser la SVN du BoY.     #
+# Pour cela, rien de plus simple. Tout d'abord, téléchargez un gestionnaire comme Tortoise SVN: http://tortoisesvn.tigris.org/      #
+# (pour Windows – je ne vais pas expliquer comment procéder pour Linux à partir du moment où des changements effectués sur un       #
+# serveur doivent être testé en local avant d'être mis en ligne; pour ceux qui ont un PC sous Linux à la maison, il existe          #
+# toutefois certaines interfaces graphiques similaires, telles que Nautilus SVN).                                                   #
+# 																    #
+# Une fois ce programme téléchargé et installé, créez un nouveau dossier appelé "BoY" dans la racine de votre serveur. Ouvrez       #
+# ce dossier, clic droit, et sélectionnez "SVN Checkout". Une fenêtre va s'ouvrir vous demandant une URL. Ajoutez maintenant        #
+# celle de la SVN du BoY, à savoir: http://elfangelis.fr/bookofymir/. Le téléchargement des ressources va maintenant commencer.     #
+# C'est fait, vous avez maintenant toutes les ressources du BoY.								    #
+# 																    #
+# Pour les maintenir à jour, il suffit de faire un nouveau clic à droite dans ce dossier et de sélectionner "SVN Update" dans       #
+# le menu de Tortoise. Il est vivement recommandé de le faire autant que possible (idéalement, à chaque fois que vous lancez le     #
+# serveur, et au minimum une fois par semaine): les ressources changent continuellement: des fautes sont corrigées, des bugs sont   #
+# fixés, des mises à jour sont effectuées, et des traductions sont ajoutées quotidiennement.					    #
+# 																    #
+#####################################################################################################################################
+
+#####################################################################################################################################
+# 																    #
+# 						III. Utiliser les scripts en français.						    #
+# 																    #
+# C'est extrêmement simple, vous n'aurez qu'une seule ligne à modifier dans les conf de votre serveur. Dans map_athena.conf,        #
+# cherchez à la fin:														    #
+# 																    #
+# 	// Scripts														    #
+# 	import: npc/scripts_main.conf    											    #
+# 																    #
+# et remplacez par: 														    #
+#  																    #
+# 	// Scripts														    #
+# 	import: BoY/npc/scripts_main.conf											    #
+# 																    #
+# Relancez votre serveur, et il utilisera les NPC en français au lieu de ceux en anglais. Si vous utilisez des scripts custom,      #
+# vous devrez les ajouter à BoY/npc/scripts_custom.conf et non plus à  npc/scripts_custom.conf.					    #
+# 																    #
+#####################################################################################################################################
+
+#####################################################################################################################################
+# 																    #
+# 					II. Utiliser les fichiers du client en français.					    #
+# 																    #
+# Rien de plus simple, vous n'avez qu'à copier le contenu du dossier BoY/data dans le dossier data de votre serveur. Vous pourriez  # 
+# aussi bien sûr créer un dépôt directement dans le dossier data de votre serveur en faisant un SVN Checkout à l'adresse suivante:  #
+# http://elfangelis.fr/bookofymir/data/.											    #
+# 																    #
+# A noter toutefois que pour les utilisateurs d'Xray il y aura peut-être une petite modification à faire: pour les clients Xray     #
+# jusqu'au client 2009-07-29a, il vous faudra copier le contenu du dossier data/xray/ dans le dossier data/. Pour les clients à     #
+# partir du client 2009-10-13a, vous n'aurez rien à faire.									    #
+# 																    #
+#####################################################################################################################################
+
+#####################################################################################################################################
+# 																    #
+# 						IV. Utiliser les bases de données du BoY.					    #
+# 																    #
+# Le Livre d'Ymir propose désormais des bases de données pour les objets et les monstres traduites en français. Pourquoi? Tout      #
+# simplement parce que ceux-ci sont déjà traduits en français dans les fichiers du client et dans les scripts NPC. Hors certaines   #
+# fonctions NPC vont directement chercher dans la base de donnée du serveur le nom de celles-ci pour l'afficher dans des dialogues  # 
+# NPC. Pour une raison de cohérence, il faut donc aussi traduire elles-ci.							    #
+# 																    #
+# Pour ceux qui utilisent des bases de données SQL, il vous faudra aller dans le dossier BoY/db/SQL et appliquer les requêtes       #
+# correspondantes.														    #
+# 																    #
+# Pour ceux qui utilisent des bases de données TXT (la majorité d'entre vous), il y a deux options. Soit vous copiez les fichiers   #
+# se trouvant dans le dossier BoY/db/ dans le dossier db/ de votre serveur. L'inconvénient est qu'il vous faudra faire cela à       #
+# chaque mise à jour.														    #
+# 																    #
+# L'autre solution vous permet de lire directement les fichiers dans le dossier su BoY, mais demande une petite modification des    #
+# sources. Dans src/map/itemdb.c, cherchez:											    #
+# 																    #
+# static int itemdb_readdb(void)												    #
+# {																    #
+# 	const char* filename[] = { "item_db.txt", "item_db2.txt" };								    #
+# 	int fi;															    #
+# 																    #
+# 	for( fi = 0; fi < ARRAYLENGTH(filename); ++fi )										    #
+# 	{															    #
+# 		uint32 lines = 0, count = 0;											    #
+# 		char line[1024];												    #
+# 																    #
+# 		char path[256];													    #
+# 		FILE* fp;													    #
+# 																    #
+# 		sprintf(path, "%s/%s", db_path, filename[fi]);									    #
+# 		fp = fopen(path, "r");												    #
+# 																    #
+# et remplacez par:														    #
+# 																    #
+# static int itemdb_readdb(void)												    #
+# {																    #
+# 	const char* filename[] = { "item_db.txt", "item_db2.txt" };								    #
+# 	int fi;															    #
+# 																    #
+# 	for( fi = 0; fi < ARRAYLENGTH(filename); ++fi )										    #
+# 	{															    #
+# 		uint32 lines = 0, count = 0;											    #
+# 		char line[1024];												    #
+# 																    #
+# 		char path[256];													    #
+# 		FILE* fp;													    #
+# 																    #
+# 		sprintf(path, "%s/%s", "BoY/db", filename[fi]);									    #
+# 		fp = fopen(path, "r");												    #
+# 																    #
+# Dans src/map/mobb.c, cherchez:												    #
+# 																    #
+# static int mob_readdb(void)													    #
+# {																    #
+# 	const char* filename[] = { "mob_db.txt", "mob_db2.txt" };								    #
+# 	int fi;															    #
+# 																    #
+# 	for( fi = 0; fi < ARRAYLENGTH(filename); ++fi )										    #
+# 	{															    #
+# 		uint32 lines = 0, count = 0;											    #
+# 		char line[1024];												    #
+# 		char path[256];													    #
+# 		FILE* fp;													    #
+# 																    #
+# 		sprintf(path, "%s/%s", db_path, filename[fi]);									    #
+# 		fp = fopen(path, "r");												    #
+# 																    #
+# et remplacez par:														    #
+# 																    #
+# static int mob_readdb(void)													    #
+# {																    #
+# 	const char* filename[] = { "mob_db.txt", "mob_db2.txt" };								    #
+# 	int fi;															    #
+# 																    #
+# 	for( fi = 0; fi < ARRAYLENGTH(filename); ++fi )										    #
+# 	{															    #
+# 		uint32 lines = 0, count = 0;											    #
+# 		char line[1024];												    #
+# 		char path[256];													    #
+# 		FILE* fp;													    #
+# 																    #
+# 		sprintf(path, "%s/%s", "BoY/db", filename[fi]);									    #
+# 		fp = fopen(path, "r");												    #
+# 																    #
+# Voilà, il ne vous reste qu'à recompiler, et c'est fini.									    #
+# 																    #
+#####################################################################################################################################
+
