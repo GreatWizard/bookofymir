@@ -33,175 +33,175 @@
 //= 2.5 Added Quest Log commands. [Kisuka]
 //==========================================================
 
-prt_church,16,41,4	script	Evêque#prst	60,{
+prt_church,16,41,4	script	Évêque#prst	60,{
 	// Uncomment the following 'if' statement to allow High Priests to assist Acolytes with the job change quest.
 	// Officially High Priests are blocked from helping by an indiscriminate check if you are a transcended character.
 	//if (Class == Job_High_Priest) set .@AllowHPAssist,1;
 	if (Upper == 1 && .@AllowHPAssist != 1) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Hum...?";
-			mes "Ah, je sens que vous êtes un guerrier revenu du Valhalla. Vous avez effectué une renaissance... Nous sommes ici pour vous protéger.";
+			mes "Ah, je sens que vous êtes un guerrier revenu du Walhalla. Vous avez effectué une renaissance... Nous sommes ici pour vous protéger.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Ne laissez pas le mal conquérir votre âme. Vous avez suffisamment de courage et de puissance pour surmonter les épreuves les plus difficiles. Que Dieu vous bénisse...";
 			close;
 	}
 	if (BaseJob != Job_Acolyte) {
 		if (BaseJob == Job_Priest) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Ah...";
 			if (sex)
 				mes "C'est si bon de vous revoir, Frère " + strcharinfo(0) + ". Une fois de plus, la grâce de Dieu a permis à nos chemins de se croiser.";
 			else
 				mes "C'est si bon de vous revoir, Soeur " + strcharinfo(0) + ". La grâce de Dieu vous a de nouveau conduit à moi.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Je suis heureux de voir que vous conduisez les enfants de Dieu vers le droit chemin. Que puis-je faire pour vous aider?";
 			next;
 			switch(select("Comment va votre santé?:Je souhaite aider un jeune Acolyte.:Père, j'ai besoin de votre aide.")) {
 			case 1:
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Merci de vous en inquiéter. Je vais bien, ma santé est bonne. Vous saluerez vos frères et soeurs de ma part?";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Souvenez-vous que nous sommes les messagers de Dieu sur cette Terre. Nous devons aider les autres quoi qu'il nous en coûte.";
 				close;
 			case 2:
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Ah, c'est une bonne idée. Aider les jeunes Acolytes est également l'une des tâches des Prêtres.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Cependant, certaines choses ne peuvent être accomplies que par un Acolyte. Tous les Acolytes doivent accomplir leur épreuve divine par eux-mêmes.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Vous pouvez cependant aider un ami Acolyte au cours de la seconde épreuve, celle de l'entraînement spirituel.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Vous devrez apporter un ^0000FFRosaire^000000 si vous souhaitez accompagner un Acolyte à son entraînement spirituel. Si vous en avez un sur vous, je peux vous envoyer immédiatement dans la zone des épreuves.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Voulez-vous vous rendre dans la zone d'entraînement pour aider un Acolyte?";
 				next;
 				if (select("Oui.:Pas pour le moment.") == 1) {
 					if (countitem(2608) > 0) {
-						mes "[Evêque Paul]";
+						mes "[Évêque Paul]";
 						mes "Je vais maintenant vous envoyer vers la zone d'entraînement des Acolytes. Dites bonjour au Frère Peter de ma part...";
 						next;
-						mes "[Evêque Paul]";
+						mes "[Évêque Paul]";
 						mes "J'espère que vous assisterez les Acolytes au mieux dans leur entraînement pour devenir Prêtre.";
 						close2;
 						warp "job_prist",26,178;
 						end;
 					}
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Veuillez apporter un ^0000FFRosaire^000000. J'en aurais besoin pour vous envoyer dans la zone d'entraînement.";
 					close;
 				}
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Je vois, prenez votre temps. Si vous souhaitez revenir, n'oubliez pas d'apporter un ^0000FFRosaire^000000...";
 				close;
 			case 3:
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Vous devez être fort. Gardez la foi, car vous êtes aimé de Dieu. Je prie pour que les blessures de votre corps guérissent rapidement...";
 				next;
 				percentheal 90,0;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Dieu, prends soin de tes enfants. Aide-les à surpasser les difficultés que le destin place sur leur chemin. Rafraîchis leur esprit...";
 				next;
 				percentheal 0,90;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "J'espère que ma prière a soulagé votre douleur. Maintenant allez, et répandez la sainte parole de Dieu. Que Dieu soit avec vous...";
 				close;
 			}
 		}
 		else if (BaseClass == Job_Novice) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Que Dieu soit";
 			if (sex)
 				mes "avec vous, mon frère.";
 			else
 				mes "avec vous, ma soeur.";
 			next;
-			mes "[Evêque Paul]";
-			mes "Bienvenue dans la Sainte Eglise de Prontera.";
+			mes "[Évêque Paul]";
+			mes "Bienvenue dans la Sainte Église de Prontera.";
 			mes "Qu'est-ce qui vous amène ici?";
 			next;
 			switch(select("Je souhaite devenir Acolyte.:Je souhaite devenir Prêtre.:Rien de spécial.")) {
 			case 1:
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Oh je vois...";
 				mes "Si vous souhaitez devenir Acolyte, rendez-vous dans la pièce de l'autre côté du couloir.";
 				break;
 			case 2:
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Oh je vois. Cependant, vous devez d'abord devenir Acolyte avant de pouvoir devenir Prêtre. Pour cela, rendez-vous dans la pièce de l'autre côté du couloir.";
 				break;
 			case 3:
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Vous êtes ici chez vous. Aucun endroit sur Terre n'est plus sûr que ce Sanctuaire.";
 				break;
 			}
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Que Dieu vous bénisse.";
 			close;
 		}
 		else {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Que Dieu soit";
 			if (sex)
 				mes "avec vous, mon frère.";
 			else
 				mes "avec vous, ma soeur.";
 			next;
-			mes "[Evêque Paul]";
-			mes "Bienvenue dans la Sainte Eglise de Prontera.";
+			mes "[Évêque Paul]";
+			mes "Bienvenue dans la Sainte Église de Prontera.";
 			mes "Qu'est-ce qui vous amène ici?";
 			next;
 			switch(select("Informations à propos des Prêtres.:Rien de spécial.")) {
 			case 1:
-				mes "[Evêque Paul]";
-				mes "Les Prêtres ont l'autorité au sein de l'Eglise pour pratiquer ou organiser des rituels religieux.";
+				mes "[Évêque Paul]";
+				mes "Les Prêtres ont l'autorité au sein de l'Église pour pratiquer ou organiser des rituels religieux.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Vous devez d'abord devenir un Acolyte discipliné et suivre des enseignements approfondis, avant de pouvoir être promu au rang de Prêtre.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Quand vous atteignez le Niveau de Métier 40 en tant qu'Acolyte, vous pouvez vous inscrire à la formation pour devenir Prêtre.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Si vous réussissez les épreuves auxquelles vous serez soumis, vos compétences deviendront plus puissantes et plus efficaces, surtout contre les Démons et les Morts-Vivants...";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Grâce à vos capacités, vous deviendrez l'un des piliers des groupes d'exploration en donjons.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Notre devoir et notre tâche, en tant que Prêtres, est de nous dévouer pour aider les autres, sans rien attendre en retour.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Il ne faut pas prendre la grosse tête. Être un bon Prêtre relève de votre choix, de votre responsabilité, et de personne d'autre.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Cependant, ne vous laissez pas maltraiter. Ceux que vous aidez vous doivent au moins la politesse. Vous devez également donner le bon exemple, même si vous avez des limites en tant qu'être humain.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "J'espère que ces explications vous conviennent. Pourquoi n'iriez-vous pas interroger des Prêtres, pour leur demander de vous raconter comment se déroule leur travail?";
 				next;
 				break;
 			case 2:
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Vous êtes ici chez vous. Aucun endroit sur Terre n'est plus sûr que ce Sanctuaire.";
 				next;
 				break;
 			}
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Bien...";
 			mes "Que Dieu vous bénisse.";
 			close;
 		}
 	}
 	if (PRIEST_Q == 0) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Que Dieu vous bénisse,";
 		if (sex)
 			mes "mon Frère.";
@@ -211,271 +211,271 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 		next;
 		switch(select("Je souhaite devenir Prêtre.:Comment allez-vous, mon Père?")) {
 		case 1:
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Je vois. Alors vous souhaitez devenir Prêtre? Dieu sera ravi de votre décision, et il vous bénira.";
 			next;
-			mes "[Evêque Paul]";
-			mes "Je suis l'Evêque Paul Cervantes, en charge de la Paroisse de Prontera.";
+			mes "[Évêque Paul]";
+			mes "Je suis l'Évêque Paul Cervantès, en charge de la Paroisse de Prontera.";
 			mes "Je suis heureux de rencontrer une personne aussi désireuse et dévouée à Dieu.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Si vous choisissez de devenir Prêtre, vous devrez vous soumettre à différentes épreuves. Seuls les Acolytes ayant atteint le Niveau de Métier 40 peuvent prétendre à ces épreuves.";
 			next;
-			mes "[Evêque Paul]";
-			mes "Si vous remplissez ces prérequis, je vous suggère de vous inscrire pour l'entraînement de Prêtre. Souhaitez-vous vous inscrire maintenant?";
+			mes "[Évêque Paul]";
+			mes "Si vous remplissez ces pré requis, je vous suggère de vous inscrire pour l'entraînement de Prêtre. Souhaitez-vous vous inscrire maintenant?";
 			next;
 			if (select("Oui, s'il vous plaît.:J'ai besoin de temps pour y réfléchir...") == 1) {
 				if (JobLevel < 40) {
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Vous n'êtes pas qualifié pour vous inscrire. Allez visiter le monde pour élargir vos connaissances et votre expérience.";
 					next;
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Vous devez encore apprendre des choses en tant qu'Acolyte. J'attendrai avec un impatience de vous revoir.";
 					close;
 				}
 				if (SkillPoint) {
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Il vous reste des points de compétence à utiliser.";
 					close;
 				}
 				set PRIEST_Q,1;
 				setquest 8009;
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 				if (sex)
-					mes "Je vais à présent vous expliquer en quoi consistent les Trois Epreuves de l'Entraînement de Prêtre. Ces épreuves vous apporteront beaucoup de souffrance, mais je suis sûr que vous pouvez les réussir, Frère " + strcharinfo(0) + ".";
+					mes "Je vais à présent vous expliquer en quoi consistent les Trois Épreuves de l'Entraînement de Prêtre. Ces épreuves vous apporteront beaucoup de souffrance, mais je suis sûr que vous pouvez les réussir, Frère " + strcharinfo(0) + ".";
 				else
-					mes "Je vais à présent vous expliquer en quoi consistent les Trois Epreuves de l'Entraînement de Prêtre. Ces épreuves vous apporteront beaucoup de souffrance, mais je suis sûr que vous pouvez les réussir, Soeur " + strcharinfo(0) + ".";
+					mes "Je vais à présent vous expliquer en quoi consistent les Trois Épreuves de l'Entraînement de Prêtre. Ces épreuves vous apporteront beaucoup de souffrance, mais je suis sûr que vous pouvez les réussir, Soeur " + strcharinfo(0) + ".";
 				next;
-				mes "[Evêque Paul]";
-				mes "La Première Epreuve consiste à effectuer un pèlerinage, afin de rendre visite à trois Prêtres ascètes, dans un ordre très particulier.";
+				mes "[Évêque Paul]";
+				mes "La Première Épreuve consiste à effectuer un pèlerinage, afin de rendre visite à trois Prêtres ascètes, dans un ordre très particulier.";
 				next;
-				mes "[Evêque Paul]";
-				mes "La Seconde Epreuve consiste en un entraînement spirituel. Vous devrez résister à la tentation des Démons et des Morts Vivants.";
+				mes "[Évêque Paul]";
+				mes "La Seconde Épreuve consiste en un entraînement spirituel. Vous devrez résister à la tentation des Démons et des Morts Vivants.";
 				next;
-				mes "[Evêque Paul]";
-				mes "Pour l'Epreuve Finale, vous devrez proférer votre entière dévotion à Dieu. Vous serez également questionné à propos de votre volonté à vous sacrifier.";
+				mes "[Évêque Paul]";
+				mes "Pour l'Épreuve Finale, vous devrez proférer votre entière dévotion à Dieu. Vous serez également questionné à propos de votre volonté à vous sacrifier.";
 				next;
-				mes "[Evêque Paul]";
-				mes "Les Acolytes qui auront atteint le Niveau de Métier 50 seront exemptés de la Première Epreuve, le pèlerinage, car ils auront déjà montré leur enthousiasme et leur dévotion.";
+				mes "[Évêque Paul]";
+				mes "Les Acolytes qui auront atteint le Niveau de Métier 50 seront exemptés de la Première Épreuve, le pèlerinage, car ils auront déjà montré leur enthousiasme et leur dévotion.";
 				next;
 				if (JobLevel == 50) {
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Je peux d'ailleurs voir que vous avez réussi à atteindre le Niveau de Métier 50. Vous êtes un loyal serviteur de Dieu.";
 					next;
-					mes "[Evêque Paul]";
-					mes "Vous pouvez aller directement vers la Seconde Epreuve: l'Entraînement Spirituel. Si vous le souhaitez, vous pouvez vous faire aider d'un Prêtre.";
+					mes "[Évêque Paul]";
+					mes "Vous pouvez aller directement vers la Seconde Épreuve: l'Entraînement Spirituel. Si vous le souhaitez, vous pouvez vous faire aider d'un Prêtre.";
 					next;
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Je n'ai aucun doute concernant votre réussite. Cependant, l'aide d'un Frère ou d'une Soeur peut vous faciliter la tâche.";
 					next;
 					set PRIEST_Q,5;
 					changequest 8009,8011;
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Êtes-vous prêt pour l'Entraînement Spirituel?";
 					next;
 					if (select("Je suis prêt.:Donnez-moi un instant.") == 1) {
-						mes "[Evêque Paul]";
+						mes "[Évêque Paul]";
 						mes "Bien. Je vous envoie vers la zone d'entraînement. Lorsque vous y serez, veuillez vous adresser à Frère Peter, qui est chargé de l'organisation de cette épreuve.";
 						next;
 						warp "job_prist",24,180;
 						end;
 					}
-					mes "[Evêque Paul]";
+					mes "[Évêque Paul]";
 					mes "Pas de problème, vous pouvez prendre tout le temps dont vous avez besoin.";
 					mes "Que Dieu vous accorde la force de surpasser vos peurs...";
 					close;
 				}
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Bien, je vais vous indiquer le chemin que vous devrez parcourir au cours de votre pèlerinage, et les ascètes que vous devrez rencontrer.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Vous devez d'abord rencontrer le Père Rubalkabara. Il se trouve dans les ruines au nord-est de Prontera.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Ensuite, vous devez aller voir Soeur Mathilda. Elle est quelque part non loin de la ville de Morroc, au sud-ouest de Prontera.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Enfin, allez voir le Père Yosuke. Il est au nord-ouest de Prontera.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Je prierai pour que votre voyage se déroule sans problème. Si vous avez besoin d'autres informations, vous pouvez vous adresser à Soeur Cecilia.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Lorsque vous serez de retour de votre pèlerinage, je vous informerai à propos de l'épreuve suivante.";
 				next;
-				mes "[Evêque Paul]";
+				mes "[Évêque Paul]";
 				mes "Que Dieu vous bénisse...";
 				changequest 8009,8010;
 				close;
 			}
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Prenez votre temps.";
 			mes "Vous serez toujours le bienvenue ici.";
 			mes "Que Dieu vous bénisse...";
 			close;
 		case 2:
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Je vois...";
 			mes "Je vais bien, ma santé est bonne. Merci de vous en inquiéter.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			if (sex)
 				mes "J'espère que vous continuerez votre mission en tant que serviteur de Dieu, mon Frère.";
 			else
 				mes "J'espère que vous continuerez votre mission en tant que serviteur de Dieu, ma Soeur.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Nos chemins se croiseront peut-être à nouveau.";
 			mes "Que Dieu vous bénisse...";
 			close;
 		}
 	}
 	else if (PRIEST_Q == 1) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Puis-je vous demander pourquoi vous êtes encore ici? Vous n'avez pas oublié votre pèlerinage, n'est-ce pas?";
 		next;
 		if (select("Mon père, pourriez-vous me répéter le chemin?:Non non, pas du tout.") == 1) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Ah, je vois. Je vais vous répéter le chemin que vous devrez parcourir au cours de votre pèlerinage.";
 			next;
-			mes "[Evêque Paul]";
-			mes "Vous devez d'abord rencontrer le Père Rubalkabara. Il est situé dand les ruines au nord-est de Prontera.";
+			mes "[Évêque Paul]";
+			mes "Vous devez d'abord rencontrer le Père Rubalkabara. Il est situé dans les ruines au nord-est de Prontera.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Ensuite, vous devez aller voir Soeur Mathilda. Elle est quelque part non loin de la ville de Morroc, au sud-ouest de Prontera.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Enfin, allez voir le Père Yosuke. Il est au nord-ouest de Prontera.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Je prierai pour que votre voyage se déroule sans problème. Si vous avez besoin d'autres informations, vous pouvez vous adresser à Soeur Cecilia.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Lorsque vous serez de retour de votre pèlerinage, je vous informerai à propos de l'épreuve suivante.";
 			next;
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Que Dieu vous bénisse...";
 			close;
 		}
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Je vois. Mais si vous avez des questions, n'hésitez pas à vous adresser à Soeur Cecilia.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Très bien, dans ce cas je vais prier pour que votre voyage se déroule en sécurité. Que Dieu vous bénisse...";
 		close;
 	}
 	else if (PRIEST_Q == 2) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Je vois que vous êtes de retour de votre voyage à la rencontre du Père Rubalkabara. Comment va-t-il? Je suis préoccupé par sa santé, depuis qu'il est seul là bas... ";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Pour la prochaine étape, vous devez rencontrer Soeur Mathilda. J'attendrai votre retour.";
 		close;
 	}
 	else if (PRIEST_Q == 3) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Je vois que vous êtes de retour de votre voyage à la rencontre de Soeur Mathilda. Elle a médité sous la chaleur, dans ce désert aride, pendant très longtemps.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous devez maintenant aller rencontrer le Père Yosuke. Il fait pénitence quelque part au nord-ouest de Prontera. Cherchez-le, parlez-lui et revenez me voir.";
 		close;
 	}
 	else if (PRIEST_Q == 4) {
 		set PRIEST_Q,5;
 		changequest 8010,8011;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous avez accompli votre pèlerinage.";
 		mes "Toutes mes félicitations.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Il est maintenant temps pour vous de commencer votre entraînement spirituel. Comme je l'ai déjà mentionné, vous pouvez demander à un Prêtre de vous accompagner pour vous aider au cours de cette épreuve.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Même si vous ne pouvez pas être aidé à toutes les étapes de votre apprentissage, exception est faite pour l'épreuve de l'entraînement spirituel.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Alors, êtes-vous prêt?";
 		next;
 		if (select("Je suis prêt.:Donnez-moi un instant.") == 1) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Bien. Je vous envoie vers la zone d'entraînement. Lorsque vous y serez, veuillez vous adresser à Frère Peter, qui est chargé de l'organisation de cette épreuve.";
 			next;
 			warp "job_prist",24,180;
 			end;
 		}
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Pas de problème, vous pouvez prendre tout le temps dont vous avez besoin.";
 		mes "Que Dieu vous accorde la force de surpasser vos peurs...";
 		close;
 	}
 	else if (PRIEST_Q == 5) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous avez l'air confiant face à l'épreuve de l'entraînement spirituel. Cela signifie que nous pouvons commencer?";
 		next;
 		if (select("Je suis prêt.:Donnez-moi un instant.") == 1) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Bien. Je vous envoie vers la zone d'entraînement. Lorsque vous y serez, veuillez vous adresser à Frère Peter, qui est chargé de l'organisation de cette épreuve.";
 			next;
 			warp "job_prist",24,180;
 			end;
 		}
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Pas de problème, vous pouvez prendre tout le temps dont vous avez besoin.";
 		mes "Que Dieu vous accorde la force de surpasser vos peurs...";
 		close;
 	}
 	else if (PRIEST_Q == 6) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous avez l'air épuisé... Cependant vous endurerez bien plus de souffrances lorsque vous serez devenu Prêtre.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous devez endurer ces épreuves pour accéder à votre but, à votre rêve. Pourquoi ne pas essayer cet entraînement spirituel à nouveau?";
 		next;
 		if (select("Je vais réessayer.:Donnez-moi un instant.") == 1) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Bien. Je vous envoie vers la zone d'entraînement. Lorsque vous y serez, veuillez vous adresser à Frère Peter.";
 			next;
 			warp "job_prist",24,180;
 			end;
 		}
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Pas de problème, vous pouvez prendre tout le temps dont vous avez besoin.";
 		mes "Que Dieu vous accorde la force de surpasser vos peurs...";
 		close;
 	}
 	else if (PRIEST_Q == 7) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Je suis heureux de voir que vous avez très bien réussi votre entraînement spirituel. Félicitations. Vous êtes maintenant qualifié pour être Prêtre.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous devez à présent jurer votre dévotion à Dieu. Adressez-vous à Soeur Cecilia, et ne soyez pas trop nerveux...";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Répondez de façon honnête, et écoutez la voix de Dieu qui murmure dans votre coeur.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Très bien...";
 		mes "Je vous attends ici.";
 		close;
 	}
 	else if (PRIEST_Q == 8) {
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Hum? Vous n'avez pas encore prêté serment...? Si vous ne prêtez pas serment envers Dieu, vous pourrez être tenté par le mal à n'importe quel instant.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Allez voir Soeur Cecilia et promettez votre dévotion à Dieu. Répondez de façon honnête, et écoutez la voix de Dieu qui murmure dans votre coeur.";
 		close;
 	}
 	else if (PRIEST_Q == 9) {
 		if (SkillPoint) {
-			mes "[Evêque Paul]";
+			mes "[Évêque Paul]";
 			mes "Il vous reste des Points de Compétence à répartir, veuillez les utiliser et revenez me voir.";
 			close;
 		}
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Félicitations, vous avez accompli les trois épreuves nécessaires pour devenir Prêtre. Je vais maintenant vous promouvoir à ce rang.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Dieu, accorde ton pouvoir à ton serviteur ici présent.";
 		changequest 8015,8016;
 		if (sex)
@@ -483,17 +483,17 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 		else
 			mes "Laisse-la propager ton message aux confins de la terre.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Fais de ce serviteur l'instrument de ton travail miraculeux...";
 		next;
 		set .@joblvl,JobLevel;
 		completequest 8016;
 		callfunc "Job_Change",Job_Priest;
 		callfunc "F_ClearJobVar";		// clears all job variables for the current player
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous êtes désormais Prêtre. Je vous félicite, et j'espère que vous viendrez en aide aux autres pour le reste de votre vie.";
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		if (.@joblvl < 50) {
 			getitem 1550,1; //Book
 			mes "Ce livre est pour vous. J'espère qu'il vous aidera à répandre le message de Dieu sur Terre.";
@@ -503,7 +503,7 @@ prt_church,16,41,4	script	Evêque#prst	60,{
 			mes "En commémoration de votre promotion, je vous offre cette Bible. Elle éclairera votre chemin vers la justice de Dieu.";
 		}
 		next;
-		mes "[Evêque Paul]";
+		mes "[Évêque Paul]";
 		mes "Vous avez montré que vous étiez capable de travailler de façon acharnée, et réalisé des progrès admirables au cours de votre quête personnelle vers la sainteté. Je vous souhaite de mener votre vie de Prêtre de façon sincère...";
 		close;
 	}
@@ -552,11 +552,11 @@ prt_church,27,24,1	script	Soeur Cecilia	79,{
 				mes "Les messagers de Dieu sont connus le nom de Prêtres. Après être devenu Acolyte, vous pourrez vous entraîner dans le but de devenir Prêtre.";
 				next;
 				mes "[Soeur Cecilia]";
-				mes "Les serviteurs de Dieu n'ont pas le droit d'utiliser d'armes contenant des lames. Pour nous, le sens d'une bataille contre un monstre ne réside pas dans la finalité de la mort du monstre, mais dans la salvation de son âme.";
+				mes "Les serviteurs de Dieu n'ont pas le droit d'utiliser d'armes contenant des lames. Pour nous, le sens d'une bataille contre un monstre ne réside pas dans la finalité de la mort du monstre, mais dans le salut de son âme.";
 				if (BaseJob == Job_Acolyte) {
 					next;
 					mes "[Soeur Cecilia]";
-					mes "Pour vous faire une idée plus précise du métier, vous pourriez rencontrer un Prêtre et lui parler? Si vous êtes intéressé par devenir Prêtre, allez trouver l'Evêque Paul dans la pièce située de l'autre côté du couloir.";
+					mes "Pour vous faire une idée plus précise du métier, vous pourriez rencontrer un Prêtre et lui parler? Si vous êtes intéressé par devenir Prêtre, allez trouver l'Évêque Paul dans la pièce située de l'autre côté du couloir.";
 					next;
 					mes "[Soeur Cecilia]";
 					mes "Il pourra vous en dire plus à propos des prérequis nécessaires, et des informations plus poussées à propos des Prêtres.";
@@ -593,7 +593,7 @@ prt_church,27,24,1	script	Soeur Cecilia	79,{
 			mes "Pour devenir Prêtre, vous devrez réussir trois épreuves. Un pèlerinage, un entraînement spirituel, et effectuer un serment de dévotion à Dieu.";
 			next;
 			mes "[Soeur Cecilia]";
-			mes "Si vous souhaitez devenir un serviteur de Dieu, inscrivez-vous à la formation au métier de Prêtre en vous adressant à l'Evêque Paul.";
+			mes "Si vous souhaitez devenir un serviteur de Dieu, inscrivez-vous à la formation au métier de Prêtre en vous adressant à l'Évêque Paul.";
 			next;
 			mes "[Soeur Cecilia]";
 			mes "Si vous avez un problème ou une question à n'importe quelle étape de votre entraînement, n'hésitez pas à venir me voir. Je vous aiderai du mieux que je peux.";
@@ -650,7 +650,7 @@ prt_church,27,24,1	script	Soeur Cecilia	79,{
 		close;
 	}
 	else if (PRIEST_Q == 4) {
-		mes "Bienvenue. Vous avez fait preuve d'une grande ténacité et de volonté au cours de cette première épreuve. Veuillez vous adresser à l'Evêque Paul à présent, afin de commencer l'épreuve suivante qui vous conduira à l'apprentissage du métier de Prêtre.";
+		mes "Bienvenue. Vous avez fait preuve d'une grande ténacité et de volonté au cours de cette première épreuve. Veuillez vous adresser à l'Évêque Paul à présent, afin de commencer l'épreuve suivante qui vous conduira à l'apprentissage du métier de Prêtre.";
 		next;
 		mes "[Soeur Cecilia]";
 		if (sex)
@@ -670,7 +670,7 @@ prt_church,27,24,1	script	Soeur Cecilia	79,{
 		mes "Tant que vous gardez la foi et que vous gardez confiance en vous, vous réussirez ce que vous entreprendrez.";
 		next;
 		mes "[Soeur Cecilia]";
-		mes "Veuillez parler au Père Peter pour plus d'informations. C'est un ami proche de l'Evêque Paul, il pourra vous donner de nombreux conseils concernant l'entraînement spirituel.";
+		mes "Veuillez parler au Père Peter pour plus d'informations. C'est un ami proche de l'Évêque Paul, il pourra vous donner de nombreux conseils concernant l'entraînement spirituel.";
 		close;
 	}
 	else if (PRIEST_Q == 6) {
@@ -796,7 +796,7 @@ L_AskQuestions:
 		if (select("Je le jure.:Non.") == 1) {
 			set PRIEST_Q,9;
 			mes "[Soeur Cecilia]";
-			mes "Maintenant que vous avez effectué votre serment de Prêtrise, et accompli les trois épreuves requises pour devenir Prêtre, vous pouvez retourner voir l'Evêque Paul.";
+			mes "Maintenant que vous avez effectué votre serment de Prêtrise, et accompli les trois épreuves requises pour devenir Prêtre, vous pouvez retourner voir l'Évêque Paul.";
 			next;
 			mes "[Soeur Cecilia]";
 			mes "Souvenez-vous, nous sommes tous frères et soeurs aux yeux de Dieu. Que la paix avec vous...";
@@ -827,7 +827,7 @@ L_AskQuestions:
 	}
 	else if (PRIEST_Q == 9) {
 		mes "Félicitations.";
-		mes "Vous avez achevé les trois tâches requises pour devenir Prêtre. L'Evêque Paul vous attend.";
+		mes "Vous avez achevé les trois tâches requises pour devenir Prêtre. L'Évêque Paul vous attend.";
 		next;
 		mes "[Soeur Cecilia]";
 		mes "Que la paix soit avec vous...";
@@ -890,7 +890,7 @@ job_prist,24,187,4	script	Peter S. Alberto	110,{
 		mes "Mon nom est Peter S. Alberto. Savez-vous comment se porte mon ami Paul ces jours-ci?";
 		next;
 		mes "[Père Peter]";
-		mes "Oh, j'oublie toujours qu'il a été promu Evêque. Je suppose que je devrais l'appeler Evêque Paul, ou 'Son Excellence'. Haha~";
+		mes "Oh, j'oublie toujours qu'il a été promu Évêque. Je suppose que je devrais l'appeler Évêque Paul, ou 'Son Excellence'. Haha~";
 		next;
 		mes "[Père Peter]";
 		mes "Quoi qu'il en soit, laissez-moi vous expliquer brièvement en quoi consiste l'entraînement spirituel que vous allez suivre. A moins que vous soyez déjà familier avec l'entraînement spirituel des Prêtres?";
@@ -1082,31 +1082,31 @@ OnEnable:
 
 Onm1:
 	set .MyMobs,13;
-	monster "job_prist",24,52,"Theft",1015,1,"Z_C#prst::OnMyMobDead";
-	monster "job_prist",18,52,"Want of Virtue",1015,1,"Z_C#prst::OnMyMobDead";
-	monster "job_prist",30,52,"Jealousy",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",24,52,"Vol",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",18,52,"Envie de Vertu",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",30,52,"Jalousie",1015,1,"Z_C#prst::OnMyMobDead";
 	end;
 
 Onm2:
 	monster "job_prist",21,62,"Furie",1015,1,"Z_C#prst::OnMyMobDead";
-	monster "job_prist",27,62,"Envy",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",27,62,"Envie",1015,1,"Z_C#prst::OnMyMobDead";
 	end;
 
 Onm3:
 	monster "job_prist",24,72,"Arrogance",1015,1,"Z_C#prst::OnMyMobDead";
-	monster "job_prist",18,72,"Lewdness",1015,1,"Z_C#prst::OnMyMobDead";
-	monster "job_prist",30,72,"Sloth",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",18,72,"Lubricité",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",30,72,"Paresse",1015,1,"Z_C#prst::OnMyMobDead";
 	end;
 
 Onm4:
-	monster "job_prist",21,82,"Gluttony",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",21,82,"Gourmandise",1015,1,"Z_C#prst::OnMyMobDead";
 	monster "job_prist",27,82,"Cupidité",1015,1,"Z_C#prst::OnMyMobDead";
 	end;
 
 Onm5:
-	monster "job_prist",24,92,"Despair",1015,1,"Z_C#prst::OnMyMobDead";
-	monster "job_prist",18,92,"Distrust",1015,1,"Z_C#prst::OnMyMobDead";
-	monster "job_prist",30,92,"Fear",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",24,92,"Désespoir",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",18,92,"Méfiance",1015,1,"Z_C#prst::OnMyMobDead";
+	monster "job_prist",30,92,"Peur",1015,1,"Z_C#prst::OnMyMobDead";
 	end;
 
 OnDisable:
@@ -1411,7 +1411,7 @@ OnTouch:
 		mes "Je ne crois pas que tu aies bien saisi ce que je peux t'offrir. Réfléchis bien. Je veux dire, c'est ta seule et unique chance d'absoudre tes erreurs passées.";
 		next;
 		mes "[Doppelganger]";
-		mes "Laisse tomber cette idée farfelue de devenir Prêtre. Je ne te le demanderai pas deux fois. Il y tant d'autres professions bien plus attrayantes... Par exemple Epéiste, comme moi!";
+		mes "Laisse tomber cette idée farfelue de devenir Prêtre. Je ne te le demanderai pas deux fois. Il y tant d'autres professions bien plus attrayantes... Par exemple Épéiste, comme moi!";
 		next;
 		if (select("Je ne veux pas devenir Prêtre!:Je ne vous écouterai jamais!") == 1) {
 			mes "[Doppelganger]";
@@ -1510,7 +1510,7 @@ OnTouch:
 		mes "je sais qui tu es.";
 		next;
 		mes "[Baphomet]";
-		mes "Je sais aussi que Deviruchi, Doppelganger et le Seigneur des Ténèbres ont échoué à te convaincre d'abandonner la sainte Eglise.";
+		mes "Je sais aussi que Deviruchi, Doppelganger et le Seigneur des Ténèbres ont échoué à te convaincre d'abandonner la sainte Église.";
 		mes "Je suis ici pour te proposer un marché.";
 		next;
 		mes "[Baphomet]";
@@ -1523,7 +1523,7 @@ OnTouch:
 		mes "Je serai à ton service. Tu deviendras la personne la plus puissante de l'histoire du monde!";
 		next;
 		mes "[Baphomet]";
-		mes "Oublie cette folle idée de servir l'Eglise. Accepte mon marché, et le monde sera à toi.";
+		mes "Oublie cette folle idée de servir l'Église. Accepte mon marché, et le monde sera à toi.";
 		next;
 		if (select("Marché conclus.:Non, Baphomet. Tu as perdu.") == 1) {
 			mes "[Baphomet]";
@@ -1678,10 +1678,10 @@ function	script	F_FatherRub	{
 			mes "Ah oui, vous devez être le jeune Acolyte qui souhaite devenir Prêtre.";
 			next;
 			mes "[Père Rubalkabara]";
-			mes "J'ai reçu un message de l'Evêque Paul. Puisque vous avez accompli votre pèlerinage, vous ne devriez pas avoir de mal à devenir Prêtre.";
+			mes "J'ai reçu un message de l'Évêque Paul. Puisque vous avez accompli votre pèlerinage, vous ne devriez pas avoir de mal à devenir Prêtre.";
 			next;
 			mes "[Père Rubalkabara]";
-			mes "Si vous en avez l'occasion, revenez visiter l'abbaye. C'est un lieu sacré consacré à notre Eglise.";
+			mes "Si vous en avez l'occasion, revenez visiter l'abbaye. C'est un lieu sacré consacré à notre Église.";
 			next;
 			mes "[Père Rubalkabara]";
 			mes "Et bien, je ne vous retiens pas plus longtemps, votre pèlerinage ne fait que commencer. Faites attention à vous au cours de vos voyages.";
@@ -1711,7 +1711,7 @@ function	script	F_MotherMart	{
 			mes "Cependant, à cet instant de votre pèlerinage, je ne suis pas celle à qui vous devriez rendre visite.";
 			next;
 			mes "[Mère Mathilda]";
-			mes "Peut-être devriez-vous demander confirmation à l'Evêque Paul ou à Soeur Cecilia. Bien, que Dieu soit avec vous...";
+			mes "Peut-être devriez-vous demander confirmation à l'Évêque Paul ou à Soeur Cecilia. Bien, que Dieu soit avec vous...";
 			close;
 		}
 		else if (PRIEST_Q == 2) {
@@ -1754,7 +1754,7 @@ function	script	F_FatherYos	{
 			mes "Et bien vous vous adressez à la mauvaise personne. Si on vous a dit de venir me voir, ce sera sûrement pour plus tard.";
 			next;
 			mes "[Père Yosuke]";
-			mes "Retournez à l'Eglise de Prontera, jeune enfant.";
+			mes "Retournez à l'Église de Prontera, jeune enfant.";
 			close;
 		}
 		else if (PRIEST_Q == 2) {
@@ -1765,7 +1765,7 @@ function	script	F_FatherYos	{
 			mes "Et bien vous vous adressez à la mauvaise personne. Si on vous a dit de venir me voir, ce sera sûrement pour plus tard.";
 			next;
 			mes "[Père Yosuke]";
-			mes "Retournez à l'Eglise de Prontera, jeune enfant.";
+			mes "Retournez à l'Église de Prontera, jeune enfant.";
 			close;
 		}
 		else if (PRIEST_Q == 3) {
@@ -1777,14 +1777,14 @@ function	script	F_FatherYos	{
 			mes "Je ne vous dirai rien de plus que: restez dévoué à Dieu toute votre vie, et vous accomplirez la mission divine.";
 			next;
 			mes "[Père Yosuke]";
-			mes "Maintenant retournez à l'Eglise de Prontera. La première épreuve est terminée.";
+			mes "Maintenant retournez à l'Église de Prontera. La première épreuve est terminée.";
 			close2;
 			savepoint "prt_fild00",206,230;
 			set PRIEST_Q,4;
 			end;
 		}
 		else if (PRIEST_Q == 4) {
-			mes "Je vous ai dit de retourner à l'Eglise de Prontera. Ou bien souhaitez-vous vous installer ici...?";
+			mes "Je vous ai dit de retourner à l'Église de Prontera. Ou bien souhaitez-vous vous installer ici...?";
 			close;
 		}
 		mes "Ne perdez pas de temps à bavasser. Ce lieu n'est pas un terrain de jeu.";
