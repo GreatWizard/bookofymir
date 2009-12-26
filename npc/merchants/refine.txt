@@ -123,7 +123,7 @@ geffen_in,110,172,0	script	Christopher#1	63,{
 		mes "Tout Forgeron qui se respecte utilise d'bons objets pour forger. Vous constaterez rapidement que y'a pas mieux que mes outils sur le marché dans l'coin!";
 		mes "Choisissez ce que vous voulez.";
 		next;
-		switch(select("Mini-Furnace - 150 Zenys:Marteau en Acier - 1000 Zenys:Marteau en Or - 3000 Zenys:Marteau en Oridecon - 5000 Zenys:Annuler.")) {
+		switch(select("Fourneau Portatif - 150 Zenys:Marteau en Acier - 1000 Zenys:Marteau en Or - 3000 Zenys:Marteau en Oridecon - 5000 Zenys:Annuler.")) {
 		case 1:
 			mes "[Christopher Guillenrow]";
 			mes "C'est indispensable si vous voulez raffiner des minerais!!";
@@ -283,14 +283,14 @@ geffen_in,110,172,0	script	Christopher#1	63,{
 		}
 	case 4:
 		mes "[Christopher Guillenrow]";
-		mes "Je peux raffiner les minerais suivants : 'Rough Oridecon' et 'Rough Elunium'. J'aurais besoin de cinq 'Rough' pour fabriquer un minerai pur.";
+		mes "Je peux raffiner les minerais suivants : 'Oridecon Brut' et 'Elunium Brut'. J'aurais besoin de cinq 'Brut' pour fabriquer un minerai pur.";
 		mes "Ça vous intéresse?";
 		next;
 		switch(select("Fabriquer de l'Oridecon:Fabriquer de l'Elunium:Annuler.")) {
 		case 1:
 			if (countitem(756) < 5) {
 				mes "[Christopher Guillenrow]";
-				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Rough Oridecon' pour fabriquer un Oridecon?";
+				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Oridecons Bruts' pour fabriquer un Oridecon?";
 				close;
 			}
 			else {
@@ -304,7 +304,7 @@ geffen_in,110,172,0	script	Christopher#1	63,{
 		case 2:
 			if (countitem(757) < 5) {
 				mes "[Christopher Guillenrow]";
-				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Rough Elunium' pour fabriquer un Elunium?";
+				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Eluniums Bruts' pour fabriquer un Elunium?";
 				close;
 			}
 			else {
@@ -394,7 +394,7 @@ ein_in01,38,29,0	script	Paul Spanner	63,{
 		mes "Tout Forgeron qui se respecte utilise d'bons objets pour forger. Vous constaterez rapidement que y'a pas mieux que mes outils sur le marché dans l'coin!";
 		mes "Choisissez ce que vous voulez.";
 		next;
-		switch(select("Mini-Furnace - 150 Zenys:Marteau en Acier - 1000 Zenys:Marteau en Or - 3000 Zenys:Marteau en Oridecon - 5000 Zenys:Annuler.")) {
+		switch(select("Fourneau Portatif - 150 Zenys:Marteau en Acier - 1000 Zenys:Marteau en Or - 3000 Zenys:Marteau en Oridecon - 5000 Zenys:Annuler.")) {
 		case 1:
 			set .@item,612;
 			set .@item_cost,150;
@@ -513,13 +513,13 @@ ein_in01,38,29,0	script	Paul Spanner	63,{
 		close;
 	case 4:
 		mes "[Paul Spanner]";
-		mes "Je peux raffiner les minerais suivants : 'Rough Oridecon' et 'Rough Elunium'. J'aurais besoin de cinq 'Rough' pour fabriquer un minerai pur.";
+		mes "Je peux raffiner les minerais suivants : 'Oridecon Brut' et 'Elunium Brut'. J'aurais besoin de cinq 'Brut' pour fabriquer un minerai pur.";
 		mes "Ça vous intéresse?";
 		switch(select("Fabriquer de l'Oridecon:Fabriquer de l'Elunium:Annuler.")) {
 		case 1:
 			if (countitem(756) < 5) {
 				mes "[Paul Spanner]";
-				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Rough Oridecon' pour fabriquer un Oridecon?";
+				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Oridecons Bruts' pour fabriquer un Oridecon?";
 				close;
 			}
 			else {
@@ -533,7 +533,7 @@ ein_in01,38,29,0	script	Paul Spanner	63,{
 		case 2:
 			if (countitem(757) < 5) {
 				mes "[Paul Spanner]";
-				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Rough Elunium' pour fabriquer un Elunium?";
+				mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Eluniums Bruts' pour fabriquer un Elunium?";
 				close;
 			}
 			else {
@@ -794,7 +794,7 @@ function	script	refinemain	{
 		if(.@refinecheck > .@safe) {
 			set .@refinecheck,.@refinecheck - .@safe;
 			mes "[" + getarg(0) + "]";
-			mes "Cela signifique que j'essayerai de raffiner cet équipement " + .@refinecheck + " fois au delà de sa limite de sécurité. Votre équipement sera peut-être détruit... Est-ce que vous voulez quand même le faire?";
+			mes "Cela signifie que que j'essayerai de raffiner cet équipement " + .@refinecheck + " fois au delà de sa limite de sécurité. Votre équipement sera peut-être détruit... Est-ce que vous voulez quand même le faire?";
 			next;
 			if(select("Oui...","Non...") == 2){
 				mes "[" + getarg(0) + "]";
@@ -1010,8 +1010,8 @@ function	script	orimain	{
 		close;
 	}
 	mes "[" + getarg(0) + "]";
-	mes "Si vous m'apportez des 'Rough Oridecon'";
-	mes "ou bien des 'Rough Elunium',";
+	mes "Si vous m'apportez des 'Oridecons Bruts'";
+	mes "ou bien des 'Eluniums Bruts',";
 	mes "je peux les purifier pour vous.";
 	mes "Vous devez m'en apporter 5 de chaque.";
 	next;
@@ -1027,7 +1027,7 @@ function	script	orimain	{
 		}
 		else {
 			mes "[" + getarg(0) + "]";
-			mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Rough Oridecon' pour fabriquer un Oridecon?";
+			mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Oridecons Bruts' pour fabriquer un Oridecon?";
 			close;
 		}
 	case 2:
@@ -1041,7 +1041,7 @@ function	script	orimain	{
 		}
 		else {
 			mes "[" + getarg(0) + "]";
-			mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Rough Elunium' pour fabriquer un Elunium?";
+			mes "Hein? C'est une blague j'espère? Ne vous ai-je pas dit que j'avais besoin de 5 'Eluniums Bruts' pour fabriquer un Elunium?";
 			close;
 		}
 	case 3:

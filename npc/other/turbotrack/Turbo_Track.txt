@@ -51,10 +51,10 @@ turbo_room,99,120,4	script	Guide du Turbo Track::TBT_Guide#Broadcast	124,{
 			mes "Bien sûr certaines courses peuvent prendre assez un tour inattendu, mais je ne peux pas vous donner d'exemple en particulier... Il me suffit de vous dire qu'il y a des pièges disséminés un peu partout.";
 			next;
 			mes "[Guide du Turbo Track]";
-			mes "Les personnages pouvant équiper un Peco Peco, tels que les Chevaliers, les Seigneurs Chevalier, les Croisés, et les Paladins, doivent laisser leur monture à l'extérieur de l'arène du Turbo Track pour participer.";
+			mes "Les personnages pouvant équiper un Péco Péco, tels que les Chevaliers, les Seigneurs Chevalier, les Croisés, et les Paladins, doivent laisser leur monture à l'extérieur de l'arène du Turbo Track pour participer.";
 			next;
 			mes "[Guide du Turbo Track]";
-			mes "Plus précisément, une de nos employées à l'entrée de l'arène vous demandera de vous séparer de votre monture, et vous donnera un ticket en échange pour que vous puissiez louer un nouveau Peco gratuitement.";
+			mes "Plus précisément, une de nos employées à l'entrée de l'arène vous demandera de vous séparer de votre monture, et vous donnera un ticket en échange pour que vous puissiez louer un nouveau Péco gratuitement.";
 			next;
 			mes "[Guide du Turbo Track]";
 			mes "Le joueur qui franchit la ligne d'arrivée en premier remporte la course. La course se termine alors et tous les participants sont alors reconduits vers la Salle d'Attente.";
@@ -135,10 +135,10 @@ turbo_room,99,120,4	script	Guide du Turbo Track::TBT_Guide#Broadcast	124,{
 			break;
 		case 4:
 			mes "[Guide du Turbo Track]";
-			mes "Les objets suivants ne peuvent pas être utilisés dans le Turbo Track: Green Potion, Panacea et Fly Wing. Ils n'auront aucun effet tant qu'une course sera en cours.";
+			mes "Les objets suivants ne peuvent pas être utilisés dans le Turbo Track: Potion Verte, Panacea et Aile de Mouche. Ils n'auront aucun effet tant qu'une course sera en cours.";
 			next;
 			mes "[Guide du Turbo Track]";
-			mes "Les compétences suivantes sont également interdites pendant la course: Rapine, Téléportation, Portail, Disparition, Dissimulation, Filature, Guérison, Mur de Glace, Furie, Basilique, Sheltering Bless et Spear Dynamo.";
+			mes "Les compétences suivantes sont également interdites pendant la course: Rapine, Téléportation, Portail, Disparition, Dissimulation, Filature, Guérison, Mur de Glace, Furie, Basilique, Le Moulin Au Clair De Lune et Concentration.";
 			next;
 			//this aopears to suposed to fall through.
 		case 5:
@@ -307,79 +307,79 @@ turbo_room,67,95,5	duplicate(TurboNormalNames)	Records Mode Normal::Normal Mode 
 turbo_room,71,95,5	duplicate(TurboExpertNames)	Records Mode Expert::Expert Mode Records#1	857
 
 // Turbo Track Item Exchanger
-turbo_room,93,117,5	script	Echange de Points::Point Exchange Helper	125,{
+turbo_room,93,117,5	script	Échange de Points::Point Exchange Helper	125,{
 	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
 		mes "^3355FFUne petite minute!";
 		mes "Vous transportez trop d'objets sur vous. Revenez me voir après avoir utilisé les Services Kafra.^000000";
 		close;
 	}
 	if (tt_point < 10) {
-		mes "[Echange de Points]";
+		mes "[Échange de Points]";
 		mes "Bonjour, " + strcharinfo(0) + ".";
 		mes "Vous avez un total de " + tt_point + " Points Turbo Track.";
 		next;
-		mes "[Echange de Points]";
+		mes "[Échange de Points]";
 		mes "Si vous avez au moins 10 Points Turbo Track, vous pourrez les échanger contre des objets. Voulez-vous consulter la liste des objets disponibles?";
 		next;
 		if (select("Oui.:Annuler.") == 1) {
-			mes "[Echange de Points]";
+			mes "[Échange de Points]";
 			mes "^3355FF10 points^000000: 1 Bon de Téléportation Gratuite de la Kafra";
 			mes "^3355FF12 points^000000: 1 Parchemin Magique de niveau 5";
 			mes "^3355FF40 points^000000: Points d'Expérience";
 			next;
-			mes "[Echange de Points]";
+			mes "[Échange de Points]";
 			mes "^3355FF150 points^000000: 1 Diamant 3 Carats";
-			mes "^3355FF300 points^000000: 1 Gift Box";
-			mes "^3355FF400 points^000000: 1 Speed Potion";
+			mes "^3355FF300 points^000000: 1 Paquet Cadeau";
+			mes "^3355FF400 points^000000: 1 Potion de Vitesse";
 			next;
-			mes "[Echange de Points]";
+			mes "[Échange de Points]";
 			mes "Vous pouvez aussi convertir vos Points de l'Arène. Le Responsable des Points pourra vous fournir plus d'informations à ce sujet. Merci.";
 			close;
 		}
-		mes "[Echange de Points]";
+		mes "[Échange de Points]";
 		mes "Nous espérons que vous appréciez le Turbo Track d'Al De Baran. Essayez de gagner autant de points que vous pouvez: vous pourrez les échanger plus tard contre des objets. Bonne course~";
 		close;
 	}
 	else {
-		mes "[Echange de Points]";
-		mes "Bonour, " + strcharinfo(0) + ". Vous avez un total de " + tt_point + " Points Turbo Track. Voudriez-vous les échanger contre des objets?";
+		mes "[Échange de Points]";
+		mes "Bonjour, " + strcharinfo(0) + ". Vous avez un total de " + tt_point + " Points Turbo Track. Voudriez-vous les échanger contre des objets?";
 		next;
 		switch(select("Les échanger.:Annuler.")) {
 		case 1:
-			mes "[Echange de Points]";
+			mes "[Échange de Points]";
 			mes "Veuillez choisir l'objet que vous voudriez échanger contre des Points Turbo Track.";
 			next;
-			switch(select("Bon de Téléportation Gratuite:Parchemin Magique de niveau 5:Points d'Expérience:Diamant 3 Carats:Gift Box:Speed Potion:Annuler.")) {
+			switch(select("Bon de Téléportation Gratuite:Parchemin Magique de niveau 5:Points d'Expérience:Diamant 3 Carats:Paquet Cadeau:Potion de Vitesse:Annuler.")) {
 			case 1:
-				mes "[Echange de Points]";
+				mes "[Échange de Points]";
 				mes "Chaque Bon coûte 10 Points Turbo Track. Combien de Bons désirez-vous (''^3355FF0^000000'' pour annuler)?";
 				next;
 				input .@input;
 				if (.@input == 0) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Vous avez annulé l'échange.";
 					close;
 				}
 				else if (.@input < 0 || .@input > 50) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Je suis désolé mais nous ne pouvons pas échanger plus de 50 Bons à la fois.";
 					close;
 				}
 				else {
 					set .@total_point,10 * .@input;
 					if (.@total_point > tt_point) {
-						mes "[Echange de Points]";
+						mes "[Échange de Points]";
 						mes "Je suis désolé mais vous n'avez pas assez de Points Turbo Track. Vous devriez vérifier votre nombre de points actuels avant de faire un nouvel échange.";
 						close;
 					}
 					set tt_point,tt_point-.@total_point;
 					getitem 7060,.@input; //Warp_Free_Ticket
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Merci de votre participation. Nous espérons bientôt vous revoir ici, au Turbo Track~";
 					close;
 				}
 			case 2:
-				mes "[Echange de Points]";
+				mes "[Échange de Points]";
 				mes "Chaque Parchemins coûte 12 Points Turbo Track. Veuillez sélectionner le type de parchemin qui vous intéresse. Chaque parchemin permet de lancer un sort au niveau 5.";
 				next;
 				switch(select("Crocs Sismiques:Pluie de Glace:Pluie de Feu:Pluie d'Éclairs:Brûlure Psychique:Boule de Feu:Mur de Feu:Gel:Soin")) {
@@ -420,40 +420,40 @@ turbo_room,93,117,5	script	Echange de Points::Point Exchange Helper	125,{
 					set .@name$,"Soin";
 					break;
 				}
-				mes "[Echange de Points]";
+				mes "[Échange de Points]";
 				mes "Veuillez indiquer combien de ^4d4dff Parchemins de "+.@name$+"^000000 vous désirez (''^3355FF0^000000'' pour annuler).";
 				next;
 				input .@input;
 				if (.@input == 0) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Vous avez annulé l'échange.";
 					close;
 				}
 				else if (.@input < 0 || .@input > 50) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Je suis désolé mais nous ne pouvons pas échanger plus de 50 Parchemins à la fois.";
 					close;
 				}
 				else {
 					set .@total_point,12 * .@input;
 					if (.@total_point > tt_point) {
-						mes "[Echange de Points]";
+						mes "[Échange de Points]";
 						mes "Je suis désolé mais vous n'avez pas assez de Points Turbo Track. Vous devriez vérifier votre nombre de points actuels avant de faire un nouvel échange.";
 						close;
 					}
 					set tt_point,tt_point-.@total_point;
 					getitem .@scroll,.@input;
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Merci de votre participation. Nous espérons bientôt vous revoir ici, au Turbo Track~";
 					close;
 				}
 			case 3:
-				mes "[Echange de Points]";
+				mes "[Échange de Points]";
 				mes "Vous pouvez échanger 40 Points Turbo Track afin de recevoir un certain montant d'Expérience de Base. Désirez-vous faire l'échange?";
 				next;
 				if (select("Non:Oui") == 2) {
 					if (tt_point < 40) {
-						mes "[Echange de Points]";
+						mes "[Échange de Points]";
 						mes "Je suis désolé mais vous n'avez pas assez de Points Turbo Track. Vous devriez vérifier votre nombre de points actuels avant de faire un nouvel échange.";
 						close;
 	
@@ -467,110 +467,110 @@ turbo_room,93,117,5	script	Echange de Points::Point Exchange Helper	125,{
 						getexp 10000,0;
 					else if (BaseLevel < 100)
 						getexp 30000,0;
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Merci. Vos Points Turbo Track ont été convertis en Expérience de Base.";
 					close;
 				}
-				mes "[Echange de Points]";
+				mes "[Échange de Points]";
 				mes "Vous avez annulé l'échange.";
 				close;
 			case 4:
-				mes "[Echange de Points]";
+				mes "[Échange de Points]";
 				mes "Vous pouvez échanger 150 Points Turbo Track contre un ^3131FFDiamant 3 Carats^000000. Veuillez indiquer combien de Diamants vous désirez (''^3355FF0^000000'' pour annuler).";
 				next;
 				input .@input;
 				if (.@input == 0) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Vous avez annulé l'échange.";
 					close;
 				}
 				else if (.@input < 0 || .@input > 10) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Je suis désolé mais nous ne pouvons pas échanger plus de 10 Diamants à la fois.";
 					close;
 				}
 				else {
 					set .@total_point,150 * .@input;
 					if (.@total_point > tt_point) {
-						mes "[Echange de Points]";
+						mes "[Échange de Points]";
 						mes "Je suis désolé mais vous n'avez pas assez de Points Turbo Track. Vous devriez vérifier votre nombre de points actuels avant de faire un nouvel échange.";
 						close;
 					}
 					set tt_point,tt_point-.@total_point;
 					getitem 732,.@input; //Crystal_Jewel__
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Merci de votre participation. Nous espérons bientôt vous revoir ici, au Turbo Track~";
 					close;
 				}
 			case 5:
-				mes "[Echange de Points]";
-				mes "Vous pouvez échanger 300 Points Turbo Track contre une ^3131FF Gift Box^000000. Veuillez indiquer combien de Gift Boxes vous désirez (''^3355FF0^000000'' pour annuler).";
+				mes "[Échange de Points]";
+				mes "Vous pouvez échanger 300 Points Turbo Track contre un ^3131FF Paquet-Cadeau?^000000. Veuillez indiquer combien de Paquet-Cadeaux vous désirez (''^3355FF0^000000'' pour annuler).";
 				next;
 				input .@input;
 				if (.@input == 0) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Vous avez annulé l'échange.";
 					close;
 				}
 				else if (.@input < 0 || .@input > 10) {
-					mes "[Echange de Points]";
-					mes "Je suis désolé mais nous ne pouvons pas échanger plus de 10 Gift Boxes à la fois.";
+					mes "[Échange de Points]";
+					mes "Je suis désolé mais nous ne pouvons pas échanger plus de 10 Paquets-Cadeau à la fois.";
 					close;
 				}
 				else {
 					set .@total_point,300 * .@input;
 					if (.@total_point > tt_point) {
-						mes "[Echange de Points]";
+						mes "[Échange de Points]";
 						mes "Je suis désolé mais vous n'avez pas assez de Points Turbo Track. Vous devriez vérifier votre nombre de points actuels avant de faire un nouvel échange.";
 						close;
 					}
 					set tt_point,tt_point-.@total_point;
-					getitem 644,.@input; //Gift_Box
-					mes "[Echange de Points]";
+					getitem 644,.@input; //Gift_Boîte
+					mes "[Échange de Points]";
 					mes "Merci de votre participation. Nous espérons bientôt vous revoir ici, au Turbo Track~";
 					close;
 				}
 			case 6:
-				mes "[Echange de Points]";
-				mes "Vous pouvez échanger 400 Points Turbo Track contre un ^3131FF Speed Potion^000000. Veuillez indiquer combien de Potions vous désirez (''^3355FF0^000000'' pour annuler).";
+				mes "[Échange de Points]";
+				mes "Vous pouvez échanger 400 Points Turbo Track contre une ^3131FF Potion de Vitesse^000000. Veuillez indiquer combien de Potions vous désirez (''^3355FF0^000000'' pour annuler).";
 				next;
 				input .@input;
 				if (.@input == 0) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Vous avez annulé l'échange.";
 					close;
 				}
 				else if (.@input < 0 || .@input > 10) {
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Je suis désolé mais nous ne pouvons pas échanger plus de 10 Potions à la fois.";
 					close;
 				}
 				else {
 					set .@total_point,400 * .@input;
 					if (.@total_point > tt_point) {
-						mes "[Echange de Points]";
+						mes "[Échange de Points]";
 						mes "Je suis désolé mais vous n'avez pas assez de Points Turbo Track. Vous devriez vérifier votre nombre de points actuels avant de faire un nouvel échange.";
 						close;
 					}
 					set tt_point,tt_point-.@total_point;
 					getitem 12016,.@input; //Speed_Up_Potion
-					mes "[Echange de Points]";
+					mes "[Échange de Points]";
 					mes "Merci de votre participation. Nous espérons bientôt vous revoir ici, au Turbo Track~";
 					close;
 				}
 			case 7:
-				mes "[Echange de Points]";
-				mes "Ce service d'Echange des Points vous a été offert par...";
+				mes "[Échange de Points]";
+				mes "Ce service d'Échange des Points vous a été offert par...";
 				next;
-				mes "[Echange de Points]";
+				mes "[Échange de Points]";
 				mes "...la Corporation Kafra, la Guilde des Forgerons, le Casino de Comodo, et les Châteaux de Guilde de Luina!";
 				close;
 			}
 		case 2:
-			mes "[Echange de Points]";
+			mes "[Échange de Points]";
 			mes "Les Points de l'Arène peuvent être convertis en Points Turbo Track. Vous pouvez avoir un maximum de ^4D4DFF29,000 Points Turbo Track.";
 			next;
-			mes "[Echange de Points]";
+			mes "[Échange de Points]";
 			mes "Vous devriez dépenser quelques points lorsque vous approchez de cette limite, avant de pouvoir continuer à en gagner dans les courses.";
 			close;
 		}
@@ -692,7 +692,7 @@ OnTouch:
 	if ((BaseJob == Job_Knight || BaseJob == Job_Crusader) && checkriding()) {
 		if (.@now_weight < 20000) {
 			mes "[Helper]";
-			mes "Les Peco Pecos sont interdits dans l'enceinte du Turbo Track. Une de nos employées pourra en prendre soin et vous remettra un Bon pour un Peco Gratuit en échange de votre monture.";
+			mes "Les Péco Péco sont interdits dans l'enceinte du Turbo Track. Une de nos employées pourra en prendre soin et vous remettra un Bon pour un Péco Gratuit en échange de votre monture.";
 			close2;
 			warp "alde_gld",183,199;
 			end;
@@ -713,34 +713,34 @@ alde_gld,186,199,3	script	Guide du Turbo Track::Turbo Track Guide#Entran	845,{
 	mes "Bienvenue au Turbo Track d'Al De Baran~";
 	next;
 	mes "[Guide]";
-	mes "Les Peco Pecos sont interdits dans l'enceinte du Turbo Track, mais ceux qui en possèdent un recevront un Bon pour un Peco Gratuit en échange de leur monture.";
+	mes "Les Péco Péco sont interdits dans l'enceinte du Turbo Track, mais ceux qui en possèdent un recevront un Bon pour un Péco Gratuit en échange de leur monture.";
 	next;
 	mes "[Guide]";
 	mes "Passez un agréable moment au Turbo Track~!";
 	close;
 }
 
-alde_gld,181,199,5	script	Responsable des Pecos::Peco Peco Manager	845,{
-	mes "[Responsable des Pecos]";
+alde_gld,181,199,5	script	Responsable des Péco::Peco Peco Manager	845,{
+	mes "[Responsable des Péco]";
 	if (BaseJob == Job_Knight || BaseJob == Job_Crusader) {
-		mes "Bienvenue! Voulez-vous reprendre votre Peco? Montrez-moi votre Bon pour un Peco Gratuit, s'il vous plaît. Si vous l'avez perdu, vous devrez payer 2.500 zenys pour le récupérer.";
+		mes "Bienvenue! Voulez-vous reprendre votre Péco? Montrez-moi votre Bon pour un Péco Gratuit, s'il vous plaît. Si vous l'avez perdu, vous devrez payer 2.500 zenys pour le récupérer.";
 		next;
 		switch(select("Utiliser le Bon:Annuler")) {
 		case 1:
 			if (getskilllv(63) == 0) {
-				mes "[Responsable des Pecos]";
+				mes "[Responsable des Péco]";
 				mes "Je suis désolé, mais nous pouvez pas utiliser ce service. Il vous faudra d'abord apprendre la compétence ''Ride''.";
 				close;
 			}
 			else {
 				if (checkriding()) {
-					mes "[Responsable des Pecos]";
-					mes "Oh, mais vous êtes déjà sur un Peco Peco! Vous ne pouvez pas en louer plusieurs. Bonne journée~";
+					mes "[Responsable des Péco]";
+					mes "Oh, mais vous êtes déjà sur un Péco Péco! Vous ne pouvez pas en louer plusieurs. Bonne journée~";
 					close;
 				}
 				else {
 					if (countitem(7310) < 1 && Zeny < 2500) {
-						mes "[Responsable des Pecos]";
+						mes "[Responsable des Péco]";
 						mes "Je suis désolée mais vous n'avez pas de Bon, ni 2.500 zenys pour payer la location.";
 						close;
 					}
@@ -750,14 +750,14 @@ alde_gld,181,199,5	script	Responsable des Pecos::Peco Peco Manager	845,{
 						else
 							set zeny,zeny-2500;
 						setriding;
-						mes "[Responsable des Pecos]";
+						mes "[Responsable des Péco]";
 						mes "Merci de votre participation au Turbo Track~";
 						close;
 					}
 				}
 			}
 		case 2:
-			mes "[Responsable des Pecos]";
+			mes "[Responsable des Péco]";
 			mes "Voulez-vous de nouveau participer au Turbo Track?";
 			mes "Bonne chance!";
 			close;
