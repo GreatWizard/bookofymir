@@ -1599,7 +1599,7 @@ UPDATE item_db SET `name_japanese`  = "Carte de Grand Chapardeur" WHERE ID = 405
 UPDATE item_db SET `name_japanese`  = "Carte de Yoyo" WHERE ID = 4051;
 UPDATE item_db SET `name_japanese`  = "Carte de Saule Ancien" WHERE ID = 4052;
 UPDATE item_db SET `name_japanese`  = "Carte de Vitata" WHERE ID = 4053;
-UPDATE item_db SET `name_japanese`  = "Carte d'Angeling" WHERE ID = 4054;
+UPDATE item_db SET `name_japanese`  = "Carte d'Angéling" WHERE ID = 4054;
 UPDATE item_db SET `name_japanese`  = "Carte de Marina" WHERE ID = 4055;
 UPDATE item_db SET `name_japanese`  = "Carte de Cendreux" WHERE ID = 4056;
 UPDATE item_db SET `name_japanese`  = "Carte de Métalleux" WHERE ID = 4057;
@@ -1786,7 +1786,7 @@ UPDATE item_db SET `name_japanese`  = "Carte de Grand-Duc" WHERE ID = 4237;
 UPDATE item_db SET `name_japanese`  = "Carte de Chouette Effraie" WHERE ID = 4238;
 UPDATE item_db SET `name_japanese`  = "Carte de Poings de Fer" WHERE ID = 4239;
 UPDATE item_db SET `name_japanese`  = "Carte d'Arclouse" WHERE ID = 4240;
-UPDATE item_db SET `name_japanese`  = "Carte d'Archangeling" WHERE ID = 4241;
+UPDATE item_db SET `name_japanese`  = "Carte d'Archangéling" WHERE ID = 4241;
 UPDATE item_db SET `name_japanese`  = "Carte d'Apocalypse" WHERE ID = 4242;
 UPDATE item_db SET `name_japanese`  = "Carte d'Antonio" WHERE ID = 4243;
 UPDATE item_db SET `name_japanese`  = "Carte de Toquant" WHERE ID = 4244;
