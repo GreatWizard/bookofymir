@@ -1710,7 +1710,7 @@ UPDATE item_db SET `name_japanese`  = "Carte de Grand Péco" WHERE ID = 4161;
 UPDATE item_db SET `name_japanese`  = "Carte de Grizzly" WHERE ID = 4162;
 UPDATE item_db SET `name_japanese`  = "Carte de Griffon" WHERE ID = 4163;
 UPDATE item_db SET `name_japanese`  = "Carte de Gullinbursti" WHERE ID = 4164;
-UPDATE item_db SET `name_japanese`  = "Carte de Harponeur" WHERE ID = 4165;
+UPDATE item_db SET `name_japanese`  = "Carte de Harponneur" WHERE ID = 4165;
 UPDATE item_db SET `name_japanese`  = "Carte de Cauchemar Terrifiant" WHERE ID = 4166;
 UPDATE item_db SET `name_japanese`  = "Carte de Néréide" WHERE ID = 4167;
 UPDATE item_db SET `name_japanese`  = "Carte du Seigneur des Ténèbres" WHERE ID = 4168;

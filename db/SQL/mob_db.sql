@@ -365,7 +365,7 @@ UPDATE mob_db SET kName = "Explosion" WHERE ID = 1383;
 UPDATE mob_db SET kName = "Deleter" WHERE ID = 1384;
 UPDATE mob_db SET kName = "Deleter" WHERE ID = 1385;
 UPDATE mob_db SET kName = "Dormeur" WHERE ID = 1386;
-UPDATE mob_db SET kName = "Harponeur" WHERE ID = 1387;
+UPDATE mob_db SET kName = "Harponneur" WHERE ID = 1387;
 UPDATE mob_db SET kName = "Archangeling" WHERE ID = 1388;
 UPDATE mob_db SET kName = "Dracula" WHERE ID = 1389;
 UPDATE mob_db SET kName = "Violie" WHERE ID = 1390;
