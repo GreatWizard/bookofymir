@@ -1889,7 +1889,7 @@ UPDATE item_db SET `name_japanese`  = "Carte d'Ours en Peluche" WHERE ID = 4340;
 UPDATE item_db SET `name_japanese`  = "Carte de Métaling" WHERE ID = 4341;
 UPDATE item_db SET `name_japanese`  = "Carte de RSX 0806" WHERE ID = 4342;
 UPDATE item_db SET `name_japanese`  = "Carte de Taupe" WHERE ID = 4343;
-UPDATE item_db SET `name_japanese`  = "Carte d'Anopheles" WHERE ID = 4344;
+UPDATE item_db SET `name_japanese`  = "Carte d'Anophélès" WHERE ID = 4344;
 UPDATE item_db SET `name_japanese`  = "Carte de Vent des Collines" WHERE ID = 4345;
 UPDATE item_db SET `name_japanese`  = "Carte d'Egnigem Cenia" WHERE ID = 4346;
 UPDATE item_db SET `name_japanese`  = "Carte d'Armaia" WHERE ID = 4347;
