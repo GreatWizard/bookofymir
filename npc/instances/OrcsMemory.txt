@@ -55,7 +55,7 @@ gef_fild10,242,202,0	script	Monolithe::Dimensional Gorge Piece	406,{
 				next;
 				switch(select("S'inscrire pour la " + .@md_name$ + ":Entrer dans le donjon:Quitter la conversation")) {
 				case 1:
-					set .@instance, instance_create(.@md_name$, .@party_id);
+					set .@instance, instance_create("Histoire des Orcs", .@party_id); // Je vire le "sombre" ici uniquement: ça fait 24 caractères sinon et je crois que ça cause des problèmes d'affichage au niveau du client (fenêtre ALT+B) [NoH]
 					if (.@instance < 0) {
 						mes "Nom de l'Équipe: "+.@p_name$+"";
 						mes "Chef d'Équipe: "+.@p_reader$+"";
@@ -64,7 +64,7 @@ gef_fild10,242,202,0	script	Monolithe::Dimensional Gorge Piece	406,{
 					}
 					else {
 						mes "^0000ff"+.@md_name$+"^000000- Inscription pour le donjon.";
-						mes "Après vous être inscrit, vous devrez sélectionner l'option 'Entrer dans le Donjon' pour entre dans la " + .@md_name$ + ".";
+						mes "Après vous être inscrit, vous devrez sélectionner l'option 'Entrer dans le Donjon' pour entrer dans la " + .@md_name$ + ".";
 
 						for( set .@i, 1; .@i <= 2; set .@i, .@i + 1 ) {
 							if( instance_attachmap(.@i + "@orcs", .@instance) == "" )
@@ -146,7 +146,7 @@ gef_fild10,242,202,0	script	Monolithe::Dimensional Gorge Piece	406,{
 				switch(select(.@md_name$ + ": Entrer dans l'instance:Annuler")) {
 				case 1:
 					//if (move_md == 3) {
-					//	mes "An unidentified error has occured.";
+					//	mes "Une erreur inconnue s'est produite.";
 					//	close;
 					//}
 					//else if (move_md == 2) {
@@ -178,7 +178,7 @@ gef_fild10,242,202,0	script	Monolithe::Dimensional Gorge Piece	406,{
 			switch(select("Plonger dans la " + .@md_name$ + ":Annuler")) {
 			case 1:
 				//if (move_md == 3) {
-				//	mes "An unidentified error has occured.";
+				//	mes "Une erreur inconnue s'est produite.";
 				//	close;
 				//}
 				//else if (move_md == 2) {
@@ -204,7 +204,7 @@ gef_fild10,242,202,0	script	Monolithe::Dimensional Gorge Piece	406,{
 			}
 		}
 		else if (.@orctime == 2) {
-			mes "^0000ffToute trace de vos aventures passées dans le Donjon des Orcs ont été effacées. Vous pouvez désormais régénérer ou entrer à nouveau dans le donjon.^000000";
+			mes "^0000ffToute trace de vos aventures passées dans le Donjon des Orcs a été effacée. Vous pouvez désormais régénérer ou entrer à nouveau dans le donjon.^000000";
 			erasequest 12059;
 			close;
 		}
@@ -232,7 +232,7 @@ gef_fild10,238,202,6	script	Scientifique Fou::Mad Scientist#orc	865,{
 		case 1:
 			mes "[Scientifique Fou]";
 			mes "Oui, oui... Je sais que c'est difficile à croire, ne vous en faites pas.";
-			mes "J'ai étudiée la Gorge Dimensionnelle découverte près de Morroc. D'après ce que j'ai pu observer, les roches qu'on y trouve renferment une énorme pouvoir!";
+			mes "J'ai étudié la Gorge Dimensionnelle découverte près de Morroc. D'après ce que j'ai pu observer, les roches qu'on y trouve renferment une énorme pouvoir!";
 			next;
 			break;
 		case 2:
@@ -247,7 +247,7 @@ gef_fild10,238,202,6	script	Scientifique Fou::Mad Scientist#orc	865,{
 			mes "Exactement! Je viens d'ailleurs de le faire! Vous voyez cette statue, là-bas? Il ne s'agit pas d'un simple Monolithe!";
 			next;
 			mes "[Scientifique Fou]";
-			mes "Je l'ai créé en combinant notre technologie à l'énergie illimitée tirée de cette faille. Vous voulez essayer?";
+			mes "Je l'ai créée en combinant notre technologie à l'énergie illimitée tirée de cette faille. Vous voulez essayer?";
 			next;
 			break;
 		}
@@ -264,7 +264,7 @@ gef_fild10,238,202,6	script	Scientifique Fou::Mad Scientist#orc	865,{
 		switch(select("Bien... Que dois-je faire?:Hum, je ne pense pas.")) {
 		case 1:
 			mes "[Scientifique Fou]";
-			mes "Très bien! Remettez-vous en à cette statue, et essayez de paraître naturel une fois à l'intérieur.";
+			mes "Très bien! Remettez-vous en à cette statue, et essayez d'agir naturellement une fois à l'intérieur.";
 			set mad,1;
 			break;
 		case 2:
@@ -758,7 +758,7 @@ OnMyMobDead:
 		else {
 			areamonster "2@orcs",173,13,183,23,"Grand Orc",1213,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1", instance_id())+"::OnMyMobDead";
 			if (rand(1,5) == 3) {
-				instance_announce 0, "Attention: Les Forces ont commencé de se rassembler près de l'Autel de la Chamane.",bc_map,"0x77ff77";
+				instance_announce 0, "Attention: Les Forces ont commencé à se rassembler près de l'Autel de la Chamane.",bc_map,"0x77ff77";
 			}
 			if (rand(1,70) == 50) {
 				initnpctimer;
@@ -772,7 +772,7 @@ OnTimer10:
 	end;
 
 OnTimer4010:
-	instance_announce 0, "[ Des spectres sont invoqués à un pouvoir inconnu ]",bc_map,"0x77ff77";
+	instance_announce 0, "[ Des spectres sont invoqués par un pouvoir mystérieux. ]",bc_map,"0x77ff77";
 	areamonster "2@orcs",167,25,177,35,"--ja--h",1475,30,instance_npcname("#2Resurrect Monsters1", instance_id())+"::OnMyMobDead";
 	stopnpctimer;
 	end;
@@ -1128,7 +1128,7 @@ OnInstanceInit:
 
 OnEnable:
 	monster "2@orcs",67,64,"Tireur d'Élite Orc",1982,1,instance_npcname("#Mobs Control", instance_id())+"::OnMyMobDead2";
-	instance_announce 0, "Tireur d'Élite Orc: Ah! Assez impressionnant, je dois l'avouer. Vous êtes arrivé jusqu'ici. Mais le voyage s'arrête maintenant...",bc_map,"0xff8888";
+	instance_announce 0, "Tireur d'Élite Orc: Ah! Assez impressionnant, je dois l'avouer. Vous êtes arrivés jusqu'ici. Mais le voyage s'arrête maintenant...",bc_map,"0xff8888";
 	end;
 
 OnContinue:
@@ -1260,7 +1260,7 @@ OnTimer10:
 	end;
 
 OnTimer6810:
-	instance_announce 0, "Chamane Cargalache: Esclave, occupe-toi de ces intrus!",bc_map,"0xffff00";
+	instance_announce 0, "Chamane Cargalache: Mon fidèle esclave, occupe-toi de ces intrus!",bc_map,"0xffff00";
 	end;
 
 OnTimer10310:
@@ -1303,7 +1303,7 @@ OnMyMobDead:
 		instance_announce 0, "Chamane Cargalache: Ce... Ça ne peut pas se terminer ainsi...",bc_map,"0xffff00";
 	}
 	else if (.@mob_ran == 4) {
-		instance_announce 0, "Chamane Cargalache: Je... Je ne peux pas encore... mourir...!",bc_map,"0xffff00";
+		instance_announce 0, "Chamane Cargalache: Je... Je ne peux pas déjà... mourir...!",bc_map,"0xffff00";
 	}
 	else {
 		instance_announce 0, "Chamane Cargalache: Être vaincue par ces fous... Cela ne se peut...!",bc_map,"0xffff00";
