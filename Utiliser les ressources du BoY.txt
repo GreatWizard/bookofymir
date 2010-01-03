@@ -78,8 +78,11 @@ http://www.bookofymir.net/
 # chaque mise à jour.														    #
 # 																    #
 # L'autre solution vous permet de lire directement les fichiers dans le dossier su BoY, mais demande une petite modification des    #
-# sources. Dans src/map/itemdb.c, cherchez:											    #
+# sources. Vous pouvez soit le faire en appliquant le patch "db_fr.diff" dans le répertoire patches.				    #
 # 																    #
+# Si vous choisissez la seconde option, dans src/map/itemdb.c, cherchez:							    #
+# 																    #
+#-----------------------------------------------------------------------							    #
 # static int itemdb_readdb(void)												    #
 # {																    #
 # 	const char* filename[] = { "item_db.txt", "item_db2.txt" };								    #
@@ -95,9 +98,11 @@ http://www.bookofymir.net/
 # 																    #
 # 		sprintf(path, "%s/%s", db_path, filename[fi]);									    #
 # 		fp = fopen(path, "r");												    #
+#-----------------------------------------------------------------------							    #
 # 																    #
 # et remplacez par:														    #
 # 																    #
+#-----------------------------------------------------------------------							    #
 # static int itemdb_readdb(void)												    #
 # {																    #
 # 	const char* filename[] = { "item_db.txt", "item_db2.txt" };								    #
@@ -113,9 +118,11 @@ http://www.bookofymir.net/
 # 																    #
 # 		sprintf(path, "%s/%s", "BoY/db", filename[fi]);	// Modifié pour utiliser les BD du BoY				    #
 # 		fp = fopen(path, "r");												    #
+#-----------------------------------------------------------------------							    #
 # 																    #
 # Dans src/map/mob.c, cherchez:													    #
 # 																    #
+#-----------------------------------------------------------------------							    #
 # static int mob_readdb(void)													    #
 # {																    #
 # 	const char* filename[] = { "mob_db.txt", "mob_db2.txt" };								    #
@@ -130,9 +137,11 @@ http://www.bookofymir.net/
 # 																    #
 # 		sprintf(path, "%s/%s", db_path, filename[fi]);									    #
 # 		fp = fopen(path, "r");												    #
+#-----------------------------------------------------------------------							    #
 # 																    #
 # et remplacez par:														    #
 # 																    #
+#-----------------------------------------------------------------------							    #
 # static int mob_readdb(void)													    #
 # {																    #
 # 	const char* filename[] = { "mob_db.txt", "mob_db2.txt" };								    #
@@ -147,6 +156,7 @@ http://www.bookofymir.net/
 # 																    #
 # 		sprintf(path, "%s/%s", "BoY/db", filename[fi]);	// Modifié pour utiliser les BD du BoY				    #
 # 		fp = fopen(path, "r");												    #
+#-----------------------------------------------------------------------							    #
 # 																    #
 # (la seule chose à changer étant db_path pour indiquer le chemin des scripts du BoY).						    #
 # 																    #
