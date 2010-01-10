@@ -21,6 +21,7 @@
 //= 3.1 Corrected time check for Sir Jore. [L0ne_W0lf]
 //= 3.2 Removed mapannounce used while debugging. [L0ne_W0lf]
 //=     Moved the disablewaitingroomevent in dancing portion.
+//= 3.3 Applied Kazukin's fix for the dancing portion. (bugreport:3966) [L0ne_W0lf]
 //============================================================ 
 
 //============================================================ 
@@ -738,7 +739,7 @@ prt_in,248,23,0	script	Femme de Chambre::Maid#sign2	111,{
 		mes "Avez-vous déjà été à Comodo? C'est un si bel endroit, avec tant de choses à faire...";
 		next;
 		mes "[Elle]";
-		mes "J'adore parier à Comodo mais il faut faire attention à ne pas devenir accroc! J'ai vu tellement de gens qui ne vivaient que pour ça...";
+		mes "J'adore parier à Comodo mais il faut faire attention à ne pas devenir accro! J'ai vu tellement de gens qui ne vivaient que pour ça...";
 		close;
 	}
 	else if (sign_q < 54) {
@@ -4281,6 +4282,7 @@ OnTimer38000:
 	end;
 
 OnTimer44000:
+	stopnpctimer;
 	donpcevent "s_dance#up::Onreset";
 	donpcevent "s_dance#down::Onreset";
 	donpcevent "s_dance#left::Onreset";
@@ -4288,8 +4290,7 @@ OnTimer44000:
 	donpcevent "s_dance#cen::Onreset";
 	mapannounce "cmd_in01","Well done.",bc_map,"0xFFFF00";
 	enablenpc "Examiner#sd";
-	donpcevent "Examiner#sd::Onreset1";
-	stopnpctimer;
+	donpcevent "Standby Room#sign::Onreset";
 	end;
 }
 
@@ -4648,10 +4649,6 @@ Onup:
 OnDisable:
 	set .s_check,0;
 	disablenpc "Examiner#sd";
-	end;
-
-Onreset1:
-	donpcevent "Standby Room#sign::Onreset";
 	end;
 }
 
