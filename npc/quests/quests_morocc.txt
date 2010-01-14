@@ -5207,7 +5207,7 @@ prt_castle,117,163,5	script	Inspector#prince	755,{
 		mes "of Rune Midgarts!";
 		close;
 	}
-	else { // Changer ce else final: ça n'a pas de sens [NoH]
+	else if ( nk_prince ) { // Bugfix: si on met un simple else on aura ce dialogue sans avoir commencé la quête, ce qui n'a pas de sens. [NoH]
 		mes "[Inspector]";
 		mes "Hello, appraiser.";
 		mes "I hope you are able to finish your mission perfectly. Have you met with all the princes, like I told you to?";
@@ -5223,6 +5223,17 @@ prt_castle,117,163,5	script	Inspector#prince	755,{
 			mes "Don't be coy. I'm sure you have done it already.";
 			close;
 		}
+		close;
+	}
+	else { // Je réutilise le dialogue du début, en supprimant l'option pour débloquer la quête. [NoH]
+		mes "[Inspector]";
+		mes "What's wrong with you?";
+		mes "This is not an open area!";
+		next;
+		select("Alright, Alright.");
+		mes "[Inspector]";
+		mes "If you know it, why are you here? Get out of here!";
+		warp "prontera",155,353;
 		close;
 	}
 }
