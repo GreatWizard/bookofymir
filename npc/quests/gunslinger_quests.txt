@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Gunslinger quests
 //===== By: ==================================================
@@ -31,18 +33,16 @@ que_ng,182,85,3	script	Garrison	109,{
 	if(BaseJob != Job_Gunslinger)
 	{
 		mes "[Garrison]";
-		mes "You're not a gunslinger.";
-		mes "You're distracting me from my work. Go on.";
+		mes "Hé, mais vous n'êtes pas un Gunslinger! Vous me dérangez dans mon travail, allez-vous-en!";
 		close;
 	}
 	else if(BaseLevel < 55)
 	{
 		mes "[Garrison]";
-		mes "My name is Garrison. I'm a master in crafting guns.";
-		mes "The gun I make is also called the Garrison. I named it that because I think the Garrison is as cool and perfect as myself.";
+		mes "Je m'appelle Garrison. Je suis un maître dans l'art de forger des armes à feu. L'arme sur laquelle je travaille s'appelle aussi un Garrison. Je lui ai donnée ce nom, car je pense qu'elle est aussi parfaite que moi~";
 		next;
 		mes "[Garrison]";
-		mes "Why don't you commission a Garrison from me?";
+		mes "Pourquoi ne me commanderiez-vous pas un Garrison?";
 		next;
 		callsub SubGarrison;
 	}
@@ -52,78 +52,68 @@ que_ng,182,85,3	script	Garrison	109,{
 			if(countitem(13104) < 1)
 			{
 				mes "[Garrison]";
-				mes "My name is Garrison. I'm a master in crafting guns.";
-				mes "The gun I make is also called the Garrison. I named it that because I think the Garrison is as cool and perfect as myself.";
+				mes "Je m'appelle Garrison. Je suis un maître dans l'art de forger des armes à feu. L'arme sur laquelle je travaille s'appelle aussi un Garrison. Je lui ai donnée ce nom, car je pense qu'elle est aussi parfaite que moi~";
 				next;
 				mes "[Garrison]";
-				mes "Are you here to commission a Garrison from me?";
+				mes "Pourquoi ne me commanderiez-vous pas un Garrison?";
 				next;
 				callsub SubGarrison;
 			}
 			mes "[Garrison]";
-			mes "Hmm~ What's going on?";
-			mes "Are you here because you need a weapon?";
+			mes "Hum~ Qu'est-ce que vous faites là? Vous voulez une autre arme, c'est ça?";
 			next;
-			switch( select( "I need a Garrison.","Not really.","Cancel") )
+			switch( select( "Il me faut un Garrison.","Pas vraiment.","Quitter la conversation.") )
 			{
 				case 1:
 					mes "[Garrison]";
-					mes "Oh~ Welcome";
-					mes "Everyone needs me~!";
-					mes "It just proves that my gun, the Garrison, is the best of the best.";
-					mes "So, are you going to ask me to make one now?";
+					mes "Oh~ Vous êtes au bon endroit! Tout le monde a besoin de moi~";
+					mes "Tout cela prouve que mon arme, le Garrison, est vraiment la meilleure. Alors, voulez-vous que je vous en forge un maintenant?";
 					next;
 					callsub SubGarrison;
 
 				case 2:
 					mes "[Garrison]";
-					mes "Hmm~ You look like you're wandering around without a mission.";
-					mes "If you've got the time, will you do me a favor?";
+					mes "Hum~ On dirait que vous n'avez pas de mission en cours. Si vous avez le temps, pourriez-vous me rendre un service?";
 					next;
 					mes "["+strcharinfo(0)+"]";
-					mes "What is it?";
+					mes "De quoi s'agit-il?";
 					next;
 					mes "[Garrison]";
-					mes "Mmm~ Well, I had actually received a letter recently stating that there are many defective makes of a gun I created called the Six Shooter.";
+					mes "Hum~ Eh bien, je viens de recevoir une lettre m'informant qu'il y a certains défauts de fabrication sur une arme j'ai créée: le Six Coups.";
 					next;
 					mes "[Garrison]";
-					mes "I'm a perfectionist, but due to my old age, my eyes are growing dark, and I think I may have sold defective Six Shooters.";
+					mes "Je suis un perfectionniste, mais je me fais vieux, et ma vue baisse, alors je crois que j'ai peut-être vendu quelques Six Coups défectueux.";
 					next;
 					mes "[Garrison]";
-					mes "So what I'm trying to say is, I'm hoping someone will find me spare parts which I can use to replace defective parts in the detective Six Shooters.";
+					mes "Bref, j'aurais besoin que quelqu'un me trouve des pièces en remplacement de celles qui sont défectueuses sur les Six Coups.";
 					next;
 					mes "[Garrison]";
-					mes "If you help me, I'll put a slot in that Garrison you're holding right now.";
-					mes "What do you say?";
+					mes "Si vous m'aidez, j'ajouterai un emplacement pour une carte sur le Garrison que vous avez là. Alors, qu'en dites-vous?";
 					next;
 					mes "[Garrison]";
-					mes "Just so you know, if I slot your Garrison, any current refine points or slotted cards will disappear. Decide carefully.";
+					mes "Mais attention: si je fais cela, il perdra aussi son Taux de Raffinage actuel, alors pensez-y bien.";
 					next;
-					switch( select( "I don't like the sound of this.","Ok, I'll try it out.") )
+					switch( select( "Je n'aime pas l'idée.","D'accord, je vais vous aider.") )
 					{
 						case 1:
 							mes "[Garrison]";
-							mes "Hmm, I see.";
-							mes "I understand.";
-							mes "I guess I'll look for a different man.";
+							mes "Hum, je vois. Je comprends. Je demanderai à quelqu'un d'autre j'imagine.";
 							close;
 
 						case 2:
 							mes "[Garrison]";
-							mes "Oh, would you?";
-							mes "I'm so thankful.";
-							mes "These are the materials I need to make spare parts...";
+							mes "Oh, fantastique! Je vous en suis vraiment reconnaissant. Voilà ce qu'il me faut pour réparer les armes défectueuses...";
 							next;
 							mes "[Garrison]";
-							mes "10 Steel, 1 Elunium, 10 Emveretarcon, 30 Coal, and 10 Rusty Screws.";
-							mes "I need this exact amount. Don't forget.";
+							mes "10 morceaux d'Acier, 1 Eluniums, 10 Emveretarcons, 30 morceaux de Charbon, et 10 Vis Rouillées.";
+							mes "Il me faut tout cela. Ne l'oubliez pas!";
 							set gun_gs,1;
 							close;
 					}
 
 				case 3:
 					mes "[Garrison]";
-					mes "Hmm... Come and see me later.";
+					mes "Hum... Revenez me voir plus tard.";
 					close;
 			}
 
@@ -131,37 +121,34 @@ que_ng,182,85,3	script	Garrison	109,{
 			if((countitem(999) < 10) || (countitem(7317) < 10) || (countitem(1011) < 10) || (countitem(1003) < 30) || (countitem(985) < 1))
 			{
 				mes "[Garrison]";
-				mes "10 Steel, 1 Elunium, 10 Emveretarcon, 30 Coal, and 10 Rusty Screws.";
-				mes "Don't forget -- the amount has to be exact.";
+				mes "10 morceaux d'Acier, 1 Eluniums, 10 Emveretarcons, 30 morceaux de Charbon, et 10 Vis Rouillées.";
+				mes "C'est tout ce qu'il me faut. Ne l'oubliez pas!";
 				close;
 			}
 			mes "[Garrison]";
-			mes "Oh~ You're back with what I need~";
-			mes "I'm so grateful.";
-			mes "Oh.. there's another favor I need to have done. Err...";
+			mes "Oh~ Vous êtes de retour avec ce que je vous avais demandé~";
+			mes "Je vous en suis très reconnaissant. Oh... mais j'ai un autre service à vous demander. Euh...";
 			next;
 			mes "[Garrison]";
-			mes "I need to deliver the spare parts once I make them to another person, but I've got so much work to do around here.";
+			mes "Il faudrait que vous les pièces de rechange à quelqu'un d'autre une fois que je les aurai forgées. Je suis très occupé ici.";
 			next;
 			mes "[Garrison]";
-			mes "Sorry to ask, but I was hoping you can deliver what I make out of these materials to the next person.";
+			mes "Désolé de vous demander ça, mais je pensais que vous pourriez vous en charger.";
 			next;
 			mes "[Garrison]";
-			mes "While you are on delivery, I will make preparations to slot your Garrison, as promised.";
+			mes "Je m'occuperai des préparatifs pour rajouter un emplacement à votre Garrison pendant que vous livrerez ça.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "-Hmm, I don't want to do it, but I'll do it anyway.-";
+			mes "-Hum, je m'en passerais bien, mais bon...-";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Ok.";
+			mes "D'accord.";
 			next;
 			mes "[Garrison]";
-			mes "Oh, thanks a lot.";
-			mes "Then deliver this to a person called Ravey. He lives in the slums of Lighthalzen.";
+			mes "Oh, merci beaucoup. Allez livrer ceci à quelqu'un du nom de Ravey. Il devrait se trouver dans les faubourgs de Lighthalzen.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "You receive the delivery goods from Garrison.";
-			mes "Let's deliver them to a person named Ravey, who lives in the slums of Lighthalzen.";
+			mes "Bien, dans ce cas allons livrer tout ça à ce 'Ravey' à Lighthalzen.";
 			delitem 999,10;
 			delitem 1011,10;
 			delitem 7317,10;
@@ -172,53 +159,46 @@ que_ng,182,85,3	script	Garrison	109,{
 
 		case 2:
 			mes "["+strcharinfo(0)+"]";
-			mes "You receive the delivery goods from Garrison.";
-			mes "Let's deliver them to a person named Ravey, who lives in the slums of Lighthalzen.";
+			mes "Bien, il faut que j'aille livrer tout ça à ce 'Ravey' à Lighthalzen.";
 			close;
 
 		case 3:
 			mes "[Garrison]";
-			mes "Oh~ How was your trip?";
+			mes "Oh~ Vous avez fait bonne route?";
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "Gyah~";
-			mes "I nearly died!!!";
-			mes "That man tried to attack me when he saw me. I barely escaped death!";
+			mes "J'ai failli mourir!!!";
+			mes "Ce type m'a attaqué quand il m'a vu. J'ai échappé de justesse à la mort!";
 			next;
 			mes "[Garrison]";
-			mes "Ahh~ Oh no.";
-			mes "I had no idea the person who sent the letter was actually plotting to assassinate me. He was probably sent by one of our enemy guilds...";
+			mes "Ah~ Oh non.";
+			mes "Je ne savais pas du tout que celui qui m'avait envoyé cette lettre avait en fait dans l'intention de m'assassiner. Il était probablement envoyé par l'une des guildes ennemies...";
 			next;
 			mes "[Garrison]";
-			mes "It looks like I've sent you unintentionally on a very dangerous mission.";
+			mes "On dirait que je vous ai confié une mission dangereuse sans le savoir.";
 			next;
 			mes "[Garrison]";
-			mes "I'm so sorry.";
-			mes "You may also know, but there's bad guys plotting to attack the Professor and the Gunslinger Guild all over the place.";
+			mes "Je suis vraiment désolé. Vous le savez surement, mais il y a des gens qui complotent pour assassiner les membres de la Guilde des Sages et de celle des Gunslingers un peu partout.";
 			next;
 			mes "[Garrison]";
-			mes "Consider this a part of your training as an Gunslinger.";
+			mes "Eh bien, considérez que ça faisait partie de votre entraînement de Gunslinger.";
 			next;
 			mes "[Garrison]";
-			mes "I'm sorry about what happened.";
-			mes "But, as promised, I will slot your Garrison ...";
+			mes "Je suis désolé de ce qui s'est passé. Mais comme promis, je vais m'occuper de votre Garrison...";
 			next;
 			if(countitem(13104) < 1)
 			{
 				mes "[Garrison]";
-				mes "Huh? Sigh.";
-				mes "Did you sell off your gun while you were gone?";
-				mes "I said I'd slot your gun, but I never said I'd slot a gun that isn't here.";
-				mes "Go and get your Garrison and then get back to me.";
+				mes "Oh mais... *Soupire*";
+				mes "Est-ce que vous avez vendu votre autre Garrison sur la route? J'ai dit que je rajouterai un emplacement sur votre arme, pas que je vous en donnerai une! Allez la chercher et revenez me voir.";
 				set gun_gs,4;
 				close;
 			}
 			mes "[Garrison]";
-			mes "Let's see~";
+			mes "Voyons~";
 			mes "*tonk* *tonk* *thump* *whump*";
-			mes "Here is your modified";
-			mes "Garrison.";
-			mes "Please use it well.";
+			mes "Voici votre Garrison modifié. Faites-en bon usage.";
 			delitem 13104,1;
 			getitem 13105,1;
 			set gun_gs, 5;
@@ -227,85 +207,81 @@ que_ng,182,85,3	script	Garrison	109,{
 			if(countitem(13104) < 1)
 			{
 				mes "[Garrison]";
-				mes "Go and get your Garrison and then get back to me.";
+				mes "Allez chercher votre Garrison et revenez me voir.";
 				close;
 			}
 			mes "[Garrison]";
-			mes "Ah, there it is.";
-			mes "Here is your modified";
-			mes "Garrison.";
-			mes "Do use it well.";
+			mes "Ah, voici votre Garrison modifié. Faites-en bon usage.";
 			delitem 13104, 1;
 			getitem 13105, 1;
 			set gun_gs,5;
 			close;
 		case 5:
 			mes "[Garrison]";
-			mes "Hmm~ You're back again~";
-			mes "What's the matter?";
-			mes "Did you come back because you need a weapon?";
-			mes "What do you need?";
+			mes "Hum~ Vous revoilà~";
+			mes "Qu'est-ce qui vous amène? Voulez-vous une nouvelle arme? De quoi avez-vous besoin?";
 			next;
-			switch( select( "Garrison","Slot a Garrison","Cancel"))
+			switch( select( "Garrison","Garrison [1]","Quitter la conversation."))
 			{
 				case 1:
 					callsub SubGarrison;
 				case 2:
 					callsub SubGarrison_;
+				case 3: // Bugfix: il manquait ce case [NoH]
+					mes "[Garrison]";
+					mes "Alors à la prochaine... Peut-être~";
+					close;	
 			}
 	}
 
 SubGarrison:
 	mes "[Garrison]";
-	mes "To create a Garrison, I need...";
-	mes "50 Steel, 3 Eluniums,";
-	mes "1 Oridecon, 50 Coal,";
-	mes "20 Rusty Screws, and";
-	mes "there's a fee of 30,000 Zeny.";
-	mes "Well, do you want one?.";
+	mes "Pour forger un Garrison, il me faut...";
+	mes "50 morceaux d'Acier,";
+	mes "3 Eluniums,";
+	mes "1 Oridecon,";
+	mes "50 morceaux de Charbon,";
+	mes "20 Vis Rouillées, et";
+	mes "la somme de 30,000 Zénys en guise de paiement.";
+	mes "Alors, en voulez-vous un?";
 	next;
-	switch( select( "Maybe later.","Yes, make it for me immediately.","Cancel") )
+	switch( select( "Plus tard peut-être.","Oui, faites m'en un sans attendre!","Quitter la conversation.") )
 	{
 		case 1:
 			mes "[Garrison]";
-			mes "Hmmm~ I got worked up for nothing~";
-			mes "Think about it. Come see me if you decide.";
+			mes "Hum~ Je me suis excité pour rien. Réfléchissez à ma proposition et revenez me voir quand vous vous serez décidé.";
 			close;
 
 		case 2:
 			if((countitem(999) < 50) || (countitem(7317) < 20) || (countitem(984) < 1) || (countitem(1003) < 50) ||(countitem(985) < 3) )
 			{
 				mes "[Garrison]";
-				mes "You didn't bring enough materials";
-				mes "To create a Garrison, I need...";
-				mes "50 Steel, 3 Eluniums,";
-				mes "1 Oridecon, 50 Coal,";
-				mes "50 Rusty Screws,";
-				mes "and there's a fee of 30,000 Zeny";
-				mes "Don't forget.";
+				mes "Vous ne m'avez pas apporté tout ce que je vous avais demandé. Pour forger un Garrison, il me faut...";
+				mes "50 morceaux d'Acier,";
+				mes "3 Eluniums,";
+				mes "1 Oridecon,";
+				mes "50 morceaux de Charbon,";
+				mes "20 Vis Rouillées, et";
+				mes "la somme de 30,000 Zénys en guise de paiement.";
+				mes "Gardez ça en tête.";
 				close;
 			}
 			else if(Zeny < 30000)
 			{
 				mes "[Garrison]";
-				mes "You need more Zeny~!";
-				mes "More Zeny!!";
+				mes "Il vous faut plus d'argent pour ça~";
+				mes "PLUS D'ARGENT!!";
 				close;
 			}
 			else if(checkweight(13104,1) == 0)
 			{
 				mes "[Garrison]";
-				mes "There's no room in your inventory";
-				mes "for my creation.";
-				mes "Make some room";
-				mes "in your inventory, and then";
-				mes "Come and see me.";
+				mes "Il n'y a pas assez de place dans votre inventaire pour ma création. Débarrassez-vous du superflu et revenez me voir.";
 				close;
 			}
 			mes "[Garrison]";
-			mes "Hmm, looks like the correct amount of materials and Zeny.";
-			mes "Here's a Garrison~";
-			mes "If you need one again, come and see me~";
+			mes "Hum, on dirait que vous avez tout ce qu'il fut. Voilà votre Garrison~";
+			mes "Revenez me voir si vous en voulez un autre~";
 			delitem 984,1; //Oridecon
 			delitem 985,3; //Elunium
 			delitem 999,50; //Steel
@@ -317,54 +293,51 @@ SubGarrison:
 
 		case 3:
 			mes "[Garrison]";
-			mes "I'll see you when I see you~";
+			mes "Alors à la prochaine... Peut-être~";
 			close;
 	}
 
 SubGarrison_:
 	mes "[Garrison]";
-	mes "In order to slot a Garrison, I need";
-	mes "10 Steel, 1 Elunium,";
-	mes "10 Emveretarcon, 30 Coal,";
-	mes "10 Rusty Screws, and";
+	mes "Pour forger un Garrison [1], il me faut...";
+	mes "10 morceaux d'Acier,";
+	mes "1 Elunium,";
+	mes "10 Emveretarcons,";
+	mes "30 morceaux de Charbon,";
+	mes "10 Vis Rouillées, et";
 	mes "1 Garrison.";
-	mes "Well, do you want one?.";
+	mes "Alors, en voulez-vous un?";
 	next;
-	switch( select( "Maybe later.","Yes, make it for me immediately.","Cancel" ))
+	switch( select( "Plus tard peut-être.","Oui, faites m'en un sans attendre!","Quitter la conversation.") )
 	{
 		case 1:
 			mes "[Garrison]";
-			mes "You've got me worked up for nothing~";
-			mes "Get back to me when you've made up your mind.";
+			mes "Hum~ Je me suis excité pour rien. Réfléchissez à ma proposition et revenez me voir quand vous vous serez décidé.";
 			close;
 
 		case 2:
 			if((countitem(999) < 10) || (countitem(7317) < 10) || (countitem(1011) < 10) || (countitem(1003) < 30) || (countitem(985) < 1) || (countitem(13104) < 1))
 			{
 				mes "[Garrison]";
-				mes "You didn't bring enough materials";
-				mes "In order to slot a Garrison, I need";
-				mes "10 Steel, 1 Elunium,";
-				mes "10 Emveretarcon, 30 Coal,";
-				mes "10 Rusty Screws, and";
+				mes "Vous ne m'avez pas apporté tout ce que je vous avais demandé. Pour forger un Garrison [1], il me faut...";
+				mes "10 morceaux d'Acier,";
+				mes "1 Elunium,";
+				mes "10 Emveretarcons,";
+				mes "30 morceaux de Charbon,";
+				mes "10 Vis Rouillées, et";
 				mes "1 Garrison.";
-				mes "Don't forget.";
+				mes "Gardez ça en tête.";
 				close;
 			}
 			else if(checkweight(13105,1) != 1)
 			{
 				mes "[Garrison]";
-				mes "There's no room in your inventory";
-				mes "for my creation.";
-				mes "Make some room";
-				mes "in your inventory, and then";
-				mes "Come and see me.";
+				mes "Il n'y a pas assez de place dans votre inventaire pour ma création. Débarrassez-vous du superflu et revenez me voir.";
 				close;
 			}
 			mes "[Garrison]";
-			mes "Hmm, looks like the correct amount of materials and Zeny.";
-			mes "Here's a modified Garrison with a slot.";
-			mes "If you need one again, come and see me~";
+			mes "Hum, on dirait que vous avez tout ce qu'il fut. Voilà votre Garrison [1]~";
+			mes "Revenez me voir si vous en voulez un autre~";
 			delitem 999, 10;
 			delitem 1011, 10;
 			delitem 7317, 10;
@@ -376,7 +349,7 @@ SubGarrison_:
 		
 		case 3:
 			mes "[Garrison]";
-			mes "I'll see you when I see you~";
+			mes "Alors à la prochaine... Peut-être~";
 			close;	
 	}
 }
@@ -386,34 +359,27 @@ lighthalzen,322,247,6	script	Ravey	 86,{
 	if(gun_gs == 2)
 	{
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me. Hello.";
-		mes "I'm here to give you replacement parts for defective Gunslin...";
+		mes "Excusez-moi. Bonjour.";
+		mes "Je viens vous apporter les pièces de rechange pour les Six C...";
 		next;
 		mes "[Ravey]";
-		mes "You!!!";
+		mes "Toi!!!";
 		mes "Huuut~!!";
-		mes "Die!!!";
+		mes "Meurs!!!";
 		set gun_gs,3;
 		percentheal 100,0;
 		percentheal -90,0;
 		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "- The man called Ravey suddenly attacks, as if he was waiting for the word Gunslinger...-";
-		mes "You nearly died.-";
+		mes "- L'homme du nom de Ravey vous attaque soudain comme si il s'attendait à voir arriver un autre Gunslinger... Vous survivez de justesse.-";
 		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "You run away without looking back.";
-		mes "Let's hurry back to Garrison.-";
+		mes "- Vous prenez vos jambes à votre coup et retournez voir Garrison.-";
 		close;
 	}
 	if(gun_gs == 3)
 	{
-		mes "["+strcharinfo(0)+"]";
-		mes "- The man called Ravey suddenly attacks, as if he was waiting for the word Gunslinger...-";
-		mes "You nearly died.-";
+		mes "- L'homme du nom de Ravey vous attaque soudain comme si il s'attendait à voir arriver un autre Gunslinger... Vous survivez de justesse.-";
 		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "Let's hurry back to Garrison.-";
+		mes "- Vous prenez vos jambes à votre coup et retournez voir Garrison.-";
 		close;
 	}
 	mes "[Ravey]";
@@ -429,105 +395,86 @@ que_ng,187,163,3	script	Ingrid	744,{
 	if(BaseJob != Job_Gunslinger)
 	{
 		mes "[Ingrid]";
-		mes "How are you!";
-		mes "I've been appointed the new Gunslinger Weapons Creator. The name is Ingrid.";
+		mes "Comment allez-vous? Je viens d'être nommée Créatrice d'Armes pour Gunslinger. Je m'appelle Ingrid.";
 		next;
 		mes "[Ingrid]";
-		mes "However, you don't seem to be a member of the Gunslinger Guild, so I can't help you with anything. Sorry.";
+		mes "Oh, mais vous n'avez pas l'air de faire partie de la Guilde des Gunslingers – je ne peux pas faire grand-chose pour vous, désolée.";
 		close;
 	}
 	switch(gun_inf)
 	{
 		case 0:
 			mes "[Ingrid]";
-			mes "How are you!";
-			mes "I've been appointed the new Gunslinger";
-			mes "Weapons Creator. The name is Ingrid.";
-			mes "A pleasure to serve you!";
+			mes "Comment allez-vous? Je viens d'être nommée Créatrice d'Armes pour Gunslinger. Je m'appelle Ingrid.";
 			next;
 			mes "[Ingrid]";
-			mes "It's only been a short while";
-			mes "since I've started working,";
-			mes "But I'll try my best to";
-			mes "assist you.";
+			mes "Cela ne fait que peu de temps que je fais ce travail, mais je ferai de mon mieux pour vous aider.";
 			next;
 			mes "[Ingrid]";
-			mes "Ahh ... I feel so anxious.";
-			mes "As of now, I'm doing the job of creating a weapon called the Inferno for customers.";
+			mes "Ah... Je suis un peu nerveuse. En ce moment, j'ai pour charge de forger une arme qu'on appelle l'Inferno.";
 			next;
 			mes "[Ingrid]";
-			mes "The Inferno is the most advanced weapon made in our Guild laboratory.";
+			mes "Il s'agit de l'arme la plus perfectionnée fabriquée dans le laboratoire de la Guilde.";
 			next;
 			mes "[Ingrid]";
-			mes "It features incredible power and range, and an ergonomic design so that it can be held well and significantly minimize kickback when fired.";
-			mes "It's a weapon worthy of being called the ultimate weapon for any Gunslinger.";
-			mes "huff huff...";
+			mes "Il renferme un pouvoir incroyable, le tout dans un design ergonomique avant de faciliter son maniement et de réduire le recul quand vous l'utilisez. Il mériterait vraiment d'avoir le titre d'arme ultime pour les Gunslingers.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "You know quite a lot about it";
+			mes "Vous en savez beaucoup à son sujet...";
 			mes ".....";
 			next;
 			mes "[Ingrid]";
-			mes "Ah. Of course~";
-			mes "I am the person who designed this weapon..";
+			mes "Ah! Bien sûr~";
+			mes "Je suis celle qui a dessiné cette arme.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Wooow~ That's incredible~";
+			mes "Wooow~ C'est incroyable~";
 			next;
 			mes "[Ingrid]";
-			mes "Ah Oops...";
-			mes "Did I end up bragging?";
-			mes "I'm still nothing compared to Professor Serena.";
+			mes "Ah Oups...";
+			mes "Est-ce que je n'étais pas un peu en train de me vanter, là? Mais tout ça n'est rien comparé au Professeur Serena.";
 			next;
 			mes "[Ingrid]";
-			mes "Actually, I wanted to become a gunslinger too, but because of my physical shortcomings weak determination, I had to give up.";
+			mes "En fait, moi aussi je voulais devenir Gunslinger mais à cause de ma faible constitution, j'ai dû abandonner l'idée.";
 			next;
 			mes "[Ingrid]";
-			mes "While I was applying to become a gunslinger, I was lucky enough to have Professor Serena see my talents, and with her help, I'm where I am now helping with the manufacturing and sales of Gunslinger Weapons";
+			mes "J'ai eu la chance de rencontrer le Professeur Serena quand j'étais candidate. Elle a tout de suite vu mes prédispositions pour ce travail, et grâce à son aide je peux maintenant aider à la fabrication et à la vente d'armes pour Gunslinger.";
 			next;
 			mes "[Ingrid]";
-			mes "I'm still remorseful that I wasn't able to become a Gunslinger, but at least my brother, who took the Gunslinger test with me, passed and become one.";
+			mes "Je regrette toujours un peu de ne pas être devenue une Gunslinger, mais au moins mon frère qui a passé le test en même temps que moi a réussi et fait maintenant partie de la Guilde.";
 			next;
 			mes "[Ingrid]";
-			mes "I'm glad that even though I fell, my brother was able to fulfill our dream.";
+			mes "Je suis contente que mon frère ait pu réaliser notre rêve à tous les deux.";
 			next;
 			mes "[Ingrid]";
-			mes "Haha~ Look at me telling you all these things when you didn't even ask.";
-			mes "Sorry.";
+			mes "Haha~ Je vous raconte toutes ces choses alors que vous n'aviez rien demandé... Désolée.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "No, it's ok.";
-			mes "You may not have become a Gunslinger, but I think you've become a great person.";
+			mes "Pas de problème.";
+			mes "Vous n'êtes peut-être pas une Gunslinger, mais je pense que vous êtes quelqu'un de bien.";
 			next;
 			mes "[Ingrid]";
-			mes "Really? Thank you~";
-			mes "I'll try my best.";
+			mes "Vraiment? Merci~";
+			mes "Je fais de mon mieux.";
 			next;
 			mes "[Ingrid]";
-			mes "To produce an Inferno,";
-			mes "I need 100 Used Iron Plates, 10 Oridecons, 50 Old Rusty Screws, 100 Burning Hearts, and 200,000 Zeny.";
-			mes "Would you like to produce it for you?";
+			mes "Bref, pour fabriquer un Inferno, il me faut 100 Plaques de Fer Endommagées, 10 Oridecons, 50 Vis Rouillées, 100 Coeurs Ardents, et 200,000 Zénys. Voulez-vous que je vous en fasse un maintenant?";
 			next;
-			switch( select( "I'll think about it.", "Yes, please." ) )
+			switch( select( "Je vais y réfléchir.", "Oui, s'il vous plaît." ) )
 			{
 				case 1:
 					mes "[Ingrid]";
-					mes "Ah~ I see.";
-					mes "I understand.";
-					mes "Ok, well, think about it.";
-					mes "Come back when you've made up your mind.";
+					mes "Ah~ Je vois.";
+					mes "Je comprends.";
+					mes "Eh bien, réfléchissez-y et revenez me voir quand vous vous serez décidé.";
 					close;
 
 				case 2:
 					mes "[Ingrid]";
-					mes "I understand.";
-					mes "Here are the materials again.";
+					mes "D'accord. Je vous redonne la liste des matériaux.";
 					next;
-					mes "[Inferno]";
-					mes "To produce an Inferno,";
-					mes "I need 100 Used Iron Plates, 10 Oridecons, 50 Rusty Old Screws, 100 Burning Hearts, and 200,000 Zeny.";
-					mes "You must bring me the correct number of materials.";
-					mes "Please don't forget that.";
+					mes "[Ingrid]";
+					mes "Pour fabriquer un Inferno, il me faut 100 Plaques de Fer Endommagées, 10 Oridecons, 50 Vis Rouillées, 100 Coeurs Ardents, et 200,000 Zénys. N'oubliez pas!";
 					set gun_inf,1;
 					close;
 			}
@@ -537,17 +484,16 @@ que_ng,187,163,3	script	Ingrid	744,{
 
 		case 2:
 			mes "[Ingrid]";
-			mes "Hello~ You're back~";
-			mes "Are you back because you need an Inferno?";
+			mes "Oh~ Vous revoilà~";
+			mes "Êtes-vous ici parce que vous avez besoin d'un Inferno?";
 			next;
-			switch( select( "Nah, I'm back just because..","Yes, make me an Inferno." ) )
+			switch( select( "Non, je viens pour...","Oui, fabriquez-moi un Inferno." ) )
 			{
 				case 1:
 					mes "[Ingrid]";
-					mes "Ah~ I see.";
-					mes "I understand.";
-					mes "Ok, well, think about it.";
-					mes "Come back when you've made up your mind.";
+					mes "Ah~ Je vois.";
+					mes "Je comprends.";
+					mes "Eh bien, pensez-y et revenez me voir si vous changez d'avis.";
 					close;
 
 				case 2:
@@ -559,33 +505,25 @@ SubInferno:
 	if ((countitem(7319) < 100) || (countitem(7317) < 50) || (countitem(984) < 10) || countitem(7097) < 100)
 	{
 		mes "[Ingrid]";
-		mes "Yeah, the required materials are 100 Used Iron Plates, 10 Oridecons, 50 Rusty Old Screws, 100 Burning Hearts, and 200,000 Zeny";
-		mes "You must bring me the correct number of materials.";
-		mes "Please don't forget that.";
+		mes "Pour fabriquer un Inferno, il me faut 100 Plaques de Fer Endommagées, 10 Oridecons, 50 Vis Rouillées, 100 Coeurs Ardents, et 200,000 Zénys. Vous devez m'apporter tout ça. N'oubliez pas!";
 		close;
 	}
 	else if(Zeny < 200000)
 	{
 		mes "[Ingrid]";
-		mes "You've brought plenty of material,";
-		mes "but did you bring enough Zeny?";
-		mes "The price of creating an Inferno is 200,000 Zeny.";
-		mes "Please don't forget that.";
+		mes "Vous avez tous les matériaux qu'il faut, mais vous n'avez pas assez d'argent. Les Infernos coûtent 200.000 Zénys. Ne l'oubliez pas.";
 		close;
 	}
 	else if(checkweight(13162,1) != 1)
 	{
 		mes "[Ingrid]";
-		mes "It looks like you have too many items to carry my creation, so I can't give it to you.";
-		mes "Why don't you come and see me again when you're ready to receive it?";
+		mes "On dirait que vous avez trop d'objets sur vous et qu'il n'y a plus de place dans votre inventaire pour mon arme. Pourquoi ne reviendriez-vous pas me voir quand vous serez un peu moins surchargé?";
 		close;
 	}
 	else
 	{
 		mes "[Ingrid]";
-		mes "I see you have the proper amount of materials and Zeny.";
-		mes "Here is the Inferno I've created for you.";
-		mes "Use it well.";
+		mes "Je vois que vous avez tout ce qu'il faut. Bien, voilà l'Inferno que j'ai créé pour vous. Faites-en bon usage.";
 		set Zeny,Zeny-200000;
 		delitem 7319,100;
 		delitem 984,10;
@@ -602,154 +540,116 @@ que_ng,185,180,3	script	Vanessa	726,{
 	if(BaseJob != Job_Gunslinger)
 	{
 		mes "[Vanessa]";
-		mes "Hah !Hah !!";
-		mes "Ballitude! Commander Sambo!";
-		mes "Wrestling!, Muye Tai!";
-		mes "Pancracion!,Lucharibre!";
-		mes "I'm going to master all the bare hand weapons in this world!!";
+		mes "Haha! Catch! Capoeira! Lutte! Boxe Thaï! Pancrace! Lucha Libre!";
+		mes "Je maîtriserai toutes les techniques de corps-à-corps au monde!";
 		next;
 		mes "[Vanessa]";
-		mes "Hmm?!";
-		mes "Who are you? You're inturrupting my practice!";
-		mes "Get lost!";
+		mes "Hum?!";
+		mes "Qui êtes-vous? Vous interrompez mon entraînement, vous savez? Allez-vous-en!";
 		close;
 	}
 	switch(gunst)
 	{
 		case 0:
 			mes "[Vanessa]";
-			mes "Ha!Hyaa!!";
-			mes "Vale Tudo!Commando Sambo!";
-			mes "Wrestling!,Muay Thai!";
-			mes "Pankration!,Mucho Libre!";
-			mes "I will master all fighting styles";
-			mes "in this world!!";
+			mes "Haha! Catch! Capoeira! Lutte! Boxe Thaï! Pancrace! Lucha Libre!";
+			mes "Je maîtriserai toutes les techniques de corps-à-corps au monde!";
 			next;
 			mes "[Vanessa]";
-			mes "Mm?";
-			mes "You are a Gunslinger, huh?";
-			mes "Why are you disturbing";
-			mes "my exercises and me";
-			mes "standing beside me?";
+			mes "Hum?";
+			mes "Vous êtes un Gunslinger, hein? Pourquoi est-ce que vous interrompez mon entraînement et que vous vous tenez là, à côté de moi?";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "It's just watching exercise";
-			mes "looks good...";
+			mes "Rien, j'aime bien vous regardez pratiquer...";
 			mes ".............";
 			next;
 			mes "[Vanessa]";
-			mes "Oh! You like martial arts?";
-			mes "Come here~ I'll lock";
-			mes "you in an arm-bar~";
+			mes "Oh! Vous aimez les arts martiaux? Approchez, je vais vous faire une clé-de-bras~";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "N~ No thanks~";
-			mes "it's okay~";
+			mes "N~ Non merci~";
+			mes "Ça va~";
 			next;
 			mes "[Vanessa]";
-			mes "What's okay~";
-			mes "Come here~!";
-			mes "-Bam!Bam!-";
+			mes "Commente ça 'ça va'?~";
+			mes "Venez ici! Allez, approchez!";
+			mes "*Bam* *Bam*";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Aah~Ugh~ Don't do that~";
+			mes "Ah~ Ugh~ Ne faites pas ça~";
 			mes "Aa..Aaaahhhh~~!!";
 			mes "Argh~";
-			mes "-Sound of something broken-";
+			mes "-Bruit de quelque chose qui se brise-";
 			mes "Owww~~";
-			mes "*Sobs*~~";
+			mes "*Snif*~~";
 			next;
 			mes "[Vanessa]";
-			mes "Hmm...Did I do it too strong.";
-			mes "Mm~";
+			mes "Hum... Y aurais-je été trop fort?";
+			mes "Hum~";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "Well obviously!";
-			mes "Idiot!Idiot!!";
-			mes "*sobs*~";
+			mes "Bien sûr que vous y avez été trop fort!";
+			mes "Sombre idiote!";
+			mes "*Gémis*";
 			next;
 			mes "[Vanessa]";
-			mes "Umm~umm~";
-			mes "Sorry~";
-			mes "Okay, okay,";
-			mes "Don't cry.";
+			mes "Hum~ Hum~";
+			mes "Désolée~";
+			mes "D'accord, d'accord, ne pleurez pas.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "*sob*~";
+			mes "*Chouine*";
 			next;
 			mes "[Vanessa]";
-			mes "Okay~ okay..";
+			mes "D'accord, d'accord...";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "*sob*~";
+			mes "*Gémis*~";
 			next;
 			mes "[Vanessa]";
-			mes "Stop! Arrgh!";
+			mes "Stop! Argh!";
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "........";
 			next;
 			mes "[Vanessa]";
-			mes "Fine, okay.";
-			mes "I'm sorry what happened";
-			mes "I'll make a weapon for you";
-			mes "if you gather some";
-			mes "materials...";
+			mes "Bon, d'accord. Je suis désolée de ce qui s'est passé. Tenez, je vais faire une arme pour vous si vous me rapportez quelques petites choses, d'accord?";
 			next;
 			mes "[Vanessa]";
-			mes "I'm Vanessa Louise.";
-			mes "Originally a Martial Artist Applicant";
-			mes "but I took a wrong turn";
-			mes "and I'm stuck making weapons.";
-			mes "Oh my god~oh my~ my miserable life~";
+			mes "Je m'appelle Vanessa Louise. À l'origine je voulais gagner ma vie grâce aux arts martiaux, mais j'ai fait les mauvais choix et maintenant je me retrouve à forger des armes.";
+			mes "Oh, Thor~ Quelle vie misérable~";
 			next;
 			mes "[Vanessa]";
-			mes "Now onto the subject.";
-			mes "The weapon I can create is";
-			mes "called the Destroyer.";
+			mes "Mais entrons dans le vif du sujet. L'arme que je peux fabriquer s'appelle un Destructeur.";
 			next;
 			mes "[Vanessa]";
-			mes "I especially named it";
-			mes "after a technique I used in an arena";
-			mes "Hehe~";
-			mes "Take this~!Destroyer~";
+			mes "Je l'ai nommé d'après une technique que j'utilisais dans l'arène. Héhé~";
+			mes "Prends ça! Destructeur~";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "*sob*~ Please~Stop~";
+			mes "*Gémis* Arrêtez s'il vous plaît~";
 			next;
 			mes "[Vanessa]";
-			mes "Ah uh..Sorry...";
-			mes "First Destroyer needs";
-			mes "materials before creating it.";
+			mes "Ah oh... Désolée...";
+			mes "Bref... Il me faut certains matériaux pour pouvoir créer un Destructeur.";
 			next;
 			mes "[Vanessa]";
-			mes "A considerable amount of items is needed";
-			mes "so think carefully.";
+			mes "En fait, il me faut un nombre considérable de choses, alors faites bien attention.";
 			next;
 			mes "[Vanessa]";
-			mes "How about it? This kind of";
-			mes "opportunity is not common.";
-			mes "Want to make a request?";
+			mes "Mais qu'en dites-vous? Ce genre d'opportunité ne se présente pas deux fois! Vous voulez la saisir?";
 			next;
-			switch( select( "Maybe next time.","Okay.") )
+			switch( select( "La prochaine fois peut-être.","D'accord.") )
 			{
 				case 1:	
 					mes "[Vanessa]";
-					mes "Mm~ Is that so~";
-					mes "It will be an opportunity for you.";
-					mes "You'll regret it~";
-					mes "Then see you next time~";
-					mes "Bye~Bye~";
+					mes "Hum~ Alors c'est comme ça~";
+					mes "C'était vraiment une belle opportunité. Vous le regretterez. À une prochaine fois peut-être~";
 					close;
            
 				case 2:	
 					mes "[Vanessa]";
-					mes "Mm, Okay.";
-					mes "To make a Destroyer,";
-					mes "You need 50 Used Iron Plates";
-					mes "5 Oridecons, 70 Rusty Old Screws";
-					mes "and a fee of 100,000 zeny.";
-					mes "You must bring me these exact materials. Understood?";
+					mes "Hum, d'accord. Pour fabriquer un Destructeur, il me faudra 50 Plaques de Fer Endommagées, 5 Oridecons, 70 Vis Rouillées, et 100.000 zénys pour les frais. Voilà, vous devez me rapporter tout ça, c'est bien compris?";
 					set gunst,1;
 					close;
 			}
@@ -759,57 +659,37 @@ que_ng,185,180,3	script	Vanessa	726,{
 			
 		case 2:
 			mes "[Vanessa]";
-			mes "Oh~ You're back.?";
-			mes "How are you nowadays?";
-			mes "There's a new item in the store.";
-			mes "Go ahead and choose.";
+			mes "Oh~ Vous revoilà! Comment allez-vous aujourd'hui? J'ai un nouvel article en magasin. Allez-y, regardez ce qui vous intéresse.";
 			next;
-			switch(select( "Destroyer","Slotted Destroyer","Cancel") )
+			switch(select( "Destructeur","Destructeur [1]","Quitter la conversation.") )
 			{
 				case 1:
 					mes "[Vanessa]";
-					mes "Yeah, that's nice";
-					mes "That's a normal Destroyer.";
-					mes "It takes 50 Used Iron Plates,";
-					mes "5 Oridecons, 70 Rusty Old Screws,";
-					mes "and 100,000 Zeny to make it.";
-					mes "You have to bring me the correct amount of materials.";
-					mes "Do you want it?";
+					mes "Oui, c'est une bonne arme. Pour le faire, il me faut 50 Plaques de Fer Endommagées, 5 Oridecons, 70 Vis Rouillées, ainsi que 100.000 zénys pour les frais, ni plus ni moins. En voulez-vous un?";
 					next;
-					switch( select( "Maybe next time.","Okay.") )
+					switch( select( "La prochaine fois peut-être.","D'accord.") )
 					{
-               					case 1:
+               				case 1:
 							mes "[Vanessa]";
-							mes "What~ C'mon";
-							mes "What's there to think about?";
-							mes "Ok, well, think about it";
-							mes "and come back...";
+							mes "Quoi? Allez... Comme si il y avait besoin de réfléchir! Bon, d'accord, pensez-y et repassez plus tard...";
 							close;
-							case 2:
+						case 2:
 							callsub SubDestroyer;
 					}
 							
 				case 2:
 					mes "[Vanessa]";
-					mes "Oh~ The Slotted Destroyer~";
-					mes "Unlike the normal Destroyer,";
-					mes "I want you to find me one of the rare items I'm collecting.";
-					mes "Then I'll give it to you.";
+					mes "Oh~ Le Destructeur [1]~";
+					mes "Pour le fabriquer, à la différence d'un Destructeur classique, il faudra que vous me trouviez certains objets rares que je recherche. Je vous en ferai un ensuite.";
 					next;
 					mes "[Vanessa]";
-					mes "I'm looking for a Finger[2].";
-					mes "I want 5 Oridecons too.";
-					mes "You have to bring me the correct amount of materials.";
-					mes "Do you still want a Slotted Destroyer?";
+					mes "Il me faudra des Griffes Acérées [2], et aussi 5 Oridecons, ni plus ni moins. Est-ce que ça vous intéresse toujours?";
 					next;
-					switch( select( "I'll think about it.","OK! I do!") )
+					switch( select( "La prochaine fois peut-être.","D'accord.") )
 					{
-               					case 1:
+               				case 1:
 							mes "[Vanessa]";
-							mes "What~ C'mon";
-							mes "What's there to think about?";
-							mes "Ok, well, think about it";
-							mes "and come back...";
+							mes "Quoi? Allez... Comme si il y avait besoin de réfléchir! Bon, d'accord, pensez-y et repassez plus tard...";
 							close;
 			
 						case 2:
@@ -819,9 +699,9 @@ que_ng,185,180,3	script	Vanessa	726,{
            
 				case 3:
 					mes "[Vanessa]";
-					mes "Hmm~ Yeah~";
-					mes "Take your time.";
-					mes "Maybe you'd like to spar with me?";
+					mes "Hum~ D'accord~";
+					mes "Prenez votre temps.";
+					mes "Peut-être voulez-vous faire un petit combat avec moi?";
 					close;
 			}
 	}
@@ -831,34 +711,27 @@ SubDestroyer:
 	if ((countitem(7319) < 50) || (countitem(7317) < 70) || (countitem(984) < 5))
 	{
 		mes "[Vanessa]";
-		mes "Yeah, the required materials are 50 Used Iron Plates,";
-		mes "5 Oridecons, 70 Rusty Old Screws, and 100,000 Zeny.";
-		mes "Keep in mind that you have to bring the correct amount.";
+		mes "Pour le faire, il me faut 50 Plaques de Fer Endommagées, 5 Oridecons, 70 Vis Rouillées, ainsi que 100.000 zénys pour les frais, ni plus ni moins. Souvenez-vous en bien!";
 		close;
 	}
 	else if(Zeny < 100000)
 	{
 		mes "[Vanessa]";
-		mes "You've brought plenty of material,";
-		mes "But the fee is 100,000.";
-		mes "Keep that in mind.";
+		mes "Vous avez tous les matériaux, mais il vous manque encore l'argent. C'est 100.000 zénys, souvenez-vous.";
 		close;
 	}
 	else if(checkweight(13160,1) != 1)
 	{
 		mes "[Vanessa]";
-		mes "It looks like you wouldn't be able to carry my creation with you even if I made it.";
-		mes "Go and empty your inventory a bit.";
+		mes "On dirait que vous n'avez pas de place dans votre inventaire pour y placer cette arme. Allez vous débarrasser du superflu et revenez me voir.";
 		close;
 	}
 	else
 	{
 		mes "[Vanessa]";
-		mes "Okay~ Very well~";
-		mes "All Checked~";
-		mes "You've got the perfect materials and Zeny~";
-		mes "Here's the Destroyer I made ahead of time for you.";
-		mes "Use it well.";
+		mes "D'accord~ Très bien~";
+		mes "Tout est là~";
+		mes "Vous avez tous les matériaux, et de quoi couvrir les frais. Et voilà le Destructeur que je vous ai fabriqué. Faites-en bon usage~";
 		set Zeny,Zeny-100000;
 		delitem 7319,50;
 		delitem 984,5;
@@ -867,9 +740,7 @@ SubDestroyer:
 		if(gunst == 1) set gunst,2;
 		next;
 		mes "[Vanessa]";
-		mes "If you ever need one again later,";
-		mes "Come and fine me anytime~";
-		mes "Next time I'll cast a different kind of bare hand technique.";
+		mes "Venez me voir si vous repassez dans le coin. Je vous montrerai une nouvelle prise la prochaine fois.";
 		close;
 	}
 
@@ -878,41 +749,32 @@ SubDestroyer_:
 	if ((countitem(1812) < 1) || (countitem(984) < 5))
 	{
 		mes "[Vanessa]";
-		mes "Yeah, the required materials are 1 Finger[2]";
-		mes "and 5 Oridecons.";
-		mes "Keep in mind that the materials need to be exact.";
+		mes "Pour le faire il me faut des Griffes Acérées [2], et aussi 5 Oridecons, ni plus ni moins. Gardez bien tout ça en tête.";
 		close;
 	}
 	else if(checkweight(13161,1) != 1)
 	{
 		mes "[Vanessa]";
-		mes "There's no space in your inventory.";
-		mes "Even if I made you one,";
-		mes "You wouldn't be able to carry it";
-		mes "Come back after you've cleared out your inventory.";
+		mes "On dirait que vous n'avez pas de place dans votre inventaire pour y placer cette arme. Allez vous débarrasser du superflu et revenez me voir.";
 		close;
 	}
 	else
 	{
 		mes "[Vanessa]";
-		mes "Okay~ Very well~";
-		mes "All Checked~";
-		mes "You've got the perfect materials and Zeny~";
-		mes "Here's the Slotted Destroyer I made ahead of time for you.";
-		mes "Use it well.";
+		mes "D'accord~ Très bien~";
+		mes "Tout est là~";
+		mes "Vous avez tous les matériaux, et de quoi couvrir les frais. Et voilà le Destructeur [1] que je vous ai fabriqué. Faites-en bon usage~";
 		delitem 1812,1;
 		delitem 984,5;
 		getitem 13161,1;
 		next;
 		mes "[Vanessa]";
-		mes "If you ever need one again later,";
-		mes "Come and fine me anytime~";
-		mes "Next time I'll cast a different kind of bare hand technique.";
+		mes "Venez me voir si vous repassez dans le coin. Je vous montrerai une nouvelle prise la prochaine fois.";
 		close;
 	}
 }
 
-que_ng,149,178,4	script	Lab Director	744,{
+que_ng,149,178,4	script	Directrice de Recherches::Lab Director	744,{ // Je passe le dialogue au féminin – le skin du perso est vraiment asexué mais ressemble quand même plus à une femme [NdT]
 
 	if(gun_na == 1){
 		if(countitem(1043) > 999 && countitem(932) > 999){
@@ -920,44 +782,25 @@ que_ng,149,178,4	script	Lab Director	744,{
 			delitem 932,1000;
 			set gun_na,2;
 			mes "[N. A]";
-			mes "Ahh, it's all here! Ahh, and I";
-			mes "was worried about that no one";
-			mes "would be able to handle my ^ff0000Butcher^000000";
-			mes "when I've finished creating it!";
+			mes "Ah, tout est là! Je me demandais si quelqu'un pourrait bien manier mon ^ff0000Exterminateur^000000 après l'avoir terminé!";
 			next;
 			mes "[N. A]";
-			mes "Alright, I'll give the ^ff0000Butcher^000000 to you.";
-			mes "However, we don't do work for";
-			mes "free, so we need to charge you";
-			mes "for it. Also, you need to obtain";
-			mes "permission to use the Butcher from";
-			mes "Lady Celena.";
+			mes "Bien, je vous vais vous donner un ^ff0000Exterminateur^000000. Mais cependant, nous ne travaillons pas gratuitement, alors il faudra nous payer un petit quelque chose. Il faudra aussi obtenir de Dame Celena la permission de l'utiliser.";
 			next;
 			mes "[N. A]";
-			mes "Once you get the permission, I will";
-			mes "give the Butcher to you, after paying";
-			mes "the fee of 100000 zeny.";
+			mes "Une fois que ce sera fait et que vous m'aurez payé 100.000 zénys, je vous donnerai votre Exterminateur.";
 			close;
 		}else{
 			mes "[N. A]";
-			mes "Have you found ^ff00001000 Orc Claw^000000 and ^ff00001000 Skel Bone^000000 yet?";
-			mes "If you think it's too difficult,";
-			mes "you can choose to give up.";
+			mes "Vous n'avez pas encore trouvé les ^ff00001000 Griffes d'Orc^000000 et les ^ff00001000 Os de Squelettes^000000? Vous pouvez toujours abandonner si vous pensez que c'est trop difficile.";
 			next;
-			if(select("I'm not giving up!:I give up...") == 1){
+			if(select("Je n'abandonnerai pas!:J'abandonne...") == 1){
 				mes "[N. A]";
-				mes "Alright, I trust you.";
-				mes "Good luck.";
+				mes "D'accord, je vous fais confiance. Bonne chance.";
 				close;
 			}else{
 				mes "[N. A]";
-				mes "You're giving up huh?";
-				mes "Well, I'll admit that the";
-				mes "test is quite difficult, but";
-				mes "you can't handle this weapon";
-				mes "if you can't handle the test.";
-				mes "You may come back later to";
-				mes "take the challenge again.";
+				mes "Vous baissez les bras, hein? J'admets que l'épreuve est difficile, mais vous ne pourrez manier l'arme si vous ne la passez pas. Vous pourrez revenir plus tard si jamais vous voulez retenter votre chance.";
 				set gun_na,0;
 				close;
 			}
@@ -965,53 +808,34 @@ que_ng,149,178,4	script	Lab Director	744,{
 	}
 	else if(gun_na == 2){
 		mes "[N. A]";
-		mes "I already got Lady Celena's";
-		mes "permission to let you use the";
-		mes "Butcher. You can use it once";
-		mes "you've paid me 100000 zeny.";
-		mes "Do you want to pay now?";
+		mes "J'ai déjà obtenu la permission de Dame Celena pour vous laisser utiliser l'Exterminateur. Vous pourrez l'essayer quand vous m'aurez payé 100.000 zénys. Voulez-vous me payer maintenant?";
 		next;
-		if(select("Nope.:Yeah.") == 1){
+		if(select("Non.:Oui.") == 1){
 			mes "[N. A]";
-			mes "Alright. I await you to return";
-			mes "with the money.";
+			mes "Bien, j'attendrai que vous reveniez avec l'argent.";
 			close;
 		}else{
 			if(Zeny < 100000){
 				mes "[N. A]";
-				mes "Huh, I don't think you have";
-				mes "enough money on you.";
-				mes "Come back with the money,";
-				mes "alright?";
+				mes "Euh... Je ne pense pas que vous ayez assez d'argent sur vous. Revenez avec la somme exacte, d'accord?";
 				close;
 			}
 			if(checkweight(13158,1) == 0){
 				mes "[N. A]";
-				mes "You are overweight.";
-				mes "Even if I give you the";
-				mes "weapon, you cannot carry it.";
-				mes "Please clear your inventory.";
+				mes "Vous êtes bien trop chargé. Même si je vous donnais l'arme, vous ne pourriez la porter. Revenez après vous être débarrassé du superflus.";
 				close;
 			}
 			set Zeny,Zeny-100000;
 			set gun_na,0;
 			getitem 13158,1;
 			mes "[N. A]";
-			mes "One, two, three, four, five,";
-			mes "six... 99997, 99998, 99999...";
-			mes "100000. *ding~!* Very well!";
-			mes "The fee is clear now. You may";
-			mes "take the ^ff0000Butcher^000000 now!";
+			mes "un, deux, trois, quatre, cinq, six... 99997, 99998, 99999... 100000. *Ding* Très bien! Vous avez la somme exacte. Vous pouvez maintenant prendre cet ^ff0000Exterminateur^000000!";
 			next;
 			mes "[N. A]";
-			mes "Mr. F. Harrison from Lighthalzen";
-			mes "is quite interested in your new";
-			mes "toy there. Show it to him some";
-			mes "time. He'll be glad.";
+			mes "M. F. Harrison de Lighthalzen est très intéressé par ce nouveau jouet. Allez lui montrer si vous avez le temps, il sera très content.";
 			next;
 			mes "[N. A]";
-			mes "Make good use of it!";
-			mes "See ya!";
+			mes "Faites-en bon usage. À bientôt!";
 			close;
 		}
 	}
@@ -1025,40 +849,26 @@ que_ng,149,178,4	script	Lab Director	744,{
 			set Zeny,Zeny-50000;
 			set gun_na,11;
 			mes "[N. A]";
-			mes "Aha, you got me all the";
-			mes "materials. Here, let me get down";
-			mes "to it right away! It'll take";
-			mes "some time, so wait up...";
+			mes "Ah, vous avez tous les matériaux. Bien, laissez-moi descendre au labo avec tout ça. Ça prendra peut-être un peu de temps, alors patientez...";
 			close;
 		}else{
 			mes "[N. A]";
-			mes "Eh? You don't have the materials";
-			mes "with you yet?";
+			mes "Hein? Vous n'avez pas encore tous les matériaux?";
 			next;
 			mes "[N. A]";
-			mes "To make Drifter, I will need";
-			mes "70 Steel, 5 Elunium,";
-			mes "3 Oridecon, 70 Coal, 50 Rusty";
-			mes "Screws, and also a fee of";
-			mes "50000 zeny.";
-			mes "Come back to me once you have";
-			mes "everything ready.";
+			mes "Pour faire un Dériveur, il me faut:";
+			mes "70 morceaux d'Acier, 5 Eluniums, 3 Oridecons, 70 morceaux de Charbon, 50 Vis Rouillées, 50.000 zénys pour couvrir les frais. Revenez lorsque vous aurez tout ça.";
 			next;
 			mes "[N. A]";
-			mes "If you don't want it anymore,";
-			mes "you can cancel the request.";
+			mes "Vous pouvez annuler votre réservation su vous n'en voulez plus.";
 			next;
-			if(select("Don't cancel.:Cancel it.") == 1){
+			if(select("Ne pas l'annuler.:L'annuler.") == 1){
 				mes "[N. A]";
-				mes "Well, please come back with the";
-				mes "materials. I'll be waiting.";
+				mes "Eh bien, revenez avec tous les matériaux. Je vous attendrai.";
 				close;
 			}else{
 				mes "[N. A]";
-				mes "Alright, request to make";
-				mes "a Drifter for you is cancelled.";
-				mes "I wish you good luck";
-				mes "in your future.";
+				mes "Bien, j'annule votre réservation pour un Dériveur. Bonne chance pour la suite.";
 				set gun_na,0;
 				close;
 			}
@@ -1067,104 +877,67 @@ que_ng,149,178,4	script	Lab Director	744,{
 	else if(gun_na == 11){
 		if(checkweight(13157,1) == 0){
 			mes "[N. A]";
-			mes "You are overweight.";
-			mes "Even if I made you the";
-			mes "weapon, you cannot carry it.";
-			mes "Please clear your inventory.";
+			mes "Vous êtes bien trop chargé. Même si je vous donnais l'arme, vous ne pourriez la porter. Revenez après vous être débarrassé du superflus.";
 			close;
 		}
 		set gun_na,0;
 		getitem 13157,1;
 		mes "[N. A]";
-		mes "Ahh, here's the completed";
-		mes "Drifter for you.";
+		mes "Ah, voilà le Dériveur assemblé pour vous.";
 		next;
 		mes "[N. A]";
-		mes "Please learn to use the";
-		mes "Gatlings well. The crazy";
-		mes "destruction will definitely";
-		mes "be mentally helpful to you.";
+		mes "Apprenez à bien maîtriser les mitrailleuses. Toute cette destruction sans limites est assez éprouvante mentalement.";
 		close;
 	}
 	else if(gun_na == 101){
 		mes "[N. A]";
-		mes "Ah, hello?";
-		mes "I'm the Coordinator of";
-		mes "Einbroch Weapon Development.";
-		mes "My name is 'Lab Director'.";
-		mes "Do you need something?";
+		mes "Ah, bonjour? Je suis la coordinatrice du Département de Recherches en Armement d'Einbroch. On m'appelle juste la 'Directrice de Recherches'. Aviez-vous besoin de quelque chose?";
 		next;
-		menu "I need a Special Metal Rod.",-;
+		menu "Il me faut un tube de métal spécial.",-;
 		mes "[N. A]";
-		mes "Huh...? Hey, weren't you that guy";
-		mes "who walked out of here with a";
-		mes "Butcher a while ago? How was the";
-		mes "Butcher?";
+		mes "Hein? Eh mais je vous reconnais! Vous êtes celui qui a reçu un Exterminateur il n'y a pas si longtemps, pas vrai?! Alors, comment fonctionne votre Exterminateur?";
 		next;
 		mes "[N. A]";
-		mes "...... WHAT!? YOU BROKE IT!?";
-		mes "I thought you would be able to";
-		mes "use it well... You disappoint me!!!";
+		mes "...... QUOI?! VOUS L'AVEZ CASSE?! Je pensais que vous sauriez vous en servir... Vous me décevez!";
 		next;
 		mes "[N. A]";
-		mes "You betrayed my faith in you!";
-		mes "You traitor! Traitor!! TRAITOR!!!!";
+		mes "Vous avez trahi la foi que j'avais en vous! Sale traitre! Traitre! TRAITRE!";
 		next;
-		menu "Explain everything.",-;
+		menu "Tout expliquer.",-;
 		mes "[N. A]";
-		mes "...... Whew.";
-		mes "So it was Mr. F. Harrison who";
-		mes "broke it, huh? I'm sorry, I should";
-		mes "not have suspected you.";
+		mes "...... Aaaah.";
+		mes "Alors c'est ce F. Harrison qui l'a cassé, hein? Je suis désolée, j'aurais dû vous faire confiance.";
 		next;
 		mes "[N. A]";
-		mes "Lady Celena has the special metal";
-		mes "rod that you want, but the doc is";
-		mes "not in right now, and no one else";
-		mes "knows where it is...";
+		mes "Dame Celena a le tube de métal spécial dont vous avez besoin, mais elle n'est pas là en ce moment, et personne d'autre ne sait où il se trouve...";
 		next;
 		mes "[N. A]";
-		mes "I have other research right now";
-		mes "so I can't waste my time looking";
-		mes "for that... Grr... I need the";
-		mes "Elemental Spheres to keep going";
-		mes "with my research...";
+		mes "Et j'ai du travail en ce moment, alors je ne peux pas perdre mon temps à le chercher... Grr... Il me faut des munitions élémentales pour pouvoir poursuivre...";
 		next;
-		menu "Make him an offer.",-;
+		menu "Lui faire une offre.",-;
 		mes "[N. A]";
-		mes "An offer? Like what?";
+		mes "Une offre? Comme quoi?";
 		next;
-		menu "We find things for each other.",-;
+		menu "Nous rendre mutuellement service.",-;
 		mes "[N. A]";
-		mes "Hmm... That sounds good.";
-		mes "Well, according to the offer,";
-		mes "I'll look for the rod for you,";
-		mes "while you find me those";
-		mes "Elemental Spheres.";
+		mes "Hum... Pourquoi pas après tout. Donc je cherche le tube et vous me rapportez des munitions élémentales, c'est ça?";
 		next;
 		mes "[N. A]";
-		mes "30 Poison Sphere, 30 Flare Sphere,";
-		mes "30 Lightning Sphere, 30 Blind";
-		mes "Sphere, or 30 Freezing Sphere.";
-		mes "Find me 30 of each Element.";
+		mes "Bien, dans ce cas, apportez-moi 30 Munitions Empoisonnées, 30 Munitions Explosives, 30 Munitions Foudroyantes, 30 Munitions Aveuglantes, ou 30 Munitions Hypothermiques.";
 		set gun_na,102;
 		close;
 	}
 	else if(gun_na == 102){
 		mes "[N. A]";
-		mes "30 Poison Sphere, 30 Flare Sphere,";
-		mes "30 Lightning Sphere, 30 Blind";
-		mes "Sphere, or 30 Freezing Sphere.";
-		mes "Find me 30 of each Element.";
-		mes "Did you find them?";
+		mes "Bien, dans ce cas, apportez-moi 30 Munitions Empoisonnées, 30 Munitions Explosives, 30 Munitions Foudroyantes, 30 Munitions Aveuglantes, ou 30 Munitions Hypothermiques.";
+		mes "Les avez-vous trouvées?";
 		next;
 
-		switch(select("Nope.:I found 30 Poison Spheres.:I found 30 Flare Spheres.:I found 30 Lightning Spheres.:I found 30 Blind Spheres.:I found 30 Freezing Spheres.")){
+		switch(select("Non.:J'ai 30 Munitions Empoisonnées.:J'ai 30 Munitions Explosives.:J'ai 30 Munitions Foudroyantes.:J'ai 30 Munitions Aveuglantes.:J'ai 30 Munitions Hypothermiques.")){
 
 		case 1:
 			mes "[N. A]";
-			mes "Just bring me whatever type";
-			mes "you could find.";
+			mes "Apportez-moi des munitions de n'importe quel type – c'est comme vous voulez.";
 			close;
 			break;
 		case 2:
@@ -1204,195 +977,122 @@ que_ng,149,178,4	script	Lab Director	744,{
 			break;
 		}
 		mes "[N. A]";
-		mes "Wow, you found them all for me!";
-		mes "I had to turn Lady Celena's lab";
-		mes "over to find this rod too.";
-		mes "Let's trade then!";
+		mes "Oh, vous les avez trouvées pour moi! J'ai dû retourner tout le laboratoire de Dame Celena, mais j'ai aussi le tube de métal. Faisons donc l'échange!";
 		next;
-		mes "-You gave the Elemental";
-		mes "Spheres to Research Coordinator and got";
-		mes "the Metal Rod in return.-";
+		mes "-Vous lui donnez les munitions et prenez le tube en échange.-";
 		next;
 		mes "[N. A]";
-		mes "Mr. F. Harrison is very good.";
-		mes "I'm sure he can fix your";
-		mes "Butcher for you.";
-		mes "Well, see you later!";
+		mes "M. F. Harrison est très doué. Je suis sûr qu'il pourra vous réparer l'Exterminateur. Bien, à bientôt!";
 		close;
 	}
 	else if(gun_na == 103 || gun_na == 104){
 		mes "[N. A]";
-		mes "Mr. F. Harrison is very good.";
-		mes "I'm sure he can fix your";
-		mes "Butcher for you.";
-		mes "Well, see you later!";
+		mes "M. F. Harrison est très doué. Je suis sûr qu'il pourra vous réparer l'Exterminateur. Bien, à bientôt!";
 		close;
 	}
 	mes "[N. A]";
-	mes "Ah, hello?";
-	mes "I'm the Coordinator of";
-	mes "Einbroch Weapon Development.";
-	mes "My name is 'Lab Director'.";
-	mes "Do you need something?";
+	mes "Ah, bonjour? Je suis la coordinatrice du Département de Recherches en Armement d'Einbroch. On m'appelle juste la 'Directrice de Recherches'. Aviez-vous besoin de quelque chose?";
 	next;
 	if (BaseJob != Job_Gunslinger){
-		menu "Talk to him.",-;
+		menu "Lui parler.",-;
 		mes "[N. A]";
-		mes "If you see Gunslingers around,";
-		mes "please tell them that I have";
-		mes "the latest news on weapons.";
-		mes "If necessary, please send them";
-		mes "here. Heheheheh...";
+		mes "Si vous croisez des Gunslingers, dites-leur que j'ai des nouvelles sur nos armes en développement. Envoyez-les-moi si nécessaire.";
 		close;
 	}
 	if (BaseLevel > 67){
-		menu "Ask about 'Butcher'.",L_BUTCHER,"Ask about the 'Drifter'.",L_DRIFTER,"Cancel",L_CANCEL;
+		menu "L'interroger à propos de l''Exterminateur'.",L_BUTCHER,"L'interroger à propos du 'Dériveur'.",L_DRIFTER,"Quitter la conversation.",L_CANCEL;
 	}
 	else if(BaseLevel > 54){
-		menu "Ask about the 'Drifter'.",L_DRIFTER,"Cancel",L_CANCEL;
+		menu "L'interroger à propos du 'Dériveur'.",L_DRIFTER,"Cancel",L_CANCEL;
 	}
 	else{
-		menu "Talk.",-;
+		menu "Parler.",-;
 		mes "[N. A]";
-		mes "... Destruction... Madness...";
-		mes "Hmm... Attack speed over 180...";
+		mes "... Destruction... Folie... Hum... Vitesse d'attaque de plus de 180...";
 		next;
 		mes "[N. A]";
-		mes "Ah, sorry, I'm developing some";
-		mes "new weapons. Please don't";
-		mes "disturb me.";
+		mes "Ah, désolée, je suis en train de concevoir de nouvelles armes. Ne me dérangez pas s'il vous plaît.";
 		close;
 	}
 
 L_CANCEL:
 	mes "[N. A]";
-	mes "I have news on the latest";
-	mes "weapons but... I guess you're";
-	mes "too busy to hear them.";
-	mes "Maybe next time I guess.";
+	mes "J'avais des nouvelles sur nos armes en développement, mais vous semblez occupé, alors ce sera pour une prochaine fois.";
 	close;
 
 L_BUTCHER:
 	mes "[N. A]";
-	mes "Ah, you heard the news";
-	mes "shortly after the end";
-	mes "of the development eh?";
+	mes "Ah, vous connaissez déjà les nouvelles alors que l'on vient juste de terminer le prototype?!";
 	next;
 	mes "[N. A]";
-	mes "^ff0000Butcher^000000 is the newest development";
-	mes "by us, the Einbroch Firearm Lab.";
-	mes "It is the newest type of Gatling";
-	mes "we have developed. While";
-	mes "^ff0000Drifter^000000 is a good weapon";
-	mes "as well, the ^ff0000Butcher^000000 definitely has";
-	mes "a much stronger firepower!";
+	mes "L'^ff0000Exterminateur^000000 est la dernière des créations du Laboratoire d'Armement Technologique d'Einbroch. Il s'agit de la toute dernière mitrailleuse que nous avons mise au point. Même si le ^ff0000Dériveur^000000 est une bonne arme, l'^ff0000Exterminateur^000000 a vraiment plus de puissance de feu!";
 	next;
 	mes "[N. A]";
-	mes "Due to its strong firepower,";
-	mes "the Butcher was also dubbed";
-	mes "as the 'Murderer'.";
+	mes "En fait, on le surnomme aussi le 'Meurtrier' à cause de son extraordinaire puissance de feu.";
 	next;
 	mes "[N. A]";
-	mes "However, even Gunslingers could";
-	mes "have troubles controlling such";
-	mes "a powerful weapon.";
+	mes "Cependant, même des Gunslingers pourraient avoir du mal à contrôler une arme aussi puissante.";
 	next;
 	mes "[N. A]";
-	mes "Do you think you can handle it?";
+	mes "Pensez-vous pouvoir le manier?";
 	next;
-	if(select("I'm not sure...:Of course I can!!") == 1){
+	if(select("Je ne suis pas certain...:Bien sûr je le peux!") == 1){
 		mes "[N. A]";
-		mes "The ^ff0000Butcher^000000 is a weapon that you";
-		mes "can't handle without a strong";
-		mes "will. I'll see you again when";
-		mes "you have enough confidence to";
-		mes "handle this monster.";
+		mes "L'^ff0000Exterminateur^000000 est une arme que vous ne pouvez manier sans une volonté de fer. Je vous reverrai quand vous aurez assez confiance en vous-même pour manier ce monstre.";
 		close;
 	}else{
 		mes "[N. A]";
-		mes "Aha, how self-confident you";
-		mes "are! However, I see people with";
-		mes "such self-confidence everywhere.";
-		mes "You'll need to prove it...";
-		mes "But how... Hmm...";
+		mes "Haha! Vous avez vraiment confiance en vous-même! Mais je vois beaucoup de gens comme vous... Il faudra faire vos preuves! Mais comment... Hum...";
 		next;
 		mes "[N. A]";
-		mes "Hmmm......";
+		mes "Hum......";
 		next;
 		mes "[N. A]";
-		mes "Aha! I got it!";
+		mes "Ah! Je sais!";
 		next;
 		mes "[N. A]";
-		mes "Here, bring me ^ff00001000 Orc Claws^000000 and ^ff00001000 Skel Bone^000000.";
-		mes "If you can bring me these items,";
-		mes "I'll let you use the Butcher.";
+		mes "Voilà, apportez-moi ^ff00001000 Griffe d'Orc^000000 et ^ff00001000 Os de Squelette^000000. Si vous m'apportez tout cela, je vous laisserai utiliser l'Exterminateur.";
 		next;
 		mes "[N. A]";
-		mes "Easy, ain't it? Go and prove";
-		mes "your ability then! Heheheh...";
+		mes "C'est plutôt facile, non? Montrez-moi de quoi vous êtes capable! Héhé...";
 		set gun_na,1;
 		close;
 	}
 
 L_DRIFTER:
 	mes "[N. A]";
-	mes "Ah, you're here to learn about";
-	mes "the ^ff0000Drifter^000000 eh?";
+	mes "Ah, vous êtes ici pour en savoir plus sur le ^ff0000Dériveur^000000, hein?";
 	next;
 	mes "[N. A]";
-	mes "The ^ff0000Drifter^000000 is one of the many";
-	mes "highest-classed weapons developed";
-	mes "by Lady Celena. It's an automatic";
-	mes "Gatling which boasts very high";
-	mes "rate of fire, which is the highest";
-	mes "among all Gunslinger weapons.";
+	mes "Il s'agit de l'une des nombreuses armes de haut rang créée par Dame Celena. Il s'agit d'une mitrailleuse automatique dont la puissance de feu est la plus élevée parmi les différentes armes de Gunslinger.";
 	next;
 	mes "[N. A]";
-	mes "Of course, you will need the Skill";
-	mes "to allow you to control Gatlings,";
-	mes "but he who contorls Gatlings well";
-	mes "will receive full aid from the";
-	mes "^ff0000Drifter^000000.";
+	mes "Bien sûr, il vous faudra apprendre la compétence permettant d'utiliser des mitrailleuses, mais ceux qui savent les manier pourront compter sur leur ^ff0000Dériveur^000000.";
 	next;
 	mes "[N. A]";
-	mes "Do you want to try using the ^ff0000Drifter^000000?";
+	mes "Voulez-vous tenter de manier un ^ff0000Dériveur^000000?";
 	next;
-	if(select("Um, no.:Yeah!") == 1){
+	if(select("Hum, non.:Oui!") == 1){
 		mes "[N. A]";
-		mes "If you want to try it out";
-		mes "some time, come back here.";
+		mes "Revenez si vous voulez en essayer un jour.";
 		close;
 	}else{
 		set gun_na,10;
 		mes "[N. A]";
-		mes "Since it's really hard to find";
-		mes "the materials for constructing";
-		mes "the ^ff0000Drifter^000000, we only make them";
-		mes "on requests, and we require those";
-		mes "who want to use the ^ff0000Drifter^000000 to bring";
-		mes "us the materials.";
+		mes "Puisqu'il est très difficile de trouver tous les matériaux pour la construction d'un ^ff0000Dériveur^000000, nous ne les fabriquons que sur demande. Il faudra m'apporter certains matériaux si vous en voulez un.";
 		next;
 		mes "[N. A]";
-		mes "I'll tell you the materials";
-		mes "needed, just bring them and";
-		mes "we'll construct it for you.";
+		mes "Je vais vous donner la liste de ce qu'il me faut. Apportez-moi tout cela et j'en construirai un pour vous.";
 		next;
 		mes "[N. A]";
-		mes "To make a Drifter, we need";
-		mes "70 Steel, 5 Eluniums, 3";
-		mes "Oridecons, 70 Coal, 50 Rusty";
-		mes "Screws, and a fee of";
-		mes "50,000 zeny.";
-		mes "Come back after you found";
-		mes "them all.";
+		mes "Pour faire un Dériveur, il me faut:";
+		mes "70 morceaux d'Acier, 5 Eluniums, 3 Oridecons, 70 morceaux de Charbon, 50 Vis Rouillées, 50.000 zénys pour couvrir les frais. Revenez lorsque vous aurez tout ça.";
 		close;
 	}
 
 L_MORE:
 	mes "[N. A]";
-	mes "Eh? What? Am I the only";
-	mes "person who can't see them?";
-	mes "Bring me more!";
+	mes "Eh? Quoi? Suis-je la seule personne ici à ne rien voir? Apportez-m'en plus!";
 	close;
 }
 
@@ -1401,98 +1101,64 @@ lighthalzen,205,284,6	script	F. Harrison	85,{
 	if (gun_na == 100){
 		if(checkweight(13102,1) == 0){
 			mes "[F. Harrison]";
-			mes "You are overweight.";
-			mes "Even if I gave you the";
-			mes "weapon, you cannot carry it.";
-			mes "Please clear your inventory.";
+			mes "Vous portez trop de choses sur vous. Même si vous rendais l'arme vous n'auriez pas assez de place dans votre inventaire.";
 			close;
 		}
 		mes "[F. Harrison]";
-		mes "Hmm... Oh?";
-		mes "Ahh...... Eh?";
+		mes "Hum... Oh?";
+		mes "Ah...... Eh?";
 		next;
 		mes "[F. Harrison]";
-		mes "Heheh... Hmm... Huh...?";
+		mes "Héhé... Hum... Hein...?";
 		next;
-		menu "May I have my Butcher back now?",-;
+		menu "Je peux reprendre mon Exterminateur maintenant?",-;
 		mes "[F. Harrison]";
-		mes "Uh? Oh, umm... Heheh...";
-		next;
-		mes "[F. Harrison]";
-		mes "Th-that, huh? Eh... Heheh...";
+		mes "Hein? Oh, hum... Héhé...";
 		next;
 		mes "[F. Harrison]";
-		mes "Ahahahah! I uh...";
+		mes "C-ça, hein? Eh... Héhé...";
 		next;
 		mes "[F. Harrison]";
-		mes "That thing! BOOM!";
+		mes "Ahahaha! Je... Oh...";
 		next;
 		mes "[F. Harrison]";
-		mes "Bam bam! I was gonna fire it!";
-		mes "Yeah!";
+		mes "Ce truc! BOUM!";
 		next;
 		mes "[F. Harrison]";
-		mes "But it resisted! So I went 'BAM!' with";
-		mes "my hand! MUAHAHAHAH!!";
+		mes "Bam bam! J'allais tirer!";
+		mes "Ouais!";
 		next;
 		mes "[F. Harrison]";
-		mes "And it broke...... *sob sob*";
+		mes "Mais ça résistait, alors j'y ai été avec ma main comme ça, et BAM! MUAHAHAHAH!";
 		next;
 		mes "[F. Harrison]";
-		mes "I call myself 'Dr. Everything' and";
-		mes "I wanted to fix it myself, but I";
-		mes "don't seem to have the materials";
-		mes "to fix it... And the materials are";
-		mes "so rare too... *sob sob*";
+		mes "Cassé...... *snif*";
 		next;
 		mes "[F. Harrison]";
-		mes "Umm... I'm sorry for breaking";
-		mes "it but... Could you get me the";
-		mes "materials I need for fixing it?";
-		mes "Bring me those items, and I can";
-		mes "fix it, plus I'll modify it for";
-		mes "you! I promise!!";
-		next;
-		mes "So please bring me the materials...";
-		mes "*sob sob sob*";
+		mes "Je me surnomme 'Dr. Système D'. Je voulais essayer de le réparer mais on dirait que je n'ai pas les pièces pour le faire... C'est si difficile d'en trouver... *snif*";
 		next;
 		mes "[F. Harrison]";
-		mes "The materials I need are";
-		mes "10 Steel, 2 Eluniums,";
-		mes "1 Oridecon, 20 Coal...";
-		mes "And a Special Metal Rod";
-		mes "used in the Butcher...";
-		mes "I think only Lady Celena can";
-		mes "make those rods......";
+		mes "Hum... Je suis désolé de l'avoir brisé mais... Vous pourriez m'apporter les pièces pour le réparer? Si vous faites ça je vous l'améliorerai même, promis!";
 		next;
 		mes "[F. Harrison]";
-		mes "But first, you'll need to talk";
-		mes "to Lady Celena's assistant, the 'Lab Director',";
-		mes "and ask for his help.";
-		mes "That kid's a bit hysterical, but";
-		mes "she'll be nice help if you talk";
-		mes "to her nicely...";
+		mes "Allez, s'il vous plaît, apportez-moi les pièces...";
+		mes "*snif*";
 		next;
 		mes "[F. Harrison]";
-		mes "I'm really sorry... Here, I'll";
-		mes "lend you my prized weapon,";
-		mes "'Crimson Bolt'. But make sure";
-		mes "you bring all those materials";
-		mes "to me once you find them all!";
-		mes "Promise me!!!";
+		mes "Il me faudrait 10 morceaux d'Acier, 2 Eluniums, 1 Oridecon, 20 morceaux de Charbon et... Et le tube de métal spécial utilisé pour fabriquer les Exterminateurs... Je pense que Dame Celena devrait en avoir un...";
+		next;
+		mes "[F. Harrison]";
+		mes "Mais vous devrez d'abord parler à l'assistante de Dame Celena, la Directrice de Recherches. Elle est un peu hystérique mais elle vous aidera si vous savez comment la prendre...";
+		next;
+		mes "[F. Harrison]";
+		mes "Je suis vraiment désolé... Voilà, je vous prête mon arme favorite en attendant, mon 'Éclair pourpre'. Mais revenez avec toutes les pièces dès que possible, d'accord? C'est promis, hein?!";
 		set gun_na,101;
 		getitem 13102,1;
 		close;
 	}
 	else if(gun_na == 101 || gun_na == 102){
 		mes "[F. Harrison]";
-		mes "The materials I need are";
-		mes "10 Steel, 2 Eluniums,";
-		mes "1 Oridecon, 20 Coal...";
-		mes "And a Special Metal Rod";
-		mes "used in the Butcher...";
-		mes "Talk to the 'Lab Director' for his";
-		mes "assistance on the Rod.";
+		mes "Il me faudrait les matériaux suivants: 10 morceaux d'Acier, 2 Eluniums, 1 Oridecon, 20 morceaux de Charbon et... Et le tube de métal spécial utilisé pour fabriquer les Exterminateurs... Allez voir la Directrice de Recherche pour obtenir ce dernier.";
 		close;
 	}
 	else if(gun_na == 103){
@@ -1505,94 +1171,54 @@ lighthalzen,205,284,6	script	F. Harrison	85,{
 				delitem 13102,1;
 				set gun_na,104;
 				mes "[F. Harrison]";
-				mes "Aha! You got all the materials";
-				mes "for me! I'll get to the repair";
-				mes "right away, please hold on...";
+				mes "Ah! Vous m'avez tout rapporté! Je vais tout de suite faire les réparations. Attendez...";
 				close;
 			}
 			else{
 				mes "[F. Harrison]";
-				mes "Aha! You got all the materials";
-				mes "for me!";
-				mes "... But where's my treasured";
-				mes "'Crimson Bolt'!? I will not fix";
-				mes "your Butcher for you if you don't";
-				mes "bring it back to me!!";
+				mes "Ah! Vous m'avez rapporté tous les matériaux! Mais... Où se trouve mon précieux Éclair Pourpre? Je ne réparerai pas votre Exterminateur si vous ne me le rendez pas!";
 				close;
 			}
 		}
 		else{
 			mes "[F. Harrison]";
-			mes "The materials I need are";
-			mes "10 Steel, 2 Eluniums,";
-			mes "1 Oridecon, 20 Coal...";
-			mes "And a Special Metal Rod";
-			mes "used in the Butcher...";
-			mes "Good thing you found the";
-			mes "Special Metal Rod already.";
+			mes "Il me faudrait les matériaux suivants: 10 morceaux d'Acier, 2 Eluniums, 1 Oridecon, 20 morceaux de Charbon et... Et le tube de métal spécial utilisé pour fabriquer les Exterminateurs. C'est une bonne chose que vous ayez déjà trouvé ce dernier.";
 			close;
 		}
 	}
 	else if(gun_na == 104){
 		if(checkweight(13159,1) == 0){
-			mes "-You're overweight already.-";
-			mes "-Come back after dropping some";
-			mes "stuff first.-";
+			mes "- Vous êtes actuellement surchargé. Revenez après avoir déposé quelques objets dans votre Stock Kafra. -";
 			close;
 		}
 		set gun_na,0;
 		getitem 13159,1;
 		mes "[F. Harrison]";
-		mes "Whew... Finally it's fixed, thanks";
-		mes "to your effort. I'm very sorry";
-		mes "for breaking it, and thank you";
-		mes "for your effort. I feel guilty";
-		mes "for just fixing it, so I added";
-		mes "some extra power on it. I hope";
-		mes "it'll work nicely for you.";
-		mes "Well, enjoy it.";
+		mes "Fiou... C'est enfin réparé. Merci de votre aide. Je suis vraiment désolé de l'avoir cassé. J'ai fait quelques modifications pour me faire pardonner, et lui rajouter un peu de puissance. J'espère que cela fonctionnera. Voilà, profitez-en!";
 		close;
 	}
 	else if(gun_na == 0){
 		if(BaseJob != Job_Gunslinger) goto L_BORED;
 		if(BaseLevel > 67 && countitem(13158) > 0){
 			mes "[F. Harrison]";
-			mes "Man, I'm so bored...";
-			mes "I wonder if there's anything";
-			mes "interesting...";
+			mes "Je m'ennuie tellement... Je me demande si il y aurait quelque chose d'intéressant à faire...";
 			next;
 			mes "[F. Harrison]";
-			mes "Eh? Are you a Gunslinger?";
-			mes "I haven't seen that weapon";
-			mes "in your hand before...";
+			mes "Eh? Vous êtes un Gunslinger? Je n'avais encore jamais vu l'arme que vous avez entre les mains auparavant...";
 			next;
 			mes "[F. Harrison]";
-			mes "May I take a look? Please?";
-			mes "C'mon, let me take a look!";
-			mes "I'm bored out of my mind here!";
-			mes "Pleeeeeeeeeeeease~?";
+			mes "Est-ce que je peux y jeter un coup d'oeil? S'il vous plaît? Je m'ennuie à mourir ici. Allez, s'il vous plaît~";
 			next;
-			if(select("No way.:Here...") == 1){
+			if(select("Pas moyen.:Voilà...") == 1){
 				mes "[F. Harrison]";
-				mes "Hah! You think you're the only";
-				mes "one with a cool weapon!? Well";
-				mes "I got my beautiful Crimson Bolt!";
-				mes "Hmph!!";
+				mes "Ah! Vous pensez que vous êtes le seul avec une arme cool, pas vrai? Eh bien regardez mon superbe Éclair Pourpre! Humph!!";
 				close;
 			}
 			mes "[F. Harrison]";
-			mes "Heheh... This is the newest";
-			mes "development by Einbroch Firearms";
-			mes "Lab, the so-called uncontrollable";
-			mes "'Destroyer Butcher', eh?";
-			mes "Interesting... VERY interesting...";
+			mes "Héhé... C'est le petit dernier du Laboratoire d'Einbroch, pas vrai? Celui qu'on appelle le 'Destructeur-Exterminateur', hein? Intéressant... TRES intéressant...";
 			next;
 			mes "[F. Harrison]";
-			mes "Hey, let me try it out for a";
-			mes "bit, alright? Don't worry, I";
-			mes "know how to handle weapons,";
-			mes "I won't break it!";
-			mes "That's that! Let's go~";
+			mes "Eh, laissez-moi l'essayer un peu, d'accord? Ne vous en faites pas, je sais manier une arme: je ne le casserai pas! C'est ça, allons-y~";
 			delitem 13158,1;
 			set gun_na,100;
 			close;
@@ -1601,12 +1227,9 @@ lighthalzen,205,284,6	script	F. Harrison	85,{
 
 L_BORED:
 	mes "[F. Harrison]";
-	mes "Man, I'm so bored...";
-	mes "I wonder if there's anything";
-	mes "interesting...";
+	mes "Je m'ennuie tellement... Je me demande si il y aurait quelque chose d'intéressant à faire...";
 	next;
 	mes "[F. Harrison]";
-	mes "Oh well... I'll just play with my";
-	mes "beautiful 'Crimson Bolt'.";
+	mes "Oh eh bien... Je vais juste faire un ou deux cartons avec mon 'Éclair Pourpre'.";
 	close;
 }
