@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Swordsman Skills Quests
 //===== By: ==================================================
@@ -14,57 +16,35 @@
 //= 1.6 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
 //============================================================
 
-izlude_in,175,130,2	script	Knight De Thomas#qsk_sm	98,{
+izlude_in,175,130,2	script	Chevalier De Thomas::Knight De Thomas#qsk_sm	98,{
 	if (BaseClass == Job_Swordman) {
 		if (SWORD_SK < 1 && getskilllv("SM_MOVINGRECOVERY") == 0) {
 			mes "[De Thomas]";
-			mes "Oh, no! You must have been hurt! Are you ok?";
-			mes "You must have fought hard to get such serious injuries..";
-			mes "Being a swordsman must come with a lot of responsibility and sacrifice.";
+			mes "Oh, non! Vous êtes blessé! Est-ce que ça va? Vous avez dû mener un vaillant combat pour avoir de telles blessures! Il est parfois difficile d'être un Épéiste: cela implique de nombreuses responsabilités et sacrifices.";
 			next;
 			mes "[De Thomas]";
-			if (Sex == 0)
-				mes "For these swordsmen and knights, there is a wonderful skill.";
-			else
-				mes "For these swordswomen and knights, there is a wonderful skill young lady.";
-			mes "I present to you - HP Recovery While Moving!";
-			mes "Body moving is a splendid skill";
-			mes "that allows you to regain strength(HP)";
-			mes "while you are moving!";
+			mes "Mais il existe une compétence extraordinaire pour les Épéistes et les Chevaliers"+ ( sex ? "" : ", jeune damoiselle" ) +", j'ai nommée: la Récupération Physique en Déplacement!";
+			mes "Grâce à certains exercices physiques, vous pourrez regagner votre force (HP) en vous déplaçant!";
 			next;
 			mes "[De Thomas]";
-			mes "It is currently under development";
-			mes "so it may not recover that much,";
-			mes "but it will help a little.";
-			mes "What do you think? Would you like to learn this skill?";
+			mes "Nous sommes encore en train de la développer, alors vous ne regagnerez pas tant que force que cela, mais cela aide tout de même. Qu'en dites-vous? Voudriez-vous apprendre cette compétence?";
 			next;
-			if (select("What a nice skill! I want to learn it!:No, thank you.") == 1) {
+			if (select("Oui je veux l'apprendre!:Non merci.") == 1) {
 				mes "[De Thomas]";
-				mes "Very well. I will tell you what you need to learn this skill.";
-				mes "First, your job level must be higher than ^00880035^000000.";
-				mes "You will also need ^008800200 empty bottles^000000.";
-				mes "Why? Because it is proof that you fought fiercely to have used that many potions.";
+				mes "Très bien. Mais pour apprendre cette compétence, il faut que votre Niveau de Métier soit au moins de ^00880035^000000. Il vous faudra aussi ^008800200 Bouteilles Vides^000000. Pourquoi? Tout simplement parce qu'avoir utilisé autant de potions me prouvera que vous avez combattu vaillamment.";
 				next;
 				mes "[De Thomas]";
-				mes "Also, the armor you used in battle.";
-				mes "This is also proof of an experienced fighter.";
-				mes "For the armor... your armor is perfect!";
-				mes "Bring your armor!";
-				mes "Last but not least... bring me one ^008800Moth Wing^000000.";
+				mes "Il me faudra aussi l'armure que vous avez utilisé durant vos nombreuses batailles, qui sera une autre preuve de votre expérience – il n'y a rien de tel que l'armure d'un Épéiste pour cela! Et le dernier mais non le moindre... Apportez-moi une paire d'^008800Ailes de Papillon de Nuit^000000.";
 				next;
-				select("Eh? You need that, too?");
+				select("Hein? Vous avez vraiment besoin de ça aussi?");
 				mes "[De Thomas]";
-				mes "Not really.. I don't really NEED it.";
-				mes "It's just that my niece has gotten a bug hunting as a holiday task during the summer vacation.";
-				mes "Of course! It would be much easier for me to get it myself.";
-				mes "but I must work here all the time so I don't exactly have the time to go out and get it.";
+				mes "Non. Enfin... Je n'en ai pas vraiment BESOIN. C'est juste que ma petite nièce doit chasser les insectes pendant les vacances pour l'école, et je n'ai pas le temps de l'aider avec tout mon travail... ";
 				next;
 				mes "[De Thomas]";
-				mes "Don't you think it is pitiful that I have to stay in once place everyday, not being able to go outside?";
-				mes "Please, find me one...*sniffsniff*";
-				mes "If you don't...";
+				mes "Ne trouvez-vous pas ça dommage que je doive rester dans cet endroit chaque jour sans pouvoir en sortir? Allez, trouvez-m'en une... *snif*";
+				mes "Ou sinon... Vous n'aurez rien du tout! Muahahaha.";
 				set SWORD_SK,1;
-				mes "You won't get anything! Muahahaha.";
+
 				close;
 			}
 			mes "[De Thomas]";
@@ -73,79 +53,64 @@ izlude_in,175,130,2	script	Knight De Thomas#qsk_sm	98,{
 		}
 		else if (SWORD_SK == 1 && getskilllv("SM_MOVINGRECOVERY") == 0) {
 			mes "[De Thomas]";
-			mes "Welcome back...";
-			mes "are you ready to learn Body Movin'?";
+			mes "Ah, vous revoilà... Êtes-vous prêt"+ ( sex ? "": "e" ) +" à apprendre à maîtriser la Récupération Physique en Déplacement?";
 			next;
-			switch(select("Yes.:No, I'm not ready yet.")) {
+			switch(select("Oui.:Non, je ne suis pas encore prêt"+ ( sex ? "": "e" ) +".")) {
 			case 1:
 				if (JobLevel > 34 && countitem(713) > 199 && countitem(1058) > 0) {
 					mes "[De Thomas]";
-					mes "Let's see.....";
+					mes "Voyons.....";
 					next;
 					mes "[De Thomas]";
-					mes "Ok! I shall now teach you...";
-					mes "..The Body Movin' skill!";
+					mes "D'accord! Je vais maintenant vous apprendre les exercices physiques permettant de restaurer vos HP en vous déplaçant.";
 					next;
 					delitem 713,200; //Empty_Bottle
 					delitem 1058,1; //Wing_Of_Moth
 					skill "SM_MOVINGRECOVERY",1,0;
 					set SWORD_SK,0;
 					mes "[De Thomas]";
-					mes "There you go!";
-					mes "Try it yourself.";
-					mes "But don't overdo it.";
+					mes "Voilà, comme ça! Allez, essayez! Mais n'en faites pas trop, hein, d'accord?";
 					next;
 					mes "[De Thomas]";
-					mes "Oh yeah, I won't be needing your";
-					mes "armor so you can keep it.";
-					mes "..Good luck now!";
+					mes "Oh et finalement je n'aurai pas besoin de votre armure. Vous pouvez la garder. Bonne chance!";
 					close;
 				}
 				else if (JobLevel < 35) {
 					mes "[De Thomas]";
-					mes "Wait a second your Job level isn't above ^00880035^000000!";
-					mes "Come back when it is.";
+					mes "Oh, mais une petite minute! Vous n'avez pas un Niveau de Métier de ^00880035^000000 ou plus! Revenez quand ce sera le cas.";
 					close;
 				}
 				else if (countitem(713) < 200 || countitem(1058) < 1) {
 					mes "[De Thomas]";
-					mes "You do not have all the items I asked for.";
+					mes "Vous n'avez pas tout ce que je vous avais demandé d'apporter.";
 					next;
 					mes "[De Thomas]";
-					mes "Remember I need, ^008800200 empty bottles^000000, your armor, and a ^008800Moth Wing^000000. Come back when you have it all.";
+					mes "Souvenez-vous, j'ai besoin de ^008800200 Bouteilles Vides^000000, de votre armure, et d'une ^008800Aile de Papillon de Nuit^000000. Revenez lorsque vous aurez tout cela.";
 					close;
 				}
 				else {
 					mes "[De Thomas]";
-					mes "You do not have all the items I asked for.";
+					mes "Vous n'avez pas tout ce que je vous avais demandé d'apporter.";
 					next;
 					mes "[De Thomas]";
-					mes "Remember I need, ^008800200 empty bottles^000000, your armor, and a ^008800Moth Wing^000000. Come back when you have it all.";
+					mes "Souvenez-vous, j'ai besoin de ^008800200 Bouteilles Vides^000000, de votre armure, et d'une ^008800Aile de Papillon de Nuit^000000. Revenez lorsque vous aurez tout cela.";
 					close;
 				}
 			case 2:
 				mes "[De Thomas]";
-				mes "Is that so?";
-				mes "Then come when you are prepared.";
+				mes "Ah oui? Eh bien revenez quand vous serez prêt"+ ( sex ? "": "e" ) +".";
 				close;
 			}
 		}
 		else {
 			mes "[De Thomas]";
-			mes "Oh, it's you?";
-			mes "Long time no see!";
-			mes "You seem healthier than before.";
-			mes "Hahahaha!";
-			mes "Take care! See you again!";
+			mes "Oh, c'est vous?! Cela faisait longtemps depuis la dernière fois. Vous avez l'air d'être en bien meilleure forme qu'auparavant! Hahahaha! Prenez bien soin de vous et à bientôt.";
 			close;
 		}
 	}
 	else {
 		mes "[De Thomas]";
-		mes "My name is De Thomas Carlos.";
-		mes "Knight of Prontera's 3rd Calvary.";
-		mes "I have a certain duty these days.";
-		mes "Ehem! Need I say more.";
+		mes "Je m'appelle De Thomas Carlos, Chevalier du 3ème Régiment de Cavalerie de Prontera. Je suis actuellement en mission. *Ahem* Dois-je en dire plus?";
 		close;
 	}
 }
@@ -154,23 +119,17 @@ prt_in,75,88,5	script	Leon Von Frich#qsk_sm	85,3,3,{
 	if ((BaseJob == Job_Swordman && JobLevel >= 25) || BaseJob == Job_Knight || BaseJob == Job_Crusader) {
 		if (getskilllv("SM_FATALBLOW") == 1) {
 			mes "[Leon]";
-			mes "Eh?";
-			mes "I was wondering who that was!";
-			mes "Why it's you from before!";
-			mes "Nice to see you again! How are you?";
-			mes "Be careful! Hahaha!";
+			mes "Eh? Je me demandais qui venait. Mais c'est vous! Comment allez vous? Faites bien attention! Hahaha!";
 			close;
 		}
 		else if (countitem(1752) > 9 && countitem(1751) > 9 && countitem(532) > 0 && countitem(962) > 29 && countitem(526) > 4) {
 			mes "[Leon]";
-			mes "Ooh! You are more than ready";
-			mes "to learn Fatal Blow!"; // Trad: Coup Fatal
-			mes "So how about it? Would you like to learn?";
+			mes "Oh! Vous, vous êtes plus que prêt"+ ( sex ? "": "e" ) +" pour apprendre à maîtriser les Coups Fatals. Qu'en dîtes-vous? Est-ce que ça vous tente?";
 			next;
-			switch(select("Yes!:No, I don't want to.:But, what is Fatal Blow?")) { // Trad: Coup Fatal
+			switch(select("Oui!:Non, sans façons.:Mais qu'est-ce qu'un Coup Fatal?")) {
 			case 1:
 				mes "[Leon]";
-				mes "OK, lets begin!";
+				mes "Bien, commençons!";
 				next;
 				delitem 1752,10; //Fire_Arrow
 				delitem 1751,10; //Silver_Arrow
@@ -179,116 +138,84 @@ prt_in,75,88,5	script	Leon Von Frich#qsk_sm	85,3,3,{
 				delitem 526,5; //Royal_Jelly
 				skill "SM_FATALBLOW",1,0;
 				mes "[Leon]";
-				mes "Success!";
-				mes "Go use your new skill to its full potential.";
-				mes "Hahahahahahahaha!";
+				mes "Et voilà! Allez exploiter tout le potentiel de votre nouvelle compétence. Hahahahahahahaha!";
 				close;
 			case 2:
 				mes "[Leon]";
-				mes "I don't like you!!!";
+				mes "Pfft! Vous le regretterez!";
 				close;
 			case 3:
 				mes "[Leon]";
-				mes "I developed this skill recently.";
-				mes "When you use bash, depending ";
-				mes "on your level, you can stun ";
-				mes "your opponent. .";
-				mes "You have learned bash, haven't you?";
+				mes "J'ai créé cette compétence il y a peu. Elle permet d'étourdir un adversaire en lui portant un Coup Puissant. Vous maîtrisez les Coups Puissants, n'est-ce pas?";
 				next;
 				mes "[Leon]";
-				mes "What do you think. Stun is";
-				mes "a very useful technique. Don't you find this skill attractive?";
-				mes "When you think you do, just come right back to me!";
+				mes "Qu'en dites-vous? L'étourdissement est une technique très utile. N'auriez-vous pas envie de maîtriser cette compétence? Si c'est le cas, revenez me voir!";
 				close;
 			}
 		}
 		else {
 			mes "[Leon]";
-			mes "Ooh! A young and strong swordsman!";
+			mes "Oh! Un"+ ( sex ? "": "e" ) +" jeune Épéiste!";
 			next;
 			mes "[Leon]";
-			mes "Wow, seeing your arm, you must enjoy using bash?";
+			mes "Ouah, d'après l'état de votre bras vous devez adorer les Coups puissants, n'est-ce pas?";
 			next;
-			select("Eh, I.. just...");
+			select("Euh, C'est juste... que...");
 			mes "[Leon]";
 			if (Sex == 0) {
-				mes "No need to be surprised.";
-				mes "If you use a sword, of course you ought to have a good arm!";
+				mes "Oh, ne soyez pas surpris. Vous devez bien sûr avoir des bras puissants pour manier une épée.";
 			}
 			else {
-				mes "Nothing to be embarrassed about.";
-				mes "Even if you are a female you need a strong arm to use a sword!";
+				mes "Oh, vous n'avez pas à vous sentir gênée. Même les femmes ont besoin d'avoir des bras puissants pour manier une épée!";
 			}
-			mes "In times of only useless and lazy youngsters,";
-			mes "I'm glad I met someone strong like you.";
+			mes "Je suis content de rencontrer quelqu'un qui se laisse pas aller en ces temps où la jeunesse est si paresseuse.";
 			next;
 			mes "[Leon]";
-			mes "Yes, I would like to give a present to an awesome swordsman like you.";
+			mes "Oui, je voudrais aider un"+ ( sex ? "" : "e" ) +" Épéiste tel"+ ( sex ? "" : "le" ) +" que vous.";
 			next;
-			switch(select("What present?:It's ok.")) {
+			switch(select("Comment ça?:Pas la peine.")) {
 			case 1:
 				mes "[Leon]";
-				mes "Haha nothing special, but a skill to attack the vital point!";
+				mes "Oh ce n'est pas grand-chose... Juste une technique pour porter un coup sur les points vitaux.";
 				next;
 				break;
 			case 2:
 				mes "[Leon]";
-				mes "...Haha nothing special, just a skill that aims at the vital spot!";
+				mes "... Oh ce n'est pas grand-chose... Juste une technique pour porter un coup sur les points vitaux.";
 				next;
 				break;
 			}
 			mes "[Leon]";
-			mes "It's a skill I developed recently.";
-			mes "When you use bash, depending on";
-			mes "your level, your opponent can";
-			mes "become stunned.";
-			mes "You have learned bash, haven't you?";
+			mes "Il s'agit d'une compétence développée récemment. Elle permet d'étourdir ses ennemis en utilisant des Coups Puissants. Vous maîtrisez les Coups Puissants, n'est-ce pas?";
 			next;
 			mes "[Leon]";
-			mes "When I was a swordsman like you,";
-			mes "I used to enjoy using Bash. Every time, I thought"; // Trad: Coup Puissant
-			mes "- maybe the attack would be more powerful";
-			mes "if I use stun at the same time.";
+			mes "Quand j'étais un Épéiste comme vous, j'adorais utiliser les Coups Puissants, mais à chaque fois je me disais que l'attaque pourrait être encore plus puissante si je pouvais en même temps étourdir mon adversaire.";
 			next;
 			mes "[Leon]";
-			mes "I drew back from the battlefield to do research";
-			mes "and finally, I developed this wonderful new skill!";
-			mes "Would you like to learn this skill?";
+			mes "Je me suis donc retiré du champ de bataille pour faire quelques recherches, et j'ai au point cette compétence extraordinaire! Voudriez-vous l'apprendre?";
 			next;
-			switch(select("Yes.:No.:Do you have any advice on how to eat sushi?")) {
+			switch(select("Oui.:Non.:Vous savez comment manger les sushis?")) {
 			case 1:
 				mes "[Leon]";
-				mes "Ok. I'll tell you the requirements.";
-				mes "First you need to have level 5 Bash."; // Trad: Coup Puissant
-				mes "You will also need to prepare 10 Fire Arrows, 10 Silver Arrows, 1 bottle of Banana Juice, 30 Tentacles, and 5 bottles of Royal Jelly.";
-				mes "They are.. somewhat like ingredients.";
+				mes "D'accord. Je vais vous donner la liste des prérequis. Tout d'abord, il vous faudra maîtriser les Coups puissants au niveau 5. Ensuite, il faudra m'apporter 10 Flèches de Feu, 10 Flèches d'Argent, 1 bouteille de Jus de Banane, et 5 Gelées Royales. C'est.. comme qui dirait quelques ingrédients.";
 				next;
 				mes "[Leon]";
-				mes "come to me again once you have all the materials.";
-				mes "We shall talk then.";
+				mes "Revenez me voir lorsque vous aurez tout cela.";
 				close;
 			case 2:
 				mes "[Leon]";
 				mes "Hahahahahahahahahaha!";
 				mes "... ";
-				mes " ... ";
-				mes " ...";
-				mes "I'm at a loss of words!?";
+				mes "... ";
+				mes "...";
+				mes "En fait je ne sais pas quoi dire...";
 				close;
 			case 3:
-				mes "[Sushi King Leon]";
-				mes "The best way to eat sushi is";
-				mes "with your hands.";
-				mes "That is the basic.";
-				mes "And dip the fish, not the rice,";
-				mes "in the soy sauce.";
+				mes "[Leon, le Roi des Sushis]";
+				mes "Le meilleur moyen est de le manger avec les mains. Ça c'est la base. Ensuite, il faut le tremper dans la sauce soja, mais pas le riz.";
 				next;
-				mes "[Sushi King Leon]";
-				mes "That way you get a richer flavor.";
-				mes "Also, always eat the kind that is in season.";
-				mes "Eating in the order of white fish then";
-				mes "blue fish will make it taste better!";
-				mes "Mmm! I like sushi~~!";
+				mes "[Leon, le Roi des Sushis]";
+				mes "C'est ce qui va enrichir son goût. Oh, et ne mangez que du poisson de saison. Commencez toujours par le poisson à chair blanche, puis celui à chair rose ensuite. Ça ne rendra le goût que meilleur. Hum! J'adore les sushis~";
 				close;
 			}
 		}
@@ -296,10 +223,7 @@ prt_in,75,88,5	script	Leon Von Frich#qsk_sm	85,3,3,{
 	}
 	else {
 		mes "[Leon]";
-		mes "Oh, no! I have nothing to offer you!";
-		mes "I can't say nice and fun things to anyone";
-		mes "other than swordsmen!";
-		mes "See you in a better world!";
+		mes "Oh, non! Je n'ai rien à vous offrir! Je ne peux rien pour quelqu'un qui n'est pas Épéiste! On se reverra dans l'autre monde!";
 		close;
 	}
 
@@ -314,38 +238,28 @@ prt_in,94,57,3	script	Juan#qsk_sm	85,{
 	if (BaseClass == Job_Swordman) {
 		if (getskilllv("SM_AUTOBERSERK") == 1) {
 			mes "[Juan]";
-			mes "Mmm? Long time no see!";
-			mes "How are you?";
-			mes "You got stronger than before.";
-			mes "Many expect great things from you.";
-			mes "You can do it.";
+			mes "Hum? Ah, ça faisait longtemps! Comment allez-vous? On dirait que vous êtes devenu encore plus fort que la dernière fois. Beaucoup attendent de grandes choses de vous. Vous y arriverez!";
 			close;
 		}
 		else if (BaseJob == Job_Swordman && JobLevel < 10) {
 			mes "[?]";
-			mes "What are you?";
-			mes "Eh, still a beginner.";
-			mes "I'm busy, so go train a little more";
-			mes "before coming back.";
+			mes "Qui vous êtes, vous? Ah, vous êtes "+ ( sex ? "un petit débutant" : "une petite débutante" ) +". Je suis occupé, alors entraînez-vous un peu avant de revenir me voir.";
 			close;
 		}
 		else if (BaseJob == Job_Swordman && JobLevel > 10 && JobLevel < 30) {
 			mes "[Juan]";
-			mes "Oh, nice to meet you.";
-			mes "You can be on your way. (smiley~)";
+			mes "Oh, ravi de vous rencontrer mais... Vous pouvez passer votre chemin. :)";
 			close;
 		}
 		else if (countitem(924) > 34 && countitem(958) > 9 && countitem(957) > 9 && countitem(518) > 9) {
 			if ((BaseJob == Job_Swordman && JobLevel >= 30) || BaseJob == Job_Knight || BaseJob == Job_Crusader) {
 				mes "[Juan]";
-				mes "Ooh. Young swordsman!";
-				mes "You are ready to learn the";
-				mes "newest skill, Auto Berserk?!"; // Trad: Dernier Recours
+				mes "Oh, un"+ ( sex ? "" : "e" ) +" jeune Épéiste! Êtes-vous prêt"+ ( sex ? "" : "e" ) +" à apprendre la dernière compétence que nous avons développée, le 'Dernier Recours'?";
 				next;
-				switch(select("Hoho, I would like to learn it now.:What is that?")) {
+				switch(select("Oh, je voudrais l'apprendre maintenant.:Qu'est-ce que c'est?")) {
 				case 1:
 					mes "[Juan]";
-					mes "Ok. Then..";
+					mes "Bien, d'accord...";
 					next;
 					delitem 924,35; //Powder_Of_Butterfly
 					delitem 958,10; //Horrendous_Mouth
@@ -353,118 +267,63 @@ prt_in,94,57,3	script	Juan#qsk_sm	85,{
 					delitem 518,10; //Honey
 					skill "SM_AUTOBERSERK",1,0;
 					mes "[Juan]";
-					mes "You have just become a swordsman";
-					mes "that can use Auto Berserk."; // Trad: Dernier Recours
-					mes "You can go about ";
-					mes "and achieve great things!";
+					mes "Et voilà, vous pouvez maintenant utiliser le Dernier Recours! Vous êtes maintenant capable d'accomplir de grandes choses.";
 					next;
 					mes "[Juan]";
-					mes "Good luck!";
+					mes "Bonne chance!";
 					next;
 					mes "[Juan]";
-					mes "....................................oh yeah.";
-					mes "I forgot to say something.";
-					mes "There are some things you must keep in mind.";
+					mes "....................Oh, j'allais oublier.";
+					mes "Il y a deux choses dont vous devrez vous souvenir.";
 					next;
 					mes "[Juan]";
-					mes "Once you regain health,";
-					mes "this skill will subside.";
-					mes "Also, there isn't really a time limit";
-					mes "but it can still disappear when";
-					mes "it is attacked with a skill that can";
-					mes "nullify provoke.";
+					mes "Une fois que vous aurez récupéré vos HP, l'effet de cette compétence disparaîtra. De plus, même si elle n'a pas de limite au niveau de sa temps, son effet s'estompera aussi si vos SP tombent à zéro.";
 					next;
 					mes "[Juan]";
-					mes "If you don't remember these characteristics,";
-					mes "you may run into some problems on the battlefield";
-					mes "when the skill disappears all of a sudden.";
+					mes "Si vous ne gardez pas ça à l'esprit, vous pourriez avoir des problèmes sur le champ de bataille lorsque l'effet de cette compétence disparaîttra soudainement.";
 					next;
 					mes "[Juan]";
-					mes "Then... bye for real~";
+					mes "Bien, alors cette fois c'est un vrai au revoir~";
 					close;
 				case 2:
 					mes "[Juan]";
-					mes "Auto Berserk?"; // Trad: Dernier Recours
-					mes "It's a skill crucial on the battlefield.";
-					mes "When your health is in red,";
-					mes "your hidden potential provokes yourself";
-					mes "to help you in battle.";
+					mes "Le Dernier Recours? C'est une compétence cruciale sur le champ de bataille. Lorsque vous êtes grièvement blessé, elle permet à vos pouvoirs cachés de resurgir et de vous aider pendant le combat.";
 					next;
 					mes "[Juan]";
-					mes "It is perfect for those that";
-					mes "fight on the battlefield like fire!";
-					mes "With your ability, you can learn";
-					mes "this skill right now.";
-					mes "Then, I shall tell you the necessary materials.";
+					mes "Elle est parfaite pour ceux qui combattent avec rage sur le champ de bataille. Vous avez le niveau pour l'apprendre. Il faudra simplement me rapporter certains objets.";
 					next;
 					mes "[Juan]";
-					mes "You need 35 Powder of Butterfly.";
-					mes "The energy from the magnificent";
-					mes "wings of a butterfly will";
-					mes "help you gather your strength!";
-					mes "And 10 Horrendous Mouth.";
-					mes "10 Decayed Nail.";
-					mes "and last but not least...";
-					mes "10 Honey!";
+					mes "Il vous faudra 35 tas de Poudre de Papillon, dont l'énergie vous aidera à rassembler vos forces, 10 Rictus Épouvantables, 10 Ongles Putrides, et enfin 10 pots de Miel.";
 					next;
 					mes "[Juan]";
-					mes "Did you get all that down?";
-					mes "As always, please come back";
-					mes "when you are ready.";
-					mes "I look forward to seeing you again.";
+					mes "Est-ce que vous avez tout noté? Bien, revenez quand vous serez prêt"+ ( sex ? "e" : "" ) +". Je vous attendrai.";
 					close;
 				}
 			}
 		}
 		mes "[Juan]";
-		mes "Oh no, you have more injuries";
-		mes "since the last time I saw you.";
-		mes "You went into battle like this?";
-		mes "Seems like you are straining yourself.";
+		mes "Oh vous avez plus de cicatrices que la dernière fois que je vous ai vu. On dirait que vous vous poussez vous-même à bout.";
 		next;
 		mes "[Juan]";
-		mes "Even though you may have a lot of strength";
-		mes "you can't do much when you reach your limits so";
-		mes "don't overestimate your powers.";
-		mes "Of course you could always use the";
-		mes "skill we developed to overcome these limits.";
+		mes "Quelle que soit votre force, vous ne pourrez pas faire grand-chose si vous atteignez vos limites, alors ne vous surestimez pas. Cependant, vous pourriez utiliser une compétence que nous avons développée pour repousser ces limites.";
 		next;
-		switch(select("Eh! What are you talking about?:Haha, there can't be such a thing.:Keuuuuuuuh!")) {
+		switch(select("De quoi est-ce que vous parlez?:Haha, une telle compétence ne peut pas exister!:Keuuuuuuuh!")) {
 		case 1:
 			mes "[Juan]";
-			mes "The skill is called Berserk."; // Trad: Furie
-			mes "It is deemed the flower of a battlefield.";
-			mes "When your health is red,";
-			mes "your hidden potential is provokes yourself";
-			mes "to help you in battle.";
+			mes "Cette compétence s'appelle le Recours Ultime. On la considère comme le fleuron du champ de bataille. Lorsque vous êtes grièvement blessé, elle permet à vos pouvoirs cachés de resurgir et de vous aider pendant le combat.";
 			next;
 			mes "[Juan]";
-			mes "It is perfect for those that";
-			mes "fight on the battlefield like fire!";
-			mes "With your ability, you can learn";
-			mes "this skill right now.";
-			mes "Then, I shall tell you the necessary materials.";
+			mes "Elle est parfaite pour ceux qui combattent avec rage sur le champ de bataille. Vous avez le niveau pour l'apprendre. Il faudra simplement me rapporter certains objets.";
 			next;
 			mes "[Juan]";
-			mes "You need 35 Powder of Butterfly.";
-			mes "The energy from the magnificent";
-			mes "wings of a butterfly will";
-			mes "help you gather your strength!";
-			mes "And 10 Horrendous Mouth.";
-			mes "10 Decayed Nail.";
-			mes "and last but not least...";
-			mes "10 Honeys!";
+			mes "Il vous faudra 35 tas de Poudre de Papillon, dont l'énergie vous aidera à rassembler vos forces, 10 Rictus Épouvantables, 10 Ongles Putrides, et enfin 10 pots de Miel.";
 			next;
 			mes "[Juan]";
-			mes "Did you get all that down?";
-			mes "As always, please come back";
-			mes "when you are ready.";
-			mes "I look forward to seeing you again.";
+			mes "Est-ce que vous avez tout noté? Bien, revenez quand vous serez prêt"+ ( sex ? "e" : "" ) +". Je vous attendrai.";
 			close;
 		case 2:
 			mes "[Juan]";
-			mes "Bleh, were you fooled all your life.";
-			mes "I don't know. Don't talk to me.";
+			mes "C'est ce que vous croyez, hein? Si c'est le cas, vous feriez mieux de partir sans attendre.";
 			close;
 		case 3:
 			mes "[Juan]";
@@ -476,10 +335,7 @@ prt_in,94,57,3	script	Juan#qsk_sm	85,{
 	}
 	else {
 		mes "[Juan]";
-		mes "Are you enjoying your trip?";
-		mes "I hope you have nice days ahead of you.";
-		mes "Ah, I am just a kind knight Juan.";
-		mes "Don't worry about me too much. Hahaha...";
+		mes "Est-ce que vous aimez voyager? J'espère que de beaux jours vous attendent. Ah oui, je suis le preux chevalier Juan. Ne faites pas attention à moi. Hahaha...";
 		close;
 	}
 }
