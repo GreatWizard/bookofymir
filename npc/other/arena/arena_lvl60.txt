@@ -24,9 +24,14 @@ OnInit:
 	end;
 
 OnStartArena:
+	warpwaitingpc "force_2-1",99,12;
+	attachrid($@warpwaitingpc[0]);
+	if(BaseLevel < 60 || BaseLevel > 79) { // Bugfix - sans ça les joueurs peuvent quand même entrer si ils gardent la fenêtre ouverte et cliquent sur la waiting room [No Healing]
+		warp "arena_room",100,75;
+		end;
+		}
 	donpcevent "arena#60::Onstart";
 	enablenpc "ArenaFee#60";
-	warpwaitingpc "force_2-1",99,12;
 	disablewaitingroomevent;
 	end;
 

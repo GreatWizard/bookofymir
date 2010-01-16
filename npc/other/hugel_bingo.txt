@@ -58,6 +58,11 @@ OnInit:
 	end;
 
 OnTouch:
+	if ( zeny < 1000 ) { // Gros bugfix: si un joueur n'a pas assez de zenys, le script plante - il ne peut pas jouer et tous doivent attendre 3 mins pour sortir [No Healing]
+		mapannounce "que_bingo","Eukran: Oh mais on dirait que "+strcharinfo(0)+" n'a pas assez d'argent, la partie doit être annulée~",1,0xFFAB54;
+		setnpctimer 201999,"start#bingo"; // J'ajoute un reset manuel
+		end;
+	}
 	set Zeny,Zeny -1000;
 	set @bingo_a1$,0;
 	set @bingo_a2$,0;
@@ -1040,7 +1045,7 @@ que_bingo,49,31,4	script	Guide de la Salle de Jeu::arcadehelper1	47,{
 que_bingo,42,31,4	script	Guide de la Salle de Jeu::arcadehelper2	66,{
 
 	mes "[Guide]";
-	mes "C'est par ici si vous voulez jouer au Bingo.";
+	mes "C'est par ici si vous voulez observer la partie de Bingo en cours.";
 	close;
 	
 }
