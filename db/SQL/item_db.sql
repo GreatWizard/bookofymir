@@ -3410,7 +3410,7 @@ UPDATE item_db SET `name_japanese`  = "Pilon" WHERE ID = 7762;
 UPDATE item_db SET `name_japanese`  = "Herbes Grasses" WHERE ID = 7763;
 UPDATE item_db SET `name_japanese`  = "Colle Forte" WHERE ID = 7764;
 UPDATE item_db SET `name_japanese`  = "Potion de Baba Yaga" WHERE ID = 7765;
-UPDATE item_db SET `name_japanese`  = "Bok Choy" WHERE ID = 7766;
+UPDATE item_db SET `name_japanese`  = "Chou Chinois" WHERE ID = 7766;
 UPDATE item_db SET `name_japanese`  = "Gâteau de Chung Li" WHERE ID = 7767;
 UPDATE item_db SET `name_japanese`  = "Calmar" WHERE ID = 7768;
 UPDATE item_db SET `name_japanese`  = "Oeuf de Yolk" WHERE ID = 7769;
@@ -4585,7 +4585,7 @@ UPDATE item_db SET `name_japanese`  = "Boîte de Brise-Lame Raffiné" WHERE ID = 1
 UPDATE item_db SET `name_japanese`  = "Boîte de Brise-Armure Raffinée" WHERE ID = 13686;
 UPDATE item_db SET `name_japanese`  = "Boîte de Dague Clair-de-Lune Raffinée" WHERE ID = 13687;
 UPDATE item_db SET `name_japanese`  = "Boîte de Clé Anglaise Raffinée" WHERE ID = 13688;
-UPDATE item_db SET `name_japanese`  = "Boîte de Bok Choy" WHERE ID = 13689;
+UPDATE item_db SET `name_japanese`  = "Boîte de Choux Chinois" WHERE ID = 13689;
 UPDATE item_db SET `name_japanese`  = "Boîte à Gâteaux de Chung Li" WHERE ID = 13690;
 UPDATE item_db SET `name_japanese`  = "Boîte de Précis sur la Guerre 25%" WHERE ID = 13695;
 UPDATE item_db SET `name_japanese`  = "Boîte de Précis sur la Guerre 100%" WHERE ID = 13696;
