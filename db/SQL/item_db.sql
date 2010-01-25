@@ -428,7 +428,7 @@ UPDATE item_db SET `name_japanese`  = "Élixir de Payon" WHERE ID = 1089;
 UPDATE item_db SET `name_japanese`  = "Tube-à-Essai Inconnu" WHERE ID = 1090;
 UPDATE item_db SET `name_japanese`  = "Paquet" WHERE ID = 1091;
 UPDATE item_db SET `name_japanese`  = "Tube-à-Essai Inconnu" WHERE ID = 1092;
-UPDATE item_db SET `name_japanese`  = "Bouille d'Alchimiste Vide" WHERE ID = 1093;
+UPDATE item_db SET `name_japanese`  = "Bouteille d'Alchimiste Vide" WHERE ID = 1093;
 UPDATE item_db SET `name_japanese`  = "Courte Daenggie" WHERE ID = 1094;
 UPDATE item_db SET `name_japanese`  = "Aiguilles d'Horloge" WHERE ID = 1095;
 UPDATE item_db SET `name_japanese`  = "Coquille Ronde" WHERE ID = 1096;
