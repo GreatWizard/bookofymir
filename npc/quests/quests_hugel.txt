@@ -4681,775 +4681,480 @@ OnTimer60000:
 
 hu_in01,15,372,3	script	Cellette Lavit	74,{
 
-	if(!hg_odeng)
-	{
-		mes "[Cellette]";
-		mes "Hi there, thanks for";
-		mes "visiting our lovely town!";
-		mes "Why don't you come in and";
-		mes "have a taste of authentic";
-		mes "Hugel cuisine? I guarantee";
-		mes "that you won't regret it~";
-		next;
-		mes "[Cellette]";
-		mes "My name is Cellette Lavit,";
-		mes "and I proudly serve Fish Cake";
-		mes "Soup, Hugel's specialty dish.";
-		mes "All the tourists that've tried";
-		mes "it have loved it, and I have";
-		mes "many regular customers~";
-		next;
-		mes "[Cellette]";
-		mes "This dish has something";
-		mes "of a cult following, and it's";
-		mes "not widely popularized, but I'm";
-		mes "sure that it'll be considered";
-		mes "representative of Schwaltzvalt";
-		mes "Republic cuisine someday.";
-		next;
-		mes "[Cellette]";
-		mes "Listen, you look like an";
-		mes "able adventurer, so would";
-		mes "you consider working part time";
-		mes "for me? I have many orders for";
-		mes "Fish Cake Soup, so there's";
-		mes "no way I can make deliveries...";
-		next;
-		mes "[Cellette]";
-		mes "If you work for me, I'll";
-		mes "waive the price: I'll give you";
-		mes "1 Fish Cake Soup for each";
-		mes "delivery that you complete.";
-		mes "But if you're not interested,";
-		mes "you can just buy some now~";
-		next;
-		switch( select( "Sure, I'll work for you!:I want to buy Fish Cake Soup.:See ya." ) )
-		{
-		case 1:
-			mes "[Cellette]";
-			mes "Oh, thank you so much!";
-			mes "You can't imagine how busy";
-			mes "I've been, and how much I need^FFFFFF ^000000 the help! Now, let's get started~";
-			next;
-			set @randvar, rand(1,4);
-			if(@randvar == 1)
-			{
-				mes "[Cellette]";
-				mes "Alright, please take this";
-				mes "order of Fish Cake Soup to";
-				mes "my friend Neha. I'm grateful";
-				mes "that she's a regular customer--";
-				mes "she's a good friend, but I'm sure^FFFFFF ^000000 that she loves the soup as well.";
-				set hg_odeng,1;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-			else if(@randvar == 2)
-			{
-				mes "[Cellette]";
-				mes "Right, take this next order";
-				mes "of Fish Cake Soup to Maewan,";
-				mes "another one of my regulars.";
-				mes "He's been buying my soup ever";
-				mes "since I helped him start his^FFFFFF ^000000 business. Nice of him, isn't it?";
-				set hg_odeng,2;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-			else if(@randvar == 3)
-			{
-				mes "[Cellette]";
-				mes "Okay, this order of Fish";
-				mes "Cake Soup is ready! Please";
-				mes "take it to my roommate Layoma.";
-				mes "But... Be careful. She's got";
-				mes "a thing about punctuality.";
-				mes "Just try not to be late...";
-				set hg_odeng,3;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-			else if(@randvar == 4)
-			{
-				mes "[Cellette]";
-				mes "Quick, take this Fish";
-				mes "Paste Soup to Erjan. Um,";
-				mes "but be careful, he's really";
-				mes "nitpicky... And he likes to";
-				mes "have everything in such";
-				mes "and such and order...";
-				set hg_odeng,4;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-		break;
-		case 2:
-			mes "[Cellette]";
-			mes "Oh, you'd like to try my";
-			mes "Fish Cake Soup, eh? Good";
-			mes "choice, I know you'll enjoy";
-			mes "its delicious, hearty flavor~";
-			mes "Each order costs 100 zeny.";
-			next;
-			switch( select( "Order a Fish Cake Soup:Cancel" ) )
-			{
-			case 1:
-				if(Zeny > 99)
-				{
-					mes "[Cellette]";
-					mes "Thanks! Enjoy your";
-					mes "bowl of Fish Cake Soup.";
-					mes "I hope you come and ";
-					mes "visit me again, okay?";
-					set Zeny,Zeny-100;
-					getitem 584,1; //Skewer soup
-					close;
-				}
-				else
-				{
-					mes "[Cellette]";
-					mes "Oh, what's this?";
-					mes "You don't have enough";
-					mes "money? Well, come back";
-					mes "after you save 100 zeny.";
-					mes "That's a really good price";
-					mes "for my gourmet soup, you know.";
-					close;
-				}
-			break;
-			case 2:
-				mes "[Cellette]";
-				mes "If you're ever hungry,";
-				mes "or just want to enjoy";
-				mes "a delicious meal, come";
-				mes "and have some of my soup~";
-				close;
-			break;
-			}
-		break;
-		case 3:
-			mes "[Cellette]";
-			mes "Oh? You're not interested";
-			mes "in trying my Fish Cake Soup";
-			mes "at all? Well, if you change";
-			mes "your mind, please come";
-			mes "back. I just know you'll love";
-			mes "the taste if you give it a try.";
-			close;
-		break;
-		}
-	}
-	else if(hg_odeng == 1)
-	{
-		if(countitem(584)) //Skewer soup
-		{
-			mes "[Cellette]";
-			mes "Haven't you left already?";
-			mes "My friend Neha is waiting";
-			mes "for you to deliver her order";
-			mes "of Fish Cake Soup. Please";
-			mes "try to get it to her before the";
-			mes "soup gets cold, okay?";
-			close;
-		}
-		else
-		{
-			mes "[Cellette]";
-			mes "What's that? You lost";
-			mes "the Fish Cake Soup you're";
-			mes "supposed to deliver to Neha?";
-			mes "Oh well, I suppose I'll have";
-			mes "to give you this fresh bowl";
-			mes "of soup that I just made...";
-			next;
-			if(Zeny > 99)
-			{
-				mes "[Cellette]";
-				mes "But you need to be";
-				mes "responsible and pay";
-				mes "me for the food you lost.";
-				mes "There, I took 100 zeny";
-				mes "from you. That's fair, so";
-				mes "please don't lose it this time.";
-				set Zeny,Zeny-100;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-			else
-			{
-				mes "[Cellette]";
-				mes "W-wait... You don't";
-				mes "have any money to pay";
-				mes "me for the soup you lost?";
-				mes "Well, I don't think I can";
-				mes "trust somebody like you";
-				mes "with any deliveries...";
-				set hg_odeng,5;
-				close;
-			}
-		}
-	}
-	else if(hg_odeng == 2)
-	{
-		if(countitem(584)) //Skewer soup
-		{
-			mes "[Cellette]";
-			mes "Whoa, whoa, whoa!";
-			mes "You should have left";
-			mes "already to deliver that";
-			mes "soup to Maewan! Hurry,";
-			mes "before it gets too cold!";
-			close;
-		}
-		else
-		{
-			mes "[Cellette]";
-			mes "What's that? You lost";
-			mes "the Fish Cake Soup you're";
-			mes "supposed to give to Maewan?";
-			mes "Oh well, I suppose I'll have";
-			mes "to give you this fresh bowl";
-			mes "of soup that I just made...";
-			next;
-			if(Zeny > 99)
-			{
-				mes "[Cellette]";
-				mes "But you need to be";
-				mes "responsible and pay";
-				mes "me for the food you lost.";
-				mes "There, I took 100 zeny";
-				mes "from you. That's fair, so";
-				mes "please don't lose it this time.";
-				set Zeny,Zeny-100;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-			else
-			{
-				mes "[Cellette]";
-				mes "W-wait... You don't";
-				mes "have any money to pay";
-				mes "me for the soup you lost?";
-				mes "Well, I don't think I can";
-				mes "trust somebody like you";
-				mes "with any deliveries...";
-				set hg_odeng,5;
-				close;
-			}
-		}
-	}
-	else if(hg_odeng == 3)
-	{
-		if(countitem(584)) //Skewer soup
-		{
-			mes "[Cellette]";
-			mes "I thought you left to";
-			mes "deliver that soup to";
-			mes "Layoma. You should hurry";
-			mes "and bring it to her, before";
-			mes "it doesn't taste good after";
-			mes "it gets cold, you know.";
-			close;
-		}
-		else
-		{
-			mes "[Cellette]";
-			mes "What's that? You lost";
-			mes "the Fish Cake Soup you're";
-			mes "supposed to give to Layoma?";
-			mes "Oh well, I suppose I'll have";
-			mes "to give you this fresh bowl";
-			mes "of soup that I just made...";
-			next;
-			if(Zeny > 99)
-			{
-				mes "[Cellette]";
-				mes "But you need to be";
-				mes "responsible and pay";
-				mes "me for the food you lost.";
-				mes "There, I took 100 zeny";
-				mes "from you. That's fair, so";
-				mes "please don't lose it this time.";
-				set Zeny,Zeny-100;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-			else
-			{
-				mes "[Cellette]";
-				mes "W-wait... You don't";
-				mes "have any money to pay";
-				mes "me for the soup you lost?";
-				mes "Well, I don't think I can";
-				mes "trust somebody like you";
-				mes "with any deliveries...";
-				set hg_odeng,5;
-				close;
-			}
-		}
-	}
-	else if(hg_odeng == 4)
-	{
-		if(countitem(584))
-		{
-			mes "[Cellette]";
-			mes "Oh, dear, you better";
-			mes "leave now and deliver";
-			mes "that Fish Cake Soup to";
-			mes "Erjan before he can think";
-			mes "of something to complain about.^FFFFFF ^000000 Although it's probably too late...";
-			close;
-		}
-		else
-		{
-			mes "[Cellette]";
-			mes "What's that? You lost";
-			mes "the Fish Cake Soup you're";
-			mes "supposed to deliver to Erjan?";
-			mes "Oh well, I suppose I'll have";
-			mes "to give you this fresh bowl";
-			mes "of soup that I just made...";
-			next;
-			if(Zeny > 99)
-			{
-				mes "[Cellette]";
-				mes "But you need to be";
-				mes "responsible and pay";
-				mes "me for the food you lost.";
-				mes "There, I took 100 zeny";
-				mes "from you. That's fair, so";
-				mes "please don't lose it this time.";
-				set Zeny,Zeny-100;
-				getitem 584,1; //Skewer soup
-				close;
-			}
-			else
-			{
-				mes "[Cellette]";
-				mes "W-wait... You don't";
-				mes "have any money to pay";
-				mes "me for the soup you lost?";
-				mes "Well, I don't think I can";
-				mes "trust somebody like you";
-				mes "with any deliveries...";
-				set hg_odeng,5;
-				close;
-			}
-		}
-	}
-	else if(hg_odeng == 5)
-	{
-		mes "[Cellette]";
-		mes "Ah, I'm sorry, but";
-		mes "I can't do any business";
-		mes "with somebody that's proven";
-		mes "to be irresponsible. Nothing";
-		mes "personal, it's just my policy.";
-		close;
-	}
-	else if(hg_odeng == 10)
-	{
-		mes "[Cellette]";
-		mes "Good work! I hear that";
-		mes "you successfully delivered";
-		mes "the soup. I knew I could trust";
-		mes "you! Ah, before I forget, here";
-		mes "is your Fish Cake Soup. Thank";
-		mes "you so much for your help~";
-		set hg_odeng,0;
-		getitem 584,3; //Skewer soup
-		getexp 1000,0;
-		next;
-		mes "[Cellette]";
-		mes "It was really nice working";
-		mes "with you, and I hope you come";
-		mes "by and help me again sometime.";
-		mes "Oh, and please tell all your";
-		mes "friends about my delicious";
-		mes "Fish Cake Soup. See you later~";
-		close;
-	}
-	else
-	{
-		mes "[Cellette]";
-		mes "Come and taste some";
-		mes "authentic Hugel cuisine!";
-		mes "Enjoy a big steaming bowl";
-		mes "of delicious Fish Cake Soup~";
-		close;
-	}
+        if(!hg_odeng)
+        {
+                mes "[Cellette]";
+                mes "Bonjour! Merci de visiter notre belle ville! Pourquoi ne venez-vous pas goûter l'authentique cuisine d'Hugel? Je vous garantis que vous ne le regretterez pas~";
+                next;
+                mes "[Cellette]";
+                mes "Mon nom est Cellette Lavit, et je sers fièrement du Bouillon de Boeuf et Tempura, spécialité culinaire d'Hugel. Tous les touristes qui l'ont essayé l'ont aimé, et j'ai beaucoup de clients réguliers~";
+                next;
+                mes "[Cellette]";
+                mes "Ce plat a quelque chose d'un véritable culte, et même s'il n'est pas très populaire, je suis sûre qu'un jour il représentera la cuisine de la République de Schwaltzvalt.";
+                next;
+                mes "[Cellette]";
+                mes "Écoutez, vous semblez être un aventurier compétent, envisageriez-vous de travailler à temps partiel pour moi? J'ai beaucoup de commandes pour le Bouillon de Boeuf et Tempura, et je ne suis pas en mesure de pouvoir effectuer les livraisons...";
+                next;
+                mes "[Cellette]";
+                mes "Si vous travaillez pour moi, je renoncerais au paiement: je vous donnerais 1 Bouillon de Boeuf et Tempura pour chaque livraison accomplie. Mais si vous n'êtes pas intéressés, vous n'avez qu'à en acheter maintenant~";
+                next;
+                switch( select( "Bien sûr, je vais travailler pour vous!:Je veux acheter du Bouillon de Boeuf et Tempura.:À bientôt!" ) )
+                {
+                case 1:
+                        mes "[Cellette]";
+                        mes "Ah, merci beaucoup! Vous ne pouvez pas imaginer à quel point je suis débordée, et combien j'ai besoin d'aide! Allez, au travail maintenant~";
+                        next;
+                        set @randvar, rand(1,4);
+                        if(@randvar == 1)
+                        {
+                                mes "[Cellette]";
+                                mes "Bien, veuillez apporter cette commande de Bouillon de Boeuf et Tempura à mon amie Neha. Je lui suis reconnaissante d'être une cliente régulière... c'est une bonne amie, mais je suis sûr qu'elle aime le potage aussi.";
+                                set hg_odeng,1;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                        else if(@randvar == 2)
+                        {
+                                mes "[Cellette]";
+                                mes "Bien, apportez la prochaine commande de Bouillon de Boeuf et Tempura à Maewan, un autre de mes habitués. Il achète ma soupe depuis que je l'ai aidé à démarrer son entreprise. Gentil de sa part, n'est-ce pas?";
+                                set hg_odeng,2;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                        else if(@randvar == 3)
+                        {
+                                mes "[Cellette]";
+                                mes "Bon, cette commande de Bouillon de Boeuf et Tempura est prête! Veuillez l'apporter à ma colocataire Layoma. Mais... Soyez prudent. Elle est très à cheval sur la ponctualité. Essayez de ne pas être en retard...";
+                                set hg_odeng,3;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                        else if(@randvar == 4)
+                        {
+                                mes "[Cellette]";
+                                mes "Vite, apportez ce Bouillon de Boeuf et Tempura à Erjan. Euh, mais faites attention, il cherche toujours la petite bête... Et il aime tout avoir dans tel et tel ordre...";
+                                set hg_odeng,4;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                break;
+                case 2:
+                        mes "[Cellette]";
+                        mes "Oh, vous souhaitez goûter mon Bouillon de Boeuf et Tempura, hein? Bon choix! Je sais que vous apprécierez, il est délicieux, copieux et savoureux~ Chaque commande coûte 100 zénys.";
+                        next;
+                        switch( select( "Commander un Bouillon de Boeuf et Tempura:Partir" ) )
+                        {
+                        case 1:
+                                if(Zeny > 99)
+                                {
+                                        mes "[Cellette]";
+                                        mes "Merci et bonne dégustation. J'espère que vous reviendrez me rendre visite, d'accord?";
+                                        set Zeny,Zeny-100;
+                                        getitem 584,1; //Skewer soup
+                                        close;
+                                }
+                                else
+                                {
+                                        mes "[Cellette]";
+                                        mes "Oh, qu'est-ce que c'est? Vous n'avez pas assez d'argent? Eh bien, revenez quand vous aurez économisé 100 zénys. C'est un prix vraiment raisonnable pour mon potage gastronomique, vous savez.";
+                                        close;
+                                }
+                        break;
+                        case 2:
+                                mes "[Cellette]";
+                                mes "Si jamais vous avez faim, ou que vous voulez tout simplement apprécier un délicieux repas, venez et prenez un peu de mon potage~";
+                                close;
+                        break;
+                        }
+                break;
+                case 3:
+                        mes "[Cellette]";
+                        mes "Ah? Ça ne vous dit pas du tout de goûter à mon Bouillon de Boeuf et Tempura? Eh bien, si vous changez d'avis, s'il vous plaît revenez. Je suis sûre que vous aimerez si vous y goûtez.";
+                        close;
+                break;
+                }
+        }
+        else if(hg_odeng == 1)
+        {
+                if(countitem(584)) //Skewer soup
+                {
+                        mes "[Cellette]";
+                        mes "Vous n'êtes pas encore parti? Mon amie Neha attend que vous lui apportiez sa commande de Bouillon de Boeuf et Tempura. Essayez de lui livrer son potage avant qu'il ne soit froid, d'accord?";
+                        close;
+                }
+                else
+                {
+                        mes "[Cellette]";
+                        mes "Comment ça? Vous avez perdu le Bouillon de Boeuf et Tempura que vous deviez livrer à Neha? Eh bien, je n'ai pas d'autre choix que de vous donner ce nouveau bol de soupe que je viens de préparer...";
+                        next;
+                        if(Zeny > 99)
+                        {
+                                mes "[Cellette]";
+                                mes "Mais vous devez être responsable et me payer la nourriture que vous avez perdue. Voilà, je vous ai pris 100 zénys. C'est tout à fait normal! Et veillez à ne pas le perdre cette fois ci.";
+                                set Zeny,Zeny-100;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                        else
+                        {
+                                mes "[Cellette]";
+                                mes "A-attendez... Vous n'avez pas d'argent pour me rembourser le potage que vous avez perdu? Hé bien, je ne pense pas pouvoir faire confiance à quelqu'un comme vous pour les livraisons...";
+                                set hg_odeng,5;
+                                close;
+                        }
+                }
+        }
+        else if(hg_odeng == 2)
+        {
+                if(countitem(584)) //Skewer soup
+                {
+                        mes "[Cellette]";
+                        mes "Ho, ho, ho! Vous devriez déjà être parti livrer ce potage à Maewan! Dépêchez-vous, avant qu'il ne devienne trop froid!";
+                        close;
+                }
+                else
+                {
+                        mes "[Cellette]";
+                        mes "Comment ça? Vous avez perdu le Bouillon de Boeuf et Tempura que vous deviez livrer à Maewan? Eh bien, je n'ai pas d'autre choix que de vous donner ce nouveau bol de soupe que je viens de préparer...";
+                        next;
+                        if(Zeny > 99)
+                        {
+                                mes "[Cellette]";
+                                mes "Mais vous devez être responsable et me payer la nourriture que vous avez perdue. Voilà, je vous ai pris 100 zénys. C'est tout à fait normal! Et veillez à ne pas le perdre cette fois ci.";
+                                set Zeny,Zeny-100;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                        else
+                        {
+                                mes "[Cellette]";
+                                mes A-attendez... Vous n'avez pas d'argent pour me rembourser le potage que vous avez perdu? Hé bien, je ne pense pas pouvoir faire confiance à quelqu'un comme vous pour les livraisons...";
+                                set hg_odeng,5;
+                                close;
+                        }
+                }
+        }
+        else if(hg_odeng == 3)
+        {
+                if(countitem(584)) //Skewer soup
+                {
+                        mes "[Cellette]";
+                        mes "Je pensais que vous étiez déjà parti livrer cette soupe à Layoma. Vous devriez vous dépêcher de la lui apporter, avant qu'elle ne soit froide et plus bonne, vous savez.";
+                        close;
+                }
+                else
+                {
+                        mes "[Cellette]";
+                        mes "Comment ça? Vous avez perdu le Bouillon de Boeuf et Tempura que vous deviez livrer à Layoma? Eh bien, je n'ai pas d'autre choix que de vous donner ce nouveau bol de soupe que je viens de préparer...";
+                        next;
+                        if(Zeny > 99)
+                        {
+                                mes "[Cellette]";
+                                mes "Mais vous devez être responsable et me payer la nourriture que vous avez perdue. Voilà, je vous ai pris 100 zénys. C'est tout à fait normal! Et veillez à ne pas le perdre cette fois ci.";
+                                set Zeny,Zeny-100;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                        else
+                        {
+                                mes "[Cellette]";
+                                mes "A-attendez... Vous n'avez pas d'argent pour me rembourser le potage que vous avez perdu? Hé bien, je ne pense pas pouvoir faire confiance à quelqu'un comme vous pour les livraisons...";
+                                set hg_odeng,5;
+                                close;
+                        }
+                }
+        }
+        else if(hg_odeng == 4)
+        {
+                if(countitem(584))
+                {
+                        mes "[Cellette]";
+                        mes "Oh, mon Dieu! Vous devriez partir livrer ce Bouillon de Boeuf et Tempura à Erjan tout de suite, avant qu'il ne puisse avoir quelque chose à redire. Même s'il est probablement trop tard...";
+                        close;
+                }
+                else
+                {
+                        mes "[Cellette]";
+                        mes "Comment ça? Vous avez perdu le Bouillon de Boeuf et Tempura que vous deviez livrer à Erjan? Eh bien, je n'ai pas d'autre choix que de vous donner ce nouveau bol de soupe que je viens de préparer...";
+                        next;
+                        if(Zeny > 99)
+                        {
+                                mes "[Cellette]";
+                                mes "Mais vous devez être responsable et me payer la nourriture que vous avez perdue. Voilà, je vous ai pris 100 zénys. C'est tout à fait normal! Et veillez à ne pas le perdre cette fois ci.";
+                                set Zeny,Zeny-100;
+                                getitem 584,1; //Skewer soup
+                                close;
+                        }
+                        else
+                        {
+                                mes "[Cellette]";
+                                mes "A-attendez... Vous n'avez pas d'argent pour me rembourser le potage que vous avez perdu? Hé bien, je ne pense pas pouvoir faire confiance à quelqu'un comme vous pour les livraisons...";
+                                set hg_odeng,5;
+                                close;
+                        }
+                }
+        }
+        else if(hg_odeng == 5)
+        {
+                mes "[Cellette]";
+                mes "Ah, je suis désolée, mais je ne peux pas travailler avec quelqu'un qui s'est révélé être un irresponsable. Rien de personnel, c'est juste ma politique.";
+                close;
+        }
+        else if(hg_odeng == 10)
+        {
+                mes "[Cellette]";
+                mes "Bon travail! J'ai appris que vous aviez livré le potage avec succès. Je savais que je pouvais vous faire confiance! Ah, avant que j'oublie, voici votre Bouillon de Boeuf et Tempura. Merci beaucoup pour votre aide~";
+                set hg_odeng,0;
+                getitem 584,3; //Skewer soup
+                getexp 1000,0;
+                next;
+                mes "[Cellette]";
+                mes "C'était vraiment agréable de travailler avec vous, et j'espère que vous reviendrez m'aider de temps en temps. Oh, et s'il vous plaît, parler de mon délicieux Bouillon de Boeuf et Tempura à tous vos amis. À un de ces jours~";
+                close;
+        }
+        else
+        {
+                mes "[Cellette]";
+                mes "Venez déguster l'authentique cuisine d'Hugel! Profitez d'un grand bol bien chaud du délicieux Bouillon de Boeuf et Tempura~";
+                close;
+        }
 }
 
-hugel,76,134,3	script	Neha	101,{
+hugel,76,134,3        script        Neha        101,{
 
-	if(hg_odeng == 1)
-	{
-		if(countitem(584))
-		{
-			mes "[Neha]";
-			mes "Oh, you have a delivery";
-			mes "from Cellette, hm? Hmpf!";
-			mes "You're late! Don't you know";
-			mes "this soup isn't good if it";
-			mes "isn't steaming hot?";
-			next;
-			if(sex)
-			{
-				mes "[Neha]";
-				mes "But... You're a handsome";
-				mes "fellow, so I'll forgive you...";
-				mes "On one condition. Bring me";
-				mes "^FF00001 Whip^000000 with which to spank ";
-				mes "you. You better hurry, boy, or";
-				mes "I won't let you off that easy.";
-				set hg_odeng,6;
-				close;
-			}
-			else
-			{
-				mes "[Neha]";
-				mes "Yes, yes... You should";
-				mes "be punished. You should be";
-				mes "spanked. If you want to finish";
-				mes "your delivery, then bring me";
-				mes "^FF00001 Whip^000000 so that I can spank you";
-				mes "for your impertinence, girl!";
-				set hg_odeng,6;
-				close;
-			}
-		}
-		else
-		{
-			mes "[Neha]";
-			mes "Oh ho ho ho ho ho~";
-			mes "I just love cute little boys...";
-			mes "But for some reason, it";
-			mes "thrills me to torture them";
-			mes "a little bit as well. Hoho~";
-			close;
-		}
-	}
-	else if(hg_odeng == 6)
-	{
-		if(countitem(1960) && countitem(584)) //Whip and Skewer soup
-		{
-			mes "[Neha]";
-			mes "Finally... My soup!";
-			mes "And you brought me my Whip!";
-			mes "Don't worry, I'll only give you";
-			mes "just one hard spanking. It'll";
-			mes "be over before you know it~";
-			next;
-			mes "[Neha]";
-			mes "Ha!";
-			next;
-			mes "^3355FF*Slap*^000000";
-			percentheal -25,0;
-			next;
-			mes "[Neha]";
-			mes "Heeyah!!";
-			next;
-			mes "^3355FF*SLAP*^000000";
-			percentheal -25,0;
-			next;
-			mes "[Neha]";
-			mes "Ooh, did I accidentally";
-			mes "whip you twice? Heh heh...";
-			mes "Well, I'm satisfied. I'll go";
-			mes "ahead and tell Celette that";
-			mes "you did a good job... I hope";
-			mes "you come deliver my soup again~";
-			delitem 1960,1; //Whip
-			delitem 584,1; //Skewer soup
-			set hg_odeng,10;
-			close;
-		}
-		else
-		{
-			mes "[Neha]";
-			mes "^FF00001 Fish Cake Soup^000000...";
-			mes "^FF00001 Whip^000000... Is that too";
-			mes "much for a girl to ask?";
-			mes "I'm hungry, and I want to";
-			mes "hit somebody! What's wrong";
-			mes "with that, huh? Now hurry up!";
-			close;
-		}
-	}
-	else
-	{
-		mes "[Neha]";
-		mes "Oh ho ho ho ho ho~";
-		mes "I just love cute little boys...";
-		mes "But for some reason, it";
-		mes "thrills me to torture them";
-		mes "a little bit as well. Hoho~";
-		close;
-	}
-	
+        if(hg_odeng == 1)
+        {
+                if(countitem(584))
+                {
+                        mes "[Neha]";
+                        mes "Oh, vous avez une livraison de la part de Cellette, hum? Humpf! Vous êtes en retard! Vous ne savez pas que cette soupe n'est pas bonne si elle n'est pas chaude et fumante?";
+                        next;
+                        if(sex)
+                        {
+                                mes "[Neha]";
+                                mes "Mais... Comme vous êtes beau garçon, je vous pardonne... À une condition cependant. Apportez-moi ^FF00001 Fouet^000000 pour vous donner une correction. Dépêchez-vous, mon garçon, ou je ne vais pas vous lâcher de sitôt.";
+                                set hg_odeng,6;
+                                close;
+                        }
+                        else
+                        {
+                                mes "[Neha]";
+                                mes "Oui, oui... Vous devriez être puni. Vous méritez la fessée. Si vous souhaitez terminer votre livraison, alors apportez-moi ^FF00001 Fouet^000000 de sorte que je puisse vous donner une correction pour votre impertinence, ma fille!";
+                                set hg_odeng,6;
+                                close;
+                        }
+                }
+                else
+                {
+                        mes "[Neha]";
+                        mes "Oh ho ho ho ho ho~ J'adore les mignons petits garçons... Mais pour je ne sais quelle raison, ça me réjouit aussi de les torturer un peu. Hoho~";
+                        close;
+                }
+        }
+        else if(hg_odeng == 6)
+        {
+                if(countitem(1960) && countitem(584)) //Whip and Skewer soup
+                {
+                        mes "[Neha]";
+                        mes "Enfin... Ma soupe! Et vous m'avez apporté mon fouet! Ne vous inquiétez pas, je vais seulement vous donner un bon coup vif. Ce sera terminé avant même que vous ne vous en rendiez compte~";
+                        next;
+                        mes "[Neha]";
+                        mes "Ha!";
+                        next;
+                        mes "^3355FF*Slap*^000000";
+                        percentheal -25,0;
+                        next;
+                        mes "[Neha]";
+                        mes "Heeyah!!";
+                        next;
+                        mes "^3355FF*SLAP*^000000";
+                        percentheal -25,0;
+                        next;
+                        mes "[Neha]";
+                        mes "Ooh, vous aurai-je fouettés deux fois accidentellement? Heh heh... Bien, je suis satisfaite. J'irai voir Cellette et je lui dirai que vous avez fait du bon travail... J'espère que vous reviendrez livrer mon potage~";
+                        delitem 1960,1; //Whip
+                        delitem 584,1; //Skewer soup
+                        set hg_odeng,10;
+                        close;
+                }
+                else
+                {
+                        mes "[Neha]";
+                        mes "^FF00001 Bouillon de Boeuf et Tempura^000000...";
+                        mes "^FF00001 Fouet^000000... Est-ce trop demandé pour une jeune fille? J'ai faim, et je veux frapper quelqu'un! Quel est le problème avec ça, hein? Maintenant, dépêchez-vous!";
+                        close;
+                }
+        }
+        else
+        {
+                mes "[Neha]";
+                mes "Oh ho ho ho ho ho~ J'adore les mignons petits garçons... Mais pour je ne sais quelle raison, ça me réjouit aussi de les torturer un peu. Hoho~";
+                close;
+        }
+        
 }
 
-hugel,87,139,3	script	Maewan	86,{
+hugel,87,139,3        script        Maewan        86,{
 
-	if(hg_odeng == 2)
-	{
-		if(countitem(584))
-		{
-			mes "[Maewan]";
-			mes "Oh, finally, I've been";
-			mes "waiting for my order of";
-			mes "Fish Cake Soup from Cellette!";
-			mes "Aaaah, it smells oh so delicious~ ^FFFFFF ^000000";
-			next;
-			mes "[Maewan]";
-			mes "Argh, but you're late!";
-			mes "This is your fault, you";
-			mes "know that, right? Well,";
-			mes "it's not a big deal, but";
-			mes "I can forgive you if you";
-			mes "help me with my collection.";
-			next;
-			mes "[Maewan]";
-			mes "Just bring me";
-			mes "1 Bookclip in Memory,";
-			mes "alright? Oh, and don't";
-			mes "eat my soup before";
-			mes "you deliver it to me!";
-			set hg_odeng,7;
-			close;
-		}
-		else
-		{
-			mes "[Maewan]";
-			mes "I like to think of";
-			mes "myself as a man of";
-			mes "eclectic taste. I love";
-			mes "collecting strange and";
-			mes "unique items, and learning";
-			mes "all sorts of new things~";
-			close;
-		}
-	}
-	else if(hg_odeng == 7 )
-	{
-		if(countitem(584) && countitem(7015)) //Skewer soup and Bookclip in memory
-		{
-			mes "[Maewan]";
-			mes "Great, you really brought";
-			mes "me a Bookclip in Memory!";
-			mes "Yes, this'll make a fine";
-			mes "addition to my collection~";
-			mes "Oh, and give me my soup.";
-			mes "Thanks again for delivering~";
-			delitem 584,1; //Skewer soup
-			delitem 7015,1; //Bookclip in memory
-			set hg_odeng,10;
-			close;
-		}
-		else
-		{
-			mes "[Maewan]";
-			mes "I know it sounds unfair";
-			mes "of me to ask you to bring";
-			mes "^FF00001 Bookclip in Memory^000000 with";
-			mes "my ^FF0000Fish Cake Soup^000000, but well...";
-			next;
-			mes "[Maewan]";
-			mes "I'd feel left out if";
-			mes "I didn't do it. I know";
-			mes "all of Cellette's other";
-			mes "customers are asking the";
-			mes "people delivering their soup";
-			mes "for all sorts of crazy things.";
-			close;
-		}
-	}
-	else
-	{
-		mes "[Maewan]";
-		mes "I like to think of";
-		mes "myself as a man of";
-		mes "eclectic taste. I love";
-		mes "collecting strange and";
-		mes "unique items, and learning";
-		mes "all sorts of new things~";
-		close;
-	}
-	
+        if(hg_odeng == 2)
+        {
+                if(countitem(584))
+                {
+                        mes "[Maewan]";
+                        mes "Oh, finalement, j'ai bien fait d'attendre ma commande de Bouillon de Boeuf et Tempura de Cellette! Aaaah, ça sent si bon~";
+                        next;
+                        mes "[Maewan]";
+                        mes "Argh, mais vous êtes en retard! C'est de votre faute, vous savez ça, non? Eh bien, ce n'est pas une bonne affaire, mais je peux vous pardonner si vous m'aider avec ma collection.";
+                        next;
+                        mes "[Maewan]";
+                        mes "Apportez-moi juste";
+                        mes "1 Marque-Page,";
+                        mes "d'accord? Oh, et ne mangez pas ma soupe en route!";
+                        set hg_odeng,7;
+                        close;
+                }
+                else
+                {
+                        mes "[Maewan]";
+                        mes "J'aime à penser que je suis un homme au goût éclectique. J'aime récupérer des objets étranges et uniques, et apprendre toutes sortes de nouvelles choses~";
+                        close;
+                }
+        }
+        else if(hg_odeng == 7 )
+        {
+                if(countitem(584) && countitem(7015)) //Skewer soup and Bookclip in memory
+                {
+                        mes "[Maewan]";
+                        mes "Super, vous m'avez vraiment apporté un Marque-Page! Oui, cela fera une excellente pièce de plus à ma collection~ Oh, et donner moi ma soupe. Merci encore pour la prestation~";
+                        delitem 584,1; //Skewer soup
+                        delitem 7015,1; //Bookclip in memory
+                        set hg_odeng,10;
+                        close;
+                }
+                else
+                {
+                        mes "[Maewan]";
+                        mes "Je sais que ça parait injuste de ma part de vous demander de m'apporter 1 Marque-Page avec mon Bouillon de Boeuf et Tempura, mais bon...";
+                        next;
+                        mes "[Maewan]";
+                        mes "Je me sentirais à part si je ne le faisais pas. Je sais que tous les autres clients de Cellette demandent aux livreurs de potage toutes sortes de choses folles.";
+                        close;
+                }
+        }
+        else
+        {
+                mes "[Maewan]";
+                mes "J'aime à penser que je suis un homme au goût éclectique. J'aime récupérer des objets étranges et uniques, et apprendre toutes sortes de nouvelles choses~";
+                close;
+        }
+        
 }
 
-hugel,84,125,3	script	Layoma	700,{
+hugel,84,125,3        script        Layoma        700,{
 
-	if(hg_odeng == 3)
-	{
-		if(countitem(584))
-		{
-			mes "[Layoma]";
-			mes "You're here to deliver";
-			mes "my Fish Cake Soup?";
-			mes "How could you be so late?!";
-			mes "Don't you know that your";
-			mes "incompetence also reflects";
-			mes "on Cellette and her shop?!";
-			next;
-			mes "[Layoma]";
-			mes "I can't let you continue";
-			mes "delivering for Cellette";
-			mes "unless you prove that you're";
-			mes "dependable to me. Erm, bring";
-			mes "me ^FF00001 Mushroom Spore^000000, and";
-			mes "I'll forget this whole thing.";
-			set hg_odeng,8;
-			close;
-		}
-		else
-		{
-			mes "[Layoma]";
-			mes "I love singing songs,";
-			mes "and I love eating mushrooms.";
-			mes "For a person living in Hugel,";
-			mes "that's a pretty exciting life!";
-			close;
-		}
-	}
-	else if(hg_odeng == 8)
-	{
-		if(countitem(584) && countitem(921)) //Skewer soup and Mushroom spore
-		{
-			mes "[Layoma]";
-			mes "Great! You brought me";
-			mes "1 Mushroom Spore! This";
-			mes "will taste perfect with my";
-			mes "bowl of Fish Cake Soup~";
-			next;
-			mes "[Layoma]";
-			mes "Alright, maybe I can";
-			mes "count on you to work";
-			mes "for my roommate Cellette";
-			mes "a little while longer. Oh, and";
-			mes "please tell her to not to come^FFFFFF ^000000 home so late all the time, okay?";
-			delitem 921,1; //Mushroom spore
-			delitem 584,1; //Skewer soup
-			set hg_odeng,10;
-			close;
-		}
-		else
-		{
-			mes "[Layoma]";
-			mes "Hey! I thought you";
-			mes "wanted to prove that";
-			mes "you're a reliable and";
-			mes "trustworthy person! Go";
-			mes "and bring me 1 Mushroom";
-			mes "Spore with my Fish Cake Soup!";
-			close;
-		}
-	}
-	else
-	{
-		mes "[Layoma]";
-		mes "I love singing songs,";
-		mes "and I love eating mushrooms.";
-		mes "For a person living in Hugel,";
-		mes "that's a pretty exciting life!";
-		close;
-	}
-	
+        if(hg_odeng == 3)
+        {
+                if(countitem(584))
+                {
+                        mes "[Layoma]";
+                        mes "Êtes-vous ici pour livrer mon Bouillon de Boeuf et Tempura? Comment pouvez-vous être tellement en retard?! Ne savez-vous pas que votre incompétence nuit à la réputation de Cellette et de sa boutique?!";
+                        next;
+                        mes "[Layoma]";
+                        mes "Je ne peux vous laisser continuer de livrer pour Cellette, sauf si vous me prouvez que vous êtes digne de confiance. Euh, apportez-moi 1 poignée de Spores de Champignon, et j'oublierai toute cette histoire.";
+                        set hg_odeng,8;
+                        close;
+                }
+                else
+                {
+                        mes "[Layoma]";
+                        mes "J'aime pousser la chansonnette, et j'adore manger des champignons. Pour une personne vivant à Hugel, c'est une vie plutôt excitante!";
+                        close;
+                }
+        }
+        else if(hg_odeng == 8)
+        {
+                if(countitem(584) && countitem(921)) //Skewer soup and Mushroom spore
+                {
+                        mes "[Layoma]";
+                        mes "Super! Vous m'avez apporté des Spores de Champignon! Ce sera exquis avec mon bol de Bouillon de Boeuf et Tempura~";
+                        next;
+                        mes "[Layoma]";
+                        mes "Bon, peut-être que je peux compter sur vous pour travailler encore quelques temps pour ma colocataire Cellette. Oh, et s'il vous plaît, dites-lui de ne plus rentrer si tard tout le temps, ok?";
+                        delitem 921,1; //Mushroom spore
+                        delitem 584,1; //Skewer soup
+                        set hg_odeng,10;
+                        close;
+                }
+                else
+                {
+                        mes "[Layoma]";
+                        mes "Hé! Je croyais que vous vouliez me prouver que vous êtes une personne fiable et digne de confiance! Rapportez-moi 1 poignée de Spores de Champignon avec mon Bouillon de Boeuf et Tempura!";
+                        close;
+                }
+        }
+        else
+        {
+                mes "[Layoma]";
+                mes "J'aime pousser la chansonnette, et j'adore manger des champignons. Pour une personne vivant à Hugel, c'est une vie plutôt excitante!";
+                close;
+        }
+        
 }
 
-hugel,102,161,3	script	Erjan	100,{
+hugel,102,161,3        script        Erjan        100,{
 
-	if(hg_odeng == 4)
-	{
-		if(countitem(584))
-		{
-			mes "[Erjan]";
-			mes "Well, I thought you'd";
-			mes "never come to deliver";
-			mes "my Fish Cake Soup. You're";
-			mes "awfully late, you know that?";
-			mes "Still, the smell is just so^FFFFFF ^000000 appetizing, I can barely resist...";
-			next;
-			mes "[Erjan]";
-			mes "Hm, but as the first son";
-			mes "of the Franchefeschu family,";
-			mes "I cannot eat this soup unless";
-			mes "it is suitably prepared. Go!";
-			mes "I command you to bring me";
-			mes "the commoner's ^FF0000China^000000!";
-			next;
-			set hg_odeng,9;
-			mes "[Erjan]";
-			mes "Realize that I'm compromising";
-			mes "with you by asking you to bring";
-			mes "me regular China... I always";
-			mes "enjoy my meals on the finest";
-			mes "glass and tableware available.";
-			mes "That's how we noblemen live~";
-			close;
-		}
-		else
-		{
-			mes "[Erjan]";
-			mes "I am Erjan, first son of";
-			mes "the noble Franchefeschu";
-			mes "family. Commoner, if you";
-			mes "do not have any business";
-			mes "with me, then leave me be,";
-			mes "and do whatever it is you do.";
-			close;
-		}
-	}
-	else if(hg_odeng == 9)
-	{
-		if(countitem(584) && countitem(736)) //Skewer soup and China
-		{
-			mes "[Erjan]";
-			mes "Ah, so you've delivered";
-			mes "my Fish Cake Soup with some";
-			mes "proper China. Yes, this pleases";
-			mes "me. Now, I may enjoy this meal";
-			mes "in a manner befitting the";
-			mes "Franchefeschu family.";
-			next;
-			mes "[Erjan]";
-			mes "Although this China is";
-			mes "below my standards, I also";
-			mes "understand that this is the";
-			mes "best you can do. Yes, to accept";
-			mes "this is my... noblesse oblige.";
-			next;
-			mes "[Erjan]";
-			mes "You are dismissed.";
-			mes "Please take your leave,";
-			mes "and return to Cellette";
-			mes "with my noble thanks.";
-			delitem 736,1; //China
-			delitem 584,1; //Skewer soup
-			set hg_odeng,10;
-			close;
-		}
-		else
-		{
-			mes "[Erjan]";
-			mes "Must I repeat myself?";
-			mes "Bring me my ^FF0000Fish Cake Soup^000000";
-			mes "with ^FF00001 China^000000 so that I may";
-			mes "properly enjoy my meal.";
-			close;
-		}
-	}
-	else
-	{
-		mes "[Erjan]";
-		mes "I am Erjan, first son of";
-		mes "the noble Franchefeschu";
-		mes "family. Commoner, if you";
-		mes "do not have any business";
-		mes "with me, then leave me be,";
-		mes "and do whatever it is you do.";
-		close;
-	}
+        if(hg_odeng == 4)
+        {
+                if(countitem(584))
+                {
+                        mes "[Erjan]";
+                        mes "Eh bien, je commençais à croire que vous ne m'apporteriez jamais mon Bouillon de Boeuf et Tempura. Vous êtes très en retard, vous savez ça? Cependant, l'odeur est tellement appétissante, j'ai du mal à résister...";
+                        next;
+                        mes "[Erjan]";
+                        mes "Hm, mais en tant que fils aîné de la famille Franchefeschu, je ne peux manger cette soupe à moins qu'elle ne soit convenablement préparée. Aller! Je vous ordonne de me porter de la ^FF0000Porcelaine^000000 de roturier!";
+                        next;
+                        set hg_odeng,9;
+                        mes "[Erjan]";
+                        mes "Rendez-vous compte que j'accepte un compromis avec vous en vous demandant de m'apporter de la porcelaine ordinaire... J'ai toujours aimé mes repas avec des verres de première qualité et de la vaisselle appropriée. C'est ainsi que nous vivons, nous les nobles~";
+                        close;
+                }
+                else
+                {
+                        mes "[Erjan]";
+                        mes "Je suis Erjan, le fils aîné de la noble famille Franchefeschu. Roturier, si vous n'avez rien à faire avec moi, de grâce laissez-moi, et retourner vaquer à vos occupations.";
+                        close;
+                }
+        }
+        else if(hg_odeng == 9)
+        {
+                if(countitem(584) && countitem(736)) //Skewer soup and China
+                {
+                        mes "[Erjan]";
+                        mes "Oh, donc vous avez livré mon Bouillon de Boeuf et Tempura avec de la Porcelaine convenable. Oui, cela me plaît. Maintenant, je peux jouir de ce repas digne de la famille Franchefeschu.";
+                        next;
+                        mes "[Erjan]";
+                        mes "Bien que cette Porcelaine soit en-dessous de mes critères, je comprends aussi que c'est le mieux que vous puissiez faire. Oui, je resterai digne malgré cette petite contrariété.";
+                        next;
+                        mes "[Erjan]";
+                        mes "Vous êtes congédié. Veuillez vous retirer, et retourner auprès de Cellette avec tous mes nobles remerciements.";
+                        delitem 736,1; //China
+                        delitem 584,1; //Skewer soup
+                        set hg_odeng,10;
+                        close;
+                }
+                else
+                {
+                        mes "[Erjan]";
+                        mes "Dois-je me répéter? Apportez-moi mon ^FF0000Bouillon de Boeuf et Tempura^000000 avec de la ^FF0000Porcelaine^000000, afin que je puisse jouir correctement de mon repas.";
+                        close;
+                }
+        }
+        else
+        {
+                mes "[Erjan]";
+                mes "Je suis Erjan, le fils aîné de la noble famille Franchefeschu. Roturier, si vous n'avez rien à faire avec moi, de grâce laissez-moi, et retourner vaquer à vos occupations.";
+                close;
+        }
 }
 
 //-------------------------------------------------------------------------
