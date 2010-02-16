@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= iRO Valentine's Day Event (2009)
 //===== By: ==================================================
@@ -23,155 +25,90 @@
 //============================================================
 
 // Marco Bassinio (Chocolate/Chocolate Box maker)
-prontera,164,174,4	script	Trader#Val09	58,{
+prontera,164,174,4	script	Marco Bassinio::Trader#Val09	58,{
 	mes "[Marco Bassinio]";
-	mes "Hey, folks! Here's something you don't see everyday!";
-	mes "Something you can never find in Rune-Midgarts!";
-	mes "Something that makes you happy with just one bite!";
+	mes "Oyez, oyez! Voici quelque chose d'unique! Quelque chose d'attirant! Quelque chose de... Oserai-je le dire? Oui, messieurs, mesdames, quelque chose de sexy! Nulle part ailleurs dans Rune-Midgard vous ne trouverez son pareil! Croyez-moi, une seule bouchée suffira à vous convaincre!";
 	next;
 	mes "[Marco Bassinio]";
-	mes "It's the perfect dessert and the perfect gift for loved ones.";
-	mes "High-quality, traditional homemade chocolate only 5000z each!";
+	mes "Oh oui, je vous parle de la friandise parfaite, du joyau sur le gâteau de l'amour! Pour les gastronomes et les amoureux, voici du chocolat fait maison! Spécialement pour les connaisseurs! Et seulement 5000z pièce!";
 	next;
-	switch(select("I'll take it, please!:I want to wrap the chocolate!:End trading.")) {
+	switch(select("J'en voudrais, s'il vous plaît!:Je voudrais faire emballer du chocolat.!:Quitter la conversation.")) {
 		case 1:
 			mes "[Marco Bassinio]";
-			mes "Ahaha, my dear.";
-			mes "This chocolate is";
-			mes "nothing like others.";
-			mes "Every piece bears the";
-			mes "devotion of the person";
-			mes "who made it!";
+			mes "Haha! Très "+ ( sex ? cher" : "chère" ) +", ce chocolat ne saurait être comparé à nul autre! Chaque morceau est fait avec dévotion, et votre palet frétillera devant tant de délicatesse et d'amour du travail bien fait!";
 			next;
 			mes "[Marco Bassinio]";
-			mes "So, that's why I can't sell";
-			mes "more than 5 of them at a time.";
-			mes "If you really really want more,";
-			mes "then talk to me again.";
-			mes "How many do you want anyway?";
+			mes "C'est pour cette raison que je ne pourrai pas vous en vendre plus de cinq morceaux. Revenez me voir si vous en voulez vraiment plus. Mais dites-moi... Combien en voulez-vous au juste?";
 			next;
 			while(.@input <= 0 || .@input > 5) {
 				input .@input;
 				if (.@input < 1) {
 					mes "[Marco Bassinio]";
-					mes "Oh, it's such a shame!";
-					mes "I'm sure you'll miss";
-					mes "this opportunity and";
-					mes "regret you didn't buy it.";
+					mes "Oh, quel dommage! Vous n'avez pas idée de l'opportunité que vous laissez passer! Vous le regretterez, croyez-moi!";
 					next;
 					mes "[Marco Bassinio]";
-					mes "Remember, you can never";
-					mes "find this anywhere else!";
-					mes "Come back anytime,";
-					mes "when you change your mind.";
+					mes "N'oubliez pas: vous n'en trouverez de pareils nulle part ailleurs! Revenez quand vous voulez si vous changez d'avis.";
 					close;
 				}
 				if (.@input > 5) {
 					mes "[Marco Bassinio]";
-					mes "Ugh.. Didn't I tell you?";
-					mes "5 is the maximum!";
-					mes "I can't sell more than";
-					mes "that to the same person.";
+					mes "Oh mais... Ne vous avais-je pas prévenu"+ ( sex ? "" : "e" ) +"? Je ne peux vendre que cinq morceaux par personne.";
 					next;
 					mes "[Marco Bassinio]";
-					mes "And you know it's not";
-					mes "like an everyday meal.";
-					mes "Eating too much is not";
-					mes "really good for you.";
+					mes "Vous savez, il s'agit de quelque chose de vraiment unique. Trop en manger n'est pas vraiment conseillé.";
 					next;
 				}
 			}
 			if (!checkweight(558, .@input)) {
 				mes "[Marco Bassinio]";
-				mes "You're carrying too many items.";
-				mes "Please use the Kafra Services.";
+				mes "Vous portez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra.";
 				close;
 			}
 			set .@price, .@input * 5000;
 			if (Zeny < .@price) {
 				mes "[Marco Bassinio]";
-				mes "Looks like you don't have";
-				mes "enough zeny with ya.";
-				mes "Maybe you should borrow";
-				mes "some zeny from a friend.";
-				mes "Cuz, I'm not gonna";
-				mes "be here everyday.";
+				mes "Oh mais on dirait que vous n'avez pas assez de zénys sur vous. Vous devriez vous dépêcher d'en emprunter à un de vos proches: je ne serai pas là tous les jours!";
 				close;
 			}else{
 				mes "[Marco Bassinio]";
-				mes "Good for you!";
-				mes "It's also perfect as a gift!";
-				mes "You know you can't get this";
-				mes "kind of chocolate normally.";
+				mes "Fantastique! Cela fera un cadeau parfait! Vous savez, il est normalement impossible d'acheter du chocolat de cette qualité...";
 				next;
 				mes "[Marco Bassinio]";
-				mes "If you want more,";
-				mes "you should come back.";
-				mes "Might be a good idea to";
-				mes "buy some more while";
-				mes "you have a chance...!";
+				mes "Revenez si vous en voulez plus. Vous devriez en profiter tant que vous en avez l'occasion...";
 				set Zeny,Zeny - .@price;
 				getitem 558,.@input;
 				close;
 			}
 		case 2:
 			mes "[Marco Bassinio]";
-			mes "If you want to gift-wrap";
-			mes "the chocolate, of course,";
-			mes "you need chocolate,";
-			mes "plus, wrapping paper,";
-			mes "wrapping strap and a box.";
+			mes "Si vous voulez emballer du chocolat pour l'offrir, il vous faudra bien sûr le chocolat en question, mais aussi un emballage cadeau, mais aussi du ruban et une boîte.";
 			next;
 			mes "[Marco Bassinio]";
-			mes "You also need to pay";
-			mes "500 zeny to carve your";
-			mes "name on the box.";
-			mes "Are you all prepared...?";
+			mes "Il vous faudra aussi payer 500 zénys pour inscrire votre nom sur la boîte. Avez-vous tout cela?";
 			next;
 			if(countitem(7175) < 1 || countitem(7174) < 1 || countitem(7948) < 1 || Zeny < 500) {
 				mes "[Marco Bassinio]";
-				mes "Hmm.. Looks like you don't";
-				mes "have enough materials to";
-				mes "decorate the gift box..";
-				mes "You can't just put your gift";
-				mes "into some plain looking box..";
-				mes "Don't you think?";
+				mes "Hum... On dirait que vous n'avez pas tout ce qu'il faut vous faire votre emballage. Vous ne pouvez pas offrir du chocolat dans une simple boîte, vous ne pensez pas?";
 				next;
 				mes "[Marco Bassinio]";
-				mes "You need to bring some";
-				mes "wrapping paper,";
-				mes "wrapping strap, and a box.";
-				mes "Oh, also bring 500 zeny,";
-				mes "and don't forget to bring your";
-				mes "true loving heart with you!!";
+				mes "Il faudra que vous m'apportiez du Papier Cadeau, du ruban, et une boîte. Oh, et il me faudra aussi 500 zénys. Et n'oubliez pas de venir avec votre "+ ( sex ? "amoureux" : "amoureuse" ) +"!";
 				close;
 			}
 			if(countitem(558) < 1) {
 				mes "[Marco Bassinio]";
-				mes "Hey, look, adventurer!";
-				mes "I can't create something right away!";
-				mes "You know I'm not an alchemist or anything.";
+				mes "Oh mais je suis désolé mais je ne peux pas créer quelque chose comme ça! Je ne suis pas un alchimiste, et encore moins un magicien, vous savez?";
 				next;
 				mes "[Marco Bassinio]";
-				mes "You're not saying that you";
-				mes "want an empty chocolate box";
-				mes "without any chocolate in it,";
-				mes "am I right?";
+				mes "Mais ôtez-moi d'un doute... Vous n'êtes pas en train de me dire que vous voulez une boîte à chocolats sans chocolats, n'est-ce pas?";
 				close;				
 			}
 			if (!checkweight(12744,1)) {
 				mes "[Marco Bassinio]";
-				mes "You're carrying too many items.";
-				mes "Please use the Kafra Services.";
+				mes "Vous portez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra.";
 				close;
 			}
 			mes "[Marco Bassinio]";
-			mes "Here, look!";
-			mes "It's your chocolate box";
-			mes "with your name on it.";
-			mes "Isn't it fabulous?";
-			mes "See, your name looks";
-			mes "great on the box!";
+			mes "Ah, voilà! Voici votre boîte à chocolats, avec votre nom inscrit dessus! N'est-ce pas merveilleux? Regardez comme le nom ressort sur la boîte!";
 			next;
 			delitem 558,1;
 			delitem 7175,1;
@@ -180,291 +117,194 @@ prontera,164,174,4	script	Trader#Val09	58,{
 			set Zeny,Zeny-500;
 			getnameditem 12744,strcharinfo(0);
 			mes "[Marco Bassinio]";
-			mes "Happy Valentine's Day!";
-			mes "Valentine's the reason I came back.";
+			mes "Joyeuse Saint Valentin! Je ne suis revenu que pour cette fête!";
 			close;
 		case 3:
 			mes "[Marco Bassinio]";
-			mes "Oh, it's such a shame!";
-			mes "I'm sure you'll miss";
-			mes "this opportunity and";
-			mes "regret you didn't buy it.";
+			mes "Oh, quel dommage! Vous n'avez pas idée de l'opportunité que vous laissez passer! Vous le regretterez, croyez-moi!";
 			next;
 			mes "[Marco Bassinio]";
-			mes "Remember, you can never";
-			mes "find this anywhere else!";
-			mes "Come back anytime,";
-			mes "when you change your mind.";
+			mes "N'oubliez pas: vous n'en trouverez de pareils nulle part ailleurs! Revenez quand vous voulez si vous changez d'avis.";
 			close;
 	}
 }
 
 // Packs Trader (Sells Wrapping Paper, Lace, and Box)
-prontera,147,171,5	script	Packs Trader#Val09	58,{
-	mes "[Packs Trader]";
-	mes "Hello.";
-	mes "I am a Packs Trader,";
-	mes "I sell paper boxes and";
-	mes "supplies for packing presents.";
+prontera,147,171,5	script	Emballages Cadeau::Packs Trader#Val09	58,{
+	mes "[Emballages Cadeau]";
+	mes "Bonjour. Je vends des emballages cadeau: du papier, des boîtes, et du ruban.";
 	next;
 	while(1) {
-		mes "[Packs Trader]";
-		mes "Do you have something to buy?";
+		mes "[Emballages Cadeau]";
+		mes "Voulez-vous m'acheter quelque chose?";
 		next;
-		switch(select("Packing Paper:Packing Ribbon:Box:Cancel.")) {
+		switch(select("Emballage Cadeau:Ruban:Boîte:Quitter la Conversation.")) {
 			case 1:
-				mes "[Packs Trader]";
-				mes "It's 200 zeny for";
-				mes "1 Packing Paper.";
-				mes "How many do you want?";
-				mes "You can't buy more";
-				mes "than 10 items at once.";
+				mes "[Emballages Cadeau]";
+				mes "Je demande 200 zénys par emballage cadeau. Combien en voulez-vous? Vous ne pouvez en acheter plus de dix à la fois.";
 				next;
 				input .@input;
 				if (.@input <= 0) {
-					mes "[Packs Trader]";
-					mes "Nothing to buy.";
-					mes "Come back when";
-					mes "you need something.";
+					mes "[Emballages Cadeau]";
+					mes "Vous ne voulez rien acheter? Eh bien revenez quand vous aurez changé d'avis.";
 					close;
 				}
 				if (.@input > 10) {
-					mes "[Packs Trader]";
-					mes "I told you not to buy more than 10...";
+					mes "[Emballages Cadeau]";
+					mes "Comme je vous l'ai dit, je ne peux pas en vendre plus de dix à la fois...";
 					next;
 					break;
 				}
 				if (!checkweight(7175,.@input)) {
-					mes "[Packs Trader]";
-					mes "You're carrying too many items.";
-					mes "Please use the Kafra Services.";
+					mes "[Emballages Cadeau]";
+					mes "Vous portez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra.";
 					close;
 				}
 				set .@price, .@input * 200;
 				if (Zeny < .@price) {
-					mes "[Packs Trader]";
-					mes "You don't have enough money.";
-					mes "Please check your wallet.";
+					mes "[Emballages Cadeau]";
+					mes "Mais, regardez dans votre porte-feuille: vous n'avez pas assez d'argent!";
 					next;
 					break;
 				}else{
-					mes "[Packs Trader]";
-					mes "Here they are.";
-					mes "Hope it makes your";
-					mes "Valentine's Day";
-					mes "more pleasing!";
+					mes "[Emballages Cadeau]";
+					mes "Et voilà pour vous! J'espère que vous passerez une bonne Saint Valentin!";
 					set Zeny,Zeny-.@price;
 					getitem 7175,.@input;
 					next;
 					break;
 				}
 			case 2:
-				mes "[Packs Trader]";
-				mes "It's 200 zeny for";
-				mes "1 Packing Ribbon.";
-				mes "How many do you want?";
-				mes "You can't buy more";
-				mes "than 10 items at once.";
+				mes "[Emballages Cadeau]";
+				mes "Je demande 200 zénys par ruban. Combien en voulez-vous? Vous ne pouvez en acheter plus de dix à la fois.";
 				next;
 				input .@input;
 				if (.@input <= 0) {
-					mes "[Packs Trader]";
-					mes "Nothing to buy.";
-					mes "Come back when";
-					mes "you need something.";
+					mes "[Emballages Cadeau]";
+					mes "Vous ne voulez rien acheter? Eh bien revenez quand vous aurez changé d'avis.";
 					close;
 				}
 				if (.@input > 10) {
-					mes "[Packs Trader]";
-					mes "I told you not to buy more than 10...";
+					mes "[Emballages Cadeau]";
+					mes "Comme je vous l'ai dit, je ne peux pas en vendre plus de dix à la fois...";
 					next;
 					break;
 				}
 				if (!checkweight(7174,.@input)) {
-					mes "[Packs Trader]";
-					mes "You're carrying too many items.";
-					mes "Please use the Kafra Services.";
+					mes "[Emballages Cadeau]";
+					mes "Vous portez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra.";
 					close;
 				}
 				set .@price, .@input * 200;
 				if (Zeny < .@price) {
-					mes "[Packs Trader]";
-					mes "You don't have enough money.";
-					mes "Please check your wallet.";
+					mes "[Emballages Cadeau]";
+					mes "Mais, regardez dans votre porte-feuille: vous n'avez pas assez d'argent!";
 					next;
 					break;
 				}else{
-					mes "[Packs Trader]";
-					mes "Here they are.";
-					mes "Hope it makes your";
-					mes "Valentine's Day";
-					mes "more pleasing!";
+					mes "[Emballages Cadeau]";
+					mes "Et voilà pour vous! J'espère que vous passerez une bonne Saint Valentin!";
 					set Zeny,Zeny-.@price;
 					getitem 7174,.@input;
 					next;
 					break;
 				}
 			case 3:
-				mes "[Packs Trader]";
-				mes "It's 600 zeny for";
-				mes "1 Box.";
-				mes "How many do you want?";
-				mes "You can't buy more";
-				mes "than 10 items at once.";
+				mes "[Emballages Cadeau]";
+				mes "Je demande 600 zénys par boîte. Combien en voulez-vous? Vous ne pouvez en acheter plus de dix à la fois.";
 				next;
 				input .@input;
 				if (.@input <= 0) {
-					mes "[Packs Trader]";
-					mes "Nothing to buy.";
-					mes "Come back when";
-					mes "you need something.";
+					mes "[Emballages Cadeau]";
+					mes "Vous ne voulez rien acheter? Eh bien revenez quand vous aurez changé d'avis.";
 					close;
 				}
 				if (.@input > 10) {
-					mes "[Packs Trader]";
-					mes "I told you not to buy more than 10...";
+					mes "[Emballages Cadeau]";
+					mes "Comme je vous l'ai dit, je ne peux pas en vendre plus de dix à la fois...";
 					next;
 					break;
 				}
 				if (!checkweight(7948,.@input)) {
-					mes "[Packs Trader]";
-					mes "You're carrying too many items.";
-					mes "Please use the Kafra Services.";
+					mes "[Emballages Cadeau]";
+					mes "Vous portez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra.";
 					close;
 				}
 				set .@price, .@input * 600;
 				if (Zeny < .@price) {
-					mes "[Packs Trader]";
-					mes "You don't have enough money.";
-					mes "Please check your wallet.";
+					mes "[Emballages Cadeau]";
+					mes "Mais, regardez dans votre porte-feuille: vous n'avez pas assez d'argent!";
 					next;
 					break;
 				}else{
-					mes "[Packs Trader]";
-					mes "Here they are.";
-					mes "Hope it makes your";
-					mes "Valentine's Day";
-					mes "more pleasing!";
+					mes "[Emballages Cadeau]";
+					mes "Et voilà pour vous! J'espère que vous passerez une bonne Saint Valentin!";
 					set Zeny,Zeny-.@price;
 					getitem 7948,.@input;
 					next;
 					break;
 				}	
 			case 4:
-				mes "[Packs Trader]";
-				mes "Goodbye!";
-				mes "And enjoy your";
-				mes "Valentine's Day.";
+				mes "[Emballages Cadeau]";
+				mes "Au revoir, et bonne Saint Valentin!";
 				close;
 		}
 	}
 }
 
 // Event Ring Maker (Makes ring for players)
-prontera,154,185,5	script	Event Ring Maker#Val09	721,{
+prontera,154,185,5	script	Anneaux (Saint Valentin)::Event Ring Maker#Val09	721,{
 	if (BaseLevel < 75) {
-		mes "[Event Ring Maker]";
-		mes "Hello, I only make the";
-		mes "Valentine rings to those";
-		mes "experienced adventurers";
-		mes "Level 75 or above.";
+		mes "[Anneaux]";
+		mes "Oh, désolée mais je ne peux forger des anneaux de la Saint Valentin que pour des aventuriers de niveau 75 ou plus.";
 		next;
-		mes "[Event Ring Maker]";
-		mes "You're not fully";
-		mes "experienced yet.";
-		mes "Come back when you're";
-		mes "experienced enough to";
-		mes "handle the quests.";
+		mes "[Anneaux]";
+		mes "Vous n'avez pas encore assez d'expérience. Revenez lorsque vous serez prêt"+ ( sex ? "" : "e" ) +" pour ma quête.";
 		close;
 	}
 	
 	if (iROval09ring >= 1) {
-		mes "[Event Ring Maker]";
-		mes "The box with the ring,";
-		mes "carved with your name,";
-		mes "is for the one you love.";
+		mes "[Anneaux]";
+		mes "La boîte portant votre nom est destinée à "+ ( sex ? "celle" : "celui" ) +" que vous aimez.";
 		next;
-		mes "[Event Ring Maker]";
-		mes "As for the rings that you";
-		mes "receive from others, they";
-		mes "should all be registered";
-		mes "with the Vote Manager.";
-		mes "She is standing near";
-		mes "the Prontera Fountain.";
+		mes "[Anneaux]";
+		mes "Quant aux anneaux que l'on pourra vous offrir, ils devraient tous être enregistrés auprès de la gérante des votes. Elle devrait se trouver près de la fontaine de Prontera.";
 		next;
-		mes "[Event Ring Maker]";
-		mes "Only the most popular";
-		mes "male and female are";
-		mes "subjected to getting rewards.";
-		mes "Be aware, and always";
-		mes "try to stay popular!";
+		mes "[Anneaux]";
+		mes "Seuls l'homme et la femme la plus populaire de Rune-Midgard obtiendront une récompense. Faites bien attention à toujours rester populaire!";
 		close;
 	}
 	
-	mes "[Event Ring Maker]";
-	mes "Hi, there, how are ya?";
-	mes "Come to me if you're";
-	mes "interested in the event,";
-	mes "'Who's Valentine's Hottest?'";
+	mes "[Anneaux]";
+	mes "Hé, bonjour! Comment allez-vous? Venez me voir si vous voulez participer au concours du couple le plus torride de la Saint Valentin!";
 	next;
-	mes "[Event Ring Maker]";
-	mes "I make the most precious";
-	mes "rings that you can give";
-	mes "to your sweethearts.";
-	mes "Those rings are very special";
-	mes "because I carve";
-	mes "your names on them!";
+	mes "[Anneaux]";
+	mes "Je peux confectionner des anneaux de grande qualité que vous pourrez offrir à votre "+ ( sex ? "belle" : "chéri" ) +". Ils sont uniques: j'y graverai même vos noms!";
 	next;
-	mes "[Event Ring Maker]";
-	mes "Isn't it exciting?";
-	mes "Isn't it such a brilliant idea?";
-	mes "Give these special rings";
-	mes "to your sweethearts!";
+	mes "[Anneaux]";
+	mes "N'est-ce pas excitant? Pouvoir offrir un tel anneau à votre "+ ( sex ? "belle" : "chéri" ) +"...";
 	next;
-	mes "[Event Ring Maker]";
-	mes "You should hurry 'cuz";
-	mes "this event will only";
-	mes "last for two weeks.";
-	mes "Give that special someone";
-	mes "a gift of a Valentine's ring.";
+	mes "[Anneaux]";
+	mes "Vous devriez vous dépêcher car cet événement ne durera que deux semaines. N'hésitez pas! Offrez un anneau de la Saint Valentin à "+ ( sex ? "celle" : "celui" ) +" que vous aimez!";
 	next;
-	mes "[Event Ring Maker]";
-	mes "Remember, you can only";
-	mes "generate the ring once.";
-	mes "You also need Wrapping Paper,";
-	mes "Wrapping Strap and a Box";
-	mes "to make the ring.";
+	mes "[Anneaux]";
+	mes "Oh, et je ne pourrai vous forger qu'un seul anneau. Il vous faudra aussi du papier-cadeau, des boîtes, et du ruban pour emballer l'anneau.";
 	next;
-	mes "[Event Ring Maker]";
-	mes "So you better be sure";
-	mes "of who you give this to.";
-	mes "By the way,";
-	mes "It costs 1,000 zeny.";
-	mes "Would you like to make one?";
+	mes "[Anneaux]";
+	mes "Vous avez intérêt un bien réfléchir à qui vous voudrez l'offrir... Quoi qu'il en soit, cet anneau coûte 1,000 zénys. En voulez-vous un?";
 	next;
-	if(select("Hmm.. I gotta give it a second thought...:Sure.") == 1) {
-		mes "[Event Ring Maker]";
-		mes "Alrighty!";
-		mes "You can't put a rush";
-		mes "on such a thing like this.";
-		mes "Think about what";
-		mes "you truly want.";
-		mes "Just follow your heart!";
+	if(select("Hum... Je vais y réfléchir...:Bien sûr.") == 1) {
+		mes "[Anneaux]";
+		mes "D'accord! Vous avez raison: mieux vaut toujours y penser à deux fois lorsque l'on touche aux choses de l'amour. Réfléchissez à ce que vous voulez vraiment, et surtout, suivez ce que vous dit votre coeur!";
 		close;
 	}
 	if(countitem(7175) < 1 || countitem(7174) < 1 || countitem(7948) < 1 || Zeny < 1000) {
-		mes "[Event Ring Maker]";
-		mes "Well, you don't have";
-		mes "enough materials";
-		mes "to make a gift box.";
-		mes "Check what you have,";
-		mes "and come back later";
-		mes "with all the materials.";
+		mes "[Anneaux]";
+		mes "Oh, mais vous n'avez pas de quoi faire un emballage digne de ce nom pour l'anneau. Vérifiez tout ça, et revenez me voir quand vous aurez tout.";
 		close;
 	}
-	mes "[Event Ring Maker]";
-	mes "Okie Dokie!";
-	mes "I'll make it right away.";
+	mes "[Anneaux]";
+	mes "Bien bien! Je vous fais ça sans attendre!";
 	next;
 	delitem 7175,1;
 	delitem 7174,1;
@@ -476,102 +316,69 @@ prontera,154,185,5	script	Event Ring Maker#Val09	721,{
 	}else{
 		getnameditem 12743,strcharinfo(0);
 	}
-	mes "[Event Ring Maker]";
-	mes "Here, the most precious";
-	mes "ring in the world!";
-	mes "Don't forget, you can never";
-	mes "make this ring again.";
+	mes "[Anneaux]";
+	mes "Et voilà! Les anneaux les plus précieux au monde! Et n'oubliez pas: vous ne pourrez jamais en avoir de semblables!";
 	next;
-	mes "[Event Ring Maker]";
-	mes "You must pick out the one";
-	mes "that you really really love,";
-	mes "and give this ring";
-	mes "to that person.";
+	mes "[Anneaux]";
+	mes "Allez trouver la personne qui fait vibrer votre coeur, et offrez-lui cet anneau.";
 	next;
-	mes "[Event Ring Maker]";
-	mes "Of course, you've got to";
-	mes "get rings from others,";
-	mes "that's the way you can";
-	mes "participate in the voting, right?";
-	mes "Challenge yourself to become";
-	mes "Valentine's Hottest!";
+	mes "[Anneaux]";
+	mes "Et si vous avez de la chance, d'autres personnes vous offriront un anneau: si vous en recevez suffisamment, vous serez peut-être "+ ( sex ? "élu Valentin" : "élue Valentine" ) +" de l'année!";
 	close;	
 }
 
 // Valentine Vote Manager (Registers votes)
-prontera,157,185,4	script	Valentine Vote Manager#v	113,{
-	mes "[Valentine Vote Manager]";
-	mes "Hello, I'm the Valentine's";
-	mes "Vote Manager.";
-	mes "I'm in charge of collecting";
-	mes "rings for this event!";
+prontera,157,185,4	script	Votes (Saint Valentin)::Valentine Vote Manager#v	113,{
+	mes "[Votes de la Saint Valentin]";
+	mes "Bonjour, je suis en charge de l'élection de la Saint Valentin! J'ai pour tâche de collecter les anneaux pour le concours.";
 	next;
-	mes "[Valentine Vote Manager]";
-	mes "I register the rings";
-	mes "you get from others";
-	mes "and I calculate the";
-	mes "total number of rings.";
+	mes "[Votes de la Saint Valentin]";
+	mes "Je note le nombre d'anneau que l'on vous a offerts et je comptabilise le tout.";
 	next;
-	mes "[Valentine Vote Manager]";
-	mes "You know what I do besides";
-	mes "just counting those rings?";
-	mes "I can tell you the adventurer's";
-	mes "name who's got the";
-	mes "most number of votes.";
+	mes "[Votes de la Saint Valentin]";
+	mes "Je ne fais pas que les collecter: je détermine aussi quel aventurier en a reçu le plus cette année.";
 	next;
-	mes "[Valentine Vote Manager]";
-	mes "Plus, you can also find out how";
-	mes "many votes he/she got.";
+	mes "[Votes de la Saint Valentin]";
+	mes "Je peux d'ailleurs vous donner les résultats si vous voulez!";
 	next;
 	while (1) {
-		mes "[Valentine Vote Manager]";
-		mes "So, what do you want?";
+		mes "[Votes de la Saint Valentin]";
+		mes "Alors, dites-moi ce que vous voudriez...";
 		next;
-		switch(select("Please register my rings.:Please count my votes.:Nothing, for now.")) {
+		switch(select("Prenez ces anneaux s'il vous plaît.:Combien d'anneaux avez-vous compté?:Rien pour l'instant.")) {
 			case 1:
-				mes "[Valentine Vote Manager]";
-				mes "Please tell me how many";
-				mes "rings you want to register.";
+				mes "[Votes de la Saint Valentin]";
+				mes "Bien. Combien d'anneaux voulez-vous me donner?";
 				next;
-				mes "[Valentine Vote Manager]";
-				mes "When you write the";
-				mes "number of the rings,";
-				mes "the number shouldn't be";
-				mes "larger than the number of";
-				mes "rings you actually have.";
-				mes "'0', cancels everything.";
+				mes "[Votes de la Saint Valentin]";
+				mes "Écrivez le nombre ici, mais n'essayez pas de tricher, hein! Je vérifierai! Entrez ''0'' si vous avez changé d'avis.";
 				next;
 				input .@input;
 
 				if (.@input <= 0) {
-					mes "[Valentine Vote Manager]";
-					mes "You have entered 0.";
-					mes "Registration is cancelled.";
+					mes "[Votes de la Saint Valentin]";
+					mes "0? Comme vous voulez. J'annule le compte.";
 					next;
 					break;
 				}
 				
 				if (Sex) {
 					if (countitem(7947) > .@input) {
-						mes "[Valentine Vote Manager]";
-						mes "Seems like the value you entered is too small.";
-						mes "I know you've got more. Be honest, dear.";
+						mes "[Votes de la Saint Valentin]";
+						mes "Oh mais on dirait que vous en avez plus que ça! Allons, soyez un petit peu plus honnête!";
 						next;
 						break;
 					}
 					
 					if (countitem(7947) < .@input) {
-						mes "[Valentine Vote Manager]";
-						mes "Seems like the value you entered is too large.";
-						mes "I know you've got less. Be honest, dear.";
+						mes "[Votes de la Saint Valentin]";
+						mes "Oh mais on dirait que vous n'en avez pas autant! Allons, soyez un petit peu plus honnête!";
 						next;
 						break;
 					}
 					
-					mes "[Valentine Vote Manager]";
-					mes "I'll take those silver rings,";
-					mes "and count the votes for you.";
-					mes "Thank you for participating.";
+					mes "[Votes de la Saint Valentin]";
+					mes "D'accord, je vais prendre ces anneaux et faire le compte. Merci de votre participation.";
 					delitem 7947,.@input;
 					set Val09Rings,Val09Rings+.@input;
 					if (Val09Rings > $Val09votes_M) {
@@ -582,25 +389,21 @@ prontera,157,185,4	script	Valentine Vote Manager#v	113,{
 					break;
 				}else{
 					if (countitem(7946) > .@input) {
-						mes "[Valentine Vote Manager]";
-						mes "Seems like the value you entered is too small.";
-						mes "I know you've got more. Be honest, dear.";
+						mes "[Votes de la Saint Valentin]";
+						mes "Oh mais on dirait que vous en avez plus que ça! Allons, soyez un petit peu plus honnête!";
 						next;
 						break;
 					}
 					
 					if (countitem(7946) < .@input) {
-						mes "[Valentine Vote Manager]";
-						mes "Seems like the value you entered is too large.";
-						mes "I know you've got less. Be honest, dear.";
+						mes "[Votes de la Saint Valentin]";
+						mes "Oh mais on dirait que vous n'en avez pas autant! Allons, soyez un petit peu plus honnête!";
 						next;
 						break;
 					}
 					
-					mes "[Valentine Vote Manager]";
-					mes "I'll take those gold rings,";
-					mes "and count the votes for you.";
-					mes "Thank you for participating.";
+					mes "[Votes de la Saint Valentin]";
+					mes "D'accord, je vais prendre ces anneaux et faire le compte. Merci de votre participation.";
 					delitem 7946,.@input;
 					set Val09Rings,Val09Rings+.@input;
 					if (Val09Rings > $Val09votes_F) {
@@ -611,173 +414,98 @@ prontera,157,185,4	script	Valentine Vote Manager#v	113,{
 					break;
 				}
 			case 2:
-				mes "[Valentine Vote Manager]";
-				mes "Let's see...";
-				mes "You have registered..";
-				mes ".."+Val09Rings+" rings so far.";
-				mes "and...";
+				mes "[Votes de la Saint Valentin]";
+				mes "Alors voyons... Vous avez enregistré "+Val09Rings+" anneaux pour l'instant.";
 				next;
-				mes "[Valentine Vote Manager]";
-				mes "The current record shows... "+$Val09name_M$+" is the male vote leader who's registered the total of "+$Val09votes_M+" rings.";
+				mes "[Votes de la Saint Valentin]";
+				mes "Pour l'instant celui qui en a enregistré le plus est... "+$Val09name_M$+" avec un total de "+$Val09votes_M+" anneaux.";
 				next;
-				mes "[Valentine Vote Manager]";
-				mes "The current record shows... "+$Val09name_F$+" is the female vote leader who's registered the total of "+$Val09votes_F+" rings.";
+				mes "[Votes de la Saint Valentin]";
+				mes "Et pour les femmes il s'agit de... "+$Val09name_F$+" avec "+$Val09votes_F+" anneaux.";
 				next;
 				break;			
 
 			case 3:
-				mes "[Valentine Vote Manager]";
-				mes "Hey, you can be popular too!";
-				mes "Anyone can... really!";
-				mes "Though you have to try a lot";
-				mes "harder, but still~ Hahaha!";
+				mes "[Votes de la Saint Valentin]";
+				mes "Oh, mais vous aussi vous pourrez devenir populaire! Tout le monde peut le devenir, vraiment! Il faudra juste que vous y mettiez un peu du vôtre~ Hahaha!";
 				close;
 		}
 	}
 }
 
 // Charles Orleans (Makes Home-Made Chocolates)
-prt_castle,42,35,3	script	Dessert Manager#Val09	47,{
+prt_castle,42,35,3	script	Chef Pâtissier::Dessert Manager#Val09	47,{
 	if (Sex) {
-		mes "[Charles Orleans]";
-		mes "Monsieur~! What brings";
-		mes "you to my beautiful atelier?";
-		mes "What is it that you want?";
-		mes "Well, my sparkling eyes";
-		mes "get dried and lose their shine";
-		mes "if not for the pretty little lady.";
+		mes "[Chef Pâtissier]";
+		mes "Oh mon bon Monsieur, qu'est-ce qui vous amène dans ce fantastique atelier de confection?~ Que cherchez-vous? Oh, mes yeux perdent leur radieux éclat lorsque mon regard ne peut se poser sur les charmes d'une charmante demoiselle...";
 		next;
-		mes "[Charles Orleans]";
-		mes "Please leave me alone unless";
-		mes "you have business with me.";
-		mes "Haaaa~ I'm a busy person.";
-		mes "Don't bother me....";
-		mes "Annoying, annoying, annoying~~!";
+		mes "[Chef Pâtissier]";
+		mes "Veuillez me laisser à moins que vous n'ayez quelque affaire d'importance dont vous voudriez m'entretenir. Haaaa~ Je suis quelqu'un de bien occupé, vous savez. Ne venez plus me déranger maintenant... Aaaah! Qu'ils sont fatigants à la fin~";
 		close;
 	}
 	
-	mes "[Charles Orleans]";
-	mes "Oh, Mademoiselle!";
-	mes "This little trifling space";
-	mes "felt like heaven the";
-	mes "minute you walked in!";
-	mes "Can I help you with";
-	mes "anything, if it's alright?";
+	mes "[Chef Pâtissier]";
+	mes "Oh, Mademoiselle, ce misérable endroit s'est transformé en un jardin d'Éden au moment où vous avez franchi l'embrasure de la porte! Puis-je vous être d'une aide quelconque?";
 	next;
-	if(select("Please, make me some chocolate.:Don't bother. I'm just passing by.") == 2) {
-		mes "[Charles Orleans]";
-		mes "Ahhh, this is so heartbreaking.";
-		mes "How could you say that?";
-		mes "You're just so mean.";
-		mes "Don't bother? Just passing by?";
+	if(select("Faites-moi du chocolat s'il vous plaît.:Ne vous dérangez pas.") == 2) {
+		mes "[Chef Pâtissier]";
+		mes "Vous ne faites que passer? Ahhh, quelle cruauté! Me briser le coeur ainsi...";
 		next;
-		mes "[Charles Orleans]";
-		mes "What can I do to make you";
-		mes "pay a little attention to me?";
-		mes "Please.. I feel like my soul is lost..";
+		mes "[Chef Pâtissier]";
+		mes "Que dois-je faire pour retenir ne serai-ce qu'une infime partie de votre attention? Dites-moi et je m'exécuterai sans conditions! C'est comme si je venais de perdre ma pauvre âme...";
 		close;
 	}
 	if(countitem(558) < 3) {
-		mes "[Charles Orleans]";
-		mes "Ahhh, Mademoiselle.";
-		mes "I'm not an alchemist,";
-		mes "or a magician.";
-		mes "I don't just make chocolate";
-		mes "out of anything.";
+		mes "[Chef Pâtissier]";
+		mes "Ahhh, Mademoiselle, je ne suis ni alchimiste, ni magicien! Je ne puis faire de chocolat à partir de rien.";
 		next;
-		mes "[Charles Orleans]";
-		mes "I always think of making";
-		mes "chocolate as artistic work.";
-		mes "You see, I'm no ordinary cook...";
-		mes "I make chocolate with feelings..";
-		mes "messages of loving hearts..";
+		mes "[Chef Pâtissier]";
+		mes "Pour moi, confectionner du chocolat est un véritable travail artistique. Vous voyez, je ne suis pas un cuisiner ordinaire... Je fais du chocolat avec mes sentiments... Comme des lettres écrites par un coeur aimant.";
 		next;
-		mes "[Charles Orleans]";
-		mes "I make masterpieces.";
-		mes "No one can imitate";
-		mes "the looks and the taste.";
-		mes "Yes, it's nothing like";
-		mes "ordinary chocolate!";
+		mes "[Chef Pâtissier]";
+		mes "Je fais de véritables oeuvres d'art. Personne ne peut en imiter le goût ou la texture. Oh non, ça n'a rien de comparable avec le chocolat ordinaire!";
 		next;
-		mes "[Charles Orleans]";
-		mes "I'm afraid I can't make it";
-		mes "and prove it to you now.";
-		mes "This is really a shame!";
+		mes "[Chef Pâtissier]";
+		mes "Mais j'ai bien peur de ne pouvoir vous en faire la démonstration sur l'heure. Quel dommage, vraiment!";
 		next;
-		mes "[Charles Orleans]";
-		mes "I really want to thank";
-		mes "you for visiting me";
-		mes "and if you only bring";
-		mes "^3152ff3 Chocolates^000000,";
-		mes "I'll make you chocolate";
-		mes "like you've never seen...";
+		mes "[Chef Pâtissier]";
+		mes "Cependant, votre venue m'a empli d'une si grande joie que si vous m'apportez 3 simples ^3152ff Chocolats^000000, je vous en ferai tel que vous n'en avez jamais vu...";
 		next;
-		mes "[Charles Orleans]";
-		mes "never tasted before...";
-		mes "Mademoiselle, with your spirit,";
-		mes "I'm sure you can bring";
-		mes "3 pieces of chocolate.";
-		mes "I have no doubt at all.";
+		mes "[Chef Pâtissier]";
+		mes "Oh, je suis persuadé que cette simple tâche ne sera qu'une formalité pour vous. Je n'en ai aucun doute.";
 		next;
-		mes "[Charles Orleans]";
-		mes "So... what do you think?";
-		mes "Can you bring ^3152ff3 Chocolates^000000?";
-		mes "I could get them myself,";
-		mes "but I'm tied up with so much";
-		mes "work as you see right now.";
+		mes "[Chef Pâtissier]";
+		mes "Alors... Qu'en dites-vous? M'apportez-vous ces ^3152ff3 Chocolats^000000? Je pourrais en obtenir par moi-même bien sûr, mais j'ai déjà tant de travail comme vous le constatez...";
 		next;
-		mes "[Charles Orleans]";
-		mes "Adios, Mademoiselle.....";
-		mes "I'll be waiting for you.";
+		mes "[Chef Pâtissier]";
+		mes "Adieu, Mademoiselle... J'attendrai votre retour avec impatience.";
 		close;
 	}else{
 		if (!checkweight(559,1)) {
-			mes "[Charles Orleans]";
-			mes "You're carrying too many items.";
-			mes "Please use the Kafra Services.";
+			mes "[Chef Pâtissier]";
+			mes "Vous portez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra.";
 			close;
 		}
-		mes "[Charles Orleans]";
-		mes "Oh, Mademoiselle!";
-		mes "I'll make the best chocolate";
-		mes "with the pieces you've brought.";
-		mes "I'm going to put the light of";
-		mes "your eyes into this chocolate";
-		mes "that no one can resist.";
+		mes "[Chef Pâtissier]";
+		mes "Oh, Mademoiselle, je vais vous confectionner le plus divin des chocolats avec les morceaux que vous m'apportez. J'y déposerai la lumière de vos yeux, tant et si bien que personne ne pourra y résister.";
 		next;
-		mes "[Charles Orleans]";
-		mes "It'll be stronger than a";
-		mes "sweet sweet love potion.....";
+		mes "[Chef Pâtissier]";
+		mes "Ce sera un charme plus puissant que le plus puissant des filtres d'amour...";
 		next;
-		mes "[Charles Orleans]";
+		mes "[Chef Pâtissier]";
 		mes "Un, Deux, Trois, Quatre.....";
-		mes "Just like the ugly duckling that";
-		mes "turned to a beautiful swan-";
-		mes "Ordinary chocolate pieces are";
-		mes "becoming a piece of art!";
+		mes "Tout comme le vilain petit canard qui est devenu cygne, je vais transformer ce chocolat ordinaire en une oeuvre d'art!";
 		next;
-		mes "[Charles Orleans]";
-		mes "They're changing!";
-		mes "They're getting warm,";
-		mes "softly changing the shape,";
-		mes "getting stronger again!";
-		mes "Oh, is it a master piece or";
-		mes "what...!!";
+		mes "[Chef Pâtissier]";
+		mes "Voilà, la transformation a commencé! Il commence à changer d'aspect, et à devenir si moelleux... Oh c'est un chef d'oeuvre!";
 		next;
-		mes "[Charles Orleans]";
-		mes "Here you go, Mademoiselle!";
-		mes "Ahahahaha, just look at this!";
-		mes "I can't believe I made this.";
-		mes "Oh, I can't take my eyes off..!!";
+		mes "[Chef Pâtissier]";
+		mes "Et voilà, jeune demoiselle! Ahahahaha, regardez-moi ça! Même moi je n'arrive à y croire! Oh, je ne peux en détacher le regard...";
 		delitem 558,3;
 		getitem 559,1;
 		next;
-		mes "[Charles Orleans]";
-		mes "Alright. Mademoiselle,";
-		mes "I hope this is just";
-		mes "what you wanted,";
-		mes "for it bears your";
-		mes "beautiful heart inside.";
+		mes "[Chef Pâtissier]";
+		mes "Bien, jeune demoiselle, j'espère que c'est ce à quoi vous vous attendiez, car ce chocolat renferme tout l'amour contenu dans votre coeur adorable.";
 		close;
 	}
 	
