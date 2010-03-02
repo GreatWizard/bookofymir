@@ -3497,7 +3497,7 @@ UPDATE item_db SET `name_japanese`  = "Rondin de Bois" WHERE ID = 7850;
 UPDATE item_db SET `name_japanese`  = "Bon de Tombola pour la Wii" WHERE ID = 7851;
 UPDATE item_db SET `name_japanese`  = "Bon de Tombola pour un Lecteur Divx" WHERE ID = 7852;
 UPDATE item_db SET `name_japanese`  = "Bon de Tombola pour un iPod" WHERE ID = 7853;
-UPDATE item_db SET `name_japanese`  = "Ticket du Frstival de Comodo" WHERE ID = 7854;
+UPDATE item_db SET `name_japanese`  = "Ticket du Festival de Comodo" WHERE ID = 7854;
 UPDATE item_db SET `name_japanese`  = "Coeur" WHERE ID = 7855;
 UPDATE item_db SET `name_japanese`  = "Bouquet de Jeune Femme" WHERE ID = 7856;
 UPDATE item_db SET `name_japanese`  = "Chat en Peluche Fait Main" WHERE ID = 7857;
