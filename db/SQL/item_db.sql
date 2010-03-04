@@ -2583,7 +2583,7 @@ UPDATE item_db SET `name_japanese`  = "Document en Mauvais État" WHERE ID = 6037
 UPDATE item_db SET `name_japanese`  = "Rapport Bien Écrit" WHERE ID = 6038;
 UPDATE item_db SET `name_japanese`  = "Morceau de Poisson" WHERE ID = 6039;
 UPDATE item_db SET `name_japanese`  = "Rapport Partiel" WHERE ID = 6040;
-UPDATE item_db SET `name_japanese`  = "Vigne Robuste" WHERE ID = 6041;
+UPDATE item_db SET `name_japanese`  = "Liane Robuste" WHERE ID = 6041;
 UPDATE item_db SET `name_japanese`  = "Branche Ordinaire" WHERE ID = 6042;
 UPDATE item_db SET `name_japanese`  = "Lettre de Lugen" WHERE ID = 6043;
 UPDATE item_db SET `name_japanese`  = "Lettre d'Otto" WHERE ID = 6044;
