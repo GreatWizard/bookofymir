@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.3
+//= 1.4
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -28,6 +28,7 @@
 //=     Fixed some varaibles (types/values) as well.
 //= 1.3 Disabled an exploit related to the orc hero spawn. [L0ne_W0lf]
 //=     Corrected the variable type for party leader name.
+//= 1.4 Fixed donpcevent calling non-existant npc. (bugreport:4039) [L0ne_W0lf]
 //============================================================ 
 
 // Entrance
@@ -107,7 +108,7 @@ gef_fild10,242,202,0	script	Monolithe::Dimensional Gorge Piece	406,{
 						donpcevent instance_npcname("#Warp2-2", instance_id())+"::OnInstanceInit";
 						donpcevent instance_npcname("#Warp2-3", instance_id())+"::OnInstanceInit";
 						donpcevent instance_npcname("#Boss Control", instance_id())+"::OnInstanceInit";
-						donpcevent instance_npcname("#Warp Outside Orc Dungeon", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#Warp Outside Orc Dun", instance_id())+"::OnInstanceInit";
 						donpcevent instance_npcname("Kruger#", instance_id())+"::OnInstanceInit";
 
 						close;
@@ -134,7 +135,7 @@ gef_fild10,242,202,0	script	Monolithe::Dimensional Gorge Piece	406,{
 					//else if (move_md == 0) {
 					else {
 						mapannounce "gef_fild10", .@p_reader$ + " d' l'Équipe " + .@p_name$ + " se plonge dans la " + .@md_name$ + ".",bc_map,"0x00ff99";
-						warp	"1@orcs",179,15;
+						warp "1@orcs",179,15;
 						setquest 12059;
 						close;
 					}

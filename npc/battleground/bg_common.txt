@@ -197,7 +197,7 @@ bat_room,159,178,5	script	Chevalier de Guillaume::Guillaume Knight#1	417,{
 	close;
 }
 
-// Tierra Officerer - Guillaume
+// Tierra Officer - Guillaume
 // *********************************************************************
 bat_room,156,178,5	script	Officier de Tierra::Tierra Valley Officer#1	418,{
 	mes "[Officier de Tierra]";
@@ -224,11 +224,17 @@ bat_room,156,178,5	script	Officier de Tierra::Tierra Valley Officer#1	418,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
+	if( checkquest(2069,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre dans la Vallée de Tierra.";
+		mes "You have received an indicator showing that you've participated in the Battle at Tierra Gorge. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Tierra Officer]";
+		mes "Stand-by for Tierra Gorge Battle until the time limit passes.";
 		close;
 	}
+	
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
@@ -287,11 +293,17 @@ bat_room,156,121,1	script	Officier de Tierra::Tierra Valley Officer#2	414,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
+	if( checkquest(2069,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre dans la Vallée de Tierra.";
+		mes "You have received an indicator showing that you've participated in the Battle at Tierra Gorge. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Tierra Officer]";
+		mes "Stand-by for Tierra Gorge Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
@@ -306,7 +318,7 @@ bat_room,156,121,1	script	Officier de Tierra::Tierra Valley Officer#2	414,{
 
 // Guillaume Knight - Tierra
 // *********************************************************************
-bat_room,175,178,5	script	Chevalier de Guillaume::Guillaume Knight#2	417,{
+bat_room,167,178,5	script	Chevalier de Guillaume::Guillaume Knight#2	417,{
 	mes "[Chevalier de Guillaume]";
 	mes "Les Gorges de Tierra forment un canyon très escarpé, dans lequel se trouvent deux forts, au Nord et au Sud.";
 	next;
@@ -325,7 +337,7 @@ bat_room,175,178,5	script	Chevalier de Guillaume::Guillaume Knight#2	417,{
 
 // Tierra Officer - Guillaume
 // *********************************************************************
-bat_room,172,178,5	script	Officier de Tierra::Tierra Valley Officer#3	418,{
+bat_room,164,178,5	script	Officier de Tierra::Tierra Valley Officer#3	418,{
 	mes "[Officier de Tierra]";
 	if( Bat_Team == 2 )
 	{
@@ -350,11 +362,17 @@ bat_room,172,178,5	script	Officier de Tierra::Tierra Valley Officer#3	418,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
+	if( checkquest(2069,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre dans la Vallée de Tierra.";
+		mes "You have received an indicator showing that you've participated in the Battle at Tierra Gorge. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Tierra Officer]";
+		mes "Stand-by for Tierra Gorge Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
@@ -363,13 +381,13 @@ bat_room,172,178,5	script	Officier de Tierra::Tierra Valley Officer#3	418,{
 
 	mes "Bonne chance!";
 	close2;
-	warp "bat_room",85,94;
+	warp "bat_room",57,94;
 	end;
 }
 
 // Croix Knight - Tierra
 // *********************************************************************
-bat_room,175,121,1	script	Chevalier de Croix::Croix Knight#2	413,{
+bat_room,167,121,1	script	Chevalier de Croix::Croix Knight#2	413,{
 	mes "[Chevalier de Croix]";
 	mes "Les Gorges de Tierra forment un canyon très escarpé, dans lequel se trouvent deux forts, au Nord et au Sud.";
 	next;
@@ -388,7 +406,7 @@ bat_room,175,121,1	script	Chevalier de Croix::Croix Knight#2	413,{
 
 // Tierra Officer - Croix
 // *********************************************************************
-bat_room,172,121,1	script	Officier de Tierra::Tierra Valley Officer#4	414,{
+bat_room,164,121,1	script	Officier de Tierra::Tierra Valley Officer#4	414,{
 	mes "[Officier de Tierra]";
 	if( Bat_Team == 1 )
 	{
@@ -413,11 +431,17 @@ bat_room,172,121,1	script	Officier de Tierra::Tierra Valley Officer#4	414,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
+	if( checkquest(2069,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre dans la Vallée de Tierra.";
+		mes "You have received an indicator showing that you've participated in the Battle at Tierra Gorge. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Tierra Officer]";
+		mes "Stand-by for Tierra Gorge Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
@@ -426,13 +450,13 @@ bat_room,172,121,1	script	Officier de Tierra::Tierra Valley Officer#4	414,{
 
 	mes "Bonne chance!";
 	close2;
-	warp "bat_room",85,77;
+	warp "bat_room",57,77;
 	end;
 }
 
 // Guillaune Knight - Flavius
 // *********************************************************************
-bat_room,151,178,5	script	Chevalier de Guillaume::Guillaume Knight#3	417,{
+bat_room,175,178,5	script	Chevalier de Guillaume::Guillaume Knight#3	417,{
 	mes "[Chevalier de Guillaume]";
 	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
 	next;
@@ -450,9 +474,9 @@ bat_room,151,178,5	script	Chevalier de Guillaume::Guillaume Knight#3	417,{
 	close;
 }
 
-// Flavius Officerer - Guillaume
+// Flavius Officer - Guillaume
 // *********************************************************************
-bat_room,148,178,5	script	Officier de Flavius::Flavius Officer#1	418,{
+bat_room,172,178,5	script	Officier de Flavius::Flavius Officer#1	418,{
 	mes "[Officier de Flavius]";
 	if( Bat_Team == 2 )
 	{
@@ -477,11 +501,157 @@ bat_room,148,178,5	script	Officier de Flavius::Flavius Officer#1	418,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Flavius_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
+	if( checkquest(2070,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Flavius.";
+		mes "You have received an indicator showing that you've participated in the Battle at Flavius. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Flavius Officer]";
+		mes "Stand-by for Flavius Battle until the time limit passes.";
 		close;
 	}
+
+	if( BaseLevel < 80 )
+	{
+		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
+		close;
+	}
+
+	mes "Bonne chance!";
+	close2;
+	warp "bat_room",85,94;
+	end;
+}
+
+// Croix Knight - Flavius
+// *********************************************************************
+bat_room,175,121,1	script	Chevalier de Croix::Croix Knight#3	413,{
+	mes "[Chevalier de Croix]";
+	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
+	next;
+	mes "[Chevalier de Croix]";
+	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
+	next;
+	mes "[Chevalier de Croix]";
+	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
+	next;
+	mes "[Chevalier de Croix]";
+	mes "Les cristaux sont immunisés à tous types de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
+	next;
+	mes "[Chevalier de Croix]";
+	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
+	close;
+}
+
+// Flavius Officerer - Croix
+// *********************************************************************
+bat_room,172,121,1	script	Officier de Flavius::Flavius Officer#2	414,{
+	mes "[Officier de Flavius]";
+	if( Bat_Team == 1 )
+	{
+		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
+		close;
+	}
+
+	if( Bat_Team == 0 )
+	{
+		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
+		close;
+	}
+
+	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
+	next;
+	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
+		close;
+
+	mes "[Officier de Flavius]";
+	if( BG_Delay_Tick >= gettimetick(2) )
+	{
+		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
+		close;
+	}
+
+	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
+	if( checkquest(2070,PLAYTIME) != -1 )
+	{
+		mes "You have received an indicator showing that you've participated in the Battle at Flavius. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Flavius Officer]";
+		mes "Stand-by for Flavius Battle until the time limit passes.";
+		close;
+	}
+
+	if( BaseLevel < 80 )
+	{
+		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
+		close;
+	}
+
+	mes "Bonne chance!";
+	close2;
+	warp "bat_room",85,77;
+	end;
+}
+
+// Guillaune Knight - Flavius
+// *********************************************************************
+bat_room,151,178,5	script	Chevalier de Guillaume::Guillaume Knight#4	417,{
+	mes "[Chevalier de Guillaume]";
+	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
+	next;
+	mes "[Chevalier de Guillaume]";
+	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
+	next;
+	mes "[Chevalier de Guillaume]";
+	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
+	next;
+	mes "[Chevalier de Guillaume]";
+	mes "Les cristaux sont immunisés à tous types de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
+	next;
+	mes "[Chevalier de Guillaume]";
+	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
+	close;
+}
+
+// Flavius Officerer - Guillaume
+// *********************************************************************
+bat_room,148,178,5	script	Officier de Flavius::Flavius Officer#3	418,{
+	mes "[Officier de Flavius]";
+	if( Bat_Team == 2 )
+	{
+		mes "Hors de ma vue, suppôt de Croix!";
+		close;
+	}
+
+	if( Bat_Team == 0 )
+	{
+		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
+		close;
+	}
+
+	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
+	next;
+	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
+		close;
+
+	mes "[Officier de Flavius]";
+	if( BG_Delay_Tick >= gettimetick(2) )
+	{
+		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
+		close;
+	}
+
+	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
+	if( checkquest(2070,PLAYTIME) != -1 )
+	{
+		mes "You have received an indicator showing that you've participated in the Battle at Flavius. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Flavius Officer]";
+		mes "Stand-by for Flavius Battle until the time limit passes.";
+		close;
+	}
+
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
@@ -496,7 +666,7 @@ bat_room,148,178,5	script	Officier de Flavius::Flavius Officer#1	418,{
 
 // Croix Knight - Flavius
 // *********************************************************************
-bat_room,151,121,1	script	Chevalier de Croix::Croix Knight#3	413,{
+bat_room,151,121,1	script	Chevalier de Croix::Croix Knight#4	413,{
 	mes "[Chevalier de Croix]";
 	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
 	next;
@@ -516,7 +686,7 @@ bat_room,151,121,1	script	Chevalier de Croix::Croix Knight#3	413,{
 
 // Flavius Officerer - Croix
 // *********************************************************************
-bat_room,148,121,1	script	Officier de Flavius::Flavius Officer#2	414,{
+bat_room,148,121,1	script	Officier de Flavius::Flavius Officer#4	414,{
 	mes "[Officier de Flavius]";
 	if( Bat_Team == 1 )
 	{
@@ -541,11 +711,17 @@ bat_room,148,121,1	script	Officier de Flavius::Flavius Officer#2	414,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
+	if( checkquest(2070,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre dans la Vallée de Tierra.";
+		mes "You have received an indicator showing that you've participated in the Battle at Flavius. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[Flavius Officer]";
+		mes "Stand-by for Flavius Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
@@ -555,134 +731,6 @@ bat_room,148,121,1	script	Officier de Flavius::Flavius Officer#2	414,{
 	mes "Bonne chance!";
 	close2;
 	warp "bat_room",253,77;
-	end;
-}
-
-// Guillaune Knight - Flavius
-// *********************************************************************
-bat_room,167,178,5	script	Chevalier de Guillaume::Guillaume Knight#4	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Les cristaux sont immunisés à tous types de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// Flavius Officerer - Guillaume
-// *********************************************************************
-bat_room,164,178,5	script	Officier de Flavius::Flavius Officer#3	418,{
-	mes "[Officier de Flavius]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Flavius]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-	if( Flavius_BG_Tick >= gettimetick(2) )
-	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Flavius.";
-		close;
-	}
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",57,94;
-	end;
-}
-
-// Croix Knight - Flavius
-// *********************************************************************
-bat_room,167,121,1	script	Chevalier de Croix::Croix Knight#4	413,{
-	mes "[Chevalier de Croix]";
-	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Les cristaux sont immunisés à tous types de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// Flavius Officerer - Croix
-// *********************************************************************
-bat_room,164,121,1	script	Officier de Flavius::Flavius Officer#4	414,{
-	mes "[Officier de Flavius]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Flavius]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
-	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre dans la Vallée de Tierra.";
-		close;
-	}
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",57,77;
 	end;
 }
 
@@ -730,11 +778,17 @@ bat_room,140,178,5	script	Officier de KVM [80-99]::KVM [80-99] Officer#1	418,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Flavius_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
+	if( checkquest(6025,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Krieger Von Midgard.";
+		mes "You have received an indicator showing that you've participated in the Battle at KvM. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[KVM Officer]";
+		mes "Stand-by for KvM Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 80 à 99.";
@@ -791,11 +845,17 @@ bat_room,140,121,1	script	Officier de KVM [80-99]::KVM [80-99] Officer#2	414,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
+	if( checkquest(6025,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Krieger Von Midgard.";
+		mes "You have received an indicator showing that you've participated in the Battle at KvM. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[KVM Officer]";
+		mes "Stand-by for KvM Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 80 )
 	{
 		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 80 à 99.";
@@ -852,11 +912,17 @@ bat_room,132,178,5	script	Officier de KVM [60-79]::KVM [60-79] Officer#1	418,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Flavius_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
+	if( checkquest(6025,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Krieger Von Midgard.";
+		mes "You have received an indicator showing that you've participated in the Battle at KvM. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[KVM Officer]";
+		mes "Stand-by for KvM Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 60 || BaseLevel > 79 )
 	{
 		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 60 à 79.";
@@ -913,11 +979,17 @@ bat_room,132,121,1	script	Officier de KVM [60-79]::KVM [60-79] Officer#2	414,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
+	if( checkquest(6025,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Krieger Von Midgard.";
+		mes "You have received an indicator showing that you've participated in the Battle at KvM. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[KVM Officer]";
+		mes "Stand-by for KvM Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel < 60 || BaseLevel > 79 )
 	{
 		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 60 à 79.";
@@ -974,11 +1046,17 @@ bat_room,124,178,5	script	Officier de KVM [1-59]::KVM [1-59] Officer#1	418,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Flavius_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
+	if( checkquest(6025,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Krieger Von Midgard.";
+		mes "You have received an indicator showing that you've participated in the Battle at KvM. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[KVM Officer]";
+		mes "Stand-by for KvM Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel > 59 )
 	{
 		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 1 à 59.";
@@ -1035,11 +1113,17 @@ bat_room,124,121,1	script	Officier de KVM [1-59]::KVM [1-59] Officer#2	414,{
 		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
 		close;
 	}
-	if( Tierra_BG_Tick >= gettimetick(2) )
+
+	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
+	if( checkquest(6025,PLAYTIME) != -1 )
 	{
-		mes "Désolé, mais vous ne pouvez rejoindre le champ de bataille maintenant. Il vous faudra encore patienter " + callfunc("Time2Str",Tierra_BG_Tick) + "^000000 avant de pouvoir de nouveau vous rendre à Krieger Von Midgard.";
+		mes "You have received an indicator showing that you've participated in the Battle at KvM. I can't let you participate in any other battles until the indicator goes off.";
+		next;
+		mes "[KVM Officer]";
+		mes "Stand-by for KvM Battle until the time limit passes.";
 		close;
 	}
+
 	if( BaseLevel > 59 )
 	{
 		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 1 à 59.";
@@ -1068,54 +1152,63 @@ bat_room,161,158,3	duplicate(bat_aid)	Aide de Guillaume::bat_aid4	419
 
 // Exit from Registration
 // *********************************************************************
+-	script	warp2bat_room	-1,{
+	end;
+
+OnTouch:
+	set BG_Delay_Tick, gettimetick(2) + 30;
+	warp "bat_room",154,149;
+	end;
+}
+
 // Flavius bat_b02
-bat_room,57,81,0	warp	bat1	2,2,bat_room,154,149
-bat_room,57,90,0	warp	bat2	2,2,bat_room,154,149
+bat_room,57,81,0	duplicate(warp2bat_room)	bat1	45,1,1
+bat_room,57,90,0	duplicate(warp2bat_room)	bat2	45,1,1
 // Free BG
-bat_room,57,220,0	warp	bat3	2,2,bat_room,154,149
-bat_room,57,211,0	warp	bat4	2,2,bat_room,154,149
+bat_room,57,220,0	duplicate(warp2bat_room)	bat3	45,1,1
+bat_room,57,211,0	duplicate(warp2bat_room)	bat4	45,1,1
 // Tierra Valley bat_a02
-bat_room,85,81,0	warp	bat5	2,2,bat_room,154,149
-bat_room,85,90,0	warp	bat6	2,2,bat_room,154,149
+bat_room,85,81,0	duplicate(warp2bat_room)	bat5	45,1,1
+bat_room,85,90,0	duplicate(warp2bat_room)	bat6	45,1,1
 // Tierra Valley bat_a01
-bat_room,85,220,0	warp	bat7	2,2,bat_room,154,149
-bat_room,85,211,0	warp	bat8	2,2,bat_room,154,149
+bat_room,85,220,0	duplicate(warp2bat_room)	bat7	45,1,1
+bat_room,85,211,0	duplicate(warp2bat_room)	bat8	45,1,1
 // Free BG
-bat_room,113,81,0	warp	bat9	2,2,bat_room,154,149
-bat_room,113,90,0	warp	bat10	2,2,bat_room,154,149
+bat_room,113,81,0	duplicate(warp2bat_room)	bat9	45,1,1
+bat_room,113,90,0	duplicate(warp2bat_room)	bat10	45,1,1
 // Free BG
-bat_room,113,220,0	warp	bat11	2,2,bat_room,154,149
-bat_room,113,211,0	warp	bat12	2,2,bat_room,154,149
+bat_room,113,220,0	duplicate(warp2bat_room)	bat11	45,1,1
+bat_room,113,211,0	duplicate(warp2bat_room)	bat12	45,1,1
 // Free BG
-bat_room,141,81,0	warp	bat13	2,2,bat_room,154,149
-bat_room,141,90,0	warp	bat14	2,2,bat_room,154,149
+bat_room,141,81,0	duplicate(warp2bat_room)	bat13	45,1,1
+bat_room,141,90,0	duplicate(warp2bat_room)	bat14	45,1,1
 // Free BG
-bat_room,141,220,0	warp	bat15	2,2,bat_room,154,149
-bat_room,141,211,0	warp	bat16	2,2,bat_room,154,149
+bat_room,141,220,0	duplicate(warp2bat_room)	bat15	45,1,1
+bat_room,141,211,0	duplicate(warp2bat_room)	bat16	45,1,1
 // Free BG
-bat_room,169,81,0	warp	bat17	2,2,bat_room,154,149
-bat_room,169,90,0	warp	bat18	2,2,bat_room,154,149
+bat_room,169,81,0	duplicate(warp2bat_room)	bat17	45,1,1
+bat_room,169,90,0	duplicate(warp2bat_room)	bat18	45,1,1
 // Free BG
-bat_room,169,220,0	warp	bat19	2,2,bat_room,154,149
-bat_room,169,211,0	warp	bat20	2,2,bat_room,154,149
+bat_room,169,220,0	duplicate(warp2bat_room)	bat19	45,1,1
+bat_room,169,211,0	duplicate(warp2bat_room)	bat20	45,1,1
 // Free BG
-bat_room,197,81,0	warp	bat21	2,2,bat_room,154,149
-bat_room,197,90,0	warp	bat22	2,2,bat_room,154,149
+bat_room,197,81,0	duplicate(warp2bat_room)	bat21	45,1,1
+bat_room,197,90,0	duplicate(warp2bat_room)	bat22	45,1,1
 // KvM bat_c03
-bat_room,197,220,0	warp	bat23	2,2,bat_room,154,149
-bat_room,197,211,0	warp	bat24	2,2,bat_room,154,149
+bat_room,197,220,0	duplicate(warp2bat_room)	bat23	45,1,1
+bat_room,197,211,0	duplicate(warp2bat_room)	bat24	45,1,1
 // Free BG
-bat_room,225,81,0	warp	bat25	2,2,bat_room,154,149
-bat_room,225,90,0	warp	bat26	2,2,bat_room,154,149
+bat_room,225,81,0	duplicate(warp2bat_room)	bat25	45,1,1
+bat_room,225,90,0	duplicate(warp2bat_room)	bat26	45,1,1
 // KvM bat_c02
-bat_room,225,220,0	warp	bat27	2,2,bat_room,154,149
-bat_room,225,211,0	warp	bat28	2,2,bat_room,154,149
+bat_room,225,220,0	duplicate(warp2bat_room)	bat27	45,1,1
+bat_room,225,211,0	duplicate(warp2bat_room)	bat28	45,1,1
 // Flavius bat_b01
-bat_room,253,81,0	warp	bat29	2,2,bat_room,154,149
-bat_room,253,90,0	warp	bat30	2,2,bat_room,154,149
+bat_room,253,81,0	duplicate(warp2bat_room)	bat29	45,1,1
+bat_room,253,90,0	duplicate(warp2bat_room)	bat30	45,1,1
 // KvM bat_c01
-bat_room,253,220,0	warp	bat31	2,2,bat_room,154,149
-bat_room,253,211,0	warp	bat32	2,2,bat_room,154,149
+bat_room,253,220,0	duplicate(warp2bat_room)	bat31	45,1,1
+bat_room,253,211,0	duplicate(warp2bat_room)	bat32	45,1,1
 
 // Badges Repairman
 // *********************************************************************
