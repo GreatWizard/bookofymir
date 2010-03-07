@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Collection of episode 13.2 quests.
 //===== By: ==================================================
@@ -17,128 +19,102 @@
 
 // Cat Hand Addition. (Leads to 13.2 areas)
 //============================================================ 
-spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
+spl_fild02,25,211,4	script	Agent du Chat::Cat Hand Agent#spl	421,{ // Je supprime la partie "hand" – ça fait trop lourd [NoH]
 	if (ep13_yong1 < 3) {
-		mes "[Cat Hand Agent]";
-		mes "Welcome to Cat Trading.";
-		mes "I guess you're a first-time customer, huh?";
+		mes "[Agent du Chat]";
+		mes "Bienvenue à la Compagnie du Chat. C'est la première fois que vous traitez avec nous, n'est-ce pas?";
 		next;
-		mes "[Cat Hand Agent]";
-		mes "For more details about our contract, you need to talk to our staff first.";
+		mes "[Agent du Chat]";
+		mes "Vous devez d'abord vous adresser aux membres de notre personnel afin d'avoir les détails de notre contrat.";
 		close;
 	}
 	else if ((ep13_yong1 > 2) && (ep13_yong1 < 20)) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Annuler")) {
 		case 1:
 			savepoint "spl_fild02",32,225;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else if ((ep13_yong1 > 19) && (ep13_yong1 < 40)) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Use Storage:Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Ouvrir son Stock:Annuler")) {
 		case 1:
 			savepoint "spl_fild02",32,225;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
 			if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais il faut avoir appris vos Compétences de Base de Novice au moins au niveau 6 pour utiliser nos services de Stock.";
 				close;
 			}
 			else if (Zeny >= 60) {
 				set zeny,zeny-60;
-				mes "[Cat Hand Agent]";
-				mes "Thank you.";
-				mes "Your storage will be opened shortly.";
+				mes "[Agent du Chat]";
+				mes "Merci. Nous allons ouvrir votre Stock.";
 				close2;
 				openstorage;
 				end;
 			}
 			else {
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you don't";
-				mes "have enough money?";
-				mes "Cat Trading's storage";
-				mes "service is 60 zeny.";
-				mes "It's cheap, isn't it?";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous semblez ne pas avoir assez d'argent. 60 zénys pour pouvoir utiliser les services de Stock du Chat est un bon prix pourtant, non?";
 				close;
 			}
 		case 3:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else if ((ep13_yong1 > 39) && (ep13_yong1 < 100)) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Use Storage:Use Cat Warp (Midgard):Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Ouvrir son Stock:Utiliser la téléportation du Chat (Midgard):Annuler")) {
 		case 1:
 			savepoint "spl_fild02",32,225;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
 			if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais il faut avoir appris vos Compétences de Base de Novice au moins au niveau 6 pour utiliser nos services de Stock.";
 				close;
 			}
 			else if (Zeny >= 60) {
 				set zeny,zeny-60;
-				mes "[Cat Hand Agent]";
-				mes "Thank you.";
-				mes "Your storage will be opened shortly.";
+				mes "[Agent du Chat]";
+				mes "Merci. Nous allons ouvrir votre Stock.";
 				close2;
 				openstorage;
 				end;
 			}
 			else {
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you don't";
-				mes "have enough money?";
-				mes "Cat Trading's storage";
-				mes "service is 60 zeny.";
-				mes "It's cheap, isn't it?";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous semblez ne pas avoir assez d'argent. 60 zénys pour pouvoir utiliser les services de Stock du Chat est un bon prix pourtant, non?";
 				close;
 			}
 		case 3:
 			// Custom Translation.
-			mes "[Cat Hand Agent]";
-			mes "With " + ep13_yong1 + " credit points, we offer the following warp services. Please remember, you can't come back easily once you move to Midgard.";
+			mes "[Agent du Chat]";
+			mes "Avec " + ep13_yong1 + " crédits, nous pouvons vous offrir les services de téléportation suivants. Gardez cependant à l'esprit que vous ne pourrez pas revenir aussi facilement une fois retourné à Midgard.";
 			next;
 			if ((ep13_yong1 > 39) && (ep13_yong1 < 49)) {
-				switch(select("Prontera -> 5500z:Cancel")) {
+				switch(select("Prontera -> 5500z:Annuler")) {
 				case 1:
 					if (Zeny >= 5500) {
 						set zeny,zeny-5500;
@@ -146,8 +122,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -155,7 +131,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				}
 			}
 			else if ((ep13_yong1 > 49) && (ep13_yong1 < 59)) {
-				switch(select("Alberta -> 5500z:Prontera -> 5500z:Cancel")) {
+				switch(select("Alberta -> 5500z:Prontera -> 5500z:Annuler")) {
 				case 1:
 					if (Zeny >= 5500) {
 						set zeny,zeny-5500;
@@ -163,8 +139,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -174,8 +150,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -183,7 +159,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				}
 			}
 			else if ((ep13_yong1 > 59) && (ep13_yong1 < 69)) {
-				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Cancel")) {
+				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Annuler")) {
 				case 1:
 					if (Zeny >= 5025) {
 						set zeny,zeny-5025;
@@ -191,8 +167,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -202,8 +178,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -213,8 +189,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -222,7 +198,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				}
 			}
 			else if ((ep13_yong1 > 69) && (ep13_yong1 < 79)) {
-				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Geffen -> 5025z:Cancel")) {
+				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Geffen -> 5025z:Annuler")) {
 				case 1:
 					if (Zeny >= 5025) {
 						set zeny,zeny-5025;
@@ -230,8 +206,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -241,8 +217,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -252,8 +228,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -263,8 +239,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -272,7 +248,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				}
 			}
 			else if ((ep13_yong1 > 79) && (ep13_yong1 < 89)) {
-				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Cancel")) {
+				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Annuler")) {
 				case 1:
 					if (Zeny >= 4765) {
 						set zeny,zeny-4765;
@@ -280,8 +256,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -291,8 +267,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -302,8 +278,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -313,8 +289,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -324,8 +300,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -333,7 +309,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				}
 			}
 			else if ((ep13_yong1 > 89) && (ep13_yong1 < 99)) {
-				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Morroc -> 4765z:Cancel")) {
+				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Morroc -> 4765z:Annuler")) {
 				case 1:
 					if (Zeny >= 4765) {
 						set zeny,zeny-4765;
@@ -341,8 +317,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -352,8 +328,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -363,8 +339,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -374,8 +350,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -385,8 +361,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -396,8 +372,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -405,7 +381,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				}
 			}
 			else if (ep13_yong1 > 99) {
-				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Cancel")) {
+				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Annuler")) {
 				case 1:
 					if (Zeny >= 4590) {
 						set zeny,zeny-4590;
@@ -413,8 +389,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -424,8 +400,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -435,8 +411,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -446,8 +422,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -457,8 +433,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -468,8 +444,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -479,8 +455,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -489,63 +465,52 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 			}
 			else {
 				// Custom Translation.
-				mes "[Cat Hand Agent]";
-				mes "I am sorry, but you don't have enough credit points to use the warp service. Please come back when you have more points.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous n'avez pas assez de crédits pour utiliser les services de téléportation. Veuillez revenir quand vous aurez plus de points.";
 				close;
 			}
 		case 4:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else if (ep13_yong1 > 99) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Use Storage:Use Cat Warp (Midgard):Use Cat Warp (Jottunheim):Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Ouvrir son Stock:Utiliser la téléportation du Chat (Midgard):Utiliser la téléportation du Chat (Jottunheim):Annuler")) {
 		case 1:
 			savepoint "spl_fild02",32,225;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
 			if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais il faut avoir appris vos Compétences de Base de Novice au moins au niveau 6 pour utiliser nos services de Stock.";
 				close;
 			}
 			else if (Zeny >= 60) {
 				set zeny,zeny-60;
-				mes "[Cat Hand Agent]";
-				mes "Thank you.";
-				mes "Your storage will be opened shortly.";
+				mes "[Agent du Chat]";
+				mes "Merci. Nous allons ouvrir votre Stock.";
 				close2;
 				openstorage;
 				end;
 			}
 			else {
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you don't";
-				mes "have enough money?";
-				mes "Cat Trading's storage";
-				mes "service is 60 zeny.";
-				mes "It's cheap, isn't it?";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous semblez ne pas avoir assez d'argent. 60 zénys pour pouvoir utiliser les services de Stock du Chat est un bon prix pourtant, non?";
 				close;
 			}
 		case 3:
 			// Custom Translation.
-			mes "[Cat Hand Agent]";
-			mes "With " + ep13_yong1 + " credit points, we offer the following warp services. Please remember, you can't come back easily once you move to Midgard.";
+			mes "[Agent du Chat]";
+			mes "Avec " + ep13_yong1 + " crédits, nous pouvons vous offrir les services de téléportation suivants. Gardez cependant à l'esprit que vous ne pourrez pas revenir aussi facilement une fois retourné à Midgard.";
 			next;
 			if ((ep13_yong1 > 99) && (ep13_yong1 < 200)) {
-				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Cancel")) {
+				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Annuler")) {
 				case 1:
 					if (Zeny >= 4590) {
 						set zeny,zeny-4590;
@@ -553,8 +518,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -564,8 +529,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -575,8 +540,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -586,8 +551,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -597,8 +562,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -608,8 +573,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -619,8 +584,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -628,7 +593,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				}
 			}
 			else if ((ep13_yong1 > 199) && (ep13_yong1 < 250)) {
-				switch(select("Alberta -> 4170z:Prontera -> 4170z:Izlude -> 4170z:Geffen -> 4170z:Payon -> 4170z:Morroc -> 4170z:Al De Baran -> 4170z:Juno -> 4170z:Cancel")) {
+				switch(select("Alberta -> 4170z:Prontera -> 4170z:Izlude -> 4170z:Geffen -> 4170z:Payon -> 4170z:Morroc -> 4170z:Al De Baran -> 4170z:Juno -> 4170z:Annuler")) {
 				case 1:
 					if (Zeny >= 4170) {
 						set zeny,zeny-4170;
@@ -636,8 +601,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -647,8 +612,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -658,8 +623,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -669,8 +634,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -680,8 +645,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -691,8 +656,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -702,8 +667,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -713,8 +678,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 9:
@@ -723,7 +688,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				close;
 			}
 			else if ((ep13_yong1 > 249) && (ep13_yong1 < 300)) {
-				switch(select("Alberta -> 4025z:Prontera -> 4025z:Izlude -> 4025z:Geffen -> 4025z:Payon -> 4025z:Morroc -> 4025z:Al De Baran -> 4025z:Juno -> 4025z:Einbroch -> 4025z:Cancel")) {
+				switch(select("Alberta -> 4025z:Prontera -> 4025z:Izlude -> 4025z:Geffen -> 4025z:Payon -> 4025z:Morroc -> 4025z:Al De Baran -> 4025z:Juno -> 4025z:Einbroch -> 4025z:Annuler")) {
 				case 1:
 					if (Zeny >= 4025) {
 						set zeny,zeny-4025;
@@ -731,8 +696,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -742,8 +707,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -753,8 +718,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -764,8 +729,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -775,8 +740,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -786,8 +751,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -797,8 +762,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -808,8 +773,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 9:
@@ -819,8 +784,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 10:
@@ -829,7 +794,7 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 				close;
 			}
 			else if (ep13_yong1 > 299) {
-				switch(select("Alberta -> 3970z:Prontera -> 3970z:Izlude -> 3970z:Geffen -> 3970z:Payon -> 3970z:Morroc -> 3970z:Al De Baran -> 3970z:Juno -> 3970z:Einbroch -> 3970z:Lighthalzen -> 3970z:Cancel")) {
+				switch(select("Alberta -> 3970z:Prontera -> 3970z:Izlude -> 3970z:Geffen -> 3970z:Payon -> 3970z:Morroc -> 3970z:Al De Baran -> 3970z:Juno -> 3970z:Einbroch -> 3970z:Lighthalzen -> 3970z:Annuler")) {
 				case 1:
 					if (Zeny >= 3970) {
 						set zeny,zeny-3970;
@@ -837,8 +802,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -848,8 +813,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -859,8 +824,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -870,8 +835,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -881,8 +846,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -892,8 +857,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -903,8 +868,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -914,8 +879,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 9:
@@ -925,8 +890,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 10:
@@ -936,8 +901,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 11:
@@ -947,12 +912,12 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 			}
 			else {
 				// Custom Translation
-				mes "[Cat Hand Agent]";
-				mes "I am sorry, but you don't have enough credit points to use the warp service. Please come back when you have more points.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous n'avez pas assez de crédits pour utiliser les services de téléportation. Veuillez revenir quand vous aurez plus de points.";
 				close;
 			}
 		case 4:
-			switch(select("Alliance Forces Post -> 5500z:Manuk Camp -> 7500z:Cancel")) {
+			switch(select("Camp des Forces de l'Alliance -> 5500z:Manuk Camp -> 7500z:Annuler")) {
 			case 1:
 				if (Zeny >= 5500) {
 					set zeny,zeny-5500;
@@ -960,8 +925,8 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 					close;
 				}
 				else {
-					mes "[Cat Hand Agent]";
-					mes "Don't play with money.";
+					mes "[Agent du Chat]";
+					mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 					close;
 				}
 			case 2:
@@ -971,151 +936,125 @@ spl_fild02,25,211,4	script	Cat Hand Agent#spl	421,{
 					close;
 				}
 				else {
-					mes "[Cat Hand Agent]";
-					mes "Don't play with money.";
+					mes "[Agent du Chat]";
+					mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 					close;
 				}
 			case 3:
-				mes "[Cat Hand Agent]";
-				mes "Thank you for using our service.";
+				mes "[Agent du Chat]";
+				mes "Merci d'avoir utilisé nos services.";
 				close;
 			}
 		case 5:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else {
-		mes "[Cat Hand Agent]";
+		mes "[Agent du Chat]";
 		mes "... ... ... ...";
-		mes "Please give me some Piece of Fish.";
+		mes "Vous n'auriez pas quelques morceaux de poisson?";
 		close;
 	}
 }
 
-man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
+man_fild02,132,47,4	script	Agent du Chat::Cat Hand Agent#man	421,{
 	if (ep13_yong1 < 3) {
-		mes "[Cat Hand Agent]";
-		mes "Welcome to Cat Trading.";
-		mes "I guess you're a first-time customer, huh?";
+		mes "[Agent du Chat]";
+		mes "Bienvenue à la Compagnie du Chat. C'est la première fois que vous traitez avec nous, n'est-ce pas?";
 		next;
-		mes "[Cat Hand Agent]";
-		mes "For more details about our contract, you need to talk to our staff first.";
+		mes "[Agent du Chat]";
+		mes "Vous devez d'abord vous adresser aux membres de notre personnel afin d'avoir les détails de notre contrat.";
 		close;
 	}
 	else if ((ep13_yong1 > 2) && (ep13_yong1 < 20)) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Annuler")) {
 		case 1:
 			savepoint "man_fild02",129,61;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else if ((ep13_yong1 > 19) && (ep13_yong1 < 40)) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Use Storage:Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Ouvrir son Stock:Annuler")) {
 		case 1:
 			savepoint "man_fild02",129,61;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
 			if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais il faut avoir appris vos Compétences de Base de Novice au moins au niveau 6 pour utiliser nos services de Stock.";
 				close;
 			}
 			else if (Zeny >= 60) {
 				set zeny,zeny-60;
-				mes "[Cat Hand Agent]";
-				mes "Thank you.";
-				mes "Your storage will be opened shortly.";
+				mes "[Agent du Chat]";
+				mes "Merci. Nous allons ouvrir votre Stock.";
 				close2;
 				openstorage;
 				end;
 			}
 			else {
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you don't";
-				mes "have enough money?";
-				mes "Cat Trading's storage";
-				mes "service is 60 zeny.";
-				mes "It's cheap, isn't it?";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous semblez ne pas avoir assez d'argent. 60 zénys pour pouvoir utiliser les services de Stock du Chat est un bon prix pourtant, non?";
 				close;
 			}
 		case 3:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else if ((ep13_yong1 > 39) && (ep13_yong1 < 100)) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Use Storage:Use Cat Warp (Midgard):Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Ouvrir son Stock:Utiliser la téléportation du Chat (Midgard):Annuler")) {
 		case 1:
 			savepoint "man_fild02",129,61;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
 			if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais il faut avoir appris vos Compétences de Base de Novice au moins au niveau 6 pour utiliser nos services de Stock.";
 				close;
 			}
 			else if (Zeny >= 60) {
 				set zeny,zeny-60;
-				mes "[Cat Hand Agent]";
-				mes "Thank you.";
-				mes "Your storage will be opened shortly.";
+				mes "[Agent du Chat]";
+				mes "Merci. Nous allons ouvrir votre Stock.";
 				close2;
 				openstorage;
 				end;
 			}
 			else {
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you don't";
-				mes "have enough money?";
-				mes "Cat Trading's storage";
-				mes "service is 60 zeny.";
-				mes "It's cheap, isn't it?";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous semblez ne pas avoir assez d'argent. 60 zénys pour pouvoir utiliser les services de Stock du Chat est un bon prix pourtant, non?";
 				close;
 			}
 		case 3:
 			// Custom Translation.
-			mes "[Cat Hand Agent]";
-			mes "With " + ep13_yong1 + " credit points, we offer the following warp services. Please remember, you can't come back easily once you move to Midgard.";
+			mes "[Agent du Chat]";
+			mes "Avec " + ep13_yong1 + " crédits, nous pouvons vous offrir les services de téléportation suivants. Gardez cependant à l'esprit que vous ne pourrez pas revenir aussi facilement une fois retourné à Midgard.";
 			next;
 			if ((ep13_yong1 > 39) && (ep13_yong1 < 49)) {
-				switch(select("Prontera -> 5500z:Cancel")) {
+				switch(select("Prontera -> 5500z:Annuler")) {
 				case 1:
 					if (Zeny >= 5500) {
 						set zeny,zeny-5500;
@@ -1123,8 +1062,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1132,7 +1071,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				}
 			}
 			else if ((ep13_yong1 > 49) && (ep13_yong1 < 59)) {
-				switch(select("Alberta -> 5500z:Prontera -> 5500z:Cancel")) {
+				switch(select("Alberta -> 5500z:Prontera -> 5500z:Annuler")) {
 				case 1:
 					if (Zeny >= 5500) {
 						set zeny,zeny-5500;
@@ -1140,8 +1079,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1151,8 +1090,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1160,7 +1099,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				}
 			}
 			else if ((ep13_yong1 > 59) && (ep13_yong1 < 69)) {
-				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Cancel")) {
+				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Annuler")) {
 				case 1:
 					if (Zeny >= 5025) {
 						set zeny,zeny-5025;
@@ -1168,8 +1107,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1179,8 +1118,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1190,8 +1129,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1199,7 +1138,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				}
 			}
 			else if ((ep13_yong1 > 69) && (ep13_yong1 < 79)) {
-				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Geffen -> 5025z:Cancel")) {
+				switch(select("Alberta -> 5025z:Prontera -> 5025z:Izlude -> 5025z:Geffen -> 5025z:Annuler")) {
 				case 1:
 					if (Zeny >= 5025) {
 						set zeny,zeny-5025;
@@ -1207,8 +1146,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1218,8 +1157,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1229,8 +1168,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1240,8 +1179,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1249,7 +1188,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				}
 			}
 			else if ((ep13_yong1 > 79) && (ep13_yong1 < 89)) {
-				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Cancel")) {
+				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Annuler")) {
 				case 1:
 					if (Zeny >= 4765) {
 						set zeny,zeny-4765;
@@ -1257,8 +1196,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1268,8 +1207,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1279,8 +1218,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1290,8 +1229,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1301,8 +1240,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -1310,7 +1249,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				}
 			}
 			else if ((ep13_yong1 > 89) && (ep13_yong1 < 99)) {
-				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Morroc -> 4765z:Cancel")) {
+				switch(select("Alberta -> 4765z:Prontera -> 4765z:Izlude -> 4765z:Geffen -> 4765z:Payon -> 4765z:Morroc -> 4765z:Annuler")) {
 				case 1:
 					if (Zeny >= 4765) {
 						set zeny,zeny-4765;
@@ -1318,8 +1257,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1329,8 +1268,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1340,8 +1279,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1351,8 +1290,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1362,8 +1301,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -1373,8 +1312,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -1382,7 +1321,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				}
 			}
 			else if (ep13_yong1 > 99) {
-				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Cancel")) {
+				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Annuler")) {
 				case 1:
 					if (Zeny >= 4590) {
 						set zeny,zeny-4590;
@@ -1390,8 +1329,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1401,8 +1340,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1412,8 +1351,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1423,8 +1362,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1434,8 +1373,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -1445,8 +1384,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -1456,8 +1395,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -1466,63 +1405,52 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 			}
 			else {
 				// Custom Translation.
-				mes "[Cat Hand Agent]";
-				mes "I am sorry, but you don't have enough credit points to use the warp service. Please come back when you have more points.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous n'avez pas assez de crédits pour utiliser les services de téléportation. Veuillez revenir quand vous aurez plus de points.";
 				close;
 			}
 		case 4:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else if (ep13_yong1 > 99) {
-		mes "[Cat Hand Agent]";
-		mes "Cat Trading's available services are as followed.";
-		mes "For additional services, please consult Agent Gyaruk.";
+		mes "[Agent du Chat]";
+		mes "Voici nos services disponibles. Adressez-vous à l'Agent Gyaruk pour les services additionnels.";
 		next;
-		switch(select("Save your location:Use Storage:Use Cat Warp (Midgard):Use Cat Warp (Jottunheim):Cancel")) {
+		switch(select("Changer son Point de Sauvegarde:Ouvrir son Stock:Utiliser la téléportation du Chat (Midgard):Utiliser la téléportation du Chat (Jottunheim):Annuler")) {
 		case 1:
 			savepoint "man_fild02",129,61;
-			mes "[Cat Hand Agent]";
-			mes "Thank you.";
-			mes "Your location has been saved.";
-			mes "You can now directly return to this camp.";
+			mes "[Agent du Chat]";
+			mes "Merci. Votre Point de Sauvegarde a été modifié. Vous pourrez désormais retourner directement dans ce camp.";
 			close;
 		case 2:
 			if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais il faut avoir appris vos Compétences de Base de Novice au moins au niveau 6 pour utiliser nos services de Stock.";
 				close;
 			}
 			else if (Zeny >= 60) {
 				set zeny,zeny-60;
-				mes "[Cat Hand Agent]";
-				mes "Thank you.";
-				mes "Your storage will be opened shortly.";
+				mes "[Agent du Chat]";
+				mes "Merci. Nous allons ouvrir votre Stock.";
 				close2;
 				openstorage;
 				end;
 			}
 			else {
-				mes "[Cat Hand Agent]";
-				mes "I'm sorry, but you don't";
-				mes "have enough money?";
-				mes "Cat Trading's storage";
-				mes "service is 60 zeny.";
-				mes "It's cheap, isn't it?";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous semblez ne pas avoir assez d'argent. 60 zénys pour pouvoir utiliser les services de Stock du Chat est un bon prix pourtant, non?";
 				close;
 			}
 		case 3:
 			// Custom Translation.
-			mes "[Cat Hand Agent]";
-			mes "With " + ep13_yong1 + " credit points, we offer the following warp services. Please remember, you can't come back easily once you move to Midgard.";
+			mes "[Agent du Chat]";
+			mes "Avec " + ep13_yong1 + " crédits, nous pouvons vous offrir les services de téléportation suivants. Gardez cependant à l'esprit que vous ne pourrez pas revenir aussi facilement une fois retourné à Midgard.";
 			next;
 			if ((ep13_yong1 > 99) && (ep13_yong1 < 200)) {
-				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Cancel")) {
+				switch(select("Alberta -> 4590z:Prontera -> 4590z:Izlude -> 4590z:Geffen -> 4590z:Payon -> 4590z:Morroc -> 4590z:Al De Baran -> 4590z:Annuler")) {
 				case 1:
 					if (Zeny >= 4590) {
 						set zeny,zeny-4590;
@@ -1530,8 +1458,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1541,8 +1469,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1552,8 +1480,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1563,8 +1491,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1574,8 +1502,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -1585,8 +1513,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -1596,8 +1524,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -1605,7 +1533,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				}
 			}
 			else if ((ep13_yong1 > 199) && (ep13_yong1 < 250)) {
-				switch(select("Alberta -> 4170z:Prontera -> 4170z:Izlude -> 4170z:Geffen -> 4170z:Payon -> 4170z:Morroc -> 4170z:Al De Baran -> 4170z:Juno -> 4170z:Cancel")) {
+				switch(select("Alberta -> 4170z:Prontera -> 4170z:Izlude -> 4170z:Geffen -> 4170z:Payon -> 4170z:Morroc -> 4170z:Al De Baran -> 4170z:Juno -> 4170z:Annuler")) {
 				case 1:
 					if (Zeny >= 4170) {
 						set zeny,zeny-4170;
@@ -1613,8 +1541,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1624,8 +1552,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1635,8 +1563,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1646,8 +1574,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1657,8 +1585,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -1668,8 +1596,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -1679,8 +1607,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -1690,8 +1618,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 9:
@@ -1700,7 +1628,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				close;
 			}
 			else if ((ep13_yong1 > 249) && (ep13_yong1 < 300)) {
-				switch(select("Alberta -> 4025z:Prontera -> 4025z:Izlude -> 4025z:Geffen -> 4025z:Payon -> 4025z:Morroc -> 4025z:Al De Baran -> 4025z:Juno -> 4025z:Einbroch -> 4025z:Cancel")) {
+				switch(select("Alberta -> 4025z:Prontera -> 4025z:Izlude -> 4025z:Geffen -> 4025z:Payon -> 4025z:Morroc -> 4025z:Al De Baran -> 4025z:Juno -> 4025z:Einbroch -> 4025z:Annuler")) {
 				case 1:
 					if (Zeny >= 4025) {
 						set zeny,zeny-4025;
@@ -1708,8 +1636,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1719,8 +1647,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1730,8 +1658,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1741,8 +1669,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1752,8 +1680,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -1763,8 +1691,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -1774,8 +1702,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -1785,8 +1713,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 9:
@@ -1796,8 +1724,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 10:
@@ -1806,7 +1734,7 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 				close;
 			}
 			else if (ep13_yong1 > 299) {
-				switch(select("Alberta -> 3970z:Prontera -> 3970z:Izlude -> 3970z:Geffen -> 3970z:Payon -> 3970z:Morroc -> 3970z:Al De Baran -> 3970z:Juno -> 3970z:Einbroch -> 3970z:Lighthalzen -> 3970z:Cancel")) {
+				switch(select("Alberta -> 3970z:Prontera -> 3970z:Izlude -> 3970z:Geffen -> 3970z:Payon -> 3970z:Morroc -> 3970z:Al De Baran -> 3970z:Juno -> 3970z:Einbroch -> 3970z:Lighthalzen -> 3970z:Annuler")) {
 				case 1:
 					if (Zeny >= 3970) {
 						set zeny,zeny-3970;
@@ -1814,8 +1742,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 2:
@@ -1825,8 +1753,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 3:
@@ -1836,8 +1764,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 4:
@@ -1847,8 +1775,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 5:
@@ -1858,8 +1786,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 6:
@@ -1869,8 +1797,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 7:
@@ -1880,8 +1808,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 8:
@@ -1891,8 +1819,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 9:
@@ -1902,8 +1830,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 10:
@@ -1913,8 +1841,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 						close;
 					}
 					else {
-						mes "[Cat Hand Agent]";
-						mes "Don't play with money.";
+						mes "[Agent du Chat]";
+						mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 						close;
 					}
 				case 11:
@@ -1924,12 +1852,12 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 			}
 			else {
 				// Custom Translation
-				mes "[Cat Hand Agent]";
-				mes "I am sorry, but you don't have enough credit points to use the warp service. Please come back when you have more points.";
+				mes "[Agent du Chat]";
+				mes "Je suis désolé mais vous n'avez pas assez de crédits pour utiliser les services de téléportation. Veuillez revenir quand vous aurez plus de points.";
 				close;
 			}
 		case 4:
-			switch(select("Alliance Forces Post -> 5500z:Splendide Camp -> 7500z:Cancel")) {
+			switch(select("Camp des Forces de l'Alliance -> 5500z:Camp de Splendide -> 7500z:Annuler")) {
 			case 1:
 				if (Zeny >= 5500) {
 					set zeny,zeny-5500;
@@ -1937,8 +1865,8 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 					close;
 				}
 				else {
-					mes "[Cat Hand Agent]";
-					mes "Don't play with money.";
+					mes "[Agent du Chat]";
+					mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 					close;
 				}
 			case 2:
@@ -1948,30 +1876,30 @@ man_fild02,132,47,4	script	Cat Hand Agent#man	421,{
 					close;
 				}
 				else {
-					mes "[Cat Hand Agent]";
-					mes "Don't play with money.";
+					mes "[Agent du Chat]";
+					mes "Ne prenez jamais les histoires d'argent à la légère. Revenez quand votre bourse sera pleine.";
 					close;
 				}
 			case 3:
-				mes "[Cat Hand Agent]";
-				mes "Thank you for using our service.";
+				mes "[Agent du Chat]";
+				mes "Merci d'avoir utilisé nos services.";
 				close;
 			}
 		case 5:
-			mes "[Cat Hand Agent]";
-			mes "Thank you for using our service.";
+			mes "[Agent du Chat]";
+			mes "Merci d'avoir utilisé nos services.";
 			close;
 		}
 	}
 	else {
-		mes "[Cat Hand Agent]";
+		mes "[Agent du Chat]";
 		mes "... ... ... ...";
-		mes "Please give me some Piece of Fish.";
+		mes "Vous n'auriez pas quelques morceaux de poisson?";
 		close;
 	}
 }
 
-man_fild02,146,81,0	script	Mysterious Rock#31	844,{
+man_fild02,146,81,0	script	Rocher Mystérieux::Mysterious Rock#31	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2002,8 +1930,7 @@ man_fild02,146,81,0	script	Mysterious Rock#31	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2014,7 +1941,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,140,148,0	script	Mysterious Rock#32	844,{
+man_fild02,140,148,0	script	Rocher Mystérieux::Mysterious Rock#32	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2045,8 +1972,7 @@ man_fild02,140,148,0	script	Mysterious Rock#32	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2057,7 +1983,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,88,263,0	script	Mysterious Rock#33	844,{
+man_fild02,88,263,0	script	Rocher Mystérieux::Mysterious Rock#33	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2088,8 +2014,7 @@ man_fild02,88,263,0	script	Mysterious Rock#33	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2100,7 +2025,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,146,365,0	script	Mysterious Rock#34	844,{
+man_fild02,146,365,0	script	Rocher Mystérieux::Mysterious Rock#34	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2131,8 +2056,7 @@ man_fild02,146,365,0	script	Mysterious Rock#34	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2143,7 +2067,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,336,305,0	script	Mysterious Rock#35	844,{
+man_fild02,336,305,0	script	Rocher Mystérieux::Mysterious Rock#35	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2174,8 +2098,7 @@ man_fild02,336,305,0	script	Mysterious Rock#35	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2186,7 +2109,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,248,124,0	script	Mysterious Rock#36	844,{
+man_fild02,248,124,0	script	Rocher Mystérieux::Mysterious Rock#36	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2217,8 +2140,7 @@ man_fild02,248,124,0	script	Mysterious Rock#36	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2229,7 +2151,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,285,115,0	script	Mysterious Rock#37	844,{
+man_fild02,285,115,0	script	Rocher Mystérieux::Mysterious Rock#37	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2260,8 +2182,7 @@ man_fild02,285,115,0	script	Mysterious Rock#37	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2272,7 +2193,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,346,116,0	script	Mysterious Rock#38	844,{
+man_fild02,346,116,0	script	Rocher Mystérieux::Mysterious Rock#38	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2303,8 +2224,7 @@ man_fild02,346,116,0	script	Mysterious Rock#38	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2315,7 +2235,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,358,174,0	script	Mysterious Rock#39	844,{
+man_fild02,358,174,0	script	Rocher Mystérieux::Mysterious Rock#39	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2346,8 +2266,7 @@ man_fild02,358,174,0	script	Mysterious Rock#39	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2358,7 +2277,7 @@ OnTimer120000:
 	end;
 }
 
-man_fild02,241,227,0	script	Mysterious Rock#40	844,{
+man_fild02,241,227,0	script	Rocher Mystérieux::Mysterious Rock#40	844,{
 	if ((countitem(6048) < 3) && (checkquest(12062,PLAYTIME) == -1)) {
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",10;
@@ -2389,8 +2308,7 @@ man_fild02,241,227,0	script	Mysterious Rock#40	844,{
 		end;
 	}
 	else {
-		mes "This rock contains unidentified minerals.";
-		mes "It's not possible to mine more than the limit.";
+		mes "Ce rocher contient des minéraux que vous n'arrivez pas à identifier. Vous ne pouvez cependant pas les extraire.";
 		close;
 	}
 	end;
@@ -2401,7 +2319,7 @@ OnTimer120000:
 	end;
 }
 
-spl_fild03,226,151,0	script	School of Fish#5::FishingHole_spl3	844,{
+spl_fild03,226,151,0	script	Zone de Pêche::FishingHole_spl3	844,{
 	if ((checkquest(12060,PLAYTIME) == -1) && (countitem(6039) < 20)) {
 		specialeffect2 EF_BUBBLE;
 		specialeffect2 EF_INVENOM;
@@ -2430,7 +2348,7 @@ spl_fild03,226,151,0	script	School of Fish#5::FishingHole_spl3	844,{
 				getitem 6037,1; //Rough_File
 				set ep13_1_rhea,14;
 				specialeffect2 EF_BUBBLE;
-				mapannounce "spl_fild03","" + strcharinfo(0) + " has caught a Loose File.",bc_map,"0xff77ff";
+				mapannounce "spl_fild03","" + strcharinfo(0) + " vient de repêcher un Document en Mauvais État.",bc_map,"0xff77ff";
 			}
 		}
 		set .@rhea_ran,rand(1,70);
@@ -2468,38 +2386,38 @@ spl_fild03,226,151,0	script	School of Fish#5::FishingHole_spl3	844,{
 			getitem 7049,1; //Stone
 		}
 		else {
-			mes "Nothing was caught.";
+			mes "Vous n'attrapez rien.";
 			close;
 		}
 		set .@rhea_ran5,rand(1,200);
 		if (.@rhea_ran5 == 3) {
 			getitem 644,1; //Gift_Box
-			mapannounce "spl_fild03","" + strcharinfo(0) + " has caught a Gift Box.",bc_map,"0x00ffff";
+			mapannounce "spl_fild03","" + strcharinfo(0) + " vient de pêcher un Paquet Cadeau.",bc_map,"0x00ffff";
 		}
 		set .@rhea_ran3,rand(1,500);
 		if (.@rhea_ran3 == 3) {
 			getitem 603,1; //Old_Blue_Box
-			mapannounce "spl_fild03","" + strcharinfo(0) + " has caught an Old Blue Box.",bc_map,"0x00ffff";
+			mapannounce "spl_fild01","" + strcharinfo(0) + " vient de pêcher une Vielle Boîte Bleue.",bc_map,"0x00ffff";
 		}
 		set .@rhea_ran4,rand(1,3000);
 		if (.@rhea_ran4 == 3) {
 			getitem 617,1; //Old_Violet_Box
-			mapannounce "spl_fild03","" + strcharinfo(0) + " has caught an Old Purple Box.",bc_map,"0x44ff44";
+			mapannounce "spl_fild03","" + strcharinfo(0) + " vient de pêcher une Vielle Boîte Violette.",bc_map,"0x44ff44";
 		}
 	}
 	else {
-		mes "Fish are swimming in the water.";
+		mes "Des poissons nagent dans l'eau.";
 		close;
 	}
 	end;
 }
 
-spl_fild03,268,230,0	duplicate(FishingHole_spl3)	School of Fish#6	844
-spl_fild03,293,253,0	duplicate(FishingHole_spl3)	School of Fish#7	844
-spl_fild03,165,100,0	duplicate(FishingHole_spl3)	School of Fish#8	844
-spl_fild03,317,190,0	duplicate(FishingHole_spl3)	School of Fish#9	844
+spl_fild03,268,230,0	duplicate(FishingHole_spl3)	Zone de Pêche::School of Fish#6	844
+spl_fild03,293,253,0	duplicate(FishingHole_spl3)	Zone de Pêche::School of Fish#7	844
+spl_fild03,165,100,0	duplicate(FishingHole_spl3)	Zone de Pêche::School of Fish#8	844
+spl_fild03,317,190,0	duplicate(FishingHole_spl3)	Zone de Pêche::School of Fish#9	844
 
-spl_fild01,41,118,0	script	School of Fish#10::FishingHole_spl1	844,{
+spl_fild01,41,118,0	script	Zone de Pêche::FishingHole_spl1	844,{
 	if ((checkquest(12060,PLAYTIME) == -1) && (countitem(6039) < 20)) {
 		specialeffect2 EF_BUBBLE;
 		specialeffect2 EF_INVENOM;
@@ -2528,7 +2446,7 @@ spl_fild01,41,118,0	script	School of Fish#10::FishingHole_spl1	844,{
 				getitem 6037,1; //Rough_File
 				set ep13_1_rhea,14;
 				specialeffect2 EF_BUBBLE;
-				mapannounce "spl_fild01","" + strcharinfo(0) + " has caught a Loose File.",bc_map,"0xff77ff";
+				mapannounce "spl_fild03","" + strcharinfo(0) + " vient de repêcher un Document en Mauvais État.",bc_map,"0xff77ff";
 			}
 		}
 		set .@rhea_ran,rand(1,70);
@@ -2566,100 +2484,99 @@ spl_fild01,41,118,0	script	School of Fish#10::FishingHole_spl1	844,{
 			getitem 7049,1; //Stone
 		}
 		else {
-			mes "Nothing was caught.";
+			mes "Vous n'attrapez rien.";
 			close;
 		}
 		set .@rhea_ran5,rand(1,200);
 		if (.@rhea_ran5 == 3) {
 			getitem 644,1; //Gift_Box
-			mapannounce "spl_fild01","" + strcharinfo(0) + " has caught a Gift Box.",bc_map,"0x00ffff";
+			mapannounce "spl_fild03","" + strcharinfo(0) + " vient de pêcher un Paquet Cadeau.",bc_map,"0x00ffff";
 		}
 		set .@rhea_ran3,rand(1,500);
 		if (.@rhea_ran3 == 3) {
 			getitem 603,1; //Old_Blue_Box
-			mapannounce "spl_fild01","" + strcharinfo(0) + " has caught a Old Blue Box.",bc_map,"0x00ffff";
+			mapannounce "spl_fild01","" + strcharinfo(0) + " vient de pêcher une Vielle Boîte Bleue.",bc_map,"0x00ffff";
 		}
 		set .@rhea_ran4,rand(1,3000);
 		if (.@rhea_ran4 == 3) {
 			getitem 617,1; //Old_Violet_Box
-			mapannounce "spl_fild01","" + strcharinfo(0) + " has caught a Old Purple Box.",bc_map,"0x44ff44";
+			mapannounce "spl_fild03","" + strcharinfo(0) + " vient de pêcher une Vielle Boîte Violette.",bc_map,"0x44ff44";
 		}
 	}
 	else {
-		mes "Fish are swimming in the water.";
+		mes "Des poissons nagent dans l'eau.";
 		close;
 	}
 	end;
 }
 
-spl_fild01,317,361,0	duplicate(FishingHole_spl1)	School of Fish#11	844
-spl_fild01,55,269,0	duplicate(FishingHole_spl1)	School of Fish#12	844
-spl_fild01,332,131,0	duplicate(FishingHole_spl1)	School of Fish#13	844
-spl_fild01,170,74,0	duplicate(FishingHole_spl1)	School of Fish#14	844
+spl_fild01,317,361,0	duplicate(FishingHole_spl1)	Zone de Pêche::School of Fish#11	844
+spl_fild01,55,269,0	duplicate(FishingHole_spl1)	Zone de Pêche::School of Fish#12	844
+spl_fild01,332,131,0	duplicate(FishingHole_spl1)	Zone de Pêche::School of Fish#13	844
+spl_fild01,170,74,0	duplicate(FishingHole_spl1)	Zone de Pêche::School of Fish#14	844
 
-manuk,304,195,5	script	Soldier#ep13pa829	454,{
+manuk,304,195,5	script	Soldat::Soldier#ep13pa829	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Food Provider]";
-		mes "The Manuk family subsists mostly on refining Gray Hollows that were burried a long time ago deep down under the ground.";
+		mes "[Responsable des Rations]";
+		mes "La famille de Manuk vit principalement du raffinage des Cavités Grises enfouies il y a très longtemps dans notre sol.";
 		close;
 	}
 	else {
-		mes "[Food Provider]";
+		mes "[Responsable des Rations]";
 		mes "Gdiios duuie Dssoas pogggd fdrul fdddoweet";
 		close;
 	}
 }
 
-manuk,274,239,5	script	Soldier#ep13_2	455,{
+manuk,274,239,5	script	Soldat::Soldier#ep13_2	455,{
 	if (isequipped(2782) == 1) {
-		mes "[Injured Manuk Soldier]";
-		mes "I can't absorb Bradium Essence anymore because of my fatal injury.";
-		mes "Those wicked fairies attacked me and left me like this.";
+		mes "[Soldat de Manuk Blessé]";
+		mes "Je n'arrive plus à absorber l'essence du Bradium à cause de mes blessures. Ces satanées fées m'ont laissées comme ça.";
 		close;
-		mes "[Injured Manuk Soldier]";
-		mes "I wish I could kill all the fairies...";
+		mes "[Soldat de Manuk Blessé]";
+		mes "J'aurais tellement envie de toutes les étrangler...";
 		close;
 	}
 	else {
-		mes "[Injured Manuk Soldier";
+		mes "[Soldat de Manuk Blessé]";
 		mes "Bhiio aaas dgwer fdds rrrrrpppp Ee";
 		close;
-		mes "[Injured Manuk Soldier]";
+		mes "[Soldat de Manuk Blessé]";
 		mes "Foi dsddff gggeeeerr pqowe";
 		close;
 	}
 }
 
-manuk,107,233,5	script	Soldier#ep13_3	454,{
+manuk,107,233,5	script	Soldat::Soldier#ep13_3	454,{
 	if (isequipped(2782) == 1) {
-		mes "[Anxious Soldier]";
-		mes "Hurry, I am in big trouble. I lost all the Manuk Coins. I think I dropped them somewhere on the snowfield. Gosh, I saw them right before I fell asleep!";
+		mes "[Soldat Anxieux]";
+		mes "Dépêchez-vous: j'ai vraiment des problèmes. J'ai perdu toutes les Pièces de Manuk. Je crois que je les ai perdues quelque part dans toute cette neige. Je les avais encore avant de m'endormir!";
 		close;
 	}
 	else {
-		mes "[Anxious Soldier]";
+		mes "[Soldat Anxieux]";
 		mes "Qosi dhhui rffd poaner ouh.";
 		close;
 	}
 }
 
-splendide,218,193,3	script	Fairy#ep13_1	441,{
+splendide,218,193,3	script	Fée::Fairy#ep13_1	441,{
 	if (isequipped(2782) == 1) {
-		mes "[Exhausted Fairy]";
-		mes "Wait, don't come any closer. I can't stand your smell, it makes me feel dizzy.";
+		mes "[Fée Fatiguée]";
+		mes "Attendez, n'approchez pas. Votre odeur est vraiment trop forte. J'ai la tête qui tourne...";
 		close;
 	}
 	else {
-		mes "[Exhausted Fairy]";
+		mes "[Fée Fatiguée]";
 		mes "OdesKoUor Ko NuffSharUden Ko CyaVenah An NudNuffser An KoRivehAdor Mu LarseorAnu O DorNe";
 		close;
 	}
 }
 
-splendide,180,223,3	script	Fairy#ep13_2	440,{
+splendide,180,223,3	script	Fée::Fairy#ep13_2	440,{
 	if (isequipped(2782) == 1) {
 		mes "[Kalua]";
-		mes "You don't look sophisticated, but I think you are better than those uncivilized guys who are around the snowfield.";
+		mes "Vous n'avez pas l'air très sophistiqué"+( sex ? "" : "e" )+", mais je pense que c'est tout de même mieux que ces rustres du pays des neiges.";
 		close;
 	}
 	else {
@@ -2669,11 +2586,10 @@ splendide,180,223,3	script	Fairy#ep13_2	440,{
 	}
 }
 
-splendide,125,227,3	script	Fairy#ep13_3	444,{
+splendide,125,227,3	script	Fée::Fairy#ep13_3	444,{
 	if (isequipped(2782) == 1) {
 		mes "[Flowa]";
-		mes "No offense, I was not looking at you with sympathy.";
-		mes "I just wondered how you could walk with that heavy body...";
+		mes "Ne le prenez pas mal, je ne vous regardais pas avec pitié. Je me demandais simplement comment vous pouviez réussir à marcher avec un corps aussi lourd...";
 		close;
 	}
 	else {
@@ -2686,122 +2602,114 @@ splendide,125,227,3	script	Fairy#ep13_3	444,{
 
 // Otherworld language
 //============================================================ 
-mid_camp,197,237,3	script	Schwartzvalt Mechanic#1	869,{
+mid_camp,197,237,3	script	Mécanicien::Schwartzvalt Mechanic#1	869,{
 	if (ep13_1_edq > 2) {
 		if (ep13_2_rhea < 1) {
-			mes "[Mechanic Engineer Dorance]";
-			mes "Do you know about the Ring of the Ancient Wise King? If you wear that Ring, you can talk to animals.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Avez-vous entendu parler de l'Anneau du Roi de la Sagesse Ancienne? Vous pouvez parler aux animaux en portant cet anneau.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "I don't know if it is a legend based on truth or not... but something like that would come in pretty handy.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Je ne sais pas s'il s'agit d'une légende ou s'il existe vraiment, mais ça serait quelque chose de vraiment utile.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Outside of the Expedition Camp, There's a race of animals which uses a mysterious language not used in Rune Midgard.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Il y a une race d'animaux à l'extérieur du camp qui parle une langue mystérieuse, inconnue sur Rune Midgard.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "We don't know if they are friend or foe, but it will be much easier for our research here if we could find out.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Nous ne savons pas encore si nous devons les compter parmi nos alliés ou nos ennemis, mais cela serait très profitable à nos recherches si nous pouvions le déterminer.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "So, the Triple Alliance Research Group is working together to find out. I would like to know how far the ^0000ff Arunafeltz Linguist^000000's decoding process is. Would you go and find out for me?";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Le Groupe de Recherche de la Triple Alliance essaie de tirer cela au clair. Je voudrais savoir où en est le processus de traduction du ^0000ffLinguiste d'Arunafeltz^000000. Pourriez-vous aller vous renseigner pour moi?";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "The ^0000ff Arunafeltz Linguist^000000 should be on the second floor of the Alliance Headquarters.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Le ^0000ffLinguiste d'Arunafeltz^000000 devrait se trouver au second étage du Quartier Général de l'Alliance.";
 			setquest 8243;
 			set ep13_2_rhea,1;
 			close;
 		}
 		else if ((ep13_2_rhea > 0) && (ep13_2_rhea < 7)) {
-			mes "[Mechanic Engineer Dorance]";
-			mes "Outside of the Expedition Camp, There's a race who uses a mysterious language which is not used in Rune Midgard";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Il y a une race d'animaux à l'extérieur du camp qui parle une langue mystérieuse, inconnue sur Rune Midgard.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "We don't know if they are friend or foe, one thing for sure is it will be more easier for our research here.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Nous ne savons pas encore si nous devons les compter parmi nos alliés ou nos ennemis, mais cela serait très profitable à nos recherches si nous pouvions le déterminer.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "So, the Triple Alliance Research Group is working together to find out. I would like to know how far the ^0000ff Arunafeltz Linguist^000000's decoding process is. Would you go and find out for me?";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Le Groupe de Recherche de la Triple Alliance essaie de tirer cela au clair. Je voudrais savoir où en est le processus de traduction du ^0000ffLinguiste d'Arunafeltz^000000. Pourriez-vous aller vous renseigner pour moi?";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Go to a big building in center of the Expedition Camp and inside that building, meet ^0000ff Arunafeltz Linguist^000000 and ask him how far his progress is.";
-			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "The ^0000ff Arunafeltz Linguist^000000 should be on the second floor of the Alliance Headquarters.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Le ^0000ffLinguiste d'Arunafeltz^000000 devrait se trouver au second étage du Quartier Général de l'Alliance.";
 			close;
 		}
 		else if (ep13_2_rhea == 7) {
-			mes "- He's making a grim face at a flooding pile of research documents. -";
+			mes "- Il tire la tête à la vue de la montagne de documents qui se dresse devant lui. -";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Ah, You are here.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Ah, vous voilà.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "t seems like you've done much for us. I thank you for that.";
-			mes "But...Sigh...";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Vous avez déjà fait beaucoup pour nous on dirait, et je vous en remercie. Cependant... *Soupire*";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Can you see this? The amount of these research documents?";
-			mes "It is a good thing that we finally decoded the other world's language... it's just too much.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Vous voyez cela? Tous ces documents de recherche? C'est une bonne chose que nous ayons enfin décodé la langue de l'Autre Monde, mais... ça fait vraiment trop.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "We can't always accompany a Linguist for an interpretion... We need to communicate with those other world races in order to explore this world...";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Nous n'avons pas assez de linguistes pour tout traduire... Et il nous faut pouvoir communiquer avec ces races de l'Autre Monde pour pouvoir explorer cet endroit...";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "To store this amount of information will need a super computer the size of this headquarter building and its processing speed will be very very slow.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Il nous faudrait un supercalculateur de la taille de ce bâtiment pour traiter toutes ces informations, et même comme cela, cela prendrait un temps fou.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Sigh... Anyways, If there's any way to store an enormous amount of data, I should be able to make a very-small portable translator.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "*Soupire* Il y aurait tout de même un moyen de traiter toutes ces données: ce serait un traducteur portable miniaturisé.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "I heard that by using a Magical Spell of Rune-Midgart, you can transpose data to a magical power and lock it into a gem... I'd like some suggestions from the Rune-Midgarts Magician.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "J'ai entendu dire qu'il existait un sort à Rune-Midgard permettant de transférer des données et de les verrouiller dans une gemme... Il me faudrait les conseils des Mages de Rune-Midgard.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Would you be kind to ask them for help?";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Auriez-vous la gentillesse d'aller leur demander leur aide?";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "While you are gone, I be here organizing these documents.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Je mettrai de l'ordre dans ces documents pendant que vous serez parti.";
 			completequest 8248;
 			setquest 8249;
 			set ep13_2_rhea,8;
 			close;
 		}
 		else if ((ep13_2_rhea > 7) && (ep13_2_rhea < 11)) {
-			mes "[Mechanic Engineer Dorance]";
-			mes "To store this amount of information will need a super computer with a size of this headquarter building. and its processing speed will be very very slow...";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Il nous faudrait un supercalculateur de la taille de ce bâtiment pour traiter toutes ces informations, et même comme cela, cela prendrait un temps fou.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Sigh... Anyways, If there's any way to store an enormous amount of data, I could be able to make a very-small portable translator.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "*Soupire* Il y aurait tout de même un moyen de traiter toutes ces données: ce serait un traducteur portable miniaturisé.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "I heard that by using the Magical Spell of Rune Midgarts, you could transpose a data to a magical power and lock it into a gem....I'd like to get some suggestion from the Magician of Rune Midgarts.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "J'ai entendu dire qu'il existait un sort à Rune-Midgard permettant de transférer des données et de les verrouiller dans une gemme... Il me faudrait les conseils des Mages de Rune-Midgard.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Would you be kind to ask them for help?";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Auriez-vous la gentillesse d'aller leur demander leur aide?";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "While you are gone, I be here organizing these documents.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Je mettrai de l'ordre dans ces documents pendant que vous serez parti.";
 			close;
 		}
 		else if (ep13_2_rhea == 11) {
-			mes "[Mechanic Engineer Dorance]";
-			mes "How'd it go?";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Comment cela s'est-il passé?";
 			next;
-			select("Give him the Gem.");
-			mes "[Mechanic Engineer Dorance]";
-			mes "Ah, Looks like you've succeeded.";
-			mes "Inputting data into a gem with a magical power... It's something you can't do with a technology... It's a bit resentful to admit, but it's magnificent.";
+			select("Lui donner la gemme.");
+			mes "[Chef Mécanicien Dorance]";
+			mes "Ah, on dirait que vous avez réussi. Graver des données dans une gemme... C'est quelque chose que je ne peux faire avec ma technologie... J'ai du mal à l'admettre, mais c'est vraiment extraordinaire.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Well then, I should be working on making a machine to read the magical data in this Gem so we could use them right away.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Bien, dans ce cas, je devrais sans attendre commencer à travailler sur une machine capable de décrypter les données magiques contenues dans cette gemme.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "Hmm...";
-			mes "Fortunately, It won't be as hard as we thought.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Hum... Malheureusement, ce ne sera pas aussi simple que nous le pensions.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "If we transform a magical power wave to an eletric signal and connect it to a human body, then transmit a data to a brain directly. That will allow us to receive and understand a data without any loading process.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Si nous réussissons à transformer un pouvoir magique en un signal électrique et que nous le connectons à un corps humain pour qu'il soit directement transmis au cerveau, cela nous permettra de recevoir et de comprendre des données qui n'auront pas été auparavant traitées.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "I don't have time to explain everything. I have to start the work right away.";
-			mes "With all preperation done, allow me about one hour to finish this thing.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Je n'ai pas le temps de tout vous expliquer en détails. Il faut que je me mette au travail sans attendre. Une fois les préparations terminées, il me faudra environ une heure pour terminer tout cela.";
 			completequest 8252;
 			setquest 8253;
 			set ep13_2_rhea,12;
@@ -2810,68 +2718,60 @@ mid_camp,197,237,3	script	Schwartzvalt Mechanic#1	869,{
 		else if (ep13_2_rhea == 12) {
 			set .@trs_time01,checkquest(8253,PLAYTIME);
 			if (.@trs_time01 == 2) {
-				mes "[Mechanic Engineer Dorance]";
-				mes "Sigh, What should I do now?!";
+				mes "[Chef Mécanicien Dorance]";
+				mes "*Soupire* Qu'est-ce que je vais bien pouvoir faire maintenant?!";
 				next;
-				mes "- Dorance is walking here and there -";
-				mes "- in a dither. -";
-				next;
-				mes "["+ strcharinfo(0) +"]";
-				mes "Is something wrong?!";
-				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "What should I do?! Ain't I REALLY a genius?!";
-				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "I've made it!!!";
-				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Convenient portable size!";
-				mes "Fashionable and practical design!";
-				mes "Features the Other World's Words / Idiom / Grammer / Phrases!!";
-				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Have you experienced the loading speed?";
-				mes "Don't you even mention it if you haven't.";
-				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "That's not all!";
-				mes "For the Well-Being life, it will buff your strength and intelligence!!!!";
-				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "With all these marvelous features, it's just 39,900 zeny....!!!";
+				mes "- Dorance marche de long en large en tout hâte. -";
 				next;
 				mes "["+ strcharinfo(0) +"]";
-				mes "...Just what are you trying to imitate...";
+				mes "Est-ce que quelque chose ne va pas?!";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Important thing is, I've made it!!";
+				mes "[Chef Mécanicien Dorance]";
+				mes "Qu'est-ce que je vais bien pouvoir faire maintenant?! Ne suis-je pas un VERITABLE génie?!";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Well, Seeing is believing.";
-				mes "Take a look.";
+				mes "[Chef Mécanicien Dorance]";
+				mes "Je l'ai fait!!!";
 				next;
-				mes "- He handed over the small ring. -";
+				mes "[Chef Mécanicien Dorance]";
+				mes "Miniaturisé pour plus de confort, un design élégant et pratique, et il inclut toute la grammaire, les idiomes, et même les proverbes de l'Autre Monde!";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "The name is 'the Ring of Wise King'. I designed it after the Ring used by ancient king to communicate with animals.";
+				mes "[Chef Mécanicien Dorance]";
+				mes "Et vous avez vu la vitesse de traitement?! C'est purement extraordinaire.";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Do not just look at it like any other rings. You see this small gem here? This socket which holds a gem and a ring part are precisely crafted, it will transform a magical power wave to electric signal and trasmit it directly to our brain.";
+				mes "[Chef Mécanicien Dorance]";
+				mes "Et ce n'est pas tout! Pour votre plus grand confort, il augmentera même votre force et votre intelligence!";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Since this electric signal is same as the signal used by our body's nerve system, it will enable us to understand and use the language fluently.";
+				mes "[Chef Mécanicien Dorance]";
+				mes "Et toutes ces fonctions merveilleuses pour la somme ridicule de 39,900 zénys!!!";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Once this translator gets popularized, it'd be just a matter of time for us to advance into the other world. Well, the problem is...we don't have enough quantity yet...";
+				mes "["+ strcharinfo(0) +"]";
+				mes "Euh... Vous essayez d'imiter qui, là, en fait?";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Hmm...";
-				mes "Anyways, now we've got the idea, I will give you this first piece of work.";
+				mes "[Chef Mécanicien Dorance]";
+				mes "L'important, c'est que... Je l'ai fait!!";
 				next;
-				mes "[Mechanic Engineer Dorance]";
-				mes "Thank you for helping us out.";
-				mes "I hope this ring would be a big help for your journey through the other world.";
+				mes "[Chef Mécanicien Dorance]";
+				mes "Eh bien, il faut le voir pour le croire. Regardez!";
+				next;
+				mes "- Il vous tend un petit anneau. -";
+				next;
+				mes "[Chef Mécanicien Dorance]";
+				mes "Je l'appelle l''Anneau de Sagesse'. Je l'ai créé d'après celui qu'un roi des temps anciens utilisait pour communiquer avec les animaux.";
+				next;
+				mes "[Chef Mécanicien Dorance]";
+				mes "Oh, mais ce n'est pas un anneau ordinaire. Vous voyez cette petite gemme ici? À sa base se trouve un mécanisme pour transformer le pouvoir magique en signal électrique, que l'anneau transmet directement à votre cerveau.";
+				next;
+				mes "[Chef Mécanicien Dorance]";
+				mes "Et comme ce signal est le même que celui utilisé par notre système nerveux, il vous permettra de comprendre leur langue comme si vous la parliez couramment.";
+				next;
+				mes "[Chef Mécanicien Dorance]";
+				mes "Une fois que ce traducteur se sera popularisé, ce ne sera qu'une question de temps avant que nous puissions nous enfoncer encore plus profondément dans l'Autre Monde. Le seul problème est que l'instant nous n'en avons pas encore suffisamment...";
+				next;
+				mes "[Chef Mécanicien Dorance]";
+				mes "Hum... Au moins nous savons maintenant comment le fabriquer. Je vais vous donner ce prototype.";
+				next;
+				mes "[Chef Mécanicien Dorance]";
+				mes "Merci de nous avoir aidé. J'espère que cet anneau vous sera utile dans votre périple dans l'Autre Monde.";
 				completequest 8253;
 				set ep13_2_rhea,100;
 				getexp 1000000,300000;
@@ -2879,158 +2779,152 @@ mid_camp,197,237,3	script	Schwartzvalt Mechanic#1	869,{
 				close;
 			}
 			else {
-				mes "- He has scattered mechanical parts -";
-				mes "- all over the room and so wrapped up -";
-				mes "- in his work -";
+				mes "- Des pièces mécaniques sont dispersées partout autour de lui, et il est complètement absorbé par son travail. -";
 				next;
-				mes "- I might get bitten if I bother him -";
-				mes "- Let's leave him alone -";
+				mes "- Vous pourriez passer un sale quart d'heure si vous le dérangiez. Il vaut mieux le laisser seul. -";
 				close;
 			}
 		}
 		else {
-			mes "[Mechanic Engineer Dorance]";
-			mes "Thank you for your help.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "Merci de nous avoir aidé.";
 			next;
-			mes "[Mechanic Engineer Dorance]";
-			mes "I hope this ring would be a big help for your journey through the other world.";
+			mes "[Chef Mécanicien Dorance]";
+			mes "J'espère que cet anneau vous sera utile dans votre périple dans l'Autre Monde.";
 			close;
 		}
 	}
 	else {
-		mes "[Mechanic Engineer Dorance]";
-		mes "Do you know about the Ring of Ancient Wise King? If you wear that Ring, you could talk to an animal.";
+		mes "[Chef Mécanicien Dorance]";
+		mes "Avez-vous entendu parler de l'Anneau du Roi de la Sagesse Ancienne? Vous pouvez parler aux animaux en portant cet anneau.";
 		next;
-		mes "[Mechanic Engineer Dorance]";
-		mes "I don't know if it is a legend based on a truth or not... something like that will come in handy.";
+		mes "[Chef Mécanicien Dorance]";
+		mes "Je ne sais pas s'il s'agit d'une légende ou s'il existe vraiment, mais ça serait quelque chose de vraiment utile.";
 		next;
-		mes "[Mechanic Engineer Dorance]";
-		mes "By the way, Who are you? This building is under Commander's control. This place is not to be entered freely... Are you acquainted with our Commander?";
+		mes "[Chef Mécanicien Dorance]";
+		mes "Qui êtes-vous au fait? Ce bâtiment est sous la direction du Commandeur. Vous ne pouvez pas aller et venir dans cet endroit comme vous le souhaitez... Avez-vous été introduit auprès du Commandeur?";
 		next;
-		mes "[Mechanic Engineer Dorance]";
-		mes "Are you looking for something to do? Perhaps I could use some help... Well, I don't know if you are trustworthy just yet.";
+		mes "[Chef Mécanicien Dorance]";
+		mes "Est-ce que vous cherchez quelque chose à faire? Vous pourriez peut-être m'être utile... Enfin... Je ne sais pas encore si je peux vous faire confiance.";
 		next;
-		mes "[Mechanic Engineer Dorance]";
-		mes "If you are good enough to solve some problems within the expedition camp, and carry out a mission given by Commander... then I think I could trust you.";
+		mes "[Chef Mécanicien Dorance]";
+		mes "Si vous réussissez à résoudre les problèmes du Camp d'Expédition et menez à bien une mission que le Commandeur vous aura confiée, que pense que je pourrai vous faire confiance.";
 		close;
 	}
 }
 
-mid_campin,168,82,3	script	Arunafeltz Linguist#1	935,{
+mid_campin,168,82,3	script	Linguiste d'Arunafeltz::Arunafeltz Linguist#1	935,{
 	if (ep13_2_rhea < 1) {
-		mes "[Linguist Dictionary]";
-		mes "Language distinguishes humans from animals. Every single intellectual life form has their own language.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Le langage est ce qui distingue les humains des animaux. Chaque forme de vie intelligente a son propre langage.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "Language is a method / system which delievers one's feeling or thinking by voice or letters. Anyway, its purpose is to communicate.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Le langage est une méthode / un système permettant de retranscrire en mots ou lettres les pensées ou les sentiments que quelqu'un. Et tous cas, sa finalité est la communication.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "Difference between a language and a sound is that language is a socially implied promise by making common system of communication to make it possible to understand eachother.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "La différence entre le langage et un simple son est que le langage est une promesse d'ordre social en ceci qu'il permet l'existence d'un système de communication permettant de se comprendre les uns les autres.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "That Socially implied promise, if we could grasp the meaning of a system and structure, we will be able to understand other intellectual life form's language...";
-		mes "...................................And just who might you be?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Et si nous pouvions modéliser la structure de cette promesse d'ordre social, nous pourrions comprendre le langage des autres formes de vie intelligentes...";
+		mes "...................................Mais qui êtes-vous au fait?";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "This is a restricted place under control of our Commander. No one could enter here without proper approval... Are you acquainted with our Commander?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Qui êtes-vous au fait? Ce bâtiment est sous la direction du Commandeur. Vous ne pouvez pas aller et venir dans cet endroit comme vous le souhaitez... Avez-vous été introduit auprès du Commandeur?";
 		close;
 	}
 	else if (ep13_2_rhea == 1) {
-		mes "[Linguist Dictionary]";
-		mes "Language is a distinctive feature of human race compared to animals. Every single intellectual life form has their own language.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Le langage est ce qui distingue les humains des animaux. Chaque forme de vie intelligente a son propre langage.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "Language is a method / system which delievers one's feeling or thinking by voice or letters. Anyway, its purpose is to communicate.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Le langage est une méthode / un système permettant de retranscrire en mots ou lettres les pensées ou les sentiments que quelqu'un. Et tous cas, sa finalité est la communication.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "Difference between a language and a sound is that language is a socially implied promise by making common system of communication to make it possible to understand eachother.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "La différence entre le langage et un simple son est que le langage est une promesse d'ordre social en ceci qu'il permet l'existence d'un système de communication permettant de se comprendre les uns les autres.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "That Socially implied promise, if we could grasp the meaning of a system and structure, we will be able to understand other intellectual life form's language...";
-		mes "...................................And just who might you be?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Et si nous pouvions modéliser la structure de cette promesse d'ordre social, nous pourrions comprendre le langage des autres formes de vie intelligentes...";
+		mes "...................................Mais qui êtes-vous au fait?";
 		next;
-		switch(select("I am Me!:I don't have a name to tell you!")) {
+		switch(select("Je suis... moi!:Je n'ai pas à vous donner mon nom!")) {
 		case 1:
 			break;
 		case 2:
-			mes "[Linguist Dictionary]";
-			mes "What the heck?";
-			mes "If you are so bored, why don't you go fishing?";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Hein? Si vous avez tant de temps à perdre, pourquoi n'iriez-vous pas pêcher?";
 			close;
 		}
-		mes "[Linguist Dictionary]";
-		mes "Ah~ I've heard from our Commander about you. You've done much for the Midgard Alliance Camp. Anyways, what brings you here?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Ah~ Oui, notre Commandeur m'a parlé de vous. Vous avez fait beaucoup pour le Camp de l'Alliance de Midgard... Mais qu'est-ce qui vous amène ici?";
 		next;
-		switch(select("I though I've confused you a bit...:What were you doing?")) {
+		switch(select("Je crois que je vous ai perturbé...:Qu'est-ce que vous étiez en train de faire?")) {
 		case 1:
-			mes "[Linguist Dictionary]";
-			mes "Confusion is a feeling that comes from distraction of one's mind when something that couldn't be predicted happens. I'm not a person who easily gets confused.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "La confusion est un sentiment qui vient de la distraction de l'esprit d'une personne lorsque quelque chose d'imprévu survient. Je ne suis pas quelqu'un qui se laisse perturber facilement.";
 			next;
 			break;
 		case 2:
 			break;
 		}
-		mes "[Linguist Dictionary]";
-		mes "I'm a linguist from Arunafeltz. I'm a scholor who studies a system and a structure of every kinds of language in the world.";
-		mes "And...don't you think the reason man like me is here is that there's a predictable cause?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Je suis un linguiste d'Arunafeltz. Je suis un érudit qui étudie la structure des différentes langues de par le monde. Mais ne pensez-vous pas qu'il était assez prévisible de trouver un homme tel que moi ici?";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "From what I heard, you've done much for the Midgarts Alliance Research Group.";
-		mes "And while you were helping us, I believe you've seen and visited many places here in the other world.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "D'après ce que j'ai entendu, vous avez fait énormément pour le Groupe de Recherche de l'Alliance. Et j'imagine que vous vous êtes rendu dans de nombreux endroits de l'Autre Monde tandis que vous nous aidiez.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "Have you met the other world's people by any chance?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Avez-vous eu la chance de rencontrer les peuples de l'Autre Monde?";
 		next;
 		set .@check_splque00,checkquest(2158);
 		set .@check_manque00,checkquest(2159);
 		if ((.@check_splque00 == 0) && (.@check_manque00 == 0)) {
 			// custom translation
-			mes "[Linguist Dictionary]";
-			mes "Looks like you haven't encountered them yet.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "On dirait que vous ne les avez pas encore rencontrés.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "Rumor here says that there's a fairy-looking and a giant wood people living out in the fields next to our camp here.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Les rumeurs ici disent qu'il y a un peuple de créatures ressemblant à des fées, et un autre de géants de bois vivant à l'extérieur de ce camp.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "Apparently these people are speaking in a strange languages that we humans can't understand...but no one seems to be able to remember how their languages sound like.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Apparemment, ils parleraient une langue étrange que les humains ne peuvent comprendre... Mais personne n'a l'air de se souvenir de ce à quoi leur langue ressemble.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "A NEW language!! This is an exciting discovery for a linguist like myself, but as you know, there's dangerous monsters outside... It's not possible for a mere scholor to go out wandering around.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Une NOUVELLE langue! C'est une découverte tout à fait extraordinaire pour un linguiste tel que moi. Mais comme vous le savez, il y a de dangereux monstres à l'extérieur... Un érudit comme moi ne peut pas sortir et aller enquêter.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "I've said this much, I think you'd be able to guess what I'm going to ask you to do.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Après tout cela, j'imagine que vous devinez que je m'apprête à vous demander...";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "The Alliance Research Group has great interest in other intelligent life. Each country's secret agents are making every effort to communicate with those two races, there's just not enough information.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Le Groupe de Recherche de l'Alliance porte un intérêt tout particulier pour les autres formes de vie intelligentes. Les agents secrets de chaque pays tentent de communiquer et d'établir le contact avec elles. Mais nous n'avons pas encore assez d'informations.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "Do me a favor and go outside of the camp, find the fairies and wooden giants, and remember everything that they are saying, word for word so that I can hear what their language sounds like.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Rendez-moi ce service: sortez du camp et allez trouver ces fées et ces géants de bois, et rappelez-vous de tout ce qu'ils vous disent, mot pour mot, pour que je puisse entendre à quoi ressemble leur langage.";
 			completequest 8243;
 			setquest 8244;
 			set ep13_2_rhea,2;
 			close;
 		}
 		else {
-			mes "[Linguist Dictionary]";
-			mes "From the look on your face, I think you have something crossed in your mind.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "A voir votre expression, on dirait que vous les avez déjà rencontrés.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "Rumor here says that there's a fairy-looking and a giant wood people living out in the fields next to our camp here.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Les rumeurs ici disent qu'il y a un peuple de créatures ressemblant à des fées, et un autre de géants de bois vivant à l'extérieur de ce camp.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "Apparently these people are speaking in a strange languages that we humans can't understand...but no one seems to be able to remember how their languages sound like.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Apparemment, ils parleraient une langue étrange que les humains ne peuvent comprendre... Mais personne n'a l'air de se souvenir de ce à quoi leur langue ressemble.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "A NEW language!! This is an exciting discovery for a linguist like myself, but as you know, there's dangerous monsters outside... It's not possible for a mere scholor to go out wandering around.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Une NOUVELLE langue! C'est une découverte tout à fait extraordinaire pour un linguiste tel que moi. Mais comme vous le savez, il y a de dangereux monstres à l'extérieur... Un érudit comme moi ne peut pas sortir et aller enquêter.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "I've said this much, I think you'd be able to guess what I'm going to ask you to do.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Après tout cela, j'imagine que vous devinez que je m'apprête à vous demander...";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "The Alliance Research Group has great interest in other intelligent life. Each country's secret agents are making every effort to communicate with those two races, there's just not enough information.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Le Groupe de Recherche de l'Alliance porte un intérêt tout particulier pour les autres formes de vie intelligentes. Les agents secrets de chaque pays tentent de communiquer et d'établir le contact avec elles. Mais nous n'avons pas encore assez d'informations.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "Do me a favor and go outside of the camp, find the fairies and wooden giants, and remember everything that they are saying, word for word so that I can hear what their language sounds like.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Rendez-moi ce service: sortez du camp et allez trouver ces fées et ces géants de bois, et rappelez-vous de tout ce qu'ils vous disent, mot pour mot, pour que je puisse entendre à quoi ressemble leur langage.";
 			completequest 8243;
 			setquest 8244;
 			set ep13_2_rhea,2;
@@ -3041,382 +2935,373 @@ mid_campin,168,82,3	script	Arunafeltz Linguist#1	935,{
 		set .@check_splque00,checkquest(2158);
 		set .@check_manque00,checkquest(2159);
 		if ((.@check_splque00 > 0) && (.@check_manque00 > 0)) {
-			mes "[Linguist Dictionary]";
-			mes "You are back!";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Ah, vous revoilà!";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "So, What were they saying?";
-			mes "Of course you remember them exactly as what they've said, right?";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Alors, que vous ont-ils dit? Vous vous souvenez bien sûr de leurs paroles exactes, n'est-ce pas?";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "Now, let's start with the Fairies! What is the fairy's language like? Please write them down here sentence by sentence!";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Eh bien, commençons par les fées! À quoi ressemble leur langage? Écrivez-moi tout cela mot par mot s'il vous plaît!";
 			next;
 			set .@spl_score00,0;
 			input .@input$;
 			if (.@input$ == "TKANTLFDMS") {
-				mes "[Linguist Dictionary]";
+				mes "[Linguiste d'Arunafeltz]";
 				mes ""+ .@input$ +"....";
-				mes "And?";
+				mes "Et?";
 				set .@spl_score01,.@spl_score00+1;
 				next;
 			}
 			else {
 				mes ""+ .@input$ +"....";
-				mes "Mmm... Hmm...?";
+				mes "Hum... Hum...?";
 				set .@spl_score01,.@spl_score00;
 				next;
 			}
 			input .@input$;
 			if (.@input$ == "TNAHRDNJSDMFH") {
 				mes ""+ .@input$ +"....";
-				mes "And?";
+				mes "Et?";
 				set .@spl_score02,.@spl_score01+1;
 				next;
 			}
 			else {
 				mes ""+ .@input$ +"....";
-				mes "I see...?";
+				mes "Je vois...";
 				set .@spl_score02,.@spl_score01;
 				next;
 			}
 			input .@input$;
 			if ((.@input$ == "!!") || (.@input$ == "WLSGHKWND")) {
 				mes ""+ .@input$ +"....";
-				mes "Is that all?";
+				mes "Est-ce tout?";
 				set .@spl_score03,.@spl_score02+1;
 				next;
 			}
 			else {
 				mes ""+ .@input$ +"....";
-				mes "Is that all?";
+				mes "Est-ce tout?";
 				set .@spl_score03,.@spl_score02;
 				next;
 			}
 			if (.@spl_score03 > 2) {
-				mes "[Linguist Dictionary]";
-				mes "So...If we put'em together,";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Alors... Tout cela mit bout à bout, cela donnerait quelque chose comme...";
 				mes "RLGHLRXLA TKANTLFDMS";
 				mes "WJACK TNAHRDNJSDMFH";
 				mes "WLSGHKWND !!";
-				mes "It'd be like this.";
+				mes "Voilà, ça devrait être cela.";
 				next;
 			}
 			else {
-				mes "[Linguist Dictionary]";
-				mes "Hmm...?";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Hum...?";
 				next;
-				mes "[Linguist Dictionary]";
-				mes "You sure this is exactly what they've said?";
-				mes "I can't understand anything from this...";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Êtes-vous bien sûr que c'est ce qu'elles vous ont dit au mot près? Je n'y comprends rien...";
 				next;
-				mes "[Linguist Dictionary]";
-				mes "Would you please go back again and check if it is exactly what they were saying?";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Pourriez-vous y retourner et vérifier que c'est bien ce qu'elles vous ont dit?";
 				close;
 			}
-			mes "[Linguist Dictionary]";
-			mes "Good. then next is the Wooden Giants! What's their language like? Write them down sentence by sentence just as you did with the Fairy's.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Bien. Passons aux géants de bois maintenant. À quoi ressemble leur langage? Écrivez-moi tout cela mot par mot, comme vous l'avez fait pour le langage des fées.";
 			next;
 			set .@man_score00,0;
 			input .@input$;
 			if (.@input$ == "CJFDI") {
-				mes "[Linguist Dictionary]";
+				mes "[Linguiste d'Arunafeltz]";
 				mes ""+ .@input$ +"....";
-				mes "And?";
+				mes "Et?";
 				set .@man_score01,.@man_score00+1;
 				next;
 			}
 			else {
 				mes ""+ .@input$ +"....";
-				mes "And?";
+				mes "Et?";
 				set .@man_score01,.@man_score00;
 				next;
 			}
 			input .@input$;
 			if (.@input$ == "QKATOS") {
 				mes ""+ .@input$ +"....";
-				mes "And?";
+				mes "Et?";
 				set .@man_score02,.@man_score01+1;
 				next;
 			}
 			else {
 				mes ""+ .@input$ +"....";
-				mes "And?";
+				mes "Et?";
 				set .@man_score02,.@man_score01;
 				next;
 			}
 			input .@input$;
 			if ((.@input$ == "DLFMADMS..") || (.@input$ == "DLFMADMS..")) {
 				mes ""+ .@input$ +"....";
-				mes "This is it?";
+				mes "C'est tout?";
 				set .@man_score03,.@man_score02+1;
 				next;
 			}
 			else {
 				mes ""+ .@input$ +"....";
-				mes "Is that all?";
+				mes "C'est tout?";
 				set .@man_score03,.@man_score02;
 				next;
 			}
 			if (.@man_score03 > 2) {
-				mes "[Linguist Dictionary]";
-				mes "So, If we put'em together,";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Alors, tout cela mit bout à bout nous donne...";
 				mes "TJDTMFJDNS CJFDI";
 				mes "TKADLFDMF QKATOS";
 				mes "EKDTLSDML DLFMADMS..";
-				mes "It will be like this.";
+				mes "Ça devrait être ça.";
 				next;
 			}
 			else {
-				mes "[Linguist Dictionary]";
-				mes "Hmm...?";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Hum...?";
 				next;
-				mes "[Linguist Dictionary]";
-				mes "You sure this is exactly what they've said?";
-				mes "Hmm...I don't get the idea...";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Êtes-vous bien sûr que c'est ce qu'ils vous ont dit au mot près? Je n'y comprends rien...";
 				next;
-				mes "[Linguist Dictionary]";
-				mes "Would you please go back again and check if it is exactly what they were saying?";
+				mes "[Linguiste d'Arunafeltz]";
+				mes "Pourriez-vous y retourner et vérifier que c'est bien ce qu'ils vous ont dit?";
 				close;
 			}
-			mes "[Linguist Dictionary]";
-			mes ".Hmm....Hm..I see...";
+			mes "[Linguiste d'Arunafeltz]";
+			mes ".Hum... Hum... Je vois...";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "....Ummmm...";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "....Hummmm...";
 			next;
-			mes "- Dictionary stared at the paper intently. -";
+			mes "- Il examine le papier avec la plus grande concentration. -";
 			set ep13_2_rhea,3;
 			close;
 		}
 		else {
 			// custom translation
-			mes "[Linguist Dictionary]";
-			mes "According to the Expedition Camp's investigation, there is a different ethnic race that is similar to fairy's, along with a different ethnic race that is similar to giants.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "D'après le rapport d'enquête du Camp d'Expédition, il existe deux ethnies dans les environs: les membres de l'un d'entre elles ressemblent à des fées, et ceux de l'autre à des géants de bois.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "It is said that they are using a language that cannot be understood by people from Midgart... ...Although we all say this, nobody is able to remember their conversation / words.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "On dit qu'ils parlent une langue qui ne peut être comprise par les hommes de Midgard. Mais cependant, personne n'a été capable jusqu'à présent de se rappeler des mots qu'ils ont utilisés.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "A New language!!! As a linguist, I cannot sit here. But outside, there are many different monsters, as a scholar, it is too dangerous to go outside.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Une NOUVELLE langue! C'est une découverte tout à fait extraordinaire pour un linguiste tel que moi. Mais comme vous le savez, il y a de dangereux monstres à l'extérieur... Un érudit comme moi ne peut pas sortir et aller enquêter.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "and as our conversation has reached this point, you should have an idea of my request, right?";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Après tout cela, j'imagine que vous devinez que je m'apprête à vous demander...";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "The Tripple Alliance Research Group is very interested in other intelligent life. In order to try and talk to them, national officials have carried out secret effort in every possible way. However, because of lacking information, they are facing difficulties.";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Le Groupe de Recherche de l'Alliance porte un intérêt tout particulier pour les autres formes de vie intelligentes. Les agents secrets de chaque pays tentent de communiquer et d'établir le contact avec elles. Mais nous n'avons pas encore assez d'informations.";
 			next;
-			mes "[Linguist Dictionary]";
-			mes "If you've encountered those races around the Expedition Camp, you must memorize their conversation! Then report back to me!";
+			mes "[Linguiste d'Arunafeltz]";
+			mes "Rendez-moi ce service: sortez du camp et allez trouver ces fées et ces géants de bois, et rappelez-vous de tout ce qu'ils vous disent, mot pour mot, pour que je puisse entendre à quoi ressemble leur langage.";
 			close;
 		}
 	}
 	else if (ep13_2_rhea == 3) {
-		mes "[Linguist Dictionary]";
+		mes "[Linguiste d'Arunafeltz]";
 		mes "............................";
 		next;
-		mes "- Dictionary stared at the paper intently. -";
+		mes "- Il examine le papier avec la plus grande concentration. -";
 		next;
-		switch(select("He looks serious, Let's leave him alone:Talk to him")) {
+		switch(select("Il a l'air concentré, laissons-le.:Lui parler.")) {
 		case 1:
-			mes "[Linguist Dictionary]";
+			mes "[Linguiste d'Arunafeltz]";
 			mes "............................";
 			close;
 		case 2:
 			break;
 		}
-		mes "[Linguist Dictionary]";
+		mes "[Linguiste d'Arunafeltz]";
 		mes "Ahhhhhhh!!!!!!!!";
 		next;
-		select("Have you figured something out?");
-		mes "[Linguist Dictionary]";
+		select("Avez-vous trouvé quelque chose?");
+		mes "[Linguiste d'Arunafeltz]";
 		mes "I....CAN'T! UNDERSTAND IT!!!";
-		mes "Whaaaat~~iiis~~ thiiis~~~ Just how do you read thisssssss~~~ I can't understand a single rule in this~~~~ Huh?";
+		mes "Mais qu'est-ce que c'est que ça?!~ Comment lit-on ça?~ Je ne vois aucune règle, aucune cohérence dans tout cela!";
 		next;
-		mes "[Linguist Dictionary]";
+		mes "[Linguiste d'Arunafeltz]";
 		mes "..................................";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "Hmph!";
-		mes "Yes?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Humph!";
+		mes "Oui?";
 		next;
-		switch(select("He looks serious. Let's leave him alone.:Ask him what's going on.")) {
+		switch(select("Il a l'air concentré, laissons-le.:Lui parler.:Lui demander ce qui se passe.")) {
 		case 1:
-			mes "[Linguist Dictionary]";
+			mes "[Linguiste d'Arunafeltz]";
 			mes "............................";
-			mes "...................Hmph...";
+			mes "...................Humph...";
 			close;
 		case 2:
 			break;
 		}
-		mes "[Linguist Dictionary]";
-		mes "Ah! Well, It's not as easy as I thought. These languages can't be heard anywhere on the Midgard Continent. No known phonetic rules seem to apply here.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Ah! Ce n'était pas aussi simple que je ne le pensais. On ne peut entendre de tels langages sur le Continent de Midgard. On dirait qu'il n'y a aucune règle phonétique ici.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "It's hard to grasp their rule or system, and before everything else, I don't even know if this pronounciation is right. I've never heard of this kind of pronounciation.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Il est très difficile de comprendre le fonctionnement et les règles de leur langage, et qui plus est je ne sais même pas si je le prononce correctement. Je n'avais jamais rencontré ce genre de prononciation.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "Ah, right, I heard that a ^0000ffRune-Midgarts Magician^000000 knows a way to conduct research based on a sample of language, would you go and ask him to help me?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Ah, oui, j'ai entendu dire qu'un ^0000ffMage de Rune-Midgard^000000 connaît un moyen d'effectuer des recherches en se basant uniquement sur un échantillon du langage. Voudriez-vous bien aller lui demander s'il pourrait m'aider?";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "The ^0000ffRune-Midgarts Magician^000000 is wandering inside of the Expedition Camp.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Le ^0000ffMage de Rune-Midgard^000000 devrait se trouver quelque part dans le camp.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "It's difficult to continue on a research without some more samples of language. Please do my favor.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Je pourrais difficilement continuer mes recherches sans avoir plus d'échantillons de ce langage. Rendez-moi ce service s'il vous plaît.";
 		completequest 8244;
 		setquest 8245;
 		set ep13_2_rhea,4;
 		close;
 	}
 	else if ((ep13_2_rhea > 3) && (ep13_2_rhea < 6)) {
-		mes "[Linguist Dictionary]";
-		mes "I heard that ^0000ffRune Midgarts Magician^000000 knows a way to conduct a research from a sample of language, would you go see him and ask him to help me?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "J'ai entendu dire qu'un ^0000ffMage de Rune-Midgard^000000 connaît un moyen d'effectuer des recherches en se basant uniquement sur un échantillon du langage. Voudriez-vous bien aller lui demander s'il pourrait m'aider?";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "The ^0000ff Rune Midgarts Magician^000000 is wandering inside of the Expedition Camp.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Le ^0000ffMage de Rune-Midgard^000000 devrait se trouver quelque part dans le camp.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "It's difficult to continue this research without some more samples of language. Please do my favor.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Je pourrais difficilement continuer mes recherches sans avoir plus d'échantillons de ce langage. Rendez-moi ce service s'il vous plaît.";
 		close;
 	}
 	else if (ep13_2_rhea == 6) {
-		mes "- The Linguist is writing on a paper as if he's obsessed by something -";
+		mes "- Le linguiste griffonne sur un papier comme si quelque chose l'obsédait. -";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "...Oh, Hello there.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "...Oh, bonjour.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "I heard that you brought us a Gem with the other world's language recorded within it. Thanks to your help, decoding process is going well.";
-		mes "Actually, it's going TOO well...";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "J'ai entendu dire que vous nous aviez rapporté une Gemme renfermant le langage de l'Autre Monde. Merci pour votre aide. Le processus de décodage suit son cours, et avance bien. Même TROP bien en fait...";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "It's a wonder that at the moment when I heard that language first-hand I could decode it flawlessly in spite of myself. It must be the blessing of Goddess Freya.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Il est quand même très étonnant que j'aie pu commencer à décoder ce langage sans me tromper dès le moment où je l'ai entendu. Je dois avoir été béni par la déesse Freya.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "But the problem is...";
-		mes "How are we going to put together this tremendous data and make it into a portable translator... I just can't figure out how.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Mais il reste un problème... Comment allons-nous rassembler toutes ces données et faire un traducteur de poche? Je n'arrive pas à m'imaginer comment.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "I wonder what the Mechanic Engineer from the Schwaltzvalt Republic would think... Would you be kind to go ask him?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Je me demande ce qu'en pense l'Ingénieur Mécanicien de la République de Schwaltzvalt... Pourriez-vous aller lui demander?";
 		completequest 8247;
 		setquest 8248;
 		set ep13_2_rhea,7;
 		close;
 	}
 	else if ((ep13_2_rhea > 6) && (ep13_2_rhea < 13)) {
-		mes "[Linguist Dictionary]";
-		mes "Just how are we going to put together these tremendous data and make it into a portable translator...I just can't figure out how.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Comment allons-nous rassembler toutes ces données et faire un traducteur de poche? Je n'arrive pas à m'imaginer comment.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "I wonder what the Mechanic Engineer from the Republic of Schwartzwalt would think...Would you be kind to go ask him?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Je me demande ce qu'en pense l'Ingénieur Mécanicien de la République de Schwaltzvalt... Pourriez-vous aller lui demander?";
 		close;
 	}
 	else if (ep13_2_rhea > 12) {
-		mes "[Linguist Dictionary]";
-		mes "So, Finally we were able to make a translator!";
-		mes "How is it working? Isn't there any problem with it?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Alors nous avons enfin réussi à fabriquer un traducteur?! Comment marche-t-il? N'y a-t-il aucun problème avec?";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "I hope this translator would help you with your journey.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "J'espère que ce traducteur vous aidera dans votre périple.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "However, Although using a translator is important, the basics of language and communication is that you should try to understand others.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Cependant, même si ce traducteur va faciliter les choses, les bases de la communication consistent à essayer de se comprendre les uns les autres.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "You should not just rely everything on a mere machine...don't forget to be understanding. Enjoy your journey in the otherworld with that translator.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Vous ne devriez pas compter que sur une simple machine... N'oubliez pas de faire preuve de compréhension. Bien, bon route dans l'Autre Monde avec ce traducteur!";
 		close;
 	}
 	else {
-		mes "[Linguist Dictionary]";
-		mes "So, Finally we were able to make a translator!";
-		mes "How is it working? Isn't there any problem with it?";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Alors nous avons enfin réussi à fabriquer un traducteur?! Comment marche-t-il? N'y a-t-il aucun problème avec?";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "I hope this translator would help you with your journey.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "J'espère que ce traducteur vous aidera dans votre périple.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "However, Although using a translator is important, the basics of language and communication is that you should try to understand others.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Cependant, même si ce traducteur va faciliter les choses, les bases de la communication consistent à essayer de se comprendre les uns les autres.";
 		next;
-		mes "[Linguist Dictionary]";
-		mes "You should not just rely everything on a mere machine...don't forget to be understanding. Enjoy your journey in the otherworld with that translator.";
+		mes "[Linguiste d'Arunafeltz]";
+		mes "Vous ne devriez pas compter que sur une simple machine... N'oubliez pas de faire preuve de compréhension. Bien, bon route dans l'Autre Monde avec ce traducteur!";
 		close;
 	}
 }
 
-mid_camp,147,256,3	script	Rune Midgarts Magician#1	735,{
+mid_camp,147,256,3	script	Mage de Rune-Midgard::Rune Midgarts Magician#1	735,{
 	if (ep13_2_rhea < 4) {
-		mes "[Magician Whisper]";
-		mes "To store a tremendous amount of information, well, it's impossible with existing technology.";
+		mes "[Mage Murmure]";
+		mes "Il est impossible de stocker une telle quantité d'informations avec la technologie actuelle.";
 		next;
-		mes "[Magician Whisper]";
-		mes "Ancient Rune Midgarts Kingdom used a some kind of magic onto a magical gem to store large information...Using a gem as a storage...";
+		mes "[Mage Murmure]";
+		mes "L'ancien Royaume de Rune Midgard utilisait la magie pour enfermer dans une gemme de nombreuses informations... Utiliser une gemme comme base de données...";
 		next;
-		mes "[Magician Whisper]";
-		mes "Oh, pardon me, you have such a comfortable atmosphere and I involuntarily spoke to you. Who might you be?";
+		mes "[Mage Murmure]";
+		mes "Oh, pardonnez-moi. Je ne sais pas pourquoi je vous ai parlé sans y prêter attention. Qui êtes-vous donc?";
 		close;
 	}
 	else if (ep13_2_rhea == 4) {
-		mes "[Magician Whisper]";
-		mes "To store a tremendous amount of information, well, it's impossible with existing technology.";
+		mes "[Mage Murmure]";
+		mes "Il est impossible de stocker une telle quantité d'informations avec la technologie actuelle.";
 		next;
-		mes "[Magician Whisper]";
-		mes "The Ancient Rune-Midgarts Kingdom used some kind of magic on a magical gem to store large amounts of information... Using a gem as storage...";
+		mes "[Mage Murmure]";
+		mes "L'ancien Royaume de Rune Midgard utilisait la magie pour enfermer dans une gemme de nombreuses informations... Utiliser une gemme comme base de données...";
 		next;
-		mes "[Magician Whisper]";
-		mes "Oh, pardon me, you have such a comfortable atmosphere and I involuntarily spoke to you. Who might you be?";
+		mes "[Mage Murmure]";
+		mes "Oh, pardonnez-moi. Je ne sais pas pourquoi je vous ai parlé sans y prêter attention. Qui êtes-vous donc?";
 		next;
-		select("Uh, Mr. Dictionary sent...");
-		mes "[Magician Whisper]";
-		mes "Oh? You mean that Linguist from the Arunafeltz. And that means we need a Recorded Language Sample.";
+		select("Le Linguiste de Rachel m'envoie...");
+		mes "[Mage Murmure]";
+		mes "Oh? Ça ne peut vouloir dire qu'une chose alors: il lui faut un échantillon des langues de l'Autre Monde.";
 		next;
-		mes "[Magician Whisper]";
-		mes "Hmmm... Actually, I've buried magical gems which records sound waves with its magical power, near their territory...to gather information about their language.";
+		mes "[Mage Murmure]";
+		mes "Hum... En fait j'ai enterré des gemmes magiques près de leur territoire, qui enregistrent les ondes sonores grâce à leurs pouvoirs afin de rassembler des informations sur leur langage.";
 		next;
-		mes "[Magician Whisper]";
-		mes "But, Assassins who were in charge of burying those gems... They are working on some other mission, so they can't go and retrieve those gems.";
+		mes "[Mage Murmure]";
+		mes "Mais les Assassins qui avaient pour tâche d'enterrer ces gemmes ont été envoyés remplir une autre mission et ne peuvent aller les chercher pour l'instant.";
 		next;
-		mes "[Magician Whisper]";
-		mes "Without someone do us a favor and retrieve those gems, there's no way I could give you the sample.";
+		mes "[Mage Murmure]";
+		mes "Pourriez-vous nous rendre service et aller rechercher ces gemmes? Sans cela je ne pourrais pas vous fournir d'échantillon.";
 		next;
-		switch(select("Then should I come back later?:What if I go and retrieve them?")) {
+		switch(select("Peut-être devrais-je revenir plus tard?:Et si je vais les chercher?")) {
 		case 1:
-			mes "[Magician Whisper]";
-			mes ".............Sure, you could wait for 100 years...";
+			mes "[Mage Murmure]";
+			mes ".............Bien sûr... Mais vous pourriez devoir attendre trèèès longtemps.";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "What?";
+			mes "Comment?";
 			next;
-			mes "[Magician Whisper]";
-			mes "Ah, No, No, It's nothing.";
+			mes "[Mage Murmure]";
+			mes "Ah, Non, non, ce n'est rien.";
 			next;
 			break;
 		case 2:
 			break;
 		}
-		mes "[Magician Whisper]";
-		mes "If you could do that, it will save us whole lot of time and that'd be good for us! Wouldn't it? Don't you think so?";
+		mes "[Mage Murmure]";
+		mes "Ça nous ferait économiser à tous un temps précieux si vous le faisiez, vous ne pensez pas?";
 		next;
-		mes "[Magician Whisper]";
-		mes "I belive you've met those two alien races out there?";
-		mes "Assassins buried Magical Gems near their villages without them noticing.";
+		mes "[Mage Murmure]";
+		mes "J'imagine que vous avez déjà rencontré les deux races de l'Autre Monde en-dehors du camp? Les Assassins ont enterré ces Gemmes Magiques près de leur village sans qu'ils ne s'en rendent compte.";
 		next;
-		mes "[Magician Whisper]";
-		mes "First Gem is buried under the Mushroom-like structure near Fairy's village.";
+		mes "[Mage Murmure]";
+		mes "La première gemme est enterrée près d'une structure en forme de champignon près du village des fées.";
 		next;
-		mes "[Magician Whisper]";
-		mes "And the Second Gem is buried under the tree near Giant's village.";
+		mes "[Mage Murmure]";
+		mes "La seconde gemme est enterrée sous un arbre près du village des géants.";
 		next;
-		mes "[Magician Whisper]";
-		mes "Bring back those two gems and that would help me greatly.";
+		mes "[Mage Murmure]";
+		mes "Me rapporter ces deux gemmes nous aiderait vraiment.";
 		next;
-		mes "[Magician Whisper]";
-		mes "Well, I can't force you to do it if you are too busy with other matters...";
+		mes "[Mage Murmure]";
+		mes "Je ne peux bien sûr pas vous y forcer si jamais vous avez d'autres choses plus importantes à faire...";
 		next;
-		mes "[Magician Whisper]";
-		mes "There's an old saying, The one who's thirsty will dig for a well...";
+		mes "[Mage Murmure]";
+		mes "Il y a un vieux proverbe qui dit qu'il n'y a point de salaire sans travail...";
 		next;
-		mes "[Magician Whisper]";
-		mes "I almost forgot! You should be careful when you dig for the Gem.";
-		mes "Assassins installed a trap to protect Gems as they bury them.";
+		mes "[Mage Murmure]";
+		mes "Ah, j'allais oublier! Vous devrez faire bien attention quand vous déterrerez les gemmes: les Assassins ont installé des pièges pour les protéger quand ils les ont enfouies.";
 		completequest 8245;
 		setquest 8246;
 		set ep13_2_rhea,5;
@@ -3427,25 +3312,22 @@ mid_camp,147,256,3	script	Rune Midgarts Magician#1	735,{
 		set .@check_manjew00,checkquest(8242);
 		if ((.@check_spljew00 > 0) && (.@check_manjew00 > 0)) {
 			if (countitem(7575) > 0) && (countitem(7576) > 0) {
-				mes "[Magician Whisper]";
-				mes "Wow, You are back already!";
-				mes "Well then, let me see them!";
+				mes "[Mage Murmure]";
+				mes "Oh, vous êtes déjà de retour? Bien, faites-moi voir les gemmes!";
 				next;
-				mes "- As you handed over the Gem, -";
-				mes "- he examined it throughly-";
+				mes "- Vous lui tendez les gemmes, qu'il examine attentivement. -";
 				next;
-				mes "[Magician Whisper]";
-				mes "Hmm...";
-				mes "There's lots of noises caught in, but I think I could extract a voice in no time.";
+				mes "[Mage Murmure]";
+				mes "Hum... Elles contiennent de nombreux sons, mais je pense pouvoir en extraire ceux des voix très rapidement.";
 				next;
-				mes "[Magician Whisper]";
-				mes "I will extract a voice recorded in this gem and send them to the Linguist from Arunafeltz.";
+				mes "[Mage Murmure]";
+				mes "Je vais extraire les voix enregistrées dans ces gemmes et les envoyer au Linguiste d'Arunafeltz.";
 				next;
-				mes "[Magician Whisper]";
-				mes "It looks like there's many kind of convenient machines. Voices I've extracted can be sent directly to the Linguist from Arunafeltz by using this recording machine.";
+				mes "[Mage Murmure]";
+				mes "J'ai plusieurs machines très pratiques à ma disposition. Les voix que j'ai extraites pourront être ensuite directement envoyées au Linguiste d'Arunafeltz par ce biais.";
 				next;
-				mes "[Magician Whisper]";
-				mes "So I will be ok by on my own. Thank you for your trouble.";
+				mes "[Mage Murmure]";
+				mes "Je pense que je vais m'en sortir tout seul. Merci de m'avoir aidé.";
 				completequest 8241;
 				completequest 8242;
 				completequest 8246;
@@ -3457,62 +3339,61 @@ mid_camp,147,256,3	script	Rune Midgarts Magician#1	735,{
 			}
 			else {
 				// custom translation
-				mes "[Magician Whisper]";
-				mes "Ah, that was quick.";
+				mes "[Mage Murmure]";
+				mes "Ah, c'était rapide.";
 				next;
-				mes "[Magician Whisper]";
-				mes "Please give meh the gem. I will extract the voice record inside the gem, then give it to the Linguist from Arunafeltz.";
+				mes "[Mage Murmure]";
+				mes "Donnez-moi les gemmes s'il vous plaît. Je vais en extraire les voix enregistrées à l'intérieur et les transmettre au Linguiste d'Arunafeltz.";
 				next;
-				mes "[Magician Whisper]";
-				mes "...... But.... where's the gem?";
+				mes "[Mage Murmure]";
+				mes "...... Mais.... Où sont les gemmes?";
 				close;
 			}
 		}
 		else {
-			mes "[Magician Whisper]";
-			mes "First Gem is buried under the Mushroom-like structure near Fairy's village.";
+			mes "[Mage Murmure]";
+			mes "La première gemme est enterrée près d'une structure en forme de champignon près du village des fées.";
 			next;
-			mes "[Magician Whisper]";
-			mes "And the Second Gem is buried under the tree near Giant's village.";
+			mes "[Mage Murmure]";
+			mes "La seconde gemme est enterrée sous un arbre près du village des géants.";
 			next;
-			mes "[Magician Whisper]";
-			mes "Bring back those two gems and that would help me greatly.";
+			mes "[Mage Murmure]";
+			mes "Me rapporter ces deux gemmes nous aiderait vraiment.";
 			next;
-			mes "[Magician Whisper]";
-			mes "Well, I can't force you to do it if you are too busy with other matters...";
+			mes "[Mage Murmure]";
+			mes "Je ne peux bien sûr pas vous y forcer si jamais vous avez d'autres choses plus importantes à faire...";
 			next;
-			mes "[Magician Whisper]";
-			mes "There's an old saying, The one who's thirsty will dig for a well...";
+			mes "[Mage Murmure]";
+			mes "Il y a un vieux proverbe qui dit qu'il n'y a point de salaire sans travail...";
 			next;
-			mes "[Magician Whisper]";
-			mes "I almost forgot! You should be careful when you dig for the Gem.";
-			mes "Assassins installed a trap to protect Gems as they bury them.";
+			mes "[Mage Murmure]";
+			mes "Ah, j'allais oublier! Vous devrez faire bien attention quand vous déterrerez les gemmes: les Assassins ont installé des pièges pour les protéger quand ils les ont enfouies.";
 			close;
 		}
 	}
 	else if ((ep13_2_rhea > 5) && (ep13_2_rhea < 8)) {
-		mes "[Magician Whisper]";
-		mes "Well, if you are not busy at the time, please go check how's the Linguist from Arunafeltz's research is coming up.";
+		mes "[Mage Murmure]";
+		mes "Si n'avez rien à faire, pourriez-vous aller voir où en sont les recherches du Linguiste d'Arunafeltz?";
 		next;
-		mes "[Magician Whisper]";
-		mes "I should be working on extracting voice data and send them to the Linguist from Arunafeltz.";
+		mes "[Mage Murmure]";
+		mes "Je vais travailler sur l'extraction des voix contenues dans ces gemmes et envoyer l'enregistrement directement au Linguiste.";
 		close;
 	}
 	else if (ep13_2_rhea == 8) {
-		mes "[Magician Whisper]";
-		mes "Hmm...There's more data than we thought...";
+		mes "[Mage Murmure]";
+		mes "Hum... Il y a plus de données que nous le pensions...";
 		next;
-		mes "[Magician Whisper]";
-		mes "Of course it is a piece of cake to turn data into magical power and put'em into a gem...Most important thing is, I don't know if there's a jewl that has enough storage space to store that much of data...";
+		mes "[Mage Murmure]";
+		mes "Il est bien sûr enfantin de transformer des données en énergie magique et de les attacher à une gemme... Mais il faut avant tout trouver un joyau capable de contenir autant de données...";
 		next;
-		mes "[Magician Whisper]";
-		mes "I heard that cold side of a field outside of the Expedition Camp, ^0000ff Mysterious Ore that can't be found in the Midgart.";
+		mes "[Mage Murmure]";
+		mes "J'ai entendu dire qu'il existait un ^0000ffMinerai Inconnu^000000 dans les terres gelées à l'extérieure du camp que l'on ne peut trouver nulle part sur Midgard.";
 		next;
-		mes "[Magician Whisper]";
-		mes "Only if we could find that ore, it would make this work much easier... What do you think about that? Do you think you could go and find one for me?";
+		mes "[Mage Murmure]";
+		mes "Si seulement nous pouvions trouver ce minerai... Cela rendrait cette tâche beaucoup plus facile... Qu'en pensez-vous? Pensez-vous que vous pourriez m'en trouver?";
 		next;
-		mes "[Magician Whisper]";
-		mes "While you are gone, I will organize the data to put into the Gem.";
+		mes "[Mage Murmure]";
+		mes "J'organiserai les données pour les transférer dans la gemme pendant votre absence.";
 		completequest 8249;
 		setquest 8250;
 		set ep13_2_rhea,9;
@@ -3520,35 +3401,33 @@ mid_camp,147,256,3	script	Rune Midgarts Magician#1	735,{
 	}
 	else if (ep13_2_rhea == 9) {
 		if (countitem(6048) > 0) {
-			mes "[Magician Whisper]";
-			mes "Oh! Is this that ore?";
+			mes "[Mage Murmure]";
+			mes "Oh! Est-ce le minerai?";
 			next;
-			mes "[Magician Whisper]";
-			mes "This sure is interesting. It has not been refined yet, but I can sense mysterious power from this ore.";
+			mes "[Mage Murmure]";
+			mes "C'est très intéressant. Il n'a pas encore été raffiné, mais je sens un pouvoir mystérieux en émaner.";
 			next;
-			mes "[Magician Whisper]";
-			mes "It's something like... the special wave with a life force.";
+			mes "[Mage Murmure]";
+			mes "C'est quelque chose comme... Une onde contenant une certaine force vitale.";
 			next;
-			mes "[Magician Whisper]";
-			mes "Let's test and see see how much magical power it could store.";
+			mes "[Mage Murmure]";
+			mes "Testons cela et voyons combien de pouvoir magique il peut emmagasiner.";
 			next;
-			mes "- He closed his eyes and chanted a spell -";
-			mes "- with the ore on his hand. -";
+			mes "- Il ferme les yeux et entonne un chant, le minerai entre ses mains. -";
 			next;
-			mes "[Magician Whisper]";
-			mes "Lumos Nox Densaugeo Dissendium Diffindo Engorgio Mobiliarbus Expecto patronum!!!!";
+			mes "[Mage Murmure]";
+			mes "Lumos Nox Densaugeo Dissendium Diffindo Engorgio Mobiliarbus Expecto Patronum!!!!";
 			next;
 			specialeffect EF_FLASHER; // 99 : "Rune Midgarts Magician#ep132_rhea03" EF_FLASHER
 			emotion e_gasp;
-			mes "[Magician Whisper]";
-			mes "Wow!!! Th, This is unbelievable!";
+			mes "[Mage Murmure]";
+			mes "Wow!!! C'est... C'est incroyable!";
 			next;
-			mes "[Magician Whisper]";
-			mes "An ore with this much storage space, only a size of fingernail could store both of two languages!";
+			mes "[Mage Murmure]";
+			mes "Un minerai avant tant d'espace de stockage! Un fragment de la taille d'un ongle pourrait renfermer toutes nos connaissances sur ces deux langages!";
 			next;
-			mes "[Magician Whisper]";
-			mes "Could you wait for a minute?";
-			mes "Take some rest while I craft this ore into a gem and put the magical data into it. You look exhausted...";
+			mes "[Mage Murmure]";
+			mes "Pourriez-vous patienter une minute? Reposez-vous un peu tandis que je transfère les données magiques dans ce minerai. Vous avez l'air épuisé"+( sex ? "" : "e" )+"...";
 			completequest 8250;
 			setquest 8251;
 			delitem 6048,1; //Unidentified_Mineral
@@ -3556,135 +3435,120 @@ mid_camp,147,256,3	script	Rune Midgarts Magician#1	735,{
 			close;
 		}
 		else {
-			mes "[Magician Whisper]";
-			mes "I heard that the cold side of the field outside of the Expedition Camp has a Unidentified Mineral that can't be found in Rune Midgard.";
+			mes "[Mage Murmure]";
+			mes "J'ai entendu dire qu'il existait un ^0000ffMinerai Inconnu^000000 dans les terres gelées à l'extérieure du camp que l'on ne peut trouver nulle part sur Midgard.";
 			next;
-			mes "[Magician Whisper]";
-			mes "Only if we could find that ore, it would make this work much easier... What do you think about that? Do you think you could go and find one for me?";
+			mes "[Mage Murmure]";
+			mes "Si seulement nous pouvions trouver ce minerai... Cela rendrait cette tâche beaucoup plus facile... Qu'en pensez-vous? Pensez-vous que vous pourriez m'en trouver?";
 			next;
-			mes "[Magician Whisper]";
-			mes "While you are gone, I will organize the data to put into the Gem.";
+			mes "[Mage Murmure]";
+			mes "J'organiserai les données pour les transférer dans la gemme pendant votre absence.";
 			close;
 		}
 	}
 	else if (ep13_2_rhea == 10) {
 		if (rand(1,5) == 3) {
-			mes "- His face turned a bit pale, -";
-			mes "- He looked pleased as he saw you -";
+			mes "- Il a le teint assez pâle. I a l'air content de vous voir. -";
 			next;
-			mes "[Magician Whisper]";
-			mes "Ah! Just in time!";
+			mes "[Mage Murmure]";
+			mes "Ah! Juste à temps!";
 			next;
-			mes "[Magician Whisper]";
-			mes "I've just finished infusing the magical power.";
-			mes "From now on, it's up to the Mechanic Engineer from Schwartzwalt to combined this gem with a machine to make it work as a real-time translator.";
+			mes "[Mage Murmure]";
+			mes "Je viens de terminer de transférer le pouvoir magique. Il ne reste plus maintenant à l'Ingénieur Mécanicien de Schwaltzvalt qu'à combiner cette gemme avec une machinerie pour l'utiliser comme un traducteur en temps réel.";
 			next;
-			mes "[Magician Whisper]";
-			mes "I will ask you one last favor.";
-			mes "Please deliver this crafted gem to the Mechanic Engineer from Schwartzwalt.";
+			mes "[Mage Murmure]";
+			mes "Je vous demanderai de me rendre un dernier service: allez apporter cette gemme à l'Ingénieur Mécanicien de Schwaltzvalt.";
 			next;
-			mes "[Magician Whisper]";
-			mes "I'm really sorry to ask you so many favors..., Ah...I've used up too much magical power...I should rest for a while.";
+			mes "[Mage Murmure]";
+			mes "Je suis vraiment désolé d'avoir dû vous demander de faire tout cela... Ah... J'ai utilisé trop de pouvoirs magiques. Je devrais me reposer un peu.";
 			next;
-			mes "- ^0000ff Received the Crafted Gem ^000000 -";
-			mes "- ^0000ff from Whisper !!^000000 -";
+			mes "- ^0000ffVous recevez une Gemme de Murmure!^000000 -";
 			completequest 8251;
 			setquest 8252;
 			set ep13_2_rhea,11;
 			close;
 		}
 		else {
-			mes "[Magician Whisper]";
-			mes "Could you wait for a minute?";
-			mes "Take some rest while I craft this ore into a gem and put the magical data into it. You look exhausted...";
+			mes "[Mage Murmure]";
+			mes "Pourriez-vous patienter une minute? Reposez-vous un peu tandis que je transfère les données magiques dans ce minerai. Vous avez l'air épuisé"+( sex ? "" : "e" )+"...";
 			close;
 		}
 	}
 	else if (ep13_2_rhea == 11) {
-		mes "[Magician Whisper]";
-		mes "Please deliver this crafted gem to the Mechanic Engineer from Schwartzwalt.";
+		mes "[Mage Murmure]";
+		mes "Pourriez-vous aller apporter cette gemme à l'Ingénieur Mécanicien de Schwaltzvalt.";
 		next;
-		mes "[Magician Whisper]";
-		mes "I'm really sorry to ask you so many favors..., Ah...I've used up too much magical power...I should rest for a while.";
+		mes "[Mage Murmure]";
+		mes "Je suis vraiment désolé d'avoir dû vous demander de faire tout cela... Ah... J'ai utilisé trop de pouvoirs magiques. Je devrais me reposer un peu.";
 		next;
-		mes "- He looks so sleepy and said -";
-		mes "- as he rubbing his closing eyes. -";
+		mes "- Il a l'air de tomber de fatigue, et ses paupière commence à se fermer. -";
 		close;
 	}
 	else if (ep13_2_rhea == 12) {
-		mes "[Magician Whisper]";
-		mes "How's the translator making process going?";
+		mes "[Mage Murmure]";
+		mes "Où en est le processus de fabrication du traducteur?";
 		close;
 	}
 	else if (ep13_2_rhea > 12) {
-		mes "[Magician Whisper]";
-		mes "I've just received a message that the translator is finished!";
+		mes "[Mage Murmure]";
+		mes "Je viens d'apprendre que le traducteur était terminé!";
 		next;
-		mes "[Magician Whisper]";
-		mes "We are short on the amount just yet, still it will make our advance to the other world easier!";
+		mes "[Mage Murmure]";
+		mes "Nous n'avons pas beaucoup de matériaux pour en fabriquer d'autres, mais cela va tout de même rendre l'exploration de l'Autre Monde beaucoup plus aisée.";
 		close;
 	}
 	else {
-		mes "[Magician Whisper]";
-		mes "I've just received a message that the translator is finished!";
+		mes "[Mage Murmure]";
+		mes "Je viens d'apprendre que le traducteur était terminé!";
 		next;
-		mes "[Magician Whisper]";
-		mes "We are short on the amount just yet, still it will make our advance to the other world easier!";
+		mes "[Mage Murmure]";
+		mes "Nous n'avons pas beaucoup de matériaux pour en fabriquer d'autres, mais cela va tout de même rendre l'exploration de l'Autre Monde beaucoup plus aisée.";
 		close;
 	}
 }
 
-spl_fild02,27,218,0	script	Half-buried Gem#1	844,{
+spl_fild02,27,218,0	script	Gemme à Moitié Enfouie::Half-buried Gem#1	844,{
 	if (ep13_2_rhea < 5) {
-		mes "- Under a round pile of earth, -";
-		mes "- there's a Red Gem -";
-		mes "- half-buried. -";
+		mes "- Vous voyez une gemme rouge à moitié enfouie sous une motte de terre. -";
 		close;
 	}
 	else if (ep13_2_rhea == 5) {
 		set .@check_spljew00,checkquest(8241);
 		if (.@check_spljew00 == -1) {
-			mes "- Under a round pile of earth, -";
-			mes "- there's a Red Gem -";
-			mes "- half-buried. -";
+			mes "- Vous voyez une gemme rouge à moitié enfouie sous une motte de terre. -";
 			next;
-			switch(select("Dig out the Gem:Leave it alone")) {
+			switch(select("Déterrer la gemme:La laisser")) {
 			case 1:
 				break;
 			case 2:
-				mes "- You overspread some earth over the Gem -";
-				mes "- and left the Gem as it was. -";
+				mes "- Vous remettez un peu de terre sur la gemme et la laissez là où elle est. -";
 				next;
 				mes "["+ strcharinfo(0) +"]";
-				mes "...What the heck am I doing now...";
+				mes "… Bon, qu'est-ce que je vais bien pouvoir faire maintenant?";
 				close;
 			}
 			if (rand(1,4) == 2) {
-				mes "- You dug up a pile of earth -";
-				mes "- and pulled out the Red Gem -";
+				mes "- Vous creusez dans la terre et en extrayez la gemme rouge. -";
 				setquest 8241;
 				getitem 7575,1; //Red_Jewel_
 				close;
 			}
 			else {
-				mes "- As you dug up a pile of earth, -";
-				mes "- a Thief Bug attacks you! -";
+				mes "- Vous commencez à creuser dans la terre mais un Chapardeur vous attaque! -";
 				donpcevent "Half-buried Gem#1::OnDisable";
 				next;
 				mes "["+ strcharinfo(0) +"]";
-				mes "What the heck is this?!?!?!";
+				mes "Qu'est-ce que...?!?!?!";
 				close;
 			}
 		}
 		else {
-			mes "- Small pile of earth -";
-			mes "- which you dug up the Red Gem -";
+			mes "- Il s'agit du petit monticule de terre d'où vous avez déterré la gemme rouge. -";
 			close;
 		}
 	}
 	else {
-		mes "- Small pile of earth -";
-		mes "- which you dug up the Red Gem -";
+		mes "- Il s'agit du petit monticule de terre d'où vous avez déterré la gemme rouge. -";
 		close;
 	}
 	end;
@@ -3701,7 +3565,7 @@ OnEnable:
 
 OnDisable:
 	initnpctimer;
-	monster "spl_fild02",25,220,"Thief Bug",1051,10,"Half-buried Gem#1::OnMyMobDead";
+	monster "spl_fild02",25,220,"Chapardeur",1051,10,"Half-buried Gem#1::OnMyMobDead";
 	hideonnpc "Half-buried Gem#1";
 	end;
 
@@ -3719,57 +3583,48 @@ OnTimer300000:
 	end;
 }
 
-man_fild03,227,109,0	script	Half-buried Gem#2	844,{
+man_fild03,227,109,0	script	Gemme à Moitié Enfouie::Half-buried Gem#2	844,{
 	if (ep13_2_rhea < 5) {
-		mes "- Under a round pile of earth, -";
-		mes "- there's a Blue Gem -";
-		mes "- half-buried. -";
+		mes "- Vous voyez une gemme bleue à moitié enfouie sous une motte de terre. -";
 		close;
 	}
 	else if (ep13_2_rhea == 5) {
 		set .@check_manjew00,checkquest(8242);
 		if (.@check_manjew00 == -1) {
-			mes "- Under a round pile of earth, -";
-			mes "- there's a Red Gem -";
-			mes "- half-buried. -";
+			mes "- Vous voyez une gemme bleue à moitié enfouie sous une motte de terre. -";
 			next;
-			switch(select("Dig out the Gem:Leave it alone")) {
+			switch(select("Déterrer la gemme:La laisser")) {
 			case 1:
 				break;
 			case 2:
-				mes "- You overspread some earth over the Gem -";
-				mes "- and left the Gem as it was. -";
+				mes "- Vous remettez un peu de terre sur la gemme et la laissez là où elle est. -";
 				next;
 				mes "["+ strcharinfo(0) +"]";
-				mes "...What the heck am I doing now...";
+				mes "… Bon, qu'est-ce que je vais bien pouvoir faire maintenant?";
 				close;
 			}
 			if (rand(1,4) == 2) {
-				mes "- You dug up a pile of earth -";
-				mes "- and pulled out the Blue Gem -";
+				mes "- Vous creusez dans la terre et en extrayez la gemme bleue. -";
 				setquest 8242;
 				getitem 7576,1; //Blue_Jewel_
 				close;
 			}
 			else {
-				mes "- As you dug up a pile of earth, -";
-				mes "- a Thief Bug attacks you! -";
+				mes "- Vous commencez à creuser dans la terre mais un Chapardeur vous attaque! -";
 				donpcevent "Half-buried Gem#2::OnDisable";
 				next;
 				mes "["+ strcharinfo(0) +"]";
-				mes "What the heck is this?!?!?!";
+				mes "Qu'est-ce que...?!?!?!";
 				close;
 			}
 		}
 		else {
-			mes "- Small pile of earth -";
-			mes "- which you dug up the Blue Gem -";
+			mes "- Il s'agit du petit monticule de terre d'où vous avez déterré la gemme bleue. -";
 			close;
 		}
 	}
 	else {
-		mes "- Small pile of earth -";
-		mes "- which you dug up the Blue Gem -";
+		mes "- Il s'agit du petit monticule de terre d'où vous avez déterré la gemme bleue. -";
 		close;
 	}
 	end;
@@ -3785,7 +3640,7 @@ OnEnable:
 
 OnDisable:
 	initnpctimer;
-	monster "man_fild03",227,109,"Thief Bug",1051,10,"Half-buried Gem#2::OnMyMobDead";
+	monster "man_fild03",227,109,"Chapardeur",1051,10,"Half-buried Gem#2::OnMyMobDead";
 	hideonnpc "Half-buried Gem#2";
 	end;
 
@@ -3803,7 +3658,7 @@ OnTimer300000:
 	end;
 }
 
-/*
+/* Je ne traduis pas cette partie qui est désactivée par défaut de toutes façons [NoH]
 mid_camp,7,3,0	script	Translator Preparation#1	708,{
 	mes "[Plot13 Translator Quest Preparation]";
 	mes "Input password.";
