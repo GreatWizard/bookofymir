@@ -5277,7 +5277,7 @@ UPDATE item_db SET `name_japanese`  = "Guide des Métiers" WHERE ID = 14592;
 UPDATE item_db SET `name_japanese`  = "Parchemin d'Amplification Mystique" WHERE ID = 14593;
 UPDATE item_db SET `name_japanese`  = "Parchemin de Bourbier" WHERE ID = 14594;
 UPDATE item_db SET `name_japanese`  = "Sort Libéré" WHERE ID = 14595;
-UPDATE item_db SET `name_japanese`  = "Coffre aux Trésors de Pierre" WHERE ID = 14596;
+UPDATE item_db SET `name_japanese`  = "Boîte au Trésor de Pierrot" WHERE ID = 14596;
 UPDATE item_db SET `name_japanese`  = "Parchemin de Phreeoni" WHERE ID = 14597;
 UPDATE item_db SET `name_japanese`  = "Parchemin de Ghostring" WHERE ID = 14598;
 UPDATE item_db SET `name_japanese`  = "Parchemin d'Avidité" WHERE ID = 14599;
