@@ -206,7 +206,7 @@ UPDATE item_db SET `name_japanese`  = "Aigue-Marine" WHERE ID = 720;
 UPDATE item_db SET `name_japanese`  = "Émeraude" WHERE ID = 721;
 UPDATE item_db SET `name_japanese`  = "Perle" WHERE ID = 722;
 UPDATE item_db SET `name_japanese`  = "Rubis" WHERE ID = 723;
-UPDATE item_db SET `name_japanese`  = "Rubis Maudis" WHERE ID = 724;
+UPDATE item_db SET `name_japanese`  = "Rubis Maudit" WHERE ID = 724;
 UPDATE item_db SET `name_japanese`  = "Sardonyx" WHERE ID = 725;
 UPDATE item_db SET `name_japanese`  = "Saphir" WHERE ID = 726;
 UPDATE item_db SET `name_japanese`  = "Opale" WHERE ID = 727;
