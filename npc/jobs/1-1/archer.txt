@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Myllena, corrigé par Icaros
+//traduit par Myllena, corrigé par Icaros et Fern.
 //===== eAthena Script ======================================= 
 //= Archer Job Quest
 //===== By: ================================================== 
@@ -71,7 +71,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 	mes "[Archer]";
 	mes "Bonjour. En quoi puis-je vous aider?";
 	next;
-	switch(select("Je voudrais devenir un Archer.:Quels sont les prérequis?:Euh... non, rien.")) {
+	switch(select("Je voudrais devenir Archer.:Quels sont les prérequis?:Euh... non, rien.")) {
 	case 1:
 		if (BaseJob == Job_Archer) {
 			mes "[Archer]";
@@ -84,7 +84,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 			mes "Je suis désolé, mais je suis obligé de refuser votre inscription à la Guilde des Archers.";
 			next;
 			mes "[Archer]";
-			mes "Peu importe qui vous êtes ou ce que vous faites, vous ne pouvez devenir Archer: vous avez déjà un métier.";
+			mes "Vous avez déjà un métier!";
 			close;
 		}
 		if (job_archer_q == 0) {
@@ -96,10 +96,10 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 				set job_archer_q,1;
 				setquest 1004;
 				mes "[Archer]";
-				mes "Okay, signez ici. Parfait, hum, je ferai de vous un Archer lorsque tous les prérequis seront satisfaits.";
+				mes "Okay, signez ici. Parfait, hum, je ferai de vous un Archer lorsque vous aurez rempli tous les prérequis.";
 				next;
 				mes "[Archer]";
-				mes "Si vous pensez qu'ils le sont, et que vous êtes prêt, nous pouvons voir ça sans attendre.";
+				mes "Si vous pensez que c'est bon, que vous êtes prêt, nous pouvons voir ça sans attendre.";
 				mes "Êtes-vous prêt?";
 				next;
 				if (select("Oui.:Oui... euh en faite pas tout à fait.") == 1) {
@@ -114,7 +114,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 				}
 			}
 			mes "[Archer]";
-			mes "Oh, bon si vous insistez.";
+			mes "Oh. Bon, si vous insistez.";
 			mes "À plus tard alors.";
 			close;
 		}
@@ -126,7 +126,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 			mes "On dirait que vous n'êtes pas encore suffisamment qualifié pour devenir un Archer.";
 			next;
 			mes "[Archer]";
-			mes "Vous devez atteindre un métier de niveau 10 au moins, et n'oubliez pas que vous devez apprendre toutes les compétences de base.";
+			mes "Je vous rappelle que vous devez atteindre le niveau 10 de votre métier, et en apprendre toute les compétences de base.";
 			close;
 		}
 		if (job_archer_q == 1) {
@@ -141,7 +141,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 			mes "Bien, voyons voir...";
 			next;
 			mes "[Archer]";
-			mes "Je vais examiner les Troncs que vous avez apportés, nécessaires à la fabrication des arcs.";
+			mes "Je vais examiner les Troncs que vous avez apportés, nous pourront fabriquer des arcs avec.";
 			next;
 			if (countitem(1066) == 0 && countitem(1067) == 0 && countitem(1068) == 0 && countitem(1019) == 0) {
 				mes "[Archer]";
@@ -182,7 +182,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 			}
 			next;
 			mes "[Archer]";
-			mes "Je vais envoyer tout ce bois à notre Centre de Fabrication d'Arcs. Maintenant que vous avez réussi toutes les épreuves, laissez-moi faire de vous l'un des membre officiel de la Guilde des Archers!";
+			mes "Je vais envoyer tout ce bois à notre Centre de Fabrication d'Arcs. Maintenant que vous avez réussi toutes les épreuves, laissez-moi faire de vous un membre officiel de la Guilde des Archers!";
 			if (countitem(1066) != 0) delitem 1066,countitem(1066); //Tree_Of_Archer_1
 			if (countitem(1067) != 0) delitem 1067,countitem(1067); //Tree_Of_Archer_2
 			if (countitem(1068) != 0) delitem 1068,countitem(1068); //Tree_Of_Archer_3
@@ -196,14 +196,14 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 		mes "Vous faites maintenant officiellement partie de la Guilde des Archers... Bienvenue!";
 		next;
 		mes "[Archer]";
-		mes "Bien sûr, nous espérons que vous nous aiderez en contribuant à l'avenir de la Guilde des Archers avec vos efforts.";
+		mes "J'espère que vous ferez honneur à la Guilde des Archers, par vos actes et vos efforts.";
 		next;
 		mes "[Archer]";
 		mes "Ah, votre arc vient d'arriver de la Manufacture des Archers. Tenez, prenez-le! Il est à vous~";
 		getitem 1702,1; //Bow_
 		next;
 		mes "[Archer]";
-		mes "Oh, j'allais oublier... Qu'est-ce qu'un chasseur avec son arc s'il n'a pas de flèches?";
+		mes "Oh, j'allais oublier... Qu'est-ce qu'un Archer sans flèches?";
 		mes "En voici quelques-unes.";
 		getitem 1750,.@total_archer2; //Arrow
 		next;
@@ -211,7 +211,7 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 		mes "Assurez vous de toujours en avoir sur vous, sinon c'est votre vie que vous mettrez en jeu.";
 		next;
 		mes "[Archer]";
-		mes "Un Archer est libre, vous pouvez continuer de vivre sans attache et profiter de la vie! Je suis convaincu que vous ferez un excellent Archer.";
+		mes "Un Archer est libre, vous pouvez vivre sans attache et profiter de la vie! Je suis convaincu que vous ferez un excellent Archer.";
 		next;
 		mes "[Archer]";
 		mes "Adieu, et bonne chance pour vos voyages.";
@@ -224,24 +224,24 @@ payon_in02,64,71,4	script	Archer#archer	85,{
 				next;
 				mes "[Archer]";
 				mes "Mais...";
-				mes "Vous êtes déjà un Archer. Vous devez déjà tout savoir de ce que j'allais dire...";
+				mes "Vous êtes déjà Archer. Vous devez déjà tout savoir de ce que j'allais dire...";
 			}
 			else {
 				next;
 				mes "[Archer]";
-				mes "Mais... Attendez une seconde. Vous avez déjà un métier, je ne vois pas en quoi cela vous concerne~";
+				mes "Mais... Attendez une seconde. Vous avez déjà un métier, je ne vois pas ce que vous faites ici~";
 			}
-			mes "Bon...Yeah...Je n'ai donc pas besoin de vous en apprendre plus sur le sujet...";
+			mes "Bon...Euh...Je n'ai donc pas besoin de vous en apprendre plus sur le sujet...";
 		}
 		next;
 		mes "[Archer]";
 		mes "Tout d'abord, vous devez avoir un Niveau de Métier égal à 9, et avoir appris toutes vos compétences de Novice.";
 		next;
 		mes "[Archer]";
-		mes "Deuxièmement, vous serez invité à participer à une petite épreuve, qui déterminera votre aptitude au métier d'Archer.";
+		mes "Ensuite, vous serez invité à participer à une petite épreuve, qui déterminera votre aptitude au métier d'Archer.";
 		next;
 		mes "[Archer]";
-		mes "On comptabilise au moins ^FF00004 différentes sortes de bois^000000, chacun comptant pour un nombre de points différent. Rassemblez une grande variété de bois et rapportez-les ici.";
+		mes "On comptabilise au moins ^FF0000quatre différentes sortes de bois^000000, chacun comptant pour un nombre de points différent. Rassemblez une grande variété de bois et rapportez-les ici.";
 		next;
 		mes "[Archer]";
 		mes "Pour devenir Archer, vous devrez comptabiliser un total entre ^0000FF25 et 40^000000 points. Le bois se trouve en général sur les 'Saules', des monstres-arbre qui se trouvent aux alentours de Payon. Mais soyez prudent quand même. Ils peuvent être assez robustes.";
