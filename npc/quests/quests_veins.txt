@@ -1,5 +1,6 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par No Healing (en cours)
+//traduit par No Healing (Thor Volcano Base Quest, Siblings Quest) et Irimar (Stone Quest) (en cours), corrigé par Fern et Myllena
+//Verification requise pour la ligne 3723
 //===== eAthena Script ======================================= 
 //= Veins Quests
 //===== By: ================================================== 
@@ -45,142 +46,78 @@
 
 // Stone Quest
 //============================================================ 
-ve_fild05,257,130,4	script	Wincing Old Man#ve	945,{
+ve_fild05,257,130,4	script	Vieil Homme Crispé#ve	945,{
 	if ((MaxWeight - Weight) < 2000 || checkweight(1201,1) == 0) {
-		mes "- Wait a moment! -";
-		mes "- Currently you are carrying -";
-		mes "- too many items with you. -";
-		mes "- Please come back after -";
-		mes "- you put some items into Kafra Storage. -";
+		mes "Une petite minute! Vous portez trop d'objets sur vous. Revenez après en avoir déposé quelques uns dans votre Stock Kafra. -";
 		close;
 	}
 	if ((veins_stone == 0) && (BaseLevel > 59)) {
 		mes "[Zabaroo]";
-		mes "My back is killing me";
-		mes "after stooping over to";
-		mes "pick up stones all day long...";
-		mes "The pain... It's unbearable!";
+		mes "Mon dos me fait souffrir le martyr à force de ramasser des pierres toute la journée... La douleur est insupportable!";
 		next;
-		switch(select("Bend with your knees, yo.:Gosh, how bad is it?")) {
+		switch(select("Bah... Mettez-vous à genoux.:Mon dieu, la douleur est si forte?")) {
 		case 1:
 			mes "[Zabaroo]";
-			mes "Whippersnapper!";
-			mes "I didn't ask you for";
-			mes "your advice! Don't";
-			mes "patronize an old man!";
+			mes "Freluquet!";
+			mes "Je ne vous ai pas demandé de conseil! Ne prenez pas ce ton condescendent avec un vieil homme!";
 			close;
 		case 2:
 			mes "[Zabaroo]";
-			mes "Oh, it hurts so much, it's";
-			mes "almost crippling. But I don't";
-			mes "have any choice. I need to";
-			mes "get enough stops to fill";
-			mes "this gap if I want to get";
-			mes "paid. Arrrrgh, damn it!";
+			mes "Oh, ça me fait si mal... C'est vraiment handicapant. Il faut que je rassemble assez de pierres pour boucher ce trou si je veux être payé. Arrrrgh, bon sang!";
 			next;
 			mes "[Zabaroo]";
-			mes "If I don't get enough";
-			mes "money to pay for my";
-			mes "granddaughter's medicine,";
-			mes "I won't be able to buy any";
-			mes "medicine for my granddaughter!";
-			mes "And that will be horrible! Ag!";
+			mes "Si je n'amasse pas assez d'argent, je ne pourrais pas acheter les médicaments prescrits à ma petite fille! Arg!";
 			next;
-			select("Can I help?");
+			select("Puis-je vous aider?");
 			mes "[Zabaroo]";
-			mes "I appreciate your kindness,";
-			mes "stranger, but no. I have";
-			mes "to do this on my own.";
-			mes "A man must have his pride....";
+			mes "J'apprécie votre gentillesse, étranger, mais c'est non. Je dois faire ça seul. J'ai encore ma fierté...";
 			next;
-			mes "^333333*Snap*^000000";
+			mes "^333333*D'oh!*^000000";
 			next;
 			mes "[Zabaroo]";
-			mes "Argh! My back...!";
-			mes "This was totally";
-			mes "unforeseeable!";
-			mes "Please! Please,";
-			mes "for the love of Freya,";
-			mes "please help me!";
+			mes "Argh! Mon dos... Oh non pas ça! S'il vous plaît! S'il vous plaît! Pour l'amour de Freya, aidez-moi!";
 			next;
-			select("I will help you.");
+			select("Je vais vous aider.");
 			mes "[Zabaroo]";
-			mes "Thank you!";
-			mes "Thanks so much!";
+			mes "Merci!";
+			mes "Merci beaucoup!";
 			next;
-			select("What do you want me to do?");
+			select("Qu'est-ce que je dois faire?");
 			mes "[Zabaroo]";
-			mes "Ow-ow-ow! Oh... Okay...";
-			mes "You see those all dark";
-			mes "stones stuck in the ground?";
-			mes "Those are what I need to";
-			mes "pick up. Now don't go";
-			mes "lifting rocks just yet...";
+			mes "Ow-ow-ow! Oh... D'accord... Vous voyez ces pierres noires sur le sol? Ce sont celles que je dois ramasser. Non, attendez, n'allez pas vous mettre à les soulever comme ça...";
 			next;
 			mes "[Zabaroo]";
-			mes "I asked some other old";
-			mes "man in town, Absar, to";
-			mes "make me something to help";
-			mes "with my back. He was going";
-			mes "to help me if I gave hi--";
-			mes "ARGH! My back! It hurts!";
+			mes "J'ai demandé à un vieil homme en ville, Asbar, de faire quelque chose pour soulager mon dos. Il allait m'aider mais je devais lui don..";
+			mes "ARGH! Mon dos! Ça fait mal!";
 			next;
 			mes "[Zabaroo]";
-			mes "It hurts so bad! But it's";
-			mes "especially painful right";
-			mes "when I'm about to finish";
-			mes "sentences in which I intend to";
-			mes "tell you important informat--";
-			mes "ARRRGH! Find Absar! Quickly!";
+			mes "Ça me fait tellement mal! Mais ça me fait encore plus mal quand je suis sur le point de finir un phrase on dir...";
+			mes "ARRRGH! Allez voir Asbar! Vite!";
 			next;
 			while(1) {
 				mes "[Zabaroo]";
-				mes "Wait, wait...";
-				mes "Maybe I can answer";
-				mes "a few of your questions";
-				mes "before my body is wracked";
-				mes "with throbbing pain. Let's...";
-				mes "Let's at least give it a try.";
+				mes "Attendez, attendez... Je peux peut-être répondre à quelques questions avant que la douleur devienne trop forte. Je vais... Je vais tout du moins essayer.";
 				next;
-				switch(select("What's with these stones?:Where's the old man?:Nothing.")) {
+				switch(select("A quoi servent ces pierres?:Où puis-je trouver le vieil homme?:S'en aller.")) {
 				case 1:
 					mes "[Zabaroo]";
-					mes "Well, we use these dark";
-					mes "stones because they're";
-					mes "pretty and easy to process.";
-					mes "They're sort of a specialty";
-					mes "of this town. I get paid to";
-					mes "harvest these handy rocks.";
+					mes "En fait, nous utilisons ces pierres noires car elles sont jolies et faciles à manipuler. C'est en quelque sorte une spécialité locale. Mon travail est d'amasser ce genre de pierre.";
 					next;
 					mes "[Zabaroo]";
-					mes "We can sell these to tourists,";
-					mes "and we even have a factory";
-					mes "that uses these stones.";
-					mes "Still, it's not like the";
-					mes "townspeople are getting";
-					mes "rich off these stones.";
+					mes "On peut les vendre aux touristes, et on a même une manufacture qui utilise ces pierres. Malheureusement, ce n'est pas avec ces pierres que les villageois deviendront riches.";
 					next;
 					mes "[Zabaroo]";
-					mes "All of us are still";
-					mes "barely making a living...";
+					mes "Nous vivons difficilement de cet artisanat...";
 					next;
 					break;
 				case 2:
 					mes "[Zabaroo]";
-					mes "Absar? He's inside";
-					mes "the Tool Shop. You";
-					mes "can't miss him... Just";
-					mes "look for the man with";
-					mes "the crazy eyes!";
+					mes "Asbar? Il est à l'intérieur du magasin général. Vous ne pouvez pas le rater... Cherchez un homme avec un regard étrange!";
 					next;
 					break;
 				case 3:
 					mes "[Zabaroo]";
-					mes "Thanks for your help.";
-					mes "If you can't find Absar";
-					mes "in the Tool Shop, then";
-					mes "you might want to stop";
-					mes "by the Tavern. A-auuugh!";
+					mes "Merci pour votre aide. Si vous ne trouvez pas Asbar au magasin général, essayez la taverne. A-auuugh!";
 					set veins_stone,1;
 					close;
 				}
@@ -189,101 +126,52 @@ ve_fild05,257,130,4	script	Wincing Old Man#ve	945,{
 	}
 	else if (veins_stone == 1) {
 		mes "[Zabaroo]";
-		mes "Thanks for your help.";
-		mes "If you can't find Absar";
-		mes "in the Tool Shop, then";
-		mes "you might want to stop";
-		mes "by the Tavern. A-auuugh!";
+		mes "Merci pour votre aide. Si vous ne trouvez pas Asbar au magasin général, essayez la taverne. A-auuugh!";
 		close;
 	}
 	else if (veins_stone < 4) {
 		mes "[Zabaroo]";
-		mes "Geez, Absar sure can";
-		mes "be fussy. Still, do your";
-		mes "best to get what he wants.";
-		mes "He won't help me otherwise!";
-		mes "Other than that, he's not";
-		mes "really that bad a guy...";
+		mes "Au fait, Asbar est quelqu'un de caractériel. Faites de votre mieux pour obtenir ce qu'il veut. Il ne m'aidera pas sinon. Ce n'est pas une mauvaise personne pourtant...";
 		close;
 	}
 	else if (veins_stone == 4) {
 		mes "[Zabaroo]";
-		mes "Oh good, you're back!";
-		mes "Did you bring what";
-		mes "Absar made for me?";
+		mes "Oh parfait, vous êtes de retour! Avez-vous apporté ce qu'Asbar m'a fabriqué?";
 		next;
-		select("Yes, here...");
+		select("Voilà, tenez...");
 		mes "[Zabaroo]";
-		mes "So this is what he";
-		mes "was talking about?";
-		mes "How does it... Ah!";
-		mes "Here we go! If I pull";
-		mes "the handle, that end of";
-		mes "the stick will pick stuff up!";
+		mes "C'est donc ça dont il parlait? Comment est-ce que... Ah, Voilà! Si je tire sur la poignée, le boût du bâton va ramasser les pierres!";
 		next;
 		mes "[Zabaroo]";
-		mes "This is great! I won't";
-		mes "have to bend over to pick";
-		mes "up stones anymore! Heh,";
-		mes "he must be awfully proud";
-		mes "of this useful invention~";
-		mes "I can imagine him strutting.";
+		mes "C'est génial! Je n'aurai plus à me pencher pour ramasser les pierres maintenant! Heh, il doit être fier de cette merveilleuse invention. Je l'imagine déjà s'en vanter.";
 		next;
 		mes "[Zabaroo]";
-		mes "Um, did he have anything";
-		mes "to say after he gave this";
-		mes "to you? I'm just curious.";
+		mes "Um, il vous a donné un message pour moi après vous avoir remis l'objet? Je suis juste curieux.";
 		next;
-		select("This message...");
+		select("Ce message...");
 		mes "[Zabaroo]";
-		mes "Oh... I thought he";
-		mes "would forget all about";
-		mes "that. Well, it's a relief";
-		mes "to know that now. That's";
-		mes "really very nice of him.";
+		mes "Oh... Je pensais qu'il avait tout oublié à ce propos. Quel soulagement de savoir ça. C'est vraiment gentil de sa part.";
 		next;
 		mes "[Zabaroo]";
-		mes "I hate to ask you...";
-		mes "But would you mind";
-		mes "helping me out one";
-		mes "more time?";
+		mes "Je suis gêné de vous demander ça mais... Ça ne vous dérangerait pas de me venir en aide une fois de plus?";
 		next;
-		select("Huh? What is it?");
+		select("Huh? Que puis-je pour vous?");
 		mes "[Zabaroo]";
-		mes "Don't worry, it's not";
-		mes "too hard. Would you just";
-		mes "deliver the stones I gathered";
-		mes "to the factory in town? It's";
-		mes "near the airport or airship or";
-		mes "something. It won't take long.";
+		mes "Ne vous en faites pas, C'est très simple. Pourriez-vous juste apporter les pierres que j'ai amassées à la manufacture en ville? Vous n'en aurez pas pour très longtemps, c'est à côté de l'aéroport.";
 		set veins_stone,5;
 		close;
 	}
 	else if (veins_stone < 7) {
 		mes "[Zabaroo]";
-		mes "Thanks again for your help!";
-		mes "What did Asbar call this";
-		mes "thing again? A Tactile...";
-		mes "Extendable... Damn it...";
-		mes "Why's the name so long?";
-		mes "Anyway, it's usefull~";
+		mes "Merci encore pour votre aide. Comment Asbar appelle ce truc encore? Des pinces de préhension... Mince... Pourquoi le nom est si long. Peu importe, c'est utile au moins.";
 		close;
 	}
 	else if (veins_stone == 7) {
 		mes "[Zabaroo]";
-		mes "Oh, you're back!";
-		mes "I really appreciate all";
-		mes "of your help. I don't have";
-		mes "much, and I know you weren't";
-		mes "expecting a reward, but I'd";
-		mes "like to give you something.";
+		mes "Ha, vous êtes de retour! J'apprécie vraiment votre aide. Ce n'est pas grand chose, et je sais que vous ne demandiez pas de récompense, mais je tiens à vous donner quelque chose.";
 		next;
 		mes "[Zabaroo]";
-		mes "Ah, here we are. I found";
-		mes "these while harvesting stones";
-		mes "I was told that adventurers";
-		mes "find these useful. Anyway,";
-		mes "I hope you like these rocks...";
+		mes "Voilà. J'ai trouvé ça quand j'amassais des pierres. On m'a dit que les aventurier les trouvaient utiles, j'espère que ça sera le cas pour vous...";
 		set veins_stone,8;
 		getexp 300000,0;
 		getitem 985,3; //Elunium
@@ -291,130 +179,87 @@ ve_fild05,257,130,4	script	Wincing Old Man#ve	945,{
 	}
 	else if (veins_stone > 7) {
 		mes "[Zabaroo]";
-		mes "Thanks to you and Asbar,";
-		mes "my poor back hasn't been";
-		mes "bothering me at all lately.";
-		mes "I should be taking better";
-		mes "care of myself at my age...";
+		mes "Merci à vous et à Asbar, mon pauvre dos ne me dérangeait pas du tout avant aujourd'hui. Je devrais faire plus attention à moi à mon âge...";
 		close;
 	}
 	mes "[Zabaroo]";
-	mes "I'm sorry dear.";
-	mes "You're not strong enough for this kind of work.";
-	mes "Put on some muscle and talk to me again.";
+	mes "Je suis désolé mais vous n'êtes pas assez fort pour faire ce travail. Entraînez-vous un peu et revenez me parler plus tard.";
 	close;
 }
 
-ve_in,169,310,6	script	Strange Old Man#ve	121,{
+ve_in,169,310,6	script	Vieil Homme Étrange#ve	121,{
 	if (veins_stone == 0) {
-		mes "[Absar]";
-		mes "Bwahahaha!";
-		mes "Once... Once this is completed, I'll...";
-		mes "Mwahahahahahahahah!";
+		mes "[Asbar]";
+		mes "Bwahahaha! Une fois... Une fois ceci achevé, je serai... Mwahahahahahahahah!";
 		close;
 	}
 	else if (veins_stone == 1) {
-		mes "[Absar]";
-		mes "I'm so close to";
-		mes "completion. Now, if";
-		mes "I just turn this here...";
+		mes "[Asbar]";
+		mes "Je suis si près du but. Maintenant, si je ne fais que tourner ça...";
 		next;
-		if (select("Excuse me...:........") == 1) {
-			mes "[Absar]";
-			mes "What?! Who dares";
-			mes "disturb me?! N-no!";
-			mes "Look! Look what you did!";
-			mes "You made me screw up!";
+		if (select("Pardonnez-moi...:........") == 1) {
+			mes "[Asbar]";
+			mes "Quoi?! Qui ose me déranger?! N-non! Regardez! Regardez ce que vous avez fait!";
+			mes "J'ai tout raté par votre faute!";
 			next;
 			specialeffect EF_LORD;
 			percentheal -30,0;
 			next;
-			mes "[Absar]";
+			mes "[Asbar]";
 			mes "!@#$%#@#$!*~";
 			mes "F$#@#%^^^&&!";
 			close2;
 			warp "ve_in",262,309;
 			end;
 		}
-		mes "[Absar]";
-		mes "Oh, no...";
+		mes "[Asbar]";
+		mes "Oh, non...";
 		next;
 		specialeffect EF_ASPERSIO;
 		next;
-		mes "[Absar]";
-		mes "How...?!";
-		mes "No! I failed again!";
-		mes "D-DAAAAAAAAAAAMN IIIII--";
+		mes "[Asbar]";
+		mes "Comment...?! Non! J'ai encore tout raté! QUE JE SOIS MAUDIIIIIIIIIIT--";
 		next;
-		mes "[Absar]";
-		mes "Huh? What are you...";
-		mes "What do you want?";
+		mes "[Asbar]";
+		mes "Huh? Qu'est-ce que...";
+		mes "Que voulez vous?";
 		next;
-		select("Oh, I-I'm...");
-		mes "[Absar]";
-		mes "Spit it out. Tell me";
-		mes "what you want, not your";
-		mes "name. Hurry, can't you";
-		mes "see that I'm busy?";
+		select("Oh, J-Je...");
+		mes "[Asbar]";
+		mes "Crachez le morceau. Dites-moi ce que vous voulez, pas votre vie. Allez, vous ne voyez pas que je suis occupé?";
 		next;
-		if (select("I... I'm sorry.:I'm here for Mr. Zabaroo...") == 1) {
-			mes "[Absar]";
-			mes "If only you didn't";
-			mes "interrupt me! Then";
-			mes "I'd already have...";
-			mes "Ugh! Back to work!";
+		if (select("Je... Je suis désolé.:Je viens de la part de M. Zabaroo...") == 1) {
+			mes "[Asbar]";
+			mes "Si seulement vous ne m'aviez pas interrompu! Alors j'aurais déjà... Ugh! Je retourne au travail!";
 			close;
 		}
-		mes "[Absar]";
-		mes "Zabaroo? What does...";
-		mes "Oh. Never mind. I think";
-		mes "I remember what he asked";
-		mes "me to make him. So did";
-		mes "you bring all the materials?";
+		mes "[Asbar]";
+		mes "Zabaroo? Qu'est-ce que... Oh, oubliez ça. Il m'a commandé quelque chose il me semble. Apportez-vous tout le matériel?";
 		next;
-		if (select("Yes:What materials...?") == 1) {
-			mes "[Absar]";
-			mes "Great, we can get";
-			mes "started and m--";
-			mes "Liar. You don't even know";
-			mes "what you're supposed to";
-			mes "bring me, do you?!";
-			mes "Get out of here!";
+		if (select("Oui:Quels matériaux...?") == 1) {
+			mes "[Asbar]";
+			mes "Génial! Nous pouvons alors commencer et... Menteur! Vous ne savez même pas ce que vous êtes supposé m'apporter! Sortez d'ici!";
 			close2;
 			warp "ve_in",262,309;
 			end;
 		}
-		mes "[Absar]";
-		mes "Of course. I didn't tell him";
-		mes "what materials I needed";
-		mes "anyway. Heh heh! Now, this";
-		mes "is what I need you to bring.";
-		mes "Listen up, okay? And hurry.";
+		mes "[Asbar]";
+		mes "Oh, j'ai du oublier de lui donner la liste des matériaux necessaires, heh heh! Voici ce que vous devez m'apporter. Écoutez bien daccord? Et dépêchez-vous.";
 		next;
-		mes "[Absar]";
-		mes "^4D4DFF5 Maneater Roots^000000,";
-		mes "^4D4DFF2 Glacial Hearts^000000, and";
-		mes "^4D4DFF5 Steel^000000. If you don't";
-		mes "come back soon, then";
-		mes "I won't help you. I've got";
-		mes "projects I'm working on!";
+		mes "[Asbar]";
+		mes "^4D4DFF5 Racines de Plante Carnivore^000000,";
+		mes "^4D4DFF2 Coeurs de Glace^000000, et";
+		mes "^4D4DFF5 morceaux d'Acier^000000. Revenez rapidement, sinon je ne pourrais pas vous aider. J'ai des projets plus importants à terminer!";
 		set veins_stone,2;
 		close;
 	}
 	else if (veins_stone == 2) {
 		if (countitem(999) > 4 && countitem(7561) > 1 && countitem(1033) > 4) {
-			mes "[Absar]";
-			mes "Good, you finally";
-			mes "brought everthing.";
-			mes "I was just about to";
-			mes "give up on you, so";
-			mes "consider yourself lucky!";
+			mes "[Asbar]";
+			mes "Bien, vous avez finalement tout apporté. Vous avez de la chance, j'étais sur le point de reprendre un autre projet!";
 			next;
-			mes "[Absar]";
-			mes "Give me a second.";
-			mes "You won't have to";
-			mes "wait long to see";
-			mes "my great invention!";
+			mes "[Asbar]";
+			mes "Donnez-moi une seconde. Vous n'aurez pas à attendre longtemps pour admirer ma sublime invention!";
 			delitem 999,5; //Steel
 			delitem 1033,5; //Root_Of_Maneater
 			delitem 7561,2; //Ice_Heart
@@ -423,220 +268,139 @@ ve_in,169,310,6	script	Strange Old Man#ve	121,{
 			specialeffect EF_FIRESPLASHHIT;
 			end;
 		}
-		mes "[Absar]";
-		mes "What the hell?";
-		mes "Hurry and bring";
-		mes "^4D4DFF5 Maneater Roots^000000,";
-		mes "^4D4DFF2 Glacial Hearts^000000, and";
-		mes "^4D4DFF5 Steel^000000! Do you think";
-		mes "I'm doing this for fun?!";
+		mes "[Asbar]";
+		mes "Ne restez pas planté là! Dépêchez-vous de m'apporter";
+		mes "^4D4DFF5 Racines de Plante Carnivore^000000,";
+		mes "^4D4DFF2 Coeurs de Glace^000000, et";
+		mes "^4D4DFF5 morceaux d'Acier^000000! Vous croyez vraiment que je fais ça pour m'amuser?!";
 		close;
 	}
 	else if (veins_stone == 3) {
-		mes "[Absar]";
-		mes "Here you are...";
-		mes "Well, I don't know";
-		mes "if you appreciate";
-		mes "inventions, but this";
-		mes "is a Tactile Extendable";
-		mes "Clamp-Release Mechanism!";
+		mes "[Asbar]";
+		mes "Voilà... Bon, j'ignore si vous apprécierez cette invention, mais c'est une pince à préhension!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Tack... What...?";
+		mes "Pince à... Quoi...?";
 		next;
-		mes "[Absar]";
-		mes "...............................";
-		mes "You can use this to pick";
-		mes "things up. From a distance.";
+		mes "[Asbar]";
+		mes "...Vous pouvez utiliser ceci afin de ramasser des objets sur le sol.";
 		next;
-		mes "[Absar]";
-		mes "Anyway, when you get back";
-		mes "to Zabaroo, let me him know";
-		mes "that he doesn't owe me";
-		mes "anything anymore. He'll...";
-		mes "He'll know what I mean...";
+		mes "[Asbar]";
+		mes "Quand vous retournerez voir Zabaroo, dites-lui qu'il ne me doit plus rien, plus rien du tout. Il devrait... Il devrait comprendre ce que je veux dire...";
 		set veins_stone,4;
 		close;
 	}
-	mes "[Absar]";
-	mes "It's a ''Tactile Extendable";
-	mes "Clamp-Release Mechanism.''";
-	mes "What's so hard to understand";
-	mes "about that? Hmpf! I know!";
-	mes "It must be the educational";
-	mes "system! They're to blame!";
+	mes "[Asbar]";
+	mes "C'est une pince de préhension. Est-ce si compliqué à comprendre? Hmpf! Je ne crois pas! Ça doit être le système éducationnel! c'est n'importe quoi!";
 	close;
 }
 
-ve_in02,37,28,4	script	Factory Manager	898,{
+ve_in02,37,28,4	script	Directeur de l'Usine	898,{
 	if (veins_stone < 5) {
 		mes "[Mirhen]";
-		mes "Hey, employees only beyond this point!";
-		mes "Geez, don't we have a sigh that says that?";
-		mes "We should get one...";
-		mes "Anyway, get out of here.";
+		mes "Hey, cette section est interdite aux visiteurs! *Soupire* Nous n'avons pas de pancarte l'indiquant? Nous devrions en avoir une...";
+		mes "Peu importe, sortez d'ici.";
 		close2;
 		warp "veins",269,221;
 		end;
 	}
 	else if (veins_stone == 5) {
 		mes "[Mirhen]";
-		mes "Hey, employees only";
-		mes "beyond this point!";
-		mes "Geez, don't we have";
-		mes "a sign that says that?";
-		mes "We should get one...";
-		mes "Anyway, get out of here.";
+		mes "Zone réservée aux employés! *Soupire* nous n'avons pas une pancarte l'indiquant? Nous devrions en avoir une...";
+		mes "Peu importe, sortez d'ici.";
 		next;
-		if (select("I'm sorry.:I've brought these...") == 1) {
+		if (select("Je suis désolé.:J'ai apporté ceci...") == 1) {
 			mes "[Mirhen]";
-			mes "You're sorry,";
-			mes "I get it. Ummm...";
-			mes "Aren't you leaving?";
+			mes "Vous êtes désolé, et alors? Ummm... Vous devriez déjà être partit?";
 			close;
 		}
 		mes "[Mirhen]";
-		mes "Huh? What's this name";
-		mes "tag? Zabaroo? Wait a sec...";
-		mes "You're definitely not him!";
+		mes "Huh? C'est quoi ce nom, Zabaroo? Attendez une seconde... Ce n'est pas vous du tout!";
 		next;
-		select("I'm here on his behalf.");
+		select("Je viens de sa part.");
 		mes "[Mirhen]";
-		mes "Ah, I get it. Zabaroo's";
-		mes "back has really been";
-		mes "bothering him lately.";
-		mes "Okay, we can bend the";
-		mes "rules a bit in this situation.";
+		mes "Ha, je comprends. Le dos de M. Zabaroo le fait souffrir depuis quelques temps. D'accord, nous pouvons bien faire une exception aux règles pour une fois.";
 		next;
 		mes "[Mirhen]";
-		mes "Bring those rocks over";
-		mes "to Bahed over there.";
-		mes "He'll take care of them.";
+		mes "Apportez ces pierres à Bahed, juste là.";
+		mes "Il va s'en charger.";
 		set veins_stone,6;
 		close;
 	}
 	mes "[Mirhen]";
-	mes "Hetarium ...";
-	mes "What's so special about";
-	mes "it? I mean, it looks just like";
-	mes "Iron Ore. Why the hell is";
-	mes "it like classified info?";
+	mes "Hetarium ... Qu'est-ce qu'ils ont de si spécial?";
+	mes "Je veux dire, ça ressemble étrangement à du Minerai de Fer. Pourquoi cette information est classée secrète?";
 	next;
 	mes "[Mirhen]";
-	mes "I wish I could return to";
-	mes "Rekenber Headquarters...";
-	mes "I hate being stuck here";
-	mes "gathering silly rocks in";
-	mes "the middle of nowhere.";
+	mes "J'aimerais tant retourner au quartier général de Rekenber...";
+	mes "Je déteste être coincé ici à étudier de vulgaires pierres au milieu de nule-part.";
 	close;
 }
 
-ve_in02,54,49,2	script	Factory Worker#ve1	943,{
+ve_in02,54,49,2	script	Ouvrier#ve1	943,{
 	if (veins_stone < 6) {
 		mes "[Bahed]";
-		mes "lately, I've been feeling so weak...";
-		mes "I heard the guy before me had to quit because he also started feeling weak.";
+		mes "Ces temps-ci je me sens si faible...";
+		mes "J'ai entendu dire que mon prédécesseur avait dû démissioner pour cette raison.";
 		next;
 		mes "[Bahed]";
-		mes "It couldn't be...";
-		mes "It couldn't be because of this 'Hetarium'...";
-		mes "That's just plain crazy...";
+		mes "Ça ne peut pas être...";
+		mes "Ça ne peut pas être à cause de cet 'Hetarium'...";
+		mes "C'est vraiment trop idiot...";
 		close;
 	}
 	else if (veins_stone == 6) {
 		mes "[Bahed]";
-		mes "Oh, you got the rocks?";
-		mes "You brought them for Zabaroo?";
-		mes "Oh, how is he doing? I hear";
-		mes "he threw out his back.";
+		mes "Oh, vous apportez des pierres?";
+		mes "Vous venez de la part de M. Zabaroo?";
+		mes "Oh, comment va-t-il? J'ai entendu dire que son dos le faisait souffrir.";
 		next;
-		select("He still hurts.");
+		select("C'est toujours le cas.");
 		mes "[Bahed]";
-		mes "Oh no... I'm so sorry";
-		mes "to hear that. I hope he";
-		mes "feels better soon. Anyway,";
-		mes "why don't you bring the";
-		mes "rocks over here?";
+		mes "Oh non... je suis navré d'entendre ça. J'espère qu'il ira mieux bientôt. En tout cas, apportez ces pierres là-bas.";
 		next;
 		mes "[Bahed]";
-		mes "Let me confirm Zabaroo's";
-		mes "quota for today. Ah, and";
-		mes "don't worry, we pay him";
-		mes "for his quotas regularly.";
+		mes "Laissez-moi confirmer le quota de M. Zabaroo pour la journée. Ah, et ne vous inquiètez pas, il sera payé malgrés son handicap.";
 		next;
-		select("I have a question...");
+		select("J'ai une question...");
 		mes "[Bahed]";
-		mes "Hm? What'd you want";
-		mes "to know? I can't say that";
-		mes "I know everything, but";
-		mes "I'll try my best to tell you";
-		mes "what I know. I mean,";
-		mes "you helped Zabaroo, so...";
+		mes "Hm? Que désirez-vous savoir?";
+		mes "Je ne sais pas tout mais je ferai de mon mieux pour vous répondre. Je veux dire, vous avez aidé M. Zabaroo, alors...";
 		next;
-		select("What's this Hetarium??");
+		select("Qu'est-ce que cet Hetarium??");
 		mes "[Bahed]";
-		mes "Well, it hasn't been that";
-		mes "long since these rocks";
-		mes "attracted attention outside";
-		mes "of town. Before all this,";
-		mes "the townspeople just";
-		mes "made carvings out of them.";
+		mes "Hmmm, ce sont des pierres que les citoyens sculptaient, avant qu'elles attirent l'attention par delà la ville.";
 		next;
 		mes "[Bahed]";
-		mes "Then, all of a sudden,";
-		mes "these people from--I guess";
-		mes "it was Schwaltzvalt--came";
-		mes "and bought a lot of these";
-		mes "stones. Later, they even built";
-		mes "this factory to process them!";
+		mes "Et soudainement, ces gens de--je crois que c'était Schwaltzvalt--sont arrivés et en ont acheté de grandes quantités. Ils ont finalement fait construire cette manufacture pour les travailler!";
 		next;
 		mes "[Bahed]";
-		mes "Oh, they tried using machines";
-		mes "to harvest these stones, but";
-		mes "they all broke down too soon.";
-		mes "That's why they hired people";
-		mes "in Veins to collect them.";
+		mes "Oh, ils ont tenté d'utiliser des machines afin de les ramasser, mais elles ont toutes cassé. Ils ont donc engagé des gens de Veins pour faire ce boulot.";
 		next;
 		mes "[Bahed]";
-		mes "I'm not sure many people";
-		mes "know who owns this factory.";
-		mes "Maybe it's Rekenber? Yes,";
-		mes "I saw one of their corporate";
-		mes "airships come to town, so";
-		mes "I think it might be them.";
+		mes "Je ne suis pas certains de connaître la personne à qui appartient cette manufacture.";
+		mes "Sans doute Rekenber? Oui, j'ai vu un de leurs dirigeables attérir en ville, donc je pense que ce sont eux.";
 		next;
-		select("How do they use Hetarium??");
+		select("Que font-ils de l'Hetarium??");
 		mes "[Bahed]";
-		mes "I'm not really sure. I just";
-		mes "happened to overhear some";
-		mes "of the higher ups mention";
-		mes "something about hearts?";
-		mes "Pieces of hearts? Doesn't";
-		mes "make any sense to me.";
+		mes "Je n'en suis pas sûr. J'ai juste pu entendre quelque-uns des dirigeants mentionner un coeur ou pièce de coeurs. Ça n'a pas de sens à mes yeux.";
 		next;
 		mes "[Bahed]";
-		mes "All I gathered was that";
-		mes "they were using the stones";
-		mes "to build a machine related";
-		mes "to those hearts. That's";
-		mes "all I know. Anyway, please";
-		mes "leave the stones over there~";
+		mes "Tout ce que j'ai pu comprendre est qu'ils utilisaient ces pierres afin de construire une machine à partir de ces coeurs. C'est tout ce que je sais. Enfin bref, je vous prie de laisser les pierres un peu plus loin là-bas...";
 		set veins_stone,7;
 		close;
 	}
 	mes "[Bahed]";
-	mes "Everyday I feel";
-	mes "weaker and weaker...";
-	mes "Could this be chronic";
-	mes "fatigue syndrome? Ugh...";
+	mes "Chaque jour, je me sens de plus en plus faible...";
+	mes "D'où peuvent venir ces symptômes de fatigue chroniques? Ugh...";
 	close;
 }
 
-ve_in02,68,39,7	script	Factory Worker#ve2	943,{
-	mes "[Worker]";
-	mes "What the heck are these rocks?";
-	mes "They're ordinary stones, aren't they?";
-	mes "They don't pay me enough here...";
+ve_in02,68,39,7	script	Ouvrier#ve2	943,{
+	mes "[Ouvrier]";
+	mes "C'est quoi ces pierres?";
+	mes "Ce sont de vulgaires pierres, pas vrai?";
+	mes "Ils ne me paient pas assez ici, je crois...";
 	close;
 }
 
@@ -2805,7 +2569,7 @@ veins,327,185,3	script	P'tit Karyn::Kid#camelcamel	944,{ // NB: c'est un garçon 
 		}
 		else if (rachel_camel == 9) {
 			mes "["+strcharinfo(0)+"]";
-			mes "J'ai tout ce dont j'ai besoin pour stimuler l'appétit des chameaux. Je dois maintenant faire avaler ça à un chameau pour obtenir cinq morceaux de fumier de chameau.";
+			mes "J'ai tout ce dont j'ai besoin pour stimuler l'appétit des chameaux. Je dois maintenant faire avaler ça à un chameau pour obtenir cinq morceaux de fumier.";
 			close;
 		}
 		else if (rachel_camel == 10) {
@@ -2815,7 +2579,7 @@ veins,327,185,3	script	P'tit Karyn::Kid#camelcamel	944,{ // NB: c'est un garçon 
 		}
 		else if (rachel_camel == 11) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients pour fabriquer du savon et cinq morceaux de fumier de chameau si je veux sauver Curdie.";
+			mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients si je veux sauver Curdie.";
 			close;
 		}
 		else if (rachel_camel <= 16) {
@@ -2956,7 +2720,7 @@ veins,327,185,3	script	P'tit Karyn::Kid#camelcamel	944,{ // NB: c'est un garçon 
 
 que_thor,36,66,5	script	P'tite Curdie::Little Curdie	941,{
 	if (rachel_camel == 1) {
-		mes "^3355FFVous voyez une petite fille, allongée par terre inconsciente.^000000";
+		mes "^3355FFVous voyez une petite fille, allongée par terre, inconsciente.^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Eh, petite! Réveille-toi! Tu peux m'entendre?";
@@ -3042,7 +2806,7 @@ que_thor,36,66,5	script	P'tite Curdie::Little Curdie	941,{
 	}
 	else if (rachel_camel == 11) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients pour fabriquer du savon et cinq morceaux de fumier de chameau si je veux sauver Curdie.";
+		mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients si je veux sauver Curdie.";
 		close;
 	}
 	else if (rachel_camel >= 12 && rachel_camel <= 16) { // Bugfix [No Healing]
@@ -3082,7 +2846,7 @@ que_thor,36,66,5	script	P'tite Curdie::Little Curdie	941,{
 		mes "[P'tite Curdie]";
 		mes "Ils... Ils me font si peur! Le monsieur qui m'apporte la nourriture me dit qu'ils ne peuvent pas me laisser partir à cause de ce que j'ai vu à l'intérieur. Ils ne me laisseront jamais retourner à la maison...";
 		next;
-		mes "^3355FFLes yeux de Curdie sont révulsés. Elle pourrait ne pas survivre longtemps si elle devait rester ici.^000000";
+		mes "^3355FFLes yeux de Curdie sont révulsés. Elle ne survivra pas longtemps si elle reste ici.^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Ne t'en fais pas.";
@@ -3288,7 +3052,7 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 	}
 	else if (rachel_camel == 11) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients pour fabriquer du savon et cinq morceaux de fumier de chameau si je veux sauver Curdie.";
+		mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de le faire manger pour obtenir les ingrédients si je veux sauver Curdie.";
 		close;
 	}
 	else if (rachel_camel == 12) {
@@ -3342,7 +3106,7 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 	}
 	else if (rachel_camel == 20) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Je ferais mieux d'utiliser le savon pour faire un moulage de la clé que je pourrai apporter à Serrurard.";
+		mes "Je ferais mieux d'utiliser le savon pour faire un moulage de la clé et l'apporter à Serrurard.";
 		close;
 	}
 	else if (rachel_camel == 21) {
@@ -3383,7 +3147,7 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 			mes "Et ne me mentez pas! Ce moulage... C'est une serrure pour des chaines que j'avais faites quand je servais sous les ordres de l'Armée de Rachel. Je n'ai pas de passe pour ça.";
 			next;
 			mes "[Serrurard le Serrurier]";
-			mes "Ces chaines ne sont utilisées que sur les prisonniers! Si je vous aide à en libérer un, ils me traqueront et me tiendront pour responsable.";
+			mes "Ces chaines ne sont utilisées que sur les prisonniers! Si je vous aide à en libérer un, ils me tiendront pour responsable et me traqueront.";
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "La vérité c'est que... Oui, j'essaie bien de libérer quelqu'un retenu prisonnier par l'armée de Rachel. Elle s'appelle Curdie. C'est une petite fille emprisonnée dans le Volcan de Thor...";
@@ -3401,7 +3165,7 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 			mes "Voilà. Prenez-la. Prenez ce passe. Retournez au Volcan de Thor et libérez cette pauvre fillette. Nous pourrions vraiment avoir des ennuis, mais...";
 			next;
 			mes "[Serrurard le Serrurier]";
-			mes "Je ne pourrais pas laisser faire ça sans l'avoir sur la conscience toute ma vie. Sauvez cette fillette et débarrassez-vous de la clé quand vous l'aurez fait.";
+			mes "Je ne peux pas laisser faire ça sans l'avoir sur la conscience toute ma vie. Sauvez cette fillette et débarrassez-vous de la clé quand vous l'aurez fait.";
 			next;
 			mes "[Serrurard le Serrurier]";
 			mes "Comme ça, l'armée ne viendra pas m'interroger. Je dirai simplement qu'un voleur me l'aura prise. Je devrais d'ailleurs me débarrasser de toutes mes clés...";
@@ -3528,7 +3292,7 @@ veins,227,127,5	script	Ivoire	940,{
 		}
 		else {
 			mes "[Ivoire, la Fabricante de Savon]";
-			mes "Il va d'abord falloir que vous m'apportiez les ingrédients de base. Oh, et apportez-moi la quantité exacte que je vous demande. Le dosage est très important quand on fait du savon.";
+			mes "Il va d'abord falloir que vous m'apportiez les ingrédients de base. Oh, et apportez-moi la quantité exacte que je vous ai demandée. Le dosage est très important quand on fait du savon.";
 			next;
 			mes "[Ivoire, la Fabricante de Savon]";
 			mes "^4D4DFF10 bouteilles de Lait^000000,";
@@ -3572,7 +3336,7 @@ veins,227,127,5	script	Ivoire	940,{
 	}
 	else if (rachel_camel == 11) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients pour fabriquer du savon et cinq morceaux de fumier de chameau si je veux sauver Curdie.";
+		mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients si je veux sauver Curdie.";
 		close;
 	}
 	else if (rachel_camel == 12) {
@@ -3623,7 +3387,7 @@ veins,227,127,5	script	Ivoire	940,{
 	}
 	else if (rachel_camel <= 25) {
 		mes "[Ivoire, la Fabricante de Savon]";
-		mes "^333333*Fiou!*^000000 C'était une grosse journée. Je pense que je peux maintenant ranger mon étale~";
+		mes "^333333*Fiou!*^000000 C'était une grosse journée. Je pense que je peux maintenant ranger mon étal~";
 		close;
 	}
 	else {
@@ -3714,7 +3478,7 @@ veins,115,59,5	script	Saraman	847,{
 			mes "Bien, maintenant apportez tout ça à mes chameaux qui se trouvent un peu plus au nord. Seul le Chameau des Sables de la Soie viendra en manger.";
 			next;
 			mes "[Saraman, le Chamelier]";
-			mes "Une fois qu'il aura avalé ce stimulant pour l'appétit, il commencera à manger comme un fou, et la fiente devrait se mettre à couler comme si on avait ouvert le robinet. Allez essayer maintenant."; // Je suis le seul à admirer la poésie de ces passages? >.> [NoH] Non, c'est... charmant XD [Etna]
+			mes "Une fois qu'il aura avalé ce stimulant pour l'appétit, il commencera à manger comme un fou, et le crotin devrait se mettre à couler comme si on avait ouvert le robinet. Allez essayer maintenant."; // Je suis le seul à admirer la poésie de ces passages? >.> [NoH] Non, c'est... charmant XD [Etna] Parfois on se dit que c'est pas si mal de pas les comprendre, les quêtes...[Fern] Puisque tout le monde y met du sien xD [Myllena]
 			next;
 			mes "[Saraman, le Chamelier]";
 			mes "Bon. Vous devriez pouvoir récupérer cinq morceaux de crottin avec tout ça. Ça n'est pas mal du tout: c'est ce qu'Ivoire me commande d'habitude.";
@@ -3742,7 +3506,7 @@ veins,115,59,5	script	Saraman	847,{
 	}
 	else if (rachel_camel == 9) {
 		mes "[Saraman, le Chamelier]";
-		mes "Une fois qu'il aura avalé ce stimulant pour l'appétit, il commencera à manger comme un fou, et la fiente devrait se mettre à couler comme si on avait ouvert le robinet. Allez essayer maintenant.";
+		mes "Une fois qu'il aura avalé ce stimulant pour l'appétit, il commencera à manger comme un fou, et le crotin devrait se mettre à couler comme si on avait ouvert le robinet. Allez essayer maintenant.";
 		next;
 		mes "[Saraman, le Chamelier]";
 		mes "Bon. Vous devriez pouvoir récupérer cinq morceaux de crottin avec tout ça. Ça n'est pas mal du tout: c'est ce qu'Ivoire me commande d'habitude.";
@@ -3753,7 +3517,7 @@ veins,115,59,5	script	Saraman	847,{
 		mes "Sidi Saraman, aucun des chameaux ne veut avaler le stimulant. J'ai fait quelque chose de travers?";
 		next;
 		mes "[Saraman, le Chamelier]";
-		mes "Oh, eh bien... Un de mes employés vient de passer et m'a appris que mon Chameau des Sables de la Soie avait disparu... C'est une terrible nouvelle!";
+		mes "Oh, eh bien... Un de mes employés vient de passer et m'a appris que mon Chameau des Sables de la Soie a disparu... C'est une terrible nouvelle!";
 		next;
 		mes "[Saraman, le Chamelier]";
 		mes "Mon précieux Chameau des Sables de la Soie... C'est le plus gros investissement de ma vie! Sans lui, je suis ruiné! S'il vous plaît... Retrouvez-le et je vous récompenserai.";
@@ -3798,7 +3562,7 @@ veins,115,59,5	script	Saraman	847,{
 		mes "Vous n'avez pas idée de la valeur de ce chameau! J'envoie tout de suite mes hommes. Vous venez de sauver mon affaire!";
 		next;
 		mes "[Saraman, le Chamelier]";
-		mes "Voilà. Prenez ceci. Considérez ça comme une preuve de remerciement pour ce que vous avez fait pour moi. Bonne chance pour faire votre savon.";
+		mes "Voilà. Prenez ceci. Considérez ça comme une preuve de ma gratitude. Bonne chance pour faire votre savon.";
 		getitem 617,1; //Old_Violet_Box
 		set rachel_camel,18;
 		close;
@@ -3810,7 +3574,7 @@ veins,115,59,5	script	Saraman	847,{
 	}
 	else if (rachel_camel <= 23) {
 		mes "[Saraman, le Chamelier]";
-		mes "Encore merci d'avoir retrouvé mon Chameau des Sables de la Soie. Revenez une autre fois, et nous partagerons un peu de yaourt de lait de chamelle.";
+		mes "Encore merci d'avoir retrouvé mon Chameau des Sables de la Soie. Revenez une autre fois, et nous partagerons un peu de yaourt au lait de chamelle.";
 		close;
 	}
 	else {
@@ -3955,7 +3719,7 @@ ve_fild07,235,42,3	script	Chameau des Sables::Silk Sand Camel	938,{
 					mes "Je n'aurais jamais pensé durant toutes ces années passées à défendre les opprimés et à protéger les innocents que j'accomplirais une telle prouesse...";
 					next;
 					mes "["+strcharinfo(0)+"]";
-					mes "Je suis si "+ ( sex ? "heureux" : "heureuse" ) +"... non: 4D4DFFfier^000000 d'avoir pu mener à bien cette tâche grâce à ma force, mon courage, et ma détermination sans faille. Ce jour figurera dans tous les livres d'histoire. Longue vie à "+strcharinfo(0)+"!";
+					mes "Je suis si "+ ( sex ? "heureux" : "heureuse" ) +"... non, "+ ( sex ? "4D4DFFfier^000000" : "4D4DFFfière^000000" ) + d'avoir pu mener à bien cette tâche grâce à ma force, mon courage, et ma détermination sans faille. Ce jour figurera dans tous les livres d'histoire. Longue vie à "+strcharinfo(0)+"!";
 					next;
 					mes "^3355FFIl est temps de retourner voir Sidi Saraman.^000000";
 
@@ -4022,7 +3786,7 @@ ve_fild07,235,42,3	script	Chameau des Sables::Silk Sand Camel	938,{
 
 veins,221,120,5	script	Jeune Autochtone::Young Town Native	943,{
 	if (rachel_camel == 3) {
-		mes "[Native Young Man]";
+		mes "[Jeune Autochtone]";
 		mes "Je m'appelle Toby. J'ai toujours vécu ici, et personne ne connait la ville mieux que moi. N'hésitez à me demander si vous cherchez quelque chose.";
 		next;
 		mes "["+strcharinfo(0)+"]";
@@ -4035,7 +3799,7 @@ veins,221,120,5	script	Jeune Autochtone::Young Town Native	943,{
 		mes "Sidi Serrurard, hein? Où est-ce que je pourrais le trouver?";
 		next;
 		mes "[Toby]";
-		mes "Oh, il traine toujours du côté du marché. Mais il boit beaucoup, et il ne travaille jamais quand il a la gueule de bois."; // faudra changer ça – ça ne le fait pas dans la bouche d'un gamin [NoH]
+		mes "Oh, il traine toujours du côté du marché. Mais il boit beaucoup, du coup il a souvent mal à la tête et après et il ne peut plus travailler...";
 		next;
 		mes "[Toby]";
 		mes "Ah, mais vous savez ce qui pourrait lui faire retrouver ses idées? Une Potion Jaune! Ça marche toujours avec lui!";
@@ -4200,7 +3964,7 @@ ra_temin,115,140,1	script	Vase::Flower Vase#vol	111,{
 		mes "["+strcharinfo(0)+"]";
 		mes "Quelqu'un a mis beaucoup d'amour à cueillir ces fleurs... Je ne peux pas aller à l'encontre de leur beauté.";
 		next;
-		mes "^3355FFVous restez là, l'air quelque peu piteux mais pas du tout pathétique.^000000";
+		mes "^3355FFVous restez là, l'air penaud.^000000";
 		close;
 	}
 	mes "^3355FFVous voyez un énorme vase rempli de fleurs magnifiques qui ont l'air d'avoir été cueillies il y a peu.^000000";
@@ -4314,7 +4078,7 @@ OnTimer55000:
 ra_temin,113,140,1	script	Garde de Rachel::Rachel Guard#vol2_1	934,{
 	mes "[Garde Krodger]";
 	mes "Qu'est-ce qu'il y a avec ce vase? C'est toujours moi qu'ils envoient pour réparer les pots cassés. Euh...";
-	mes "Et puis ça arrive si souvent... Je ne pense pas que c'est par accident. Vous pensez qu'il y a des vandales?";
+	mes "Et puis ça arrive si souvent... Je ne pense pas que ce soit par accident. Il doit y avoir des vandales.";
 	close;
 
 OnInit:
@@ -4355,7 +4119,7 @@ ra_temin,85,118,3	script	Tiroir::Drawer#vol3	111,{
 	if (aru_vol == 4) {
 		mes "^3355FFVous trouvez une série de rapports adressés au Grand Prêtre dans ce tiroir.^000000";
 		next;
-		if (select("Examiner les rapports:Annuler") == 1) {
+		if (select("Examiner les rapports:Partir") == 1) {
 			mes "["+strcharinfo(0)+"]";
 			mes "Ce n'est peut-être pas très important mais j'ai le sentiment que je devrais au moins en examiner quelques-uns.";
 			next;
@@ -4389,7 +4153,7 @@ ra_temin,85,118,3	script	Tiroir::Drawer#vol3	111,{
 }
 
 ra_temin,88,117,3	script	Statue de la Déesse::Goddess Statue#vol1	111,{
-	mes "^3355FFIl s'agit d'une statue de Freya, une déesse révérée pour sa clémence et sa sagesse.^000000";
+	mes "^3355FFIl s'agit d'une statue de Freya, une déesse vénérée pour sa clémence et sa sagesse.^000000";
 	close;
 }
 
@@ -4438,7 +4202,7 @@ veins,159,171,3	script	Habitant::Towner#vol	945,{
 	mes "Le petit bureau à l'étage de l'armurerie est utilisé par un géologue. Ou tout du moins c'est ce qu'il prétend être...";
 	next;
 	mes "[Habitant]";
-	mes "Mais ce type pourrait tout aussi bien être un charlatan. Il passe ses journées à boire et à draguer des femmes aux moeurs douteuses. Vous pensais que les savants étaient censés passer leur journée la tête dans leurs bouquins pour découvrir des choses..";
+	mes "Mais ce type pourrait tout aussi bien être un charlatan. Il passe ses journées à boire et à draguer des femmes aux moeurs douteuses. Vous pensiez que les savants étaient censés passer leur journée la tête dans leurs bouquins pour découvrir des choses...";
 	close;
 }
 
@@ -4456,7 +4220,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 		mes "''^3131FFHé, mon pote! C'est la gorge qu'on utilise pour parler, pas ses poings! Tu me cherches? Eh bien viens me trouver!^000000''";
 		next;
 		mes "[Homme Ivre]";
-		mes "Et là il a fait dans son froc et est parti en courant! Hahahaha! J'imagine que j'ai l'air balèze, vous ne croyez pas?";
+		mes "Et là il a fait dans son froc et est parti en courant! Hahahaha! J'imagine que j'ai l'air balèze, nan?";
 		next;
 		donpcevent "Drunken Lady#1::OnEmote";
 		donpcevent "Drunken Lady#2::OnEmote";
@@ -4478,7 +4242,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 		mes "''^3131FFHé, mon pote! C'est la gorge qu'on utilise pour parler, pas ses poings! Tu me cherches? Eh bien viens me trouver!^000000''";
 		next;
 		mes "[Homme Ivre]";
-		mes "Et là il a fait dans son froc et est parti en courant! Hahahaha! J'imagine que j'ai l'air balèze, vous ne croyez pas?";
+		mes "Et là il a fait dans son froc et est parti en courant! Hahahaha! J'imagine que j'ai l'air balèze, nan?";
 		next;
 		donpcevent "Drunken Lady#1::OnEmote";
 		donpcevent "Drunken Lady#2::OnEmote";
@@ -4544,7 +4308,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 		next;
 		emotion e_no1;
 		mes "[Homme Ivre]";
-		mes "Je vous promeus chercheur en chef de l'Institut Géologique de Veins. Félicitations, et bienvenue dans l'équipe, l'ami!";
+		mes "Je vous nomme chercheur en chef de l'Institut Géologique de Veins. Félicitations, et bienvenue dans l'équipe, l'ami!";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Uh...?";
@@ -4557,7 +4321,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 		mes "Hé, je n'ai jamais--";
 		next;
 		mes "[Gio le Géologue]";
-		mes "Ah-ah! Maintenant que vous êtes mon apprenti, j'attends de vous que vous travailliez dur pour pouvoir tout apprendre. Bon, tout d'abord, allez dans mon bureau et occupez-vous du travail en retard.";
+		mes "Ah-ah! Maintenant que vous êtes mon apprenti, j'attends de vous que vous travailliez dur pour tout apprendre. Bon, tout d'abord, allez dans mon bureau et occupez-vous du travail en retard.";
 		next;
 		mes "[Gio le Géologue]";
 		mes "Voilà. Prenez ce ^FF0000manuel^000000 et allez à mon bureau. Vous trouverez un ^FF0000pyromètre^000000 et un ^FF0000formulaire de rapport^000000 sur le bureau. Il vous faudra apporter tout ça au Volcan de Thor.";
@@ -4590,7 +4354,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 	}
 	else if ((aru_vol > 7) && (aru_vol < 24)) {
 		mes "[Gio le Géologue]";
-		mes "Hé, vous feriez mieux de vous dépêcher. Je veux dire... C'est vous qui avez trouvé cette note dans mon bureau, pas vrai? Alors vous devez savoir comme c'est urgent!";
+		mes "Hé, vous feriez mieux de vous dépêcher. Je veux dire... C'est vous qui avez trouvé cette note dans mon bureau, pas vrai? Alors vous devriez savoir que c'est urgent!";
 		next;
 		mes "[Gio le Géologue]";
 		mes "Allez chercher le pyromètre, et partez pour le Volcan de Thor pour remplir le formulaire pour le rapport. Apportez-le ensuite au camp géologique.";
@@ -4664,7 +4428,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 	mes "''^3131FFHé, mon pote! C'est la gorge qu'on utilise pour parler, pas ses poings! Tu me cherches? Eh bien viens me trouver!^000000''";
 	next;
 	mes "[Homme Ivre]";
-	mes "Et là il a fait dans son froc et est parti en courant! Hahahaha! J'imagine que j'ai l'air balèze, vous ne croyez pas?";
+	mes "Et là il a fait dans son froc et est parti en courant! Hahahaha! J'imagine que j'ai l'air balèze, nan?";
 	next;
 	donpcevent "Drunken Lady#1::OnEmote";
 	donpcevent "Drunken Lady#2::OnEmote";
@@ -4780,7 +4544,7 @@ thor_v01,37,234,3	script	Surface Brûlante::Hot Land Surface#1	111,{
 		mes "^3355FFVous avez besoin du pyromètre et du rapport pour pouvoir mesurer la température à la surface de ce volcan.^000000";
 		close;
 	}
-	mes "^3355FFCet amas de roches dégage une très forte température qui vous brûle le visage.^000000";
+	mes "^3355FFCet amas de roches dégage une très forte chaleur qui vous brûle le visage.^000000";
 	close;
 }
 
@@ -4800,7 +4564,7 @@ thor_v02,165,37,3	script	Surface Brûlante::Hot Land Surface#2	111,{
 		mes "^3355FFVous avez besoin du pyromètre et du rapport pour pouvoir mesurer la température à la surface de ce volcan.^000000";
 		close;
 	}
-	mes "^3355FFCet amas de roches dégage une très forte température qui vous brûle le visage.^000000";
+	mes "^3355FFCet amas de roches dégage une très forte chaleur qui vous brûle le visage.^000000";
 	close;
 }
 
@@ -4828,7 +4592,7 @@ thor_v02,170,100,3	script	Surface Brûlante::Hot Land Surface#3	111,{
 		mes "J'ai fait assez de relevés. Je devrais maintenant apporter ce rapport au camp de géologie~";
 		close;
 	}
-	mes "^3355FFCet amas de roches dégage une très forte température qui vous brûle le visage.^000000";
+	mes "^3355FFCet amas de roches dégage une très forte chaleur qui vous brûle le visage.^000000";
 	close;
 }
 
@@ -4875,7 +4639,7 @@ thor_camp,250,104,3	script	Sahedi#vol	934,{
 	}
 	if (aru_vol == 12) {
 		mes "[Sahedi]";
-		mes "Je suis désolé mais je ne pense pas vous connaître. Seul le personnel habilité est autorisé dans cette zone. Si vous n'avez aucune raison d'être là...";
+		mes "Je suis désolé mais je ne pense pas vous connaître. Cette zone est réservée au personnel autorisé. Si vous n'avez aucune raison d'être là...";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Je suis "+ ( sex ? "un étudiant" : "une étudiante" ) +" au service du Directeur Gio pour l'Institut Géologique de Veins. Pourriez-vous me tamponner ce relevé des températures?";
@@ -5134,13 +4898,13 @@ thor_camp,159,74,3	script	Colonel Vito#3	946,{
 		next;
 		while(1) {
 			mes "[Colonel Vito]";
-			mes "^FF0000en tant que servant fidèle de la déesse Freya^000000";
+			mes "^FF0000en tant que serviteur fidèle de la déesse Freya^000000";
 			next;
 			input .@input$;
-			set .@answer$,"en tant que servant fidèle de la déesse Freya";
+			set .@answer$,"en tant que serviteur fidèle de la déesse Freya";
 			if (.@input$ == .@answer$) {
 				mes "["+strcharinfo(0)+"]";
-				mes "en tant que servant fidèle de la déesse Freya, sainte patronne de la Grande Arunafeltz,";
+				mes "en tant que serviteur fidèle de la déesse Freya, sainte patronne de la Grande Arunafeltz,";
 				next;
 				break;
 			}
@@ -5264,7 +5028,7 @@ thor_camp,159,74,3	script	Colonel Vito#3	946,{
 	}
 	else if (aru_vol == 20) {
 		mes "[Colonel Vito]";
-		mes "Plus vous vous entraînez, et plus fort vous devenez tout comme les troupes de Freya. Entraînez-vous chaque jour, et ne vous relâchez jamais!";
+		mes "Plus vous vous entraînez, et plus fort vous deviendrez, tout comme les troupes de Freya. Entraînez-vous chaque jour, et ne vous relâchez jamais!";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Oui, monsieur!";
@@ -5278,7 +5042,7 @@ thor_camp,159,74,3	script	Colonel Vito#3	946,{
 		close;
 	}
 	mes "[Colonel Vito]";
-	mes "Vous ne devez jamais vous relâcher dans votre entraînement. Vous ne savez jamais quand Freya nous appellera pour partir en guerre!";
+	mes "Vous ne devez jamais vous relâcher dans votre entraînement. On ne sait jamais quand Freya nous appellera pour partir en guerre!";
 	close;
 }
 
@@ -5345,7 +5109,7 @@ thor_camp,109,167,3	script	Panneau de Contrôle::Control Panel#vol	111,{
 		mes "under the ground."; */ // Pas compris ce passage [NoH]
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Tous ces tuyaux transportant des roches en fusion... J'imagine que l'énergie du camp vient de la chaleur qu'ils dégagent. Ce n'est pas bête d'ailleurs~";
+		mes "Tous ces tuyaux transportant des roches en fusion... J'imagine que l'énergie du camp vient de la chaleur qu'elles dégagent. Ce n'est pas bête d'ailleurs~";
 		next;
 		mes "^3355FFLe panneau de contrôle émet quelques petits bruits de mécanisme en marche, et semble fonctionner correctement. En fait, tout a l'air en ordre.";
 		next;
@@ -5499,7 +5263,7 @@ thor_camp,196,315,7	script	Soldat du Volcan::Thor Volcano Soldier#vo7	939,{
 }
 
 thor_camp,181,231,0	script	Gardien::Guardian#vol_7	111,{
-	mes "^3355FFIl y a de nombreux Gardiens plus ou moins endommagés. On dirait qu'ils sont sur le point d'être réparés.^000000";
+	mes "^3355FFIl y a de nombreux Gardiens plus ou moins endommagés. On dirait qu'ils sont en attente de réparations.^000000";
 	close;
 }
 
@@ -5594,7 +5358,7 @@ ve_in,237,131,1	script	Cliente::Female Customer#ve1	940,{
 		next;
 		mes "[Tavernier]";
 		mes "Oh, allez!";
-		mes "Je rigolais~";
+		mes "Je plaisantais~";
 		emotion e_sob;
 		close;
 	}
