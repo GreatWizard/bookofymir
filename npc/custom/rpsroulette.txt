@@ -13,33 +13,38 @@
 //= 1.2 Fixes by Blackthunder and me [Poki#3]
 //============================================================
 
-cmd_in02,182,126,2	script	Crazy Boris	85,{
-	mes "Crazy Boris";
+cmd_in02,182,126,2	script	Boris le Timbré::Crazy Boris	85,{
+	mes "[Boris le Timbré]";
 	set @counter,1;
-	mes "Hey you! Up for Rock Scissors Roulette?";
+	mes "Hé vous! Vous êtes partant"+ ( sex ? "" : "e" ) +" pour un tour de Pierre-Papier-Ciseaux Moscovite?";
 	next;
-	menu "Let me play.",PLAY,"Explain the rules.",RULES,"Leave",LEAVE;
-	SAME:
-	mes "Draw! Again!";
+	menu "Laissez-moi jouer!",PLAY,"Quelles sont les règles?",RULES,"Partir.",LEAVE;
+
+SAME:
+	mes "[Boris le Timbré]";
+	mes "Une égalité! On recommence!";
 	next;
 	goto PLAY;
 
 WIN:
-	mes "Damnit, You Win!";
+	mes "[Boris le Timbré]";
+	mes "Argh, vous gagnez!";
 	emotion 19;
 	next;
 	goto OPPPULL;
 
 LOSE:
+	mes "[Boris le Timbré]";
 	emotion 18;
-	mes "Boorah! You Lose!";
+	mes "Haha! Vous avez perdu!";
 	next;
 	goto YOUPULL;
 
 PLAY:
-	mes "Rock... Paper...";
+	mes "[Boris le Timbré]";
+	mes "Pierre... Papier...";
 	set @opp,rand (1,3);
-	menu "^0000FFROCK!",ROCK,"^FF0000SCISSORS!",SCISSORS,"^00FF00PAPER!^000000",PAPER;
+	menu "^0000FFPierre!",ROCK,"^FF0000Ciseaux!",SCISSORS,"^00FF00Papier!^000000",PAPER;
 
 ROCK:
   	if (@lastchoice == 1) set @opp,rand (1,3);
@@ -89,7 +94,8 @@ OPPPULL:
 
 ONE:
 	set @counter,2;
-	mes "1 of 6";
+	mes "[Boris le Timbré]";
+	mes "1ère balle sur les 6.";
 	set @pull,rand (1,6);
 	next;
 	if (@pull == 1) goto DIE;
@@ -97,7 +103,8 @@ ONE:
 
 TWO:
 	set @counter,3;
-	mes "2 of 6";
+	mes "[Boris le Timbré]";
+	mes "2ème balle sur les 6.";
 	set @pull,rand (1,5);
 	next;
 	if (@pull == 1) goto DIE;
@@ -105,7 +112,8 @@ TWO:
 
 THREE:
 	set @counter,4;
-	mes "3 of 6";
+	mes "[Boris le Timbré]";
+	mes "3ème balle sur les 6.";
 	set @pull,rand (1,4);
 	next;
 	if (@pull == 1) goto DIE;
@@ -113,7 +121,8 @@ THREE:
 
 FOUR:
 	set @counter,5;
-	mes "4 of 6";
+	mes "[Boris le Timbré]";
+	mes "4ème balle sur les 6.";
 	set @pull,rand (1,3);
 	next;
 	if (@pull == 1) goto DIE;
@@ -121,7 +130,8 @@ FOUR:
 
 FIVE:
 	set @counter,6;
-	mes "5 of 6";
+	mes "[Boris le Timbré]";
+	mes "5ème balle sur les 6.";
 	set @pull,rand (1,2);
 	if (@pull == 1) set @pull,rand (1,2);
 	next;
@@ -129,8 +139,9 @@ FIVE:
 	if (@pull != 1) goto SAFE;
 
 SIX:
-	mes "6 of 6";
-	mes "Say your prayers";
+	mes "[Boris le Timbré]";
+	mes "6ème balle sur les 6.";
+	mes "Faites vos prières!";
 	set @pull,1;
 	next;
 	if (@pull == 1) goto DIE;
@@ -138,7 +149,8 @@ SIX:
 
 ONEa:
 	set @counter,2;
-	mes "1 of 6";
+	mes "[Boris le Timbré]";
+	mes "1ère balle sur les 6.";
 	set @pull,rand (1,6);
 	next;
 	if (@pull == 1) goto KILL;
@@ -146,7 +158,8 @@ ONEa:
 
 TWOa:
 	set @counter,3;
-	mes "2 of 6";
+	mes "[Boris le Timbré]";
+	mes "2ème balle sur les 6.";
 	set @pull,rand (1,5);
 	next;
 	if (@pull == 1) goto KILL;
@@ -154,7 +167,8 @@ TWOa:
 
 THREEa:
 	set @counter,4;
-	mes "3 of 6";
+	mes "[Boris le Timbré]";
+	mes "3ème balle sur les 6.";
 	set @pull,rand (1,4);
 	next;
 	if (@pull == 1) goto KILL;
@@ -162,7 +176,8 @@ THREEa:
 
 FOURa:
 	set @counter,5;
-	mes "4 of 6";
+	mes "[Boris le Timbré]";
+	mes "4ème balle sur les 6.";
 	set @pull,rand (1,3);
 	next;
 	if (@pull == 1) goto KILL;
@@ -170,54 +185,61 @@ FOURa:
 
 FIVEa:
 	set @counter,6;
-	mes "5 of 6";
+	mes "[Boris le Timbré]";
+	mes "5ème balle sur les 6.";
 	set @pull,rand (1,2);
 	next;
 	if (@pull == 1) goto KILL;
 	if (@pull != 1) goto SAFE;
 
 SIXa:
-	mes "6 of 6";
-	mes "Say your prayers";
+	mes "[Boris le Timbré]";
+	mes "6ème balle sur les 6.";
+	mes "Oh par tous les dieux...";
 	set @pull,1;
 	next;
 	if (@pull == 1) goto KILL;
 	if (@pull != 1) goto SAFE;
 
 SAFE:
+	mes "[Boris le Timbré]";
 	emotion 32;
-	mes "*^0000FFClick^000000* whew...";
+	mes "*^0000FFClick^000000* Ouf...";
 	goto PLAY;
 
 DIE:
 	specialeffect2 183;
 	emotion 29;
 	percentheal -100,-100;
+	mes "[Boris le Timbré]";
 	mes "*^0000FFClick^000000* *^FF0000BANG^000000*";
-	mes "You're dead!";
+	mes "Haha! Vous êtes mort"+ ( sex ? "" : "e" ) +"!";
 	close;
 
 KILL:
 	specialeffect 183;
 	emotion 23;
+	mes "[Boris le Timbré]";
 	mes "*^0000FFClick^000000* *^FF0000BANG^000000*";
-	mes "OWWW @#$%^!! THAT HURT LIKE HELL!!";
+	mes "OWWW @#$%^!! CA FAIT UN MAL DE CHIEN!!";
 	next;
 	goto PRIZE;
 
 RULES:
-	mes "Ok here are the rules:";
-	mes "I have with me a ^FF00006^000000 chamber pistol with ^FF00001^000000 round. First we play ^FF0000Scissors ^00FF00Paper ^0000FFRock^000000. The loser pulls the trigger. The winner is whoever comes out best.";
-	mes "Beat me to win a prize.";
-	menu "Let me play.",CONT,"No thanks.",LEAVE;
+	mes "[Boris le Timbré]";
+	mes "Bon, d'accord. Voici les règles: J'ai là un pistolet à ^FF0000six^000000 coups. ^FF0000Une seule^000000 balle est à l'intérieur. Nous commençons par jouer à ^FF0000Pierre ^00FF00Papier ^0000FFCiseaux^000000. Le perdant appuie la détente. Le gagnant sera celui qui restera en vie.";
+	mes "Battez-moi et vous recevrez un prix.";
+	menu "Je veux jouer!",CONT,"Sans façons.",LEAVE;
 
 CONT:
-	mes "Ok here we go...";
+	mes "[Boris le Timbré]";
+	mes "Bien, c'est parti...";
 	next;
 	goto PLAY;
 
 PRIZE:
-	mes "Congratulations! You have won...";
+	mes "[Boris le Timbré]";
+	mes "Bon, bravo... Vous avez gagné...";
 	set @prize,rand (1,10);
 	if (@prize == 1) goto P1;
 	if (@prize == 2) goto P2;
@@ -271,7 +293,7 @@ P8:
 	close;
 
 P9:
-	mes "10x Elunium!";
+	mes "10 Eluniums!";
 	getitem 985,10;
 	close;
 
@@ -281,6 +303,7 @@ P10:
 	close;
 
 LEAVE:
-	mes "Pansy.";
+	mes "[Boris le Timbré]";
+	mes "Poule mouillée!";
 	close;
 }
