@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.7
+//= 1.8
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -33,7 +33,7 @@
 //= 1.2 Added Veins Siblings Quest. [L0ne_W0lf]
 //=	Added Veins Thor Volcano Base Quest NPC. [L0ne_W0lf]
 //=	Start NPC is missing, but will be added when I get it.
-//= 1.3 Fixed two typos small in Asbar. [L0ne_W0lf]
+//= 1.3 Fixed two typos small in Absar. [L0ne_W0lf]
 //= 1.3a More fixes to some of the Base quest NPCs. [L0ne_W0lf]
 //= 1.4 Added missing checkweights. [L0ne_W0lf]
 //= 1.4a Corrected a typo error ";;". [Toms]
@@ -41,6 +41,7 @@
 //= 1.5a Corrected a couple typos in Nameless Addition. [L0ne_W0lf]
 //= 1.6 Replaced effect numerics with constants. [L0ne_W0lf]
 //= 1.7 Moved a couple NPCs related to the Spy quest. [L0ne_W0lf]
+//= 1.8 Fixed some typos and confusing condition checks. [L0ne_W0lf]
 //============================================================ 
 
 // Stone Quest
@@ -86,12 +87,12 @@ ve_fild05,257,130,4	script	Vieil Homme Crispé#ve	945,{
 			mes "Ow-ow-ow! Oh... D'accord... Vous voyez ces pierres noires sur le sol? Ce sont celles que je dois ramasser. Non, attendez, n'allez pas vous mettre à les soulever comme ça...";
 			next;
 			mes "[Zabaroo]";
-			mes "J'ai demandé à un vieil homme en ville, Asbar, de faire quelque chose pour soulager mon dos. Il allait m'aider mais je devais lui don..";
+			mes "J'ai demandé à un vieil homme en ville, Absar, de faire quelque chose pour soulager mon dos. Il allait m'aider mais je devais lui don..";
 			mes "ARGH! Mon dos! Ça fait mal!";
 			next;
 			mes "[Zabaroo]";
 			mes "Ça me fait tellement mal! Mais ça me fait encore plus mal quand je suis sur le point de finir une phrase on dir...";
-			mes "ARRRGH! Allez voir Asbar! Vite!";
+			mes "ARRRGH! Allez voir Absar! Vite!";
 			next;
 			while(1) {
 				mes "[Zabaroo]";
@@ -111,12 +112,12 @@ ve_fild05,257,130,4	script	Vieil Homme Crispé#ve	945,{
 					break;
 				case 2:
 					mes "[Zabaroo]";
-					mes "Asbar? Il est à l'intérieur du magasin général. Vous ne pouvez pas le rater... Cherchez un homme avec un regard étrange!";
+					mes "Absar? Il est à l'intérieur du magasin général. Vous ne pouvez pas le rater... Cherchez un homme avec un regard étrange!";
 					next;
 					break;
 				case 3:
 					mes "[Zabaroo]";
-					mes "Merci pour votre aide. Si vous ne trouvez pas Asbar au magasin général, essayez la taverne. A-auuugh!";
+					mes "Merci pour votre aide. Si vous ne trouvez pas Absar au magasin général, essayez la taverne. A-auuugh!";
 					set veins_stone,1;
 					close;
 				}
@@ -125,17 +126,17 @@ ve_fild05,257,130,4	script	Vieil Homme Crispé#ve	945,{
 	}
 	else if (veins_stone == 1) {
 		mes "[Zabaroo]";
-		mes "Merci pour votre aide. Si vous ne trouvez pas Asbar au magasin général, essayez la taverne. A-auuugh!";
+		mes "Merci pour votre aide. Si vous ne trouvez pas Absar au magasin général, essayez la taverne. A-auuugh!";
 		close;
 	}
-	else if (veins_stone < 4) {
+	else if ((veins_stone > 1) && (veins_stone < 4)) {
 		mes "[Zabaroo]";
-		mes "Au fait, Asbar est quelqu'un de caractériel. Faites de votre mieux pour obtenir ce qu'il veut. Il ne m'aidera pas sinon. Ce n'est pas une mauvaise personne pourtant...";
+		mes "Au fait, Absar est quelqu'un de caractériel. Faites de votre mieux pour obtenir ce qu'il veut. Il ne m'aidera pas sinon. Ce n'est pas une mauvaise personne pourtant...";
 		close;
 	}
 	else if (veins_stone == 4) {
 		mes "[Zabaroo]";
-		mes "Oh parfait, vous êtes de retour! Avez-vous apporté ce qu'Asbar m'a fabriqué?";
+		mes "Oh parfait, vous êtes de retour! Avez-vous apporté ce qu'Absar m'a fabriqué?";
 		next;
 		select("Voilà, tenez...");
 		mes "[Zabaroo]";
@@ -162,7 +163,7 @@ ve_fild05,257,130,4	script	Vieil Homme Crispé#ve	945,{
 	}
 	else if (veins_stone < 7) {
 		mes "[Zabaroo]";
-		mes "Merci encore pour votre aide. Comment Asbar appelle ce truc encore? Des pinces de préhension... Mince... Pourquoi le nom est si long. Peu importe, c'est utile au moins.";
+		mes "Merci encore pour votre aide. Comment Absar appelle ce truc encore? Des pinces de préhension... Mince... Pourquoi le nom est si long. Peu importe, c'est utile au moins.";
 		close;
 	}
 	else if (veins_stone == 7) {
@@ -178,7 +179,7 @@ ve_fild05,257,130,4	script	Vieil Homme Crispé#ve	945,{
 	}
 	else if (veins_stone > 7) {
 		mes "[Zabaroo]";
-		mes "Merci à vous et à Asbar, mon pauvre dos ne me dérangeait pas du tout avant aujourd'hui. Je devrais faire plus attention à moi à mon âge...";
+		mes "Merci à vous et à Absar, mon pauvre dos ne me dérangeait pas du tout avant aujourd'hui. Je devrais faire plus attention à moi à mon âge...";
 		close;
 	}
 	mes "[Zabaroo]";
@@ -188,64 +189,64 @@ ve_fild05,257,130,4	script	Vieil Homme Crispé#ve	945,{
 
 ve_in,169,310,6	script	Vieil Homme Étrange#ve	121,{
 	if (veins_stone == 0) {
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Bwahahaha! Une fois... Une fois ceci achevé, je serai... Mwahahahahahahahah!";
 		close;
 	}
 	else if (veins_stone == 1) {
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Je suis si près du but. Maintenant, si je ne fais que tourner ça...";
 		next;
 		if (select("Pardonnez-moi...:........") == 1) {
-			mes "[Asbar]";
+			mes "[Absar]";
 			mes "Quoi?! Qui ose me déranger?! N-non! Regardez! Regardez ce que vous avez fait!";
 			mes "J'ai tout raté par votre faute!";
 			next;
 			specialeffect EF_LORD;
 			percentheal -30,0;
 			next;
-			mes "[Asbar]";
+			mes "[Absar]";
 			mes "!@#$%#@#$!*~";
 			mes "F$#@#%^^^&&!";
 			close2;
 			warp "ve_in",262,309;
 			end;
 		}
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Oh, non...";
 		next;
 		specialeffect EF_ASPERSIO;
 		next;
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Comment...?! Non! J'ai encore tout raté! QUE JE SOIS MAUDIIIIIIIIIIT--";
 		next;
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Hein? Qu'est-ce que...";
 		mes "Que voulez-vous?";
 		next;
 		select("Oh, J-Je...");
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Crachez le morceau. Dites-moi ce que vous voulez, pas votre vie. Allez, vous ne voyez pas que je suis occupé?";
 		next;
 		if (select("Je... Je suis désolé.:Je viens de la part de M. Zabaroo...") == 1) {
-			mes "[Asbar]";
+			mes "[Absar]";
 			mes "Si seulement vous ne m'aviez pas interrompu! Alors j'aurais déjà... Ugh! Je retourne au travail!";
 			close;
 		}
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Zabaroo? Qu'est-ce que... Oh, oubliez ça. Il m'a commandé quelque chose il me semble. Apportez-vous tout le matériel?";
 		next;
 		if (select("Oui:Quels matériaux...?") == 1) {
-			mes "[Asbar]";
+			mes "[Absar]";
 			mes "Génial! Nous pouvons alors commencer et... Menteur! Vous ne savez même pas ce que vous êtes supposé m'apporter! Sortez d'ici!";
 			close2;
 			warp "ve_in",262,309;
 			end;
 		}
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Oh, j'ai dû oublier de lui donner la liste des matériaux nécessaires, héhé! Voici ce que vous devez m'apporter. Écoutez bien d'accord? Et dépêchez-vous.";
 		next;
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "^4D4DFF5 Racines de Plante Carnivore^000000,";
 		mes "^4D4DFF2 Coeurs de Glace^000000, et";
 		mes "^4D4DFF5 morceaux d'Acier^000000. Revenez rapidement, sinon je ne pourrai pas vous aider. J'ai des projets plus importants à terminer!";
@@ -254,10 +255,10 @@ ve_in,169,310,6	script	Vieil Homme Étrange#ve	121,{
 	}
 	else if (veins_stone == 2) {
 		if (countitem(999) > 4 && countitem(7561) > 1 && countitem(1033) > 4) {
-			mes "[Asbar]";
+			mes "[Absar]";
 			mes "Bien, vous avez finalement tout apporté. Vous avez de la chance, j'étais sur le point de reprendre un autre projet!";
 			next;
-			mes "[Asbar]";
+			mes "[Absar]";
 			mes "Donnez-moi une seconde. Vous n'aurez pas à attendre longtemps pour admirer ma sublime invention!";
 			delitem 999,5; //Steel
 			delitem 1033,5; //Root_Of_Maneater
@@ -267,7 +268,7 @@ ve_in,169,310,6	script	Vieil Homme Étrange#ve	121,{
 			specialeffect EF_FIRESPLASHHIT;
 			end;
 		}
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Ne restez pas planté là! Dépêchez-vous de m'apporter";
 		mes "^4D4DFF5 Racines de Plante Carnivore^000000,";
 		mes "^4D4DFF2 Coeurs de Glace^000000, et";
@@ -275,21 +276,21 @@ ve_in,169,310,6	script	Vieil Homme Étrange#ve	121,{
 		close;
 	}
 	else if (veins_stone == 3) {
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Voilà... Bon, j'ignore si vous apprécierez cette invention, mais c'est une pince à préhension!";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Pince à... Quoi...?";
 		next;
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "...Vous pouvez utiliser ceci afin de ramasser des objets sur le sol.";
 		next;
-		mes "[Asbar]";
+		mes "[Absar]";
 		mes "Quand vous retournerez voir Zabaroo, dites-lui qu'il ne me doit plus rien, plus rien du tout. Il... Il devrait comprendre ce que je veux dire...";
 		set veins_stone,4;
 		close;
 	}
-	mes "[Asbar]";
+	mes "[Absar]";
 	mes "C'est une pince de préhension. Est-ce si compliqué à comprendre? Hmpf! Je n'arrive pas à y croire! Ça doit être le système éducationnel! c'est n'importe quoi!";
 	close;
 }
@@ -2581,7 +2582,7 @@ veins,327,185,3	script	P'tit Karyn::Kid#camelcamel	944,{ // NB: c'est un garçon 
 			mes "Je ferais mieux de retrouver le chameau perdu de Saraman, et de stimuler son appétit pour pouvoir obtenir les ingrédients si je veux sauver Curdie.";
 			close;
 		}
-		else if (rachel_camel <= 16) {
+		else if ((rachel_camel >= 12) && (rachel_camel <= 16)) {
 			mes "["+strcharinfo(0)+"]";
 			mes "Bon... J'ai trouvé le chameau. Il faut maintenant que je rassemble tous les ingrédients pour fabriquer du savon. Plus vite je les aurai, plus vite je pourrai sauver Curdie.";
 			close;
@@ -4771,11 +4772,11 @@ OnTouch:
 		end;
 	}
 	else if (aru_vol == 14) {
-		enablenpc "Colonel Vito#1"; // Bugfix
+		enablenpc "Colonel Vito#1";
 		mes "[Colonel Vito]";
 		mes "Qu'est-ce que vous faites encore ici? Ne vous ramollissez pas! Venez!";
 		close2;
-		disablenpc "Colonel Vito#1"; // Bugfix
+		disablenpc "Colonel Vito#1";
 		warp "thor_camp",156,68;
 		end;
 	}
@@ -4785,7 +4786,6 @@ OnTouch:
 thor_camp,162,182,0	script	#Colonel2	-1,7,7,{
 OnTouch:
 //OnTouch2:
-
 	if (aru_vol == 13) {
 		enablenpc "Colonel Vito#2";
 		mes "[????]";
@@ -4810,7 +4810,7 @@ OnTouch:
 		end;
 	}
 	else if (aru_vol == 14) {
-		enablenpc "Colonel Vito#2"; // Bugfix – je rajoute ça
+		enablenpc "Colonel Vito#1";
 		mes "[Colonel Vito]";
 		mes "Qu'est-ce que vous faites encore ici? Ne vous ramollissez pas! Venez!";
 		close2;
@@ -4822,12 +4822,16 @@ OnTouch:
 }
 
 thor_camp,187,228,5	script	Colonel Vito#1	946,{
+	end;
+
 OnInit:
 	disablenpc "Colonel Vito#1";
 	end;
 }
 
 thor_camp,155,175,7	script	Colonel Vito#2	946,{
+	end;
+
 OnInit:
 	disablenpc "Colonel Vito#2";
 	end;
