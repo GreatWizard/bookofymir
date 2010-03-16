@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.0
+//= 1.1
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -13,6 +13,7 @@
 //= Party Relay Quest.
 //===== Additional Comments: ================================= 
 //= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Fixed a couple typos, npcs check area for PCs. [L0ne_W0lf]
 //============================================================
 
 payon,103,113,3	script	Ledrion#payon::RelayLedrion	109,{
@@ -1236,7 +1237,7 @@ payon,204,221,3	script	Bafhail#payon::RelayBafhail	731,{
 		mes "N'oubliez-pas, d'accord?";
 		close;
 	}
-	if ((countitem(7739) > 0) && (.@relaytime >= 11) && (.@relaytime < 14) && ((Baseclass == Job_Thief) || (BaseClass == Job_Acolyte))) { // Bugfix: jog -> job [No Healing]
+	if ((countitem(7739) > 0) && (.@relaytime >= 11) && (.@relaytime < 14) && ((Baseclass == Job_Thief) || (BaseClass == Job_Acolyte))) {
 		mes "[Bafhail]";
 		mes "Oh, dites-moi, c'est un ticket que vous avez là, n'est-ce pas? À en juger par votre profession, ce doit être Gatan qui vous envoie. Je m'appelle Bafhail~";
 		mes "Bon, parlons affaires maintenant.";
@@ -1253,7 +1254,7 @@ payon,204,221,3	script	Bafhail#payon::RelayBafhail	731,{
 		mes "C'est compris? Bien, dans ce cas vous pourrez commencer à collecter ces objets une fois que vous m'aurez remis votre ticket. À bientôt~";
 		close;
 	}
-	else if ((countitem(7739) > 0) && (.@relaytime >= 0) && (.@relaytime < 3) && ((Baseclass == Job_Thief) || (BaseClass == Job_Acolyte))) { // Bugfix: jog -> job [No Healing]
+	else if ((countitem(7739) > 0) && (.@relaytime >= 0) && (.@relaytime < 3) && ((Baseclass == Job_Thief) || (BaseClass == Job_Acolyte))) {
 		mes "[Bafhail]";
 		mes "Oh, dites-moi, c'est un ticket que vous avez là, n'est-ce pas? À en juger par votre profession, ce doit être Gatan qui vous envoie. Je m'appelle Bafhail~";
 		mes "Bon, parlons affaires maintenant.";
@@ -1270,7 +1271,7 @@ payon,204,221,3	script	Bafhail#payon::RelayBafhail	731,{
 		mes "C'est compris? Bien, dans ce cas vous pourrez commencer à collecter ces objets une fois que vous m'aurez remis votre ticket. À bientôt~";
 		close;
 	}
-	if ((countitem(7739) > 0) && ((Baseclass == Job_Thief) || (BaseClass == Job_Acolyte))) { // Bugfix: jog -> job [No Healing]
+	if ((countitem(7739) > 0) && ((Baseclass == Job_Thief) || (BaseClass == Job_Acolyte))) {
 		mes "[Bafhail]";
 		mes "Oh, dites-moi, c'est un ticket que vous avez là, n'est-ce pas? À en juger par votre profession, ce doit être Gatan qui vous envoie. Je m'appelle Bafhail~";
 		next;
@@ -1452,7 +1453,7 @@ payon,204,221,3	script	Bafhail#payon::RelayBafhail	731,{
 		mes "Je vous attendrai ici à ces heures, d'accord?";
 		close;
 	}
-	if ((countitem(7735) > 0) && (.@relaytime >= 14) && (.@relaytime < 17) && (BaseClass == Job_Acolyte)) { // Bugfix: jog -> job [No Healing]
+	if ((countitem(7735) > 0) && (.@relaytime >= 14) && (.@relaytime < 17) && (BaseClass == Job_Acolyte)) {
 		mes "[Bafhail]";
 		mes "Oh, dites-moi, c'est un ticket que vous avez là, n'est-ce pas? À en juger par votre profession, ce doit être Gatan qui vous envoie. Je m'appelle Bafhail~";
 		next;
@@ -1470,7 +1471,7 @@ payon,204,221,3	script	Bafhail#payon::RelayBafhail	731,{
 		mes "C'est compris? Bien, dans ce cas vous pourrez commencer à collecter ces objets une fois que vous m'aurez remis votre ticket. À bientôt~";
 		close;
 	}
-	else if ((countitem(7735) > 0) && (.@relaytime >= 18) && (.@relaytime < 21) && (BaseClass == Job_Acolyte)) { // Bugfix: jog ? job [No Healing]
+	else if ((countitem(7735) > 0) && (.@relaytime >= 18) && (.@relaytime < 21) && (BaseClass == Job_Acolyte)) {
 		mes "[Bafhail]";
 		mes "Oh, dites-moi, c'est un ticket que vous avez là, n'est-ce pas? À en juger par votre profession, ce doit être Gatan qui vous envoie. Je m'appelle Bafhail~";
 		next;
@@ -1488,7 +1489,7 @@ payon,204,221,3	script	Bafhail#payon::RelayBafhail	731,{
 		mes "C'est compris? Bien, dans ce cas vous pourrez commencer à collecter ces objets une fois que vous m'aurez remis votre ticket. À bientôt~";
 		close;
 	}
-	if ((countitem(7735) > 0) && (BaseClass == Job_Acolyte)) { // Bugfix: jog ? job [No Healing]
+	if ((countitem(7735) > 0) && (BaseClass == Job_Acolyte)) {
 		mes "[Bafhail]";
 		mes "Oh, dites-moi, c'est un ticket que vous avez là, n'est-ce pas? À en juger par votre profession, ce doit être Gatan qui vous envoie. Je m'appelle Bafhail~";
 		next;
@@ -1690,9 +1691,6 @@ payon,168,314,3	script	Lospii#payon::RelayLospii	706,{
 		close;
 	}
 	set .@relaytime,gettime(3);
-	//set .@juwi,getusersinrange(7);
-	// Bugfix: la fonction getusersinrange n'est peut-être pas implantées sur eA, mais si la var .@juwi n'est pas set ça ne risque pas de marcher...
-	// Je mets une zone de 8 cases autour du NPC arbitrairement. [No Healing]
 	getmapxy(.@m$,.@x,.@y,1,strnpcinfo(3));
 	set .@juwi,getareausers(.@m$,.@x-8,.@y-8,.@x+8,.@y+8);
 	if (party_relay == 32) {
