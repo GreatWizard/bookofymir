@@ -217,7 +217,7 @@ geffen,129,148,3	script	Argen#1	779,{
 			next;
 			emotion e_no1;
 			mes "[Argen]";
-			mes "Ah... J'ai fini! Ça rend pas mal, non? Oh, tu tu peux garder les queues qui me restent.";
+			mes "Ah... J'ai fini! Ça rend pas mal, non? Oh, tu peux garder les queues qui me restent.";
 			delitem 2269,1; //Centimental_Flower
 			delitem 999,10; //Steel
 			set zeny,zeny-20000;
@@ -271,7 +271,7 @@ yuno,300,188,5	script	Zhenbolt#1	753,{
 	}
 	if (countitem(7216) > 299 && countitem(7097) > 299 && countitem(2211) > 0 && countitem(982) > 0) {
 		mes "[Zhenbolt]";
-		mes "Qu'est-ce que cela?! Vous avez apporté tout ce que je vous avais demandé! Beau travail, héros! A moi de mettre la main à la patte maintenant...";
+		mes "Qu'est-ce que cela?! Vous avez apporté tout ce que je vous avais demandé! Beau travail, héros! À moi de mettre la main à la patte maintenant...";
 		next;
 		mes "[Zhenbolt]";
 		mes "...";
@@ -577,7 +577,7 @@ geffen,67,87,3	script	Ipore#1	700,{
 
 // Angel Wing Ears, Devil Wing Ears
 //============================================================
-yuno,241,52,3	script	Old Blacksmith#hgear	813,{
+yuno,241,52,3	script	Vieux Forgeron::Old Blacksmith#hgear	813,{
 	//DisableItemMove
 	if (checkweight(1201,1) == 0) {
 		mes "- Une petite minute! Vous portez trop d'objets sur vous en ce moment. Essayez à nouveau après en avoir déposé quelques-uns dans votre Stock. -";
@@ -586,315 +586,277 @@ yuno,241,52,3	script	Old Blacksmith#hgear	813,{
 	//	EnableItemMove
 	//	end;
 	}
-	mes "[Skillful Looking Artisan]";
-	mes "Aha~";
-	mes "You must really like to travel! You're certainly not from around here.";
+	mes "[Artisan]";
+	mes "Haha~";
+	mes "Vous devez vraiment aimer voyager! Vous n'êtes pas d'ici, je le vois tout de suite.";
 	next;
-	mes "[Skillful Looking Artisan]";
-	mes "Allow me to introduce myself. My name is Hatbyr Mhore, a travelling Blacksmith.";
+	mes "[Artisan]";
+	mes "Laissez-moi me présenter. Je m'appelle Hatbyr Mhore. Je suis un Forgeron Errant.";
 	next;
 	if (countitem(2254) > 0 && countitem(2286) > 0) {
 		mes "[Hatbyr Mhore]";
-		mes "Oh? It seems that you're carrying some valuable stuff with you.";
+		mes "Oh? On dirait que vous avez quelques objets de valeur sur vous.";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "Hmm, if you like, I could make you something truly amazing with that ^4d4dffAngel Wing^000000 and ^4d4dffElven Ears^000000 that you have.";
+		mes "Hum... Si vous le souhaitez, je pourrais créer quelque chose de vraiment extraordinaire avec ces ^4d4dffAiles d'Ange^000000 et cette paire d'^4d4dffOreilles d'Elfe^000000 que vous avez là.";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "How does that sound?";
-		mes "Oh, and don't you worry about my skill! I'm pretty well known among Blacksmiths for my talent, and my knack of making great things out of junk.";
+		mes "Qu'en dites-vous? Oh, ne vous en faites pas: je sais ce que je fais. Je suis assez connu parmi les Forgerons grâce à mon talent et mes capacités à fabriquer des choses merveilleuses à partir de matériaux ordinaires.";
 		next;
-		switch(select("Umm, let me think.:Okay, make it for me then.:Can you make it with an Evil Wing..?")) {
+		switch(select("Hum... Laissez-moi y réfléchir.:D'accord, fabriquez-le alors.:Pourriez-vous le faire avec des Ailes Maléfiques?")) {
 		case 1:
 			mes "[Hatbyr Mhore]";
-			mes "Huh. What's to think about?! I was gonna use all of my skill to create something special for you. Ah well...";
+			mes "Hein? À quoi voudriez-vous réfléchir? J'étais prêt à utiliser tout mon talent pour vous créer quelque chose de vraiment unique...";
 			close;
 		case 2:
 			mes "[Hatbyr Mhore]";
-			mes "Aha~ Good good good.";
-			mes "Let's see let's see...";
-			mes "1 Angel Wing";
-			mes "1 Elven Ears...";
+			mes "Haha~ Bien, bien, bien. Voyons voir...";
+			mes "1 paire d'Ailes d'Ange";
+			mes "1 paire d'Oreilles d'Elfe...";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "Some other crap and";
-			mes "...20,000 zeny.";
-			mes "I must say this is a very cheap price to pay for such a great item. But before I start, I should tell you...";
+			mes "Quelques petites babioles et... 20,000 zénys.";
+			mes "Et je peux vous dire que ce n'est pas cher payé pour un tel objet! Mais avant de commencer, je dois vous prévenir d'une chose...";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "I don't care how many times you've upgraded the items you brought, but please ^4d4dff carry only items that you need to create this item.^000000 I can't mess up my artwork because of some mistake you might make.";
+			mes "Je me moque de savoir combien de fois vous avez raffiné les objets que vous m'avez apporté, mais s'il vous plaît, n'en ayez qu'^4d4dffun seul exemplaire sur vous^000000. Je ne voudrais pas faire d'erreur et utiliser le mauvais.";
 			next;
-			if (select("I am ready.:Okay, let me go store my other items first.") == 1) {
+			if (select("Je suis prêt"+ ( sex ? "" : "e" ) +".:D'accord, laissez-moi aller trier mon inventaire.") == 1) {
 				set .@now_weight,MaxWeight-Weight;
 				if (.@now_weight < 2000) {
 					mes "[Hatbyr Mhore]";
-					mes "Ouch...!";
-					mes "Why are you carrying so many items with you? Leave all your extra baggage somewhere else and come back.";
+					mes "Ouch! Pourquoi portez-vous autant d'objets sur vous? Déposez le superflu quelque part et revenez me voir.";
 					close;
 				}
 				else {
 					if (countitem(2254) > 0 && countitem(2286) > 0 && Zeny > 19999) {
 						mes "[Hatbyr Mhore]";
-						mes "Alright...";
-						mes "Let's get a groove on!";
+						mes "Bon... Vous allez voir ce que vous allez voir!";
 						specialeffect EF_REPAIRWEAPON;
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "There you go, buddy.";
-						mes "I am proud to say this is my masterpiece. Please take this item. I call it...";
-						mes "'Angel Wing Ears!'";
+						mes "Et voilà pour vous, l'ami"+ ( sex ? "" : "e" ) +". C'est un véritable chef d'œuvre! Prenez cet objet. J'appelle ça... des Petites Ailes d'Ange!";
 						delitem 2254,1; //Angelic_Chain
 						delitem 2286,1; //Elven_Ears
 						set zeny,zeny-20000;
 						getitem 5074,1; //Ear_Of_Angel's_Wing
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "There's no doubt that you'll be the talk of the town sporting these fashionable things.";
+						mes "Je peux vous assurer que tout le monde en ville ne parlera que de vous avec un tel article de mode!";
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "The glamour of an angel and the cuteness of Elven Ears is almost too much goodness for one headgear~!";
+						mes "Le glamour des angles allié au côté tout mimi des Oreilles d'Elfe - c'en est presque trop pour un seul accessoire!~";
 						close;
 					}
 					mes "[Hatbyr Mhore]";
-					mes "I'm sorry buddy, but I can't make this item without having the things I need. Remember, I need 1 Angel Wing, 1 Elven Ears and 20,000 zeny.";
+					mes "Je suis désolé l'ami"+ ( sex ? "" : "e" ) +", mais je ne peux pas travailler si je n'ai tout ce qu'il me faut. Rappelez-vous, il me faut 1 paire d'Ailes d'Ange, 1 paire d'Oreilles d'Elfe et 20,000 zénys.";
 					close;
 				}
 			}
 			mes "[Hatbyr Mhore]";
-			mes "No problem.";
-			mes "Come back anytime you want.";
-			mes "I'll just be here enjoying the view.";
+			mes "Pas de problèmes. Revenez quand vous voudrez. Je resterai ici, à profiter de la vue.";
 			close;
 		case 3:
 			mes "[Hatbyr Mhore]";
-			mes "Of course, I can make an item";
-			mes "out of an Evil Wing as well!";
-			mes "That sort of thing is simple for me!";
+			mes "Bien sûr, je peux fabriquer quelque chose à partir d'une paire d'Ailes Maléfiques aussi! Rien de plus simple pour quelqu'un comme moi!";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "Okay then, I will need...?";
-			mes "1 Evil Wing,";
-			mes "1 Elven Ears,";
-			mes "...and 20,000 zeny.";
+			mes "Bien, dans ce cas, il me faudra...";
+			mes "1 paire d'Ailes Maléfiques,";
+			mes "1 paire d'Oreilles d'Elfe,";
+			mes "...et 20,000 zénys.";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "I must say this is a very cheap price considering the item I will make for you. But before I start, I should tell you...";
+			mes "Et je peux vous dire que ce n'est pas cher payé pour un tel objet! Mais avant de commencer, je dois vous prévenir d'une chose...";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "I don't care how many times you've upgraded the items you brought, but please ^4d4dff carry only items that you need to create this item.^000000 I can't mess up my artwork because of some mistake you might make.";
+			mes "Je me moque de savoir combien de fois vous avez raffiné les objets que vous m'avez apporté, mais s'il vous plaît, n'en ayez qu'^4d4dffun seul exemplaire sur vous^000000. Je ne voudrais pas faire d'erreur et utiliser le mauvais.";
 			next;
-			if (select("I am ready.:Okay, let me go store my other items first.") == 1) {
+			if (select("Je suis prêt"+ ( sex ? "" : "e" ) +".:D'accord, laissez-moi aller trier mon inventaire.") == 1) {
 				set .@now_weight,MaxWeight-Weight;
 				if (.@now_weight < 2000) {
 					mes "[Hatbyr Mhore]";
-					mes "Ouch...!";
-					mes "Why are you carrying so many items with you? Leave all your extra baggage somewhere else and come back.";
+					mes "Ouch! Pourquoi portez-vous autant d'objets sur vous? Déposez le superflu quelque part et revenez me voir.";
 					close;
 				}
 				else {
 					if (countitem(2255) > 0 && countitem(2286) > 0 && Zeny > 19999) {
 						mes "[Hatbyr Mhore]";
-						mes "Alright, it's time to roll!";
+						mes "Bon... Vous allez voir ce que vous allez voir!";
 						specialeffect EF_REPAIRWEAPON;
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "There you go, buddy. I am proud to say this is my masterpiece. I call it... 'Devil Wing Ears!'";
+						mes "Et voilà pour vous, l'ami"+ ( sex ? "" : "e" ) +". C'est un véritable chef d'œuvre! Prenez cet objet. J'appelle ça... des Petites Ailes Maléfiques!";
 						delitem 2255,1; //Satanic_Chain
 						delitem 2286,1; //Elven_Ears
 						set zeny,zeny-20000;
 						getitem 5068,1; //Ear_Of_Devil's_Wing
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "You'll be wowing everyone on the streets with your fashionable new look that says 'It feels so good to be so bad.' Glad to be of service~!";
+						mes "Vous allez faire un malheur à marcher dans les rues avec ça, l'air de dire ''c'est si bon d'être un mauvais garçon''! Je suis content d'avoir pu vous rendre service~";
 						close;
 					}
 					mes "[Hatbyr Mhore]";
-					mes "I'm sorry buddy, but I can't make this item without the stuff I need. Remember I need 1 Devil Wing, 1 Elven Ears and 20,000 zeny.";
+					mes "Je suis désolé l'ami"+ ( sex ? "" : "e" ) +", mais je ne peux pas travailler si je n'ai tout ce qu'il me faut. Rappelez-vous, il me faut 1 paire d'Ailes Maléfiques, 1 paire d'Oreilles d'Elfe et 20,000 zénys.";
 					close;
 				}
 			}
 			mes "[Hatbyr Mhore]";
-			mes "No problem.";
-			mes "Come back anytime you want.";
-			mes "I'll just be here enjoying the view.";
+			mes "Pas de problèmes. Revenez quand vous voudrez. Je resterai ici, à profiter de la vue.";
 			close;
 		}
 	}
 	else if (countitem(2255) > 0 && countitem(2286) > 0) {
 		mes "[Hatbyr Mhore]";
-		mes "Oh? It seems that you're carrying some valuable stuff with you.";
+		mes "Oh? On dirait que vous avez quelques objets de valeur sur vous.";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "Hmm, if you like, I could make you something truly amazing with that ^4d4dffEvil Wing^000000 and ^4d4dffElven Ears^000000 that you have.";
+		mes "Hum... Si vous le souhaitez, je pourrais créer quelque chose de vraiment extraordinaire avec ces ^4d4dffAiles Maléfiques^000000 et cette paire d'^4d4dffOreilles d'Elfe^000000 que vous avez là.";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "How does that sound?";
-		mes "Oh, and don't you worry about my skill! I'm pretty well known among Blacksmiths for my talent, and my knack of making great things out of junk.";
+		mes "Qu'en dites-vous? Oh, ne vous en faites pas: je sais ce que je fais. Je suis assez connu parmi les Forgerons grâce à mon talent et mes capacités à fabriquer des choses merveilleuses à partir de matériaux ordinaires.";
 		next;
-		switch(select("Umm, let me think.:Okay, make it for me then.:Can you make it with an Angel Wing..?")) {
+		switch(select("Hum... Laissez-moi y réfléchir.:D'accord, fabriquez-le alors.:Pourriez-vous le faire avec des Ailes d'Ange?")) {
 		case 1:
 			mes "[Hatbyr Mhore]";
-			mes "Huh. What's to think about?! I was gonna use all of my skill to create something special for you. Ah well...";
+			mes "Hein? À quoi voudriez-vous réfléchir? J'étais prêt à utiliser tout mon talent pour vous créer quelque chose de vraiment unique...";
 			close;
 		case 2:
 			mes "[Hatbyr Mhore]";
-			mes "Aha~ Good good good.";
-			mes "Let's see let's see...";
-			mes "1 Devil Wing";
-			mes "1 Elven Ears...";
+			mes "Bien, dans ce cas, il me faudra...";
+			mes "1 paire d'Ailes Maléfiques,";
+			mes "1 paire d'Oreilles d'Elfe,";
+			mes "...et 20,000 zénys.";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "Some other crap and";
-			mes "...20,000 zeny.";
-			mes "I must say this is a very cheap price to pay for such a great item. But before I start, I should tell you...";
+			mes "Et je peux vous dire que ce n'est pas cher payé pour un tel objet! Mais avant de commencer, je dois vous prévenir d'une chose...";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "I don't care how many times you've upgraded the items you brought, but please ^4d4dff carry only items that you need to create this item. I can't mess up my artwork because of some mistake you might make. ^000000";
+			mes "Je me moque de savoir combien de fois vous avez raffiné les objets que vous m'avez apporté, mais s'il vous plaît, n'en ayez qu'^4d4dffun seul exemplaire sur vous^000000. Je ne voudrais pas faire d'erreur et utiliser le mauvais.";
 			next;
-			if (select("I am ready.:Okay, let me go store my other items first.") == 1) {
+			if (select("Je suis prêt"+ ( sex ? "" : "e" ) +".:D'accord, laissez-moi aller trier mon inventaire.") == 1) {
 				set .@now_weight,MaxWeight-Weight;
 				if (.@now_weight < 2000) {
 					mes "[Hatbyr Mhore]";
-					mes "Ouch, why are you carrying";
-					mes "so many items with you?";
-					mes "Leave all your extra baggage somewhere else and come back.";
+					mes "Ouch! Pourquoi portez-vous autant d'objets sur vous? Déposez le superflu quelque part et revenez me voir.";
 					close;
 				}
 				else {
 					if (countitem(2255) > 0 && countitem(2286) > 0 && Zeny > 19999) {
 						mes "[Hatbyr Mhore]";
-						mes "Alright...";
-						mes "Let's get a groove on!";
+						mes "Bon... Vous allez voir ce que vous allez voir!";
 						specialeffect EF_REPAIRWEAPON;
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "There you go, buddy.";
-						mes "I am proud to say this is my masterpiece. Please take this item. I call it... 'Devil Wing Ears!'";
+						mes "Et voilà pour vous, l'ami"+ ( sex ? "" : "e" ) +". C'est un véritable chef d'œuvre! Prenez cet objet. J'appelle ça... des Petites Ailes Maléfiques!";
 						delitem 2255,1; //Satanic_Chain
 						delitem 2286,1; //Elven_Ears
 						set zeny,zeny-20000;
 						getitem 5068,1; //Ear_Of_Devil's_Wing
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "You'll be wowing everyone on the streets with your fashionable new look that says 'It feels so good to be so bad.' Glad to be of service~!";
+						mes "Vous allez faire un malheur à marcher dans les rues avec ça, l'air de dire ''c'est si bon d'être un mauvais garçon''! Je suis content d'avoir pu vous rendre service~";
 						close;
 					}
 					mes "[Hatbyr Mhore]";
-					mes "I'm sorry buddy, but I can't make this item without having the things I need. Remember, I need 1 Devil Wing, 1 Elven Ears and 20,000 zeny.";
+					mes "Je suis désolé l'ami"+ ( sex ? "" : "e" ) +", mais je ne peux pas travailler si je n'ai tout ce qu'il me faut. Rappelez-vous, il me faut 1 paire d'Ailes Maléfiques, 1 paire d'Oreilles d'Elfe et 20,000 zénys.";
 					close;
 				}
 			}
 			mes "[Hatbyr Mhore]";
-			mes "No problem.";
-			mes "Come back anytime you want.";
-			mes "I'll just be here enjoying the view.";
+			mes "Pas de problèmes. Revenez quand vous voudrez. Je resterai ici, à profiter de la vue.";
 			close;
 		case 3:
 			mes "[Hatbyr Mhore]";
-			mes "Of course, I can make an item";
-			mes "out of an Angel Wing as well!";
-			mes "That sort of thing is simple for me!";
+			mes "Bien sûr, je peux fabriquer quelque chose à partir d'une paire d'Ailes d'Ange aussi! Rien de plus simple pour quelqu'un comme moi!";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "Okay then, then I'll need...";
-			mes "1 Angel Wing,";
-			mes "1 Elven Ears,";
-			mes "...and 20,000 zeny.";
+			mes "Bien, dans ce cas, il me faudra...";
+			mes "1 paire d'Ailes d'Ange";
+			mes "1 paire d'Oreilles d'Elfe...";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "I must say this is a very cheap price considering the item I will make for you. But before I start, I should tell you...";
+			mes "Quelques petites babioles et... 20,000 zénys.";
+			mes "Et je peux vous dire que ce n'est pas cher payé pour un tel objet! Mais avant de commencer, je dois vous prévenir d'une chose...";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "I don't care how many times you've upgraded the items you brought, but please ^4d4dff carry only items that you need to create this item.^000000 I can't mess up my artwork because of some mistake you might make.";
+			mes "Je me moque de savoir combien de fois vous avez raffiné les objets que vous m'avez apporté, mais s'il vous plaît, n'en ayez qu'^4d4dffun seul exemplaire sur vous^000000. Je ne voudrais pas faire d'erreur et utiliser le mauvais.";
 			next;
-			if (select("I am ready.:Okay, let me go store my other items first.") == 1) {
+			if (select("Je suis prêt"+ ( sex ? "" : "e" ) +".:D'accord, laissez-moi aller trier mon inventaire.") == 1) {
 				set .@now_weight,MaxWeight-Weight;
 				if (.@now_weight < 2000) {
 					mes "[Hatbyr Mhore]";
-					mes "Ouch, why are you carrying";
-					mes "so many items with you?";
-					mes "Leave all your extra baggage somewhere else and come back.";
+					mes "Ouch! Pourquoi portez-vous autant d'objets sur vous? Déposez le superflu quelque part et revenez me voir.";
 					close;
 				}
 				else {
 					if (countitem(2254) > 0 && countitem(2286) > 0 && Zeny > 19999) {
-						mes "Alright...";
-						mes "Let's get a groove on!";
+						mes "Bon... Vous allez voir ce que vous allez voir!";
 						specialeffect EF_REPAIRWEAPON;
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "There you go, buddy.";
-						mes "I am proud to say this is my masterpiece. Please take this item. I call it... 'Angel Wing Ears!'";
+						mes "Et voilà pour vous, l'ami"+ ( sex ? "" : "e" ) +". C'est un véritable chef d'œuvre! Prenez cet objet. J'appelle ça... des Petites Ailes d'Ange!";
 						delitem 2254,1; //Angelic_Chain
 						delitem 2286,1; //Elven_Ears
 						set zeny,zeny-20000;
 						getitem 5074,1; //Ear_Of_Angel's_Wing
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "There's no doubt that you'll be the talk of the town sporting these fashionable things.";
+						mes "Je peux vous assurer que tout le monde en ville ne parlera que de vous avec un tel article de mode!";
 						next;
 						mes "[Hatbyr Mhore]";
-						mes "The glamour of an angel and the cuteness of Elven Ears is almost too much goodness for one headgear~!";
+						mes "Le glamour des angles allié au côté tout mimi des Oreilles d'Elfe - c'en est presque trop pour un seul accessoire!~";
 						close;
 					}
 					mes "[Hatbyr Mhore]";
-					mes "I'm sorry buddy, but I can't make this item without having the things I need. Remember, I need 1 Angel Wing, 1 Elven Ears and 20,000 zeny.";
+					mes "Je suis désolé l'ami"+ ( sex ? "" : "e" ) +", mais je ne peux pas travailler si je n'ai tout ce qu'il me faut. Rappelez-vous, il me faut 1 paire d'Ailes d'Ange, 1 paire d'Oreilles d'Elfe et 20,000 zénys.";
 					close;
 				}
 			}
 			mes "[Hatbyr Mhore]";
-			mes "No problem.";
-			mes "Come back anytime you want.";
-			mes " ";
-			mes "I'll just be here enjoying the view.";
+			mes "Pas de problèmes. Revenez quand vous voudrez. Je resterai ici, à profiter de la vue.";
 			close;
 		}
 	}
 	else {
 		mes "[Hatbyr Mhore]";
-		mes "I happened to come to Juno while I was traveling around the world. Being someplace up in the clouds makes me a little nervous, but still, the scenery looks great from up here.";
+		mes "Je suis venu à Yuno par hasard alors que je voyageais de par le monde. Être au-dessus des nuages me rend un petit peu nerveux, mais la ville a tout de même un côté très serin.";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "Although I really enjoy traveling more than staying in my shop, I'm still a Blacksmith at heart and I always gotta be making something. It's been a while since I've made my last creation...";
+		mes "Même si je préfère les voyages à mon atelier, je reste un Forgeron dans l'Âme, et il faut toujours que je fabrique quelque chose. Mais cela fait déjà un bout de temps depuis la dernière fois que j'ai créé quelque chose...";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "Hmm...";
-		mes "If I had some materials, I think I could put together some pretty amazing stuff.";
+		mes "Hum... Si j'avais les matériaux nécessaires, je pense que je pourrais fabriquer quelque chose d'extraordinaire.";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "If by any chance, you have an Angel Wing or Evil Wing, and";
-		mes "Elven Ears, would you give me a chance to smith something?";
+		mes "Si jamais vous trouviez des Ailes d'Ange ou des Ailes Maléfiques, ainsi qu'une paire d'Oreilles d'Elfe, me laisseriez-vous les utiliser pour forger quelque chose d'autre?";
 		next;
 		mes "[Hatbyr Mhore]";
-		mes "I was thinking...";
-		mes "Elven Ears are great...";
-		mes "And everyone loves Angel Wing or Devil Wing. Wouldn't it be totally fab if I could combine the Elven Ears with one of the wings?!";
+		mes "J'étais en train de me dire que...";
+		mes "Les Oreilles d'Elfe sont vraiment mignonnes... et tout le monde adore les Ailes d'Ange ou les Ailes Maléfiques. Ne serait-ce pas merveilleux de combiner les deux pour en faire une seule et même paire d'aile?!";
 		next;
-		if (select("Give me more information.:Yeah, I will think about it.") == 1) {
+		if (select("Donnez-moi plus de détails.:Oui, je vais y réfléchir.") == 1) {
 			mes "[Hatbyr Mhore]";
-			mes "Oh, right.";
-			mes "Let me tell";
-			mes "you exactly I need.";
+			mes "Oh, d'accord. Laissez-moi vous dire exactement ce dont j'ai besoin.";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "For creating Angel Wing Ears, I need 1 ^4d4dffAngel Wing^000000,";
-			mes "1 ^4d4dffElven Ears^000000 and";
-			mes "^4d4dff20,000 zeny^000000.";
+			mes "Pour créer des Petites Ailes d'Ange, il me faudrait:";
+			mes "1 paire d'^4d4dffAiles d'Ange^000000,";
+			mes "1 paire d'^4d4dffOreilles d'Elfe^000000 et";
+			mes "^4d4dff20,000 zénys^000000.";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "For creating Devil Wing Ears,";
-			mes "I need 1 ^4d4dffDevil Wing^000000,";
-			mes "1 ^4d4dffElven Ears^000000 and";
-			mes "^4d4dff20,000 zeny^000000.";
+			mes "Pour créer des Petites Ailes Maléfiques, il me faudrait:";
+			mes "1 paire d'^4d4dffAiles Maléfiques^000000,";
+			mes "1 paire d'^4d4dffOreilles d'Elfe^000000 et";
+			mes "^4d4dff20,000 zénys^000000.";
 			next;
 			mes "[Hatbyr Mhore]";
-			mes "Come back anytime when you have those materials.";
-			mes "I will let you have either the elegance of an angel or the charisma of a demon with the wearables only I can craft.";
+			mes "Revenez me voir si vous réussissez à vous procurer tout ça. Vous pourriez avoir l'élégance d'un ange, ou le charisme d'un démon avec ces merveilles.";
 			close;
 		}
 		mes "[Hatbyr Mhore]";
-		mes "No problem.";
-		mes "I'm always here at this scenic spot so I can enjoy the view. Just come back whenever you feel like it.";
+		mes "Pas de problèmes. Revenez quand vous voudrez. Je resterai ici, à profiter de la vue.";
 		close;
 	}
 	//EnableItemMove
@@ -902,145 +864,131 @@ yuno,241,52,3	script	Old Blacksmith#hgear	813,{
 
 // Sea-Otter Hat
 //============================================================
-xmas,183,267,3	script	Pretty Lindsay#1	793,{
+xmas,183,267,3	script	P'tite Lindsay::Pretty Lindsay#1	793,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Une petite minute! Vous portez trop d'objets sur vous en ce moment. Essayez à nouveau après en avoir déposé quelques uns dans votre Stock. -";
+		mes "- Une petite minute! Vous portez trop d'objets sur vous en ce moment. Essayez à nouveau après en avoir déposé quelques-uns dans votre Stock. -";
 		close;
 	}
 	set .@now_weight,MaxWeight-Weight;
 	if (.@now_weight < 2000) {
-		mes "[Pretty Lindsay]";
-		mes "I know you brought everything you need for me to make you a hat, but you're carrying too much stuff. Why don't you put some of your things in Kafra Storage?";
+		mes "[P'tite Lindsay]";
+		mes "Je sais que vous m'apportez tout ce que je vous avais demandé, mais vous portez trop de choses sur vous. Revenez me voir après en avoir déposé quelques-uns dans votre Stock.";
 		close;
 	}
 	else if (countitem(5033) > 0 && countitem(5064) > 0) {
 		emotion e_gasp;
-		mes "[Pretty Lindsay]";
-		mes "Whoa~";
-		mes "You brought everything!";
-		mes "Okay, hold on a bit.";
-		mes "Let me make your hat.";
+		mes "[P'tite Lindsay]";
+		mes "Ouah~";
+		mes "Vous m'avez tout apporté! D'accord, attendez une petite minute. Laissez-moi vous confectionner votre chapeau.";
 		next;
-		mes "[Pretty Lindsay]";
-		mes "As my mom taught me,";
-		mes "put this down on the ground...";
-		mes "Okay, I am ready...";
+		mes "[P'tite Lindsay]";
+		mes "Alors, comme maman m'a dit, je dois passer ça par-dessous, et ça par-dessus... Voilà, j'ai presque terminé!";
 		next;
-		mes "^FF0000Lindsay put the Raccoon Hat on the ground, threw the Smokie Leaf onto the hat and mumbled some words while hugging herself.^000000"; // Smokie = Fumard
+		mes "^FF0000Lindsay jette le Chapeau de Raton-Laveur par terre, lance la Feuille de Fumard par-dessus, et commence à marmonner quelques mots en se serrant dans ses propres bras.^000000";
 		next;
-		mes "^FF0000Then, suddenly with a dazzling light, the Raccoon Hat turned blue and slowly transformed into a Sea-Otter Hat.^000000";
+		mes "^FF0000Soudain, dans un éclair de lumière, le Chapeau de Raton-Laveur devient bleu et se transforme en un Chapeau de Loutre de Mer.^000000";
 		specialeffect EF_FLASHER;
 		next;
-		mes "[Pretty Lindsay]";
-		mes "Phew! It's done!";
-		mes "Gosh! I think I";
-		mes "spent all my energy.";
-		mes "Okay, take this~";
+		mes "[P'tite Lindsay]";
+		mes "Et voilà! C'est terminé! Je suis complètement vidée maintenant! Bien, prenez-le~";
 		delitem 5033,1; //Smokie_Hat
 		delitem 5064,1; //Leaf_Headgear
 		getitem 5078,1; //Sea_Otter_Cap
 		next;
-		mes "[Pretty Lindsay]";
-		mes "I made this hat with all my heart, so you gotta promise me you will take care of this, okay?";
+		mes "[P'tite Lindsay]";
+		mes "J'ai mis tout mon cœur pour fabriquer ce chapeau, alors vous devez me promettre que vous en prendrez bien soin, d'accord?";
 		close;
 	}
 	if (Sex == 1) {
-		mes "[Pretty Lindsay]";
-		mes "Hello, there?";
-		mes "Mister...?";
+		mes "[P'tite Lindsay]";
+		mes "Bonjour, m'sieur!";
 		next;
 		emotion e_heh;
-		mes "[Pretty Lindsay]";
-		mes "You look like you're freezing...";
-		mes "Um, I know! How about I make you a cute, warm and fuzzy Sea-Otter hat?";
+		mes "[P'tite Lindsay]";
+		mes "On dirait que vous mourrez de froid! Qu'est-ce que vous diriez si je vous faisais un Chapeau de Loutre de Mer tout mimi et bien chaud?";
 		next;
-		mes "[Pretty Lindsay]";
-		mes "It's really really cute! Also, it's the only hat I know how to make, because I love playing with Sea Otters so much!"; // Loutre de Mer
+		mes "[P'tite Lindsay]";
+		mes "Il est vraiment craquant! Et puis, c'est le seul chapeau que je sais fabriquer, parce que j'adore jouer avec les Loutre de Mer!";
 		next;
-		mes "[Pretty Lindsay]";
-		mes "I have to put together ^0000FF1 Raccoon Hat^000000 and ^0000FF1 Smokie Leaf^000000 to make a ^4D4DFFSea-Otter Hat^000000 for you, though.";
+		mes "[P'tite Lindsay]";
+		mes "Mais pour en faire un, il faudra que vous m'apportiez ^0000FF1 Chapeau de Raton-Laveur^000000 et ^0000FF1 Feuille de Fumard^000000.";
 		next;
-		if (select("Okay, I will come back with the stuff.:Um... How come you need a Raccoon Hat?") == 1) {
+		if (select("D'accord, je reviendrai avec tout ça.:Euh... Pourquoi un Chapeau de Raton-Laveur?") == 1) {
 			emotion e_heh;
-			mes "[Pretty Lindsay]";
-			mes "Cool~! Come back soon as you can~!";
+			mes "[P'tite Lindsay]";
+			mes "Fantastique! Revenez aussi vite que possible~";
 			close;
 		}
-		mes "[Pretty Lindsay]";
-		mes "Well, it's supposed to be a seeeecret, but my mommy taught me some magic to make Sea-Otter hats with Raccoon hats.";
+		mes "[P'tite Lindsay]";
+		mes "Eh bien c'est censé être un secret, mais ma maman m'a appris un tour de magie pour transformer les Chapeaux de Raton-Laveur en Chapeaux de Loutre de Mer.";
 		next;
-		mes "[Pretty Lindsay]";
-		mes "It's the bestest magic ever because it comes from my heart!";
-		next;
-		mes "[" + strcharinfo(0) + "]";
-		mes "That...";
-		mes "That still doesn't explain anything!";
+		mes "[P'tite Lindsay]";
+		mes "Et c'est la meilleure des magies, parce que ça vient du plus profond de mon coeur!";
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "Alright...";
-		mes "Yeah...";
-		mes "I'll come back later, kid.";
+		mes "Ça... Ça n'explique toujours rien!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Bon, d'accord... Je reviendrai plus tard, petite.";
 		close;
 	}
-	mes "[Pretty Lindsay]";
-	mes "Hello, hello~!";
-	mes "You're such a pretty lady!";
+	mes "[P'tite Lindsay]";
+	mes "Bonjour, bonjour~";
+	mes "Oh, vous êtes si jolie!";
 	next;
 	emotion e_heh;
-	mes "[Pretty Lindsay]";
-	mes "Hey hey! Can I make you a Sea-Otter hat! It's really really really really cute!";
+	mes "[P'tite Lindsay]";
+	mes "Hé! Hé! Est-ce que je peux vous faire un Chapeau de Loutre de Mer? Il est vraiment trop trop trop mignon!";
 	next;
-	mes "[Pretty Lindsay]";
-	mes "I need ^0000FF1 Raccoon Hat^000000 and ^0000FF1 Smokie Leaf^000000 so I can make a ^4D4DFFSea-Otter Hat^000000 for you.";
+	mes "[P'tite Lindsay]";
+	mes "Mais pour en faire un, il faudra que vous m'apportiez ^0000FF1 Chapeau de Raton-Laveur^000000 et ^0000FF1 Feuille de Fumard^000000.";
 	next;
-	if (select("Okay, I will come back with the stuff.:Um, why do you want to make hats so much?") == 1) {
+	if (select("D'accord, je reviendrai avec tout ça.:Pourquoi tu aimes tant faire des chapeaux?") == 1) {
 		emotion e_heh;
-		mes "[Pretty Lindsay]";
-		mes "Cool~!";
-		mes "Come back as";
-		mes "soon as you can~!";
+		mes "[P'tite Lindsay]";
+		mes "Fantastique! Revenez aussi vite que possible~";
 		close;
 	}
-	mes "[Pretty Lindsay]";
-	mes "Because...!";
-	mes "If everyone in Lutie was wearing a fuzzy Sea-Otter cap, it would look so so cute!";
+	mes "[P'tite Lindsay]";
+	mes "Parce que...!";
+	mes "Si tout le monde à Lutie portait un Chapeau de Loutre de Mer, ce serait si mimi!";
 	next;
-	mes "[Pretty Lindsay]";
-	mes "We could play games in the snow, and play with real Sea Otters and have them give us rides and..."; // Loutre de Mer
+	mes "[P'tite Lindsay]";
+	mes "On pourrait jouer dans la neige et s'amuser avec de vraies Loutres de Mer, et les faire monter sur notre dos, et...";
 	mes ".....";
 	close;
 }
 
 // Teddybear Hat
 //============================================================
-xmas,175,156,3	script	Fuzzy Fuzz#1	712,{
+xmas,175,156,3	script	Poilu-Poilu::Fuzzy Fuzz#1	712,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Une petite minute! Vous portez trop d'objets sur vous en ce moment. Essayez à nouveau après en avoir déposé quelques uns dans votre Stock. -";
 		close;
 	}
 	if (countitem(5030) > 0 && countitem(7213) > 99  && countitem(7217) > 99 && countitem(7161) > 299) {
 		if ((MaxWeight-Weight) < 2000) {
-			mes "[Fuzzy Fuzz]";
-			mes "You brought every material I need, but unfortunately you don't have enough space in your inventory. Try and place some of your items into Kafra Storage first.";
+			mes "[Poilu-Poilu]";
+			mes "Même si vous m'avez apporté tous les matériaux, vous n'avez plus assez de place dans votre inventaire. Allez utiliser le service de Stock et revenez me voir.";
 			close;
 		}
-		mes "[Fuzzy Fuzz]";
-		mes "Excellent! You brought everything! Please make yourself comfortable while I make you your Teddybear Hat.";
+		mes "[Poilu-Poilu]";
+		mes "Ah, vous avez tout! Mettez-vous à l'aise pendant que je confectionne votre Chapeau-Nounours.";
 		next;
 		emotion e_ho;
-		mes "[Fuzzy Fuzz]";
-		mes "Hmm Hm Hmm...";
-		mes "Tear this off...";
-		mes "Knit this on....";
-		mes "Okay, it's almost done...";
+		mes "[Poilu-Poilu]";
+		mes "Hum hum hum...";
+		mes "Je coupe ça là...";
+		mes "Je couds ceci ici....";
+		mes "D'accord, c'est presque terminé...";
 		next;
-		mes "[Fuzzy Fuzz]";
+		mes "[Poilu-Poilu]";
 		emotion e_an;
-		mes "There is an old saying, 'Everything comes to those who wait.' Oh, are you freezing? Why don't you rub your hands together?";
+		mes "Il y a un vieux dicton qui dit ''tout vient à point à celui qui sait attendre''. Oh, mais vous êtes gelé"+ ( sex ? "" : "e" ) +". Soufflez dans vos mains pour les réchauffer!";
 		next;
-		mes "[Fuzzy Fuzz]";
+		mes "[Poilu-Poilu]";
 		emotion e_ic;
-		mes "It's complete! There you go. I think this one will look really good on you! Please take good care of this hat.";
+		mes "Voilà, c'est terminé! Je pense que ça vous ira vraiment bien! Prenez bien soin de ce chapeau.";
 		delitem 5030,1; //Panda_Cap
 		delitem 7213,100; //Needle_Pouch
 		delitem 7217,100; //Spool
@@ -1049,46 +997,37 @@ xmas,175,156,3	script	Fuzzy Fuzz#1	712,{
 		close;
 	}
 	emotion e_gasp;
-	mes "[Fuzzy Fuzz]";
-	mes "Hello there, young man.";
-	mes "What brings you to Lutie, town of goodwill and year round Christmas cheer?";
+	mes "[Poilu-Poilu]";
+	mes "Oh, bien le bonjour, "+ ( sex ? "jeune homme" : "jeune femme" ) +"! Qu'est-ce qui vous amène à Lutie, la ville de la bonne humeur?";
 	next;
-	mes "[Fuzzy Fuzz]";
-	mes "I'm a master of creating stuffed animals, which make great presents. As we all know, everyone loves to hug cute and cuddly stuffed animals.";
+	mes "[Poilu-Poilu]";
+	mes "Je suis un expert taxidermiste! Tout le monde adore les animaux empaillés tout poilus et tout doux au toucher.";
 	next;
-	mes "[Fuzzy Fuzz]";
-	mes "My specialty is the 'Teddybear Hat.' When it's worn, it makes you as cute as a teddy bear, and your hugs twice as warm and cuddly.";
+	mes "[Poilu-Poilu]";
+	mes "Mais ma spécialité, ce sont les 'Chapeaux-Nounours'. Ils rendent aussi mignon qu'un ours-en-peluche quand on les porte, et ils sont chauds et doux.";
 	next;
-	mes "[Fuzzy Fuzz]";
-	if (Sex) {
-		mes "The 'Teddybear Hat' can't be worn by just anyone, since it's cuddling powers are easily abused.";
-		next;
-		mes "[Fuzzy Fuzz]";
-		mes "But I sense that you are an adventurer with a pure heart and would not use the Teddybear Hat for selfish gain.";
-		next;
-		mes "[Fuzzy Fuzz]";
-		mes "You can learn a lot about telling good people from the naughty after working for Santa for a loooong time...";
-	}
-	else {
-		mes "I sense that you are an adventurer with a good heart, and that a sweet girl like you deserves a nice gift.";
-		next;
-		mes "[Fuzzy Fuzz]";
-		mes "You know more about such things after working for Santa for so long.";
-	}
+	mes "[Poilu-Poilu]";
+	mes "Mais tout le monde ne peux pas porter de 'Chapeau-Nounours'! Certains se laisseraient abuseraient de leur côté irrésistiblement attirant pour les autres.";
 	next;
-	mes "[Fuzzy Fuzz]";
-	mes "Unfortunately, I don't have any material to make the headgear right now. But if you bring the materials, I will make you a 'Teddybear Hat' for free.";
+	mes "[Poilu-Poilu]";
+	mes "Mais je sens que vous êtes "+ ( sex ? "un aventurier" : "une aventurière" ) +" au cœur pur, et que vous ne l'emploierez pas à des fins égoïstes.";
 	next;
-	mes "[Fuzzy Fuzz]";
-	mes "Let's see...";
-	mes "I'll need...";
-	mes "^0000FF1 Panda Hat^000000,";
-	mes "^0000FF100 Needle Packet^000000,";
-	mes "^0000FF100 Spool^000000 and";
-	mes "^0000FF300 Black Bear Skin^000000.";
+	mes "[Poilu-Poilu]";
+	mes "J'ai appris à lire dans le cœur des gens depuis tout le temps que je travaille pour le Père Noël.";
 	next;
-	mes "[Fuzzy Fuzz]";
-	mes "So, do you think you can get all of them? I will be here waiting for you.";
+	mes "[Poilu-Poilu]";
+	mes "Malheureusement, je n'ai pas les matériaux nécessaires pour en fabriquer un sous la main. Mais si vous m'apportez tout cela, je vous confectionnerai gratuitement un 'Chapeau-Nounours'.";
+	next;
+	mes "[Poilu-Poilu]";
+	mes "Voyons...";
+	mes "Il me faudrait...";
+	mes "^0000FF1 Chapeau de Panda^000000,";
+	mes "^0000FF100 Paquets d'Aiguilles^000000,";
+	mes "^0000FF100 Bobines^000000 et";
+	mes "^0000FF300 Peaux d'Ours Brun^000000.";
+	next;
+	mes "[Poilu-Poilu]";
+	mes "Est-ce que vous pensez que vous arriverez à me trouver tout cela? Je vous attendrai.";
 	emotion e_heh;
 	close;
 }
