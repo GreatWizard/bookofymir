@@ -17,6 +17,16 @@
 //============================================================
 
 prt_church,173,23,4	script	Acolyte Klift#qsk_al	79,{
+	if ( BaseJob != Job_Acolyte && BaseJob != Job_Monk && BaseJob != Job_Priest) { // Bugfix: ils avaient oublié ces checks. [No Healing]
+		mes "[Acolyte Klift]";
+		mes "Oh, je suis désolée mais je ne suis pas familère avec votre profession. J'ai bien peur que je ne puisse pas grand chose pour vous.";
+		close;
+	}
+	else if (JobLevel >= 29 && BaseJob == Job_Acolyte) {
+		mes "[Acolyte Klift]";
+		mes "Oh, un jeune acolyte! Continuez d'étudier, j'aurai peut-être bientôt quelque chose à vous enseigner.";
+		close;
+	}
 	mes "[Acolyte Klift]";
 	if(sex==1) mes "Ahh... Mon Frère!";
 	if(sex==0) mes "Ahh... Ma Soeur!";
