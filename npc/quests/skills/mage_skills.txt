@@ -16,9 +16,24 @@
 //= 1.6 Fixed a typo in job check. (Bugreport:1531) [L0ne_W0lf]
 //============================================================
 
-geffen_in,151,119,4	script	Blizzardriss#qsk_mg	64,{
+geffen_in,151,119,4	script	Blizzardriss#qsk_mg	64,{ // Bugfix: ils avaient oublié ces checks. [No Healing]
+	if ( BaseJob != Job_Mage && BaseJob != Job_Wizard && BaseJob != Job_Sage) {
+		mes "[Blizzardriss]";
+		mes "Oh je suis désolée mais je ne suis pas familière avec votre profession. J'ai bien peur que je ne puisse pas faire grand chose pour vous...";
+		close;
+		}
+	else if (JobLevel <= 34 && BaseJob == Job_Mage) {
+		mes "[Blizzardriss]";
+		mes "Oh, un"+ ( sex ? "" : "e" ) +" jeune apprenti"+ ( sex ? "" : "e" ) +"! Continuez d'étudier, j'aurai peut-être bientôt quelque chose à vous enseigner.";
+		close;
+		}
+	else if (getskilllv("MG_ENERGYCOAT") == 1) {
+		mes "[Blizzardriss]";
+		mes "On dirait que vous maîtrisez déjà la compétence Manteau Protecteur. Je suis désolée, mais je n'ai plus rien à vous apprendre...";
+		close;
+	}
 	mes "[Blizzardriss]";
-	mes "Hé! Mon ami! Si vous êtes un Mage intéressé par découvrir les compétences cachées, vous êtes au bon endroit!";
+	mes "Hé! Mon ami"+ ( sex ? "" : "e" ) +"! Si vous êtes un Mage intéressé par découvrir les compétences cachées, vous êtes au bon endroit!";
 	next;
 	switch(select("A Propos des Compétences Cachées:Apprendre le ^3355FFManteau Protecteur^000000:Mettre fin à la conversation")) {
 	case 1:
@@ -52,7 +67,7 @@ geffen_in,151,119,4	script	Blizzardriss#qsk_mg	64,{
 		next;
 		mes "[Blizzardriss]";
 		mes "Ok...";
-		mes "Alors, êtes-vous intéressé?";
+		mes "Alors, êtes-vous intéressé"+( sex ? "" : "e" )+"?";
 		close;
 	case 2:
 		if (getskilllv("MG_ENERGYCOAT") == 1) {
@@ -79,7 +94,7 @@ geffen_in,151,119,4	script	Blizzardriss#qsk_mg	64,{
 					mes "Délivrez nos esprits!";
 					mes "Bouclier de Mana! Armure Métallique!";
 					mes ". . . . . . . . . . . .";
-					mes "ENERGY COAT! ! !";
+					mes "MANTEAU PROTECTEUR!!!";
 					next;
 					delitem 746,3; //Glass_Bead
 					delitem 730,1; //Crystal_Jewel
@@ -99,7 +114,7 @@ geffen_in,151,119,4	script	Blizzardriss#qsk_mg	64,{
 			mes "[Blizzardriss]";
 			mes "Et bien!!";
 			mes "Vous n'avez pas écouté mes explications?!";
-			mes "Vous n'êtes pas prêt à ce que je vous assiste dans votre apprentissage.";
+			mes "Vous n'êtes pas prêt"+( sex ? "" : "e" )+" à ce que je vous assiste dans votre apprentissage.";
 			next;
 			mes "[Blizzardriss]";
 			mes "Si vous avez besoin que je vous explique à nouveau, n'hésitez pas à me demander. Je serai ravie de vous donner un cours de rattrapage... à condition que vous écoutiez!";
@@ -108,7 +123,7 @@ geffen_in,151,119,4	script	Blizzardriss#qsk_mg	64,{
 	case 3:
 		mes "[Blizzardriss]";
 		mes "Le sage connaît la patience.";
-		mes "Entraînez-vous et revenez me voir lorsque vous serez prêt.";
+		mes "Entraînez-vous et revenez me voir lorsque vous serez prêt"+( sex ? "" : "e" )+".";
 		close;
 	}
 }
