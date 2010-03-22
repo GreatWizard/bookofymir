@@ -353,7 +353,7 @@ UPDATE item_db SET `name_japanese`  = "Mandibules de Fourmi" WHERE ID = 1014;
 UPDATE item_db SET `name_japanese`  = "Langue" WHERE ID = 1015;
 UPDATE item_db SET `name_japanese`  = "Queue de Rat" WHERE ID = 1016;
 UPDATE item_db SET `name_japanese`  = "Moustache de Taupe" WHERE ID = 1017;
-UPDATE item_db SET `name_japanese`  = "Griffe de Taupe" WHERE ID = 1018;
+UPDATE item_db SET `name_japanese`  = "Griffes de Taupe" WHERE ID = 1018;
 UPDATE item_db SET `name_japanese`  = "Tronc" WHERE ID = 1019;
 UPDATE item_db SET `name_japanese`  = "Cheveux Noirs" WHERE ID = 1020;
 UPDATE item_db SET `name_japanese`  = "Cornes de Dokebi" WHERE ID = 1021;
