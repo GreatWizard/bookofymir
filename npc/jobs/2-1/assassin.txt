@@ -243,7 +243,7 @@ in_moc_16,19,33,1	script	Guildien#asn	55,{
 				mes "[Type au regard féroce]";
 				mes "Alors que diriez-vous de passer à la prochaine étape et de devenir un Assassin?";
 				next;
-				switch(select("Ouais. J'en ai fini de voler à l'arrachée.:Quelles sont les exigences?:Peut-être plus tard, il me reste des trucs à voler avant.")) {
+				switch(select("Ouais. J'en ai fini de voler à l'arrachée.:Quelles sont les exigences?:Plus tard, il me reste des trucs à voler avant.")) {
 				case 1:
 					mes "[Type au regard féroce]";
 					mes "Ça fait très longtemps que je n'avais pas eu d'invité. Je vous envoie au bureau.";
@@ -313,7 +313,7 @@ OnTouch:
 		mes "[Assassin 'Khai']";
 		mes "Excusez mon éclat de rire, mais c'est tellement drôle! Hahaha~ Alors vous voulez que je vous donne quelques conseils?";
 		next;
-		switch(select("Je vous en prie, aidez-moi.:Ne me faites pas rire! Maintenant, donnez moi des conseils!:...Fermez-la, je n'ai pas besoin de votre aide!")) {
+		switch(select("Je vous en prie, aidez-moi.:Ça suffit! Maintenant, donnez moi des conseils!:...Fermez-la, je n'ai pas besoin de votre aide!")) {
 		case 1:
 			mes "[Assassin 'Khai']";
 			mes "Haaahahahaha!!!";
@@ -966,7 +966,7 @@ L_AskQuestions:
 				changequest 8002,8003;
 				next;
 				mes "[L'Anonyme]";
-				mes "Vous n'avez pas échoué cette fois-ci! Mais vous n'avez pas encore fini. Il vous faut réussir un autre examen. Dans la salle suivante, vous serez informés sur le prochain test.";
+				mes "Vous n'avez pas échoué cette fois-ci! Mais vous n'en avez pas encore fini. Il vous faut passer un nouvel autre examen. Nous vous donnerons plus de détails sur la prochaine péreuve dans la salle.";
 				close;
 			}
 			else {
@@ -1037,11 +1037,12 @@ OnInit:
 	end;
 
 OnStartArena:
-	if (ASSIN_Q2 < 5) { // Bugfix: sans ça les persos peuvent ne pas fermer le pop up et cliquer directement sur la salle d'attente pour entrer. [NoH]
-		kickwaitingroomall;
+	warpwaitingpc "in_moc_16", 66, 151;
+	attachrid($@warpwaitingpc[0]);  // Bugfix: sans ça les persos peuvent ne pas fermer le pop up et cliquer directement sur la salle d'attente pour entrer. [NoH]
+	if (ASSIN_Q2 < 5) {
+		warp "Save",0,0;
 		end;
 		}
-	warpwaitingpc "in_moc_16", 66, 151;
 	donpcevent "Beholder#ASNTEST::OnEnable";
 	donpcevent "Gardien de la Porte#ASN::OnDisable";
 	set getvariableofnpc(.DisableTraps,"Beholder#ASNTEST"),0;
