@@ -77,12 +77,12 @@ pay_fild10,148,252,3	duplicate(HntNotice)	Informations#hu	857
 
 // Actual Job quest start
 //============================================================ 
-hu_in01,386,373,4	script	Chasseresse Sherin#hnt	727,{
+hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 	if (Upper == 1) {
-		mes "[Chasseresse Sherin]";
+		mes "[Chasseuse Sherin]";
 		mes "Oh, comment allez-vous? Ça fait longtemps, n'est-ce pas?";
 		next;
-		mes "[Chasseresse Sherin]";
+		mes "[Chasseuse Sherin]";
 		mes "...Attendez.";
 		mes "Oups! Je suis désolée, j'aurais parié que nous nous étions déjà rencontrés. C'est bizarre.";
 		close;
@@ -99,13 +99,13 @@ hu_in01,386,373,4	script	Chasseresse Sherin#hnt	727,{
 		close;
 	}
 	if (SkillPoint) {
-		mes "[Chasseresse Sherin]";
+		mes "[Chasseuse Sherin]";
 		mes "Vous ne pouvez pas changer de classe sans avoir utilisé tous vos Points de Compétence. Veuillez tous les répartir et revenez me voir...";
 		close;
 	}
 	if (BaseClass == Job_Novice) {
 		mes "[Membre de la Guilde des Chasseurs]";
-		mes "Vous devez être... Novice?";
+		mes "Vous devez être... un Novice?";
 		mes "Hé bien, vous avez fait un bien long chemin. Mais je ne vois pas vraiment ce que vous pourriez faire ici.";
 		close;
 	}
@@ -143,37 +143,37 @@ hu_in01,386,373,4	script	Chasseresse Sherin#hnt	727,{
 		close;
 	}
 	else if (BaseJob == Job_Hunter) {
-		mes "[Chasseresse Sherin]";
+		mes "[Chasseuse Sherin]";
 		mes "Oh... " + strcharinfo(0) + "!!";
 		mes "Ça faisait longtemps... Qu'est-ce qui vous amène ici? Votre faucon se serait-il échappé?";
 		next;
-		mes "[Chasseresse Sherin]";
+		mes "[Chasseuse Sherin]";
 		mes "Je n'ai pas réellement de nouveautés de la part de la guilde pour l'instant, donc j'espère que vous n'êtes pas venu ici pour ça...";
 		close;
 	}
 	else if (BaseJob == Job_Archer) {
 		if (SkillPoint) {
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Vous ne pouvez pas faire une demande de changement de classe si vous avez encore des Points de Compétence inutilisés. Utilisez d'abord tous vos Points de Compétence.";
 			close;
 		}
 		else if (HNTR_Q == 17 && countitem(1007) == 0) {
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Hum... j'ai été informée que vous vous aviez réussi l'examen. Mais vous ne possédez pas le 'Collier de Sagesse' nécessaire qui atteste de votre réussite.";
 			next;
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Je peux vous permettre de changer de classe, mais vous devez impérativement me rapporter un 'Collier de Sagesse'.";
 			close;
 		}
 		else if (HNTR_Q == 17 && countitem(1007) > 0 && JobLevel > 39) {
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Oh...? Vous avez réussi l'examen du changement de classe? Félicitations...!!";
 			next;
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Bien dans ce cas, je vais maintenant vous changer en Chasseur.";
 			next;
 			delitem 1007,1; //Penetration
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Tadam... Félicitations!";
 			mes "Vous êtes impressionnant en Chasseur!!";
 			set .@joblvl,joblevel;
@@ -181,10 +181,10 @@ hu_in01,386,373,4	script	Chasseresse Sherin#hnt	727,{
 			callfunc "Job_Change",Job_Hunter;
 			callfunc "F_ClearJobVar";		// clears all job variables for the current player
 			next;
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Devenez une personne noble et un digne représentant de notre Guilde de Chasseurs. Montrez votre amour de la nature...";
 			next;
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Et aussi, voici une petit présent pour récompenser tous vos efforts. C'est de ma part, bien entendu...";
 			if (.@joblvl > 49)
 				getitem 1718,1; //Hunter_Bow
@@ -213,24 +213,24 @@ hu_in01,386,373,4	script	Chasseresse Sherin#hnt	727,{
 				mes "Ah!";
 				mes "Les voilà: les questions de l'entretien... Tout d'abord, mon nom est Sherin. Heureuse de faire votre connaissance!";
 				next;
-				mes "[Chasseresse Sherin]";
+				mes "[Chasseuse Sherin]";
 				mes "Bien dans ce cas, que diriez-vous de commencer?";
 				next;
 				if (select("Oui... commençons tout de suite.:Non, je reviendrai plus tard.") == 1) {
 					if(checkquest(4000) == -1) {
 						setquest 4000;
 					}
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Je vais vous décrire plusieurs énoncés. Écoutez-les attentivement. Quand je vous poserai une question, vous devrez choisir une réponse. Plutôt simple, non?";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Je veux simplement savoir ce que vous pensez de la vie en général, et pourquoi vous souhaitez devenir Chasseur, il n'y a pas de quoi être nerveux.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Bien, commençons dans ce cas.";
 					next;
 L_AskQuestions:
-					mes "[Chasseresse Sherin]"; //myllena
+					mes "[Chasseuse Sherin]"; //myllena
 					mes "Vous êtes Archer, et vous ne savez pas où vous devez aller chasser. Que faites-vous?";
 					next;
 					switch(select("Demander où vous pourriez aller en hurlant.:Demander calmement à une personne de passage.:Chercher autour de vous un bon endroit.")) {
@@ -240,10 +240,10 @@ L_AskQuestions:
 					default:
 						break;
 					}
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Donc vous avez choisi un endroit où aller chasser. Vous allez chasser les monstres connus sous le nom de Hodes dans le Désert de Sograt.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Mais vous êtes à Payon!!";
 					mes "Comment allez-vous vous rendre dans le désert?";
 					next;
@@ -254,10 +254,10 @@ L_AskQuestions:
 					default:
 						break;
 					}
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Il y a aucun Prêtre à solliciter pour une téléportation, et aucun ami pour vous accompagner. Vous êtes obligé d'utiliser le service de la Kafra, mais vous n'avez pas de Zeny!";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Que faites-vous pour obtenir les Zeny dont vous avez besoin?";
 					next;
 					switch(select("Je demande ici et là.:Je vends des objets qui ne me sont pas utiles.:Je pars chasser dans un endroit proche.")) {
@@ -267,23 +267,23 @@ L_AskQuestions:
 					default:
 						break;
 					}
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Et vous arrivez enfin dans le Désert de Sograt. Mais vous vous rendez compte que vous ne pouvez pas tuer les Hodes seul car ils sont un peu trop forts pour vous.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Que feriez-vous face à cette situation?";
 					next;
 					if (select("J'attaquerais un Hode d'en haut d'une colline.:Je retournerais en ville.:J'attaquerais le Hode de quelqu'un d'autre.") == 2)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Disons que vous avez eu beaucoup de soucis à tuer des Hodes et que vous êtes retourné en ville. Désormais vous n'avez plus de HP et un Prêtre semble se trouver dans les environs. Comment lui demanderiez-vous de vous soigner?";
 					next;
 					if (select("Serait-il possible d'être soigné, s'il-vous-plaît?:Soins, svp.:Soignez-moi.") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Cette fois, vous avez trouvé un objet rare en fouillant dans votre inventaire. Vous voulez vendre votre objet, et vous trouvez de nombreuses personnes qui ont ouvert leur boutique et des fenêtres de discussion.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Quel est le meilleur moyen pour vendre votre objet?";
 					next;
 					switch(select("Hurler à vue.:Ouvrir une fenêtre de discussion et attendre.:Regarder si quelqu'un est intéressé par l'objet.")) {
@@ -293,15 +293,15 @@ L_AskQuestions:
 					default:
 						break;
 					}
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Pendant que vous attendez, quelqu'un demande des objets et des Zeny. Que devriez-vous faire?";
 					next;
 					if (select("Lui donner quelques uns de mes objets et des Zeny.:L'ignorer et continuer mon chemin.:Lui conseiller un bon endroit où aller chasser.") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Dans l'immédiat, vous décidez de vous rendre seul au Labyrinthe.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Mais sur votre chemin, vous rencontrez une personne qui s'est perdue. Que devriez-vous faire?";
 					next;
 					switch(select("Lui indiquer la route à prendre.:L'escorter personnellement jusqu'à destination.:L'ignorer.")) {
@@ -311,18 +311,18 @@ L_AskQuestions:
 					default:
 						break;
 					}
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Après avoir rencontré cette personne, vous décidez de repartir. Au même moment, vous trouver quelqu'un entrain de combattre un gros Monstre!";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Que feriez-vous?";
 					next;
 					if (select("L'observer, puis attaquer s'il demande de l'aide.:Attaquer et observer ce qui se passe.:Retourner en ville.") == 1)
 						set .@hunter_t,.@hunter_t+10;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Vous êtes maintenant épuisé après la dure journée de chasse. Il est temps de retourner en ville.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Mais qu'est-ce que c'est!? Vous trouvez un objet coûteux par terre! Que devriez-vous faire avec cet objet?";
 					next;
 					switch(select("Le prendre et le garder.:Essayer de trouver à qui il appartient.:Passer mon chemin.")) {
@@ -332,41 +332,41 @@ L_AskQuestions:
 					default:
 						break;
 					}
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Ok, c'est la fin de l'examen!";
 					next;
 					if (.@hunter_t == 100) {
 						set HNTR_Q,2;
 						changequest 4000,4001;
-						mes "[Chasseresse Sherin]";
+						mes "[Chasseuse Sherin]";
 						mes "Bien joué! Vos réponses montrent que vous avez une juste conception de la vie. Vous possédez sans aucun doute les qualités requises pour devenir Chasseur...";
 						next;
-						mes "[Chasseresse Sherin]";
+						mes "[Chasseuse Sherin]";
 						mes "Je suis heureuse de vous dire que vous avez réussi l'entretien... Maintenant, allez voir la personne située là bas, dans le coin de la pièce. Elle vous indiquera la suite des épreuves...";
 						close;
 					}
 					else if (.@hunter_t == 90) {
 						set HNTR_Q,2;
 						changequest 4000,4001;
-						mes "[Chasseresse Sherin]";
+						mes "[Chasseuse Sherin]";
 						mes "Bien, je suis en train de regarder vos réponses et vos résultats ne sont pas satisfaisants. Mais je vais malgré tout vous permettre de valider votre examen. Bien que je ne sache pas ce qu'en pensera notre Maître de Guilde.";
 						next;
-						mes "[Chasseresse Sherin]";
+						mes "[Chasseuse Sherin]";
 						mes "Gardez les bases en mémoire. Faites mieux à la prochaine épreuve, d'accord?";
 						close;
 					}
 					set HNTR_Q,1;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Hum... de cette façon ça ne peut pas fonctionner. Vous ne pouvez pas devenir Chasseur sans connaître les bases.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Réfléchissez sérieusement aux réponses que vous m'avez données. Afin d'être en communion avec la nature, vous devez d'abord évaluer vos relations avec les autres.";
 					next;
-					mes "[Chasseresse Sherin]";
+					mes "[Chasseuse Sherin]";
 					mes "Ainsi, vous serez plus en harmonie avec la nature et les personnes qui vous entourent. C'est ce genre d'harmonie qui fait les meilleurs Chasseurs.";
 					close;
 				}
-				mes "[Chasseresse Sherin]";
+				mes "[Chasseuse Sherin]";
 				mes "Ok... Revenez quand vous serez prêt...";
 				close;
 			case 2:
@@ -390,17 +390,17 @@ L_AskQuestions:
 			}
 		}
 		else if (JobLevel > 39 && HNTR_Q == 1) {
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Bienvenue de nouveau...!";
 			mes "Bien, commençons l'entretien. Cette fois-ci, réfléchissez bien aux réponses pour chaque question.";
 			next;
 			goto L_AskQuestions;
 		}
 		else if (HNTR_Q > 2 && HNTR_Q < 10) {
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Donnez simplement l'objet au Chasseur de Démons, qui se trouve au fond à gauche de la salle...";
 			next;
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			if (sex)
 				mes "Si vous décidez de devenir Chasseur, promettez-moi de venir me rendre visite. J'aimerais vous voir en Chasseur. Vous devriez être formidable!!";
 			else
@@ -408,20 +408,20 @@ L_AskQuestions:
 			close;
 		}
 		else if (HNTR_Q == 2) {
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "????";
 			next;
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "Vous n'avez pas été capable de trouver le Chasseur de Démons? Il se trouve juste à gauche! Héhé...";
 			next;
-			mes "[Chasseresse Sherin]";
+			mes "[Chasseuse Sherin]";
 			mes "J'aimerais vous voir devenir Chasseur...! Waaah... Je pense que vous seriez formidable, alors dépêchez-vous!";
 			close;
 		}
-		mes "[Chasseresse Sherin]";
+		mes "[Chasseuse Sherin]";
 		mes "Hum, vous êtes sensé rencontrer quelqu'un d'autre, pas moi. Comme notre Maître de Guilde qui est absent pour affaires, vous savez?";
 		next;
-		mes "[Chasseresse Sherin]";
+		mes "[Chasseuse Sherin]";
 		mes "J'ai entendu dire qu'il était dans le Palais Central de Payon... ou au Village des Archers, à un de ces deux endroits. Essayez d'aller là-bas et trouvez-le, d'accord?";
 		close;
 	}
@@ -565,7 +565,7 @@ L_GiveQuestItems:
 	}
 	else {
 		mes "[Réceptionniste de la Guilde]";
-		mes "Si vous souhaitez devenir Chasseur, inscrivez-vous auprès de Sherin.";
+		mes "Si vous souhaitez devenir un Chasseur, inscrivez-vous auprès de Sherin.";
 		close;
 	}
 }
@@ -612,7 +612,7 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 			next;
 		}
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Tenez, prenez ces quelques flèches, elles vous seront utiles!";
+		mes "Tenez ces quelques flèches, elles vous seront utiles!";
 		set HNTR_Q,12;
 		changequest 4009,4011;
 		getitem 1751,200; //Silver_Arrow
@@ -1161,7 +1161,7 @@ OnTouch:
 		mapannounce "job_hunte"," !! Opération annulée. !! ",bc_map;
 		end;
 	case 3:
-		mapannounce "job_hunte"," !! opération annulée... !! ",bc_map;
+		mapannounce "job_hunte"," !! Opération annulée... !! ",bc_map;
 		mes "^3355FFVous allez être renvoyé dans la salle d'attente.^000000";
 		close2;
 		set HNTR_Q,13;
