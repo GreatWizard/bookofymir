@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Leonid (en cours), corrigé par Myllena, No Healing et Icaros
+//traduit par Leonid (quête de Satan Morroc), et NoH, corrigé par Myllena, No Healing et Icaros
 //===== eAthena Script ======================================= 
 //= Quest NPCs related to Morroc
 //===== By: ================================================== 
@@ -88,72 +88,53 @@ moc_ruins,113,181,4	script	William	89,{
 
 // Binoculars Quest
 // ============================================================
-moc_ruins,118,176,4	script	Alchemist	64,{
+moc_ruins,118,176,4	script	Alchimiste::Alchemist	64,{
 	mes "[Marius]";
-	mes "Howdy, new customer!!";
-	mes "I know what you're gonna talk about. You want the Magic Glasses from me, riiiiight?";
+	mes "Un nouveau client! Comment allez-vous? Je sais ce que vous avez en tête: vous voulez une paire de mes Lunettes Magiques, pas vrai?";
 	next;
-	switch(select("What is that?:Manufacture:Ignore him")) {
+	switch(select("Hein? De quoi vous parlez?:En fabriquer une paire.:L'ignorer.")) {
 	case 1:
 		mes "[Marius]";
-		mes "Hmm~!";
-		mes "Well, the official name for them is ^3355FFBinoculars^000000! An optical device that works like a pair of field glasses, they're designed for simultaneous use by both eyes!";
+		mes "Hum~ En fait il s'agit de ^3355FFLunettes Grossissantes^000000, tout du moins, c'est leur nom officiel. C'est un mécanisme optique fonctionnant sur le principe des longue-vues traditionnelles, mais dessiné pour pouvoir fonctionner avec les deux yeux!";
 		next;
 		mes "[Marius]";
-		mes "They're made up of two small telescopes joined with a single focusing device. You can arrange the lenses to produce stereoscopic vision.";
+		mes "Il s'agit de deux petites longue-vues reliée à un focus unique. Vous pouvez régler les lentilles pour obtenir une vision stéréoscopique.";
 		next;
 		mes "[Marius]";
-		mes "So?";
-		mes "Ain't that";
-		mes "something, huh?";
-		mes "Muhahahahahaha!";
+		mes "Qu'en sites-vous? C'est quelque chose, n'est-ce pas? Muhahahahahaha!";
 		mes ". . . . .";
 		next;
 		mes "[Marius]";
-		mes "Hm? You don't seem to";
-		mes "believe what I just said?";
-		mes "Oh c'mon, jerk. It's real!!";
+		mes "Hum? Vous ne me croyez pas? Ne soyez pas stupide! Bien sûr que ça existe!";
 		next;
 		mes "[Marius]";
-		mes "I will let you";
-		mes "know the items I need...";
-		mes "1 ^3355FFGeek Glasses^000000! 100 ^3355FFSteel^000000!";
-		mes "And ^3355FF50000 Zeny^000000!";
+		mes "Voici ce dont j'ai besoin pour en fabriquer une paire: 1 paire de ^3355FFCuls-de-Bouteille^000000, 100 morceau d'^3355FFAcier^000000, et ^3355FF50000 Zénys^000000.";
 		close;
 	case 2:
 		if ((countitem(2243) > 0) && (countitem(999) > 99) && (Zeny > 49999)) {
 			mes "[Marius]";
-			mes "Perfect, perfect !";
-			mes "Now my masterpiece will be complete!";
-			mes "Muhahahaha !";
+			mes "Ah, vous avez tout, parfait! Une petite minute... Ah voilà, mon chef d'oeuvre est terminé! Muhahahaha !";
 			next;
 			delitem 2243,1;  //Spinning_Eyes
 			delitem 999,100;  //Steel
 			set Zeny,Zeny-50000;
 			mes "[Marius]";
-			mes "Here you are!";
-			mes "Binoculars !";
+			mes "Et voilà vos Lunettes Grossissantes!";
 			getitem 2296,1; // Binoculars
 			next;
 			mes "[Marius]";
-			mes "Just remember...";
-			mes "Don't peep at something you shouldn't look at. Well, at least try not to.";
+			mes "Oh, et évitez de de fixer trop longtemps quelque chose que vous ne devriez pas... Ou du moins, essayez.";
 			close;
 		}
 		else {
 			mes "[Marius]";
-			mes "Argggghhhhhhh!!";
-			mes "You didn't bring";
-			mes "enough items!!!!";
-			mes "How dare you";
-			mes "disgrace me!!!";
-			mes "Baaaadddd !!";
+			mes "Argggghhhhhhh! Vous n'avez pas tout ce que je vous avais demandé de rapporter! Comment osez-vous me faire perdre mon temps!"+ ( sex ? "Petit idiot" : "Petite idiote" ) +"!";
 			close;
 		}
 	case 3:
 		mes "[Marius]";
-		mes "Hey you~!";
-		mes "Now you're in front of Marius, an Alchemist among Alchemists. Ignoring me, eh? Come on, I'll beat your ass!";
+		mes "Hé vous~";
+		mes "Vous savez qui je suis? Marius, le plus grand des Alchimistes au monde! Vous m'ignorez?! Approchez, que je vous remette les idées en place!";
 		close;
 	}
 }
@@ -833,54 +814,44 @@ OnDisable:
 }
 */
 
-yuno_in04,180,106,3	script	Reading Girl#moc_girl1	73,{
+yuno_in04,180,106,3	script	Lectrice::Reading Girl#moc_girl1	73,{
 	mes "[" + strcharinfo(0) + "]";
-	mes "Excuse me, but may I ask";
-	mes "you a question?";
+	mes "Excusez-moi, mais est-ce que je peux vous demander quelque chose?";
 	next;
 	mes "[Yunia]";
-	mes "Eh? Oh, I'm sorry, I was";
-	mes "so busy reading this book!";
-	mes "So, uh, what exactly did";
-	mes "you want to ask me?";
+	mes "Hein? Oh, je suis désolée, j'étais plongée dans ce livre! Alors, qu'est-ce que vous vouliez me demander, au juste?";
 	next;
-	select("What are you reading?");
+	select("Qu'est-ce que vous êtes en train de lire?");
 	mes "[Yunia]";
-	mes "Ah! This is one of the best sellers of Joshua Vansei's.";
-	mes "The main character is a writer, and it's so touching that this guy writes a story of his mistress...";
+	mes "Ah!Il s'agit de l'un des best sellers de Joshua Vansei. Le personnage principal est un écrivain, et raconte l'histoire de sa maîtresse. C'est si touchant...";
 	next;
 	mes "[Yunia]";
-	mes "Oh.. I can't wait to see Hoein Special..";
-	mes "And this, you could have a look if you want to.";
+	mes "Oh... Je suis si impatiente de lire le hors-série de Hoein...";
+	mes "Dites, vous voulez jeter un oeil à cet exemplaire?";
 	next;
 	mes "[" + strcharinfo(0) + "]";
-	mes "Oh, now, I shouldn't.";
-	mes "Looks like the cover's rounded with a red strap,";
-	mes "which..I really think is for adults only.";
-	mes "ex..cuse me~!";
+	mes "Oh, je ne devrais pas. J'aperçois un bordereau rouge sur la couverture – c'est réservé aux adultes, n'est-ce pas? Euh... Je dois y aller~";
 	close;
 }
 
-morocc_in,46,125,5	script	Assistant#moc_ex1	729,{
+morocc_in,46,125,5	script	Assistante::Assistant#moc_ex1	729,{
 	mes "[Sephit]";
-	mes "I've always believed in Satan..";
-	mes "Haah... Guess it's good to be living, after all.";
+	mes "J'ai toujours cru en l'existence de Satan... Haha! J'imagine que cette vie méritait d'être vécue, après tout.";
 	next;
 	mes "[Sephit]";
-	mes "Who would've thought to actually see the Satan while alive.....?";
+	mes "Qui aurait imaginé voir Satan de toute sa vie...?";
 	close;
 }
 
-que_job01,70,84,1	script	Girl#moc_ex002	882,{
-	mes "[Girl]";
-	mes "Oh, the world.. the world is doomed..";
-	mes "-sobbing-";
-	mes "Nothing seems to be working now..";
+que_job01,70,84,1	script	Jeune Femme::Girl#moc_ex002	882,{
+	mes "[Jeune Femme]";
+	mes "Oh, le monde... Le monde court à sa perte... *snif*";
+	mes "Tout semble fichu, maintenant..";
 	emotion e_sob;
 	next;
 	mes "["+ strcharinfo(0) +"]";
 	mes "....Tsk..tsk...";
-	mes "Good heavens.. I can't believe this young girl's drinking with sadness....";
+	mes "Bon sang... Je n'arrive pas à croire que cette jeune femme noie son chagrin dans l'alcool....";
 	close;
 }
 
@@ -1186,7 +1157,7 @@ prontera,164,304,3	script	Messager Continental#01::ConMessenger	997,3,3,{
 	}
 
 OnTouch:
-	if (BaseLevel > 79) {
+	if (BaseLevel > 79 && !rebirth_moc_edq) { // Bugfix: faut pas abuser non plus avec ces OnTouch: il n'y a pas de raison de continuer quand le perso a commencé la quête. Ce n'est pas 100% officiel (à vérifier), mais je le fais quand même. [NoH]
 		mes "[Messager de la Garde Continentale]";
 		mes "Êtes-vous... "+ strcharinfo(0) +"?";
 		mes "Ah, très bien. J'ai un message très important à vous transmettre.";
