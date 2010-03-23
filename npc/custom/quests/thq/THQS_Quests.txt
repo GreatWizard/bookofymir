@@ -53,7 +53,7 @@ pay_arche,86,129,6	script	Archer	732,{
 	mes "Désolé, je ne peux pas parler: je suis occupé. J'attends qu'on me livre quelque chose.";
 	close;
 N_QuestStart:
-	if (!countitem(1072)) { // Bugfix: il manquait ce check [No Healing]
+	if (!countitem(1072)) {
 		mes "[Kieth]";
 		mes "Vous n'étiez pas sensé me livrer un arc? Eh bien, où est-il?";
 		close;
@@ -62,9 +62,9 @@ N_QuestStart:
 	mes "Ah, vous devez faire partie de la Guilde des Chasseurs de Trésors. Est-ce que vous avez mon arc?";
 	mes " ";
 	mes "Ah, merci d'avoir pris le temps de me le livrer. Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors.";
+	delitem 1072,1;
 	set one_qset,0;
 	set On_Quest,0;
-	delitem 1072,1;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
 }
@@ -80,13 +80,13 @@ N_QuestComp:
 	mes "Oh, merci, c'est un bon début. Il faut vraiment que ces vermines fichent le camp...";
 	mes " ";
 	mes "Voilà, prenez ces 2 Jetons de la Guilde des Chasseurs de Trésors.";
-	set one_qset,0;
-	set #Treasure_Token,#Treasure_Token+2;
-	set On_Quest,0;
 	delitem 909,20;
 	delitem 955,20;
 	delitem 914,20;
 	delitem 705,20;
+	set one_qset,0;
+	set #Treasure_Token,#Treasure_Token+2;
+	set On_Quest,0;
 	close;
 N_QuestStart:
 	mes "[Billy-Bob]";
@@ -107,8 +107,8 @@ N_QuestComp:
 	next;
 	mes "[Vielle Femme:]";
 	mes "Merci beaucoup! Voilà vos 3 Jetons de la Guilde des Chasseurs de Trésors.";
-	set #Treasure_Token,#Treasure_Token+3;
 	delitem 934,15;
+	set #Treasure_Token,#Treasure_Token+3;
 	set one_qset,0;
 	set On_Quest,0;
 	close;
@@ -166,9 +166,9 @@ N_QuestComp:
 	mes "[Jeramiah]";
 	mes "Ah bonjour, vous devez faire partie de la Guilde des Chasseurs de Trésors. Avez-vous mon Jur? Ah, bien, bien. Merci.";
 	mes "Voilà, prenez ce jeton de la Guilde des Chasseurs de Trésors.";
+	delitem 1998,1;
 	set two_qset,0;
 	set On_Quest,0;
-	delitem 1998,1;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
 N_QuestStart:
@@ -212,10 +212,10 @@ N_QuestComp:
 	mes "VOUS L'AVEZ FAIT!!!";
 	mes " ";
 	mes "Je savais que vous étiez fort, mais je ne me doutais pas que vous pourriez le tuer. Merci beaucoup. Voilà 3 Jetons de la Guilde en récompense.";
+	delitem 7005,1;
 	set two_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+3;
-	delitem 7005,1;
 	close;
 N_QuestStart:
 	mes "[Molly]";
@@ -240,8 +240,8 @@ N_QuestComp:
 	mes "Bon, c'est un début. J'espère que cette tanière disparaîtra complètement un jour.";
 	mes " ";
 	mes "J'aurai peut-être une autre quête pour vous plus tard. En attendant, prenez ces 2 Jetons de la Guilde des Chasseurs de Trésors.";
-	set #Treasure_Token,#Treasure_Token+2;
 	delitem 1040,30;
+	set #Treasure_Token,#Treasure_Token+2;
 	set three_qset,0;
 	set On_Quest,0;
 	close;
@@ -268,8 +268,8 @@ N_QuestComp:
 	next;
 	mes "[Flank]";
 	mes "Merci. Prenez ce Jeton de la Guilde";
-	set three_qset,0;
 	delitem 1082,1;
+	set three_qset,0;
 	set #Treasure_Token,#Treasure_Token+1;
 	set On_Quest,0;
 	close;
@@ -316,9 +316,9 @@ N_QuestComp:
 	mes "Ravi de voir que vous êtes revenu vivant! J'avais des doutes, mais je vous remercie de votre aide.";
 	mes " ";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1041,50;
 	set three_qset,0;
 	set On_Quest,0;
-	delitem 1041,50;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 N_QuestStart:
@@ -341,8 +341,8 @@ pay_arche,45,138,6	script	Flora	724,{
 N_QuestComp:
 	mes "[Flora]";
 	mes "Re-bonjour! Bien joué, vous avez réussi (je me demande si ce Machin Enflammé est toujours en vie). J'espère que vous nous avez débarrassé d'un bon nombre de monstres. Voilà, prenez ces 2 Jetons.";
-	set #Treasure_Token,#Treasure_Token+2;
 	delitem 957,50;
+	set #Treasure_Token,#Treasure_Token+2;
 	set four_qset,0;
 	set On_Quest,0;
 	killmonster "pay_dun00","Flora::OnMobDead";
@@ -376,10 +376,10 @@ N_QuestComp:
 	mes "Eh bien, vous avez pris votre temps! Vous savez que le temps, c'est de l'argent?! Ne comptez pas sur moi pour faire votre éloge! Donnez-moi mon bâton, et hors de ma vue! ";
 	next;
 	mes "[Zed]";
-	mes "Bon, prenez quand même ce truc, là, ce ''Jeton''.";
+	mes "Bon, prenez quand même ce truc, là, ce 'Jeton'.";
+	delitem 1999,1;
 	set On_Quest,0;
 	set four_qset,0;
-	delitem 1999,1;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
 N_QuestStart:
@@ -398,9 +398,9 @@ N_QuestComp:
 	mes "[Dassy]";
 	mes "Ouiii! Merci maintenant mon Animal de Compagnie n'aura plus faim avant un bon bout de temps. Merci beaucoup!";
 	mes "Voilà, prenez ce Jeton de la Guilde.";
+	delitem 711,20;
 	set On_Quest,0;
 	set four_qset,0;
-	delitem 711,20;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
 N_QuestStart:
@@ -429,9 +429,9 @@ N_QuestComp:
 	mes "Voilà, prenez ces 2 Jetons de la Guilde des Chasseurs de Trésors.";
 	mes "Oh, et prenez aussi mon vieux trésor...";
 	monster "prt_gld",155,99,"Trésor du Vieil Homme",1324,1;
+	delitem 714,1;
 	set four_qset,0;
 	set On_Quest,0;
-	delitem 714,1;
 	set #Treasure_Token,#Treasure_Token+2;
 	close;
 N_QuestStart:
@@ -456,17 +456,17 @@ N_QuestComp:
 	mes "Oh merci beaucoup. Mais malheureusement, ils reviendront...";
 	next;
 	mes "Voilà, prenez ces 2 Jetons de la Guildes";
+	delitem 1028,15;
 	set five_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+2;
-	delitem 1028,15;
 	close;
 N_QuestStart:
 	mes "[Lithin]";
 	mes "Bonjour bonjour!";
 	mes "Bienvenue dans la Forêt-Labyrinthe. J'ai une mission pour vous.";
 	mes " ";
-	mes "Est-ce que vous avez déjà entendu parler du monstre qu'on appelle le ''Sauvage''? Il ressemble à un sanglier, mais il fait des bruits très ennuyeux. Qu'est-ce que vous en diriez si je vous demandais de me rapporter 15 Crinières de Sauvages?";
+	mes "Est-ce que vous avez déjà entendu parler du monstre qu'on appelle le 'Sauvage'? Il ressemble à un sanglier, mais il fait des bruits très ennuyeux. Qu'est-ce que vous en diriez si je vous demandais de me rapporter 15 Crinières de Sauvages?";
 	close;
 }
 //5-2 goes to 6-2 using callfunc;
@@ -482,10 +482,10 @@ N_QuestComp:
 	mes "De tout mon coeur je vous remercie.";
 	next;
 	mes "Voilà, prenez ces 2 Jetons de la Guilde.";
+	delitem 932,30;
 	set #Treasure_Token,#Treasure_Token+2;
 	set five_qset,0;
 	set On_Quest,0;
-	delitem 932,30;
 	close;
 N_QuestStart:
 	mes "[Homme Étrange]";
@@ -532,9 +532,9 @@ N_QuestComp:
 	next;
 	mes "[Sorcier]";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1059,50;
 	set five_qset,0;
 	set On_Quest,0;
-	delitem 1059,50;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 N_QuestStart:
@@ -560,8 +560,8 @@ N_QuestComp:
 	next;
 	mes "[Voleur]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors en récompense.";
-	set six_qset,0;
 	delitem 1083,1;
+	set six_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
@@ -584,8 +584,8 @@ N_QuestComp2:
 	next;
 	mes "[Homme Étrange]";
 	mes "Prenez ces 3 Jetons.";
-	set #Treasure_Token,#Treasure_Token+3;
 	delitem 930,30;
+	set #Treasure_Token,#Treasure_Token+3;
 	set On_Quest,0;
 	set six_qset,0;
 	close;
@@ -603,8 +603,8 @@ N_QuestComp:
 	next;
 	mes "[Chirach]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors en récompense.";
-	set six_qset,0;
 	delitem 1083,1;
+	set six_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
@@ -625,9 +625,9 @@ N_QuestComp:
 	mes "Merci de m'avoir aidé.";
 	next;
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 944,20;
 	set six_qset,0;
 	set On_Quest,0;
-	delitem 944,20;
 	set #Treasure_Token,#Treasure_Token+4;
 	next;
 	mes "[Zuuzuu]";
@@ -658,9 +658,9 @@ N_QuestComp:
 	next;
 	mes "[Fille]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors.";
+	delitem 531,5;
 	set seven_qset,0;
 	set On_Quest,0;
-	delitem 531,5;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
 N_QuestStart:
@@ -684,8 +684,8 @@ N_QuestComp:
 	next;
 	mes "[Charles]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors en récompense.";
-	set seven_qset,0;
 	delitem 1082,1;
+	set seven_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
@@ -708,9 +708,9 @@ N_QuestComp2:
 	next;
 	mes "[Chevalier des Égouts]";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 969,1;
 	set seven_qset,0;
 	set On_Quest,0;
-	delitem 969,1;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 }
@@ -727,9 +727,9 @@ N_QuestComp:
 	next;
 	mes "[Scarlet]";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1127,1;
 	set seven_qset,0;
 	set On_Quest,0;
-	delitem 1127,1;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 N_QuestStart:
@@ -751,9 +751,9 @@ N_QuestComp2:
 	next;
 	mes "[Fille]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors.";
+	delitem 532,5;
 	set eight_qset,0;
 	set On_Quest,0;
-	delitem 532,5;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
 }
@@ -770,8 +770,8 @@ N_QuestComp:
 	next;
 	mes "[Klye]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors en récompense.";
-	set eight_qset,0;
 	delitem 1081,1;
+	set eight_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
@@ -794,9 +794,9 @@ N_QuestComp:
 	next;
 	mes "[Zack]";
 	mes "Voilà, prenez ces 5 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 923,1;
 	set eight_qset,0;
 	set On_Quest,0;
-	delitem 923,1;
 	set #Treasure_Token,#Treasure_Token+5;
 	close;
 N_QuestStart:
@@ -820,9 +820,9 @@ N_QuestComp:
 	next;
 	mes "[Fleur]";
 	mes "Voilà, prenez ces 2 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 746,10;
 	set eight_qset,0;
 	set On_Quest,0;
-	delitem 746,10;
 	set #Treasure_Token,#Treasure_Token+2;
 	close;
 N_QuestStart:
@@ -846,8 +846,8 @@ N_QuestComp:
 	next;
 	mes "[Mage]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors en récompense.";
-	set nine_qset,0;
 	delitem 1082,1;
+	set nine_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
@@ -869,9 +869,9 @@ N_QuestComp:
 	next;
 	mes "[Écolière]";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1020,20;
 	set nine_qset,0;
 	set On_Quest,0;
-	delitem 1020,20;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 N_QuestStart:
@@ -898,14 +898,14 @@ N_QuestComp:
 	next;
 	mes "[Jack]";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1022,1;
 	set nine_qset,0;
 	set On_Quest,0;
-	delitem 1022,1;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 N_QuestStart:
 	mes "[Jack]";
-	mes "Eh bien je ne sais pas grand chose à ce sujet, mais c'est en rapport avec les tréfonds des Grottes de Payon. Nous ignorons ce qui se passe là-bas, parce que personne n'en revient jamais vivant, mais nous pensons qu'il s'y trouve un monstre qu'on appelle ''Fleur de Lune''.";
+	mes "Eh bien je ne sais pas grand chose à ce sujet, mais c'est en rapport avec les tréfonds des Grottes de Payon. Nous ignorons ce qui se passe là-bas, parce que personne n'en revient jamais vivant, mais nous pensons qu'il s'y trouve un monstre qu'on appelle 'Fleur de Lune'.";
 	mes " ";
 	mes "Allez-y et rapportez-moi une 'Neuf-Queues'!";
 	close;
@@ -923,9 +923,9 @@ N_QuestComp2:
 	next;
 	mes "[Jack]";
 	mes "Voilà, prenez ces 3 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 901,40;
 	set nine_qset,0;
 	set On_Quest,0;
-	delitem 901,40;
 	set #Treasure_Token,#Treasure_Token+3;
 	close;
 }
@@ -943,8 +943,8 @@ N_QuestComp:
 	next;
 	mes "[Kreg]";
 	mes "Voilà, prenez ce Jeton de la Guilde des Chasseurs de Trésors en récompense.";
-	set ten_qset,0;
 	delitem 1082,1;
+	set ten_qset,0;
 	set On_Quest,0;
 	set #Treasure_Token,#Treasure_Token+1;
 	close;
@@ -966,9 +966,9 @@ N_QuestComp:
 	next;
 	mes "[Homme]";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1029,1;
 	set ten_qset,0;
 	set On_Quest,0;
-	delitem 1029,1;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 N_QuestStart:
@@ -991,9 +991,9 @@ N_QuestComp:
 	next;
 	mes "[Caral]";
 	mes "Voilà, prenez ces 4 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1015,1;
 	set ten_qset,0;
 	set On_Quest,0;
-	delitem 1015,1;
 	set #Treasure_Token,#Treasure_Token+4;
 	close;
 N_QuestStart:
@@ -1016,9 +1016,9 @@ N_QuestComp:
 	next;
 	mes "[Jeni]";
 	mes "Voilà, prenez ces 3 Jetons de la Guilde des Chasseurs de Trésors.";
+	delitem 1096,1;
 	set ten_qset,0;
 	set On_Quest,0;
-	delitem 1096,1;
 	set #Treasure_Token,#Treasure_Token+3;
 	close;
 N_QuestStart:
