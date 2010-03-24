@@ -4,6 +4,39 @@ http://www.bookofymir.net/
 Changelog Patches & DB
 
 
+## 24 Mars 2010 ##
+	Mise à jour des bases de donnée (eA 14270).
+	Ajout du fichier mob_chat_db dans la db du BoY. Si vous n'avez pas encore appliqué le patch pour utiliser les db en français, vous pouvez le faire et le serveur
+	utilisra automatiquement ce fichier. Dans le cas contraire, dans mob.c, cherchez:
+
+-----------------------------------------------------------------------
+static void mob_readchatdb(void)
+{
+	char arc[]="mob_chat_db.txt";
+	uint32 lines=0, count=0;
+	char line[1024], path[256];
+	int i, tmp=0;
+	FILE *fp;
+	sprintf(path, "%s/%s", db_path, arc); 
+ 
+-----------------------------------------------------------------------
+
+	et remplacez par:
+
+-----------------------------------------------------------------------
+static void mob_readchatdb(void)
+{
+	char arc[]="mob_chat_db.txt";
+	uint32 lines=0, count=0;
+	char line[1024], path[256];
+	int i, tmp=0;
+	FILE *fp;
+	sprintf(path, "%s/%s", "BoY/db", arc); 
+ 
+-----------------------------------------------------------------------
+
+	N'oubliez pas de mettre votre serveur à jour avant, bien sûr!
+
 ## 22 Mars 2010 ##
 	Petites corrections.
 
