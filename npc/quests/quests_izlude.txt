@@ -24,12 +24,12 @@ izlude,182,186,2	script	Edgar#izlude	49,{
 	if (MISC_QUEST & 16) {
 		mes "[Edgar]";
 		mes "Oh, alors vous retournez à Alberta?";
-		mes "Je vous fais la même remise que la dernière fois, 250 Zénys le trajet. Qu'est-ce que tu en dis?";
+		mes "Je vous fais la même remise que la dernière fois, 250 Zénys le trajet. Qu'est-ce que vous en dites?";
 		next;
 		if (select("Super~!:Vous êtes trop gentil *-*") == 1) {
 			if (Zeny < 250) {
 				mes "[Edgar]";
-				mes "Mon garçon, vous n'avez pas assez d'argent pour ça! Allez donc en gagner!";
+				mes ( sex ? "Mon garçon" :"Ma petite dame" )+", vous n'avez pas assez d'argent pour ça! Allez donc en gagner!";
 				close ;
 			}
 			set zeny,zeny-250;
@@ -37,8 +37,7 @@ izlude,182,186,2	script	Edgar#izlude	49,{
 			end;
 		}
 		mes "[Edgar]";
-		mes "C'est bien normal voyons.";
-		mes "Vous me rappelez mon jeune fils, qui a quitté la maison il y a des années pour devenir marin sur son propre bateau.";
+		mes "C'est bien normal voyons. Vous me rappelez "+ ( sex ? "mon jeune fils" : "ma jeune fille" ) +", qui a quitté la maison il y a des années pour devenir marin sur son propre bateau.";
 		mes "Béni soit-il, où qu'il soit.";
 		close;
 	}
@@ -46,35 +45,34 @@ izlude,182,186,2	script	Edgar#izlude	49,{
 	mes "Izlude est reliée à Alberta par le port à l'ouest. Il y a tellement de trafic entre ces deux villes, que parfois je me sens comme un Albertois. Hahaha!";
 	next;
 	mes "[Edgar]";
-	mes "J'ai un ami à Alberta, qui se nomme Phelix. Il est un peu avare, mais c'est un gentil garçon qui aime apporter de l'aide aux gens.";
+	mes "J'ai un ami à Alberta, qui se nomme Phelix. Il est un peu avare, mais c'est un gentil garçon qui aime apporter son aide aux gens.";
 	next;
 	mes "[Edgar]";
 	mes "Il a un grand coeur, et il peut vous aider à acquérir certains objets en échange d'autres.";
 	next;
 	mes "[Edgar]";
-	mes "Ces derniers temps, les rumeurs d'Alberta disent qu'il aide les autres en échange de quelques 'Jellopys' ou quelque chose comme ça.";
-	mes "Vous pourrez peut-être économiser quelques zénys si vous faites affaires avec lui.";
+	mes "Ces derniers temps, les rumeurs d'Alberta disent qu'il aide les autres en échange de quelques 'Jellopys' ou quelque chose comme ça. Vous pourrez peut-être économiser quelques zénys si vous faites affaires avec lui.";
 	next;
 	if (select("Comment se rendre à Alberta?:Mettre fin à la conversation.") == 1) {
 		mes "[Edgar]";
-		mes "Et bien, vous pouvez toujours y aller à pieds. C'est au sud à partir d'ici, après avoir passé la ville de Payon. Cependant cela peut prendre assez longtemps si vous marchez jusque-là bas, je vous suggère de prendre le bateau.";
+		mes "Eh bien, vous pouvez toujours y aller à pieds. C'est au sud à partir d'ici, après avoir passé la ville de Payon. Cependant cela peut prendre assez longtemps si vous marchez jusque-là bas. Je vous conseille plutôt de prendre le bateau.";
 		next;
-		if (select("Ok, compris!:Je suis fauché et j'en ai marre de marcher!") == 1) {
+		if (select("Ok, compris!:Je suis fauché"+( sex ? "" : "e" )+" et j'en ai marre de marcher!") == 1) {
 			mes "[Edgar]";
 			mes "Très bien, prenez soin de vous~";
 			close;
 		}
 		mes "[Edgar]";
-		mes "Hum... vous n'aimez pas marcher mais vous êtes à court d'argent, mais vous voulez quand même y aller... (*soupir*)...";
+		mes "Hum... vous êtes à court d'argent, mais n'aimez pas marcher mais et vous voulez quand même y aller... (*soupir*)...";
 		next;
 		mes "[Edgar]";
-		mes "Et bien, je suis le capitaine d'un petit bateau, je peux donc vous faire un prix! Je vous emmène là-bas pour 250 Zeny si vous voulez.";
+		mes "Eh bien, je suis le capitaine d'un petit bateau, je peux donc vous faire un prix! Je vous emmène là-bas pour 250 Zeny si vous voulez.";
 		next;
-		if (select("D'accord~!:Bah, tu parles d'un prix!!!") == 1) {
+		if (select("D'accord~!:Bah, vous parlez d'un prix!!!") == 1) {
 			set MISC_QUEST,MISC_QUEST | 16;
 			if (Zeny < 250) {
 				mes "[Edgar]";
-				mes "Mon garçon, vous n'avez pas assez d'argent pour ça! Allez donc en gagner!";
+				mes ( sex ? "Mon garçon" :"Ma petite dame" )+", vous n'avez pas assez d'argent pour ça! Allez donc en gagner!";
 				close;
 			}
 			set zeny,zeny-250;
