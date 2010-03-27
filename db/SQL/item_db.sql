@@ -2803,7 +2803,7 @@ UPDATE item_db SET `name_japanese`  = "Vieux Shuriken" WHERE ID = 7072;
 UPDATE item_db SET `name_japanese`  = "Joyau de Freya" WHERE ID = 7073;
 UPDATE item_db SET `name_japanese`  = "Gantelets de Thor" WHERE ID = 7074;
 UPDATE item_db SET `name_japanese`  = "Poupée de Fer" WHERE ID = 7075;
-UPDATE item_db SET `name_japanese`  = "Rouage Inconnu" WHERE ID = 7076;
+UPDATE item_db SET `name_japanese`  = "Roue du Destin" WHERE ID = 7076;
 UPDATE item_db SET `name_japanese`  = "Bijou en Argent" WHERE ID = 7077;
 UPDATE item_db SET `name_japanese`  = "Fureur de la Valkyrie" WHERE ID = 7078;
 UPDATE item_db SET `name_japanese`  = "Plume d'Aile d'Ange" WHERE ID = 7079;
