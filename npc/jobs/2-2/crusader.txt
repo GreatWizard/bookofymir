@@ -72,7 +72,7 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 		mes "Comme cela s'est produit il y a mille ans, les forces maléfiques vont un jour attaquer en essayant de dominer notre monde encore une fois.";
 		close;
 	} 
-	else if(CRUS_Q <= 3 && countitem(1004) && countitem(1009)) {
+	else if(CRUS_Q && CRUS_Q <= 3 && countitem(1004) && countitem(1009)) { // Gros bugfix (possibilité de changer de job au jlvl 1...) [NoH]
 		mes "Ah...";
 		mes "Je vois que tu as été appelé pour devenir Croisé. Nous sommes sûrs de ta volonté, mais allons maintenant devoir tester tes capacités.";
 		next;
@@ -82,6 +82,15 @@ prt_castle,45,169,5	script	Croisé#1	752,{
 		delitem 1004, 1;
 		delitem 1009, 1;
 		set CRUS_Q,4;
+		if(checkquest(3006) != -1) { // Bugfix: ils avaient oublié le changequest. [NoH]
+			changequest 3006,3009;
+		}
+		else if(checkquest(3007) != -1) {
+			changequest 3007,3009;
+		}
+		else {
+			changequest 3008,3009;
+		}
 		mes "[Michael Halig]";
 		mes "Moorenak et d'autres comme lui vont tester les limites de tes capacités, et t'aider à trouver ta voie. Reviens me voir quand tu auras fini leurs tests...";
 		close;
