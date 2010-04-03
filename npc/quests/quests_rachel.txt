@@ -69,73 +69,37 @@
 ra_in01,384,246,3	script	Vincent#ra_in01	47,{
 	if (BaseLevel < 60) {
 		mes "[Vincent]";
-		mes "You're inside Sir Zhed's";
-		mes "looking for new employees,";
-		mes "I don't think you're suited";
-		mes "for this kind of domestic";
-		mes "work, brave adventurer.";
+		mes "Vous vous trouvez dans la demeure du Grand Prêtre Zhed. Je ne pense pas que ce genre de travaux domestiques vous convienne, brave "+( sex ? "aventurier" : "aventurière" )+".";
 		close;
 	}
 
 	if (lost_boy < 1) {
 		mes "[Vincent]";
-		mes "I am Vincert, steward of";
-		mes "this mansion and faithful";
-		mes "servant to its master, Sir";
-		mes "Zhed, the most powerful";
-		mes "man in all of Arunafeltz.";
+		mes "Je m'appelle Vincent. Je suis le majordome de cette résidence, et fidèle serviteur de mon bon maître, le Grand prêtre Zhed, l'homme le plus puissant d'Arunafeltz.";
 		next;
 		mes "[Vincent]";
-		mes "My master is currently out";
-		mes "to attend the High Priest";
-		mes "assembly, and has been gone";
-		mes "for a few days. I would like to";
-		mes "ask you for your help with";
-		mes "a problem on his behalf.";
+		mes "Mon maître préside actuellement l'assemblée des Grands Prêtres. Il est parti voilà quelques jours. Je voudrais vous demander en son nom de m'aider à résoudre un problème.";
 		next;
 
-		switch(select("I'm too busy.:Sure, why not?")) {
+		switch(select("Je suis trop occupé"+( sex ? "" : "e" )+".:Bien sûr, pourquoi pas?")) {
 
 		case 1:
 			mes "[Vincent]";
-			mes "I understand.";
-			mes "I'm sorry that you're";
-			mes "too busy at the moment...";
-			mes "If you should be available";
-			mes "later, then I'd like to ask for";
-			mes "your assistance once again.";
+			mes "Je suis désolé de l'apprendre, mais je comprends. Si jamais vous trouvez du temps à me consacrer, j'aurais certainement toujours besoin de votre aide.";
 			close;
 
 		case 2:
 			mes "[Vincent]";
-			mes "Thank you. You see,";
-			mes "the pope awarded Sir Zhed";
-			mes "for his great contributions to";
-			mes "Arunafeltz with a precious gem.";
-			mes "However, this jewel is missing";
-			mes "and I need your help to find it.";
+			mes "Merci. Voyez-vous, la Papesse a récompensé les efforts du Grand Prêtre par une pierre précieuse. Malheureusement, ce joyau a disparu et j'aurais besoin de votre aide pour le retrouver.";
 			next;
 			mes "[Vincent]";
-			mes "I don't have any proof, but";
-			mes "I suspect it was stolen by";
-			mes "Phobe, a servant that";
-			mes "disappeared about the same";
-			mes "time the gem disappeared.";
+			mes "Je n'ai aucune preuve, mais je suspecte un domestique du nom de Phobe qui a disparu à peu près au même moment que le joyau.";
 			next;
 			mes "[Vincent]";
-			mes "Please retrieve this gem";
-			mes "and find who stole it before";
-			mes "Sir Zhed returns and finds";
-			mes "out what happened. If you";
-			mes "can keep this secret, I'd";
-			mes "very much appreciate it.";
+			mes "S'il vous plaît, retrouvez cette pierre ainsi que celui qui l'a volée avant que le Grand Maître Zhed ne revienne et apprenne ce qui s'est passé. J'apprécierais beaucoup aussi que vous gardiez cette affaire secrète.";
 			next;
 			mes "[Vincent]";
-			mes "I believe that you'd want";
-			mes "to interrogate Phobe, but";
-			mes "he has run away somewhere.";
-			mes "You might want to question the";
-			mes "other servants of his whereabouts. Thanks again for your help.";
+			mes "J'imagine que vous chercherez à interroger Phobe, mais malheureusement il s'est enfui. Peut-être les autres serviteurs auront entendu quelque chose. Encore merci pour votre aide.";
 			set lost_boy,1;
 			close;
 
@@ -145,156 +109,70 @@ ra_in01,384,246,3	script	Vincent#ra_in01	47,{
 
 	else if ((lost_boy >= 1) && (lost_boy < 4)) {
 		mes "[Vincent]";
-		mes "I suggest looking around";
-		mes "the mansion and asking the";
-		mes "servants for any clues about";
-		mes "Phobe's current location.";
+		mes "Je vous suggère d'inspecter la résidence et d'interroger les serviteurs pour chercher s'ils auraient une idée de où se trouve Phobe actuellement.";
 		close;
 	}
 
 	else if ((lost_boy >= 4) && (lost_boy < 7)) {
 		mes "[Vincent]";
-		mes "We're running out";
-		mes "of time... Please find";
-		mes "the gem and Phobe";
-		mes "as soon as you can.";
+		mes "Nous n'avons pas beaucoup de temps... Je vous en prie, retrouvez Phobe et la pierre aussi vite que possible.";
 		close;
 	}
 
 	else if (lost_boy == 7) {
 		mes "[Vincent]";
-		mes "Ah...!";
-		mes "H-hello! How are";
-		mes "you still, er... That";
-		mes "look on your face? Did";
-		mes "you happen to find Logan?";
+		mes "Ah! Bonjour! Mais qu'est-ce que vous faites enc... Oh mais quel est ce regard? Est-ce que vous avez croisé Logan?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "No! I actually got";
-		mes "stabbed by Mogan, and";
-		mes "then we had a talk. What's";
-		mes "the big idea? I come to help";
-		mes "you, and you try to have me";
-		mes "killed! I want an explanation!";
+		mes "Non, mais j'ai été attaqué"+( sex ? "" : "e" )+" par Mogan, et nous avons eu une petite discussion! C'était quoi l'idée? Je viens vous aider et vous essayez de me faire tuer! J'exige une explication!";
 		next;
 		mes "[Vincent]";
-		mes "I... Yes, you deserve";
-		mes "the truth after wh-what";
-		mes "I tried to do to you. First";
-		mes "of all, Phobe is my son, but";
-		mes "please don't tell anybody!";
+		mes "Je... Oui, je dois vous dire toute la vérité. Tout d'abord, Phobe est mon fils, mais vous ne devez en parler à personne!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "What?";
-		mes "Why, what's";
-		mes "the big deal?";
+		mes "Quoi? Pourquoi? Qu'est-ce qui se passe?";
 		next;
 		mes "[Vincent]";
-		mes "There's something of";
-		mes "a class system here in";
-		mes "Arunafeltz. No one talks";
-		mes "about it, but those that";
-		mes "immigrated here and built this";
-		mes "city are the dominant class.";
+		mes "Il existe quelque chose comme un système de castes ici, en Arunafeltz. Personne n'en parle ouvertement, mais ceux qui ont émigré ici et construit cette cité forment la caste dominante.";
 		next;
 		mes "[Vincent]";
-		mes "The native people are";
-		mes "second class citizens that";
-		mes "are looked down upon by the";
-		mes "descendents of the settlers";
-		mes "that developed this city. It";
-		mes "is a sad, undeniable truth.";
+		mes "Les autochtones sont des citoyens de seconde zone, et sont regardés de haut par les descendants des colons. C'est triste, mais c'est l'indéniable vérité.";
 		next;
 		mes "[Vincent]";
-		mes "The native people typically";
-		mes "suffer from lower class status,";
-		mes "and usually do the hard, blue";
-		mes "collar work in the city. Jenny,";
-		mes "Phobe's mother, is one of them.";
+		mes "Les autochtones forment une caste inférieure et ont les métiers les plus fastidieux et dégradants dans la ville. Jenny, la mère de Phobe, appartient à cette caste.";
 		next;
 		mes "[Vincent]";
-		mes "It's taboo for me to love her,";
-		mes "especially since Sir Zhed has";
-		mes "taken me under his wing and";
-		mes "been like a father to me. If";
-		mes "I married her, it'd greatly";
-		mes "damage his reputation.";
+		mes "Notre amour est tabou, surtout depuis que maître Zhed m'a pris sous son aile et a été comme un père pour moi. Sa réputation serait ruinée si nous nous marrions.";
 		next;
 		mes "[Vincent]";
-		mes "I tried to control my";
-		mes "feelings but... Well,";
-		mes "Phobe was born. And there's";
-		mes "no going back now. We did";
-		mes "get secretly married though,";
-		mes "and I don't regret that.";
+		mes "J'ai tenté de freiner mes sentiments, mais... Eh bien Phobe est né, et nous ne pouvons plus revenir en arrière maintenant. Nous nous sommes cependant mariés en secret, et je ne l'ai jamais regretté.";
 		next;
 		mes "[Vincent]";
-		mes "Phobe must resent me...";
-		mes "I've had to treat him and";
-		mes "his mother like slaves";
-		mes "in front of other people.";
-		mes "I know it's horrible... To be";
-		mes "so cold to those you love.";
+		mes "Phobe doit me détester... J'ai dû les traiter, lui et sa mère, comme des esclaves en présence des autres. Je sais que c'est terrible... Être si froid envers les personnes que vous aimez...";
 		next;
 		mes "[Vincent]";
-		mes "When he ran off with the";
-		mes "jewel, I was actually more";
-		mes "worried about Phobe than";
-		mes "my master's treasure. So...";
-		mes "I did what I could to try to";
-		mes "get him back: I hired you.";
+		mes "Lorsqu'il s'est enfui avec le joyau, je me suis plus inquiété pour Phobe que pour le trésor perdu de mon maître. Alors j'ai fait tout ce qui était en mon pouvoir pour le retrouver: je vous ai engagé"+( sex ? "" : "e" )+".";
 		next;
 		mes "[Vincent]";
-		mes "However, once you found";
-		mes "Phobe, I planned to have";
-		mes "you killed so that we could";
-		mes "blame you for the theft. I'm";
-		mes "sorry, I know it's wrong, but";
-		mes "I was so worried about my boy!";
+		mes "Mais j'avais prévu de vous faire tuer une fois que vous auriez retrouvé Phobe pour que nous puissions vous accuser du vol. Je suis désolé. Je sais que c'était mal, mais je m'inquiétais pour mon fils.";
 		next;
 		mes "[Vincent]";
-		mes "I hope you forgive me...";
-		mes "I'll do what I should've";
-		mes "done from the beginning...";
-		mes "I'll take full responsibility";
-		mes "for the gem's theft, and Sir";
-		mes "Zhed can do to me what he will.";
+		mes "J'espère que vous me pardonnerez... Je vais faire ce que j'aurais dû faire depuis le début: je vais assumer l'entière responsabilité pour le vol de la pierre, et maître Zhed disposera de moi comme il l'entend.";
 		next;
 		mes "[Vincent]";
-		mes "The gem is very special...";
-		mes "Our pope commanded my";
-		mes "master to keep the jewel";
-		mes "safely, as it has the power";
-		mes "to save Arunafeltz and Rachel";
-		mes "when the time comes.";
+		mes "Cette pierre est très unique... Notre papesse a ordonné à mon maître de la garder en lieu sûr. Elle aurait le pouvoir de sauver Rachel et Arunafeltz lorsque le temps sera venu.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "The gem is really that";
-		mes "important, huh? Well, you";
-		mes "almost had me killed, but";
-		mes "since I'm still alive, I guess";
-		mes "I can overlook it, you know?";
+		mes "Alors cette gemme et si important que ça, hein? Vous avez essayé de me tuer, mais puisque je suis toujours en vie, j'imagine que je peux oublier cet épisode.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "You won't get in trouble";
-		mes "if I can find the jewel and";
-		mes "Phobe before Sir Zhed";
-		mes "returns, so I'll try to find";
-		mes "them for you as soon as I can.";
+		mes "Vous n'aurez pas d'ennuis si jamais je retrouve Phobe et la pierre avant que votre maître ne revienne. Je vous la rapporterai au plus vite.";
 		next;
 		mes "[Vincent]";
-		mes "You're willing to";
-		mes "do that for me? ^333333*Sob*^000000";
-		mes "Even after what I've put";
-		mes "you through? ^333333*Sniff*^000000";
+		mes "Vous seriez prêt"+( sex ? "" : "e" )+" à faire ça pour moi? ^333333*Snif*^000000 Même après tout ce que je vous ai fait subir? ^333333*Snif*^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Eh, I went through all";
-		mes "this trouble already, so";
-		mes "I might as well finish the";
-		mes "job. Besides, Phobe is";
-		mes "just a kid, so he's probably";
-		mes "hiding somewhere in town.";
+		mes "Eh bien, ce qui est fait est fait, alors je pourrais aussi bien terminer le travail. De plus, Phoebe n'est encore qu'un enfant, alors il se cache surement quelque part en ville.";
 		set lost_boy,8;
 		close;
 	}
@@ -302,174 +180,88 @@ ra_in01,384,246,3	script	Vincent#ra_in01	47,{
 
 	else if (lost_boy == 8) {
 		mes "[Vincent]";
-		mes "The gem is very special...";
-		mes "Our pope commanded my";
-		mes "master to keep the jewel";
-		mes "safely, as it has the power";
-		mes "to save Arunafeltz and Rachel";
-		mes "when the time comes.";
+		mes "Cette pierre est très unique... Notre papesse a ordonné à mon maître de la garder en lieu sûr. Elle aurait le pouvoir de sauver Rachel et Arunafeltz lorsque le temps sera venu.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "The gem is really that";
-		mes "important, huh? Well, you";
-		mes "almost had me killed, but";
-		mes "since I'm still alive, I guess";
-		mes "I can overlook it, you know?";
+		mes "Alors cette gemme et si important que ça, hein? Vous avez essayé de me tuer, mais puisque je suis toujours en vie, j'imagine que je peux oublier cet épisode.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "You won't get in trouble";
-		mes "if I can find the jewel and";
-		mes "Phobe before Sir Zhed";
-		mes "returns, so I'll try to find";
-		mes "them for you as soon as I can.";
+		mes "Vous n'aurez pas d'ennuis si jamais je retrouve Phobe et la pierre avant que votre maître ne revienne. Je vous la rapporterai au plus vite.";
 		next;
 		mes "[Vincent]";
-		mes "You're willing to";
-		mes "do that for me? ^333333*Sob*^000000";
-		mes "Even after what I've put";
-		mes "you through? ^333333*Sniff*^000000";
+		mes "Vous seriez prêt"+( sex ? "" : "e" )+" à faire ça pour moi? ^333333*Snif*^000000 Même après tout ce que je vous ai fait subir? ^333333*Snif*^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Eh, I went through all";
-		mes "this trouble already, so";
-		mes "I might as well finish the";
-		mes "job. Besides, Phobe is";
-		mes "just a kid, so he's probably";
-		mes "hiding somewhere in town...";
+		mes "Eh bien, ce qui est fait est fait, alors je pourrais aussi bien terminer le travail. De plus, n'est encore qu'un enfant, alors il se cache surement quelque part en ville.";
 		close;
 	}
 
 
 	else if (lost_boy == 9) {
 		mes "[Vincent]";
-		mes "You came back!";
-		mes "Were you able to";
-		mes "find Phobe?! H-how";
-		mes "is he? Is he alright?";
+		mes "Vous revoilà! Avez-vous trouvé Phobe? Comment va-t-il? Est-ce qu'il va bien?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Huh? Oh yeah, he's";
-		mes "just fine. I found Phobe";
-		mes "loitering around Freya's";
-		mes "Spring. Er, he's not willing";
-		mes "to come home yet, but he did";
-		mes "give me the gem he stole.";
+		mes "Hein? Oh oui, il va bien. Je l'ai trouvé près de la Source de Freya. Il ne veut pas encore rentrer, mais il m'a rendu la pierre qu'il avait volé.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "So... I earned my";
-		mes "reward now, right?";
-		mes "And no one has to die?";
+		mes "Alors... J'en ai terminé maintenant, n'est-ce pas? Et personne ne va mourir.";
 		next;
 		mes "[Vincent]";
-		mes "Yes, yes, thank you so";
-		mes "much! I'll never forget";
-		mes "what you've done for me.";
-		mes "Oh, my boy is alright!";
+		mes "Oui, oui, merci beaucoup! Je n'oublierai jamais ce que vous avez fait pour moi. Oh, mon garçon va bien!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "H-hey! Um, take";
-		mes "this jewel! You need";
-		mes "to return it to wherever";
-		mes "it's supposed to go, right?";
+		mes "Bon, prenez cette pierre. Il va falloir que vous la remettiez en place, pas vrai?";
 		next;
 		mes "[Vincent]";
-		mes "Oh, yes, I'd better do";
-		mes "that. While I return this";
-		mes "jewel, would you please";
-		mes "tell my wife Jenny that our";
-		mes "boy is okay? She's been";
-		mes "very worried about him, so...";
+		mes "Oh, oui, je ferai mieux de le faire sans attendre. Pendant ce temps-là, pourriez-vous prévenir ma femme Jenny que notre fils et sain et sauf? Elle s'inquiétait tellement à son sujet...";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "You want me to tell";
-		mes "Jenny about Phobe?";
-		mes "Sure, sure, I'll do that.";
+		mes "Vous voulez que je lui donne des nouvelles de Phobe? Bien sûr. Je m'en charge.";
 		set lost_boy,10;
 		close;
 	}
 
 	else if (lost_boy == 10) {
 		mes "[Vincent]";
-		mes "Oh! While I return this";
-		mes "jewel, would you please";
-		mes "tell my wife Jenny that our";
-		mes "boy is okay? She's been";
-		mes "very worried about him, so...";
+		mes "Pendant que je remets la pierre à sa place, pourriez-vous prévenir ma femme Jenny que notre fils et sain et sauf? Elle s'inquiétait tellement à son sujet...";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "You want me to tell";
-		mes "Jenny about Phobe?";
-		mes "Sure, sure, I'll do that.";
+		mes "Vous voulez que je lui donne des nouvelles de Phobe? Bien sûr. Je m'en charge.";
 		close;
 	}	
 
 	else if (lost_boy == 11) {
 		mes "["+strcharinfo(0)+"]";
-		mes "I told Jenny that";
-		mes "about Phobe, and that";
-		mes "the gem was returned...";
-		mes "She seemed pretty relieved...";
+		mes "J'ai dit à Jenny que j'avais retrouvé Phobe et qu'il avait rendu la pierre. Elle semble vraiment soulagée.";
 		next;
 		mes "[Vincent]";
-		mes "Thank you so much,";
-		mes "adventurer. She's such";
-		mes "a kind, loving woman, and";
-		mes "I hate to see her go through";
-		mes "all that torment. I don't deserve";
-		mes "such a beautiful woman...";
+		mes "Merci beaucoup, "+( sex ? "aventurier" : "aventurière" )+". C'est une femme si gentille... Je déteste la voir souffrir. Je ne la mérite vraiment pas.";
 		next;
 		mes "[Vincent]";
-		mes "It's very fortunate that";
-		mes "you've come to save us...";
-		mes "Please drop by the next";
-		mes "time that you're in Rachel,";
-		mes "and I'll try to help you if I can.";
+		mes "Nous avons vraiment eu de la chance que vous nous ayez aidés. Revenez nous voir la prochaine fois que vous serez à Rachel, et je ferai de mon mieux pour vous rendre la pareille.";
 		next;
 		mes "[Vincent]";
-		mes "Ah, actually, I have";
-		mes "one last favor to ask";
-		mes "of you. Would you please";
-		mes "bring this note and package";
-		mes "to my master? He should still";
-		mes "be in the temple right now.";
+		mes "Ah, en fait, j'avais un dernier service à vous demander. Pourriez-vous apporter cette note et ce paquet à mon maître? Il devrait toujours se trouver au temple.";
 		next;
 		mes "[Vincent]";
-		mes "If you ask for High";
-		mes "Priest Zhed and mention";
-		mes "that I sent you, then he";
-		mes "will meet with you.";
+		mes "Demandez à voir le Grand Prêtre Zhed et dites que je vous envoie. Ils vous laisseront le rencontrer.";
 		next;
 		mes "[Vincent]";
-		mes "Now is the time for";
-		mes "me to give you your";
-		mes "reward. How about that?";
-		mes "I don't know what's inside,";
-		mes "but I know these items are";
-		mes "quite valuable nowadays...";
+		mes "Il est temps pour moi de vous donner votre récompense. Que dites-vous de ça? Je ne sais pas ce qu'il y a à l'intérieur, mais ces objets sont assez recherchés de nos jours...";
 		getitem 617,1; //Old_Violet_Box
 		set lost_boy,12;
 		next;
 		mes "[Vincent]";
-		mes "Ah, and this note is a";
-		mes "letter of recommendation";
-		mes "that I have written for you.";
-		mes "Please deliver it to Sir Zhed";
-		mes "as soon as possible. Good bye,";
-		mes "and thank you for everything.";
+		mes "Ah, et cette note est une lettre de recommandation pour vous. Apportez-la au Grand Prêtre Zhed aussi rapidement que possible. Au revoir, et encore merci pour tout.";
 		next;
-		mes "^3355FFYou received a letter";
-		mes "of recommendation";
-		mes "from Vincent.^000000";
+		mes "^3355FFVous obtenez une Lettre de Recommandation écrite par Vincent.^000000";
 		close;
 	}
 
 	else {
 		mes "[Vincent]";
-		mes "Thank you for everything";
-		mes "that you've done for me";
-		mes "and my family. If you ever";
-		mes "need help, please don't";
-		mes "hesitate to ask me, alright?";
+		mes "Merci de tout ce que vous avez fait pour moi et ma famille. N'hésitez pas à me demander si jamais vous avez besoin d'aide, d'accord?";
 		close;
 	}
 
@@ -478,71 +270,38 @@ ra_in01,384,246,3	script	Vincent#ra_in01	47,{
 rachel,114,232,3	script	Logan#ra_in01	869,{
 	if ((lost_boy < 1) || (lost_boy >= 3)) {
 		mes "[Logan]";
-		mes "I'm just Logan, one";
-		mes "of the many servants";
-		mes "working here in Sir Zhed's";
-		mes "glorious mansion. I've got";
-		mes "a lot of work to do, so don't";
-		mes "don't distract me, please.";
+		mes "Je m'appelle Logan. Je ne suis que l'un des nombreux domestiques du Grand Prêtre Zhed. J'ai encore beaucoup de travail, alors ne me dérangez pas, d'accord?";
 		close;
 	}
 
 	else if (lost_boy == 1) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me, but do";
-		mes "you know man named";
-		mes "Phobe by any chance?";
-		mes "I heard that he used";
-		mes "to work around here.";
+		mes "Excusez-moi, mais est-ce que vous connaîtriez un homme du nom de Phobe par hasard? J'ai entendu dire qu'il travaillait ici lui aussi.";
 		next;
 		mes "[Logan]";
-		mes "Er, may I ask";
-		mes "you are? Why are";
-		mes "you looking for him?";
+		mes "Euh, est-ce que je peux vous demander qui vous êtes? Pourquoi est-ce que vous le cherchez?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Well, I've just been";
-		mes "hired to look for him,";
-		mes "and I was told that asking";
-		mes "the servants around here";
-		mes "was a good starting point.";
+		mes "Eh bien, je viens d'être embauché"+( sex ? "" : "e" )+" pour le retrouver, et on m'a suggéré de me renseigner auprès des autres domestiques pour commencer.";
 		next;
 		mes "[Logan]";
-		mes "Oh, okay. Yeah, Phobe's";
-		mes "been missing ever since";
-		mes "he left to buy stuff from";
-		mes "the market a few days ago.";
-		mes "I hope the kid is alright.";
+		mes "Oh, d'accord. Oui, Phobe a disparu. Il est parti faire quelques courses au marché il y a quelques jours et n'est jamais revenu. J'espère que le gamin va bien.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Er, kid? Just";
-		mes "how old is Phobe?";
+		mes "Euh... Le gamin? Mais quel âge a Phobe au juste?";
 		next;
 		mes "[Logan]";
-		mes "He just turned fifteen.";
-		mes "That's all I know about";
-		mes "him. Truth be told, I don't";
-		mes "know much since I just";
-		mes "started working here. Why don't";
-		mes "you ask the senior employees?";
+		mes "Il vient d'avoir quinze ans. C'est tout ce que je sais sur lui. Je viens d'être embauché ici, alors je ne sais pas grand-chose. Pourquoi n'iriez-vous pas interroger ceux qui travaillent ici depuis plus longtemps?";
 		next;
 		mes "[Logan]";
-		mes "Let's see...";
-		mes "You could ask Mr. Manson";
-		mes "inside the mansion. He's";
-		mes "been working here for a while.";
+		mes "Voyons... Vous pourriez aller parler à M. Manson dans la résidence. Cela fait très longtemps qu'il travaille ici.";
 		set lost_boy,2;
 		close;
 	}
 
 	else if (lost_boy == 2) {
 		mes "[Logan]";
-		mes "If you want to learn";
-		mes "more about Phobe, you'd";
-		mes "better ask one of the senior";
-		mes "employees since I just started";
-		mes "working here. Mr. Manson in";
-		mes "the mansion is a good bet.";
+		mes "Si vous voulez en apprendre plus au sujet de Phobe, vous feriez mieux d'aller interroger les employés travaillant depuis longtemps ici, comme M. Manson, à l'intérieur.";
 		close;
 	}
 
@@ -551,109 +310,53 @@ rachel,114,232,3	script	Logan#ra_in01	869,{
 ra_in01,372,200,3	script	Manson#ra_in01	929,{
 	if (lost_boy < 1) {
 		mes "[Manson]";
-		mes "I am Manson, one of the";
-		mes "many servants working here";
-		mes "in Sir Zhed's mansion. Er,";
-		mes "would you be more careful";
-		mes "walking around here? I hate";
-		mes "cleaning up after visitors.";
+		mes "Je m'appelle Manson. Je suis l'un des nombreux domestiques du Grand Prêtre Zhed. Euh, pourriez-vous vous essuyer les pieds s'il vous plaît? Je déteste avoir à nettoyer après que les visiteurs soient partis.";
 		close;
 	}
 
 	else if (lost_boy == 1) {
 		mes "[Manson]";
-		mes "You know, considering";
-		mes "that natives like me are";
-		mes "looked down upon and";
-		mes "are kinda of lower class,";
-		mes "I'm really lucky to work for";
-		mes "Sir Zhed here in the mansion.";
+		mes "Vous savez, les autochtones comme moi sont regardés de haut et forment vraiment les basses classes. J'ai vraiment de la chance de travailler pour maître Zhed, ici, dans sa résidence.";
 		close;
 	}
 
 	else if (lost_boy == 2) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me, but do you";
-		mes "know a man named Phobe?";
-		mes "He's gone missing, so I've";
-		mes "been hired to look for him.";
+		mes "Excusez-moi, mais est-ce que vous connaîtriez un homme du nom de Phobe? Il a disparu et j'ai été embauché"+( sex ? "" : "e" )+" pour le retrouver.";
 		next;
 		mes "[Manson]";
-		mes "Ah, so you're the one";
-		mes "that Vincent hired, huh?";
-		mes "That's good, that's good.";
-		mes "I'm pretty sure Phobe is";
-		mes "hiding somewhere and";
-		mes "just goofing around.";
+		mes "Ah, alors vous êtes "+( sex ? "celui" : "celle" )+" que Vincent a engagé? Bien, très bien. Je suis certain que Phobe est juste en train de se cacher quelque part et qu'il fait l'imbécile.";
 		next;
 		mes "[Manson]";
-		mes "I'm sure he can take care";
-		mes "of himself, so we won't have";
-		mes "to worry too much. Let's see,";
-		mes "he asked me if I had any";
-		mes "errands to for him to do,";
-		mes "so I sent him to the market.";
+		mes "Je sais qu'il peut se prendre en charge, alors nous ne devrions pas trop nous en faire. Voyons... Il m'avait demandé si jamais des courses à faire, alors je l'ai envoyé au marché.";
 		next;
 		mes "[Manson]";
-		mes "That's the last time I saw";
-		mes "him. I guess he's using the";
-		mes "money I gave him to feed himself";
-		mes "while he's run away. He's young,";
-		mes "so I can't really blame him.";
-		mes "We've all done crazy things~";
+		mes "C'est la dernière fois que je l'ai vu. J'imagine qu'il achète de quoi manger avec l'argent que je lui avais confié. Il est encore jeune, alors je ne peux pas vraiment lui en vouloir. Nous avons tous fait des bêtises quand nous étions jeunes.~";
 		next;
 		mes "[Manson]";
-		mes "Ah, our gardener Jenny";
-		mes "was the one that introduced";
-		mes "me to him. She's worked for";
-		mes "Sir Zhed for a long time, and";
-		mes "she loves kids. I guess she's";
-		mes "got a soft spot for Phobe.";
+		mes "Ah, notre jardinier, Jenny, est celle qui me l'a présenté. Elle travaille pour maître Zhed depuis très longtemps et adore les enfants. J'imagine qu'elle avait craqué pour Phobe.";
 		next;
 		mes "[Manson]";
-		mes "No one knows who his";
-		mes "parents are, so I guess";
-		mes "he's an orphan. That's";
-		mes "probably why she has him.";
-		mes "working with us in the mansion.";
+		mes "Personne ne connait ses parents. J'imagine qu'il est orphelin. C'est probablement pour ça qu'elle voulait qu'il vienne travailler dans la résidence.";
 		next;
 		mes "[Manson]";
-		mes "Jenny has done a lot for";
-		mes "that boy. We skipped our";
-		mes "usual employment process";
-		mes "just for her, you know? And";
-		mes "now Jenny and even Vincent";
-		mes "are worried about him missing.";
+		mes "Jenny a fait beaucoup pour ce garçon. Nous lui avons fait une valeur et nous avons embauché Phobe sans trop poser de questions, vous savez? Et maintenant Jenny et même Vincent s'inquiètent de sa disparition.";
 		next;
 		mes "[Manson]";
-		mes "You know, if you want to";
-		mes "know more about that kid,";
-		mes "you should talk to Jenny.";
-		mes "She's working in the garden";
-		mes "now, and she'd appreciate";
-		mes "your help in finding Phobe.";
+		mes "Si vous voulez en apprendre plus sur cet enfant, vous devriez aller parler à Jenny. Elle travaille dans le jardin, et appréciait beaucoup que vous aidiez à retrouver Phobe.";
 		set lost_boy,3;
 		close;
 	}
 
 	else if (lost_boy == 3) {
 		mes "[Manson]";
-		mes "You know, if you want to";
-		mes "know more about that kid,";
-		mes "you should talk to Jenny.";
-		mes "She's working in the garden";
-		mes "now, and she'd appreciate";
-		mes "your help in finding Phobe.";
+		mes "Si vous voulez en apprendre plus sur cet enfant, vous devriez aller parler à Jenny. Elle travaille dans le jardin, et appréciait beaucoup que vous aidiez à retrouver Phobe.";
 		close;
 	}
 
 	else {
 		mes "[Manson]";
-		mes "Nuts, there's so much";
-		mes "work to do! I never seem";
-		mes "to get it all done until";
-		mes "the very end of the day.";
-		mes "Ah well, it's a living.";
+		mes "Mince, il y a encore tant de travail à faire... Je n'arrive jamais à tout faire avant la nuit tombée. Enfin... C'est un travail comme un autre.";
 		close;
 	}
 
@@ -662,163 +365,84 @@ ra_in01,372,200,3	script	Manson#ra_in01	929,{
 rachel,48,237,3	script	Jenny#ra_in01	894,{
 	if (lost_boy < 3) {
 		mes "[Jenny]";
-		mes "These grounds are owned by";
-		mes "Sir Zhed and are considered";
-		mes "private property. Please";
-		mes "leave immediately if you";
-		mes "haven't been invited!";
+		mes "Ces terres appartiennent au Grand Prêtre Zhed et constituent une propriété privée. Veuillez partir immédiatement vous vous n'avez pas été invité"+( sex ? "" : "e" )+".";
 		close;
 	}
 
 	else if (lost_boy == 3) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me, but are";
-		mes "you Jenny? I've been";
-		mes "told by Manson to speak";
-		mes "to you if I wanted to learn";
-		mes "more about Phobe. You see,";
-		mes "Vincent hired me to find him.";
+		mes "Excusez-moi, mais êtes-vous Jenny? Manson m'a conseillé de m'adresser à vous si je voulais en apprendre plus au sujet de Phobe. Vincent m'a embauché"+( sex ? "" : "e" )+" pour le retrouver.";
 		next;
 		mes "[Jenny]";
-		mes "Oh! That's wonderful";
-		mes "news! Y-yes, I'm Jenny.";
-		mes "What did you need to know?";
+		mes "Oh! C'est une très bonne nouvelle! Oui, je suis Jenny. Que vouliez-vous savoir?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Er, anything you could";
-		mes "tell me would be fine.";
-		mes "Things like his favorite";
-		mes "hangouts might also be";
-		mes "helpful for me to investigate.";
+		mes "Euh... Tout ce que vous pourrez m'apprendre fera l'affaire. Connaître ses endroits préférés pourrait me faire avancer.";
 		next;
 		mes "[Jenny]";
-		mes "Phobe is such a good";
-		mes "boy. I don't know what";
-		mes "kind of trouble he's gotten";
-		mes "into this time, but he's";
-		mes "really a great kid if you";
-		mes "just give him a chance.";
+		mes "Phobe est un si gentil garçon... Je ne sais pas dans quoi il s'est fourré cette fois-ci, mais c'est vraiment un bon garçon quand vous le connaissez.";
 		next;
 		mes "[Jenny]";
-		mes "Oh... Vincent must";
-		mes "also be--I'm-I'm very";
-		mes "glad that he's hired";
-		mes "you. But as for places";
-		mes "he might be found, I'm";
-		mes "not sure if I know.";
+		mes "Oh... Vincent doit aussi... Je suis vraiment très contente qu'il ait fait appel à vous. Mais pour ce qui est de l'endroit où il pourrait se trouver... Je ne sais pas.";
 		next;
 		mes "[Jenny]";
-		mes "Have you tried the";
-		mes "market? That's where";
-		mes "he was last seen, wasn't it?";
-		mes "Maybe they have some idea";
-		mes "of where he was going?";
+		mes "Est-ce que vous avez essayé le marché? C'est là qu'on l'a vu pour la dernière fois, n'est-ce pas? Peut-être que quelqu'un là-bas aura une idée.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Oh... That's a good idea.";
-		mes "Alright, I guess I can go";
-		mes "to the market and ask around.";
+		mes "Oh... C'est une bonne idée. Bien, j'imagine que je peux me rendre au marché et demander.";
 		set lost_boy,4;
 		close;
 	}
 
 	else if ((lost_boy >= 3) && (lost_boy < 6)) {
 		mes "[Jenny]";
-		mes "Please find Phobe,";
-		mes "and bring him back";
-		mes "safely as soon as you";
-		mes "can! I can't help but worry";
-		mes "about that boy, you know?";
+		mes "Je vous en prie, trouvez Phobe et ramenez-le sain et sauf au plus vite! Je ne peux pas m'empêcher de m'en faire pour ce garçon, vous savez?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "I'll do my best";
-		mes "First, I guess I should ask";
-		mes "around the market where";
-		mes "Phobe was last seen.";
+		mes "Je ferai de mon mieux, mais j'imagine que je devrais commencer par aller interroger les gens du côté du marché où Phobe a été vu pour la dernière fois.";
 		close;
 	}
 
 	else if (lost_boy == 6) {
 		mes "[Jenny]";
-		mes "Please find Phobe,";
-		mes "and bring him back";
-		mes "safely as soon as you";
-		mes "can! I can't help but worry";
-		mes "about that boy, you know?";
+		mes "Je vous en prie, trouvez Phobe et ramenez-le sain et sauf au plus vite! Je ne peux pas m'empêcher de m'en faire pour ce garçon, vous savez?";
 		close;
 	}
 
 	else if ((lost_boy > 6) && (lost_boy < 11)) {
 		mes "[Jenny]";
-		mes "Oh! You're back!";
-		mes "Did you find Phobe?";
+		mes "Oh! Vous revoilà! Est-ce que vous avez trouvé Phobe?";
 		next;
 		if (lost_boy == 7) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Actually... Uh...";
-			mes "I have something very";
-			mes "important to discuss";
-			mes "with Vincent first.";
+			mes "En fait... Euh... Je dois d'abord parler de que quelque chose de vraiment important à Vincent.";
 		}
 
 		else if (lost_boy == 8) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Actually... Uh...";
-			mes "Not just yet. But I'm";
-			mes "following a really good";
-			mes "lead! Don't worry, I'll";
-			mes "find him soon, I promise.";
+			mes "En fait... Euh... Pas encore. Mais je suis sur une piste! Ne vous inquiétez pas, je l'aurai bientôt retrouvé. C'est promis.";
 		}
 
 		else if (lost_boy == 9) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Actually... Uh...";
-			mes "I should report to";
-			mes "Vincent first and return";
-			mes "this jewel, but I'll deliver";
-			mes "some good news soon,";
-			mes "I promise. Se eyou later~";
+			mes "En fait... Euh... Je dois d'abord aller prévenir Vincent et lui rapporter ce joyau, mais je reviendrai bientôt avec de bonnes nouvelles. C'est promis. À très bientôt~";
 		}
 
 		else if (lost_boy == 10) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Yes, he's fine, just";
-			mes "hanging around the south";
-			mes "side of town. He's safe,";
-			mes "but he's not willing to";
-			mes "come home just right now.";
+			mes "Oui, il va bien. Il est dans le Sud de la ville. Il est sain et sauf, mais il ne veut pas rentrer tout de suite.";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "The jewel's been returned,";
-			mes "so everything should be fine";
-			mes "now. Also, Vincent explained";
-			mes "everything to me. You know,";
-			mes "how you, him, and Phobe";
-			mes "are all related, so...";
+			mes "La pierre précieuse a été rendue, alors tout devrait rentrer dans l'ordre. Vincent m'a aussi tout expliqué. Vous savez... Le fait que vous soyez liés à Phobe, alors...";
 			next;
 			mes "[Jenny]";
-			mes "Oh! Oh, I see. He told";
-			mes "you our secret? Well,";
-			mes "I guess we can trust you.";
-			mes "Mostly, I'm just relieved";
-			mes "that my son is alright, and";
-			mes "that he won't get in trouble.";
+			mes "Oh! Oh, je vois. Il vous a raconté notre secret? Eh bien, j'imagine que je peux vous faire confiance. Je suis avant soulagée d'apprendre que mon fils est sain et sauf, et qu'il n'aura pas d'ennuis.";
 			next;
 			mes "[Jenny]";
-			mes "Anyway, even though Phobe";
-			mes "is being pretty stubborn,";
-			mes "I'm sure he'll come back";
-			mes "soon. As he grows up, I think";
-			mes "he'll understand his father's";
-			mes "position a little bit better.";
+			mes "Quoi qu'il en soit, même si Phobe est une tête de mule, je suis certaine qu'il rentrera bientôt. Je pense qu'il comprendra un peu mieux la situation de son père en grandissant.";
 			next;
 			mes "[Jenny]";
-			mes "I hope so. Although";
-			mes "it's been very hard for";
-			mes "all three of us to live";
-			mes "this way, I couldn't be";
-			mes "happier. Thank you for";
-			mes "all of your help, adventurer~";
+			mes "En tout cas j'espère. Même si vivre comme cela est très difficile pour tout le monde, je ne pourrais pas être plus heureuse. Merci de votre aide, "+( sex ? "aventurier" : "aventurière" )+".~";
 			set lost_boy,11;
 		}
 
@@ -827,12 +451,7 @@ rachel,48,237,3	script	Jenny#ra_in01	894,{
 
 	else if ((lost_boy > 10) && (lost_boy < 13)) {
 		mes "[Jenny]";
-		mes "Thank you so much for";
-		mes "finding my son. If there's";
-		mes "anything I can ever do for";
-		mes "you, please let me know.";
-		mes "You don't know how grateful";
-		mes "I am to you as a mother...";
+		mes "Merci beaucoup d'avoir retrouvé mon fils. Faite-moi savoir s'il y a quoi que ce soit que je puisse faire pour vous. Vous n'avez pas idée de combien je vous en suis reconnaissante en tant que mère...";
 		close;
 	}
 
@@ -840,452 +459,242 @@ rachel,48,237,3	script	Jenny#ra_in01	894,{
 	
 }
 
-rachel,138,73,5	script	Idle Merchant#ra_in01	85,{
+rachel,138,73,5	script	Marchand Oisif::Idle Merchant#ra_in01	85,{
 	if ((lost_boy < 4) || (lost_boy >= 6)) {
-		mes "[Idle Merchant]";
-		mes "Man! Business is going";
-		mes "sooo slooow right now!";
-		mes "Well, no point standing";
-		mes "around this dump much";
-		mes "longer. Maybe I should";
-		mes "pack it up and go home.";
+		mes "[Marchand Oisif]";
+		mes "Ah, les affaires vont si mal en ce moment... Bon, je crois que ça ne sert à rien de rester là à ne rien faire. Je devrais peut-être tout remballer et retourner à la maison.";
 		close;
 	}
 
 	else if (lost_boy == 4) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me?";
-		mes "Hello? Sir?";
+		mes "Excusez-moi? Bonjour? Monsieur?";
 		next;
-		mes "[Idle Merchant]";
-		mes "Finally! A customer!";
-		mes "I knew someone would come";
-		mes "eventually! So whaddya want";
-		mes "to buy? I got all sorts of";
-		mes "handy little knickknacks~";
+		mes "[Marchand Oisif]";
+		mes ( sex ? "Un client" : "Une cliente" )+"! Enfin! Je savais que quelqu'un finirait bien par venir! Alors, qu'est-ce que vous voulez m'acheter? J'ai tout un tas de produits ici plus délicieux les uns que les autres.~";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Sorry, not interested.";
-		mes "I just wanted to ask if";
-		mes "you've seen a boy around";
-		mes "here that's about fifteen";
-		mes "years old. He supposedly";
-		mes "ran away from home, so.";
+		mes "Désolé, je ne suis pas intéressé"+( sex ? "" : "e" )+". Je voulais simplement vous demander si vous aviez vu un garçon d'environ quinze ans traîner dans les parages. Il s'est enfin de chez lui, alors...";
 		next;
-		mes "[Idle Merchant]";
-		mes "Fifteen? My own son is";
-		mes "that age... I'm sorry, but";
-		mes "I haven't seen any lads that";
-		mes "age around here in the past";
-		mes "few days. Though, you might";
-		mes "want to ask the other merchants.";
+		mes "[Marchand Oisif]";
+		mes "Quinze ans? Mon fils a le même âge... Je suis désolé mais je n'ai vu personne de cet âge dans le coin depuis quelques jours. Mais vous devriez peut-être demander aux autres commerçants.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Cool. Thanks a lot.";
+		mes "D'accord. Merci beaucoup.";
 		next;
-		mes "[Idle Merchant]";
-		mes "Alright, then!";
-		mes "Good luck bringing that";
-		mes "boy home! Oh, and are you";
-		mes "sure that you don't want";
-		mes "to take a look around?";
+		mes "[Marchand Oisif]";
+		mes "Eh bien dans ce cas, bonne chance pour trouver ce garçon et le ramener chez lui. Oh, et vous êtes sûr"+( sex ? "" : "e" )+" que vous ne voulez pas jeter un oeil à ce que j'ai là?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Er, what exactly do";
-		mes "you sell here? I can't";
-		mes "recognize any of these";
-		mes "goods that you're selling.";
+		mes "Euh... Qu'est-ce que vous vendez au juste? Je ne sais même pas ce que c'est.";
 		next;
-		mes "[Idle Merchant]";
-		mes "You know how some restaurants";
-		mes "offer dishes with mock meat";
-		mes "made out of vegetables and";
-		mes "stuff like wheat gluten, right?";
+		mes "[Marchand Oisif]";
+		mes "Vous savez que certains restaurants servent de la fausse viande végétarienne faite à partir de légumes et d'autres choses comme du gluten, pas vrai?";
 		next;
-		mes "[Idle Merchant]";
-		mes "Get this: mock vegetables";
-		mes "made out of pure meat! Now";
-		mes "how's that for the best of both";
-		mes "worlds? Yeah? Yeah? Here,";
-		mes "why don't you try a sample?";
+		mes "[Marchand Oisif]";
+		mes "Eh bien regardez ceci: de faux légumes entièrement faits à partir de viande! Qu'est-ce que vous en dites? Oui, oui, il faut aussi penser aux carnivores! Regardez, vous ne voulez pas en goûter un morceau?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "What the?!";
-		mes "No way in hell am";
-		mes "I putting that in my";
-		mes "mouth! What the heck";
-		mes "is that supposed to be?";
+		mes "Qu'est-ce que... Je ne mettrai jamais quelque chose comme ça dans ma bouche! Qu'est-ce que c'est censé être?";
 		next;
-		mes "[Idle Merchant]";
-		mes "It's the world's";
-		mes "first zucchini...";
-		mes "Made completely out";
-		mes "of Grade A Sirloin Steak!";
+		mes "[Marchand Oisif]";
+		mes "Il s'agit de la première courgette au monde entièrement composée de faux-filet label rouge!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "No no no! I've got to";
-		mes "go and ask those other";
-		mes "merchants about that";
-		mes "missing boy. Er, but";
-		mes "good luck selling that.";
+		mes "Ah non, hors de question que je goûte ça! Et puis je dois aller interroger les autres commerçants à propos de ce garçon disparu. Mais bonne chance pour vendre tout cela.";
 		set lost_boy,5;
 		close;
 	}
 
 	else if (lost_boy >= 5) {
 		mes "["+strcharinfo(0)+"]";
-		mes "(^333333I better ask the other";
-		mes "merchants around here if";
-		mes "they've seen that boy. I'm";
-		mes "wasting my time talking to";
-		mes "this crazy merchant and his";
-		mes "ridiculous mock vegetables.^000000)";
+		mes "(^333333Je ferais mieux d'aller demander aux autres commerçants s'ils auraient vu ce garçon, et de laisser ce marchand déjanté à ses faux légumes pour carnivores.^000000)";
 		close;
 	}
 
 }
 
-rachel,120,47,3	script	Idle Merchant#ra_in01_2	85,{
+rachel,120,47,3	script	Marchand Oisif::Idle Merchant#ra_in01_2	85,{
 	if ((lost_boy < 5) || (lost_boy > 6)) {
-		mes "[Idle Merchant]";
-		mes "I'm thinking of quitting";
-		mes "this business... No one";
-		mes "to seems to want whatever";
-		mes "I'm selling! I definitely can't";
-		mes "make a living like this.";
+		mes "[Marchand Oisif]";
+		mes "Je suis en train de me demander si je ne vais arrêter ce travail... Personne ne veut jamais rien acheter! Je ne peux vraiment pas en vivre.";
 		close;
 	}
 
 	else if (lost_boy == 5) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me,";
-		mes "um... Hello?";
+		mes "Excusez-moi, euh... Bonjour?";
 		next;
-		mes "[Idle Merchant]";
-		mes "Oh! Welcome to my shop!";
-		mes "How can I help you today?";
+		mes "[Marchand Oisif]";
+		mes "Oh! Bienvenue à mon étal! Que puis-je faire pour vous aujourd'hui?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Actually, I'm not";
-		mes "here to buy anything...";
-		mes "I'm looking for a boy";
-		mes "named Phobe that was";
-		mes "here a few days ago.";
-		mes "Have you seen him?";
+		mes "En fait, je ne viens pas vous acheter quelque chose... Je cherche un garçon qui s'appelle Phobe et qui était ici il y a quelques jours. Est-ce que vous l'avez vu?";
 		next;
-		mes "[Idle Merchant]";
-		mes "Oh! Yeah, last night,";
-		mes "some guy asked me to tell";
-		mes "anyone looking for this guy";
-		mes "named Phobe to give you";
-		mes "a message. Basically, he wants";
-		mes "you to come to the ''ice cave.''";
+		mes "[Marchand Oisif]";
+		mes "Oh! Oui, hier soir quelqu'un est venu et m'a demandé de donner un message si quelqu'un était à la recherche de ce Phobe. En gros, il veut que vous vous rendiez dans la 'Grotte de Glace'.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Who asked you to tell";
-		mes "me that? How did he know";
-		mes "that I'd come over here?";
-		mes "Does he know where Phobe";
-		mes "is? I-Is Phobe alright?";
+		mes "Qui vous a demandé de me dire ça? Et comment savait-il que je viendrais ici? Est-ce qu'il sait où se trouve Phobe? Et est-ce que le garçon va bien?";
 		next;
-		mes "[Idle Merchant]";
-		mes "No clue. I told you all";
-		mes "I know. Let's see, his";
-		mes "name was... Nogan?";
-		mes "Rogan? Something";
-		mes "like that. That's";
-		mes "all I know, honest.";
+		mes "[Marchand Oisif]";
+		mes "Aucune idée. Je vous ai dit tout ce que je savais. Voyons, il s'appelait... Nogan? Rogan? Quelque chose comme ça. C'est tout ce que je sais, vraiment.";
 		next;
-		mes "[Idle Merchant]";
-		mes "So the kid's missing,";
-		mes "huh? Good luck finding";
-		mes "him. Oh, and be careful";
-		mes "in that ice cave. That place";
-		mes "can be plenty dangerous.";
+		mes "[Marchand Oisif]";
+		mes "Alors le garçon a disparu, hein? Bonne chance pour le retrouver. Oh, et soyez bien prudent"+( sex ? "" : "e" )+" dans la Grotte de Glace. C'est un endroit vraiment dangereux.";
 		set lost_boy,6;
 		close;
 	}
 
 	else if (lost_boy == 6) {
-		mes "[Idle Merchant]";
-		mes "So yeah, last night,";
-		mes "some guy asked me to tell";
-		mes "anyone looking for this guy";
-		mes "named Phobe to give you";
-		mes "a message. Basically, he wants";
-		mes "you to come to the ''ice cave.''";
+		mes "[Marchand Oisif]";
+		mes "Oh! Oui, hier soir quelqu'un est venu et m'a demandé de donner un message si quelqu'un était à la recherche de ce Phobe. En gros, il veut que vous vous rendiez dans la 'Grotte de Glace'.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Who asked you to tell";
-		mes "me that? How did he know";
-		mes "that I'd come over here?";
-		mes "Does he know where Phobe";
-		mes "is? I-Is Phobe alright?";
+		mes "Qui vous a demandé de me dire ça? Et comment savait-il que je viendrais ici? Est-ce qu'il sait où se trouve Phobe? Et est-ce que le garçon va bien?";
 		next;
-		mes "[Idle Merchant]";
-		mes "No clue. I told you all";
-		mes "I know. Let's see, his";
-		mes "name was... Nogan?";
-		mes "Rogan? Something";
-		mes "like that. That's";
-		mes "all I know, honest.";
+		mes "[Marchand Oisif]";
+		mes "Aucune idée. Je vous ai dit tout ce que je savais. Voyons, il s'appelait... Nogan? Rogan? Quelque chose comme ça. C'est tout ce que je sais, vraiment.";
 		next;
-		mes "[Idle Merchant]";
-		mes "So the kid's missing,";
-		mes "huh? Good luck finding";
-		mes "him. Oh, and be careful";
-		mes "in that ice cave. That place";
-		mes "can be plenty dangerous.";
+		mes "[Marchand Oisif]";
+		mes "Alors le garçon a disparu, hein? Bonne chance pour le retrouver. Oh, et soyez bien prudent"+( sex ? "" : "e" )+" dans la Grotte de Glace. C'est un endroit vraiment dangereux.";
 		close;
 	}
 
 
 }
 
-ra_fild01,245,325,3	script	Suspicious Man#ra_in01	934,{
+ra_fild01,245,325,3	script	Homme Suspect::Suspicious Man#ra_in01	934,{
 	if ((lost_boy < 6) || (lost_boy > 7)) {
-		mes "[Suspicious Man]";
-		mes "Th-there's not enough";
-		mes "air here, it's so stuffy!";
-		mes "Hey, get away! You're";
-		mes "wasting all of my";
-		mes "precious oxygen!";
+		mes "[Homme Suspect]";
+		mes "Il n'y a pas assez d'air ici, on étouffe! Hé, allez-vous-en! Vous me privez de mon précieux oxygène!";
 		close;
 	}
 
 	if (lost_boy == 6) {
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me, but do you";
-		mes "know a man named";
-		mes "Rogan? I'm here to--";
+		mes "Excusez-moi, mais est-ce que vous connaîtriez un homme du nom de Rogan? Je viens pour...";
 		next;
-		mes "[Suspicious Man]";
-		mes "Hah! I had no idea";
-		mes "it'd be this simple!";
-		mes "Easiest money I've";
-		mes "ever made! Bwahahaha!";
-		mes "Time for you to die, kid!";
+		mes "[Homme Suspect]";
+		mes "Ah! Je ne doutais pas que ce serait aussi simple! Je n'ai jamais gagné d'argent aussi facilement! Bwahahaha!";
+		mes "Ton heure est venue, "+( sex ? "morveux" : "morveuse" )+"!";
 		next;
-		mes "[Suspicious Man]";
+		mes "[Homme Suspect]";
 		mes "Hyah!";
 		percentheal -50,0;
 		next;
-		mes "^3355FFThis suspicious man";
-		mes "wounded you with a throwing";
-		mes "dagger, and then threw another";
-		mes "one that you managed to dodge.";
-		mes "You quickly retaliate to keep";
-		mes "him from further harming you.^000000";
+		mes "^3355FFCet homme suspect lance une dague en votre direction et vous blesse, avant d'en lancer une seconde que vous réussissez à esquiver. Vous ripostez aussitôt pour l'arrêter.^000000";
 		next;
-		mes "[Suspicious Man]";
-		mes "Argh! I...";
-		mes "I guess I underestimated";
-		mes "you! You're a lot stronger";
-		mes "than when you're taken by";
-		mes "surprise, adventurer!";
+		mes "[Homme Suspect]";
+		mes "Argh! Je... J'imagine que je vous ai sous-estimé"+( sex ? ". Vous êtes bien plus fort que lorsqu'on vous prend par surprise, aventurier!" : "e. Vous êtes bien plus forte que lorsqu'on vous prend par surprise, aventurière!" );
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Hey, who the hell are";
-		mes "you?! Are you Rogan?";
-		mes "Are you the one that";
-		mes "kidnapped Phobe?";
+		mes "Mais enfin, qui êtes-vous? Vous êtes Rogan, c'est ça? C'est vous qui avez enlevé Phobe, pas vrai?";
 		next;
-		mes "[Suspicious Man]";
-		mes "What th--? I didn't";
-		mes "kidnap nobody! I don't";
-		mes "know any Phobe! I was";
-		mes "just hired to kill you and";
-		mes "bring your body to my client.";
-		mes "This wasn't what I expected.";
+		mes "[Homme Suspect]";
+		mes "Quoi?! Je n'ai enlevé personne! Je ne connais pas de Phobe! On m'a juste engagé pour vous tuer et rapporter votre corps. Ça ne s'est pas passé comme prévu...";
 		next;
-		mes "[Suspicious Man]";
-		mes "Vincent's instructions";
-		mes "were to kill anyone that";
-		mes "asked about Rogan, some";
-		mes "name he made up. My name";
-		mes "is Mogan. Gosh... I thought";
-		mes "you were a really bad guy.";
+		mes "[Homme Suspect]";
+		mes "Les consignes de Vincent étaient de tuer tous ceux qui poseraient des questions au sujet de Rogan, un nom qu'il a inventé. Moi je m'appelle Mogan. Par tous les dieux, je pensais vraiment que vous étiez quelqu'un de mauvais.";
 		next;
 		mes "[Mogan]";
-		mes "Hey, set me straight";
-		mes "here. Did you steal";
-		mes "something really";
-		mes "valuable, like some";
-		mes "red jewel or something?";
+		mes "Bon, dites-moi tout. Est-ce que vous avez volé quelque chose de vraiment précieux, comme un joyau?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Huh? No! Vincent actually";
-		mes "sent me to look for the guy";
-		mes "that stole that jewel, and";
-		mes "to retrieve it for him!";
+		mes "Hein? Non! Vincent m'a même engagé"+( sex ? "" : "e" )+" pour retrouver celui qui avait volé cette pierre précieuse et la lui rapporter!";
 		next;
 		mes "[Mogan]";
-		mes "It looks like he set";
-		mes "us up, dude. That's...";
-		mes "That's really low. Sorry,";
-		mes "if I had known, I wouldn't";
-		mes "have done it. Why would";
-		mes "he manipulate us like that?";
+		mes "On dirait qu'il s'est joué de nous, l'ami"+( sex ? "" : "e" )+". Désolé, si j'avais su je n'aurais pas participé à ça. Mais pourquoi nous manipuler comme ça?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "I don't know...";
-		mes "I'm going to talk";
-		mes "to Vincent and make";
-		mes "him explain everything.";
+		mes "Je ne sais pas... Je vais aller parler à Vincent et obtenir quelques explications.";
 		set lost_boy,7;
 		close;
 	}
 
 	else if (lost_boy == 7) {
 		mes "[Mogan]";
-		mes "It looks like he set";
-		mes "us up, dude. That's...";
-		mes "That's really low. Sorry,";
-		mes "if I had known, I wouldn't";
-		mes "have done it. Why would";
-		mes "he manipulate us like that?";
+		mes "On dirait qu'il s'est joué de nous, l'ami"+( sex ? "" : "e" )+". Désolé, si j'avais su je n'aurais pas participé à ça. Mais pourquoi nous manipuler comme ça?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "I don't know...";
-		mes "I'm going to talk";
-		mes "to Vincent and make";
-		mes "him explain everything.";
+		mes "Je ne sais pas... Je vais aller parler à Vincent et obtenir quelques explications.";
 		close;
 	}
 
 }
 
-rachel,263,32,3	script	Kid#ra_in01	931,{
+rachel,263,32,3	script	Enfant::Kid#ra_in01	931,{
 	if (lost_boy < 7) {
 		mes "[Enfant]";
-		mes "Leave me alone!";
+		mes "Laissez-moi tranquille!";
 		close;
 	}
 
 	else if (lost_boy == 8) {
-		mes "^3355FFYou catch a shining";
-		mes "glint from this boy's";
-		mes "back pocket. Perhaps he";
-		mes "has the jewel that Vincent";
-		mes "wants you to retrieve.^000000";
+		mes "^3355FFVous apercevez quelque chose qui brille dans la poche de ce garçon. Peut-être est-ce le joyau que Vincent vous a demandé de retrouver.^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Hey, you.";
-		mes "You must be";
-		mes "Phobe, right?";
+		mes "Hé, toi. Tu dois être Phobe, pas vrai?";
 		next;
 		mes "[Enfant]";
-		mes "Yeah?";
-		mes "So what?";
+		mes "Oui, et alors?";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Your father sent";
-		mes "me here to find you.";
+		mes "Ton père m'a envoyé"+( sex ? "" : "e" )+" pour te retrouver.";
 		next;
 		mes "[Phobe]";
-		mes "No! Don't touch me!";
-		mes "I have no father!";
-		mes "H-he's dead to me!";
+		mes "Non! Ne me touchez pas! Je n'ai pas de père! Il... Il est mort pour moi!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Well, in any case, I need";
-		mes "to return the jewel that";
-		mes "you're hiding in your pocket.";
-		mes "I know that it really belongs";
-		mes "to Sir Zhed.  If I don't, then";
-		mes "your father will be in trouble.";
+		mes "Eh bien quoi qu'il en soit, il faut que je rapporte le joyau que tu caches dans ta poche. Il appartient au Grand Prêtre Zhed. Ton père aura des ennuis si tu ne le rends pas.";
 		next;
 		mes "[Phobe]";
-		mes "Hah! You mean ''Mister";
-		mes "Vincent!'' That's fine";
-		mes "by me! That's exactly";
-		mes "why I took this thing!";
+		mes "Ah! Vous parlez de 'Monsieur Vincent'?! C'est exactement pour ça que j'ai volé ce truc!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Oh, yeah? How do you";
-		mes "think Ms. Jenny will";
-		mes "feel? Do you think";
-		mes "that she'll be happy";
-		mes "hearing about this?";
+		mes "Ah oui? Et tu as pensé à ce que Jenny, ta mère, ressentirait? Tu crois qu'elle sera contente d'apprendre tout ça?";
 		next;
 		mes "[Phobe]";
 		mes "..............................";
-		mes "...So you know about";
-		mes "our family secret, huh?";
-		mes "Alright, I'll give this to";
-		mes "you. But I'm doing this for";
-		mes "my mom, and not for him!";
+		mes "...Alors vous connaissez les secrets de notre famille, hein? D'accord, je vais vous le rendre. Mais je le fais pour maman, pas pour lui!";
 		next;
-		mes "^3355FFPhobe gingerly pulls";
-		mes "the shining red jewel";
-		mes "from his pocket and";
-		mes "reluctantly hands it to you.^000000";
+		mes "^3355FFPhobe attrape le joyau rouge éclatant dans sa poche et tend sa main vers vous à contrecoeur.^000000";
 		next;
 		mes "[Phobe]";
-		mes "Just so you know,";
-		mes "I don't plan on going";
-		mes "back home! Well, just";
-		mes "not this second anyway.";
-		mes "But let my mom know that";
-		mes "I'm fine and not to worry.";
+		mes "Et pour votre information, je ne reviendrai pas à la maison! Pas tout de suite en tous cas. Mais dites à ma mère que je vais bien et qu'elle n'a pas à s'en faire.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Alright, I'll tell your mom";
-		mes "But you should be getting";
-		mes "back to them soon. Your";
-		mes "father took a really big";
-		mes "risk covering up for you.";
+		mes "D'accord, je lui dirai, mais tu devrais rentrer rapidement. Ton père prend de gros risques en te couvrant.";
 		next;
 		mes "[Phobe]";
-		mes "Hmpf! I...";
-		mes "I don't care!";
+		mes "Pfft! Je... Je m'en fiche!";
 		next;
-		mes "^3355FFIt doesn't look like";
-		mes "you can force Phobe to";
-		mes "return home for now, so";
-		mes "you should bring this red";
-		mes "jewel back to Vincent.^000000";
+		mes "^3355FFOn dirait que vous ne pouvez pas forcer Phobe à rentrer. Vous devriez rapporter la pierre à Vincent.^000000";
 		set lost_boy,9;
 		close;
 	}
 
 	else if (lost_boy == 9) {
 		mes "[Phobe]";
-		mes "I... I'm not ready";
-		mes "to go back home just";
-		mes "fine, and let Mister Vincent";
-		mes "know that I'm not sorry";
-		mes "for what I did, okay?!";
+		mes "Je... Je ne veux pas encore rentrer à la maison tout de suite. Dites simplement à Monsieur Vincent que je suis désolé, d'accord?"; // Apparemment il manque une ligne dans le texte original alors je traduis un peu au hasard. [NoH]
 		next;
-		mes "^3355FFIt doesn't look like";
-		mes "you can force Phobe to";
-		mes "return home for now, so";
-		mes "you should bring this red";
-		mes "jewel back to Vincent.^000000";
+		mes "^3355FFOn dirait que vous ne pouvez pas forcer Phobe à rentrer. Vous devriez rapporter la pierre à Vincent.^000000";
 		close;
 	}
 
 	else {
 		mes "["+strcharinfo(0)+"]";
-		mes "You know, you should";
-		mes "quit making trouble and";
-		mes "listen to your parents.";
+		mes "Tu sais, tu devrais arrêter de n'en faire qu'à ta tête et commencer à écouter tes parents.";
 		next;
 		mes "[Phobe]";
-		mes "You're not the boss";
-		mes "of me! Mind your own";
-		mes "business! Jeez louise!";
+		mes "Vous ne me commandez pas! Occupez-vous de vos affaires! Non mais!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "I can't mind my own";
-		mes "business if your actions";
-		mes "are causing this much trouble";
-		mes "to so many other people! You";
-		mes "need to act more responsibly!";
+		mes "Je m'occuperais de mes propres affaires si tu n'avais pas fait du mal à tant de gens! Il est temps que tu sois un peu plus responsable!";
 		next;
 		mes "[Phobe]";
 		mes "Mmmrrrr...";
-		mes "Gosh... Fine.";
+		mes "Arf... D'accord.";
 		close;
 	}
 
