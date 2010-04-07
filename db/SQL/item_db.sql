@@ -2299,7 +2299,7 @@ UPDATE item_db SET `name_japanese`  = "Chapeau de Magicien Blanc" WHERE ID = 523
 UPDATE item_db SET `name_japanese`  = "Chapeau de Magicien Gris" WHERE ID = 5240;
 UPDATE item_db SET `name_japanese`  = "Chapeau de Magicien Bleu" WHERE ID = 5241;
 UPDATE item_db SET `name_japanese`  = "Chapeau de Magicien Jaune" WHERE ID = 5242;
-UPDATE item_db SET `name_japanese`  = "Chullos" WHERE ID = 5243;
+UPDATE item_db SET `name_japanese`  = "Chapka" WHERE ID = 5243;
 UPDATE item_db SET `name_japanese`  = "Bandeau Pour les Yeux d'Elfe" WHERE ID = 5244;
 UPDATE item_db SET `name_japanese`  = "Lunettes de Soleil d'Elfe" WHERE ID = 5245;
 UPDATE item_db SET `name_japanese`  = "Heaume d'Ange" WHERE ID = 5246;
