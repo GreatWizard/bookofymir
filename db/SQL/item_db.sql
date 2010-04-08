@@ -3223,7 +3223,7 @@ UPDATE item_db SET `name_japanese`  = "Clé Dorée" WHERE ID = 7493;
 UPDATE item_db SET `name_japanese`  = "Bouton Luxueux" WHERE ID = 7494;
 UPDATE item_db SET `name_japanese`  = "Clé Magnétique Bleue" WHERE ID = 7495;
 UPDATE item_db SET `name_japanese`  = "Clé Magnétique Rouge" WHERE ID = 7496;
-UPDATE item_db SET `name_japanese`  = "Fragment de Métal" WHERE ID = 7497;
+UPDATE item_db SET `name_japanese`  = "Fragment de Métal Inconnu" WHERE ID = 7497;
 UPDATE item_db SET `name_japanese`  = "Clé de la Résidence Losimier" WHERE ID = 7498;
 UPDATE item_db SET `name_japanese`  = "Portrait de Famille" WHERE ID = 7499;
 UPDATE item_db SET `name_japanese`  = "Portrait d'une Dame" WHERE ID = 7500;
