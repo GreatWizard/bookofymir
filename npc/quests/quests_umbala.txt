@@ -220,7 +220,7 @@ um_in,39,122,5	script	Chef Utan	784,{
 				mes "Oh, vous l'avez apporté! J'ai toujours rêvé de posséder un masque aussi sublime! Merci, aventurier de Rune-Midgard.";
 				next;
 				mes "[Karkatan]";
-				mes "Je dirai à Puchuchartan que je confirme vos qualifications. Allez lui parler. Même si je ne suis pas certain de l'aide qu'elle puisse vous apporter, j'espère que vous pourrez lui rendre une faveur en retour.";
+				mes "Je dirai à Puchuchartan que je confirme vos qualifications. Allez lui parler. Même si je ne suis pas certain de l'aide qu'elle puisse vous apporter, j'espère que vous pourrez lui rendre service en retour.";
 				delitem 2278,1; //Mr_Smile
 				set event_umbala,6;
 				close;
@@ -248,7 +248,7 @@ um_in,39,122,5	script	Chef Utan	784,{
 //=====================================================================
 //                    Create Essence/Dismantle Stone
 //=====================================================================
-um_in,44,71,2	script	Chaman Utan	782,{
+um_in,44,71,2	script	Chamane Utan::Chaman Utan	782,{
 	if (checkweight(908,600) == 0) {
 		mes "^3355FFAttendez!";
 		mes "Vous portez bien trop de choses sur vous, vous allez vous faire un lumbago!";
@@ -570,7 +570,7 @@ um_in,44,71,2	script	Chaman Utan	782,{
 					mes "essences de terre? Dans ce cas, il vous faudra m'apporter "+input_want+" pierres enchantées à la propriété élémentale de terre.";
 					break;
 				}
-				mes "^3377FF"+.@input+" "+getitemname(.@divide)+"^000000.";
+				mes "^3377FF"+.@input+"x "+getitemname(.@divide)+"^000000.";
 				next;
 				mes "[Puchuchartan]";
 				mes "C'est tout ce dont j'ai besoin.";
@@ -747,7 +747,7 @@ um_in,139,48,5	script	Phrenetan	783,{
 		close;
 	}
 	if (um_wind <= 3 && (MISC_QUEST & 32768) == 0) {
-		if (um_wind) set um_wind,1;
+		if (!um_wind) set um_wind,1; // Bugfix [NoH]
 		emotion e_an;
 		mes "[Phrenetan]";
 		mes "Umbaumbah wooga wooga";
@@ -1007,21 +1007,23 @@ OnTouch:
 	if (um_wind == 5) {
 		mes "^3355FFAlors que vous réalisez que vous avez été jeté hors de la maison à coup de pieds aux fesses, vous trouvez une feuille par terre, juste à côté de là où vous êtes étendu.^000000";
 		next;
-		if (select("Prendre la feuille.:Ne pas prendre la feuille.") == 1) {
-			close2;
+		if (select("Prendre la feuille.:Ne pas prendre la feuille.") == 1) { // Bugfix: les dialogues ne correspondent pas à ce qui se passe - je change [NoH]
+			mes "[" + strcharinfo(0) + "]";
+			mes "Ceci appartenait peut-être à quelqu'un...?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "En tous cas, maintenant ça m'appartient.";
 			set um_wind,0;
 			set MISC_QUEST,MISC_QUEST | 32768;
 			getitem 610,1; //Leaf_Of_Yggdrasil
+			close2;
 			disablenpc "#unpc";
 			end;
 		}
 		set um_wind,0;
 		set MISC_QUEST,MISC_QUEST | 32768;
 		mes "[" + strcharinfo(0) + "]";
-		mes "Ceci appartenait peut-être à quelqu'un...?";
-		next;
-		mes "[" + strcharinfo(0) + "]";
-		mes "En tous cas, maintenant ça m'appartient.";
+		mes "Ceci appartient peut-être à quelqu'un...?";
 		close2;
 		disablenpc "#unpc";
 	}
