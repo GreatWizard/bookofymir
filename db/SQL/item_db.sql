@@ -222,7 +222,7 @@ UPDATE item_db SET `name_japanese`  = "Porcelaine" WHERE ID = 736;
 UPDATE item_db SET `name_japanese`  = "Louche Noire" WHERE ID = 737;
 UPDATE item_db SET `name_japanese`  = "Trousse" WHERE ID = 738;
 UPDATE item_db SET `name_japanese`  = "Rouge à Lèvres" WHERE ID = 739;
-UPDATE item_db SET `name_japanese`  = "Peluche" WHERE ID = 740;
+UPDATE item_db SET `name_japanese`  = "Lapin en Peluche" WHERE ID = 740;
 UPDATE item_db SET `name_japanese`  = "Poring en Peluche" WHERE ID = 741;
 UPDATE item_db SET `name_japanese`  = "Chonchon en Peluche" WHERE ID = 742;
 UPDATE item_db SET `name_japanese`  = "Spore en Peluche" WHERE ID = 743;
