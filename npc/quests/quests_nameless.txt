@@ -787,6 +787,7 @@ ra_temple,165,57,5	script	Niren#ss	915,{
 			mes "J'espère que la Déesse pourra me pardonner. Ah, et vous devez savoir que Zhed vous attend. Pourquoi n'iriez-vous pas le voir maintenant?";
 			next;
 			mes "^3355FFNiren vous sourit tendrement. Vous réalisez alors que c'est la première fois que vous voyez cette expression sur son visage.^000000";
+			set temparu,0; // Bugfix: cf plus bas, avec les annonces [NoH]
 			set aru_em,23;
 			getexp 1000000,0;
 			close2;
@@ -1901,7 +1902,8 @@ OnInit:
 	end;
 
 OnTouch:
-	if (aru_em == 22) {
+	if (aru_em == 22 && !temparu) {
+		set temparu,1; // Bugfix: sans ça les joueurs peuvent déclencher ces annonces à volonté et spammer Rachel [NoH]
 		initnpctimer;
 		disablenpc "#em_end";
 	}
