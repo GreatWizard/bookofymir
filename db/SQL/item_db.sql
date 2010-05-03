@@ -1036,7 +1036,7 @@ UPDATE item_db SET `name_japanese`  = "Canon de Bras" WHERE ID = 2117;
 UPDATE item_db SET `name_japanese`  = "Canon de Bras" WHERE ID = 2118;
 UPDATE item_db SET `name_japanese`  = "Canon de Bras Renforcé" WHERE ID = 2119;
 UPDATE item_db SET `name_japanese`  = "Canon de Bras Renforcé" WHERE ID = 2120;
-UPDATE item_db SET `name_japanese`  = "Marque-Page" WHERE ID = 2121;
+UPDATE item_db SET `name_japanese`  = "Livre de Mémoires" WHERE ID = 2121;
 UPDATE item_db SET `name_japanese`  = "Bouclier de Platine" WHERE ID = 2122;
 UPDATE item_db SET `name_japanese`  = "Plateau d'Orléans" WHERE ID = 2123;
 UPDATE item_db SET `name_japanese`  = "Bouclier à Pointes" WHERE ID = 2124;
