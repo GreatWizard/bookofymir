@@ -3534,7 +3534,7 @@ UPDATE item_db SET `name_japanese`  = "Boîte de Fruits Secs" WHERE ID = 7887;
 UPDATE item_db SET `name_japanese`  = "Sac de Noix" WHERE ID = 7888;
 UPDATE item_db SET `name_japanese`  = "Nourriture de Poulet" WHERE ID = 7889;
 UPDATE item_db SET `name_japanese`  = "Tasse" WHERE ID = 7891;
-UPDATE item_db SET `name_japanese`  = "Charbon" WHERE ID = 7892;
+UPDATE item_db SET `name_japanese`  = "Charbon de Bois" WHERE ID = 7892;
 UPDATE item_db SET `name_japanese`  = "Sulfure" WHERE ID = 7893;
 UPDATE item_db SET `name_japanese`  = "Acide Nitrique" WHERE ID = 7894;
 UPDATE item_db SET `name_japanese`  = "Rama 5" WHERE ID = 7895;
