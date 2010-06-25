@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88
 //===== Current Version: ===================================== 
-//= 3.3
+//= 3.4
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -48,6 +48,7 @@
 //= 3.1b Fixed waiting room not enabled in some situations [Zephyrus]
 //= 3.2 Fixed a question having all correct answers. [brianluau]
 //= 3.3 Added Quest Log commands. [Kisuka]
+//= 3.4 Removed the need for use of 'goto.' [L0ne_W0lf]
 //============================================================ 
 
 in_moc_16,19,33,1	script	Guildien#asn	55,{
@@ -622,141 +623,166 @@ OnTouch:
 
 in_moc_16,19,154,0	script	nameless_one	-1,8,2,{
 OnTouch:
-	if (ASSIN_Q2 < 3) {
-		mes "[L'Anonyme]";
-		mes "Bienvenue, invité.";
-		mes "Mouahaha, il est inutile d'essayer de me voir ou de me trouver...";
-		next;
-		mes "[L'Anonyme]";
-		mes "Je suis parfaitement caché!";
-		mes "Devenir invisible est une capacité réservée aux plus grands Assassins!";
-		next;
-		mes "[L'Anonyme]";
-		mes "Vous n'avez pas peur de ne pas pouvoir me voir? Je pourrais vous tuer à n'importe quel moment et ce serait tellement facile...";
-		next;
-		if (select("Je crois que j'ai fait dans ma culotte!:Balivernes. Je vous défie!") == 1) {
+	if (ASSIN_Q2 < 5) {
+		if (ASSIN_Q2 < 3) {
 			mes "[L'Anonyme]";
-			mes "Maintenant je comprends, vous n'êtes rien d'autre qu'une mauviette.";
+			mes "Bienvenue, invité.";
+			mes "Mouahaha, il est inutile d'essayer de me voir ou de me trouver...";
 			next;
 			mes "[L'Anonyme]";
-			mes "Mouahahahahahah!";
-			mes "Arrêtez de trembler de peur! Vous me faites marrer!";
-			close;
-		}
-		mes "[L'Anonyme]";
-		mes "Oh...";
-		mes "Vous voulez me défier? Moi?!";
-		next;
-		mes "[L'Anonyme]";
-		mes "A chacun de mes pas s'ensuit un bain de sang. Je n'ai d'autre nom que la pointe de mes lames, c'est tout ce qu'il y a à savoir.";
-		next;
-		mes "[L'Anonyme]";
-		mes "Je suis ici pour tester vos connaissances, et votre capacité à être sans pitié. Ces deux aptitudes sont nécessaires pour devenir Assassin.";
-		next;
-		mes "[L'Anonyme]";
-		mes "En ce qui concerne votre défi, vous devez répondre correctement à mes questions. Ce sont des questions très difficiles et seul un Assassin peut trouver les bonnes réponses.";
-		next;
-		mes "[L'Anonyme]";
-		mes "Bien que je sois sans pitié, je ne suis pas nécessairement cruel. Avant que nous commencions, y a-t-il quelque chose que vous voudriez savoir?";
-		next;
-		set ASSIN_Q2,0;
-		while(ASSIN_Q2 < 3) {
-			switch(select("...les compétences?:...les statistiques?:Hum, je sais tout.")) {
-			case 1:
+			mes "Je suis parfaitement caché!";
+			mes "Devenir invisible est une capacité réservée aux plus grands Assassins!";
+			next;
+			mes "[L'Anonyme]";
+			mes "Vous n'avez pas peur de ne pas pouvoir me voir? Je pourrais vous tuer à n'importe quel moment et ce serait tellement facile...";
+			next;
+			if (select("Je crois que j'ai fait dans ma culotte!:Balivernes. Je vous défie!") == 1) {
 				mes "[L'Anonyme]";
-				mes "Les compétences...?";
-				mes "Bien que les compétences aient des utilisations circonstancielles, je vais vous parler des concepts de base.";
+				mes "Maintenant je comprends, vous n'êtes rien d'autre qu'une mauviette.";
 				next;
 				mes "[L'Anonyme]";
-				mes "Tout d'abord, ^3355FFMaîtrise du Katar^000000. Cette compétence accroît les dégâts des armes de type Katar. Plus le niveau de la compétence est élevé, plus les dégâts sont importants.";
-				next;
-				mes "[L'Anonyme]";
-				mes "^3355FFVélocité Sénestre^000000 et ^3355FFVélocité Dextre^000000. Les Assassins peuvent équiper des armes différentes dans chaque main lorsqu'ils utilisent des armes de type Dague.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Mais c'est évidemment plus difficile de maîtriser deux armes à la fois plutôt qu'une seule. Les compétences de Vélocité Dextre et Sénestre augmentent les dégâts lorsque deux Dagues sont utilisées.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Cependant, si vous ne voulez pas utiliser deux Dagues, vous n'aurez pas besoin de cette compétence. Vous verrez comment fonctionne la 'Vélocité Sénestre' dès que vous aurez maîtrisé la 'Vélocité Dextre' au niveau 2.";
-				next;
-				mes "[L'Anonyme]";
-				mes "^3355FFCoups Supersoniques^000000 vous permet de frapper un ennemi 8 fois en un seul coup. Cette compétence fonctionne uniquement avec des armes de type Katar à cause de la vitesse qu'elle requiert.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Bien entendu, les dégâts sont influencés par la Force et les dégâts de l'arme. Vous comprendrez comment fonctionne cette compétence aussitôt que vous atteindrez le niveau 4 de Maîtrise du Katar.";
-				next;
-				mes "[L'Anonyme]";
-				mes "^3355FFCrocs des Ombres^000000 vous permet d'attaquer vos ennemis lorsque vous êtes caché sous le sol. Quand vous la maîtriserez, il vous sera possible de les attaquer à une certaine distance.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Puisqu'il s'agit d'une attaque à distance, elle peut s'avérer très utile quand vous êtes entouré d'ennemis.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Parce que vous avez besoin de devenir parfaitement invisible pour utiliser cette compétence, vous devez impérativement apprendre Dissimulation jusqu'au niveau 2 avant d'apprendre Crocs des Ombres.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Pour apprendre ^3355FFDissimulation^000000, vous devez apprendre Disparition jusqu'au niveau 2. Ensuite vous pourrez bouger tout en étant invisible si vous êtes près d'une paroi.";
-				next;
-				mes "[L'Anonyme]";
-				mes "La compétence ^3355FFArme Empoisonnée^000000 vous permet d'enchanter l'arme que vous utilisez avec du poison. Votre arme possèdera alors temporairement la propriété Poison.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Avec un peu de chance, votre attaque pourra aussi empoisonner votre ennemi. Vous pouvez également utiliser cette compétence pour enchanter les armes des membres de votre groupe...";
-				next;
-				mes "[L'Anonyme]";
-				mes "^3355FFParade Empoisonnée^000000 protège l'utilisateur des attaques de propriété Poison, et peut tout aussi bien être utilisée sur d'autres personnes. Toutefois, vous devez apprendre Arme Empoisonnée au niveau 3 en premier.";
-				next;
-				mes "[L'Anonyme]";
-				mes "^3355FFNuage Toxique^000000 consomme une Gemme Rouge pour contaminer une zone avec du poison. La durée de la contamination augmente avec le niveau de la compétence.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Vous pouvez apprendre la compétence Nuage Toxique après être arrivé au niveau 5 de Arme Empoisonnée.";
-				next;
-				mes "[L'Anonyme]";
-				mes "^3355FFBombe Empoisonnée^000000 est une compétence qui, après être utilisée sur une cible, la fera exploser si ses HP sont inférieurs à un certain montant après trois secondes.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Quand la cible explose, les ennemis proches reçoivent également des dommages. C'est une compétence essentielle pour les Assassins. Elle demande Parade Empoisonnée et Nuage Toxique au niveau 5.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Voilà...";
-				mes "C'est tout ce que je peux vous dire sur les compétences des Assassins.";
-				set ASSIN_Q2,1;
-				next;
-				break;
-			case 2:
-				mes "[L'Anonyme]";
-				mes "Hum, les statistiques...";
-				mes "Pour les Assassins, l'Agilité est la statistique la plus importante.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Pour l'aboutissement de l'assassinat, la Force est probablement la deuxième statistique la plus importante. Mais c'est seulement mon avis.";
-				next;
-				mes "[L'Anonyme]";
-				mes "Je ne peux pas vous donner de meilleurs conseils en ce qui concerne les statistiques. Vous devriez chercher et trouver les statistiques qui vous correspondent le mieux, et décider quel genre d'Assassin vous voulez devenir.";
-				set ASSIN_Q2,2;
-				next;
-				break;
-			case 3:
-				if (ASSIN_Q2 == 0) {
-					mes "[L'Anonyme]";
-					mes "Vous savez tout vous dites?! Je veux bien voir ça!";
-					next;
-				}
-				set ASSIN_Q2,3;
-				break;
+				mes "Mouahahahahahah!";
+				mes "Arrêtez de trembler de peur! Vous me faites marrer!";
+				close;
 			}
+			mes "[L'Anonyme]";
+			mes "Oh...";
+			mes "Vous voulez me défier? Moi?!";
+			next;
+			mes "[L'Anonyme]";
+			mes "A chacun de mes pas s'ensuit un bain de sang. Je n'ai d'autre nom que la pointe de mes lames, c'est tout ce qu'il y a à savoir.";
+			next;
+			mes "[L'Anonyme]";
+			mes "Je suis ici pour tester vos connaissances, et votre capacité à être sans pitié. Ces deux aptitudes sont nécessaires pour devenir Assassin.";
+			next;
+			mes "[L'Anonyme]";
+			mes "En ce qui concerne votre défi, vous devez répondre correctement à mes questions. Ce sont des questions très difficiles et seul un Assassin peut trouver les bonnes réponses.";
+			next;
+			mes "[L'Anonyme]";
+			mes "Bien que je sois sans pitié, je ne suis pas nécessairement cruel. Avant que nous commencions, y a-t-il quelque chose que vous voudriez savoir?";
+			next;
+			set ASSIN_Q2,0;
+			while(ASSIN_Q2 < 3) {
+				switch(select("...les compétences?:...les statistiques?:Hum, je sais tout.")) {
+				case 1:
+					mes "[L'Anonyme]";
+					mes "Les compétences...?";
+					mes "Bien que les compétences aient des utilisations circonstancielles, je vais vous parler des concepts de base.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Tout d'abord, ^3355FFMaîtrise du Katar^000000. Cette compétence accroît les dégâts des armes de type Katar. Plus le niveau de la compétence est élevé, plus les dégâts sont importants.";
+					next;
+					mes "[L'Anonyme]";
+					mes "^3355FFVélocité Sénestre^000000 et ^3355FFVélocité Dextre^000000. Les Assassins peuvent équiper des armes différentes dans chaque main lorsqu'ils utilisent des armes de type Dague.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Mais c'est évidemment plus difficile de maîtriser deux armes à la fois plutôt qu'une seule. Les compétences de Vélocité Dextre et Sénestre augmentent les dégâts lorsque deux Dagues sont utilisées.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Cependant, si vous ne voulez pas utiliser deux Dagues, vous n'aurez pas besoin de cette compétence. Vous verrez comment fonctionne la 'Vélocité Sénestre' dès que vous aurez maîtrisé la 'Vélocité Dextre' au niveau 2.";
+					next;
+					mes "[L'Anonyme]";
+					mes "^3355FFCoups Supersoniques^000000 vous permet de frapper un ennemi 8 fois en un seul coup. Cette compétence fonctionne uniquement avec des armes de type Katar à cause de la vitesse qu'elle requiert.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Bien entendu, les dégâts sont influencés par la Force et les dégâts de l'arme. Vous comprendrez comment fonctionne cette compétence aussitôt que vous atteindrez le niveau 4 de Maîtrise du Katar.";
+					next;
+					mes "[L'Anonyme]";
+					mes "^3355FFCrocs des Ombres^000000 vous permet d'attaquer vos ennemis lorsque vous êtes caché sous le sol. Quand vous la maîtriserez, il vous sera possible de les attaquer à une certaine distance.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Puisqu'il s'agit d'une attaque à distance, elle peut s'avérer très utile quand vous êtes entouré d'ennemis.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Parce que vous avez besoin de devenir parfaitement invisible pour utiliser cette compétence, vous devez impérativement apprendre Dissimulation jusqu'au niveau 2 avant d'apprendre Crocs des Ombres.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Pour apprendre ^3355FFDissimulation^000000, vous devez apprendre Disparition jusqu'au niveau 2. Ensuite vous pourrez bouger tout en étant invisible si vous êtes près d'une paroi.";
+					next;
+					mes "[L'Anonyme]";
+					mes "La compétence ^3355FFArme Empoisonnée^000000 vous permet d'enchanter l'arme que vous utilisez avec du poison. Votre arme possèdera alors temporairement la propriété Poison.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Avec un peu de chance, votre attaque pourra aussi empoisonner votre ennemi. Vous pouvez également utiliser cette compétence pour enchanter les armes des membres de votre groupe...";
+					next;
+					mes "[L'Anonyme]";
+					mes "^3355FFParade Empoisonnée^000000 protège l'utilisateur des attaques de propriété Poison, et peut tout aussi bien être utilisée sur d'autres personnes. Toutefois, vous devez apprendre Arme Empoisonnée au niveau 3 en premier.";
+					next;
+					mes "[L'Anonyme]";
+					mes "^3355FFNuage Toxique^000000 consomme une Gemme Rouge pour contaminer une zone avec du poison. La durée de la contamination augmente avec le niveau de la compétence.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Vous pouvez apprendre la compétence Nuage Toxique après être arrivé au niveau 5 de Arme Empoisonnée.";
+					next;
+					mes "[L'Anonyme]";
+					mes "^3355FFBombe Empoisonnée^000000 est une compétence qui, après être utilisée sur une cible, la fera exploser si ses HP sont inférieurs à un certain montant après trois secondes.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Quand la cible explose, les ennemis proches reçoivent également des dommages. C'est une compétence essentielle pour les Assassins. Elle demande Parade Empoisonnée et Nuage Toxique au niveau 5.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Voilà...";
+					mes "C'est tout ce que je peux vous dire sur les compétences des Assassins.";
+					set ASSIN_Q2,1;
+					next;
+					break;
+				case 2:
+					mes "[L'Anonyme]";
+					mes "Hum, les statistiques...";
+					mes "Pour les Assassins, l'Agilité est la statistique la plus importante.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Pour l'aboutissement de l'assassinat, la Force est probablement la deuxième statistique la plus importante. Mais c'est seulement mon avis.";
+					next;
+					mes "[L'Anonyme]";
+					mes "Je ne peux pas vous donner de meilleurs conseils en ce qui concerne les statistiques. Vous devriez chercher et trouver les statistiques qui vous correspondent le mieux, et décider quel genre d'Assassin vous voulez devenir.";
+					set ASSIN_Q2,2;
+					next;
+					break;
+				case 3:
+					if (ASSIN_Q2 == 0) {
+						mes "[L'Anonyme]";
+						mes "Vous savez tout vous dites?! Je veux bien voir ça!";
+						next;
+					}
+					set ASSIN_Q2,3;
+					break;
+				}
+			}
+			mes "[L'Anonyme]";
+			mes "Hum. Il est temps de tester vos connaissances. Vous n'êtes pas autorisé à faire plus d'une erreur.";
+			next;
+			mes "[L'Anonyme]";
+			mes "En d'autres termes, si vous voulez réussir cet examen, vous devez me donner au minimum 9 bonnes réponses sur 10. Je ne vous dirai pas où vous vous êtes trompé...";
+			next;
+			mes "[L'Anonyme]";
+			mes "Vous êtes prêt? On y va!";
 		}
-		mes "[L'Anonyme]";
-		mes "Hum. Il est temps de tester vos connaissances. Vous n'êtes pas autorisé à faire plus d'une erreur.";
+		else if (ASSIN_Q2 < 5) {
+			mes "[L'Anonyme]";
+			mes "Vous avez eu des soucis à réussir un simple examen? Vos connaissances sont trop faibles.";
+			next;
+			if (select("Aidez-moi, comment faire pour réussir?:Je vous défie une nouvelle fois!") == 1) {
+				mes "[L'Anonyme]";
+				mes "Hé bien, c'est vraiment une bonne question. Mais vous avez été banni de la guilde des Assassins, donc ça ne me concerne plus...";
+				close2;
+				warp "moc_fild16",206,151;
+				end;
+			}
+			mes "[L'Anonyme]";
+			mes "Ah je vois...";
+			mes "Maintenant allez-y, mais n'ayez pas peur. Je serai de votre côté puisque vous avez compris vos erreurs...";
+			next;
+			mes "[L'Anonyme]";
+			mes "A présent, nous devons vous tester à nouveau! Rappelez-vous, vous devez répondre correctement à 9 questions sur 10. Souvenez-vous que je vous fais une faveur...";
+			next;
+			mes "[L'Anonyme]";
+			mes "Vous devez répondre correctement à 9 questions sur 10. Si vous donnez plus d'une mauvaise réponse, vous ne serez jamais Assassin.";
+			next;
+			mes "[L'Anonyme]";
+			mes "Bon, vous êtes prêt? Bonne chance";
+		}
 		next;
-		mes "[L'Anonyme]";
-		mes "En d'autres termes, si vous voulez réussir cet examen, vous devez me donner au minimum 9 bonnes réponses sur 10. Je ne vous dirai pas où vous vous êtes trompé...";
-		next;
-		mes "[L'Anonyme]";
-		mes "Vous êtes prêt? On y va!";
-		next;
-L_AskQuestions:
 		switch(rand(1,3)) {
 		case 1:
 			mes "[L'Anonyme]";
@@ -993,38 +1019,11 @@ L_AskQuestions:
 			}
 		}
 	}
-	else if (ASSIN_Q2 < 5) {
-		mes "[L'Anonyme]";
-		mes "Vous avez eu des soucis à réussir un simple examen? Vos connaissances sont trop faibles.";
-		next;
-		if (select("Aidez-moi, comment faire pour réussir?:Je vous défie une nouvelle fois!") == 1) {
-			mes "[L'Anonyme]";
-			mes "Hé bien, c'est vraiment une bonne question. Mais vous avez été banni de la guilde des Assassins, donc ça ne me concerne plus...";
-			close2;
-			warp "moc_fild16",206,151;
-			end;
-		}
-		mes "[L'Anonyme]";
-		mes "Ah je vois...";
-		mes "Maintenant allez-y, mais n'ayez pas peur. Je serai de votre côté puisque vous avez compris vos erreurs...";
-		next;
-		mes "[L'Anonyme]";
-		mes "A présent, nous devons vous tester à nouveau! Rappelez-vous, vous devez répondre correctement à 9 questions sur 10. Souvenez-vous que je vous fais une faveur...";
-		next;
-		mes "[L'Anonyme]";
-		mes "Vous devez répondre correctement à 9 questions sur 10. Si vous donnez plus d'une mauvaise réponse, vous ne serez jamais Assassin.";
-		next;
-		mes "[L'Anonyme]";
-		mes "Bon, vous êtes prêt? Bonne chance";
-		next;
-		goto L_AskQuestions;
-	}
 	else {
 		mes "[L'Anonyme]";
 		mes "...Je vous observerai.";
 		close;
 	}
-
 }
 
 in_moc_16,21,165,2	script	Salle d'Attente#ASNTEST	725,{

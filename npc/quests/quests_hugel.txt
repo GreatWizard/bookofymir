@@ -200,7 +200,7 @@ hu_in01,387,245,0	script	Allen Schuwell	849,2,2,{
 			next;
 			mes "[Postell]";
 			mes "Euh... Hé, papa. J'ai apporté ces médicaments dont tu as tant besoin.";
-			donpcevent "Postell Schuwell#D::OnEffect";
+			specialeffect EF_CHANGECOLD,AREA,"Postell Schuwell#D";
 			next;
 			mes "[Allen]";
 			mes "Merci mon Dieu...";
@@ -210,7 +210,7 @@ hu_in01,387,245,0	script	Allen Schuwell	849,2,2,{
 			mes "[Allen]";
 			mes "A-attends...";
 			mes "Quelque chose ne va pas. Le Bunkoll A n'a pas ce goût...";
-			donpcevent "Postell Schuwell#D::OnSweat";
+			emotion e_swt,0,"Postell Schuwell#D";
 			next;
 			mes "[Postell]";
 			mes "Bunkoll A...?";
@@ -312,14 +312,6 @@ OnEnable:
 OnTimer100000:
 	disablenpc "Postell Schuwell#D";
 	stopnpctimer;
-	end;
-	
-OnSweat:
-	emotion e_swt;
-	end;
-
-OnEffect:
-	specialeffect EF_CHANGECOLD;
 	end;
 
 }
@@ -3651,7 +3643,7 @@ hu_fild06,218,373,1	script	Moks Bugs#Bug4	1053,{
 			mes "- *Whizz Whizz Bzzzz* -";
 			mes "- *Whizz Whizz*-";
 			mes "- *Whizz Whizz*-";
-			specialeffect2 71;
+			specialeffect2 EF_CONE;
 			next;
 			if(rand(1,5) > 4)
 			{
@@ -3750,7 +3742,7 @@ lhz_dun02,244,226,0	script	Unethical Machine	111,{
 			mes "- You threw a Marine Sphere Bottle toward the machine. -";
 			next;
 			mes "BOOM!";
-			specialeffect2 183;
+			specialeffect2 EF_SUI_EXPLOSION;
 			enablenpc "HiddenExplosion";
 			mapannounce "lhz_dun02","Beep------------------ ",1,0x99CCFF;
 			delitem 7138,1; //Marine sphere bottle
@@ -3774,7 +3766,7 @@ OnInit:
 	
 OnTouch:
 	percentheal -10,0;
-	specialeffect 4;
+	specialeffect EF_HIT5;
 	disablenpc "HiddenExplosion";
 	end;
 	
@@ -3818,7 +3810,7 @@ hugel,198,169,0	script	#HugelTree	139,2,2,{
 		}
 		else if(hg_memory == 6)
 		{
-			specialeffect2 57;
+			specialeffect2 EF_BEGINSPELL5;
 			mes "^3355FFQuel est cet étrange sentiment de crainte? Ce froid particulier... C'est presque comme si vous étiez à Niflheim...^000000";
 			close;
 		}
@@ -4230,7 +4222,7 @@ hugel,196,164,3	script	El Schatt	50,{
 		mes "...El Schatt...";
 		mes "Elle est de nouveau partie. C'est... Je suis Manainne... ^333333*Sniff*^000000 Elle a dû repartir...";
 		next;
-		specialeffect2 71;
+		specialeffect2 EF_CONE;
 		set hg_memory,12;
 		getexp 50000,0;
 		getitem 603,1; //Old blue box
@@ -4433,7 +4425,7 @@ hu_fild06,190,367,3	script	Maman de Torpy	701,{
 		next;
 		mes "[Maman de Torpy]";
 		mes "J'apprécie vraiment tout ce que vous avez fait pour nous aider à le trouver. Je sais que ce n'est pas grand-chose, mais j'espère que vous accepterez ceci en gage de nos remerciements. Au revoir pour le moment, aventurier~";
-		specialeffect2 71;
+		specialeffect2 EF_CONE;
 		set hg_ubu01,8;
 		getitem 12065,3; //Green salad
 		getexp 50000,0;
@@ -4446,7 +4438,7 @@ hu_fild06,190,367,3	script	Maman de Torpy	701,{
 		next;
 		mes "[Maman de Torpy]";
 		mes "J'apprécie vraiment tout ce que vous avez fait pour nous aider à le trouver. Je sais que ce n'est pas grand-chose, mais j'espère que vous accepterez ceci en gage de nos remerciements. Au revoir pour le moment, aventurier~";
-		specialeffect2 68;
+		specialeffect2 EF_MVP;
 		set hg_ubu01,8;
 		getitem 12065,3; //Green salad
 		getexp 50000,0;
@@ -5373,7 +5365,7 @@ yuno,111,156,3	script	Euslan	90,{
 		mes "Je n'oublierai jamais ce que vous avez fait pour Thierry et moi. Je prierai pour vous tous les jours. Prenez soin de vous...";
 		close2;
 		set hg_ma1,13;
-		specialeffect 253;
+		specialeffect EF_ABSORBSPIRITS;
 		getexp 900000,600000;
 		end;
 	}
@@ -5685,7 +5677,7 @@ hugel,56,104,3	script	Kurupe	709,3,3,{
 			close;
 		}
 		set hg_milk,9;
-		specialeffect2 71;
+		specialeffect2 EF_CONE;
 		getexp 100000,0;
 		getitem 12063,3;
 		mes "[Kurupe]";
@@ -6348,7 +6340,7 @@ hu_in01,19,161,0	script	Alex	803,{
 				mes "Qu-quoi?!";
 				mes "Vous êtes venus ici juste pour me dire ça? Revenez quand vous aurez terminé et arrêtez de me faire perdre mon temps!";
 				next;
-				donpcevent "Julian::OnEmote";
+				emotion e_ho,0,"Julian";
 				mes "[Julian]";
 				mes "Hé, tu sais quoi, Alex? Tu ne peux pas pousser les gens comme ça. D'ailleurs, il ne faut pas abuser de cet aventurier, tu sais?";
 				next;
@@ -6498,7 +6490,7 @@ hu_in01,14,11,4	script	Laura	70,{
 		mes "[Laura]";
 		mes "Mon assistante, Milton Ashe, est juste là. Dites 'Bonjour', Ashe.";
 		next;
-		donpcevent "Ashe::OnEmote";
+		emotion e_heh,0,"Ashe";
 		mes "[Ashe]";
 		mes "Bonjour!";
 		next;
@@ -6580,7 +6572,7 @@ hu_in01,14,11,4	script	Laura	70,{
 				mes "[Laura]";
 				mes "Désolée, laissez-moi me présenter. Je suis Laura Laurence, la chef d'expédition vers le Temple d'Odin pour le Royaume de Rune-Midgard. Ashe Milton est mon adjointe sur ces fouilles.";
 				next;
-				donpcevent "Ashe::OnEmote";
+				emotion e_heh,0,"Ashe";
 				mes "[Ashe]";
 				mes "Bonjour!";
 				next;
@@ -6701,7 +6693,7 @@ hu_in01,14,11,4	script	Laura	70,{
 				mes "[Laura]";
 				mes "Et cette fille Alex... Elle peut sembler polie, mais elle me regarde toujours d'un sale oeil, et me salue d'un sourire insidieux. Je la hais!";
 				next;
-				donpcevent "Ashe::OnEmote2"; //ET_PROFUSELY_SWAT
+				emotion e_swt2,0,"Ashe";
 				mes "[Ashe]";
 				mes "Mme Laurence...! Arrêtez, s'il vous plaît! C'est gênant de vous entendre parler d'une collègue comme ça.";
 				next;
@@ -6955,7 +6947,7 @@ hu_in01,14,11,4	script	Laura	70,{
 				mes "["+strcharinfo(0)+"]";
 				mes "Eh bien, vous avez déjà entendu parler d'Ymir...";
 				next;
-				donpcevent "Ashe::OnEmote3"; //ET_SURPRISE
+				emotion e_gasp,0,"Ashe";
 				mes "[Ashe]";
 				mes "...Le coeur?";
 				mes "Le coeur d'Ymir, c'est ça?";
@@ -6990,7 +6982,7 @@ hu_in01,14,11,4	script	Laura	70,{
 						next;
 						break;
 				}
-				donpcevent "Ashe::OnEmote4"; //ET_OK
+				emotion e_ok,0,"Ashe";
 				mes "[Ashe]";
 				mes "Le Coeur d'Ymir? C'est une marque de vêtements, n'est-ce pas? Ouais, c'est en vogue chez les gens branchés de la République de Schwaltzvalt.";
 				next;
@@ -7086,10 +7078,6 @@ hu_in01,18,167,4	script	Julian	86,{
 		mes "Pourquoi nos deux chefs d'équipe sont si têtues? Peut-être que ça vient du fait que ce sont deux femmes célibataires... presque vieilles filles? Ne leur dites surtout pas que je les ai traité de vieilles filles, hein?!";
 		close;
 	}
-	
-OnEmote:
-	emotion e_ho,0;
-	end;
 }
 
 hu_in01,16,21,0	script	Ashe#5	139,2,2,{
@@ -7194,22 +7182,6 @@ hu_in01,16,20,4	script	Ashe	95,{
 			mes "S'il vous plaît, ne me demandez plus rien... Je ne veux pas vous attirer des ennuis~";
 			close;
 	}
-	
-OnEmote:
-	emotion e_heh,0;
-	end;
-	
-OnEmote2:
-	emotion e_swt2,0;
-	end;
-
-OnEmote3:
-	emotion e_gasp,0;
-	end;
-	
-OnEmote4:
-	emotion e_ok,0;
-	end;
 }
 
 hu_in01,174,90,0	script	Entrée	139,2,2,{
@@ -7230,13 +7202,13 @@ hu_in01,159,84,3	script	Laura#2	70,{
 	if(hg_odin == 22 || hg_odin == 23)
 	{
 		cutin "hu_laura03.bmp",2;
-		donpcevent "Laura#2::OnEmote";
+		emotion e_an,0,"Laura#2";
 		mes "[Laura]";
 		mes "Qu-quoi...?!";
 		mes "Est-ce que ça veut dire que tout le monde m'a trompée pendant tout ce temps?! C'est de la pure folie!";
 		next;
 		cutin "hu_alex04.bmp",0;
-		donpcevent "Alex#2::OnEmote";
+		emotion e_an,0,"Alex#2";
 		mes "[Alex]";
 		mes "Qu'est-ce que vous racontez, espèce de folle? Vous avez vu le temple de l'autre côté! Ce n'est pas un secret!";
 		next;
@@ -7266,12 +7238,12 @@ hu_in01,159,84,3	script	Laura#2	70,{
 		next;
 		mes "^3355FFLaura agite brusquement un épais dossier dans ses mains.^000000";
 		next;
-		donpcevent "Julian#2::OnEmote";
+		emotion e_omg,0,"Julian#2";
 		mes "[Julian]";
 		mes "Qu'est-ce...?";
 		mes "Argh, c'est--!";
 		next;
-		donpcevent "Laura#2::OnEmote2";
+		emotion e_ag,0,"Laura#2";
 		mes "[Laura]";
 		mes "C'est ça. Maintenant dites-moi, qu'est-ce que le '^FF0000Coeur d'Ymir^000000', bon Dieu?";
 		next;
@@ -7280,7 +7252,7 @@ hu_in01,159,84,3	script	Laura#2	70,{
 		mes "......";
 		mes "Julian!";
 		next;
-		donpcevent "Julian#2::OnEmote2";
+		emotion e_swt2,0,"Julian#2";
 		mes "[Julian]";
 		mes "Euh, ce n'est pas de ma faute! El-elle n'a pas le droit de venir dans notre bureau!";
 		next;
@@ -7293,7 +7265,7 @@ hu_in01,159,84,3	script	Laura#2	70,{
 		mes "C'est vraiment louche: vous ne sortez que la nuit et vous faites si peu de progrès en fouillant le Temple d'Odin. Dites-moi, quelles sont vos véritables intentions?!";
 		next;
 		cutin "hu_alex03.bmp",0;
-		donpcevent "Alex#2::OnEmote3";
+		emotion e_swt2,0,"Alex#2";
 		mes "[Alex]";
 		mes "J-je ne sais pas de quoi vous parlez! J-Julian a du se voir confier une mission et a du l'exécuter sans mon consentement! N'allez pas déformer les faits, espèce... espèce de voleuse!";
 		next;
@@ -7304,17 +7276,17 @@ hu_in01,159,84,3	script	Laura#2	70,{
 		next;
 		mes "^3355FFLaura jette le dossier au loin, et retrousse ses manches d'un air menaçant.^000000";
 		next;
-		donpcevent "Ashe#2::OnEmote";
+		emotion e_sob,0,"Ashe#2";
 		mes "[Ashe]";
 		mes "A-Arrêtez!";
 		mes "Toutes les deux!";
 		next;
-		donpcevent "Laura#2::OnEmote3";
+		emotion e_swt2,0,"Laura#2";
 		mes "[Laura]";
 		mes "Restez en dehors de ça, Ashe!";
 		next;
 		cutin "hu_alex04.bmp",0;
-		donpcevent "Alex#2::OnEmote";
+		emotion e_an,0,"Alex#2";
 		mes "[Alex]";
 		mes "Ouais, ce n'est pas vos affaires!";
 		next;
@@ -7341,17 +7313,6 @@ hu_in01,159,84,3	script	Laura#2	70,{
 		cutin "hu_alex04.bmp",255;
 		end;
 	}
-OnEmote:
-	emotion e_an,0;
-	end;
-	
-OnEmote2:
-	emotion e_ag,0;
-	end;
-	
-OnEmote3:
-	emotion e_swt2,0;
-	end;
 }
 
 hu_in01,158,84,5	duplicate(Laura#2)	Alex#2	803,0,0
@@ -7386,10 +7347,6 @@ hu_in01,162,85,4	script	Ashe#2	95,{
 		mes "Ne vous inquiétez pas, mon camarade à la Porte Sud de Morroc vous expliquera tout. Dépêchez-vous s'il vous plaît, et trouvez-le aussi vite que possible!";
 		close;
 	}
-
-OnEmote:
-	emotion e_sob,0;
-	end;
 }
 
 hu_in01,171,90,0	script	Ashe#3	139,2,2,{
@@ -7424,21 +7381,9 @@ hu_in01,155,82,4	script	Julian#2	86,{
 	mes "[Julian]";
 	mes "J'arrête de m'inquiéter, qu'ils se battent ou non... Je ne dois pas trop m'impliquer. Si vous le souhaitez, vous pouvez essayer de les arrêter...";
 	close;
-	
-OnEmote:
-	emotion e_omg,0;
-	end;
-	
-OnEmote2:
-	emotion e_swt2,0;
-	end;
 }
 
 moc_fild12,160,372,0	script	Hit	139,{
-
-OnEffect:
-	specialeffect 122;
-	end;
 }
 
 moc_fild12,160,365,0	script	Ashe#4	139,4,4,{
@@ -7452,7 +7397,7 @@ OnTouch:
 		mes "[???]";
 		mes "Ne vous retournez pas, ne tremblez pas, ne respirez même pas. Vous êtes suivi. Attendez une seconde, je m'occupe de lui.";
 		next;
-		donpcevent "Hit::OnEffect";
+		specialeffect EF_SONICBLOWHIT,AREA,"Hit";
 		mes "[???]";
 		mes "Ha!";
 		next;
@@ -7814,9 +7759,9 @@ OnTouch:
 							mes "["+strcharinfo(0)+"]";
 							mes "Qu'est-ce...? Quel était ce bruit?!";
 							next;
-							specialeffect 90;
-							specialeffect 90;
-							specialeffect 90;
+							specialeffect EF_LORD;
+							specialeffect EF_LORD;
+							specialeffect EF_LORD;
 							mes "["+strcharinfo(0)+"]";
 							mes "Wa...waaaahhhh!";
 							close2;

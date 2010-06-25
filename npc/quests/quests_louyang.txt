@@ -1542,25 +1542,6 @@ lou_in02,201,166,4	script	Gardien de la Remise#lou	819,{
 	mes "[Jiang Xiayou]";
 	mes "Hum. Je suppose que je devrais m'occuper de tout ça le plus vite possible...";
 	close;
-
-OnEmotion1:
-	emotion e_an;
-	end;
-
-OnEmotion2:
-	emotion e_pif;
-	end;
-
-OnEmotion3:
-	emotion e_gg;
-	end;
-
-OnEmotion4:
-	emotion e_wah;
-	end;
-
-OnEmotion5:
-	emotion e_rock;
 }
 
 lou_in02,210,47,0	script	Employé de la Mairie#lou	825,{
@@ -1895,7 +1876,7 @@ lou_in02,204,169,0	script	Stock de Marchandises#1l	111,{
 			mes "[Jiang Xiayou]";
 			mes "Hé hé...";
 			mes "J'te l'avais dit! Il n'est pas trop tard hein, tu peux toujours me rendre service si tu veux que je t'aide à retrouver le médicament dans tout le bazar qu'est cette remise!";
-			donpcevent "Gardien de la Remise#lou::OnEmotion1";
+			emotion e_an,0,"Gardien de la Remise#lou";
 			close;
 		}
 		mes "^3355FF*Farfouille*";
@@ -1956,7 +1937,7 @@ lou_in02,207,168,0	script	Stock de Marchandises#5l	111,{
 	next;
 	mes "[Jiang Xiayou]";
 	mes "Hé, ne touche à rien! Si tu fous du bordel, t'auras intérêt à tout ranger après, capiche? Alors si tu ne veux pas être de corvée de rangement, éloigne-toi des stocks!";
-	donpcevent "Gardien de la Remise#lou::OnEmotion5";
+	emotion e_rock,0,"Gardien de la Remise#lou";
 	close;
 }
 
@@ -1986,7 +1967,7 @@ lou_in02,206,163,0	script	Stock de Marchandises#4l	111,{
 				mes "Bah, j'y crois pas!";
 				mes "Tu "+(sex?"un sacré veinard":"une sacrée veinarde")+", toi!";
 				mes "^666666*Grommelle grommelle*^000000";
-				donpcevent "Gardien de la Remise#lou::OnEmotion4";
+				emotion e_wah,0,"Gardien de la Remise#lou";
 				close;
 			}
 			mes "^3355FF*Fouille*";
@@ -1997,7 +1978,6 @@ lou_in02,206,163,0	script	Stock de Marchandises#4l	111,{
 			mes "[Jiang Xiayou]";
 			mes "Hé hé...";
 			mes "J'te l'avais dit! Il n'est pas trop tard hein, tu peux toujours me rendre service si tu veux que je t'aide à retrouver le médicament dans tout le bazar qu'est cette remise!";
-			donpcevent "Gardien de la Remise#lou::OnEmotion1";
 			close;
 		}
 		mes "^3355FF*Farfouille*";
@@ -2046,7 +2026,7 @@ lou_in02,198,170,0	script	Stock de Marchandises#3l	111,{
 			mes "[Jiang Xiayou]";
 			mes "Hé hé...";
 			mes "J'te l'avais dit! Il n'est pas trop tard hein, tu peux toujours me rendre service si tu veux que je t'aide à retrouver le médicament dans tout le bazar qu'est cette remise!";
-			donpcevent "Gardien de la Remise#lou::OnEmotion3";
+			emotion e_gg,0,"Gardien de la Remise#lou";
 			close;
 		}
 		mes "^3355FF*Farfouille*";
@@ -2095,7 +2075,7 @@ lou_in02,192,170,0	script	Stock de Marchandises#2	111,{
 			mes "[Jiang Xiayou]";
 			mes "Hé hé...";
 			mes "J'te l'avais dit! Il n'est pas trop tard hein, tu peux toujours me rendre service si tu veux que je t'aide à retrouver le médicament dans tout le bazar qu'est cette remise!";
-			donpcevent "Gardien de la Remise#lou::OnEmotion2";
+			emotion e_pif,0,"Gardien de la Remise#lou";
 			close;
 		}
 		mes "^3355FF*Farfouille*";
@@ -3828,7 +3808,7 @@ lou_fild01,224,348,0	script	Lady#delivery	817,{
 				set zeny,zeny-100;
 			}
 			close2;
-			donpcevent " #fire::OnClaymore";
+			specialeffect EF_BLASTMINEBOMB,AREA," #fire";
 			end;
 		}
 		mes "[Lady]";
@@ -3850,7 +3830,7 @@ lou_fild01,224,348,0	script	Lady#delivery	817,{
 				set zeny,zeny-100;
 			}
 			close2;
-			donpcevent " #fire::OnClaymore";
+			specialeffect EF_BLASTMINEBOMB,AREA," #fire"; //[Bugfix Myllena]
 			end;
 		}
 		mes "[Lady]";
@@ -3937,7 +3917,7 @@ lou_fild01,224,348,0	script	Lady#delivery	817,{
 				set zeny,zeny-100;
 			}
 			close2;
-			donpcevent " #fire::OnClaymore";
+			specialeffect EF_BLASTMINEBOMB,AREA," #fire"; //[Bugfix Myllena]
 			end;
 		}
 		mes "[Lady]";
@@ -3948,10 +3928,6 @@ lou_fild01,224,348,0	script	Lady#delivery	817,{
 }
 
 lou_fild01,225,350,0	script	 #fire	139,{
-	end;
-
-OnClaymore:
-	specialeffect EF_BLASTMINEBOMB;
 	end;
 }
 

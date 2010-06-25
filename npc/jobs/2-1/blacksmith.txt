@@ -9,7 +9,7 @@
 //= Optimized and further edited by kobra_k88.
 //= Further bugfixed and tested by Lupus
 //===== Current Version: =====================================
-//= 2.7
+//= 2.8
 //===== Compatible With: =====================================
 //= eAthena  SVN
 //===== Description: =========================================
@@ -41,6 +41,7 @@
 //= 2.6 Fixed 4 bugs [Lupus]
 //= 2.6a Typo fix [Yommy]
 //= 2.7 Added Quest Log commands. [Kisuka]
+//= 2.8 Removed the need for use of 'goto.' [L0ne_W0lf]
 //==============================================================
 
 ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
@@ -280,22 +281,35 @@ ein_in01,201,27,3	script	Geschupenschte#alberta	63,{
 			mes "Je suis bien placé pour savoir ce que c'est que d'être occupé~";
 			close;
 		}
-		else if (BSMITH_Q == 1) {
-			mes "[Geschupenschte]";
-			mes "Vous êtes celui que la Guilde à envoyé, non?";
-			mes "Ah, les gens commandent tant d'objets... mais nous n'avons pas assez de personnes pour les livrer!";
-			next;
-			mes "[Geschupenschte]";
-			mes "Donc, vous ETES celui envoyé par la guilde, n'est-ce pas?";
-			mes "Oh oui, heureusement...";
-			next;
-			mes "[Geschupenschte]";
-			mes "L'autre jour ils nous ont envoyé un gamin avec deux mains gauches... Une vraie plaie!";
-			mes "Heureusement vous êtes un peu plus compétent, n'est-ce pas?";
-			mes "Bien! Maintenant, je vais vous poser quelques questions!";
-			next;
-			if (select("Très bien.:Un instant, je vais me préparer.") == 1) {
-L_AskQuestions:
+		else if ((BSMITH_Q == 1) || (BSMITH_Q == 2)) {
+			if (BSMITH_Q == 1) {
+				mes "[Geschupenschte]";
+				mes "Vous êtes celui que la Guilde à envoyé, non?";
+				mes "Ah, les gens commandent tant d'objets... mais nous n'avons pas assez de personnes pour les livrer!";
+				next;
+				mes "[Geschupenschte]";
+				mes "Donc, vous ETES celui envoyé par la guilde, n'est-ce pas?";
+				mes "Oh oui, heureusement...";
+				next;
+				mes "[Geschupenschte]";
+				mes "L'autre jour ils nous ont envoyé un gamin avec deux mains gauches... Une vraie plaie!";
+				mes "Heureusement vous êtes un peu plus compétent, n'est-ce pas?";
+				mes "Bien! Maintenant, je vais vous poser quelques questions!";
+				next;
+				set .@selection,select("Très bien.:Un instant, je vais me préparer.");
+			else if (BSMITH_Q == 2) {
+				mes "[Geschupenschte]";
+				mes "Alors, j'espère que vous avez étudié depuis la dernière fois?";
+				next;
+				mes "[Geschupenschte]";
+				mes "Je comprends parfaitement qu'on ne puisse pas répondre juste à tous les coups, donc je vais vous aider un peu...";
+				next;
+				mes "[Geschupenschte]";
+				mes "Vous avez droit à une réponse fausse!";
+				mes "Très bien, commençons l'interrogation~";
+				next;
+			}
+			if (.@selection != 2) {
 				if (rand(2)) {
 					mes "[Geschupenschte]";
 					mes "1. Quelle ville ne correspond pas avec l'objet local?";
@@ -442,6 +456,7 @@ L_AskQuestions:
 			mes "Je vous attendrai ici même.";
 			close;
 		}
+		/*
 		else if (BSMITH_Q == 2) {
 			mes "[Geschupenschte]";
 			mes "Alors, j'espère que vous avez étudié depuis la dernière fois?";
@@ -454,6 +469,7 @@ L_AskQuestions:
 			mes "Très bien, commençons l'interrogation~";
 			next;
 			goto L_AskQuestions;
+		*/
 		}
 		else if (BSMITH_Q == 3) {
 			mes "[Geschupenschte]";
