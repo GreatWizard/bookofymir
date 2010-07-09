@@ -1302,7 +1302,7 @@ UPDATE item_db SET `name_japanese`  = "Chaussures Versatiles" WHERE ID = 2449;
 UPDATE item_db SET `name_japanese`  = "Chaussures de Bois de l'Arbre de Vie" WHERE ID = 2450;
 UPDATE item_db SET `name_japanese`  = "Capuche" WHERE ID = 2501;
 UPDATE item_db SET `name_japanese`  = "Capuche" WHERE ID = 2502;
-UPDATE item_db SET `name_japanese`  = "Cache-Col" WHERE ID = 2503;
+UPDATE item_db SET `name_japanese`  = "Cache-Nez" WHERE ID = 2503;
 UPDATE item_db SET `name_japanese`  = "Cache-Nez" WHERE ID = 2504;
 UPDATE item_db SET `name_japanese`  = "Surveste" WHERE ID = 2505;
 UPDATE item_db SET `name_japanese`  = "Surveste" WHERE ID = 2506;
