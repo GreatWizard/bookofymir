@@ -6,7 +6,7 @@
 //= Made by: Black Dragon
 //= Converted by: Shin
 //===== Current Version: ===================================== 
-//= 3.2
+//= 3.3
 //===== Compatible With: ===================================== 
 //= eAthena  SVN
 //===== Description: ========================================= 
@@ -33,6 +33,7 @@
 //= 3.0 Updated waiting room. (Removes global var) [L0ne_W0lf]
 //= 3.1 Adding Hermemton's changes. [L0ne_W0lf]
 //= 3.2 Added Quest Log commands. [Kisuka]
+//= 3.3 Removed the need for use of 'goto.' [L0ne_W0lf]
 //============================================================
 
 
@@ -486,7 +487,8 @@ prt_church,95,127,3	script	Croisée::Croisé#2	745,{
 		mes "Si tu veux devenir Croisé, parle à notre Chef, dans le Château Central de Prontera.";
 		close;
 	}
-	else if(CRUS_Q == 6) {
+	else if((CRUS_Q == 6) || (CRUS_Q == 7)) {
+		if(CRUS_Q == 6) {
 		mes "Bienvenue.";
 		mes "Comment se sont passés";
 		mes "ces douloureuses épreuves?";
@@ -506,15 +508,15 @@ prt_church,95,127,3	script	Croisée::Croisé#2	745,{
 		goto C_Questions;
 	} 
 	else if(CRUS_Q == 7) {
-		mes "Bon retour~";
-		mes "T'es-tu bien préparé pour ce test?";
-		mes "Essayons de nouveau alors... Prêt...?";
-		next;
-		mes "[Gabrielle Valentine]";
-		mes "Une fois encore, je vais te poser une dizaine de questions.";
-		mes "Écoute attentivement, et choisis la bonne réponse.";
-		next;
-C_Questions:	
+			mes "Bon retour~";
+			mes "T'es-tu bien préparé pour ce test?";
+			mes "Essayons de nouveau alors... Prêt...?";
+			next;
+			mes "[Gabrielle Valentine]";
+			mes "Une fois encore, je vais te poser une dizaine de questions.";
+			mes "Écoute attentivement, et choisis la bonne réponse.";
+			next;
+		}
 		set .@cru_m,rand(1,3);
 		if (.@cru_m == 1) {
 			mes "[Gabrielle Valentine]";
@@ -753,7 +755,7 @@ C_Questions:
 		mes "[Gabrielle Valentine]";
 		mes "Ne stresse pas, tu dois en savoir beaucoup pour passer ce test. Dans tous les cas, j'attendrai ici. Quand tu te sentiras prêt, reviens ici d'accord?";
 		close;
-	}
+	} 
 	else if(CRUS_Q == 8 || CRUS_Q == 9) {
 		mes "Comme je l'ai dit précédemment, tu devrais aller au Château de Prontera et parler à Bliant Piyord pour passer le prochain test. Bonne chance, et deviens vite un Croisé, d'accord?";
 		close;

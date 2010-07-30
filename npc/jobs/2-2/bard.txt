@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= Muad_Dib(The Prometheus Project), Lupus, Samuray22
 //===== Current Version: ===================================== 
-//= 2.5
+//= 2.6
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -24,6 +24,7 @@
 //=	- Changed item names to item IDs
 //= 2.4 Fixed hang up on bard quest. ($kiN.) [L0ne_W0lf]
 //= 2.5 Added Quest Log commands. [Kisuka]
+//= 2.6 Removed the need for use of 'goto.' [L0ne_W0lf]
 //============================================================
 
 //=============== Ayealo ============================
@@ -419,27 +420,58 @@ comodo,226,123,5	script	Barde	741,{
 		cutin "job_bard_aiolo01",255;
 		end;
 	}
-	else if(BARD_Q == 3) {
-		if(xmas_npc > 10) { //this var is set in LUTIE.TXT
+	else if ((BARD_Q >= 3) || (BARD_Q <= 5)) {
+		if (BARD_Q == 3) {
+			if(xmas_npc > 10) { //this var is set in LUTIE.TXT
+				cutin "job_bard_aiolo01",2;
+				mes "[Lalo]";
+				mes "Alors, comment était ce voyage? As-tu rencontré beaucoup de monde?";
+				mes "Tu devrais avoir appris quelque chose de bien plus important qu'un cadeau.";
+				next;
+				mes "[Lalo]";
+				mes "Alors, veux-tu essayer de chanter...?";
+				mes "Je vais chanter une courte mélodie... et tu essayeras ensuite.";
+				if(checkquest(3003) == -1) {
+					changequest 3002,3003;
+				}
+				next;
+				mes "[Lalo]";
+				mes "C'est parti.";
+				mes "Ehem *se racle la gorge*";
+				mes "1, 2, 3, 4";
+				next;
+			}
+			else {
+				cutin "job_bard_aiolo01",2;
+				set xmas_npc,1;
+				mes "[Lalo]";
+				mes "Eh, tu n'es toujours pas devenu son ami?";
+				mes "Parler ne sera pas suffisant.";
+				next;
+				mes "[Lalo]";
+				mes "Si tu deviens ami avec ^008800Jack Frost^000000, tu recevras quelque chose.";
+				mes "Et parle avec les villageois aussi...";
+				close2;
+				cutin "job_bard_aiolo01",255;
+				end;
+			}
+		}
+		else if (BARD_Q == 4) {
 			cutin "job_bard_aiolo01",2;
 			mes "[Lalo]";
-			mes "Alors, comment était ce voyage? As-tu rencontré beaucoup de monde?";
-			mes "Tu devrais avoir appris quelque chose de bien plus important qu'un cadeau.";
+			mes "Hum... Cette fois tu peux faire mieux non?";
+			mes "Essayons encore, tu peux le faire.";
 			next;
 			mes "[Lalo]";
-			mes "Alors, veux-tu essayer de chanter...?";
-			mes "Je vais chanter une courte mélodie...";
-			mes "et tu essayeras ensuite.";
-			if(checkquest(3003) == -1) {
-				changequest 3002,3003;
-			}
+			mes "Je vais chanter un couplet... et tu répèteras après moi.";
 			next;
 			mes "[Lalo]";
-			mes "C'est parti.";
-			mes "Ehem *se racle la gorge*";
+			mes "Allons-y.";
+			mes "*Ehem*";
 			mes "1, 2, 3, 4";
 			next;
-B_Sing:
+		}
+		if (BARD_Q != 5) {
 			set .@bard_s, rand(1,5);
 			if (.@bard_s == 1) {
 				mes "^3377FFIl était un homme^000000";
@@ -780,8 +812,8 @@ B_Sing:
 			if (.@w_point) {
 				cutin "job_bard_aiolo02",2;
 				mes "[Lalo]";
-				mes "Hé, tu t'es trompé dans les paroles!";
-				mes "Tu ne peux même pas chanter seul...?";
+				mes "Hé, tu t'es "+(sex? "trompé","trompée")+" dans les paroles!";
+				mes "Tu ne peux même pas chanter "+(sex? "seul","seule")+"...?";
 				next;
 				mes "[Lalo]";
 				mes "Ta prononciation n'est pas articulée.";
@@ -807,106 +839,57 @@ B_Sing:
 			mes "Veux tu changer de métier maintenant?";
 			mes "Ou veux-tu d'abord mon petit cadeau?";
 			next;
-			if (select("Changer de métier!:Recevoir le cadeau.") == 1) {
-B_Change:
-				if(SkillPoint) {
-					cutin "job_bard_aiolo01",2;
-					mes "[Lalo]";
-					mes "Ah... Tout est parfait, Mais vous avez encore des Points de Compétence.";
-					mes "Va apprendre le reste de tes compétences et reviens me voir.";
-					next;
-					mes "[Lalo]";
-					mes "Et je vais te donner un petit cadeau";
-					mes "Apporte-moi quelques Troncs.";
-					mes "Peu importe de quel genre, tant qu'il y en a 60 du même type...";
-					close2;
-					cutin "job_bard_aiolo01",255;
-					end;
-				}
-				completequest 3003;
-				callfunc "Job_Change",Job_Bard;
-				callfunc "F_ClearJobVar";		//clears all job variables for the current player
+			set .@selection,select("Changer de métier!:Recevoir le cadeau.");
+		}
+		if ((.@selection == 1) || (BARD_Q == 5)) {
+			if(SkillPoint) {
+				cutin "job_bard_aiolo01",2;
 				mes "[Lalo]";
-				mes "Très bien! J'espère que tu passera ton temps à chanter des chansons joyeuses.";
-				mes "Vis comme le Vent et les Nuages!";
+				mes "Ah... Tout est parfait, Mais vous avez encore des Points de Compétence.";
+				mes "Va apprendre le reste de tes compétences et reviens me voir.";
 				next;
 				mes "[Lalo]";
-				mes "A la prochaine!";
+				mes "Et je vais te donner un petit cadeau";
+				mes "Apporte-moi quelques Troncs.";
+				mes "Peu importe de quel genre, tant qu'il y en a 60 du même type...";
 				close2;
 				cutin "job_bard_aiolo01",255;
 				end;
 			}
-			changequest 3003,3004;
-			mes "[Lalo]";
-			mes "Hum... Très bien, rapporte moi quelques Troncs.";
-			mes "Peu importe de quel genre, tant qu'il y en a 60 du même type...";
-			next;
-			mes "[Lalo]";
-			mes "Je te donnerai un cadeau quand tu me les auras apportés.";
-			mes "Fais un bon voyage.";
-			close2;
-			cutin "job_bard_aiolo01",255;
-			end;
+			else {
+				switch(BARD_Q) {
+				case 5:
+					if(countitem(1019) > 59) callsub S_ChangeJob,1019,1901;
+					else if(countitem(1068) > 59) callsub S_ChangeJob,1068,1903;
+					else if(countitem(1067) > 59) callsub S_ChangeJob,1067,1903;
+					else if(countitem(1066) > 59) {
+						if(JobLevel > 49) callsub S_ChangeJob,1066,1910;
+						else callsub S_ChangeJob,1066,1905;
+					}
+					cutin "job_bard_aiolo01",2;
+					mes "[Lalo]";
+					mes "Hum? Il semblerait que tu n'aies pas encore tous les Troncs? ";
+					mes "Veux tu quand même changer de métier?";
+					next;
+					if (select("Oui, changez mon métier.:Non, je vais aller les chercher") == 2)
+						break;
+				default:
+					completequest 3003;
+					callfunc "Job_Change",Job_Bard;
+					callfunc "F_ClearJobVar";		//clears all job variables for the current player
+					mes "[Lalo]";
+					mes "Très bien! J'espère que tu passera ton temps à chanter des chansons joyeuses.";
+					mes "Vis comme le Vent et les Nuages!";
+					next;
+					mes "[Lalo]";
+					mes "À la prochaine!";
+					close2;
+					cutin "job_bard_aiolo01",255;
+					end;
+				}
+			}
 		}
-		cutin "job_bard_aiolo01",2;
-		set xmas_npc,1;
-		mes "[Lalo]";
-		mes "Eh, tu n'es toujours pas devenu son ami?";
-		mes "Parler ne sera pas suffisant.";
-		next;
-		mes "[Lalo]";
-		mes "Si tu deviens ami avec ^008800Jack Frost^000000, tu recevras quelque chose.";
-		mes "Et parle avec les villageois aussi...";
-		close2;
-		cutin "job_bard_aiolo01",255;
-		end;
-	} 
-	else if(BARD_Q == 4) {
-		cutin "job_bard_aiolo01",2;
-		mes "[Lalo]";
-		mes "Hum... Cette fois tu peux faire mieux non?";
-		mes "Essayons encore, tu peux le faire.";
-		next;
-		mes "[Lalo]";
-		mes "Je vais chanter un couplet...";
-		mes "et tu répèteras après moi.";
-		next;
-		mes "[Lalo]";
-		mes "Allons-y.";
-		mes "*Ehem*";
-		mes "1, 2, 3, 4";
-		next;
-		goto B_SING;
-	}
-	else if(BARD_Q == 5) {
-		if(SkillPoint) {
-			cutin "job_bard_aiolo01",2;
-			mes "[Lalo]";
-			mes "Ah... Tout est parfait, mais il te reste encore quelques points de compétence.";
-			mes "Apprends le reste de tes compétences et reviens me voir.";
-			next;
-			mes "[Lalo]";
-			mes "Et je vais te donner un petit cadeau...";
-			mes "Alors n'oublie pas les Troncs.";
-			mes "Peu importe de quel genre, tant qu'il y en a 60 du même type...";
-			close2;
-			cutin "job_bard_aiolo01",255;
-			end;
-		}
-		if(countitem(1019) > 59) callsub S_ChangeJob,1019,1901;
-		else if(countitem(1068) > 59) callsub S_ChangeJob,1068,1903;
-		else if(countitem(1067) > 59) callsub S_ChangeJob,1067,1903;
-		else if(countitem(1066) > 59) {
-			if(JobLevel > 49) callsub S_ChangeJob,1066,1910;
-			else callsub S_ChangeJob,1066,1905;
-		}
-		cutin "job_bard_aiolo01",2;
-		mes "[Lalo]";
-		mes "Hum? Il semblerait que tu n'aies pas encore tous les Troncs? ";
-		mes "Veux tu quand même changer de métier?";
-		next;
-		if (select("Oui, changez mon métier.:Non, je vais aller les chercher.") == 1) goto B_Change;
-		cutin "job_bard_aiolo01",2;
+		changequest 3003,3004;
 		mes "[Lalo]";
 		mes "Hum... ok, apporte quelques ^3355FFTroncs^000000.";
 		mes "Peu importe le genre, tant qu'il y en a 60 du même type.";
@@ -944,7 +927,7 @@ S_ChangeJob:
 		mes "J'espère que tu chanteras des chansons joyeuses.";
 		next;
 		mes "[Lalo]";
-		mes "A la prochaine!";
+		mes "À la prochaine!";
 		close2;
 		cutin "job_bard_aiolo01",255;
 		end;

@@ -6,7 +6,7 @@
 //= (Aegis) Translated by yoshiki, converted by kobra_k88
 //= Further bugfixed and tested by Lupus
 //===== Current Version: ===================================== 
-//= 3.0
+//= 3.1
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -26,6 +26,7 @@
 //= 2.9 Reverted the change of donpcevent to doevent. [L0ne_W0lf]
 //=     Was probably cuased by a warp BEFORE a percentheal
 //= 3.0 Added Quest Log commands. [Kisuka]
+//= 3.1 Removed the need for use of 'goto.' [L0ne_W0lf]
 //============================================================ 
 
 gef_tower,111,37,4	script	Catherine	70,{
@@ -472,40 +473,71 @@ gef_tower,102,24,2	script	Sorcier Ténébreux::Sorcier Sombre	735,{
 		mes "*kof* *kof* Mais si vous devenez Sorcier votre vie ne sera plus de tout repos. ~Hahahahhaha";
 		close;
 	}
-	else if (WIZ_Q == 3) {
-		mes "[Raulel]";
-		mes "*kof* *kof*... Vous avez réussi la première épreuve?";
-		mes "D'accord, je suis le Sorcier en charge de la suite des épreuves. Mon nom est Raulel Asparagus.";
-		next;
-		mes "[Raulel]";
-		mes "*renifle* Il n'est pas trop tard pour vous: si vous voulez repartir en ville et continuer à vivre votre paisible petit quotidien, ce n'est pas moi qui vais vous en empêcher.";
-		next;
-		mes "[Raulel]";
-		mes "Hahahaha~ Vous ne le savez pas encore mais... la Magie de Haut Niveau peut être très dangereuse.";
-		next;
-		if (select("Je veux rester Mage.:Je veux continuer les épreuves.") == 1) {
+	else if ((WIZ_Q == 3) || (WIZ_Q == 4)) {
+		if (WIZ_Q == 3) {
 			mes "[Raulel]";
-			mes "Hahaha~ *renifle* Bon choix...*kof* *kof*~";
-			mes "Devenir Sorcier... Même pas en rêve! La Ma... Mag...*renifle* La Magie de Haut Niveau n'a pas été créée pour les simples mortels!";
+			mes "*kof* *kof*... Vous avez réussi la première épreuve?";
+			mes "D'accord, je suis le Sorcier en charge de la suite des épreuves. Mon nom est Raulel Asparagus.";
 			next;
 			mes "[Raulel]";
-			mes "Quittez cet endroit et ne vous retournez pas en partant. Vivez paisiblement, et contentez-vous des pouvoirs que vous possédez actuellement.";
-			close;
+			mes "*renifle* Il n'est pas trop tard pour vous: si vous voulez repartir en ville et continuer à vivre votre paisible petit quotidien, ce n'est pas moi qui vais vous en empêcher.";
+			next;
+			mes "[Raulel]";
+			mes "Hahahaha~ Vous ne le savez pas encore mais... la Magie de Haut Niveau peut être très dangereuse.";
+			next;
+			if (select("Je veux rester Mage.:Je veux continuer les épreuves.") == 1) {
+				mes "[Raulel]";
+				mes "Hahaha~ *renifle* Bon choix...*kof* *kof*~";
+				mes "Devenir Sorcier... Même pas en rêve! La Ma... Mag...*renifle* La Magie de Haut Niveau n'a pas été créée pour les simples mortels!";
+				next;
+				mes "[Raulel]";
+				mes "Quittez cet endroit et ne vous retournez pas en partant. Vivez paisiblement, et contentez-vous des pouvoirs que vous possédez actuellement.";
+				close;
+			}
+			mes "[Raulel]";
+			mes "*renifle* Hahahaha~ On a "+(sex?"un fou, et de un","une folle, et d'une")+"!";
+			mes "D'accord, dans ce cas voyons voir quel est votre niveau. *kof* Je veux pouvoir vous juger de mes propres yeux!";
+			next;
+			mes "[Raulel]";
+			mes "*renifle* Commençons le test!";
+			mes "Si vous ne répondez pas à toutes mes questions correctement, vous échouerez. Hahahahahahahahaha~";
+			next;
+			mes "[Raulel]";
+			mes "Je vais vous poser dix questions, vous devrez me donner les réponses correctes! Si vous vous trompez, je ne vous le signalerai pas, et vous devrez tout recommencer depuis le début!";
+			if(checkquest(9016) == -1) {
+				changequest 9015,9016;
+			}
+			next;
+			mes "[Raulel]";
+			mes "*Cough* *cough* Then here go the questions!";
 		}
-		mes "[Raulel]";
-		mes "*renifle* Hahahaha~ On a un fou, et de un!";
-		mes "D'accord, dans ce cas voyons voir quel es votre niveau. *kof* Je veux pouvoir vous juger de mes propres yeux!";
-		next;
-		mes "[Raulel]";
-		mes "*renifle* Commençons le test!";
-		mes "Si vous ne répondez pas à toutes mes questions correctement, vous échouerez. Hahahahahahahahaha~";
-		if(checkquest(9016) == -1) {
-			changequest 9015,9016;
+		else if (WIZ_Q == 4) {
+			mes "[Raulel]";
+			mes "Hahahaha~ Vous êtes à ce point "+(sex?"désespéré","désespérée")+"? *renifle* Quelle plaie...";
+			next;
+			mes "[Raulel]";
+			mes "Hahahahahahaha~ Regardez-moi "+(sex?"ce crétin","cette crétine")+"!";
+			mes "Et bien, puisque vous avez l'air "+(sex?"persuadé","persuadée")+" de votre valeur, voyons voir comment vous allez vous en sortir cette fois-ci! *renifle*";
+			next;
+			mes "[Raulel]";
+			mes "Si vous vous trompez sur une seule question, vous échouerez. Mais vous devriez abandonner maintenant, ce sera plus simple. De toutes façons vous n'avez aucun talent pour la magie! ~Hahahahaha";
+			next;
+			if (select("Je... vais rester Mage, finalement.:Faites-moi repasser le test!") == 1) {
+				mes "[Raulel]";
+				mes "Hahaha~ *renifle* Bon choix...*kof* *kof*~";
+				mes "Devenir Sorcier... Même pas en rêve! La Ma... Mag...*renifle* La Magie de Haut Niveau n'a pas été créée pour les simples mortels!";
+				next;
+				mes "[Raulel]";
+				mes "Quittez cet endroit et ne vous retournez pas en partant. Vivez paisiblement, et contentez-vous des pouvoirs que vous possédez actuellement.";
+				close;
+			}
+			mes "[Raulel]";
+			mes "*renifle* Hahahaha~ On a "+(sex?"un fou, et de un","une folle, et d'une")+"!";
+			mes "D'accord, dans ce cas voyons voir quel est votre niveau. *kof* Je veux pouvoir vous juger de mes propres yeux!";
+			next;
+			mes "[Raulel]";
+			mes "Commençons le test!";
 		}
-		next;
-		mes "[Raulel]";
-		mes "*kof* *kof* C'est parti!";
-L_AskQuestions:
 		next;
 		switch(rand(1,3)) {
 		case 1:
@@ -746,33 +778,6 @@ L_AskQuestions:
 			mes "Hors de ma vue! Si vous étiez Sorcier, je n'hésiterais pas à vous punir comme il se doit pour cette démonstration de nullité extrême!";
 			close;
 		}
-	}
-	else if (WIZ_Q == 4) {
-		mes "[Raulel]";
-		mes "Hahahaha~ Vous n'abandonnez pas facilement, hein? *renifle* Quelle plaie...";
-		next;
-		mes "[Raulel]";
-		mes "Puisque vous semblez réellement penser que vous pouvez y arriver, je vais vous donner une autre chance. Après tout, ce n'est pas mon problème si vous vous tapez la honte après avoir exposé votre déficience mentale...";
-		next;
-		mes "[Raulel]";
-		mes "Si vous ne savez pas répondre à toutes les questions correctement, c'est que vous n'êtes pas fait pour être Sorcier. Croyez-moi, vous pouvez encore laisser tomber pendant qu'il en est temps! ~Hahahahaha";
-		next;
-		if (select("Je souhaite vivre comme un Mage normal.:Je souhaite continuer les épreuves.") == 1) {
-			mes "[Raulel]";
-			mes "Hahahaha~ Pourquoi ça ne me surprend même pas? C'est un très bon choix...*kof* *kof*";
-			mes "Si j'étais vous, j'abandonnerai définitivement ce rêve stupide que vous avez de devenir Sorcier. La Ma... Mag... *renifle* La Magie de Haut Niveau n'est pas faite pour vous.";
-			next;
-			mes "[Raulel]";
-			mes "Quittez cet endroit et ne vous retournez pas en partant. Vivez paisiblement, et contentez-vous des pouvoirs que vous possédez actuellement.";
-			close;
-		}
-		mes "[Raulel]";
-		mes "Hahahahahahaha~ Regardez-moi ce crétin!";
-		mes "Et bien, puisque vous avez l'air persuadé de votre valeur, voyons voir comment vous allez vous en sortir cette fois-ci! *renifle*";
-		next;
-		mes "[Raulel]";
-		mes "Commençons le test!";
-		goto L_AskQuestions;
 	}
 	else if (WIZ_Q == 5) {
 		mes "[Raulel]";

@@ -14,7 +14,7 @@
 //===== By: ================================================== 
 //= Kisuka
 //===== Current Version: ===================================== 
-//= 1.7
+//= 1.8
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -30,6 +30,7 @@
 //= 1.5 Fixes to 'Koshei the Immortal' quest. [Kisuka]
 //= 1.6 Added 'tides' to Ibanoff & Fixed time check for Marozka. [Kisuka]
 //= 1.7 Fixes on donpcevents and fixed some left over aegis stuff. [Kisuka]
+//= 1.8 Fixed some condition checks. [Gepard]
 //============================================================ 
 
 //============================================================================
@@ -3633,7 +3634,7 @@ OnTouch:
 		mes "Vais-je retourner sur l'île?";
 		next;
 		if(select("Retourner sur l'Île-Baleine.:Rester ici.") == 1) {
-			if (getequipid(EQI_ACC_L) || getequipid(EQI_ACC_R) == 2707) {
+			if (getequipid(EQI_ACC_L) == 2707 || getequipid(EQI_ACC_R) == 2707) {
 				soundeffect "mos_gusli2.wav",0;
 				mes "-Vos mains se mettent à jouer langoureusement du Gusli, entonnant une mélodie rappelant celle que le vieil ermite jouait...-";
 				next;
@@ -7985,7 +7986,7 @@ OnTouch:
 		while(1) {
 			if(select("Chercher la gourde.:Je reviendrai.") == 1) {
 				set .@findout,rand(1,20);
-				if (Class == THIEF || Class == THIEF_H || Class == ROGUE || Class == ROGUE_H || Class == ASSASSIN || Class == ASSASSIN_H) {
+				if (BaseJob == Job_Thief) {
 					mes "["+strcharinfo(0)+"]";
 					mes "Ah, la voilà! Elle n'était pas si difficile à trouver.";
 					set mos_nowinter,9;
