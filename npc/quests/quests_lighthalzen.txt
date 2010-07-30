@@ -6,7 +6,7 @@
 //= Persian, Vicious_Pucca, aoa00, Evera, MasterOfMupppets,
 //= Lupus, Lord Gywall
 //===== Current Version: ===================================== 
-//= 4.4
+//= 4.5
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -75,85 +75,35 @@
 //= 4.4 Replaced effect numerics with constants. [L0ne_W0lf]
 //= 4.5 Corrected an Incorrect check of the Shinokas_Quest. (bugreport:2276) [Samuray22]
 //=	  Replaced effect numerics with constants.
+//= 4.5 Official Gangster Alert script. [Gepard]
 //============================================================ 
 
-lighthalzen,1,1,7	script	sneakAddSuber	-1,{
-OnInit:
-	set $@sneakchance, 3;	// chance of successful sneak(0 = never, 10 = always)
-	set $@sneakguard, 0;	// numbers of people who sneaked past guard
-	set $@threshold, 10;	// numbers of sneakers before mob appears
-	set $@mob, 50;		// Max respawn numbers of "mobsters"
-	set $@mobcount, 0;	// current numbers of "mobsters"
-	set $@lhz_alert, 0;	// Alert on Lighthalzen(0 = off, 1 = on)
-	set $@i, 0;
-	
+// Gangster Alert [Aegis Conversion]
+//------------------------------------------------------------
+lighthalzen,1,1,0	script	Law Enforcement	-1,{
 	end;
 
-OnMinute00:
-OnMinute05:
-OnMinute10:
-OnMinute15:
-OnMinute20:
-OnMinute25:
-OnMinute30:
-OnMinute35:
-OnMinute40:
-OnMinute45:
-OnMinute50:
-OnMinute55:
-	if($@lhz_alert == 0) set $@sneakguard, $@sneakguard + rand(1,3);
-	if($@lhz_alert == 1) set $@sneakguard, $@sneakguard - 1;  // Monsters will die after 5~10 min. (sneakAddSuber)
-	end;
-}
-
-lighthalzen,1,1,7	script	AlertChk	-1,{
-OnInit:
+OnEnable:
+	mapannounce "lighthalzen","Ceci est un message d'alerte aux citoyens de Lighthalzen. Une faille de sécurité est survenue, la ville passe en état d'alerte. Veuillez trouver un refuge immédiatement!",bc_map;
 	initnpctimer;
+	for (set .@i, 0; .@i < 30; set .@i, .@i + 1)
+		monster "lighthalzen",0,0,"Gangster",1592,1,"Law Enforcement::OnMyMobDead";
 	end;
 
-OnTimer10000:
-	if($@sneakguard >= $@threshold) goto MakeMob;
-	if($@sneakguard == 0) goto ClearMob;  // Monsters will die after 5~10 min. (sneakAddSuber)
-	setnpctimer 0;
+OnTimer220000:
+	killmonster "lighthalzen","Law Enforcement::OnMyMobDead";
+	mapannounce "lighthalzen","Citoyens de Lighthalzen, votre attention s'il vous plaît. Notre département de contrôle des lois a contenu la situation avec succès. L'état d'alerte est suspendu.",bc_map;
+	set $@Lhz_Gangster_Alert, 0;
+	stopnpctimer;
 	end;
-	
-MakeMob:
-	if($@lhz_alert == 1) goto ChkEnd;
-	set $@mobcount, $@mob;
-	mapannounce "lighthalzen","Ceci est un message d'alerte aux citoyens de Lighthalzen. Une faille de sécurité est survenue, la ville passe en état d'alerte. Veuillez trouver un refuge immédiatement!", 1;
-	
-	for( set $@i, 0; $@i < $@mob; set $@i, $@i + 1 ) {
-		monster "lighthalzen",0,0,"Gangster",1592,1,"AlertChk::OnMobKilled";
-	}
 
-	set $@lhz_alert, 1;	
-	set $@sneakguard, 2;   // Monsters will die after 5~10 min. (sneakAddSuber)
-	setnpctimer 0;
+OnMyMobDead:
 	end;
-	
-ClearMob:
-	if($@lhz_alert == 0) goto ChkEnd;
-	set $@mobcount, 0;
-	mapannounce "lighthalzen","Citoyens de Lighthalzen, votre attention s'il vous plaît. Notre département de contrôle des lois a contenu la situation avec succès. L'état d'alerte est suspendu.", 1;	
-	killmonster "lighthalzen","AlertChk::OnMobKilled";
-	set $@lhz_alert, 0;
-	set $@sneakguard, 0;
-	setnpctimer 0;
-	end;
-		
-OnMobKilled:
-	set $@mobcount, $@mobcount - 1;
-	if($@mobcount == 0) goto ClearMob;
-	setnpctimer 0;
-	end;	
-	
-ChkEnd:	
-	setnpctimer 0;
-	end;	
 }
+
 
 lighthalzen,267,200,3	script	Garde#lhz01	868,{
-	if(countitem(7350)>0) {
+	if (countitem(7350) > 0) {
 		mes "[Garde]";
 		mes "Hé attendez, on ne passe pas--!";
 		mes "Oh. Je suis désolé. Je n'avais pas vu que vous étiez muni d'une autorisation d'accès.";
@@ -161,39 +111,47 @@ lighthalzen,267,200,3	script	Garde#lhz01	868,{
 		warp "lighthalzen",303,229;
 		end;
 	}
-	else if($@lhz_alert == 1) {
+	if ($@Lhz_Gangster_Alert >= 100) {
 		mes "[Garde]";
 		mes "Trop de personnes ont voyagé entre la ville et le ghetto récemment. Les contrôles de sécurité ont donc été renforcés dans cette zone. Je me demande comment certains arrivent systématiquement à nous filer sous le nez?";
 		close;
 	}
-	else if ((gettime(2)>00 && gettime(2)<10) || (gettime(2)>30 && gettime(2)<40)) {
-		if(rand(1,10) < 2) {
-			mes "[Garde]";
-			mes "Stop, arrêtez-vous!";
-			mes "Aucune personne n'est autorisée à entrer dans le quartier des taudis.";
-			mes "Retournez d'où vous venez!";
-			close;
-		}
+	if ($@Lhz_Gangster_Alert > 14) {
+		mes "[Garde]";
+		mes "Trop de personnes ont voyagé entre la ville et le ghetto récemment. Les contrôles de sécurité ont donc été renforcés dans cette zone. Je me demande comment certains arrivent systématiquement à nous filer sous le nez?";
+		donpcevent "Law Enforcement::OnEnable";
+		set $@Lhz_Gangster_Alert, 100;
+		close;
+	}
+	if (gettime(3) >= 22 || gettime(3) < 2) {
 		mes "[Garde]";
 		mes "Zzzz... Zzz...";
 		mes "ZZZzzzzzzzzzz...";
 		next;
 		mes "^3355FFCe garde est en train de somnoler. C'est le moment idéal pour lui passer sous le nez!^000000";
 		close2;
+		set $@Lhz_Gangster_Alert, $@Lhz_Gangster_Alert + 1;
 		warp "lighthalzen",303,229;
 		end;
 	}
-	else if(rand(1,10) < 2) {
+	if (rand(1,6) == 3) {
 		mes "^3355FFLe garde semble distrait, il a les yeux en l'air, le regard perdu. C'est le moment ou jamais de lui passer sous le nez!^000000";
 		close2;
-		warp "lighthalzen",297,227;
-		set $@sneakguard, $@sneakguard + 1;
+		set $@Lhz_Gangster_Alert, $@Lhz_Gangster_Alert + 1;
+		warp "lighthalzen",303,229;
 		end;
+	}
+	else {
+		mes "[Garde]";
+		mes "Stop, arrêtez-vous!";
+		mes "Aucune personne n'est autorisée à entrer dans le quartier des taudis.";
+		mes "Retournez d'où vous venez!";
+		close;
 	}
 }
 
 lighthalzen,294,223,7	script	Garde#lhz02	868,{
-	if(countitem(7350)>0) {
+	if (countitem(7350) > 0) {
 		mes "[Garde]";
 		mes "Hé attendez, on ne passe pas--!";
 		mes "Oh. Je suis désolé. Je n'avais pas vu que vous étiez muni d'une autorisation d'accès.";
@@ -201,34 +159,42 @@ lighthalzen,294,223,7	script	Garde#lhz02	868,{
 		warp "lighthalzen",260,199;
 		end;
 	}
-	if($@lhz_alert == 1) {
+	if ($@Lhz_Gangster_Alert >= 100) {
 		mes "[Garde]";
-mes "Trop de personnes ont voyagé entre la ville et le ghetto récemment. Les contrôles de sécurité ont donc été renforcés dans cette zone. Je me demande comment certains arrivent systématiquement à nous filer sous le nez?";
+		mes "Trop de personnes ont voyagé entre la ville et le ghetto récemment. Les contrôles de sécurité ont donc été renforcés dans cette zone. Je me demande comment certains arrivent systématiquement à nous filer sous le nez?";
 		close;
 	}
-	if((gettime(2)>00 && gettime(2)<10) || (gettime(2)>30 && gettime(2)<40)) {
-		if(rand(1,10) < 2) {
-			mes "[Garde]";
-			mes "Stop, arrêtez-vous!";
-			mes "Aucune personne n'est autorisée à entrer dans le quartier des taudis.";
-			mes "Retournez d'où vous venez!";
-			close;
-		}
+	if ($@Lhz_Gangster_Alert > 14) {
+		mes "[Garde]";
+		mes "Trop de personnes ont voyagé entre la ville et le ghetto récemment. Les contrôles de sécurité ont donc été renforcés dans cette zone. Je me demande comment certains arrivent systématiquement à nous filer sous le nez?";
+		donpcevent "Law Enforcement::OnEnable";
+		set $@Lhz_Gangster_Alert, 100;
+		close;
+	}
+	if (gettime(3) >= 22 || gettime(3) < 2) {
 		mes "[Garde]";
 		mes "Zzzz... Zzz...";
 		mes "ZZZzzzzzzzzzz...";
 		next;
 		mes "^3355FFCe garde est en train de somnoler. C'est le moment idéal pour lui passer sous le nez!^000000";
 		close2;
-		warp "lighthalzen",264,200;
+		set $@Lhz_Gangster_Alert, $@Lhz_Gangster_Alert + 1;
+		warp "lighthalzen",260,199;
 		end;
 	}
-	else if(rand(1,10) < 2) {
+	if (rand(1,6) == 3) {
 		mes "^3355FFLe garde semble distrait, il a les yeux en l'air, le regard perdu. C'est le moment ou jamais de lui passer sous le nez!^000000";
 		close2;
-		warp "lighthalzen",264,200;
-		set $@sneakguard, $@sneakguard + 1;
+		set $@Lhz_Gangster_Alert, $@Lhz_Gangster_Alert + 1;
+		warp "lighthalzen",260,199;
 		end;
+	}
+	else {
+		mes "[Garde]";
+		mes "Stop, arrêtez-vous!";
+		mes "Aucune personne n'est autorisée à entrer dans le quartier des taudis.";
+		mes "Retournez d'où vous venez!";
+		close;
 	}
 }
 
