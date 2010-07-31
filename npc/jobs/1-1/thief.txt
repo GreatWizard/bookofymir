@@ -29,18 +29,18 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 		if (ADVJOB == Job_Assassin_Cross || ADVJOB == Job_Stalker) {
 			if (Class == Job_Novice_High) {
 				mes "[Voleur]";
-				mes "Hum? Est-ce qu'on se connaît? Ta p'tite tête m'est ne m'est pas inconnue... T'as un jumeau, c'est ça?";
+				mes "Hum? Est-ce qu'on se connaît? Ta p'tite tête ne m'est pas inconnue... T'as "+( sex ? "un jumeau" : "une jumelle" )+", c'est ça?";
 				next;
 				if (getskilllv("NV_BASIC") < 9) {
 					mes "[Voleur]";
-					mes "Quoi? Tu veux devenir Voleur? Je suis désolé, mais il va falloir t'entraîner un peu plus!";
+					mes "Quoi? Tu veux devenir Voleu"+( sex ? "r" : "se" )+"? Je suis désolé, mais il va falloir t'entraîner un peu plus!";
 					next;
 					mes "[Voleur]";
 					mes "Apprends toutes les compétences de base et reviens me voir, ok?";
 					close;
 				}
 				mes "[Voleur]";
-				mes "Je suis persuadé de t'avoir connu dans une autre vie... Tu as sûrement déjà beaucoup combattu. Tu peux devenir Voleur... Tes yeux me disent que tu es déjà apte à exercer ce métier.";
+				mes "Je suis persuadé de t'avoir connu dans une autre vie... Tu as sûrement déjà beaucoup combattu. Tu peux devenir Voleu"+( sex ? "r" : "se" )+"... Tes yeux me disent que tu es déjà apte à exercer ce métier.";
 				next;
 				skill 143,0,0;
 				jobchange Job_Thief_High;
@@ -49,7 +49,7 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 				skill 151,1,0;
 				skill 152,1,0;
 				mes "[Voleur]";
-				mes "Puisque tu es devenu Voleur, vis en tant que tel à partir de maintenant. Allez... Du balai!";
+				mes "Puisque tu es devenu Voleu"+( sex ? "r" : "se" )+", vis en tant que tel à partir de maintenant. Allez... Du balai!";
 				close;
 			}
 			else {
@@ -67,13 +67,13 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 				mes "Salut mon pote! T'as l'air d'un bon p'tit gars...";
 			else
 				mes "Salut ma belle~ T'as l'air d'une bonne p'tite fille...";
-			mes "...Un peu trop d'ailleurs, pour pouvoir devenir Voleur! Maintenant, ouste! Je suis occupé. Du balai!";
+			mes "...Un peu trop d'ailleurs, pour pouvoir devenir Voleu"+( sex ? "r" : "se" )+"! Maintenant, ouste! Je suis occupé. Du balai!";
 			close;
 		}
 	}
 	if (BaseJob == Job_Thief) {
 		mes "[Voleur]";
-		mes "T'es déjà un voleur... Qu'est ce qu'tu veux? Tire toi!";
+		mes "T'es déjà "+( sex ? "un Voleur" : "une Voleuse" )+"... Qu'est ce qu'tu veux? Tire toi!";
 		emotion e_swt;
 		close;
 	}
@@ -82,32 +82,36 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 		mes "Qu'est-ce que... ?";
 		switch(Class) {
 		case 1:
-			mes "Oh non, encore un gamin qui ne jure que par les 'Coups Puissants'. Rends-moi service... Pourquoi tu n'irais pas voir ailleurs si j'y suis?";
+			mes "Oh non, encore "+( sex ? "un gamin" : "une gamine" )+" qui ne jure que par les 'Coups Puissants'. Rends-moi service... Pourquoi tu n'irais pas voir ailleurs si j'y suis?";
 			break;
 		case 2:
-			mes "Oh un apprenti magicien. Tu sais, on peut faire du feu avec une allumette, hein. HAHAHA.";
+			mes "Oh "+( sex ? "un apprenti magicien" : "une apprentie magicienne" )+". Tu sais, on peut faire du feu avec une allumette, hein. HAHAHA.";
 			break;
 		case 3:
 			mes "Hahahaha mais j'te reconnais! T'es l'archer pitoyable que j'ai croisé l'autre jour dans la forêt!";
 			break;
 		case 4:
-			mes "Oh mon dieu, au secooours.... Un protecteur de Poring!";
+			mes "Oh mon dieu, au secooours.... "+( sex ? "Un protecteur" : "Une protectrice" )+" de Poring!";
 			mes "Pourquoi t'es là à traîner dans ce coin miteux, et pas à l'église en train de prier?";
 			break;
 		case 5:
-			mes "EEEErrk... un marchand ici! Vas faire ton commerce ailleurs! Pouah!";
+			mes "EEEErrk... "+( sex ? "un marchand" : "une marchande" )+" ici! Vas faire ton commerce ailleurs! Pouah!";
 			break;
 		case 8:
 			mes "Oh... Est-ce que je vais mourir?";
 			next;
 			mes "[Voleur]";
-			mes "Pour quelle autre raison un Prêtre viendrait traîner ici? Je suppose qu'il vaut mieux que je confesse tous mes péchés.";
+			mes "Pour quelle autre raison "+( sex ? "un Prêtre" : "une Prêtresse" )+" viendrait traîner ici? Je suppose qu'il vaut mieux que je confesse tous mes péchés.";
 			close;
 		case 12:
-			mes "Hé, t'étais pas l'un des notres? On dirait qu't'a changé. T'as l'air vraiment dangereux, maintenant...";
+			mes "Hé, t'étais pas l'un des notres? On dirait qu't'a changé"+( sex ? "" : "e" )+". T'as l'air vraiment dangereu"+( sex ? "x" : "se" )+", maintenant...";
 			close;
 		case 17:
+		if (sex)
 			mes "Hé mec, ton allure est super cool!";
+		else {
+			mes "Hé mad'moiselle, tu sais qu't'es charmante?"; //Obligé de détourner la phrase [Morrigan]
+		}
 			close;
 		}
 		next;
@@ -126,7 +130,7 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 	}
 	else if (job_thief_q == 3) {
 		mes "[Voleur]";
-		mes "Alors, c'était bien, la Ferme aux Champignons. Tu t'es éclaté?";
+		mes "Alors, c'était bien, la Ferme aux Champignons. Tu t'es éclaté"+( sex ? "" : "e" )+"?";
 		next;
 		if (select("Ouais, c'était cool..:C'était...Horrible.") == 1) {
 			mes "[Voleur]";
@@ -186,7 +190,7 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 			close;
 		}
 		mes "[Voleur]";
-		mes ".... Alors, tu veux quoi??? T'as un truc à m'dire? TU es le gars qui est venu ici ME chercher...";
+		mes ".... Alors, tu veux quoi??? T'as un truc à m'dire? TU es "+( sex ? "le gars" : "la fille" )+" qui est venu"+( sex ? "" : "e" )+" ici ME chercher...";
 		mes "Quoi... Tu m'cherches?? HEIN!!??";
 		close;
 	}
@@ -202,10 +206,10 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 	else {
 		mes "Ah...";
 		mes "T'es revenu.";
-		mes "T'es sûr d'être prêt pour recommencer?";
+		mes "T'es sûr d'être prêt"+( sex ? "" : "e" )+" pour recommencer?";
 	}
 	next;
-	if (select("Eh, j'suis pas venu pour l'ambiance, compris?!:Moi? J'fais que passer...") == 1) {
+	if (select("Eh, j'suis pas venu"+( sex ? "" : "e" )+" pour l'ambiance, compris?!:Moi? J'fais que passer...") == 1) {
 		if (job_thief_q == 0) {
 			mes "[Voleur]";
 			mes "Humph... Ça sonne un rien vantard.... T'sais, être un Voleur, c'est pas aussi simple que ça....";
@@ -216,7 +220,7 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 			emotion e_heh;
 			next;
 			mes "[Voleur]";
-			mes "Mais bon... J'suppose que t'es là pour devenir Voleur...";
+			mes "Mais bon... J'suppose que t'es là pour devenir Voleu"+( sex ? "r" : "se" )+"...";
 			next;
 			switch(select("-Bien vu.:-Non. J'te fait juste perdre ton temps.:-Pourquoi vous avez volé ce type?")) {
 			case 1:
@@ -238,7 +242,7 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 			mes "[Voleur]";
 			mes "Ok, très bien. D'abord, remplis cette demande d'admission.";
 			next;
-			switch(select("Remplir la demande:J'ai trop peur d'être un Voleur!")) {
+			switch(select("Remplir la demande:J'ai trop peur d'être "+( sex ? "un Voleur" : "une Voleuse" )+"!")) {
 			case 1:
 				mes "[Voleur]";
 				mes "Très bien, ^FF0000"+ strcharinfo(0) + "^000000, si c'est ton VRAI nom..... apparemment t'as déjà un chouette 'casier' ici.";
@@ -246,7 +250,7 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 				set job_thief_q,1;
 				next;
 				mes "[Voleur]";
-				mes "Ah, c'est bon...... T'as tout ce qu'il faut pour devenir un Voleur. Maintenant, tout ce qu'il te reste à faire est de passer le ^FF0000Test des Voleurs de Morroc^000000.";
+				mes "Ah, c'est bon...... T'as tout ce qu'il faut pour devenir "+( sex ? "un Voleur" : "une Voleuse" )+". Maintenant, tout ce qu'il te reste à faire est de passer le ^FF0000Test des Voleurs de Morroc^000000.";
 				next;
 				switch(select("Ok, c'est parti.:Je vais réfléchir en fait.")) {
 				case 1:
@@ -279,10 +283,10 @@ moc_prydb1,39,129,2	script	Voleur	69,{
 		next;
 		mes "[Voleur]";
 		if (getskilllv("NV_BASIC") < 9) {
-			mes "Euh... J'peux voir qu't'es ambitieux......Mais on peut pas filer un flingue à un bébé, non? Reviens quand t'auras appris toutes tes Compétences de Base.";
+			mes "Euh... J'peux voir qu't'es ambitieu"+( sex ? "x" : "se" )+"......Mais on peut pas filer un flingue à un bébé, non? Reviens quand t'auras appris toutes tes Compétences de Base.";
 			close;
 		}
-		mes "Okay. J'ai vu ton casier, sympa. T'as peut être ce qu'il faut pour être Voleur en fait.";
+		mes "Okay. J'ai vu ton casier, sympa. T'as peut être ce qu'il faut pour être Voleu"+( sex ? "r" : "se" )+" en fait.";
 		next;
 		mes "[Voleur]";
 		mes "Je peux le sentir, et maintenant je peux dire que t'as passé l'interview avec succès. Bon travail!";
@@ -348,12 +352,12 @@ moc_prydb1,42,133,2	script	Brad	118,{
 	}
 	else if (BaseJob != Job_Novice && BaseJob != Job_Thief) {
 		mes "[Brad]";
-		mes "Hé~ Hé~ T'as pas la gueule d'un Voleur. C'est quoi l'problème? T'as INTERET à pas manigancer quelque chose sur le TERRITOIRE DES VOLEURS!!";
+		mes "Hé~ Hé~ T'as pas la gueule d'"+( sex ? "un Voleur" : "une Voleuse" )+". C'est quoi l'problème? T'as INTERET à pas manigancer quelque chose sur le TERRITOIRE DES VOLEURS!!";
 		close;
 	}
 	if (job_thief_q == 0 || job_thief_q == 1) {
 		mes "[Brad]";
-		mes "Errr? C'est quoi ton problème, gamin? Si tu veux devenir Voleur, parle à la fille à coté d'moi.";
+		mes "Errr? C'est quoi ton problème, gamin"+( sex ? "" : "e" )+"? Si tu veux devenir Voleu"+( sex ? "r" : "se" )+", parle à la fille à coté d'moi.";
 		close;
 	}
 	else if (job_thief_q == 2) {
@@ -369,7 +373,7 @@ moc_prydb1,42,133,2	script	Brad	118,{
 			next;
 			mes "[Brad]";
 			mes "Mais c'est quoi le délire...";
-			mes "T'as piqué aucun champignons! Retournes-y tout de suite ou je m'énerve! Et je ferai tout pour que tu loupes ton examen pour devenir Voleur!";
+			mes "T'as piqué aucun champignons! Retournes-y tout de suite ou je m'énerve! Et je ferai tout pour que tu loupes ton examen pour devenir Voleu"+( sex ? "r" : "se" )+"!";
 			close;
 		}
 		next;
@@ -397,7 +401,7 @@ moc_prydb1,42,133,2	script	Brad	118,{
 		next;
 		mes "[Brad]";
 		if (.@total_thief > 25) {
-			mes "Ooooh. Plus de 25, cool. Tu feras un excellent voleur!";
+			mes "Ooooh. Plus de 25, cool. Tu feras "+( sex ? "un excellent voleur" : "une excellente voleuse" )+"!";
 		}
 		else if (.@total_thief == 25) {
 			mes "Bien. T'as réussit le Test.";
@@ -416,7 +420,7 @@ moc_prydb1,42,133,2	script	Brad	118,{
 		completequest 1013;
 		next;
 		mes "[Brad]";
-		mes "A partir de maintenant, tu dois agir, penser et même sentir comme un Voleur.";
+		mes "A partir de maintenant, tu dois agir, penser et même sentir comme "+( sex ? "un Voleur" : "une Voleuse" )+".";
 		mes "T'es l'un d'entre nous, ce qui signifie que t'as la confiance et le respect de tous les Voleurs de Rune-Midgard.";
 		next;
 		mes "[Brad]";
@@ -436,7 +440,7 @@ moc_prydb1,42,133,2	script	Brad	118,{
 moc_ruins,141,125,3	script	L'Impertinent	83,{
 	if (BaseJob == Job_Thief) {
 		mes "[L'Impertinent]";
-		mes "Yahou! Matez moi ça! T'es devenu un Voleur sacrément cool!";
+		mes "Yahou! Matez moi ça! T'es devenu "+( sex ? "un Voleur" : "une Voleuse" )+" sacrément cool!";
 		next;
 		mes "[L'Impertinent]";
 		mes "T'inquiète à propos de la Ferme de Shibu. Laisse les p'tits nouveaux s'en occuper. Pourquoi tu voyagerais pas un peu, histoire de buter quelques monstres un peu plus forts?";
@@ -502,7 +506,7 @@ moc_ruins,141,125,3	script	L'Impertinent	83,{
 		close;
 	}
 	mes "[L'Impertinent]";
-	mes "Hé!! Le Novice! Tu veux d'venir plus fort et plus puissant!? T'aimes t'infiltrer partout et te cacher?";
+	mes "Hé!! L"+( sex ? "e" : "a" )+" Novice! Tu veux d'venir plus fort"+( sex ? "" : "e" )+" et plus puissant"+( sex ? "" : "e" )+"!? T'aimes t'infiltrer partout et te cacher?";
 	mes "Si oui, rejoins la Guilde des Voleurs! Tout le monde est l'bienvenue! Rejoins-nous maintenant!";
 	next;
 	mes "[L'Impertinent]";
