@@ -74,7 +74,7 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 		else {
 			mes "[Maître Épéiste]";
 			mes "Hum...?";
-			mes "Oh, vous êtes un guerrier qui a effectué une renaissance, n'est-ce pas? Impressionnant...";
+			mes "Oh, vous êtes "+( sex ? "un guerrier" : "une guerrière" )+" qui a effectué une renaissance, n'est-ce pas? Impressionnant...";
 			next;
 			mes "[Maître Épéiste]";
 			mes "Hmmm...";
@@ -93,7 +93,7 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 	case 1:
 		if (BaseJob == Job_Swordman) {
 			mes "[Maître Épéiste]";
-			mes "Muhahaha! Vous devez plaisanter! Vous êtes déjà un Épéiste! Soyez fier et fort!";
+			mes "Muhahaha! Vous devez plaisanter! Vous êtes déjà un"+( sex ? "" : "e" )+" Épéiste! Soyez fi"+( sex ? "er" : "ère" )+" et fort"+( sex ? "" : "e" )+"!";
 			close;
 		}
 		else if (BaseJob != Job_Novice) {
@@ -103,7 +103,7 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 		}
 		if (job_sword_q == 0) {
 			mes "[Maître Épéiste]";
-			mes "Alors comme ça vous voulez devenir un Épéiste? Très bon choix! Remplissez ce formulaire d'inscription s'il vous plaît.";
+			mes "Alors comme ça vous voulez devenir un"+( sex ? "" : "e" )+" Épéiste? Très bon choix! Remplissez ce formulaire d'inscription s'il vous plaît.";
 			next;
 			if (select("Signer.:Annuler.") == 1) {
 				savepoint "izlude_in",65,165;
@@ -123,7 +123,7 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 				}
 				else {
 					mes "[Maître Épéiste]";
-					mes "Okay, pas de problèmes. N'hésitez pas à revenir quand vous serez prêt. Vous n'avez qu'à remplir le formulaire et c'est bon. Bonne chance.";
+					mes "Okay, pas de problèmes. N'hésitez pas à revenir quand vous serez prêt"+( sex ? "" : "e" )+". Vous n'avez qu'à remplir le formulaire et c'est bon. Bonne chance.";
 					close;
 				}
 			}
@@ -142,14 +142,14 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 			close;
 		}
 		else if (job_sword_q <= 3) {
-			mes "Hum, vous remplissez les critères de sélection mais vous n'avez pas encore réussi le test. Vous devez réussir cette épreuve avant que je ne puisse faire de vous un guerrier.";
+			mes "Hum, vous remplissez les critères de sélection mais vous n'avez pas encore réussi le test. Vous devez réussir cette épreuve avant que je ne puisse faire de vous un"+( sex ? "" : "e" )+" guerri"+( sex ? "er" : "ère" )+".";
 			next;
 			mes "[Maître Épéiste]";
-			mes "Très bien. Quand vous vous sentirez prêt à passer l'épreuve, entrez simplement dans la salle où se déroule le test, sur ma droite.";
+			mes "Très bien. Quand vous vous sentirez prêt"+( sex ? "" : "e" )+" à passer l'épreuve, entrez simplement dans la salle où se déroule le test, sur ma droite.";
 			close;
 		}
 		else if (job_sword_q == 4) {
-			mes "Hahaha! Félicitations! Vous avez toutes les qualités pour devenir un grand Épéiste! Je me charge de votre nouveau rang!";
+			mes "Hahaha! Félicitations! Vous avez toutes les qualités pour devenir "+( sex ? "un grand" : "une grande" )+" Épéiste! Je me charge de votre nouveau rang!";
 			next;
 			callfunc "Job_Change",Job_Swordman;
 			set job_sword_q,0;
@@ -184,7 +184,7 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 		mes "Alors comme ça, vous voulez devenir Épéiste....";
 		if (BaseJob != Job_Novice) {
 			if (BaseJob == Job_Swordman)
-				mes "....mais vous êtes déjà un Épéiste...????";
+				mes "....mais vous êtes déjà un"+( sex ? "" : "e" )+" Épéiste...????";
 			else
 				mes "Mais vous avez déjà un autre métier... Il est trop tard pour devenir Épéiste.";
 		}
@@ -196,7 +196,7 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 		mes "Ensuite, vous devez passer la légendaire épreuve des Épéistes d'Izlude.";
 		next;
 		mes "[Maître Épéiste]";
-		mes "Si vous réussissez ces deux épreuves, vous deviendrez officiellement un Épéiste.";
+		mes "Si vous réussissez ces deux épreuves, vous deviendrez officiellement un"+( sex ? "" : "e" )+" Épéiste.";
 		close;
 	case 4:
 		mes "[Maître Épéiste]";
@@ -208,7 +208,7 @@ izlude_in,74,172,4	script	Maître Épéiste#swd_1	119,{
 izlude_in,62,170,6	script	Maître Épéiste#swd_2	85,{
 	mes "[Maître Épéiste]";
 	if (BaseJob == Job_Swordman) {
-		mes "Vous êtes déjà un Épéiste! Vous n'avez pas besoin de passer cette épreuve débile!";
+		mes "Vous êtes déjà un"+( sex ? "" : "e" )+" Épéiste! Vous n'avez pas besoin de passer cette épreuve débile!";
 		close;
 	}
 	else if (BaseJob != Job_Novice) {
@@ -238,10 +238,10 @@ izlude_in,62,170,6	script	Maître Épéiste#swd_2	85,{
 
 izlude_in,30,175,4	script	Maître Épéiste#swd_3	92,{
 	mes "[Maître Épéiste]";
-	mes "Je vais vous donner les renseignements concernant l'épreuve légendaire devenir Épéiste d'Izlude! Ecoutez attentivement, car je ne répèterai pas!";
+	mes "Je vais vous donner les renseignements concernant l'épreuve légendaire pour devenir Épéiste d'Izlude! Ecoutez attentivement, car je ne répèterai pas!";
 	next;
 	mes "[Maître Épéiste]";
-	mes "Le but de cette épreuve est de déterminer si vous êtes ou non qualifié pour devenir Épéiste."; 
+	mes "Le but de cette épreuve est de déterminer si vous êtes ou non qualifié"+( sex ? "" : "e" )+" pour devenir Épéiste."; 
 	mes "Comme vous le savez, un Épéiste doit faire preuve d'une force physique importante, tout en ayant un mental d'acier!";
 	mes "Si vous n'avez ni l'un ni l'autre de ces attributs, vous échouerez certainement à cette épreuve.";
 	next;
@@ -266,19 +266,19 @@ izlude_in,30,175,4	script	Maître Épéiste#swd_3	92,{
 izlude_in,30,163,0	script	Guide#swd_1	105,{
 	mes "[Guide]";
 	if (BaseJob == Job_Swordman) {
-		mes "Hm? Comment êtes vous entré? Vous n'avez rien à faire ici, sortez je vous prie.";
+		mes "Hm? Comment êtes vous entré"+( sex ? "" : "e" )+"? Vous n'avez rien à faire ici, sortez je vous prie.";
 		close2;
 		warp "izlude_in",66,170;
 		end;
 	}
 	else if (BaseJob != Job_Novice) {
-		mes "Qui êtes vous?! Cette salle est réservée aux candidats à l'examen d'Épéiste! Vous n'êtes pas autorisé à entrer, sortez!";
+		mes "Qui êtes vous?! Cette salle est réservée aux candidats à l'examen d'Épéiste! Vous n'êtes pas autorisé"+( sex ? "" : "e" )+" à entrer, sortez!";
 		close2;
 		warp "izlude_in",66,170;
 		end;
 	}
 	if (job_sword_q == 1) {
-		mes "Vous voulez passer l'épreuve? Hum... vous avez l'air confiant.... C'est bien. Restez calme et faites de votre mieux. Ce n'est pas une épreuve aussi difficile qu'elle en a l'air.";
+		mes "Vous voulez passer l'épreuve? Hum... vous avez l'air confiant"+( sex ? "" : "e" )+".... C'est bien. Restez calme et faites de votre mieux. Ce n'est pas une épreuve aussi difficile qu'elle en a l'air.";
 		next;
 		set job_sword_q,2;
 	}
@@ -336,7 +336,7 @@ function	script	F_JobSwdStaff	{
 	mes "Vous abandonnez?";
 	next;
 	if (select("Oui.:Non.") == 1) {
-		mapannounce "job_sword1","Candidat " + strcharinfo(0) + " : Abandon.",bc_map;
+		mapannounce "job_sword1","Candidat"+( sex ? "" : "e" )+" " + strcharinfo(0) + " : Abandon.",bc_map;
 		warp "izlude_in",65,165;
 		end;
 	}
@@ -348,10 +348,10 @@ function	script	F_JobSwdStaff	{
 function	script	F_JobSwdTestStaff	{
 OnTouch:
 	mes "[Medic]";
-	mes "Candidat " + strcharinfo(0) + ". Vous abandonnez??";
+	mes "Candidat"+( sex ? "" : "e" )+" " + strcharinfo(0) + ". Vous abandonnez??";
 	next;
 	if (select("Oui.:Non.") == 1) {
-		mapannounce "job_sword1","Candidat " + strcharinfo(0) + " : Abandon.",bc_map;
+		mapannounce "job_sword1","Candidat"+( sex ? "" : "e" )+" " + strcharinfo(0) + " : Abandon.",bc_map;
 		warp "izlude_in",65,165;
 		end;
 	}
@@ -361,7 +361,7 @@ OnTouch:
 
 function	script	F_JobSwdTestStaff2	{
 OnTouch:
-	mapannounce "job_sword1","Candidat " + strcharinfo(0) + ". Passage à la "+getarg(0)+" course.",bc_map;
+	mapannounce "job_sword1","Candidat"+( sex ? "" : "e" )+" " + strcharinfo(0) + ". Passage à la "+getarg(0)+" course.",bc_map;
 	warp "job_sword1",getarg(1),getarg(2);
 	end;
 }

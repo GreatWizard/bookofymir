@@ -47,10 +47,10 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Chef Mahnsoo]";
 				mes "Humm...";
-				mes "On dirait cependant que vous n'êtes pas encore prêt à reprendre vos activités de Marchand. Pourquoi n'iriez-vous pas apprendre les compétences de base avant de revenir ici?";
+				mes "On dirait cependant que vous n'êtes pas encore prêt"+( sex ? "" : "e" )+" à reprendre vos activités de Marchand. Pourquoi n'iriez-vous pas apprendre les compétences de base avant de revenir ici?";
 				next;
 				mes "[Chef Mahnsoo]";
-				mes "Ne vous inquiétez pas, il y aura toujours une place dans la Guilde Marchande pour vous. Revenez quand vous serez prêt, d'accord?";
+				mes "Ne vous inquiétez pas, il y aura toujours une place dans la Guilde Marchande pour vous. Revenez quand vous serez prêt"+( sex ? "" : "e" )+", d'accord?";
 				close;
 			}
 			mes "[Chef Mahnsoo]";
@@ -76,7 +76,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 	if (BaseJob == Job_Merchant) {
 		mes "[Chef Mahnsoo]";
 		mes "Bonjour!";
-		mes "Alors, comment trouvez vous la vie de Marchand?";
+		mes "Alors, comment trouvez vous la vie de Marchand"+( sex ? "" : "e" )+"?";
 		next;
 		mes "[Chef Mahnsoo]";
 		mes "Une vie si proche de l'argent a ses avantages, n'est ce pas?";
@@ -103,10 +103,10 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 		mes "je viens de lire le compte-rendu de Kay, le Chef de l'Entrepôt, à votre sujet...";
 		next;
 		mes "[Chef Mahnsoo]";
-		mes "Quelle honte, quelle honte! Comment avez-vous pu être si MALADROIT et PEU SOIGNEUX??!! Je suis sûr que Kay vous a déjà sermonné, donc je ne vais pas vous le répéter... Mais tout de même!";
+		mes "Quelle honte, quelle honte! Comment avez-vous pu être si MALADROIT"+( sex ? "" : "E" )+" et PEU SOIGNEU"+( sex ? "X" : "SE" )+"??!! Je suis sûr que Kay vous a déjà sermonné"+( sex ? "" : "e" )+", donc je ne vais pas vous le répéter... Mais tout de même!";
 		next;
 		mes "[Chef Mahnsoo]";
-		mes ""+ strcharinfo(0) + ", vous avez échoué à l'épreuve. Cependant...... si vous voulez VRAIMENT devenir un Marchand, je peux peut-être vous laisser une seconde chance... à condition de travailler CONSCIENCIEUSEMENT cette fois ci....";
+		mes ""+ strcharinfo(0) + ", vous avez échoué à l'épreuve. Cependant...... si vous voulez VRAIMENT devenir un Marchand"+( sex ? "" : "e" )+", je peux peut-être vous laisser une seconde chance... à condition de travailler CONSCIENCIEUSEMENT cette fois ci....";
 		close;
 	}
 	else if (job_merchant_q == 8 || job_merchant_q == 7) {
@@ -195,7 +195,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 			if (job_merchant_q2 == 1) {
 				mes "[Chef Mahnsoo]";
 				mes "Rappelez vous, le Numéro de Série du paquet est le ^3355FF2485741^000000.";
-//				setquest 1009; // Bugfix: Ca devrait être plus bas sinon ça ne va pas marcher [No Healing]
+//				setquest 1009; // Bugfix: Ça devrait être plus bas sinon ça ne va pas marcher [No Healing]
 			}
 			else {
 				mes "[Chef Mahnsoo]";
@@ -274,10 +274,10 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 		mes "Bonjour, qu'est-ce qui vous amène à la Guilde des Marchands?";
 		mes "Puis-je faire quelque chose pour vous aider?";
 		next;
-		switch(select("J'aimerais devenir Marchand.:En quoi consiste le métier de Marchand?:Quels sont les pré-requis?:Non, rien merci.")) {
+		switch(select("J'aimerais devenir Marchand"+( sex ? "" : "e" )+".:En quoi consiste le métier de Marchand?:Quels sont les pré-requis?:Non, rien merci.")) {
 		case 1:
 			mes "[Chef Mahnsoo]";
-			mes "Un marchand, vous dites? Bien...";
+			mes ""+( sex ? "Un marchand" : "Une marchande" )+", vous dites? Bien...";
 			next;
 			if (getskilllv("NV_BASIC") < 9) {
 				mes "[Chef Mahnsoo]";
@@ -555,7 +555,7 @@ alberta_in,28,29,2	script	Chef de l'Entrepôt#mer	83,{
 			mes "Vous vous moquez de moi? Vous allez rater votre épreuve si vous avez perdu le paquet!";
 			next;
 			mes "[Kay, Chef de l'Entrepôt]";
-			mes "Awwww naannn mec. Bon, si vous voulez repasser l'épreuve, allez voir Mahnsoo, okay? Vous avez de la chance de pouvoir repasser le test!";
+			mes ""+( sex ? "Awwww naannn mec" : "Dommage mademoiselle" )+". Bon, si vous voulez repasser l'épreuve, allez voir Mahnsoo, okay? Vous avez de la chance de pouvoir repasser le test!";
 			close;
 		}
 		mes "[Kay, Chef de l'Entrepôt]";
@@ -565,7 +565,7 @@ alberta_in,28,29,2	script	Chef de l'Entrepôt#mer	83,{
 	}
 	else if (job_merchant_q == 4 || job_merchant_q == 3 && countitem(1081) != 0 || countitem(1082) != 0 || countitem(1091) != 0) {
 		mes "[Kay, Chef de l'Entrepôt]";
-		mes "Hey, que faites vous encore là? Vous devriez être parti en livraison, non?";
+		mes "Hey, que faites vous encore là? Vous devriez être parti"+( sex ? "" : "e" )+" en livraison, non?";
 		next;
 		if (select("J'aurais besoin d'un nouveau paquet.:Oh, oui mer...credi. Vous avez raison!") == 1) {
 			if (countitem(1081) == 0 && countitem(1082) == 0 && countitem(1083) == 0 && countitem(1091) == 0) {
@@ -578,7 +578,7 @@ alberta_in,28,29,2	script	Chef de l'Entrepôt#mer	83,{
 					set job_merchant_q,9;
 					mes "[Kay, Chef de l'Entrepôt]";
 					mes "Vous...";
-					mes "Vous avez PERDU le colis??!! Mais c'est pas vrai quel crétin!!";
+					mes "Vous avez PERDU le colis??!! Mais c'est pas vrai "+( sex ? "quel crétin" : "quelle crétine" )+"!!";
 					mes "Vous avez PERDU à votre test également!";
 					next;
 					mes "[Kay, Chef de l'Entrepôt]";
@@ -609,7 +609,7 @@ alberta_in,28,29,2	script	Chef de l'Entrepôt#mer	83,{
 			close;
 		}
 		mes "[Kay, Chef de l'Entrepôt]";
-		mes "Mais quel crétin...";
+		mes "Mais "+( sex ? "quel crétin" : "quelle crétine" )+"...";
 		close;
 	}
 	else if ((job_merchant_q == 0 || job_merchant_q == 1 || job_merchant_q == 2)) {
@@ -674,9 +674,9 @@ alberta_in,28,29,2	script	Chef de l'Entrepôt#mer	83,{
 				else if (.@where_village == 3)
 					mes "Votre destination est donc Morroc. C'est pas à coté! Le Numéro de série est le " + .@input + ". Vous confirmez?";
 				else
-					mes "Chanceux! Votre destination est l'Île de Byalan. Le Numéro de série est le " + .@input + ". Vous confirmez?";
+					mes "Chanceu"+( sex ? "x" : "se" )+"! Votre destination est l'Île de Byalan. Le Numéro de série est le " + .@input + ". Vous confirmez?";
 				next;
-				if (select("Confirmer.:Whoops! je me suis trompé de numéro!") == 1) {
+				if (select("Confirmer.:Whoops! je me suis trompé"+( sex ? "" : "e" )+" de numéro!") == 1) {
 					break;
 				}
 			}
@@ -790,7 +790,7 @@ morocc_in,140,102,4	script	Apprenti Teinturier#mer	86,{
 	else if (job_merchant_q == 6 || job_merchant_q == 5 && job_merchant_q2 == 6 || job_merchant_q2 == 5) {
 		mes "[Apprenti Teinturier]";
 		mes "Oh...";
-		mes "Vous allez être obligé de revenir avec le bon paquet je pense? Okay alors, faites attention la prochaine fois!";
+		mes "Vous allez être obligé"+( sex ? "" : "e" )+" de revenir avec le bon paquet je pense? Okay alors, faites attention la prochaine fois!";
 		close;
 	}
 	else {
@@ -809,11 +809,11 @@ morocc_in,140,102,4	script	Apprenti Teinturier#mer	86,{
 geffen_in,155,122,4	script	Membre de la Guilde#mer	47,{
 	if (job_merchant_q == 4 || job_merchant_q == 3) {
 		mes "[Membre de la Guilde]";
-		mes "Oh, bonjour. Vous êtes membre de la Guilde Marchande? C'est vrai?! Ca veut dire que.........";
+		mes "Oh, bonjour. Vous êtes membre de la Guilde Marchande? C'est vrai?! Ça veut dire que.........";
 		next;
 		mes "[Membre de la Guilde]";
 		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
-			mes "Oh excusez-moi. Vous devez être très fatigué d'avoir voyagé par ce temps estival. Merci beaucoup de vos efforts.";
+			mes "Oh excusez-moi. Vous devez être très fatigué"+( sex ? "" : "e" )+" d'avoir voyagé par ce temps estival. Merci beaucoup de vos efforts.";
 		}
 		else {
 			mes "Hum? Où est mon colis?";
@@ -885,7 +885,7 @@ prontera,248,42,0	script	Kafra#mer	116,{
 		mes "Oh, une livraison provenant de la Guilde Marchande?";
 		mes "Oh, oui, posez le ici ça ira...";
 		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
-			mes "Vous devez être fatigué après un si long voyage!";
+			mes "Vous devez être fatigué"+( sex ? "" : "e" )+" après un si long voyage!";
 		}
 		else {
 			mes "Hum......... Excusez-moi mais... où est le colis que vous deviez nous livrer....?";
@@ -909,7 +909,7 @@ prontera,248,42,0	script	Kafra#mer	116,{
 			getitem 1074,1; //Merchant_Voucher_2
 		}
 		else {
-			mes "Mmmm? Oh, très cher, ce n'est pas ce que nous avions commandé.";
+			mes "Mmmm? Oh, très "+( sex ? "cher" : "chère" )+", ce n'est pas ce que nous avions commandé.";
 			if (job_merchant_q2 == 1)
 				mes "Le numéro de série du colis que nous attendons est 2485741. Je suis certaine que ce n'est pas celui là.";
 			else if (job_merchant_q2 == 2)
