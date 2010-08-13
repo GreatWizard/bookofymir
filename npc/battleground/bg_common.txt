@@ -1,5 +1,4 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par No Healing, corrigé par Myllena et Icaros
 // ==============================================================================
 // BattleGround System - Common NPCs
 // ==============================================================================
@@ -12,135 +11,264 @@ bat_room	mapflag	nowarpto
 bat_room	mapflag	nobranch
 bat_room	mapflag	nopenalty
 bat_room	mapflag	noteleport
-bat_room	mapflag	nosave	SavePoint
 
-// BattleGround Warper - Entrance
-// *********************************************************************
+// Generals
+//============================================================
+bat_room,161,158,3	script	Gen. Guillaume's Aide#01	419,{ end; }
+bat_room,161,160,3	script	Gen. Guillaume's Aide#03	419,{ end; }
 
-payon,189,104,3	script	Recruteur de Maroll::BatRecruit	728,{
-	mes "[Recruteur pour la Bataille de Maroll]";
-	mes "Salut à vous, aventurier!";
-	mes "Je suis un chevalier du lointain pays que l'on appelle le Royaume de Maroll.";
-	next;
-	mes "[Recruteur pour la Bataille de Maroll]";
-	mes "Les deux princes du royaume se livrent une bataille farouche pour le trône de Maroll, et nous avons grand besoin de soldats expérimentés tels que vous. Que diriez-vous de joindre la cause de l'un des princes du Royaume de Maroll?";
-	next;
-	if( select("Accepter:Refuser") == 2 )
-	{
-		mes "[Recruteur pour la Bataille de Maroll]";
-		mes "Vous me trouverez ici si vous changez d'avis. N'hésitez pas à venir me trouver: je suis toujours à la recherche de nouveaux soldats.";
-		close;
-	}
-	mes "[Recruteur pour la Bataille de Maroll]";
-	mes "Puissent les dieux de la guerre vous bénir.";
-	close2;
-	warp "bat_room",155,150;
-	end;
-}
-
-prontera,123,83,5	duplicate(BatRecruit)	Recruteur de Maroll::BatRecruit2	728
-rachel,149,138,5	duplicate(BatRecruit)	Recruteur de Maroll::BatRecruit3	728
-moc_ruins,75,162,5	duplicate(BatRecruit)	Recruteur de Maroll::BatRecruit4	728
-aldebaran,146,109,5	duplicate(BatRecruit)	Recruteur de Maroll::BatRecruit5	728
-lighthalzen,153,86,5	duplicate(BatRecruit)	Recruteur de Maroll::BatRecruit6	728
-
-// BattleGround Warper - Exit
-// *********************************************************************
-
-bat_room,148,150,4	script	Téléporteur#bat	124,{
-	mes "[Téléporteur]";
-	mes "Désirez-vous quitter le champ de bataille? Je peux vous renvoyer chez vous si vous le désirez.";
-	next;
-	if( select("Partir:Rester ici") == 2 )
-	{
-		mes "[Téléporteur]";
-		mes "Vous me trouverez toujours ici si jamais vous avez besoin de mes services.";
-		close;
-	}
-
-	set .@spoint$, getsavepoint(0);
-	set .@x, getsavepoint(1);
-	set .@y, getsavepoint(2);
-	mes "[Téléporteur]";
-	mes "Bien, je vais vous renvoyer à " + .@spoint$ + ".";
-	close2;
-	warp .@spoint$, .@x, .@y;
-	end;
-}
-
-// Kafra
-// *********************************************************************
-bat_room,148,147,4	script	Employée Kafra::kaf_bat	861,{
-	cutin "kafra_09",2;
-	callfunc "F_Kafra",0,2,1,150,0;
-}
-
-// Général Guillaume
-// *********************************************************************
-bat_room,160,159,3	script	Général Guillaume	420,{
-	cutin "bat_kiyom2",2;
-	mes "[Général Guillaume]";
-	mes "Fougueux aventurier, nous allons avoir besoin de vos compétences pour remporter cette bataille.";
-	next;
-	cutin "bat_kiyom1",2;
-	mes "[Général Guillaume]";
-	mes "Notre grand roi, Marcel Marollo VII, est très malade. Sa Majesté a déclaré qu'il choisirait son héritier parmi moi et le Prince Croix et que de ses neuf enfants l'un de nous deviendrait son successeur.";
-	next;
-	mes "[Général Guillaume]";
-	mes "Deux rois ne peuvent se partager une même nation! Seul celui qui sortira vainqueur de la bataille prévue par sa Majesté sera intronisé.";
-	next;
-	mes "[Général Guillaume]";
-	mes "Mais il ne s'agit pas d'un simple combat entre nous. Cette bataille déterminera l'avenir du pays. Et sur mon honneur je jure de démontrer que je suis seul digne de protéger Maroll des menaces extérieures.";
-	next;
-	if( select("Je me battrai à vos côtés.:Quitter la conversation.") == 2 )
-	{
-		mes "[Général Guillaume]";
-		mes "Je serai celui qui capturera le drapeau!";
-		close2;
-		cutin "",255;
-		end;
-	}
-	cutin "bat_kiyom2",2;
-	mes "[Général Guillaume]";
-	mes "Bienvenue dans mon armée, camarade. Votre regard m'inspire confiance.";
-	set Bat_Team,1;
-	next;
-	mes "[Général Guillaume]";
-	mes "Allez maintenant trouver vos frères d'armes qui se préparent pour la bataille. Je sens qu'ils vous accueilleront chaleureusement.";
-	close2;
-	cutin "",255;
-	end;
-}
-
-// General Croix
-// *********************************************************************
-bat_room,160,140,3	script	Prince Croix	416,{
+bat_room,160,141,3	script	Prince Croix	416,{
 	cutin "bat_crua1",2;
 	mes "[Prince Croix]";
-	mes "Sage aventurier, nous allons avoir besoin de vos compétences pour remporter la victoire.";
+	mes "Wise adventurer, why don't you lend us your power for victory?";
 	next;
-	cutin "bat_crua2",2;
-	mes "[Prince Croix]";
-	mes "Je ne désire pas verser le sang, mais je n'ai d'autre choix que de combattre dans l'espoir d'une paix future et dans l'intérêt de mon peuple.";
-	next;
-	mes "[Prince Croix]";
-	mes "Le Général Guillaume, en tant que grand général de Maroll a un avantage certain dans cette bataille, mais la victoire ne lui est pas assurée pour autant. Je veux remporter cette bataille et offrir à mon peuple un futur radieux.";
-	next;
-	if( select("Je me battrai à vos côtés!:Quitter la conversation.") == 2 )
-	{
+	switch(select("What's the reason for the Battle?:Tell me about General Guillaume")) {
+	case 1:
+		cutin "bat_crua2",2;
 		mes "[Prince Croix]";
-		mes "Pour Maroll!";
-		close2;
-		cutin "",255;
-		end;
+		mes "Maroll's great king, Marcel Marollo VII, is very sick lately.";
+		mes "His Majesty has declared that he will be leaving the future of Maroll to me or the 3rd prince, General Guillaume.";
+		next;
+		mes "[Prince Croix]";
+		mes "General Guillaume may have an advantage in this battle as he is the great general of Maroll, but that doesn't automatically mean he'll win.";
+		mes "I want to win this battle so that I can bring prosperity to the people of Maroll. They've suffered enough from war...";
+		next;
+		switch(select("Yes, I want to join you.:End Conversation")) {
+		case 1:
+			cutin "bat_crua1",2;
+			mes "[Prince Croix]";
+			mes "Thank you so much. I feel like I can win with the help of adventurers like you.";
+			mes "Now, please go downstairs and join your comrades in sharpening their skills to fight the enemy!";
+			break;
+		case 2:
+			mes "[Prince Croix]";
+			mes "For Maroll!";
+			break;
+		}
+		break;
+	case 2:
+		cutin "bat_crua2",2;
+		mes "[Prince Croix]";
+		mes "The 3rd Prince Guillaume is the great general of Maroll.";
+		mes "It's a waste of time to explain to you how great a leader or warlord he is, since he commands the great military power of Maroll.";
+		next;
+		mes "[Prince Croix]";
+		mes "Unfortunately, there's something he and his followers are unaware of:";
+		mes "Do the people of Maroll really want them to spend so much money on military power?";
+		mes "We have suffered enough from wars.";
+		mes "I believe weapons aren't the best way to bring prosperity to a nation.";
+		next;
+		mes "[Prince Croix]";
+		mes "I do not wish to shed blood, but I have no choice but to fight for the possibility of peace and for the sake of my people.";
+		next;
+		switch(select("Yes, I want to join you.:End Conversation")) {
+		case 1:
+			cutin "bat_crua1",2;
+			mes "[Prince Croix]";
+			mes "Thank you so much. I feel like I can win with the help of adventurers like you.";
+			mes "Now, please go downstairs and join your comrades in sharpening their skills to fight the enemy!";
+			break;
+		case 2:
+			mes "[Prince Croix]";
+			mes "For Maroll!";
+			break;
+		}
+		break;
 	}
-	mes "[Prince Croix]";
-	mes "Merci de tout coeur. Je sais qu'avec des aventuriers tels que vous à mes côtés, je pourrai remporter la victoire. Allez maintenant rejoindre vos camarades qui se préparent déjà pour la bataille!";
-	set Bat_Team,2;
 	close2;
-	cutin "",255;
+	cutin "bat_crua1",255;
+	cutin "bat_crua2",255;
 	end;
 }
+
+bat_room,161,140,3	script	Prince Croix's Aide#01	415,{ end; }
+bat_room,161,142,3	script	Prince Croix's Aide#02	415,{ end; }
+
+bat_room,160,159,3	script	General Guillaume	420,{
+	cutin "bat_kiyom2",2;
+	mes "[General Guillaume]";
+	mes "Hot-blooded adventurer, we need your ability to win this battle.";
+	next;
+	switch(select("What's the reason for the Battle?:Tell me about Prince Croix")) {
+	case 1:
+		cutin "bat_kiyom1",2;
+		mes "[General Guillaume]";
+		mes "Our great king, Marcel Marollo VII, is very sick lately.";
+		mes "His Majesty has declared that he has chosen either me or Prince Croix as the next king amongst his 9 sons.";
+		next;
+		mes "[General Guillaume]";
+		mes "Two kings can't share a nation! Only the one victorious from His Majesty's appointed battle will be enthroned.";
+		next;
+		mes "[General Guillaume]";
+		mes "This is, however, not just a battle between us. This battle will determine the future of this country.";
+		mes "I pledge on my honor to prove that I'm the one who can protect this Maroll from outside threats.";
+		next;
+		switch(select("Yes, I want to join you.:End Conversation")) {
+		case 1:
+			cutin "bat_kiyom2",2;
+			mes "[General Guillaume]";
+			mes "Welcome to my army, comrade.";
+			mes "Your eyes tell me that you're a soldier that I can trust.";
+			next;
+			mes "[General Guillaume]";
+			mes "Now, go upstairs and apply for battle with your comrades.";
+			mes "I'm sure they'll welcome you whole-heartedly!";
+			break;
+		case 2:
+			mes "[General Guillaume]";
+			mes "I'll be the one who will capture the flag!";
+			break;
+		}
+		break;
+	case 2:
+		cutin "bat_kiyom1",2;
+		mes "[General Guillaume]";
+		mes "The 5th Prince Croix is currently titled as the Prime Minister of Maroll.";
+		mes "He thinks all national matters of a nation can be discussed and determined on a desk,";
+		mes "and believes in peaceful co-existence with other countries.";
+		next;
+		mes "[General Guillaume]";
+		mes "He's too ignorant to admit that so-called peace is built on countless lives that are sacrificed in wars while normal citizens and upper classes can live, oblivious to the horrors that allow them to live that way.";
+		next;
+		mes "[General Guillaume]";
+		mes "He's too naive to understand the reality....";
+		mes "I can't leave Maroll to someone like him who lives in a dream!";
+		next;
+		mes "[General Guillaume]";
+		mes "His unrealistic beliefs will drown this country in poverty and make the people weak. If he becomes the king, Maroll will never rest from the onslaughts of other countries.";
+		mes "I want to teach him what makes this small country so powerful and prosperous. It's military power!";
+		next;
+		switch(select("I want to join your army!:End Conversation")) {
+		case 1:
+			cutin "bat_kiyom2",2;
+			mes "[General Guillaume]";
+			mes "Welcome to my army, comrade.";
+			mes "Your eyes tell me that you're a soldier that I can trust.";
+			next;
+			mes "[General Guillaume]";
+			mes "Now, go upstairs and apply for battle from your comrades.";
+			mes "I'm sure they'll welcome you whole-heartedly!";
+			break;
+		case 2:
+			mes "[General Guillaume]";
+			mes "I'll be the one who will capture the flag!";
+			break;
+		}
+		break;
+	}
+	close2;
+	cutin "bat_kiyom1",255;
+	cutin "bat_kiyom2",255;
+	end;
+}
+
+// Flags
+//============================================================
+//bat_room,140,160,3	script	Guillaume Base#roomflag1	973,{ end; }
+//bat_room,167,160,3	script	Guillaume Base#roomflag2	973,{ end; }
+//bat_room,140,139,3	script	Croix Base#roomflag1	974,{ end; }
+//bat_room,167,139,3	script	Croix Base#roomflag2	974,{ end; }
+
+// BattleGround Warper
+//============================================================
+bat_room,148,150,5	script	Teleporter#Battlefield	124,{
+	mes "[Teleporter]";
+	mes "Do you wish to leave the battlefield? Use my services to return to town.";
+	next;
+	switch(select("Leave:Don't Leave")) {
+	case 1:
+		mes "[Teleporter]";
+		switch(bat_return) {
+		default:
+		case 1:
+			setarray .@mapname$[0],"Prontera.","prontera";
+			setarray .@xy[0],116,72;
+			break;
+		case 2:
+			setarray .@mapname$[0],"Morroc","moc_ruins";
+			setarray .@xy[0],152,48;
+			break;
+		case 3:
+			setarray .@mapname$[0],"Al De Baran.","aldebaran";
+			setarray .@xy[0],168,112;
+			break;
+		case 4:
+			setarray .@mapname$[0],"Geffen.","geffen";
+			setarray .@xy[0],120,39;
+			break;
+		case 5:
+			setarray .@mapname$[0],"Payon.","payon";
+			setarray .@xy[0],161,58;
+			break;
+		case 6:
+			setarray .@mapname$[0],"Lighthalzen.","lighthalzen";
+			setarray .@xy[0],159,93;
+			break;
+		case 7:
+			setarray .@mapname$[0],"Rachel.","rachel";
+			setarray .@xy[0],115,124;
+			break;
+		}
+		mes "You will be sent back to "+.@mapname$[0]+".";
+		close2;
+		warp .@mapname$[1],.@xy[0],.@xy[1];
+		break;
+	case 2:
+		mes "[Teleporter]";
+		mes "I'll be here whenever you're in need of my services.";
+		close;
+	}
+	end;
+}
+
+-	script	Maroll Battle Recruiter::BatRecruit	728,{
+	mes "[Maroll Battle Recruiter]";
+	mes "Good day, adventurer.";
+	mes "I'm a knight from a far country called Maroll Kingdom.";
+	next;
+	mes "[Maroll Battle Recruiter]";
+	mes "The two princes of the kingdom are now battling for the throne of Maroll, and are in need of experienced soldiers like you.";
+	mes "How would you like to lend your power to one of the princes in the Maroll Kingdom?";
+	next;
+	switch(select("Join:Don't Join")) {
+	case 1:
+		mes "[Maroll Battle Recruiter]";
+		mes "May the war god bless you.";
+		close2;
+		getmapxy(.@mapname$,.@x,.@y,1);
+		if (.@mapname$ == "prontera")
+			set bat_return,1;
+		else if (.@mapname$ == "moc_ruins")
+			set bat_return,2;
+		else if (.@mapname$ == "aldebaran")
+			set bat_return,3;
+		else if (.@mapname$ == "geffen")
+			set bat_return,4;
+		else if (.@mapname$ == "payon")
+			set bat_return,5;
+		else if (.@mapname$ == "lighthalzen")
+			set bat_return,6;
+		else if (.@mapname$ == "rachel")
+			set bat_return,7;
+		else
+			set bat_return,1;
+		warp "bat_room",154,150;
+		break;
+	case 2:
+		mes "[Maroll Battle Recruiter]";
+		mes "I'll always be stationed here for more soldiers. Feel free to come back whenever you're interested.";
+		close;
+	}
+	end;
+}
+
+prontera,123,83,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit1	728
+moc_ruins,75,162,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit2	728
+aldebaran,146,109,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit3	728
+geffen,109,66,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit4	728
+payon,189,105,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit5	728
+lighthalzen,153,86,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit6	728
+rachel,149,138,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit7	728
 
 // Time calculation Function
 // *********************************************************************
@@ -156,14 +284,14 @@ function	script	Time2Str	{
 	
 	set .@Time$, "";
 	if( .@Days > 1 )
-		set .@Time$, .@Time$ + .@Days + " jours, ";
+		set .@Time$, .@Time$ + .@Days + " days, ";
 	else if( .@Days > 0 )
-		set .@Time$, .@Time$ + .@Days + " jour, ";
+		set .@Time$, .@Time$ + .@Days + " day, ";
 
 	if( .@Hours > 1 )
-		set .@Time$, .@Time$ + .@Hours + " heures, ";
+		set .@Time$, .@Time$ + .@Hours + " hours, ";
 	else if( .@Hours > 0 )
-		set .@Time$, .@Time$ + .@Hours + " heure, ";
+		set .@Time$, .@Time$ + .@Hours + " hour, ";
 
 	if( .@Minutes > 1 )
 		set .@Time$, .@Time$ + .@Minutes + " minutes, ";
@@ -171,984 +299,12 @@ function	script	Time2Str	{
 		set .@Time$, .@Time$ + .@Minutes + " minute, ";
 
 	if( .@Time_Left > 1 || .@Time_Left == 0 )
-		set .@Time$, .@Time$ + .@Time_Left + " secondes.";
+		set .@Time$, .@Time$ + .@Time_Left + " seconds.";
 	else if( .@Time_Left == 1 )
-		set .@Time$, .@Time$ + .@Time_Left + " seconde.";
+		set .@Time$, .@Time$ + .@Time_Left + " second.";
 	
 	return .@Time$;
 }
-
-// Guillaume Knight - Tierra Valley
-// *********************************************************************
-bat_room,159,178,5	script	Chevalier de Guillaume::Guillaume Knight#1	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Les Gorges de Tierra forment un canyon très escarpé, dans lequel se trouvent deux forts, au Nord et au Sud.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Il y a un dépôt de rations pour les armées de Guillaume et de Croix à respectivement 11 et 8 heures.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "La bataille débute au bateau de votre armée, et le but est d'avancer et de détruire les rations de l'ennemi plus vite qu'ils ne détruisent les vôtres.";
-	mes "";
-	mes "L'armée qui capture la Bannière de Neutralité au centre du champ de bataille gagnera un bonus permettant à ses soldats de ressusciter plus rapidement que les soldats adverses, leur donnant un avantage.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés.";
-	close;
-}
-
-// Tierra Officer - Guillaume
-// *********************************************************************
-bat_room,156,178,5	script	Officier de Tierra::Tierra Valley Officer#1	418,{
-	mes "[Officier de Tierra]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-	
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Tierra]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
-	if( checkquest(2069,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-	
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",85,224;
-	end;
-}
-
-// Croix Knight - Tierra Valley
-// *********************************************************************
-bat_room,159,121,1	script	Chevalier de Croix#1	413,{
-	mes "[Chevalier de Croix]";
-	mes "Les Gorges de Tierra forment un canyon très escarpé, dans lequel se trouvent deux forts, au Nord et au Sud.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Il y a un dépôt de rations pour les armées de Guillaume et de Croix à respectivement 11 et 8 heures.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "La bataille débute au bateau de votre armée, et le but est d'avancer et de détruire les rations de l'ennemi plus vite qu'ils ne détruisent les vôtres.";
-	mes "";
-	mes "L'armée qui capture la Bannière de Neutralité au centre du champ de bataille gagnera un bonus permettant à ses soldats de ressusciter plus rapidement que les soldats adverses, leur donnant un avantage.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés.";
-	close;
-}
-
-// Tierra Officer - Croix
-// *********************************************************************
-bat_room,156,121,1	script	Officier de Tierra::Tierra Valley Officer#2	414,{
-	mes "[Officier de Tierra]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Tierra]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
-	if( checkquest(2069,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",85,208;
-	end;
-}
-
-// Guillaume Knight - Tierra
-// *********************************************************************
-bat_room,167,178,5	script	Chevalier de Guillaume::Guillaume Knight#2	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Les Gorges de Tierra forment un canyon très escarpé, dans lequel se trouvent deux forts, au Nord et au Sud.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Il y a un dépôt de rations pour les armées de Guillaume et de Croix à respectivement 11 et 8 heures.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "La bataille débute au bateau de votre armée et le but est d'avancer et de détruire les rations de l'ennemi plus vite qu'ils ne détruisent les vôtres.";
-	mes "";
-	mes "L'armée qui capture la Bannière de Neutralité au centre du champ de bataille gagnera un bonus permettant à ses soldats de ressusciter plus rapidement que les soldats adverses, leur donnant un avantage.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés.";
-	close;
-}
-
-// Tierra Officer - Guillaume
-// *********************************************************************
-bat_room,164,178,5	script	Officier de Tierra::Tierra Valley Officer#3	418,{
-	mes "[Officier de Tierra]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-	
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Tierra]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
-	if( checkquest(2069,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",57,94;
-	end;
-}
-
-// Croix Knight - Tierra
-// *********************************************************************
-bat_room,167,121,1	script	Chevalier de Croix::Croix Knight#2	413,{
-	mes "[Chevalier de Croix]";
-	mes "Les Gorges de Tierra forment un canyon très escarpé, dans lequel se trouvent deux forts, au Nord et au Sud.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Il y a un dépôt de rations pour les armées de Guillaume et de Croix à respectivement 11 et 8 heures.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "La bataille débute au bateau de votre armée et le but est d'avancer et de détruire les rations de l'ennemi plus vite qu'ils ne détruisent les vôtres.";
-	mes "";
-	mes "L'armée qui capture la Bannière de Neutralité au centre du champ de bataille gagnera un bonus permettant à ses soldats de ressusciter plus rapidement que les soldats adverses, leur donnant un avantage.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés.";
-	close;
-}
-
-// Tierra Officer - Croix
-// *********************************************************************
-bat_room,164,121,1	script	Officier de Tierra::Tierra Valley Officer#4	414,{
-	mes "[Officier de Tierra]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Tierra]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2069,PLAYTIME) == 2 ) erasequest 2069;
-	if( checkquest(2069,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",57,77;
-	end;
-}
-
-// Guillaune Knight - Flavius
-// *********************************************************************
-bat_room,175,178,5	script	Chevalier de Guillaume::Guillaume Knight#3	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Les cristaux sont immunisés à tout type de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// Flavius Officer - Guillaume
-// *********************************************************************
-bat_room,172,178,5	script	Officier de Flavius::Flavius Officer#1	418,{
-	mes "[Officier de Flavius]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Flavius]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
-	if( checkquest(2070,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",85,94;
-	end;
-}
-
-// Croix Knight - Flavius
-// *********************************************************************
-bat_room,175,121,1	script	Chevalier de Croix::Croix Knight#3	413,{
-	mes "[Chevalier de Croix]";
-	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Les cristaux sont immunisés à tous types de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// Flavius Officerer - Croix
-// *********************************************************************
-bat_room,172,121,1	script	Officier de Flavius::Flavius Officer#2	414,{
-	mes "[Officier de Flavius]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Flavius]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
-	if( checkquest(2070,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",85,77;
-	end;
-}
-
-// Guillaune Knight - Flavius
-// *********************************************************************
-bat_room,151,178,5	script	Chevalier de Guillaume::Guillaume Knight#4	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Les cristaux sont immunisés à tous types de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// Flavius Officerer - Guillaume
-// *********************************************************************
-bat_room,148,178,5	script	Officier de Flavius::Flavius Officer#3	418,{
-	mes "[Officier de Flavius]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Flavius]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
-	if( checkquest(2070,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",253,94;
-	end;
-}
-
-// Croix Knight - Flavius
-// *********************************************************************
-bat_room,151,121,1	script	Chevalier de Croix::Croix Knight#4	413,{
-	mes "[Chevalier de Croix]";
-	mes "Le but de la bataille de Flavius est de marquer deux points avant votre ennemi en détruisant leur cristal.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Les cristaux des deux armées sont protégés par des barricades spéciales qui ne peuvent être détruites par une attaque directe.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Cependant, vos ennemis peuvent les détruire en éliminant les Gardes qui protègent votre base.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Les cristaux sont immunisés à tous types de compétences. La seule option que vous avez pour les détruire est d'utiliser vos attaques physiques.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Alors allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// Flavius Officerer - Croix
-// *********************************************************************
-bat_room,148,121,1	script	Officier de Flavius::Flavius Officer#4	414,{
-	mes "[Officier de Flavius]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Flavius]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(2070,PLAYTIME) == 2 ) erasequest 2070;
-	if( checkquest(2070,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Tierra]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de la Gorge de Tierra lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de joindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",253,77;
-	end;
-}
-
-// Guillaume Knight - KvM
-// *********************************************************************
-bat_room,143,178,5	script	Chevalier de Guillaume::Guillaume Knight#5	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Afin de remporter la Bataille de Kreiger Von Midgard, vous et votre équipe devrez exterminer tous vos opposants avant qu'ils ne fassent de même.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "L'armée dont tous les soldats auront péri sur le champ de bataille perdra.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Puisque vous ne pourrez pas retourner sur le champ de bataille après avoir été tué, il vous sera impératif de prendre soin de vous.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// KvM Officerer - Guillaume
-// *********************************************************************
-bat_room,140,178,5	script	Officier de KVM [80-99]::KVM [80-99] Officer#1	418,{
-	mes "[Officier de Kreiger Von Midgard]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Kreiger Von Midgard]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-	if( checkquest(6025,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Kreiger Von Midgard]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Kreiger Von Midgard lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 80 à 99.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",253,224;
-	end;
-}
-
-// Croix Knight - KvM
-// *********************************************************************
-bat_room,143,121,1	script	Chevalier de Croix::Croix Knight#5	413,{
-	mes "[Chevalier de Croix]";
-	mes "Afin de remporter la Bataille de Kreiger Von Midgard, vous et votre équipe devrez exterminer tous vos opposants avant qu'ils ne fassent de même.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "L'armée dont tous les soldats auront péri sur le champ de bataille perdra.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Puisque vous ne pourrez pas retourner sur le champ de bataille après avoir été tué, il vous sera impératif de prendre soin de vous.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// KvM Officer - Croix
-// *********************************************************************
-bat_room,140,121,1	script	Officier de KVM [80-99]::KVM [80-99] Officer#2	414,{
-	mes "[Officier de Kreiger Von Midgard]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Kreiger Von Midgard]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-	if( checkquest(6025,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Kreiger Von Midgard]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Kreiger Von Midgard lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 80 )
-	{
-		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 80 à 99.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",253,208;
-	end;
-}
-
-// Guillaume Knight - KvM
-// *********************************************************************
-bat_room,135,178,5	script	Chevalier de Guillaume::Guillaume Knight#6	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Afin de remporter la Bataille de Kreiger Von Midgard, vous et votre équipe devrez exterminer tous vos opposants avant qu'ils ne fassent de même.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "L'armée dont tous les soldats auront péri sur le champ de bataille perdra.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Puisque vous ne pourrez pas retourner sur le champ de bataille après avoir été tué, il vous sera impératif de prendre soin de vous.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// KvM Officerer - Guillaume
-// *********************************************************************
-bat_room,132,178,5	script	Officier de KVM [60-79]::KVM [60-79] Officer#1	418,{
-	mes "[Officier de Kreiger Von Midgard]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Kreiger Von Midgard]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-	if( checkquest(6025,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Kreiger Von Midgard]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Kreiger Von Midgard lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 60 || BaseLevel > 79 )
-	{
-		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 60 à 79.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",225,224;
-	end;
-}
-
-// Croix Knight - KvM
-// *********************************************************************
-bat_room,135,121,1	script	Chevalier de Croix::Croix Knight#6	413,{
-	mes "[Chevalier de Croix]";
-	mes "Afin de remporter la Bataille de Kreiger Von Midgard, vous et votre équipe devrez exterminer tous vos opposants avant qu'ils ne fassent de même.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "L'armée dont tous les soldats auront péri sur le champ de bataille perdra.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Puisque vous ne pourrez pas retourner sur le champ de bataille après avoir été tué, il vous sera impératif de prendre soin de vous.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// KvM Officer - Croix
-// *********************************************************************
-bat_room,132,121,1	script	Officier de KVM [60-79]::KVM [60-79] Officer#2	414,{
-	mes "[Officier de Kreiger Von Midgard]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Kreiger Von Midgard]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-	if( checkquest(6025,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Kreiger Von Midgard]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Kreiger Von Midgard lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel < 60 || BaseLevel > 79 )
-	{
-		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 60 à 79.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",225,208;
-	end;
-}
-
-// Guillaume Knight - KvM
-// *********************************************************************
-bat_room,127,178,5	script	Chevalier de Guillaume::Guillaume Knight#7	417,{
-	mes "[Chevalier de Guillaume]";
-	mes "Afin de remporter la Bataille de Kreiger Von Midgard, vous et votre équipe devrez exterminer tous vos opposants avant qu'ils ne fassent de même.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "L'armée dont tous les soldats auront péri sur le champ de bataille perdra.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Puisque vous ne pourrez pas retourner sur le champ de bataille après avoir été tué, il vous sera impératif de prendre soin de vous.";
-	next;
-	mes "[Chevalier de Guillaume]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// KvM Officerer - Guillaume
-// *********************************************************************
-bat_room,124,178,5	script	Officier de KVM [1-59]::KVM [1-59] Officer#1	418,{
-	mes "[Officier de Kreiger Von Midgard]";
-	if( Bat_Team == 2 )
-	{
-		mes "Hors de ma vue, suppôt de Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Guillaume à ces misérables!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Kreiger Von Midgard]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-	if( checkquest(6025,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Kreiger Von Midgard]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Kreiger Von Midgard lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel > 59 )
-	{
-		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 1 à 59.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",197,224;
-	end;
-}
-
-// Croix Knight - KvM
-// *********************************************************************
-bat_room,127,121,1	script	Chevalier de Croix::Croix Knight#7	413,{
-	mes "[Chevalier de Croix]";
-	mes "Afin de remporter la Bataille de Kreiger Von Midgard, vous et votre équipe devrez exterminer tous vos opposants avant qu'ils ne fassent de même.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "L'armée dont tous les soldats auront péri sur le champ de bataille perdra.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Puisque vous ne pourrez pas retourner sur le champ de bataille après avoir été tué, il vous sera impératif de prendre soin de vous.";
-	next;
-	mes "[Chevalier de Croix]";
-	mes "Êtes-vous prêt pour la bataille? Dans ce cas allez trouver le recruteur à mes côtés!";
-	close;
-}
-
-// KvM Officer - Croix
-// *********************************************************************
-bat_room,124,121,1	script	Officier de KVM [1-59]::KVM [1-59] Officer#2	414,{
-	mes "[Officier de Kreiger Von Midgard]";
-	if( Bat_Team == 1 )
-	{
-		mes "Hors de ma vue, écervelé à la solde de Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Vous devez choisir un camp, et vous battre aux côtés du Prince Croix ou du Général Guillaume!";
-		close;
-	}
-
-	mes "Bonjour " + strcharinfo(0) + ". Montrons la vaillance de l'armée de Croix à ces chiens!";
-	next;
-	if( select("Je veux m'enrôler!:Quitter la conversation.") == 2 )
-		close;
-
-	mes "[Officier de Kreiger Von Midgard]";
-	if( BG_Delay_Tick >= gettimetick(2) )
-	{
-		mes "Vous êtes un déserteur! À cause de votre couardise, vous devrez attendre ^0000FF" + callfunc("Time2Str",BG_Delay_Tick) + "^000000 avant de rejoindre le champ de bataille.";
-		close;
-	}
-
-	if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-	if( checkquest(6025,PLAYTIME) != -1 )
-	{
-		mes "Ola, mon brave! Même "+ ( sex ? "un guerrier" : "une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
-		next;
-		mes "[Officier de Kreiger Von Midgard]";
-		mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Kreiger Von Midgard lorsque ce sera fait.";
-		close;
-	}
-
-	if( BaseLevel > 59 )
-	{
-		mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais cette arène est réservée aux joueurs de niveau 1 à 59.";
-		close;
-	}
-
-	mes "Bonne chance!";
-	close2;
-	warp "bat_room",197,208;
-	end;
-}
-
-// Guard Dummy
-// *********************************************************************
-
-bat_room,161,141,3	script	Aide du Prince Croix::bat_aid	415,{ end; }
-bat_room,161,139,3	duplicate(bat_aid)	Aide du Prince Croix::bat_aid2	415
-bat_room,161,160,3	duplicate(bat_aid)	Aide de Guillaume::bat_aid3	419
-bat_room,161,158,3	duplicate(bat_aid)	Aide de Guillaume::bat_aid4	419
-
-// Flags
-// *********************************************************************
-
--	script	Camp de Guillaume#bat	973,{ end; }
--	script	Camp de Croix#bat	974,{ end; }
 
 // Exit from Registration
 // *********************************************************************
@@ -1164,21 +320,15 @@ OnTouch:
 // Flavius bat_b02
 bat_room,57,81,0	duplicate(warp2bat_room)	bat1	45,1,1
 bat_room,57,90,0	duplicate(warp2bat_room)	bat2	45,1,1
-// Free BG
-bat_room,57,220,0	duplicate(warp2bat_room)	bat3	45,1,1
-bat_room,57,211,0	duplicate(warp2bat_room)	bat4	45,1,1
-// Tierra Valley bat_a02
+// Empty
 bat_room,85,81,0	duplicate(warp2bat_room)	bat5	45,1,1
 bat_room,85,90,0	duplicate(warp2bat_room)	bat6	45,1,1
-// Tierra Valley bat_a01
+// Empty
 bat_room,85,220,0	duplicate(warp2bat_room)	bat7	45,1,1
 bat_room,85,211,0	duplicate(warp2bat_room)	bat8	45,1,1
 // Free BG
 bat_room,113,81,0	duplicate(warp2bat_room)	bat9	45,1,1
 bat_room,113,90,0	duplicate(warp2bat_room)	bat10	45,1,1
-// Free BG
-bat_room,113,220,0	duplicate(warp2bat_room)	bat11	45,1,1
-bat_room,113,211,0	duplicate(warp2bat_room)	bat12	45,1,1
 // Free BG
 bat_room,141,81,0	duplicate(warp2bat_room)	bat13	45,1,1
 bat_room,141,90,0	duplicate(warp2bat_room)	bat14	45,1,1
@@ -1189,32 +339,30 @@ bat_room,141,211,0	duplicate(warp2bat_room)	bat16	45,1,1
 bat_room,169,81,0	duplicate(warp2bat_room)	bat17	45,1,1
 bat_room,169,90,0	duplicate(warp2bat_room)	bat18	45,1,1
 // Free BG
-bat_room,169,220,0	duplicate(warp2bat_room)	bat19	45,1,1
-bat_room,169,211,0	duplicate(warp2bat_room)	bat20	45,1,1
-// Free BG
 bat_room,197,81,0	duplicate(warp2bat_room)	bat21	45,1,1
 bat_room,197,90,0	duplicate(warp2bat_room)	bat22	45,1,1
-// KvM bat_c03
-bat_room,197,220,0	duplicate(warp2bat_room)	bat23	45,1,1
-bat_room,197,211,0	duplicate(warp2bat_room)	bat24	45,1,1
 // Free BG
 bat_room,225,81,0	duplicate(warp2bat_room)	bat25	45,1,1
 bat_room,225,90,0	duplicate(warp2bat_room)	bat26	45,1,1
-// KvM bat_c02
-bat_room,225,220,0	duplicate(warp2bat_room)	bat27	45,1,1
-bat_room,225,211,0	duplicate(warp2bat_room)	bat28	45,1,1
 // Flavius bat_b01
 bat_room,253,81,0	duplicate(warp2bat_room)	bat29	45,1,1
 bat_room,253,90,0	duplicate(warp2bat_room)	bat30	45,1,1
-// KvM bat_c01
+// Empty
 bat_room,253,220,0	duplicate(warp2bat_room)	bat31	45,1,1
 bat_room,253,211,0	duplicate(warp2bat_room)	bat32	45,1,1
+
+// Kafra
+// *********************************************************************
+bat_room,148,147,4	script	Kafra Staff::kaf_bat	861,{
+	cutin "kafra_09",2;
+	callfunc "F_Kafra",0,2,1,150,0;
+}
 
 // Badges Repairman
 // *********************************************************************
 
-bat_room,138,144,5	script	Réparateur#bg	99,{
-	callfunc "repairmain","Réparateur";
+bat_room,138,144,5	script	Repairman#bg	86,{
+	callfunc "repairmain","Repairman";
 	end;
 }
 
@@ -1223,29 +371,31 @@ bat_room,138,144,5	script	Réparateur#bg	99,{
 
 bat_room,160,150,3	script	Erundek	109,{
 	mes "[Erundek]";
-	mes "Bienvenue, puissant guerrier. En quoi puis-je vous aider aujourd'hui?";
+	mes "Welcome, mighty warrior.";
+	mes "What can I do for you today ?";
 	next;
-	switch( select("Feuilleter le catalogue.","Échanger ses Médailles de Bravoure.","Échanger ses Médailles de Valeur.","Échanger ses Médailles d'Héroïsme.","Hum, en rien je suppose.") )
+	switch( select("Check the Catalog","Exchange Bravery Badges","Exchange Valor Badges","Hmm, nothing I guess.") )
 	{
 		case 1:
 			mes "[Erundek]";
-			mes "Nous avons énormément d'objets, alors prenez votre temps pour pouvoir nous acheter quelque chose en toute connaissance de cause.";
+			mes "We have many items, so please take a look and purchase deliberately.";
 			close2;
 			Readbook 11010,1;
 			end;
-		case 5:
+		case 4:
 			mes "[Erundek]";
-			mes "Comme vous voulez. Au plaisir.";
+			mes "As you wish.";
+			mes "See you later.";
 			close;
 		case 2: // Bravery Badges
 			mes "[Erundek]";
-			mes "Alors vous voulez échanger vos ^0000FFMédailles de Bravoure^000000 de la Bataille de la Vallée de Tierra...";
-			mes "Contre quel genre d'objets voudriez-vous les échanger?";
+			mes "So you want to exchange ^0000FFBravery Badges^000000 from the Battle of Tierra Gorge.";
+			mes "What kind of item do you want to exchange?";
 			next;
 			deletearray .@Item_DB[0],127;
 			set .@Badge, 7828;
 
-			switch( select("Armes:Manteaux:Chaussures:Armures:Accessoires") )
+			switch( select("Weapons:Garment:Footgear:Armor:Accessory") )
 			{
 				case 1: setarray .@Item_DB[0],13036,13411,1425,1632,1634,1543,1924,1978,1574,1824,1183,1380,13305,1279,1739,13108,13172; set .@Value, 100; break;
 				case 2: setarray .@Item_DB[0],2538,2539,2540; set .@Value, 50; break;
@@ -1257,13 +407,13 @@ bat_room,160,150,3	script	Erundek	109,{
 			break;
 		case 3: // Valor Badges
 			mes "[Erundek]";
-			mes "Alors vous voulez échanger vos ^FF0000Médailles de Valeur^000000 de la Bataille de Flavius...";
-			mes "Contre quel genre d'objets voudriez-vous les échanger?";
+			mes "So you want to exchange ^FF0000Valor Badges^000000 from the Battle of Flavius.";
+			mes "What kind of item do you want to exchange?";
 			next;
 			deletearray .@Item_DB[0],127;
 			set .@Badge, 7829;
 
-			switch( select("Armes:Manteaux:Chaussures:Armures:Accessoires") )
+			switch( select("Weapons:Garment:Footgear:Armor:Accessory") )
 			{
 				case 1: setarray .@Item_DB[0],13037,13410,1633,1635,1542,1923,1977,1575,1823,1184,1482,1379,13306,1280,1738,13171,13173,13174; set .@Value, 100; break;
 				case 2: setarray .@Item_DB[0],2538,2539,2540; set .@Value, 50; break;
@@ -1273,15 +423,11 @@ bat_room,160,150,3	script	Erundek	109,{
 			}
 			
 			break;
-		case 4: // Heroism Badge
-			mes "[Erundek]";
-			mes "Alors vous voulez échanger vos ^FFA500Médailles d'Héroïsme^000000 de la Bataille de Kreiger Von Midgard...";
-			mes "Je suis désolé mais nous n'avons plus rien en stock pour le moment.";
-			close;
 	}
-	
+
 	mes "[Erundek]";
-	mes "Quel objet voudriez-vous acquérir? Vous devriez consulter notre catalogue si vous n'êtes pas sûr de vous.";
+	mes "What item do you want to exchange?";
+	mes "If you are not sure, check the catalog.";
 	next;
 
 	set .@Menu$, "";
@@ -1292,29 +438,29 @@ bat_room,160,150,3	script	Erundek	109,{
 	set .@Item_ID, .@Item_DB[select(.@Menu$) - 1];
 
 	mes "[Erundek]";
-	mes "Souhaitez-vous échanger ^FF0000" + .@Value + " " + getitemname(.@Badge) + "^000000 contre un ^0000FF" + getitemname(.@Item_ID) + "^000000?";
+	mes "Would you like to exchange ^FF0000" + .@Value + " " + getitemname(.@Badge) + "^000000 for a ^0000FF" + getitemname(.@Item_ID) + "^000000?";
 	next;
-	mes "Souvenez-vous bien que les récompenses des Champs de Bataille sont ^FF0000attachées au personnage^000000.";
-	mes "Voulez-vous vraiment cet objet?";
+	mes "Remember, Battleground Reward Items are ^FF0000Character Bound^000000.";
+	mes "Are you sure you want this item?";
 	next;
 	
-	if( select("Oui:Non") == 2 )
+	if( select("Yes:No") == 2 )
 	{
 		mes "[Erundek]";
-		mes "Avez-vous besoin de plus de temps pour examiner les objets?";
+		mes "Do you need more time to check the items?";
 		close;
 	}
 	
 	if( countitem(.@Badge) < .@Value )
 	{
 		mes "[Erundek]";
-		mes "Je suis désolé mais vous n'avez pas assez de Médailles à échanger.";
+		mes "I'm sorry, but you don't have enough badges to exchange.";
 		close;
 	}
 	
 	delitem .@Badge,.@Value;
 	getitem .@Item_ID,1;
 	mes "[Erundek]";
-	mes "Voilà pour vous. Merci pour l'échange.";
+	mes "Thank you for exchanging.";
 	close;
 }
