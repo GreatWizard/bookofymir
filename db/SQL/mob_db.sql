@@ -676,7 +676,7 @@ UPDATE mob_db SET kName = "Ancienne Mimic" WHERE ID = 1699;
 UPDATE mob_db SET kName = "Observation" WHERE ID = 1700;
 UPDATE mob_db SET kName = "Maîtresse du Foyer" WHERE ID = 1701;
 UPDATE mob_db SET kName = "Baronne Rétribution" WHERE ID = 1702;
-UPDATE mob_db SET kName = "Dame Récomfort" WHERE ID = 1703;
+UPDATE mob_db SET kName = "Dame Réconfort" WHERE ID = 1703;
 UPDATE mob_db SET kName = "Haine de Thanatos" WHERE ID = 1704;
 UPDATE mob_db SET kName = "Désespoir de Thanatos" WHERE ID = 1705;
 UPDATE mob_db SET kName = "Tristesse de Thanatos" WHERE ID = 1706;
