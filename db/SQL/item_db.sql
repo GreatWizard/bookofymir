@@ -1993,7 +1993,7 @@ UPDATE item_db SET `name_japanese`  = "Carte de Draco" WHERE ID = 4444;
 UPDATE item_db SET `name_japanese`  = "Carte de Luciola Vespa" WHERE ID = 4445;
 UPDATE item_db SET `name_japanese`  = "Carte de Centipède" WHERE ID = 4447;
 UPDATE item_db SET `name_japanese`  = "Carte de Cornus" WHERE ID = 4448;
-UPDATE item_db SET `name_japanese`  = "Carte de Dark Shadow" WHERE ID = 4449;
+UPDATE item_db SET `name_japanese`  = "Carte de Sombres Ténèbres" WHERE ID = 4449;
 UPDATE item_db SET `name_japanese`  = "Carte de Maître Banshee" WHERE ID = 4450;
 UPDATE item_db SET `name_japanese`  = "Carte d'Entweihen Crothen" WHERE ID = 4451;
 UPDATE item_db SET `name_japanese`  = "Carte de Larve Centipède" WHERE ID = 4452;
