@@ -2462,7 +2462,7 @@ jupe_area1,112,162,0	script	Levier#ufe	844,{
 	case 1:
 		if($@JupreArea1InUse == 1) close;
 		initnpctimer;
-		donpcevent "LevierWarp#ufe::OnEnable";
+		donpcevent "LeverWarp#ufe::OnEnable";
 		disablenpc "Levier#ufe";
 		close;
 	case 2:
@@ -2478,14 +2478,14 @@ OnTimer3000:
 	end;
 }
 
-jupe_area1,117,157,0	script	LevierWarp#ufe	139,2,2,{
+jupe_area1,117,157,0	script	LeverWarp#ufe	139,2,2,{
 OnInit:
-	disablenpc "LevierWarp#ufe";
+	disablenpc "LeverWarp#ufe";
 	end;
 
 OnEnable:
-	enablenpc "LevierWarp#ufe";
-	specialeffect 561;
+	enablenpc "LeverWarp#ufe";
+	specialeffect 561; //"LeverWarp#ufe" 561
 	soundeffectall "jupe_warp.wav",0;
 	initnpctimer;
 	end;
@@ -2496,7 +2496,7 @@ OnTouch:
 
 OnTimer3000:
 	stopnpctimer;
-	disablenpc "LevierWarp#ufe";
+	disablenpc "LeverWarp#ufe";
 	end;
 }
 
@@ -3539,7 +3539,7 @@ jupe_area2,51,162,0	script	Levier#ufe2	844,{
 	case 1:
 		if($@JupreArea2InUse == 1) close;
 		initnpctimer;
-		donpcevent "LevierWarp#ufe2::OnEnable";
+		donpcevent "LeverWarp#ufe2::OnEnable";
 		disablenpc "Levier#ufe2";
 		close;
 	case 2:
@@ -3555,14 +3555,14 @@ OnTimer3000:
 	end;
 }
 
-jupe_area2,46,157,0	script	LevierWarp#ufe2	139,2,2,{
+jupe_area2,46,157,0	script	LeverWarp#ufe2	139,2,2,{
 OnInit:
-	disablenpc "LevierWarp#ufe2";
+	disablenpc "LeverWarp#ufe2";
 	end;
 
 OnEnable:
-	enablenpc "LevierWarp#ufe2";
-	specialeffect 561;
+	enablenpc "LeverWarp#ufe2";
+	specialeffect 561; //"LeverWarp#ufe2" 561
 	soundeffectall "jupe_warp.wav",0;
 	initnpctimer;
 	end;
@@ -3573,14 +3573,14 @@ OnTouch:
 
 OnTimer3000:
 	stopnpctimer;
-	disablenpc "LevierWarp#ufe2";
+	disablenpc "LeverWarp#ufe2";
 	end;
 }
 
 //============================================================
 // Elevator Reception Room
 //============================================================
-jupe_ele_r,51,98,0	script	Levier#ufe	844,{
+jupe_ele_r,51,98,0	script	Levier#ufe4	844,{
 	if ($@JupeElevatorInUse == 1) {
 		mes "^3355FFOn dirait une sorte de levier, qui aurait déjà été activé par quelqu'un d'autre.^000000";
 		close;
@@ -3629,10 +3629,10 @@ jupe_ele_r,51,98,0	script	Levier#ufe	844,{
 							mes "^3355FFAlors que vous tirez le levier, les Fragments d'Armoiries semblent s'enfoncer plus profondément dans les fentes en émettant un cliquetis suggérant qu'ils ne pourront plus être retirés. Le sol se met à trembler violemment. Ce n'est pas normal!^000000";
 							next;
 							set $@JupeElevatorInUse,1;
-							disablenpc "Levier#ufe";
-							enablenpc "Levier#ufe2";
+							disablenpc "Levier#ufe4";
+							enablenpc "Levier#ufe3";
 							initnpctimer;
-							specialeffect2 563;
+							specialeffect2 563; // 563
 							soundeffectall "earth_quake.wav",0;
 							close2;
 							cutin "5-1",255;
@@ -3698,12 +3698,12 @@ OnTimer27000:
 	end;
 }
 
-jupe_ele_r,51,98,0	script	Levier#ufe2	844,{
+jupe_ele_r,51,98,0	script	Levier#ufe3	844,{
 	mes "^3355FFOn dirait que quelqu'un d'autre est en train d'utiliser cette machine...^000000";
 	close;
 
 OnInit:
-	disablenpc "Levier#ufe2";
+	disablenpc "Levier#ufe3";
 	end;
 }
 
@@ -3759,8 +3759,8 @@ OnTimer2600:
 
 OnTimer120000:
 	mapannounce "jupe_ele_r","Il est décevant de voir qu'une simple hallucination a eu raison de vous...",bc_map,"0x66FF00";
-	enablenpc "Levier#ufe";
-	disablenpc "Levier#ufe2";
+	enablenpc "Levier#ufe4";
+	disablenpc "Levier#ufe3";
 	donpcevent "Annihilation#ufe::OnEnable";
 	set $@JupeElevatorInUse,0;
 	end;
@@ -3887,8 +3887,8 @@ OnTimer59000:
 		stopnpctimer;
 		set $@JupeElevatorInUse2,0;
 		set $@JupeElevatorInUse,0;
-		disablenpc "Levier#ufe2";
-		enablenpc "Levier#ufe";
+		disablenpc "Levier#ufe3";
+		enablenpc "Levier#ufe4";
 	}
 	end;
 
@@ -3936,8 +3936,8 @@ OnTimer142000:
 	donpcevent "TimeOut#ufe::OnDisable";
 	set $@JupeElevatorInUse2,0;
 	set $@JupeElevatorInUse,0;
-	disablenpc "Levier#ufe2";
-	enablenpc "Levier#ufe";
+	disablenpc "Levier#ufe3";
+	enablenpc "Levier#ufe4";
 	stopnpctimer;
 	end;
 }
@@ -4208,8 +4208,8 @@ OnTimer25000:
 OnTimer26000:
 	set $@JupeElevatorInUse2,0;
 	set $@JupeElevatorInUse,0;
-	disablenpc "Levier#ufe2";
-	enablenpc "Levier#ufe";
+	disablenpc "Levier#ufe3";
+	enablenpc "Levier#ufe4";
 	donpcevent "GuardEnd#ufe::OnDisable";
 }
 
