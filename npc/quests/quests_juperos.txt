@@ -162,7 +162,7 @@ yuno_in04,190,125,4	script	Érudite	700,{
 
 		case 3:
 			mes "[Fayruz]";
-			mes "Hé bien, vous paraissez plutôt content.";
+			mes "Hé bien, vous paraissez plutôt "+(sex?"content":"contente")+".";
 			mes "Puis-je vous demander ce qui est arrivé pour que votre visage affiche une telle expression?";
 			next;
 			switch( select( "J'ai trouvé quelque chose à Juperos.","Rien de spécial." ) )
@@ -170,7 +170,7 @@ yuno_in04,190,125,4	script	Érudite	700,{
 		
 				case 1:
 					mes "[" +strcharinfo(0)+"]";
-					mes "Je suis allé à Juperos comme vous me l'aviez demandé, et j'ai trouvé cette statue de pierre dont vous parliez.";
+					mes "Je suis "+(sex?"allé":"allée")+" à Juperos comme vous me l'aviez demandé, et j'ai trouvé cette statue de pierre dont vous parliez.";
 					mes "Comme vous l'aviez dit, il y avait un message gravé dessus.";
 					next;
 					mes "[Fayruz]";
@@ -389,9 +389,9 @@ yuno_in04,190,125,4	script	Érudite	700,{
 		case 9:
 			mes "[Fayruz]";
 			mes "Ah, je vous attendais, "+strcharinfo(0)+".";
-			mes "Alors, êtes-vous retourné à Juperos? J'espère réellement que vous avez été capable de trouver quelque chose de nouveau qui m'aidera dans mes recherches...";
+			mes "Alors, êtes-vous "+(sex?"retourné":"retournée")+" à Juperos? J'espère réellement que vous avez été capable de trouver quelque chose de nouveau qui m'aidera dans mes recherches...";
 			next;
-			switch( select("En réalité, j'ai trouvé cela...","Je suis désolé, mais non...") )
+			switch( select("En réalité, j'ai trouvé cela...","Je suis "+(sex?"désolé":"désolée")+", mais non...") )
 			{
 				case 1:
 					switch(jupe_hist)
@@ -508,7 +508,7 @@ function	script	Func_JupHist	{
 				next;
 				mes "^3355FFFayruz vous raconte une histoire avec un début très gai, rempli d'espoir, qui vous imprègne de la béatitude des cieux, mais qui ensuite vous fait tomber subitement dans tout le désespoir et le tourment de l'enfer.^000000";
 				next;
-				mes "^3355FFL'histoire atteint finalement sa fin et vous êtes surpris de vous trouver assis dans la Bibliothèque de Yuno.^000000";
+				mes "^3355FFL'histoire atteint finalement sa fin et vous êtes "+(sex?"surpris":"surprise")+" de vous trouver assis dans la Bibliothèque de Yuno.^000000";
 				next;
 				mes "[Fayruz]";
 				mes "Je sais que c'est une histoire vraiment déprimante, mais j'espère que vous l'avez aimée.";
@@ -965,7 +965,7 @@ juperos_01,99,112,4	script	Statue de Bronze#1	844,{
 				next;
 				mes "["+strcharinfo(0)+"]";
 				mes "Ça donne la chair de poule!";
-				mes "Je sais que je ne suis pas censé pouvoir le lire, et pourtant j'y arrive.";
+				mes "Je sais que je ne suis pas "+(sex?"censé":"censée")+" pouvoir le lire, et pourtant j'y arrive.";
 				mes "Je sais quels sons toutes ces lettres produisent...";
 				next;
 				if(yuno_hist == 2)
@@ -3580,7 +3580,7 @@ OnTimer3000:
 //============================================================
 // Elevator Reception Room
 //============================================================
-jupe_ele_r,51,98,0	script	Switch#ufe	844,{
+jupe_ele_r,51,98,0	script	Levier#ufe	844,{
 	if ($@JupeElevatorInUse == 1) {
 		mes "^3355FFOn dirait une sorte de levier, qui aurait déjà été activé par quelqu'un d'autre.^000000";
 		close;
@@ -3629,8 +3629,8 @@ jupe_ele_r,51,98,0	script	Switch#ufe	844,{
 							mes "^3355FFAlors que vous tirez le levier, les Fragments d'Armoiries semblent s'enfoncer plus profondément dans les fentes en émettant un cliquetis suggérant qu'ils ne pourront plus être retirés. Le sol se met à trembler violemment. Ce n'est pas normal!^000000";
 							next;
 							set $@JupeElevatorInUse,1;
-							disablenpc "Switch#ufe";
-							enablenpc "Switch On#ufe";
+							disablenpc "Levier#ufe";
+							enablenpc "Levier#ufe2";
 							initnpctimer;
 							specialeffect2 563;
 							soundeffectall "earth_quake.wav",0;
@@ -3698,12 +3698,12 @@ OnTimer27000:
 	end;
 }
 
-jupe_ele_r,51,98,0	script	Switch On#ufe	844,{
+jupe_ele_r,51,98,0	script	Levier#ufe2	844,{
 	mes "^3355FFOn dirait que quelqu'un d'autre est en train d'utiliser cette machine...^000000";
 	close;
 
 OnInit:
-	disablenpc "Switch On#ufe";
+	disablenpc "Levier#ufe2";
 	end;
 }
 
@@ -3759,8 +3759,8 @@ OnTimer2600:
 
 OnTimer120000:
 	mapannounce "jupe_ele_r","Il est décevant de voir qu'une simple hallucination a eu raison de vous...",bc_map,"0x66FF00";
-	enablenpc "Switch#ufe";
-	disablenpc "Switch On#ufe";
+	enablenpc "Levier#ufe";
+	disablenpc "Levier#ufe2";
 	donpcevent "Annihilation#ufe::OnEnable";
 	set $@JupeElevatorInUse,0;
 	end;
@@ -3887,8 +3887,8 @@ OnTimer59000:
 		stopnpctimer;
 		set $@JupeElevatorInUse2,0;
 		set $@JupeElevatorInUse,0;
-		disablenpc "Switch On#ufe";
-		enablenpc "Switch#ufe";
+		disablenpc "Levier#ufe2";
+		enablenpc "Levier#ufe";
 	}
 	end;
 
@@ -3936,8 +3936,8 @@ OnTimer142000:
 	donpcevent "TimeOut#ufe::OnDisable";
 	set $@JupeElevatorInUse2,0;
 	set $@JupeElevatorInUse,0;
-	disablenpc "Switch On#ufe";
-	enablenpc "Switch#ufe";
+	disablenpc "Levier#ufe2";
+	enablenpc "Levier#ufe";
 	stopnpctimer;
 	end;
 }
@@ -4208,8 +4208,8 @@ OnTimer25000:
 OnTimer26000:
 	set $@JupeElevatorInUse2,0;
 	set $@JupeElevatorInUse,0;
-	disablenpc "Switch On#ufe";
-	enablenpc "Switch#ufe";
+	disablenpc "Levier#ufe2";
+	enablenpc "Levier#ufe";
 	donpcevent "GuardEnd#ufe::OnDisable";
 }
 
