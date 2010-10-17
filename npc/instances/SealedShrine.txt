@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.4
+//= 1.5
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -17,10 +17,12 @@
 //= 1.2 Fixed Torch#12 not being disabled. (bugreport:4044) [L0ne_w0lf]
 //= 1.3 Fixed cutins not being removed. (bugreport:4117) [L0ne_w0lf]
 //= 1.4 Fixed some typos. [Gepard]
+//= 1.5 Fixed not being able to enter dungeon for the first two hours.
 //============================================================ 
 
 // Sealed Catacomb Entrance
 monk_test,309,146,3	script	Frère Patrick::Friar Patrick#edq	412,{
+	if (checkquest(3040)>=0) erasequest 3040;
 	cutin "ins_cata_pri_n",2;
 	mes "[Frère Patrick]";
 	mes "La paix dans ce monde ne peut durer éternellement... Les ténèbres sont de nouveau sur le point de s'abattre sur ce monde...";
@@ -72,9 +74,7 @@ monk_test,309,146,3	script	Frère Patrick::Friar Patrick#edq	412,{
 			next;
 			mes "[Frère Patrick]";
 			mes "Continuez à vous entraîner, et utilisiez vos dons pour protéger le monde du retour imminent du Mal...";
-			close2;
-			cutin "",255;
-			end;
+			break;
 		case 2:
 			cutin "ins_cata_pri_n",2;
 			mes "[Frère Patrick]";
@@ -82,10 +82,9 @@ monk_test,309,146,3	script	Frère Patrick::Friar Patrick#edq	412,{
 			next;
 			mes "[Frère Patrick]";
 			mes "Continuez à vous entraîner, et utilisiez vos dons pour protéger le monde du retour imminent du Mal...";
-			close2;
-			cutin "",255;
-			end;
+			break;
 		}
+		break;
 	case 2:
 		if (BaseLevel > 74) {
 
@@ -97,134 +96,118 @@ monk_test,309,146,3	script	Frère Patrick::Friar Patrick#edq	412,{
 			mes "[Frère Patrick]";
 			mes "Voulez-vous dire que vous voulez vous rendre dans son tombeau pour sceller à nouveau Baphomet?";
 			next;
-			set .@ins_bapho_check,checkquest(3040,PLAYTIME);
+			
+			// 12 hour cooldown
+			set .@ins_bapho_check,checkquest(3046,PLAYTIME);
+			// Two hour play limit
 			set .@ins_bapho_check2,checkquest(3045,PLAYTIME);
 
-			if ((.@ins_bapho_check != 2) && (.@ins_bapho_check2 == 2)) {
-				mes "[Frère Patrick]";
-				mes "On dirait que vous vous y êtes rendu récemment. Vous ne pourrez y retourner tant que la malédiction de Baphomet persistera. Elle ne disparaitra qu'avec le temps.";
-				close2;
-				cutin "",255;
-				end;
-			}
-
-			if (.@ins_bapho_check == -1) {
-				if ((getpartyleader(.@party_id,2) == getcharid(0)) && (.@partymembercount > 1)) {
-					set .@instance, instance_create("Catacombes", .@party_id);
-					if (.@instance < 0) {
-						mes "[Frère Patrick]";
-						mes "Nom de l'Équipe: "+getpartyname(.@party_id)+".";
-						mes "Nom du Chef d'Équipe "+.@partymembername$[0]+".";
-						mes "Hum... On dirait que nous avions un problème... Je vais regarder ça. Patientez un peu.";
-						close2;
-						cutin "",255;
-					}
-					else {
-
-						for( set .@i, 1; .@i <= 2; set .@i, .@i + 1 ) {
-							if( instance_attachmap("" + .@i + "@cata", .@instance) == "" )
-								break;
+			if (.@ins_bapho_check < 2) {
+				if (.@ins_bapho_check == -1) {
+					if ((getpartyleader(.@party_id,2) == getcharid(0)) && (.@partymembercount > 1)) {
+						set .@instance, instance_create("Sealed Catacombs", .@party_id);
+						if (.@instance < 0) {
+							mes "[Friar Patrick]";
+							mes "Party name is "+getpartyname(.@party_id)+"...";
+							mes "Name of the leader is "+.@partymembername$[0]+"...";
+							mes "Umm... But it seems that there is an unknown problem here... I'll check quickly. Please wait.";
 						}
-						if( .@i < 2 ) {
-							instance_destroy(.@instance);
-							close;
-						}
+						else {
 
-						instance_attach(.@instance);
-						instance_set_timeout 14400,300,.@instance;
-						instance_init(.@instance);
+							for( set .@i, 1; .@i <= 2; set .@i, .@i + 1 ) {
+								if( instance_attachmap("" + .@i + "@cata", .@instance) == "" )
+									break;
+							}
+							if( .@i < 2 ) {
+								instance_destroy(.@instance);
+								close;
+							}
+
+							instance_attach(.@instance);
+							instance_set_timeout 14400,300,.@instance;
+							instance_init(.@instance);
 
 						// First Floor
-						disablenpc instance_npcname("Âme de Héros Antique#1F", instance_id());
-						disablenpc instance_npcname("ins_bapho_to_2f", instance_id());
-
-						for( set .@i, 1; .@i < 13; set .@i, .@i + 1 ) {
-							disablenpc instance_npcname("Pierre Tombale#1F_"+.@i+"T", instance_id());
+							disablenpc instance_npcname("Âme de Héros Antique#1F", instance_id());
 							disablenpc instance_npcname("Pierre Tombale#1F_"+.@i+"F", instance_id());
+
+													for( set .@i, 1; .@i < 13; set .@i, .@i + 1 ) {
+								disablenpc instance_npcname("Pierre Tombale#1F_"+.@i+"T", instance_id());
+								disablenpc instance_npcname("Pierre Tombale#1F_"+.@i+"F", instance_id());
+							}
+							for( set .@i, 1; .@i <= 12; set .@i, .@i + 1 ) {
+								disablenpc instance_npcname("Torche Vacillante#"+.@i, instance_id());
+							}
+
+							// Second Floor
+							disablenpc instance_npcname("ins_baphomet_1f_timer", instance_id());
+							disablenpc instance_npcname("ins_2f_enter_broad", instance_id());
+							disablenpc instance_npcname("Sceau Magique#0", instance_id());
+							disablenpc instance_npcname("Sceau Magique#2", instance_id());
+							disablenpc instance_npcname("Sceau Magique#4", instance_id());
+							disablenpc instance_npcname("Sceau Magique#8", instance_id());
+							disablenpc instance_npcname("Sceau Magique#10", instance_id());
+							disablenpc instance_npcname("Âme de Héros Antique#2F", instance_id());
+							disablenpc instance_npcname("control_baphomet", instance_id());
+							disablenpc instance_npcname("ins_2f_hero_broad2", instance_id());
+							disablenpc instance_npcname("2f_callmon_pattern_c", instance_id());
+							disablenpc instance_npcname("2f_callmon_pattern", instance_id());
+							disablenpc instance_npcname("ins_2f_hero_pattern_c", instance_id());
+							disablenpc instance_npcname("ins_2f_hero_pattern", instance_id());
+
+							// Pick proper grave
+							donpcevent instance_npcname("ins_baphomet_lotto", instance_id())+"::OnEnable";
+
+							// Spawn monsters.
+							donpcevent instance_npcname("ins_1f_spawn_mobs", instance_id())+"::OnEnable";
+
+							mes "[Friar Patrick]";
+							mes "Party name is "+getpartyname(.@party_id)+"...";
+							mes "Name of the leader is "+.@partymembername$[0]+"...";
+							mes "Okay... I'll adjust the seal of the grave so that you and your company can enter.";
+							next;
+							mes "[Friar Patrick]";
+							mes "You will see a sign when the control of the seal is finished. Please wait until the sign shows...";
+							next;
+							mes "[Friar Patrick]";
+							mes "When you see the sign, put your hands on the altar of the grave... Then you can move to inside of the grave.";
+							next;
+							mes "[Friar Patrick]";
+							mes "One thing that you should remember is... Anyone who enters this grave, will be cursed by Baphomet and they can't enter or leave this grave while they are cursed.";
+							next;
+							mes "[Friar Patrick]";
+							mes "And one more thing... In this cursed area, some skills, which are protected by outer physical power, are prohibited by the effect of the seal.";
+							next;
+							mes "[Friar Patrick]";
+							mes "For example, the skills like ^0000FFSafety wall, Assumptio^000000... So you'd better to prepare enoughly before enter the grave.";
 						}
-						for( set .@i, 1; .@i <= 12; set .@i, .@i + 1 ) {
-							disablenpc instance_npcname("Torche Vacillante#"+.@i, instance_id());
-						}
-
-						// Second Floor
-						disablenpc instance_npcname("ins_baphomet_1f_timer", instance_id());
-						disablenpc instance_npcname("ins_2f_enter_broad", instance_id());
-						disablenpc instance_npcname("Sceau Magique#0", instance_id());
-						disablenpc instance_npcname("Sceau Magique#2", instance_id());
-						disablenpc instance_npcname("Sceau Magique#4", instance_id());
-						disablenpc instance_npcname("Sceau Magique#8", instance_id());
-						disablenpc instance_npcname("Sceau Magique#10", instance_id());
-						disablenpc instance_npcname("Âme de Héros Antique#2F", instance_id());
-						disablenpc instance_npcname("control_baphomet", instance_id());
-						disablenpc instance_npcname("ins_2f_hero_broad2", instance_id());
-						disablenpc instance_npcname("2f_callmon_pattern_c", instance_id());
-						disablenpc instance_npcname("2f_callmon_pattern", instance_id());
-						disablenpc instance_npcname("ins_2f_hero_pattern_c", instance_id());
-						disablenpc instance_npcname("ins_2f_hero_pattern", instance_id());
-
-						// Pick proper grave
-						donpcevent instance_npcname("ins_baphomet_lotto", instance_id())+"::OnEnable";
-
-						// Spawn monsters.
-						donpcevent instance_npcname("ins_1f_spawn_mobs", instance_id())+"::OnEnable";
-
-						mes "[Frère Patrick]";
-						mes "Nom de l'Équipe: "+getpartyname(.@party_id)+".";
-						mes "Nom du Chef d'Équipe: "+.@partymembername$[0]+".";
-						mes "Bien... Je vais ouvrir temporairement le sceau du tombeau pour que votre Équipe puisse entrer.";
-						next;
-						mes "[Frère Patrick]";
-						mes "Vous apercevrez un signe quand j'aurai neutralisé le sceau. Patientez jusqu'à ce que vous le voyiez...";
-						next;
-						mes "[Frère Patrick]";
-						mes "Posez alors vos mains sur le tombeau. Vous pourrez vous rendre dans le sépulcre.";
-						next;
-						mes "[Frère Patrick]";
-						mes "Mais vous devrez garder une chose à l'esprit: tous ceux qui y pénétreront seront maudits par Baphomet et ils ne pourront pas quitter cet endroit ou y retourner tant qu'ils seront maudits.";
-						next;
-						mes "[Frère Patrick]";
-						mes "Une dernière chose... Certaines compétences sont inopérantes sur cette terre maudite – le pouvoir du sceau empêche leur utilisation.";
-						next;
-						mes "[Frère Patrick]";
-						mes "Entre autres, vous ne pourrez utiliser de sorts de ^0000FFProtection ou d'Assomption^000000... Alors soyez prêts avant de pénétrer dans ce sépulcre.";
-						close2;
-						cutin "",255;
 					}
-					end;
+					else {
+							
+						mes "[Frère Patrick]";
+						mes "Umm... I recognize your courage, but... I can't permit anyone to enter this place. I can only permit the leader of a party to enter first.";
+						next;
+						mes "[Frère Patrick]";
+						mes "Once the party leader is permitted, the rest of the party can enter. This is a rule of this monastery, so please understand.";
+					}
 				}
-				else {
+				else if ((.@ins_bapho_check == 0) || (.@ins_bapho_check == 1)) {
 					mes "[Frère Patrick]";
-					mes "Hum... Je respecte votre courage mais je ne peux pas laisser n'importe qui pénétrer en ces lieux. Seul le Chef d'Équipe sera autorisé à s'inscrire.";
+					mes "It seems you have entered this grave recently... You cannot enter because Baphomet's Curse still remains. Baphomet's Curse disappears only after a certain amount of time has passed.";
+				}
+				else if (.@ins_bapho_check == 2) {
+					mes "[Friar Patrick]";
+					mes "Umm... It seems that Baphomet's Curse has weakened. I can remove it now.";
 					next;
 					mes "[Frère Patrick]";
-					mes "Une fois qu'il sera inscrit, les reste de l'Équipe pourra entrer. Soyez compréhensif – il s'agit de l'une des règles de notre abbaye.";
-					close2;
-					cutin "",255;
-					end;
+					mes "Haaaaaaap... Hocus Pocus Wingardium Abracadabra!!!!!";
+					next;
+					if (checkquest(3046)) erasequest 3046;
+					if (checkquest(3041)) erasequest 3041;
+					if (checkquest(3045)) erasequest 3045;
+					mes "[Friar Patrick]";
+					mes "Huu... It's over. Now that I've released Baphomet's Curse, you can enter again.";
 				}
-			}
-			else if ((.@ins_bapho_check == 0) || (.@ins_bapho_check == 1)) {
-				mes "[Frère Patrick]";
-				mes "On dirait que vous vous êtes rendu dans ce tombeau récemment. Vous êtes toujours maudit par Baphomet. La malédiction ne disparaîtra qu'avec le temps.";
-				close2;
-				cutin "",255;
-				end;
-			}
-			else if (.@ins_bapho_check == 2) {
-				mes "[Frère Patrick]";
-				mes "Hum... La malédiction de Baphomet semble s'être affaiblie. Je devrais pouvoir la lever maintenant.";
-				next;
-				mes "[Frère Patrick]";
-				mes "Haaaaaaap... Hocus Pocus Wingardium Abracadabra!!!!!";
-				next;
-				erasequest 3040;
-				erasequest 3041;
-				erasequest 3045;
-				mes "[Frère Patrick]";
-				mes "Oh... C'est terminé. Vous allez pouvoir y retourner, maintenant que j'ai levé la malédiction de Baphomet.";
-				close2;
-				cutin "",255;
-				end;
 			}
 		}
 		else {
@@ -233,10 +216,8 @@ monk_test,309,146,3	script	Frère Patrick::Friar Patrick#edq	412,{
 			next;
 			mes "[Frère Patrick]";
 			mes "Entraînez-vous encore et revenez me voir.";
-			close2;
-			cutin "",255;
 		}
-		end;
+		break;
 	case 3:
 		if (.@doll == 1) {
 			mes "[Frère Patrick]";
@@ -254,9 +235,7 @@ monk_test,309,146,3	script	Frère Patrick::Friar Patrick#edq	412,{
 			mes "[Frère Patrick]";
 			mes "Allez voir ^0000FFRust Main-Noire^000000. Il se trouve près du bâtiment principal de l'Abbaye... Il pourra s'en occuper.";
 			setquest 3042;
-			close2;
-			cutin "",255;
-			end;
+			break;
 		}
 	case 4:
 		mes "[Frère Patrick]";
@@ -264,16 +243,17 @@ monk_test,309,146,3	script	Frère Patrick::Friar Patrick#edq	412,{
 		next;
 		mes "[Frère Patrick]";
 		mes "Continuez à vous entraîner, et utilisiez vos dons pour protéger le monde du retour imminent du Mal...";
-		close2;
-		cutin "",255;
-		end;
+		break;
 	}
+	close2;
+	cutin "",255;
+	end;
 }
 
 monk_test,306,151,3	script	Sépulcre de Baphomet::Grave of Baphomet#edq	111,{
-	if (countitem(6002) > 0) {
+	if (checkquest(3040)>=0) erasequest 3040;
+	if (countitem(6002) > 0)
 		delitem 6002,countitem(6002); //Token_Of_Apostle
-	}
 	mes "Un démon aux larges cornes est gravé sur cette pierre tombale. Un sentiment funeste s'en dégage.";
 	next;
 	switch(select("Toucher la pierre tombale.:Reculer.")) {
@@ -287,10 +267,12 @@ monk_test,306,151,3	script	Sépulcre de Baphomet::Grave of Baphomet#edq	111,{
 		set .@instance, instance_id(1);
 		instance_attach(.@instance);
 
-		set .@ins_bapho_check,checkquest(3040,PLAYTIME);
+		// 12 hour cooldown
+		set .@ins_bapho_check,checkquest(3046,PLAYTIME);
+		// Two hour play limit
 		set .@ins_bapho_check2,checkquest(3045,PLAYTIME);
 
-		if ((.@ins_bapho_check != 2) && (.@ins_bapho_check2 == 2)) {
+		if ((.@ins_bapho_check == -1) || ((.@ins_bapho_check2 >= 0) && (.@ins_bapho_check2 < 2))) {
 			mes "[Frère Patrick]";
 			mes "On dirait que vous vous êtes rendu dans ce tombeau récemment. Vous êtes toujours maudit par Baphomet. La malédiction ne disparaîtra qu'avec le temps.";
 			close;
@@ -312,7 +294,8 @@ monk_test,306,151,3	script	Sépulcre de Baphomet::Grave of Baphomet#edq	111,{
 			//else if (ret == 0) {
 			else {
 				mapannounce "monk_test","[" + strcharinfo(0) + "], membre de l'Équipe [" + getpartyname(.@party_id) + "] vient de pénétrer dans les catacombes.",bc_map,"0x00ff99";
-				setquest 3040;
+				setquest 3046;
+				setquest 3045;
 				warp "1@cata",100,224;
 				close;
 			}
@@ -329,17 +312,18 @@ monk_test,306,151,3	script	Sépulcre de Baphomet::Grave of Baphomet#edq	111,{
 			mes "[Frère Patrick]";
 			mes "Haaaaaaap... Wingardium Leviosa Expecto Patronum !!!!!";
 			specialeffect2 EF_HOLYHIT;
-			erasequest 3040;
-			erasequest 3041;
-			erasequest 3045; // C'est vraiment la bonne quête? Elle n'est pas dans la version actuelle de questid2display. Regarder ça à l'occasion. [NoH]
+			if (checkquest(3046)) erasequest 3046;
+			if (checkquest(3041)) erasequest 3041;
+			if (checkquest(3045)) erasequest 3045;
 			next;
 			mes "[Frère Patrick]";
 			mes "Oh... C'est terminé. Vous allez pouvoir y retourner, maintenant que j'ai levé la malédiction de Baphomet.";
-			close;
 		}
+		break;
 	case 2:
-		close;
+		break;
 	}
+	close;
 }
 
 prt_monk,261,91,3	script	Rust Main-Noire#edq	826,{
@@ -854,7 +838,6 @@ OnMyMobDead:
 	}
 	end;
 
-//OnTouch2:
 OnTouch:
 	if ('ins_baphomet == 0) {
 		mes "'Krrrr... Krrrr...'";
@@ -991,7 +974,7 @@ OnTouch:
 		else {
 			mes "[Âme de Héros Antique]";
 			mes "Encore une fois, je ne peux me substantialiser que pendant une heure. Vous devrez finir le travail pendant ce temps.";
-			set 'ins_baphomet,3;
+			//set 'ins_baphomet,3;
 		}
 		close2;
 		cutin "",255;
@@ -1016,7 +999,7 @@ OnTouch:
 		cutin "",255;
 		end;
 	}
-	else if (('ins_baphomet == 3) && (getpartyleader(.@party_id,2) == getcharid(0))) {
+	else if ('ins_baphomet == 3) {
 		cutin "ins_cata_champ_n",2;
 		mes "[Âme de Héros Antique]";
 		mes "Avez-vous la ^0000FFMarque des Apôtres^000000?";
@@ -1034,7 +1017,7 @@ OnTouch:
 		cutin "",255;
 		end;
 	}
-	else if (('ins_baphomet == 4) && (getpartyleader(.@party_id,2) == getcharid(0))) {
+	else if ('ins_baphomet == 4) {
 		cutin "ins_cata_champ_n",2;
 		mes "[Âme de Héros Antique]";
 		mes "Êtes-vous prêt? Je vais vous ouvrir le passage scellé. Il vous faudra une ^0000FFMarque des Apôtres^000000 pour pouvoir le franchir.";
@@ -1082,7 +1065,6 @@ OnTouch:
 
 //===================== TO 2F Warp ========================
 1@cata,281,12,0	script	ins_bapho_to_2f	45,1,1,{
-//OnTouch2:
 OnTouch:
 	if (countitem(6002) > 0) {
 		delitem 6002,countitem(6002); //Token_Of_Apostle
@@ -2153,9 +2135,9 @@ OnTouch:
 
 2@cata,80,63,4	script	Âme de Héros Antique#2F	411,{
 	cutin "ins_cata_champ_s",2;
-	erasequest 3041;
-	erasequest 3040;
-	setquest 3040;
+	if (checkquest(3041)) erasequest 3041;
+	if (checkquest(3046)) erasequest 3046;
+	setquest 3046;
 	mes "[Âme de Héros Antique]";
 	mes "Bravo, mes descendants... Vous avez finalement accompli ce que moi et mes compagnons avons tenté de faire depuis si longtemps, sans succès.";
 //	next;
@@ -2239,7 +2221,7 @@ OnDisable:
 OnMyMobDead:
 	if (mobcount("2@cata",instance_npcname("control_baphomet", instance_id())+"::OnMyMobDead") < 1) {
 		set 'ins_baphomet,7;
-		setquest 3040;
+		setquest 3046;
 		erasequest 3041;
 		instance_announce 0, "Baphomet : Non! Non! Non! Je ne serai pas vaincu par ces misérables vermines...",bc_map,"0xdb7093";
 		enablenpc instance_npcname("Âme de Héros Antique#2F", instance_id());

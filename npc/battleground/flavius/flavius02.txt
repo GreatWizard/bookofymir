@@ -4,7 +4,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.0
+//= 1.2
 //===== Compatible With: ===================================== 
 //= eAthena 1.0
 //===== Description: ========================================= 
@@ -14,6 +14,8 @@
 //= - Losing Team: 3 badge
 //===== Additional Comments: ================================= 
 //= 1.0 First Version.
+//= 1.1 Fixed NPCs being called for waiting rooms. (bugreport:4395)
+//= 1.2 Fixed pink crystal spawning as blue. [L0ne_W0lf]
 //============================================================
 
 // Waiting Room NPCs
@@ -21,7 +23,7 @@
 bat_room,142,227,4	script	Lieutenant Huvas	418,{
 	end;
 OnInit:
-	waitingroom "Battle Station",1,"start#bat_b02::OnReadyCheck",1;
+	waitingroom "Battle Station",10,"start#bat_b02::OnReadyCheck",1;
 	end;
 OnEnterBG:
 	set $@FlaviusBG2_id1, waitingroom2bg("bat_b02",10,290,"start#bat_b02::OnGuillaumeQuit","");
@@ -31,7 +33,7 @@ OnEnterBG:
 bat_room,142,204,0	script	Lieutenant Yukon	414,{
 	end;
 OnInit:
-	waitingroom "Battle Station",1,"start#bat_b02::OnReadyCheck",1;
+	waitingroom "Battle Station",10,"start#bat_b02::OnReadyCheck",1;
 	end;
 OnEnterBG:
 	set $@FlaviusBG2_id2, waitingroom2bg("bat_b02",390,10,"start#bat_b02::OnCroixQuit","");
@@ -77,13 +79,13 @@ OnInit:
 OnReadyCheck:
 	if( $@FlaviusBG2 )
 		end;
-	set .@Guillaume, getwaitingroomstate(0,"Lieutenant Ator");
-	set .@Croix, getwaitingroomstate(0,"Lieutenant Thelokus");
+	set .@Guillaume, getwaitingroomstate(0,"Lieutenant Huvas");
+	set .@Croix, getwaitingroomstate(0,"Lieutenant Yukon");
 	if( !.@Guillaume && !.@Croix ) {
 		donpcevent "#bat_b02_timer::OnStop";
 		end;
 	}
-	if( .@Guillaume < 1 || .@Croix < 1 )
+	if( .@Guillaume < 10 || .@Croix < 10 )
 		end;
 	set $@FlaviusBG2, 1;
 	set $@FlaviusBG2_Victory, 0;
@@ -91,8 +93,8 @@ OnReadyCheck:
 	set $@Guill_ScoreBG2, 0;
 
 	bg_updatescore "bat_b02",$@Guill_ScoreBG2,$@Croix_ScoreBG2;
-	donpcevent "Lieutenant Ator::OnEnterBG";
-	donpcevent "Lieutenant Thelokus::OnEnterBG";
+	donpcevent "Lieutenant Huvas::OnEnterBG";
+	donpcevent "Lieutenant Yukon::OnEnterBG";
 	donpcevent "OBJ#bat_b02_a::Onkill";
 	donpcevent "OBJ#bat_b02_a::OnEnable";
 	donpcevent "OBJ#bat_b02_b::Onkill";
@@ -147,7 +149,7 @@ OnTimer10000:
 
 bat_b02,1,1,3	script	OBJ#bat_b02_a	844,{
 OnEnable:
-	bg_monster $@FlaviusBG2_id1,"bat_b02",61,150,"Blue Crystal",1915,"OBJ#bat_b02_a::OnMyMobDead";
+	bg_monster $@FlaviusBG2_id1,"bat_b02",61,150,"Pink Crystal",1915,"OBJ#bat_b02_a::OnMyMobDead";
 	end;
 
 Onkill:

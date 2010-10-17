@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 // Samuray22
 //===== Current Version: ===================================== 
-//= 1.6
+//= 1.7
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -25,6 +25,7 @@
 //= 1.4 Fixed incorrect variable type used. [L0ne_W0lf]
 //= 1.5 Replaced effect numerics with constants. [Samuray22]
 //= 1.6 Changed some variables to scope instead of permanent char. [brianluau]
+//= 1.7 some minor cleanup updates to the airship invasion. [L0ne_W0lf]
 //============================================================ 
 
 //=======================================================================================================//
@@ -651,8 +652,8 @@ function	script	cherno	{
 	misceffect 20;
 	mes "^33355F*Crash!*^000000";
 	mes "....."; 
-	emotion 4, "Theo Cherno";
-	Emotion 4, "Tarsha Cherno";
+	emotion e_swt, "Theo Cherno";
+	emotion e_swt, "Tarsha Cherno";
 	next;
 	mes "[Theo Cherno]";
 	mes "Chérie...";
@@ -674,8 +675,8 @@ function	script	cherno	{
 		mes "Comme vous le voyez, ma femme et moi sommes assez occupés... nous planchons sur un nouveau modèle de machine. Si vous n'avez pas d'affaire urgente, pourriez-vous nous laisser seuls?";
 		close;
 	case 2:
-		Emotion 4, "Tarsha Cherno";
-		Emotion 4, "Theo Cherno";
+		emotion e_swt, "Tarsha Cherno";
+		emotion e_swt, "Theo Cherno";
 		mes "[Tarsha Cherno]";
 		mes "Pardon?";
 		mes "Qu'a-t-elle dit?";
@@ -908,7 +909,7 @@ einbech,53,94,5	duplicate(Tree)	Arbre#t1-4	111
 
 
 //=============Monsters Attack======================
-airplane_01,1,1,0	script	Quest_Izl	-1,{
+airplane_01,1,1,0	script	Airship#airplane02	-1,{
 OnInit:
 	disablenpc "Capitaine de bord#02";
 OnInvasion:
@@ -917,14 +918,14 @@ while($@mobinv >= 9 && $@mobrand == 3)
 	Initnpctimer;
 	end;
 OnTimer6000:
-	mapannounce "airplane_01","Capitaine: Attention à tous les passagers.",1,0x00FF00;
+	mapannounce "airplane_01","Capitaine: Attention à tous les passagers.",bc_map,0x00FF00;
 	end;
 OnTimer10000:
-	mapannounce "airplane_01","Capitaine: Un groupe de créatures non identifiées s'approche de nous.",1,0x00ff00;
+	mapannounce "airplane_01","Capitaine: Un groupe de créatures non identifiées s'approche de nous.",bc_map,0x00ff00;
 	end;
 OnTimer12000:
-	mapannounce "airplane_01", "Capitaine: À tous les passagers se trouvant sur le pont, veuillez trouver un abri à l'intérieur du navire!",1,0x00ff00;
-	disablenpc "Personnel de Bord#info";
+	mapannounce "airplane_01", "Capitaine: À tous les passagers se trouvant sur le pont, veuillez trouver un abri à l'intérieur du navire!",bc_map,0x00ff00;
+	disablenpc "Personnel de Bord#airplane01";
 	end;
 OnTimer16000:
 	monster "airplane_01",245,57,"--ja--",1632,1;
@@ -935,47 +936,64 @@ OnTimer16000:
 	monster "airplane_01",234,56,"--ja--",1633,1;
 	monster "airplane_01",227,49,"--ja--",1633,1;
 	monster "airplane_01",233,41,"--ja--",1633,1;
-	set $@monster, rand(1,5);
-	if($@monster == 1) {
-		monster "airplane_01",251,47,"--ja--",1434,1;
-		monster "airplane_01",245,53,"--ja--",1434,1;
-		monster "airplane_01",234,46,"--ja--",1434,1;
-		monster "airplane_01",233,58,"--ja--",1434,1;
-		monster "airplane_01",243,60,"--ja--",1434,1;
-		monster "airplane_01",228,54,"--ja--",1434,1;
-		monster "airplane_01",232,41,"--ja--",1434,1;
-	} else if($@monster == 2) {
-		monster "airplane_01",251,47,"--ja--",1557,1;
-		monster "airplane_01",245,53,"--ja--",1557,1;
-		monster "airplane_01",234,46,"--ja--",1557,1;
-		monster "airplane_01",233,58,"--ja--",1557,1;
-		monster "airplane_01",243,60,"--ja--",1557,1;
-		monster "airplane_01",228,54,"--ja--",1557,1;
-		monster "airplane_01",232,41,"--ja--",1557,1;
-	} else if($@monster == 3) {
-		monster "airplane_01",251,47,"--ja--",1419,1;
-		monster "airplane_01",245,53,"--ja--",1419,1;
-		monster "airplane_01",234,46,"--ja--",1419,1;
-		monster "airplane_01",233,58,"--ja--",1419,1;
-		monster "airplane_01",243,60,"--ja--",1419,1;
-		monster "airplane_01",228,54,"--ja--",1419,1;
-		monster "airplane_01",232,41,"--ja--",1419,1;
-	} else if($@monster == 4) {
-		monster "airplane_01",251,47,"--ja--",1050,1;
-		monster "airplane_01",245,53,"--ja--",1050,1;
-		monster "airplane_01",234,46,"--ja--",1050,1;
-		monster "airplane_01",233,58,"--ja--",1050,1;
-		monster "airplane_01",243,60,"--ja--",1050,1;
-		monster "airplane_01",228,54,"--ja--",1050,1;
-		monster "airplane_01",232,41,"--ja--",1050,1;
-	} else if($@monster == 5) {
-		monster "airplane_01",251,47,"--ja--",1042,1;
-		monster "airplane_01",245,53,"--ja--",1042,1;
-		monster "airplane_01",234,46,"--ja--",1042,1;
-		monster "airplane_01",233,58,"--ja--",1042,1;
+
+	monster "airplane_01",228,54,"--ja--",1050,1;
+	monster "airplane_01",232,41,"--ja--",1050,1;
+	switch(rand(1,5)) {
+	case 1: monster "airplane_01",251,47,"--ja--",1111,1; break;
+	case 2: monster "airplane_01",251,47,"--ja--",1392,1; break;
+	case 3: monster "airplane_01",251,47,"--ja--",1005,1; break;
+	case 4: monster "airplane_01",251,47,"--ja--",1049,1; break;
+	case 5: monster "airplane_01",251,47,"--ja--",1042,1; break;
+	}
+	switch(rand(1,5)) {
+	case 1: monster "airplane_01",245,53,"--ja--",1111,1; break;
+	case 2: monster "airplane_01",245,53,"--ja--",1392,1; break;
+	case 3: monster "airplane_01",245,53,"--ja--",1005,1; break;
+	case 4: monster "airplane_01",245,53,"--ja--",1049,1; break;
+	case 5: monster "airplane_01",245,53,"--ja--",1042,1; break;
+	}
+	switch(rand(1,5)) {
+	case 1: monster "airplane_01",234,46,"--ja--",1111,1; break;
+	case 2: monster "airplane_01",234,46,"--ja--",1392,1; break;
+	case 3: monster "airplane_01",234,46,"--ja--",1005,1; break;
+	case 4: monster "airplane_01",234,46,"--ja--",1049,1; break;
+	case 5: monster "airplane_01",234,46,"--ja--",1042,1; break;
+	}
+	switch(rand(1,5)) {
+	case 1: monster "airplane_01",233,58,"--ja--",1111,1; break;
+	case 2: monster "airplane_01",233,58,"--ja--",1392,1; break;
+	case 3: monster "airplane_01",233,58,"--ja--",1005,1; break;
+	case 4: monster "airplane_01",233,58,"--ja--",1049,1; break;
+	case 5: monster "airplane_01",233,58,"--ja--",1042,1; break;
+	}
+	// it's possible this is an error, but in aegis it stops resetting the random var.
+	switch(rand(1,5)) {
+	case 1:
+		monster "airplane_01",243,60,"--ja--",1111,1;
+		monster "airplane_01",228,54,"--ja--",1111,1;
+		monster "airplane_01",232,41,"--ja--",1111,1;
+		break;
+	case 2:
+		monster "airplane_01",243,60,"--ja--",1392,1;
+		monster "airplane_01",228,54,"--ja--",1392,1;
+		monster "airplane_01",232,41,"--ja--",1392,1;
+		break;
+	case 3:
+		monster "airplane_01",243,60,"--ja--",1005,1;
+		monster "airplane_01",228,54,"--ja--",1005,1;
+		monster "airplane_01",232,41,"--ja--",1005,1;
+		break;
+	case 4:
+		monster "airplane_01",243,60,"--ja--",1049,1;
+		monster "airplane_01",228,54,"--ja--",1049,1;
+		monster "airplane_01",232,41,"--ja--",1049,1;
+		break;
+	case 5:
 		monster "airplane_01",243,60,"--ja--",1042,1;
 		monster "airplane_01",228,54,"--ja--",1042,1;
-		monster "airplane_01",232,41,"--ja--",1042,1;	
+		monster "airplane_01",232,41,"--ja--",1042,1;
+		break;
 	}
 	end;
 OnTimer16010:
@@ -989,236 +1007,245 @@ OnTimer16010:
 	monster "airplane_01",237,62,"--ja--",1633,1;
 	end;
 OnTimer21000:
-	mapannounce "airplane_01", "Subalterne: Capitaine Tarlock, nous sommes en difficulté! Les monstres se dirigent vers les hélices!",1,0x00FF00;
+	mapannounce "airplane_01", "Subalterne: Capitaine Tarlock, nous sommes en difficulté! Les monstres se dirigent vers les hélices!",bc_map,0x00FF00;
 	end;
 OnTimer26000:
-	mapannounce "airplane_01", "Capitaine Tarlock: Quoi?! Je dois les arrêter!",1,0x70DBDB;
+	mapannounce "airplane_01", "Capitaine Tarlock: Quoi?! Je dois les arrêter!",bc_map,0x70DBDB;
 	end;
 OnTimer31000:
 	disablenpc "Capitaine de bord#01";
 	enablenpc "Capitaine de bord#02";
 	end;
 OnTimer36000:
-	emotion 6, "Capitaine de bord#02";
-	mapannounce "airplane_01", "Capitaine Tarlock: Vous, sales bêtes paumées... Descendez de mon vaisseau!",1,0x70DBDB;
+	emotion e_ag, "Capitaine de bord#02";
+	mapannounce "airplane_01", "Capitaine Tarlock: Vous, sales bêtes paumées... Descendez de mon vaisseau!",bc_map,0x70DBDB;
 	end;
 OnTimer36500:
-	mapannounce "airplane_01", "*Kzzz...Drrrr...Boom! CRASH!*",1,0x00FF00;
-	donpcevent "boom#air-6::OnAttack"; //6
+	mapannounce "airplane_01", "*Kzzz...Drrrr...Boom! CRASH!*",bc_map,0x00FF00;
+	specialeffect EF_SUI_EXPLOSION,"boom6#airplane";
 	end;
 OnTimer37000:
-	donpcevent "boom#air-7::OnAttack"; //7
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
 	end;
 OnTimer37500:
-	donpcevent "boom#air-8::OnAttack"; //8
+	specialeffect EF_SUI_EXPLOSION,"boom8#airplane";
 	end;
 OnTimer38000:
-	donpcevent "boom#air-9::OnAttack"; //9
+	specialeffect EF_SUI_EXPLOSION,"boom9#airplane";
 	end;
 OnTimer38500:
-	donpcevent "boom#air-10::OnAttack"; //10
+	specialeffect EF_SUI_EXPLOSION,"boom10#airplane";
 	end;
 OnTimer39000:
-	donpcevent "boom#air-6::OnAttack"; //6
+	specialeffect EF_SUI_EXPLOSION,"boom6#airplane";
 	end;
 OnTimer39500:
-	donpcevent "boom#air-7::OnAttack"; //7
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
 	end;
 OnTimer40000:
-	donpcevent "boom#air-8::OnAttack"; //8
+	specialeffect EF_SUI_EXPLOSION,"boom8#airplane";
 	end;
 OnTimer40500:
-	donpcevent "boom#air-9::OnAttack"; //9
+	specialeffect EF_SUI_EXPLOSION,"boom9#airplane";
 	end;
 OnTimer41000:
-	donpcevent "boom#air-10::OnAttack"; //10
+	specialeffect EF_SUI_EXPLOSION,"boom10#airplane";
 	end;
 OnTimer41500:
-	donpcevent "boom#air-6::OnAttack"; //6
-	mapannounce "airplane_01", "Ingénieur: Oh non ! Nous avons un problème avec le premier moteur arrière!",1,0x00FF00;
+	specialeffect EF_SUI_EXPLOSION,"boom6#airplane";
+	mapannounce "airplane_01", "Ingénieur: Oh non ! Nous avons un problème avec le premier moteur arrière!",bc_map,0x00FF00;
 	end;
 OnTimer42500:
-	donpcevent "boom#air-7::OnAttack"; //7
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
 	end;
 OnTimer43500:
-	donpcevent "boom#air-8::OnAttack"; //8
+	specialeffect EF_SUI_EXPLOSION,"boom8#airplane";
 	end;
 OnTimer44500:
-	donpcevent "boom#air-9::OnAttack"; //9
+	specialeffect EF_SUI_EXPLOSION,"boom9#airplane";
 	end;
 OnTimer45500:
-	donpcevent "boom#air-10::OnAttack"; //10
+	specialeffect EF_SUI_EXPLOSION,"boom10#airplane";
 	end;
 OnTimer46500:
-	mapannounce "airplane_01", "Pilote: Dépêchez-vous! Amenez d'abord les femmes, les vieillards et les enfants dans un endroit sûr! Dépêchez-vous!",1,0x00FF00;
+	mapannounce "airplane_01", "Pilote: Dépêchez-vous! Amenez d'abord les femmes, les vieillards et les enfants dans un endroit sûr! Dépêchez-vous!",bc_map,0x00FF00;
 	end;
 OnTimer47500:
-	donpcevent "boom#air-6::OnAttack"; //6
+	specialeffect EF_SUI_EXPLOSION,"boom6#airplane";
 	end;
 OnTimer48500:
-	donpcevent "boom#air-7::OnAttack"; //7
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
 	end;
 OnTimer49500:
-	donpcevent "boom#air-8::OnAttack"; //8
+	specialeffect EF_SUI_EXPLOSION,"boom8#airplane";
 	end;
 OnTimer50500:
-	donpcevent "boom#air-7::OnAttack"; //7
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
 	end;
 OnTimer51500:
-	Emotion 6, "Capitaine de bord#02";
-	mapannounce "airplane_01", "Capitaine Tarlock: Vous, sales monstres, allez avoir affaire au capitaine de ce navire...",1,0x70DBDB;
+	emotion e_ag, "Capitaine de bord#02";
+	mapannounce "airplane_01", "Capitaine Tarlock: Vous, sales monstres, allez avoir affaire au capitaine de ce navire...",bc_map,0x70DBDB;
 	end;
 OnTimer56500:
-	Emotion 6, "Capitaine de bord#02";
-	mapannounce "airplane_01", "Capitaine Tarlock: Je protégerai ce vaisseau et mon équipage au péril de ma vie!",1,0x70DBDB;
+	emotion e_ag, "Capitaine de bord#02";
+	mapannounce "airplane_01", "Capitaine Tarlock: Je protégerai ce vaisseau et mon équipage au péril de ma vie!",bc_map,0x70DBDB;
 	end;
 OnTimer61500:
-	Emotion 29, "Capitaine de bord#02";
-	mapannounce "airplane_01", "Capitaine Tarlock: Allons-y! Special Exodus Joker XIII Doom Rifle!",1,0x70DBDB; // ça doit être un fusil spécial, mais je ne vois pas comment traduire ça, et je ne m'y connais pas en arme à feu (Etna)
+	emotion e_pif, "Capitaine de bord#02";
+	mapannounce "airplane_01", "Capitaine Tarlock: Allons-y! Special Exodus Joker XIII Doom Rifle!",bc_map,0x70DBDB; // ça doit être un fusil spécial, mais je ne vois pas comment traduire ça, et je ne m'y connais pas en arme à feu (Etna)
 	end;
 OnTimer66500:
-	mapannounce "airplane_01", "*Bang! Bang Bang! Bang Bang! Bang Bang Bang!*",1,0x00FF00;
-	donpcevent "Capitaine de bord#02::OnAttack";
+	mapannounce "airplane_01", "*Bang! Bang Bang! Bang Bang! Bang Bang Bang!*",bc_map,0x00FF00;
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer67000:
-	donpcevent "boom#air-1::OnAttack"; //1
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom1#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer67500:
-	donpcevent "boom#air-2::OnAttack"; //2
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom2#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer68000:
-	donpcevent "boom#air-3::OnAttack"; //3
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom3#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer68500:
-	donpcevent "boom#air-4::OnAttack"; //4
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom4#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer69000:
-	donpcevent "boom#air-5::OnAttack"; //5
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom5#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer69500:
-	donpcevent "boom#air-0::OnAttack"; //0
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom0#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer70000:
-	donpcevent "boom#air-1::OnAttack"; //1
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom1#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer70500:
-	donpcevent "boom#air-2::OnAttack"; //2
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom2#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer71000:
-	donpcevent "boom#air-4::OnAttack"; //4
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom4#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer71500:
-	donpcevent "boom#air-5::OnAttack"; //5
+	specialeffect EF_SUI_EXPLOSION,"boom5#airplane";
 	end;
 OnTimer72000:
-	Emotion 6, "Capitaine de bord#02";
-	mapannounce "airplane_01","Capitaine Tarlock: Sales bêtes! Arrêtez de saccager mon dirigeable!",1,0x70DBDB;
+	emotion e_ag, "Capitaine de bord#02";
+	mapannounce "airplane_01","Capitaine Tarlock: Sales bêtes! Arrêtez de saccager mon dirigeable!",bc_map,0x70DBDB;
 	end;
 OnTimer72500:
-	mapannounce "airplane_01", "*Bang! Bang Bang! Bang Bang! Bang Bang Bang!*",1,0x00FF00;
-	donpcevent "Capitaine de bord#02::OnAttack";
+	mapannounce "airplane_01", "*Bang! Bang Bang! Bang Bang! Bang Bang Bang!*",bc_map,0x00FF00;
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer73000:
-	donpcevent "boom#air-6::OnAttack"; //6
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom6#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer73500:
-	donpcevent "boom#air-7::OnAttack"; //7
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer74000:
-	donpcevent "boom#air-8::OnAttack"; //8
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom8#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer74500:
-	donpcevent "boom#air-9::OnAttack"; //9
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom9#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer75000:
-	donpcevent "boom#air-10::OnAttack"; //10
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom10#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer75500:
-	donpcevent "boom#air-6::OnAttack"; //6
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom6#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer76000:
-	donpcevent "boom#air-7::OnAttack"; //7
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer76500:
-	donpcevent "boom#air-8::OnAttack"; //8
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom8#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer77000:
-	donpcevent "boom#air-9::OnAttack"; //9
-	donpcevent "Capitaine de bord#02::OnAttack";
+	specialeffect EF_SUI_EXPLOSION,"boom9#airplane";
+	specialeffect EF_HIT5,"Capitaine de bord#02";
 	end;
 OnTimer77500:
-	donpcevent "boom#air-8::OnAttack"; //8
-	mapannounce "airplane_01", "*Boom! Boom Boom! Boom Boom! Boom!*",1,0x00FF00;
+	specialeffect EF_SUI_EXPLOSION,"boom8#airplane";
+	mapannounce "airplane_01", "*Boom! Boom Boom! Boom Boom! Boom!*",bc_map,0x00FF00;
 	end;
 OnTimer78000:
-	donpcevent "boom#air-9::OnAttack"; //9
+	specialeffect EF_SUI_EXPLOSION,"boom9#airplane";
 	end;
 OnTimer78500:
-	donpcevent "boom#air-10::OnAttack"; //10
+	specialeffect EF_SUI_EXPLOSION,"boom10#airplane";
 	end;
 OnTimer79000:
-	donpcevent "boom#air-6::OnAttack"; //6
+	specialeffect EF_SUI_EXPLOSION,"boom6#airplane";
 	end;
 OnTimer79500:
-	donpcevent "boom#air-7::OnAttack"; //7
+	specialeffect EF_SUI_EXPLOSION,"boom7#airplane";
 	end;
 OnTimer80000:
-	Emotion 26,"Capitaine de bord#02";
-	mapannounce "airplane_01", "Capitaine Tarlock: Il y a... Il y en a trop à gérer!",1,0x70DBDB;
+	emotion e_an,"Capitaine de bord#02";
+	mapannounce "airplane_01", "Capitaine Tarlock: Il y a... Il y en a trop à gérer!",bc_map,0x70DBDB;
 	end;
 OnTimer85000:
-	mapannounce "airplane_01", "Pilote: Capitaine, monsieur, la situation devient critique!",1,0x00FF00;
+	mapannounce "airplane_01", "Pilote: Capitaine, monsieur, la situation devient critique!",bc_map,0x00FF00;
 	end;
 OnTimer100000:
-	Emotion 4,"Capitaine de bord#02";
-	mapannounce "airplane_01", "Capitaine Tarlock: Nous aurions besoin de toute l'aide disponible!",1,0x70DBDB;
+	emotion e_swt,"Capitaine de bord#02";
+	mapannounce "airplane_01", "Capitaine Tarlock: Nous aurions besoin de toute l'aide disponible!",bc_map,0x70DBDB;
 	end;
 OnTimer125000:
-	Emotion 26,"Capitaine de bord#02";
-	mapannounce "airplane_01", "Capitaine Tarlock: À toutes les personnes et passagers qui peuvent se battre! Nous devons chasser ces monstres!",1,0x70DBDB;
+	emotion e_sry,"Capitaine de bord#02";
+	mapannounce "airplane_01", "Capitaine Tarlock: À toutes les personnes et passagers qui peuvent se battre! Nous devons chasser ces monstres!",bc_map,0x70DBDB;
 	end;
 OnTimer130000:
 	disablenpc "Capitaine de bord#02";
 	enablenpc "Capitaine de bord#01";
-	enablenpc "Personnel de Bord#info";
+	enablenpc "Personnel de Bord#airplane01";
 	donpcevent "YunoIzl_Airship::OnReturn";
 	end;
 }
 }
 
-//========Captain Tarlock (Outside the Captain Cabin)=======================
-
-airplane_01,246,54,5	script	Capitaine::Capitaine de bord#02	873,{
+airplane_01,246,54,3	script	Capitaine de bord#02	873,{
+	cutin "fly_felrock",2;
 	mes "[Tarlock]";
 	mes "Je suis Tarlock, capitaine de ce Dirigeable. Allons combattre les Gremlins!";
-	close;
-OnAttack:
-	misceffect 4;
+	close2;
+	cutin "fly_felrock",255;
 	end;
 }
+
+airplane_01,249,50,0	script	boom0#airplane	139,{ end; }
+airplane_01,239,62,0	script	boom1#airplane	139,{ end; }
+airplane_01,244,55,0	script	boom2#airplane	139,{ end; }
+airplane_01,239,50,0	script	boom3#airplane	139,{ end; }
+airplane_01,245,59,0	script	boom4#airplane	139,{ end; }
+airplane_01,245,48,0	script	boom5#airplane	139,{ end; }
+airplane_01,235,39,0	script	boom6#airplane	139,{ end; }
+airplane_01,252,41,0	script	boom7#airplane	139,{ end; }
+airplane_01,252,63,0	script	boom8#airplane	139,{ end; }
+airplane_01,234,65,0	script	boom9#airplane	139,{ end; }
+airplane_01,227,67,0	script	boom10#airplane	139,{ end; }
 
 //========Captain Tarlock (Inside the Captain Cabin)=======================
 
 airplane_01,238,154,5	script	Capitaine::Capitaine de bord#01	873,{
-
-	cutin "fly_trock.bmp",2;
+	cutin "fly_felrock",2;
 	mes "[Tarlock]";
 	mes "Je suis Tarlock, capitaine de ce dirigeable. Avez-vous une question?";
 	next;
@@ -1344,7 +1371,7 @@ airplane_01,238,154,5	script	Capitaine::Capitaine de bord#01	873,{
 					mes "[Tarlock]";
 					mes "En fait, tout ce dirigeable flotte grâce à la puissance donnée par la pierre, sans exagérer. Elle a vraiment un pouvoir puissant.";
 					next;
-					specialeffect2 EF_ABSORBSPIRITS;
+					specialeffect2 EF_MAPPILLAR;
 					mes "[Tarlock]";
 					mes "Avez-vous compris? Je vais me reposer un peu. Je suis fatigué de lire et écrire ces longues lettres.";
 					set lght_air, 7;
@@ -1387,7 +1414,6 @@ airplane_01,238,154,5	script	Capitaine::Capitaine de bord#01	873,{
 //===========Captain Ferlock=======================
 
 airplane,236,163,5	script	Capitaine::Capitaine de bord#03	873,{
-
 	cutin "fly_trock.bmp",2;
 	if(hg_ma1 == 3 || hg_ma1 == 4)
 	{
@@ -2297,22 +2323,3 @@ L_Input:
 		goto L_Input;
 	}
 }
-
-//========Explosions=======================
-
-airplane_01,239,62,0	script	boom#air-1::boom	139,{
-OnAttack:
-	misceffect 183;
-	end;
-}
-//==========Duplicates=============
-airplane_01,244,55,0	duplicate(boom)	boom#air-2	139
-airplane_01,239,50,0	duplicate(boom)	boom#air-3	139
-airplane_01,245,59,0	duplicate(boom)	boom#air-4	139
-airplane_01,245,48,0	duplicate(boom)	boom#air-5	139
-airplane_01,235,39,0	duplicate(boom)	boom#air-6	139
-airplane_01,252,41,0	duplicate(boom)	boom#air-7	139
-airplane_01,252,63,0	duplicate(boom)	boom#air-8	139
-airplane_01,234,65,0	duplicate(boom)	boom#air-9	139
-airplane_01,227,67,0	duplicate(boom)	boom#air-10	139
-airplane_01,249,50,0	duplicate(boom)	boom#air-0	139
