@@ -7,7 +7,7 @@
 //===== By: ==================================================
 //= MasterOfMuppets & SinSloth
 //===== Current Version: =====================================
-//= 2.0
+//= 2.1
 //===== Compatible With: =====================================
 //= eAthena
 //===== Description: =========================================
@@ -27,6 +27,8 @@
 //= 1.8 Added missing checkweight. [L0ne_W0lf]
 //= 1.9 Replaced effect numerics with constants. [Samuray22]
 //= 2.0 Commented a break out to fix a script hang.
+//= 2.1 Added quest log entries for:
+//=     - Juno Remedy Quest
 //============================================================
 
 //-------------------------------------------------------------------------
@@ -5264,6 +5266,7 @@ yuno,111,156,3	script	Euslan	90,{
 			next;
 			mes "[Euslan]";
 			mes "Si vous parvenez à trouver où Thierry a disparu, alors faites-le moi savoir dès que possible, d'accord? Merci de me remonter le moral, "+strcharinfo(0)+".";
+			setquest 8044;
 			set hg_ma1,3;
 			close;
 		break;
@@ -5301,6 +5304,7 @@ yuno,111,156,3	script	Euslan	90,{
 			next;
 			mes "[Euslan]";
 			mes "Si vous parvenez à trouver où Thierry a disparu, alors faites-le moi savoir dès que possible, d'accord? Merci de me remonter le moral, "+strcharinfo(0)+".";
+			setquest 8044;
 			set hg_ma1,3;
 			close;
 		break;
@@ -5333,6 +5337,7 @@ yuno,111,156,3	script	Euslan	90,{
 		next;
 		mes "[Euslan]";
 		mes "Je sais que c'est beaucoup demander, alors ne vous en faites pas si ce n'est pas sur votre chemin. Cependant, j'apprécierais vraiment votre aide si toutefois vous passiez par Hugel.";
+		changequest 8046,8047;
 		set hg_ma1,6;
 		close;
 	}
@@ -5365,6 +5370,7 @@ yuno,111,156,3	script	Euslan	90,{
 		mes ""+strcharinfo(0)+"...";
 		mes "Je n'oublierai jamais ce que vous avez fait pour Thierry et moi. Je prierai pour vous tous les jours. Prenez soin de vous...";
 		close2;
+		completequest 8052;
 		set hg_ma1,13;
 		specialeffect EF_ABSORBSPIRITS;
 		getexp 900000,600000;
@@ -5411,6 +5417,7 @@ que_bingo,53,190,7	script	Eukran	778,{
 		mes "[Eukran]";
 		mes "Il doit y avoir quelque chose là-bas qui peut aider ma soeur à se remettre. Sinon, pourquoi Thierry irait dans un endroit aussi dangereux? Personne ne va au Temple d'Odin sans raison.";
 		close2;
+		changequest 8047,8048;
 		set hg_ma1,8;
 		warp "que_bingo",37,24;
 		end;
@@ -5488,6 +5495,7 @@ odin_tem01,130,134,4	script	Jeune Homme#Hu_Quest	774,{
 		mes "[Thierry]";
 		mes "Eh bien, euh, je suis désolé. Je ne peux pas vraiment rentrer dans les détails, mais je fais ce travail pour trouver un remède à la maladie d'Euslan. C'est incurable par la médecine moderne...";
 		close2;
+		changequest 8048,8049;
 		set hg_ma1,9;
 		end;
 	}
@@ -5545,6 +5553,7 @@ odin_tem01,130,134,4	script	Jeune Homme#Hu_Quest	774,{
 		mes "[Thierry]";
 		mes "Vous êtes "+( sex ? "le seul" : "la seule" )+" en qui je puisse avoir confiance pour sauver Euslan. En attendant, je me cacherai de ces hommes, juste là. S'ils me cherchent, je ne pourrai jamais faire le médicament!";
 		close2;
+		changequest 8050,8051;
 		set hg_ma1,11;
 		end;
 	}
@@ -5575,6 +5584,7 @@ odin_tem01,130,134,4	script	Jeune Homme#Hu_Quest	774,{
 		mes "^3355FFVous reçevez le médicament que Thierry a fait pour Euslan.^000000";
 		close2;
 		delitem 7511,5; //Darkness rune
+		changequest 8051,8052;
 		set hg_ma1,12;
 		end;
 	}
@@ -5607,6 +5617,7 @@ OnTouch:
 		next;
 		mes "^3355FFCe n'est pas bon! Thierry est en danger! Vous feriez mieux d'aller lui dire maintenant!^000000";
 		close2;
+		changequest 8049,8050;
 		set hg_ma1,10;
 		end;
 	}

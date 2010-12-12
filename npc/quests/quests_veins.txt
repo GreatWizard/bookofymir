@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.8
+//= 1.9
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -42,6 +42,9 @@
 //= 1.6 Replaced effect numerics with constants. [L0ne_W0lf]
 //= 1.7 Moved a couple NPCs related to the Spy quest. [L0ne_W0lf]
 //= 1.8 Fixed some typos and confusing condition checks. [L0ne_W0lf]
+//= 1.9 Added quest log entries for:
+//=     - Siblings Quest
+//=     - Thor Volcano Base Quest
 //============================================================ 
 
 // Stone Quest
@@ -1736,7 +1739,6 @@ ein_in01,279,221,0	script	Hotel Manager#sch	903,5,5,{
 	}
 	end;
 
-//OnTouch2:
 OnTouch:
 	if (que_sch == 14) {
 		mes "[Manager]";
@@ -1795,7 +1797,6 @@ ein_in01,166,282,4	script	Employee#sch	904,{
 }
 
 ein_in01,176,285,0	script	°ÍµÂ ÌØÀæ¸ê#sch	-1,1,1,{
-//OnTouch2:
 OnTouch:
 	if (que_sch == 15) {
 		disablenpc "Corporate Figure#sch";
@@ -2507,6 +2508,7 @@ veins,327,185,3	script	P'tit Karyn::Kid#camelcamel	944,{ // NB: c'est un garçon 
 				next;
 				mes "["+strcharinfo(0)+"]";
 				mes "Bon... Souhaite-moi bonne chance. Je vais aller faire un tour du côté du volcan voir ce que je peux trouver.";
+				setquest 3060;
 				set rachel_camel,1;
 				close;
 			}
@@ -2531,6 +2533,7 @@ veins,327,185,3	script	P'tit Karyn::Kid#camelcamel	944,{ // NB: c'est un garçon 
 			next;
 			mes "[P'tit Karyn]";
 			mes "Oh! Oh, il y a un serrurier dans la rue du marché! Vous pouvez lui demander d'aider Curdie!";
+			changequest 3061,3062;
 			set rachel_camel,3;
 			close;
 		}
@@ -2656,6 +2659,7 @@ veins,327,185,3	script	P'tit Karyn::Kid#camelcamel	944,{ // NB: c'est un garçon 
 			mes "["+strcharinfo(0)+"]";
 			mes "Bien, bien...";
 			mes "Je retiens ta promesse. À bientôt~";
+			completequest 3083;
 			set rachel_camel,25;
 			specialeffect2 EF_ABSORBSPIRITS;
 			getexp 1000000,700000;
@@ -2762,6 +2766,7 @@ que_thor,36,66,5	script	P'tite Curdie::Little Curdie	941,{
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Je te le promets. Je suis sûr que quelqu'un en ville sait comment te débarrasser de ces chaînes. Je reviens dès que possible!";
+		changequest 3060,3061;
 		set rachel_camel,2;
 		close;
 	}
@@ -2862,6 +2867,7 @@ que_thor,36,66,5	script	P'tite Curdie::Little Curdie	941,{
 		mes "Tout ira bien. Il faut juste que je me dépêche un peu. Bien, il est temps que j'y aille.";
 		next;
 		mes "^3355FFVous sortez le savon de la serrure et l'emballez soigneusement. Il ne vous reste maintenant plus qu'à apporter la moulure à Sidi Serrurard.^000000";
+		changequest 3079,3080;
 		set rachel_camel,21;
 		close;
 	}
@@ -2907,6 +2913,7 @@ que_thor,36,66,5	script	P'tite Curdie::Little Curdie	941,{
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Qu'a-t-elle bien pu voir derrière cette porte d'acier dans ce vieux volcan? Ça devait être quelque chose de compromettant... Quelque chose en rapport avec l'Armée de Rachel...";
+		changequest 3082,3083;
 		set rachel_camel,24;
 		close;
 	}
@@ -2986,7 +2993,8 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "...........";
-			delitem 503,1;
+			delitem 503,1; //Yellow_Potion
+			changequest 3063,3064;
 			set rachel_camel,5;
 			close;
 		}
@@ -3101,6 +3109,7 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "D'accord.";
+		changequest 3078,3079;
 		set rachel_camel,20;
 		close;
 	}
@@ -3124,6 +3133,7 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 		next;
 		mes "[Serrurard le Serrurier]";
 		mes "J'ai juste besoin d'un morceau d'^4D4DFFAcier^000000. Ça ne me prendra pas plus de cinq minutes pour pouvoir forger la clé. Je le ferai dès que vous m'aurez apporté ça. Je vous attendrai.";
+		changequest 3080,3081;
 		set rachel_camel,22;
 		close;
 	}
@@ -3172,6 +3182,7 @@ veins,181,166,3	script	Serrurard le Serrurier::Serrurard	900,{
 			next;
 			mes "[Serrurard le Serrurier]";
 			mes "Dépêchez-vous de ramener cette pauvre enfant à sa famille!";
+			changequest 3081,3082;
 			set rachel_camel,23;
 			close;
 		}
@@ -3261,6 +3272,7 @@ veins,227,127,5	script	Ivoire	940,{
 		mes "^4D4DFF50 Jellopys^000000, et";
 		mes "^4D4DFF5 Bouteilles Vides^000000.";
 		mes "On verra ensuite pour le reste.";
+		changequest 3064,3065;
 		set rachel_camel,6;
 		close;
 	}
@@ -3287,6 +3299,7 @@ veins,227,127,5	script	Ivoire	940,{
 			mes "["+strcharinfo(0)+"]";
 			mes "Sidi Saraman...?";
 			mes "Bon, eh bien si c'est comme ça, je vais aller le trouver. J'ai vraiment besoin de ce savon...";
+			changequest 3065,3066;
 			set rachel_camel,7;
 			close;
 		}
@@ -3378,6 +3391,7 @@ veins,227,127,5	script	Ivoire	940,{
 		mes "Ne vous en faites pas. Je ne le répèterai pas. Merci pour le savon! ";
 		next;
 		mes "^3355FFMaintenant que vous avez le savon de Chameau des Sables de la Soie, vous devriez l'apporter à Serrurard.^000000";
+		changequest 3077,3078;
 		set rachel_camel,19;
 		close;
 	}
@@ -3464,6 +3478,7 @@ veins,115,59,5	script	Saraman	847,{
 		mes "^4D4DFF5 parts de Nourriture pour Monstre^000000,";
 		mes "^4D4DFF1 Bouteille Vide^000000, et";
 		mes "^4D4DFF1 Potion Jaune^000000.";
+		changequest 3066,3067;
 		set rachel_camel,8;
 		close;
 	}
@@ -3486,6 +3501,7 @@ veins,115,59,5	script	Saraman	847,{
 			delitem 503,1; //Yellow_Potion
 			delitem 619,1; //Unripe_Apple
 			delitem 713,1; //Empty_Bottle
+			changequest 3067,3068;
 			set rachel_camel,9;
 			close;
 		}
@@ -3527,6 +3543,7 @@ veins,115,59,5	script	Saraman	847,{
 		next;
 		mes "[Saraman, le Chamelier]";
 		mes "Bon, je ne dois pas paniquer... Ça va aller. Ce chameau se déplace très lentement, alors il ne devrait pas être bien loin. S'il vous plaît, retrouvez Soony, mon chameau, aussi vite que possible.";
+		changequest 3069,3070;
 		set rachel_camel,11;
 		close;
 	}
@@ -3563,6 +3580,7 @@ veins,115,59,5	script	Saraman	847,{
 		next;
 		mes "[Saraman, le Chamelier]";
 		mes "Voilà. Prenez ceci. Considérez ça comme une preuve de ma gratitude. Bonne chance pour faire votre savon.";
+		changequest 3076,3077;
 		getitem 617,1; //Old_Violet_Box
 		set rachel_camel,18;
 		close;
@@ -3590,12 +3608,12 @@ veins,115,59,5	script	Saraman	847,{
 veins,78,226,5	script	Chameau#camelcc1::VeinsCamel	938,{
 	if (rachel_camel == 9) {
 		mes "^3355FFLe chameau renifle le stimulant pour l'appétit avant de s'en détourner brusquement.^000000";
+		changequest 3068,3069;
 		set rachel_camel,10;
 		close;
 	}
 	else if (rachel_camel == 10) {
 		mes "^3355FFLe chameau renifle le stimulant pour l'appétit avant de s'en détourner brusquement. Ce n'est probablement pas le chameau que vous cherchez^000000";
-//		set rachel_camel,10; - Je supprime cette ligne inutile ( rachel_camel est déjà à 10). [NoH]
 		close;
 	}
 	else {
@@ -3624,6 +3642,7 @@ ve_fild07,235,42,3	script	Chameau des Sables::Silk Sand Camel	938,{
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Ce doit être le Chameau des Sables de la Soie. J'imagine qu'il ne me reste plus qu'à ramasser son précieux fumier...";
+		changequest 3070,3071;
 		set rachel_camel,12;
 		close;
 	}
@@ -3728,6 +3747,7 @@ ve_fild07,235,42,3	script	Chameau des Sables::Silk Sand Camel	938,{
 				delitem 511,20; //Green_Herb
 				delitem 909,10; //Jellopy
 				delitem 713,1; //Empty_Bottle
+				changequest 3059+rachel_camel,3060+rachel_camel;
 				set rachel_camel,rachel_camel+1;
 				close;
 			case 6:
@@ -3814,6 +3834,7 @@ veins,221,120,5	script	Jeune Autochtone::Young Town Native	943,{
 		mes "...Ah...?";
 		next;
 		mes "^3355FFAllez trouver Sidi Serrurard dans la rue du marché et apportez-lui une Potion Jaune.^000000";
+		changequest 3062,3063;
 		set rachel_camel,4;
 		close;
 	}
@@ -3923,7 +3944,6 @@ OnInit:
 	end;
 
 OnTouch:
-//OnTouch2:
 	warp "ra_temin",85,137;
 	close;
 }
@@ -3938,7 +3958,6 @@ OnInit:
 	end;
 
 OnTouch:
-//OnTouch2:
 	warp "ra_temin",85,137;
 	close;
 }
@@ -3973,7 +3992,6 @@ ra_temin,115,140,1	script	Vase::Flower Vase#vol	111,{
 
 ra_temin,85,131,0	script	path_vol1	-1,5,0,{
 OnTouch:
-//OnTouch2:
 	if ((aru_vol != 3) && (aru_vol != 4)) {
 		warp "ra_temin",85,137;
 	}
@@ -3982,7 +4000,6 @@ OnTouch:
 
 ra_temin,82,131,0	script	path_vol1#2	-1,5,0,{
 OnTouch:
-//OnTouch2:
 	if (aru_vol != 4) {
 		warp "ra_temin",85,137;
 	}
@@ -3991,7 +4008,6 @@ OnTouch:
 
 ra_temin,82,127,0	script	path_vol1#3	-1,5,1,{
 OnTouch:
-//OnTouch2:
 	if (aru_vol == 5) {
 		warp "ra_temin",84,124;
 	}
@@ -4130,6 +4146,7 @@ ra_temin,85,118,3	script	Tiroir::Drawer#vol3	111,{
 			mes "Ça pourrait être ce que je cherche.";
 			next;
 			mes "^3355FFVous saisissez le petit dossier intitulé 'Institut de Recherches Géologiques de Veins' et fermez le tiroir.^000000";
+			changequest 2114,2115;
 			set aru_vol,5;
 			getitem 7342,1; //File01
 			close;
@@ -4176,7 +4193,6 @@ ra_temin,73,126,1	script	Échelle::Ladder#vol1	111,{
 
 ve_in,280,223,0	script	#volroom	-1,2,2,{
 OnTouch:
-//OnTouch2:
 	if (aru_vol == 6) {
 		mes "^3355FFOn dirait que cette maison est abandonnée depuis des lustres: le sol est couvert d'une fine couche de poussière, et il est jonché de papiers épars.^000000";
 		next;
@@ -4348,6 +4364,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 		mes "Bon. À bientôt cher élève~";
 		next;
 		mes "^3355FFCe n'est pas du tout ce à quoi vous vous attendiez, mais vous avez le sentiment que ça pourrait tourner en votre faveur. Vous connaissez ce sentiment, pas vrai?^000000";
+		changequest 2116,2117;
 		set aru_vol,8;
 		getitem 7705,1; //Note_Of_Geologist
 		close;
@@ -4414,6 +4431,7 @@ ve_in,233,116,3	script	Homme Ivre::Drunken Man#vol	901,{
 		next;
 		mes "[Gio le Géologue]";
 		mes "Considérez ça comme un salaire pour le travail accompli. Beau boulot! Mais je n'en espérais pas moins de mon meilleur élève!";
+		changequest 60211,60212;
 		set aru_vol,25;
 		delitem 7342,1; //File01
 		delitem 7704,1; //Broken_Thermometer
@@ -4495,6 +4513,7 @@ ve_in,281,214,3	script	Rayonnages::Bookshelf#vol	111,{
 		next;
 		mes "^3355FFAprès avoir fouillé un peu, vous repérez la boîte grise dont parlait Gio. Vous fermez les yeux et plongez la main dedans.^000000";
 		next;
+		changequest 60212,60213;
 		set aru_vol,26;
 		set .@box_box,rand(1,20);
 		if (.@box_box < 7) {
@@ -4527,6 +4546,7 @@ thor_v01,37,234,3	script	Surface Brûlante::Hot Land Surface#1	111,{
 			mes "^3131FFTempérature actuelle: 2300 THT^000000";
 			next;
 			mes "^3355FFVous notez la température dans votre rapport.^000000";
+			changequest 2117,2118;
 			set aru_vol,9;
 			next;
 			mes "["+strcharinfo(0)+"]";
@@ -4550,6 +4570,7 @@ thor_v02,165,37,3	script	Surface Brûlante::Hot Land Surface#2	111,{
 			mes "^3131FFTempérature actuelle: 2270 THT^000000";
 			next;
 			mes "^3355FFVous notez la température dans votre rapport.^000000";
+			changequest 2118,2119;
 			set aru_vol,10;
 			close;
 		}
@@ -4573,6 +4594,7 @@ thor_v02,170,100,3	script	Surface Brûlante::Hot Land Surface#3	111,{
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "J'ai fait assez de relevés. Je devrais maintenant apporter ce rapport au camp de géologie~";
+			changequest 2119,2120;
 			set aru_vol,11;
 			close;
 		}
@@ -4598,6 +4620,7 @@ que_thor,145,66,3	script	Garde#vol::VeinsGuard	939,{
 		next;
 		mes "[Garde]";
 		mes "Oh, je vois. Eh bien je ne suis pas autorisé à le faire. Entrez et demandez à Sahedi de vous aider. Il devrait se trouver du côté du dirigeable, au sud de la gare.";
+		changequest 2120,2121;
 		set aru_vol,12;
 		close2;
 		warp "thor_camp",248,190;
@@ -4662,6 +4685,7 @@ thor_camp,250,104,3	script	Sahedi#vol	934,{
 		next;
 		mes "[Sahedi]";
 		mes "D'accord... Allez inspecter le camp, voir si il pourra résister au désastre.";
+		changequest 2121,2122;
 		set aru_vol,13;
 		delitem 7342,1; //File01
 		close;
@@ -4727,6 +4751,7 @@ thor_camp,250,104,3	script	Sahedi#vol	934,{
 		disablenpc "Aitra#vol";
 		mes "[Sahedi]";
 		mes "Oh, c'est un cauchemar... Pourriez-vous montrer ce rapport à votre directeur, Gio? J'espère qu'il aura quelques conseils à nous donner pour éviter ce désastre...";
+		changequest 2128,60211;
 		set aru_vol,24;
 		getitem 7342,1; //File01
 		close;
@@ -4739,7 +4764,7 @@ thor_camp,250,104,3	script	Sahedi#vol	934,{
 
 thor_camp,194,220,0	script	#Colonel1	-1,5,5,{
 OnTouch:
-//OnTouch2:
+
 	if (aru_vol == 13) {
 		enablenpc "Colonel Vito#1";
 		mes "[????]";
@@ -4757,6 +4782,7 @@ OnTouch:
 		next;
 		mes "[Colonel Vito]";
 		mes "Vous devriez vous sentir fier et honoré d'être personnellement entraîné par moi, le grand Colonel Vito! Je vais faire de vous un véritable guerrier, pour la plus grande gloire de Freya! Suivez-moi, maintenant!";
+		changequest 2122,2123;
 		set aru_vol,14;
 		close2;
 		disablenpc "Colonel Vito#1";
@@ -4777,7 +4803,6 @@ OnTouch:
 
 thor_camp,162,182,0	script	#Colonel2	-1,7,7,{
 OnTouch:
-//OnTouch2:
 	if (aru_vol == 13) {
 		enablenpc "Colonel Vito#2";
 		mes "[????]";
@@ -4795,6 +4820,7 @@ OnTouch:
 		next;
 		mes "[Colonel Vito]";
 		mes "Vous devriez vous sentir fier et honoré d'être personnellement entraîné par moi, le grand Colonel Vito! Je vais faire de vous un véritable guerrier, pour la plus grande gloire de Freya! Suivez-moi, maintenant!";
+		changequest 2122,2123;
 		set aru_vol,14;
 		disablenpc "Colonel Vito#2";
 		close2;
@@ -4984,6 +5010,7 @@ thor_camp,159,74,3	script	Colonel Vito#3	946,{
 		mes "[Colonel Vito]";
 		mes "Bien. Vous savez maintenant quel genre d'attitude vous devez avoir en tant que guerrier au service de Freya.";
 		mes "C'est tout pour le premier exercice, mais il en reste encore un.";
+		changequest 2123,2124;
 		set aru_vol,16;
 		close;
 	}
@@ -5007,6 +5034,7 @@ thor_camp,159,74,3	script	Colonel Vito#3	946,{
 		next;
 		mes "[Colonel Vito]";
 		mes "Bien. Il est temps maintenant de passer au second exercice, qui vous permettra de renforcer un peu ce corps. Vous voyez les cibles en face de vous? Entraînez-vous en la frappant 10 fois. Exécution!";
+		changequest 2125,2126;
 		set aru_vol,19;
 		next;
 		if (select("Oui, monsieur!:Frapper? Comment ça?") == 1) {
@@ -5033,6 +5061,7 @@ thor_camp,159,74,3	script	Colonel Vito#3	946,{
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "(^333333Eh bien... Je pense que je vais retourner voir Sahedi. J'espère que lui me prendra pour un chercheur en géologie et non pas pour un soldat...^000000)";
+		changequest 2126,2127;
 		set aru_vol,21;
 		close;
 	}
@@ -5043,7 +5072,6 @@ thor_camp,159,74,3	script	Colonel Vito#3	946,{
 
 thor_camp,141,62,0	script	#vol_study1::VeinsWarp	-1,3,3,{
 OnTouch:
-//OnTouch2:
 	if ((aru_vol >= 14 && aru_vol <= 16) || (aru_vol == 19)) {
 		warp "thor_camp",156,67;
 	}
@@ -5055,7 +5083,6 @@ thor_camp,172,38,0	duplicate(VeinsWarp)	#vol_study3	-1,3,3
 
 thor_camp,172,132,0	script	#sita_vol	-1,3,3,{
 OnTouch:
-//OnTouch2:
 	if (aru_vol == 21) {
 		mes "^3355FFIl y a un flot de magma qui s'écoule à travers un passage sous le grillage.^000000";
 		next;
@@ -5068,12 +5095,12 @@ OnTouch:
 
 thor_camp,148,310,0	script	#buki_vol	-1,5,5,{
 OnTouch:
-//OnTouch2:
 	if (aru_vol == 22) {
 		mes "^3355FFDes gens transportent de nombreuses caisses de bois marquées du sceau de la République de Schwaltzvalt. Elles doivent contenir de l'équipement militaire pour le camp.^000000";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Je devrais retourner voir Sahedi maintenant.";
+		changequest 2127,2128;
 		set aru_vol,23;
 		close;
 	}
@@ -5110,6 +5137,7 @@ thor_camp,109,167,3	script	Panneau de Contrôle::Control Panel#vol	111,{
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Pas de problème à signaler. J'imagine que je peux retourner voir le colonel.";
+		changequest 2124,2125;
 		set aru_vol,18;
 		close;
 	}
@@ -5275,7 +5303,7 @@ thor_camp,98,213,5	script	Soldat du Volcan::Thor Volcano Soldier#vo9	939,{
 }
 
 thor_v02,143,78,0	script	#totcamp	45,2,2,{
-OnTouch:
+OnTouch_:
 	if (rachel_camel < 24) {
 		warp "que_thor",65,55;
 		end;
@@ -5285,20 +5313,19 @@ OnTouch:
 }
 
 que_thor,69,56,0	script	#tov_1	45,2,2,{
-OnTouch:
+OnTouch_:
 	warp "thor_v02",146,84;
 	end;
 }
 
 que_thor,187,56,0	script	#tov_2	45,2,2,{
-OnTouch:
+OnTouch_:
 	warp "thor_v02",146,84;
 	end;
 }
 
 thor_camp,62,98,0	script	#volbq	-1,5,5,{
-OnTouch:
-//OnTouch2:
+OnTouch_:
 	mes "^3355FFVous voyez un vieil homme en robe de Grand Prêtre face à vous.^000000";
 	next;
 	mes "^3355FFVous feriez mieux de ne pas vous faire remarquer.^000000";
@@ -5323,7 +5350,7 @@ thor_camp,246,191,3	script	Garde::Guard#goto	939,{
 }
 
 veins,302,166,0	script	#whoau	-1,2,2,{
-OnTouch:
+OnTouch_:
 	mes "[Propriétaire de la Maison]";
 	mes "Mais... Mais qui êtes-vous?! Chéri! Il y a ce... cette personne chez nous!";
 	next;

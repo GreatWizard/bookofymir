@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 3.3a
+//= 3.4
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -62,6 +62,9 @@
 //= 3.3 Fixed occurance of PcName. [L0ne_W0lf]
 //=     Fixed level 4 ID warps always being usable.
 //= 3.3a Fixed level 4 ID warps again. (Bugreport:4102) [L0ne_W0lf]
+//= 3.4 Added quest log entries for:
+//=     - Ice Necklace Quest
+//=     - Thor Volcano Base Quest addition.
 //============================================================ 
 
 // Lost Child Quest (Prerequisite to High Priest quest)
@@ -2216,6 +2219,7 @@ rachel,157,183,3	script	Adepte Urstialla::Sincere Follower Urstia	916,{
 			}
 			mes "[Urstialla]";
 			mes "Merci beaucoup! Voilà, prenez ce collier et demandez à Maheo de lui rendre son éclat s'il vous plaît. Ce sera alors une offrande digne de notre bien-aimée Freya.";
+			setquest 2109;
 			getitem 7572,1; //Magic_Necklace
 			set ice_necklace_q,1;
 			close2;
@@ -2240,6 +2244,7 @@ rachel,157,183,3	script	Adepte Urstialla::Sincere Follower Urstia	916,{
 			mes "Voilà, ce n'est pas grand-chose, mais acceptez ceci en gage de ma reconnaissance pour ce que vous avez fait pour moi.";
 			delitem 7573,1; //Magic_Necklace_
 			getexp 700000,0;
+			completequest 2113;
 			set ice_necklace_q,6;
 			next;
 			mes "["+strcharinfo(0)+"]";
@@ -2374,6 +2379,7 @@ ice_dun02,120,105,3	script	Homme dans la Glace::Man Stuck in Ice#cave	924,5,5,{ 
 		next;
 		mes "[Maheo]";
 		mes "N'ayez pas peur. Je suis certain que mon maître connaîtra un moyen de me libérer de cette prison de glace. Il devrait se trouver près de la Source de Freya. S'il vous plaît, partez à sa recherche pour moi!";
+		changequest 2109,2110;
 		set ice_necklace_q,2;
 		close2;
 		cutin "",255;
@@ -2459,6 +2465,7 @@ ice_dun02,120,105,3	script	Homme dans la Glace::Man Stuck in Ice#cave	924,5,5,{ 
 		delitem 7569,1; //Wind Of_Hammer
 		getitem 7574,4; //Freezing Snow Powder
 		getitem 7573,1; //Magic_Necklace_
+		changequest 2112,2113;
 		set ice_necklace_q,5;
 		close2;
 		cutin "",255;
@@ -2532,6 +2539,7 @@ rachel,265,98,3	script	Hamion#aru	930,{
 		next;
 		mes "[Hamion]";
 		mes "Vous pourrez acheter le parchemin à l'Académie des Sages de Yuno. Ah, et par rapport au marteau, je parle des armes toutes bâtes, pas des marteaux de forgerons utilisés pour la forge. Si vous aiderais si je le pouvais mais... Même si je suis intelligent, la force brute n'est pas mon fort.";
+		changequest 2110,2111;
 		set ice_necklace_q,3;
 		close;
 	}
@@ -2573,6 +2581,7 @@ rachel,265,98,3	script	Hamion#aru	930,{
 		delitem 1354,1; //Empty_Scroll
 		delitem 7433,1; //Hammer
 		getitem 7569,1; //Hammer_of_Wind
+		changequest 2111,2112;
 		set ice_necklace_q,4;
 		close;
 	}
@@ -4033,6 +4042,7 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 				next;
 				mes "[Grand Prêtre Zhed]";
 				mes "Vous avez raison. Il faudra que nous pensions à un moyen de vous faire entrer. Hummm...";
+				setquest 2114;
 				set aru_vol,1;
 				close2;
 				cutin "ra_gman",255;
@@ -4121,6 +4131,7 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 					mes "[Grand Prêtre Zhed]";
 					mes "J'espère que vous irez parler au géologue. Il devrait se trouver à Veins, la ville du désert au sud de Rachel. C'est l'opportunité pour vous de pouvoir entrer dans le camp du Volcan de Thor sans éveiller les soupçons.";
 					delitem 7342,1; //File01
+					changequest 2115,2116;
 					set aru_vol,6;
 				}
 				else {
@@ -4160,6 +4171,7 @@ ra_temin,277,159,3	script	Grand Prêtre Zhed::High Priest Zhed#rachel	932,{
 				next;
 				mes "[Grand Prêtre Zhed]";
 				mes "Prenez un peu de repos: je m'occupe du reste. Je vous recontacterai. Ensemble, nous pourrons préserver la paix entre les nations.";
+				completequest 60213;
 				set aru_vol,27;
 				getexp 200000,0;
 				close2;

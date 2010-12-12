@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= Evera and The eAthena Dev Team
 //===== Current Version: ===================================== 
-//= 2.4
+//= 2.5
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -48,6 +48,9 @@
 //= 2.2a Fixed typos in var names from EIN_LOVERQRQ to EIN_LOVERQ. (bugreport:2464) [Paradox924X]
 //= 2.3 Removed occurance of PcName. [L0ne_W0lf]
 //= 2.4 Added missing remove cutin. [Kisuka]
+//= 2.5 Added quest log entries for:
+//=     - Factory Quest
+//=     - Murder Quest
 //============================================================ 
 
 // Oridecon Stone OR Mineral Stone Quest
@@ -3370,6 +3373,7 @@ OnTimer600000:
 
 einbroch,132,84,3	script	Liotzburg#ein	853,2,2,{
 	if ((EinFactory == 13) || (EinFactory == 14)) {
+		changequest 8029,8030;
 		set EinFactory,14;
 		mes "[Liotzburg]";
 		mes "Comment...?";
@@ -3484,6 +3488,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 			delitem 7317,10; //Screw
 			delitem 7319,10; //Old_Steel_Plate
 			set $EinPolution,$EinPolution+1;
+			completequest 8031;
 			set EinFactory,16;
 			if (BaseLevel < 41) {
 				getexp 615,0;
@@ -3558,6 +3563,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 		mes "10 ^FF0000Plaques de Fer Endommagées^000000,";
 		mes "nous pourrions effectuer ces réparations.";
 		next;
+		changequest 8030,8031;
 		set EinFactory,15;
 		mes "[Zelmeto]";
 		mes "Mais sans budget, il n'y a aucune chance pour qu'on puisse acheter ces matériaux.";
@@ -3583,6 +3589,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 		mes "[Zelmeto]";
 		mes "Maintenant, nous devons nous assurer que nous avons assez de matériaux pour effectuer les réparations, afin que les machines puissent fonctionner en toute sécurité à nouveau.";
 		next;
+		changequest 8028,8029;
 		set EinFactory,13;
 		mes "[Zelmeto]";
 		mes "Tout d'abord, je ferais bien de me dépêcher de demander une augmentation du Budget de Réparations de l'Usine à notre patron.";
@@ -3611,6 +3618,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 		mes "Nous n'en possédons qu'un seul exemplaire, donc on le déplace à droite à gauche car beaucoup de gens de l'usine l'utilisent.";
 		mes "Je ne sais pas du tout où il peut être à l'heure actuelle.";
 		next;
+		changequest 8026,8027;
 		set EinFactory,11;
 		mes "[Zelmeto]";
 		mes "Je pense néanmoins qu'il doit se trouver à l'intérieur du bâtiment donc vous devriez pouvoir le trouver.";
@@ -3639,6 +3647,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 		mes "[Zelmeto]";
 		mes "La canalisation dont je vous parle est située tout près de ces grands chaudrons où l'on fait fondre le métal. Vous devriez la trouver sans trop de mal.";
 		next;
+		changequest 8024,8025;
 		set EinFactory,9;
 		mes "[Zelmeto]";
 		mes "Merci encore de votre aide, "+( sex ? "monsieur l'Aventurier" : "mademoiselle l'Aventurière" )+"!";
@@ -3666,6 +3675,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 		mes "[Zelmeto]";
 		mes "On a eu des problèmes pour le programmer récemment. Si une pièce est cassée, on doit savoir laquelle pour pouvoir la réparer ou la remplacer le plus rapidement possible.";
 		next;
+		changequest 8022,8023;
 		set EinFactory,7;
 		mes "[Zelmeto]";
 		mes "Merci d'avance.";
@@ -3690,6 +3700,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 		mes "[Zelmeto]";
 		mes "Il est situé au milieu de l'usine, vous ne devriez pas avoir de mal à le trouver. Il est sûrement en mauvais état, même s'il continue de fonctionner pour l'instant...";
 		next;
+		changequest 8020,8021;
 		set EinFactory,5;
 		mes "[Zelmeto]";
 		mes "Nous devons nous assurer de sa stabilité et de sa fiabilité, et qu'il ne représente pas une menace à notre travail.";
@@ -3719,6 +3730,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 		mes "[Zelmeto]";
 		mes "Vous devez inspecter le ^FF00003eme Sas à Pression Automatique^000000. Même si le problème semble bénin, faites-moi un rapport. Je sais que tout peut sembler aller bien, mais on n'est jamais à l'abri d'un accident.";
 		next;
+		changequest 8018,8019;
 		set EinFactory,3;
 		mes "[Zelmeto]";
 		mes "Merci de nous aider, "+( sex ? "monsieur l'Aventurier" : "mademoiselle l'Aventurière" )+".";
@@ -3770,6 +3782,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 			mes "Tout d'abord, trouvez le ^FF00002ème Panneau de Contrôle^000000 et inspectez son état. Je suis certain qu'il est cassé depuis très longtemps, mais cela ne fera pas de mal de s'en assurer.";
 			mes "Vous devriez le trouver facilement..";
 			next;
+			setquest 8017;
 			set EinFactory,1;
 			mes "[Zelmeto]";
 			mes "Quand vous avez fini votre inspection, revenez me voir pour me dire quels sont les problèmes. Merci encore d'avoir proposé votre aide.";
@@ -3791,6 +3804,7 @@ ein_in01,67,242,3	script	Zelmeto	851,{
 
 ein_in01,49,232,3	script	2ème Panneau de Contrôle	111,{
 	if ((EinFactory == 1) || (EinFactory == 2)) {
+		changequest 8017,8018;
 		set EinFactory,2;
 		mes "^3355FFC'est le 2ième panneau de contrôle que Zelmeto vous a demandé d'inspecter.";
 		mes "Il a l'air complètement cassé: il manque des vis, et la tôle de fer est pliée, laissant apercevoir à l'intérieur un désordre embrouillé de fils électriques.^000000";
@@ -3801,6 +3815,7 @@ ein_in01,49,232,3	script	2ème Panneau de Contrôle	111,{
 
 ein_in01,108,217,3	script	3ème Sas à Pression	111,{
 	if ((EinFactory == 3) || (EinFactory == 4)) {
+		changequest 8019,8020;
 		set EinFactory,4;
 		mes "^3355FFA première vue, ce sas de pression a l'air tout à fait en bon état.";
 		mes "Mais après avoir regardé de plus près, vous trouvez qu'il émet des étranges grincements, et que certaines vis en surface sont manquantes.";
@@ -3811,6 +3826,7 @@ ein_in01,108,217,3	script	3ème Sas à Pression	111,{
 
 ein_in01,62,258,3	script	Panneau de Contrôle	111,{
 	if ((EinFactory == 5) || (EinFactory == 6)) {
+		changequest 8021,8022;
 		set EinFactory,6;
 		mes "^3355FFLe panneau de contrôle principal se semble pas avoir de problème en apparence. Mais après avoir tapoté la surface, vous entendez un bruit creux à faire bondir le coeur hors de la poitrine. On dirait bien qu'il manque de nombreux composants...^000000";
 		close;
@@ -3820,6 +3836,7 @@ ein_in01,62,258,3	script	Panneau de Contrôle	111,{
 
 ein_in01,46,197,3	script	Convoyeur#ins	111,{
 	if ((EinFactory == 7) || (EinFactory == 8)) {
+		changequest 8023,8024;
 		set EinFactory,8;
 		mes "^3355FFLes mouvements du convoyeur sont nerveux et maladroits. Le bras mécanique ne semble pas assez puissant pour pouvoir supporter le poids qu'il porte. Les vis du convoyeur sont également rouillées par endroits.^000000";
 		close;
@@ -3829,6 +3846,7 @@ ein_in01,46,197,3	script	Convoyeur#ins	111,{
 
 ein_in01,100,266,3	script	Canalisation#ins	111,{
 	if ((EinFactory == 9) || (EinFactory == 10)) {
+		changequest 8025,8026;
 		set EinFactory,10;
 		mes "^3355FFL'inspection de cette canalisation n'a pas pris longtemps: elle est complètement boursouflée et gondolée d'avoir supporté trop longtemps une surcharge de pression. On se demande même pourquoi elle n'a pas déjà explosé...";
 		close;
@@ -3838,6 +3856,7 @@ ein_in01,100,266,3	script	Canalisation#ins	111,{
 
 ein_in01,95,239,3	script	Convoyeur#ins2	111,{
 	if ((EinFactory == 11) || (EinFactory == 12)) {
+		changequest 8027,8028;
 		set EinFactory,12;
 		mes "^3355FFCe convoyeur semble avoir les mêmes problèmes que le petit modèle. Ses mouvements sont désordonnés, instables et peu puissants, et presque toutes les vis sont rouillées.^000000";
 		close;
@@ -4010,6 +4029,7 @@ einbech,165,105,7	script	Buender Hikeman#ein	847,{
 		mes "[Buender Hikeman]";
 		mes "Puis j'ai finis par apprendre...";
 		mes "...que tu avais planifié ça depuis longtemps.";
+		setquest 2071;
 		set Shinokas_Quest,1;
 		close2;
 		cutin "ein_hicman",255;
@@ -4088,6 +4108,7 @@ einbech,165,105,7	script	Buender Hikeman#ein	847,{
 		mes "Je ferais mieux de m'éloigner un peu de lui!";
 		next;
 		mes "^3355FFVous vous éloignez de Hikeman alors qu'il tombe sur le sol. Ce serait une mauvaise idée de provoquer le vieil homme à nouveau, que ce soit intentionnel ou non.^000000";
+		changequest 2071,2072;
 		set Shinokas_Quest,2;
 		close2;
 		cutin "ein_hicman",255;
@@ -4202,6 +4223,7 @@ einbech,165,105,7	script	Buender Hikeman#ein	847,{
 			mes "^333333Pourquoi ces hommes sont-ils tellement obnubilés par un morceau du Coeur d'Ymir? Est-ce que cela vaut une telle cruauté? Qui que soient ces hommes, leurs intentions ne peuvent pas être bonnes.";
 			close2;
 			cutin "ein_hicman",255;
+			completequest 2078;
 			set Shinokas_Quest,11;
 			if (BaseLevel < 70) {
 				getexp 100000,80000;
@@ -4379,6 +4401,7 @@ ein_in01,231,163,7	script	Vieil Homme Malade	849,{
 		mes "J'ai encore un peu de temps devant moi.";
 		mes "Ce doit être un coup de pouce du destin!";
 		mes "Très bien, je vais vous raconter ce qui s'est passé. Mais c'est une longue histoire...";
+		changequest 2072,2073;
 		set Shinokas_Quest,3;
 		close;
 	}
@@ -4434,6 +4457,7 @@ ein_in01,231,163,7	script	Vieil Homme Malade	849,{
 		mes "[Shinokas]";
 		mes "Je suis trop vieux et trop faible pour sortir d'ici et espérer que ces hommes ne me trouve pas. Vous comprenez ma situation, n'est-ce pas...?";
 		mes "Essayez de découvrir si les Kappelltheine possèdent cette pierre unique...";
+		changequest 2073,2074;
 		set Shinokas_Quest,4;
 		close;
 	}
@@ -4462,6 +4486,7 @@ ein_in01,231,163,7	script	Vieil Homme Malade	849,{
 		mes "[Shinokas]";
 		mes "S'ils sont si discrets, il est possible qu'ils y cachent la pierre.";
 		mes "S'il vous plaît, allez enquêter à l'Usine pour essayer de retrouver la pierre, et revenez dès que possible.";
+		changequest 2074,2075;
 		set Shinokas_Quest,6;
 		close;
 	}
@@ -4513,6 +4538,7 @@ ein_in01,231,163,7	script	Vieil Homme Malade	849,{
 				mes "[Shinokas]";
 				mes "Souvenez-vous...";
 				mes "N'importe qui ne rentre pas comme ça dans ce genre d'endroit. Mais je suis certain que vous trouverez bien un moyen.";
+				changequest 2075,2076;
 				set Shinokas_Quest,7;
 				close;
 			}
@@ -4619,6 +4645,7 @@ ein_in01,231,163,7	script	Vieil Homme Malade	849,{
 		mes "Shinokas!";
 		mes "Mon dieu, pourquoi?";
 		mes "Pourquoi...";
+		changequest 2077,2078;
 		set Shinokas_Quest,10;
 		close;
 	}
@@ -4886,6 +4913,7 @@ airplane,31,77,5	script	Homme Ivre#ein	853,{
 			next;
 			mes "["+strcharinfo(0)+"]";
 			mes "^333333(Cette chose étrange que j'ai vue au laboratoire, entourée de barbelés, ce devait être un morceau du ^3131FFCoeur d'Ymir^000000. Je ferais mieux d'en parler à Shinokas.)^000000";
+			changequest 2076,2077;
 			set Shinokas_Quest,9;
 			close;
 		case 2:

@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 // Samuray22
 //===== Current Version: ===================================== 
-//= 1.7
+//= 1.8
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -13,8 +13,8 @@
 //= Reward: -Free Ticket for Flyship.
 //=	    -Free System to Repair.
 //= Quest about how work the airship
-//= Reward: -Base Experience 200.000
-//=	    -Job Experience 10.000
+//= Reward: -Base Experience 200,000
+//=	    -Job Experience 10,000
 //===== Additional Comments: ================================= 
 //= 1.0 First Beta.
 //= 1.1 Added Heart Fragment quest. [SinSloth]
@@ -26,6 +26,9 @@
 //= 1.5 Replaced effect numerics with constants. [Samuray22]
 //= 1.6 Changed some variables to scope instead of permanent char. [brianluau]
 //= 1.7 some minor cleanup updates to the airship invasion. [L0ne_W0lf]
+//= 1.8 Added quest log entries for:
+//=     - Airship Ticket Quest
+//=     - How the Airship Works
 //============================================================ 
 
 //=======================================================================================================//
@@ -49,6 +52,7 @@ airplane,47,61,1	script	Membre d'Équipage	833,{
 		mes "[Kain Himere]";
 		mes "C'est un service étrange que je vous demande, mais je vous rendrai la pareille dès que vous reviendrez.";
 		next;
+		setquest 2079;
 		set kain_ticket, 5;
 		mes "^3355FFKain Himere vous a donné une petite boîte.^000000";
 		close;
@@ -239,7 +243,7 @@ airplane,47,61,1	script	Membre d'Équipage	833,{
 				mes "Il y a quelque chose que je dois envoyer à Einbroch. Quoi qu'il en soit, je vous souhaite un bon voyage. Oh, et merci de m'avoir écouté.";
 				close;
 			}
-		}			
+		}
 	} else if(kain_ticket==3) {
 		mes "[Kain Himere]";
 		mes "Oh, qui êtes-vous?";
@@ -326,6 +330,7 @@ airplane,47,61,1	script	Membre d'Équipage	833,{
 			next;
 			mes "[Kain Himere]";
 			mes "Auriez-vous l'amabilité de m'aider à trouver ce journal et de voir si Tarsha est ma fille?";
+			changequest 2081,2082;
 			set kain_ticket, 11;
 			close;
 		}
@@ -356,6 +361,7 @@ airplane,47,61,1	script	Membre d'Équipage	833,{
 			mes "[Kain Himere]";
 			mes "Je sais que ce n'est pas grand-chose, mais comprenez que c'est tout ce que je peux vous donner. Que Dieu vous bénisse pour toute l'aide que vous m'avez apportée!";
 			delitem 7276, 1;
+			completequest 2085;
 			set kain_ticket, 15;
 			getitem 7311, 4;
 			close;
@@ -411,6 +417,7 @@ OnTouch:
 			mes "J'aime beaucoup cette chanson! Surtout quand je crie 'camarades!'";
 			close;
 		case 2:
+			changequest 2079,2080;
 			set kain_ticket, 7;
 			mes "[Elle Cherno]";
 			mes "Cette...?";
@@ -450,6 +457,7 @@ OnTouch:
 			mes "J'ai fait quelque chose pour lui. Je ne sais pas écrire, mais j'ai fait cette lettre du mieux que j'ai pu. Est-ce que vous me promettez de la lui donner pour moi? S'il vous plaît?";
 			next;
 			mes "^3355FFElle met un grand message gribouillé dans votre main.^000000";
+			changequest 2084,2085;
 			set kain_ticket, 14;
 			getitem 7276, 1; //Picture Letter,
 			close;
@@ -551,6 +559,7 @@ ein_in01,125,99,3	script	Tarsha Cherno	850,{
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Je dois aller vérifier quelque chose maintenant, mais si tout se passe comme prévu, je serais bientôt de retour avec de bonnes nouvelles!";
+		changequest 2080,2081;
 		set kain_ticket, 10;
 		close;
 	} else if(kain_ticket == 10 || kain_ticket == 11) {
@@ -605,6 +614,7 @@ ein_in01,125,99,3	script	Tarsha Cherno	850,{
 			mes "[Tarsha Cherno]";
 			mes "Ah, bien.";
 			mes "Elle veut vous revoir. Auriez-vous la gentillesse d'aller la voir avant de partir?";
+			changequest 2083,2084;
 			set kain_ticket, 13;
 			close;
 		case 3:
@@ -772,6 +782,7 @@ einbech,45,113,5	script	Arbre#t1-1::Tree	111,{
 			close;
 		} else {
 			callfunc "diary";
+			changequest 2082,2083;
 			set kain_ticket, 12;
 			close;
 		}
@@ -1304,6 +1315,7 @@ airplane_01,238,154,5	script	Capitaine::Capitaine de bord#01	873,{
 						cutin "",255;
 						end;
 					case 2:
+						setquest 8032;
 						set lght_air, 2;
 						mes "[Tarlock]";
 						mes "Ha-hah! Je vous aime déjà! Bien, voici le marché. J'ai un jeune frère que je vois rarement, car il est également capitaine de dirigeable et donc toujours en voyage.";
@@ -1374,6 +1386,7 @@ airplane_01,238,154,5	script	Capitaine::Capitaine de bord#01	873,{
 					specialeffect2 EF_MAPPILLAR;
 					mes "[Tarlock]";
 					mes "Avez-vous compris? Je vais me reposer un peu. Je suis fatigué de lire et écrire ces longues lettres.";
+					completequest 8035;
 					set lght_air, 7;
 					getexp 200000, 10000;
 					close2;
@@ -1484,6 +1497,7 @@ airplane,236,163,5	script	Capitaine::Capitaine de bord#03	873,{
 		next;
 		mes "[Ferlock]";
 		mes "Et si jamais vous la rencontrez, envoyez-lui ma gratitude et mes salutations s'il vous plaît.";
+		changequest 8045,8046;
 		set hg_ma1,5;
 		close2;
 		cutin "",255;
@@ -1597,6 +1611,7 @@ airplane,236,163,5	script	Capitaine::Capitaine de bord#03	873,{
 		mes "Qui envoie ces monstres envahir nos Dirigeables, et dans quel but veulent-ils les Pierres Runiques? Hum. Bien, disons-nous au revoir pour le moment, aventurier.";
 		close2;
 		specialeffect2 EF_ABSORBSPIRITS;
+		completequest 8043;
 		set lhz_heart,13;
 		getexp 700000,400000;
 		cutin "",255;
@@ -1632,37 +1647,39 @@ airplane,236,163,5	script	Capitaine::Capitaine de bord#03	873,{
 		
 	case 2:
 		if (lght_air == 2) {
-		set lght_air, 3;
-		mes "^3131FFVous remettez au capitaine Ferlock la lettre que son frère Tarlock lui a écrit.^000000";
-		next;
-		mes "[Ferlock]";
-		mes "Oh, c'est de mon frère? Hé, merci beaucoup de m'avoir porté ça de sa part. Oh, donnez-moi une minute pour lire tout ça, vous voulez bien?";
-		next;
-		mes "[Ferlock]";
-		mes "...";
-		mes "Donc, c'est ce qu'il devient. Huh. Hahaha! Oh, c'est drôle. Ah, c'est toujours bon de recevoir des nouvelles de Tarlock. Quoi qu'il en soit, je suis désolé de vous faire attendre.";
-		next;
-		mes "[Ferlock]";
-		mes "De toute façon, mon frère a écrit des trucs habituels, mais il a mentionné qu'il espérait enfin me rendre quelques affaires qu'il m'a empruntées. Cependant, il les a perdues...";
-		next;
-		mes "[Ferlock]";
-		mes "Il s'avère que ces méchants Gremlins qui attaquent parfois son navire ont volé mes affaires, il espère donc, en réalité, que vous m'aiderez à les récupérer.";
-		next;
-		mes "[Ferlock]";
-		mes "Ouais, ouais. Il a spécifiquement mentionné que je ne dois pas vous donner ma réponse tant que vous n'avez pas chassé ces monstres et récupéré mon matériel. Je suis désolé, mais j'ai l'impression que vous devez encore quelque chose à mon grand-frère, hein?";
-		next;
-		mes "[Ferlock]";
-		mes "Eh bien, si vous êtes prêt à m'aider, pourriez-vous récupérer ^ff00002 Volontés des Ténèbres^000000 et mes ^ff00002 Fruits Épineux^000000 pour moi?";
-		next;
-		mes "[Ferlock]";
-		mes "Les monstres qui attaquent le Dirigeable de Tarlock devraient les avoir. J'apprécierais que vous m'aidiez sur ce coup là, aventurier. Merci d'avance et bonne chance~";
-		close2;
-		cutin "",255;
-		end;
+			changequest 8032,8033;
+			set lght_air, 3;
+			mes "^3131FFVous remettez au capitaine Ferlock la lettre que son frère Tarlock lui a écrit.^000000";
+			next;
+			mes "[Ferlock]";
+			mes "Oh, c'est de mon frère? Hé, merci beaucoup de m'avoir porté ça de sa part. Oh, donnez-moi une minute pour lire tout ça, vous voulez bien?";
+			next;
+			mes "[Ferlock]";
+			mes "...";
+			mes "Donc, c'est ce qu'il devient. Huh. Hahaha! Oh, c'est drôle. Ah, c'est toujours bon de recevoir des nouvelles de Tarlock. Quoi qu'il en soit, je suis désolé de vous faire attendre.";
+			next;
+			mes "[Ferlock]";
+			mes "De toute façon, mon frère a écrit des trucs habituels, mais il a mentionné qu'il espérait enfin me rendre quelques affaires qu'il m'a empruntées. Cependant, il les a perdues...";
+			next;
+			mes "[Ferlock]";
+			mes "Il s'avère que ces méchants Gremlins qui attaquent parfois son navire ont volé mes affaires, il espère donc, en réalité, que vous m'aiderez à les récupérer.";
+			next;
+			mes "[Ferlock]";
+			mes "Ouais, ouais. Il a spécifiquement mentionné que je ne dois pas vous donner ma réponse tant que vous n'avez pas chassé ces monstres et récupéré mon matériel. Je suis désolé, mais j'ai l'impression que vous devez encore quelque chose à mon grand-frère, hein?";
+			next;
+			mes "[Ferlock]";
+			mes "Eh bien, si vous êtes prêt à m'aider, pourriez-vous récupérer ^ff00002 Volontés des Ténèbres^000000 et mes ^ff00002 Fruits Épineux^000000 pour moi?";
+			next;
+			mes "[Ferlock]";
+			mes "Les monstres qui attaquent le Dirigeable de Tarlock devraient les avoir. J'apprécierais que vous m'aidiez sur ce coup là, aventurier. Merci d'avance et bonne chance~";
+			close2;
+			cutin "",255;
+			end;
 		} else if(lght_air == 3) {
 			if (countitem(7340) >= 2 && countitem(576) >= 2) {
 				delitem 7340, 2;
 				delitem 576, 2;
+				changequest 8033,8034;
 				set lght_air, 4;
 				mes "[Ferlock]";
 				mes "Vous avez apporté les objets! Merci beaucoup. Tenez, prenez cette lettre pour mon frère, remettez-lui s'il vous plaît.";
@@ -1675,11 +1692,11 @@ airplane,236,163,5	script	Capitaine::Capitaine de bord#03	873,{
 				cutin "",255;
 				end;
 			}
-				mes "[Ferlock]";
-				mes "Oh, je suis désolé, mais on dirait que vous avez oublié quelque chose. Pourriez-vous aller chercher ^ff00002 Volontés des Ténèbres^000000 et ^ff00002 Fruits Épineux^000000? Merci, brave aventurier~";
-				close2;
-				cutin "",255;
-				end;
+			mes "[Ferlock]";
+			mes "Oh, je suis désolé, mais on dirait que vous avez oublié quelque chose. Pourriez-vous aller chercher ^ff00002 Volontés des Ténèbres^000000 et ^ff00002 Fruits Épineux^000000? Merci, brave aventurier~";
+			close2;
+			cutin "",255;
+			end;
 		}
 		mes "[Ferlock]";
 		mes "Bien, j'espère que vous appréciez le temps passé sur le dirigeable et que vous faites bon voyage.";
@@ -1791,6 +1808,7 @@ airplane,236,63,4	script	Hallen	706,{
 				mes "Pourriez-vous aller lui remettre cette lettre pour moi? Ça vient d'un certain type nommé M. Mawong, son mentor ou quelque chose comme ça.";
 				next;
 				mes "^3355FFHallen vous a donné la lettre de Mawong à livrer à Kaci.^000000";
+				setquest 8036;
 				set lhz_heart,2;
 				next;
 				mes "[Hallen]";
@@ -1879,6 +1897,7 @@ airplane,236,63,4	script	Hallen	706,{
 		next;
 		mes "[Hallen]";
 		mes "Ces dirigeables sont tellement énormes et lourds, que j'ai peine à croire qu'ils puissent voler. Comment est-ce même possible? Eh bien, si vous pouviez découvrir ça pour moi, ce serait vraiment une grande aide.";
+		changequest 8038,8039;
 		set lhz_heart,6;
 		close;
 	}
@@ -1914,6 +1933,7 @@ airplane,236,63,4	script	Hallen	706,{
 			next;
 			mes "[Hallen]";
 			mes "L'imitation d'un Fragment du Coeur d'Ymir. Alors, où ai-je déjà entendu parler de ça? Hum, laissez-moi réfléchir...";
+			changequest 8039,8040;
 			set lhz_heart,7;
 			close;
 		}
@@ -1958,6 +1978,7 @@ airplane,236,63,4	script	Hallen	706,{
 		}
 		if(Shinokas_Quest > 9) set lhz_heart,9;
 		else set lhz_heart,8;
+		changequest 8040,8041;
 		getitem 501,1;
 		mes "[Hallen]";
 		mes "Tenez~ Je sais que c'est assez dérisoire par rapport aux récompenses que vous autres, aventuriers, obtenez habituellement, mais bon... C'est le geste qui compte, pas vrai? À plus tard~";
@@ -2038,6 +2059,7 @@ airplane,33,69,4	script	Kaci	73,{
 		mes "Quant à Euslan, s'il vous plaît, donnez-lui de mes nouvelles et faites-lui savoir que je lui souhaite de guérir rapidement.";
 		next;
 		mes "^3355FFPuisqu'elle prie, je suppose que je devrais envoyer son message.";
+		changequest 8044,8045;
 		set hg_ma1,4;
 		close;
 	}
@@ -2060,6 +2082,7 @@ airplane,33,69,4	script	Kaci	73,{
 		mes "[Kaci]";
 		mes "Oh, Hallen vous a demandé de me remettre ça. Il devrait faire ce genre de chose lui-même, au lieu de demander des services aux clients! Mais bon, il est vraiment très occupé...";
 		next;
+		changequest 8036,8037;
 		set lhz_heart,3;
 		mes "[Kaci]";
 		mes "Merci de me l'avoir apportée. Si jamais vous avez besoin d'un petit service, n'hésitez pas à me demander, d'accord? À plus tard~";
@@ -2118,6 +2141,7 @@ L_Ask:
 		next;
 		mes "[Kaci]";
 		mes "Eh bien, je ferais mieux de retourner au travail maintenant. Bonne journée, je vous verrai plus tard~";
+		changequest 8037,8038;
 		set lhz_heart,4;
 		close;
 	}
@@ -2147,6 +2171,7 @@ L_Ask:
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "(^333333Je vais enquêter davantage sur ce laboratoire d'Einbroch dès que possible, même si c'est une zone très restreinte.^000000)";
+		changequest 8041,8042;
 		set lhz_heart,9;
 		close;
 	}
@@ -2293,6 +2318,7 @@ L_Input:
 			mes "Cependant, vous feriez mieux de sortir d'ici. Les gardes patrouillent régulièrement ici, vous êtes donc presque sûr de vous faire prendre. Hum, venez me voir plus tard au dirigeable, d'accord? Maintenant, dépêchez-vous!";
 			close2;
 			donpcevent "Ferlock#lab::OnInit";
+			changequest 8042,8043;
 			set lhz_heart,11;
 			end;
 		}
