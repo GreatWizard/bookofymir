@@ -6,7 +6,7 @@
 //= Persian, Vicious_Pucca, aoa00, Evera, MasterOfMupppets,
 //= Lupus, Lord Gywall
 //===== Current Version: ===================================== 
-//= 4.5
+//= 4.6
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -76,6 +76,8 @@
 //= 4.5 Corrected an Incorrect check of the Shinokas_Quest. (bugreport:2276) [Samuray22]
 //=	  Replaced effect numerics with constants.
 //= 4.5 Official Gangster Alert script. [Gepard]
+//= 4.6 Added quest log entries for:
+//=     - Cursed Spirit Quest
 //============================================================ 
 
 // Gangster Alert [Aegis Conversion]
@@ -2206,6 +2208,7 @@ OnTouch:
 		if(!lhz_curse)
 		{
 			soundeffect "tao_gunka_stand.wav",0;
+			setquest 2086;
 			set lhz_curse,1;
 			end;
 		}
@@ -2251,6 +2254,7 @@ OnTouch:
 		if(!lhz_curse)
 		{
 			soundeffect "tao_gunka_stand.wav",0;
+			setquest 2086;
 			set lhz_curse,1;
 			end;
 		}
@@ -2937,6 +2941,7 @@ lhz_que01,99,74,5	script	#pecomaster	48,{
 		mes "Ouais, c'est juste de la camelote. Ce collier ne vaut même pas la peine qu'on se baisse pour le ramasser.";
 		next;
 		mes "^3131FFVous ramassez un vieux collier sur le sol. Le pendentif est un médaillon, mais il est si vieux que vous n'arrivez pas à l'ouvrir pour voir ce qu'il contient.^000000";
+		changequest 2090,2091;
 		set lhz_curse,17;
 		getitem 7341,1;
 		close2;
@@ -3081,6 +3086,7 @@ L_NoText:
 				next;
 				mes "[Personne Âgée]";
 				mes "Bonne chance, mon petit. J'espère que vous pourrez apaiser la colère de ces esprits... Mais tant que vous les laisserez vous guider, vous serez en sûreté.";
+				changequest 2086,2087;
 				set lhz_curse,6;
 				close;
 		
@@ -3123,9 +3129,10 @@ L_NoText:
 				mes "[Personne Âgée]";
 				mes "Il ne vous reste plus beaucoup de temps, revenez dès que possible avec ces objets!";
 				mes "À chaque seconde, les esprits sont consumés par leur rage surnaturelle...";
+				changequest 2091,2092;
 				set lhz_curse,18;
 				close;
-				case 2:
+			case 2:
 				mes "[Personne Âgée]";
 				mes "Oh... Vous êtes très pale, est-ce que ça va?";
 				close;
@@ -3164,9 +3171,10 @@ L_NoText:
 		mes "Pourquoi n'apporteriez-vous pas ce médaillon à l'endroit où il appartient? Je suis certaine que cela apporterait beaucoup de soulagement à son ancien propriétaire.";
 		next;
 		mes "^3131FFTout d'un coup, le médaillon s'ouvre et révèle une photo d'un couple souriant. La jeune femme sur la photo, assise sur une vieille chaise à l'aspect inconfortable, vous est familière...^000000";
+		delitem 523,5; // Holy Water
+		delitem 744,1; // Bouquet
+		changequest 2092,2093;
 		set lhz_curse,19;
-		delitem 523,5;
-		delitem 744,1;
 		close;
 	}
 	else goto L_NoText;
@@ -3321,6 +3329,7 @@ lhz_in03,32,162,3	script	Jeune Infirme	53,{
 							mes "......";
 							mes "Pfff.";
 							mes "Pas la peine de s'énerver, je ne disais que la vérité.";
+							changequest 2093,2094;
 							set lhz_curse,23;
 							close2;
 							warp "lighthalzen",322,323;
@@ -3393,6 +3402,7 @@ lhz_in03,32,162,3	script	Jeune Infirme	53,{
 									mes "["+strcharinfo(0)+"]";
 									mes "Oui, j'en suis "+(sex?"sûr":"sûre")+".";
 									delitem 7341,1;
+									changequest 2093,2094;
 									set lhz_curse,25;
 									close;
 						
@@ -3423,6 +3433,7 @@ lhz_in03,32,162,3	script	Jeune Infirme	53,{
 									mes "[Setsu]";
 									mes "Je ferai de mon mieux!";
 									delitem 7341,1;
+									changequest 2093,2094;
 									set lhz_curse,25;
 									close;
 							}
@@ -3498,6 +3509,7 @@ OnTouch:
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "J'ai le sentiment que toutes leurs souffrances sont liées à la ^FF0000Corporation Rekenber^000000 et à ce ^FF0000Laboratoire Regenschirm^000000.";
+		changequest 2094,2095;
 		set lhz_curse,26;
 		if(BaseLevel < 70) getexp 800000,300000;
 		else if(BaseLevel < 80) getexp 1000000,500000;
@@ -3516,45 +3528,46 @@ lhz_in01,114,181,3	script	Représentante	71,{
 	if(lhz_curse == 7) menu "Informations sur le Bâtiment.",L_Building,"Histoire de la Corporation.",L_History;
 	else menu "Informations sur le Bâtiment.",L_Building;
 
-L_Building:
-	mes "[Représentante]";
-	mes "Quel étage vous intéresse en particulier?";
-	next;
-	switch( select( "Rez-de-chaussée.","Premier étage.","Sous-sol.","Annuler." ) )
-	{
-		case 1:
-			mes "[Représentante]";
-			mes "La ^3131FFBibliothèque de la Corporation Rekenber^000000 est située dans la dernière pièce à gauche du grand hall. Elle comporte une incroyable ressource d'informations et d'idées innovantes pour que nos employés soient à la pointe de la connaissance des systèmes de développement.";
-			next;
-			mes "[Représentante]";
-			mes "La ^3131FFSalle de Réception^000000 est située au niveau du hall de l'aile de droite. Différents évènements et fêtes y ont lieu.";
-			next;
-			goto L_Building;
+	while(1) {
+		mes "[Représentante]";
+		mes "Quel étage vous intéresse en particulier?";
+		next;
+		switch( select( "Rez-de-chaussée.","Premier étage.","Sous-sol.","Annuler." ) )
+		{
+			case 1:
+				mes "[Représentante]";
+				mes "La ^3131FFBibliothèque de la Corporation Rekenber^000000 est située dans la dernière pièce à gauche du grand hall. Elle comporte une incroyable ressource d'informations et d'idées innovantes pour que nos employés soient à la pointe de la connaissance des systèmes de développement.";
+				next;
+				mes "[Représentante]";
+				mes "La ^3131FFSalle de Réception^000000 est située au niveau du hall de l'aile de droite. Différents évènements et fêtes y ont lieu.";
+				next;
+				goto L_Building;
 
-		case 2:
-			mes "[Représentante]";
-			mes "Afin de vous rendre au premier étage, veuillez emprunter les escaliers situés des deux côtés du bureau d'accueil. Cet étage abrite majoritairement des bureaux utilisés à des fins administratives.";
-			next;
-			mes "[Représentante]";
-			mes "Vous pourrez également trouver une ^3131FFSalle de Conférence^000000,";
-			mes "le ^3131FFBureau des Secrétaires^000000,";
-			mes "l'^3131FFAuditorium^000000, et";
-			mes "le ^3131FFBureau du Directeur^000000.";
-			next;
-			goto L_Building;
+			case 2:
+				mes "[Représentante]";
+				mes "Afin de vous rendre au premier étage, veuillez emprunter les escaliers situés des deux côtés du bureau d'accueil. Cet étage abrite majoritairement des bureaux utilisés à des fins administratives.";
+				next;
+				mes "[Représentante]";
+				mes "Vous pourrez également trouver une ^3131FFSalle de Conférence^000000,";
+				mes "le ^3131FFBureau des Secrétaires^000000,";
+				mes "l'^3131FFAuditorium^000000, et";
+				mes "le ^3131FFBureau du Directeur^000000.";
+				next;
+				goto L_Building;
 
-		case 3:
-			mes "[Représentante]";
-			mes "Le sous-sol est utilisé par le ^3131FFRegenshirm^000000, le laboratoire avec lequel nous sommes associés. Pour des raisons de sécurité, cet étage n'est pas accessible aux visiteurs.";
-			next;
-			goto L_Building;
+			case 3:
+				mes "[Représentante]";
+				mes "Le sous-sol est utilisé par le ^3131FFRegenshirm^000000, le laboratoire avec lequel nous sommes associés. Pour des raisons de sécurité, cet étage n'est pas accessible aux visiteurs.";
+				next;
+				goto L_Building;
 
-		case 4:
-			mes "[Représentante]";
-			mes "Nous faisons de notre mieux afin de proposer les meilleurs services à nos clients.";
-			mes "Souvenez-vous que Rekenber est un nom de confiance.";
-			mes "Merci, passez une bonne journée.";
-			close;
+			case 4:
+				mes "[Représentante]";
+				mes "Nous faisons de notre mieux afin de proposer les meilleurs services à nos clients.";
+				mes "Souvenez-vous que Rekenber est un nom de confiance.";
+				mes "Merci, passez une bonne journée.";
+				close;
+		}
 	}
 
 L_History:
@@ -3564,8 +3577,9 @@ L_History:
 	mes "[Représentante]";
 	mes "Pour vous rendre à la bibliothèque, rendez-vous simplement dans le hall d'entrée, et prenez à votre gauche.";
 	mes "Merci, passez une bonne journée.";
+	changequest 2087,2088;
 	set lhz_curse,8;
-	close;	
+	close;
 }
 
 lhz_in01,27,247,5	script	Représentante#lhz	71,{
@@ -3592,7 +3606,10 @@ lhz_in01,27,247,5	script	Représentante#lhz	71,{
 				mes "[Représentante]";
 				mes "En 700 A.G., le ^ff0000Docteur Varmunt^000000 a rejoint Regenschirm. Ce sont ses travaux en sciences qui ont permis à la Corporation Rekenber de devenir rapidement la société la plus importante au niveau national.";
 				if(lhz_curse == 8) set lhz_curse,9;
-				else if(lhz_curse == 9) set lhz_curse,10;
+				else if(lhz_curse == 9) {
+					changequest 2088,2089;
+					set lhz_curse,10;
+				}
 				next;
 				break;
 
@@ -3603,7 +3620,10 @@ lhz_in01,27,247,5	script	Représentante#lhz	71,{
 				mes "[Représentante]";
 				mes "La Corporation Rekenber est impliquée dans la majeure partie des commerces d'échanges. Souvenez-vous que le nom de Rekenber est un nom en lequel vous pouvez avoir confiance.";
 				if (lhz_curse == 8) set lhz_curse,9;
-				else if(lhz_curse == 9) set lhz_curse,10;
+				else if(lhz_curse == 9) {
+					changequest 2088,2089;
+					set lhz_curse,10;
+				}
 				next;
 				break;
 		}
@@ -3619,45 +3639,46 @@ lhz_in01,27,247,5	script	Représentante#lhz	71,{
 	switch( select( "Informations sur le Bâtiment." ) )
 	{
 		case 1:
-L_Building:
-			mes "[Représentante]";
-			mes "Quel étage vous intéresse en particulier?";
-			next;
-			switch( select( "Rez-de-chaussée.","Premier étage.","Sous-sol.","Annuler." ) )
-			{
-				case 1:
-					mes "[Représentante]";
-					mes "La ^3131FFBibliothèque de la Corporation Rekenber^000000 est située dans la dernière pièce à gauche du grand hall. Elle comporte une incroyable ressource d'informations et d'idées innovantes pour que nos employés soient à la pointe de la connaissance des systèmes de développement.";
-					next;
-					mes "[Représentante]";
-					mes "La ^3131FFSalle de Réception^000000 est située au niveau du hall de l'aile de droite. Différents évènements et fêtes y ont lieu.";
-					next;
-					goto L_Building;
+			while (1) {
+				mes "[Représentante]";
+				mes "Quel étage vous intéresse en particulier?";
+				next;
+				switch( select( "Rez-de-chaussée.","Premier étage.","Sous-sol.","Annuler." ) )
+				{
+					case 1:
+						mes "[Représentante]";
+						mes "La ^3131FFBibliothèque de la Corporation Rekenber^000000 est située dans la dernière pièce à gauche du grand hall. Elle comporte une incroyable ressource d'informations et d'idées innovantes pour que nos employés soient à la pointe de la connaissance des systèmes de développement.";
+						next;
+						mes "[Représentante]";
+						mes "La ^3131FFSalle de Réception^000000 est située au niveau du hall de l'aile de droite. Différents évènements et fêtes y ont lieu.";
+						next;
+						goto L_Building;
 
-				case 2:
-					mes "[Représentante]";
-					mes "Afin de vous rendre au premier étage, veuillez emprunter les escaliers situés de chaque côté du Bureau d'Accueil. Cet étage abrite majoritairement des bureaux utilisés à des fins administratives.";
-					next;
-					mes "[Représentante]";
-					mes "Vous pourrez également trouver une ^3131FFSalle de Conférence^000000,";
-					mes "le ^3131FFBureau des Secrétaires^000000,";
-					mes "l'^3131FFAuditorium^000000, et";
-					mes "le ^3131FFBureau du Directeur^000000.";
-					next;
-					goto L_Building;
+					case 2:
+						mes "[Représentante]";
+						mes "Afin de vous rendre au premier étage, veuillez emprunter les escaliers situés de chaque côté du Bureau d'Accueil. Cet étage abrite majoritairement des bureaux utilisés à des fins administratives.";
+						next;
+						mes "[Représentante]";
+						mes "Vous pourrez également trouver une ^3131FFSalle de Conférence^000000,";
+						mes "le ^3131FFBureau des Secrétaires^000000,";
+						mes "l'^3131FFAuditorium^000000, et";
+						mes "le ^3131FFBureau du Directeur^000000.";
+						next;
+						goto L_Building;
 
-				case 3:
-					mes "[Représentante]";
-					mes "Le sous-sol est utilisé par le ^3131FFRegenshirm^000000, le laboratoire avec lequel nous sommes associés. Pour des raisons de sécurité, cet étage n'est pas accessible aux visiteurs.";
-					next;
-					goto L_Building;
+					case 3:
+						mes "[Représentante]";
+						mes "Le sous-sol est utilisé par le ^3131FFRegenshirm^000000, le laboratoire avec lequel nous sommes associés. Pour des raisons de sécurité, cet étage n'est pas accessible aux visiteurs.";
+						next;
+						goto L_Building;
 
-				case 4:
-					mes "[Représentante]";
-					mes "Nous faisons de notre mieux afin de proposer les meilleurs services à nos clients.";
-					mes "Souvenez-vous que Rekenber est un nom de confiance.";
-					mes "Merci, passez une bonne journée.";
-					close;
+					case 4:
+						mes "[Représentante]";
+						mes "Nous faisons de notre mieux afin de proposer les meilleurs services à nos clients.";
+						mes "Souvenez-vous que Rekenber est un nom de confiance.";
+						mes "Merci, passez une bonne journée.";
+						close;
+				}
 			}
 	}
 }
@@ -3722,6 +3743,7 @@ lhz_in01,273,121,1	script	Scientifique Fou	865,{
 				mes "[Wolfchev]";
 				mes "Ah, mais attendez! Je dois réunir certains matériaux. Oui, vous pourriez m'apporter ce dont j'ai besoin. Oui, oui.";
 				mes "Voici un indice... C'est rond... Brillant... Les enfants adorent jouer avec! Oh, j'en ai peut-être un peu trop dit!";
+				changequest 2089,2090;
 				set lhz_curse,15;
 				close;
 
@@ -4070,6 +4092,7 @@ L_Evidence:
 		next;
 		mes "[Sueii Slierre]";
 		mes "Oui, les expériences en lien avec les Homoncules ne sont pas tabou. Quoi qu'il en soit, acceptez ceci en gage de notre gratitude, aventurier.";
+		changequest 2094,2095;
 		set lhz_curse,31;
 		getitem 617,1;
 		getitem 12016,10;
@@ -4099,7 +4122,10 @@ OnTouch:
 	if(lhz_curse > 30)
 	{
 		mes "^3131FFIl n'y a aucune trace du scientifique fou. Seules des piles de dossiers bien organisés demeurent au laboratoire.^000000";
-		if(lhz_curse == 31) set lhz_curse,32;
+		if(lhz_curse == 31) {
+			completequest 2095;
+			set lhz_curse,32;
+		}
 		close;
 	}
 }
