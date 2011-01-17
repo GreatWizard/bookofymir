@@ -832,7 +832,7 @@ UPDATE item_db SET `name_japanese`  = "Bâton d'Hypnotiseur" WHERE ID = 1622;
 UPDATE item_db SET `name_japanese`  = "Bâton de Puissance Raffiné" WHERE ID = 1623;
 UPDATE item_db SET `name_japanese`  = "Baguette d'Os de Liche" WHERE ID = 1624;
 UPDATE item_db SET `name_japanese`  = "Bâton de Guérison" WHERE ID = 1625;
-UPDATE item_db SET `name_japanese`  = "Bâton de Pénétration" WHERE ID = 1626;
+UPDATE item_db SET `name_japanese`  = "Bâton de Transpercement" WHERE ID = 1626;
 UPDATE item_db SET `name_japanese`  = "LA Baguette" WHERE ID = 1627;
 UPDATE item_db SET `name_japanese`  = "Bâton de Survie Raffiné" WHERE ID = 1628;
 UPDATE item_db SET `name_japanese`  = "Cane de Gentilhomme" WHERE ID = 1629;
@@ -850,7 +850,7 @@ UPDATE item_db SET `name_japanese`  = "Baguette Magique de la Gloire" WHERE ID =
 UPDATE item_db SET `name_japanese`  = "Glorieux Bâton de Guérison" WHERE ID = 1641;
 UPDATE item_db SET `name_japanese`  = "Bâton des Ténèbres" WHERE ID = 1642;
 UPDATE item_db SET `name_japanese`  = "Bâton de Branche Flétrie" WHERE ID = 1643;
-UPDATE item_db SET `name_japanese`  = "Bâton de Pénétration" WHERE ID = 1644;
+UPDATE item_db SET `name_japanese`  = "Bâton de Transpercement" WHERE ID = 1644;
 UPDATE item_db SET `name_japanese`  = "Baguette d'Os de Liche" WHERE ID = 1645;
 UPDATE item_db SET `name_japanese`  = "Bâton d'Ord" WHERE ID = 1648;
 UPDATE item_db SET `name_japanese`  = "Arc" WHERE ID = 1701;
