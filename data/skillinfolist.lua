@@ -5009,6 +5009,12 @@ SKILL_INFO_LIST = {
 		MaxLv = 1,
 		Type = "Quest",
 	},
+	[SKID.MO_BALKYOUNG] = {
+		"MO_BALKYOUNG";
+		SkillName = "Explosion du Ki",
+		MaxLv = 1,
+		Type = "Quest",
+	},
 
 	[SKID.SA_ELEMENTGROUND] = {
 		"SA_ELEMENTGROUND";
