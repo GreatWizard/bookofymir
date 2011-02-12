@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.2
+//= 1.3
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -16,6 +16,7 @@
 //= 1.0 First version. [L0ne_W0lf]
 //= 1.1 Optimization. [Zephyrus]
 //= 1.2 Removed redundent input. [L0ne_W0lf]
+//= 1.3 Duplicates now spawned from floating NPCs. [L0ne_W0lf]
 //============================================================ 
 
 prontera,41,337,5	script	Loueur de Mercenaires::Mercenary Manager#Spear	105,{
@@ -392,7 +393,7 @@ pay_arche,99,167,4	script	Loueur de Mercenaires::Mercenary Manager#Bow	732,{
 
 // Mercenary Merchant NPCs
 //============================================================
-prontera,30,337,4	script	Marchande (Mercenaires)::MercMerchant	700,{
+-	script	Marchande (Mercenaires)#dum::MercMerchant	-1,{
 	mes "[Marchande pour Mercenaires]";
 	mes "Bonjour, je vends des potions que peuvent utiliser les Mercenaires. Est-ce que vous cherchez quelque chose en particulier?";
 	next;
@@ -423,8 +424,10 @@ prontera,30,337,4	script	Marchande (Mercenaires)::MercMerchant	700,{
 		next;
 		callfunc "F_PurchaseMercItem",12243,2100;
 	}
+	close;
 }
 
+prontera,30,337,4	duplicate(MercMerchant)	Marchande (Mercenaires)#Spear	700
 izlude,56,139,4	duplicate(MercMerchant)	Marchande (Mercenaires)::Mercenary Merchant#Sword	892
 pay_arche,102,167,5	duplicate(MercMerchant)	Marchande (Mercenaires)::Mercenary Merchant#Bow	879
 
