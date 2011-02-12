@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= kobra_k88; L0ne_W0lf
 //===== Current Version: ===================================== 
-//= 1.4
+//= 1.5
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -28,15 +28,12 @@
 //=	exception of the "Free for all" mode.
 //=	Added PVP event NPCs.
 //= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.5 Duplicates now spawn from floating NPCs. [L0ne_W0lf]
 //============================================================ 
 
-// Morroc
+// Floating NPC
 //============================================================ 
-morocc_in,144,138,4	script	Informations PvP#moc	84,{
-	callfunc "F_PVPNarrator","morocc_in",141,139;
-}
-
-morocc_in,144,142,4	script	Gardien PvP#moc::PVPGateKeeper	83,{
+-	script	Gardien PvP#dummy::PVPGateKeeper	-1,{
 	mes "[Gardien PvP]";
 	mes "Ravi d'être à votre service!";
 	mes "Je peux vous conduire aux Arènes PvP. Si vous avez des questions à propos des règles ou bien des modes du PvP, adressez-vous à mon collègue s'il vous plaît.";
@@ -93,6 +90,16 @@ morocc_in,144,142,4	script	Gardien PvP#moc::PVPGateKeeper	83,{
 		close;
 	}
 }
+
+// Morroc
+//============================================================ 
+morocc_in,144,138,4	script	Informations PvP#moc	84,{
+	callfunc "F_PVPNarrator","morocc_in",141,139;
+}
+
+morocc_in,144,142,4	duplicate(PVPGateKeeper)	Gardien PvP#moc	83,{
+
+
 
 // Alberta
 //============================================================ 
@@ -376,7 +383,7 @@ OnInit:
 
 // Spectator Entrance
 //============================================================ 
-pvp_room,62,85,4	script	Entrée Spectateurs#1::PVPSpectator	105,{
+-	script	Entrée Spectateurs#dum::PVPSpectator	-1,{
 	if (countitem(7029) == 0) {
 		mes "[Personnel de l'Arène]";
 		mes "Ceci est l'entrée des spectateurs.";
@@ -403,6 +410,8 @@ OnInit:
 	end;
 }
 
+pvp_room,62,85,4	duplicate(PVPSpectator)	Entrée Spectateurs#1	105
+
 pvp_room,70,85,4	duplicate(PVPSpectator)	Entrée Spectateurs#2	105
 
 pvp_room,78,85,4	duplicate(PVPSpectator)	Entrée Spectateurs#3	105
@@ -411,7 +420,7 @@ pvp_room,86,85,4	duplicate(PVPSpectator)	Entrée Spectateurs#4	105
 
 // Spectator Warps
 //============================================================ 
-pvp_2vs2,5,4,0	script	Personnel de l'Arène#1::PVPSpecWarp	45,1,1,{
+-	script	Personnel de l'Arène#dum::PVPSpecWarp	-1,{
 OnTouch:
 	mes "[Personnel de l'Arène]";
 	mes "En quoi puis-je vous aider?";
@@ -422,6 +431,8 @@ OnTouch:
 	warp "pvp_room",84,39;
 	end;
 }
+
+pvp_2vs2,5,4,0	duplicate(PVPSpecWarp)	Personnel de l'Arène#1	45,1,1,{
 
 pvp_2vs2,5,74,0	duplicate(PVPSpecWarp)	Personnel de l'Arène#2	45,1,1
 

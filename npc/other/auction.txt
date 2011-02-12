@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.2
+//= 1.3
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
@@ -15,6 +15,7 @@
 //= 1.0 First version, place holders only. [L0ne_W0lf]
 //= 1.1 Moved Morroc Auction NPCs to Morroc Ruins. [L0ne_W0lf]
 //= 1.2 Warp fixed. Dialog in Ruins/Lighthalzen changed. [Kisuka]
+//= 1.3 Duplicates now spawn from floating NPCs. [L0ne_W0lf]
 //============================================================
 
 // Auction House warpers
@@ -67,14 +68,15 @@ function	script	F_AuctionWarper	{
 
 // Sign posts
 //============================================================
-moc_ruins,76,176,6	script	Informations#moc::AuctionSign	837,{
+-	script	Informations#dum::AuctionSign	-1,{
 	mes "[Informations]";
 	mes "Téléportation vers la salle de ventes aux enchères.";
 	close;
 }
 
-prontera,216,120,6	duplicate(AuctionSign)	Informations#prt	837,{
-yuno,131,116,0	duplicate(AuctionSign)	Informations#yuno	837,{
+moc_ruins,76,176,6	duplicate(AuctionSign)	Informations#moc	837
+prontera,216,120,4	duplicate(AuctionSign)	Informations#prt	837
+yuno,131,116,0		duplicate(AuctionSign)	Informations#yuno	837
 lighthalzen,207,169,6	duplicate(AuctionSign)	Informations#lhz	837
 
 // Warps
@@ -86,7 +88,7 @@ auction_02,43,17,0	warp	auction_enterance_lhz	1,1,lighthalzen,209,169
 
 // Auction House NPCs
 //============================================================
-auction_01,182,68,6	script	Commissaire-Priseur#mo1::AuctionBroker	98,{
+-	script	Commissaire-Priseur#du::AuctionBroker	-1,{
 	mes "[Commissaire-Priseur]";
 	mes "Bienvenue à la Salle des Enchères.";
 	mes "Souhaitez-vous voir les objets?";
@@ -104,6 +106,7 @@ auction_01,182,68,6	script	Commissaire-Priseur#mo1::AuctionBroker	98,{
 	close;
 }
 
+auction_01,182,68,6	duplicate(AuctionBroker)	Commissaire-Priseur#mo1	98
 auction_01,182,75,0	duplicate(AuctionBroker)	Commissaire-Priseur#mo2	99
 auction_01,177,75,2	duplicate(AuctionBroker)	Commissaire-Priseur#mo3	98
 auction_01,177,68,4	duplicate(AuctionBroker)	Commissaire-Priseur#mo4	99

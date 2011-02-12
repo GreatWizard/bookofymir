@@ -5,12 +5,12 @@
 //===== By: ==================================================
 //= eAthena dev team
 //===== Current Version: =====================================
-//= 1.8
+//= 2.0
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
-//= item loses all element refinement and upgrades but
-//= cards too?
+//= [Aegis Conversion]
+//= Adds slots to selected weapons and armor.
 //===== Additional Comments: =================================
 //= 0.1a added missing L_No: to 2 funcs [Lupus]
 //= 0.1b Removed duplicates [Toms]
@@ -26,10 +26,17 @@
 //= 1.6 Replaced effect numerics with constants. [Samuray22]
 //= 1.7 Adjusted prices on some armor and weapons. [L0ne_W0lf]
 //= 1.8 Added missing Gae Bolg and Dragon Slayer. [Kisuka]
+//= 1.9 Moved Episode 12 items to separate NPC.
+//=     Some cleanup & optimization. [Gepard]
+//= 2.0 Duplicates now spawn from floating NPCs. [L0ne_W0lf]
 //============================================================
 
-payon,140,151,5	script	Seiyablem	84,{
-
+-	script	Seiyablem#dummy::SocketEnchant	-1,{
+	if (checkweight(1201,1) == 0)
+	{
+		mes "Attendez une minute! Vous portez trop d'articles sur vous. Veuillez revenir après avoir déposé quelques objets dans votre Stock Kafra.";
+		close;
+	}
 	mes "[Seiyablem]";
 	mes "Bonjour.";
 	mes "Je suis un ingénieur spécialisé dans l'amélioration des Armes et Armures classiques.";
@@ -46,7 +53,6 @@ payon,140,151,5	script	Seiyablem	84,{
 			mes "Vous voulez améliorer une Arme?";
 			mes "Les Armes sont classées en différentes catégories suivant la difficulté à travailler sur celles-ci. Les Armes de Classe C sont relativement faciles à travailler, et les Armes de Classe S sont les plus coriaces.";
 			mes "Quelle est la Classe de l'Arme sur laquelle vous voulez essayer une amélioration?";
-			set @sockettype,1;
 			next;
 			switch( select( "Classe C","Classe B","Classe A","Classe S" ) )
 			{
@@ -54,74 +60,50 @@ payon,140,151,5	script	Seiyablem	84,{
 					mes "[Seiyablem]";
 					mes "Une arme de Classe C?";
 					mes "Cela paraît raisonnable.";
-     					mes "Veuillez choisir votre arme:";
+     				mes "Veuillez choisir votre arme:";
 					next;
-					switch( select( "Trident","Corde","Violon","Livre des Flots","Livre de Mère Nature","Livre du Soleil Éclatant","Livre de la Bourrasque" ) )
+					switch(select("Trident","Corde","Violon"))
 					{
-						case 1: callfunc "Func_Socket",1,1460,1461,40,66,200,1010,10; break;
-						case 2: callfunc "Func_Socket",1,1950,1951,40,66,200,1010,10; break;
-						case 3: callfunc "Func_Socket",1,1901,1902,40,66,200,1010,10; break;
-						case 4: callfunc "Func_Socket",1,1553,1568,40,66,200,1010,10; break;
-						case 5: callfunc "Func_Socket",1,1554,1569,40,66,200,1010,10; break;
-						case 6: callfunc "Func_Socket",1,1555,1570,40,66,200,1010,10; break;
-						case 7: callfunc "Func_Socket",1,1556,1571,40,66,200,1010,10; break;
+						case 1: callfunc "Func_Socket",1460,1461,40,66,200,1010,10;
+						case 2: callfunc "Func_Socket",1950,1951,40,66,200,1010,10;
+						case 3: callfunc "Func_Socket",1901,1902,40,66,200,1010,10;
 					}
-				break;
-				
 				case 2:
 					mes "[Seiyablem]";
 					mes "Une arme de Classe B?";
 					mes "Très bien...";
-     					mes "Veuillez choisir votre arme:";
+     				mes "Veuillez choisir votre arme:";
 					next;
-					switch( select( "Fléau","Gladius","Arc Gakkung","Pique","Haedonggum","Luth","Câble","Waghnak","Arbalète","Hache d'Orc","Cimeterre","Pointe" ) )
+					switch( select( "Fléau","Gladius","Arc Gakkung","Pique","Haedonggum","Luth","Câble","Waghnak","Arbalète"))
 					{
-						case 1: callfunc "Func_Socket",1,1519,1520,40,61,300,1010,10; break;
-						case 2: callfunc "Func_Socket",2,1219,1220,40,61,300,984,1,999,5; break;
-						case 3: callfunc "Func_Socket",2,1714,1716,40,61,300,984,2,999,5; break;
-						case 4: callfunc "Func_Socket",1,1407,1408,40,61,200,1010,10; break;
-						case 5: callfunc "Func_Socket",2,1123,1128,40,61,300,984,2,999,5; break;
-						case 6: callfunc "Func_Socket",1,1905,1906,40,61,300,1011,10; break;
-						case 7: callfunc "Func_Socket",1,1954,1955,40,61,300,1011,10; break;
-						case 8: callfunc "Func_Socket",1,1801,1802,40,61,300,1010,10; break;
-						case 9: callfunc "Func_Socket",2,1713,1715,40,61,300,984,2,999,5; break;
-						case 10: callfunc "Func_Socket",1,1304,1309,40,61,200,984,1; break;
-						case 11: callfunc "Func_Socket",1,1113,1114,40,61,200,984,1; break;
-						case 12: callfunc "Func_Socket",1,1523,1538,40,61,300,984,1; break;
+						case 1: callfunc "Func_Socket",1519,1520,40,61,300,1010,10;
+						case 2: callfunc "Func_Socket",1219,1220,40,61,300, 984, 1,999,5;
+						case 3: callfunc "Func_Socket",1714,1716,40,61,300, 984, 2,999,5;
+						case 4: callfunc "Func_Socket",1407,1408,40,61,200,1010,10;
+						case 5: callfunc "Func_Socket",1123,1128,40,61,300, 984, 2,999,5;
+						case 6: callfunc "Func_Socket",1905,1906,40,61,300,1011,10;
+						case 7: callfunc "Func_Socket",1954,1955,40,61,300,1011,10;
+						case 8: callfunc "Func_Socket",1801,1802,40,61,300,1010,10;
+						case 9: callfunc "Func_Socket",1713,1715,40,61,300, 984, 2,999,5;
 					}
-				break;
-				
 				case 3:
 					mes "[Seiyablem]";
 					mes "Ooh une arme de Classe A?";
 					mes "Nous entrons en territoire à haut risque!";
-      					mes "Veuillez choisir votre arme:";
+      				mes "Veuillez choisir votre arme:";
 					next;
-					switch( select( "Arc de Chasse","Bâton de Survie(INT)","Zweihander","Flamberge","Percemaille","Baliste","Gourdin","Furie","Claymore","Tueur de Dragons","Katar des Terres Gelées","Katar de l'Antre de la Terre","Katar des Flammes Déchaînées","Katar aux Lames de Vent","Masse Dorée","Luth Oriental","Fouet Royal","Lance Fantôme","Gae Bolg","Schweizersabel" ) )
+					switch( select( "Arc de Chasse","Bâton de Survie(INT)","Zweihander","Flamberge","Percemaille","Baliste","Gourdin","Furie","Claymore"))
 					{
-						case 1: callfunc "Func_Socket",2,1718,1726,40,61,500,984,2,999,10; break;
-						case 2: callfunc "Func_Socket",2,1619,1620,40,61,500,984,5,999,10; break;
-						case 3: callfunc "Func_Socket",2,1168,1171,40,61,800,984,5,999,10; break;
-						case 4: callfunc "Func_Socket",2,1129,1149,40,61,500,984,2,999,10; break;
-						case 5: callfunc "Func_Socket",2,1261,1266,40,61,700,984,5,999,10; break;
-						case 6: callfunc "Func_Socket",2,1722,1727,40,61,500,984,5,999,10; break;
-						case 7: callfunc "Func_Socket",2,1522,1532,40,61,500,984,2,999,10; break;
-						case 8: callfunc "Func_Socket",2,1814,1816,40,61,500,984,5,999,10; break;
-						case 9: callfunc "Func_Socket",2,1163,1172,40,61,500,984,5,999,10; break;
-						case 10: callfunc "Func_Socket",1,13001,13030,40,61,500,984,2; break;
-						case 11: callfunc "Func_Socket",1,1256,1275,40,61,500,984,2; break;
-						case 12: callfunc "Func_Socket",1,1257,1276,40,61,500,984,2; break;
-						case 13: callfunc "Func_Socket",1,1258,1277,40,61,500,984,2; break;
-						case 14: callfunc "Func_Socket",1,1259,1278,40,61,500,984,2; break;
-						case 15: callfunc "Func_Socket",1,1524,1539,40,61,500,984,2; break;
-						case 16: callfunc "Func_Socket",1,1918,1922,40,61,500,984,2; break;
-						case 17: callfunc "Func_Socket",1,1970,1976,40,61,500,984,2; break;
-						case 18: callfunc "Func_Socket",1,1477,1479,40,61,500,984,2; break;
-						case 19: callfunc "Func_Socket",1,1474,1480,40,61,500,984,2; break;
-						case 20: callfunc "Func_Socket",1,1167,1178,40,61,500,984,2; break;
+						case 1: callfunc "Func_Socket",1718,1726,40,61,500,984,2,999,10;
+						case 2: callfunc "Func_Socket",1619,1620,40,61,500,984,5,999,10;
+						case 3: callfunc "Func_Socket",1168,1171,40,61,800,984,5,999,10;
+						case 4: callfunc "Func_Socket",1129,1149,40,61,500,984,2,999,10;
+						case 5: callfunc "Func_Socket",1261,1266,40,61,700,984,5,999,10;
+						case 6: callfunc "Func_Socket",1722,1727,40,61,500,984,5,999,10;
+						case 7: callfunc "Func_Socket",1522,1532,40,61,500,984,2,999,10;
+						case 8: callfunc "Func_Socket",1814,1816,40,61,500,984,5,999,10;
+						case 9: callfunc "Func_Socket",1163,1172,40,61,500,984,2,999,10; // NPC says "5 Oridecon" (Aegis) but takes only 2
 					}
-				break;
-				
 				case 4:
 					mes "[Seiyablem]";
 					mes "Whoa, whoa, whoa...";
@@ -129,28 +111,18 @@ payon,140,151,5	script	Seiyablem	84,{
 					mes "Ce serait un miracle si j'y arrivais, mais bon... On ne sait jamais!";
 					mes "Veuillez choisir votre arme:";
 					next;
-					switch( select( "Gungnir","Couteau Empoisonné","Pic à Glace","Sucsamad","Ginnungagap","Coutelas","Faux","Bâton de Survie(DEX)","Zephyrus","Brise-Armure","Fléau des Dragons","Brise-Lame","Dague d'Assassin","Grande Croix","Bourreau" ) )
+				switch(select("Gungnir","Couteau Empoisonné","Pic à Glace","Sucsamad","Ginnungagap","Coutelas","Faux","Bâton de Survie(DEX)"))
 					{
-						case 1: callfunc "Func_Socket",2,1413,1418,40,51,1000,984,5,999,10; break;
-						case 2: callfunc "Func_Socket",2,1239,13016,40,51,1000,984,5,999,10; break;
-						case 3: callfunc "Func_Socket",2,1230,13017,40,51,2000,984,5,999,10; break;
-						case 4: callfunc "Func_Socket",2,1236,13018,40,51,1000,984,5,999,10; break;
-						case 5: callfunc "Func_Socket",2,13002,13019,40,51,1000,984,5,999,10; break;
-						case 6: callfunc "Func_Socket",2,1135,13400,40,51,1000,984,5,999,10; break;
-						case 7: callfunc "Func_Socket",2,1466,1476,40,51,1000,984,5,999,10; break;
-						case 8: callfunc "Func_Socket",2,1617,1618,40,51,2000,984,5,999,10; break;
-						case 9: callfunc "Func_Socket",2,1468,1481,40,51,1000,984,5,999,10; break;
-						case 10: callfunc "Func_Socket",2,1225,13032,40,51,1000,984,5,999,10; break;
-						case 11: callfunc "Func_Socket",2,1166,1180,40,51,1000,984,5,999,10; break;
-						case 12: callfunc "Func_Socket",2,1224,13031,40,51,1000,984,5,999,10; break;
-						case 13: callfunc "Func_Socket",2,1232,13033,40,51,1000,984,5,999,10; break;
-						case 14: callfunc "Func_Socket",2,1528,1540,40,51,1000,984,5,999,10; break;
-						case 15: callfunc "Func_Socket",2,1169,1179,40,51,1000,984,5,999,10; break;
+						case 1: callfunc "Func_Socket", 1413, 1418,40,51,1000,984,5,999,10;
+						case 2: callfunc "Func_Socket", 1239,13016,40,51,1000,984,5,999,10;
+						case 3: callfunc "Func_Socket", 1230,13017,40,51,2000,984,5,999,10;
+						case 4: callfunc "Func_Socket", 1236,13018,40,51,1000,984,5,999,10;
+						case 5: callfunc "Func_Socket",13002,13019,40,51,1000,984,5,999,10;
+						case 6: callfunc "Func_Socket", 1135,13400,40,51,1000,984,5,999,10;
+						case 7: callfunc "Func_Socket", 1466, 1476,40,51,1000,984,5,999,10;
+						case 8: callfunc "Func_Socket", 1617, 1618,40,51,2000,984,5,999,10;
 					}
-				break;
 			}
-		break;
-		
 		case 2:
 			mes "[Seiyablem]";
 			mes "Une armure, vous dites?";
@@ -158,112 +130,89 @@ payon,140,151,5	script	Seiyablem	84,{
 			mes "Les armures sont divisées en quatre Classes différentes, qui dépendent de la difficulté de réussite.";
 			mes "La Classe C est celle sur laquelle il est le plus facile de travailler, et la Classe S la plus difficile.";
 			mes "De quelle Classe est l'Armure sur laquelle vous voulez essayer une amélioration?";
-			set @sockettype,2;
 			next;
-			switch( select( "C Class","B Class","A Class","S Class" ) )
+			switch(select("Classe C","Classe B","Classe A","Classe S" ) )
 			{
 				case 1:
 					mes "[Seiyablem]";
 					mes "Une armure de Classe C?";
 					mes "Cela paraît raisonnable.";
-      					mes "Veuillez choisir votre armure:";
+      				mes "Veuillez choisir votre armure:";
 					next;
-					switch( select( "Manteau","Blouson","Diadème","Calotte","Tournesol","Chapeau de Remise des Diplômes","Gros Ruban","Casquette de Marin" ) )
+					switch(select("Manteau","Blouson","Diadème","Calotte"))
 					{
-						case 1: callfunc "Func_Socket",1,2307,2308,40,66,200,999,3; break;
-						case 2: callfunc "Func_Socket",1,2309,2310,40,66,200,999,3; break;
-						case 3: callfunc "Func_Socket",1,2232,2233,40,66,200,999,3; break;
-						case 4: callfunc "Func_Socket",1,2216,2217,40,66,200,999,3; break;
-						case 5: callfunc "Func_Socket",1,2253,5351,40,66,100,999,3; break;
-						case 6: callfunc "Func_Socket",1,5012,5347,40,66,200,999,3; break;
-						case 7: callfunc "Func_Socket",1,2244,5348,40,66,200,999,5; break;
-						case 8: callfunc "Func_Socket",1,5016,5349,40,66,200,999,5; break;
+						case 1: callfunc "Func_Socket",2307,2308,40,66,200,999,3;
+						case 2: callfunc "Func_Socket",2309,2310,40,66,200,999,3;
+						case 3: callfunc "Func_Socket",2232,2233,40,66,200,999,3;
+						case 4: callfunc "Func_Socket",2216,2217,40,66,200,999,3;
 					}
-				break;
-				
 				case 2:
 					mes "[Seiyablem]";
 					mes "Une armure de Classe B? Très bien...";
       					mes "Veuillez choisir votre armure:";
 					next;
-					switch( select( "Bouclier Scintillant","Cotte de Mailles","Saint Robe","Robe de Soie","Bottes","Chaussures","Cache-Nez [1]","Garde","Rondache","Bouclier","Toque de Bongun","Anneau des Morts","Chaussures à Serres" ) )
+					switch( select( "Bouclier Scintillant","Cotte de Mailles","Saint Robe","Robe de Soie","Bottes","Chaussures","Cache-Nez [1]","Garde","Rondache","Bouclier","Toque de Bongun"))
 					{
-						case 1:  callfunc "Func_Socket",1,2107,2108,40,61,250,999,5; break;
-						case 2:  callfunc "Func_Socket",1,2314,2315,40,61,250,999,5; break;
-						case 3:  callfunc "Func_Socket",1,2325,2326,40,61,300,999,5; break;
-						case 4:  callfunc "Func_Socket",1,2321,2322,40,61,300,999,5; break;
-						case 5:  callfunc "Func_Socket",1,2405,2406,40,61,300,999,5; break;
-						case 6:  callfunc "Func_Socket",1,2403,2404,40,61,300,999,5; break;
-						case 7:  callfunc "Func_Socket",1,2503,2504,40,61,300,999,5; break;
-						case 8:  callfunc "Func_Socket",1,2101,2102,40,61,300,999,5; break;
-						case 9:  callfunc "Func_Socket",1,2103,2104,40,61,300,999,5; break;
-						case 10: callfunc "Func_Socket",1,2105,2106,40,61,250,999,5; break;
-						case 11: callfunc "Func_Socket",1,5046,5168,40,61,250,999,5; break;
-						case 12: callfunc "Func_Socket",1,2609,2715,40,61,300,999,5; break;
-						case 13: callfunc "Func_Socket",1,2409,2432,40,61,300,999,5; break;
+						case 1:  callfunc "Func_Socket",2107,2108,40,61,250,999,5;
+						case 2:  callfunc "Func_Socket",2314,2315,40,61,250,999,5;
+						case 3:  callfunc "Func_Socket",2325,2326,40,61,300,999,5;
+						case 4:  callfunc "Func_Socket",2321,2322,40,61,300,999,5;
+						case 5:  callfunc "Func_Socket",2405,2406,40,61,300,999,5;
+						case 6:  callfunc "Func_Socket",2403,2404,40,61,300,999,5;
+						case 7:  callfunc "Func_Socket",2503,2504,40,61,300,999,5;
+						case 8:  callfunc "Func_Socket",2101,2102,40,61,300,999,5;
+						case 9:  callfunc "Func_Socket",2103,2104,40,61,300,999,5;
+						case 10: callfunc "Func_Socket",2105,2106,40,61,250,999,5;
+						case 11: callfunc "Func_Socket",5046,5168,40,61,250,999,5;
 					}
-				break;
-				
 				case 3:
 					mes "[Seiyablem]";
 					mes "Ooh, une armure de Classe A?";
 					mes "Nous entrons en territoire à haut risque!";
       					mes "Veuillez choisir votre armure:";
 					next;
-					switch( select( "Casque Serti","Chapeau Séelique","Livre de Mémoires","Justaucorps","Harnois","Armure Complète","Vêtements de Voleur","Grèves","Coiffe","Surveste","Heaume","Tenue de Ninja","Heaume d'Orc","Vieille Cape","Calotte","Casque d'Or","Broche","Toque de Munak","Bandeau de Pirate","Bottes de Cuir Noir" ) )
+					switch( select( "Casque Serti","Chapeau Séelique","Livre de Mémoires","Justaucorps","Harnois","Armure Complète","Vêtements de Voleur","Grèves","Coiffe","Surveste","Heaume","Tenue de Ninja","Heaume d'Orc","Vieille Cape","Calotte","Casque d'Or","Broche","Toque de Munak"))
 					{
-						case 1:  callfunc "Func_Socket",1,2230,2231,40,61,400,985,1; break;
-						case 2:  callfunc "Func_Socket",1,5114,5120,40,61,400,985,1; break;
-						case 3:  callfunc "Func_Socket",1,2109,2121,40,61,400,985,1; break;
-						case 4:  callfunc "Func_Socket",1,2330,2331,40,61,400,985,1; break;
-						case 5:  callfunc "Func_Socket",1,2341,2342,40,61,400,985,1; break;
-						case 6:  callfunc "Func_Socket",1,2316,2317,40,61,400,985,1; break;
-						case 7:  callfunc "Func_Socket",1,2335,2336,40,61,400,985,1; break;
-						case 8:  callfunc "Func_Socket",1,2411,2412,40,61,400,985,1; break;
-						case 9:  callfunc "Func_Socket",1,5092,5093,40,61,400,985,1; break;
-						case 10: callfunc "Func_Socket",1,2505,2506,40,61,400,985,1; break;
-						case 11: callfunc "Func_Socket",1,2228,2229,40,61,400,985,1; break;
-						case 12: callfunc "Func_Socket",1,2337,2359,40,61,400,985,1; break;
-						case 13: callfunc "Func_Socket",1,2299,5157,40,61,400,985,1; break;
-						case 14: callfunc "Func_Socket",1,2507,2525,40,61,400,985,1; break;
-						case 15: callfunc "Func_Socket",1,2251,5158,40,61,400,985,1; break;
-						case 16: callfunc "Func_Socket",1,2246,5159,40,61,400,985,1; break;
-						case 17: callfunc "Func_Socket",1,2605,2625,40,61,400,985,1; break;
-						case 18: callfunc "Func_Socket",1,2264,5167,40,61,300,985,1; break;
-						case 19: callfunc "Func_Socket",1,2287,5350,40,61,500,985,1; break;
-						case 20: callfunc "Func_Socket",1,2425,2434,40,61,500,985,1; break;
+						case 1:  callfunc "Func_Socket",2230,2231,40,61,400,985,1;
+						case 2:  callfunc "Func_Socket",5114,5120,40,61,400,985,1;
+						case 3:  callfunc "Func_Socket",2109,2121,40,61,400,985,1;
+						case 4:  callfunc "Func_Socket",2330,2331,40,61,400,985,1;
+						case 5:  callfunc "Func_Socket",2341,2342,40,61,400,985,1;
+						case 6:  callfunc "Func_Socket",2316,2317,40,61,400,985,1;
+						case 7:  callfunc "Func_Socket",2335,2336,40,61,400,985,1;
+						case 8:  callfunc "Func_Socket",2411,2412,40,61,400,985,1;
+						case 9:  callfunc "Func_Socket",5092,5093,40,61,400,985,1;
+						case 10: callfunc "Func_Socket",2505,2506,40,61,400,985,1;
+						case 11: callfunc "Func_Socket",2228,2229,40,61,400,985,1;
+						case 12: callfunc "Func_Socket",2337,2359,40,61,400,985,1;
+						case 13: callfunc "Func_Socket",2299,5157,40,61,400,985,1;
+						case 14: callfunc "Func_Socket",2507,2525,40,61,400,985,1;
+						case 15: callfunc "Func_Socket",2251,5158,40,61,400,985,1;
+						case 16: callfunc "Func_Socket",2246,5159,40,61,400,985,1;
+						case 17: callfunc "Func_Socket",2605,2625,40,61,400,985,1;
+						case 18: callfunc "Func_Socket",2264,5167,40,61,300,985,1;
 					}
-				break;
-				
 				case 4:
 					mes "[Seiyablem]";
 					mes "Hum... Une armure de Classe S?";
 					mes "Vous êtes sûr de vous?";
 					mes "Très bien... Veuillez choisir votre armure... Mais je ne vous garantis rien!";
 					next;
-					switch( select( "Cornes Majestueuses","Serre-Tête à Pointes","Casque en Os","Chapeau du Capitaine","Couronne","Tiare","Chapeau de Pharaon","Robe d'Incantation","Boucle d'Oreille","Anneau","Palette","Manteau de Magicien","Robe Sacrée","Mission Divine","Maillot-de-Corps","Sous-Vêtements" ) )
+					switch(select("Cornes Majestueuses","Serre-Tête à Pointes","Casque en Os","Chapeau du Capitaine","Couronne","Tiare","Chapeau de Pharaon","Robe d'Incantation","Boucle d'Oreille","Anneau","Palette"))
 					{
-						case 1:  callfunc "Func_Socket",1,2256,5160,40,51,2000,985,2; break;
-						case 2:  callfunc "Func_Socket",1,2258,5161,40,51,2000,985,2; break;
-						case 3:  callfunc "Func_Socket",1,5017,5162,40,51,2000,985,2; break;
-						case 4:  callfunc "Func_Socket",1,5019,5163,40,51,2000,985,2; break;
-						case 5:  callfunc "Func_Socket",1,2235,5165,40,51,2000,985,2; break;
-						case 6:  callfunc "Func_Socket",1,2234,5164,40,51,2000,985,2; break;
-						case 7:  callfunc "Func_Socket",1,5053,5166,40,51,2000,985,2; break;
-						case 8:  callfunc "Func_Socket",1,2343,2360,40,51,2000,985,2; break;
-						case 9:  callfunc "Func_Socket",1,2602,2622,40,51,2000,985,2; break;
-						case 10: callfunc "Func_Socket",1,2601,2621,40,51,2000,985,2; break;
-						case 11: callfunc "Func_Socket",1,2619,2671,40,51,2000,985,2; break;
-						case 12: callfunc "Func_Socket",1,2334,2372,40,51,1000,985,1; break;
-						case 13: callfunc "Func_Socket",1,2327,2373,40,51,1000,985,1; break;
-						case 14: callfunc "Func_Socket",1,2111,2128,40,51,1000,985,1; break;
-						case 15: callfunc "Func_Socket",1,2522,2523,40,51,1000,985,1; break;
-						case 16: callfunc "Func_Socket",1,2339,2371,40,51,1000,985,1; break;
+						case 1:  callfunc "Func_Socket",2256,5160,40,51,2000,985,2;
+						case 2:  callfunc "Func_Socket",2258,5161,40,51,2000,985,2;
+						case 3:  callfunc "Func_Socket",5017,5162,40,51,2000,985,2;
+						case 4:  callfunc "Func_Socket",5019,5163,40,51,2000,985,2;
+						case 5:  callfunc "Func_Socket",2235,5165,40,51,2000,985,2;
+						case 6:  callfunc "Func_Socket",2234,5164,40,51,2000,985,2;
+						case 7:  callfunc "Func_Socket",5053,5166,40,51,1000,985,2;
+						case 8:  callfunc "Func_Socket",2343,2360,40,51,1000,985,2;
+						case 9:  callfunc "Func_Socket",2602,2622,40,51,1000,985,2;
+						case 10: callfunc "Func_Socket",2601,2621,40,51,1000,985,2;
+						case 11: callfunc "Func_Socket",2619,2671,40,51,1000,985,2;
 					}
-				break;
 			}
-		break;
-		
 		case 3:
 			mes "[Seiyablem]";
 			mes "Je peux essayer d'améliorer une arme ou une armure pour vous, à savoir, tenter d'y ajouter un emplacement pour une carte.";
@@ -287,32 +236,21 @@ payon,140,151,5	script	Seiyablem	84,{
 			mes "^FF0000Ne portez sur vous que l'équipement sur lequel vous souhaitez que je travaille^000000.";
 			mes "Par mesure de sécurité, il vaut mieux déposer tous vos autres équipements dans votre Stock Kafra.";
 			close;
-			
 		case 4:
 			mes "[Seiyablem]";
 			mes "A bientôt, aventurier.";
 			close;
 	}
 }
-				
+
 function	script	Func_Socket	{
 
 	mes "[Seiyablem]";
-	mes "Vous souhaitez tenter une amélioration sur l'objet " +getitemname(getarg(1))+ "?";
-	if (getarg(0) == 1)
-	{
-		if(getarg(5) > 999) mes "Très bien, alors apportez-moi ^FF0000" +getarg(7)+ " " +getitemname(getarg(6))+ "s^000000, ainsi que^FF0000 " +getarg(5) / 1000+",000 000 zenys^000000.";
-		else mes "Très bien, alors apportez-moi ^FF0000" +getarg(7)+ " " +getitemname(getarg(6))+ "s^000000, ainsi que^FF0000 " +getarg(5)+" 000 zenys^000000.";
-	}
-	else if (getarg(0) == 2)
-	{
-		if(getarg(5) > 999) mes "Très bien, alors apportez-moi ^FF0000" +getarg(7)+ " " +getitemname(getarg(6))+ "^000000, ^FF0000" +getarg(9)+ " " +getitemname(getarg(8))+ "^000000 ainsi que^FF0000 " +getarg(5) / 1000+",000 000 zenys^000000.";
-		else mes "Très bien, alors apportez-moi ^FF0000" +getarg(7)+ " " +getitemname(getarg(6))+ "^000000, ^FF0000" +getarg(9)+ " " +getitemname(getarg(8))+ "^000000 ainsi que^FF0000 " +getarg(5)+"000 zenys^000000.";
-	}
-	mes "Ah, et n'oubliez pas d'apporter votre " +getitemname(getarg(1))+ "!";
+	mes "Vous souhaitez tenter une amélioration sur l'objet " +getitemname(getarg(0))+ "?";
+	mes "Très bien alors apportez-moi ^FF0000" + getarg(6) + " " + getitemname(getarg(5)) + (getarg(6) > 1 && getarg(5) != 999 ? "s":"") + "^000000, " + (getarg(7,0) != 0 && getarg(8,0) != 0 ? ("^FF0000" + getarg(8,0) + " " + getitemname(getarg(7,0)) + (getarg(8,0) > 1 && getarg(7,0) != 999 ? "s":"") + "^000000 ") : "") + "ainsi que ^FF0000" + (getarg(4) >= 1000 ? (getarg(4)/1000 + ",000") : getarg(4)) + ",000 Zenys^000000.";
 	next;
-
-	if(@sockettype == 1)
+	mes "[Seiyablem]";
+	if (getiteminfo(getarg(0),5)&2) // EQP_HAND_R = 2, it's a weapon
 	{
 		mes "[Seiyablem]";
 		mes "Je peux tenter l'amélioration de cet équipement si vous avez les matériaux et l'argent nécessaires sur vous.";
@@ -324,7 +262,7 @@ function	script	Func_Socket	{
 		mes "Souhaitez-vous poursuivre le processus d'amélioration de votre Arme?";
 		next;
 	}
-	else if(@sockettype == 2)
+	else // armor
 	{
 		mes "[Seiyablem]";
 		mes "Je peux tenter l'amélioration de cet équipement si vous avez les matériaux et l'argent nécessaires sur vous.";
@@ -337,83 +275,72 @@ function	script	Func_Socket	{
 		next;
 	}
 
-	if ( select("Bien sûr!","J'ai changé d'avis.") == 2 )
-	{
-		mes "[Seiyablem]";
-		mes "Besoin de temps pour réfléchir, hein?";
-		mes "Je comprends.";
-		mes "Souvenez-vous simplement du fameux adage qui dit que la chance sourit aux audacieux~";
-		close;
-	}
-
-	mes "[Seiyablem]";
-	mes "Très bien! Le vrai travail va pouvoir commencer!";
-	mes "Vous feriez mieux de m'encourager ou de prier... enfin comme vous voulez, mais je ne garantis pas le résultat.";
-	next;
-	switch(getarg(0))
+	switch(select("Bien sûr!","J'ai changé d'avis."))
 	{
 		case 1:
-			if((Zeny < getarg(5)*1000) || (countitem(getarg(6)) < getarg(7)) || (!countitem(getarg(1))))
+			if ((Zeny >= getarg(4)*1000) && (countitem(getarg(5)) >= getarg(6)) && (countitem(getarg(7,512)) >= getarg(8,0)) && (countitem(getarg(0)) > 0)) // if there's no getarg(7) and getarg(8) provided, check itemcount against 0 (we still need a valid item ID though)
+			{
+				mes "[Seiyablem]";
+				mes "Très bien! Le vrai travail va pouvoir commencer!";
+				mes "Vous feriez mieux de m'encourager ou de prier... enfin comme vous voulez, mais je ne garantis pas le résultat.";
+				next;
+				set .@a, rand(1,100);
+				if ((.@a > getarg(2)) && (.@a < getarg(3)))
+				{
+					specialeffect getarg(3) == 51 ? EF_LORD : EF_SANCTUARY; // only S Class items have Lord of Vermillion effect
+					mes "[Seiyablem]";
+					mes "Et bien on dirait que c'est une réussite!";
+					mes "Et voilà pour vous!";
+					delitem getarg(0),1;
+					delitem getarg(5),getarg(6);
+					if (getarg(7,0) != 0 && getarg(8,0) != 0)
+						delitem getarg(7),getarg(8);
+					set Zeny, Zeny - getarg(4)*1000;
+					getitem getarg(1),1;
+					next;
+					mes "[Seiyablem]";
+					mes "A bientôt, mon pote!";
+					close;
+				}
+				else
+				{
+					specialeffect EF_SUI_EXPLOSION;
+					mes "[Seiyablem]";
+					mes "Wah! ...Je suis désolé, mais j'ai échoué.";
+					mes "Ne soyez pas déçu, vous retenterez votre chance une autre fois, d'accord?";
+					delitem getarg(0),1;
+					delitem getarg(5),getarg(6);
+					if (getarg(7,0) != 0 && getarg(8,0) != 0)
+						delitem getarg(7),getarg(8);
+					set Zeny, Zeny - getarg(4)*1000;
+					next;
+					mes "[Seiyablem]";
+					mes "A bientôt!";
+					close;
+				}
+			}
+			else
 			{
 				mes "[Seiyablem]";
 				mes "J'aimerais beaucoup travailler sur votre équipement, mais il vous manque certaines choses...";
 				mes "Êtes-vous certain d'avoir l'équipement en question, les matériaux, et l'argent nécessaires?";
 				close;
 			}
-			break;
-	
 		case 2:
-			if((Zeny < getarg(5)*1000) || (countitem(getarg(6)) < getarg(7)) || (countitem(getarg(8)) < getarg(9)) || (!countitem(getarg(1))))
-			{
-				mes "[Seiyablem]";
-				mes "J'aimerais beaucoup travailler sur votre équipement, mais il vous manque certaines choses...";
-				mes "Êtes-vous certain d'avoir l'équipement en question, les matériaux, et l'argent nécessaires?";
-				close;
-			}
-			break;
-	}
-
-	set .@socketrand,rand(1,100);
-	if((.@socketrand > getarg(3)) && (.@socketrand < getarg(4)))
-	{
-		if(getarg(4) == 51) specialeffect EF_LORD;
-		else specialeffect EF_SANCTUARY;
-		mes "[Seiyablem]";
-		mes "Et bien on dirait que c'est une réussite!";
-		mes "Et voilà pour vous!";
-		delitem getarg(1),1;
-		delitem getarg(6),getarg(7);
-		if(getarg(0) == 2) delitem getarg(8),getarg(9);
-		set Zeny,Zeny - getarg(5)*1000;
-		getitem getarg(2),1;
-		next;
-		mes "[Seiyablem]";
-		mes "A bientôt, mon pote!";
-		close;
-	}
-	else
-	{
-		specialeffect EF_FREEZING;
-		mes "[Seiyablem]";
-		mes "Wah! ...Je suis désolé, mais j'ai échoué.";
-		mes "Ne soyez pas déçu, vous retenterez votre chance une autre fois, d'accord?";
-		delitem getarg(1),1;
-		delitem getarg(6),getarg(7);
-		if(getarg(0) == 2) delitem getarg(8),getarg(9);
-		set Zeny,Zeny - getarg(5)*1000;
-		next;
-		mes "[Seiyablem]";
-		mes "A bientôt!";
-		close;
+			mes "[Seiyablem]";
+			mes "Besoin de temps pour réfléchir, hein?";
+			mes "Je comprends.";
+			mes "Souvenez-vous simplement du fameux adage qui dit que la chance sourit aux audacieux~";
+			close;
 	}
 }
 
-lhz_in02,281,35,5	duplicate(Seiyablem)	Seiyablem#lhz	84
-prt_in,33,70,5	duplicate(Seiyablem)	Seiyablem#prt	84
-morocc,51,41,5	duplicate(Seiyablem)	Seiyablem#moc	84
+payon,140,151,5	duplicate(SocketEnchant)	Seiyablem#pay	84
+lhz_in02,281,35,5	duplicate(SocketEnchant)	Seiyablem#lhz	84
+prt_in,33,70,5	duplicate(SocketEnchant)	Seiyablem#prt	84
+morocc,51,41,4	duplicate(SocketEnchant)	Seiyablem#moc	84
 
-payon,143,143,7	script	Jeune Homme#socket	97,{
-
+-	script	Jeune Homme#dummy::SocketMan	-1,{
 	mes "[Jeune Homme]";
 	mes "J'étudie afin de devenir Ingénieur d'Amélioration d'Armes et d'Armures.";
 	mes "C'est un nouveau domaine d'études, qui permet d'ajouter des emplacements pour une carte aux équipements... Une activité très lucrative qui plus est.";
@@ -430,6 +357,7 @@ payon,143,143,7	script	Jeune Homme#socket	97,{
 	close;
 }
 
-lhz_in02,269,33,5	duplicate(Jeune Homme#socket)	Jeune Homme#lhz	97
-prt_in,31,57,1	duplicate(Jeune Homme#socket)	Jeune Homme#prt	97
-morocc,60,42,3	duplicate(Jeune Homme#socket)	Jeune Homme#moc	97
+prt_in,31,57,1	duplicate(SocketMan)	Jeune Homme#prt	97
+payon,143,143,7	duplicate(SocketMan)	Jeune Homme#pay	97
+morocc,60,42,3	duplicate(SocketMan)	Jeune Homme#moc	97
+lhz_in02,269,33,5	duplicate(SocketMan)	Jeune Homme#lhz	97
