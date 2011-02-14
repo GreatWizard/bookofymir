@@ -1287,7 +1287,7 @@ UPDATE item_db SET `name_japanese`  = "Bottes de Cuir Noir" WHERE ID = 2434;
 UPDATE item_db SET `name_japanese`  = "Grèves de Guerre" WHERE ID = 2435;
 UPDATE item_db SET `name_japanese`  = "Bottes de Combat" WHERE ID = 2436;
 UPDATE item_db SET `name_japanese`  = "Bottes de Bataille" WHERE ID = 2437;
-UPDATE item_db SET `name_japanese`  = "Empreinte de Chat" WHERE ID = 2438;
+UPDATE item_db SET `name_japanese`  = "Pattes de Chat" WHERE ID = 2438;
 UPDATE item_db SET `name_japanese`  = "Chaussures Aérées" WHERE ID = 2439;
 UPDATE item_db SET `name_japanese`  = "Chaussures de Course" WHERE ID = 2440;
 UPDATE item_db SET `name_japanese`  = "Sandales de Plage" WHERE ID = 2441;
