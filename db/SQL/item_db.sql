@@ -4349,7 +4349,7 @@ UPDATE item_db SET `name_japanese`  = "Fusil de Chasse Militaire" WHERE ID = 131
 UPDATE item_db SET `name_japanese`  = "Lance-Grenade Militaire" WHERE ID = 13174;
 UPDATE item_db SET `name_japanese`  = "Fusil de la Gloire" WHERE ID = 13176;
 UPDATE item_db SET `name_japanese`  = "Mitrailleuse de la Gloire" WHERE ID = 13177;
-UPDATE item_db SET `name_japanese`  = "Glorieux Fusil de Chasse de la Gloire" WHERE ID = 13178;
+UPDATE item_db SET `name_japanese`  = "Fusil de Chasse de la Gloire" WHERE ID = 13178;
 UPDATE item_db SET `name_japanese`  = "Lance-Grenade de la Gloire" WHERE ID = 13179;
 UPDATE item_db SET `name_japanese`  = "Balle" WHERE ID = 13200;
 UPDATE item_db SET `name_japanese`  = "Balle en Argent" WHERE ID = 13201;
