@@ -3742,7 +3742,7 @@ SKILL_DESCRIPT = {
 		"[NV 2]^777777 +20% Soin, Lancer une Potion Orange ^000000",
 		"[NV 3]^777777 +30% Soin, Lancer une Potion Jaune ^000000",
 		"[NV 4]^777777 +40% Soin, Lancer une Potion Blanche ^000000",
-		"[NV 5]^777777 +50% SOin, Lancer une Potion Blueue ^000000",
+		"[NV 5]^777777 +50% Soin, Lancer une Potion Blueue ^000000",
 	},
 
 	[SKID.AM_CANNIBALIZE] = {
