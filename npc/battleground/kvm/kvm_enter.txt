@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 // BattleGround System - KvM Entrance NPCs
 //===== By: ================================================== 
@@ -19,12 +21,12 @@
 
 // KvM Officer - Guillaume
 //============================================================
-bat_room,164,178,5	script	KVM Mercenary Officer#1	418,{
+bat_room,164,178,5	script	Officier de Kreiger::KVM Mercenary Officer#1	418,{
 	/*
 	set .@kvm,checkquest(6026,PLAYTIME);
 	if ((.@kvm == 0) || (.@kvm == 1)) {
-		mes "[Croix Mercenary Officer]";
-		mes "I know that you've already signed with the Croix. Go back and join their team. We will not accept traitors to fight for us.";
+		mes "[Officier de Croix]";
+		mes "Vous vous êtes déjà engagé auprès des partisans de Croix. Allez les retrouver, puisque c'est ce que vous voulez! Nous ne voulons pas de traitres dans nos rangs!";
 		close;
 	}
 	else if (.@kvm == 2) {
@@ -33,21 +35,20 @@ bat_room,164,178,5	script	KVM Mercenary Officer#1	418,{
 	*/
 	set .@permit,checkquest(6025,PLAYTIME);
 	if ((.@permit == 0) || (.@permit == 1)) {
-		mes "[Guillaume Mercenary Officer]";
-		mes "It seems you have recently participated in a KVM battle. You must wait 5 minutes before signing up again.";
+		mes "[Officier de Guillaume]";
+		mes "On dirait que vous avez participé il y a peu à une bataille de Krieger Von Midgard. Vous devez attendre au moins 5 minutes avant de pouvoir à nouveau vous inscrire.";
 		close;
 	}
 	else if (.@permit == 2) {
 		erasequest 6025;
 	}
-	mes "[Guillaume Mercenary Officer]";
-	mes "Let them know the real might of Guillaume!";
+	mes "[Officier de Guillaume]";
+	mes "Montrez-leur le pouvoir de Guillaume!";
 	next;
-	switch(select("I will fight with you.:End Conversation.")) {
+	switch(select("Je combattrai à vos côtés.:Quitter la conversation.")) {
 	case 1:
-		mes "[Guillaume Mercenary Officer]";
-		mes "Show them how strong we are.";
-		mes "Today, everyone will hear the shout of triumph from Guillaume!";
+		mes "[Officier de Guillaume]";
+		mes "Montrez-leur qui nous sommes! Aujourd'hui, le cri de victoire de Guillaume retentira dans tout le royaume!";
 		close2;
 		//setquest 6025;
 		if (BaseLevel > 79) {
@@ -61,80 +62,70 @@ bat_room,164,178,5	script	KVM Mercenary Officer#1	418,{
 		}
 		close;
 	case 2:
-		mes "[Guillaume Mercenary Officer]";
-		mes "We will win!";
+		mes "[Officier de Guillaume]";
+		mes "La victoire sera nôtre!";
 		close;
 	}
 }
 
 // Guillaume Knight - KvM
 //============================================================
-bat_room,167,178,5	script	Guillaume Knight#kvm	417,{
-	mes "[Guillaume Knight]";
-	mes "Hello.";
-	mes "What do you want to know?";
+bat_room,167,178,5	script	Chevalier de Guillaume::Guillaume Knight#kvm	417,{
+	mes "[Chevalier de Guillaume]";
+	mes "Bonjour. Que puis-je pour vous?";
 	next;
-	switch(select("Apply for KVM.:What is KVM?:How do I participate in KVM?:I want to know my Kreiger Points.")) {
+	switch(select("S'enrôler pour Kreiger Von Midgard.:Qu'est-ce que Kreiger Von Midgard?:Comment puis-je participer?:Je veux connaître mon total de points.")) {
 	case 1:
-		mes "[Guillaume Knight]";
-		mes "Applications are not available yet.";
-		mes "To apply, you need to go to a KVM Mercenary Officer.";
+		mes "[Chevalier de Guillaume]";
+		mes "Vous ne pouvez pas encore vous enrôler. Il vous faudra pour cela aller voir un officier de Kreiger Von Midgard.";
 		close;
 	case 2:
-		mes "[Guillaume Knight]";
-		mes "KVM is the abbreviation of Kreiger Von Midgard.";
-		mes "Adventurer, are you aware that the way to the new world has been opened?";
+		mes "[Chevalier de Guillaume]";
+		mes "Je suis certain que vous savez qu'un passage vers le nouveau monde a été ouvert, n'est-ce pas?";
 		next;
-		mes "[Guillaume Knight]";
-		mes "We, the Guillaume Administration, have several plans to advance to the new world.";
-		mes "And KVM is one of them.";
+		mes "[Chevalier de Guillaume]";
+		mes "Nous autres, partisans de Guillaume, avons dans l'idée de marcher sur le Nouveau Monde, et Krieger Von Midgard est l'un des moyens pour arriver à nos fins.";
 		next;
-		mes "[Guillaume Knight]";
-		mes "It means that we, one of many countries in the Midgard continent,";
-		mes "have decided to employ many adventurers for the immediate advance to the new world.";
+		mes "[Chevalier de Guillaume]";
+		mes "Cela signifie que notre pays, comme les autres pays du continent de Midgard, a décidé d'employer des aventuriers pour les envoyer dans le Nouveau Monde.";
 		next;
-		mes "[Guillaume Knight]";
-		mes "Therefore, to select the best adventurers, we are holding the KVM.";
-		mes "We exspect responses from many adventurers.";
+		mes "[Chevalier de Guillaume]";
+		mes "Nous avons donc organisé cette bataille afin de pouvoir sélectionner des candidats. Nous espérons recevoir de nombreuses réponses d'aventuriers.";
 		next;
-		mes "[Guillaume Knight]";
-		mes "And we will give them rewards for their participation!";
-		mes "As for the rewards, please contact a KVM Logistic Officer.";
+		mes "[Chevalier de Guillaume]";
+		mes "Nous les récompenserons de leur participation! Vous pourrez en apprendre plus à ce sujet auprès de l'Officier de la Logistique de Kreiger Von Midgard.";
 		close;
 	case 3:
-		mes "[Guillaume Knight]";
-		mes "Basically, KVM is a 5 on 5 battle.";
-		mes "First, you apply with a KVM receptionist, in a group or individually.";
+		mes "[Chevalier de Guillaume]";
+		mes "Il s'agit, pour dire vite, d'une bataille à cinq contre cinq. Tout d'abord, vous devrez vous inscrire auprès d'un recruteur, seul"+( sex ? "" : "e" )+" ou en groupe.";
 		next;
-		mes "[Guillaume Knight]";
-		mes "Group applications are for when you intend to enter the KVM with your party members,";
-		mes "and a personal application is for when you intend to enter the KVM individually.";
+		mes "[Chevalier de Guillaume]";
+		mes "Tout dépend de si vous voulez vous inscrire avec les membres de votre équipe, ou individuellement.";
 		next;
-		mes "[Guillaume Knight]";
-		mes "Please apply with a KVM officer, and he will contact you later when you are in Prontera.";
+		mes "[Chevalier de Guillaume]";
+		mes "Inscrivez-vous auprès d'un officier, et il vous recontactera lorsque vous serez à Prontera.";
 		next;
-		mes "[Guillaume Knight]";
-		mes "Then you enter and follow the instructions in the battlefield.";
+		mes "[Chevalier de Guillaume]";
+		mes "Vous pourrez alors entrer sur le champ de bataille, et vous n'aurez qu'à suivre ses instructions.";
 		next;
-		mes "[Guillaume Knight]";
-		mes "However, please be advised that unless you are in the KVM office, he cannot contact you.";
+		mes "[Chevalier de Guillaume]";
+		mes "Souvenez-vous cependant qu'il ne pourra pas vous contacter à moins que vous ne vous trouviez dans le bureau de Kreiger Von Midgard.";
 		close;
 	case 4:
-		mes "[Guillaume Knight]";
-		mes "Your Kreiger Points are:";
-		mes ""+kvm_point+".";
+		mes "[Chevalier de Guillaume]";
+		mes "Vous avez actuellement "+kvm_point+" points de Kreiger Von Midgard.";
 		close;
 	}
 }
 
 // KvM Officer - Croix
 //============================================================
-bat_room,164,121,1	script	KVM Mercenary Officer#2	414,{
+bat_room,164,121,1	script	Officier de Kreiger::KVM Mercenary Officer#2	414,{
 	/*
 	set .@kvm,checkquest(6025,PLAYTIME);
 	if ((.@kvm == 0) || (.@kvm == 1)) {
-		mes "[Croix Mercenary Officer]";
-		mes "I know that you've already signed with the Guillaume. Go back and join their team. We will not accept traitors to fight for us.";
+		mes "[Officier de Croix]";
+		mes "Vous vous êtes déjà engagé auprès des partisans de Guillaume. Allez les retrouver, puisque c'est ce que vous voulez! Nous ne voulons pas de traitres dans nos rangs!";
 		close;
 	}
 	else if (.@kvm == 2) {
@@ -143,21 +134,20 @@ bat_room,164,121,1	script	KVM Mercenary Officer#2	414,{
 	*/
 	set .@permit,checkquest(6025,PLAYTIME);
 	if ((.@permit == 0) || (.@permit == 1)) {
-		mes "[Croix Mercenary Officer]";
-		mes "It seems you have recently participated in a KVM battle. You must wait 5 minutes before signing up again.";
+		mes "[Officier de Croix]";
+		mes "On dirait que vous avez participé il y a peu à une bataille de Krieger Von Midgard. Vous devez attendre au moins 5 minutes avant de pouvoir à nouveau vous inscrire.";
 		close;
 	}
 	else if (.@permit == 2) {
 		erasequest 6025;
 	}
-	mes "[Croix Mercenary Officer]";
-	mes "Let them know the real might of Croix!";
+	mes "[Officier de Croix]";
+	mes "Montrez-leur le pouvoir de Croix!";
 	next;
-	switch(select("I will fight with you.:End Conversation.")) {
+	switch(select("Je combattrai à vos côtés.:Quitter la conversation.")) {
 	case 1:
-		mes "[Croix Mercenary Officer]";
-		mes "Show them how strong we are.";
-		mes "Today, everyone will hear the shout of triumph from Croix!";
+		mes "[Officier de Croix]";
+		mes "Montrez-leur qui nous sommes! Aujourd'hui, le cri de victoire de Croix retentira dans tout le royaume!";
 		close2;
 		//setquest 6026;
 		if (BaseLevel > 79) {
@@ -171,68 +161,58 @@ bat_room,164,121,1	script	KVM Mercenary Officer#2	414,{
 		}
 		close;
 	case 2:
-		mes "[Croix Mercenary Officer]";
-		mes "We will win!";
+		mes "[Officier de Croix]";
+		mes "La victoire sera nôtre!";
 		close;
 	}
 }
 
 // Croix Knight - KvM
 //============================================================
-bat_room,167,121,1	script	Croix Knight#kvm	413,{
-	mes "[Croix Knight]";
-	mes "Hello.";
-	mes "What do you want to know?";
+bat_room,167,121,1	script	Chevalier de Croix::Croix Knight#kvm	413,{
+	mes "[Chevalier de Croix]";
+	mes "Bonjour. Que puis-je pour vous?";
 	next;
-	switch(select("Apply for KVM.:What is KVM?:How do I participate in KVM?:I want to know my Kreiger Points.")) {
+	switch(select("S'enrôler pour Kreiger Von Midgard.:Qu'est-ce que Kreiger Von Midgard?:Comment puis-je participer?:Je veux connaître mon total de points.")) {
 	case 1:
-		mes "[Croix Knight]";
-		mes "Applications are not available yet.";
-		mes "To apply, you need to go to a KVM Mercenary Officer.";
+		mes "[Chevalier de Croix]";
+		mes "Vous ne pouvez pas encore vous enrôler. Il vous faudra pour cela aller voir un officier de Kreiger Von Midgard.";
 		close;
 	case 2:
-		mes "[Croix Knight]";
-		mes "KVM is the abbreviation of Kreiger Von Midgard.";
-		mes "Adventurer, are you aware that the way to the new world has been opened?";
+		mes "[Chevalier de Croix]";
+		mes "Je suis certain que vous savez qu'un passage vers le nouveau monde a été ouvert, n'est-ce pas?";
 		next;
-		mes "[Croix Knight]";
-		mes "We, the Croix Administration, have several plans to advance to the new world.";
-		mes "And KVM is one of them.";
+		mes "[Chevalier de Croix]";
+		mes "Nous autres, partisans de Croix, avons dans l'idée de marcher sur le Nouveau Monde, et Krieger Von Midgard est l'un des moyens pour arriver à nos fins.";
 		next;
-		mes "[Croix Knight]";
-		mes "It means that we, one of many countries in the Midgard continent,";
-		mes "have decided to employ many adventurers for the immediate advance to the new world.";
+		mes "[Chevalier de Croix]";
+		mes "Cela signifie que notre pays, comme les autres pays du continent de Midgard, a décidé d'employer des aventuriers pour les envoyer dans le Nouveau Monde.";
 		next;
-		mes "[Croix Knight]";
-		mes "Therefore, to select the best adventurers, we are holding the KVM.";
-		mes "We exspect responses from many adventurers.";
+		mes "[Chevalier de Croix]";
+		mes "Nous avons donc organisé cette bataille afin de pouvoir sélectionner des candidats. Nous espérons recevoir de nombreuses réponses d'aventuriers.";
 		next;
-		mes "[Croix Knight]";
-		mes "And we will give them rewards for their participation!";
-		mes "As for the rewards, please contact a KVM Logistic Officer.";
+		mes "[Chevalier de Croix]";
+		mes "Nous les récompenserons de leur participation! Vous pourrez en apprendre plus à ce sujet auprès de l'Officier de la Logistique de Kreiger Von Midgard.";
 		close;
 	case 3:
-		mes "[Croix Knight]";
-		mes "Basically, KVM is a 5 on 5 battle.";
-		mes "First, you apply with a KVM receptionist, in a group or individually.";
+		mes "[Chevalier de Croix]";
+		mes "Il s'agit pour dire vite d'une bataille à cinq contre cinq. Tout d'abord, vous devrez vous inscrire auprès d'un recruteur, seul"+( sex ? "" : "e" )+" ou en groupe.";
 		next;
-		mes "[Croix Knight]";
-		mes "Group applications are for when you intend to enter the KVM with your party members,";
-		mes "and a personal application is for when you intend to enter the KVM individually.";
+		mes "[Chevalier de Croix]";
+		mes "Tout dépend de si vous voulez vous inscrire avec les membres de votre équipe, ou individuellement.";
 		next;
-		mes "[Croix Knight]";
-		mes "Please apply with a KVM officer, and he will contact you later when you are in Prontera.";
+		mes "[Chevalier de Croix]";
+		mes "Inscrivez-vous auprès d'un officier, et il vous recontactera lorsque vous serez à Prontera.";
 		next;
-		mes "[Croix Knight]";
-		mes "Then you enter and follow the instructions in the battlefield.";
+		mes "[Chevalier de Croix]";
+		mes "Vous pourrez alors entrer sur le champ de bataille, et vous n'aurez qu'à suivre ses instructions.";
 		next;
-		mes "[Croix Knight]";
-		mes "However, please be advised that unless you are in the KVM office, he cannot contact you.";
+		mes "[Chevalier de Croix]";
+		mes "Souvenez-vous cependant qu'il ne pourra pas vous contacter à moins que vous ne vous trouviez dans le bureau de Kreiger Von Midgard.";
 		close;
 	case 4:
-		mes "[Croix Knight]";
-		mes "Your Kreiger Points are:";
-		mes ""+kvm_point+".";
+		mes "[Chevalier de Croix]";
+		mes "Vous avez actuellement "+kvm_point+" points de Kreiger Von Midgard.";
 		close;
 	}
 }
