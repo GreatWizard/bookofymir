@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 // BattleGround System - Flavius Entrance NPCs
 //===== By: ================================================== 
@@ -15,56 +17,48 @@
 
 // Flavius Officer - Guillaume
 //============================================================
-bat_room,133,178,5	script	Flavius Officer#01a	418,{
+bat_room,133,178,5	script	Officier de Flavius::Flavius Officer#01a	418,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you loose some weight. -";
+		mes "- Une petite minute! Vous transportez trop d'objets sur vous! Revenez après vous être allégé un peu. -";
 		close;
 	}
-	mes "[Guillaume Army Officer]";
-	mes "Let's show the power of the Guillaume Army to those stinky Croixs!";
+	mes "[Officier de l'Armée de Guillaume]";
+	mes "Montrons la vaillance de l'armée de Guillaume à ces misérables!";
 	next;
-	switch(select("I want to join your army!:End Conversation")) {
+	switch(select("Je veux rejoindre votre armée!:Quitter la conversation.")) {
 	case 1:
 		if ((Class == job_Novice) || (BaseClass == Job_Supernovice)) {
-			mes "[Guillaume Army Officer]";
-			mes "I'm very pleased that you want to join us and fight the Croix Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+			mes "[Officier de l'Armée de Guillaume]";
+			mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 		}
 		else {
 			if (BaseLevel < 80) {
-				mes "[Guillaume Army Officer]";
-				mes "I'm very pleased that you want to join us and fight the Croix Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+				mes "[Officier de l'Armée de Guillaume]";
+				mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 			}
 			else {
 				set .@chk_urtime,checkquest(2070,PLAYTIME);
 				if ((.@chk_urtime == 0)|| (.@chk_urtime == 1)) {
-					mes "[Guillaume Army Officer]";
-					mes "You seem to have just returned from the battlefield.";
-					mes "It's too early for you to go back. Go rest, and leave the enemies to us!";
+					mes "[Officier de l'Armée de Guillaume]";
+					mes "Ola, "+ ( sex ? "mon brave! Même un guerrier" : "gente Dame! Même une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
+					mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Flavius lorsque ce sera fait.";
 				}
 				else {
 					if (.@chk_urtime == 2)
 						erasequest 2070;
 					set .@mapcount2,getmapusers("bat_b01");
 					if (.@mapcount2 > 0) {
-						mes "[Guillaume Army Officer]";
-						mes "I've received a report informing me that an elite corps has been dispatched to the battlefield fighting the Croixs already.";
-						mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+						mes "[Officier de l'Armée de Guillaume]";
+						mes "J'ai reçu un rapport m'informant qu'un groupe d'élite venait d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 					}
 					else {
 						if ($@FlaviusBG1 > 0) {
-							mes "[Guillaume Army Officer]";
-							mes "An elite corps is already standing by to be dispatched to the battlefield.";
-							mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+							mes "[Officier de l'Armée de Guillaume]";
+							mes "Un groupe d'élite est sur le point d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 						}
 						else {
-							mes "[Guillaume Army Officer]";
-							mes "You definitely seem to be ready for battle!";
-							mes "Go show the Croixs what fear truly means!";
-							mes "Today, our cry of victory shall echo all over the battlefield!";
+							mes "[Officier de l'Armée de Guillaume]";
+							mes "Vous voilà prêt"+ ( sex ? "" : "e" ) +" pour la bataille! Montrons aux partisans de Croix le véritable sens du mot terreur! Que retentissent nos cris victorieux sur le champ de bataille!";
 							close2;
 							warp "bat_room",85,223;
 							end;
@@ -75,63 +69,55 @@ bat_room,133,178,5	script	Flavius Officer#01a	418,{
 		}
 		break;
 	case 2:
-		mes "[Guillaume Army Officer]";
-		mes "Today, we shall be victorious!";
+		mes "[Officier de l'Armée de Guillaume]";
+		mes "La victoire sera nôtre!";
 		break;
 	}
 	close;
 }
 
-bat_room,133,121,1	script	Flavius Officer#01b	414,{
+bat_room,133,121,1	script	Officier de Flavius::Flavius Officer#01b	414,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you loose some weight. -";
+		mes "- Une petite minute! Vous transportez trop d'objets sur vous! Revenez après vous être allégé un peu. -";
 		close;
 	}
-	mes "[Croix Army Officer]";
-	mes "Let's show the Guillaumes the power of the Croix Army!";
+	mes "[Officier de l'Armée de Croix]";
+	mes "Montrons la vaillance de l'armée de Croix à ces misérables!";
 	next;
-	switch(select("I want to join your army!:End Conversation")) {
+	switch(select("Je veux rejoindre votre armée!:Quitter la conversation.")) {
 	case 1:
 		if ((Class == job_Novice) || (BaseClass == Job_Supernovice)) {
-			mes "[Croix Army Officer]";
-			mes "I'm very pleased that you want to join us and fight the Guillaume Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+			mes "[Officier de l'Armée de Croix]";
+			mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 		}
 		else {
 			if (BaseLevel < 80) {
-				mes "[Croix Army Officer]";
-				mes "I'm very pleased that you want to join us and fight the Guillaume Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+				mes "[Officier de l'Armée de Croix]";
+				mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 			}
 			else {
 				set .@chk_urtime,checkquest(2070,PLAYTIME);
 				if ((.@chk_urtime == 0)|| (.@chk_urtime == 1)) {
-					mes "[Croix Army Officer]";
-					mes "You seem to have just returned from the battlefield.";
-					mes "It's too early for you to go back. Go rest, and leave the enemies to us!";
+					mes "[Officier de l'Armée de Croix]";
+					mes "Ola, "+ ( sex ? "mon brave! Même un guerrier" : "gente Dame! Même une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
+					mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Flavius lorsque ce sera fait.";
 				}
 				else {
 					if (.@chk_urtime == 2)
 						erasequest 2070;
 					set .@mapcount2,getmapusers("bat_b01");
 					if (.@mapcount2 > 0) {
-						mes "[Croix Army Officer]";
-						mes "I've received a report informing me that an elite corps has been dispatched to the battlefield fighting the Guillaume already.";
-						mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+						mes "[Officier de l'Armée de Croix]";
+						mes "J'ai reçu un rapport m'informant qu'un groupe d'élite venait d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 					}
 					else {
 						if ($@FlaviusBG1 > 0) {
-							mes "[Croix Army Officer]";
-							mes "An elite corps is already standing by to be dispatched to the battlefield.";
-							mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+							mes "[Officier de l'Armée de Croix]";
+							mes "Un groupe d'élite est sur le point d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 						}
 						else {
-							mes "[Croix Army Officer]";
-							mes "You definitely seem to be ready for battle!";
-							mes "Go show the Guillaumes what fear truly means!";
-							mes "Today, our cry of victory shall echo all over the battlefield!";
+							mes "[Officier de l'Armée de Croix]";
+							mes "Vous voilà prêt"+ ( sex ? "" : "e" ) +" pour la bataille! Montrons aux partisans de Guillaume le véritable sens du mot terreur! Que retentissent nos cris victorieux sur le champ de bataille!";
 							close2;
 							warp "bat_room",85,207;
 							end;
@@ -142,153 +128,141 @@ bat_room,133,121,1	script	Flavius Officer#01b	414,{
 		}
 		break;
 	case 2:
-		mes "[Croix Army Officer]";
-		mes "Today, we shall be victorious!";
+		mes "[Officier de l'Armée de Croix]";
+		mes "La victoire sera nôtre!";
 		break;
 	}
 	close;
 }
 
-bat_room,135,178,5	script	Guillaume Knight#3	417,{
-	mes "[Guillaume Knight]";
-	mes "The objective of the Flavius Battle is to score 2 points before your enemy by destroying their crystal.";
+bat_room,135,178,5	script	Chevalier de Guillaume::Guillaume Knight#3	417,{
+	mes "[Chevalier de Guillaume]";
+	mes "L'objective de la Bataille de Flavius est de marquer 2 points avant vos adversaires en détruisant leur cristal.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "The crystals for both armies are protected by special barricades that cannot be destroyed by direct attacks.";
+	mes "[Chevalier de Guillaume]";
+	mes "Les cristaux des deux armées sont protégés par des barricades ne pouvant être détruites par des attaques directes.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "But they can be removed by destroying the Guardians that protect the enemy army base.";
+	mes "[Chevalier de Guillaume]";
+	mes "Cependant, vous pourrez les abattre en détruisant les gardiens qui protègent la base adverse.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "The crystals are immune to every type of skill; your physical attacks are the only choice for destroying your enemy's crystal.";
+	mes "[Chevalier de Guillaume]";
+	mes "Les cristaux sont immunisés contre les compétences. Seules vos attaques physiques peuvent les détruire.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "Please remember: when you join a battle, you will be receiving a token which indicates the set duration for which you cannot participate in the same type of battle.";
-	mes "You may check the duration by pressing the Alt+U keys.";
+	mes "[Chevalier de Guillaume]";
+	mes "Gardez à l'esprit que vous ne pourrez pas participer à une bataille du même type que celle à laquelle vous participez qu'avant un certain temps. Vous pouvez consulter cela en appuyant sur ALT+U.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "Are you ready for battle? Then apply with the recruiter next to me!";
+	mes "[Chevalier de Guillaume]";
+	mes "Êtes-vous prêt"+ ( sex ? "" : "e" ) +" pour le combat? Alors allez parler au recruteur à mes côtés!";
 	close;
 }
 
-bat_room,151,178,5	script	Guillaume Knight#4	417,{
-	mes "[Guillaume Knight]";
-	mes "The objective of the Flavius Battle is to score 2 points before your enemy by destroying their crystal.";
+bat_room,151,178,5	script	Chevalier de Guillaume::Guillaume Knight#4	417,{
+	mes "[Chevalier de Guillaume]";
+	mes "L'objective de la Bataille de Flavius est de marquer 2 points avant vos adversaires en détruisant leur cristal.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "The crystals for both armies are protected by special barricades that cannot be destroyed by direct attacks.";
+	mes "[Chevalier de Guillaume]";
+	mes "Les cristaux des deux armées sont protégés par des barricades ne pouvant être détruites par des attaques directes.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "But they can be removed by destroying the Guardians that protect the enemy army base.";
+	mes "[Chevalier de Guillaume]";
+	mes "Cependant, vous pourrez les abattre en détruisant les gardiens qui protègent la base adverse.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "The crystals are immune to every type of skill; your physical attacks are the only choice for destroying your enemy's crystal.";
+	mes "[Chevalier de Guillaume]";
+	mes "Les cristaux sont immunisés contre les compétences. Seules vos attaques physiques peuvent les détruire.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "Please remember: when you join a battle, you will be receiving a token which indicates the set duration for which you cannot participate in the same type of battle.";
-	mes "You may check the duration by pressing the Alt+U keys.";
+	mes "[Chevalier de Guillaume]";
+	mes "Gardez à l'esprit que vous ne pourrez pas participer à une bataille du même type que celle à laquelle vous participez qu'avant un certain temps. Vous pouvez consulter cela en appuyant sur ALT+U.";
 	next;
-	mes "[Guillaume Knight]";
-	mes "Are you ready for battle? Then apply with the recruiter next to me!";
+	mes "[Chevalier de Guillaume]";
+	mes "Êtes-vous prêt"+ ( sex ? "" : "e" ) +" pour le combat? Alors allez parler au recruteur à mes côtés!";
 	close;
 }
 
-bat_room,135,121,1	script	Croix Knight#3	413,{
-	mes "[Croix Knight]";
-	mes "The objective of the Flavius Battle is to score 2 points before your enemy by destroying their crystal.";
+bat_room,135,121,1	script	Chevalier de Croix::Croix Knight#3	413,{
+	mes "[Chevalier de Croix]";
+	mes "L'objective de la Bataille de Flavius est de marquer 2 points avant vos adversaires en détruisant leur cristal.";
 	next;
-	mes "[Croix Knight]";
-	mes "The crystals for both armies are protected by special barricades that cannot be destroyed by direct attacks.";
+	mes "[Chevalier de Croix]";
+	mes "Les cristaux des deux armées sont protégés par des barricades ne pouvant être détruites par des attaques directes.";
 	next;
-	mes "[Croix Knight]";
-	mes "But they can be removed by destroying the Guardians that protect the enemy army base.";
+	mes "[Chevalier de Croix]";
+	mes "Cependant, vous pourrez les abattre en détruisant les gardiens qui protègent la base adverse.";
 	next;
-	mes "[Croix Knight]";
-	mes "The crystals are immune to every type of skill; your physical attacks are the only choice for destroying your enemy's crystal.";
+	mes "[Chevalier de Croix]";
+	mes "Les cristaux sont immunisés contre les compétences. Seules vos attaques physiques peuvent les détruire.";
 	next;
-	mes "[Croix Knight]";
-	mes "Please remember: when you join a battle, you will be receiving a token which indicates the set duration for which you cannot participate in the same type of battle.";
-	mes "You may check the duration by pressing the Alt+U keys.";
+	mes "[Chevalier de Croix]";
+	mes "Gardez à l'esprit que vous ne pourrez pas participer à une bataille du même type que celle à laquelle vous participez qu'avant un certain temps. Vous pouvez consulter cela en appuyant sur ALT+U.";
 	next;
-	mes "[Croix Knight]";
-	mes "Are you ready for battle? Then apply with the recruiter next to me!";
+	mes "[Chevalier de Croix]";
+	mes "Êtes-vous prêt"+ ( sex ? "" : "e" ) +" pour le combat? Alors allez parler au recruteur à mes côtés!";
 	close;
 }
 
-bat_room,151,121,1	script	Croix Knight#4	413,{
-	mes "[Croix Knight]";
-	mes "The objective of the Flavius Battle is to score 2 points before your enemy by destroying their crystal.";
+bat_room,151,121,1	script	Chevalier de Croix::Croix Knight#4	413,{
+	mes "[Chevalier de Croix]";
+	mes "L'objective de la Bataille de Flavius est de marquer 2 points avant vos adversaires en détruisant leur cristal.";
 	next;
-	mes "[Croix Knight]";
-	mes "The crystals for both armies are protected by special barricades that cannot be destroyed by direct attacks.";
+	mes "[Chevalier de Croix]";
+	mes "Les cristaux des deux armées sont protégés par des barricades ne pouvant être détruites par des attaques directes.";
 	next;
-	mes "[Croix Knight]";
-	mes "But they can be removed by destroying the Guardians that protect the enemy army base.";
+	mes "[Chevalier de Croix]";
+	mes "Cependant, vous pourrez les abattre en détruisant les gardiens qui protègent la base adverse.";
 	next;
-	mes "[Croix Knight]";
-	mes "The crystals are immune to every type of skill; your physical attacks are the only choice for destroying your enemy's crystal.";
+	mes "[Chevalier de Croix]";
+	mes "Les cristaux sont immunisés contre les compétences. Seules vos attaques physiques peuvent les détruire.";
 	next;
-	mes "[Croix Knight]";
-	mes "Please remember: when you join a battle, you will be receiving a token which indicates the set duration for which you cannot participate in the same type of battle.";
-	mes "You may check the duration by pressing the Alt+U keys.";
+	mes "[Chevalier de Croix]";
+	mes "Gardez à l'esprit que vous ne pourrez pas participer à une bataille du même type que celle à laquelle vous participez qu'avant un certain temps. Vous pouvez consulter cela en appuyant sur ALT+U.";
 	next;
-	mes "[Croix Knight]";
-	mes "Are you ready for battle? Then apply with the recruiter next to me!";
+	mes "[Chevalier de Croix]";
+	mes "Êtes-vous prêt"+ ( sex ? "" : "e" ) +" pour le combat? Alors allez parler au recruteur à mes côtés!";
 	close;
 }
 
 // Flavius Officer - Croix
 //============================================================
-bat_room,148,178,5	script	Flavius Officer#02a	418,{
+bat_room,148,178,5	script	Officier de Flavius::Flavius Officer#02a	418,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you loose some weight. -";
+		mes "- Une petite minute! Vous transportez trop d'objets sur vous! Revenez après vous être allégé un peu. -";
 		close;
 	}
-	mes "[Guillaume Army Officer]";
-	mes "Let's show the power of the Guillaume Army to those stinky Croixs!";
+	mes "[Officier de l'Armée de Guillaume]";
+	mes "Montrons la vaillance de l'armée de Guillaume à ces misérables!";
 	next;
-	switch(select("I want to join your army!:End Conversation")) {
+	switch(select("Je veux rejoindre votre armée!:Quitter la conversation.")) {
 	case 1:
 		if ((Class == job_Novice) || (BaseClass == Job_Supernovice)) {
-			mes "[Guillaume Army Officer]";
-			mes "I'm very pleased that you want to join us and fight the Croix Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+			mes "[Officier de l'Armée de Guillaume]";
+			mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 		}
 		else {
 			if (BaseLevel < 80) {
-				mes "[Guillaume Army Officer]";
-				mes "I'm very pleased that you want to join us and fight the Croix Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+				mes "[Officier de l'Armée de Guillaume]";
+				mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 			}
 			else {
 				set .@chk_urtime,checkquest(2070,PLAYTIME);
 				if ((.@chk_urtime == 0)|| (.@chk_urtime == 1)) {
-					mes "[Guillaume Army Officer]";
-					mes "You seem to have just returned from the battlefield.";
-					mes "It's too early for you to go back. Go rest, and leave the enemies to us!";
+					mes "[Officier de l'Armée de Guillaume]";
+					mes "Ola, "+ ( sex ? "mon brave! Même un guerrier" : "gente Dame! Même une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
+					mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Flavius lorsque ce sera fait.";
 				}
 				else {
 					if (.@chk_urtime == 2)
 						erasequest 2070;
 					set .@mapcount2,getmapusers("bat_b02");
 					if (.@mapcount2 > 0) {
-						mes "[Guillaume Army Officer]";
-						mes "I've received a report informing me that an elite corps has been dispatched to the battlefield fighting the Croixs already.";
-						mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+						mes "[Officier de l'Armée de Guillaume]";
+						mes "J'ai reçu un rapport m'informant qu'un groupe d'élite venait d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 					}
 					else {
 						if ($@FlaviusBG2 > 0) {
-							mes "[Guillaume Army Officer]";
-							mes "An elite corps is already standing by to be dispatched to the battlefield.";
-							mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+							mes "[Officier de l'Armée de Guillaume]";
+							mes "Un groupe d'élite est sur le point d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 						}
 						else {
-							mes "[Guillaume Army Officer]";
-							mes "You definitely seem to be ready for battle!";
-							mes "Go show the Croixs what fear truly means!";
-							mes "Today, our cry of victory shall echo all over the battlefield!";
+							mes "[Officier de l'Armée de Guillaume]";
+							mes "Vous voilà prêt"+ ( sex ? "" : "e" ) +" pour la bataille! Montrons aux partisans de Croix le véritable sens du mot terreur! Que retentissent nos cris victorieux sur le champ de bataille!";
 							close2;
 							warp "bat_room",141,224;
 							end;
@@ -299,63 +273,55 @@ bat_room,148,178,5	script	Flavius Officer#02a	418,{
 		}
 		break;
 	case 2:
-		mes "[Guillaume Army Officer]";
-		mes "Today, we shall be victorious!";
+		mes "[Officier de l'Armée de Guillaume]";
+		mes "La victoire sera nôtre!";
 		break;
 	}
 	close;
 }
 
-bat_room,148,121,1	script	Flavius Officer#02b	414,{
+bat_room,148,121,1	script	Officier de Flavius::Flavius Officer#02b	414,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you loose some weight. -";
+		mes "- Une petite minute! Vous transportez trop d'objets sur vous! Revenez après vous être allégé un peu. -";
 		close;
 	}
-	mes "[Croix Army Officer]";
-	mes "Let's show the power of the Croix Army to those stinky Guillaumes!";
+	mes "[Officier de l'Armée de Croix]";
+	mes "Montrons la vaillance de l'armée de Croix à ces misérables!";
 	next;
-	switch(select("I want to join your army!:End Conversation")) {
+	switch(select("Je veux rejoindre votre armée!:Quitter la conversation.")) {
 	case 1:
 		if ((Class == job_Novice) || (BaseClass == Job_Supernovice)) {
-			mes "[Croix Army Officer]";
-			mes "I'm very pleased that you want to join us and fight the Guillaume Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+			mes "[Officier de l'Armée de Croix]";
+			mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 		}
 		else {
 			if (BaseLevel < 80) {
-				mes "[Croix Army Officer]";
-				mes "I'm very pleased that you want to join us and fight the Guillaume Army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield.";
+				mes "[Officier de l'Armée de Croix]";
+				mes "Je suis heureux que vous ayez décidé de rejoindre notre armée, mais je ne peux envoyer un blanc-bec comme vous sur le champ de bataille. Vous ne feriez pas long feu là-bas.";
 			}
 			else {
 				set .@chk_urtime,checkquest(2070,PLAYTIME);
 				if ((.@chk_urtime == 0)|| (.@chk_urtime == 1)) {
-					mes "[Croix Army Officer]";
-					mes "You seem to have just returned from the battlefield.";
-					mes "It's too early for you to go back. Go rest, and leave the enemies to us!";
+					mes "[Officier de l'Armée de Croix]";
+					mes "Ola, "+ ( sex ? "mon brave! Même un guerrier" : "gente Dame! Même une guerrière" ) +" de votre rang doit se reposer! Je ne puis vous laisser participer tant que ce ne sera pas fait.";
+					mes "Pour la plus grande gloire de notre bon prince, restez en retrait. Vous pourrez participer à la bataille de Flavius lorsque ce sera fait.";
 				}
 				else {
 					if (.@chk_urtime == 2)
 						erasequest 2070;
 					set .@mapcount2,getmapusers("bat_b02");
 					if (.@mapcount2 > 0) {
-						mes "[Croix Army Officer]";
-						mes "I've received a report informing me that an elite corps has been dispatched to the battlefield fighting the Guillaume already.";
-						mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+						mes "[Officier de l'Armée de Croix]";
+						mes "J'ai reçu un rapport m'informant qu'un groupe d'élite venait d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 					}
 					else {
 						if ($@FlaviusBG2 > 0) {
-							mes "[Croix Army Officer]";
-							mes "An elite corps is already standing by to be dispatched to the battlefield.";
-							mes "Why don't you go wait for a while? I suggest you sharpen your weapons and prepare your supplies until then.";
+							mes "[Officier de l'Armée de Croix]";
+							mes "Un groupe d'élite est sur le point d'être envoyé pour combattre nos ennemis. Pourquoi n'attendriez-vous pas un moment. Profitez-en pour affûter votre lame et préparer vos rations.";
 						}
 						else {
-							mes "[Croix Army Officer]";
-							mes "You definitely seem to be ready for battle!";
-							mes "Go show the Guillaumes what fear truly means!";
-							mes "Today, our cry of victory shall echo all over the battlefield!";
+							mes "[Officier de l'Armée de Croix]";
+							mes "Vous voilà prêt"+ ( sex ? "" : "e" ) +" pour la bataille! Montrons aux partisans de Guillaume le véritable sens du mot terreur! Que retentissent nos cris victorieux sur le champ de bataille!";
 							close2;
 							warp "bat_room",141,207;
 							end;
@@ -366,8 +332,8 @@ bat_room,148,121,1	script	Flavius Officer#02b	414,{
 		}
 		break;
 	case 2:
-		mes "[Croix Army Officer]";
-		mes "Today, we shall be victorious!";
+		mes "[Officier de l'Armée de Croix]";
+		mes "La victoire sera nôtre!";
 		break;
 	}
 	close;

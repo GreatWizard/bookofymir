@@ -1,4 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing, corrigé par Myllena
 // ==============================================================================
 // BattleGround System - Flavius 1
 // ==============================================================================
@@ -6,20 +7,20 @@
 // Registration NPC's
 // *********************************************************************
 
-bat_room,86,227,4	script	Registration::Fl1R_Guillaume	418,{
+bat_room,253,97,4	script	Inscription::Fl1R_Guillaume	418,{
 	end;
 OnInit:
-	waitingroom "Battle Station 10 Players",10,"Flavius_BG1::OnGuillaumeJoin",1;
+	waitingroom "Combat à 10 Joueurs",10,"Flavius_BG1::OnGuillaumeJoin",1;
 	end;
 OnEnterBG:
 	set $@FlaviusBG1_id1, waitingroom2bg("bat_b01",390,10,"Flavius_BG1::OnGuillaumeQuit","");
 	end;
 }
 
-bat_room,85,204,0	script	Registration::Fl1R_Croix	414,{
+bat_room,253,74,0	script	Inscription::Fl1R_Croix	414,{
 	end;
 OnInit:
-	waitingroom "Battle Station 10 Players",10,"Flavius_BG1::OnCroixJoin",1;
+	waitingroom "Combat à 10 Joueurs",10,"Flavius_BG1::OnCroixJoin",1;
 	end;
 OnEnterBG:
 	set $@FlaviusBG1_id2, waitingroom2bg("bat_b01",10,290,"Flavius_BG1::OnCroixQuit","");
@@ -35,8 +36,8 @@ OnEnterBG:
 OnInit:
 	disablenpc "Guillaume Vintenar#fl1";
 	disablenpc "Croix Vintenar#fl1";
-	disablenpc "Therapist in battle#fl11";
-	disablenpc "Therapist in battle#fl12";
+	disablenpc "Rebouteux#fl11";
+	disablenpc "Rebouteux#fl12";
 	end;
 
 OnGuillaumeQuit:
@@ -58,7 +59,7 @@ OnReadyCheck:
 	
 	if( .@Guillaume < 10 || .@Croix < 10 )
 	{
-		mapannounce "bat_room","Battleground -- Flavius [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",1,0x006400;
+		mapannounce "bat_room","Champ de Bataille -- Flavius [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",1,0x006400;
 		end;
 	}
 
@@ -73,14 +74,14 @@ OnReadyCheck:
 	// Prepare NPC
 	donpcevent "#gfl1_respawn::OnBGStart";
 	donpcevent "#cfl1_respawn::OnBGStart";
-	enablenpc "Therapist in battle#fl11";
-	enablenpc "Therapist in battle#fl12";
+	enablenpc "Rebouteux#fl11";
+	enablenpc "Rebouteux#fl12";
 	disablenpc "Guillaume Vintenar#fl1";
 	disablenpc "Croix Vintenar#fl1";
 	// Build and Warp Teams
 	donpcevent "Fl1R_Guillaume::OnEnterBG";
 	donpcevent "Fl1R_Croix::OnEnterBG";
-	announce "Battleground -- Flavius [80-99] has started!",0,0x006400;
+	announce "Champ de Bataille -- La bataille de Flavius [80-99] vient de débuter!",0,0x006400;
 	initnpctimer;
 	// Start Match!!
 
@@ -98,27 +99,27 @@ OnRoundStart:
 
 	set .Match, .Match + 1;
 	// Crystal Spawn
-	set .Guillaume_Crystal, bg_monster($@FlaviusBG1_id1,"bat_b01",328,150,"Crystal Guillaume",1914,"Flavius_BG1::OnGuillaumeBreak");
+	set .Guillaume_Crystal, bg_monster($@FlaviusBG1_id1,"bat_b01",328,150,"Cristal de Guillaume",1914,"Flavius_BG1::OnGuillaumeBreak");
 	setwall "bat_b01",327,149,2,6,0,"gui_wall1-1";
 	setwall "bat_b01",329,149,2,0,0,"gui_wall1-2";
 	setwall "bat_b01",329,151,2,2,0,"gui_wall1-3";
 	setwall "bat_b01",327,151,2,4,0,"gui_wall1-4";
 
-	set .Croix_Crystal, bg_monster($@FlaviusBG1_id2,"bat_b01",62,150,"Crystal Croix",1915,"Flavius_BG1::OnCroixBreak");
+	set .Croix_Crystal, bg_monster($@FlaviusBG1_id2,"bat_b01",62,150,"Cristal de Croix",1915,"Flavius_BG1::OnCroixBreak");
 	setwall "bat_b01",61,149,2,6,0,"cro_wall1-1";
 	setwall "bat_b01",63,149,2,0,0,"cro_wall1-2";
 	setwall "bat_b01",63,151,2,2,0,"cro_wall1-3";
 	setwall "bat_b01",61,151,2,4,0,"cro_wall1-4";
 
 	// Guardian Spawns
-	bg_monster $@FlaviusBG1_id1,"bat_b01",328,160,"Guillaume Guardian",1949,"Flavius_BG1::OnGuiGuardian";
-	bg_monster $@FlaviusBG1_id1,"bat_b01",328,140,"Guillaume Guardian",1950,"Flavius_BG1::OnGuiGuardian";
+	bg_monster $@FlaviusBG1_id1,"bat_b01",328,160,"Garde de Guillaume",1949,"Flavius_BG1::OnGuiGuardian";
+	bg_monster $@FlaviusBG1_id1,"bat_b01",328,140,"Garde de Guillaume",1950,"Flavius_BG1::OnGuiGuardian";
 	set .Guillaume_Guardian, 2;
-	bg_monster $@FlaviusBG1_id2,"bat_b01",62,160,"Croix Guardian",1949,"Flavius_BG1::OnCroGuardian";
-	bg_monster $@FlaviusBG1_id2,"bat_b01",61,140,"Croix Guardian",1950,"Flavius_BG1::OnCroGuardian";
+	bg_monster $@FlaviusBG1_id2,"bat_b01",62,160,"Garde de Croix",1949,"Flavius_BG1::OnCroGuardian";
+	bg_monster $@FlaviusBG1_id2,"bat_b01",61,140,"Garde de Croix",1950,"Flavius_BG1::OnCroGuardian";
 	set .Croix_Guardian, 2;
 	// Announces
-	mapannounce "bat_b01","The Battle of Flavius [ " + .Match + " ] Round has begun!!",1,0x006400;
+	mapannounce "bat_b01","Le round [ " + .Match + " ] de la bataille de Flavius vient de débuter!!",1,0x006400;
 	end;
 
 OnRoundStop:
@@ -144,7 +145,7 @@ OnGuiGuardian:
 		delwall "gui_wall1-2";
 		delwall "gui_wall1-3";
 		delwall "gui_wall1-4";
-		mapannounce "bat_b01","The Guillaume Crystal is vulnerable to attack!",1,0x0000FF;
+		mapannounce "bat_b01","Le Cristal de Guillaume est maintenant vulnérable aux attaques!",1,0x0000FF;
 	}
 	end;
 
@@ -155,7 +156,7 @@ OnCroGuardian:
 		delwall "cro_wall1-2";
 		delwall "cro_wall1-3";
 		delwall "cro_wall1-4";
-		mapannounce "bat_b01","The Croix Crystal is vulnerable to attack!",1,0xFF0000;
+		mapannounce "bat_b01","Le Cristal de Croix est maintenant vulnérable aux attaques!",1,0xFF0000;
 	}
 	end;
 
@@ -165,13 +166,13 @@ OnGuillaumeBreak:
 	if( set(.Croix_Score, .Croix_Score + 1) < 2 )
 	{
 		bg_updatescore "bat_b01",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b01","The Guillaume Crystal has been destroyed!",1,0x0000FF;
+		mapannounce "bat_b01","Le Cristal de Guillaume vient d'être détruit!",1,0x0000FF;
 		donpcevent "Flavius_BG1::OnRoundStart";
 	}
 	else
 	{
 		bg_updatescore "bat_b01",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b01","The Croix army has won the Battle of Flavius!",1,0xFF0000;
+		mapannounce "bat_b01","L'armée de Croix remporte la Bataille de Flavius!",1,0xFF0000;
 		set $@FlaviusBG1_Victory, 2;
 		donpcevent "Flavius_BG1::OnMatchEnd";
 	}
@@ -183,39 +184,39 @@ OnCroixBreak:
 	if( set(.Guillaume_Score, .Guillaume_Score + 1) < 2 )
 	{
 		bg_updatescore "bat_b01",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b01","The Croix Crystal has been destroyed!",1,0xFF0000;
+		mapannounce "bat_b01","Le Cristal de Croix vient d'être détruit!",1,0xFF0000;
 		donpcevent "Flavius_BG1::OnRoundStart";
 	}
 	else
 	{
 		bg_updatescore "bat_b01",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b01","The Guillaume army has won the Battle of Flavius!",1,0x0000FF;
+		mapannounce "bat_b01","L'armée de Guillaume remporte la Bataille de Flavius!",1,0x0000FF;
 		set $@FlaviusBG1_Victory, 1;
 		donpcevent "Flavius_BG1::OnMatchEnd";
 	}
 	end;
 
 OnTimer2400000:
-	mapannounce "bat_b01","Battle of Flavius will ends in 5 minutes",1,0x006400;
+	mapannounce "bat_b01","La Bataille de Flavius prendra fin dans 5 minutes.",1,0x006400;
 	end;
 OnTimer2640000:
-	mapannounce "bat_b01","Battle of Flavius will ends in 1 minute",1,0x006400;
+	mapannounce "bat_b01","La Bataille de Flavius prendra fin dans 1 minute.",1,0x006400;
 	end;
 
 OnTimer2700000:
 	if( .Croix_Score > .Guillaume_Score )
 	{
-		mapannounce "bat_b01","The Croix army has won the Battle of Flavius!",1,0xFF0000;
+		mapannounce "bat_b01","L'armée de Croix a remporté la Bataille de Flavius!",1,0xFF0000;
 		set $@FlaviusBG1_Victory, 2;
 	}
 	else if( .Croix_Score < .Guillaume_Score )
 	{
-		mapannounce "bat_b01","The Guillaume army has won the Battle of Flavius!",1,0x0000FF;
+		mapannounce "bat_b01","L'armée de Guillaume a remporté la Bataille de Flavius!",1,0x0000FF;
 		set $@FlaviusBG1_Victory, 1;
 	}
 	else
 	{
-		mapannounce "bat_b01","The Battle of Flavius is over. The time is out, this is a Tie",1,0x006400;
+		mapannounce "bat_b01","La Bataille de Flavius est terminée. Elle s'achève par une égalité!",1,0x006400;
 		set $@FlaviusBG1_Victory, 3;
 	}
 
@@ -224,25 +225,25 @@ OnMatchEnd:
 	stopnpctimer;
 	donpcevent "#gfl1_respawn::OnBGStop";
 	donpcevent "#cfl1_respawn::OnBGStop";
-	disablenpc "Therapist in battle#fl11";
-	disablenpc "Therapist in battle#fl12";
+	disablenpc "Rebouteux#fl11";
+	disablenpc "Rebouteux#fl12";
 	enablenpc "Guillaume Vintenar#fl1";
 	enablenpc "Croix Vintenar#fl1";
 	sleep 2000;
 	bg_warp $@FlaviusBG1_id1,"bat_b01",390,10;
 	bg_warp $@FlaviusBG1_id2,"bat_b01",10,290;
 	sleep 3000;
-	mapannounce "bat_b01","Battle of Flavius will close in 1 minute!",1,0x006400;
+	mapannounce "bat_b01","La Bataille de Flavius prendra fin dans 1 minute!",1,0x006400;
 	initnpctimer;
 	end;
 
 OnTimer30000:
 	if( $@FlaviusBG1 == 2 )
-		mapannounce "bat_b01","Battle of Flavius will close in 30 seconds!",1,0x006400;
+		mapannounce "bat_b01","La Bataille de Flavius prendra fin dans 30 secondes!",1,0x006400;
 	end;
 OnTimer50000:
 	if( $@FlaviusBG1 == 2 )
-		mapannounce "bat_b01","Battle of Flavius will close in 10 seconds!",1,0x006400;
+		mapannounce "bat_b01","La Bataille de Flavius prendra fin dans 10 secondes!",1,0x006400;
 	end;
 
 OnTimer60000:
@@ -262,8 +263,8 @@ OnReset:
 	// NPC's
 	disablenpc "Guillaume Vintenar#fl1";
 	disablenpc "Croix Vintenar#fl1";
-	disablenpc "Therapist in battle#fl11";
-	disablenpc "Therapist in battle#fl12";
+	disablenpc "Rebouteux#fl11";
+	disablenpc "Rebouteux#fl12";
 
 	if( $@FlaviusBG1_id1 ) { bg_destroy $@FlaviusBG1_id1; set $@FlaviusBG1_id1, 0; }
 	if( $@FlaviusBG1_id2 ) { bg_destroy $@FlaviusBG1_id2; set $@FlaviusBG1_id2, 0; }
@@ -281,24 +282,22 @@ OnReset:
 // Battleground rewards
 // *********************************************************************
 
-bat_b01,390,13,5	script	Guillaume Vintenar#fl1	419,{
+bat_b01,390,13,5	script	Aide de Camp (Guillaume)::Guillaume Vintenar#fl1	419,{
 	if( $@FlaviusBG1_Victory )
 	{
 		if( $@FlaviusBG1_Victory == Bat_Team )
 		{ // Victory
 			mes "[Swandery]";
-			mes "Blessed Guillaume!!";
-			mes "Let's enjoy our glorious victory!";
-			mes "" + strcharinfo(0) + ", its a sign reflecting victory";
+			mes "Guillaume le Très Saint!!";
+			mes "Festoyons à notre glorieuse victoire!";
+			mes "" + strcharinfo(0) + ", voici un symbole de notre triomphe.";
 			close2;
 			set .@Reward, 9;
 		}
 		else
 		{ // 
 			mes "[Swandery]";
-			mes "You lost, but you're dedicated to this battle.";
-			mes "This is a reward for your great dedication by Guillaume Marollo!";
-			mes "Just take this defeat a lesson, and later you would definitely learn.";
+			mes "Nous avons failli, mais vous avez su faire preuve de bravoure sur le champ de bataille. Voici de quoi récompenser votre dévotion envers Guillaume Marollo! Que cette défaite soit pour nous une leçon et nous rende plus forts.";
 			close2;
 			set .@Reward, 3;
 		}
@@ -312,24 +311,22 @@ bat_b01,390,13,5	script	Guillaume Vintenar#fl1	419,{
 	end;
 }
 
-bat_b01,10,293,5	script	Croix Vintenar#fl1	415,{
+bat_b01,10,293,5	script	Aide de Camp (Croix)::Croix Vintenar#fl1	415,{
 	if( $@FlaviusBG1_Victory )
 	{
 		if( $@FlaviusBG1_Victory == Bat_Team )
 		{ // Victory
 			mes "[Swandery]";
-			mes "Blessed Croax!!";
-			mes "Let's enjoy our glorious victory!";
-			mes "" + strcharinfo(0) + ", its a sign reflecting victory";
+			mes "Croix le Très Saint!!";
+			mes "Festoyons à notre glorieuse victoire!";
+			mes "" + strcharinfo(0) + ", voici un symbole de notre triomphe.";
 			close2;
 			set .@Reward, 9;
 		}
 		else
 		{ // 
 			mes "[Swandery]";
-			mes "Oh, " + strcharinfo(0) + ". Don't be sad.";
-			mes "Even though we didn't win, we did our best.";
-			mes "This is a Royal gift from Croix, and please don't forget this battle. We can win the next.";
+			mes "Point de larmes ni de regrets, " + strcharinfo(0) + ". Nous avons failli, mais nous avons aussi su faire preuve de bravoure. Voici un présent royal de Croix. Puisse-t-il vous permettre de ne jamais oublier cette bataille. Que la prochaine soit celle de notre triomphe!";
 			close2;
 			set .@Reward, 3;
 		}
@@ -346,18 +343,16 @@ bat_b01,10,293,5	script	Croix Vintenar#fl1	415,{
 // Battleground Therapist
 // *********************************************************************
 
-bat_b01,390,13,5	script	Therapist in battle#fl12	95,{
-	mes "[Therapist in battle]";
-	mes "Just close your eyes, and take a deep breathe.";
-	mes "You can be free from pain.";
+bat_b01,390,13,5	script	Rebouteux#fl12	95,{
+	mes "[Rebouteux]";
+	mes "Serre bien les dents mon p'tit gars, et prends une bonne bouffée d'air. Ça risque de faire un peu mal...";
 	specialeffect2 312;
 	close;
 }
 
-bat_b01,10,293,5	script	Therapist in battle#fl11	95,{
-	mes "[Therapist in battle]";
-	mes "Just close your eyes, and take a deep breathe.";
-	mes "You can be free from pain.";
+bat_b01,10,293,5	script	Rebouteux#fl11	95,{
+	mes "[Rebouteux]";
+	mes "Serre bien les dents mon p'tit gars, et prends une bonne bouffée d'air. Ça risque de faire un peu mal...";
 	specialeffect2 312;
 	close;
 }
@@ -412,30 +407,43 @@ OnTimer25000:
 // Flags
 // *********************************************************************
 
-bat_b01,304,231,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat1	973
-bat_b01,319,231,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat2	973
-bat_b01,304,218,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat3	973
-bat_b01,319,218,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat4	973
-bat_b01,304,231,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat5	973
-bat_b01,304,231,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat6	973
-bat_b01,335,142,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat7	973
-bat_b01,335,157,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat8	973
-bat_b01,390,16,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat9	973
-bat_b01,292,163,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat19	973
-bat_b01,292,136,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat20	973
-bat_b01,241,185,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat21	973
-bat_b01,247,179,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat22	973
+bat_b01,304,231,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat1	973
+bat_b01,319,231,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat2	973
+bat_b01,304,218,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat3	973
+bat_b01,319,218,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat4	973
+bat_b01,304,231,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat5	973
+bat_b01,304,231,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat6	973
+bat_b01,335,142,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat7	973
+bat_b01,335,157,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat8	973
+bat_b01,390,16,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat9	973
+bat_b01,292,163,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat19	973
+bat_b01,292,136,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat20	973
+bat_b01,241,185,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat21	973
+bat_b01,247,179,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat22	973
 
-bat_b01,96,81,1	duplicate(Croix camp#bat)	Croix camp#bat1	974
-bat_b01,96,68,1	duplicate(Croix camp#bat)	Croix camp#bat2	974
-bat_b01,79,81,1	duplicate(Croix camp#bat)	Croix camp#bat3	974
-bat_b01,79,68,1	duplicate(Croix camp#bat)	Croix camp#bat4	974
-bat_b01,96,81,1	duplicate(Croix camp#bat)	Croix camp#bat5	974
-bat_b01,96,81,1	duplicate(Croix camp#bat)	Croix camp#bat6	974
-bat_b01,59,164,1	duplicate(Croix camp#bat)	Croix camp#bat7	974
-bat_b01,59,137,1	duplicate(Croix camp#bat)	Croix camp#bat8	974
-bat_b01,10,296,1	duplicate(Croix camp#bat)	Croix camp#bat9	974
-bat_b01,110,162,1	duplicate(Croix camp#bat)	Croix camp#bat18	974
-bat_b01,110,137,1	duplicate(Croix camp#bat)	Croix camp#bat19	974
-bat_b01,152,120,1	duplicate(Croix camp#bat)	Croix camp#bat20	974
-bat_b01,158,114,1	duplicate(Croix camp#bat)	Croix camp#bat21	974
+bat_b01,96,81,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat1	974
+bat_b01,96,68,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat2	974
+bat_b01,79,81,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat3	974
+bat_b01,79,68,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat4	974
+bat_b01,96,81,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat5	974
+bat_b01,96,81,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat6	974
+bat_b01,59,164,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat7	974
+bat_b01,59,137,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat8	974
+bat_b01,10,296,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat9	974
+bat_b01,110,162,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat18	974
+bat_b01,110,137,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat19	974
+bat_b01,152,120,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat20	974
+bat_b01,158,114,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat21	974
+
+// MapFlags
+// *********************************************************************
+
+bat_b01	mapflag	battleground	2
+bat_b01	mapflag	nomemo
+bat_b01	mapflag	nosave	SavePoint
+bat_b01	mapflag	noteleport
+bat_b01	mapflag	nowarp
+bat_b01	mapflag	nowarpto
+bat_b01	mapflag	noreturn
+bat_b01	mapflag	nobranch
+bat_b01	mapflag	nopenalty

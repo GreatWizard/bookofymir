@@ -1,4 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing, corrigé par Myllena
 // ==============================================================================
 // BattleGround System - Tierra Valley 2
 // ==============================================================================
@@ -6,20 +7,20 @@
 // Registration NPC's
 // *********************************************************************
 
-bat_room,114,227,4	script	Registration::TV2R_Guillaume	418,{
+bat_room,85,97,4	script	Inscription::TV2R_Guillaume	418,{
 	end;
 OnInit:
-	waitingroom "Battle Station 10 Players",10,"Tierra_BG2::OnGuillaumeJoin",1;
+	waitingroom "Combat à 10 Joueurs",10,"Tierra_BG2::OnGuillaumeJoin",1;
 	end;
 OnEnterBG:
 	set $@TierraBG2_id1, waitingroom2bg("bat_a02",50,374,"Tierra_BG2::OnGuillaumeQuit","");
 	end;
 }
 
-bat_room,114,204,0	script	Registration::TV2R_Croix	414,{
+bat_room,85,74,0	script	Inscription::TV2R_Croix	414,{
 	end;
 OnInit:
-	waitingroom "Battle Station 10 Players",10,"Tierra_BG2::OnCroixJoin",1;
+	waitingroom "Combat à 10 Joueurs",10,"Tierra_BG2::OnCroixJoin",1;
 	end;
 OnEnterBG:
 	set $@TierraBG2_id2, waitingroom2bg("bat_a02",42,16,"Tierra_BG2::OnCroixQuit","");
@@ -35,8 +36,8 @@ OnEnterBG:
 OnInit:
 	disablenpc "Croix Vintenar#tv2";
 	disablenpc "Guillaume Vintenar#tv2";
-	disablenpc "Therapist in battle#tv21";
-	disablenpc "Therapist in battle#tv22";
+	disablenpc "Rebouteux#tv21";
+	disablenpc "Rebouteux#tv22";
 	end;
 
 OnGuillaumeQuit:
@@ -58,7 +59,7 @@ OnReadyCheck:
 
 	if( .@Guillaume < 10 || .@Croix < 10 )
 	{
-		mapannounce "bat_room","Battleground -- Tierra Valley [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",1,0xF4A460;
+		mapannounce "bat_room","Champ de Bataille -- Vallée de Tierra [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",1,0xF4A460;
 		end;
 	}
 
@@ -67,9 +68,9 @@ OnReadyCheck:
 	donpcevent "TV2R_Guillaume::OnEnterBG";
 	donpcevent "Guillaume_TV2B::OnBuild";
 	donpcevent "Croix_TV2B::OnBuild";
-	bg_monster $@TierraBG2_id1,"bat_a02",176,345,"Food Depot",1909,"Tierra_BG2::OnGuillaumeBreak";
-	bg_monster $@TierraBG2_id2,"bat_a02",167,50,"Food Storage",1910,"Tierra_BG2::OnCroixBreak";
-	bg_monster 0,"bat_a02",273,204,"Neutrality Flag",1911,"Tierra_BG2::OnNeutralBreak";
+	bg_monster $@TierraBG2_id1,"bat_a02",176,345,"Dépôt de Nourriture",1909,"Tierra_BG2::OnGuillaumeBreak";
+	bg_monster $@TierraBG2_id2,"bat_a02",167,50,"Réserve de Nourriture",1910,"Tierra_BG2::OnCroixBreak";
+	bg_monster 0,"bat_a02",273,204,"Drapeau Neutre",1911,"Tierra_BG2::OnNeutralBreak";
 	
 	set .Neutral_Base, 0;
 	set $@TierraBG2_Victory, 0;
@@ -78,8 +79,8 @@ OnReadyCheck:
 	set .Guardian_2, 0;
 	set .Guardian_3, 0;
 
-	enablenpc "Therapist in battle#tv21";
-	enablenpc "Therapist in battle#tv22";
+	enablenpc "Rebouteux#tv21";
+	enablenpc "Rebouteux#tv22";
 	disablenpc "Croix Vintenar#tv2";
 	disablenpc "Guillaume Vintenar#tv2";
 	// Respawner
@@ -87,14 +88,14 @@ OnReadyCheck:
 	donpcevent "#ctv2_respawn::OnBGStart";
 	donpcevent "#ntv2_respawn::OnBGStart";
 	// Warp Teams
-	announce "Battleground -- Tierra Valley [80-99] has started!",0,0xF4A460;
+	announce "Champ de Bataille -- La bataille de la Vallée de Tierra [80-99] vient de débuter!",0,0xFFA500;
 	bg_warp $@TierraBG2_id1,"bat_a02",353,344;
 	bg_warp $@TierraBG2_id2,"bat_a02",353,52;
 	// Final Messages
 	sleep 6000;
-	mapannounce "bat_a02","Guillaume Vintenar Axl Rose : Let's attack to burn down Croix's food storage",1,0x0000FF;
+	mapannounce "bat_a02","Aide de Camp de Guillaume Axl Rose : Chargez, fiers soldats, et réduisez les réserves de nourriture de Croix en cendres!",1,0x0000FF;
 	sleep 2000;
-	mapannounce "bat_a02","Croix Vintenar Swandery : Master of Valhalla! Let us be gifted with unfailing faith and courage",1,0xFF0000;
+	mapannounce "bat_a02","Aide de Camp de Croix Swandery : Seigneurs du Walhalla! Donnez-nous la force de brandir le fer avec foi et courage!",1,0xFF0000;
 	
 	initnpctimer;
 	end;
@@ -102,13 +103,13 @@ OnReadyCheck:
 OnNeutralBreak:
 	if( getcharid(4) == $@TierraBG2_id1 )
 	{
-		mapannounce "bat_a02","Guillaume obtained a neurality banner, so they have an advantage.",1,0x0000FF;
+		mapannounce "bat_a02","Guillaume a capturé une Bannière de Neutralité et gagne l'avantage.",1,0x0000FF;
 		bg_team_setxy $@TierraBG2_id2,42,16;
 		areawarp "bat_a02",52,208,61,217,"bat_a02",42,16;
 	}
 	else if( getcharid(4) == $@TierraBG2_id2 )
 	{
-		mapannounce "bat_a02","Croix obtained a neutrality banner, so they have an advantage.",1,0xFF0000;
+		mapannounce "bat_a02","Croix a capturé une Bannière de Neutralité et gagne l'avantage.",1,0xFF0000;
 		bg_team_setxy $@TierraBG2_id1,50,374;
 		areawarp "bat_a02",52,208,61,217,"bat_a02",50,374;
 	}
@@ -118,17 +119,17 @@ OnNeutralBreak:
 	bg_team_setxy .Neutral_Base,56,212;
 
 	if( .Guardian_1 == 0 )
-		set .Guardian_1, bg_monster(.Neutral_Base,"bat_a02",280,233,"Guardian",1949,"Tierra_BG2::OnGuardian1");
+		set .Guardian_1, bg_monster(.Neutral_Base,"bat_a02",280,233,"Garde",1949,"Tierra_BG2::OnGuardian1");
 	else
 		bg_monster_set_team .Guardian_1, .Neutral_Base;
 	
 	if( .Guardian_2 == 0 )
-		set .Guardian_2, bg_monster(.Neutral_Base,"bat_a02",287,203,"Guardian",1950,"Tierra_BG2::OnGuardian2");
+		set .Guardian_2, bg_monster(.Neutral_Base,"bat_a02",287,203,"Garde",1950,"Tierra_BG2::OnGuardian2");
 	else
 		bg_monster_set_team .Guardian_2, .Neutral_Base;
 
 	if( .Guardian_3 == 0 )
-		set .Guardian_3, bg_monster(.Neutral_Base,"bat_a02",268,204,"Guardian",1949,"Tierra_BG2::OnGuardian3");
+		set .Guardian_3, bg_monster(.Neutral_Base,"bat_a02",268,204,"Garde",1949,"Tierra_BG2::OnGuardian3");
 	else
 		bg_monster_set_team .Guardian_3, .Neutral_Base;
 
@@ -136,9 +137,9 @@ OnNeutralBreak:
 	if( $@TierraBG2 != 1 ) end;
 
 	if( .Neutral_Base == $@TierraBG2_id1 )
-		bg_monster .Neutral_Base,"bat_a02",273,204,"Guillaume Flag",1912,"Tierra_BG2::OnNeutralBreak";
+		bg_monster .Neutral_Base,"bat_a02",273,204,"Bannière de Guillaume",1912,"Tierra_BG2::OnNeutralBreak";
 	else if( .Neutral_Base == $@TierraBG2_id2 )
-		bg_monster .Neutral_Base,"bat_a02",273,204,"Croix Flag",1913,"Tierra_BG2::OnNeutralBreak";
+		bg_monster .Neutral_Base,"bat_a02",273,204,"Bannière de Croix",1913,"Tierra_BG2::OnNeutralBreak";
 	end;
 
 OnGuardian1: set .Guardian_1, 0; end;
@@ -147,33 +148,33 @@ OnGuardian3: set .Guardian_3, 0; end;
 
 OnGuillaumeBreak:
 	set $@TierraBG2_Victory, 2;
-	mapannounce "bat_a02","Croix Vintenar Swandery: We destroyed Guillaume's food storehouse. We won that! Wow!",1,0xFF0000;
+	mapannounce "bat_a02","Aide de Camp de Croix Swandery: Nous avons détruit les réserves de nourriture de Guillaume. Hourra, braves guerriers!",1,0xFF0000;
 	donpcevent "Tierra_BG2::OnStop";
 	end;
 
 OnCroixBreak:
 	set $@TierraBG2_Victory, 1;
-	mapannounce "bat_a02","Guillaume Vintenar Axl Rose: We destroyed Croix's food storehouse. We won that! Wow!",1,0x0000FF;
+	mapannounce "bat_a02","Aide de Camp de Guillaume Axl Rose: Nous avons détruit les réserves de nourriture de Croix. Hourra, braves guerriers!",1,0x0000FF;
 	donpcevent "Tierra_BG2::OnStop";
 	end;
 
 OnTimer2400000:
-	mapannounce "bat_a02","Battle of Tierra Gorge will ends in 5 minutes",1,0xF4A460;
+	mapannounce "bat_a02","La bataille des Gorges de Tierra prendra fin dans 5 minutes.",1,0xF4A460;
 	end;
 OnTimer2640000:
-	mapannounce "bat_a02","Battle of Tierra Gorge will ends in 1 minute",1,0xF4A460;
+	mapannounce "bat_a02","La bataille des Gorges de Tierra prendra fin dans 1 minutes.",1,0xF4A460;
 	end;
 
 OnTimer2700000:
 	set $@TierraBG2_Victory, 3; // Draw Game
-	mapannounce "bat_a02","Battle of Tierra Gorge is over. The time is out, this is a Tie",1,0xF4A460;
+	mapannounce "bat_a02","La Bataille des Gorges de Tierra est terminée. Elle s'achève par une égalité!",1,0xF4A460;
 	donpcevent "Tierra_BG2::OnStop";
 	end;
 
 OnStop:
 	set $@TierraBG2, 2;
-	disablenpc "Therapist in battle#tv21";
-	disablenpc "Therapist in battle#tv22";
+	disablenpc "Rebouteux#tv21";
+	disablenpc "Rebouteux#tv22";
 	donpcevent "#gtv2_respawn::OnBGStop";
 	donpcevent "#ctv2_respawn::OnBGStop";
 	donpcevent "#ntv2_respawn::OnBGStop";
@@ -190,17 +191,17 @@ OnStop:
 	bg_warp $@TierraBG2_id1,"bat_a02",50,374;
 	bg_warp $@TierraBG2_id2,"bat_a02",42,16;
 	sleep 3000;
-	mapannounce "bat_a02","Battle of Tierra Gorge will close in 1 minute!",1,0xF4A460;
+	mapannounce "bat_a02","La Bataille des Gorges de Tierra prendra fin dans 1 minute!",1,0xF4A460;
 	initnpctimer;
 	end;
 
 OnTimer30000:
 	if( $@TierraBG2 == 2 )
-		mapannounce "bat_a02","Battle of Tierra Valley will close in 30 seconds!",1,0xF4A460;
+		mapannounce "bat_a02","La Bataille des Gorges de Tierra prendra fin dans 30 secondes!",1,0xF4A460;
 	end;
 OnTimer50000:
 	if( $@TierraBG2 == 2 )
-		mapannounce "bat_a02","Battle of Tierra Valley will close in 10 seconds!",1,0xF4A460;
+		mapannounce "bat_a02","La Bataille des Gorges de Tierra prendra fin dans 10 secondes!",1,0xF4A460;
 	end;
 
 OnTimer60000:
@@ -211,8 +212,8 @@ OnReset:
 	set .Neutral_Base, 0;
 	disablenpc "Croix Vintenar#tv2";
 	disablenpc "Guillaume Vintenar#tv2";
-	disablenpc "Therapist in battle#tv21";
-	disablenpc "Therapist in battle#tv22";
+	disablenpc "Rebouteux#tv21";
+	disablenpc "Rebouteux#tv22";
 	donpcevent "#gtv2_respawn::OnBGStop";
 	donpcevent "#gtv2_respawn::OnBGStop";
 	donpcevent "#ctv2_respawn::OnBGStop";
@@ -239,26 +240,39 @@ OnReset:
 	end;
 }
 
+// MapFlags
+// *********************************************************************
+
+bat_a02	mapflag	battleground
+bat_a02	mapflag	nomemo
+bat_a02	mapflag	nosave	SavePoint
+bat_a02	mapflag	noteleport
+bat_a02	mapflag	nowarp
+bat_a02	mapflag	nowarpto
+bat_a02	mapflag	noreturn
+bat_a02	mapflag	nobranch
+bat_a02	mapflag	nopenalty
+
 // Other Flags
 // *********************************************************************
 
-bat_a02,148,85,1	duplicate(Croix camp#bat)	Croix camp#bat22	974
-bat_a02,155,85,1	duplicate(Croix camp#bat)	Croix camp#bat23	974
-bat_a02,357,75,1	duplicate(Croix camp#bat)	Croix camp#bat24	974
-bat_a02,348,74,1	duplicate(Croix camp#bat)	Croix camp#bat25	974
-bat_a02,199,49,1	duplicate(Croix camp#bat)	Croix camp#bat26	974
-bat_a02,168,16,1	duplicate(Croix camp#bat)	Croix camp#bat27	974
-bat_a02,138,12,1	duplicate(Croix camp#bat)	Croix camp#bat28	974
-bat_a02,108,35,1	duplicate(Croix camp#bat)	Croix camp#bat29	974
-bat_a02,164,308,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat23	973
-bat_a02,157,308,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat24	973
-bat_a02,359,327,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat25	973
-bat_a02,350,326,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat26	973
-bat_a02,209,344,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat27	973
-bat_a02,173,380,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat28	973
-bat_a02,150,380,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat29	973
-bat_a02,118,357,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat30	973
-bat_a02,119,336,1	duplicate(Guillaume camp#bat)	Guillaume camp#bat31	973
+bat_a02,148,85,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat22	974
+bat_a02,155,85,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat23	974
+bat_a02,357,75,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat24	974
+bat_a02,348,74,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat25	974
+bat_a02,199,49,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat26	974
+bat_a02,168,16,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat27	974
+bat_a02,138,12,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat28	974
+bat_a02,108,35,1	duplicate(Camp de Croix#bat)	Camp de Croix#bat29	974
+bat_a02,164,308,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat23	973
+bat_a02,157,308,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat24	973
+bat_a02,359,327,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat25	973
+bat_a02,350,326,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat26	973
+bat_a02,209,344,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat27	973
+bat_a02,173,380,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat28	973
+bat_a02,150,380,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat29	973
+bat_a02,118,357,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat30	973
+bat_a02,119,336,1	duplicate(Camp de Guillaume#bat)	Camp de Guillaume#bat31	973
 
 // Barricades
 // *********************************************************************
@@ -284,7 +298,7 @@ OnWall:
 	if( set(.MyMobCount,.MyMobCount - 1) < 1 )
 	{
 		delwall "bat_a02_g1";
-		mapannounce "bat_a02","South Gate : The Gate has been Destroy!!",1,0xF4A460;
+		mapannounce "bat_a02","Porte Sud: La Porte a été détruite!",1,0xF4A460;
 	}
 	end;
 }
@@ -310,7 +324,7 @@ OnWall:
 	if( set(.MyMobCount,.MyMobCount - 1) < 1 )
 	{
 		delwall "bat_a02_c1";
-		mapannounce "bat_a02","North Gate : A Gate has been Destroy!!",1,0xF4A460;
+		mapannounce "bat_a02","Porte Nord: La Porte a été détruite!",1,0xF4A460;
 	}
 	end;
 }
@@ -318,25 +332,23 @@ OnWall:
 // Battleground rewards
 // *********************************************************************
 
-bat_a02,45,19,3	script	Croix Vintenar#tv2	415,{
+bat_a02,45,19,3	script	Aide de Camp (Croix)::Croix Vintenar#tv2	415,{
 	if( $@TierraBG2_Victory )
 	{
 		if( $@TierraBG2_Victory == Bat_Team )
 		{ // Victory
 			set .@Reward, 3;
 			mes "[Swandery]";
-			mes "Blessed Croax!!";
-			mes "Let's enjoy our glorious victory!";
-			mes "" + strcharinfo(0) + ", its a sign reflecting victory";
+			mes "Croix le Très Saint!!";
+			mes "Festoyons à notre glorieuse victoire!";
+			mes "" + strcharinfo(0) + ", voici un symbole de notre triomphe.";
 			close2;
 		}
 		else
 		{ // 
 			set .@Reward, 1;
 			mes "[Swandery]";
-			mes "Oh, " + strcharinfo(0) + ". Don't be sad.";
-			mes "Even though we didn't win, we did our best.";
-			mes "This is a Royal gift from Croix, and please don't forget this battle. We can win the next.";
+			mes "Point de larmes ni de regrets, " + strcharinfo(0) + ". Nous avons failli, mais nous avons aussi su faire preuve de bravoure. Voici un présent royal de Croix. Puisse-t-il vous permettre de ne jamais oublier cette bataille. Que la prochaine soit celle de notre triomphe!";
 			close2;
 		}
 
@@ -349,25 +361,23 @@ bat_a02,45,19,3	script	Croix Vintenar#tv2	415,{
 	end;
 }
 
-bat_a02,53,377,3	script	Guillaume Vintenar#tv2	419,{
+bat_a02,53,377,3	script	Aide de Camp (Guillaume)::Guillaume Vintenar#tv2	419,{
 	if( $@TierraBG2_Victory )
 	{
 		if( $@TierraBG2_Victory == Bat_Team )
 		{ // Victory
 			set .@Reward, 3;
 			mes "[Swandery]";
-			mes "Blessed Guillaume!!";
-			mes "Let's enjoy our glorious victory!";
-			mes "" + strcharinfo(0) + ", its a sign reflecting victory";
+			mes "Guillaume le Très Saint!!";
+			mes "Festoyons à notre glorieuse victoire!";
+			mes "" + strcharinfo(0) + ", voici un symbole de notre triomphe.";
 			close2;
 		}
 		else
 		{ // 
 			set .@Reward, 1;
 			mes "[Swandery]";
-			mes "You lost, but you're dedicated to this battle.";
-			mes "This is a reward for your great dedication by Guillaume Marollo!";
-			mes "Just take this defeat a lesson, and later you would definitely learn.";
+			mes "Nous avons failli, mais vous avez su faire preuve de bravoure sur le champ de bataille. Voici de quoi récompenser votre dévotion envers Guillaume Marollo! Que cette défaite soit pour nous une leçon et nous rende plus forts.";
 			close2;
 		}
 
@@ -383,25 +393,23 @@ bat_a02,53,377,3	script	Guillaume Vintenar#tv2	419,{
 // Battleground Therapist
 // *********************************************************************
 
-bat_a02,60,216,3	script	Ghost#tv23	950,{
-	mes "[Ghost in valley]";
-	mes "Boo...Boo...";
+bat_a02,60,216,3	script	Fantôme#tv23	950,{
+	mes "[Fantôme de la Vallée]";
+	mes "Bouh...Bouh...";
 	specialeffect2 312;
 	close;
 }
 
-bat_a02,53,377,3	script	Therapist in battle#tv22	95,{
-	mes "[Therapist in battle]";
-	mes "Just close your eyes, and take a deep breathe.";
-	mes "You can be free from pain.";
+bat_a02,53,377,3	script	Rebouteux#tv22	95,{
+	mes "[Rebouteux]";
+	mes "Serre bien les dents mon p'tit gars, et prends une bonne bouffée d'air. Ça risque de faire un peu mal...";
 	specialeffect2 312;
 	close;
 }
 
-bat_a02,45,18,3	script	Therapist in battle#tv21	95,{
-	mes "[Therapist in battle]";
-	mes "Just close your eyes, and take a deep breathe.";
-	mes "You can be free from pain.";
+bat_a02,45,18,3	script	Rebouteux#tv21	95,{
+	mes "[Rebouteux]";
+	mes "Serre bien les dents mon p'tit gars, et prends une bonne bouffée d'air. Ça risque de faire un peu mal...";
 	specialeffect2 312;
 	close;
 }
