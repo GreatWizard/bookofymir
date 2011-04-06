@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par No Healing (en cours)
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= 2004 Headgear Quests
 //===== By: ================================================== 
@@ -1282,285 +1282,270 @@ geffen,83,189,5	script	Seth#1	716,{
 	
 // Party Hat, Straw Hat, Cowboy Hat, Sombrero, Beanie
 //============================================================
-xmas_in,35,30,3	script	Hat Merchant#zero	797,{
+xmas_in,35,30,3	script	Chapelier::Hat Merchant#zero	797,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Une petite minute! Vous portez trop d'objets sur vous en ce moment. Essayez à nouveau après en avoir déposé quelques uns dans votre Stock. -";
 		close;
 	}
-	mes "[Mad Hatter]";
-	mes "Hey there. Um...";
-	mes "I'm the 'Mad Hatter.' Well, at least that's what I call myself.";
+	mes "[Chapelier Fou]";
+	mes "Bonjour, vous! Je suis le 'Chapelier Fou'. Tout du moins c'est le nom que je me suis donné.";
 	next;
-	mes "[Mad Hatter]";
-	mes "If you give me some stuff, I can renovate some of your old hats so that they really show your personality. Whether you're laid back or a party animal, I'll be able to make a hat just for you!";
+	mes "[Chapelier Fou]";
+	mes "Si vous m'apportez quelques petites choses, je pourrai rénover vos vieux chapeaux pour qu'ils reflètent véritablement votre personnalité. Je pourrais vous faire un chapeau juste pour vous, que vous soyez fêtard"+ ( sex ? "" : "e" ) +" ou pantouflard"+ ( sex ? "" : "e" ) +"!";
 	next;
-	mes "[Mad Hatter]";
-	mes "You wanna take a look at the trendy, stylish hats I can make for you?";
+	mes "[Chapelier Fou]";
+	mes "Est-ce que vous voulez voir tous les chapeaux tendance que je peux vous faire?";
 	next;
-	switch(select("Party Hat:Straw Hat:Cowboy Hat:Sombrero:Beanie")) {
+	switch(select("Chapeau de Fête:Chapeau de Paille:Chapeau de Cowboy:Sombrero:Bonnet")) {
 	case 1:
 		if (countitem(2236) > 0 && countitem(7151) > 99 && countitem(7111) > 99) {
-			mes "[Mad Hatter]";
-			mes "Party Hat! It's a Santa Hat I've remade by adding colorful paper for a festive look. Celebrate good times with a Party Hat! Come on!";
+			mes "[Chapelier Fou]";
+			mes "Le Chapeau de Fête! C'est un Bonnet de Père Noël que j'ai modifié en rajoutant du papier coloré pour le rendre plus festif. Il est parfait pour les soirées de détente!";
 			next;
-			mes "[Mad Hatter]";
-			mes "Oh wait! Please check one thing before we start.";
+			mes "[Chapelier Fou]";
+			mes "Oh mais attendez! Vérifiez bien une chose avant que nous ne commencions!";
 			next;
-			mes "[Mad Hatter]";
-			mes "If the Santa Hat you use to create this hat was upgraded or compounded with a card, all those upgrades will be lost. So, to be safe, I suggest you put everything in your inventory, other than the things to make the Party Hat, into Kafra Storage.";
+			mes "[Chapelier Fou]";
+			mes "Si le Bonnet de Père Noël que vous me donnez pour le faire a été amélioré, ou si vous y avez attaché une carte, tout cela sera perdu. Par sécurité, je vous conseille de ne garder dans l'inventaire que les objets que vous voulez que j'utilise pour faire le Chapeau de Fête.";
 			next;
-			mes "[Mad Hatter]";
-			mes "It seems to me that you have everything. Alright! Shall I make you a Party Hat?";
+			mes "[Chapelier Fou]";
+			mes "On dirait que vous avez tout sur vous. Bien! Alors, vous voulez vraiment que je vous confectionne un Chapeau de Fête?";
 			next;
-			if (select("No thanks.:Yes.") == 1) {
-				mes "[Mad Hatter]";
-				mes "Umm, okay...";
-				mes "I guess being the life of the party is a bit too much for you, eh? Hmpf. Well, I know a good library in Juno where you can hang out...";
+			if (select("Non merci.:Oui.") == 1) {
+				mes "[Chapelier Fou]";
+				mes "Hum, d'accord...";
+				mes "J'imagine que vous ne vous sentez pas assez fêtard"+ ( sex ? "" : "e" ) +" dans l'âme. Hé bien... Je connais une bibliothèque à Yuno que vous adoreriez...";
 				close;
 			}
-			mes "^3355FF*Rustle Rustle Splat Splat*^000000";
-			mes "^3355FF*Squick Squick Grind Grind*^000000";
-			mes "^3355FF*Swish Swish Rustle Rustle*^000000";
+			mes "^3355FF*Frotte* *Frotte* *Frotte*^000000";
+			mes "^3355FF*Rappe* *Rappe* *Rappe*^000000";
+			mes "^3355FF*Polit* *Polit* *Polit*^000000";
 			next;
 			delitem 2236,1; //Santa's_Hat
 			delitem 7151,100; //Oil_Paper
 			delitem 7111,100; //Smooth_Paper
-			mes "[Mad Hatter]";
-			mes "It's done! Your new life, as the life of the party, has officially begun. All you need to do is wear this Party Hat. Though, knowing a couple jokes would probably help too.";
+			mes "[Chapelier Fou]";
+			mes "Voilà, c'est fait! Vous venez d'être officiellement "+ ( sex ? "intronisé roi" : "intronisée reine" ) +" de la fête! Vous n'aurez qu'à porter ce chapeau! Enfin... Connaître quelques blagues pourra aider aussi.";
 			getitem 5060,1; //Party_Hat
 			next;
-			mes "[Mad Hatter]";
-			mes "Oh by the way, there's some stuff left over. I guess you should hold onto it. You know, in case you need it later.";
+			mes "[Chapelier Fou]";
+			mes "Oh au fait, il me reste quelques petites choses. J'imagine que vous pourrez les reprendre, au cas où vous en auriez besoin plus tard.";
 			getitem 914,10; //Fluff
 			close;
 		}
 		else {
-			mes "[Mad Hatter]";
-			mes "Oh... man. Everyone needs a Party Hat! Even boring types get jazzed with pizazz wearing one of these!";
+			mes "[Chapelier Fou]";
+			mes "Oh... franchement. Tout le monde a besoin d'un Chapeau de Fête! Même les ringards se transforment en fêtards quand ils portent l'un de ces chapeaux!";
 			next;
-			mes "[Mad Hatter]";
-			mes "You can wear them for birthday parties, Christmas parties. Um, slumber parties. P-political parties.";
-			mes "......";
-			mes "And hunting parties?";
+			mes "[Chapelier Fou]";
+			mes "Vous pourrez les porter pendant les fêtes d'anniversaire, pour Noël, pour la Fête de la Musique...";
 			next;
-			mes "[Mad Hatter]";
-			mes "Anyway, this is what I need to make a Party Hat...";
-			mes "1 ^3355FFSanta Hat^000000,";
-			mes "100 ^3355FFOil Paper^000000 and";
-			mes "100 ^3355FFSlick Paper^000000.";
+			mes "[Chapelier Fou]";
+			mes "Quoi qu'il en soit, pour faire un Chapeau de Fête, il me faut...";
+			mes "1 ^3355FFBonnet de Père Noël^000000,";
+			mes "100 ^3355FFPapier Huileux^000000 et";
+			mes "100 ^3355FFPapier Lisse^000000.";
 			next;
-			mes "[Mad Hatter]";
-			mes "I'll be right here when you decide to crank your life up a notch with a Party Hat.";
+			mes "[Chapelier Fou]";
+			mes "Je reste là, si vous voulez revenir quand vous vous serez décidé"+ ( sex ? "" : "e" ) +" à devenir "+ ( sex ? "un véritable fêtard" : "une véritable fêtarde" ) +".";
 			close;
 		}
 	case 2:
 		if (countitem(2280) > 0 && countitem(7197) > 299 && countitem(7150) > 299) {
-			mes "[Mad Hatter]";
-			mes "A Straw Hat! Made out of a Sakkat with bamboo and tough vines, it gives you a relaxed, rustic feeling when you wear it.";
+			mes "[Chapelier Fou]";
+			mes "Un Chapeau de Paille! On en fait à partir d'un Sakkat avec des bambous et des lianes. Cela vous donne un air rural, décontracté, quand vous le portez.";
 			next;
-			mes "[Mad Hatter]";
-			mes "Oh wait! Please check one thing before we start.";
-			mes "If the Sakkat you use to create this hat was upgraded, any cards, slots or upgrades will disappear once I make a new hat out of it.";
+			mes "[Chapelier Fou]";
+			mes "Oh mais attendez! Vérifiez bien une chose avant que nous ne commencions!";
 			next;
-			mes "[Mad Hatter]";
-			mes "To be safe, I suggest you put everything else, other than the required hat items, into Kafra Storage.";
+			mes "[Chapelier Fou]";
+			mes "Si le Sakkat que vous me donnez pour le faire a été amélioré, ou si vous y avez attaché une carte, tout cela sera perdu. Par sécurité, je vous conseille de ne garder dans l'inventaire que les objets que vous voulez que j'utilise pour faire le Chapeau de Paille.";
 			next;
-			mes "[Mad Hatter]";
-			mes "Ah! I see you brought everything. Alright! Do you want me to make you a Straw Hat now?";
+			mes "[Chapelier Fou]";
+			mes "Ah! Je vois que vous m'avez tout rapporté. Bien! Donc, voulez-vous que je vous confectionne un Chapeau de Paille?";
 			next;
-			if (select("No thanks.:Yes.") == 1) {
-				mes "[Mad Hatter]";
-				mes "Man...";
-				mes "I think you need this hat more than I thought. You have got to learn to just chill and relax~!";
+			if (select("Non merci.:Oui.") == 1) {
+				mes "[Chapelier Fou]";
+				mes "Vous savez... Je pense que vous avez plus besoin de ce chapeau que je ne le pensais. Il va falloir que vous appreniez à vous décontracter!~";
 				close;
 			}
-			mes "^3355FF*Crunch Chew Chew Chew*^000000";
-			mes "^3355FF*Squish Squish Fwsht Fwsht*^000000";
-			mes "^3355FF*Crunch Crunch Tap Tap*^000000";
+			mes "^3355FF*Crunch* *Chew* *Chew*^000000";
+			mes "^3355FF*Squish* *Squish* *Fwsht*^000000";
+			mes "^3355FF*Crunch* *Crunch* *Tap*^000000";
 			next;
 			delitem 2280,1; //Sahkkat
 			delitem 7197,300; //Tough_Vines
 			delitem 7150,300; //Bamboo_Cut
-			mes "[Mad Hatter]";
-			mes "It's done!";
-			mes "Now you can wear this hat, feel cool, and relax with style.";
-			mes "Please come again~";
+			mes "[Chapelier Fou]";
+			mes "Voilà, c'est terminé! Vous pouvez maintenant le porter. Vous verrez comme vous vous sentirez décontracté"+ ( sex ? "" : "e" ) +". A bientôt!~";
 			getitem 5062,1; //Straw_Hat
 			close;
 		}
 		else {
-			mes "[Mad Hatter]";
-			mes "A Straw Hat! It shades you from the heat of the sun and keeps farmers cool when they're working on the fields. It's a hat for cool, relaxed types and the hat of choice for some famous heroes!";
+			mes "[Chapelier Fou]";
+			mes "Un Chapeau de Paille! Il vous protège du soleil et garde les fermiers au frais quand ils travaillent dans les champs. C'est un chapeau pour les gens calmes, et détendus. Certains héros célèbres le portent, d'ailleurs!";
 			next;
-			mes "[Mad Hatter]";
-			mes "Anyways, I need all these to make you a Straw Hat...";
+			mes "[Chapelier Fou]";
+			mes "Bref, il me faut les objets suivants pour confectionner un Chapeau de Paille...";
 			mes "1 ^3355FFSakkat^000000,";
-			mes "300 ^3355FFTough Vines^000000 and";
-			mes "300 ^3355FFPiece of Bamboo^000000.";
+			mes "300 ^3355FFVignes Robustes^000000 et";
+			mes "300 ^3355FFMorceaux de Bambou^000000.";
 			next;
-			mes "[Mad Hatter]";
-			mes "I'll be right here when you decide that you want the perfect hat for laid back, kick back moods. Be cool~";
+			mes "[Chapelier Fou]";
+			mes "Je serai toujours là quand vous vous serez décidé"+ ( sex ? "" : "e" ) +" à porter le chapeau des gens calmes et détendus! Restez zen~";
 			close;
 		}
 	case 3:
 		if (countitem(2248) > 0 && countitem(7030) > 107 && countitem(7194) > 107 && countitem(7120) > 3) {
-			mes "[Mad Hatter]";
-			mes "I take a Western Grace, add some manliness, um, do some finangling, and Voila~! A Cowboy Hat!";
+			mes "[Chapelier Fou]";
+			mes "Je prends un Stetson, je le rends un peu plus viril, et fais un peu de travail de finition, et voilà, vous avez votre chapeau de Cowboy!";
 			next;
-			mes "[Mad Hatter]";
-			mes "It's a hat for adventure and exploration. Although it's a manly hat like no other, with a manly factor of 9, it also looks great on girls.";
+			mes "[Chapelier Fou]";
+			mes "C'est un chapeau pour l'aventure et les grandes explorations. Même si c'est LE chapeau des vrais mecs, avec un facteur de virilité de 9 sur 10, il va bien aussi aux femmes.";
 			next;
-			mes "[Mad Hatter]";
-			mes "Oh wait! Please check one thing before we start.";
-			mes "If the Western Grace you use to create this hat was upgraded, any cards or upgrades will be lost once I make a new hat out of it.";
+			mes "[Chapelier Fou]";
+			mes "Oh mais attendez! Vérifiez une chose avant que nous ne commencions!";
 			next;
-			mes "[Mad Hatter]";
-			mes "To be safe, I suggest you put everything, other than the required materials, into Kafra Storage.";
+			mes "[Chapelier Fou]";
+			mes "Si le Stetson que vous me donnez pour le faire a été amélioré, ou si vous y avez attaché une carte, tout cela sera perdu. Par sécurité, je vous conseille de ne garder dans l'inventaire que les objets que vous voulez que j'utilise pour faire le Chapeau de Cowboy.";
 			next;
-			mes "[Mad Hatter]";
-			mes "Ah! You brought everything already. Excellent. Do you want me to make a Cowboy Hat now?";
+			mes "[Chapelier Fou]";
+			mes "Ah! Vous m'avez déjà tout rapporté! Très bien. Voulez-vous que je vous confectionne un Chapeau de Cowboy sans attendre?";
 			next;
-			if (select("No thanks.:Yes.") == 1) {
-				mes "[Mad Hatter]";
-				mes "Well, I see.";
-				mes "I guess you just don't appreciate the value of cowboy heroes, do you?";
+			if (select("Non merci.:Oui.") == 1) {
+				mes "[Chapelier Fou]";
+				mes "Bien, je comprends. J'imagine que vous n'appréciez pas à leur juste valeur tous les héros qui portent ce genre de chapeau.";
 				close;
 			}
-			mes "^3355FF*Clik-clak Clik-clak Pam Pam Pam Pam*^000000";
-			mes "^3355FF*Bang Bang Ping Ping*^000000";
-			mes "^3355FF*Uk Uk Uk Uk Uhoh Uhoh*^000000";
+			mes "^3355FF*Clik-clak* *Pam* *Pam*^000000";
+			mes "^3355FF*Bang* *Bang* *Ping*^000000";
+			mes "^3355FF*Uk* *Uk* *Uhoh* *Uhoh*^000000";
 			next;
 			delitem 2248,1; //Western_Grace
 			delitem 7030,108; //Claw_Of_Desert_Wolf
 			delitem 7194,108; //Soft_Leaf
 			delitem 7120,4; //Burning_Horse_Shoe
-			mes "[Mad Hatter]";
-			mes "Yeeeeehaw! With this hat on, you can tame broncos, rob stagecoaches, and look really stylish in duels!";
+			mes "[Chapelier Fou]";
+			mes "Yeeeeehaw! Avec ce chapeau, vous pourrez apprivoiser les bisons sauvages, dévaliser les diligences, et garder la classe pendant les duels!";
 			getitem 5075,1; //Cowboy_Hat
 			close;
 		}
 		else {
-			mes "[Mad Hatter]";
-			mes "A Cowboy Hat! This is a very popular that brings up images of frontier life and gunplay.";
+			mes "[Chapelier Fou]";
+			mes "Un Chapeau de Cowboy! C'est un chapeau très populaire véhiculant les images d'une vie menée à 100 à l'heures et de combats aux armes à feu.";
 			next;
-			mes "[Mad Hatter]";
-			mes "Wearing a Cowboy Hat will make guys look tougher and more heroic, and will add untamed cuteness to the ladies.";
+			mes "[Chapelier Fou]";
+			mes "Porter un Chapeau de Cowboy vous fera paraître plus robuste, et plus héroïque, et rajoutera une touche de beauté sauvage aux femmes.";
 			next;
-			mes "[Mad Hatter]";
-			mes "I need these items to make a Cowboy Hat...";
-			mes "1 ^3355FFWestern Grace^000000,";
-			mes "108 ^3355FFClaw of Desert Wolf^000000,";
-			mes "108 ^3355FFSoft Blade of Grass^000000 and";
-			mes "4 ^3355FFBurning Horseshoe^000000.";
+			mes "[Chapelier Fou]";
+			mes "J'aurai besoin de ces objets pour faire un Chapeau de Cowboy...";
+			mes "1 ^3355FFStetson^000000,";
+			mes "108 ^3355FFGriffes de Loup du Désert^000000,";
+			mes "108 ^3355FFBrins d'Herbe Tendre^000000 et";
+			mes "4 ^3355FFFers à Cheval Ardents^000000.";
 			next;
-			mes "[Mad Hatter]";
-			mes "So when you decide to give your life a boost with rustic style, come back to me with those items so I can make you a Cowboy Hat.";
+			mes "[Chapelier Fou]";
+			mes "Revenez me voir avec ce dont j'ai besoin pour faire un Chapeau de Cowboy quand vous vous serez décidé"+ ( sex ? "" : "e" ) +" à donner à votre vie une touche de rusticité!";
 			close;
 		}
 	case 4:
 		if (countitem(5062) > 0 && countitem(952) > 49 && countitem(1907) > 0) {
-			mes "[Mad Hatter]";
-			mes "Ah yes. Now here's a classy hat for mariachi heroes and Latin lovers. You can't deny the sex appeal that just pours from someone wearing a Sombrero.";
+			mes "[Chapelier Fou]";
+			mes "Ah oui, le chapeau des mariachi et des latin lovers. Vous ne pouvez nier que le simple fait de porter un Sombrero rend quelqu'un plus attirant...";
 			next;
-			mes "[Mad Hatter]";
-			mes "Oh wait! Please check one thing before we start.";
-			mes "If the Straw Hat you use to creating this hat was upgraded, any cards or upgrades in this hat will be lost once I make the Sombrero.";
+			mes "[Chapelier Fou]";
+			mes "Oh mais attendez! Vérifiez bien une chose avant que nous ne commencions!";
 			next;
-			mes "[Mad Hatter]";
-			mes "To be safe, I suggest you put everything you don't need to make this hat into Kafra Storage.";
+			mes "[Chapelier Fou]";
+			mes "Si le Chapeau de Paille que vous me donnez pour le faire a été amélioré, ou si vous y avez attaché une carte, tout cela sera perdu. Par sécurité, je vous conseille de ne garder dans l'inventaire que les objets que vous voulez que j'utilise pour faire le Sombrero.";
 			next;
-			mes "[Mad Hatter]";
-			mes "Ah! You brought everything already. Alright! Do you want me to make you a Sombrero right away?";
+			mes "[Chapelier Fou]";
+			mes "Ah! Vous m'avez tout apporté. Bien, voulez-vous que je vous confectionne un Sombrero sans attendre?";
 			next;
-			if (select("No thanks.:Yes.") == 1) {
-				mes "[Mad Hatter]";
-				mes "Fine, fine.";
-				mes "But think of all the sex appeal you're missing out on. Come on, you know you need a Sombrero.";
+			if (select("Non merci.:Oui.") == 1) {
+				mes "[Chapelier Fou]";
+				mes "Bien, bien. Mais pensez que vous pourriez être encore plus attirant"+ ( sex ? "" : "e" ) +" avec un Sombrero.";
 				close;
 			}
-			mes "^3355FFZinga Zinga Zang Zang^000000";
-			mes "^3355FFDing Ding Ding Dan Dan Dan^000000";
-			mes "^3355FFAdios Amigo^000000";
+			mes "^3355FF*Zinga* *Zinga* *Zang*^000000";
+			mes "^3355FF*Ding* *Ding* *Dan* *Dan*^000000";
+			mes "^3355FFAdios, amigo!^000000";
 			next;
 			delitem 5062,1; //Straw_Hat
 			delitem 952,50; //Cactus_Needle
 			delitem 1907,1; //Guitar
-			mes "[Mad Hatter]";
-			mes "With this Sombrero, you'll look like you have all kinds of style. Adios, cool guy~";
+			mes "[Chapelier Fou]";
+			mes "Avec ce Sombrero, ce sera comme si vous aviez tout un tas de facettes. Adios, amigo!~";
 			getitem 5067,1; //Sombrero
 			close;
 		}
 		else {
-			mes "[Mad Hatter]";
-			mes "Now, everyone needs a Sombrero. They're one of the most versatile hats in existence. You can wear them to formal events, you can wear them while napping, you can wear them just to hang out...";
+			mes "[Chapelier Fou]";
+			mes "Tout le monde a besoin d'un Sombrero. C'est l'un des chapeaux les plus polyvalents qui soit. Vous pouvez le porter pendant les évènements officiels, tout comme quand vous faites la sieste, ou juste pour sortir...";
 			next;
-			mes "[Mad Hatter]";
-			mes "Look, you don't need me to explain how cool a Sombrero is. It's just one of those things that everyone naturally knows. So I know you want one.";
+			mes "[Chapelier Fou]";
+			mes "Je sais que vous n'avez pas besoin que je vous explique à quel point les Sombreros sont cool! C'est quelque chose que tout le monde sait. Je sais que vous en voulez un!";
 			next;
-			mes "[Mad Hatter]";
-			mes "So this is what I need to make a Sombrero...";
-			mes "1 ^3355FFStraw Hat^000000,";
-			mes "50 ^3355FFCactus Needle^000000 and";
-			mes "1 ^3355FFGuitar^000000.";
+			mes "[Chapelier Fou]";
+			mes "Voilà ce dont j'ai besoin pour fabriquer un Sombrero...";
+			mes "1 ^3355FFChapeau de Paille^000000,";
+			mes "50 ^3355FFÉpines de Cactus^000000 et";
+			mes "1 ^3355FFGuitare^000000.";
 			next;
-			mes "[Mad Hatter]";
-			mes "That's all you need to have the coolest hat ever.";
-			mes "(Woohoo~!)";
+			mes "[Chapelier Fou]";
+			mes "Voilà, c'est ce qu'il me faut en échange du plus cool de tous les chapeaux!";
+			mes "(Woohoo!~)";
 			close;
 		}
 	case 5:
 		if (countitem(2226) > 0 && countitem(7038) > 499) {
-			mes "[Mad Hatter]";
-			mes "A Beanie...!";
-			mes "Whaddup, broham. This hat keeps your head toasty, but let's you play things cool with your homeys. And, um, fly girls.";
+			mes "[Chapelier Fou]";
+			mes "Un Bonnet... Il permet de garder la tête au chaud, mais ça vous fait aussi paraître cool auprès de vos proches, et euh... des "+ ( sex "filles" : "garçons" ) +".";
 			next;
-			mes "[Mad Hatter]";
-			mes "Oh wait! Please check one thing before we start.";
-			mes "If the Cap you use to make this Beanie was upgraded, any cards or upgrades will be lost once I make this hat!";
+			mes "[Chapelier Fou]";
+			mes "Oh mais attendez! Vérifiez bien une chose avant que nous ne commencions!";
 			next;
-			mes "[Mad Hatter]";
-			mes "To be safe, I suggest you put everything not needed to make this hat into Kafra Storage.";
+			mes "[Chapelier Fou]";
+			mes "Si le Calot que vous me donnez pour le faire a été amélioré, ou si vous y avez attaché une carte, tout cela sera perdu. Par sécurité, je vous conseille de ne garder dans l'inventaire que les objets que vous voulez que j'utilise pour faire le Bonnet.";
 			next;
-			mes "[Mad Hatter]";
-			mes "Ah! You brought everything already. Alright! How about I make you that Beanie right now?";
+			mes "[Chapelier Fou]";
+			mes "Ah! Vous m'avez déjà tout rapporté! Très bien, voulez-vous que je vous tricote un Bonnet sans attendre?";
 			next;
-			if (select("No thanks.:Yes.") == 1) {
-				mes "[Mad Hatter]";
-				mes "Okay...";
-				mes "Dork. Come back When you decide to join the cool guys, word?";
+			if (select("Non merci.:Oui.") == 1) {
+				mes "[Chapelier Fou]";
+				mes "D'accord...";
+				if (sex) mes "Ringard. Revenez quand vous serez prêt à rejoindre le club des gars cool, d'accord?";
+				else mes "Ringarde. Revenez quand vous serez prête à rejoindre le club des nanas cool, d'accord?";
 				close;
 			}
-			mes "^3355FF*Crunch Chew Chew Chew*^000000";
-			mes "^3355FF*Squish Squish Fwsht Fwsht*^000000";
-			mes "^3355FF*Crunch Crunch Tap Tap*^000000";
+			mes "^3355FF*Crunch* *Chew* *Chew*^000000";
+			mes "^3355FF*Squish* *Squish* *Fwsht*^000000";
+			mes "^3355FF*Crunch* *Crunch* *Tap*^000000";
 			next;
 			delitem 2226,1; //Cap
 			delitem 7038,500; //Yarn
-			mes "[Mad Hatter]";
-			mes "There you go! Your very own Beanie! Cute, but still 'dope!'";
+			mes "[Chapelier Fou]";
+			mes "Et voilà pour vous! Votre propre Bonnet! Mignon tout en restant porté par les mauvais garçons!'";
 			next;
-			mes "[Mad Hatter]";
-			mes "Uh! Uh!";
-			mes "I'm in da house!";
+			mes "[Chapelier Fou]";
+			mes "Hé! Hé! Wesh, mec, c'est moi in da house!";
 			getitem 5076,1; //Fur_Hat
 			close;
 		}
 		else {
-			mes "[Mad Hatter]";
-			mes "A Beanie!";
-			mes "Whether you plan to go to a house party, get your groove back, or be as fresh as a prince, you'll be chillin' with this fly style.";
+			mes "[Chapelier Fou]";
+			mes "Un Bonnet! Que vous vouliez aller faire la fête ou que vous vouliez être aussi confortable qu'un roi, vous adorerez son style.";
 			next;
-			mes "[Mad Hatter]";
-			mes "But well...";
-			mes "Although it can be a street fashion, Beanies also look really cute on some people.";
+			mes "[Chapelier Fou]";
+			mes "Mais... C'est peut être à la mode dans la rue, mais les Bonnets sont aussi si mignons sur certaines personnes...";
 			next;
-			mes "[Mad Hatter]";
-			mes "Anyway, this is what I need to make a Beanie...";
-			mes "1 ^3355FFCap^000000 and";
-			mes "500 ^3355FFYarn^000000.";
+			mes "[Chapelier Fou]";
+			mes "Quoi qu'il en soit, voilà ce dont j'ai besoin pour confectionner un Bonnet...";
+			mes "1 ^3355FFCalot^000000 et";
+			mes "500 ^3355FFPelotes de Laine^000000.";
 			next;
-			mes "[Mad Hatter]";
-			mes "When you decide to represent yo' hood, come to me with the stuff. I'll hook you up.";
+			mes "[Chapelier Fou]";
+			mes "Revenez me voir quand vous voudrez enfin de vous la jouer 'bad "+ ( sex ? "boy" : "girl" ) +"', ok? Je ne bouge pas de là.";
 			close;
 		}
 	}
@@ -1574,34 +1559,30 @@ yuno_in03,20,18,6	script	Nehris#1	726,{
 		close;
 	}
 	mes "[Nehris]";
-	mes "The Monster Museum has prepared a special event for your support~!";
+	mes "Le Musée des Monstres a préparé un évènement spécial pour vous remercier de votre soutien!~";
 	next;
 	mes "[Nehris]";
-	mes "Accessories typically worn by monsters are now available for adventurers to wear!";
+	mes "Des accessoires que seuls des monstres ont l'habitude de porter sont maintenant disponibles pour tout le monde!";
 	next;
 	mes "[Nehris]";
-	mes "Of course, since we're on a trial period, we can only provide 3 monster accessories to our fans. However, according to your response, we may add more monster accessories in the future.";
+	mes "Mais bien sûr, tout cela n'est encore qu'un premier essai, alors nous ne fabriquons que trois types d'accessoires pour l'instant. Nous en aurons peut-être plus à votre disposition dans un futur proche, en fonction des réactions.";
 	next;
 	mes "[Nehris]";
-	mes "Simply bring the required materials, and pay a small fee, and we will provide you with the monsters accessory of your choice.";
+	mes "Vous n'aurez qu'à m'apporter quelques matières premières, et nous vous fournirons l'accessoire de monde de votre choix.";
 	next;
 	mes "[Nehris]";
-	mes "Please choose the";
-	mes "accessory you are";
-	mes "interested in.";
+	mes "Choisissez un accessoire qui vous intéresse, s'il vous plaît.";
 	next;
-	switch(select("Decorative Golden Bell:Crown of Ancient Queen:Crown of Mistress")) {
+	switch(select("Clochette Dorée:Couronne d'une Reine Ancienne:Couronne de Maîtresse")) {
 	case 1:
 		mes "[Nehris]";
-		mes "This Golden Bell is fashioned after the one worn by the 'Sohee' monster. It's a cute accessory I personally recommend for us ladies. A little oversized, but I believe you'll like it a lot.";
+		mes "Cette Clochette Dorée ressemble à celles que porte les 'Sohees'. C'est un mignon petit accessoire que je recommande à toutes les jeunes femmes. Les clochettes sont un peu grosses, mais je parie que vous adorerez.";
 		next;
 		if (countitem(10016) > 0 && countitem(714) > 0 && countitem(969) > 2 && Zeny > 19999) {
 			mes "[Nehris]";
-			mes "Thank you for";
-			mes "bringing everything.";
-			mes "Please wait one moment.";
+			mes "Merci de m'avoir tout apporté. Patientez un moment.";
 			next;
-			mes "^3355FF* Clang Clang! Scrape Scrape! Jingle Jingle! *^000000";
+			mes "^3355FF*Clang* *Clang* *Scrape* *Ding*^000000";
 			next;
 			delitem 10016,1; //Golden_Bell
 			delitem 714,1; //Emperium
@@ -1609,37 +1590,32 @@ yuno_in03,20,18,6	script	Nehris#1	726,{
 			set zeny,zeny-20000;
 			getitem 5091,1; //Big_Golden_Bell
 			mes "[Nehris]";
-			mes "Yoohoo~";
-			mes "There you go. Here's your beautiful Golden Bell. I doubt it will jingle if you shake your head, though.";
+			mes "Youhou~";
+			mes "Voilà pour vous! Votre magnifique Clochette Dorée! Cependant, je doute qu'elle tinte en tournant la tête.";
 			next;
 			mes "[Nehris]";
-			mes "Oh, one more thing, don't confuse yourself with Sohee and commit suicide!";
+			mes "Oh, une dernière chose: ne vous prenez pas pour une Sohee: n'ayez pas dans l'idée de vous suicider!";
 			next;
 			mes "[Nehris]";
-			mes "If you'd like me to make another one, please come again. Thank you for visiting the Monster Museum.";
+			mes "Revenez me voir si jamais vous voulez que je vous en fasse une autre. Merci de votre visite au Musée des Monstres!";
 			close;
 		}
 		mes "[Nehris]";
-		mes "The required materials for the Decorative Golden Bell are...";
-		mes "^3355FF1 Golden Bell, 1 Emperium, 3 Gold^000000 and";
-		mes "20,000 zeny.";
+		mes "Voici ce dont j'ai besoin pour fabriquer une Clochette Dorée...";
+		mes "^3355FF1 Clochette Dorée pour monstre, 1 Emperium, 3 Lingots d'Or^000000 et 20,000 zénys.";
 		next;
 		mes "[Nehris]";
-		mes "Just come ask me";
-		mes "when you're ready.";
-		mes "Thank you.";
+		mes "Revenez me voir lorsque vous aurez tout ça, d'accord? Merci.";
 		close;
 	case 2:
 		mes "[Nehris]";
-		mes "This crown is inspired by the the one worn by the 'Isis' monster. It has a elegant look fitting for ancient royalty.";
+		mes "Cette couronne s'inspire de celle que porte le monstre 'Isis'. Elle est vraiment élégante, et c'est le symbole des anciens suzerains.";
 		next;
 		if (countitem(10006) > 0 && countitem(714) > 0 && countitem(969) > 2 && Zeny > 19999) {
 			mes "[Nehris]";
-			mes "Thank you for";
-			mes "bringing everything.";
-			mes "Please wait one moment.";
+			mes "Merci de m'avoir tout rapporté. Patientez un petit moment.";
 			next;
-			mes "^3355FF* Clang Clang! Scrape Scrape! Jingle Jingle! *^000000";
+			mes "^3355FF*Clang* *Clang* *Scrape* *Ding*^000000";
 			next;
 			delitem 10006,1; //Queen's_Hair_Ornament
 			delitem 714,1; //Emperium
@@ -1647,49 +1623,42 @@ yuno_in03,20,18,6	script	Nehris#1	726,{
 			set zeny,zeny-20000;
 			getitem 5080,1; //Headgear_Of_Queen
 			mes "[Nehris]";
-			mes "Tah dah!";
-			mes "Here's your Crown of Ancient Queen! I don't know if you can get anyone to bow before you while wearing this, but at least you'll look elegant.";
+			mes "Tadaaaaaa!";
+			mes "Voilà votre Couronne d'une Ancienne Reine! Je ne sais pas si quelqu'un vous fera la révérence quand vous porterez ceci, mais au moins vous avez l'air très élégant"+ ( sex ? "" : "e" ) +"!";
 			next;
 			mes "[Nehris]";
-			mes "If you'd like me to make another one, please come again. Thank you for visiting the Monster Museum.";
+			mes "Revenez me voir si jamais vous voulez que je vous en fasse une autre. Merci de votre visite au Musée des Monstres!";
 			close;
 		}
 		mes "[Nehris]";
-		mes "The required materials for the Crown of Ancient Queen are...";
-		mes "^3355FF1 Queen's Hair Ornament, 1 Emperium, 3 Gold^000000 and";
-		mes "20,000 zeny.";
+		mes "J'ai besoin des matériaux suivant pour fabriquer cette Couronne...";
+		mes "^3355FF1 set de Bijoux de la Reine, 1 Emperium, 3 Lingots d'Or^000000 et 20.000 zénys.";
 		next;
 		mes "[Nehris]";
-		mes "Just come ask me";
-		mes "when you're ready.";
-		mes "Thank you.";
+		mes "Revenez me voir quand vous aurez tout ça, d'accord? Merci.";
 		close;
 	case 3:
 		mes "[Nehris]";
-		mes "This crown is an imitation of the one worn by the 'Mistress' monster. Wearing this will give you a look of brusque authority."; // Mistress == Maîtresse
+		mes "Cette couronne ressemble à celle portée par le monstre 'Maîtresse'. La porter vous donne un air très grave et autoritaire.";
 		next;
 		if (countitem(2249) > 0 && countitem(714) > 0 && countitem(969) > 2 && Zeny > 39999) {
 			mes "[Nehris]";
-			mes "Thank you for";
-			mes "bringing everything.";
+			mes "Merci de m'avoir tout rapporté.";
 			next;
 			mes "[Nehris]";
-			mes "^FF0000By the way, if you use an upgraded";
-			mes "Coronet for making this item,";
-			mes "the item you create out of the Coronet";
-			mes "will not have its upgraded status.^000000";
+			mes "^FF0000Au fait, si jamais vous aviez amélioré votre Petite Couronne, ça ne changera rien pour la Couronne de Maîtresse que je vous fabriquerai.^000000";
 			next;
 			mes "[Nehris]";
-			mes "^FF0000Also, please only have one Coronet in your inventory to make the Crown of Mistress. We are not responsible for any loss.";
+			mes "^FF0000Faites bien attention aussi à ce que la seule Petite Couronne qui se trouve dans votre inventaire soit celle que vous voulez que j'utilise. Nous ne pourrons pas être tenus responsables pour d'éventuelles pertes.";
 			next;
 			mes "[Nehris]";
-			mes "Are you sure you want to create the Crown of Mistress?";
+			mes "Voulez-vous vraiment que je vous fabrique une Couronne de Maîtresse?";
 			next;
-			if (select("Yes:Wait a minute...!") == 1) {
+			if (select("Oui:Attendez, une petite minute...") == 1) {
 				mes "[Nehris]";
-				mes "Please wait one moment.";
+				mes "Bien. Patientez un instant.";
 				next;
-				mes "^3355FF* Clang Clang! Scrape Scrape! Jingle Jingle! *^000000";
+				mes "^3355FF*Clang* *Clang* *Scrape* *Ding*^000000";
 				next;
 				delitem 2249,1; //Coronet
 				delitem 714,1; //Emperium
@@ -1697,53 +1666,49 @@ yuno_in03,20,18,6	script	Nehris#1	726,{
 				set zeny,zeny-40000;
 				getitem 5081,1; //Mistress_Crown
 				mes "[Nehris]";
-				mes "Yay! You've got a great looking crown!";
+				mes "Et voilà! Une magnifique couronne!";
 				next;
 				mes "[Nehris]";
-				mes "I don't know if everyone will obey your commands while wearing this, but at least you can feel beautifully regal.";
+				mes "Je ne sais pas si tout le monde vous obéira sans discuter quand vous porterez ceci, mais au moins vous vous sentirez majestueu"+ ( sex ? "x" : "se" ) +"!";
 				next;
 				mes "[Nehris]";
-				mes "Why don't you go take a picture with Mistress? That would be funny to see if she wasn't too busy trying to maul you."; // Trad Mistress
+				mes "Pourquoi n'iriez-vous pas vous faire peindre le portrait avec Maîtresse? Ça pourrait valoir le coup d'oeil - à moins qu'elle ne soit trop occupée à vous assommer de coups pour poser!";
 				next;
 				mes "[Nehris]";
-				mes "If you'd like me to make you another one, please come again. Thank you for visiting the Monster Museum.";
+				mes "Revenez me voir si jamais vous voulez que je vous en fasse une autre. Merci de votre visite au Musée des Monstres!";
 				close;
 			}
 			mes "[Nehris]";
-			mes "No problem, just be sure to understand our precautions well, okay?";
+			mes "Aucun problème. Assurez-vous d'avoir bien compris nos mises en garde avant, d'accord?";
 			close;
 		}
 		mes "[Nehris]";
-		mes "The required materials for the Crown of Mistress are...";
-		mes "^3355FF1 Coronet, 1 Emperium, 3 Gold^000000 and";
-		mes "40,000 zeny.";
+		mes "Pour faire une Couronne de Maîtresse, il me faut...";
+		mes "^3355FF1 Petite Couronne, 1 Emperium, 3 Lingots d'Or^000000 et 40.000 zénys.";
 		next;
 		mes "[Nehris]";
-		mes "Just come ask me";
-		mes "when you're ready.";
-		mes "Thank you.";
+		mes "Revenez me voir quand vous aurez tout ça, d'accord? Merci.";
 		close;
 	}
 }
 
 // Alarm Mask
 //============================================================
-alde_alche,88,180,0	script	Muscle Man#Alarm Mask	748,{ // Trad: Alarm = Toquant
+alde_alche,88,180,0	script	Monsieur Muscle::Muscle Man#Alarm Mask	748,{ // Trad: Alarm = Toquant
 	if (checkweight(1201,1) == 0) {
-		mes "[Muscle Man]";
-		mes "Hmmm...";
-		mes "It's seems you're carrying too much stuff for me to give anything to you.";
+		mes "[Monsieur Muscle]";
+		mes "Hum... On dirait que vous portez trop d'objets pour que je puisse vous donner quoi que ce soit.";
 		next;
-		mes "[Muscle Man]";
-		mes "Talk to me again after you've freed up some of your inventory space by putting some of your things into the Kafra Storage.";
+		mes "[Monsieur Muscle]";
+		mes "Revenez me voir après que vous ayez fait un peu de place dans votre inventaire en déposant quelques objets dans votre Stock Kafra.";
 		close;
 	}
-	mes "[Muscle Man]";
-	mes "Oooh yeah!";
-	mes "Sometimes, even I can't believe how much this body of mine ripples with sexy love muscles~! I can barely hold them all in...";
+	mes "[Monsieur Muscle]";
+	mes "Oooh ouais!";
+	mes "Parfois, même moi je n'arrive pas à croire que j'ai un corps aussi sexy! Des, je n'arrive même pas à faire tenir tous ces muscles sous mes vêtements...";
 	next;
-	mes "[Muscle Man]";
-	mes "It's...";
+	mes "[Monsieur Muscle]";
+	mes "It's..."; // Je laisse en anglais dans le texte [NoH]
 	mes "It's sexy time!";
 	next;
 	specialeffect EF_FLASHER;
@@ -1758,106 +1723,94 @@ alde_alche,88,180,0	script	Muscle Man#Alarm Mask	748,{ // Trad: Alarm = Toquant
 	specialeffect EF_CLAYMORE,AREA," #Alarm Mask Man4";
 	initnpctimer;
 	if (countitem(1095) > 2999 && countitem(2288) > 0) {
-		if (select("Give him items:Cancel") == 1) {
-			mes "[Muscle Man]";
-			mes "Ooh... Finally!";
-			mes "You brought them!";
-			mes "Excellent, excellent!";
+		if (select("Lui donner les objets:Annuler") == 1) {
+			mes "[Monsieur Muscle]";
+			mes "Oh... Enfin! Vous m'avez tout rapporté! Excellent, excellent!";
 			next;
-			mes "[Muscle Man]";
-			mes "Alright...";
-			mes "Now I can use this Mr.Scream and all these clock hands to continue my testing.";
+			mes "[Monsieur Muscle]";
+			mes "Bien... Je peux utiliser ça pour confectionner un Masque de Toquant, et garder le reste pour poursuivre mes expériences.";
 			next;
 			delitem 1095,3000; //Needle_Of_Alarm
 			delitem 2288,1; //Mr_Scream
 			getitem 5086,1; //Alarm_Mask
-			mes "[Muscle Man]";
-			mes "And, this is yours. All yours.";
+			mes "[Monsieur Muscle]";
+			mes "Voilà, c'est à vous! Rien qu'à vous!";
 			next;
-			mes "[Muscle Man]";
-			mes "Well then... Farewell!";
-			mes "Don't forget to bring me more Mr.Screams and clock hands if you find more of them!";
+			mes "[Monsieur Muscle]";
+			mes "Hé bien... Conne continuation! N'oubliez pas de me rapporter d'autres Visages Terrifiants et d'autres Aiguilles d'Horloges si vous en trouvez d'autres!";
 			close;
 		}
-		mes "[Muscle Man]";
-		mes "Hmmm...?";
-		mes "That's funny, I thought you would have that Mr. Scream mask and all those clock hands by now...";
+		mes "[Monsieur Muscle]";
+		mes "Hein...? Tiens, je penais que vous auriez ce Visage Terrifiant et toutes ces Aiguilles d'Horloge depuis le temps...";
 		close;
 	}
-	mes "[Muscle Man]";
-	mes "But...";
-	mes "Not everyone is fortunate to have a magnificent, flawless physique. There are people in this world that have tragically lost appendages in accidents.";
+	mes "[Monsieur Muscle]";
+	mes "Malheureusement... Tout le monde n'a pas la chance d'avoir une plastique aussi parfaite. Certaines gens ont même perdu un membre dans un accident.";
 	next;
-	mes "[Muscle Man]";
-	mes "When I realized this, I decided to help these people and began to research technology for artificial limbs. My studies have lead me to Alarms and their own mechanical limbs known as 'Ruimento.'";
+	mes "[Monsieur Muscle]";
+	mes "Quand je me suis rendu compte de ça, j'ai décidé de les aider, et j'ai commencé à travailler sur une technologie pour créer des membres artificiels. Mes études m'ont conduit à m'intéresser aux Toquants, et à leurs propres membres artificiels connus sous ne nom de 'Ruimento.'";
 	next;
-	mes "[Muscle Man]";
-	mes "The Alarms, and their 'Ruimento,' are made from an ancient mysterious technology. You can only find these in the Clock Tower.";
+	mes "[Monsieur Muscle]";
+	mes "Les Toquants et leurs 'Ruimento' sont issus d'une technologie ancienne. On ne les trouve que dans la Tour de l'Horloge.";
 	next;
-	mes "[Muscle Man]";
-	mes "So I am trying to research a method to reproduce Ruimetto, except in a smaller form for the human body. If I'm successful, it would be a medical miracle!";
+	mes "[Monsieur Muscle]";
+	mes "Je cherche un moyen de reproduire ces Ruimetto, mais de façon moins développée, plus adaptée à la morphologie humaine. Si je réussis, ça serait un miracle de la médecine!";
 	next;
-	mes "[Muscle Man]";
-	mes "However, I need help in completing my research. Hence, the reason I've told you my story, adventurer.";
+	mes "[Monsieur Muscle]";
+	mes "J'ai malheureusement besoin d'aide pour faire avancer mes recherches. C'est pour ça que je vous raconte tout cela, "+ ( sex ? "aventurier" : "aventurière" ) +".";
 	next;
-	mes "[Muscle Man]";
-	mes "I desperately need materials to continuing testing so that I can develop a prototype. I'll need ^0000FFClock Hand^000000 from Alarms and ^0000FFMr. Scream^000000 in order to continue my research.";
+	mes "[Monsieur Muscle]";
+	mes "Il me faut à tout prix certaines pièces afin que je puisse développer un prototype. Il me faut des ^0000FFAiguilles d'Horloge^000000 de Toquants et un ^0000FFVisage Terrifiant^000000 pour poursuivre mes recherches.";
 	next;
-	mes "[Muscle Man]";
-	mes "I would collect these things myself but everytime I go up to the Clock Tower, I can't bear to break the Alarms, and just stare in awe at their mechanical, masculine physiques.";
+	mes "[Monsieur Muscle]";
+	mes "Je m'en chargerais bien moi-même, mais je ne supporte pas de détruire des Toquants quand je vais à la Tour de l'Horloge: je reste juste là à admirer leur magnifique plastique virile.";
 	next;
-	mes "[Muscle Man]";
-	mes "So...";
-	mes "If you help me out, I promise to give you, um...";
+	mes "[Monsieur Muscle]";
+	mes "Donc... Si jamais vous voulez bien m'aider, je vous promets de vous donner... Hum...";
 	next;
-	mes "[Muscle Man]";
-	mes "...this Alarm Mask!";
+	mes "[Monsieur Muscle]";
+	mes "...Ce Masque de Toquant!";
 	mes ".....";
 	next;
-	mes "[Muscle Man]";
-	mes "I'd wear it myself, if it weren't for the fact that people never look at my face anyway. Everyone I meet seems to be fixated on my chiseled form. But trust me, this mask is pretty cool.";
+	mes "[Monsieur Muscle]";
+	mes "Je le porterais bien moi-même, mais les gens ne regardent jamais mon visage. Tout le monde est hypnotisé par mon corps d'Apollon. Mais faites-moi confiance, ce masque est vraiment réussi!";
 	next;
-	mes "[Muscle Man]";
-	mes "Please adventurer...";
-	mes "Help me give muscles to the world.";
+	mes "[Monsieur Muscle]";
+	mes "S'il vous plaît, aventuri"+ ( sex ? "er" : "ère" ) +"... Aidez-moi à redonner des muscles au monde!";
 	next;
-	if (select("Alright.:.........") == 1) {
-		mes "[Muscle Man]";
-		mes "Oh~~! You know how I feel about Alarm's beautiful mechanic muscle! I am glad to have met someone who shares my good sense of taste.";
+	if (select("D'accord.:.........") == 1) {
+		mes "[Monsieur Muscle]";
+		mes "Oh~ Vous savez ce que je pense des magnifiques muscles mécaniques des Toquants! Je suis content d'avoir trouvé quelqu'un qui partage mon sens du goût!";
 		next;
-		mes "[Muscle Man]";
-		mes "Okay, here's the deal.";
-		mes "Bring me...";
-		mes "^0000FF3000 Clock Hand^000000 and";
-		mes "^0000FF1 Mr. Scream^000000.";
+		mes "[Monsieur Muscle]";
+		mes "Bien, voilà ma proposition. Apportez-moi...";
+		mes "^0000FF3000 Aiguilles d'Horloge^000000 et";
+		mes "^0000FF1 Visage Terrifiant^000000.";
 		next;
-		mes "[Muscle Man]";
-		mes "With those, I will be able to continue my research, at least for a while. As I told you, I will give you this awesome ^0000FFAlarm Mask^000000 for those items!";
+		mes "[Monsieur Muscle]";
+		mes "Je pourrai continuer mes recherches grâce à cela. Comme je vous l'ai dit, je vous donnerai ce magnifique ^0000FFMasque de Toquant^000000 en échange de tout cela!";
 		next;
-		mes "[Muscle Man]";
-		mes "Now! Go for it!";
-		mes "Let's spread our love for muscle around the globe!";
+		mes "[Monsieur Muscle]";
+		mes "Bien, allez-y maintenant! Propageons notre amour de la musculation partout sur le monde!";
 		close;
 	}
-	mes "[Muscle Man]";
-	mes "Oh~! I'm sorry!!";
-	mes "I guess I must have pumped one of these glorious biceps on accident.";
+	mes "[Monsieur Muscle]";
+	mes "Oh~ Je suis désolé! J'imagine que j'ai dû gonfler l'un de ces magnifiques biceps par accident.";
 	next;
-	mes "[Muscle Man]";
-	mes "I forget how breathtaking the sheer majesty of my body can be. It's alright, take your time, savor the visual pleasure...";
+	mes "[Monsieur Muscle]";
+	mes "J'oublie à quel point mon corps peut être époustouflant et envoûtant. Il n'y a pas de mal. Prenez votre temps et admirez cette perfection...";
 	next;
-	mes "[Muscle Man]";
-	mes "But listen, I'll need:";
-	mes "^0000FF3000 Clock Hand^000000 and";
-	mes "^0000FF1 Mr. Scream^000000";
-	mes "in order to continue my research.";
+	mes "[Monsieur Muscle]";
+	mes "Mais écoutez, j'aurais besoin de:";
+	mes "^0000FF3000 Aiguilles d'Horloge^000000 et";
+	mes "^0000FF1 Visage Terrifiant^000000";
+	mes "pour continuer nos recherches.";
 	next;
-	mes "[Muscle Man]";
-	mes "As I told you, I will give you this really nifty ^0000FFAlarm Mask^000000 for those items, as well as do any sort of pose for you.";
+	mes "[Monsieur Muscle]";
+	mes "Comme je vous l'ai dit, je vous donnerai ce magnifique ^0000FFMasque de Toquant^000000 en échange, et je vous ferai toutes les poses que vous voulez!";
 	next;
-	mes "[Muscle Man]";
-	mes "Now! Go for it!";
-	mes "Let's spread our love for muscle around the globe!";
+	mes "[Monsieur Muscle]";
+	mes "Bien, allez-y maintenant! Propageons notre amour de la musculation partout sur le monde!";
 	close;
 
 OnTimer4000:
@@ -1901,39 +1854,33 @@ OnInit:
 
 // Drooping Cat, Smokie Leaf, Lazy Smokie, Blue Fish
 //============================================================
-morocc,273,79,4	script	Educated Traveller	99,{
+morocc,273,79,4	script	Voyageur Éduqué::Educated Traveller	99,{
 	if ((MaxWeight-Weight) < 5000 || checkweight(1201,1) == 0) {
 		mes "- Une petite minute! Vous portez trop d'objets sur vous en ce moment. Essayez à nouveau après en avoir déposé quelques uns dans votre Stock. -";
 		close;
 	}
 	if (countitem(7030) > 0) {
 		mes "[Lee Hester]";
-		mes "Hm...?";
-		mes "What's that";
-		mes "you have on you?";
-		mes "Ah, a Claw of Desert Wolf~!";
+		mes "Hum...? Qu'est-ce que vous avez là? Ah, une Griffe de Loup du Désert!~";
 		next;
 		mes "[Lee Hester]";
-		mes "You can only get one of those if you've been traveling for a long time in the desert. I guess someone like you also appreciates the beauty of my homeland.";
+		mes "Vous n'en auriez pas si vous n'aviez pas passé longtemps dans le désert. J'imagine que quelqu'un comme vous apprécie la beauté de ma terre natale!";
 		next;
 		mes "[Lee Hester]";
 		mes "Ahahaha~";
-		mes "If you've spent enough time in the Morocc desert, I'm sure you also appreciate the value of a high quality hat to beat the heat.";
+		mes "Si vous avez passé tant de temps dans le désert de Morroc, je suis sûr que vous appréciez les chapeaux qui peuvent vous protéger du soleil.";
 		next;
 		mes "[Lee Hester]";
-		mes "Tell you what. I've learned a lot studying about animals, so if you give me the right materials, I'll make you a ^3355FFtruly great hat^000000.";
+		mes "Je vais vous dire... J'ai beaucoup appris en étudiant les animaux, alors si vous m'apportez quelques petites choses, je vous confectionnerai ^3355FFun chapeau vraiment génial^000000.";
 		next;
 		mes "[Lee Hester]";
-		mes "Just remember...";
-		mes "If you give me any equipment compounded with cards or with upgrades, ^ff0000any upgraded abilities and cards in those items will be lost after I make something out of them.^000000 So, please keep that in mind.";
+		mes "Mais rappelez-vous... Si jamais vous m'apportez des pièces d'équipement qui ont été raffinées ou sur lesquelles il y a des cartes, ^ff0000toutes les améliorations seront perdues, ainsi que les cartes attachées.^000000 Gardez ça à l'esprit.";
 		next;
-		switch(select("Drooping Cat:Smokie Leaf:Lazy Smokie:Blue Fish:That's... okay.")) {
+		switch(select("Chat Perché:Feuille de Fumard:Fumard Endormi:Poisson Bleu:C'est... C'est bon.")) {
 		case 1:
 			if (countitem(2233) > 0 && countitem(983) > 0 && countitem(7206) > 299) {
 				mes "[Lee Hester]";
-				mes "Ah...";
-				mes "You brought everything.";
-				mes "Excellent! Okay, give me some time to create the 'Drooping Cat.'";
+				mes "Ah... Vous avez tout avec vous. Excellent! Bien, donnez-moi les matériaux pour confectionner un Chat Perché.";
 				next;
 				mes "*Scratch scratch...*";
 				next;
@@ -1944,11 +1891,11 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Tap tap...*";
 				mes "*Scratch scratch...*";
 				next;
-				mes "^3355FFHmm...";
-				mes "Those don't sound like hat-making noises...^000000";
+				mes "^3355FFHum...";
+				mes "Ce ne sont pas les bruits auxquels on est habitué quand on confectionne un chapeau...^000000";
 				next;
 				mes "[Lee Hester]";
-				mes "Oh, don't worry. It's almost done.";
+				mes "Oh, ne vous en faites pas, c'est presque terminé.";
 				next;
 				mes "*Swish swish...*";
 				next;
@@ -1960,8 +1907,8 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Chikachikachoom*";
 				next;
 				mes "[Lee Hester]";
-				mes "There you go. *Phew~*";
-				mes "Your own 'Drooping Cat' hat, powered by a scientific principle! Also, would you mind if I keep that Desert Wolf Claw? Heh heh, thanks~";
+				mes "Et voilà. *Fiou~*";
+				mes "Votre propre Chat Perché, fabriqué grâce aux principes de la science! Oh, et ça vous dérange si je garde cette Griffe de Loup du Désert? Héhé - merci!~";
 				delitem 2233,1; //Circlet_
 				delitem 983,1; //Black_Dyestuffs
 				delitem 7206,300; //Black_Kitty_Doll
@@ -1972,38 +1919,34 @@ morocc,273,79,4	script	Educated Traveller	99,{
 			}
 			else {
 				mes "[Lee Hester]";
-				mes "Why don't I make you...";
-				mes "a 'Drooping Cat?'";
-				mes "Having a cat for a hat makes a certain sort of sense if you'll just hear me out...";
+				mes "Pourquoi ne vous ferais-je pas un... Chat Perché! Un chat en guise de chapeau... Ça se tient, non?";
 				next;
 				mes "[Lee Hester]";
-				mes "At the Juno Library, I read in this issue of 'Funtime Kid Science' that all cats, whether they're wild or domesticated, are hunters that have mastered the art of saving their energy.";
+				mes "A la bibliothèque de Yuno, j'ai lu dans un numéro de 'Science et Loisirs' que tous les chats, qu'ils soient sauvages ou domestiques, sont des chasseurs ayant maîtrisé l'art de préserver leur énergie.";
 				next;
 				mes "[Lee Hester]";
-				mes "After investing many hours napping in the sun, they've developed the perfect position to nap in any place and in any condition: the lazy feline droop.";
+				mes "Après avoir enquêté pendant des jours, à faire la sieste sous le soleil, j'en suis venu à la conclusion qu'ils avaient trouvé la position parfaite pour faire la sieste en n'importe quel endroit, et dans n'importe quelle condition: la position du chat affalé.";
 				next;
 				mes "[Lee Hester]";
-				mes "It's impossible for humans to even imitate this special feline skill without the inspiration from this hat!";
+				mes "Les humains ne peuvent pas imiter cette position sans recevoir l'inspiration de ce couvre-chef!";
 				next;
 				mes "[Lee Hester]";
-				mes "And even if you don't manage to copy the napping cat droop, at least this'll keep the sun off the top of your head, if not out of your eyes.";
+				mes "Et même si vous ne réussissez pas à reproduire cette position, au moins ce couvre-chef vous protègera la tête, si ce n'est les yeux, du soleil.";
 				next;
 				mes "[Lee Hester]";
-				mes "The items I need are...";
-				mes "1 ^ff0000slotted Circlet^000000,";
-				mes "1 ^ff0000Black Dyestuffs^000000";
-				mes "and 300 ^ff0000Black Cat Doll^000000.";
+				mes "Pour en faire un, il me faut...";
+				mes "1 ^ff0000Diadème [1]^000000,";
+				mes "1 pot de ^ff0000Teinture Noire^000000";
+				mes "et 300 ^ff0000Chats Noirs en Peluche^000000.";
 				next;
 				mes "[Lee Hester]";
-				mes "I will make a Drooping Cat right away when you bring all of those items.";
+				mes "Je vous ferai un Chat Perché sans attendre si vous me rapportez tout cela.";
 				close;
 			}
 		case 2:
 			if (countitem(945) > 599) {
 				mes "[Lee Hester]";
-				mes "Ah...";
-				mes "You brought everything.";
-				mes "Excellent! Okay, give me some time to put this 'Smokie Leaf' together.";
+				mes "Ah... Vous m'avez tout rapporté. Excellent! Bien, laissez-moi un peu de temps pour confectionner cette 'Feuille de Fumard'.";
 				next;
 				mes "*Scratch scratch...*";
 				next;
@@ -2014,11 +1957,11 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Tap tap...*";
 				mes "*Scratch scratch...*";
 				next;
-				mes "^3355FFHmm...";
-				mes "Those don't sound like hat-making noises...^000000";
+				mes "^3355FFHum...";
+				mes "Ce ne sont pas les bruits auxquels on est habitué quand on confectionne un chapeau...^000000";
 				next;
 				mes "[Lee Hester]";
-				mes "Oh, don't worry. It's almost done.";
+				mes "Oh, ne vous en faites pas, c'est presque terminé.";
 				next;
 				mes ".........";
 				next;
@@ -2032,8 +1975,8 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*P-peeeeeeeeep*";
 				next;
 				mes "[Lee Hester]";
-				mes "There you go. *Phew~*";
-				mes "Your own 'Smokie Leaf' hat, powered by a scientific principle! Also, would you mind if I keep that Desert Wolf Claw? Heh heh, thanks~";
+				mes "Et voilà! *Fiou~*";
+				mes "Votre propre 'Feuille de Fumard', confectionnée grâce aux principes de la science! Oh, et est-ce que ça vous dérange si je garde cette Griffe de Loup du Désert? Hé hé, merci!~";
 				delitem 945,600; //Raccoon_Leaf
 				delitem 7030,1; //Claw_Of_Desert_Wolf
 				getitem 5064,1; //Leaf_Headgear
@@ -2042,41 +1985,36 @@ morocc,273,79,4	script	Educated Traveller	99,{
 			}
 			else {
 				mes "[Lee Hester]";
-				mes "How about...";
-				mes "a 'Smokie Leaf?'";
+				mes "Qu'est-ce que vous diriez d'une Feuille de Fumard?";
 				next;
 				mes "[Lee Hester]";
-				mes "I know, I know, wearing a big ol' Leaf on top of your head sounds impractical. But, it makes a certain sort of sense if you'll just hear me out.";
+				mes "Je sais, je sais, porter une bonne vielle feuille sur la tête ne semble pas très pratique, mais ça se défend...";
 				next;
 				mes "[Lee Hester]";
-				mes "Do you ever notice how on a hot day, you feel a lot cooler when you wear white, but you're a lot warmer when you wear black?";
+				mes "Vous avez déjà remarqué que les jours de canicule, vous vous sentez bien plus frais quand vous portez du blanc, et que vous avez l'impression d'avoir plus chaud en portant du noir?";
 				next;
 				mes "[Lee Hester]";
-				mes "After some intense thinking, and reading some 'Funtime Kid Science' magazines in Juno, I realized that the color black absorbs sunlight and heat, and that the color white reflects it.";
+				mes "Après y avoir pas mal réfléchi, et à la suite d'un article lu dans 'Science et Loisirs' à Yuno, j'ai compris que la couleur noire absorbais la lumière du soleil et la chaleur, alors que la couleur blanche la renvoyait.";
 				next;
 				mes "[Lee Hester]";
-				mes "So...";
-				mes "What happens if you're wearing no colors? If my ^333333*ahem*^000000 hypothesis is correct, you wouldn't feel any heat if you were invisible!";
+				mes "Alors... Qu'est-ce qui se passe quand vous ne portez aucune couleur? Si mon ^333333*ahem*^000000 hypothèse est correcte, vous ne ressentiriez pas la chaleur si vous étiez invisible!";
 				next;
 				mes "[Lee Hester]";
-				mes "That's why I've created this Racoon Leaf, in an attempt to imitate Smokie's uncanny invisibility powers.";
+				mes "C'est par ça que j'ai créé un chapeau-raton-laveur afin de tenter d'imiter leurs capacités innées à se rendre invisibles!";
 				next;
 				mes "[Lee Hester]";
-				mes "It...";
-				mes "I haven't gotten it to work the way I want to yet. But it's a big leaf! It'll offer some shade.";
+				mes "Ça... Ça ne marche pas encore comme je le voudrais, mais... C'est une grosse feuille! Au moins ça fait de l'ombre!";
 				next;
 				mes "[Lee Hester]";
-				mes "All I need to make this is...";
-				mes "600 ^ff0000Raccoon Leaf^000000.";
-				mes "It's weird, but I need a whole lot of little leaves to make a big one.";
+				mes "Tout ce dont j'ai besoin, c'est de...";
+				mes "600 ^ff0000Feuilles de Raton-Laveur^000000.";
+				mes "C'est bizarre, je sais, mais il me faut tout un tas de petites feuilles pour en faire une grande.";
 				close;
 			}
 		case 3:
 			if (countitem(1026) > 999 && countitem(7065) > 99 && countitem(945) > 9) {
 				mes "[Lee Hester]";
-				mes "Ah....";
-				mes "You brought everything.";
-				mes "Excellent! Okay, give me some time to create the 'Lazy Smokie' hat.";
+				mes "Ah.... Vous revoilà avec tout ce que je vous avais demandé! Excellent! Laissez-moi un peu de temps pour vous faire un 'Fumard Endormi'.";
 				mes "....";
 				next;
 				mes "*Scratch scratch...*";
@@ -2088,12 +2026,11 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Tap tap...*";
 				mes "*Scratch scratch...*";
 				next;
-				mes "^3355FFHmm...";
-				mes "Those don't sound like hat-making noises...^000000";
-				next;
+				mes "^3355FFHum...";
+				mes "Ce ne sont pas les bruits auxquels on est habitué quand on confectionne un chapeau...^000000";
 				next;
 				mes "[Lee Hester]";
-				mes "Oh, don't worry. It's almost done.";
+				mes "Oh, ne vous en faites pas, c'est presque terminé.";
 				next;
 				mes ".........";
 				next;
@@ -2107,8 +2044,8 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Glunk.*";
 				next;
 				mes "[Lee Hester]";
-				mes "There you go. *Phew~*";
-				mes "Your own 'Lazy Smokie' hat, powered by a scientific principle! Also, would you mind if I keep that Desert Wolf Claw? Heh heh, thanks~";
+				mes "Et voilà! *Fiou~*";
+				mes "Votre propre 'Fumard Endormi', confectionné grâce aux principes de la science! Oh, et est-ce que ça vous dérange si je garde cette Griffe de Loup du Désert? Hé hé, merci!~";
 				delitem 1026,1000; //Acorn
 				delitem 7065,100; //Sea_Otter_Leather
 				delitem 945,10; //Raccoon_Leaf
@@ -2119,53 +2056,49 @@ morocc,273,79,4	script	Educated Traveller	99,{
 			}
 			else {
 				mes "[Lee Hester]";
-				mes "Why don't I make...";
-				mes "a 'Lazy Smokie?'";
+				mes "Pourquoi ne vous ferais-je pas un 'Fumard Endormi'?";
 				next;
 				mes "[Lee Hester]";
-				mes "I know, I know, having a Racoon on your head sounds ridiculous, but it makes a certain sort of sense if you'll just hear me out.";
+				mes "Je sais, avoir un raton-laveur sur la tête semble ridicule, mais ça se tient en un sens.";
 				next;
 				mes "[Lee Hester]";
-				mes "So I learned from an issue of 'Funtime Kid Science' at Juno Library that different colors absorb or reflect sunlight.";
+				mes "J'ai appris d'un article de 'Science et Loisirs' à Yuno que certaines couleurs absorbaient ou réfléchissaient la lumière du soleil.";
 				next;
 				mes "[Lee Hester]";
-				mes "Wearing one color makes you feel warmer, and another makes you feel cooler on a hot day.";
+				mes "Selon les couleurs, vous allez avoir plus ou moins chaud les jours de canicule.";
 				next;
 				mes "[Lee Hester]";
-				mes "So I was thinking...";
-				mes "What if I had no colors?";
+				mes "Alors je me demandais... Qu'est-ce qui se passerait si on ne portait aucune couleur?";
 				next;
 				mes "[Lee Hester]";
-				mes "And, as we all know, you wear no colors if you're invisible, or when you're completely nude. I've already conducted my nudity experiment with sad and pitiable results...";
+				mes "Et comme nous le savons tous, on ne porte aucune couleur si on est invisible, ou lorsqu'on est complètement nu. J'ai déjà fait quelques expériences sur la nudité, mais les résultats ont été quelque peu... décevants.";
 				next;
 				mes "[Lee Hester]";
-				mes "So now I'm experimenting with invisibility. I've tried using a human sized Smokie Leaf to become invisible, but it didn't really work yet. So I got to thinking...";
+				mes "Je m'intéresse donc maintenant à l'invisibilité. J'ai essayé d'utiliser des feuilles de Fumard à l'échelle humaine pour devenir invisible, mais ce n'est pas encore au point. Alors je dois réfléchir...";
 				next;
 				mes "[Lee Hester]";
-				mes "If I somehow connected a Smokie to me, would I become invisible when he becomes invisible?";
+				mes "Si par un moyen quelconque j'établissais un lien avec un Fumard, ne deviendrais-je pas invisible en même temps que lui?";
 				next;
 				mes "[Lee Hester]";
-				mes "I haven't been able to try it yet, because Smokies are pretty heavy and I've got to build up my neck muscles before I can strap a Smokie to my head.";
+				mes "Je n'ai pas encore pu essayer, parce que les Fumards sont assez lourds et que je dois me muscler le cou avant de pouvoir me coller l'un d'entre eux sur la tête.";
 				next;
 				mes "[Lee Hester]";
-				mes "So of course I need a practice Smokie to wear on my head before I'm ready for the real thing.";
+				mes "Il me faut donc un Fumard d'entraînement pour m'habituer à en porter sur la tête avant de m'y mettre vraiment.";
 				next;
 				mes "[Lee Hester]";
-				mes "And that was how I invented the 'Lazy Smokie' hat.";
+				mes "Et c'est comme ça que j'ai inventé ce chapeau, le 'Fumard Endormi'.";
 				next;
 				mes "[Lee Hester]";
-				mes "The items I need are...";
-				mes "1000 ^ff0000Acorn^000000,";
-				mes "100 ^ff0000Sea-Otter Fur^000000 and";
-				mes "10 ^ff0000Raccoon Leaf^000000.";
+				mes "Pour le faire, j'ai besoin de...";
+				mes "1000 ^ff0000Glands^000000,";
+				mes "100 ^ff0000Fourrures de Loutre de Mer^000000 et de";
+				mes "10 ^ff0000Feuilles de Raton-Laveur^000000.";
 				close;
 			}
 		case 4:
 			if (countitem(624) > 0 && countitem(959) > 299 && countitem(551) > 49 && countitem(1023) > 0 && countitem(938) > 99) {
 				mes "[Lee Hester]";
-				mes "Ah...";
-				mes "You brought everything.";
-				mes "Excellent! Okay, give me some time to create the 'Blue Fish' hat out of all this fish.";
+				mes "Ah... Vous m'avez tout rapporté! Bien, je vais pouvoir vous créer un 'Poisson Bleu' en guise de couvre-chef avec tout ce poisson.";
 				next;
 				mes "*Scratch scratch...*";
 				next;
@@ -2176,11 +2109,11 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Tap tap...*";
 				mes "*Scratch scratch...*";
 				next;
-				mes "^3355FFHmm...";
-				mes "Those don't sound like hat-making noises...^000000";
+				mes "^3355FFHum...";
+				mes "Ce ne sont pas les bruits auxquels on est habitué quand on confectionne un chapeau...^000000";
 				next;
 				mes "[Lee Hester]";
-				mes "Oh, don't worry. It's almost done.";
+				mes "Oh, ne vous en faites pas, c'est presque terminé.";
 				next;
 				mes "*Swish swish...*";
 				next;
@@ -2192,8 +2125,8 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Wataaaaa~!*";
 				next;
 				mes "[Lee Hester]";
-				mes "There you go. *Phew~*";
-				mes "Your own 'Blue Fish' hat, powered by a scientific principle! Also, would you mind if I keep that Desert Wolf Claw? Heh heh, thanks~";
+				mes "Et voilà! *Fiou~*";
+				mes "Votre propre 'Poisson Bleu', confectionné grâce aux principes de la science! Oh, et est-ce que ça vous dérange si je garde cette Griffe de Loup du Désert? Hé hé, merci!~";
 				delitem 624,1; //Rotten_Fish
 				delitem 959,300; //Rotten_Scale
 				delitem 551,50; //Shusi
@@ -2206,70 +2139,62 @@ morocc,273,79,4	script	Educated Traveller	99,{
 			}
 			else {
 				mes "[Lee Hester]";
-				mes "Ah! I got it!";
-				mes "How about I make you...";
-				mes "a 'Blue Fish' hat?";
+				mes "Ah! J'ai trouvé! Pourquoi est-ce que je ne vous confectionnerais pas un couvre-chef en forme de... Poisson Bleu?!";
 				next;
 				mes "[Lee Hester]";
-				mes "I know putting a Fish on top of your head doesn't sound like the best idea, but it makes a certain sort of sense if you'll just hear me out.";
+				mes "Je sais que se coller un poisson sur la tête ne semble pas être la meilleure des idées, mais ça se défend...";
 				next;
 				mes "[Lee Hester]";
-				mes "So I was reading some issues of 'Funtime Kid Science' at the Juno Library, and read about animals that take naps under the sun when they feel really hot.";
+				mes "Je lisais quelques exemplaires de 'Science et Loisirs' à la bibliothèque de Yuno, et j'ai entendu parler des animaux qui font la sieste sous le soleil quand ils ont vraiment chaud.";
 				next;
 				mes "[Lee Hester]";
-				mes " So then I thought...";
-				mes "Animals that don't take naps under the sun must never feel hot?";
+				mes "Alors je me suis demandé... Les animaux qui font la sieste sous le soleil n'ont jamais chaud?";
 				next;
 				mes "[Lee Hester]";
-				mes "I decided to make a hat of that one perfect beast that was immune to the sun, never having to succumb its power.";
+				mes "J'ai décidé de confectionner un chapeau à partir de la seule bête qui était immunisée au soleil, n'ayant jamais à l'affronter.";
 				next;
 				mes "[Lee Hester]";
-				mes "I set to work immediately, listing all the animals I know that don't take naps in the sun. Then, I removed any animals from the list that I didn't like, especially the ones with really long names.";
+				mes "Je me suis mis tout de suite au travail, en faisant la liste de tous les animaux que je connaissais qui ne faisaient pas la sieste sous le soleil. J'ai ensuite retiré de ma liste tous les animaux que je n'aimais pas - surtout ceux avec des noms à rallonge.";
 				next;
 				mes "[Lee Hester]";
-				mes "Finally, I had only three creatures on my list: the Emu, the Giraffe and the Fish.";
+				mes "Finalement, il ne restait que trois animaux sur ma liste: l'émeu, la girafe, et les poissons.";
 				next;
 				mes "[Lee Hester]";
-				mes "First, I removed Emu, because everyone kept telling me I was spelling it wrong. And as everyone knows, a Giraffe hat would just look ridiculous. So, of course, I chose the Fish.";
+				mes "J'ai d'abord éliminé l'émeu parce que les gens n'arrêtaient pas de me dire que je ne savais pas l'écrire correctement. Et comme tout le monde sait, la girafe a l'air ridicule, alors j'ai choisi les poissons.";
 				next;
 				mes "[Lee Hester]";
-				mes "And that, my friend, was how I invented the 'Blue Fish' hat.";
+				mes "Et c'est comme ça, mon ami"+ ( sex ? "" : "e" ) +", que j'ai inventé ce couvre-chef, le 'Poisson Bleu'.";
 				next;
 				mes "[Lee Hester]";
-				mes "The items I need are...";
-				mes "^ff00001 Rotten Fish,";
-				mes "300 Stinky Scale,";
-				mes "50 Sushi,";
-				mes "1 Fish Tail^000000 and";
-				mes "^ff0000100 Sticky Mucus^000000.";
+				mes "Voilà les objets dont j'ai besoin...";
+				mes "^ff00001 Poisson Pourri,";
+				mes "300 Écailles Nauséabondes,";
+				mes "50 Sushis,";
+				mes "1 Queue de Poisson^000000 et";
+				mes "^ff0000100 Morves^000000.";
 				close;
 			}
 		case 5:
 			mes "[Lee Hester]";
-			mes "Oh... I see.";
-			mes "I'm a little disappointed, but you probably already have a nice hat to keep the sun out of your eyes. Well, if you change your mind, I'll be here.";
+			mes "Oh... Je vois. Je suis un peu déçu, mais vous avez sans doute déjà un bon chapeau pour vous protéger les yeux du soleil. Hé bien, je reste ici, si jamais vous changez d'avis.";
 			close;
 		}
 	}
 	else {
 		mes "[Lee Hester]";
-		mes "Isn't it such";
-		mes "a beautiful day";
-		mes "today?";
+		mes "N'est-ce pas une belle journée?";
 		next;
 		mes "[Lee Hester]";
-		mes "Beautiful...";
-		mes "But insanely hot.";
-		mes "I live here, I should know. Still, nothing can beat the Morroc sunset.";
+		mes "Magnifique... Mais il fait beaucoup trop chaud. Mais je vis ici, je devrais le savoir: rien ne peut battre le soleil de Morroc.";
 		next;
 		mes "[Lee Hester]";
-		mes "It's amazing how so many different animals can live in the desert. I've been spending some time researching the ways of animals, reading books in the Juno Library...";
+		mes "C'est étonnant de voir le nombre d'animaux différents qui vivent dans le désert. J'ai passé du temps à me renseigner sur eux à la bibliothèque de Yuno...";
 		next;
 		mes "[Lee Hester]";
-		mes "Trying to figure out the Animal Kingdom's secrets of dealing with the heat.";
+		mes "J'essaie de percer les secrets du Royaume des Animaux en ce qui concerne la chaleur.";
 		next;
 		mes "[Lee Hester]";
-		mes "I hope you're having a good time here in Morroc. If you ever question the special abilities of animals, just think of the majestic Desert Wolf that's able to thrive in the harsh Morroc deserts."; // trad: Loup du Désert
+		mes "J'espère que vous passez un bon moment, ici, à Morroc. Si jamais vous vous intéressez aux capacités spéciales des animaux du désert, pensez au majestueux Loup du Désert, qui est capable de survivre dans le terrible désert de Morroc.";
 		emotion e_paper;
 		close;
 	}
