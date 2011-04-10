@@ -26,44 +26,44 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 		delitem 7773,.@pointstoadd;
 		set kvm_point,kvm_point+.@pointstoadd;
 		mes "[Logistique]";
-		mes "Que vois-je? Des MÃ©dailles d'HÃ©roÃ¯sme? Nous n'acceptons plus cette devise, mais je peux vous donner ceci Ã  la place...";
-		mes "Vous avez donc "+.@pointstoadd+" MÃ©dailles d'HÃ©roÃ¯sme? Bien, voilÃ . C'est fait. Vous avez maintenant ^580080"+ kvm_point +"^000000 points de Kreiger Von Midgard.";
+		mes "Que vois-je? Des Médailles d'Héroïsme? Nous n'acceptons plus cette devise, mais je peux vous donner ceci à la place...";
+		mes "Vous avez donc "+.@pointstoadd+" Médailles d'Héroïsme? Bien, voilà. C'est fait. Vous avez maintenant ^580080"+ kvm_point +"^000000 points de Kreiger Von Midgard.";
 		next;
 	}
 	if (checkweight(1201,1) == 0) {
-		mes "- Une petite minute! Vous portez trop d'objets sur vous. Revenez aprÃ¨s vous Ãªtre allÃ©gÃ© un peu. -";
+		mes "- Une petite minute! Vous portez trop d'objets sur vous. Revenez après vous être allégé un peu. -";
 		close;
 	}
 	mes "[Logistique]";
-	mes "Salut Ã  vous! J'ai pour charge de distribuer des rÃ©compenses en Ã©change de points de Kreiger Von Midgard. Faites bien attention en choisissant: je ne reprendrai pas les rÃ©compenses si jamais vous vous trompez! Que puis-je pour vous?";
+	mes "Salut à vous! J'ai pour charge de distribuer des récompenses en échange de points de Kreiger Von Midgard. Faites bien attention en choisissant: je ne reprendrai pas les récompenses si jamais vous vous trompez! Que puis-je pour vous?";
 	next;
 	set .@name$,strcharinfo(0);
-	switch(select("Consulter le catalogue.:Acheter des objets.:Consulter son nombre de points.:Explications sur les rÃ©compenses.:Explications sur les points.")) {
+	switch(select("Consulter le catalogue.:Acheter des objets.:Consulter son nombre de points.:Explications sur les récompenses.:Explications sur les points.")) {
 	case 1:
 		mes "[Logistique]";
-		mes "Voici le catalogue des rÃ©compenses de Kreiger Von Midgard. Chaque arme coÃ»te 2.000 points, et les armures de 10 Ã  1.200 points. Faites bien attention en choisissant une rÃ©compense!";
+		mes "Voici le catalogue des récompenses de Kreiger Von Midgard. Chaque arme coûte 2.000 points, et les armures de 10 à 1.200 points. Faites bien attention en choisissant une récompense!";
 		close2;
 		ReadBook 11017,1;
 		end;
 	case 2:
 		mes "[Logistique]";
-		mes "Quel type d'objet vous intÃ©resse-t-il? Je vous laisse consulter le ^3131FFCatalogue^000000 pour avoir plus d'informations sur chacun des piÃ¨ces.";
+		mes "Quel type d'objet vous intéresse-t-il? Je vous laisse consulter le ^3131FFCatalogue^000000 pour avoir plus d'informations sur chacun des pièces.";
 		next;
 		switch(select("Armes:Armures/Accessoires:Armures/Accessoires ordinaires:Armures/Accessoires populaires")) {
 		case 1:
 			mes "[Logistique]";
-			mes "Bien, vous voulez une arme. Choisissez une sous-catÃ©gorie.";
+			mes "Bien, vous voulez une arme. Choisissez une sous-catégorie.";
 			next;
-			switch(select("Dague/Ã‰pÃ©e/Lance:BÃ¢ton/Masse/Hache/Shuriken:Arc/Katar/Musique/Fouet:Livre/Griffes:Armes Ã  feu")) {
+			switch(select("Dague/Épée/Lance:Bâton/Masse/Hache/Shuriken:Arc/Katar/Musique/Fouet:Livre/Griffes:Armes à feu")) {
 			case 1:
 				mes "[Logistique]";
-				mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+				mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 				next;
-				switch(select("Dague:Ã‰pÃ©e Ã  une main:Ã‰pÃ©e Ã  deux mains:Lance Ã  une main:Lance Ã  deux mains")) {
+				switch(select("Dague:Épée à une main:Épée à deux mains:Lance à une main:Lance à deux mains")) {
 				case 1: callsub PurchaseItem,13042,0,1; //Krieger_Dagger1 
 				case 2:
 					mes "[Logistique]";
-					mes "Nous avons trois Ã©pÃ©es Ã  une main diffÃ©rentes. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intÃ©resse?";
+					mes "Nous avons trois épées à une main différentes. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intéresse?";
 					next;
 					switch(select(getitemname(14316)+":"+getitemname(14317)+":"+getitemname(14318))) {
 					case 1: callsub PurchaseItem,13416,0,0; //Krieger_Onehand_Sword1
@@ -76,12 +76,12 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 				}
 			case 2:
 				mes "[Logistique]";
-				mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+				mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 				next;
-				switch(select("BÃ¢tons:"+getitemname(1546)+":"+getitemname(1310)+":"+getitemname(1382)+":"+getitemname(13307))) {
+				switch(select("Bâtons:"+getitemname(1546)+":"+getitemname(1310)+":"+getitemname(1382)+":"+getitemname(13307))) {
 				case 1:
 					mes "[Logistique]";
-					mes "Nous avons trois bÃ¢tons diffÃ©rents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intÃ©resse?";
+					mes "Nous avons trois bâtons différents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intéresse?";
 					next;
 					switch(select(getitemname(2002)+":"+getitemname(1640)+":"+getitemname(1641))) {
 					case 1: callsub PurchaseItem,2002,0,0; //Krieger_Twohand_Staff1
@@ -95,13 +95,13 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 				}
 			case 3:
 				mes "[Logistique]";
-				mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+				mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 				next;
 				switch(select(getitemname(1743)+":Katars:"+getitemname(1927)+":"+getitemname(1981))) {
 				case 1: callsub PurchaseItem,1743,0,1; //Krieger_Bow1
 				case 2:
 					mes "[Logistique]";
-					mes "Nous avons deux katars diffÃ©rents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intÃ©resse?";
+					mes "Nous avons deux katars différents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intéresse?";
 					next;
 					switch(select(getitemname(1281)+":"+getitemname(1282))) {
 					case 1: callsub PurchaseItem,1281,0,0; //Krieger_Katar1
@@ -112,12 +112,12 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 				}
 			case 4:
 				mes "[Logistique]";
-				mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+				mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 				next;
 				switch(select("Livre:Griffes")) {
 				case 1:
 					mes "[Logistique]";
-					mes "Nous avons deux livres diffÃ©rents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intÃ©resse?";
+					mes "Nous avons deux livres différents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intéresse?";
 					next;
 					switch(select(getitemname(1576)+":"+getitemname(1577))) {
 					case 1: callsub PurchaseItem,1576,0,0; //Krieger_Book1
@@ -125,7 +125,7 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 					}
 				case 2:
 					mes "[Logistique]";
-					mes "Nous avons deux types de griffes diffÃ©rents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intÃ©resse?";
+					mes "Nous avons deux types de griffes différents. Vous pouvez consulter le catalogue pour plus d'informations sur chacune d'entre elles. Laquelle vous intéresse?";
 					next;
 					switch(select(getitemname(1826)+":"+getitemname(1827))) {
 					case 1: callsub PurchaseItem,1826,0,0; //Krieger_Knuckle1
@@ -134,9 +134,9 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 				}
 			case 5:
 				mes "[Logistique]";
-				mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+				mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 				next;
-				switch(select("RÃ©volver:Fusil:Mitraillette:Fusil de Chasse:Lance-Grenade")) {
+				switch(select("Révolver:Fusil:Mitraillette:Fusil de Chasse:Lance-Grenade")) {
 				case 1: callsub PurchaseItem,13110,0,1; //Krieger_Pistol1
 				case 2: callsub PurchaseItem,13176,0,1; //Krieger_Rifle1
 				case 3: callsub PurchaseItem,13177,0,1; //Krieger_Gatling1
@@ -146,7 +146,7 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 			}
 		case 2:
 			mes "[Logistique]";
-			mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+			mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 			next;
 			switch(select("Armure:Cape:Chaussures:Accessoire")) {
 			case 1: callsub PurchaseItem,2394,1,2; //Krieger_Suit1
@@ -156,7 +156,7 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 			}
 		case 3:
 			mes "[Logistique]";
-			mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+			mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 			next;
 			switch(select("Armure ordinaire:Chaussures ordinaires:Accessoire ordinaire")) {
 			case 1: callsub PurchaseItem,2395,5,3; //Krieger_Suit2
@@ -165,7 +165,7 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 			}
 		case 4:
 			mes "[Logistique]";
-			mes "Bien, veuillez Ã  nouveau choisir une sous-catÃ©gorie.";
+			mes "Bien, veuillez à nouveau choisir une sous-catégorie.";
 			next;
 			switch(select("Armure populaire:Chaussures populaires:Accessoire populaire")) {
 			case 1: callsub PurchaseItem,2396,8,4; //Krieger_Suit3
@@ -179,23 +179,23 @@ bat_room,151,144,3	script	Logistique de Kreiger::KVM Logistic Officer#a	734,{
 		close;
 	case 4:
 		mes "[Logistique]";
-		mes "Il y a trois types de rÃ©compenses diffÃ©rents: des armes, des armures, et des accessoires.";
+		mes "Il y a trois types de récompenses différents: des armes, des armures, et des accessoires.";
 		next;
 		mes "[Logistique]";
-		mes "Les armes coÃ»tent 2.000 points de Kreiger Von Midgard chaque. Les armures sont de trois types, et coÃ»tent 840, 630, ou 580 points chaque. Les accessoires quant Ã  eux coÃ»tent 1.200 points chaque.";
+		mes "Les armes coûtent 2.000 points de Kreiger Von Midgard chaque. Les armures sont de trois types, et coûtent 840, 630, ou 580 points chaque. Les accessoires quant à eux coûtent 1.200 points chaque.";
 		next;
 		mes "[Logistique]";
-		mes "Les armes de Kreiger sont des armes niveau 4, qui peuvent Ãªtre amÃ©liorÃ©es et avoir des effets particuliers: Massacre, Destruction et BÃ©nÃ©diction.";
+		mes "Les armes de Kreiger sont des armes niveau 4, qui peuvent être améliorées et avoir des effets particuliers: Massacre, Destruction et Bénédiction.";
 		next;
 		mes "[Logistique]";
-		mes "En portant une armure complÃ¨te, vous recevrez aussi certains pouvoirs supplÃ©mentaires. De mÃªme, porter Ã  la fois des accessoires de Kreiger et une mÃ©daille de Tierra ou de Flavius augmentera leur puissance.";
+		mes "En portant une armure complète, vous recevrez aussi certains pouvoirs supplémentaires. De même, porter à la fois des accessoires de Kreiger et une médaille de Tierra ou de Flavius augmentera leur puissance.";
 		next;
 		mes "[Logistique]";
-		mes "Enfin, il existe aussi des armures et des accessoires ordinaires, que les joueurs de niveau 60 ou plus peuvent Ã©quiper. Il en va de mÃªme pour les armures et accessoires populaires.";
+		mes "Enfin, il existe aussi des armures et des accessoires ordinaires, que les joueurs de niveau 60 ou plus peuvent équiper. Il en va de même pour les armures et accessoires populaires.";
 		close;
 	case 5:
 		mes "[Logistique]";
-		mes "Vous recevez des points de Kreiger Von Midgard que vous gagniez ou perdiez une bataille. Vous pouvez obtenir des rÃ©compenses spÃ©ciales en Ã©change de ces points.";
+		mes "Vous recevez des points de Kreiger Von Midgard que vous gagniez ou perdiez une bataille. Vous pouvez obtenir des récompenses spéciales en échange de ces points.";
 		close;
 	}
 
@@ -223,18 +223,18 @@ PurchaseItem:
 	}
 
 	if (!getarg(1))
-		mes "Il vous en coÃ»tera ^0000ff2.000^000000 points. Vous en avez actuellement ^580080"+ kvm_point +"^000000.";
+		mes "Il vous en coûtera ^0000ff2.000^000000 points. Vous en avez actuellement ^580080"+ kvm_point +"^000000.";
 	else if (getarg(1) == 4)
-		mes "Il vous en coÃ»tera ^0000ff1.200^000000 points. Vous en avez actuellement ^580080"+ kvm_point +"^000000.";
+		mes "Il vous en coûtera ^0000ff1.200^000000 points. Vous en avez actuellement ^580080"+ kvm_point +"^000000.";
 	else
-		mes "Il vous en coÃ»tera ^0000ff"+.@prices[getarg(1)]+"^000000 points. Vous en avez actuellement ^580080"+ kvm_point +"^000000.";
+		mes "Il vous en coûtera ^0000ff"+.@prices[getarg(1)]+"^000000 points. Vous en avez actuellement ^580080"+ kvm_point +"^000000.";
 
-	mes "ÃŠtes-vous sÃ»r"+ ( sex ? "" : "e" ) +" de vouloir cet objet?";
+	mes "Êtes-vous sûr"+ ( sex ? "" : "e" ) +" de vouloir cet objet?";
 	next;
-	switch(select("Non, j'ai changÃ© d'avis.:Oui, j'en suis sÃ»r"+ ( sex ? "" : "e" ) +".")) {
+	switch(select("Non, j'ai changé d'avis.:Oui, j'en suis sûr"+ ( sex ? "" : "e" ) +".")) {
 	case 1:
 		mes "[Logistique]";
-		mes "Bien, annulons la transaction dans ce cas. A bientÃ´t!";
+		mes "Bien, annulons la transaction dans ce cas. A bientôt!";
 		break;
 	case 2:
 		if (kvm_point >= .@prices[getarg(1)]) {
@@ -243,11 +243,11 @@ PurchaseItem:
 			mes "[Logistique]";
 			mes "Vous venez d'acheter l'objet suivant: "+getitemname(getarg(0))+".";
 			if (!getarg(1))
-				mes "Votre total de points a Ã©tÃ© rÃ©duit de ^0000ff"+getarg(1)+"^000000 points. Vous en avez dÃ©sormais ^580080"+kvm_point+"^000000.";
+				mes "Votre total de points a été réduit de ^0000ff"+getarg(1)+"^000000 points. Vous en avez désormais ^580080"+kvm_point+"^000000.";
 			if (getarg(1) == 4)
-				mes "Votre total de points a Ã©tÃ© rÃ©duit de ^0000ff1.200^000000 points. Vous en avez dÃ©sormais ^580080"+kvm_point+"^000000.";
+				mes "Votre total de points a été réduit de ^0000ff1.200^000000 points. Vous en avez désormais ^580080"+kvm_point+"^000000.";
 			else
-				mes "Votre total de points a Ã©tÃ© rÃ©duit de ^0000ff"+.@prices[getarg(1)]+"^000000 points. Vous en avez dÃ©sormais ^580080"+kvm_point+"^000000.";
+				mes "Votre total de points a été réduit de ^0000ff"+.@prices[getarg(1)]+"^000000 points. Vous en avez désormais ^580080"+kvm_point+"^000000.";
 		}
 		else {
 			mes "[Logistique]";

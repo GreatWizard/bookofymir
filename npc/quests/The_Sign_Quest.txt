@@ -5,7 +5,7 @@
 //===== By: ================================================== 
 //= SinSloth(Most of the NPCs), MasterOfMuppets(Some of the NPCs + bug fixes) & Kargha(The quiz NPCs)
 //===== Current Version: ===================================== 
-//= 3.2
+//= 3.4
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -22,6 +22,7 @@
 //= 3.2 Removed mapannounce used while debugging. [L0ne_W0lf]
 //=     Moved the disablewaitingroomevent in dancing portion.
 //= 3.3 Applied Kazukin's fix for the dancing portion. (bugreport:3966) [L0ne_W0lf]
+//= 3.4 Updated 'waitingroom' to support required zeny/lvl. [Kisuka]
 //============================================================ 
 
 //============================================================ 
@@ -3462,8 +3463,7 @@ cmd_in01,33,33,1	script	Salle d'Attente::Standby Room#sign	66,{
 	end;
 
 OnInit:
-	waitingroom "DANSE~ DANSE~",20,"Standby Room#sign::OnStartArena",1; // Complètement hors-sujet, et ça n'a rien à faire sur la SVN (mais ça y est quand même! :P): Myllena, je ne comprends pas comment tu as pu aimer ce truc au point de vouloir faire un mod pour RO basé sur ce concept... xD [NoH]
-	//SetReqLevel 44 99
+	waitingroom "DANSE~ DANSE~",20,"Standby Room#sign::OnStartArena",1,0,44,99;
 	enablewaitingroomevent;
 	end;
 
@@ -4581,78 +4581,41 @@ alberta_in,114,178,5	script	Majordome::Refined Steward	109,{
 	callfunc "F_UpdateSignVars";
 	if (sign_q < 37) {
 		mes "[Mahatra]";
-		mes "Welcome to the";
-		mes "Alchesh Estate.";
-		mes "The Alcheshs are the";
-		mes "most esteemed family";
-		mes "in all of Alberta.";
+		mes "Bienvenue à la résidence Alchesh. Les Alchesh sont l'une des familles les plus respectables d'Alberta.";
 		next;
 		mes "[Mahatra]";
-		mes "I am Mahatra Mornen,";
-		mes "steward of this family.";
-		mes "Feel free to ask me if";
-		mes "you need anything and";
-		mes "I shall do my best";
-		mes "to assist you.";
+		mes "Je m'appelle Mahatra Mornen, je suis le majordome. N'hésitez pas à faire appel à mes services si vous avez besoin de quoi que ce soit. Je ferai de mon mieux pour vous être utile.";
 		close;
 	}
 	else if (sign_q == 37) {
 		mes "[Mahatra]";
-		mes "Ah yes, the master informed";
-		mes "me that you would be taking";
-		mes "care of an urgent delivery for";
-		mes "him. Please take this to a";
-		mes "man named ^3355FFLeibech^000000.";
+		mes "Ah oui, le maître m'a informé que vous viendriez vous occupez de cette livraison urgente pour lui. S'il vous plaît, apportez ceci à un homme du nom de ^3355FFLeibech^000000.";
 		next;
 		mes "[Mahatra]";
-		mes "It may be difficult";
-		mes "to find him since he";
-		mes "travels around the world.";
-		mes "Ah yes, I have heard that";
-		mes "he was in some other country...";
+		mes "Il sera peut-être difficile à trouver, puisqu'il voyage de par le monde. Oui, j'ai entendu dire qu'il se trouvait en terre étrangère...";
 		next;
 		mes "[Mahatra]";
-		mes "Now, the item I am";
-		mes "about to give you is";
-		mes "one of a kind. Don't lose";
-		mes "it or you will fall out of favor with the master...";
+		mes "L'objet que je vais vous confier est unique. Ne l'égarez pas, ou vous perdriez toute l'estime de mon maître...";
 		next;
-		mes "^3355FFMahatra gives you";
-		mes "a unique stone that has";
-		mes "your name attached to it.^000000";
+		mes "^3355FFMahatra vous donne une unique pierre, sur laquelle est gravé votre nom.^000000";
 		set sign_q,38;
 		getnameditem 7049,strcharinfo(0);
 		close;
 	}
 	else if (sign_q == 38) {
 		mes "[Mahatra]";
-		mes "You haven't delivered";
-		mes "the Stone yet? Please take";
-		mes "good care of it since it's very";
-		mes "rare. Don't use it or lose it.";
-		mes "before it's delivered!";
-		mes "Take care, now...";
+		mes "Vous n'avez pas encore livré la pierre? Prenez-en bien soin s'il vous plaît. Elle est rarissime. Ne l'utilisez pas, et ne la perdez pas avant de la livrer! Bonne route...";
 		close;
 	}
 	else if (sign_q == 39) {
 		if (countitem(7181) < 1) {
 			mes "[Mahatra]";
-			mes "You haven't delivered";
-			mes "the Stone yet? Please take";
-			mes "good care of it since it's very";
-			mes "rare. Don't use it or lose it.";
-			mes "before it's delivered!";
-			mes "Take care, now...";
+			mes "Vous n'avez pas encore livré la pierre? Prenez-en bien soin s'il vous plaît. Elle est rarissime. Ne l'utilisez pas, et ne la perdez pas avant de la livrer! Bonne route...";
 			close;
 		}
 		else {
 			mes "[Mahatra]";
-			mes "Ah, you've returned.";
-			mes "And I see you already";
-			mes "delivered the Stone. Great,";
-			mes "well done. Let me send a";
-			mes "message to the master, so";
-			mes "please visit him later.";
+			mes "Ah, vous revoilà. Je vois que vous avez déjà livré la pierre. Beau travail. Je vais envoyer une missive à mon maître afin de le tenir au courant. Allez le trouver plus tard.";
 			delitem 7181,1; //Receipt_01
 			set sign_q,40;
 			close;
@@ -4660,341 +4623,194 @@ alberta_in,114,178,5	script	Majordome::Refined Steward	109,{
 	}
 	else if (sign_q == 40) {
 		mes "[Mahatra]";
-		mes "Thank you very";
-		mes "much for the trouble";
-		mes "you've gone through";
-		mes "on our behalf.";
+		mes "Merci beaucoup de vous être occupé"+ ( sex ? "" : "e" ) +" de nos problèmes.";
 		close;
 	}
 	else if (sign_q == 41) {
 		mes "[Mahatra]";
-		mes "Greetings. Hm?";
-		mes "Did the master ask";
-		mes "you to perform another";
-		mes "task for him already?";
+		mes "Bonjour. Hum? Est-ce que le maître vous a déjà demandé de lui rendre un autre service?";
 		next;
-		switch(select("No.:You have another assignment for me.")) {
+		switch(select("Non.:Vous avez une autre tâche pour moi.")) {
 		case 1:
 			mes "[Mahatra]";
-			mes "Very well.";
-			mes "Then we shall";
-			mes "converse later~";
+			mes "Très bien. Nous reparlerons plus tard ~";
 			close;
 		case 2:
 			mes "[Mahatra]";
-			mes "I... I do...?";
-			mes "The master didn't";
-			mes "leave me any instructions.";
-			mes "Hmmm. Oh, I know what you can";
-			mes "do! Why don't you help ^FF0000Seylin^000000? She seems bothered by something...";
+			mes "Je... C'est vrai...? Le maître ne m'a pas laissé d'instructions. Hum... D'accord, je crois savoir. Pourquoi n'iriez-vous pas aider ^FF0000Seylin^000000? Il semble y avoir quelque chose qui la tracasse...";
 			set sign_q,42;
 			close;
 		}
 	}
 	else if (sign_q < 51) {
 		mes "[Mahatra]";
-		mes "Although you may only";
-		mes "be doing it for the Sobbing";
-		mes "Starlight, I really appreciate";
-		mes "all your help. Seylin's a very";
-		mes "nice girl and doesn't deserve";
-		mes "to feel down...";
+		mes "Même si vous ne faites peut-être tout cela que pour le Fragment d'Étoile Filante, je suis vraiment reconnaissant de votre aide. Seylin est une femme très douce, et ne mérite pas ce qui lui arrive...";
 		close;
 	}
 	else if (sign_q == 51) {
 		mes "[Mahatra]";
-		mes "Yes.";
-		mes "I heard from Seylin.";
-		mes "I did not know she was worried about her brother.";
-		mes "Ahem ahem...";
-		mes "Thank you for helping her.";
-		mes "I will send a message to my master.";
+		mes "Oui. J'ai entendu dire pour Seylin. Je ne savais pas qu'elle s'en faisait pour son frère.";
+		mes "Ahem ahem... Merci de l'avoir aidée. J'en informerai mon maître.";
 		next;
 		mes "Mahatra]";
-		mes "If there is anything else, he will let you pass the test.";
-		mes "Good luck.";
+		mes "Il considèrera probablement que vous avez passé son épreuve. Bonne chance.";
 		set sign_q,52;
 		close;
 	}
 	else if (sign_q == 98) {
 		mes "[Mahatra]";
-		mes "I'm very disappointed";
-		mes "in you. We put our trust";
-		mes "in you and you really";
-		mes "let us down.";
+		mes "Vous me décevez profondément. Nous avions confiance en vous, et vous nous avez laissé tomber.";
 		next;
 		mes "Mahatra]";
-		mes "Well, I suppose";
-		mes "that's the nature";
-		mes "of the testing. They're";
-		mes "designed so that only";
-		mes "the best of the best";
-		mes "can pass them.";
+		mes "Eh bien, je suppose que c'était le but de ces épreuves. Seule la crème de le crème peut les réussir.";
 		close;
 	}
 	else {
 		mes "[Mahatra]";
-		mes "I hope the master listens";
-		mes "to me and dresses more like";
-		mes "a man in his position. Even if";
-		mes "he thinks he's just a merchant,";
-		mes "he's the master of this estate!";
-		mes "But please don't tell him that~";
+		mes "J'espère que le maître m'écoutera et s'habillera plus comme un homme de son rang. Même s'il pense qu'il n'est qu'un vulgaire marchand, il est le maître de ces lieux!";
+		mes "Mais s'il vous plaît, ne lui parlez pas de tout ça ~";
 		close;
 	}
 }
 
-alberta,98,202,5	script	Guard#s10	105,{
+alberta,98,202,5	script	Garde::Guard#s10	105,{
 	if (sign_q < 35) {
 		mes "[Hurubu]";
-		mes "Welcome to the";
-		mes "Alchesh Estate.";
-		mes "If you have any business";
-		mes "with the master, please";
-		mes "let me know.";
+		mes "Bienvenue dans la Résidence Alchesh. Faites-le moi savoir si vous voulez vous entretenir avec le maître.";
 		close;
 	}
 	else if (sign_q < 52) {
 		mes "[Hurubu]";
-		mes "Welcome to the";
-		mes "Alchesh Estate.";
-		mes "If you have any business";
-		mes "with the master, please";
-		mes "let me know.";
+		mes "Bienvenue dans la Résidence Alchesh. Faites-le moi savoir si vous voulez vous entretenir avec le maître.";
 		next;
-		switch(select("I'd like to see Mr. Bakerlan.:Have a nice day.")) {
+		switch(select("Je voudrais voir M. Bakerlan.:Passez une bonne journée.")) {
 		case 1:
 			mes "[Hurubu]";
-			mes "Ah, you've";
-			mes "come to speak";
-			mes "to the master?";
-			mes "He's not out on";
-			mes "business, so you";
-			mes "can probably see him.";
+			mes "Ah, vous êtes venu"+ ( sex ? "" : "e" ) +" parler au maître? Il est là, donc il pourra certainement vous recevoir.";
 			close;
 		case 2:
 			mes "[Hurubu]";
 			mes "Ah...";
-			mes "Good day.";
+			mes "Passez une bonne journée.";
 			close;
 		}
 	}
 	else if (sign_q == 97) {
 		mes "[Hurubu]";
-		mes "Welcome to the";
-		mes "Alchesh Estate.";
-		mes "Please leave if";
-		mes "you do not have";
-		mes "any business here.";
+		mes "Bienvenue dans la Résidence Alchesh. Veuillez passer votre chemin si vous n'avez rien à faire ici.";
 		close;
 	}
 	else if (sign_q == 98) {
 		mes "[Hurubu]";
-		mes "Welcome to the";
-		mes "Alchesh Estate.";
-		mes "Please leave if";
-		mes "you do not have";
-		mes "any business here.";
+		mes "Bienvenue dans la Résidence Alchesh. Veuillez passer votre chemin si vous n'avez rien à faire ici.";
 		close;
 	}
 	else {
 		mes "[Hurubu]";
-		mes "Welcome to the";
-		mes "Alchesh Estate.";
-		mes "Lately, it seems that";
-		mes "the master is in a good";
-		mes "mood. I believe that we";
-		mes "have you to thank for that.";
+		mes "Bienvenue dans la Résidence Alchesh. Le maître semble être de bonne humeur ces temps-ci. Je pense que je dois vous en remercier.";
 		close;
 	}
 }
 
-alberta,43,49,5	script	Poor-looking Merchant	89,{
+alberta,43,49,5	script	Marchand à l'Air Pauvre::Poor-looking Merchant	89,{
 	callfunc "F_UpdateSignVars";
 	if (sign_q < 35) {
 		mes "[Machen]";
-		mes "Why...?";
-		mes "How did my";
-		mes "family's wealth";
-		mes "and prestige just";
-		mes "go down the drain?";
+		mes "Pourquoi...? Comment est-ce que les richesse familiales ont pu fondre ainsi, emportant notre prestige?";
 		next;
 		mes "[Machen]";
-		mes "Ever since the";
-		mes "Alcheshs came to Alberta,";
-		mes "they quickly took our place";
-		mes "as the biggest business owners";
-		mes "here. It's our biggest shame...";
+		mes "Depuis que les Alchesh sont arrivés à Alberta, ils ont fait main basse sur tous nos commerces. Quelle honte pour nous...";
 		close;
 	}
 	else if ((sign_q < 52) || (sign_q ==98)) {
 		mes "[Machen]";
-		mes "^333333*Sigh...*^000000";
-		mes "How did it happen?";
-		mes "How did the Alcheshs";
-		mes "become so rich so quickly?";
+		mes "^333333*Soupire...*^000000";
+		mes "Comment est-ce que ça a bien pu arriver? Comment est-ce que les Alchesh ont pu devenir riches aussi rapidement?";
 		next;
-		switch(select("Alchesh family?:Do you know where Mr. Bakerlan is?")) {
+		switch(select("La famille Alchesh?:Savez-vous où se trouve M. Bakerlan?")) {
 		case 1:
 			mes "[Machen]";
-			mes "My family, the Tudas,";
-			mes "used to run the biggest";
-			mes "trading company in Alberta.";
-			mes "But when the Alcheshs came";
-			mes "fifty years ago, they started";
-			mes "to outdo us in everything...";
+			mes "Ma famille, les Tuda, possédaient la plus grande compagnie d'échange d'Alberta. Mais les Alchesh sont arrivés il y a une cinquantaine d'années et on commencé à nous surpasser dans tous les domaines...";
 			next;
 			mes "[Machen]";
-			mes "It's like they're financial";
-			mes "geniuses or something!";
-			mes "Under Bakerlan's guidance,";
-			mes "their estate has grown to be";
-			mes "one of the richest in Alberta,";
-			mes "if not all of Rune-Midgard...";
+			mes "Ce sont vraiment des génies de la finance! Sous la tutelle de Bakerlan, ils sont devenus l'une des plus riches familles d'Alberta, si ce n'est de tout Rune-Midgard!";
 			close;
 		case 2:
 			mes "[Machen]";
-			mes "Bakerlan...?";
-			mes "Oh, he's probably";
-			mes "in his ten story money";
-			mes "vault, swimming in his";
-			mes "money by now. You";
-			mes "know rich people.";
+			mes "Bakerlan...? Oh, il est probablement dans son immense coffre-fort, à nager dans son argent en ce moment. Vous connaissez les riches...";
 			next;
 			select(".........");
 			mes "[Machen]";
-			mes "It-was-a-joke!";
-			mes "You see that big";
-			mes "mansion to the north?";
-			mes "That's the Alchesh Estate.";
-			mes "He should be home now.";
+			mes "Je plaisantais! Vous voyez cette grande bâtisse au nord? C'est la Résidence Alchesh. Il devrait être à la maison.";
 			next;
 			mes "[Machen]";
-			mes "He usually travels";
-			mes "a lot on business,";
-			mes "but if you're lucky you";
-			mes "should be able to catch him.";
+			mes "Il part souvent en voyages d'affaire, mais avec un peu de chance, vous le trouverez.";
 			close;
 		}
 	}
 	else if (sign_q == 97) {
 		mes "[Machen]";
-		mes "Why...?";
-		mes "How did my";
-		mes "family's wealth";
-		mes "and prestige just";
-		mes "go down the drain?";
+		mes "Pourquoi...? Comment est-ce que les richesse familiales ont pu fondre ainsi, emportant notre prestige?";
 		next;
 		mes "[Machen]";
-		mes "Ever since the";
-		mes "Alcheshs came to Alberta,";
-		mes "they quickly took our place";
-		mes "as the biggest business owners";
-		mes "here. It's our biggest shame...";
+		mes "Depuis que les Alchesh sont arrivés à Alberta, ils ont fait main basse sur tous nos commerces. Quelle honte pour nous...";
 		close;
 	}
 	else {
 		mes "[Machen]";
-		mes "You know, if the Alcheshs";
-		mes "were greedy, they actually";
-		mes "wouldn't be as big as they";
-		mes "are today. They've contributed";
-		mes "to a lot of social causes and";
-		mes "that won them a lot of support.";
+		mes "Vous savez, si les Alchesh étaient pingres, ils n'auraient pas l'importance qu'ils ont aujourd'hui. Ils ont contribué à de nombreuses oeuvres de charité, et ça leur a valu un soutien formidable.";
 		next;
 		mes "[Machen]";
-		mes "I gotta admit...";
-		mes "The whole family";
-		mes "is a bunch of financial";
-		mes "geniuses, alright.";
+		mes "Je dois admettre... Tout leur famille est constituée de génies des affaires.";
 		close;
 	}
 }
 
-yuno,330,100,4	script	Knight#ss	734,{
+yuno,330,100,4	script	Chevalier::Knight#ss	734,{
 	callfunc "F_UpdateSignVars";
 	if (sign_q < 38) {
 		mes "[Leibech]";
-		mes "I have a great";
-		mes "interest in collecting";
-		mes "unique and uncommon";
-		mes "goods. You know, things";
-		mes "that most people see just";
-		mes "once in their lifetimes.";
+		mes "L'une de mes plus grandes passions et de collectionner des biens rares et uniques. Vous savez... C'est chose qu'on ne voit qu'une fois dans sa vie.";
 		next;
 		mes "[Leibech]";
-		mes "I usually use the";
-		mes "Alchesh Trading Company";
-		mes "to help add to my collection.";
-		mes "Their prices aren't the cheapest, but their service is very reliable.";
+		mes "J'utilise généralement les services de la Compagnie de Commerce Alchesh pour enrichir ma collection. Ils ne sont pas le moins chers mais ils sont très fiables.";
 		close;
 	}
 	else if (sign_q == 38) {
 		if (countitem(7049) < 1) {
 			mes "[Leibech]";
-			mes "Excuse me...";
-			mes "Are you from the Alchesh";
-			mes "Trading Company? I've been";
-			mes "waiting for my order and they";
+			mes "Excuses-moi... Faites-vous partie de la Compagnie de Commerce Alchesh? J'attends ma commande.";
 			next;
-			switch(select("No, I'm not.:They must be busy.:Yes, I have your order.")) {
+			switch(select("Non, je n'en fait pas partie.:Ils doivent être débordés.:Oui, j'ai votre commande.")) {
 			case 1:
 				mes "[Leibech]";
-				mes "Oh, I'm sorry.";
-				mes "My mistake. Well";
-				mes "then, be safe in";
-				mes "your travels.";
+				mes "Oh, je suis désolé, c'est ma méprise. Eh bien, faites bonne route!";
 				close;
 			case 2:
 				mes "[Leibech]";
-				mes "I suppose you're";
-				mes "right. I mean, Juno";
-				mes "is pretty far from";
-				mes "Alberta. Maybe I'm";
-				mes "just overly excited";
-				mes "about my delivery...";
+				mes "Je suppose que vous avez raison. Je veux dire... Yuno est très éloignée d'Alberta. Peut-être suis-simplement trop excité...";
 				close;
 			case 3:
 				mes "[Leibech]";
-				mes "Really?!";
-				mes "That's great!";
-				mes "Do you have the";
-				mes "item I ordered?";
-				mes "Where is it?";
+				mes "Vraiment? Vous avez ce que j'ai commandé? Où l'avez-vous mis";
 				next;
-				switch(select("I put it somewhere.:Sorry, I lost it.")) {
+				switch(select("Je l'ai laissé quelque part.:Désolé, je l'ai perdu.")) {
 				case 1:
 					mes "[Leibech]";
-					mes "Oh, alright. ";
-					mes "So long as you didn't";
-					mes "lose it, that's fine. I'll wait";
-					mes "here, so would you bring it";
-					mes "to me as soon as you can?";
+					mes "Oh, Bien. Tant que vous ne l'avez pas perdu... Je vous attendrai ici. Revenez dès que vous le pouvez.";
 					close;
 				case 2:
 					mes "[Leibech]";
-					mes "What...?";
-					mes "Hey, man.";
-					mes "That's not funny!";
-					mes "You're joking, right?";
+					mes "Quoi...? Hé, ce n'est pas drôle! Vous plaisantez, n'est-ce pas?";
 					next;
-					switch(select("No. I'm not joking.:Okay, you got me~")) {
+					switch(select("Non, je ne plaisante pas.:Oui, vous m'avez eu"+ ( sex ? "" : "e" ) +" ~")) {
 					case 1:
 						mes "[Leibech]";
-						mes "I don't believe it!";
-						mes "I think I'm going to";
-						mes "write a letter to your";
-						mes "boss, Mister Bakerlan.";
-						mes "What do you think ";
-						mes "about that?";
+						mes "Je n'y crois pas! Eh bien, je vais écrire à votre patron, Monsieur Bakerlan. Que dites-vous de cela?";
 						close;
 					case 2:
 						mes "[Leibech]";
-						mes "Oh, thank goodness!";
-						mes "I thought you might have";
-						mes "really lost it! Say, would you";
-						mes "bring it to me as soon as";
-						mes "can? I'll wait for you here.";
+						mes "Oh, dieu merci! J'ai vraiment cru que vous l'aviez perdu! Dites-moi, pourriez-vous me l'apporter aussi vite que possible? Je vous attendrai ici.";
 						close;
 					}
 				}
@@ -5008,32 +4824,18 @@ yuno,330,100,4	script	Knight#ss	734,{
 			set .@sign2,0;
 			if (!countitem2(7049,1,0,0,.@sign1,.@sign2,.@sign3,.@sign4)) {
 				mes "[Leibech]";
-				mes "Hm...?";
-				mes "There must be some";
-				mes "mistake. This isn't what";
-				mes "I ordered. Well, I can wait... ";
+				mes "Hein...? Il doit y avoir une erreur. Ce n'est pas ce que j'ai commandé. Oh, je n'en peu plus d'attendre... ";
 				next;
 				mes "[Leibech]";
-				mes "Just come back and";
-				mes "bring me what I actually";
-				mes "ordered, alright? And this";
-				mes "time, don't make any mistakes.";
-				mes "Thanks, I appreciate it~";
+				mes "Revenez avec ce que je vous ai commandé, d'accord? Ne vous trompez pas cette fois. Merci, j'apprécie. ~";
 				close;
 			}
 			else {
 				mes "[Leibech]";
-				mes "Finally, it's here!";
-				mes "Yes, this is what I ordered.";
-				mes "Thanks for the delivery!";
+				mes "Enfin, c'est arrivé! Oui, c'est ce que j'avais commandé. Merci pour la livraison!";
 				next;
 				mes "[Leibech]";
-				mes "Well, here's your";
-				mes "receipt. Please take";
-				mes "this to Mister Bakerlan";
-				mes "so he knows you did";
-				mes "a good job for me.";
-				mes "Thanks again!";
+				mes "Bien, voilà votre reçu. Apportez-le à Monsieur Bakerlan, qu'il sache que j'apprécie ses services. Encore merci!";
 				delitem2 7049,1,1,0,0,.@sign1,.@sign2,.@sign3,.@sign4;
 				set sign_q,39;
 				getitem 7181,1; //Receipt_01
@@ -5058,43 +4860,26 @@ yuno,330,100,4	script	Knight#ss	734,{
 	}
 	else if (sign_q == 97) {
 		mes "[Leibech]";
-		mes "I have a great";
-		mes "interest in collecting";
-		mes "unique and uncommon";
-		mes "goods. You know, things";
-		mes "that most people see just";
-		mes "once in their lifetimes.";
+		mes "L'une de mes plus grandes passions et de collectionner des biens rares et uniques. Vous savez... C'est chose qu'on ne voit qu'une fois dans sa vie.";
 		next;
 		mes "[Leibech]";
-		mes "I usually use the";
-		mes "Alchesh Trading Company";
-		mes "to help add to my collection.";
-		mes "Their prices aren't the cheapest, but their service is very reliable.";
+		mes "J'utilise généralement les services de la Compagnie de Commerce Alchesh pour enrichir ma collection. Ils ne sont pas le moins chers mais ils sont très fiables.";
 		close;
 	}
 	else if (sign_q == 98) {
 		mes "[Leibech]";
-		mes "I am interested in collecting uncommon stuffs.";
-		mes "For that, I need to find something that I cannot see around here.";
+		mes "L'une de mes plus grandes passions et de collectionner des biens rares et uniques. Vous savez... C'est chose qu'on ne voit qu'une fois dans sa vie.";
 		next;
 		mes "[Leibech]";
-		mes "Usually, I am using Alchesh Trading Company for that.";
-		mes "Although the price is little bit higher than I wish,";
-		mes "they are very reliable.";
+		mes "J'utilise généralement les services de la Compagnie de Commerce Alchesh pour enrichir ma collection. Ils ne sont pas le moins chers mais ils sont très fiables.";
 		close;
 	}
 	else {
 		mes "[Leibech]";
-		mes "Hey, thanks for";
-		mes "delivering my order";
-		mes "for me. It was a great";
-		mes "addition to my collection!";
+		mes "Hé, merci de m'avoir livré cette commande. C'est un ajout extraordinaire pour la collection!";
 		next;
 		mes "[Leibech]";
-		mes "It's really tough to";
-		mes "find unique and oddball";
-		mes "items, but I find great pride";
-		mes "in expanding my collection~";
+		mes "Il est très difficile de trouver des objets aussi uniques, mais je mets un point d'honneur à enrichir ma collection. ~";
 		close;
 	}
 }

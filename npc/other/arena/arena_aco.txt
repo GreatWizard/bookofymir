@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.1
+//= 1.2
 //===== Compatible With: =====================================
 //= Any Athena Version
 //===== Description: =========================================
@@ -13,6 +13,7 @@
 //===== Additional Comments: =================================
 //= 1.0 First version.
 //= 1.1 Corrected variable typos. (bugreport:4374) [L0ne_w0lf]
+//= 1.2 Updated 'waitingroom' to support required zeny/lvl. [Kisuka]
 //============================================================
 
 arena_room,114,102,0	script	onlyaco#arena	45,1,1,{
@@ -33,10 +34,7 @@ arena_room,136,138,3	script	Salle d'Attente Acolytes::Acolyte Waiting Room	124,{
 	end;
 
 OnInit:
-	//setarenaeventsize 1
-	waitingroom "Salle d'attente Acolytes",50,"Acolyte Waiting Room::OnStartArena",1;
-	//SetReqLevel 10 99
-	//SetFeeZeny 1000
+	waitingroom "Salle d'attente Acolytes",50,"Acolyte Waiting Room::OnStartArena",1,1000,10,99;
 	enablewaitingroomevent;
 	end;
 
@@ -931,6 +929,7 @@ OnOn3:
 	donpcevent "Trocco#aco2::On06_start";
 	areamonster "force_5-1",170,67,178,131,"--ja--",1438,4,"force_06mob#pri::OnMyMobDead";
 	end;
+
 
 Onreset:
 	killmonster "force_5-1","force_06mob#pri::OnMyMobDead";
