@@ -1,0 +1,1673 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par NoH
+//===== eAthena Script ======================================= 
+//= Poring War
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Poring War
+//===== Additional Comments: ================================= 
+//= 1.0 First version. [Kisuka]
+//============================================================
+
+// Poring War Recruiter
+//============================================================
+prt_fild08,159,371,3	script	Recruteur des Porings::Poring War Recruiter#wop	909,{
+	mes "[Poring]";
+	mes "!!!!!";
+	mes "Ouah! "+ ( sex ? "Un humain" : "Une humaine" ) +", ring! Faut que j'me cache! Vite, vite!";
+	mes "Il nous tentent avec leurs Jellopys! Faut pas s'laisser avoir!";
+	next;
+	mes "[Poring]";
+	mes "Hwak!!";
+	mes "Ring~ Ring~ Mais c'est quoi votre problème, les gens?";
+	mes "Hé... Hé, là. Hu... Humains...";
+	mes "Poring...";
+	next;
+	mes "[Poring]";
+	mes "J'ai... J'ai un boulot sympa pour vous... Ça vous intéresse? Nous... Nous autres, Porings, avons besoin de tas de guerriers humains, braves, et forts, et... ring ~";
+	next;
+	switch(select("D'accord, je te suis!:Pourquoi ça?:L'ignorer.")) {
+	case 1:
+		if (Zeny > 499) {
+			mes "[Poring]";
+			mes "Oh, et il faut payer 500 zénys pour entrer, ring.";
+			mes "Passez un bon moment, ring.";
+			delitem 7773,countitem(7773);
+			set Zeny,Zeny-500;
+			close2;
+			warp "poring_w01",112,138;
+			end;
+		}else{
+			mes "[Poring]";
+			mes "Oh, et il faut payer 500 zénys pour entrer, ring.";
+			mes "...........";
+			mes "Hé, c'est la vie, ring. Nous aussi on a besoin de zénys, vous savez!~";
+			close;
+		}
+	case 2:
+		mes "[Poring]";
+		mes "C'est juste que... Il y a eu... Comme un petit conflit dans notre société... Ring...";
+		mes "Alors là, on dois... se battre un peu pour arranger les choses... Vous verrez quand vous serez là-bas!";
+		close;
+	case 3:
+		mes "[Poring]";
+		mes "Huhhhh! Les hu... humains sont si froids et cruels!";
+		close;
+	}
+}
+
+// Poring Vending Machine
+//============================================================
+poring_w01,100,97,3	script	Distributeur Poring::Poring Vending Machine#w	909,{
+	if (checkweight(714,3) == 0) {
+		mes "- Vous portez trop d'objets sur vous pour utiliser le Distributeur. -";
+		close;
+	}
+	mes "Il s'agit d'un Distributeur. Vous pouvez utiliser des Pièces de Poring pour acheter des choses.";
+	next;
+	if(select("Acheter quelque chose.:Lire les descriptions des objets.") == 1) {
+		mes "Il vous faut des Pièces Poring pour acheter des objets. Vous ne pouvez pas payer en zénys.";
+		mes "Nom de l'objet - Prix en Pièces(P.Po)";
+		next;
+		switch(select("Médaille Merveilleuse - 4 P.Po:Solidarité Tribale - 20 P.Po:Boîte à Porings - 30 P.Po:Suivant")) {
+		case 1:
+			callsub S_PoringVending,7515,4;
+		case 2:
+			callsub S_PoringVending,658,20;
+		case 3:
+			callsub S_PoringVending,12109,30;
+		case 4:
+			mes "Il s'agit d'objets particuliers...";
+			mes "Nom de l'objet - Prix en Pièces(P.Po)";
+			next;
+			switch(select("Bruterose - 15 P.Po:Doppelganger - 20 P.Po:Egnigem Cenia - 20 P.Po:Objets de Collection")) {
+			case 1:
+				callsub S_PoringVending,12300,15;
+			case 2:
+				callsub S_PoringVending,12301,20;
+			case 3:
+				callsub S_PoringVending,12302,20;
+			case 4:
+				mes "Il s'agit de figurines représentant les professions de base, y compris les Novices. Toutes les figurines, sauf celle de Novice, sont ^4d4dffliées au personnage qui les achète^000000. Faites donc bien attention avant d'en acheter. ~";
+				mes "Nom de l'objet - Prix en Pièces(P.Po)";
+				next;
+				switch(select("Figurine de Novice - 50 P.Po:Figurine d'Épéiste - 100 P.Po:Figurine de Voleur - 100 P.Po:Figurine de Marchand - 100 P.Po:Figurine d'Acolyte - 100 P.Po:Figurine de Mage - 100 P.Po:Figurine d'Archer - 100 P.Po:Une figurine au hasard - 50 P.Po:Annuler")) {
+				case 1:
+					callsub S_PoringVending,2765,50;
+				case 2:
+					callsub S_PoringVending,2766,100;
+				case 3:
+					callsub S_PoringVending,2770,100;
+				case 4:
+					callsub S_PoringVending,2771,100;
+				case 5:
+					callsub S_PoringVending,2767,100;
+				case 6:
+					callsub S_PoringVending,2768,100;
+				case 7:
+					callsub S_PoringVending,2769,100;
+				case 8:
+					mes "Vous avez choisi d'acheter une figurine au hasard. Vous allez en obtenir une parmi les sept possibles.";
+					next;
+					if(select("Tirer une figurine.:Annuler.") == 1) {
+						if(countitem(7539) >= 50) {
+							mes "Insérez les Pièces de Poring et tirez le levier.";
+							mes "Clic~ L'objet ressort de la bouche d'un Poring en un grondement.";
+							mes "Qu'est-ce que ça peut bien être?";
+							next;
+							switch(rand(1,17)) {
+							case 5: set .@Random_Figure,2766; break; // Swordman_Figure
+							case 6: set .@Random_Figure,2767; break; // Acolyte_Figure
+							case 8: set .@Random_Figure,2770; break; // Thief_Figure
+							case 11: set .@Random_Figure,2771; break; // Merchant_Figure
+							case 13: set .@Random_Figure,2769; break; // Archer_Figure
+							case 14: set .@Random_Figure,2768; break; // Mage_Figure
+							default: set .@Random_Figure,2765; break; // Novice_Figure
+							}
+							mes "Une belle " + getitemname(.@Random_Figure) + "!";
+							delitem 7539,50; // Poring_Coin
+							getitem .@Random_Figure,1;
+							close;
+						}else{
+							mes "Vous n'avez pas assez de pièces.";
+							close;
+						}
+					}
+					mes "["+strcharinfo(0)+"]";
+					mes "... La prochaine fois peut-être...";
+					close;
+				case 9:
+					mes "["+strcharinfo(0)+"]";
+					mes "... La prochaine fois peut-être...";
+					close;
+				}
+			}
+		}
+	}
+	mes "Selling Item List";
+	mes "====================";
+	mes "[Médaille Merveilleuse]";
+	mes " : Une médaille faite d'un métal spécial uniquement produit à Hugel.";
+	mes " ";
+	mes "[Solidarité Tribale]";
+	mes " : Une statue représentant les liens forts pouvant unir deux tribus. Les gens pensent qu'observer cette statue permet d'améliorer les rapports entre les tribus.";
+	mes " ";
+	mes "[Boîte à Porings]";
+	mes " : Une boîte emballée dans du papier-cadeau à motif de Porings. Il y a quelque chose à l'intérieur.";
+	mes " ";
+	mes "[Bruterose]";
+	mes " : Votre ami Bruterose viendra vous aider!";
+	mes " ";
+	mes "[M. Doppel]";
+	mes " : Le jeune Doppelganger viendra vous aider!";
+	mes " ";
+	mes "[Egnigem Cenia]";
+	mes " : Une belle jeune femme du Laboratoire de Somatologie, Egnigem Cenia, viendra vous aider!";
+	mes " ";
+	mes "[Figurine de Novice]";
+	mes " : Une magnifique figurine de Novice. Peut s'équiper en tant qu''^4d4dffaccessoire^000000'.";
+	mes " Points de Vie + 70, et Points de Vie + 30 lorsqu'elle est portée par des Novices.";
+	mes " ";
+	mes "[Figurine d'Épéiste]";
+	mes " : Une magnifique figurine d'Épéiste. Peut s'équiper en tant qu''^4d4dffaccessoire^000000'.";
+	mes " Vitalité + 1, et Défense + 2 lorsqu'elle est portée par des Épéistes.";
+	mes " ";
+	mes "[Figurine de Marchand]";
+	mes " : Une magnifique figurine de Marchand. Peut s'équiper en tant qu''^4d4dffaccessoire^000000'.";
+	mes " Force + 1, et Taux de Critique + 5 lorsqu'elle est portée par des Marchands.";
+	mes " ";
+	mes "[Figurine de Voleur]";
+	mes " : Une magnifique figurine de Voleur. Peut s'équiper en tant qu''^4d4dffaccessoire^000000'.";
+	mes " Agilité + 1, et Vitesse d'Attaque + 3% lorsqu'elle est portée par des Voleurs.";
+	mes " ";
+	mes "[Figurine de Mage]";
+	mes " : Une magnifique figurine de Mage. Peut s'équiper en tant qu''^4d4dffaccessoire^000000'.";
+	mes " Intelligence + 1, et augmentation de la vitesse de récupération des Points de Mana de 5% lorsqu'elle est portée par des Mages.";
+	mes " ";
+	mes "[Figurine d'Acolyte]";
+	mes " : Une magnifique figurine d'Acolyte. Peut s'équiper en tant qu''^4d4dffaccessoire^000000'.";
+	mes " Intelligence + 1, et + 50 Points de Mana lorsqu'elle est portée par des Acolytes.";
+	mes " ";
+	mes "[Figurine d'Archer]";
+	mes " : Une magnifique figurine d'Archer. Peut s'équiper en tant qu''^4d4dffaccessoire^000000'.";
+	mes " Dextérité + 1, et Attaque + 10 lorsqu'elle est portée par des Archers.";
+	close;
+	end;
+
+S_PoringVending:
+	if(countitem(7539) >= getarg(1)) {
+		mes "Clic~ L'objet ressort de la bouche d'un Poring en un grondement.";
+		delitem 7539,getarg(1); // Poring_Coin
+		getitem getarg(0),1;
+	}else{
+		mes "Vous n'avez pas assez de pièces.";
+	}
+	close;
+}
+
+// Information
+//============================================================
+poring_w01,96,97,3	script	P'tit Devi::Sweet Devi#wop	738,{
+	if (MaxWeight-Weight < 2000 || checkweight(1201,1) == 0) {
+		mes "- Une petite minute! Vous portez trop d'objets sur vous! Revenez après vous être allégé"+ ( sex ? "" : "e" ) +" un peu. -";
+		close;
+	}
+	mes "[Deviruchi]";
+	mes "Oh, un autre combattant humain! Comment se fait-il que tant d'humains participent à la Guerre des Porings de nos jours?";
+	next;
+	mes "[Deviruchi]";
+	mes "Oh... Tant que je peux me faire de l'argent avec ça... ~";
+	mes "Bon, Guerriers! Hahaha! J'ai toujours voulu crier ça! ~";
+	next;
+	mes "[Deviruchi]";
+	mes ( sex ? "Brave Guerrier" : "Brave Guerrière" ) +", êtes-vous prêt"+ ( sex ? "" : "e" ) +" à rejoindre la guerre sainte entre Angéling et Déviling?";
+	next;
+	mes "[Deviruchi]";
+	mes "Héhéhé, je me sens un peu bête maintenant... Bref, vous voulez prendre part à la Guerre des Porings ou pas?";
+	next;
+	switch(select("Je peux?:Comment prendre part?:Annuler.:Laissez-moi partir... S'il vous plaît!")) {
+	case 1:
+		mes "[Deviruchi]";
+		mes "Il n'y a pas de ségrégation raciale! Tout le monde peut y participer, tant que vous avez envie de vous battre.";
+		mes "C'est juste étrange de vous voir participer, vous les humains, qui étaient nos pires ennemis.";
+		next;
+		mes "[Deviruchi]";
+		mes "Si vous voulez vraiment participer à la guerre, le recruteur est juste là. Et c'est à vous de décider pour quel camp vous vous battrez. ~";
+		close;
+	case 2:
+		mes "[Deviruchi]";
+		mes "C'est simple. Vous voyez ces salles de recrutement? Chaque équipe est composée de cinq personnes. Dès qu'il y a cinq membres, le combat commence. Vous gagnez en tuant les Porings de l'équipe adverse.";
+		next;
+		mes "[Deviruchi]";
+		mes "Il faut donc un total de dix participants.";
+		next;
+		mes "[Deviruchi]";
+		mes "Lorsque les dix participants sont présents, il leur revient de choisir une équipe. Chaque camp devra être composé de cinq membres dans la MÊME équipe.";
+		next;
+		mes "[Deviruchi]";
+		mes "Enfin, la moitié des membres rejoint l'équipe Angéling, et l'autre moitié celle de Déviling.";
+		next;
+		mes "[Deviruchi]";
+		mes "Si vous faites partie de l'équipe Angéling, votre but sera de tuer les Dévilings de la base adverse, et vice-versa.";
+		next;
+		mes "[Deviruchi]";
+		mes "Chaque équipe doit essayer de tuer les deux Porings dans la base adverse. Après en avoir tué un, vous n'aurez qu'un temps limité pour tuer le second, ou celui qui est mort reviendra à la vie.";
+		next;
+		mes "[Deviruchi]";
+		mes "Ça ressemble à la capture de drapeaux, mais avec des Porings à la place. Compris? Assurez-vous de bien savoir qui se trouve dans chaque équipe.";
+		close;
+	case 3:
+		mes "[" + strcharinfo(0) + "]";
+		mes "Hum, je vois.";
+		close;
+	case 4:
+		mes "[Deviruchi]";
+		mes "Oh, bien, bien. Je peux vous renvoyer à votre Point de Sauvegarde si vous y tenez vraiment.";
+		close2;
+		if(WoP_SaveMap$ != "") {
+			savepoint WoP_SaveMap$,WoP_SaveMap_X,WoP_SaveMap_Y;
+			set WoP_SaveMap$,"";
+			set WoP_SaveMap_X,0;
+			set WoP_SaveMap_Y,0;
+		}
+		warp getsavepoint(0), getsavepoint(1), getsavepoint(2);
+		end;
+	}
+
+OnPCLogoutEvent:
+	getmapxy .@map$,.@x,.@y,0;
+	if (.@map$ == "poring_w02") {
+		if(WoP_SaveMap$ != "") {
+			savepoint WoP_SaveMap$,WoP_SaveMap_X,WoP_SaveMap_Y;
+			set WoP_SaveMap$,"";
+			set WoP_SaveMap_X,0;
+			set WoP_SaveMap_Y,0;
+		}
+		delitem 7773,countitem(7773);
+		set wop_team,0;
+	}
+	end;
+
+OnPCDieEvent:
+	getmapxy .@map$,.@x,.@y,0;
+	if (.@map$ == "poring_w02" && wop_team) {
+		if(getsavepoint(0) != "poring_w02" && WoP_SaveMap$ == "") {
+			set WoP_SaveMap$,getsavepoint(0);
+			set WoP_SaveMap_X,getsavepoint(1);
+			set WoP_SaveMap_Y,getsavepoint(2);
+		}
+		if (wop_team == 1) {
+			savepoint "poring_w02",rand(44,51),rand(76,87);
+		}
+		if (wop_team == 2) {
+			savepoint "poring_w02",rand(146,153),rand(76,87);
+		}
+	}
+	end;
+
+OnPCKillEvent:
+	getmapxy .@map$,.@x,.@y,0;
+	if (.@map$ == "poring_w02" && wop_team) {
+		getnameditem 7773,rid2name(killedrid);
+	}
+	end;
+
+OnInit:
+	removemapflag "poring_w02",mf_partylock;
+	removemapflag "poring_w02",mf_pvp;
+	removemapflag "poring_w02",mf_pvp_noguild;
+	removemapflag "poring_w02",mf_pvp_nocalcrank;
+	set $@wop_teamcount,0;
+	set $@wop_deadcount_a,0;
+	set $@wop_deadcount_d,0;
+	set $@wop_team_a,0;
+	set $@wop_team_d,0;
+	set $@wop_doorcount_a,0;
+	set $@wop_doorcount_d,0;
+	end;
+}
+
+// Poring Registers
+//============================================================
+poring_w01,91,97,3	script	Poring#wop_door_all	1002,{
+	end;
+	
+OnInit:
+	waitingroom "[Recrute 10 Participants]",10,"Poring#wop_door_all::OnStartArena",10,500,9,99;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	warpwaitingpc "poring_w01",101,70;
+	donpcevent "#wop_warp_rtry::OnReady";
+	disablewaitingroomevent;
+	end;
+
+OnEnable:
+	enablewaitingroomevent;
+	end;
+
+OnDisable:
+	disablewaitingroomevent;
+	end;
+}
+
+poring_w01,91,68,5	script	Poring#wop_door_a	1002,{
+	end;
+
+OnInit:
+	waitingroom "[Recruteur Angéling]",5,"Poring#wop_door_a::OnStartArena",5,0,9,99;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	warpwaitingpc "poring_w02",26,175;
+	disablewaitingroomevent;
+	if($@wop_teamcount == 0) {
+		set $@wop_teamcount,1;
+		donpcevent "Poring#wop_door_d::OnDevilingStart";
+		donpcevent "#wop_warp_rtry::OnStop";
+	}
+	else if($@wop_teamcount == 1) {
+		donpcevent "#wop_master::OnStart";
+		donpcevent "Poring#wop_door_d::OnStop";
+		stopnpctimer;
+	}
+	end;
+
+OnEnable:
+	enablewaitingroomevent;
+	end;
+
+OnDisable:
+	disablewaitingroomevent;
+	end;
+
+OnAngelingStart:
+	initnpctimer;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "poring_w01","Le recrutement de Déviling pour la plus grande bataille de tous les temps est terminé, ring!",0,0xf08080;
+	end;
+
+OnTimer4000:
+	mapannounce "poring_w01","Rejoignez la fière équipe Angéling, avec ses ailes d'ange!",0,0xf08080;
+	end;
+
+OnTimer8000:
+	mapannounce "poring_w01","Vous avez une minute pour rejoindre l'équipe Angéling. Le combat sera annulé dans une minute si vous n'êtes pas prêts!",0,0xf08080;
+	donpcevent "#wop_master::OnAngelingWarn";
+	end;
+
+OnTimer13000:
+	mapannounce "poring_w01","C'est l'heure de rejoindre la glorieuse équipe Angéling, ring!",0,0xf08080;
+	end;
+
+OnTimer20000:
+	mapannounce "poring_w01","Cette bataille fait la fierté des Porings! Ring! Rejoignez l'équipe Angéling!",0,0xf08080;
+	end;
+
+OnTimer30000:
+	mapannounce "poring_w01","Nous n'avons pas beaucoup de temps, ring. Ne laissez pas les Dévilings vous contaminer!",0,0xf08080;
+	end;
+
+OnTimer40000:
+	mapannounce "poring_w01","Allez! Rejoignez-nous!",0,0xf08080;
+	end;
+
+OnTimer50000:
+	mapannounce "poring_w01","Quel dommage! Je n'arrive pas à croire que nous n'ayons pas assez de braves guerriers!",0,0xf08080;
+	end;
+
+OnTimer55000:
+	mapannounce "poring_w01","Déviling: On ne peut pas attendre pour toujours! Nous annulons le combat, ring!",0,0x33FF66;
+	end;
+
+OnTimer55100:
+	donpcevent "Poring#wop_door_a::OnDisable";
+	donpcevent "Poring#wop_door_d::OnDisable";
+	donpcevent "Poring#wop_door_all::OnDisable";
+	set $@wop_teamcount,0;
+	donpcevent "#wop_master::OnAngelingEnd";
+	donpcevent "#wop_warp_rtry::OnEnable";
+	end;
+
+OnTimer58000:
+	mapannounce "poring_w01","... On ne peut rien y faire, ring... Encourageons ceux qui vont suivre, ring.",0,0xf08080;
+	donpcevent "#wop_master::OnReset";
+	stopnpctimer;
+	end;
+}
+
+poring_w01,112,68,3	script	Poring#wop_door_d	1002,{
+	end;
+
+OnInit:
+	waitingroom "[Recruteur Déviling]",5,"Poring#wop_door_d::OnStartArena",5,0,9,99;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	warpwaitingpc "poring_w02",170,175;
+	disablewaitingroomevent;
+	if($@wop_teamcount == 0) {
+		set $@wop_teamcount,1;
+		donpcevent "Poring#wop_door_a::OnAngelingStart";
+		donpcevent "#wop_warp_rtry::OnStop";
+	}
+	else if($@wop_teamcount == 1) {
+		donpcevent "#wop_master::OnStart";
+		donpcevent "Poring#wop_door_a::OnStop";
+		stopnpctimer;
+	}
+	end;
+
+OnEnable:
+	enablewaitingroomevent;
+	end;
+
+OnDisable:
+	disablewaitingroomevent;
+	end;
+
+OnAngelingStart:
+	initnpctimer;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "poring_w01","Plus de bonnes gens, le recrutement pour l'équipe Angéling est terminé, ring!",0,0x33FF66;
+	end;
+
+OnTimer4000:
+	mapannounce "poring_w01","Braves membres de l'équipe Déviling, rassemblons-nous, ring!",0,0x33FF66;
+	end;
+
+OnTimer8000:
+	mapannounce "poring_w01","La bataille sera annulée si les membres ne sont pas recrutés avant une minute!",0,0x33FF66;
+	donpcevent "#wop_master::OnDevilingWarn";
+	end;
+
+OnTimer13000:
+	mapannounce "poring_w01","C'est l'heure de rejoindre la brave équipe Déviling, ring!",0,0x33FF66;
+	end;
+
+OnTimer20000:
+	mapannounce "poring_w01","D.E.V.I.L.I.N.G! L'équipe Déviling! Rejoignez-nous!",0,0x33FF66;
+	end;
+
+OnTimer30000:
+	mapannounce "poring_w01","Il ne reste pas beaucoup de temps, ring! Dépêchez-vous, si vous voulez rejoindre l'équipe Déviling!",0,0x33FF66;
+	end;
+
+OnTimer40000:
+	mapannounce "poring_w01","D.E.V.I.L.I.N.G! L'équipe Déviling! Rejoignez-nous!",0,0x33FF66;
+	end;
+
+OnTimer50000:
+	mapannounce "poring_w01","Quel dommage! Je n'arrive pas à croire qu'il n'y ait pas assez de participants!",0,0x33FF66;
+	end;
+
+OnTimer55000:
+	mapannounce "poring_w01","Angéling: Nous n'avons pas de temps à perdre, stupide Déviling! Le combat est annulé, ring!",0,0xf08080;
+	end;
+
+OnTimer55100:
+	donpcevent "Poring#wop_door_a::OnDisable";
+	donpcevent "Poring#wop_door_d::OnDisable";
+	donpcevent "Poring#wop_door_all::OnDisable";
+
+	set $@wop_teamcount,0;
+	donpcevent "#wop_master::OnDevilingEnd";
+	donpcevent "#wop_warp_rtry::OnEnable";
+	end;
+
+OnTimer58000:
+	mapannounce "poring_w01","... Ughhhhhh... Dites-moi que ce n'est pas vrai, ring! Bon, soyez prêts pour le prochain round, ring!",0,0x33FF66;
+	donpcevent "#wop_master::OnReset";
+	stopnpctimer;
+	end;
+}
+
+poring_w01,103,70,0	script	#wop_warp_rtry	139,13,13,{
+	end;
+
+OnInit:
+	disablenpc "#wop_warp_rtry";
+	end;
+
+OnEnable:
+	enablenpc "#wop_warp_rtry";
+	end;
+
+OnDisable:
+	disablenpc "#wop_warp_rtry";
+	end;
+
+OnReady:
+	initnpctimer;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnTouch:
+	warp "poring_w01",112,138;
+	end;
+
+OnTimer3000:
+	mapannounce "poring_w01","Porings: Vous avez une minute pour choisir votre équipe, ring!",0,0xf08080;
+	end;
+
+OnTimer33000:
+	mapannounce "poring_w01","Porings: Plus que 30 secondes! Allez, choisissez une équipe sans attendre, ring!",0,0xf08080;
+	end;
+
+OnTimer58000:
+	mapannounce "poring_w01","Porings: Vous êtes sûrs que vous êtes des guerriers? Je suis déçu, ring!",0,0xf08080;
+	end;
+
+OnTimer60000:
+	mapannounce "poring_w01","Le combat est annulé puisque toutes les équipes ne sont pas complètes!",0,0xf08080;
+	end;
+
+OnTimer61000:
+	enablenpc "#wop_warp_rtry";
+	end;
+
+OnTimer65000:
+	disablenpc "#wop_warp_rtry";
+	donpcevent "#wop_master::OnReset";
+	stopnpctimer;
+	end;
+}
+
+// Mr. Doppel
+//============================================================
+poring_w02,26,181,3	script	M. Doppel::Mr. Doppel#wop_team_a	739,{
+	if (checkweight(714,3) == 0) {
+		mes "- Une petite minute! Vous portez trop d'objets sur vous! Revenez après vous être allégé"+ ( sex ? "" : "e" ) +" un peu. -";
+		close;
+	}
+	set .@a_tname$,getpartyname($@wop_team_a);
+	set .@pname$,getpartyname(getcharid(1));
+	if($@wop_team_a != 0 && $@wop_team_a == getcharid(1)) {
+		mes "[M. Doppel]";
+		mes "Bien. Tout le monde fait partie de l'équipe? Il s'agit de l'équipe... " + .@pname$ + ", c'est cela? Je vais vous transférer vers la zone de combat.";
+		next;
+		switch(select("Non, attendez!:Se rendre dans la zone de combat.")) {
+		case 1:
+			mes "[M. Doppel]";
+			mes "Qu'est-ce qu'il y a encore? Ne pourriez-vous pas faire preuve d'un peu plus de motivation? Vous n'avez pas beaucoup de temps. Il faut vous décider maintenant!";
+			next;
+			mes "[M. Doppel]";
+			mes "Si vous n'y allez pas maintenant, vous n'y serez pas à temps pour le début du combat.";
+			close;
+		case 2:
+			if((getpartyleader(getcharid(1),2) == getcharid(0))) {
+				mes "[M. Doppel]";
+				mes "Alors, vous êtes le chef d'équipe... Vous devriez envoyer tous les autres membres sur le champ de bataille avant de vous y rendre à votre tour.";
+				next;
+				switch(select("Très bien, j'entrerai en "+ ( sex ? "dernier" : "dernière" ) +".:Je suis le "+ ( sex ? "dernier" : "dernière" ) +". Je suis prêt "+ ( sex ? "" : "e" ) +" à partir.")) {
+				case 1:
+					mes "[M. Doppel]";
+					mes "Tout d'abord, vous devez vérifier que tous les membres font partie de l'équipe.";
+					close;
+				case 2:
+					mes "[M. Doppel]";
+					mes "Très bien. Content de voir que vous êtes ponctuels."; // Oui, c'est bien au pluriel. [NdT]
+					delitem 7773,countitem(7773);
+					close2;
+					set wop_team,0;
+					warp "poring_w02",44,82;
+					end;
+				}
+			}
+			else {
+				mes "[M. Doppel]";
+				mes "Bien. Je vais vous envoyer sur le champ de bataille. Vous rejoindrez les autres membres de l'équipe là-bas.";
+				delitem 7773,countitem(7773);
+				close2;
+				set wop_team,0;
+				warp "poring_w02",44,82;
+				end;
+			}
+		}
+	}
+	else {
+		if((getpartyleader(getcharid(1),2) == getcharid(0))) {
+			if($@wop_team_a == 0) {
+				mes "[M. Doppel]";
+				mes "Donc, vous êtes le chef de l'équipe Angéling... Êtes-vous certain"+ ( sex ? "" : "e" ) +" que tous les autres membres font partie de votre équipe? Nous allons d'abord enregistrer le nom de l'équipe, et nous vérifierons ensuite que tout le monde est là.";
+				next;
+				mes "[M. Doppel]";
+				mes "Voyons... Le nom de l'équipe est...";
+				mes " ";
+				mes "^4d4dff " + .@pname$ + " ^000000";
+				mes " ";
+				mes "C'est cela? C'est bien le nom que vous désirez porter?";
+				next;
+				switch(select("Non, ce n'est pas ça.:Oui, je veux enregistrer ce nom.:Annuler.")) {
+				case 1:
+					mes "[M. Doppel]";
+					mes "Hé, je n'ai pas toute la journée! Décidez-vous vite et revenez vous enregistrer. N'oubliez pas d'inviter tous vos coéquipiers dans l'équipe. Seuls les membres d'une équipe enregistrée peuvent participer à la bataille.";
+					close;
+				case 2:
+					mes "[M. Doppel]";
+					mes "Donc je vais enregistrer votre équipe sous le nom de - " +.@pname$ + " -.";
+					mes "Dites maintenant ^4d4dffaux autres membres de venir confirmer leur inscription^000000. Je les enverrai sur le champ de bataille dès que ce sera fait.";
+					set $@wop_team_a,getcharid(1);
+					mapannounce "poring_w02","L'inscription pour l'équipe Angéling vient d'être confirmée. Les autres membres de l'équipe doivent venir s'inscrire auprès de M. Doppel.",0,0x33FF66;
+					close;
+				case 3:
+					mes "[M. Doppel]";
+					mes "L'horloge tourne. Décidez-vous et enregistrez-vous aussi rapidement que possible.";
+					close;
+				}
+			}
+			else {
+				mes "[M. Doppel]";
+				mes "Donc, vous êtes le chef d'équipe... Vous n'avez pas encore terminé l'inscription? Vous devrez rester dans l'équipe qui se sera inscrite.";
+				next;
+				mes "[M. Doppel]";
+				mes "Le nom de l'équipe est... " + .@a_tname$ + ". C'est bien cela?";
+				close;
+			}
+		}
+		else {
+			mes "[M. Doppel]";
+			mes "Vous ne pourrez pas rejoindre le combat si vous ne faites pas partie d'une équipe.";
+			next;
+			mes "[M. Doppel]";
+			mes "Revenez me voir quand ce sera fait. Je vous enverrai sur le champ de bataille après que l'équipe ait été enregistrée.";
+			mes "Nous devons rester ensemble en tant qu'équipe, ou nous n'avons aucune chance.";
+			close;
+		}
+	}
+
+OnInit:
+	disablenpc "Mr. Doppel#wop_team_a";
+	end;
+
+OnEnable:
+	enablenpc "Mr. Doppel#wop_team_a";
+	end;
+
+OnDisable:
+	disablenpc "Mr. Doppel#wop_team_a";
+	end;
+}
+
+poring_w02,170,181,3	script	M. Doppel::Mr. Doppel#wop_team_d	739,{
+	if (checkweight(714,3) == 0) {
+		mes "- Une petite minute! Vous portez trop d'objets sur vous! Revenez après vous être allégé"+ ( sex ? "" : "e" ) +" un peu. -";
+		close;
+	}
+	set .@d_tname$,getpartyname($@wop_team_d);
+	set .@pname$,getpartyname(getcharid(1));
+	if($@wop_team_d != 0 && $@wop_team_d == getcharid(1)) {
+		mes "[M. Doppel]";
+		mes "Bien. Tout le monde fait partie de l'équipe? Il s'agit de l'équipe... " + .@pname$ + ", c'est cela? Je vais vous transférer vers la zone de combat.";
+		next;
+		switch(select("Non, attendez!:Se rendre dans la zone de combat.")) {
+		case 1:
+			mes "[M. Doppel]";
+			mes "Qu'est-ce qu'il y a encore? Ne pourriez-vous pas faire preuve d'un peu plus de motivation? Vous n'avez pas beaucoup de temps. Il faut vous décider maintenant!";
+			next;
+			mes "[M. Doppel]";
+			mes "Si vous n'y allez pas maintenant, vous n'y serez pas à temps pour le début du combat.";
+			close;
+		case 2:
+			if((getpartyleader(getcharid(1),2) == getcharid(0))) {
+				mes "[M. Doppel]";
+				mes "Alors, vous êtes le chef d'équipe... Vous devriez envoyer tous les autres membres sur le champ de bataille avant de vous y rendre à votre tour.";
+				next;
+				switch(select("Très bien, j'entrerai en "+ ( sex ? "dernier" : "dernière" ) +".:Je suis le "+ ( sex ? "dernier" : "dernière" ) +". Je suis prêt "+ ( sex ? "" : "e" ) +" à partir.")) {
+				case 1:
+					mes "[M. Doppel]";
+					mes "Tout d'abord, vous devez vérifier que tous les membres font partie de l'équipe.";
+					close;
+				case 2:
+					mes "[M. Doppel]";
+					mes "Très bien. Content de voir que vous êtes ponctuels.";
+					delitem 7773,countitem(7773);
+					close2;
+					set wop_team,0;
+					warp "poring_w02",153,82;
+					end;
+				}
+			}else{
+				mes "[M. Doppel]";
+				mes "Bien. Je vais vous envoyer sur le champ de bataille. Vous rejoindrez les autres membres de l'équipe là-bas.";
+				delitem 7773,countitem(7773);
+				close2;
+				set wop_team,0;
+				warp "poring_w02",153,82;
+				end;
+			}
+		}
+	}else{
+		if((getpartyleader(getcharid(1),2) == getcharid(0))) {
+			if($@wop_team_d == 0) {
+				mes "[M. Doppel]";
+				mes "Donc, vous êtes le chef de l'équipe Déviling... Êtes-vous certain"+ ( sex ? "" : "e" ) +" que tous les autres membres font partie de votre équipe? Nous allons d'abord enregistrer le nom de l'équipe, et nous vérifierons ensuite que tout le monde est là.";
+				next;
+				mes "[M. Doppel]";
+				mes "Voyons... Le nom de l'équipe est...";
+				mes " ";
+				mes "^4d4dff " + .@pname$ + " ^000000";
+				mes " ";
+				mes "C'est cela? C'est bien le nom que vous désirez porter?";
+				next;
+				switch(select("Non, ce n'est pas ça.:Oui, je veux enregistrer ce nom.:Annuler.")) {
+				case 1:
+					mes "[M. Doppel]";
+					mes "Hé, je n'ai pas toute la journée! Décidez-vous vite et revenez vous enregistrer. N'oubliez pas d'inviter tous vos coéquipiers dans l'équipe. Seuls les membres d'une équipe enregistrée peuvent participer à la bataille.";
+					close;
+				case 2:
+					mes "[M. Doppel]";
+					mes "Donc je vais enregistrer votre équipe sous le nom de - " +.@pname$ + " -.";
+					mes "Dites maintenant ^4d4dffaux autres membres de venir confirmer leur inscription^000000. Je les enverrai sur le champ de bataille dès que ce sera fait.";
+					set $@wop_team_d,getcharid(1);
+					mapannounce "poring_w02","L'inscription pour l'équipe Déviling vient d'être confirmée. Les autres membres de l'équipe doivent venir s'inscrire auprès de M. Doppel.",0,0x33FF66;
+					close;
+				case 3:
+					mes "[M. Doppel]";
+					mes "L'horloge tourne. Décidez-vous et enregistrez-vous aussi rapidement que possible.";
+					close;
+				}
+			}
+			else {
+				mes "[M. Doppel]";
+				mes "Donc, vous êtes le chef d'équipe... Vous n'avez pas encore terminé l'inscription? Vous devrez rester dans l'équipe qui se sera inscrite.";
+				next;
+				mes "[M. Doppel]";
+				mes "Le nom de l'équipe est... " + .@d_tname$ + ". C'est bien cela?";
+				close;
+			}
+		}
+		else {
+			mes "[M. Doppel]";
+			mes "Vous ne pourrez pas rejoindre le combat si vous ne faites pas partie d'une équipe.";
+			next;
+			mes "[M. Doppel]";
+			mes "Revenez me voir quand ce sera fait. Je vous enverrai sur le champ de bataille après que l'équipe ait été enregistrée.";
+			mes "Nous devons rester ensemble en tant qu'équipe, ou nous n'avons aucune chance.";
+			close;
+		}
+	}
+
+OnInit:
+	disablenpc "Mr. Doppel#wop_team_d";
+	end;
+
+OnEnable:
+	enablenpc "Mr. Doppel#wop_team_d";
+	end;
+
+OnDisable:
+	disablenpc "Mr. Doppel#wop_team_d";
+	end;
+}
+
+poring_w02,1,1,0	script	#wop_master	-1,{
+	end;
+
+OnReset:
+	removemapflag "poring_w02",mf_partylock;
+	removemapflag "poring_w02",mf_pvp;
+	removemapflag "poring_w02",mf_pvp_noguild;
+	removemapflag "poring_w02",mf_pvp_nocalcrank;
+	mapwarp "poring_w02","poring_w01",112,138;
+	donpcevent "#wop_angellium1::OnReset";
+	donpcevent "#wop_angellium2::OnReset";
+	donpcevent "#wop_devillium1::OnReset";
+	donpcevent "#wop_devillium2::OnReset";
+	set $@wop_team_a,0;
+	set $@wop_team_d,0;
+	set $@wop_deadcount_a,0;
+	set $@wop_deadcount_d,0;
+	set $@wop_teamcount,0;
+	set $@wop_doorcount_a,0;
+	set $@wop_doorcount_d,0;
+	donpcevent "#wop_warp_a::OnDisable";
+	donpcevent "#wop_warp_d::OnDisable";
+	donpcevent "#wop_warp_rtry::OnDisable";
+	donpcevent "Poring#wop_door_a::OnEnable";
+	donpcevent "Poring#wop_door_d::OnEnable";
+	donpcevent "Poring#wop_door_all::OnEnable";
+	stopnpctimer;
+	end;
+
+Onstart:
+	initnpctimer;
+	end;
+
+OnAngelingWarn:
+	mapannounce "poring_w02","Le recrutement pour l'équipe Déviling est terminé. Le combat sera automatiquement annulé si le recrutement de l'équipe Angéling n'est pas achevé dans 1 minute.",0,0xf08080;
+	end;
+
+OnDevilingWarn:
+	mapannounce "poring_w02","Le recrutement pour l'équipe Angéling est terminé. Le combat sera automatiquement annulé si le recrutement de l'équipe Déviling n'est pas achevé dans 1 minute.",0,0xf08080;
+	end;
+
+OnDevilingEnd:
+	mapannounce "poring_w02","L'équipe Déviling n'a pas réussi à recruter assez de combattants à temps. Le combat va être annulé.",0,0xf08080;
+	end;
+
+OnAngelingEnd:
+	mapannounce "poring_w02","L'équipe Angéling n'a pas réussi à recruter assez de combattants à temps. Le combat va être annulé.",0,0xf08080;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnAngelingWin:
+	removemapflag "poring_w02",mf_partylock;
+	removemapflag "poring_w02",mf_pvp;
+	removemapflag "poring_w02",mf_pvp_noguild;
+	removemapflag "poring_w02",mf_pvp_nocalcrank;
+	mapannounce "poring_w02","M. Doppel: L'équipe " + getpartyname($@wop_team_a) + " a remporté la bataille au nom d'Angéling!",0,0xf08080;
+	donpcevent "Deviruchi#wop_endmaster::OnEnable";
+	stopnpctimer;
+	end;
+
+OnDevilingWin:
+	removemapflag "poring_w02",mf_partylock;
+	removemapflag "poring_w02",mf_pvp;
+	removemapflag "poring_w02",mf_pvp_noguild;
+	removemapflag "poring_w02",mf_pvp_nocalcrank;
+	mapannounce "poring_w02","M. Doppel: L'équipe " + getpartyname($@wop_team_d) + " a remporté la bataille au nom de Déviling!",0,0xf08080;
+	donpcevent "Deviruchi#wop_endmaster::OnEnable";
+	stopnpctimer;
+	end;
+
+OnTimer5000:
+	mapannounce "poring_w02","M. Doppel: Bienvenue à tous les combattants qui nous ont rejoint pour cette bataille.",0,0xf08080;
+	donpcevent "Mr. Doppel#wop_team_a::OnEnable";
+	donpcevent "Mr. Doppel#wop_team_d::OnEnable";
+	end;
+
+OnTimer8000:
+	mapannounce "poring_w02","M. Doppel: Chaque membre de l'équipe doit rejoindre un groupe, et le chef d'équipe doit enregistrer son nom.",0,0xf08080;
+	end;
+
+OnTimer12000:
+	mapannounce "poring_w02","M. Doppel: Il vous reste 50 secondes. Rejoignez un groupe, enregistrez son nom, et rendez-vous sur le champ de bataille.",0,0xf08080;
+	end;
+
+OnTimer32000:
+	mapannounce "poring_w02","M. Doppel: Il ne vous reste plus que 30 secondes. Rejoignez un groupe, enregistrez son nom, et rendez-vous sur le champ de bataille.",0,0xf08080;
+	end;
+
+OnTimer62000:
+	mapannounce "poring_w02","M. Doppel: Le temps est écoulé. Nous vous expliquerons rapidement les règles avant le combat.",0,0xf08080;
+	end;
+
+OnTimer70000:
+	mapannounce "poring_w02","M. Doppel: Êtes-vous tous prêts? Laissez-moi vous expliquer les règles du combat.",0,0xf08080;
+	end;
+
+OnTimer75000:
+	mapannounce "poring_w02","M. Doppel: L'équipe Angéling doit protéger 2 Angélings dans leur base, et dans le même temps éliminer les Dévilings dans la base adverse, et vice-versa.",0,0xf08080;
+	end;
+
+OnTimer80000:
+	mapannounce "poring_w02","M. Doppel: Votre équipe gagne si vous éliminez les deux monstres de la base adverse. C'est aussi simple que cela.",0,0xf08080;
+	end;
+
+OnTimer85000:
+	mapannounce "poring_w02","M. Doppel: Cependant, les Angélings et les Dévilings reviennent à la vie après un certain temps, alors il est important d'éliminer l'autre Poring aussi rapidement que possible après avoir exterminé le premier.",0,0xf08080;
+	end;
+
+OnTimer90000:
+	mapannounce "poring_w02","M. Doppel: Sachez aussi que ces Porings sont enragés, et qu'ils attaqueront quiconque, peu importe son camp.",0,0xf08080;
+	end;
+
+OnTimer95000:
+	mapannounce "poring_w02","M. Doppel: Pour dire vite, les Porings sont les ennemis naturels des humains, alors ils ne pourront pas s'empêcher d'attaquer, même si vous êtes dans la même équipe.",0,0xf08080;
+	end;
+
+OnTimer100000:
+	mapannounce "poring_w02","M. Doppel: Dans certaines zones, vous aurez besoin de Médailles d'Héroïsme, que vous obtiendrez en éliminant les membres de l'équipe adverse. Bien. Commençons!",0,0xf08080;
+	setmapflag "poring_w02",mf_partylock;
+	setmapflag "poring_w02",mf_pvp;
+	setmapflag "poring_w02",mf_pvp_noguild;
+	setmapflag "poring_w02",mf_pvp_nocalcrank;
+	donpcevent "#wop_warp_a::OnEnable";
+	donpcevent "#wop_warp_d::OnEnable";
+	donpcevent "#wop_angellium1::OnAngelingSpawn";
+	donpcevent "#wop_angellium2::OnAngelingSpawn";
+	donpcevent "#wop_devillium1::OnDevilingSpawn";
+	donpcevent "#wop_devillium2::OnDevilingSpawn";
+	end;
+
+OnTimer700000:
+	mapannounce "poring_w02","M. Doppel: Le temps est écoulé. Vous allez être téléporté vers la zone finale.",0,0xf08080;
+	removemapflag "poring_w02",mf_partylock;
+	removemapflag "poring_w02",mf_pvp;
+	removemapflag "poring_w02",mf_pvp_noguild;
+	removemapflag "poring_w02",mf_pvp_nocalcrank;
+	donpcevent "#wop_angellium1::OnReset";
+	donpcevent "#wop_angellium2::OnReset";
+	donpcevent "#wop_devillium1::OnReset";
+	donpcevent "#wop_devillium2::OnReset";
+	end;
+
+OnTimer703000:
+	donpcevent "Deviruchi#wop_endmaster::OnEnable";
+	stopnpctimer;
+	end;
+}
+
+poring_w02,51,82,0	script	#wop_warp_a	139,1,1,{
+	end;
+
+OnInit:
+	disablenpc "#wop_warp_a";
+	end;
+
+OnEnable:
+	enablenpc "#wop_warp_a";
+	specialeffect EF_MAPPILLAR2,AREA,"#wop_warp_a";
+	end;
+
+OnDisable:
+	disablenpc "#wop_warp_a";
+	end;
+
+OnTouch:
+	set wop_team,1;
+	warp "poring_w02",57,82;
+	end;
+}
+
+poring_w02,146,82,0	script	#wop_warp_d	139,1,1,{
+	end;
+
+OnInit:
+	disablenpc "#wop_warp_d";
+	end;
+
+OnEnable:
+	enablenpc "#wop_warp_d";
+	specialeffect EF_MAPPILLAR2,AREA,"#wop_warp_d";
+	end;
+
+OnDisable:
+	disablenpc "#wop_warp_d";
+	end;
+
+OnTouch:
+	set wop_team,2;
+	warp "poring_w02",140,82;
+	end;
+}
+
+// Poring Spawn
+//============================================================
+poring_w02,80,82,0	script	#wop_angellium1	-1,{
+	end;
+
+OnReset:
+	killmonster "poring_w02","#wop_angellium1::OnMyMobDead";
+	stopnpctimer;
+	end;
+
+OnAngelingSpawn:
+	monster "poring_w02",80,82,"Angéling",1766,1,"#wop_angellium1::OnMyMobDead";
+	end;
+
+OnMyMobDead:
+	set $@wop_deadcount_a,$@wop_deadcount_a + 1;
+	if($@wop_deadcount_a == 1) {
+		mapannounce "poring_w02","M. Doppel: L'Angéling de la première base vient d'être tué! 1 point de perdu!",0,0x00ff00;
+		initnpctimer;
+	}
+	else {
+		donpcevent "#wop_angellium1::OnReset";
+		donpcevent "#wop_angellium2::OnReset";
+		donpcevent "#wop_devillium1::OnReset";
+		donpcevent "#wop_devillium2::OnReset";
+		donpcevent "#wop_master::OnDevilingWin";
+	}
+	end;
+
+OnTimer120000:
+	set $@wop_deadcount_a,$@wop_deadcount_a - 1;
+	donpcevent "#wop_angellium1::OnAngelingSpawn";
+	mapannounce "poring_w02","M. Doppel: L'Angéling de la première base vient de réapparaître! 1 point de gagné!",0,0x00ff00;
+	stopnpctimer;
+}
+
+poring_w02,98,41,0	script	#wop_angellium2	-1,{
+	end;
+
+OnReset:
+	killmonster "poring_w02","#wop_angellium2::OnMyMobDead";
+	stopnpctimer;
+	end;
+
+OnAngelingSpawn:
+	monster "poring_w02",98,41,"Angéling",1766,1,"#wop_angellium2::OnMyMobDead";
+	end;
+
+OnMyMobDead:
+	set $@wop_deadcount_a,$@wop_deadcount_a + 1;
+	if($@wop_deadcount_a == 1) {
+		mapannounce "poring_w02","M. Doppel: L'Angéling de la seconde base vient d'être tué! 1 point de perdu!",0,0x00ff00;
+		initnpctimer;
+	}
+	else {
+		donpcevent "#wop_angellium1::OnReset";
+		donpcevent "#wop_angellium2::OnReset";
+		donpcevent "#wop_devillium1::OnReset";
+		donpcevent "#wop_devillium2::OnReset";
+		donpcevent "#wop_master::OnDevilingWin";
+	}
+	end;
+
+OnTimer120000:
+	set $@wop_deadcount_a,$@wop_deadcount_a - 1;
+	donpcevent "#wop_angellium2::OnAngelingSpawn";
+	mapannounce "poring_w02","M. Doppel: L'Angéling de la seconde base vient de réapparaître! 1 point de gagné!",0,0x00ff00;
+	stopnpctimer;
+	end;
+}
+
+poring_w02,116,82,0	script	#wop_devillium1	-1,{
+	end;
+
+OnReset:
+	killmonster "poring_w02","#wop_devillium1::OnMyMobDead";
+	stopnpctimer;
+	end;
+
+OnDevilingSpawn:
+	monster "poring_w02",116,82,"Déviling",1767,1,"#wop_devillium1::OnMyMobDead";
+	end;
+
+OnMyMobDead:
+	set $@wop_deadcount_d,$@wop_deadcount_d + 1;
+	if($@wop_deadcount_d == 1) {
+		mapannounce "poring_w02","M. Doppel: Le Déviling de la première base vient d'être tué! 1 point de perdu!",0,0x00ff00;
+		initnpctimer;
+	}
+	else {
+		donpcevent "#wop_devillium1::OnReset";
+		donpcevent "#wop_devillium2::OnReset";
+		donpcevent "#wop_devillium1::OnReset";
+		donpcevent "#wop_devillium2::OnReset";
+		donpcevent "#wop_master::OnAngelingWin";
+	}
+	end;
+
+OnTimer120000:
+	set $@wop_deadcount_d,$@wop_deadcount_d - 1;
+	donpcevent "#wop_devillium1::OndevilingSpawn";
+	mapannounce "poring_w02","M. Doppel: Le Déviling de la première base vient de réapparaître! 1 point de gagné!",0,0x00ff00;
+	stopnpctimer;
+	end;
+}
+
+poring_w02,98,124,0	script	#wop_devillium2	-1,{
+	end;
+
+OnReset:
+	killmonster "poring_w02","#wop_devillium2::OnMyMobDead";
+	stopnpctimer;
+	end;
+
+OndevilingSpawn:
+	monster "poring_w02",98,124,"Déviling",1767,1,"#wop_devillium2::OnMyMobDead";
+	end;
+
+OnMyMobDead:
+	set $@wop_deadcount_d,$@wop_deadcount_d + 1;
+	if($@wop_deadcount_d == 1) {
+		mapannounce "poring_w02","M. Doppel: Le Déviling de la seconde base vient d'être tué! 1 point de perdu!",0,0x00ff00;
+		initnpctimer;
+	}
+	else {
+		donpcevent "#wop_devillium1::OnReset";
+		donpcevent "#wop_devillium2::OnReset";
+		donpcevent "#wop_devillium1::OnReset";
+		donpcevent "#wop_devillium2::OnReset";
+		donpcevent "#wop_master::OnAngelingWin";
+	}
+	end;
+
+OnTimer120000:
+	set $@wop_deadcount_d,$@wop_deadcount_d - 1;
+	donpcevent "#wop_devillium2::OndevilingSpawn";
+	mapannounce "poring_w02","M. Doppel: Le Déviling de la seconde base vient de réapparaître! 1 point de gagné!",0,0x00ff00;
+	stopnpctimer;
+}
+
+// Deviruchi
+//============================================================
+poring_w02,99,201,3	script	Deviruchi#wop_endmaster	738,{
+	if (MaxWeight-Weight < 2000 || checkweight(1201,1) == 0) {
+		mes "- Une petite minute! Vous portez trop d'objets sur vous! Revenez après vous être allégé"+ ( sex ? "" : "e" ) +" un peu. -";
+		close;
+	}
+	set .@a_point,$@wop_deadcount_a;
+	set .@d_point,$@wop_deadcount_d;
+	if(getcharid(1) == $@wop_team_a) {
+		if(.@a_point < .@d_point) {
+			mes "[Devi]";
+			mes "Beau travail! Grâce à vous, nos chances de victoire ont encore augmenté. Acceptez ces quelques Pièces de Poring en témoignage de notre gratitude.";
+			next;
+			if(wop_team == 1) {
+				mes "[Devi]";
+				mes "Au revoir, mon "+ ( sex ? "ami humain" : "amie humaine" ) +".";
+				close2;
+				getitem 7539,3; // Poring_Coin
+				warp "prt_fild08",150,370;
+				end;
+			}
+			else {
+				mes "[Devi]";
+				mes "Une petite minute, votre tête ne me revient pas! Ah, je comprends: vous êtes du côté des Dévilings! Je ne vous pardonnerai jamais!";
+				close2;
+				percentheal 99,0;
+				warp "prt_fild08",150,370;
+				end;
+			}
+		}
+		else if(.@a_point == .@d_point) {
+			mes "[Devi]";
+			mes "Vous avez fait de votre mieux. Quel dommage que ce soit terminé par un match nul... Mais merci de vous être battu"+ ( sex ? "" : "e" ) +" pour nous. S'il vous plaît, acceptez cette Pièce de Poring.";
+			next;
+			if(wop_team == 1) {
+				mes "[Devi]";
+				mes "Au revoir, mon "+ ( sex ? "ami humain" : "amie humaine" ) +".";
+				close2;
+				getitem 7539,1; // Poring_Coin
+				warp "prt_fild08",150,370;
+				end;
+			}
+			else {
+				mes "[Devi]";
+				mes "Une petite minute, votre tête ne me revient pas! Ah, je comprends: vous êtes du côté des Dévilings! Ce doit être à cause de vous que nous avons fait match nul! Je ne vous pardonnerai jamais!";
+				close2;
+				percentheal 99,0;
+				warp "prt_fild08",150,370;
+				end;
+			}
+		}
+		else {
+			if(wop_team == 1) {
+				mes "[Devi]";
+				mes "Eh bien, j'imagine que nous n'avons pas eu de chance... Je ne peux rien vous donner puisque nous avons perdu...";
+				next;
+				mes "[Devi]";
+				mes "Au revoir, mon "+ ( sex ? "ami humain" : "amie humaine" ) +".";
+				close2;
+				warp "prt_fild08",150,370;
+				end;
+			}
+			else {
+				mes "[Devi]";
+				mes "Attendez une minute... Il y a un traitre parmi nous! Ah, je comprends, vous êtes du côté des Dévilings! Vous espionnez les Angélings!";
+				next;
+				mes "[Devi]";
+				mes "Vous devriez avoir honte!";
+				close2;
+				percentheal 99,0;
+				warp "prt_fild08",150,370;
+				end;
+			}
+		}
+	}
+	else if(getcharid(1) == $@wop_team_d) {
+		if (.@a_point > .@d_point) {
+			mes "[Devi]";
+			mes "Beau travail! Grâce à vous, nos chances de victoire ont encore augmenté. Acceptez ces quelques Pièces de Poring en témoignage de notre gratitude.";
+			next;
+			if (wop_team == 2) {
+				mes "[Devi]";
+				mes "Au revoir, mon "+ ( sex ? "ami humain" : "amie humaine" ) +".";
+				close2;
+				getitem 7539,3; // Poring_Coin
+				warp "prt_fild08",150,370;
+				end;
+			}
+			else {
+				mes "[Devi]";
+				mes "Une petite minute, votre tête ne me revient pas! Ah, je comprends: vous êtes du côté des Angélings! Vous nous espionnez! Je ne vous pardonnerai jamais!";
+				close2;
+				percentheal 99,0;
+				warp "prt_fild08",150,370;
+				end;
+			}
+		}
+		else if(.@a_point == .@d_point) {
+			mes "[Devi]";
+			mes "Vous avez fait de votre mieux. Quel dommage que ce soit terminé par un match nul... Mais merci de vous être battu"+ ( sex ? "" : "e" ) +" pour nous. S'il vous plaît, acceptez cette Pièce de Poring.";
+			next;
+			if(wop_team == 2) {
+				mes "[Devi]";
+				mes "Au revoir, mon "+ ( sex ? "ami humain" : "amie humaine" ) +".";
+				close2;
+				getitem 7539,1; // Poring_Coin
+				warp "prt_fild08",150,370;
+				end;
+			}
+			else {
+				mes "[Devi]";
+				mes "Une petite minute, votre tête ne me revient pas! Ah, je comprends: vous êtes du côté des Angélings! Ce doit être à cause de vous que nous avons fait match nul! Je ne vous pardonnerai jamais!";
+				close2;
+				percentheal 99,0;
+				warp "prt_fild08",150,370;
+				end;
+			}
+		}
+		else {
+			if(wop_team == 2) {
+				mes "[Devi]";
+				mes "Eh bien, j'imagine que nous n'avons pas eu de chance... Je ne peux rien vous donner puisque nous avons perdu...";
+				next;
+				mes "[Devi]";
+				mes "Je vais vous reconduire dans le monde des humains.";
+				close2;
+				warp "prt_fild08",150,370;
+				end;
+			}
+			else {
+				mes "[Devi]";
+				mes "Attendez une minute... Il y a un traitre parmi nous! Ah, je comprends, vous êtes du côté des Angélings! Vous espionnez les Dévilings!";
+				next;
+				mes "[Devi]";
+				mes "Vous devriez avoir honte!";
+				close2;
+				percentheal 99,0;
+				warp "prt_fild08",150,370;
+				end;
+			}
+		}
+	}
+	else {
+		mes "[Devi]";
+		mes "C'est bizarre... Le nom de votre équipe n'a pas été enregistré. Je suis désolé, mais les règles sont les règles. Je ne peux rien faire pour vous si tout n'est pas en règle.";
+		close;
+	}
+OnInit:
+	disablenpc "Deviruchi#wop_endmaster";
+	end;
+
+OnEnable:
+	enablenpc "Deviruchi#wop_endmaster";
+	initnpctimer;
+	end;
+
+OnDisable:
+	disablenpc "Deviruchi#wop_endmaster";
+	end;
+
+OnTimer3000:
+	mapwarp "poring_w02","poring_w02",99,196;
+	end;
+
+OnTimer5000:
+	mapannounce "poring_w02","M. Doppel: Laissez-moi offrir quelque chose à tous les humains qui se sont vaillamment battus pour les Porings! S'il vous plaît, allez trouver Devi.",0,0x00ff00;
+	end;
+
+OnTimer65000:
+	mapannounce "poring_w02","M. Doppel: C'est terminé! Je vais vous téléporter.",0,0x00ff00;
+	end;
+
+OnTimer68000:
+	mapwarp "poring_w02","poring_w01",112,138;
+	end;
+
+OnTimer68100:
+	donpcevent "#wop_master::OnStop";
+	donpcevent "#wop_devillium1::OnReset";
+	donpcevent "#wop_devillium2::OnReset";
+	donpcevent "#wop_angellium1::OnReset";
+	donpcevent "#wop_angellium2::OnReset";
+	set $@wop_team_a,0;
+	set $@wop_team_d,0;
+	set $@wop_deadcount_a,0;
+	set $@wop_deadcount_d,0;
+	set $@wop_teamcount,0;
+	set $@wop_doorcount_a,0;
+	set $@wop_doorcount_d,0;
+	donpcevent "#wop_warp_a::OnDisable";
+	donpcevent "#wop_warp_d::OnDisable";
+	donpcevent "Mr. Doppel#wop_team_a::OnDisable";
+	donpcevent "Mr. Doppel#wop_team_d::OnDisable";
+	donpcevent "#wop_warp_rtry::OnDisable";
+	donpcevent "Poring#wop_door_a::OnReset";
+	donpcevent "Poring#wop_door_d::OnReset";
+	donpcevent "Poring#wop_door_all::OnReset";
+	stopnpctimer;
+	end;
+}
+
+// Gate Guardian
+//============================================================
+poring_w02,99,52,0	script	Gardien Angéling::Angeling Guardian#wop_da	111,{
+	cutin "wop_emb0" + $@wop_doorcount_a,1;
+	if($@wop_doorcount_a < 3) {
+		if (wop_team == 2) {
+			mes "Vous voyez un mécanisme dans lequel vous pouvez insérer des Médailles d'Héroïsme.";
+			next;
+			switch(select("Insérer une Médaille d'Héroïsme.:Annuler.")) {
+			case 1:
+				if(countitem(7773)) {
+					if($@wop_doorcount_a < 3) {
+						mes "Médaille d'Héroïsme insérée.";
+						delitem 7773,1; // War_Badge
+						set $@wop_doorcount_a,$@wop_doorcount_a + 1;
+						cutin "wop_emb0" + $@wop_doorcount_a,1;
+						if($@wop_doorcount_a == 4) {
+							next;
+							mes "Portail activé.";
+							donpcevent "#aroom_ingate_wop::OnEnable";
+							donpcevent "#aroom_outgate_wop::OnEnable";
+						}
+						close2;
+					}
+					else {
+						mes "Il y a une Médaille d'Héroïsme dans chacun des emplacements. Vous n'avez plus besoin d'en insérer d'autres.";
+						close2;
+					}
+				}
+				else {
+					mes "^4d4dff - Vous n'avez aucune Médaille d'Héroïsme. Vous pourrez en obtenir en tuant des membres de l'équipe adverse. - ^000000";
+					close2;
+				}
+				break;
+			case 2:
+				mes "Cancel.";
+				close2;
+			}
+		}
+		else {
+			mes "Il s'agit d'un mécanisme où vous pouvez insérer des Médailles d'Héroïsme. Faites bien attention à ce qu'aucun ennemi ne vienne ici prendre vos médailles.";
+			close2;
+		}
+	}
+	else {
+		mes "Toutes les Médailles d'Héroïsme ont été insérées.";
+		close2;
+	}
+	cutin "",255;
+	end;
+
+OnInit:
+	set $@wop_doorcount_a,0;
+	end;
+}
+
+poring_w02,103,52,0	script	#aroom_ingate_wop	139,1,1,{
+	end;
+
+OnInit:
+	disablenpc "#aroom_ingate_wop";
+	end;
+
+OnEnable:
+	enablenpc "#aroom_ingate_wop";
+	end;
+
+OnDisable:
+	disablenpc "#aroom_ingate_wop";
+	end;
+
+OnTouch:
+	warp "poring_w02",99,49;
+	end;
+}
+
+poring_w02,93,51,0	script	#aroom_outgate_wop	139,1,1,{
+	end;
+
+OnInit:
+	disablenpc "#aroom_outgate_wop";
+	end;
+
+OnEnable:
+	enablenpc "#aroom_outgate_wop";
+	end;
+
+OnDisable:
+	disablenpc "#aroom_outgate_wop";
+	end;
+
+OnTouch:
+	warp "poring_w02",99,54;
+	end;
+}
+
+poring_w02,98,113,0	script	Gardien Déviling::Deviling Guardian#wop_dd	111,{
+	cutin "wop_emb0" + $@wop_doorcount_d,1;
+	if($@wop_doorcount_d < 3) {
+		if (wop_team == 1) {
+			mes "Vous voyez un mécanisme dans lequel vous pouvez insérer des Médailles d'Héroïsme.";
+			next;
+			switch(select("Insérer une Médaille d'Héroïsme.:Annuler.")) {
+			case 1:
+				if(countitem(7773)) {
+					if($@wop_doorcount_d < 3) {
+						mes "Médaille d'Héroïsme insérée.";
+						delitem 7773,1; // War_Badge
+						set $@wop_doorcount_d,$@wop_doorcount_d + 1;
+						cutin "wop_emb0" + $@wop_doorcount_d,1;
+						if($@wop_doorcount_d == 4) {
+							next;
+							mes "Portail activé.";
+							donpcevent "#droom_ingate_wop::OnEnable";
+							donpcevent "#droom_outgate_wop::OnEnable";
+						}
+						close2;
+					}
+					else {
+						mes "Il y a une Médaille d'Héroïsme dans chacun des emplacements. Vous n'avez plus besoin d'en insérer d'autres.";
+						close2;
+					}
+				}
+				else {
+					mes "^4d4dff - Vous n'avez aucune Médaille d'Héroïsme. Vous pourrez en obtenir en tuant des membres de l'équipe adverse. - ^000000";
+					close2;
+				}
+				break;
+			case 2:
+				mes "Cancel.";
+				close2;
+			}
+		}
+		else {
+			mes "Il s'agit d'un mécanisme où vous pouvez insérer des Médailles d'Héroïsme. Faites bien attention à ce qu'aucun ennemi ne vienne ici prendre vos médailles.";
+			close2;
+		}
+	}
+	else {
+		mes "Toutes les Médailles d'Héroïsme ont été insérées.";
+		close2;
+	}
+	cutin "",255;
+	end;
+
+OnInit:
+	set $@wop_doorcount_d,0;
+	end;
+}
+
+poring_w02,93,113,0	script	#droom_ingate_wop	139,1,1,{
+	end;
+
+OnInit:
+	disablenpc "#droom_ingate_wop";
+	end;
+
+OnEnable:
+	enablenpc "#droom_ingate_wop";
+	end;
+
+OnDisable:
+	disablenpc "#droom_ingate_wop";
+	end;
+
+OnTouch:
+	warp "poring_w02",98,116;
+	end;
+}
+
+poring_w02,103,114,0	script	#droom_outgate_wop	139,1,1,{
+	end;
+
+OnInit:
+	disablenpc "#droom_outgate_wop";
+	end;
+
+OnEnable:
+	enablenpc "#droom_outgate_wop";
+	end;
+
+OnDisable:
+	disablenpc "#droom_outgate_wop";
+	end;
+
+OnTouch:
+	warp "poring_w02",98,111;
+	end;
+}
+
+// Other NPCs
+//============================================================
+-	script	Angeling Side Poring#wpa	-1,{
+	end;
+}
+
+-	script	Deviling Side Marin#wpd	-1,{
+	end;
+}
+
+poring_w01,79,102,5	duplicate(Angeling Side Poring#wpa)	Poring d'Angéling::Angeling Side Poring#wa1	1002
+poring_w01,80,107,5	duplicate(Angeling Side Poring#wpa)	Poring d'Angéling::Angeling Side Poring#wa2	1002
+poring_w01,84,108,5	duplicate(Angeling Side Poring#wpa)	Poring d'Angéling::Angeling Side Poring#wa3	1002
+poring_w01,84,112,5	duplicate(Angeling Side Poring#wpa)	Poring d'Angéling::Angeling Side Poring#wa4	1002
+poring_w01,88,112,5	duplicate(Angeling Side Poring#wpa)	Poring d'Angéling::Angeling Side Poring#wa5	1002
+
+poring_w01,114,112,3	duplicate(Deviling Side Marin#wpd)	Marin de Déviling::Deviling Side Marin#wd1	1242
+poring_w01,117,111,3	duplicate(Deviling Side Marin#wpd)	Marin de Déviling::Deviling Side Marin#wd2	1242
+poring_w01,117,108,3	duplicate(Deviling Side Marin#wpd)	Marin de Déviling::Deviling Side Marin#wd3	1242
+poring_w01,122,108,3	duplicate(Deviling Side Marin#wpd)	Marin de Déviling::Deviling Side Marin#wd4	1242
+poring_w01,121,105,3	duplicate(Deviling Side Marin#wpd)	Marin de Déviling::Deviling Side Marin#wd5	1242
+
+poring_w01,84,108,3	script	#wop_ex_1	139,3,3,{
+	end;
+
+OnTouch:
+	mes "[Porings]";
+	mes "P~ooooooooo -!!!";
+	mes "Donnons-leur une leçon, ring! Ne mettons plus nos vies en danger pour des Jellopys, ring!!!";
+	next;
+	mes "[Porings]";
+	mes "Allez! Au combat! On va gagner, gagner, gagner!!!";
+	emotion e_go,0,"Angeling Side Poring#wa1";
+	emotion e_go,0,"Angeling Side Poring#wa2";
+	emotion e_go,0,"Angeling Side Poring#wa3";
+	emotion e_go,0,"Angeling Side Poring#wa4";
+	emotion e_go,0,"Angeling Side Poring#wa5";
+	next;
+	if(wop_team == 1) {
+		mes "[Porings]";
+		mes "Ohhhhhh, "+ ( sex ? "le voilà! Le guerrier" : "la voilà! La guerrière" ) +" qui a combattu pour nous! Oh mon dieu... Génial, ring!";
+		mes "Poring~ Poring~ Poooooo~";
+		mes "L'équipe Angéling~ Popopo, Poring!";
+	}
+	else if(wop_team == 2) {
+		mes "[Porings]";
+		mes "Attendez, VOUS! Vous n'êtes pas du côté des Dévilings?! Allez-vous en! Maintenant!";
+		mes "Booooo~ Boo~ Boooo~";
+		emotion e_omg,0,"Angeling Side Poring#wa1";
+		emotion e_an,0,"Angeling Side Poring#wa2";
+		emotion e_omg,0,"Angeling Side Poring#wa3";
+		emotion e_an,0,"Angeling Side Poring#wa4";
+		emotion e_gasp,0,"Angeling Side Poring#wa5";
+	}
+	else {
+		mes "[Porings]";
+		mes "Hé, l'humain"+ ( sex ? "" : "e" ) +"! Qu'est-ce que vous diriez de combattre pour nous aux côtés d'Angéling?!";
+		emotion e_hlp,0,"Angeling Side Poring#wa1";
+		emotion e_go,0,"Angeling Side Poring#wa2";
+		emotion e_hlp,0,"Angeling Side Poring#wa3";
+		emotion e_go,0,"Angeling Side Poring#wa4";
+		emotion e_go,0,"Angeling Side Poring#wa5";
+	}
+	next;
+	mes "[Porings]";
+	mes "L'équipe Angéling~ Popopo, Poring!";
+	mes "Victoire~ Victoire~ Pooooooo~";
+	next;
+	mes "- Les Porings chantent avec ardeur leur victoire. -";
+	close;
+}
+
+poring_w01,119,107,3	script	#wop_ex_2	139,3,3,{
+	end;
+
+OnTouch:
+	mes "[Marins]";
+	mes "Woooooaaaaaaaaaaa!";
+	mes "On va enfin pouvoir donner une leçon à ces imbéciles! Les Porings de bas niveau sont tous des idiots!";
+	next;
+	mes "[Marins]";
+	mes "Allez! Battons-nous! Battons-nous pour la victoire!";
+	emotion e_go,0,"Deviling Side Marin#wd1";
+	emotion e_go,0,"Deviling Side Marin#wd2";
+	emotion e_go,0,"Deviling Side Marin#wd3";
+	emotion e_go,0,"Deviling Side Marin#wd4";
+	emotion e_go,0,"Deviling Side Marin#wd5";
+	next;
+	if(wop_team == 1) {
+		mes "[Marins]";
+		mes "Ohhhh... Voilà "+ ( sex ? "le guerrier qui s'est battu" : "la guerrière qui s'est battue" ) +" pour nous!";
+		mes "Fantastique! Ça prouve enfin que les humains nous voient comme de véritables monstres!";
+	}
+	else if(wop_team == 2) {
+		mes "[Marins]";
+		mes "Attendez, VOUS! Vous n'êtes pas du côté des Angélings?! Allez-vous en! Maintenant!";
+		mes "Booooo~ Boo~ Boooo~";
+		emotion e_omg,0,"Deviling Side Marin#wd1";
+		emotion e_an,0,"Deviling Side Marin#wd2";
+		emotion e_omg,0,"Deviling Side Marin#wd3";
+		emotion e_an,0,"Deviling Side Marin#wd4";
+		emotion e_gasp,0,"Deviling Side Marin#wd5";
+	}
+	else {
+		mes "[Marins]";
+		mes "Hé, l'humain"+ ( sex ? "" : "e" ) +"! Vous ne voulez pas vous battre pour Déviling, la noblesse des ténèbres? Qu'en dites-vous?";
+		emotion e_hlp,0,"Deviling Side Marin#wd1";
+		emotion e_go,0,"Deviling Side Marin#wd2";
+		emotion e_hlp,0,"Deviling Side Marin#wd3";
+		emotion e_go,0,"Deviling Side Marin#wd4";
+		emotion e_go,0,"Deviling Side Marin#wd5";
+	}
+	next;
+	mes "[Marins]";
+	mes "Le plus génial des Super-Porings! Déviling a tout pour lui! Allez, Déviling, allez!";
+	next;
+	mes "- Les Marins chantent avec ardeur leur victoire. -";
+	close;
+}

@@ -8,7 +8,7 @@
 //= eAthena 1.0
 //===== Description: ========================================= 
 //= [AEGIS Conversion]
-//= Kreiger Von Midgard Battleground for levels 80 to 99
+//= Kreiger von Midgard Battleground for levels 80 to 99
 //= - Winning Team: 5 points
 //= - Losing Team: 1 point
 //===== Additional Comments: ================================= 
@@ -25,7 +25,7 @@ bat_room,169,226,5	script	KVM Waiting Room#a::KvM01R_Guillaume	418,{
 	end;
 
 OnInit:
-	waitingroom "Battle Station 5 Players",5,"KvM01_BG::OnGuillaumeJoin",1;
+	waitingroom "Combat à 5 Joueurs",5,"KvM01_BG::OnGuillaumeJoin",1;
 	end;
 	
 OnEnterBG:
@@ -39,7 +39,7 @@ bat_room,169,205,3	script	KVM Waiting Room#b::KvM01R_Croix	414,{
 	end;
 
 OnInit:
-	waitingroom "Battle Station 5 Players",5,"KvM01_BG::OnCroixJoin",1;
+	waitingroom "Combat à 5 Joueurs",5,"KvM01_BG::OnCroixJoin",1;
 	end;
 
 OnEnterBG:
@@ -149,8 +149,7 @@ OnGuillaumeDie:
 		bg_updatescore "bat_c01",.Guillaume_Count,.Croix_Count;
 		if( .Guillaume_Count < 1 ) donpcevent "KvM01_BG::OnCroixWin";
 		else {
-			mapannounce "bat_c01", "The number of Guillaumes is "+.Guillaume_Count+".",bc_map,"0x00ff00";
-			mapannounce "bat_c01", "The number of Croixes is "+.Croix_Count+".",bc_map,"0x00ff00";
+			mapannounce "bat_c01", "Score des partisans de Guillaume: "+.Guillaume_Count+". Score des partisans de Croix: "+.Croix_Count+".",bc_map,"0x00ff00";
 		}
 	}
 	end;
@@ -164,8 +163,7 @@ OnCroixDie:
 		bg_updatescore "bat_c01",.Guillaume_Count,.Croix_Count;
 		if( .Croix_Count < 1 ) donpcevent "KvM01_BG::OnGuillaumeWin";
 		else {
-			mapannounce "bat_c01", "The number of Guillaumes is "+.Guillaume_Count+".",bc_map,"0x00ff00";
-			mapannounce "bat_c01", "The number of Croixes is "+.Croix_Count+".",bc_map,"0x00ff00";
+			mapannounce "bat_c01", "Score des partisans de Guillaume: "+.Guillaume_Count+". Score des partisans de Croix: "+.Croix_Count+".",bc_map,"0x00ff00";
 		}
 	}
 	end;
@@ -196,16 +194,15 @@ OnStart:
 	end;
 
 OnTimer1000:
-	mapannounce "bat_c01", "In 1 minute, KVM will start.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Kreiger von Midgard commencera dans 1 minute!",bc_map,"0x00ff00";
 	end;
 
 OnTimer3000:
-	mapannounce "bat_c01", "The maximum time for a KVM battle is 5 minutes.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Les combats de Kreiger von Midgard sont limités à 5 minutes.",bc_map,"0x00ff00";
 	end;
 
 OnTimer6000:
-	mapannounce "bat_c01", "Please prepare for the KVM battle.",bc_map,"0x00ff00";
-	mapannounce "bat_c01", "You can buff your people.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Il est temps de vous préparer pour la bataille! Priez pour la victoire!",bc_map,"0x00ff00";
 	donpcevent "#A_camp_start01::OnEnable";
 	donpcevent "#B_camp_start01::OnEnable";
 	end;
@@ -216,26 +213,26 @@ OnTimer13000:
 	end;
 
 OnTimer30000:
-	mapannounce "bat_c01", "30 seconds remaining to start KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "30 secondes restantes avant le début de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	end;
 
 OnTimer45000:
-	mapannounce "bat_c01", "15 seconds remaining to start KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "15 secondes restantes avant le début de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	donpcevent "::OnKvM01One";
 	end;
 
 OnTimer50000:
-	mapannounce "bat_c01", "10 seconds remaining to start KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "10 secondes restantes avant le début de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	donpcevent "::OnKvM01Two";
 	end;
 
 OnTimer55000:
-	mapannounce "bat_c01", "5 seconds remaining to start KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "5 secondes restantes avant le début de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	donpcevent "::OnKvM01One";
 	end;
 
 OnTimer59000:
-	mapannounce "bat_c01", "KVM is now commencing.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Le début de la bataille de Kreiger von Midgard vient de commencer!",bc_map,"0x00ff00";
 	donpcevent "::OnKvM01Two";
 	end;
 
@@ -247,7 +244,7 @@ OnTimer61000:
 	{
 		set $@KvM01BG_Victory, 3;
 		set $@KvM01BG, 3;
-		mapannounce "bat_c01","There are not enough players to start the battle",1,0x696969;
+		mapannounce "bat_c01","Il n'y a pas assez de participants pour commencer la bataille!",1,0x696969;
 		stopnpctimer;
 		donpcevent "KvM01_BG::OnStop";
 		end;
@@ -258,23 +255,23 @@ OnTimer61000:
 	end;
 
 OnTimer300000:
-	mapannounce "bat_c01", "1 minute remaining to finish the KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "1 minute restante avant la fin de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	end;
 
 OnTimer330000:
-	mapannounce "bat_c01", "30 seconds remaining to finish the KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "30 secondes restantes avant la fin de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	end;
 
 OnTimer345000:
-	mapannounce "bat_c01", "15 seconds remaining to finish the KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "15 secondes restantes avant la fin de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	end;
 
 OnTimer350000:
-	mapannounce "bat_c01", "10 seconds remaining to finish the KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "10 secondes restantes avant la fin de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	end;
 
 OnTimer355000:
-	mapannounce "bat_c01", "5 seconds remaining to finish the KVM battle.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "5 secondes restantes avant la fin de la bataille de Kreiger von Midgard!",bc_map,"0x00ff00";
 	end;
 
 OnTimer360000:
@@ -287,9 +284,7 @@ OnTimer360000:
 	{ // Draw Game
 		set $@KvM01BG, 3;
 		set $@KvM01BG_Victory, 3;
-		mapannounce "bat_c01", "The number of Guillaumes is "+.Guillaume_Count+".",bc_map,"0x00ff00";
-		mapannounce "bat_c01", "The number of Croixes is "+.Croix_Count+".",bc_map,"0x00ff00";
-		mapannounce "bat_c01", "This battle has ended in a draw.",bc_map,"0x00ff00";
+		mapannounce "bat_c01", "Score des partisans de Guillaume: "+.Guillaume_Count+". Score des partisans de Croix: "+.Croix_Count+". C'est un match nul!",bc_map,"0x00ff00";
 		donpcevent "KvM01_BG::OnStop";
 	}
 	end;
@@ -297,18 +292,14 @@ OnTimer360000:
 OnGuillaumeWin:
 	set $@KvM01BG, 3;
 	set $@KvM01BG_Victory, 1;
-	mapannounce "bat_c01", "Guillaume wins!",bc_map,"0x00ff00";
-	mapannounce "bat_c01", "Congratulations to Guillaume members.",bc_map,"0x00ff00";
-	mapannounce "bat_c01", "Everyone will be moved to the start point.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Guillaume remporte la victoire! Félicitation à ses partisans! Tout le monde va être reconduit vers le point de départ.",bc_map,"0x00ff00";
 	donpcevent "KvM01_BG::OnStop";
 	end;
 
 OnCroixWin:
 	set $@KvM01BG, 3;
 	set $@KvM01BG_Victory, 2;
-	mapannounce "bat_c01", "Croix wins!",bc_map,"0x00ff00";
-	mapannounce "bat_c01", "Congratulations to Croix members.",bc_map,"0x00ff00";
-	mapannounce "bat_c01", "Everyone will be moved to the start point.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Croix remporte la victoire! Félicitation à ses partisans! Tout le monde va être reconduit vers le point de départ.",bc_map,"0x00ff00";
 	donpcevent "KvM01_BG::OnStop";
 	end;
 
@@ -346,21 +337,19 @@ OnBegin:
 	end;
 
 OnTimer1000:
-	mapannounce "bat_c01", "Please apply with the Officer to acquire KVM points.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Veuillez aller trouver l'Officier pour obtenir des Points de Kreiger von Midgard.",bc_map,"0x00ff00";
 	end;
 
 OnTimer3000:
-	mapannounce "bat_c01", "The Officer will grant you the points for 30 seconds.",bc_map,"0x00ff00";
-	mapannounce "bat_c01", "In 30 seconds, the Officer will be sent away.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "L'Officier pourra vous donner vos récompenses pendant 30 secondes. Il disparaîtra ensuite.",bc_map,"0x00ff00";
 	end;
 
 OnTimer5000:
-	mapannounce "bat_c01", "Unless you talk to the Officer, you cannot gain the points.",bc_map,"0x00ff00";
-	mapannounce "bat_c01", "Please be careful.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Faites bien attention, vous ne pourrez pas gagner de points si vous ne lui parlez pas.",bc_map,"0x00ff00";
 	end;
 
 OnTimer:55000:
-	mapannounce "bat_c01", "You will be sent back.",bc_map,"0x00ff00";
+	mapannounce "bat_c01", "Vous allez être reconduits à l'extérieur.",bc_map,"0x00ff00";
 	end;
 
 OnTimer60000:
@@ -371,25 +360,21 @@ OnTimer60000:
 
 // Battleground rewards
 //============================================================
-bat_c01,51,130,5	script	KVM Officer#KVM01A	419,{
+bat_c01,51,130,5	script	Officier::KVM Officer#KVM01A	419,{
 	if( $@KvM01BG_Victory )
 	{
 		if( $@KvM01BG_Victory == Bat_Team )
 		{ // Victory
 			set kvm_point,kvm_point + 5;
-			mes "[KVM Officer]";
-			mes "Good Game.";
-			mes "May the glory of KVM be with you.";
-			mes "You aquire the winning points: 5";
+			mes "[Officier de Kreiger von Midgard]";
+			mes "Beau travail. Que la gloire de Kreiger von Midgard rejaillisse sur vous! Vous gagnez 5 points.";
 			close2;
 		}
 		else
 		{ // 
 			set kvm_point,kvm_point + 1;
-			mes "[KVM Officer]";
-			mes "I am so sorry.";
-			mes "I wish you better luck next time.";
-			mes "You aquire the losing points: 1";
+			mes "[Officier de Kreiger von Midgard]";
+			mes "Je suis désolé. Vous aurez peut-être plus de chance la prochaine fois. Vous gagnez 1 point.";
 			close2;
 		}
 		bg_leave;
@@ -400,25 +385,21 @@ bat_c01,51,130,5	script	KVM Officer#KVM01A	419,{
 	end;
 }
 
-bat_c01,148,53,1	script	KVM Officer#KVM01B	415,{
+bat_c01,148,53,1	script	Officier::KVM Officer#KVM01B	415,{
 	if( $@KvM01BG_Victory )
 	{
 		if( $@KvM01BG_Victory == Bat_Team )
 		{ // Victory
 			set kvm_point,kvm_point + 5;
-			mes "[KVM Officer]";
-			mes "Good Game.";
-			mes "May the glory of KVM be with you.";
-			mes "You aquire the winning points: 5";
+			mes "[Officier de Kreiger von Midgard]";
+			mes "Beau travail. Que la gloire de Kreiger von Midgard rejaillisse sur vous! Vous gagnez 5 points.";
 			close2;
 		}
 		else
 		{ // 
 			set kvm_point,kvm_point + 1;
-			mes "[KVM Officer]";
-			mes "I am so sorry.";
-			mes "I wish you better luck next time.";
-			mes "You aquire the losing points: 1";
+			mes "[Officier de Kreiger von Midgard]";
+			mes "Je suis désolé. Vous aurez peut-être plus de chance la prochaine fois. Vous gagnez 1 point.";
 			close2;
 		}
 		bg_leave;
