@@ -1,12 +1,12 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Atikae, corrigé par Fern, Myllena et Icaros
+//traduit par Atikae et Myllena, corrigé par Fern, Myllena et Icaros
 //merci à Dark Sephiroth
 //===== eAthena Script ======================================= 
 //= Lighthalzen City
 //===== By: ================================================== 
 //=  erKURITA, Au{R}oN (Translated by Alan), $ephiroth
 //===== Current Version: ===================================== 
-//= 2.1
+//= 2.2
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -44,6 +44,7 @@
 //= 1.9 Added Cool Corp. Event Staff, who oringialy resided in the DTS_warper script file. [L0ne_W0lf]
 //= 2.0 Added missing Lab Staff#amano08 NPC. (bugreport:4319) [Gepard]
 //= 2.1 Commented out Duplicate NPCs. (bugreport:4555)
+//= 2.2 Added missing NPC found in AEGIS files. [L0ne_W0lf]
 //=============================================================
 
 lighthalzen,198,285,5	script	Jiwon#zen5	862,{
@@ -2192,6 +2193,43 @@ lhz_in02,19,274,2	script	Employé#lhz	851,{
 	close;
 }
 */
+
+lighthalzen,337,296,3	script	Employé#li_2	868,{
+	if (hg_tre > 54) {
+		mes "[Employé de la Rekenber]";
+		mes "Bien le bonjour!";
+		mes "Dans un souci de rétablir l'équilibre social entre les pauvres et les riches, la Corporation Rekenber s'efforce de proposer des offres d'emploi ciblées aux citoyens qui habitent dans les taudis de Lighthalzen.";
+		next;
+		mes "[Employé de la Rekenber]";
+		mes "Vous pouvez choisir de travailler de chez vous, ou bien de suivre une formation proposée par nos soins pour les emplois nécessitant des qualifications techniques particulières. Ces formations sont une change pour acquérir à la fois qualification et rémunération~";
+		emotion e_no1,"Employé#li";
+		close;
+	}
+}
+
+lhz_in01,221,131,7	script	Scientifique#li_01	865,{
+	if (isequipped(2241) && isequipped(2243)) {
+		if (hg_tre > 54) {
+			mes "[Scientifique]";
+			mes "Que s'est-il passé? Toutes les machines sont hors service, et les rapports ont disparu! Les archives du Laboratoire Regenschirm ont été volées!";
+			close;
+		}
+		else {
+			mes "[Scientifique]";
+			mes "Traiter ces données prend tellement de temps... J'ai hâte de connaitre la réponse à ce problème. Cette attente est stimulante...";
+			close;
+		}
+	}
+	else {
+		mes "[Scientifique]";
+		mes "Quoi?! Gardes!";
+		mes "Dépéchez-vous, il y a un intrus!";
+		emotion e_gasp,"Scientifique#li_01";
+		close2;
+		warp "lhz_in01",33,224;
+		end;
+	}
+}
 
 // Lighthalzen Mushroom.
 // Don't really understand why it's there, but it's funny regardless.
