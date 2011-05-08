@@ -21,6 +21,7 @@
 //= Daily Quests:
 //= - Midgard Ore
 //= - Alfheim Perfume
+//= Secret note of Bazett
 //= Yggdrasil Dungeon Floor 2 puzzle.
 //===== Additional Comments: =================================
 //= 1.0 First version
@@ -45,7 +46,7 @@
 
 // Cat Hand Addition.
 //============================================================ 
-spl_fild02,25,211,4	script	Agent du Chat::Cat Hand Agent#spl	421,{ // Je supprime la partie "hand" – ça fait trop lourd [NoH]
+spl_fild02,25,211,4	script	Agent du Chat::Cat Hand Agent#spl	421,{ // Je supprime la partie "hand" - ça fait trop lourd [NoH]
 	if (ep13_yong1 < 3) {
 		mes "[Agent du Chat]";
 		mes "Bienvenue à la Compagnie du Chat. C'est la première fois que vous traitez avec nous, n'est-ce pas?";
@@ -9961,6 +9962,617 @@ OnTimer60000:
 	enablenpc "Exhausted Soldier#7";
 	stopnpctimer;
 	end;
+}
+
+// Secret note of Bazett
+//============================================================ 
+mid_camp,283,198,5	script	Bazett Noirthé::Bazett Teablack#ep13bs	883,{
+	if (checkweight(1201,1) == 0) {
+		mes " - Une petite minute! Vous transportez trop d'objets. Vous ne pourrez pas recevoir de récompense. Veuillez utiliser les services Kafra avant de revenir. - ";
+		close;
+	}
+	if (ep13_2_rhea < 100) {
+		mes "[Homme Occupé]";
+		mes "Uh~";
+		mes "C'est très intéressant... Je vais le noter dans mes cahiers de recherche.";
+		emotion e_ic,"Bazett Teablack#ep13bs";
+		next;
+		mes "[Homme Occupé]";
+		mes "*Écrit* *Écrit*";
+		mes "*Gratte* *Gratte*";
+		next;
+		mes " - Il ne semble pas voir que vous vous trouvez juste à côté de lui et continue à écrire. -";
+		next;
+		mes "[Homme Occupé]";
+		mes "*Écrit* *Écrit*";
+		mes "*Gratte* *Gratte*";
+		mes "....";
+		close;
+	}
+	if (ep13_2_busut < 1) {
+		if (isequipped(2782) == 1) {
+			mes "[Homme Occupé]";
+			mes "Uh~";
+			mes "C'est très intéressant... Je vais le noter dans mes cahiers de recherche.";
+			emotion e_ic,"Bazett Teablack#ep13bs";
+			next;
+			mes "[Homme Occupé]";
+			mes "*Écrit* *Écrit*";
+			mes "*Gratte* *Gratte*";
+			next;
+			mes " - Il ne semble pas voir que vous vous trouvez juste à côté de lui et continue à écrire. -";
+			next;
+			mes "[Homme Occupé]";
+			mes "*Écrit* *Écrit*";
+			mes "*Gratte* *Gratte*";
+			mes "....";
+			next;
+			mes "[Homme Occupé]";
+			mes "Hé!!!";
+			mes "Qui... Qui êtes-vous?! Depuis combien de temps êtes-vous là?";
+			emotion e_omg,"Bazett Teablack#ep13bs";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Euh, je ne fais que passer. On dirait que vous êtes occupé.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Au revoir~";
+			emotion e_swt2,1;
+			next;
+			mes "[Homme Occupé]";
+			mes "Attendez! Votre doigt... Est-ce que c'est..?!";
+			next;
+			mes " - Il vous attrape la main, l'air surpris. -";
+			next;
+			mes "[Homme Occupé]";
+			mes "Il s'agit d'un ^0000FFAnneau de Sagesse^000000!!!!! Ce doit être une rencontre du destin!";
+			next;
+			mes "[Homme Occupé]";
+			mes "Mes recherches piétinaient. Les dieux doivent vous avoir envoyé"+ ( sex ? "" : "e" ) +" vers moi, j'en suis certain!";
+			emotion e_no1,"Bazett Teablack#ep13bs";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "......";
+			mes "......Quoi?!";
+			emotion e_omg,1;
+			next;
+			mes "[Homme Occupé]";
+			mes "Voudriez-vous m'aider dans mes recherches?";
+			next;
+			switch(select("Quel genre de recherches?:Bien sûr.:Nan, c'est trop ennuyeux.")) {
+			case 1:
+				mes "[Homme Occupé]";
+				mes "Pour dire vite, je cherche simplement des fées et des géants qui vivent ici.";
+				next;
+				mes "[Homme Occupé]";
+				mes "Même si je sais qu'ils vivent tous au même endroit, je suis persuadé qu'ils ont différentes cultures. Mais je dois d'abord et avant tout prouver leur existence.";
+				next;
+				mes "[Homme Occupé]";
+				mes "Qu'en dites-vous? Est-ce que ça vous intéresse?";
+				next;
+				switch(select("Bien sûr.:Pas vraiment.")) {
+				case 1:
+					mes "[Homme Occupé]";
+					mes "Haha... Je sais déjà que j'ai raison!";
+					mes "Hahahaha!!";
+					next;
+					mes "[Homme Occupé]";
+					mes "Travaillons donc ensemble à partir de ce jour. Comme vous pouvez le voir sur mon badge, je m'appelle ^0000FFBazett Noirthé^000000.";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Je m'appelle "+strcharinfo(0)+".";
+					next;
+					select("Bon, qu'est-ce que je peux faire pour vous?");
+					mes "[Bazett]";
+					mes ""+strcharinfo(0)+"... Voyons... Allez voir dans les environs de Manuk et de Splendide s'il y a des signes des fées ou des géants.";
+					next;
+					mes "[Bazett]";
+					mes "Ça n'est pas très difficile. Rapportez-moi tout ce que vous pourrez trouver dans ces zones.";
+					next;
+					mes "[Bazett]";
+					mes "Avec un peu de chance, les informations que vous me fournirez me permettront de trouver ce que je cherche.";
+					set ep13_2_busut,2;
+					setquest 11101;
+					close;
+				case 2:
+					mes "[Homme Occupé]";
+					mes ".............";
+					mes ".............";
+					mes ".............";
+					mes ".............";
+					mes "....Pourquoi?!!";
+					emotion e_sob,"Bazett Teablack#ep13bs";
+					next;
+					mes "[Homme Occupé]";
+					mes "Hé bien, revenez me voir si jamais vous changez d'avis.";
+					set ep13_2_busut,1;
+					close;
+				}
+				break;
+			case 2:
+				mes "[Homme Occupé]";
+				mes "Haha... Je sais déjà que j'ai raison!";
+				mes "Hahahaha!!";
+				next;
+				mes "[Homme Occupé]";
+				mes "Travaillons donc ensemble à partir de ce jour. Comme vous pouvez le voir sur mon badge, je m'appelle ^0000FFBazett Noirthé^000000.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Je m'appelle "+strcharinfo(0)+".";
+				next;
+				select("Bon, qu'est-ce que je peux faire pour vous?");
+				mes "[Bazett]";
+				mes ""+strcharinfo(0)+"... Voyons... Allez voir dans les environs de Manuk et de Splendide s'il y a des signes des fées ou des géants.";
+				next;
+				mes "[Bazett]";
+				mes "Ça n'est pas très difficile. Rapportez-moi tout ce que vous pourrez trouver dans ces zones.";
+				next;
+				mes "[Bazett]";
+				mes "Avec un peu de chance, les informations que vous me fournirez me permettront de trouver ce que je cherche.";
+				set ep13_2_busut,2;
+				setquest 11101;
+				close;
+			case 3:
+				mes "[Homme Occupé]";
+				mes ".............";
+				next;
+				mes "[Homme Occupé]";
+				mes ".............";
+				mes ".............";
+				next;
+				mes "[Homme Occupé]";
+				mes ".............";
+				mes ".............";
+				mes ".............";
+				next;
+				mes "[Homme Occupé]";
+				mes ".............";
+				mes ".............";
+				mes ".............";
+				mes ".............";
+				next;
+				mes "[Homme Occupé]";
+				mes ".............";
+				mes ".............";
+				mes ".............";
+				mes ".............";
+				mes "......Pourquoi?!!";
+				emotion e_sob,"Bazett Teablack#ep13bs";
+				next;
+				mes "[Homme Occupé]";
+				mes "Hé bien, revenez me vois si jamais vous changez d'avis.";
+				set ep13_2_busut,1;
+				close;
+			}
+		}
+		else {
+			if (rand(1,2) == 1) {
+				mes "[Homme Occupé]";
+				mes "Gthgh sdsWryi";
+				mes "Apeu hjsu opuer ";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "?????";
+				mes "Qu'est-ce que vous venez de dire?";
+				next;
+				mes "[Homme Occupé]";
+				mes "Oh! Je suis désolé, j'ai dû prononcer ça de travers... J'ai juste trop pris goût à mes recherches...";
+				next;
+				mes "[Homme Occupé]";
+				mes "Vous devriez trouver un moyen de comprendre ce langage étrange que les créatures de l'Ash Vacuum parlent.";
+				next;
+				mes "[Homme Occupé]";
+				mes "Il serait vraiment difficile de voyager sur ces terre sans la capacité de communiquer, vous ne pensez pas?";
+				close;
+			}
+			else {
+				mes "[Homme Occupé]";
+				mes "TalDathMush Di nahDeh";
+				mes "ReAnduDu So sehr";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "?????";
+				mes "Hein?";
+				next;
+				mes "[Homme Occupé]";
+				mes "Oh! Je dois m'être trompé dans la prononciation. Mes recherches stagnent depuis quelques temps.";
+				next;
+				mes "[Homme Occupé]";
+				mes "On devrait trouver un moyen de comprendre l'étrange langage que les autochtones parlent.";
+				next;
+				mes "[Homme Occupé]";
+				mes "Il serait vraiment difficile de voyager sur ces terre sans la capacité de communiquer, vous ne pensez pas?";
+				close;
+			}
+		}
+	}
+	if (ep13_2_busut == 1) {
+		mes "[Homme Occupé]";
+		mes "Ah! Vous revoilà? Alors, êtes-vous maintenant intéressé"+ ( sex ? "" : "e" ) +" par mes recherches?";
+		next;
+		switch(select("Oui.:Non.")) {
+		case 1:
+			mes "[Homme Occupé]";
+			mes "Haha... Je sais déjà que j'ai raison!";
+			mes "Hahahaha!!";
+			next;
+			mes "[Homme Occupé]";
+			mes "Travaillons donc ensemble à partir de ce jour. Comme vous pouvez le voir sur mon badge, je m'appelle ^0000FFBazett Noirthé^000000.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Je m'appelle "+strcharinfo(0)+".";
+			next;
+			select("Bon, qu'est-ce que je peux faire pour vous?");
+			mes "[Bazett]";
+			mes ""+strcharinfo(0)+"... Voyons... Allez voir dans les environs de Manuk et de Splendide s'il y a des signes des fées ou des géants.";
+			next;
+			mes "[Bazett]";
+			mes "Ça n'est pas très difficile. Rapportez-moi tout ce que vous pourrez trouver dans ces zones.";
+			next;
+			mes "[Bazett]";
+			mes "Avec un peu de chance, les informations que vous me fournirez me permettront de trouver ce que je cherche.";
+			set ep13_2_busut,2;
+			setquest 11101;
+			close;
+		case 2:
+			mes "[Homme Occupé]";
+			mes ".............";
+			mes "Hé bien, revenez me voir si jamais vous changez d'avis.";
+			emotion e_sob,"Bazett Teablack#ep13bs";
+			close;
+		}
+	}
+	if (ep13_2_busut == 2) {
+		mes "[Bazett]";
+		mes "Hum... Pour aujourd'hui, pourriez-vous chercher des géants dans les environs de Manuk? Il y fait assez froid, alors vous feriez mieux de prendre un bon manteau.";
+		next;
+		mes "[Bazett]";
+		mes "J'ai utilisé cette note, alors elle devrait toujours être utile. Prenez-la...";
+		mes "Ah... Et ne vous en faites pour le titre de la note.";
+		next;
+		mes "[Bazett]";
+		mes "Rapportez-moi la note quand vous aurez fini de chercher.";
+		next;
+		mes "[Bazett]";
+		mes "Vous avez compris? Bon, faites bien attention à vous, et à bientôt.";
+		set ep13_2_busut,3;
+		set ep13_2_bs1,1;
+		set ep13_2_bs2,1;
+		set ep13_2_bs3,1;
+		set ep13_2_bs4,1;
+		getitem 6074,1; //Bazett's_Order
+		changequest 11101,11102;
+		close;
+	}
+	if (ep13_2_busut == 3) {
+		mes "[Bazett]";
+		mes "Comment est-ce que ça se passe?";
+		next;
+		if (countitem(6074) < 1) {
+			mes "[Bazett]";
+			mes "!!!!!!!";
+			mes "Vous avez perdu la note?!";
+			mes "*Soupire...*";
+			next;
+			mes "[Bazett]";
+			mes "Bon, ce qui est fait est fait. Je vais vous en donner une nouvelle.";
+			getitem 6074,1; //Bazett's_Order
+			close;
+		}
+		else {
+			mes "[Bazett]";
+			mes "Faites de votre mieux...";
+			close;
+		}
+	}
+	if (ep13_2_busut == 4) {
+		mes "[Bazett]";
+		mes "Oh! En avez-vous fini avec votre petite enquête?";
+		next;
+		switch(select("Oui.:Pas encore...")) {
+		case 1:
+			if (countitem(6074) < 1) {
+				mes "[Bazett]";
+				mes "!!!!!!!";
+				mes "Vous avez perdu la note?!";
+				mes "*Soupire...*";
+				next;
+				mes "[Bazett]";
+				mes "Bon, ce qui est fait est fait. Je vais vous en donner une nouvelle.";
+				set ep13_2_busut,7;
+				erasequest 11102;
+				setquest 11104;
+				close;
+			}
+			else {
+				mes "[Bazett]";
+				mes "Puis-je d'abord jeter un oeil à vos notes?";
+				next;
+				mes " - Bazett commence à lire en détails vos notes et semble captivé. Vous feriez mieux de le laisser le temps qu'il finisse. - ";
+				next;
+				mes "[Bazett]";
+				mes "Hum... De telles choses existent-elles vraiment?!";
+				next;
+				mes "[Bazett]";
+				mes "Hum... Je vois, je vois.";
+				next;
+				mes "[Bazett]";
+				mes "Même si tout cela reste assez basique, c'est bien organisé, et très intéressant. Je n'en attendais pas moins de vous, "+strcharinfo(0)+"!";
+				next;
+				mes "[Bazett]";
+				mes "Vous avez bien travaillé. Vous devez être épuisé"+ ( sex ? "" : "e" ) +". Allez vous reposer. Nous continuerons demain.";
+				next;
+				mes "[Bazett]";
+				mes "Ah... Ce n'est pas grand-chose, mais voici une de ces pièces que les géants utilisent. Peut-être pourrez-vous acheter quelque chose avec.";
+				delitem 6074,1; //Bazett's_Order
+				set ep13_2_busut,7;
+				if (ep13_2_bs1 == 3) getitem 6080,1; //Manuk_Coin
+				if (ep13_2_bs2 == 3) getitem 6080,1; //Manuk_Coin
+				if (ep13_2_bs3 == 3) getitem 6080,1; //Manuk_Coin
+				if (ep13_2_bs4 == 3) getitem 6080,1; //Manuk_Coin
+				erasequest 11102;
+				setquest 11104;
+				close;
+			}
+			break;
+		case 2:
+			mes "[Bazett]";
+			mes "Faites de votre mieux...";
+			close;
+		}
+	}
+	else {
+		mes "[Bazett]";
+		mes "Vous avez bien travaillé. Vous devez être épuisé"+ ( sex ? "" : "e" ) +". Allez vous reposer. Nous continuerons demain.";
+		close;
+	}
+}
+
+manuk,193,135,0	script	Travailleur::Worker#ep13bs	454,{
+	if (isequipped(2782) == 1) {
+		if (ep13_2_busut == 3) {
+			if (ep13_2_bs1 == 1) {
+				mes "[Travailleur]";
+				mes "Oups, c'est dangereux, c'est presque cassé. Je ferais mieux de me dépêcher de remplacer ça, sinon...";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Qu'est-ce qui se passe?";
+				next;
+				mes "[Travailleur]";
+				mes "Ah... Là... Euh...";
+				mes "......";
+				mes ".........";
+				mes "Rien!!!";
+				emotion e_omg,"Worker#ep13bs";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Est-ce que ça va?";
+				next;
+				mes "[Travailleur]";
+				mes "Vous êtes "+ ( sex ? "un étranger" : "une étrangère" ) +".";
+				mes "......";
+				mes "Votre voix m'a surpris.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Ah, désolé"+ ( sex ? "" : "e" ) +" de vous avoir fait sursauter.";
+				emotion e_heh,1;
+				next;
+				mes "[Travailleur]";
+				mes "Haha, ce n'est rien. J'ai entendu parler des gens comme vous il y a quelques temps, mais c'est la première fois que j'en rencontre un.";
+				next;
+				mes "[Travailleur]";
+				mes "Vous parlez bien notre langue.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Ah... Enfin... On dirait que vous avez un problème. Qu'est-ce qui se passe?";
+				next;
+				mes "[Travailleur]";
+				mes "Rien!!!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Vous êtes sûr? On dirait que le destin nous a réuni pour une certaine raison. Racontez-moi~";
+				next;
+				mes "[Travailleur]";
+				mes "......";
+				mes "À vrai dire...";
+				next;
+				mes "[Travailleur]";
+				mes "Cette vis est trop vieille pour faire tenir la tente, alors je devrais la changer avant qu'elle ne casse.";
+				next;
+				mes "[Travailleur]";
+				mes "Je dois rester là, alors j'attends qu'un ami passe dans les environs et vienne m'aider.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Est-ce que je peux vous aider?";
+				next;
+				mes "[Travailleur]";
+				mes "Non~ Ça va. Nous venons de nous rencontrer, alors je ne peux pas vous demander de me rendre service.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Oh, ça va! Nous pouvons nous entraider!";
+				next;
+				mes "- Vous entendez soudain un son perçant tandis que la visse lâche. -";
+				next;
+				mes "[Travailleur]";
+				mes "Ugh!!!";
+				mes "**Soupire**";
+				emotion e_sob,"Worker#ep13bs";
+				emotion e_sob,1;
+				next;
+				mes "[Travailleur]";
+				mes "Ah, bah voilà!";
+				mes "Quoi qu'il en soit, je m'appelle ^0000FFGill^000000.";
+				next;
+				mes "[Gill]";
+				mes "Il me faut quelque chose pour réparer la tente. Si jamais vous pouviez m'apporter^0000FF 30 Cornes de Lion des Collines^000000, je pourrai m'en servir comme des vis solides.";
+				next;
+				mes "[Gill]";
+				mes "Encore désolé de vous envoyer faire cela. Je vous attendrai ici.";
+				set ep13_2_bs1,2;
+				setquest 11105;
+				close;
+			}
+			else if (ep13_2_bs1 == 2) {
+				if (countitem(6032) > 29) {
+					mes "[Gill]";
+					mes "Est-ce que vous avez pu me rapporter toutes mes Cornes de Lion des Collines?";
+					mes "Merci beaucoup.";
+					next;
+					mes "[Gill]";
+					mes "Grâce à vous, nous avons pu éviter un désastre. ^0000FFVous faites peut-être partie d'une autre race, mais comparé à ces abominables fées...^000000 Je suis content d'avoir rencontré quelqu'un comme vous, "+strcharinfo(0)+".";
+					delitem 6032,30; //Horn_Of_Hilsrion
+					set ep13_2_bs1,3;
+					set ep13_2_busut,4;
+					completequest 11105;
+					close;
+				}
+				else {
+					mes "[Gill]";
+					mes "Encore désolé de vous envoyer chercher^0000FF 30 Cornes de Lion des Collines^000000, mais je dois rester là en attendant que vous reveniez avec.";
+					close;
+				}
+			}
+			else if (ep13_2_bs1 == 3) {
+				mes "[Gill]";
+				mes "Encore merci de m'avoir aidé. ^0000FFVous faites peut-être partie d'une autre race, mais comparé à ces abominables fées...^000000 Je suis content d'avoir rencontré quelqu'un comme vous, "+strcharinfo(0)+".";
+				close;
+			}
+			else {
+				mes "[Travailleur]";
+				mes "Ça devient dangereux... Ça se desserre. Il va falloir remplacer ça.";
+				close;
+			}
+		}
+		else if (ep13_2_busut == 4) {
+			if (ep13_2_bs1 == 1) {
+				mes "[Travailleur]";
+				mes "Ça devient dangereux... Ça se desserre. Il va falloir remplacer ça.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Est-ce que quelque chose ne va pas?";
+				next;
+				mes "[Travailleur]";
+				mes "Ah... Euh... Là...";
+				mes "......";
+				mes ".........";
+				mes "Oubliez ça. Ce n'est rien.";
+				emotion e_omg,"Worker#ep13bs";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Vous n'avez pas à faire ça.";
+				next;
+				mes "[Travailleur]";
+				mes "Vous êtes une race bien étrange, pas vrai?";
+				mes "......";
+				mes "Ça m'a fait un petit choc quand je vous ai soudain entendu"+ ( sex ? "" : "e" ) +" parler notre langue.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "J'ai pensais qu'il me faudrait apprendre, comme je voyage dans les environs...";
+				emotion e_heh,1," ET_SMILE";
+				next;
+				mes "[Travailleur]";
+				mes "Haha, c'est vrai? J'avais entendu dire qu'il existait une race comme la vôtre, mais je ne vous avais pas encore rencontré.";
+				next;
+				mes "[Travailleur]";
+				mes "Et dire que vous parlez notre langue... Intéressant.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Ah... Mais vous n'aviez pas des problèmes avec quelque chose il y a un instant? Est-ce que quelque chose ne va pas?";
+				next;
+				mes "[Travailleur]";
+				mes "Ce n'est rien.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Ah~ Notre rencontre doit être un signe du destin~";
+				mes "Vous pouvez tout me dire.";
+				next;
+				mes "[Travailleur]";
+				mes "......";
+				mes "Hé bien...";
+				next;
+				mes "[Travailleur]";
+				mes "Une des vis qu'on utilise pour maintenir cette tente est complètement rouillée... Nous devons la remplacer.";
+				next;
+				mes "[Travailleur]";
+				mes "Mais comme je dois rester ici, j'attendais que quelqu'un passe dans le coin. Et vous êtes venu"+ ( sex ? "" : "e" ) +" me parler. Je pensais que vous faisiez partie de la tribu.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Je peux vous aider.";
+				next;
+				mes "[Travailleur]";
+				mes "No, ça va. Nous venons juste de nous rencontrer, alors je ne veux pas vous embêter.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Ne vous en faites pas pour ça. La vie est faire pour s'entraider, vous ne pensez pas?";
+				next;
+				mes " - La vis qui tenait bon jusqu'à présent lâche soudain pendant que vous discutez. - ";
+				next;
+				mes "[Travailleur]";
+				mes "Ah!!!";
+				emotion e_sob,"Worker#ep13bs";
+				emotion e_sob,1;
+				next;
+				mes "[Travailleur]";
+				mes "Bon, je ne peux plus faire de manières maintenant. Laissez-moi me présenter: je m'appelle ^0000FFGill^000000.";
+				next;
+				mes "[Gill]";
+				mes "Il me faut quelque chose pour stabiliser la tente. Je pourrais utiliser des ^0000FFCornes de Lions des Collines^000000 pour ça. 30 devraient faire l'affaire.";
+				next;
+				mes "[Gill]";
+				mes "Je suis vraiment désolé, mais si vous pouviez faire vite...";
+				set ep13_2_bs1,2;
+				setquest 11105;
+				close;
+			}
+			else if (ep13_2_bs1 == 2) {
+				if (countitem(6032) > 29) {
+					mes "[Gill]";
+					mes "M'avez-vous rapporté toutes les Cornes de lion des Collines? Merci beaucoup.";
+					next;
+					mes "[Gill]";
+					mes "Grâce à vous, nous avons pu éviter un désastre. ^0000FFVous faites peut-être partie d'une autre race, mais comparé à ces abominables fées...^000000 Je suis content d'avoir rencontré quelqu'un comme vous, "+strcharinfo(0)+".";
+					delitem 6032,30; //Horn_Of_Hilsrion
+					set ep13_2_bs1,3;
+					completequest 11105;
+					close;
+				}
+				else {
+					mes "[Gill]";
+					mes "J'ai honte de vous envoyer faire quelque chose comme ça...";
+					close;
+				}
+			}
+			else if (ep13_2_bs1 == 3) {
+				mes "[Gill]";
+				mes "Encore merci de m'avoir aidé. ^0000FFVous faites peut-être partie d'une autre race, mais comparé à ces abominables fées...^000000 Je suis content d'avoir rencontré quelqu'un comme vous, "+strcharinfo(0)+".";
+				close;
+			}
+			else {
+				mes "[Travailleur]";
+				mes "Ça devient dangereux... Ça se desserre. Il va falloir remplacer ça.";
+				close;
+			}
+		}
+		else {
+			mes "[Gill]";
+			mes "Vous revoilà? Ça me fait du bien de parler à quelqu'un de temps en temps.";
+			close;
+		}
+	}
+	else {
+		mes "[Travailleur]";
+		mes "Ehahdie O Ehai";
+		mes "Ohek Hekdh I dkek";
+		mes "Ohehp Qe Tehdhah";
+		next;
+		mes "[Travailleur]";
+		mes "Ehaodke Thdieqak Khehdi";
+		mes "PHhdkel";
+		mes "Thhdqdcczk U dheagelokd dok";
+		next;
+		mes "- Vous n'arrivez pas à comprendre ce qu'il raconte. - ";
+		close;
+	}
 }
 
 // Yggdrasil Dungeon Floor 2 puzzle.

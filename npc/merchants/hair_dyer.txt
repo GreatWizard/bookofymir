@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Myllena
+//traduit par Myllena, No Healing
 //===== eAthena Script ======================================= 
 //= Hair Dyer
 //===== By: ================================================== 
@@ -160,61 +160,46 @@ S_NoDye:
 
 
 // Lighthalzen
-lhz_in02,100,134,3	script	Hair Dyer#lich	850,{
+lhz_in02,100,134,3	script	Coiffeuse::Hair Dyer#lich	850,{
 	mes "[Rossa]";
 	if (Sex == 1) {
-		mes "Welcome, come in~";
-		mes "Oh, I see that you take";
-		mes "much better care of your";
-		mes "hair than those other boys.";
-		mes "Now would you like to dye";
-		mes "your hair another color?";
+		mes "Bienvenue, entrez~";
+		mes "Oh, je vois que vous prenez bien mieux soin de vos cheveux que la moyenne des hommes!";
+		mes "Est-ce que vous voudriez les teindre en une autre couleur?";
 	}
 	else {
-		mes "Oh, wow~ Where did";
-		mes "you get your hair styled?";
-		mes "I love it! But... It would";
-		mes "be even more beautiful if";
-		mes "you dyed your hair. What";
-		mes "do you think about that?";
+		mes "Oh, ouah~ Qui vous a fait cette coupe? J'adore! Mais... Ça vous irait mieux encore si jamais vous vous faisiez une couleur. Qu'en pensez-vous?";
 	}
 	while (.@choose_success != 2) {
 		next;
-		switch(select("Dye Hair:Coloring Information:Cancel")) {
+		switch(select("Se teindre les cheveux:Informations sur les couleurs:Annuler")) {
 		case 1:
 			mes "[Rossa]";
 			mes "Ho ho ho ho~";
-			mes "So which color would";
-			mes "you like to try? Something";
-			mes "vivid or dark? Sexy or cute?";
+			mes "Alors, vous voudriez essayer quelle couleur? Quelque chose de voyant ou de sombre? De sexy ou de mignon?";
 			next;
 			while (.@choose_success != 2) {
 				if (.@choose_success == 1) {
 					mes "[Rossa]";
-					mes "Ooh, I like this color!";
-					mes "But would you like to";
-					mes "try a different one?";
+					mes "Ooh, j'aime cette couleur. Mais voudriez-vous en essayer une autre?";
 					next;
-					switch(select("Yes:No")) {
+					switch(select("Oui:Non")) {
 					case 1:
 						mes "[Rossa]";
-						mes "Please select";
-						mes "another color~";
+						mes "Choisissez une autre couleur s'il vous plaît~";
 						next;
 						break;
 					case 2:
 						mes "[Rossa]";
-						mes "An excellent choice~";
-						mes "Alright then, thank you";
-						mes "for using my service and";
-						mes "I hope you come by again!";
+						mes "Un excellent choix~";
+						mes "Hé bien, merci d'avoir utilisé mes services. J'espère que vous reviendrez!";
 						close2;
 						set .@choose_success,2;
 						break;
 					}
 				}
 				while (.@choose_success != 2) {
-					switch(select("Red, please.:Yellow, please.:Purple, please.:Orange, please.:Green, please.:Blue, please.:White, please.:Dark Brown, please.:I like my hair color.")) {
+					switch(select("Rouge, s'il vous plaît.:Blond, s'il vous plaît.:Violet, s'il vous plaît.:Orange, s'il vous plaît.:Vert, s'il vous plaît.:Bleu, s'il vous plaît.:Blanc, s'il vous plaît.:Brun, s'il vous plaît.:J'aime ma couleur actuelle.")) {
 					case 1:
 						set .@headpalette,8;
 						break;
@@ -242,20 +227,13 @@ lhz_in02,100,134,3	script	Hair Dyer#lich	850,{
 					case 9:
 						if (.@choose_success != 0) {
 							mes "[Rossa]";
-							mes "Are you sure?";
-							mes "Alright then, you";
-							mes "know what's best for";
-							mes "your beauty and to tell";
-							mes "the truth, I agree with you~";
+							mes "Êtes-vous sûr"+ ( sex ? "" : "e" ) +"? Bien. Vous savez ce qui vous va le mieux après tout, et à dire vrai, je suis d'accord avec votre choix~";
 							close2;
 							set .@choose_success,2;
 						}
 						else {
 							mes "[Rossa]";
-							mes "Oh, I see. Still, I can't";
-							mes "help but feel so disappointed.";
-							mes "You'd look so good if you dyed";
-							mes "your hair a different color~";
+							mes "Oh, je vois. Mais je ne peux pas m'empêcher de me sentir déçue. Ça vous irait si bien si vous vous faisiez une couleur~";
 							close2;
 							set .@choose_success,2;
 						}
@@ -263,104 +241,69 @@ lhz_in02,100,134,3	script	Hair Dyer#lich	850,{
 					}
 					if (getlook(VAR_HEADPALETTE) == .@headpalette) {
 						mes "[Rossa]";
-						mes "Hmm, your hair color";
-						mes "is still fine, so there's";
-						mes "no need to dye it the same";
-						mes "color again, if that's what";
-						mes "you're worried about.";
+						mes "Hum, votre couleur tient toujours, il n'y a pas besoin de la refaire, si c'et ce que vous vous demandiez.";
 						next;
 					}
 					else {
 						if ((.@headpalette == 8) && (countitem(975) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Scarlet Dyestuffs with you...";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Rouge Écarlate...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 1) && (countitem(976) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Lemon Dyestuffs with you...";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Jaune Citron...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 2) && (countitem(981) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Violet Dyestuffs with you...";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Violette...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 3) && (countitem(980) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Orange Dyestuffs with you...";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Orange...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 4) && (countitem(979) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Darkgreen Dyestuffs";
-							mes "with you. Would you come";
-							mes "back after you get some?";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Vert Sapin...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 5) && (countitem(978) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Cobaltblue Dyestuffs";
-							mes "with you. Would you come";
-							mes "back after you get some?";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Bleu Cobalt...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 6) && (countitem(982) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "White Dyestuffs with you...";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Blanche...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						else if ((.@headpalette == 7) && (countitem(983) == 0)) {
 							mes "[Rossa]";
-							mes "Oh, I'm sorry dear,";
-							mes "but I can't dye your";
-							mes "hair if you didn't bring";
-							mes "Black Dyestuffs with you...";
+							mes "Oh, je suis désolée, mais je ne vais pas pouvoir vous teindre les cheveux si vous ne m'avez pas apporté de Teinture Noire...";
 							close2;
 							set .@choose_success,2;
 							break;
 						}
 						if (Zeny < 1000) {
 							mes "[Rossa]";
-							mes "Oh, I'm so sorry dear,";
-							mes "but my service fee is";
-							mes "1,000 zeny. Did you forget";
-							mes "to bring your money with you?";
+							mes "Oh, je suis désolée "+ ( sex ? "mon cher" : "ma chère" ) +", mais mes services coûtent 1.000 zénys. Est-ce que vous avez oublié de prendre l'argent avec vous?";
 							close2;
 							set .@choose_success,2;
 							break;
@@ -383,29 +326,14 @@ lhz_in02,100,134,3	script	Hair Dyer#lich	850,{
 			break;
 		case 2:
 			mes "[Rossa]";
-			mes "When you're feeling";
-			mes "down, when you just want";
-			mes "to look nice for the one you";
-			mes "love, or when you just want";
-			mes "a different look, why don't";
-			mes "you dye your hair?";
+			mes "Lorsque vous avez une baisse de régime, lorsque vous voulez vous faire "+ ( sex ? "beau pour celui" : "beau pour celle" ) +" que vous aimez, ou tout simplement lorsque vous voulez changer de look, pourquoi ne pas vous faire une teinture?";
 			next;
 			mes "[Rossa]";
-			mes "All you need is one";
-			mes "Dyestuffs item of the";
-			mes "color that you want to";
-			mes "dye your hair, as well as";
-			mes "a 1,000 zeny service fee.";
-			mes "I'm here for your beauty needs~";
+			mes "Tout ce dont vous avez besoin, c'est de Teinture de la couleur que vous voulez, et de 1.000 zénys pour payer mes services. Je suis là pour m'occuper de vous et vous rendre encore plus "+ ( sex ? "beau" : "belle" ) +"~";
 			break;
 		case 3:
 			mes "[Rossa]";
-			mes "You know, when you";
-			mes "put some effort into";
-			mes "your appearance, you'll";
-			mes "not only look better, but";
-			mes "you'll feel better about";
-			mes "yourself. Makes sense, right?";
+			mes "Vous savez, en soignant un peu votre apparence, vous n'avez pas seulement l'air plus "+ ( sex ? "beau" : "belle" ) +", mais vous vous sentez aussi mieux. Ça se tient, non?";
 			close;
 		}
 	}

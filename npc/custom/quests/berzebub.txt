@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script =======================================
 //= Berzebub Card Quest Script
 //===== By: ==================================================
@@ -11,40 +13,40 @@
 //===== Additional Comments: =================================
 //= 1.1 Fixed ingredients. Was too exploitable [Lupus]
 //============================================================
-prontera,165,178,8	script	Old Woman	103,{
-	mes "[Old Woman]";
+prontera,165,178,8	script	Vielle Femme#berz	103,{
+	mes "[Vielle Femme]";
 	if(BerzQuest == 1) goto L_Already;
-	mes "Greeting lad. I found a really nifty item while I was picking mushrooms near Glast Heim.";
+	mes "Bonjour, l'ami"+ ( sex ? "" : "e" ) +"! J'ai trouvé un objet vraiment extraordinaire en ramassant des champignons près de Glast Heim.";
 	next;
-	menu "Keep talking",-, "Leave", M_Leave;
+	menu "Continuer la conversation.",-, "Quitter la conversation.", M_Leave;
 	
-		mes "[Old Woman]";
-		mes "I have never seen an item like this before.  I am told it can be placed inside am accessory that has a slot avaiable in it.";
+		mes "[Vielle Femme]";
+		mes "Je n'avais jamais rien vu de tel auparavant. Je crois qu'on peut l'attacher à un accessoire qui a un emplacement pour ça.";
 		next;
-		mes "[Old Woman]";
-		mes "If you're interested in this item, tell me and I'll tell you what you need for me to make you one of your own.  I can only give one of these to each player, so once you finish this quest once, you may not do it again.";
+		mes "[Vielle Femme]";
+		mes "S'il vous intéresse, dites-le moi et je pourrai peut-être vous en faire une copie. Mais attention, hein, c'est juste pour cette fois! Je ne vais pas vous en faire trente-six!";
 		next;
-		menu "Tell me more about it",-, "Nah, I don't care about it", M_Leave;
+		menu "Dites-m'en plus.",-, "Non, je m'n fiche.", M_Leave;
 		
-		mes "[Old Woman]";
-		mes "I believe the item is called a ^FF0000Berzebub Card^000000.  It can make any spell caster cast spells really fast!"; //Carte de Beelzébub
+		mes "[Vielle Femme]";
+		mes "Je crois qu'on appelle ça une ^FF0000Carte de Beelzébub^000000. Ça permet de lancer des sorts très rapidement, ou quelque chose ans le genre...";
 		next;
-		mes "[Old Woman]";
-		mes "I need all of the following items:";
-		mes "^0080FF25^000000 Emperiums";
-		mes "^0080FF100^000000 Witched Starsands";
-		mes "^0080FF200^000000 Needles of Alarm";
-		mes "^0080FF10^000000 Worn Out Scrolls";
-		mes "^0080FF2^000000 Biblies";
-		mes "^0080FF1^000000 Wand of the Occult";
-		mes "^0080FF20^000000 Opals";
+		mes "[Vielle Femme]";
+		mes "Il me faut les objets suivants pour en faire une copie:";
+		mes "^0080FF25^000000 Empériums";
+		mes "^0080FF100^000000 pincées de Poussière d'Étoile de Sorcière";
+		mes "^0080FF200^000000 Aiguilles d'Horloge";
+		mes "^0080FF10^000000 Pages Usées";
+		mes "^0080FF2^000000 Bibles";
+		mes "^0080FF1^000000 Baguette d'Occultisme";
+		mes "^0080FF20^000000 Opales";
 		next;
-		menu "I have all that!",-, "I'll get those ASAP", M_Leave;
+		menu "J'ai tout ça!",-, "Je vous rapporte ça au plus vite!", M_Leave;
 		
-		mes "[Old Woman]";
-		mes "Anyone can say they have the items, but do they really have them?  Let's take a look here...";
+		mes "[Vielle Femme]";
+		mes "C'est vrai? Vous avez tout? Faites-moi voir ça...";
 		next;
-		mes "[Old Woman]";
+		mes "[Vielle Femme]";
 		if(countitem(714) < 25 || countitem(1061) < 100 || countitem(1095) < 200 || countitem(618) < 10 || countitem(1551) < 2 || countitem(1614) < 1 || countitem(727) < 20) goto L_noItems;
 		delitem 714, 25;
 		delitem 1061, 100;
@@ -55,20 +57,20 @@ prontera,165,178,8	script	Old Woman	103,{
 		delitem 727, 20;
 		getitem 4145, 1;
 		set BerzQuest, 1;
-		mes "Well congratulations!  You have all the items.  Here is your ^FF0000Berzebub Card^000000, just as I promised."; //Carte de Beelzébub
+		mes "Hé bien félicitations! Voici votre ^FF0000Carte de Beelzébub^000000 comme promis.";
 		emotion e_grat;
 		close;
 	
 	M_Leave:
-		mes "[Old Woman]";
-		mes "Such a great item I have right here...";
+		mes "[Vielle Femme]";
+		mes "J'adore cette carte...";
 		close;
 
 	L_noItems:
-		mes "I knew you were lying!  Get out of here and get those items you sorry excuse for a rock star.";
+		mes "Oh, mais vous m'avez menti! Vous êtes pathétique! hors de ma vue!";
 		close;
 	
 	L_Already:
-		mes "Hey I remember you!  I already told you that you may only complete this quest once.";
+		mes "Hé, je me souviens de vous! Je vous avez prévenu"+ ( sex ? "" : "e" ) +"! Je ne vais vous faire trente-six copies de cette carte!";
 		close;
 }

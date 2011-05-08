@@ -183,7 +183,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AL_DEMONBANE] = {
 		"AL_DEMONBANE";
-		SkillName = "Fléau des Démons",
+		SkillName = "Fléau du Démon",
 		MaxLv = 10,
 		_NeedSkillList = {
 			{ SKID.AL_DP,3 }
@@ -348,7 +348,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MC_VENDING] = {
 		"MC_VENDING";
-		SkillName = "Echoppe",
+		SkillName = "Échoppe",
 		MaxLv = 10,
 		_NeedSkillList = {
 			{ SKID.MC_PUSHCART,3 }
@@ -414,7 +414,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.TF_DOUBLE] = {
 		"TF_DOUBLE";
-		SkillName = "Double Attaque",
+		SkillName = "Double Tir",
 		MaxLv = 10,
 	},
 
@@ -461,6 +461,8 @@ SKILL_INFO_LIST = {
 		MaxLv = 4,
 		_NeedSkillList = {
 			{ SKID.MG_SRECOVERY,4 },
+
+
 			{ SKID.PR_STRECOVERY,1 }
 		}
 	},
@@ -737,7 +739,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WZ_JUPITEL] = {
 		"WZ_JUPITEL";
-		SkillName = "Foudre de Jupiter",
+		SkillName = "Éclair Suprême",
 		MaxLv = 10,
 		SpAmount = { 20, 23, 26, 29, 32, 35, 38, 41, 44, 47 },
 		_NeedSkillList = {
@@ -748,7 +750,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WZ_VERMILION] = {
 		"WZ_VERMILION";
-		SkillName = "Tonerre Suprême",
+		SkillName = "Tonnerre Suprême",
 		MaxLv = 10,
 		SpAmount = { 60, 64, 68, 72, 76, 80, 84, 88, 92, 96 },
 		_NeedSkillList = {
@@ -869,7 +871,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.BS_ORIDEOCON] = {
 		"BS_ORIDEOCON";
-		SkillName = "Connaissance de l'Oridecon",
+		SkillName = "Connaissance de l'Oridécon",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.BS_ENCHANTEDSTONE,1 }
@@ -892,6 +894,7 @@ SKILL_INFO_LIST = {
 	},
 
 	[SKID.BS_TWOHANDSWORD] = {
+
 		"BS_TWOHANDSWORD";
 		SkillName = "Forge d'Épées à Deux Mains",
 		MaxLv = 3,
@@ -1593,7 +1596,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AM_CANNIBALIZE] = {
 		"AM_CANNIBALIZE";
-		SkillName = "Bio Cannibalisme",
+		SkillName = "Bio-Cannibalisme",
 		MaxLv = 5,
 		SpAmount = { 20, 20, 20, 20, 20 },
 		_NeedSkillList = {
@@ -1710,7 +1713,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AM_RESURRECTHOMUN] = {
 		"AM_RESURRECTHOMUN";
-		SkillName = "Resurrection de l'Homuncule",
+		SkillName = "Résurrection de l'Homuncule",
 		MaxLv = 5,
 		SpAmount = { 74, 68, 62, 56, 50 },
 		_NeedSkillList = {
@@ -1742,7 +1745,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.CR_SHIELDBOOMERANG] = {
 		"CR_SHIELDBOOMERANG";
-		SkillName = "Bouclier Boomerang",
+		SkillName = "Boomerang",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.CR_SHIELDCHARGE,3 }
@@ -1761,7 +1764,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.CR_HOLYCROSS] = {
 		"CR_HOLYCROSS";
-		SkillName = "Sainte Croix",
+		SkillName = "Sainte-Croix",
 		MaxLv = 10,
 		SpAmount = { 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
 		_NeedSkillList = {
@@ -2075,7 +2078,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SA_DELUGE] = {
 		"SA_DELUGE";
-		SkillName = "Deluge",
+		SkillName = "Déluge",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.SA_FROSTWEAPON,2 }
@@ -2331,7 +2334,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.BA_FROSTJOKE] = {
 		"BA_FROSTJOKE";
-		SkillName = "Blague Pourrie",
+		SkillName = "Farce Glaciale",
 		MaxLv = 5,
 		SpAmount = { 12, 14, 16, 18, 20 },
 		_NeedSkillList = {
@@ -2361,7 +2364,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.BA_POEMBRAGI] = {
 		"BA_POEMBRAGI";
-		SkillName = "Le Poême de Bragi",
+		SkillName = "Le Poème de Bragi",
 		MaxLv = 10,
 		SpAmount = { 40, 45, 50, 55, 60, 65, 70, 75, 80, 85 },
 		_NeedSkillList = {
@@ -2448,7 +2451,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.DC_SERVICEFORYOU] = {
 		"DC_SERVICEFORYOU";
-		SkillName = "A votre service",
+		SkillName = "À votre service",
 		MaxLv = 10,
 		SpAmount = { 40, 45, 50, 55, 60, 65, 70, 75, 80, 85 },
 		_NeedSkillList = {
@@ -2524,7 +2527,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.LK_BERSERK] = {
 		"LK_BERSERK";
-		SkillName = "Berserk",
+		SkillName = "Furie",
 		MaxLv = 1,
 	},
 
@@ -2834,12 +2837,12 @@ SKILL_INFO_LIST = {
 
 	[SKID.CR_ALCHEMY] = {
 		"CR_ALCHEMY";
-		SkillName = "Alchemy",
+		SkillName = "Alchimie",
 	},
 
 	[SKID.CR_SYNTHESISPOTION] = {
 		"CR_SYNTHESISPOTION";
-		SkillName = "Synthesis Potion",
+		SkillName = "Synthèse de Potions",
 	},
 
 	[SKID.CG_ARROWVULCAN] = {
@@ -2896,7 +2899,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.LK_SPIRALPIERCE] = {
 		"LK_SPIRALPIERCE";
-		SkillName = "Spire-Estoc",
+		SkillName = "Estoc Tourbillonnant",
 		MaxLv = 5,
 		SpAmount = { 18, 21, 24, 27, 30 },
 		_NeedSkillList = {
@@ -2960,7 +2963,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.PF_MEMORIZE] = {
 		"PF_MEMORIZE";
-		SkillName = "Memorisation",
+		SkillName = "Mémorisation",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.SA_ADVANCEDBOOK,5 },
@@ -3540,7 +3543,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.ST_PRESERVE] = {
 		"ST_PRESERVE";
-		SkillName = "Preservation",
+		SkillName = "Préservation",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.RG_PLAGIARISM,10 }
@@ -3600,7 +3603,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.HP_MANARECHARGE] = {
 		"HP_MANARECHARGE";
-		SkillName = "Economie de Mana",
+		SkillName = "Économie de Mana",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.PR_MACEMASTERY,10 },
@@ -3821,7 +3824,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GS_BULLSEYE] = {
 		"GS_BULLSEYE";
-		SkillName = "Oeil de Taureau",
+		SkillName = "Les Yeux du Taureau",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.GS_GLITTERING,5 },
@@ -3879,13 +3882,13 @@ SKILL_INFO_LIST = {
 
 	[SKID.GS_SINGLEACTION] = {
 		"GS_SINGLEACTION";
-		SkillName = "Action Solitaire",
+		SkillName = "Action Simple",
 		MaxLv = 10,
 	},
 
 	[SKID.GS_SNAKEEYE] = {
 		"GS_SNAKEEYE";
-		SkillName = "Oeil de Serpent",
+		SkillName = "Les Yeux du Serpent",
 		MaxLv = 10,
 	},
 
@@ -3910,7 +3913,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GS_DISARM] = {
 		"GS_DISARM";
-		SkillName = "Désarmement",
+		SkillName = "Tir Désarmant",
 		MaxLv = 5,
 		SpAmount = { 15, 20, 25, 30, 35 },
 		_NeedSkillList = {
@@ -4002,7 +4005,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NJ_TOBIDOUGU] = {
 		"NJ_TOBIDOUGU";
-		SkillName = "Maîtrise du Lancer",
+		SkillName = "Entraînement au Lancer",
 		MaxLv = 10,
 	},
 
@@ -4203,7 +4206,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NJ_NEN] = {
 		"NJ_NEN";
-		SkillName = "Nan",
+		SkillName = "Nen",
 		MaxLv = 5,
 		SpAmount = { 20, 30, 40, 50, 60 },
 		_NeedSkillList = {
@@ -4300,7 +4303,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MB_MUNAKBALL] = {
 		"MB_MUNAKBALL";
-		SkillName = "Munak Ball",
+		SkillName = "Balle de Munak",
 	},
 
 	[SKID.MB_SCROLL] = {
@@ -4380,7 +4383,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AM_TWILIGHT4] = {
 		"AM_TWILIGHT4";
-		SkillName = "Alchimie Céleste",
+		SkillName = "Alchimie du Crépuscule",
 	},
 
 	[SKID.DE_BERSERKAIZER] = {
@@ -4767,7 +4770,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NPC_PULSESTRIKE] = {
 		"NPC_PULSESTRIKE";
-		SkillName = "Pulsation",
+		SkillName = "Frappe Impulsive",
 	},
 
 	[SKID.NPC_HELLJUDGEMENT] = {
@@ -4787,27 +4790,27 @@ SKILL_INFO_LIST = {
 
 	[SKID.NPC_WIDEBLEEDING] = {
 		"NPC_WIDEBLEEDING";
-		SkillName = "Ca va saigner",
+		SkillName = "Ça va saigner",
 	},
 
 	[SKID.NPC_WIDESTONE] = {
 		"NPC_WIDESTONE";
-		SkillName = "Que la Pierre s'empare de vous",
+		SkillName = "Changez-vous tous en Pierre",
 	},
 
 	[SKID.NPC_WIDECONFUSE] = {
 		"NPC_WIDECONFUSE";
-		SkillName = "HAHAHAHAHHAHAHA",
+		SkillName = "Que les brumes envahissent votre esprit",
 	},
 
 	[SKID.NPC_WIDESLEEP] = {
 		"NPC_WIDESLEEP";
-		SkillName = "Sombrez dans le sommeil",
+		SkillName = "Dormez, je vous l'ordonne",
 	},
 
 	[SKID.NPC_EVILLAND] = {
 		"NPC_EVILLAND";
-		SkillName = "Que cette Terre soit maudite",
+		SkillName = "Que cette terre soit maudite",
 	},
 
 	[SKID.NPC_MAGICMIRROR] = {
@@ -4817,32 +4820,32 @@ SKILL_INFO_LIST = {
 
 	[SKID.NPC_SLOWCAST] = {
 		"NPC_SLOWCAST";
-		SkillName = "Débilisme",
+		SkillName = "Débilitation",
 	},
 
 	[SKID.NPC_CRITICALWOUND] = {
 		"NPC_CRITICALWOUND";
-		SkillName = "Blessures Graves",
+		SkillName = "Blessures Critiques",
 	},
 
 	[SKID.NPC_STONESKIN] = {
 		"NPC_STONESKIN";
-		SkillName = "Peau de Pierre",
+		SkillName = "Chair de Pierre",
 	},
 
 	[SKID.NPC_ANTIMAGIC] = {
 		"NPC_ANTIMAGIC";
-		SkillName = "Antimagie",
+		SkillName = "Anti-magie",
 	},
 
 	[SKID.NPC_WIDECURSE] = {
 		"NPC_WIDECURSE";
-		SkillName = "Soyez maudits",
+		SkillName = "Soyez tous maudits",
 	},
 
 	[SKID.NPC_WIDESTUN] = {
 		"NPC_WIDESTUN";
-		SkillName = "GRAAAAAAHHH",
+		SkillName = "Perdez tous connaissance",
 	},
 
 	[SKID.NPC_VAMPIRE_GIFT] = {
@@ -4857,17 +4860,17 @@ SKILL_INFO_LIST = {
 
 	[SKID.ALL_INCCARRY] = {
 		"ALL_INCCARRY";
-		SkillName = "Scéance de muscu",
+		SkillName = "Musculation",
 	},
 
 	[SKID.NPC_HELLPOWER] = {
 		"NPC_HELLPOWER";
-		SkillName = "Pouvoir de l'Enfer",
+		SkillName = "Pouvoir Démoniaque",
 	},
 
 	[SKID.NPC_ALLHEAL] = {
 		"NPC_ALLHEAL";
-		SkillName = "Plus un bobo",
+		SkillName = "Plus une égratignure",
 	},
 
 	[SKID.GM_SANDMAN] = {
@@ -4883,7 +4886,9 @@ SKILL_INFO_LIST = {
 	[SKID.ALL_PARTYFLEE] = {
 		"ALL_PARTYFLEE";
 		SkillName = "Que souffle le Vent Sacré",
+
 	},
+
 
 	[SKID.ALL_ANGEL_PROTECT] = {
 		"ALL_ANGEL_PROTECT";
@@ -4892,7 +4897,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.ALL_DREAM_SUMMERNIGHT] = {
 		"ALL_DREAM_SUMMERNIGHT";
-		SkillName = "Songe d'une Nuit d'été",
+		SkillName = "Le Songe d'une Nuit d'été",
 	},
 
 	[SKID.ALL_REVERSEORCISH] = {
@@ -4902,12 +4907,45 @@ SKILL_INFO_LIST = {
 
 	[SKID.ALL_WEWISH] = {
 		"ALL_WEWISH";
-		SkillName = "Douce Nuit",
+		SkillName = "Ô Douce Nuit",
 	},
+
+-- Pas officiel, mais utilisés avec certains objets
+
+	[SKID.NPC_DARKSTRIKE] = {
+		"NPC_DARKSTRIKE";
+		SkillName = "Brûlure_de_l'Âme",
+	},
+
+	[SKID.CASH_BLESSING] = {
+		"CASH_BLESSING";
+		SkillName = "Soyez tous bénits",
+	},
+
+	[SKID.CASH_INCAGI] = {
+		"CASH_INCAGI";
+		SkillName = "Faites vite",
+	},
+	[SKID.CASH_ASSUMPTIO] = {
+		"CASH_ASSUMPTIO";
+		SkillName = "Que notre assomption advienne",
+	},
+
+	[SKID.NPC_INVINCIBLE] = {
+		"NPC_INVINCIBLE";
+		SkillName = "Je suis invincible",
+	},
+
+	[SKID.NPC_INVINCIBLEOFF] = {
+		"NPC_INVINCIBLEOFF";
+		SkillName = "Je redeviens mortel",
+	},
+
+------------------------------------------------------
 
 	[SKID.KN_CHARGEATK] = {
 		"KN_CHARGEATK";
-		SkillName = "Charge Attack",
+		SkillName = "Charge",
 		MaxLv = 1,
 		Type = "Quest",
 	},
@@ -4956,7 +4994,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SA_ELEMENTWATER] = {
 		"SA_ELEMENTWATER";
-		SkillName = "Transformation Élémentale: Eau",
+		SkillName = "Transformation Élémentale (Eau)",
 		MaxLv = 1,
 		Type = "Quest",
 	},
@@ -4984,7 +5022,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.BS_UNFAIRLYTRICK] = {
 		"BS_UNFAIRLYTRICK";
-		SkillName = "Triche",
+		SkillName = "Fausse Monnaie",
 		MaxLv = 1,
 		Type = "Quest",
 	},
@@ -5018,21 +5056,21 @@ SKILL_INFO_LIST = {
 
 	[SKID.SA_ELEMENTGROUND] = {
 		"SA_ELEMENTGROUND";
-		SkillName = "Transformation Élémentale: Terre",
+		SkillName = "Transformation Élémentale (Terre)",
 		MaxLv = 1,
 		Type = "Quest",
 	},
 
 	[SKID.SA_ELEMENTFIRE] = {
 		"SA_ELEMENTFIRE";
-		SkillName = "Transformation Élémentale: Feu)",
+		SkillName = "Transformation Élémentale (Feu)",
 		MaxLv = 1,
 		Type = "Quest",
 	},
 
 	[SKID.SA_ELEMENTWIND] = {
 		"SA_ELEMENTWIND";
-		SkillName = "Transformation Élémentale: Vent",
+		SkillName = "Transformation Élémentale (Vent)",
 		MaxLv = 1,
 		Type = "Quest",
 	},
@@ -5059,7 +5097,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.RK_DEATHBOUND] = {
 		"RK_DEATHBOUND";
-		SkillName = "Lien Mortel",
+		SkillName = "Liens Mortels",
 		MaxLv = 10,
 		SpAmount = { 50, 60, 65, 70, 75, 80, 85, 90, 95, 100 },
 		_NeedSkillList = {
@@ -5171,7 +5209,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.RK_FIGHTINGSPIRIT] = {
 		"RK_FIGHTINGSPIRIT";
-		SkillName = "Othila: Esprit du Combattant",
+		SkillName = "Othila: Esprit de Combat",
 	},
 
 	[SKID.RK_ABUNDANCE] = {
@@ -5181,7 +5219,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.RK_PHANTOMTHRUST] = {
 		"RK_PHANTOMTHRUST";
-		SkillName = "Accélération Fantômatique",
+		SkillName = "Attraction Fantomatique",
 		MaxLv = 5,
 		SpAmount = { 15, 18, 21, 24, 27 },
 		_NeedSkillList = {
@@ -5307,6 +5345,7 @@ SKILL_INFO_LIST = {
 		}
 	},
 
+
 	[SKID.GC_PHANTOMMENACE] = {
 		"GC_PHANTOMMENACE";
 		SkillName = "Menace Fantôme",
@@ -5378,7 +5417,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AB_CLEMENTIA] = {
 		"AB_CLEMENTIA";
-		SkillName = "Clémence",
+		SkillName = "Clémence Divine",
 		MaxLv = 3,
 		SpAmount = { 200, 220, 240 },
 		_NeedSkillList = {
@@ -5437,7 +5476,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AB_LAUDAAGNUS] = {
 		"AB_LAUDAAGNUS";
-		SkillName = "Le Seigneur est mon Guide",
+		SkillName = "Le Seigneur est mon Berger",
 		MaxLv = 4,
 		SpAmount = { 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -5476,7 +5515,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AB_HIGHNESSHEAL] = {
 		"AB_HIGHNESSHEAL";
-		SkillName = "Soin Majestueux",
+		SkillName = "Soins Suprêmes",
 		MaxLv = 5,
 		SpAmount = { 70, 100, 130, 160, 190 },
 		_NeedSkillList = {
@@ -5517,12 +5556,12 @@ SKILL_INFO_LIST = {
 
 	[SKID.AB_DUPLELIGHT_MELEE] = {
 		"AB_DUPLELIGHT_MELEE";
-		SkillName = "Lumière des Deux Mondes (mêlée)",
+		SkillName = "Lumière des Deux Mondes - Mêlée",
 	},
 
 	[SKID.AB_DUPLELIGHT_MAGIC] = {
 		"AB_DUPLELIGHT_MAGIC";
-		SkillName = "Lumière des Deux Mondes (magique)",
+		SkillName = "Lumière des Deux Mondes - Magie",
 	},
 
 	[SKID.AB_SILENTIUM] = {
@@ -5557,7 +5596,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_FROSTMISTY] = {
 		"WL_FROSTMISTY";
-		SkillName = "Brume du Givre",
+		SkillName = "Brume de Glace",
 		MaxLv = 5,
 		SpAmount = { 40, 48, 56, 64, 72 },
 		_NeedSkillList = {
@@ -5635,7 +5674,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_CRIMSONROCK] = {
 		"WL_CRIMSONROCK";
-		SkillName = "Roche Pourpre",
+		SkillName = "Roches Pourpres",
 		MaxLv = 5,
 		SpAmount = { 60, 70, 80, 90, 100 },
 		_NeedSkillList = {
@@ -5645,7 +5684,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_HELLINFERNO] = {
 		"WL_HELLINFERNO";
-		SkillName = "Fourneau Infernal",
+		SkillName = "Feu Infernal",
 		MaxLv = 5,
 		SpAmount = { 35, 40, 45, 50, 55 },
 		_NeedSkillList = {
@@ -5665,7 +5704,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_CHAINLIGHTNING] = {
 		"WL_CHAINLIGHTNING";
-		SkillName = "Éclair",
+		SkillName = "Tempête d'Éclairs",
 		MaxLv = 5,
 		SpAmount = { 80, 90, 100, 110, 120 },
 		_NeedSkillList = {
@@ -5698,7 +5737,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_SUMMONFB] = {
 		"WL_SUMMONFB";
-		SkillName = "Sphère de Feu! Je te convoque",
+		SkillName = "Invocation de Boules de Feu",
 		MaxLv = 5,
 		SpAmount = { 10, 12, 14, 16, 18 },
 		_NeedSkillList = {
@@ -5708,7 +5747,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_SUMMONBL] = {
 		"WL_SUMMONBL";
-		SkillName = "Sphère d'Éclairs! Je te convoque",
+		SkillName = "Invocation de Sphères Électriques",
 		MaxLv = 5,
 		SpAmount = { 10, 12, 14, 16, 18 },
 		_NeedSkillList = {
@@ -5718,7 +5757,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_SUMMONWB] = {
 		"WL_SUMMONWB";
-		SkillName = "Sphère d'Eau! Je te convoque",
+		SkillName = "Invocation de Sphères d'Eau",
 		MaxLv = 5,
 		SpAmount = { 10, 12, 14, 16, 18 },
 		_NeedSkillList = {
@@ -5728,7 +5767,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WL_SUMMONSTONE] = {
 		"WL_SUMMONSTONE";
-		SkillName = "Sphère de Pierre! Je te convoque",
+		SkillName = "Invocation de Roches",
 		MaxLv = 5,
 		SpAmount = { 10, 12, 14, 16, 18 },
 		_NeedSkillList = {
@@ -5836,7 +5875,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.RA_WUGDASH] = {
 		"RA_WUGDASH";
-		SkillName = "Galop",
+		SkillName = "Galop du Warg",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.RA_WUGRIDER,1 }
@@ -5947,7 +5986,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.RA_ICEBOUNDTRAP] = {
 		"RA_ICEBOUNDTRAP";
-		SkillName = "Piège de la Glace",
+		SkillName = "Piège des Glaces",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.RA_DETONATOR,1 }
@@ -6060,7 +6099,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NC_MAINFRAME] = {
 		"NC_MAINFRAME";
-		SkillName = "Restructuration",
+		SkillName = "Restructuration de l'Armure",
 		MaxLv = 4,
 		_NeedSkillList = {
 			{ SKID.NC_MADOLICENCE,4 }
@@ -6098,7 +6137,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NC_INFRAREDSCAN] = {
 		"NC_INFRAREDSCAN";
-		SkillName = "Vision Infrarouge",
+		SkillName = "Scan Infrarouge",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.NC_SHAPESHIFT,2 }
@@ -6163,6 +6202,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NC_RESEARCHFE] = {
 		"NC_RESEARCHFE";
+
 		SkillName = "Recherches sur la Terre et le Feu",
 		MaxLv = 5,
 	},
@@ -6209,7 +6249,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NC_MAGICDECOY] = {
 		"NC_MAGICDECOY";
-		SkillName = "Artillerie: Leurre Magique",
+		SkillName = "Artillerie - Leurre Magique",
 		MaxLv = 5,
 		SpAmount = { 40, 45, 50, 55, 60 },
 		_NeedSkillList = {
@@ -6248,7 +6288,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_AUTOSHADOWSPELL] = {
 		"SC_AUTOSHADOWSPELL";
-		SkillName = "Sortilège des Ombres",
+		SkillName = "Sort des Ombres",
 		MaxLv = 10,
 		SpAmount = { 40, 45, 50, 55, 60, 65, 70, 75, 80, 85 },
 		_NeedSkillList = {
@@ -6308,7 +6348,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_ENERVATION] = {
 		"SC_ENERVATION";
-		SkillName = "Épuisement",
+		SkillName = "Mascarade - Épuisement",
 		MaxLv = 3,
 		SpAmount = { 30, 40, 50 },
 		_NeedSkillList = {
@@ -6318,7 +6358,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_GROOMY] = {
 		"SC_GROOMY";
-		SkillName = "Mélancolie",
+		SkillName = "Mascarade - Mélancolie",
 		MaxLv = 3,
 		SpAmount = { 30, 40, 50 },
 		_NeedSkillList = {
@@ -6328,7 +6368,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_IGNORANCE] = {
 		"SC_IGNORANCE";
-		SkillName = "Ignorance",
+		SkillName = "Mascarade - Ignorance",
 		MaxLv = 3,
 		SpAmount = { 30, 40, 50 },
 		_NeedSkillList = {
@@ -6338,7 +6378,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_LAZINESS] = {
 		"SC_LAZINESS";
-		SkillName = "Paresse",
+		SkillName = "Mascarade - Paresse",
 		MaxLv = 3,
 		SpAmount = { 30, 40, 50 },
 		_NeedSkillList = {
@@ -6350,7 +6390,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_UNLUCKY] = {
 		"SC_UNLUCKY";
-		SkillName = "Malchance",
+		SkillName = "Mascarade - Malchance",
 		MaxLv = 3,
 		SpAmount = { 30, 40, 50 },
 		_NeedSkillList = {
@@ -6361,7 +6401,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_WEAKNESS] = {
 		"SC_WEAKNESS";
-		SkillName = "Faiblesse",
+		SkillName = "Mascarade - Faiblesse",
 		MaxLv = 3,
 		SpAmount = { 30, 40, 50 },
 		_NeedSkillList = {
@@ -6373,7 +6413,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SC_STRIPACCESSARY] = {
 		"SC_STRIPACCESSARY";
-		SkillName = "File ta montre et des bijoux",
+		SkillName = "File-moi ta montre",
 		MaxLv = 5,
 		SpAmount = { 15, 18, 21, 24, 27 },
 		_NeedSkillList = {
@@ -6481,7 +6521,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.LG_REFLECTDAMAGE] = {
 		"LG_REFLECTDAMAGE";
-		SkillName = "Bouclier Réflecteur Royal",
+		SkillName = "Bouclier Réflecteur Ultime",
 		MaxLv = 5,
 		SpAmount = { 40, 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -6508,7 +6548,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.LG_RAGEBURST] = {
 		"LG_RAGEBURST";
-		SkillName = "Explosion de Rage",
+		SkillName = "Explosion de Colère",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.LG_FORCEOFVANGUARD,1 }
@@ -6653,7 +6693,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_EARTHSHAKER] = {
 		"SR_EARTHSHAKER";
-		SkillName = "Entrailles de la Terre",
+		SkillName = "Coup des Entrailles de la Terre",
 		MaxLv = 5,
 		SpAmount = { 20, 25, 30, 35, 40, 0, 10, 15, 20, 25, 30 },
 		_NeedSkillList = {
@@ -6683,7 +6723,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_RAMPAGEBLASTER] = {
 		"SR_RAMPAGEBLASTER";
-		SkillName = "Explosion",
+		SkillName = "Explosion de Fureur",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.SR_EARTHSHAKER,2 }
@@ -6761,7 +6801,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_POWERVELOCITY] = {
 		"SR_POWERVELOCITY";
-		SkillName = "Transfert Complet du Ki",
+		SkillName = "Transfert Spirituel Ultime",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.MO_CALLSPIRITS,5 }
@@ -6781,7 +6821,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_GENTLETOUCH_QUIET] = {
 		"SR_GENTLETOUCH_QUIET";
-		SkillName = "Point de Pression: Silence",
+		SkillName = "Point de Pression - Silence",
 		MaxLv = 5,
 		SpAmount = { 20, 25, 30, 35, 40, 0, 20, 25, 30, 35, 40 },
 		_NeedSkillList = {
@@ -6791,7 +6831,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_GENTLETOUCH_CURE] = {
 		"SR_GENTLETOUCH_CURE";
-		SkillName = "Point de Pression: Guérison",
+		SkillName = "Point de Pression - Guérison",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.SR_POWERVELOCITY,1 }
@@ -6800,7 +6840,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_GENTLETOUCH_ENERGYGAIN] = {
 		"SR_GENTLETOUCH_ENERGYGAIN";
-		SkillName = "Point de Pression: Régénération",
+		SkillName = "Point de Pression - Régénération",
 		MaxLv = 5,
 		SpAmount = { 40, 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -6810,7 +6850,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_GENTLETOUCH_CHANGE] = {
 		"SR_GENTLETOUCH_CHANGE";
-		SkillName = "Point de Pression: Conversion",
+		SkillName = "Point de Pression - Conversion",
 		MaxLv = 5,
 		SpAmount = { 40, 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -6820,7 +6860,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_GENTLETOUCH_REVITALIZE] = {
 		"SR_GENTLETOUCH_REVITALIZE";
-		SkillName = "Point de Pression: Revitalisation",
+		SkillName = "Point de Pression - Revitalisation",
 		MaxLv = 5,
 		SpAmount = { 40, 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -6896,7 +6936,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WM_METALICSOUND] = {
 		"WM_METALICSOUND";
-		SkillName = "Harmonique",
+		SkillName = "Harmonisation",
 		MaxLv = 5,
 		SpAmount = { 64, 68, 72, 76, 80 },
 		_NeedSkillList = {
@@ -6965,7 +7005,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WM_DEADHILLHERE] = {
 		"WM_DEADHILLHERE";
-		SkillName = "Vallée de la Mort",
+		SkillName = "La Vallée des Morts",
 		MaxLv = 5,
 		SpAmount = { 50, 53, 56, 59, 62 },
 		_NeedSkillList = {
@@ -7005,7 +7045,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.WM_GLOOMYDAY] = {
 		"WM_GLOOMYDAY";
-		SkillName = "Triste Jour",
+		SkillName = "Sombre Journée",
 		MaxLv = 5,
 		SpAmount = { 60, 60, 60, 60, 60 },
 		_NeedSkillList = {
@@ -7332,7 +7372,7 @@ SKILL_INFO_LIST = {
 	
 	[SKID.SO_SUMMON_AGNI] = {
 		"SO_SUMMON_AGNI";
-		SkillName = "Agni! VIens à moi",
+		SkillName = "Agni! Viens à moi",
 		MaxLv = 3,
 		SpAmount = { 100, 150, 200 },
 		_NeedSkillList = {
@@ -7611,19 +7651,19 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_TRAINING_SWORD] = {
 		"GN_TRAINING_SWORD";
-		SkillName = "Sword Training",
+		SkillName = "Entraînement à l'Épée",
 		MaxLv = 5,
 	},
 
 	[SKID.GN_REMODELING_CART] = {
 		"GN_REMODELING_CART";
-		SkillName = "Cart Remodeling",
+		SkillName = "Charrette Aérodynamique",
 		MaxLv = 5,
 	},
 
 	[SKID.GN_CART_TORNADO] = {
 		"GN_CART_TORNADO";
-		SkillName = "Cart Tornado",
+		SkillName = "Charrette Tornade",
 		MaxLv = 5,
 		SpAmount = { 30, 30, 30, 30, 30 },
 		_NeedSkillList = {
@@ -7633,7 +7673,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_CARTCANNON] = {
 		"GN_CARTCANNON";
-		SkillName = "Cart Cannon",
+		SkillName = "Charrette Armée",
 		MaxLv = 5,
 		SpAmount = { 40, 42, 46, 48, 50 },
 		_NeedSkillList = {
@@ -7643,7 +7683,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_CARTBOOST] = {
 		"GN_CARTBOOST";
-		SkillName = "Cart Boost",
+		SkillName = "Charrette à Réaction",
 		MaxLv = 5,
 		SpAmount = { 20, 24, 28, 32, 36 },
 		_NeedSkillList = {
@@ -7653,7 +7693,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_THORNS_TRAP] = {
 		"GN_THORNS_TRAP";
-		SkillName = "Thorn Trap",
+		SkillName = "Piège d'Aubépines",
 		MaxLv = 5,
 		SpAmount = { 22, 26, 30, 34, 38 },
 		_NeedSkillList = {
@@ -7663,7 +7703,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_BLOOD_SUCKER] = {
 		"GN_BLOOD_SUCKER";
-		SkillName = "Blood Sucker",
+		SkillName = "Suceur de Sang",
 		MaxLv = 5,
 		SpAmount = { 30, 35, 40, 45, 50 },
 		_NeedSkillList = {
@@ -7673,7 +7713,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_SPORE_EXPLOSION] = {
 		"GN_SPORE_EXPLOSION";
-		SkillName = "Spore Explosion",
+		SkillName = "Explosion de Spores",
 		MaxLv = 5,
 		SpAmount = { 55, 60, 65, 70, 75 },
 		_NeedSkillList = {
@@ -7683,7 +7723,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_WALLOFTHORN] = {
 		"GN_WALLOFTHORN";
-		SkillName = "Wall of Thorns",
+		SkillName = "Mur de Ronces",
 		MaxLv = 5,
 		SpAmount = { 40, 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -7693,7 +7733,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_CRAZYWEED] = {
 		"GN_CRAZYWEED";
-		SkillName = "Crazy Weed",
+		SkillName = "Herbes Folles",
 		MaxLv = 10,
 		SpAmount = { 24, 28, 32, 36, 40, 44, 48, 52, 56, 60 },
 		_NeedSkillList = {
@@ -7703,7 +7743,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_DEMONIC_FIRE] = {
 		"GN_DEMONIC_FIRE";
-		SkillName = "Demonic Fire",
+		SkillName = "Feu Démoniaque",
 		MaxLv = 5,
 		SpAmount = { 24, 28, 32, 36, 40 },
 		_NeedSkillList = {
@@ -7713,7 +7753,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_FIRE_EXPANSION] = {
 		"GN_FIRE_EXPANSION";
-		SkillName = "Fire Expansion",
+		SkillName = "Huile sur le Feu",
 		MaxLv = 5,
 		SpAmount = { 30, 35, 40, 45, 50 },
 		_NeedSkillList = {
@@ -7723,7 +7763,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_HELLS_PLANT] = {
 		"GN_HELLS_PLANT";
-		SkillName = "Hell's Plant",
+		SkillName = "Plante Infernale",
 		MaxLv = 5,
 		SpAmount = { 40, 45, 50, 55, 60 },
 		_NeedSkillList = {
@@ -7733,7 +7773,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_MANDRAGORA] = {
 		"GN_MANDRAGORA";
-		SkillName = "Howling of Mandragora",
+		SkillName = "Cri de Mandragore",
 		MaxLv = 5,
 		SpAmount = { 40, 45, 50, 55, 60 },
 		_NeedSkillList = {
@@ -7743,7 +7783,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_SLINGITEM] = {
 		"GN_SLINGITEM";
-		SkillName = "Sling Item",
+		SkillName = "Lancer d'Objet",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.GN_CHANGEMATERIAL,1 }
@@ -7752,13 +7792,13 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_CHANGEMATERIAL] = {
 		"GN_CHANGEMATERIAL";
-		SkillName = "Change Material",
+		SkillName = "Recyclage",
 		MaxLv = 1,
 	},
 
 	[SKID.GN_MIX_COOKING] = {
 		"GN_MIX_COOKING";
-		SkillName = "Mix Cooking",
+		SkillName = "Expérimentations Culinaires",
 		MaxLv = 2,
 		SpAmount = { 5, 40 },
 		_NeedSkillList = {
@@ -7768,7 +7808,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_MAKEBOMB] = {
 		"GN_MAKEBOMB";
-		SkillName = "Create Bomb",
+		SkillName = "Création de Bombe",
 		MaxLv = 2,
 		SpAmount = { 5, 40 },
 		_NeedSkillList = {
@@ -7778,14 +7818,14 @@ SKILL_INFO_LIST = {
 
 	[SKID.GN_S_PHARMACY] = {
 		"GN_S_PHARMACY";
-		SkillName = "Special Pharmacy",
+		SkillName = "Pharmacie Expérimentale",
 		MaxLv = 10,
 		SpAmount = { 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 }		
 	},
 
 	[SKID.AB_SECRAMENT] = {
 		"AB_SECRAMENT";
-		SkillName = "Sacrament",
+		SkillName = "Saint Sacrement",
 		MaxLv = 5,
 		SpAmount = { 100, 120, 140, 160, 180 },
 		_NeedSkillList = {
@@ -7796,7 +7836,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_HOWLINGOFLION] = {
 		"SR_HOWLINGOFLION";
-		SkillName = "Howling of Lion",
+		SkillName = "Rugissement du Lion",
 		MaxLv = 5,
 		SpAmount = { 40, 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -7807,7 +7847,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.SR_RIDEINLIGHTNING] = {
 		"SR_RIDEINLIGHTNING";
-		SkillName = "Ride in Lightning",
+		SkillName = "Chevauchée des Éclairs",
 		MaxLv = 5,
 		SpAmount = { 40, 50, 60, 70, 80 },
 		_NeedSkillList = {
@@ -7817,7 +7857,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.ALL_ODINS_RECALL] = {
 		"ALL_ODINS_RECALL";
-		SkillName = "Odin's Recall",
+		SkillName = "Appel d'Odin",
 	},
 
 	[SKID.RETURN_TO_ELDICASTES] = {
@@ -7832,7 +7872,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.ALL_ODINS_POWER] = {
 		"ALL_ODINS_POWER";
-		SkillName = "Odin's Power",
+		SkillName = "Pouvoir d'Odin",
 	},
 
 	[SKID.HLIF_HEAL] = {
@@ -7854,7 +7894,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.HLIF_CHANGE] = {
 		"HLIF_CHANGE";
-		SkillName = "Inversion Mentale",
+		SkillName = "Échange Mentale",
 	},
 
 	[SKID.HAMI_CASTLE] = {
@@ -7894,7 +7934,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.HFLI_SPEED] = {
 		"HFLI_SPEED";
-		SkillName = "Vitesse Extrême",
+		SkillName = "Dépassement de Vitesse",
 		SpAmount = { 30, 40, 50, 60, 70 }
 	},
 
@@ -8084,7 +8124,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MS_BERSERK] = {
 		"MS_BERSERK";
-		SkillName = "Berserk",
+		SkillName = "Furie",
 	},
 
 	[SKID.MA_DOUBLE] = {
@@ -8124,12 +8164,12 @@ SKILL_INFO_LIST = {
 
 	[SKID.MA_CHARGEARROW] = {
 		"MA_CHARGEARROW";
-		SkillName = "Tir Chargé",
+		SkillName = "Flèche Repoussante",
 	},
 
 	[SKID.MA_SHARPSHOOTING] = {
 		"MA_SHARPSHOOTING";
-		SkillName = "Transpercement",
+		SkillName = "Tir Perçant",
 	},
 
 	[SKID.ML_PIERCE] = {
@@ -8144,12 +8184,12 @@ SKILL_INFO_LIST = {
 
 	[SKID.ML_SPIRALPIERCE] = {
 		"ML_SPIRALPIERCE";
-		SkillName = "Spire-Estoc",
+		SkillName = "Estoc Tourbillonnant",
 	},
 
 	[SKID.ML_DEFENDER] = {
 		"ML_DEFENDER";
-		SkillName = "Carapace",
+		SkillName = "Défense",
 	},
 
 	[SKID.ML_AUTOGUARD] = {
@@ -8174,7 +8214,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MER_SIGHT] = {
 		"MER_SIGHT";
-		SkillName = "Révélation",
+		SkillName = "Feu Révélateur",
 	},
 
 	[SKID.MER_CRASH] = {
@@ -8269,17 +8309,17 @@ SKILL_INFO_LIST = {
 
 	[SKID.GD_GUARDRESEARCH] = {
 		"GD_GUARDRESEARCH";
-		SkillName = "Recherches sur les Gardiens",
+		SkillName = "Connaissance des Gardiens",
 	},
 
 	[SKID.GD_GUARDUP] = {
 		"GD_GUARDUP";
-		SkillName = "Construction des Gardiens",
+		SkillName = "Entraînement des Gardiens",
 	},
 
 	[SKID.GD_EXTENSION] = {
 		"GD_EXTENSION";
-		SkillName = "Espansion de la Guilde",
+		SkillName = "Extension de la Guilde",
 	},
 
 	[SKID.GD_GLORYGUILD] = {
@@ -8304,7 +8344,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GD_HAWKEYES] = {
 		"GD_HAWKEYES";
-		SkillName = "Oeil de Faucon",
+		SkillName = "Oeil du Faucon",
 	},
 
 	[SKID.GD_BATTLEORDER] = {
@@ -8329,7 +8369,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.GD_DEVELOPMENT] = {
 		"GD_DEVELOPMENT";
-		SkillName = "Developpement Florissant",
+		SkillName = "Développement Florissant",
 	},
 
 	[SKID.GD_ITEMEMERGENCYCALL] = {
