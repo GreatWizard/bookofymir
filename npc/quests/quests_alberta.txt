@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Zack (Hat Quests) et Myllena (Turtle Island Quests), corrigé par Icaros
+//traduit par Zack (Hat Quests), NoH (Alberta Boy), et Myllena (Turtle Island Quests), corrigé par Icaros
 //===== eAthena Script ======================================= 
 //= Quest NPCs related to Alberta
 //===== By: ================================================== 
@@ -16,6 +16,8 @@
 //= Hat of Sun God, Sunday Hat, Mage Hat, Magician Hat Quests
 //= [Aegis conversion]
 //= Turtle Island Quests
+//= [Aegis Conversion]
+//= Alberta Boy
 //===== Additional Comments: ================================= 
 //= Fully working
 //= 1.1 Fixed Spore Doll exploit, Gramp's Tiger skin label bug
@@ -420,7 +422,7 @@ alberta_in,28,145,4	script	Grand-Père#albq	120,{
 			mes "Non seulement elles n'ont pas fonctionné mais leur coût exorbitant m'ont mis sur la paille!";
 			next;
 			mes "[Grand-Père]";
-			mes "J'ai tout essayé pour restaurer ma jeunesse... Enfin... Il y a une chose que je n'ai pas essayé...";
+			mes "J'ai tout essayé pour retrouver ma jeunesse... Enfin... Il y a une chose que je n'ai pas essayé...";
 			next;
 			mes "[Grand-Père]";
 			mes "C'est la ^3355FFPatte du Tigre^000000, un talisman légendaire pour la revitalisation!!"; 
@@ -2171,5 +2173,492 @@ tur_dun03,67,130,4	script	Chevalier#tur4	105,{
 	next;
 	mes "[Nysurea]";
 	mes "Quoi qu'il en soit, soyez extrêmement prudent. L'Île de la Tortue recèle de dangers et de pièges dans lesquels nos hommes sont tombés lorsqu'ils exploraient la façade Est et Nord de l'île.";
+	close;
+}
+
+// Alberta Boy
+//============================================================ 
+alberta_in,131,95,5	script	Iromo#ep3_2	706,{
+	if (ep13_2_hiki == 13) {
+		mes "[Iromo]";
+		mes "Mais... Ce monde est... Il est si grand! Ce n'est pas juste les humains... C'est aussi plein d'autres formes de vie comme nous, je suis sûr... Mais où peuvent-elles bien être?";
+		next;
+		mes "[Iromo]";
+		mes "... Où est-ce qu'ils vivent? Où se trouve leur royaume? Leur terre? Où est-ce que ça peut bien être?";
+		next;
+		mes "[Iromo]";
+		mes "S'ils existaient, ça serait génial! Non, c'est sûr qu'ils existent! Un jour... Un jour, j'irai là-bas!";
+		close;
+	}
+	if (ep13_2_hiki == 12) {
+		mes "[Iromo]";
+		mes "Si ça fait trop peur... Ce serait mieux si...";
+		next;
+		mes "- Silence -";
+		next;
+		mes "- Vous commencez à parler et à lui raconter vos aventures, vos joies, vos peines, vos pertes, unes par unes. -";
+		next;
+		mes "- Combattre des monstres et remporter la victoire... Rencontrer tant de monde... Et tant d'autres choses... Vous racontez tout cela au garçon, autant que possible. -";
+		next;
+		mes "- Vous avez vécu de nombreuses choses, vous avez connu de nombreux dangers, mais au final, vous ne retenez que les bonnes choses. Ce que vous avez reçu surpasse largement ce que vous avez perdu. Vous essayez de faire passer ce message à Iromo. -";
+		next;
+		mes "[Iromo]";
+		mes "...";
+		next;
+		mes "[Iromo]";
+		mes "... Alors en fin de compte... Vous voulez juste que... je sorte? C'est ça?";
+		next;
+		select("C'est vrai. Tu as plus à gagner qu'à perdre.");
+		mes "[Iromo]";
+		mes "...";
+		next;
+		mes "[Iromo]";
+		mes "... Mais... Je ne sortirai pas! J'ai trop peur! Pas maintenant en tout cas.";
+		next;
+		mes "[Iromo]";
+		mes "Bon, même si je ne sors pas tout de suite, j'essaierai de me forcer. Un jour, je deviendrai surement un aventurier, et je ferai des tas de choses!";
+		next;
+		set ep13_2_hiki,13;
+		completequest 10089;
+		getexp 80000,0;
+		mes "[Iromo]";
+		mes "Le monde est si grand... Il y a tant de choses à faire... Je n'ai encore rien vu. Oui... Je veux tout voir!";
+		close;
+	}
+	if ((ep13_2_hiki == 11) && (friendship > 14)) {
+		mes "[Iromo]";
+		mes "Je préfère rester ici, plutôt que de sortir avec mes amis. Au moins ici, je ne risque rien.";
+		next;
+		mes "[Iromo]";
+		mes "Bon, allez-vous en, maintenant! Je sais ce que vous allez dire! Vous répétez toujours la même chose!";
+		next;
+		mes "- Vous n'abandonnez pas et continuez à lui raconter des histoires parlant de deux amis. Vous lui racontez une histoire vraie... -";
+		next;
+		mes "- Quelqu'un venait enfin de retrouver un vieil ami, mais à cause d'un tour du destin, celui-ci meurt dans cette tragédie... -";
+		next;
+		mes "- Vous insistez sur le fait que même s'il s'agit d'une tragédie, il s'agissait aussi et surtout d'une très belle amitié qui perdura malgré cela.-";
+		next;
+		mes "[Iromo]";
+		mes "...";
+		next;
+		mes "[Iromo]";
+		mes "... Merci de m'avoir raconté ça. C'était de vrais amis...";
+		next;
+		mes "[Iromo]";
+		mes "... Et alors? Qu'est-ce que vous voulez encore me dire cette fois-ci? Vous m'avais raconté plein d'histoires... Pourquoi vous ne m'en racontez pas une que vous avez inventée?";
+		next;
+		select("On ne peut pas oublier ses amis.");
+		mes "[Iromo]";
+		mes "...";
+		next;
+		select("Pour avoir d'aussi bons amis...");
+		select("Il faut sortir et voir le monde.");
+		mes "[Iromo]";
+		mes "Vous avez changé d'histoire, mais vous parlez toujours de la même chose...";
+		next;
+		select("À vrai dire, tu manques aux autres enfants.");
+		mes "[Iromo]";
+		mes "... C'est vrai? Je leur manque? Ça fait si longtemps...";
+		next;
+		select("Tu as beaucoup de choses à découvrir...");
+		mes "[Iromo]";
+		mes "...";
+		next;
+		select("Tu ne crois pas que tu perds ton temps à la maison?");
+		mes "[Iromo]";
+		mes "...";
+		next;
+		select("Tu veux renoncer à tes aventures parce que tu as peur?");
+		select("C'est dommage. Les changements font toujours du bien.");
+		mes "[Iromo]";
+		mes "... Les changements...";
+		mes "Font du bien?";
+		next;
+		select("Le monde est plus vaste que cette ville ou ce royaume.");
+		mes "[Iromo]";
+		mes "...";
+		next;
+		select("Et comme il est si grand, il y a plein de choses marrantes.");
+		mes "[Iromo]";
+		mes "Vraiment? Il y a d'autres endroits qu'Alberta et que Rune-Midgard?";
+		next;
+		set ep13_2_hiki,12;
+		changequest 10088,10089;
+		mes "[Iromo]";
+		mes "Mais... Ça veut dire qu'il y a encore plus de dangers! Non, ça ne peut pas être vrai! J'ai peeeeeuuuur! Je n'aime pas ça!";
+		close;
+	}
+	if (ep13_2_hiki == 11) {
+		mes "[Iromo]";
+		mes "Je préfère rester ici, plutôt que de sortir avec mes amis. Au moins ici, je ne risque rien.";
+		next;
+		mes "[Iromo]";
+		mes "Bon, allez-vous en, maintenant! Je sais ce que vous allez dire! Vous répétez toujours la même chose!";
+		close;
+	}
+	if (ep13_2_hiki == 10) {
+		set .@cooltime,checkquest(10087,PLAYTIME);
+		if (.@cooltime == 2) {
+			mes "[Iromo]";
+			mes "... Vous êtes vraiment ennuyant"+ ( sex ? "" : "e" ) +"... Qu'est-ce que vous voulez de moi au juste?";
+			next;
+			mes "[Iromo]";
+			mes "Il y a très longtemps... J'avais un ami comme vous. J'allais jouer avec lui... Mais... Il a dû m'oublier.";
+			next;
+			set ep13_2_hiki,11;
+			changequest 10087,10088;
+			getexp 67000,0;
+			mes "[Iromo]";
+			mes "Oubliez ça... Je m'y attendais... Je préfère rester ici, plutôt que de sortir avec mes amis. Au moins ici, je ne risque rien.";
+			close;
+		}
+		mes "[Iromo]";
+		mes "... Quoi?! Je ne veux plus vous écouter! Allez-vous en!";
+		close;
+	}
+	if ((ep13_2_hiki == 9) && (lhz_rekenber > 21)) {
+		mes "[Iromo]";
+		mes "Qu'est-ce que vous me voulez, cette fois?";
+		next;
+		select("L'histoire de deux frères...");
+		mes "- Vous lui parlez de Kazien et de Lyozien. À cause du destin, ils étaient nés pour remplir des tâches illégales. Mais l'innocent Lyozien faisait confiance à son frère...-";
+		next;
+		mes "- Et même si Kazien était devenu un criminel, il essayait de prendre soin de son cadet. -";
+		next;
+		mes "-Cette histoire s'est passée à l'autre bout du continent, mais comme vous en avez été témoin, vous arrivez à faire passer tous vos sentiments. -";
+		next;
+		mes "- Cette histoire devrait retenir l'attention d'Iromo, qui a toujours voulu un frère. -";
+		next;
+		mes "[Iromo]";
+		mes "Je vois... C'est deux frères géniaux! C'est triste, mais c'est vraiment une belle histoire! Si seulement ça pouvait être moi dans l'histoire...";
+		next;
+		mes "[Iromo]";
+		mes "Mais... Je suis fils unique, alors je ne peux rien y faire...";
+		next;
+		select("Pas besoin de liens de sang pour être frères...");
+		mes "[Iromo]";
+		mes "...";
+		next;
+		select("Tu pourrais te trouver un frère dehors...");
+		mes "[Iromo]";
+		mes "... Dehors?...";
+		next;
+		select("Rien ne changera si tu restes là.");
+		mes "[Iromo]";
+		mes "...";
+		next;
+		mes "[Iromo]";
+		mes "... Quoi? Alors c'est de ma faute? Vous dites toujours la même chose... Allez-vous en! Vous m'ennuyez maintenant...";
+		next;
+		set ep13_2_hiki,10;
+		changequest 10086,10087;
+		getexp 57000,0;
+		mes "[Iromo]";
+		mes "... Allez-vous en, je ne veux plus vous voir!";
+		close;
+	}
+	if ((ep13_2_hiki == 8) || (ep13_2_hiki == 9)) {
+		set .@cooltime,checkquest(10085,PLAYTIME);
+		if (.@cooltime == 2) {
+			mes "[Iromo]";
+			mes "Vous n'abandonnez jamais, pas vrai? Qu'est-ce que vous essayez de me dire?";
+			next;
+			mes "[Iromo]";
+			mes "C'est frustrant... Pourquoi est-ce que vous insistez comme ça?";
+			next;
+			if (Sex == 0) {
+				mes "[Iromo]";
+				mes "Vraiment, ça va... J'aimerais bien avoir une soeur comme vous.";
+				next;
+			}
+			else {
+				mes "[Iromo]";
+				mes "Vraiment, ça va... J'aimerais bien avoir un frère comme vous.";
+				next;
+			}
+			mes "[Iromo]";
+			mes "Est-ce que vous connaissez des histoires à propos de deux frères?";
+			next;
+			set ep13_2_hiki,9;
+			changequest 10085,10086;
+			mes "[Iromo]";
+			mes "Quoi? Vous n'avez rien à me raconter? Vraiment? Bon, laissez-moi tranquille alors!";
+			close;
+		}
+		mes "[Iromo]";
+		mes "Merci de vous inquiéter, mais... Ça va... Non merci.";
+		close;
+	}
+	if (ep13_2_hiki == 7) {
+		set .@goyang,checkquest(10084,HUNTING);
+		if (.@goyang == 2) {
+			mes "[Iromo]";
+			mes "Oh, vous avez fait fuir le méchant chat hors du village? C'est vrai?! Merciii!";
+			next;
+			mes "[Iromo]";
+			mes "Mais... J'ai toujours peur de sortir. Je préfère rester à la maison.";
+			next;
+			set ep13_2_hiki,8;
+			changequest 10084,10085;
+			getexp 47000,0;
+			mes "[Iromo]";
+			mes "Merci d'essayer de m'aider, mais non merci.";
+			close;
+		}
+		mes "[Iromo]";
+		mes "Si jamais je sors, je vais tomber sur le méchant chat.";
+		next;
+		mes "[Iromo]";
+		mes "Il va encore me mordre et me griffer partout! Je veux rester à la maison.";
+		close;
+	}
+	if ((ep13_2_hiki == 6) && (countitem(528) > 0) && (countitem(501) > 0)) {
+		mes "[Iromo]";
+		mes "... Oh? Cette odeur... C'est celle que je préfère! Ha Ha!";
+		next;
+		mes "[Iromo]";
+		mes "Mais... Ma maman est juste là.";
+		mes "(Clin d'oeil, clin d'oeil)";
+		next;
+		mes "[Iromo]";
+		mes "... Merci! Il faut que j'aille cacher tout ça. Mais encore merci!";
+		next;
+		mes "[Iromo]";
+		mes "Ça sent si bon...";
+		next;
+		mes "[Iromo]";
+		mes "Hein? Je pourrai en avoir si jamais je sors?";
+		next;
+		mes "[Iromo]";
+		mes "......";
+		next;
+		mes "[Iromo]";
+		mes "Mais... J'ai trop peur...";
+		next;
+		mes "[Iromo]";
+		mes "J'ai trop peur. Si jamais je sors, alors... Non, je ne veux pas encore me faire attaquer.";
+		next;
+		select("Encore?");
+		mes "[Iromo]";
+		mes "... Il y a un chat bizarre en ville qui marche sur deux pattes. J'aime bien les chats, moi, alors j'ai été le voir. Mais tout d'un coup, il a craché, et il s'est mis à me mordre et à me griffer.";
+		next;
+		delitem 528,1; //Monster's_Feed
+		delitem 501,1; //Red_Potion
+		set ep13_2_hiki,7;
+		changequest 10083,10084;
+		getexp 37500,0;
+		mes "[Iromo]";
+		mes "Je ne veux plus jamais revoir ce chat. Si jamais je sors et que je le revois, je ne sais pas ce que je pourrais faire. J'ai trop peur...";
+		close;
+	}
+	if ((ep13_2_hiki == 3) || (ep13_2_hiki == 4) || (ep13_2_hiki == 5) || (ep13_2_hiki == 5)) {
+		mes "[Iromo]";
+		mes "... Je n'aime pas être hors du village. Il n'y a rien de mieux que d'être chez soi!";
+		close;
+	}
+	if ((ep13_2_hiki == 1) || (ep13_2_hiki == 2)) {
+		mes "[Iromo]";
+		mes "Maman me dit que je devrais sortir jouer dehors avec mes amis. Mais moi, je ne veux pas sorir avec eux.";
+		next;
+		mes "[Iromo]";
+		mes "C'est juste dommage que je ne puisse pas aller chercher cette nourriture délicieuse qu'on trouve en-dehors du village, mais je m'y fais.";
+		next;
+		set ep13_2_hiki,2;
+		changequest 10079,10080;
+		mes "[Iromo]";
+		mes "Et puis je ne suis pas obligé de manger de la nourriture de l'extérieur, alors je n'ai pas vraiment besoin de sortir.";
+		close;
+	}
+	mes "[Iromo]";
+	mes "......";
+	next;
+	mes "[Iromo]";
+	mes "J'aime bien ma maison et ma chambre. Je ne veux pas en sortir.";
+	close;
+}
+
+alberta_in,120,93,3	script	Mère d'Iromo::Iromo's Mother#ep3_2	53,{
+	if (ep13_2_hiki == 8) {
+		mes "[Mère]";
+		mes "Merci d'aider mon fils, mais je pense qu'on ne peut plus rien y faire.";
+		next;
+		mes "[Mère]";
+		mes "Iromo était plein de vie, curieux du monde. Il voulait l'explorer entièrement...";
+		next;
+		mes "[Mère]";
+		mes "Mais regardez-le maintenant. Il ne sort même plus de la maison. Il reste dans sa chambre.";
+		next;
+		mes "[Mère]";
+		mes "Il est devenu tout timide. Quand on se dispute, il ne me parle plus de la semaine, ensuite.";
+		next;
+		mes "[Mère]";
+		mes "Vous aurez peut-être du mal à le faire parler...";
+		close;
+	}
+	if (ep13_2_hiki == 7) {
+		mes "[Mère]";
+		mes "Oh, je me souviens de ce qui s'est passé la dernière fois... Un jour, Iromo est revenu les larmes aux yeux, et il semblait s'être blessé.";
+		next;
+		mes "[Mère]";
+		mes "Ce n'était rien de grave, mais je m'inquiétais pour lui. Il n'a jamais voulu me dire ce qui c'était passé.";
+		next;
+		mes "[Mère]";
+		mes "Il ne parle plus beaucoup depuis ce jour, et il ne veut plus sortir.";
+		next;
+		mes "[Mère]";
+		mes "J'espère qu'il me racontera ce qui s'est passé ce jour-là. Iromo était un si gentil garçon...";
+		close;
+	}
+	if ((ep13_2_hiki == 4) || (ep13_2_hiki == 5) || (ep13_2_hiki == 6)) {
+		mes "[Mère]";
+		mes "Hum.. Le plat préféré d'Iromo? Laissez-moi réfléchir... En fait, il aime toutes sortes de nourriture. Il n'est vraiment pas difficile.";
+		next;
+		mes "[Mère]";
+		mes "Il dépensait tout son argent de poche en nourriture quand il sortait avec ses amis, mais je ne sais pas ce qu'il mangeait.";
+		next;
+		set ep13_2_hiki,3;
+		mes "[Mère]";
+		mes "Oh, pourquoi ne demanderiez-vous pas à ses amis? Je pense qu'ils pourraient vous répondre.";
+		close;
+	}
+	if ((ep13_2_hiki == 2) || (ep13_2_hiki == 3)) {
+		mes "[Mère]";
+		mes "Hum.. Le plat préféré d'Iromo? Laissez-moi réfléchir... En fait, il aime toutes sortes de nourriture. Il n'est vraiment pas difficile.";
+		next;
+		mes "[Mère]";
+		mes "Il dépensait tout son argent de poche en nourriture quand il sortait avec ses amis, mais je ne sais pas ce qu'il mangeait.";
+		next;
+		set ep13_2_hiki,3;
+		mes "[Mère]";
+		mes "Oh, pourquoi ne demanderiez-vous pas à ses amis? Je pense qu'ils pourraient vous répondre.";
+		close;
+	}
+	mes "[Mère]";
+	mes "Ce petit garçon est mon fils, Iromo.";
+	next;
+	mes "[Mère]";
+	mes "Il était toujours dehors autrefois, à jouer avec ses amis.";
+	next;
+	mes "[Mère]";
+	mes "Mais pour une raison qui m'échappe... Il ne sort plus jamais.";
+	next;
+	if (BaseLevel > 40) {
+		set ep13_2_hiki,1;
+		setquest 10079;
+	}
+	mes "[Mère]";
+	mes "Je suis vraiment inquiète pour lui. Qu'est-ce qui a bien pu lui arriver?";
+	close;
+}
+
+alberta,45,106,5	script	Petit Garçon::Little Boy#ep3_2	706,{
+	if (ep13_2_hiki == 6) {
+		mes "[Petit Garçon]";
+		mes "Iromo? Il aimait bien la ^FF0000Nourriture pour Monstre^000000 et les ^FF0000Potions Rouges^000000.";
+		next;
+		mes "[Petit Garçon]";
+		mes "Oh, et aussi... Moi, j'aime bien les Bananes!~";
+		mes "Haha!";
+		close;
+	}
+	if (ep13_2_hiki == 5) {
+		mes "[Petit Garçon]";
+		mes "......";
+		next;
+		mes "[Petit Garçon]";
+		mes "Miam! C'es toujours bon, les bananes! C'est le meilleur de tous les fruits!";
+		next;
+		mes "[Petit Garçon]";
+		mes "Merci pour la Banane...";
+		mes "Maintenant, je vais pouvoir essayer de me rappeler ce qu'Iromo aime manger...";
+		next;
+		mes "[Petit Garçon]";
+		mes "D'habitude, il aimait bien la nourriture pas chère... Vous savez, tous ces trucs à grignoter bizarres. Il devait se cacher quand il en mangeait.";
+		next;
+		mes "[Petit Garçon]";
+		mes "Sa mère ne l'aurait pas laissé manger toutes ces cochonneries... C'est pour ça qu'il lui cachait. Mais je ne sais pas pourquoi il aimait ça.";
+		next;
+		mes "[Petit Garçon]";
+		mes "D'habitude, il achetait de la Nourriture pour Monstre. Il disait que c'était bon avec un verre de Potion Rouge. C'est toujours ce qu'il mangeait à midi.";
+		next;
+		mes "[Petit Garçon]";
+		mes "Il a vraiment des goûts bizarres. Je ne comprends pas comment il peut aimer ça...";
+		next;
+		set ep13_2_hiki,6;
+		changequest 10082,10083;
+		mes "[Petit Garçon]";
+		mes "Mais je vous ai dit tout ce que je savais. J'ai fini. Venez me voir si vous avez d'autres Bananes. Haha!";
+		mes "J'adoooore les Bananes!~";
+		close;
+	}
+	if ((ep13_2_hiki == 4) && (countitem(513) > 0)) {
+		mes "[Petit Garçon]";
+		mes "Hein? C'est quoi cette odeur? Vous m'avez apporté des Bananes! Oh, merci merci merciiiii!";
+		next;
+		mes "[Petit Garçon]";
+		mes "Donnez-les moi d'abord.";
+		next;
+		mes "[Petit Garçon]";
+		mes "*Mâche* *Mâche*";
+		next;
+		mes "[Petit Garçon]";
+		mes "Miam, miam...";
+		next;
+		delitem 513,1; //Banana
+		set ep13_2_hiki,5;
+		changequest 10081,10082;
+		mes "[Petit Garçon]";
+		mes "Attendez, attendez...";
+		mes "***Glup***";
+		mes "Juste une minute...";
+		mes "Wait.";
+		close;
+	}
+	if (ep13_2_hiki == 4) {
+		mes "[Petit Garçon]";
+		mes "Des bananes~ Des bananes~";
+		mes "L'adore les bananes~";
+		next;
+		mes "[Petit Garçon]";
+		mes "Ils ne vendent pas de bananes dans ce village... Je voudrais vraiment une banane.";
+		next;
+		mes "[Petit Garçon]";
+		mes "Oh~ C'est vrai? C'est promis? Vous allez me rapporter des Bananes? Génial! Je vous attends ici!";
+		close;
+	}
+	if (ep13_2_hiki == 3) {
+		mes "[Petit Garçon]";
+		mes "J'ai faim... Il n'y a pas grand-chose à grignoter dans ce village.";
+		next;
+		mes "[Petit Garçon]";
+		mes "Hein? Iromo? Oh, ça fait un bout de temps que je ne l'ai pas vu... Hum... Où est-ce qu'il peut bien être? Est-ce qu'il a déménagé?";
+		next;
+		mes "[Petit Garçon]";
+		mes "Hein? Son plat favori? Euh... Qu'est-ce que c'est déjà?";
+		next;
+		mes "[Petit Garçon]";
+		mes "Si je m'en rappelle, vous m'achèterez une Banane?";
+		next;
+		mes "[Petit Garçon]";
+		mes "Des bananes~ Des bananes~";
+		mes "L'adore les bananes~";
+		next;
+		mes "[Petit Garçon]";
+		mes "Ils ne vendent pas de bananes dans ce village... Je voudrais vraiment une banane.";
+		next;
+		set ep13_2_hiki,4;
+		changequest 10080,10081;
+		mes "[Petit Garçon]";
+		mes "Oh, vous allez m'acheter des Bananes? Si vous m'en rapportez, j'essaierai de me souvenir du plat préféré d'Iromo, promis!";
+		close;
+	}
+	mes "[Petit Garçon]";
+	mes "J'ai faim... Il n'y a pas grand-chose à grignoter dans ce village.";
+	next;
+	mes "[Petit Garçon]";
+	mes "Ils ne vendent pas de bananes dans ce village, alors qu'on en vend partout ailleurs...";
+	next;
+	mes "[Petit Garçon]";
+	mes "Ce village est siiii ennuyeux... Il est tout petit! On n'y trouve rien!";
 	close;
 }

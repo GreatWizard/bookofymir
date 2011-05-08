@@ -1,3 +1,5 @@
+//Le Livre d'Ymir http://www.bookofymir.net/
+//traduit par No Healing
 //===== eAthena Script ======================================= 
 //= Crusader Skills Quests
 //===== By: ================================================== 
@@ -17,12 +19,7 @@ geffen,110,117,3	script	Ford#11	752,{
 	if (BaseJob == Job_Crusader) {
 		if (CRUS_SK == 8 && getskilllv("CR_SHRINK") == 0) {
 			mes "[Ford]";
-			mes "Hey, it's been a while~";
-			mes "And you even managed to";
-			mes "become a Paladin. You must";
-			mes "have forgotten how to perform";
-			mes "the Shrink skill, so I'll teach"; // Trad: Interception
-			mes "it to you real quick... There!";
+			mes "Hé! Ça faisait si longtemps... Alors comme ça, vous êtes devenu"+ ( sex ? "" : "e" ) +" Paladin?! Vous devez avoir oublié comment maîtriser les Interceptions. Laissez-moi vous rafraîchir la mémoire... Voilà!";
 			set CRUS_SK,10;
 			skill "CR_SHRINK",1,0;
 			close;
@@ -30,422 +27,220 @@ geffen,110,117,3	script	Ford#11	752,{
 
 		else if (CRUS_SK == 0) {
 			mes "[Ford]";
-			mes "Damn! Why is it";
-			mes "taking so long?";
-			mes "Ah, finally, you've";
-			mes "arrived! Quick, show me";
-			mes "the ^FF0000report^000000 you've brought!";
+			mes "Mince! Pourquoi est-ce que ça prend tant de temps? Ah, vous voilà enfin! Vite, faites-moi voir le ^FF0000rapport^000000 que vous avez apporté!";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Excuse me...?";
-			mes "Oh, you must have";
-			mes "mistaken me for someone";
-			mes "else. I really don't know";
-			mes "what you're talking about.";
+			mes "Excusez-moi...?";
+			mes "Oh, vous devez me prendre pour quelqu'un d'autre. Je ne sais pas de quoi vous parlez.";
 			next;
 			mes "[Ford]";
-			mes "What?! You're not one";
-			mes "of the guards stationed";
-			mes "at South Geffen? Oh, this";
-			mes "is horrible. I apologize,";
-			mes "I just assumed since you";
-			if (Upper == 1)
-				mes "were dressed like a Paladin...";
-			else
-				mes "were dressed like a Crusader...";				
+			mes "Quoi?! Vous n'êtes pas l'un de ces gardes stationnés à Geffen Sud? Oh, c'est terrible. Je m'excuse, mais puisque vous étiez vêtu"+ ( sex ? "" : "e" ) +" comme "+ ( upper == 1 ? "un"+ ( sex ? "" : "e" ) +" Paladin" : ( sex ? "un Croisé" : "une Croisée" ) ) +"..."; // Ma syntaxe est correcte, là? Ça fait trop longtemps que je n'ai pas bossé sur eA... [NoH]
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "I'm sorry...";
-			mes "What's happening?";
-			mes "Is something the matter?";
-			mes "I'm an adventurer that";
-			mes "goes by the name, "+ strcharinfo(0) +".";
+			mes "Je suis désolé"+ ( sex ? "" : "e" ) +"... Qu'est-ce qui se passe? Y a-t-il un problème? Je suis "+ ( sex ? "un aventurier connu" : "une aventurière connue" ) +" sous le nom de "+ strcharinfo(0) +".";
 			next;
 			mes "[Ford]";
-			mes "Well, I'm Leslie Ford,";
-			mes "commander of the Prontera";
-			mes "Crusader Guardians. We're";
-			mes "charged with the duty of";
-			mes "protecting adventurers and";
-			mes "citizens from evil monsters.";
+			mes "Eh bien, je m'appelle Leslie Ford. Je commande la garnison de Croisés de Prontera. Nous avons pour tâche de protéger les aventuriers et les citoyens de tous ces monstres maléfiques.";
 			next;
 			mes "[Ford]";
-			mes "There's been a recent surge";
-			mes "in unprovoked violence from";
-			mes "Goblins and they're making"; // Gobelin
-			mes "quite a bit of trouble for us.";
-			mes "Our patrols are supposed to";
-			mes "report on their activity to me.";
+			mes "Depuis quelques temps, les Gobelins nous posent problème. Nos patrouilles devaient m'envoyer un rapport sur leurs agissements.";
 			next;
 			mes "[Ford]";
-			mes "However, today's report";
-			mes "hasn't arrived yet, so I'm";
-			mes "starting to fear that something";
-			mes "has happened to the patrol.";
-			mes "Unfortunately, my duties don't";
-			mes "allow me to leave my post.";
+			mes "Cependant, le rapport d'aujourd'hui ne m'est toujours pas parvenu, et je redoute qu'il ne soit arrivé quelque chose à la patrouille. Malheureusement, mes obligations me contraignent à rester ici.";
 			next;
 			mes "[Ford]";
-			mes "I'm getting desperate,";
-			mes "and I don't have any choice";
-			mes "but to ask for outside help.";
-			mes "Since you're a fellow Crusader,";
-			mes "I want to ask you if you would";
-			mes "please lend me your aid.";
+			mes "Je suis désespéré, et je n'ai pas d'autre choix que de demander de l'aide extérieure. Puisque vous aussi êtes un"+ ( sex ? "" : "e" ) +" Croisé, je voudrais vous demander votre aide.";
 			next;
-			switch(select("Sure.:I'm sorry, but I'm busy...")) {
+			switch(select("Bien sûr.:Je suis désolé"+ ( sex ? "" : "e" ) +", mais je suis occupé"+ ( sex ? "" : "e" ) +"...")) {
 			case 1:
 				mes "[Ford]";
-				mes "Great, thank you so much!";
-				mes "Now, please go and seek";
-				mes "out ^0000FFSloutii^000000 who should be";
-				mes "stationed south of Geffen,";
-				mes "and deliver his report to me.";
-				mes "Your help is a great relief...";
+				mes "Merci beaucoup! S'il vous plaît, allez me rapporter le rapport de ^0000FFSloutii^000000. Il devrait se trouver au sud de Geffen. Vous ne savez pas à quel point vous m'ôtez une épine du pied...";
 				set CRUS_SK,1;
 				close;
 			case 2:
 				mes "[Ford]";
-				mes "Hm. I understand.";
-				mes "I do not know what";
-				mes "obligations that you";
-				mes "have right now, but if";
-				mes "your current task isn't";
-				mes "urgent, please reconsider...";
+				mes "Hum... Je comprends. Je ne connais pas vos obligations, mais si jamais ce n'est pas si important, vous voudrez peut-être y repenser...";
 				close;
 			}
 			close;
 		}
 		else if (CRUS_SK == 1) {
 			mes "[Ford]";
-			mes "Please search for";
-			mes "^0000FFSloutii^000000 in the area south";
-			mes "of Geffen, and he should";
-			mes "give you his report on";
-			mes "his patrol of the Goblins"; // Gobelin
-			mes "for you to deliver to me.";
+			mes "S'il vous plaît, partez à la recherche de ^0000FFSloutii^000000 au sud de Geffen, et rapportez-moi son rapport sur les mouvements des Gobelins.";
 			close;
 		}
 		else if (CRUS_SK == 2) {
 			mes "[Ford]";
-			mes "Wait, you've met with";
-			mes "Sloutii, but haven't";
-			mes "received his report?";
-			mes "Please go back to him";
-			mes "and bring it to me, it's";
-			mes "imperative that I read it!";
+			mes "Attendez, vous avez trouvé Sloutii, mais vous n'avez pas son rapport? Retournez le voir et rapportez-le moi s'il vous plaît. Je dois impérativement le lire!";
 			close;
 		}
 		else if (CRUS_SK == 3) {
 			mes "[Ford]";
-			mes "Ah, you've returned!";
-			mes "So how is Sloutii?";
-			mes "Is everything all right?";
+			mes "Ah, vous revoilà! Alors, comment va Sloutii? Est-ce que tout va bien?";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Here, I've brought";
-			mes "this report as soon as";
-			mes "I could! You better read";
-			mes "it, quick! Things seemed";
-			mes "pretty bad when I left...";
+			mes "Voilà, je vous ai rapporté son rapport aussi vite que je le pouvais. Vous feriez mieux de le lire sans attendre. Les choses n'avaient pas l'air d'aller quand je suis parti"+ ( sex ? "" : "e" ) +"...";
 			next;
 			mes "[Ford]";
-			mes "Goodness, there's blood all";
-			mes "over the paper! Let's see...";
-			mes "Oh no. This is an emergency";
-			mes "situation! I need to report this^FFFFFF ^000000 to Sir Arga and request for";
-			mes "backup immediately!";
+			mes "Mon dieu, ce document est taché de sang! Voyons voir... Oh, non! C'est une situation d'extrême urgence! Je dois signaler tout cela à Sieur Arga et demander de l'aide sans attendre!";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Wait, we need to do";
-			mes "something about Sloutii.";
-			mes "He was wounded by the";
-			mes "Goblins, and I think he's"; // Gobelin
-			mes "in serious trouble.";
+			mes "Attendez, nous devons faire quelque chose pour Sloutii. Il a été blessé par les Gobelins, et je crois qu'il a de gros problèmes!";
 			next;
 			mes "[Ford]";
-			mes "The Goblins...?"; // Gobelin
-			mes "Oh no, you'll need the";
-			mes "special antidote that you";
-			mes "can get from Father Arthur";
-			mes "to treat the poison in the";
-			mes "knives these Goblins use."; // Gobelin
+			mes "Les Gobelins...? Oh, non, vous aurez besoin d'un antidote spécial afin de contrer le poison dont ils enduisent leurs dagues. Le Père Arthur pourra vous en fournir.";
 			next;
 			mes "[Ford]";
-			mes "While I request for backup,";
-			mes "please go to ^0000FFProntera Church^000000";
-			mes "and ask Father ^0000FFArthur^000000 for his";
-			mes "antidote for Goblin Poison."; // Gobelin
-			mes "If you don't hurry, it might";
-			mes "be too late for Sloutii--!";
+			mes "S'il vous plait, allez à l'^0000FFéglise de Prontera^000000 pendant que je demande des renforts, et demandez au Père ^0000FFArthur^000000 une fiole d'antidote pour le poison des Gobelins. Faites au plus vite ou il sera peut-être trop tard pour Sloutii!";
 			set CRUS_SK,4;
 			close;
 		}
 		else if (CRUS_SK == 4) {
 			mes "[Ford]";
-			mes "Please hurry and obtain";
-			mes "the antidote for Goblin's"; // Gobelin (etc... je ne le rajoute pas pour la suite, on a compris)
-			mes "poison from ^0000FFFather Arthur^000000";
-			mes "in ^0000FFProntera Church^000000. Sloutii's";
-			mes "life depends on you now.";
+			mes "Faites vite et allez chercher un antidote pour le poison des Gobelins auprès du  ^0000FFPère Arthur^000000 à l'^0000FFéglise de Prontera^000000. La vie de Sloutii est entre vos mains.";
 			close;
 		}
 		else if (CRUS_SK == 5) {
 			mes "[Ford]";
-			mes "You've already met";
-			mes "Father Arthur? Good,";
-			mes "now please hurry and";
-			mes "get the antidote from him.";
-			mes "Without it, Sloutii will slowly";
-			mes "and excruciatingly perish!";
+			mes "Vous avez déjà été trouver le Père Arthur? Bien, maintenant, dépêchez-vous de récupérer un antidote. Sans cela, l'agonie de Sloutii se poursuivra inexorablement...";
 			close;
 		}
 		else if (CRUS_SK == 6) {
 			mes "[Ford]";
-			mes "You've already met";
-			mes "Father Arthur? Good,";
-			mes "now please hurry and";
-			mes "get the antidote from him.";
-			mes "Without it, Sloutii will slowly";
-			mes "and excruciatingly perish!";
+			mes "Vous avez déjà été trouver le Père Arthur? Bien, maintenant, dépêchez-vous de récupérer un antidote. Sans cela, l'agonie de Sloutii se poursuivra inexorablement...";
 			close;
 		}
 		else if (CRUS_SK == 7) {
 			mes "[Ford]";
-			mes "Great, you've received";
-			mes "the antidote from Father";
-			mes "Arthur! Now, make haste";
-			mes "and administer it to Sloutii";
-			mes "stationed south of Geffen.";
-			mes "Hurry, every second counts!";
+			mes "Bien, vous avez l'antidote du Père Arthur! Il n'y a pas de temps à perdre! Allez l'administrer à Sloutii, au sud de Geffen. Chaque seconde compte: dépêchez-vous!";
 			close;
 		}
 		else if (CRUS_SK == 8) {
 			mes "[Ford]";
-			mes "I hear that you were";
-			mes "able to save Sloutii.";
-			mes "For that, I am eternally";
-			mes "grateful. We could use more";
-			mes "people like you to serve in the";
-			mes "Prontera Crusader Guardians...";
+			mes "J'ai entendu dire que vous avez été capable de sauver Sloutii. Je vous en serai éternellement reconnaissant. Nous aurions bien besoin de plus de gens comme vous dans nos rangs...";
 			next;
 			mes "[Ford]";
-			mes "I know that you adventurers";
-			mes "prefer not to commit to these";
-			mes "kinds of organizations, but";
-			mes "your help will always be";
-			mes "welcome here. I hope to";
-			mes "see you again someday.";
+			mes "Je sais que vous autres, aventuriers, vous vous méfiez de ce genre d'organisations, mais votre aide sera toujours la bienvenue. J'espère vous revoir un jour.";
 			next;
 			mes "[Ford]";
-			mes "Thanks once again,";
-			mes "and I hope to that you";
-			mes "travel in safety. For now,";
-			mes "this is farewell, "+ strcharinfo(0) +".";
+			mes "Encore merci, j'espère que vous ferez bonne route. Eh bien, c'est un au revoir, "+ strcharinfo(0) +".";
 			close;
 			}
 		else if (CRUS_SK == 10) {
 			mes "[Ford]";
-			mes "Hey, it's been a while~";
-			mes "You should come by more";
-			mes "often, and if you're really";
-			mes "interested, you can enlist in";
-			mes "my troops. We can really use";
-			mes "somebody with your expertise.";
+			mes "Hé, ça faisait un bail!~";
+			mes "Vous devriez passer plus souvent. Si vous êtes vraiment intéressé"+ ( sex ? "" : "e" ) +", vous pouvez toujours vous enrôler. Nous aurions grand besoin de quelqu'un avec vos talents.";
 			close;
 			}
 		else {
 			mes "[Ford]";
-			mes "Great, you've received";
-			mes "the antidote from Father";
-			mes "Arthur! Now, make haste";
-			mes "and administer it to Sloutii";
-			mes "stationed south of Geffen.";
-			mes "Hurry, every second counts!";
+			mes "Bien, vous avez l'antidote du Père Arthur! Il n'y a pas de temps à perdre! Allez l'administrer à Sloutii, au sud de Geffen. Chaque seconde compte: dépêchez-vous!";
 			close;
 			}
 	}
 	else {
 		mes "[Ford]";
-		mes "Ah, greetings.";
-		mes "I'm sorry that I cannot";
-		mes "assist you, adventurer,";
-		mes "but I have something";
-		mes "rather urgent to take care";
-		mes "of. Now if you'll excuse me...";
+		mes "Ah, bien le bonjour! Je suis désolé, "+ ( sex ? "aventurier" : "aventurière" ) +", mais je ne peux pas vous aider. Il y a quelque chose de très urgent dont je dois m'occuper. Maintenant, si vous voulez bien m'excuser...";
 		close;
 	}
 }
 
-gef_fild13,297,242,3	script	Soldier#277	751,{
+gef_fild13,297,242,3	script	Soldat::Soldier#277	751,{
 	if (BaseJob == Job_Crusader) {
 		if (Upper == 1 && getskilllv("CR_SHRINK")) {
 			if (CRUS_SK == 8) {
 				mes "[Sloutii]";
-				mes "Hey pal, it's been";
-				mes "a while. I still need";
-				mes "to recuperate from my";
-				mes "wounds, so if you want";
-				mes "to learn Shrink, speak"; // Trad: Interception
-				mes "to Sir Ford, alright?";
+				mes "Hé, l'ami"+ ( sex ? "" : "e" ) +"! Ça faisait longtemps! Je dois toujours me remettre de mes blessures, alors allez parler à Sieur Ford si vous voulez apprendre à maîtriser l'Interception, d'accord?";
 				close;
 			}
 			else if (CRUS_SK == 10) {
 				mes "[Sloutii]";
-				mes "So how's that Shrink"; // Trad: Interception
-				mes "skill working out for you?";
-				mes "Hopefully, it's saved your";
-				mes "life as many times as it's";
-				mes "saved mine. Anyway, I'll";
-				mes "see you around, "+ strcharinfo(0) +"~";
+				mes "Alors, comment vous débrouillez-vous avec les Interceptions? J'espère que ça vous a sauvé la vie autant de fois que ça a sauvé la mienne. À la prochaine, "+ strcharinfo(0) +"~";
 				close;
 			}
 		}
 		if (CRUS_SK == 1) {
-			mes "[Soldier]";
+			mes "[Soldat]";
 			mes "Arrrrrghhh!";
-			mes "M-my legs!";
-			mes "What the hell";
-			mes "have they done";
-			mes "to my legs?!";
+			mes "Mes jambes! Qu'est-ce qu'ils ont fait à mes jambes?!";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Wh-what happened?";
-			mes "Were you attacked?";
+			mes "Qu'est-ce qui s'est passé? On vous a attaqué?";
 			next;
-			mes "[Soldier]";
-			mes "Y-yeah, I was on my way";
-			mes "to report to Sir Ford on my";
-			mes "regular patrol when I was";
-			mes "attacked by these Goblins!";
-			mes "I've got to warn my superiors!";
-			mes "They're going to raid Geffen!";
+			mes "[Soldat]";
+			mes "Oui, je rentrais de patrouille faire mon rapport à Sieur Ford quand j'ai été attaqué par ces Gobelins! Je sois prévenir mes supérieurs! Ils vont mettre Geffen à sac!";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "I actually spoke to";
-			mes "Sir Ford! You must be";
-			mes "Sloutii, right? He sent me";
-			mes "to see what happened to you!";
+			mes "En fait, je viens de parler à Sieur Ford! Vous devez être Sloutii, c'est cela? Il m'a envoyé"+ ( sex ? "" : "e" ) +" voir ce qui vous était arrivé!";
 			next;
 			mes "[Sloutii]";
-			mes "Great, p-perfect timing!";
-			mes "Listen, you've got to send";
-			mes "him this report. I-it contains";
-			mes "details of my patrol and an";
-			mes "urgent request for backup.";
-			mes "U-ugh! We don't have time!";
+			mes "Fantastique! Vous arrivez juste au bon moment. Écoutez, vous devez lui faire parvenir ce rapport. Il contient le compte-rendu de ma patrouille, et une demande urgente de renforts. U-ugh! Nous n'avons pas de temps à perdre!";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Wait...!";
-			mes "But what about";
-			mes "you? You're hurt...";
+			mes "Mais... Et vous? Vous êtes blessé...";
 			next;
 			mes "[Sloutii]";
-			mes "I'll be damned if help";
-			mes "is delayed on my account!";
-			mes "Just hurry and get that";
-			mes "report to Sir Ford! Now go!";
-			mes "Now, if I can just get that";
-			mes "report out of my-- OW! N-no...";
+			mes "Que je sois maudit si les renforts n'arrivent pas à temps à cause de moi! Laissez-moi ici et apportez ce rapport à Sieur Ford! Allez-y maintenant! Il faut juste que j'arrive à sortir ce rapport de mon... Ouch! N-non...";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "^333333(He's writhing in pain";
-			mes "so much that he can't even";
-			mes "give me his report. I better";
-			mes "bring him a Red Potion to";
-			mes "alleviate his suffering...)^000000";
+			mes "^333333(Il tremble tant de douleur qu'il n'arrive même pas à vous donner le rapport. Vous feriez mieux de lui donner une Potion Rouge pour alléger ses souffrances...)^000000";
 			set CRUS_SK,2;
 			close;
 		}
 		else if (CRUS_SK == 2) {
 			if (countitem(501) > 0) {
 				mes "["+ strcharinfo(0) +"]";
-				mes "Here, please take";
-				mes "this Red Potion.";
-				mes "It just might help...";
+				mes "Voilà, s'ils vous plait, prenez cette Potion Rouge. Ça pourrait vous faire du bien...";
 				next;
 				mes "[Sloutii]";
-				mes "Oh, thank goodness!";
-				mes "Arrrgh! Just pour it";
-				mes "into the wound! I-it...";
-				mes "It burns so much! Those";
-				mes "Goblins must've cut me with";
-				mes "something coated in poison!";
+				mes "Oh, dieu merci!";
+				mes "Arrrgh! Versez-la simplement sur la blessure. Ça... Ça lance tellement! Ces Gobelins doivent m'avoir blessé avec une lame enduite de poison!";
 				next;
 				mes "[Sloutii]";
-				mes "Ah... Ahh...";
-				mes "The bleeding hasn't";
-				mes "stopped, but at least";
-				mes "it's better. Here, take";
-				mes "this report now and get it";
-				mes "to Sir Ford. Hurry and go!";
+				mes "Ah... Aah...";
+				mes "Le saignement n'est pas endigué, mais c'est tout de même mieux. Voilà, prenez ce rapport et apportez-le à Sieur Ford. Dépêchez-vous!";
 				next;
-				mes "^3355FFYou received Sloutii's";
-				mes "patrol report. Some of the";
-				mes "pages are smudged with";
-				mes "the blood from his wound.^000000";
+				mes "^3355FFVous obtenez le rapport de patrouille de Sloutii. Quelques pages sont tachées de son sang.^000000";
 				delitem 501,1; //Red_Potion
 				set CRUS_SK,3;
 				close;
 			}
 			else {
 				mes "[Sloutii]";
-				mes "Hurry and t-take this";
-				mes "report! L-let me just";
-				mes "hand it to you and th--";
-				mes "Arrrrgh! I-I can't move!";
-				mes "It... It just hurts so much!";
+				mes "Prenez vite ce rapport. Laissez-moi là et...";
+				mes "Arrrrgh! Je ne peux pas bouger! J'ai si mal!";
 				next;
 				mes "["+ strcharinfo(0) +"]";
-				mes "^333333(I better bring him";
-				mes "a Red Potion, otherwise";
-				mes "I have no hope of getting";
-				mes "that report without hurting him!) ^FFFFFF ^000000";
+				mes "^333333(Je ferais mieux de lui apporter une Potion Rouge ou je n'arriverai pas à prendre ce rapport sans le blesser.) ^FFFFFF ^000000";
 				close;
 			}
 		}
 		else if (CRUS_SK == 3) {
 			mes "[Sloutii]";
-			mes "We're running out";
-			mes "of time! Hurry and get";
-			mes "my report to Sir Ford as";
-			mes "soon as you possibly can!";
+			mes "Nous n'avons pas de temps à perdre! Dépêchez-vous d'apporter ce rapport à Sieur Ford!";
 			close;
 		}
 		else if (CRUS_SK == 4) {
 			mes "[Sloutii]";
-			mes "Eeearrrgh--!";
-			mes "My l-legs! Everything";
-			mes "is starting to h-hurt!";
+			mes "Aaaarrrgh--!";
+			mes "Mes jambes! J'ai... J'ai mal de partout!";
 			next;
-			mes "^3355FFSloutii fell unconscious,";
-			mes "and it seems that the wounds";
-			mes "in his legs are causing him";
-			mes "much more suffering.^000000";
+			mes "^3355FFSloutii tombe inconscient. On dirait que ses blessures à la jambe le font encore plus souffrir.^000000";
 			close;
 		}
 		else if (CRUS_SK == 5) {
 			mes "[Sloutii]";
 			if (upper == 1) {
-				mes "Eeearrrgh--!";
-				mes "My l-legs! Everything";
-				mes "is starting to h-hurt!";
+				mes "Aaaarrrgh--!";
+				mes "Mes jambes! J'ai... J'ai mal de partout!";
 				next;
-				mes "^3355FFSloutii fell unconscious,";
-				mes "and it seems that the wounds";
-				mes "in his legs are causing him";
-				mes "much more suffering.^000000";
+				mes "^3355FFSloutii tombe inconscient. On dirait que ses blessures à la jambe le font encore plus souffrir.^000000";
 			}
 			else {
 				mes "........";
 				mes ".........";
 				next;
-				mes "^3355FFSloutii is still";
-				mes "unconscious. He'll";
-				mes "die if his injuries aren't";
-				mes "treated immediately.";
-				mes "You'll have to help him";
-				mes "as quickly as you can.^000000";
+				mes "^3355FFSloutii est toujours inconscient. Il va mourir si ses blessures ne sont pas traitées rapidement. Il va falloir que vous l'aidiez aussi vite que possible.^000000";
 			}
 			close;
 		}
@@ -454,233 +249,125 @@ gef_fild13,297,242,3	script	Soldier#277	751,{
 			mes "........";
 			mes ".........";
 			next;
-			mes "^3355FFSloutii is still";
-			mes "unconscious. He'll";
-			mes "die if his injuries aren't";
-			mes "treated immediately.";
-			mes "You'll have to help him";
-			mes "as quickly as you can.^000000";
+			mes "^3355FFSloutii est toujours inconscient. Il va mourir si ses blessures ne sont pas traitées rapidement. Il va falloir que vous l'aidiez aussi vite que possible.^000000";
 			close;
 		}
 		else if (CRUS_SK == 7) {
 			set .@rand,rand(1,5);
 			if (.@rand == 1 || .@rand == 5) {
-				mes "^3355FFYou carefully pour the";
-				mes "Goblin poison antidote";
-				mes "into Sloutii's mouth.";
-				mes "His throat struggles to";
-				mes "swallow the antidote, but";
-				mes "he manages to ingest it.^000000";
+				mes "^3355FFVous versez précautionneusement l'antidote contre le poison des Gobelins dans la bouche de Sloutii. Il lutte pour l'avaler, mais il arrive finalement à l'ingérer.^000000";
 				next;
-				mes "^3355FFMiraculously, the wounds";
-				mes "inflicted by the Goblins";
-				mes "begin to rapidly heal.^000000";
+				mes "^3355FFLes blessures infligées par les Gobelins comment miraculeusement à guérir.^000000";
 				next;
 				mes "[Sloutii]";
-				mes "Oh, wh-what happened?";
-				mes "Am... Am I really still alive?";
-				mes "Hey, it's you! You must've";
-				mes "saved my life! I thought";
-				mes "I was going to die for sure!";
+				mes "Oh, qu... qu'est-ce qui s'est passé? Est-ce que... Est-ce que je suis toujours en vie? Hé, mais c'est vous! Vous devez m'avoir sauvé la vie! Je pensais bien que j'allais y rester!";
 				next;
 				mes "["+ strcharinfo(0) +"]";
-				mes "Well, it's a good thing";
-				mes "I came in time. Sir Ford";
-				mes "had me visit Father Arthur to";
-				mes "make an antidote to save you.";
-				mes "Ah, and I already delivered";
-				mes "your report to Sir Ford.";
+				mes "Hé bien, c'est une bonne chose que je sois arrivé"+ ( sex ? "" : "e" ) +" à temps. Sieur Ford m'a envoyé"+ ( sex ? "" : "e" ) +" chercher un antidote auprès du Père Arthur pour vous sauver. Ah, et je lui ai transmis votre rapport.";
 				next;
 				mes "[Sloutii]";
-				mes "Great! Now, let me repay you";
-				mes "by teaching you a special skill";
-				mes "developed by the Prontera Crusader Guardians. Using this skill helped";
-				mes "me survive the attack by those";
-				mes "Goblins. You ready to learn?";
+				mes "Fantastique! Maintenant, laissez-moi payer ma dette envers vous en vous enseignant une compétence spéciale, développée par les Croisés de Prontera. Cette technique m'a permis de rester en vie après avoir été attaqué par ces Gobelins. Êtes-vous prêt"+ ( sex ? "" : "e" ) +" pour la leçon?";
 				next;
 				mes "[Sloutii]";
-				mes "This skill is called";
-				mes "''^0000FFShrink^000000,'' and it will"; // Trad: Interception
-				mes "knock enemies backwards";
-				mes "when you successfully";
-				mes "guard their attacks.";
+				mes "Cette technique s'appelle l'''^0000FFInterception^000000'', et elle permet de repousser les ennemis en arrière quand vous parez leurs attaques.";
 				next;
 				mes "[Sloutii]";
-				mes "Now listen closely...";
-				mes "To execute it, you've got";
-				mes "to be able to concentrate";
-				mes "and repel enemies using";
-				mes "the right stance and mindset...";
+				mes "Maintenant, écoutez-moi attentivement... Pour l'utiliser, vous devrez être capable de vous concentrer et de repousser les ennemis en utilisant la bonne posture, alliée au bon état d'esprit...";
 				next;
 				mes "[Sloutii]";
-				mes "Great! You learned the";
-				mes "skill! Now, I hope you use";
-				mes "this ability to combat evil";
-				mes "and protect the weak. Ah, and";
-				mes "if I learn any new skills, I'll be sure to teach you right away.";
+				mes "Fantastique! Vous maîtrisez déjà la technique! J'espère maintenant que vous l'utiliserez pour combattre le mal et protéger la veuve et l'orphelin! Ah, et si jamais j'apprends de nouvelles compétences, je n'oublierai pas de vous les enseigner aussi!";
 				set CRUS_SK,8;
 				skill "CR_SHRINK",1,0;
 				close;
 			}
-			mes "^3355FFYou carefully pour the";
-			mes "Goblin poison antidote";
-			mes "into Sloutii's mouth.";
-			mes "His throat struggles to";
-			mes "swallow the antidote, but";
-			mes "he manages to ingest it.^000000";
+			mes "^3355FFVous versez précautionneusement l'antidote contre le poison des Gobelins dans la bouche de Sloutii. Il lutte pour l'avaler, mais il arrive finalement à l'ingérer.^000000";
 			next;
-			mes "^3355FFUnfortunately, nothing";
-			mes "happened. The antidote";
-			mes "proabably lost its effect";
-			mes "while you were traveling";
-			mes "from Father Arthur to Sloutii.";
-			mes "You've got to return to Father";
-			mes "Arthur and make another one.^000000";
+			mes "^3355FFMalheureusement, rien ne se passe. L'antidote a probablement perdu ses effets pendant votre voyage depuis Prontera. Vous allez devoir retourner demander au Père Arthur qu'il vous en prépare un autre.^000000";
 			set CRUS_SK,9;
 			close;
 		}
 		else if (CRUS_SK == 8 || CRUS_SK == 10) {
 			mes "[Sloutii]";
-			mes "Hey, it's you~";
-			mes "So how have you been?";
-			mes "If you ever get some free";
-			mes "time, come by and maybe";
-			mes "we can practice our swordplay.";
+			mes "Hé, c'est vous~";
+			mes "Alors, comment allez-vous? Si jamais vous avez un peu de temps, nous pourrions faire quelques passes d'arme...";
 			close;
 		}
 		else if (CRUS_SK == 9) {
-			mes "^3355FFThe antidote you";
-			mes "previously administered";
-			mes "had no effect. You've got";
-			mes "to try again by returning to";
-			mes "Father Arthur and making";
-			mes "a new antidote for Sloutii.^000000";
+			mes "^3355FFL'antidote que vous aviez administré n'a eu aucun effet. Vous devez retourner voir le Père Arthur pour lui demander de vous en préparer un nouveau.^000000";
 			close;
 		}
 		else {
 			mes "[Sloutii]";
-			mes "Please be careful around";
-			mes "this area. Goblins are known";
-			mes "to attack any humans that";
-			mes "they encounter. And lately,";
-			mes "they've been getting even more violent, so stay on the lookout.";
+			mes "Faites bien attention dans cette zone s'il vous plait. Les Gobelins ont l'habitude d'attaquer les humains qu'ils croisent. Ils deviennent de plus en plus violents depuis quelques temps, alors restez sur vos gardes.";
 			close;
 		}
 	}
 	else {
 		mes "[Sloutii]";
-		mes "Please be careful around";
-		mes "this area. Goblins are known";
-		mes "to attack any humans that";
-		mes "they encounter. And lately,";
-		mes "they've been getting even more violent, so stay on the lookout.";
+		mes "Faites bien attention dans cette zone s'il vous plait. Les Gobelins ont l'habitude d'attaquer les humains qu'ils croisent. Ils deviennent de plus en plus violents depuis quelques temps, alors restez sur vos gardes.";
 		close;
 	}
 }
 
-prt_church,87,127,3	script	Pastor#1011	755,{
+prt_church,87,127,3	script	Pasteur::Pastor#1011	755,{
 	if (BaseJob == Job_Crusader) {
 		if (Upper == 1 && getskilllv("CR_SHRINK")) {
 			if (CRUS_SK == 8) {
-				mes "[Father Arthur]";
-				mes "Oh, a Paladin now,";
-				mes "are you? Ah, I'm quite";
-				mes "proud of you. After all, I've";
-				mes "known you back when you";
-				mes "were a brave Crusader.";
+				mes "[Père Arthur]";
+				mes "Oh, vous êtes maintenant un"+ ( sex ? "" : "e" ) +" Paladin, n'est-ce pas? Ah, je suis vraiment fier de vous. Après tout, je vous ai connu"+ ( sex ? "" : "e" ) +" quand vous n'étiez que Croisé"+ ( sex ? "" : "e" ) +".";
 				next;
-				mes "[Father Arthur]";
-				mes "I hope that you continue to";
-				mes "use your power to combat";
-				mes "the forces of evil and to";
-				mes "protect the weak. May your";
-				mes "heart guide your actions.";
+				mes "[Père Arthur]";
+				mes "J'espère que vous continuerez toujours à utiliser vos pouvoirs pour combattre les forces du mal et pour protéger les faibles. Puisse votre coeur guider vos actions.";
 				close;
 			}
 			else if (CRUS_SK == 10) {
-				mes "[Father Arthur]";
-				mes "Ah, have you been well?";
-				mes "It is good to see you under";
-				mes "more pleasant circumstances.";
-				mes "Nonetheless, if you think that";
-				mes "I can be of service to you, then please let me know right away.";
+				mes "[Père Arthur]";
+				mes "Ah, comment allez-vous? C'est bon de vous voir dans des circonstances un peu moins graves. Néanmoins, n'hésitez pas à venir me voir si vous pensez que je puis vous être utile de quelque manière que ce soit.";
 				close;
 			}
 		}
 		if (CRUS_SK == 4) {
-			mes "[Father Arthur]";
-			mes "Greetings.";
-			mes "How may I be of";
-			mes "service to you today?";
+			mes "[Père Arthur]";
+			mes "Salutations. Que puis-je faire pour vous aujourd'hui?";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Someone was wounded";
-			mes "by Goblins, and I was told";
-			mes "by Sir Ford that you're the";
-			mes "only one who can make the";
-			mes "Goblin Poison Antidote.";
+			mes "Quelqu'un a été blessé par des Gobelins, et Sieur Ford m'a dit que vous étiez la seule personne à pouvoir créer un antidote contre leur poison.";
 			next;
-			mes "[Father Arthur]";
-			mes "Saints preserve us,";
-			mes "the Goblins are indeed";
-			mes "cruel and merciless!";
-			mes "Unfortunately, I'm fresh";
-			mes "out of Goblin Poison Antidote";
-			mes "and must make it from scratch.";
+			mes "[Père Arthur]";
+			mes "Que les saints nous préservent! Les Gobelins sont effectivement cruels et sans pitié. Malheureusement, je n'ai plus d'antidote contre leur poison, et je dois en préparer à nouveau.";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Tell me what you";
-			mes "need to make it, and";
-			mes "I'll bring you all of the";
-			mes "materials right away!";
+			mes "Dites-moi ce dont vous avez besoin pour en faire, et je vous apporterai tout cela au plus vite";
 			next;
-			mes "[Father Arthur]";
-			mes "Ah, yes. Bring me";
-			mes "^0000FF20 Sticky Mucus^000000,";
-			mes "^0000FF3 Empty Bottles^000000,";
-			mes "^0000FF5 Jellopies^000000...";
+			mes "[Père Arthur]";
+			mes "Ah, d'accord. Apportez-moi";
+			mes "^0000FF20 Morves^000000,";
+			mes "^0000FF3 Bouteilles Vides^000000,";
+			mes "^0000FF5 Jellopys^000000...";
 			next;
-			mes "[Father Arthur]";
-			mes "...^0000FF1 Coal^000000,";
-			mes "^0000FF1 Grape^000000,";
-			mes "^0000FF3 Cyfar^000000 and";
-			mes "^0000FF1 Unripe Apple^000000.";
-			mes "Now hurry, he won't";
-			mes "last long if he's poisoned!";
+			mes "[Père Arthur]";
+			mes "...^0000FF1 morceau de Charbon^000000,";
+			mes "^0000FF1 grappe de Raisin^000000,";
+			mes "^0000FF3 Cyfars^000000 et";
+			mes "^0000FF1 Pomme Encore Verte^000000.";
+			mes "Dépêchez-vous ou il ne fera pas long feu s'il a vraiment été empoisonné!";
 			set CRUS_SK,5;
 			close;
 		}
 		else if (CRUS_SK == 5) {
 			if (countitem(514) > 0 && countitem(619) > 0 && countitem(1003) > 0 && countitem(7053) > 2 && countitem(713) > 2 && countitem(909) > 4 && countitem(938) > 19) {
-				mes "[Father Arthur]";
-				mes "Ah, you've returned.";
-				mes "Now let me check to";
-				mes "see if you've brought";
-				mes "everything needed to";
-				mes "create the antidote.";
+				mes "[Père Arthur]";
+				mes "Ah, vous revoilà. Laissez-moi regarder si vous m'avez apporté tout ce dont j'ai besoin pour l'antidote.";
 				next;
-				mes "[Father Arthur]";
-				mes "Good, good. It looks";
-				mes "like everything is ready.";
-				mes "Now, before I begin, I should";
-				mes "tell you that the antidote has";
-				mes "a time limit of effectiveness.";
+				mes "[Père Arthur]";
+				mes "Bien, bien, on dirait que vous avez tout ce qu'il me faut. Mais avant que je commence, je dois vous prévenir que l'antidote ne sera efficace que pendant un certain temps.";
 				next;
-				mes "[Father Arthur]";
-				mes "However, there's no way";
-				mes "to accurately predict when";
-				mes "the antidote will become";
-				mes "ineffective until you try it.";
-				mes "Therefore, you may have to";
-				mes "return to me for a new batch.";
+				mes "[Père Arthur]";
+				mes "Il n'y a malheureusement aucun moyen de prédire avec exactitude la durée de ses effets. Le seul moyen est d'essayer. Il vous faudra donc peut-être revenir me voir pour que je vous en prépare à nouveau.";
 				next;
-				mes "[Father Arthur]";
-				mes "These materials should";
-				mes "be enough for multiple";
-				mes "dosages, so you won't have";
-				mes "to worry about collecting";
-				mes "materials again. Now, give";
-				mes "me a moment to distill this...";
+				mes "[Père Arthur]";
+				mes "Avec tout cela, je devrais pouvoir en préparer plusieurs doses, alors vous n'aurez pas à vous en faire de ce point de vue là.";
+				mes "Laissez-moi maintenant un moment, le temps que je distille cela...";
 				delitem 938,20; //Sticky_Mucus
 				delitem 619,1; //Unripe_Apple
 				delitem 909,5; //Jellopy
@@ -692,121 +379,73 @@ prt_church,87,127,3	script	Pastor#1011	755,{
 				close;
 			}
 			else {
-				mes "[Father Arthur]";
-				mes "I'm sorry, but these";
-				mes "aren't enough materials";
-				mes "in order for me to distill the";
-				mes "antidote. Hmm, what were";
-				mes "the required materials again?";
+				mes "[Père Arthur]";
+				mes "Je suis désolé mais vous n'avez pas assez d'ingrédients pour que je puisse distiller un antidote. Voulez-vous que je vous redonne la liste?";
 				next;
-				mes "[Father Arthur]";
-				mes "Ah, yes. Bring me";
-				mes "^0000FF20 Sticky Mucus^000000,";
-				mes "^0000FF3 Empty Bottles^000000,";
-				mes "^0000FF5 Jellopies^000000...";
+				mes "[Père Arthur]";
+				mes "Ah, d'accord. Apportez-moi";
+				mes "^0000FF20 Morves^000000,";
+				mes "^0000FF3 Bouteilles Vides^000000,";
+				mes "^0000FF5 Jellopys^000000...";
 				next;
-				mes "[Father Arthur]";
-				mes "...^0000FF1 Coal^000000,";
-				mes "^0000FF1 Grape^000000,";
-				mes "^0000FF3 Cyfar^000000 and";
-				mes "^0000FF1 Unripe Apple^000000.";
-				mes "Now hurry, he won't";
-				mes "last long if he's poisoned!";
+				mes "[Père Arthur]";
+				mes "...^0000FF1 morceau de Charbon^000000,";
+				mes "^0000FF1 grappe de Raisin^000000,";
+				mes "^0000FF3 Cyfars^000000 et";
+				mes "^0000FF1 Pomme Encore Verte^000000.";
+				mes "Dépêchez-vous ou il ne fera pas long feu s'il a vraiment été empoisonné!";
 				close;
 			}
 		}
 		else if (CRUS_SK == 6) {
-			mes "[Father Arthur]";
-			mes "Your timing must be";
-			mes "divinely inspired: I've";
-			mes "just completed the Goblin";
-			mes "Poison Antidote. Now please";
-			mes "listen very carefully to me...";
+			mes "[Père Arthur]";
+			mes "Ce doit être les dieux qui vous ont suggéré de revenir à ce moment précis: je viens tout juste de terminer de préparer l'antidote. Écoutez-moi attentivement, maintenant...";
 			next;
-			mes "[Father Arthur]";
-			mes "I can't guarantee if this";
-			mes "antidote will work. If it";
-			mes "loses its effectiveness before";
-			mes "you arrive, you'll have to come";
-			mes "back and get a fresh new dose.";
+			mes "[Père Arthur]";
+			mes "Je ne peux pas garantir son efficacité. Si jamais il perdait ses effets avant que vous n'arriviez, vous devrez revenir me voir pour que je prépare une nouvelle dose.";
 			next;
-			mes "[Father Arthur]";
-			mes "You've got to hurry over";
-			mes "to the wounded as quickly";
-			mes "as possible. Now, as soon as";
-			mes "I hand this to you, you've got";
-			mes "to run there as fast as you";
-			mes "can: a man's life is at stake!";
+			mes "[Père Arthur]";
+			mes "Dépêchez-vous, et allez retrouver le blessé aussi vite que possible. Courrez le rejoindre le plus vite que vous pouvez: la vie d'un homme en dépend!";
 			next;
-			mes "[Father Arthur]";
-			mes "Here, take the";
-			mes "antidote. Now go!";
-			mes "Godspeed, adventurer!";
+			mes "[Père Arthur]";
+			mes "Voilà, prenez l'antidote. Partez maintenant! Bonne chance, "+ ( sex ? "aventurier" : "aventurière" ) +"!";
 			set CRUS_SK,7;
 			close;
 		}
 		else if (CRUS_SK == 7) {
-			mes "[Father Arthur]";
-			mes "You haven't left yet?!";
-			mes "Hurry over to the wounded";
-			mes "and administer the antidote!";
-			mes "You'll have to come back for";
-			mes "a fresh batch of antidote if";
-			mes "you arrive there too late!";
+			mes "[Père Arthur]";
+			mes "Vous n'êtes toujours pas parti"+ ( sex ? "" : "e" ) +"? Dépêchez-vous d'aller administrer cet antidote au blessé! Vous devrez revenir chercher une nouvelle dose si jamais vous arrivez trop tard!";
 			close;
 		}
 		else if (CRUS_SK == 8) {
-			mes "[Father Arthur]";
-			mes "Ah, so the antidote";
-			mes "worked and that man is";
-			mes "expected to fully recover?";
-			mes "Good, good. It does my heart";
-			mes "good to hear he's much better.";
+			mes "[Père Arthur]";
+			mes "Ah, alors l'antidote a marché et cet homme se remet de ses blessures? Bien, bien. Ça me fait chaud au coeur d'entendre qu'il se porte mieux.";
 			close;
 		}
 		else if (CRUS_SK == 9) {
-			mes "[Father Arthur]";
-			mes "The antidote failed?!";
-			mes "We have no choice, but";
-			mes "to try it again. Here, let";
-			mes "me quickly distill a new";
-			mes "dosage for you. Wait, wait...";
-			mes "Ah! There! I've finished it!";
+			mes "[Père Arthur]";
+			mes "L'antidote n'a pas marché?! Nous n'avons pas le choix: il faut à nouveau essayer. Laissez-moi le temps de distiller une nouvelle dose pour vous. Juste un petit moment... Ah! Voilà! C'est prêt!";
 			next;
-			mes "[Father Arthur]";
-			mes "Now take this fresh";
-			mes "antidote and run as";
-			mes "fast as you can to";
-			mes "the wounded! Go!";
+			mes "[Père Arthur]";
+			mes "Prenez maintenant cette nouvelle dose, et allez trouver le blessé aussi vite que possible. Allez!";
 			set CRUS_SK,7;
 			close;
 		}
 		else if (CRUS_SK == 10) {
-			mes "[Father Arthur]";
-			mes "Ah, have you been well?";
-			mes "It is good to see you under";
-			mes "more pleasant circumstances.";
-			mes "Nonetheless, if you think that";
-			mes "I can be of service to you, then please let me know right away.";
+			mes "[Père Arthur]";
+			mes "Ah, comment allez-vous? C'est bon de vous voir dans des circonstances un peu moins graves. Néanmoins, n'hésitez pas à venir me voir si vous pensez que je puis vous être utile de quelque manière que ce soit.";
 			close;
 		}
 		else {
-			mes "[Father Arthur]";
-			mes "Ah, hello there~";
-			mes "Welcome to Prontera";
-			mes "Church. Please relax here,";
-			mes "enjoy the silence, and invite";
-			mes "spiritual calm into your heart.";
+			mes "[Père Arthur]";
+			mes "Ah, bonjour~";
+			mes "Bienvenue à l'église de Prontera. Reposez-vous en ces lieux, et profitez du silence. Laissez votre coeur se remplir de la sérénité divine.";
 			close;
 		}
 	}
 	else {
-		mes "[Father Arthur]";
-		mes "Ah, hello there~";
-		mes "Welcome to Prontera";
-		mes "Church. Please relax here,";
-		mes "enjoy the silence, and invite";
-		mes "spiritual calm into your heart.";
+		mes "[Père Arthur]";
+		mes "Bienvenue à l'église de Prontera. Reposez-vous en ces lieux, et profitez du silence. Laissez votre coeur se remplir de la sérénité divine.";
 		close;
 	}
 }
