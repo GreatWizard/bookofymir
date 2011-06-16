@@ -149,7 +149,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.MG_SRECOVERY] = {
 
-		"Régénération du Mana",
+		"Régénération Psychique",
 		"Niveau Max : 10",
 		"Type:^000099 Compétence passive^000000",
 		"Effet:^777777Permet de régénérer quelques Points de Magie en restant immobile pendant 10 secondes. Augmente aussi le nombre de points restaurés avec des consommables.^000000",
@@ -292,7 +292,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.MG_FIREWALL] = {
 
-		"Mur de Flammes",
+		"Mur de Feu",
 		"Niveau Max:^777777 10^000000",
 		"Type:^33cc00 Active^000000",
 		"Coût en Énergie:^777777 40^000000",
@@ -1163,16 +1163,16 @@ SKILL_DESCRIPT = {
 
 	[SKID.KN_RIDING] = {
 
-		"Monte",
+		"Équitation",
 		"Niveau Max:^777777 1^000000",
 		"Type:^000099 Compétence passive^000000",
 		"Effet:^777777 Permet de monter un Péco Péco. Ils s'achètent à Prontera, auprès de l'éleveur de Péco Péco.",
-		"Permet d'augmenter la Vitesse de Déplacement de 25% et la Charge Maximale de 1000 points. Les Attaques à la Lance contre les ennemis des taille moyenne causeront 100% des dégâts. Cependant, la vitesse d'Attaque sera réduite de moitié, mais cela pourra être pallié par une plus grande Maîtrise de la Cavalerie.^000000",
+		"Permet d'augmenter la Vitesse de Déplacement de 25% et la Charge Maximale de 1000 points. Les Attaques à la Lance contre les ennemis des taille moyenne causeront 100% des dégâts. Cependant, la vitesse d'Attaque sera réduite de moitié, mais cela pourra être pallié par une plus grande Maîtrise de l'Équitation.^000000",
 	},
 
 	[SKID.KN_CAVALIERMASTERY] = {
 
-		"Maîtrise de la Cavalerie",
+		"Maîtrise de l'Équitation",
 		"Niveau Max:^777777 5^000000",
 		"Type:^000099 Compétence passive^000000",
 		"Effet:^777777 Permet de réduire le malus de la Vitesse d'Attaque lorsque vous montez un Péco Péco.^000000",
@@ -1973,7 +1973,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.BS_MAXIMIZE] = {
 
-		"Optimisation",
+		"Puissance Maximale",
 		"Niveau Max:^777777 5^000000",
 		"Type:^33cc00 Active^000000",
 		"Coût en Énergie:^777777 10 + (1 par Niveau toutes les secondes)^000000",
@@ -2531,7 +2531,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.NV_TRICKDEAD] = {
 
-		"J'suis Mort!",
+		"Faire le Mort!",
 		"Niveau Max:^777777 1^000000",
 		"Type:^33cc00 Active^000000",
 		"Coût en Énergie:^777777 5^000000",
@@ -2583,7 +2583,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.AC_CHARGEARROW] = {
 
-		"Tir Chargé",
+		"Flèche Repoussante",
 		"Niveau Max:^777777 1^000000",
 		"Type:^777777 Offensive^000000",
 		"Coût en Énergie:^777777 15^000000",
@@ -3376,7 +3376,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.CR_SHIELDBOOMERANG] = {
 
-		"Boomerang",
+		"Bouclier Boomerang",
 		"Niveau Max:^777777 5^000000",
 		"Type:^777777 Offensive^000000",
 		"Coût en Énergie:^777777 12^000000",
@@ -4300,7 +4300,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.BD_RINGNIBELUNGEN] = {
 
-		"L'Anneau du Nibelung",
+		"L'Anneau des Nibelungen",
 		"Niveau Max:^777777 5^000000",
 		"Type:^000099 Duo^000000",
 		"Coût en Énergie:^777777 35 + 3 fois le Niveau de la Compétence^000000",
@@ -4875,7 +4875,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.HW_SOULDRAIN] = {
 
-		"Drain du Mana",
+		"Absorption Psychique",
 		"Niveau Max:^777777 10^000000",
 		"Type:^000099 Compétence passive^000000",
 		"Effet:^777777 Permet de recevoir des Points d'Énergie en tuant des ennemis, ainsi que d'augmenter ses Points d'Énergie Maximum.",
@@ -4930,7 +4930,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.PA_PRESSURE] = {
 
-		"Pression",
+		"Pression Divine",
 		"Niveau Max:^777777 5^000000",
 		"Type:^777777 Offensive^000000",
 		"Coût en Énergie:^777777 25 + 5 fois le Niveau de la Compétence^000000",
@@ -4960,7 +4960,7 @@ SKILL_DESCRIPT = {
 		"Actif pendant:^777777 Cinq Prochaines Attaques^000000",
 		"Effet:^777777 Vous sacrifierez 9% de vos Points de Vie Maximum avec chacun de vos coups, causant jusqu'à 140% des points perdus comme dommages. Cette compétence reste active pour vos 5 prochains coups.",
 		"Elle est d'élément Neutre, et prend en compte les modifications de pourcentage des cartes, mais elle ignore l'Esquive et la défense de la cible.",
-		"Un Bouclier Réflecteur peut renvoyer les dommages. Une Frappe Explosive ou la Pression augmentent les dommages.",
+		"Un Bouclier Réflecteur peut renvoyer les dommages. Une Frappe Explosive ou la Pression Divine augmentent les dommages.",
 		"L'effet de la Carte de Baphomet, ainsi que celui du Pic à Glace ne s'appliquent pas avec cette compétence.",
 		"Une Parade Instinctive de Rôdeur peut diminué de moitié les dommages et les refléter au Paladin.",
 		"Fonctionne sur les Boss mais pas contre un Empérium",
@@ -5552,7 +5552,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.PF_FOGWALL] = {
 
-		"Brouillard",
+		"Mur de Charrette Dévastatrice",
 		"Niveau Max:^777777 1^000000",
 		"Type:^777777 Offensive^000000",
 		"Coût en Énergie:^777777 25 Points d'Énergie^000000",
@@ -5561,7 +5561,7 @@ SKILL_DESCRIPT = {
 		"Actif pendant:^777777 20 sec^000000",
 		"Effet:^777777 Permet de créer une zone de brouillard de 5x3 cases (2 maximum) pouvant aveugler ceux qui s'y trouvent pendant 30 sec.",
 		"Les attaques sortant de ce brouillard ont 75% de chance de rater, et un malus de Précision de -50 est appliqué.",
-		"Peut être lancé dans un Déluge (le Brouillard durera 40 sec au lieu de 20).^000000",
+		"Peut être lancé dans un Déluge (le Mur de Charrette Dévastatrice durera 40 sec au lieu de 20).^000000",
 	},
 
 	[SKID.PF_SPIDERWEB] = {
@@ -6261,7 +6261,7 @@ SKILL_DESCRIPT = {
 		"Temps entre chaque Utilisation:^777777 0.5 sec^000000",
 		"Actif pendant:^777777 100 + 50 secondes par Niveau^000000",
 		"Effet:^777777 Permet de lier temporairement un esprit à un Croisé ou un Paladin afin de lui révéler des compétences cachées.",
-		"- La compétence Boomerang ne ratera jamais sa cible, causera le double des dommages, et son délai après l'incantation sera réduit de moitié.^000000",
+		"- La compétence Bouclier Boomerang ne ratera jamais sa cible, causera le double des dommages, et son délai après l'incantation sera réduit de moitié.^000000",
 	},
 
 	[SKID.SL_SUPERNOVICE] = {
@@ -6898,7 +6898,7 @@ SKILL_DESCRIPT = {
 		"Cible:^777777 Soi-même^000000",
 		"Actif pendant:^777777 180 sec^000000",
 		"Effet:^777777 Permet d'augmenter temporairement sa puissance d'attaque en utilisant le pouvoir de l'argent.",
-		"Contrairement à la compétence Optimisation, la compétence Puissance n'affectera que vous.",
+		"Contrairement à la compétence Puissance Maximale, la compétence Puissance n'affectera que vous.",
 		"Vous aurez 0.1% de chance de casser votre arme à chaque coup.^000000",
 		"[Nv 1]^777777 120% de l'Attaque, 3000z dépensés^000000",
 		"[Nv 2]^777777 140% de l'Attaque, 3500z dépensés^000000",
@@ -11308,7 +11308,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.LG_SHIELDPRESS] = {
 
-		"Pression du Bouclier",
+		"Pression Divine du Bouclier",
 		"Niveau Max:^777777 5^000000",
 		"Type:^777777 Active / Dommage^000000",
 		"Effet:^777777 Frappe une cible avec le bouclier, ce qui a pour effet de l'Etourdir (Statut Étourdissement).",
@@ -13175,7 +13175,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.HLIF_BRAIN] = {
 
-		"Chirurgie Cervicale",
+		"Chirurgie Cérébrale",
 		"Niveau Max:^777777 5^000000",
 		"Type:^000099 Compétence passive^000000",
 		"Effet:^777777 Permet d'augmenter les Points d'Énergie Maximum et la Régénération des Points d'Énergie de votre Lif.",
@@ -13649,7 +13649,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.MA_CHARGEARROW] = {
 
-		"Tir Chargé",
+		"Flèche Repoussante",
 		"Niveau Max:^777777 1^000000",
 		"Type:^777777 Offensive^000000",
 		"Coût en Énergie:^777777 15^000000",
@@ -14332,7 +14332,7 @@ SKILL_DESCRIPT = {
 
 	[SKID.MH_POISON_MIST] = {
 
-		"Brume de Poison",
+		"Charrette Dévastatrice de Poison",
 		"Niveau Max:^777777 5^000000",
 		"Actif pendant:^777777 10 secondes, plus 2 secondes par Niveau^000000",
 		"Coût en Énergie:^777777 55 + 10 fois le Niveau de la Compétence^000000", 

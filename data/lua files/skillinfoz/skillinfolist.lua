@@ -62,7 +62,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MG_SRECOVERY] = {
 		"MG_SRECOVERY";
-		SkillName = "Régénération du Mana",
+		SkillName = "Régénération Psychique",
 		MaxLv = 10,
 	},
 
@@ -138,7 +138,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MG_FIREWALL] = {
 		"MG_FIREWALL";
-		SkillName = "Mur de Flammes",
+		SkillName = "Mur de Feu",
 		MaxLv = 10,
 		_NeedSkillList = {
 			{ SKID.MG_SIGHT,1 },
@@ -551,7 +551,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.KN_RIDING] = {
 		"KN_RIDING";
-		SkillName = "Monte",
+		SkillName = "Équitation",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.SM_ENDURE,1 }
@@ -560,7 +560,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.KN_CAVALIERMASTERY] = {
 		"KN_CAVALIERMASTERY";
-		SkillName = "Maîtrise de la Cavalerie",
+		SkillName = "Maîtrise de l'Équitation",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.KN_RIDING,1 }
@@ -1023,7 +1023,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.BS_MAXIMIZE] = {
 		"BS_MAXIMIZE";
-		SkillName = "Optimisation",
+		SkillName = "Puissance Maximale",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.BS_WEAPONPERFECT,3 },
@@ -1294,7 +1294,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.NV_TRICKDEAD] = {
 		"NV_TRICKDEAD";
-		SkillName = "J'suis Mort",	
+		SkillName = "Faire le Mort",	
 		MaxLv = 1,
 		Type = "Quest"
 	},
@@ -1329,7 +1329,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.AC_CHARGEARROW] = {
 		"AC_CHARGEARROW";
-		SkillName = "Tir Chargé",
+		SkillName = "Flèche Repoussante",
 		MaxLv = 1,
 		Type = "Quest"
 	},
@@ -1498,7 +1498,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.RG_GRAFFITI] = {
 		"RG_GRAFFITI";
-		SkillName = "Tag",
+		SkillName = "Graffiti",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.RG_FLAGGRAFFITI,5 }
@@ -1750,7 +1750,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.CR_SHIELDBOOMERANG] = {
 		"CR_SHIELDBOOMERANG";
-		SkillName = "Boomerang",
+		SkillName = "Bouclier Boomerang",
 		MaxLv = 5,
 		_NeedSkillList = {
 			{ SKID.CR_SHIELDCHARGE,3 }
@@ -2259,7 +2259,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.BD_RINGNIBELUNGEN] = {
 		"BD_RINGNIBELUNGEN";
-		SkillName = "L'anneau du Nibelung",
+		SkillName = "L'Anneau des Nibelungen",
 		MaxLv = 5,
 		SpAmount = { 38, 41, 44, 47, 50 },
 		_NeedSkillList = {
@@ -2573,7 +2573,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.HW_SOULDRAIN] = {
 		"HW_SOULDRAIN";
-		SkillName = "Drain du Mana",
+		SkillName = "Absorption Psychique",
 		MaxLv = 10,
 		_NeedSkillList = {
 			{ SKID.MG_SRECOVERY,5 },
@@ -2583,7 +2583,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.HW_MAGICCRASHER] = {
 		"HW_MAGICCRASHER";
-		SkillName = "Impact",
+		SkillName = "Impact Magique",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.MG_SRECOVERY,1 },
@@ -2599,7 +2599,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.PA_PRESSURE] = {
 		"PA_PRESSURE";
-		SkillName = "Pression",
+		SkillName = "Pression Divine",
 		MaxLv = 5,
 		SpAmount = { 30, 35, 40, 45, 50 },
 		_NeedSkillList = {
@@ -2979,7 +2979,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.PF_FOGWALL] = {
 		"PF_FOGWALL";
-		SkillName = "Brouillard",
+		SkillName = "Mur de Charrette Dévastatrice",
 		MaxLv = 1,
 		_NeedSkillList = {
 			{ SKID.SA_VIOLENTGALE,2 },
@@ -5621,7 +5621,7 @@ d	[SKID.SL_NINJA] = {
 
 	[SKID.WL_FROSTMISTY] = {
 		"WL_FROSTMISTY";
-		SkillName = "Brume de Glace",
+		SkillName = "Charrette Dévastatrice de Glace",
 		MaxLv = 5,
 		SpAmount = { 40, 48, 56, 64, 72 },
 		_NeedSkillList = {
@@ -6537,7 +6537,7 @@ d	[SKID.SL_NINJA] = {
 
 	[SKID.LG_SHIELDPRESS] = {
 		"LG_SHIELDPRESS";
-		SkillName = "Pression du Bouclier",
+		SkillName = "Pression Divine du Bouclier",
 		MaxLv = 5,
 		SpAmount = { 10, 12, 14, 16, 18 },
 		_NeedSkillList = {
@@ -7919,7 +7919,7 @@ d	[SKID.SL_NINJA] = {
 
 	[SKID.HLIF_BRAIN] = {
 		"HLIF_BRAIN";
-		SkillName = "Chirurgie Cervicale",
+		SkillName = "Chirurgie Cérébrale",
 	},
 
 	[SKID.HLIF_CHANGE] = {
@@ -8220,7 +8220,7 @@ d	[SKID.SL_NINJA] = {
 
 	[SKID.MA_CHARGEARROW] = {
 		"MA_CHARGEARROW";
-		SkillName = "Tir Chargé",
+		SkillName = "Flèche Repoussante",
 	},
 
 	[SKID.MA_SHARPSHOOTING] = {
