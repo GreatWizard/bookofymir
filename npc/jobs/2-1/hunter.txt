@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Leonid et Myllena, corrigé par Fern
+//traduit par Leonid et Myllena, corrigé par Fern et NoH
 //===== eAthena Script ======================================= 
 //= Hunter Job Quest
 //===== By: ================================================== 
@@ -62,15 +62,15 @@ in_hunter,99,99,4	script	Informations#hnt::HntNotice	727,{
 	mes "============ Notice ============";
 	mes "Nous vous informons que vous devez maintenant vous rendre à ^ff0000Hugel^000000 dans la République de Schwaltzvalt pour le changement de classe en Chasseur.";
 	next;
-	mes "Vous pouvez désormais utiliser la ligne aérienne Hugel, alors veuillez utiliser le dirigeable pour visiter la ville.";
+	mes "Vous pouvez désormais utiliser la ligne aérienne Hugel, alors veuillez utiliser le dirigeable pour vous rendre dans la ville.";
 	next;
-	mes "Vous trouverez le nouvel emplacement pour le changement de classe à ^ff0000 Hugel 208 222 ^000000.";
+	mes "Vous trouverez le nouvel emplacement pour le changement de classe à ^ff0000 Hugel (208, 222)^000000. Vous ignorez ce que ces étranges chiffres peuvent signifier.";
 	next;
 	mes "^804000(Vous apercevez une petite ligne écrite en bas de la notice.)^000000";
 	mes " ";
 	mes " ";
 	mes " ";
-	mes "Le dresseur de faucons se trouve là-bas également.";
+	mes "Le dresseur de faucons se trouve également là-bas.";
 	close;
 }
 
@@ -81,7 +81,7 @@ pay_fild10,148,252,3	duplicate(HntNotice)	Informations#hu	857
 hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 	if (Upper == 1) {
 		mes "[Chasseuse Sherin]";
-		mes "Oh, comment allez-vous? Ça fait longtemps, n'est-ce pas?";
+		mes "Oh, comment allez-vous? Ça faisait longtemps, n'est-ce pas?";
 		next;
 		mes "[Chasseuse Sherin]";
 		mes "...Attendez.";
@@ -90,10 +90,10 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 	}
 	if (BaseJob == Job_Archer && JobLevel < 40) {
 		mes "[Membre de la Guilde des Chasseurs]";
-		mes "Hé? Vous ne vous êtes pas encore assez entraîné. Pour être Chasseur, vous devez d'abord acquérir un certain niveau d'expérience en tant qu'Archer.";
+		mes "Hé? Vous ne vous êtes pas encore assez entraîné"+ ( sex ? "" : "e" ) +". Pour devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +", vous devez d'abord acquérir un certain niveau d'expérience en tant qu'"+ ( sex ? "Archer" : "Archère" ) +".";
 		next;
 		mes "[Membre de la Guilde des Chasseurs]";
-		mes "Sortez d'ici et entraînez vous un peu plus. Vous aurez besoin d'avoir un Niveau de Métier d'au moins 40 avant de pouvoir devenir Chasseur pour de bon. Bien entendu, vous pouvez atteindre un niveau plus important si vous le souhaitez.";
+		mes "Sortez d'ici et entraînez-vous un peu plus. Vous aurez besoin d'avoir un Niveau de Métier d'au moins 40 avant de pouvoir devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +" pour de bon. Bien entendu, vous pouvez atteindre un niveau plus important si vous le souhaitez.";
 		next;
 		mes "[Membre de la Guilde des Chasseurs]";
 		mes "À la prochaine...";
@@ -101,12 +101,12 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 	}
 	if (SkillPoint) {
 		mes "[Chasseuse Sherin]";
-		mes "Vous ne pouvez pas changer de classe sans avoir utilisé tous vos Points de Compétence. Veuillez tous les répartir et revenez me voir...";
+		mes "Vous ne pouvez pas changer de classe sans avoir utilisé tous vos Points de Compétence. Veuillez les répartir et revenez me voir...";
 		close;
 	}
 	if (BaseClass == Job_Novice) {
 		mes "[Membre de la Guilde des Chasseurs]";
-		mes "Vous devez être... un Novice?";
+		mes "Vous devez être... un"+ ( sex ? "" : "e" ) +" Novice?";
 		mes "Hé bien, vous avez fait un bien long chemin. Mais je ne vois pas vraiment ce que vous pourriez faire ici.";
 		close;
 	}
@@ -122,7 +122,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 	}
 	else if (BaseClass == Job_Acolyte) {
 		mes "[Membre de la Guilde des Chasseurs]";
-		mes "Oh, un servant de Dieu! Heureux de faire votre connaissance. Il n'y a pas beaucoup de personnes comme vous qui visitent cet endroit... héhé.";
+		mes "Oh, un"+ ( sex ? "serviteur" : "e servante" ) +" de Dieu! Heureux de faire votre connaissance. Il n'y a pas beaucoup de personnes comme vous qui visitent cet endroit... héhé.";
 		close;
 	}
 	else if (Baseclass == Job_Merchant) {
@@ -149,7 +149,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 		mes "Ça faisait longtemps... Qu'est-ce qui vous amène ici? Votre faucon se serait-il échappé?";
 		next;
 		mes "[Chasseuse Sherin]";
-		mes "Je n'ai pas réellement de nouveautés de la part de la guilde pour l'instant, donc j'espère que vous n'êtes pas venu ici pour ça...";
+		mes "Il n'y a pas vraiment de nouvelles provenant de la guilde pour l'instant, donc j'espère que vous n'êtes pas venu"+ ( sex ? "" : "e" ) +" ici pour ça...";
 		close;
 	}
 	else if (BaseJob == Job_Archer) {
@@ -171,19 +171,19 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 			mes "Oh...? Vous avez réussi l'examen du changement de classe? Félicitations...!!";
 			next;
 			mes "[Chasseuse Sherin]";
-			mes "Bien dans ce cas, je vais maintenant vous changer en Chasseur.";
+			mes "Bien dans ce cas, je vais maintenant vous changer en "+ ( sex ? "Chasseur" : "Chasseuse" ) +".";
 			next;
 			delitem 1007,1; //Penetration
 			mes "[Chasseuse Sherin]";
 			mes "Tadam... Félicitations!";
-			mes "Vous êtes impressionnant en Chasseur!!";
+			mes "Vous êtes impressionnant"+ ( sex ? " en Chasseur" : "e en Chasseuse" ) +"!!";
 			set .@joblvl,joblevel;
 			completequest 4013;
 			callfunc "Job_Change",Job_Hunter;
 			callfunc "F_ClearJobVar";		// clears all job variables for the current player
 			next;
 			mes "[Chasseuse Sherin]";
-			mes "Devenez une personne noble et un digne représentant de notre Guilde de Chasseurs. Montrez votre amour de la nature...";
+			mes "Devenez quelqu'un de noble, un"+ ( sex ? "" : "e" ) +" digne représentant"+ ( sex ? "" : "e" ) +" de notre Guilde de Chasseurs. Montrez votre amour de la nature...";
 			next;
 			mes "[Chasseuse Sherin]";
 			mes "Et aussi, voici une petit présent pour récompenser tous vos efforts. C'est de ma part, bien entendu...";
@@ -196,7 +196,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 		else if ((JobLevel > 39) && ((HNTR_Q == 0) || (HNTR_Q == 1))) {
 			if (HNTR_Q == 0) {
 				mes "[Membre de la Guilde des Chasseurs]";
-				mes "Oh, vous êtes Archer! Il semblerait que vous vous soyez entraîné suffisamment... Vous êtes venu ici pour devenir Chasseur, n'est-ce pas?";
+				mes "Oh, vous êtes "+ ( sex ? "Archer" : "Archère" ) +"! Il semblerait que vous vous soyez suffisamment entraîné"+ ( sex ? "" : "e" ) +"... Vous êtes venu"+ ( sex ? "" : "e" ) +" ici pour devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +", n'est-ce pas?";
 				next;
 				switch(select("Oui. C'est pour ça que je suis ici.:Quelles sont les prérequis?:....Je ne suis pas encore "+(sex?"prêt":"prête")+".")) {
 				case 1:
@@ -205,7 +205,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 					mes "J'avais raison! Laissez-moi vous inscrire sur la liste des candidats. Voyons voir...*";
 					next;
 					mes "[Membre de la Guilde des Chasseurs]";
-					mes "Hum... Commençons par l'entretien. Patientez et détendez vous un instant. Pas besoin de vous inquiétez, je vais tout préparer...";
+					mes "Hum... Commençons par l'entretien. Patientez et détendez-vous un instant. Pas besoin de vous inquiétez, je vais tout préparer...";
 					next;
 					mes "^3355FF*Rassemble et feuillette des papiers*^000000";
 					next;
@@ -226,7 +226,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 						mes "Je vais vous décrire plusieurs énoncés. Écoutez-les attentivement. Quand je vous poserai une question, vous devrez choisir une réponse. Plutôt simple, non?";
 						next;
 						mes "[Chasseuse Sherin]";
-						mes "Je veux simplement savoir ce que vous pensez de la vie en général, et pourquoi vous souhaitez devenir Chasseur, il n'y a pas de quoi être nerveux.";
+						mes "Je veux simplement savoir ce que vous pensez de la vie en général, et pourquoi vous souhaitez devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +", il n'y a pas de quoi être "+ ( sex ? "nerveux" : "nerveuse" ) +".";
 						next;
 					}
 					else {
@@ -255,7 +255,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 				mes "Bien, commençons.";
 				next;
 				mes "[Chasseuse Sherin]";
-				mes "Vous êtes Archer, et vous ne savez pas où vous devez aller chasser. Que faites-vous?";
+				mes "Vous êtes "+ ( sex ? "Archer" : "Archère" ) +", et vous ne savez pas où vous devez aller chasser. Que faites-vous?";
 				next;
 				switch(select("Demander où vous pourriez aller en hurlant.:Demander calmement à une personne de passage.:Chercher autour de vous un bon endroit.")) {
 				case 2:
@@ -271,7 +271,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 				mes "Mais vous êtes à Payon!!";
 				mes "Comment allez-vous vous rendre dans le désert?";
 				next;
-				switch(select("Je demande à un Prêtre d'ouvrir un portail pour y être téléporté.:J'utilise le service de la Kafra.:Je marche avec un ami.")) {
+				switch(select("Je demande à un Prêtre d'ouvrir un portail pour y être téléporté"+ ( sex ? "" : "e" ) +".:J'utilise le service de la Kafra.:Je marche avec un ami.")) {
 				case 2:
 				case 3:
 					set .@hunter_t,.@hunter_t+10;
@@ -279,10 +279,10 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 					break;
 				}
 				mes "[Chasseuse Sherin]";
-				mes "Il y a aucun Prêtre à solliciter pour une téléportation, et aucun ami pour vous accompagner. Vous êtes obligé d'utiliser le service de la Kafra, mais vous n'avez pas de Zeny!";
+				mes "Il y a aucun Prêtre à solliciter pour une téléportation, et aucun ami pour vous accompagner. Vous êtes obligé"+ ( sex ? "" : "e" ) +" d'utiliser le service de la Kafra, mais vous n'avez pas de Zény!";
 				next;
 				mes "[Chasseuse Sherin]";
-				mes "Que faites-vous pour obtenir les Zeny dont vous avez besoin?";
+				mes "Que faites-vous pour obtenir les Zénys dont vous avez besoin?";
 				next;
 				switch(select("Je demande ici et là.:Je vends des objets qui ne me sont pas utiles.:Je pars chasser dans un endroit proche.")) {
 				case 2:
@@ -292,7 +292,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 					break;
 				}
 				mes "[Chasseuse Sherin]";
-				mes "Et vous arrivez enfin dans le Désert de Sograt. Mais vous vous rendez compte que vous ne pouvez pas tuer les Hodes seul car ils sont un peu trop forts pour vous.";
+				mes "Et vous arrivez enfin dans le Désert de Sograt. Mais vous vous rendez compte que vous ne pouvez pas tuer les Hodes seul"+ ( sex ? "" : "e" ) +" car ils sont un peu trop forts pour vous.";
 				next;
 				mes "[Chasseuse Sherin]";
 				mes "Que feriez-vous face à cette situation?";
@@ -300,9 +300,9 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 				if (select("J'attaquerais un Hode d'en haut d'une colline.:Je retournerais en ville.:J'attaquerais le Hode de quelqu'un d'autre.") == 2)
 					set .@hunter_t,.@hunter_t+10;
 				mes "[Chasseuse Sherin]";
-				mes "Disons que vous avez eu beaucoup de soucis à tuer des Hodes et que vous êtes retourné en ville. Désormais vous n'avez plus de HP et un Prêtre semble se trouver dans les environs. Comment lui demanderiez-vous de vous soigner?";
+				mes "Disons que vous avez eu beaucoup de soucis à tuer des Hodes et que vous êtes retourné"+ ( sex ? "" : "e" ) +" en ville. Désormais vous n'avez plus de Points de Vie, et un Prêtre se trouve dans les environs. Comment lui demanderiez-vous de vous soigner?";
 				next;
-				if (select("Serait-il possible d'être soigné, s'il-vous-plaît?:Soins, svp.:Soignez-moi.") == 1)
+				if (select("Serait-il possible d'être soigné"+ ( sex ? "" : "e" ) +", s'il-vous-plaît?:Des soins, svp.:Soignez-moi.") == 1)
 					set .@hunter_t,.@hunter_t+10;
 				mes "[Chasseuse Sherin]";
 				mes "Cette fois, vous avez trouvé un objet rare en fouillant dans votre inventaire. Vous voulez vendre votre objet, et vous trouvez de nombreuses personnes qui ont ouvert leur boutique et des fenêtres de discussion.";
@@ -318,15 +318,15 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 					break;
 				}
 				mes "[Chasseuse Sherin]";
-				mes "Pendant que vous attendez, quelqu'un demande des objets et des Zeny. Que devriez-vous faire?";
+				mes "Pendant que vous attendez, quelqu'un demande des objets et des Zénys. Que faites-vous?";
 				next;
-				if (select("Lui donner quelques uns de mes objets et des Zeny.:L'ignorer et continuer mon chemin.:Lui conseiller un bon endroit où aller chasser.") == 1)
+				if (select("Lui donner quelques uns de mes objets et des Zénys.:L'ignorer et continuer mon chemin.:Lui conseiller un bon endroit où aller chasser.") == 1)
 					set .@hunter_t,.@hunter_t+10;
 				mes "[Chasseuse Sherin]";
-				mes "Dans l'immédiat, vous décidez de vous rendre seul au Labyrinthe.";
+				mes "Dans l'immédiat, vous décidez de vous rendre seul"+ ( sex ? "" : "e" ) +" au Labyrinthe.";
 				next;
 				mes "[Chasseuse Sherin]";
-				mes "Mais sur votre chemin, vous rencontrez une personne qui s'est perdue. Que devriez-vous faire?";
+				mes "Mais sur votre chemin, vous rencontrez une personne qui s'est perdue. Que faites-vous?";
 				next;
 				switch(select("Lui indiquer la route à prendre.:L'escorter personnellement jusqu'à destination.:L'ignorer.")) {
 				case 1:
@@ -336,20 +336,20 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 					break;
 				}
 				mes "[Chasseuse Sherin]";
-				mes "Après avoir rencontré cette personne, vous décidez de repartir. Au même moment, vous trouver quelqu'un entrain de combattre un gros Monstre!";
+				mes "Après avoir rencontré cette personne, vous décidez de repartir. Au même moment, vous trouvez quelqu'un en train de combattre un gros Monstre!";
 				next;
 				mes "[Chasseuse Sherin]";
-				mes "Que feriez-vous?";
+				mes "Que faites-vous?";
 				next;
 				if (select("L'observer, puis attaquer s'il demande de l'aide.:Attaquer et observer ce qui se passe.:Retourner en ville.") == 1)
 					set .@hunter_t,.@hunter_t+10;
 				mes "[Chasseuse Sherin]";
-				mes "Vous êtes maintenant épuisé après la dure journée de chasse. Il est temps de retourner en ville.";
+				mes "Vous êtes maintenant épuisé"+ ( sex ? "" : "e" ) +" après la dure journée de chasse. Il est temps de retourner en ville.";
 				next;
 				mes "[Chasseuse Sherin]";
-				mes "Mais qu'est-ce que c'est!? Vous trouvez un objet coûteux par terre! Que devriez-vous faire avec cet objet?";
+				mes "Mais qu'est-ce que c'est!? Vous trouvez un objet de valeur par terre! Que faites-vous avec cet objet?";
 				next;
-				switch(select("Le prendre et le garder.:Essayer de trouver à qui il appartient.:Passer mon chemin.")) {
+				switch(select("Le prendre et le garder.:Essayer de trouver à qui il appartient.:Passer son chemin.")) {
 				case 2:
 				case 3:
 					set .@hunter_t,.@hunter_t+10;
@@ -363,17 +363,17 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 					set HNTR_Q,2;
 					changequest 4000,4001;
 					mes "[Chasseuse Sherin]";
-					mes "Bien joué! Vos réponses montrent que vous avez une juste conception de la vie. Vous possédez sans aucun doute les qualités requises pour devenir Chasseur...";
+					mes "Bien joué! Vos réponses montrent que vous avez une juste conception de la vie. Vous possédez sans aucun doute les qualités requises pour devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +"...";
 					next;
 					mes "[Chasseuse Sherin]";
-					mes "Je suis heureuse de vous dire que vous avez réussi l'entretien... Maintenant, allez voir la personne située là-bas, dans le coin de la pièce. Elle vous indiquera la suite des épreuves...";
+					mes "Je suis heureuse de vous dire que vous avez réussi l'entretien... Maintenant, allez voir la personne située là-bas, dans le coin de la pièce. Elle vous indiquera la suite des évènements...";
 					close;
 				}
 				else if (.@hunter_t == 90) {
 					set HNTR_Q,2;
 					changequest 4000,4001;
 					mes "[Chasseuse Sherin]";
-					mes "Bien, je suis en train de regarder vos réponses et vos résultats ne sont pas satisfaisants. Mais je vais malgré tout vous permettre de valider votre examen. Bien que je ne sache pas ce qu'en pensera notre Maître de Guilde.";
+					mes "Bien, je suis en train de regarder vos réponses et vos résultats ne sont pas satisfaisants. Mais je vais malgré tout vous permettre de valider votre examen, bien que je ne sache pas ce qu'en pensera notre Maître de Guilde.";
 					next;
 					mes "[Chasseuse Sherin]";
 					mes "Gardez les bases en mémoire. Faites mieux à la prochaine épreuve, d'accord?";
@@ -381,7 +381,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 				}
 				set HNTR_Q,1;
 				mes "[Chasseuse Sherin]";
-				mes "Hum... de cette façon ça ne peut pas fonctionner. Vous ne pouvez pas devenir Chasseur sans connaître les bases.";
+				mes "Hum... de cette façon ça ne peut pas fonctionner. Vous ne pouvez pas devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +" sans connaître les bases.";
 				next;
 				mes "[Chasseuse Sherin]";
 				mes "Réfléchissez sérieusement aux réponses que vous m'avez données. Afin d'être en communion avec la nature, vous devez d'abord évaluer vos relations avec les autres.";
@@ -392,7 +392,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 			case 2:
 				mes "[Membre de la Guilde des Chasseurs]";
 				mes "Les exigences pour le changement de métier?";
-				mes "Tout d'abord... vous devez être Archer...";
+				mes "Tout d'abord... vous devez être "+ ( sex ? "Archer" : "Archère" ) +"...";
 				next;
 				mes "[Membre de la Guilde des Chasseurs]";
 				mes "Ensuite... votre Niveau de Métier doit être d'au moins 40.";
@@ -401,7 +401,7 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 				mes "De plus... vous devez rapporter tous les objets qui vous seront demandés par la guilde.";
 				next;
 				mes "[Membre de la Guilde des Chasseurs]";
-				mes "Pour finir... vous devez passer l'examen donné par la guilde. Si vous vous êtes assez entraîné en tant qu'Archer, vous devriez le réussir sans problème...";
+				mes "Pour finir... vous devez passer l'examen donné par la guilde. Si vous vous êtes assez entraîné"+ ( sex ? "" : "e" ) +" en tant qu'"+ ( sex ? "Archer" : "Archère" ) +", vous devriez le réussir sans problème...";
 				break;
 			case 3:
 				mes "[Membre de la Guilde des Chasseurs]";
@@ -411,13 +411,13 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 		}
 		else if (HNTR_Q > 2 && HNTR_Q < 10) {
 			mes "[Chasseuse Sherin]";
-			mes "Donnez simplement l'objet au Chasseur de Démons, qui se trouve au fond à gauche de la salle...";
+			mes "Donnez simplement l'objet au Chasseur de Démons qui se trouve au fond à gauche de la salle...";
 			next;
 			mes "[Chasseuse Sherin]";
 			if (sex)
-				mes "Si vous décidez de devenir Chasseur, promettez-moi de venir me rendre visite. J'aimerais vous voir en Chasseur. Vous devriez être formidable!!";
+				mes "Si vous décidez de devenir Chasseur, promettez-moi de venir me rendre visite. J'aimerais vous voir en Chasseur. Vous seriez formidable!!";
 			else
-				mes "Si vous décidez de devenir Chasseresse, venez me rendre visite, d'accord? Vous êtes mignonne, mais... vous devriez l'être encore plus en Chasseresse. Héhé...";
+				mes "Si vous décidez de devenir Chasseuse, venez me rendre visite, d'accord? Vous êtes mignonne, mais... vous le seriez encore plus en tant que Chasseuse. Héhé...";
 			close;
 		}
 		else if (HNTR_Q == 2) {
@@ -428,21 +428,21 @@ hu_in01,386,373,4	script	Chasseuse Sherin::Chasseresse Sherin#hnt	727,{
 			mes "Vous n'avez pas été capable de trouver le Chasseur de Démons? Il se trouve juste à gauche! Héhé...";
 			next;
 			mes "[Chasseuse Sherin]";
-			mes "J'aimerais vous voir devenir Chasseur...! Waaah... Je pense que vous seriez formidable, alors dépêchez-vous!";
+			mes "J'aimerais vous voir devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +"...! Waaah... Je pense que vous seriez formidable, alors dépêchez-vous!";
 			close;
 		}
 		mes "[Chasseuse Sherin]";
-		mes "Hum, vous êtes censé rencontrer quelqu'un d'autre, pas moi. Comme notre Maître de Guilde qui est absent pour affaires, vous savez?";
+		mes "Hum, vous êtes censé"+ ( sex ? "" : "e" ) +" rencontrer quelqu'un d'autre, pas moi. Comme notre Maître de Guilde qui est absent pour affaires, vous savez?";
 		next;
 		mes "[Chasseuse Sherin]";
 		mes "J'ai entendu dire qu'il était dans le Palais Central de Payon... ou au Village des Archers, à un de ces deux endroits. Essayez d'aller là-bas et trouvez-le, d'accord?";
 		close;
 	}
 	mes "[Membre de la Guilde des Chasseurs]";
-	mes "Hein? Vous ne vous êtes pas assez entraîné en tant qu'Archer. Pour devenir Chasseur, vous devez d'abord gagner plus d'expérience en tant qu'Archer.";
+	mes "Hein? Vous ne vous êtes pas assez entraîné"+ ( sex ? "" : "e" ) +" en tant qu'"+ ( sex ? "Archer" : "Archère" ) +". Pour devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +", vous devez d'abord gagner plus d'expérience en tant qu'"+ ( sex ? "Archer" : "Archère" ) +".";
 	next;
 	mes "[Membre de la Guilde des Chasseurs]";
-	mes "Bien dans ce cas, allez vous entraînez davantage. Votre Niveau de Métier doit être d'au moins 40 pour être exacte. Bien entendu, vous pouvez toujours viser plus haut. À la prochaine...";
+	mes "Bien dans ce cas, allez vous entraîner davantage. Votre Niveau de Métier doit être d'au moins 40 pour être exactes. Bien entendu, vous pouvez toujours viser plus haut. À la prochaine...";
 	close;
 }
 
@@ -467,7 +467,7 @@ hu_in01,382,382,4	script	Réceptionniste#hnt	732,{
 			}
 			else {
 				mes "[Chasseur de Démons]";
-				mes "Si tu crois que tes petites blagues minables peuvent m'amuser, tu te fourres le doigt dans l'oeil jusqu'au coude. Dehors, bouffon! On ne plaisante pas avec le ^660000Chasseur de Démons^000000!'";
+				mes "Si tu crois que tes petites blagues minables peuvent m'amuser, tu te fourres le doigt dans l'oeil jusqu'au coude. Dehors, bouffon"+ ( sex ? "" : "ne" ) +"! On ne plaisante pas avec le ^660000Chasseur de Démons^000000!'";
 				close2;
 				warp "hugel",208,223;
 				end;
@@ -497,7 +497,7 @@ hu_in01,382,382,4	script	Réceptionniste#hnt	732,{
 		}
 		if (.@selection == 1) {
 			mes "[Chasseur de Démons]";
-			mes "Hum. Il vous faudra: ^660000"+.@items[1]+" "+getitemname(.@items[0])+"^000000 pour fabriquer la pointe des flèches, mais aussi ^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 pour diverses autres utilisations. Ah, et aussi ^660000"+.@items[5]+" "+getitemname(.@items[4])+"^000000 s'il vous plaît.";
+			mes "Hum. Il vous faudra: ^660000"+.@items[1]+" "+getitemname(.@items[0])+""+ ( .@items[1] > 1 ? "s" : "" ) +"^000000 pour fabriquer la pointe des flèches, mais aussi ^660000"+.@items[3]+" "+getitemname(.@items[2])+""+ ( .@items[3] > 1 ? "s" : "" ) +"^000000 pour diverses autres utilisations. Ah, et aussi ^660000"+.@items[5]+" "+getitemname(.@items[4])+""+ ( .@items[5] > 1 ? "s" : "" ) +"^000000 s'il vous plaît.";
 			set HNTR_Q,.@items[6];
 			next;
 			mes "[Chasseur de Démons]";
@@ -563,9 +563,9 @@ hu_in01,382,382,4	script	Réceptionniste#hnt	732,{
 		next;
 		mes "[Chasseur de Démons]";
 		mes "Rapportez-moi:";
-		mes "^660000"+.@items[1]+" "+getitemname(.@items[0])+"^000000,";
-		mes "^660000"+.@items[3]+" "+getitemname(.@items[2])+"^000000 et";
-		mes "^660000"+.@items[5]+" "+getitemname(.@items[4])+"^000000.";
+		mes "^660000"+.@items[1]+" "+getitemname(.@items[0])+""+ ( .@items[1] > 1 ? "s" : "" ) +"^000000,";
+		mes "^660000"+.@items[3]+" "+getitemname(.@items[2])+""+ ( .@items[3] > 1 ? "s" : "" ) +"^000000 et";
+		mes "^660000"+.@items[5]+" "+getitemname(.@items[4])+""+ ( .@items[5] > 1 ? "s" : "" ) +"^000000.";
 		mes "Revenez quand vous aurez rassemblé tous ces matériaux, et pas avant!";
 		close;
 	}
@@ -581,7 +581,7 @@ hu_in01,382,382,4	script	Réceptionniste#hnt	732,{
 	}
 	else {
 		mes "[Réceptionniste de la Guilde]";
-		mes "Si vous souhaitez devenir un Chasseur, inscrivez-vous auprès de Sherin.";
+		mes "Si vous souhaitez devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +", vous devrez vous inscrire auprès de Sherin.";
 		close;
 	}
 }
@@ -614,7 +614,7 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 			mes "Je vous enverrai dans la zone de l'épreuve. Vous y trouverez une Salle d'Attente: si quelqu'un d'autre occupe la pièce de l'épreuve, vous devrez attendre qu'il ait terminé.";
 			next;
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Si la personne avant vous réussi, échoue, ou abandonne l'épreuve, la personne suivante dans la Salle d'Attente pourra rejoindre la zone de l'épreuve. Si vous êtes tout seul, vous rejoindrez immédiatement la zone de l'épreuve après être entré dans la Salle d'Attente.";
+			mes "Si la personne avant vous réussit, échoue, ou abandonne l'épreuve, la personne suivante dans la Salle d'Attente pourra rejoindre la zone de l'épreuve. Si vous êtes tout"+ ( sex ? "" : "e" ) +" seul"+ ( sex ? "" : "e" ) +", vous rejoindrez immédiatement la zone de l'épreuve après être entré"+ ( sex ? "" : "e" ) +" dans la Salle d'Attente.";
 			close;
 		case 4:
 			if (.@a0) {
@@ -628,7 +628,7 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 			next;
 		}
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Tenez ces quelques flèches, elles vous seront utiles!";
+		mes "Tenez, prenez ces quelques flèches: elles vous seront utiles!";
 		set HNTR_Q,12;
 		changequest 4009,4011;
 		getitem 1751,200; //Silver_Arrow
@@ -639,10 +639,10 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 	else if (HNTR_Q > 1 && HNTR_Q < 10) {
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Mum...?";
-		mes "Qu'est-ce qu'un Archer vient faire par ici?";
+		mes "Qu'est-ce qu'"+ ( sex ? "un Archer" : "une Archère" ) +" vient faire par ici?";
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Personne dans la Guilde des Chasseurs ne m'a mis au courant. Vous ne seriez pas en train d'essayer de vous défiler des épreuves pour devenir Chasseur par hasard?";
+		mes "Personne dans la Guilde des Chasseurs ne m'a mis au courant. Vous ne seriez pas en train d'essayer de vous défiler des épreuves pour devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +" par hasard?";
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Retournez passer les épreuves, et revenez quand vous aurez réussi.";
@@ -650,12 +650,12 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 	}
 	else if (HNTR_Q == 11) {
 		mes "[Chasseur]";
-		mes "Hum? En quoi puis-je vous aider? Si vous souhaitez devenir Chasseur, vous devriez vous adresser aux personnes de la Guilde, pas à moi.";
+		mes "Hum? En quoi puis-je vous aider? Si vous souhaitez devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +", vous devriez vous adresser aux personnes de la Guilde, pas à moi.";
 		close;
 	}
 	else if (HNTR_Q > 11 && HNTR_Q < 16) {
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Hum. Vous êtes l'Archer dont on m'a parlé. Vous avez bien terminé votre apprentissage du métier de Chasseur, pas vrai? Mais il vous reste encore une dernière épreuve.";
+		mes "Hum. Vous êtes l'"+ ( sex ? "Archer" : "Archère" ) +" dont on m'a parlé. Vous avez bien terminé votre apprentissage du métier de Chasseur, pas vrai? Mais il vous reste encore une dernière épreuve.";
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Si vous avez des questions, c'est le moment.";
@@ -667,10 +667,10 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 			close;
 		case 2:
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Vous commencerez au sud d'une pièce. Vous devrez chasser les monstres, activer un levier qui apparaîtra au centre de la pièce.";
+			mes "Vous commencerez au Sud d'une pièce. Vous devrez chasser les monstres, activer un levier qui apparaîtra au centre de la pièce.";
 			next;
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Vous réussirez si vous êtes capable de vous échapper via la sortie au nord de la pièce, après avoir activé le levier.";
+			mes "Vous réussirez si vous êtes capable de vous échapper via la sortie au Nord de la pièce, après avoir activé le levier.";
 			close;
 		case 3:
 			mes "[Maître de la Guilde des Chasseurs]";
@@ -680,7 +680,7 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 			mes "Une seule personne à la fois peut passer l'épreuve. Une salle d'attente est prévue si plusieurs personnes sont inscrites à l'épreuve.";
 			next;
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit à la pièce de l'épreuve après être entré dans la salle d'attente.";
+			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit"+ ( sex ? "" : "e" ) +" à la pièce de l'épreuve après être entré"+ ( sex ? "" : "e" ) +" dans la salle d'attente.";
 			close;
 		case 4:
 			mes "[Maître de la Guilde des Chasseurs]";
@@ -703,12 +703,12 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 			end;
 		}
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Hâtez-vous de terminer de vous préparer. On ne vous attendra pas dans la bataille!";
+		mes "Hâtez-vous de terminer de vous préparer. On ne vous attendra pas pendant la bataille!";
 		close;
 	}
 	else if (HNTR_Q == 16) {
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Oh, vous êtes revenu en un seul morceau!";
+		mes "Oh, vous êtes revenu"+ ( sex ? "" : "e" ) +" en un seul morceau!";
 		mes "Euh je veux dire... bon travail. Voici un petit quelque chose qui prouvera que vous avez réussi cette épreuve auprès de mes collègues.";
 		set HNTR_Q,17;
 		savepoint "payon",104,99;
@@ -716,12 +716,12 @@ payon_in03,131,7,3	script	Chasseur#htnGM	59,{
 		changequest 4012,4013;
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Retournez voir les membres de la Guilde des Chasseurs. J'ai du travail... J'espère que vous deviendrez Chasseur très bientôt.";
+		mes "Retournez voir les membres de la Guilde des Chasseurs. J'ai du travail... J'espère que vous deviendrez "+ ( sex ? "Chasseur" : "Chasseuse" ) +" très bientôt.";
 		close;
 	}
 	else if (HNTR_Q == 17) {
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "N'êtes-vous pas pressé de devenir Chasseur? Pendant le mois qui a suivi l'obtention de mon diplôme, j'étais tout fou, à courir ça et là à brandir mon arc à la moindre occasion. J'étais si heureux~";
+		mes "N'êtes-vous pas pressé"+ ( sex ? "" : "e" ) +" de devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +"? Pendant le mois qui a suivi l'obtention de mon diplôme, j'étais tout fou, à courir ça et là, à brandir mon arc à la moindre occasion. J'étais si heureux~";
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Vous devriez retourner parler à mes collègues~";
@@ -739,7 +739,7 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 	cutin "job_huntermaster",2;
 	if (HNTR_Q == 11) {
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Hum... Je vois que vous êtes ici pour devenir Chasseur. Laissez-moi vous expliquer en quoi va consister l'épreuve. Que souhaitez-vous savoir?";
+		mes "Hum... Je vois que vous êtes ici pour devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +". Laissez-moi vous expliquer en quoi va consister l'épreuve. Que souhaitez-vous savoir?";
 		next;
 		switch(select("En quoi consiste l'épreuve?:Comment réussir l'épreuve?:Quels sont vos conseils?:Commencer l'épreuve.")) {
 		case 1:
@@ -753,10 +753,10 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 			end;
 		case 2:
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Vous commencerez au sud d'une pièce. Vous devrez chasser les monstres, puis activer un levier qui apparaîtra au centre de la pièce.";
+			mes "Vous commencerez au Sud d'une pièce. Vous devrez chasser les monstres, puis activer un levier qui apparaîtra au centre de la pièce.";
 			next;
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Vous réussirez si vous êtes capable de vous échapper via la sortie au nord de la pièce, après avoir activé le levier.";
+			mes "Vous réussirez si vous êtes capable de vous échapper via la sortie au Nord de la pièce, après avoir activé le levier.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
@@ -768,7 +768,7 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 			mes "Une seule personne à la fois peut passer l'épreuve. Une salle d'attente est prévue si plusieurs personnes sont inscrites à l'épreuve.";
 			next;
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit à la pièce de l'épreuve après être entré dans la salle d'attente.";
+			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit"+ ( sex ? "" : "e" ) +" à la pièce de l'épreuve après être entré"+ ( sex ? "" : "e" ) +" dans la salle d'attente.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
@@ -798,7 +798,7 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 	else if (HNTR_Q > 1 && HNTR_Q < 10) {
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Mum...?";
-		mes "Qu'est-ce qu'un Archer vient faire par ici?";
+		mes "Qu'est-ce qu'"+ ( sex ? "un Archer" : "une Archère" ) +" vient faire par ici?";
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Personne dans la Guilde des Chasseurs ne m'a mis au courant. Vous ne seriez pas en train d'essayer de vous défiler des épreuves pour devenir Chasseur par hasard?";
@@ -813,7 +813,7 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 		mes "[Chasseur]";
 		mes "Hum?";
 		mes "En quoi puis-je vous aider?";
-		mes "Oh, vous devez être un candidat au métier de Chasseur.";
+		mes "Oh, vous devez être candidat"+ ( sex ? "" : "e" ) +" au métier de Chasseur.";
 		next;
 		mes "[Chasseur]";
 		mes "Si tel est le cas, vous devriez rendre visite à la personne en charge de cela, au Palais Central de Payon.";
@@ -823,7 +823,7 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 	}
 	else if (HNTR_Q > 11 && HNTR_Q < 16) {
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Hum? N'êtes-vous pas l'Archer qui a abandonné la dernière fois? Vous êtes prêt maintenant, n'est-ce pas? Je vais vous envoyer vers la zone de l'épreuve.";
+		mes "Hum? N'êtes-vous pas l'"+ ( sex ? "Archer" : "Archère" ) +" qui a abandonné la dernière fois? Vous êtes prêt"+ ( sex ? "" : "e" ) +" maintenant, n'est-ce pas? Je vais vous envoyer vers la zone de l'épreuve.";
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Si vous avez encore des questions, n'hésitez pas.";
@@ -840,10 +840,10 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 			end;
 		case 2:
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Vous commencerez au sud d'une pièce. Vous devrez chasser les monstres,puis activer un levier qui apparaîtra au centre de la pièce.";
+			mes "Vous commencerez au Sud d'une pièce. Vous devrez chasser les monstres,puis activer un levier qui apparaîtra au centre de la pièce.";
 			next;
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Vous réussirez si vous êtes capable de vous échapper via la sortie au nord de la pièce, après avoir activé le levier.";
+			mes "Vous réussirez si vous êtes capable de vous échapper via la sortie au Nord de la pièce, après avoir activé le levier.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
@@ -855,7 +855,7 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 			mes "Une seule personne à la fois peut passer l'épreuve. Une salle d'attente est prévue si plusieurs personnes sont inscrites à l'épreuve.";
 			next;
 			mes "[Maître de la Guilde des Chasseurs]";
-			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit à la pièce de l'épreuve après être entré dans la salle d'attente.";
+			mes "Si la personne avant vous réussit, abandonne ou échoue, la personne suivante dans la salle d'attente accèdera à la pièce de l'épreuve. Vous devrez attendre votre tour de cette façon. Si personne n'attend, vous serez immédiatement conduit"+ ( sex ? "" : "e" ) +" à la pièce de l'épreuve après être entré"+ ( sex ? "" : "e" ) +" dans la salle d'attente.";
 			close2;
 			cutin "job_huntermaster",255;
 			end;
@@ -882,14 +882,14 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 		}
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "*Soupir...*";
-		mes "Hâtez-vous de finir de vous préparer. On ne vous attendra pas dans la bataille!";
+		mes "Hâtez-vous de finir de vous préparer. On ne vous attendra pas pendant la bataille!";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q == 16) {
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "Oh, vous êtes revenu en un seul morceau!";
+		mes "Oh, vous êtes revenu"+ ( sex ? "" : "e" ) +" en un seul morceau!";
 		mes "Euh je veux dire... bon travail. Voici un petit quelque chose qui prouvera que vous avez réussi cette épreuve auprès de mes collègues.";
 		set HNTR_Q,17;
 		savepoint "payon",104,99;
@@ -898,14 +898,14 @@ payon_in02,21,31,1	script	Chasseur#htnGM2	59,{
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Bien...";
 		mes "Et voilà.";
-		mes "Retournez voir les membres de la Guilde des Chasseurs. J'ai du travail... J'espère que vous deviendrez Chasseur très bientôt~";
+		mes "Retournez voir les membres de la Guilde des Chasseurs. J'ai du travail... J'espère que vous deviendrez "+ ( sex ? "Chasseur" : "Chasseuse" ) +" très bientôt~";
 		close2;
 		cutin "job_huntermaster",255;
 		end;
 	}
 	else if (HNTR_Q == 17) {
 		mes "[Maître de la Guilde des Chasseurs]";
-		mes "N'êtes-vous pas pressé de devenir Chasseur? Pendant le mois qui a suivi l'obtention de mon diplôme, j'étais tout fou, à courir ça et là à brandir mon arc à la moindre occasion. J'étais si heureux~";
+		mes "N'êtes-vous pas pressé"+ ( sex ? "" : "e" ) +" de devenir "+ ( sex ? "Chasseur" : "Chasseuse" ) +"? Pendant le mois qui a suivi l'obtention de mon diplôme, j'étais tout fou, à courir ça et là, à brandir mon arc à la moindre occasion. J'étais si heureux~";
 		next;
 		mes "[Maître de la Guilde des Chasseurs]";
 		mes "Vous devriez retourner parler à mes collègues~";
@@ -933,30 +933,30 @@ OnTouch:
 		mes "Comme il vous a déjà été expliqué, vous devrez chasser les monstres dont le nom est ^3355FFChangement de Classe^000000. Une fois ceci fait, un levier apparaîtra au centre de la pièce.";
 		next;
 		mes "[Guide]";
-		mes "Vous devrez activer ce levier pour que la sortie vous soit accessible, au nord de la pièce. Tout devra évidemment être accompli durant le temps imparti.";
+		mes "Vous devrez activer ce levier pour que la sortie vous soit accessible, au Nord de la pièce. Tout devra évidemment être accompli durant le temps imparti.";
 		next;
 		mes "[Guide]";
 		mes "Si vous échouez, que vous tombez dans un piège ou que vous dépassez la limite de temps, vous devrez recommencer du début.";
 		next;
 		mes "[Guide]";
-		mes "Nous vous fournirons les flèches, mais n'oubliez pas d'apporter votre propre arc. Entrez dès que vous êtes prêt.";
+		mes "Nous vous fournirons les flèches, mais n'oubliez pas d'apporter votre propre arc. Entrez dès que vous êtes prêt"+ ( sex ? "" : "e" ) +".";
 		savepoint "job_hunte",176,22;
 		close;
 	}
 	else if (HNTR_Q > 12 && HNTR_Q < 16) {
 		mes "[Guide]";
 		mes "Hum...";
-		mes "Vous avez eu quelques soucis on dirait.";
+		mes "Vous avez eu quelques soucis, on dirait.";
 		mes "Reposez-vous un instant.";
 		percentheal 100,100;
 		next;
 		mes "[Guide]";
-		mes "Si c'est trop difficile, peut-être devriez-vous laisser tomber?";
+		mes "Si c'est trop difficile, peut-être devriez-vous abandonner?";
 		next;
 		switch(select("Réessayer.:Abandonner.")) {
 		case 1:
 			mes "[Guide]";
-			mes "D'accord. Faîtes de votre mieux pour devenir un bon Chasseur. Entrez dans la salle d'attente. Si quelqu'un est actuellement en train de passer l'épreuve, vous devrez attendre qu'il ait fini et ce sera à vous juste après.";
+			mes "D'accord. Faîtes de votre mieux pour devenir "+ ( sex ? "un bon Chasseur" : "une bonne Chasseuse" ) +". Entrez dans la salle d'attente. Si quelqu'un est actuellement en train de passer l'épreuve, vous devrez attendre qu'il ait fini et ce sera à vous juste après.";
 			close;
 		case 2:
 			mapannounce "job_hunte",strcharinfo(0)+ " a abandonné. Candidat suivant, veuillez entrer.",bc_map;
@@ -1094,7 +1094,7 @@ OnTimer7000:
 	end;
 
 OnTimer9000:
-	mapannounce "job_hunte","Lorsque vous activerez le levier, la sortie apparaîtra au nord de la pièce.",bc_map;
+	mapannounce "job_hunte","Lorsque vous activerez le levier, la sortie apparaîtra au Nord de la pièce.",bc_map;
 	end;
 
 OnTimer11000:
@@ -1102,7 +1102,7 @@ OnTimer11000:
 	end;
 
 OnTimer13000:
-	mapannounce "job_hunte","Le temps est décompté à partir de maintenant. Des indications temporelles vous seront données régulièrement.",bc_map;
+	mapannounce "job_hunte","Le décompte commence maintenant. Nous vous tiendrons régulièrement informé du temps qu'il vous reste.",bc_map;
 	end;
 
 OnTimer14000:
@@ -1178,7 +1178,7 @@ OnTouch:
 		end;
 	case 3:
 		mapannounce "job_hunte"," !! Opération annulée... !! ",bc_map;
-		mes "^3355FFVous allez être renvoyé dans la salle d'attente.^000000";
+		mes "^3355FFVous allez être renvoyé"+ ( sex ? "" : "e" ) +" dans la salle d'attente.^000000";
 		close2;
 		set HNTR_Q,13;
 		warp "job_hunte",176,22;
@@ -1219,86 +1219,86 @@ job_hunte,52,140,0	script	1-1::HntTrap	-1,0,1,{
 OnTouch:
 	switch(rand(200)) {
 	default: //myllena: je me suis permise quelques libertés humoristiques sur les phrases ci-dessous
-	case 1: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Vous allez être renvoyé au point de départ.",bc_map; break;
+	case 1: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège. Vous allez être renvoyé"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
 	case 2: mapannounce "job_hunte",strcharinfo(0) + ", oui vous! Retournez au point de départ et recommencez!",bc_map; break;
 	case 3: mapannounce "job_hunte",strcharinfo(0) + " a échoué!...enfin...ce sera le cas si vous ne recommencez pas...",bc_map; break;
 	case 4: mapannounce "job_hunte",strcharinfo(0) + " a échoué! Revenez au point de départ!",bc_map; break;
-	case 5: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Je suis désolé, mais vous avez encore PERDU.",bc_map; break;
+	case 5: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège. Je suis désolé, mais vous avez encore PERDU.",bc_map; break;
 	case 6: mapannounce "job_hunte",strcharinfo(0) + ", qu'est-ce que vous faites!? Retournez au point de départ et recommencez!",bc_map; break;
 	case 7: mapannounce "job_hunte",strcharinfo(0) + ", allez! Vous pouvez faire mieux que ça!! Essayez encore!",bc_map; break;
-	case 8: mapannounce "job_hunte",strcharinfo(0) + ", est tombé dans un piège... encore une fois. Mais ne vous inquiétez pas, vous vous améliorez.",bc_map; break;
+	case 8: mapannounce "job_hunte",strcharinfo(0) + ", est tombé"+ ( sex ? "" : "e" ) +" dans un piège... encore une fois. Mais ne vous inquiétez pas, vous vous améliorez.",bc_map; break;
 	case 9: mapannounce "job_hunte",strcharinfo(0) + ", échoue, échoue, échoue... Revenez au point de départ!",bc_map; break;
 	case 10: mapannounce "job_hunte",strcharinfo(0) + "... arf.. Essayez encore! Vous pouvez y arriver!",bc_map; break;
-	case 11: mapannounce "job_hunte",strcharinfo(0) + ", @#$%#^!@ et voulez être un quoi? Chasseur? Recommencez!",bc_map; break;
-	case 12: mapannounce "job_hunte",strcharinfo(0) + " a été battu par les forces du mal. N'abandonnez pas, héros!",bc_map; break;
+	case 11: mapannounce "job_hunte",strcharinfo(0) + ", @#$%#^!@ et voulez être quoi? "+ ( sex ? "Chasseur" : "Chasseuse" ) +"? Recommencez!",bc_map; break;
+	case 12: mapannounce "job_hunte",strcharinfo(0) + " a été battu"+ ( sex ? "" : "e" ) +" par les forces du mal. N'abandonnez pas, "+ ( sex ? "héros" : "héroïne" ) +"!",bc_map; break;
 	case 13: mapannounce "job_hunte","Je vous ai envoyé un sortilège " + strcharinfo(0) + " et vous m'appartenez désormais! Recommencez maintenant.",bc_map; break;
 	case 14: mapannounce "job_hunte",strcharinfo(0) + ". Salut camarade, bienvenue dans le royaume souterrain. Pour vous récompenser, je vais vous renvoyer au point de départ...",bc_map; break;
 	case 15: mapannounce "job_hunte","C'est mon territoire ici " + strcharinfo(0) + "! ne vous approchez-pas, recommencez du début.",bc_map; break;
 	case 16: mapannounce "job_hunte",strcharinfo(0) + ", vous avez abattu un autre archer. Il vous en reste 3!",bc_map; break;
 	case 17: mapannounce "job_hunte",strcharinfo(0) + ", vous avez saisi ce qu'il faut faire? Alors réessayez.",bc_map; break;
-	case 18: mapannounce "job_hunte","Hélas, " + strcharinfo(0) + ", vous êtes tombé en proie au plus redouté des pièges. La redoutable bombe puante! Courrez courrez courrez viiiiiite!",bc_map; break;
+	case 18: mapannounce "job_hunte","Hélas, " + strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" en proie au plus redouté des pièges. La redoutable bombe puante! Courrez courrez courrez viiiiiite!",bc_map; break;
 	case 19: mapannounce "job_hunte",strcharinfo(0) + " avait bu trop de jus de pruneau aujourd'hui. Retour au point de départ~",bc_map; break;
-	case 20: mapannounce "job_hunte","Non.... " + strcharinfo(0) + ", vous êtes tombé dans un piège. Vous allez être reconduit au point de départ.",bc_map; break;
+	case 20: mapannounce "job_hunte","Non.... " + strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège. Vous allez être reconduit"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
 	case 21: mapannounce "job_hunte","Miaou *bondit* Regardez mes chatons, nous allons goûter du ragoût de " + strcharinfo(0) + ". Si vous ne voulez pas finir en civet, retournez au point de départ!",bc_map; break;
 	case 22: mapannounce "job_hunte","Désolé " + strcharinfo(0) + ", mais vous venez de découvrir un MAUVAIS secret. Vous allez être reconduit au point de départ.",bc_map; break;
 	case 23: mapannounce "job_hunte",strcharinfo(0) + ", stupide Archer... votre ténacité est touchante... Mais pas de pitié pour les croissants, ZOU, au point de départ...",bc_map; break;
-	case 24: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé et vous ne pouvez plus vous relever. Vous allez être transporté au point de départ.",bc_map; break;
+	case 24: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" et vous ne pouvez plus vous relever. Vous allez être transporté"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
 	case 25: mapannounce "job_hunte","Sautez votre tour, " + strcharinfo(0) + ", retournez à la case départ.",bc_map; break;
-	case 26: mapannounce "job_hunte",strcharinfo(0) + ", nya nya, hé hé hé. Vous allez être reconduit au point de départ.",bc_map; break;
-	case 27: mapannounce "job_hunte","L'entraînement est terminé " + strcharinfo(0) + ". Il est l'heure de passer aux choses sérieuses.",bc_map; break;
-	case 28: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes encore plus nul qu'un Poring avec une jambe de bois... Sortez! Retournez au début.",bc_map; break;
+	case 26: mapannounce "job_hunte",strcharinfo(0) + ", nya nya, hé hé hé. Vous allez être reconduit"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
+	case 27: mapannounce "job_hunte","L'entraînement est terminé " + strcharinfo(0) + ". C'est l'heure de passer aux choses sérieuses.",bc_map; break;
+	case 28: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes encore plus nul"+ ( sex ? "" : "le" ) +" qu'un Poring avec une jambe de bois... Sortez! Retournez au début.",bc_map; break;
 	case 29: mapannounce "job_hunte","Déconnecté du serveur. " + strcharinfo(0) + ", vous devez recommencer du début.",bc_map; break;
-	case 30: mapannounce "job_hunte","Tiens? Que fait ce bouton? ... Oups! " + strcharinfo(0) + ", j'ai peur que vous deviez recommencer du début.",bc_map; break;
-	case 31: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes entré dans la zone bonus! Eeeeet, vous êtes perdu! Vous allez être reconduit au point de départ.",bc_map; break;
-	case 32: mapannounce "job_hunte","Oh, non " + strcharinfo(0) + ", vous vous êtes cogné contre un essaim d'abeilles. Vous vous en êtes sorti de justesse, et maintenant direction le début.",bc_map; break;
+	case 30: mapannounce "job_hunte","Tiens? Que fait ce bouton? ... Oups! " + strcharinfo(0) + ", j'ai peur que vous ne deviez recommencer du début.",bc_map; break;
+	case 31: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes entré"+ ( sex ? "" : "e" ) +" dans la zone bonus! Eeeeet, vous êtes perdu"+ ( sex ? "" : "e" ) +"! Vous allez être reconduit"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
+	case 32: mapannounce "job_hunte","Oh, non " + strcharinfo(0) + ", vous vous êtes cogné"+ ( sex ? "" : "e" ) +" contre un essaim d'abeilles. Vous vous en êtes sorti"+ ( sex ? "" : "e" ) +" de justesse. Et maintenant direction le début.",bc_map; break;
 	case 33: mapannounce "job_hunte",strcharinfo(0) + ", attendez, attendez. C'est un piège! Oh, ah non... C'est juste un chien...",bc_map; break;
 	case 34: mapannounce "job_hunte","Stop " + strcharinfo(0) + "! Pour avoir marché dans ce piège, au nom de Payon, je vais vous punir!",bc_map; break;
 	case 35: mapannounce "job_hunte",strcharinfo(0) + ", je reviendrai... Et j'espère que vous aussi.",bc_map; break;
 	case 36: mapannounce "job_hunte",strcharinfo(0) + ", venez avec moi si vous souhaitez rester en vie... jusqu'au point de départ.",bc_map; break;
 	case 37: mapannounce "job_hunte",strcharinfo(0) + ", mon... précieux! Retournez au point de départ.",bc_map; break;
 	case 38: mapannounce "job_hunte","Suivez le lapin blanc, " + strcharinfo(0) + "!! Non, attendez... Pas par ici... Retour au point de départ.",bc_map; break;
-	case 39: mapannounce "job_hunte",strcharinfo(0) + ", vous n'avez pas pu vous en empêcher, avouez! Et maintenant vous êtes perdu!",bc_map; break;
-	case 40: mapannounce "job_hunte",strcharinfo(0) + ", tout ceci n'est qu'une histoire... Ce n'est pas réel. Mais vous allez être reconduit au point de départ.",bc_map; break;
-	case 41: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Et le piège... s'est refermé sur vous. Retournez au point de départ.",bc_map; break;
-	case 42: mapannounce "job_hunte","N'ayez crainte " + strcharinfo(0) + ", vous apprendrez vous aussi les pouvoirs du côté obscur. Vous allez être reconduit au départ.",bc_map; break;
-	case 43: mapannounce "job_hunte",strcharinfo(0) + ", est tombé dans un piège. Et de façon complètement stupide, j'en ai bien peur. Mais il en faut plus pour décourager ce héros!",bc_map; break;
-	case 44: mapannounce "job_hunte","Astuce du jour: ne tombez pas dans les pièges. Vous allez être reconduit au point de départ.",bc_map; break;
-	case 45: mapannounce "job_hunte",strcharinfo(0) + " est tombé dans un piège. Encore une fois. Vous devriez avoir honte, " + strcharinfo(0) + ".",bc_map; break;
+	case 39: mapannounce "job_hunte",strcharinfo(0) + ", vous n'avez pas pu vous en empêcher, avouez! Et maintenant vous êtes perdu"+ ( sex ? "" : "e" ) +"!",bc_map; break;
+	case 40: mapannounce "job_hunte",strcharinfo(0) + ", tout ceci n'est qu'une histoire... Ce n'est pas réel. Mais vous allez être reconduit"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
+	case 41: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège. Et le piège... s'est refermé sur vous. Retournez au point de départ.",bc_map; break;
+	case 42: mapannounce "job_hunte","N'ayez crainte " + strcharinfo(0) + ", vous apprendrez vous aussi les pouvoirs du côté obscur. Vous allez être reconduit"+ ( sex ? "" : "e" ) +" au départ.",bc_map; break;
+	case 43: mapannounce "job_hunte",strcharinfo(0) + " est tombé"+ ( sex ? "" : "e" ) +" dans un piège. Et de façon complètement stupide, j'en ai bien peur. Mais il en faut plus pour décourager "+ ( sex ? "ce héros" : "cette héroïne" ) +"!",bc_map; break;
+	case 44: mapannounce "job_hunte","Astuce du jour: ne tombez pas dans les pièges. Vous allez être reconduit"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
+	case 45: mapannounce "job_hunte",strcharinfo(0) + " est tombé"+ ( sex ? "" : "e" ) +" dans un piège. Encore une fois. Vous devriez avoir honte, " + strcharinfo(0) + ".",bc_map; break;
 	case 46: mapannounce "job_hunte","Hoy hoy, " + strcharinfo(0) + "... J'ai vu des Porings aveugles s'en sortir mieux que vous! Retournez au point de départ.",bc_map; break;
-	case 47: mapannounce "job_hunte","MES YEUX!! " + strcharinfo(0) + ", idiot, qu'avez-vous fait... ?! Réessayez encore...",bc_map; break;
-	case 48: mapannounce "job_hunte",strcharinfo(0) + ", où êtes-vous passé? Ah... Non, ce n'est PAS par ici.",bc_map; break;
+	case 47: mapannounce "job_hunte","MES YEUX!! " + strcharinfo(0) + ", idiot"+ ( sex ? "" : "e" ) +", qu'avez-vous fait... ?! Réessayez encore...",bc_map; break;
+	case 48: mapannounce "job_hunte",strcharinfo(0) + ", où êtes-vous passé"+ ( sex ? "" : "e" ) +"? Ah... Non, ce n'est PAS par ici.",bc_map; break;
 	case 49: mapannounce "job_hunte","Wahou, et dire que quelqu'un s'est réellement fait suer à traduire ces commentaires. " + strcharinfo(0) + ", vous pouvez retourner au point de départ.",bc_map; break;
-	case 50: mapannounce "job_hunte","Nom de Zeus, " + strcharinfo(0) + "! Vous êtes tombé dans un piège comme un idiot! C'est vraiment pas l'pied~!",bc_map; break;
-	case 51: mapannounce "job_hunte",strcharinfo(0) + ", avez-vous ne serait-ce qu'une idée de ce que vous faites ici? Recommencez encore *soupire*.",bc_map; break;
+	case 50: mapannounce "job_hunte","Nom de Zeus, " + strcharinfo(0) + "! Vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège comme un"+ ( sex ? "" : "e" ) +" idiot"+ ( sex ? "" : "e" ) +"! C'est vraiment pas l'pied~!",bc_map; break;
+	case 51: mapannounce "job_hunte",strcharinfo(0) + ", avez-vous ne serait-ce qu'une idée de ce que vous faites ici? Recommencez *soupire*.",bc_map; break;
 	case 52: mapannounce "job_hunte",strcharinfo(0) + ", est-ce que vous aimez la glace au thé vert? Non? Pas de chance, retournez au point de départ...*humph*",bc_map; break;
-	case 53: mapannounce "job_hunte","Oh, non... " + strcharinfo(0) + ", êtes-vous blessé? Venez par ici, retournons au point de départ.",bc_map; break;
+	case 53: mapannounce "job_hunte","Oh, non... " + strcharinfo(0) + ", êtes-vous blessé"+ ( sex ? "" : "e" ) +"? Venez par ici, retournons au point de départ.",bc_map; break;
 	case 54: mapannounce "job_hunte","Bonjour " + strcharinfo(0) + ", comment allez-vous? Voici un cadeau pour vous~ une téléportation gratuite... Pour le point de départ!",bc_map; break;
-	case 55: mapannounce "job_hunte",strcharinfo(0) + ".......... saviez-vous qu'il s'agissait d'un piège? J'espère pour vous, sinon ma foi je suppose que vous seriez assez embarrassé.",bc_map; break;
+	case 55: mapannounce "job_hunte",strcharinfo(0) + ".......... saviez-vous qu'il s'agissait d'un piège? J'espère pour vous, sinon, ma foi, je suppose que vous seriez assez embarrassé"+ ( sex ? "" : "e" ) +".",bc_map; break;
 	case 56: mapannounce "job_hunte",strcharinfo(0) + ", que pensez-vous de la décoration intérieure? J'ai travaillé très dur pour tout agencer avec goût et harmonie... Et ce joli petit piège va vous renvoyer au point de départ.",bc_map; break;
-	case 57: mapannounce "job_hunte","BOUM BAM BOUM! " + strcharinfo(0) + ", vous êtes tombé dans un piège! Mais je ne vais pas vous tuer... Juste... Vous humilier...",bc_map; break;
+	case 57: mapannounce "job_hunte","BOUM BAM BOUM! " + strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège! Mais je ne vais pas vous tuer... Juste... Vous humilier...",bc_map; break;
 	case 58: mapannounce "job_hunte","Oh, " + strcharinfo(0) + "... Vous pouvez faire mieux que ça. Essayez encore!",bc_map; break;
-	case 59: mapannounce "job_hunte","Bonjour, ici l'Hôtesse Kafra... Le petit " + strcharinfo(0) + " est attendu par sa maman à l'accueil.",bc_map; break;
+	case 59: mapannounce "job_hunte","Bonjour, ici l'Hôtesse Kafra... "+ ( sex ? "Le petit" : "La petite" ) +" " + strcharinfo(0) + " est attendu"+ ( sex ? "" : "e" ) +" par sa maman à l'accueil.",bc_map; break;
 	case 60: mapannounce "job_hunte",strcharinfo(0) + ", si vous réussissez, je vous donnerai un petit cadeau... Ce que c'est? Vous le saurez quand vous réussirez~ Réessayez à présent!",bc_map; break;
-	case 61: mapannounce "job_hunte",strcharinfo(0) + " a échoué. Héhé, c'est une blague. Vous allez être reconduit au point de départ. Essayez à nouveau!",bc_map; break;
-	case 62: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé dans un piège. Vous devriez quand même regarder où vous mettez les pieds. Comment? Invisible? Détail! Maintenant, recommencez!",bc_map; break;
-	case 63: mapannounce "job_hunte","Désolé, " + strcharinfo(0) + ", vous êtes tombé dans un piège. Mais je suis gentil, je vais vous reconduire au point de départ.",bc_map; break;
-	case 64: mapannounce "job_hunte",strcharinfo(0) + ", HAHAHAHAHAHA!!!! Je ne peux pas croire que vous êtes tombé dans celui-là!",bc_map; break;
+	case 61: mapannounce "job_hunte",strcharinfo(0) + " a échoué. Héhé, c'est une blague. Vous allez être reconduit"+ ( sex ? "" : "e" ) +" au point de départ. Essayez à nouveau!",bc_map; break;
+	case 62: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège. Vous devriez quand même regarder où vous mettez les pieds. Comment? Invisible? Détail! Maintenant, recommencez!",bc_map; break;
+	case 63: mapannounce "job_hunte","Désolé, " + strcharinfo(0) + ", vous êtes tombé"+ ( sex ? "" : "e" ) +" dans un piège. Mais je suis gentil, je vais vous reconduire au point de départ.",bc_map; break;
+	case 64: mapannounce "job_hunte",strcharinfo(0) + ", HAHAHAHAHAHA!!!! Je ne peux pas croire que vous êtes tombé"+ ( sex ? "" : "e" ) +" dans celui-là!",bc_map; break;
 	case 65: mapannounce "job_hunte",strcharinfo(0) + ", quel dommage, j'allais justement vous prévenir... Retour au départ.",bc_map; break;
-	case 66: mapannounce "job_hunte",strcharinfo(0) + "...Je suis désolé mon ami, vous avez échoué. Mais ne vous inquiétez pas, ceci reste entre nous...",bc_map; break;
+	case 66: mapannounce "job_hunte",strcharinfo(0) + "...Je suis désolé mon ami"+ ( sex ? "" : "e" ) +", vous avez échoué. Mais ne vous inquiétez pas, ceci restera entre nous...",bc_map; break;
 	case 67: mapannounce "job_hunte",strcharinfo(0) + ", quelle performance pitoyable... Réessayez et prouvez-moi que vous n'êtes pas une mauviette.",bc_map; break;
 	case 68: mapannounce "job_hunte",strcharinfo(0) + ", Oh... ça doit faire mal. Retour au point de départ~",bc_map; break;
 	case 69: mapannounce "job_hunte",strcharinfo(0) + ", je trouve que vous manquez de dynamisme. Recommencez du début.",bc_map; break;
-	case 70: mapannounce "job_hunte",strcharinfo(0) + ", vos yeux vous ont trompé. Ne vous fiez pas à votre vision, mais à votre intuition. Détendez-vous et réessayez.",bc_map; break;
-	case 71: mapannounce "job_hunte",strcharinfo(0) + ", si vous laissez le côté obscur vous envahir, à tout jamais il voilera votre coeur et dominera votre destin. Vous allez être reconduit au point de départ.",bc_map; break;
-	case 72: mapannounce "job_hunte",strcharinfo(0) + ", la taille n'a pas d'importance, vous savez. Par contre, le nom de pièges dans lequel vous tombez, oui. Réessayez et prouvez votre valeur!",bc_map; break;
-	case 73: mapannounce "job_hunte",strcharinfo(0) + ", n'essayez pas. Faites-le, ou ne le faites pas. Mais il n'y a pas de place à l'essai.",bc_map; break;
+	case 70: mapannounce "job_hunte",strcharinfo(0) + ", vos yeux vous ont trompé. Ne vous fiez pas à votre vision, mais à votre intuition. Détendez-vous de réessayer.",bc_map; break;
+	case 71: mapannounce "job_hunte",strcharinfo(0) + ", si vous laissez le côté obscur vous envahir, à tout jamais il voilera votre coeur et dominera votre destin. Vous allez être reconduit"+ ( sex ? "" : "e" ) +" au point de départ.",bc_map; break;
+	case 72: mapannounce "job_hunte",strcharinfo(0) + ", la taille n'a pas d'importance, vous savez. Par contre, le nom des pièges dans lesquels vous tombez, si. Réessayez et prouvez votre valeur!",bc_map; break;
+	case 73: mapannounce "job_hunte",strcharinfo(0) + ", n'essayez pas. Faites-le, ou ne le faites pas. Mais il n'y a pas de place pour l'essai.",bc_map; break;
 	case 74: mapannounce "job_hunte",strcharinfo(0) + ", encore et toujours, perdu! Maintenant réessayez!",bc_map; break;
 	case 75: mapannounce "job_hunte",strcharinfo(0) + ", regardez. Si c'est en métal et que ça a des petites pointes en forme de dents, vous ne devez pas poser le pied dessus. C'est pourtant simple...",bc_map; break;
 	case 76: mapannounce "job_hunte",strcharinfo(0) + ", Vous avez échoué. Inutile de protester.",bc_map; break;
 	case 77: mapannounce "job_hunte",strcharinfo(0) + ", j'espère qu'un jour vous arriverez à terminer votre entraînement. Alors vous m'appellerez Maître.",bc_map; break;
-	case 78: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes trop sûr de vous. C'est ce qui constitue votre plus grande faiblesse.",bc_map; break;
+	case 78: mapannounce "job_hunte",strcharinfo(0) + ", vous êtes trop sûr"+ ( sex ? "" : "e" ) +" de vous. C'est ce qui constitue votre plus grande faiblesse.",bc_map; break;
 	case 79: mapannounce "job_hunte",strcharinfo(0) + ", faites attention où vous mettez les pieds. Le terrain est pas mal accidenté par ici.",bc_map; break;
-	case 80: mapannounce "job_hunte",strcharinfo(0) + ", oh, je vous avais prévenu que c'était dangereux.",bc_map; break;
+	case 80: mapannounce "job_hunte",strcharinfo(0) + ", oh, je vous avais prévenu"+ ( sex ? "" : "e" ) +" que c'était dangereux.",bc_map; break;
 	case 81: mapannounce "job_hunte",strcharinfo(0) + ", tout se déroule selon mon plan... Le monde sera bientôt mien... HAHAHA...!",bc_map; break;
 	case 82: mapannounce "job_hunte",strcharinfo(0) + ", vous n'auriez pas du revenir.",bc_map; break;
 	case 83: mapannounce "job_hunte",strcharinfo(0) + ", il n'y a pas d'alternatives au combat. Mais avant ça, vous devez réussir cette épreuve. Maintenant, réessayez!",bc_map; break;
@@ -1309,14 +1309,14 @@ OnTouch:
 	case 88: mapannounce "job_hunte",strcharinfo(0) + ", je vais finir par me fâcher... Est-ce que le mot -réfléchir- fait partie de votre vocabulaire?",bc_map; break;
 	case 89: mapannounce "job_hunte",strcharinfo(0) + ", il y a eu un bug dans la matrice... Recommencez.",bc_map; break;
 	case 90: mapannounce "job_hunte",strcharinfo(0) + ", oui, je sais, la vie est injuste... Mais vous devez recommencer.",bc_map; break;
-	case 91: mapannounce "job_hunte",strcharinfo(0) + ".... Uhhh... ne me regardez pas comme ça, ce n'est pas MOI qui suis tombé dans ce piège....",bc_map; break;
+	case 91: mapannounce "job_hunte",strcharinfo(0) + ".... Uhhh... ne me regardez pas comme ça, ce n'est pas MOI qui suis tombé"+ ( sex ? "" : "e" ) +" dans ce piège....",bc_map; break;
 	case 92: mapannounce "job_hunte",strcharinfo(0) + ", essayez de survivre encore un peu pour recommencer.",bc_map; break;
 	case 93: mapannounce "job_hunte",strcharinfo(0) + ", rassemblez votre force pour surmonter les obstacles qui se dressent devant vous. Vous en êtes capable... Tout le monde le peut.",bc_map; break;
-	case 94: mapannounce "job_hunte",strcharinfo(0) + ", le bonheur vient à ceux qui acceptent leur destin, et la gloire vient à ceux qui leur résiste.",bc_map; break;
+	case 94: mapannounce "job_hunte",strcharinfo(0) + ", le bonheur vient à ceux qui acceptent leur destin, et la gloire vient à ceux qui leur résistent.",bc_map; break;
 	case 95: mapannounce "job_hunte",strcharinfo(0) + ", certaines choses sont vraies, et d'autres sont fausses. N'arrivez-vous pas à faire la part des choses?",bc_map; break;
 	case 96: mapannounce "job_hunte",strcharinfo(0) + ", on s'amuse bien, pas vrai? Tous les jours ressemblent à un rêve éveillé. J'espère que cela continuera pour toujours.",bc_map; break;
 	case 97: mapannounce "job_hunte",strcharinfo(0) + ", voici un petit conseil, entre nous... Mourir, ça fait vraiment très mal.",bc_map; break;
-	case 98: mapannounce "job_hunte",strcharinfo(0) + ", n'abandonnez pas! Soyez un peu plus prudent...",bc_map; break;
+	case 98: mapannounce "job_hunte",strcharinfo(0) + ", n'abandonnez pas! Soyez un peu plus prudent"+ ( sex ? "" : "e" ) +"...",bc_map; break;
 	case 99: mapannounce "job_hunte",strcharinfo(0) + ", la mort n'est pas un présent que l'on reçoit à la naissance. Mais... ces pièges ne vont pas vous tuer, ne vous inquiétez pas.",bc_map; break;
 	case 100: mapannounce "job_hunte",strcharinfo(0) + ", je comptais sur vous depuis le début. Mais je suppose que vous allez encore me faire attendre...",bc_map; break;
 	case 101: mapannounce "job_hunte",strcharinfo(0) + ", la fin est synonyme d'espoir et de renaissance. Mais pour vous, c'est retour au début~",bc_map; break;
@@ -1331,14 +1331,14 @@ OnTouch:
 	case 110: mapannounce "job_hunte",strcharinfo(0) + ", ne vous inquiétez pas. La justice triomphe toujours. Et nous n'avons bientôt plus de pièges en stock...",bc_map; break;
 	case 111: mapannounce "job_hunte",strcharinfo(0) + ", même lorsque de mauvaises choses se produisent, n'abandonnez pas. Le jour viendra où vous regarderez vos échecs passés en riant. Mais pas aujourd'hui.",bc_map; break;
 	case 112: mapannounce "job_hunte",strcharinfo(0) + ", ne vous inquiétez pas. On ne peut pas gagner à tous les coups, pas vrai?",bc_map; break;
-	case 113: mapannounce "job_hunte",strcharinfo(0) + ", qu'est-ce que vous avez mangé ce matin? Vous êtes sûr que ça n'a pas atteint votre cerveau en plus de votre système digestif?...",bc_map; break;
+	case 113: mapannounce "job_hunte",strcharinfo(0) + ", qu'est-ce que vous avez mangé ce matin? Vous êtes sûr"+ ( sex ? "" : "e" ) +" que ça n'a pas atteint votre cerveau, en plus de votre système digestif?...",bc_map; break;
 	case 114: mapannounce "job_hunte",strcharinfo(0) + ", vous devez oublier le passé, dans votre propre intérêt et si vous souhaitez trouver le bonheur un jour.",bc_map; break;
 	case 115: mapannounce "job_hunte",strcharinfo(0) + ", si vous pouvez tomper vos amis, vous saurez tromper vos ennemis.",bc_map; break;
 	case 116: mapannounce "job_hunte",strcharinfo(0) + ", ce monde est fait d'amour et de paix!",bc_map; break;
 	case 117: mapannounce "job_hunte",strcharinfo(0) + ", si vous échouez, vous devez boire... ceci *ricanement*",bc_map; break;
-	case 118: mapannounce "job_hunte",strcharinfo(0) + ", n'allez pas dire qu'on ne vous avait pas prévenu!",bc_map; break;
+	case 118: mapannounce "job_hunte",strcharinfo(0) + ", n'allez pas dire qu'on ne vous avait pas prévenu"+ ( sex ? "" : "e" ) +"!",bc_map; break;
 	case 119: mapannounce "job_hunte",strcharinfo(0) + ", la curiosité est un vilain défaut.",bc_map; break;
-	case 120: mapannounce "job_hunte",strcharinfo(0) + ", retourner étudier! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER! ETUDIER!",bc_map; break;
+	case 120: mapannounce "job_hunte",strcharinfo(0) + ", retourner étudier! ÉTUDIER! ÉTUDIER! ÉTUDIER! ÉTUDIER! ÉTUDIER! ÉTUDIER! ÉTUDIER! ÉTUDIER! ÉTUDIER!",bc_map; break;
 	case 121: mapannounce "job_hunte",strcharinfo(0) + ", comment me trouvez-vous? ...!",bc_map; break;
 	case 122: mapannounce "job_hunte",strcharinfo(0) + "...magnifique... tout simplement brillant... du pur génie. Ah, désolé, je parlais de la conception de mon dernier piège.",bc_map; break;
 	case 123: mapannounce "job_hunte",strcharinfo(0) + ", et c'est le buuuuut! En plein dans le piège, bien joué! Hé... Revenez!",bc_map; break;
@@ -1586,7 +1586,7 @@ job_hunte,65,92,0	duplicate(HntTrap)	57-3	-1,0,0
 
 job_hunte,65,93,0	script	57-4::HntTrap2	-1,{
 OnTouch:
-	mapannounce "job_hunte",strcharinfo(0) + ", a échoué! Retournez au début!",bc_map;
+	mapannounce "job_hunte",strcharinfo(0) + " a échoué! Retournez au début!",bc_map;
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
 	donpcevent "Manager#hnt::OnReset";
