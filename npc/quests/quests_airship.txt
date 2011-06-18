@@ -271,7 +271,7 @@ airplane,47,61,1	script	Membre d'Équipage	833,{
 		}
 	} else if(kain_ticket > 4 && kain_ticket < 10) {
 		mes "[Kain Himere]";
-		mes "Oh bonjour!";
+		mes "Oh , " + ( isday() ? "bonjour" : "bonsoir" ) + "!";
 		mes "C'est animé en ce moment, mais l'avez-vous livré-- Oh! Attendez, monsieur!";
 		next;
 		mes "^3355FFKain semble trop occupé pour vous parler en ce moment...^000000";
@@ -407,7 +407,7 @@ OnTouch:
 	mes "Faisons de notre mieux! Rien ne peut nous arrêter, les gars~!";
 	if(kain_ticket == 6) {
 		next;
-		switch( select( "Bonjour!", "Que chantes-tu?")) {
+		switch( select( ( isday() ? "Bonjour" : "Bonsoir" ) + "!", "Que chantes-tu?")) {
 		case 1:
 			mes "[Elle Cherno]";
 			mes "Mettons-nous au travail, courageux camaraaaades~!";
@@ -677,7 +677,7 @@ function	script	cherno	{
 	next;
 	Emotion 1, "Tarsha Cherno";
 	mes "[Tarsha Cherno]";
-	mes "Elle joue dehors. Oh, je ne savais pas que nous avions un invité? Bonjour, comment allez-vous?";
+	mes "Elle joue dehors. Oh, je ne savais pas que nous avions un invité? " + ( isday() ? "Bonjour" : "Bonsoir" ) + ", comment allez-vous?";
 	next;
 	switch( select( "...", "Votre fille m'a envoyé vous rendre visite.")) {
 	case 1:
@@ -2003,7 +2003,7 @@ airplane,33,69,4	script	Kaci	73,{
 	if(hg_ma1 == 3)
 	{
 		mes "[Kaci]";
-		mes "Bien le bonjour! Mon nom est Kaci. Si vous vous ennuyez à bord du dirigeable, pourquoi ne pas jouer à un jeu de dés avec moi?";
+		mes "Bien le " + ( isday() ? "bonjour" : "bonsoir" ) + "! Mon nom est Kaci. Si vous vous ennuyez à bord du dirigeable, pourquoi ne pas jouer à un jeu de dés avec moi?";
 		next;
 		switch( select( "Demander si elle connaît Thierry" ) )
 		{
@@ -2091,7 +2091,7 @@ airplane,33,69,4	script	Kaci	73,{
 	else if(lhz_heart == 3)
 	{
 		mes "[Kaci]";
-		mes "Oh, salut. Merci de m'avoir remis cette lettre de M. Mawong, alors qu'Hallen était trop occupé pour le faire lui-même. La lecture de cette lettre m'a rendu heureuse pour la journée~";
+		mes "Oh, salut. Merci de m'avoir remis cette lettre de M. Mawong, alors qu'Hallen était trop occupé pour le faire lui-même. La lecture de cette lettre m'a rendu heureuse pour la "+ ( isday() ? "journée" : "soirée" ) +"~";
 		next;
 L_Ask:
 		switch( select( "Se renseigner sur Hallen","Se renseigner sur Mawong","Se renseigner sur le dirigeable" ) )
@@ -2140,7 +2140,7 @@ L_Ask:
 		mes "À propos, si Hallen vous dérange avec une autre requête, s'il vous plaît, refusez de l'aider la prochaine fois, d'accord? Je ne lui permettrai pas d'être gâté! Ho ho ho ho~";
 		next;
 		mes "[Kaci]";
-		mes "Eh bien, je ferais mieux de retourner au travail maintenant. Bonne journée, je vous verrai plus tard~";
+		mes "Eh bien, je ferais mieux de retourner au travail maintenant. Bonne "+ ( isday() ? "journée" : "soirée" ) +", je vous verrai plus tard~";
 		changequest 8037,8038;
 		set lhz_heart,4;
 		close;
@@ -2148,7 +2148,7 @@ L_Ask:
 	else if(lhz_heart == 8)
 	{
 		mes "[Kaci]";
-		mes "Bonjour, "+strcharinfo(0)+".";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+strcharinfo(0)+".";
 		mes "C'est agréable de vous revoir. Alors, y a-t-il quelque chose que je puisse faire pour vous aider aujourd'hui?";
 		next;
 		switch( select( "Qui est cet ivrogne là-bas?" ) )

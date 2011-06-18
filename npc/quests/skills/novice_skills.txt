@@ -19,7 +19,7 @@
 prt_in,234,133,4	script	Nami#qsk_nv	66,{
 	if ((BaseClass == Job_Novice && JobLevel > 3) || (BaseLevel > 11 && NOV_SK < 3)) {
 		mes "[Nami]";
-		mes "Bonjour!";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + "!";
 		mes "Ah, je voudrais tellement être infirmière... Je m'efforce toujours d'en apprendre plus sur le sujet. En fait, je suis assez douée. Est-ce que vous voulez que je vous montre?";
 		next;
 		if (select("Continuer la conversation.:S'éclipser mine de rien.") == 1) {
@@ -72,7 +72,7 @@ prt_in,234,133,4	script	Nami#qsk_nv	66,{
 						mes "Oh, vous revoilà, et vous avez tout apporté! Fantastique! Oui, je sais, cet instructeur est un peu étrange... Héhéhé!";
 						next;
 						mes "[Nami]";
-						mes "Bien, commençons la leçon. En utilisant les Premiers Soins, vous dépenserez 3 SP et convertirez cette énergie en 5 HP.";
+						mes "Bien, commençons la leçon. En utilisant les Premiers Soins, vous dépenserez 3 Points d'Énergie que vous convertirez en 5 Points de Vie.";
 //						mes "This is done with your first aid skill"; // hum? [NdT]
 //						mes "and supplies.";
 						next;
@@ -85,7 +85,7 @@ prt_in,234,133,4	script	Nami#qsk_nv	66,{
 						skill 142,1,0;
 						set NOV_SK,3;
 						mes "[Nami]";
-						mes "Oui, c'est aussi simple que cela! J'espère que cette compétence vous aidera par la suite, maintenant que vous la maîtrisez. Merci, et passez une bonne journée!~";
+						mes "Oui, c'est aussi simple que cela! J'espère que cette compétence vous aidera par la suite, maintenant que vous la maîtrisez. Merci, et passez une bonne "+ ( isday() ? "journée" : "soirée" ) +"!~";
 						close;
 					}
 					else {

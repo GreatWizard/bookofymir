@@ -253,7 +253,7 @@ lighthalzen,341,224,3	script	Fishbone	868,{
 			next;
 			mes "[Fishbone]";
 			mes "Ben voyons!";
-			mes "Alors tu vas t'asseoir ici et me regarder toute la journée?! Très bien! Je vais simplement t'ignorer, espèce de casse-pieds!";
+			mes "Alors tu vas t'asseoir ici et me regarder toute la "+ ( isday() ? "journée" : "soirée" ) +"?! Très bien! Je vais simplement t'ignorer, espèce de casse-pieds!";
 			next;
 			mes "[Fishbone]";
 			mes "...";
@@ -2994,7 +2994,7 @@ lighthalzen,346,263,3	script	Personne Âgée#lhz	846,{
 		else if (lhz_curse == 17) {
 			if (countitem(7341) > 0) {
 				mes "[Personne Âgée]";
-				mes "Bonjour, jeune "+( sex ? "aventurier" : "aventurière" )+".";
+				mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", jeune "+( sex ? "aventurier" : "aventurière" )+".";
 				mes "Comment se déroulent vos recherches à propos des tourments des esprits qui vous suivent?";
 				next;
 				switch(select("Lui montrer le médaillon.:S'en aller.")) {
@@ -3020,7 +3020,7 @@ lighthalzen,346,263,3	script	Personne Âgée#lhz	846,{
 			}
 			else {
 				mes "[Personne Âgée]";
-				mes "Bonjour, jeune "+( sex ? "aventurier" : "aventurière" )+".";
+				mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", jeune "+( sex ? "aventurier" : "aventurière" )+".";
 				mes "Comment se déroulent vos recherches à propos des tourments des esprits qui vous suivent?";
 				next;
 				mes "[Personne Âgée]";
@@ -3170,7 +3170,7 @@ lhz_in03,32,162,3	script	Jeune Infirme#li_tre	53,{
 	if (lhz_curse == 23) {
 		if (countitem(7341) > 0) {
 			mes "["+strcharinfo(0)+"]";
-			mes "Bonjour, est-ce que tout va bien?";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", est-ce que tout va bien?";
 			next;
 			mes "[Jeune Infirme]";
 			mes "Oh, merci, je vais bien. Mais... Nous nous connaissons?";
@@ -3224,7 +3224,7 @@ lhz_in03,32,162,3	script	Jeune Infirme#li_tre	53,{
 		}
 		else {
 			mes "["+strcharinfo(0)+"]";
-			mes "Bonjour, est-ce que tout va bien?";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", est-ce que tout va bien?";
 			next;
 			mes "[Jeune Infirme]";
 			mes "Oh, merci, je vais bien. Mais... Nous nous connaissons?";
@@ -3257,12 +3257,12 @@ lhz_in03,32,162,3	script	Jeune Infirme#li_tre	53,{
 		mes "......";
 		mes "*Soupir...*";
 		next;
-		select( "Bonjour, comment allez-vous?" );
+		select( ( isday() ? "Bonjour" : "Bonsoir" ) + ", comment allez-vous?" );
 		mes "[Jeune Infirme]";
 		mes "Oh, je vais bien, merci. J'attends quelqu'un, c'est tout.";
 		if (lhz_curse == 19) {
 			next;
-			switch(select("Lui montrer le médaillon.:D'accord, passez une bonne journée.")) {
+			switch(select("Lui montrer le médaillon.:D'accord, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".")) {
 			case 1:
 				break;
 			case 2:
@@ -3539,7 +3539,7 @@ lhz_in01,114,181,5	script	Représentante#li_01	71,{
 					mes "[Représentante]";
 					mes "Nous faisons de notre mieux afin de proposer les meilleurs services à nos clients.";
 					mes "Souvenez-vous que Rekenber est un nom de confiance.";
-					mes "Merci, passez une bonne journée.";
+					mes "Merci, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 					close;
 				}
 			}
@@ -3549,7 +3549,7 @@ lhz_in01,114,181,5	script	Représentante#li_01	71,{
 			next;
 			mes "[Représentante]";
 			mes "Pour vous rendre à la bibliothèque, rendez-vous simplement dans le hall d'entrée, et prenez à votre gauche.";
-			mes "Merci, passez une bonne journée.";
+			mes "Merci, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 			set lhz_curse,8;
 			changequest 2087,2088;
 			close;
@@ -3595,7 +3595,7 @@ lhz_in01,114,181,5	script	Représentante#li_01	71,{
 					mes "[Représentante]";
 					mes "Nous faisons de notre mieux afin de proposer les meilleurs services à nos clients.";
 					mes "Souvenez-vous que Rekenber est un nom de confiance.";
-					mes "Merci, passez une bonne journée.";
+					mes "Merci, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 					close;
 				}
 			}
@@ -3640,7 +3640,7 @@ lhz_in01,27,247,5	script	Représentante#li_02	71,{
 		}
 		mes "[Représentante]";
 		mes "Si vous souhaitez en savoir plus à propos des directives de la compagnie, vous pouvez consulter le dépliant situé juste à côté de moi.";
-		mes "Merci, passez une bonne journée.";
+		mes "Merci, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 		changequest 2088,2089;
 		close;
 	}
@@ -3684,7 +3684,7 @@ lhz_in01,27,247,5	script	Représentante#li_02	71,{
 					mes "[Représentante]";
 					mes "Nous faisons de notre mieux afin de proposer les meilleurs services à nos clients.";
 					mes "Souvenez-vous que Rekenber est un nom de confiance.";
-					mes "Merci, passez une bonne journée.";
+					mes "Merci, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 					close;
 				}
 			}
@@ -4222,7 +4222,7 @@ lighthalzen,179,170,4	script	Homme Ordinaire	98,{
 	if(!lhz_boss)
 	{
 		mes "[Ghalstein]";
-		mes "Bonjour~";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
 		mes "Vous ne trouvez pas que Lighthalzen est une merveille de splendeur et de magnificence?";
 		next;
 		switch( select( "Je suppose.","Oui, tout à fait.","Je ne sais pas trop." ) )
@@ -4247,7 +4247,7 @@ lighthalzen,179,170,4	script	Homme Ordinaire	98,{
 		{
 			mes "[Ghalstein]";
 			mes "Ha ha ha!";
-			mes "Quoi qu'il en soit, je vous souhaite une bonne journée~";
+			mes "Quoi qu'il en soit, je vous souhaite une bonne "+ ( isday() ? "journée" : "soirée" ) +"~";
 			close;
 		}
 		mes "[Ghalstein]";
@@ -4257,7 +4257,7 @@ lighthalzen,179,170,4	script	Homme Ordinaire	98,{
 		next;
 		mes "[Ghalstein]";
 		mes "Ha ha ha!";
-		mes "Quoi qu'il en soit, je vous souhaite une bonne journée~";
+		mes "Quoi qu'il en soit, je vous souhaite une bonne "+ ( isday() ? "journée" : "soirée" ) +"~";
 		set lhz_boss,1;
 		close;
 	}
@@ -4818,7 +4818,7 @@ yuno_pre,69,20,4	script	Secrétaire#1	862,{
 	if(lhz_boss < 11)
 	{
 		mes "[Hes O'Neil]";
-		mes "Bonjour, en quoi puis-je vous aider?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", en quoi puis-je vous aider?";
 		next;
 		switch( select( "Oh. Rien, merci.","Je souhaite rencontrer le président~","Q-Qui êtes-vous...?" ) )
 		{
@@ -4836,7 +4836,7 @@ yuno_pre,69,20,4	script	Secrétaire#1	862,{
 				{
 					case 1:
 						mes "[Hes O'Neil]";
-						mes "Très bien. Puis-je avoir votre nom, afin que je vérifie sur son emploi du temps de la journée?";
+						mes "Très bien. Puis-je avoir votre nom, afin que je vérifie sur son emploi du temps de la "+ ( isday() ? "journée" : "soirée" ) +"?";
 						next;
 						switch( select( ""+strcharinfo(0)+"" ) )
 						{
@@ -4864,7 +4864,7 @@ yuno_pre,69,20,4	script	Secrétaire#1	862,{
 	else if(lhz_boss < 16)
 	{
 		mes "[Hes O'Neil]";
-		mes "Bonjour, en quoi puis-je vous aider?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", en quoi puis-je vous aider?";
 		next;
 		switch( select( "Montrer la Carte de Membre.","Je souhaite rencontrer le président.","Rien, merci." ) )
 		{
@@ -4901,7 +4901,7 @@ yuno_pre,69,20,4	script	Secrétaire#1	862,{
 				{
 					case 1:
 						mes "[Hes O'Neil]";
-						mes "Très bien. Puis-je avoir votre nom, afin que je vérifie sur son emploi du temps de la journée?";
+						mes "Très bien. Puis-je avoir votre nom, afin que je vérifie sur son emploi du temps de la "+ ( isday() ? "journée" : "soirée" ) +"?";
 						next;
 						switch( select( ""+strcharinfo(0)+"" ) )
 						{
@@ -4934,7 +4934,7 @@ yuno_pre,69,20,4	script	Secrétaire#1	862,{
 			close;
 		}
 		mes "[Hes O'Neil]";
-		mes "Bonjour, puis-je vous aider?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", puis-je vous aider?";
 		next;
 		switch( select( "J'ai apporté ceci." ) )
 		{
@@ -5046,7 +5046,7 @@ yuno_pre,95,71,5	script	Garde	852,{
 			mes ""+strcharinfo(0)+", permettez-moi de vous présenter Eridan Keshnaar.";
 			next;
 			mes "[Keshnaar]";
-			mes "Ravi de vous rencontrer. Maintenant, si vous voulez bien m'excuser, le devoir m'appelle. Bonne journée~";
+			mes "Ravi de vous rencontrer. Maintenant, si vous voulez bien m'excuser, le devoir m'appelle. Bonne "+ ( isday() ? "journée" : "soirée" ) +"~";
 			next;
 			mes "[Garde]";
 			mes "Prenez soin de vous,";
@@ -5101,7 +5101,7 @@ yuno_pre,95,71,5	script	Garde	852,{
 	else
 	{
 		mes "[Garde]";
-		mes "Bonjour.";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ".";
 		mes "Vous pouvez entrer voir le président.";
 		close2;
 		warp "yuno_pre",78,69;
@@ -5543,7 +5543,7 @@ L_Mission:
 		enablenpc "Gentilhomme Élégant";
 		next;
 		mes "[Kurelle]";
-		mes "Bonjour, monsieur le Président.";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", monsieur le Président.";
 		mes "Vous m'avez fait appeler?";
 		next;
 		mes "[Karl]";
@@ -5760,11 +5760,11 @@ aldebaran,58,225,4	script	Employée Kafra#l1	116,{
 		next;
 		mes "[Employée Kafra]";
 		mes "Si vous avez besoin de quoi que ce soit, veuillez vous adresser aux Employées Kafra situées à l'intérieur du bâtiment.";
-		mes "Merci, passez une bonne journée~";
+		mes "Merci, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +"~";
 		close;
 	}
 	mes "[Employée Kafra]";
-	mes "Bonjour~";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
 	mes "La Corporation Kafra est fière de travailler à la satisfaction de ses clients.";
 	mes "En quoi puis-je vous aider aujourd'hui?";
 	next;
@@ -5783,14 +5783,14 @@ aldebaran,58,225,4	script	Employée Kafra#l1	116,{
 			mes "Oh, Benith? Bien sûr, elle se trouve à l'intérieur du Quartier Général des Kafras, bâtiment de droite. Elle porte un uniforme spécial, vous la reconnaîtrez sans mal.";
 			next;
 			mes "[Employée Kafra]";
-			mes "Je vous souhaite une bonne journée!";
+			mes "Je vous souhaite une bonne "+ ( isday() ? "journée" : "soirée" ) +"!";
 			mes "Et souvenez-vous que les Services Kafras seront toujours à vos côtés~";
 			close;
 
 		case 2:
 			mes "[Employée Kafra]";
 			mes "N'hésitez pas à vous adresser à n'importe quelle employée du bâtiment si vous avez besoin d'une information.";
-			mes "Merci, passez une bonne journée~";
+			mes "Merci, passez une bonne "+ ( isday() ? "journée" : "soirée" ) +"~";
 			close;
 	}
 }
@@ -7448,7 +7448,7 @@ izlude,186,57,5	script	Type Louche#airpl	853,{
 	if(lhz_rekenber > 21)
 	{
 		mes "[Ahman]";
-		mes "Oh, bonjour. J'ai entendu dire que vous avez démissionné? C'est dommage, vraiment. Si vous n'aviez pas été là, mes paquets auraient certainement été endommagés par ces bandits.";
+		mes "Oh, " + ( isday() ? "bonjour" : "bonsoir" ) + ". J'ai entendu dire que vous avez démissionné? C'est dommage, vraiment. Si vous n'aviez pas été là, mes paquets auraient certainement été endommagés par ces bandits.";
 		close;
 	}
 	else if(lhz_rekenber == 21)
@@ -7471,7 +7471,7 @@ izlude,186,57,5	script	Type Louche#airpl	853,{
 	else if (lhz_rekenber > 15 && lhz_rekenber < 20)
 	{
 		mes "[Ahman]";
-		mes "Oh, bonjour. Je n'attends aucune livraison pour l'instant. Ne devriez-vous pas êtes à Lighthalzen?";
+		mes "Oh, " + ( isday() ? "bonjour" : "bonsoir" ) + ". Je n'attends aucune livraison pour l'instant. Ne devriez-vous pas êtes à Lighthalzen?";
 		close;
 	}
 	else if(lhz_rekenber == 15)

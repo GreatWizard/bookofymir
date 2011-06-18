@@ -103,7 +103,7 @@ alberta_in,55,142,7	script	Coiffeuse::Hair Dresser	91,{
 					mes "Oh, ça c'est la coupe 'Nuage Toxique'. Une coupe pour les rebelles et les marginaux qui pourtant attire irrésistiblement les belles demoiselles.";
 					close2; cutin "",255; end;
 				}
-					mes "Oh, ça c'est la coupe 'SP Rétablissement'. Pour donner plus de volume à ces franges, j'utilise un spray qui vous donne l'impression de regagner vos SP. Malheureusement ce n'est qu'une impression...";
+					mes "Oh, ça c'est la coupe 'Régénération de Points d'Énergie'. Pour donner plus de volume à ces franges, j'utilise un spray qui vous donne l'impression de regagner vos Points d'Énergie. Malheureusement ce n'est qu'une impression...";
 					close2; cutin "",255; end;
 			case 10:
 				if(Sex == 1) {
@@ -405,125 +405,77 @@ alberta,33,141,7	script	Coiffeur Ambulant::Roving Hair Dresser	87,{
 
 
 // Lighthalzen
-lhz_in02,100,143,3	script	Hair Dresser#li	122,{
+lhz_in02,100,143,3	script	Coiffeur::Hair Dresser#li	122,{
 	mes "[Prince Shammi]";
-	mes "Welcome to Prince Shammi's";
-	mes "Beauty Shop, the place to go";
-	mes "for faaabulous hair. Don't be";
-	mes "shy, tell me exactly how you";
-	mes "want me to make you glamorous~";
+	mes "Bienvenue dans le Salon de Beauté du Prince Shammi, l'endroit incontournable pour avoir une chevelure faaaaabuleuse! Ne soyez pas timide, dites-moi exactement ce que vous voulez que je fasse pour vous rendre plus glamour~";
 	next;
-	switch(select("Check all hairstyles:Change hairstyle:Cancel")) {
+	switch(select("Consulter toutes les coupes:Changer de coupe:Annuler")) {
 	case 1:
 		mes "[Prince Shammi]";
-		mes "Oh, would you like to";
-		mes "see all of the trendy new";
-		mes "hairstyles I offer?";
+		mes "Oh, vous voulez voir toutes les coupes branchées que j'ai à proposer?";
 		next;
 		mes "[Prince Shammi]";
-		mes "Please, oh please, choose from the following styles and I will show you a preview.";
+		mes "Je vous en prie! Choisissez l'une des coupes dans mon catalogue, et je vous montrerai un aperçu.";
 		next;
-		switch(select("Old Hairstyles:New Hairstyles")) {
+		switch(select("Anciennes coupes:Nouvelles coupes")) {
 		case 1:
 			if (Sex == 1) {
-				switch(select("Petite Style:Executioner Style:Prince Style:Deviace Style:Cancel")) {
+				switch(select("Coupe Petite:Coupe Exécuteur:"+ ( sex ? "Coupe du Prince" : "Coupe Princesse" ) +":Coupe Déviace:Annuler")) {
 				case 1:
 					cutin "hair_m_20",4;
 					mes "[Prince Shammi]";
-					mes "This is the ^3131FFPetite Style^000000,";
-					mes "which softens the gentleman's";
-					mes "appearance with long braids";
-					mes "for a fluffier appearance.";
+					mes "Voici la ^3131FFCoupe Petite^000000, qui adoucit l'apparence des hommes avec de longues nattes pour donner plus de volume.";
 					break;
 				case 2:
 					cutin "hair_m_21",4;
 					mes "[Prince Shammi]";
-					mes "Oh, the ^3131FFExecutioner Style^000000!";
-					mes "It's a rugged, shaggy style";
-					mes "for that tough guy look that's";
-					mes "becoming popular these days.";
-					mes "And every girl loves a tough";
-					mes "guy, right? ^333333*Tee hee~*^000000";
+					mes "Oh, la ^3131FFCoupe Exécuteur^000000! C'est un style très brut et viril pour ces hommes rudes qui deviennent de plus en plus populaires. Et on sait que les femmes aiment ça, n'est-ce pas? ^333333*Tee hee~*^000000";
 					break;
 				case 3:
 					cutin "hair_m_22",4;
 					mes "[Prince Shammi]";
-					mes "You certainly have an";
-					mes "eye for fashion! Yes, this";
-					mes "is the ^3131FFPrince Style^000000, the";
-					mes "pinnacle of sexiness and";
-					mes "sophistication. Magnifique, no?";
-					mes "Yes, choose this one, this one!";
+					mes "Vous avez certainement l'oeil pour reconnaître les belles choses! Oui, c'est la ^3131FF"+ ( sex ? "Coupe du Prince" : "Coupe Princesse" ) +"^000000, le summum de la sensualité et de la sophistication. Magnifique, non? Oui, choisissez celle-la! Choisissez celle-la!";
 					break;
 				case 4:
 					cutin "hair_m_23",4;
 					mes "[Prince Shammi]";
-					mes "A-ha~! The ^3131FFDeviace Style^000000!";
-					mes "This is much like the Prince";
-					mes "Style, but with shorter hair";
-					mes "in the back. Yes, this look";
-					mes "is very neat and dandy.";
+					mes "Ah-ah!~ La ^3131FFCoupe Déviace^000000! Elle ressemble à la Coupe du Prince, mais avec des cheveux coupés un peu plus courts dans le dos. Oh oui, c'est une coupe très \"propre sur soi\", très \"dandy\".";
 					break;
 				case 5:
 					cutin "hair_f_01",255;
 					mes "[Prince Shammi]";
-					mes "No? You didn't want";
-					mes "to take a look? Please,";
-					mes "you're an adventurer, I know";
-					mes "you can be more daring than";
-					mes "that! Be fashionably adventurous, you fashionable adventurer~";
+					mes "Non? Vous ne vouliez rien voir? Vous êtes un aventurier! Je sais que vous savez être audacieux! Soyez aventureux en matière de mode~"; // NB: pas besoin de ( sex ? ) dans tout ce passage: il y a un if ( sex ) plus haut [NoH]
 					emotion e_lv,"Hair Dresser#i";
 					close;
 				}
 			}
 			else {
-				switch(select("Spring Rabbit Style:Harpy Style:Medusa Style:Isis Style:Cancel")) {
+				switch(select("Coupe Lapin Bondissant:Coupe Harpie:Coupe Méduse:Coupe Isis:Annuler")) {
 				case 1:
 					cutin "hair_f_20",4;
 					mes "[Prince Shammi]";
-					mes "Oh yes, this is the ";
-					mes "^3131FFSpring Rabbit Style^000000.";
-					mes "The bobbing forelock";
-					mes "adds an aura of chic,";
-					mes "cutsiness and playfulness.";
-					mes "Yes? No? Yes? No? Oh yes!";
+					mes "Oh oui, la ^3131FFCoupe Lapin Bondissant^000000! La frange libre à l'avant ajoute un je ne sais quoi de chic, et un côté très taquin. Oui? Non? Oui? Non? Oh, oui!";
 					break;
 				case 2:
 					cutin "hair_f_21",4;
 					mes "[Prince Shammi]";
-					mes "Ooh, are you interested";
-					mes "in the ^3131FFHarpy Style^000000? The";
-					mes "natural curl coupled with";
-					mes "the pony tail results in";
-					mes "a sophisticated, yet very";
-					mes "natural and relaxed look~";
+					mes "Oh, la ^3131FFCoupe Harpie^000000 vous intéresse? L'ondulation naturelle des cheveux et la queue de cheval en font quelque chose de très sophistiqué, et pourtant de très naturel et décontracté~";
 					break;
 				case 3:
 					cutin "hair_f_22",4;
 					mes "[Prince Shammi]";
-					mes "Ahh, the ^3131FFMedusa Style^000000~";
-					mes "These boldy flowing locks";
-					mes "scream power and dominance";
-					mes "and is ideal for the big career";
-					mes "woman who wishes to be...";
-					mes "irresistable to men~";
+					mes "Ah, la ^3131FFCoupe Méduse^000000~";
+					mes "Ces mèches se baladant audacieusement crient \"pouvoir\" et \"domination\". C'est la coupe idéale pour les femmes de carrière qui désirent se rendre irrésistibles auprès des hommes~";
 					break;
 				case 4:
 					cutin "hair_f_23",4;
 					mes "[Prince Shammi]";
-					mes "Ooh, the ^3131FFIsis Style^000000~";
-					mes "Yes, you'll look very cute";
-					mes "with your hair in buns on";
-					mes "on both sides of your head.";
-					mes "It'll be very darling on you!";
+					mes "Oh, la ^3131FFCoupe Isis^000000~";
+					mes "Oui, vous aurez l'air très mignonne avec des chignons de chaque côté. Ça vous irait comme un charme!";
 					break;
 				case 5:
 					mes "[Prince Shammi]";
-					mes "No? You didn't want";
-					mes "to take a look? Please,";
-					mes "you're an adventurer, I know";
-					mes "you can be more daring than";
-					mes "that! Be fashionably adventurous, you fashionable adventurer~";
+					mes "Non? Vous ne vouliez rien voir? Vous êtes une aventurière! Je sais que vous savez être audacieuse! Soyez aventureuse en matière de mode~";
 					emotion e_lv,"Hair Dresser#li";
 					close;
 				}
@@ -531,80 +483,62 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 			break;
 		case 2:
 			if (Sex == 1) {
-				switch(select("Emergency Heal Perm:Aura Blade Cut:Power Swing:Renovatio Cut:Cancel")) {
+				switch(select("Permanente Soin Urgent:Coupe Aura d'Énergie:Coupe Hache Tournoyante:Coupe Rénovation:Annuler")) {
 				case 1:
 					cutin "hair_m_24",4;
 					mes "[Prince Shammi]";
-					mes "This is the ^3131FFEmergency Heal Perm^000000";
-					mes "It is quite popular among the healing class.";
+					mes "Il s'agit de la ^3131FFPermanente Soin Urgent^000000. Elle est très populaire auprès des guérisseurs.";
 					break;
 				case 2:
 					cutin "hair_m_25",4;
 					mes "[Prince Shammi]";
-					mes "You must be after a lady yes?";
-					mes "The ^3131FFAura Blade Cut^000000";
-					mes "is known to make the ladies swoon, you tiger you!";
+					mes "Vous devez être après une femme, n'est-ce pas? La ^3131FFCoupe Aura d'Énergie^000000 fera s'évanouir les dames, beau félin!";
 					break;
 				case 3:
 					cutin "hair_m_26",4;
 					mes "[Prince Shammi]";
-					mes "Oh you brute!";
-					mes "^3131FFPower Swing Cut^000000";
-					mes "Flex your style muscles with this hairstyle. This is definitely your look.";
+					mes "Oh, vous êtes une brute!";
+					mes "La ^3131FFCoupe Hache Tournoyante^000000 vous donne l'impression de gonfler vos muscles avec vos cheveux. C'est vraiment votre style.";
 					break;
 				case 4:
 					cutin "hair_m_27",4;
 					mes "[Prince Shammi]";
-					mes "Ah! I see you're only interested in the latest trends.";
-					mes "Straight from the runway is the ^3131FFRenovatio Cut^000000.";
+					mes "Ah! Je vois que vous êtes intéressé par les dernières tendances. Hé bien, ça vient de sortir, il s'agit de la ^3131FFCoupe Rénovation^000000!";
 					break;
 				case 5:
 					mes "[Prince Shammi]";
-					mes "No? You didn't want";
-					mes "to take a look? Please,";
-					mes "you're an adventurer, I know";
-					mes "you can be more daring than";
-					mes "that! Be fashionably adventurous, you fashionable adventurer~";
+					mes "Non? Vous ne vouliez rien voir? Vous êtes un aventurier! Je sais que vous savez être audacieux! Soyez aventureux en matière de mode~";
 					emotion e_lv,"Hair Dresser#li";
 					close;
 				}
 			}
 			else {
-				switch(select("Assumptio Perm:Soul Changer Cut:X Tornado Cut:Oratio Cut:Cancel")) {
+				switch(select("Permanente Assomption:Coupe Échange d'Âmes:Coupe Hache Tornade:Coupe Oraison Funèbre:Annuler")) {
 				case 1:
 					cutin "hair_f_24",4;
 					mes "[Prince Shammi]";
-					mes "This is the ^3131FFAssumptio Perm^000000";
-					mes "It's a shorter style perm that allows for maximum spellcasting.";
+					mes "Il s'agit de la ^3131FFPermanente Assomption^000000. Une permanente plus courte pour un maximum d'efficacité quand vous lancez des sorts!";
 					break;
 				case 2:
 					cutin "hair_f_25",4;
 					mes "[Prince Shammi]";
-					mes "You must be a man killer no?";
-					mes "The ^3131FFSoul Changer Cut^000000";
-					mes "will make any man open his wall... er heart to you!";
+					mes "Vous devez être une croqueuse d'hommes, non? La ^3131FFCoupe Échange d'Âmes^000000 donnera à tous les hommes envie de vous ouvrir leur porte-f... euh... leur coeur!";
 					break;
 				case 3:
 					cutin "hair_f_26",4;
 					mes "[Prince Shammi]";
-					mes "This is a bit of a trendy style";
-					mes "^3131FFX Tornado Cut^000000";
-					mes "It's for adventurous people who like change.";
+					mes "Voici un style très à la mode: la ^3131FFCoupe Hache Tornade^000000!";
+					mes "Elle est faite pour les femmes aventureuses qui aiment le changement.";
 					break;
 				case 4:
 					cutin "hair_f_27",4;
 					mes "[Prince Shammi]";
-					mes "Ah! I see you're only interested in the latest trends.";
-					mes "Straight from the runway is the ^3131FFOratio Cut^000000.";
-					mes "You'll be the envy of all of your friends with this hairstyle.";
+					mes "Ah! Je vois que les dernières tendances vous intéressent! Hé bien, ça vient de sortir, il s'agit de la ^3131FFCoupe Oraison Funèbre^000000!";
+					mes "Vous ferez l'envie de tous vos amies avec cette coupe.";
 					break;
 				case 5:
 					mes "[Prince Shammi]";
-					mes "No? You didn't want";
-					mes "to take a look? Please,";
-					mes "you're an adventurer, I know";
-					mes "you can be more daring than";
-					mes "that! Be fashionably adventurous, you fashionable adventurer~";
+					mes "Non? Vous ne vouliez rien voir? Vous êtes une aventurière! Je sais que vous savez être audacieuse! Soyez aventureuse en matière de mode~";
 					emotion e_lv,"Hair Dresser#li";
 					close;
 				}
@@ -616,93 +550,67 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 	case 2:
 		if (BaseLevel < 60) {
 			mes "[Prince Shammi]";
-			mes "Oh, I'm so sorry, but";
-			mes "I can only perform my";
-			mes "services for clients that have";
-			mes "matured enough to find their";
-			mes "true inner beauty. But please";
-			mes "come back once you do, okay?";
+			mes "Oh, je suis vraiment désolé, mais je ne peux proposer mes services qu'à des clients assez mûrs pour trouver leur véritable beauté intérieure. Mais revenez me voir quand vous y serez parvenu"+ ( sex ? "" : "e" ) +", d'accord?";
 			close;
 		}
 		else if ((countitem(973) < 3) || (countitem(974) < 3) || (countitem(901) < 100) || (countitem(1094) < 100) || (countitem(1020) < 100) || (countitem(1060) < 100) || (countitem(7152) < 100) || (Zeny < 99800)) {
 			mes "[Prince Shammi]";
-			mes "If you've already decided";
-			mes "what hairstyle you'd like,";
-			mes "please have my service charge";
-			mes "ready, as well as the materials";
-			mes "I will need in performing this";
-			mes "service, okay? Please bring...";
+			mes "Si vous savez déjà quelle coupe vous voulez, merci de préparer les matériaux dont j'ai besoin pour ce service, ainsi que la somme pour payer mes modestes émoluments. S'il vous plait, rapportez-moi...";
 			next;
 			mes "[Prince Shammi]";
-			mes "^3355FF3 Counteragent^000000,";
-			mes "^3355FF3 Mixture^000000,";
-			mes "^3355FF100 Daenggie^000000,";
-			mes "^3355FF100 Short Daenggie^000000...";
+			mes "^3355FF3 Antiagents^000000,";
+			mes "^3355FF3 Mixtures^000000,";
+			mes "^3355FF100 Daenggies^000000,";
+			mes "^3355FF100 Courtes Daenggies^000000...";
 			next;
 			mes "[Prince Shammi]";
-			mes "^3355FF100 Black Hair^000000,";
-			mes "^3355FF100 Golden Hair^000000,";
-			mes "^3355FF100 Glossy Hair^000000";
-			mes "and ^3355FF99,800 zeny^000000.";
-			mes "Once you do that, I'll make";
-			mes "a miracle out of your hair!";
+			mes "^3355FF100 mèches de Cheveux Noirs^000000,";
+			mes "^3355FF100 mèches de Cheveux Dorés^000000,";
+			mes "^3355FF100 mèches de Cheveux Brillants^000000";
+			mes "et ^3355FF99,800 zénys^000000.";
+			mes "Je ferai un miracle avec vos cheveux une fois que vous aurez tout ça!";
 			close;
 		}
 		mes "[Prince Shammi]";
-		mes "Alright, please choose";
-		mes "which hairstyle you wish";
-		mes "to have from numbers 20 to 25.";
-		mes "Here's a list of the style names just in case you need them~";
+		mes "D'accord, choisissez la coupe que vous voulez en entrant un nombre entre 20 et 25.";
+		mes "Voici la liste des correspondances au cas où vous en auriez besoin~";
 		next;
 		mes "[Prince Shammi]";
 		if (Sex == 1) {
-			mes "No. 20: Petite Style";
-			mes "No. 21: Executioner Style";
-			mes "No. 22: Prince Style";
-			mes "No. 23: Deviace Style";
-			mes "No. 24: Emergency Heal Perm";
-			mes "No. 25: Aura Blade Cut";
-			mes "No. 26: Power Swing and";
-			mes "No. 27: Renovatio Cut.";
+			mes "No. 20: Coupe Petite";
+			mes "No. 21: Coupe Exécuteur";
+			mes "No. 22: "+ ( sex ? "Coupe du Prince" : "Coupe Princesse" );
+			mes "No. 23: Coupe Déviace";
+			mes "No. 24: Permanente Soin Urgent";
+			mes "No. 25: Coupe Aura d'Énergie";
+			mes "No. 26: Coupe Hache Tournoyante et";
+			mes "No. 27: Coupe Rénovation.";
 		}
 		else {
-			mes "No. 20: Spring Rabbit Style";
-			mes "No. 21: Harpy Style";
-			mes "No. 22: Medusa Style";
-			mes "No. 23: Isis Style";
-			mes "No. 24: Assumptio Perm";
-			mes "No. 25: Soul Changer Cut";
-			mes "No. 26: X Tornado Cut and";
-			mes "No. 27: Oratio Cut.";
+			mes "No. 20: Coupe Lapin Bondissant";
+			mes "No. 21: Coupe Harpie";
+			mes "No. 22: Coupe Méduse";
+			mes "No. 23: Coupe Isis";
+			mes "No. 24: Permanente Assomption";
+			mes "No. 25: Coupe Échange d'Âmes";
+			mes "No. 26: Coupe Hache Tornade et";
+			mes "No. 27: Coupe Oraison Funèbre.";
 		}
 		next;
 		input .@input;
 		if (.@input == 0) {
 			mes "[Prince Shammi]";
-			mes "Oh...?";
-			mes "You decided to cancel?";
-			mes "Well, you know what's";
-			mes "best for you, I suppose.";
-			mes "Still, I'm so disappointed~";
+			mes "Oh...? Vous avez changé d'avis? Hé bien, j'imagine que vous savez ce qui est le mieux pour vous. Mais je suis tout de même déçu~";
 			close;
 		}
 		else if ((.@input < 20) || (.@input > 27)) {
 			mes "[Prince Shammi]";
-			mes "Dearie, please enter";
-			mes "a number from ''20'' to";
-			mes "''25,'' alright? Then I can";
-			mes "get right to work at making";
-			mes "you soooooooo beautiful!";
+			mes ( sex ? "Mon cher" : "Ma chère" ) +", vous devez indiquer un numéro de \"20\" à \"25\", d'accord? Je pourrai ensuite me mettre au travail et vous rendre irrrrrrrésistible!";
 			close;
 		}
 		else if (getlook(VAR_HEAD) == .@input) {
 			mes "[Prince Shammi]";
-			mes "Oh dear me, you're not";
-			mes "going to waste money for";
-			mes "the same hairstyle that you";
-			mes "have now, are you? You can";
-			mes "have someone else change";
-			mes "your hair color, you know.";
+			mes ( sex ? "Oh, mon cher" : "Oh, ma chère" ) +", vous n'allez pas gaspiller votre argent pour que je vous refasse la même coupe, voyons! Il y a quelqu'un qui peut changer votre couleur de cheveux si c'est ce que vous voulez, vous savez?";
 			close;
 		}
 		else {
@@ -711,22 +619,16 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 			else
 				cutin "hair_f_"+.@input+".BMP",4;
 			mes "[Prince Shammi]";
-			mes "Oooh! Now, is this the";
-			mes "hairstyle that you wanted?";
-			mes "This is No. "+.@input+", by the way.";
+			mes "Oooh! Alors, est-ce que c'est la coupe que vous vouliez?";
+			mes "Il s'agit de la coupe No. "+.@input+", au passage.";
 			next;
-			switch(select("Yes.:No.")) {
+			switch(select("Oui.:Non.")) {
 			case 1:
 				if (getlook(VAR_HEADPALETTE) == 0) {
 					mes "[Prince Shammi]";
-					mes "Oh, Sweet Christmas,";
-					mes "I almost forgot! Would";
-					mes "you like me to dye your";
-					mes "hair, free of charge? It's";
-					mes "a part of my service, so";
-					mes "please choose a color~";
+					mes "Oh, par Odin, j'allais presque oublier! Voudriez que je teigne vos cheveux par la même occasion? Je ne vous demanderai rien de plus, c'est compris dans le prix. Choisissez une nouvelle couleur~";
 					next;
-					switch(select("Red:Yellow:Purple:Orange:Green:Blue:White:Dark Brown")) {
+					switch(select("Rouge:Blond:Violet:Orange:Vert:Bleu:Blanc:Brun")) {
 					case 1:
 						set .@headpalette,8;
 						break;
@@ -754,13 +656,10 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 					}
 				}
 				mes "[Prince Shammi]";
-				mes "Okay, let's get";
-				mes "started, shall we?";
-				mes "Keep your head still,";
-				mes "now. Yes, that's good...";
+				mes "D'accord, commençons vous voulez bien? Redressez la tête... Oui, comme ça...";
 				next;
-				mes "^3355FF*Snip snip*";
-				mes "*Rustle rustle*";
+				mes "^3355FF*Coupe* *Coupe*";
+				mes "*Rase* *Rase*";
 				mes "*Clip clip clip clip*";
 				mes "*Bzzzzzzzzzzzzzzzzzzzz*^000000";
 				next;
@@ -775,35 +674,16 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 				setlook VAR_HEAD,.@input;
 				setlook VAR_HEADPALETTE,.@headpalette;
 				mes "[Prince Shammi]";
-				mes "Well, we're all finished!";
-				mes "And my, oh my, you look even";
-				mes "more fabulous that I thought";
-				mes "you would! Oh, I can't believe";
-				if (Sex == 1) {
-					mes "how tough and elegant you are~";
-					mes "So ruggedly manly and handsome!";
-				}
-				else {
-					mes "how graceful and elegant you";
-					mes "look! Absolutely gorgeous!";
-				}
+				mes "Et voilà, c'est terminé! Et oh mon... Vous avez l'air encore plus resplendissent"+ ( sex ? "" : "e" ) +" que je n'aurais osé l'espérer! Je n'arrive pas à croire à quel point vous êtes "+ ( sex ? "élégant, et pourtant toujours aussi viril et charmant" : "gracieuse et élégante! Absolument adorable" ) +"!";
 				emotion e_kis,"Hair Dresser#li";
 				next;
 				mes "[Prince Shammi]";
-				mes "You love your new";
-				mes "hair, don't you? Feel";
-				mes "free to come back anytime.";
-				mes "I'll make you the best looking";
-				mes "person in the entire world!";
+				mes "Vous adorez votre nouvelle coupe, n'est-ce pas? Revenez quand vous voulez. Je ferai de vous la personne la plus attirante au monde!";
 				emotion e_no1,"Hair Dresser#li";
 				close;
 			case 2:
 				mes "[Prince Shammi]";
-				mes "Oh, did you forget which";
-				mes "hairstyle goes with which";
-				mes "number? By all means, please";
-				mes "check again! Find the one that";
-				mes "is perfect just for you, okay?";
+				mes "Oh, est-ce que vous avez oublié à quelles coupes correspondent ces numéros? Ne vous sentez pas gêné"+ ( sex ? "" : "e" ) +", vérifiez à nouveau! Trouvez la coupe qui vous ira à la perfection, d'accord?";
 				close;
 			}
 		}
@@ -811,116 +691,69 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 	case 3:
 		mes "[Prince Shammi]";
 		mes "Humm ? ";
-		mes "Maybe you don't understand";
-		mes "my futuristic styles.";
-		mes "Goodbye! ";
+		mes "Peut-être ne comprenez-vous rien à la sophistication de mes coupes... C'est la dernière tendance, vous savez? Hé bien, au revoir dans ce cas!";
 		close;
 	}
 }
 
-lhz_in02,91,155,5	script	Assistant Beautician#li	862,{
-	mes "[Assistant Beautician]";
-	mes "Wah?! Sweet Jiminy,";
-	mes "you freaked me out!";
-	mes "What are you doing?!";
+lhz_in02,91,155,5	script	Apprentie Esthéticienne::Assistant Beautician#li	862,{
+	mes "[Apprentie Esthéticienne]";
+	mes "Hein?! Oh, par Freya, vous m'avez fait peur! Qu'est-ce que vous faites là?!";
 	emotion e_omg,"Assistant Beautician#li";
 	next;
-	mes "[Assistant Beautician]";
-	mes "Oh! Um, a customer!";
-	mes "H-h-h-h-h-hello! Can";
-	mes "I help you with anything?";
+	mes "[Apprentie Esthéticienne]";
+	mes "Oh! Vous êtes "+ ( sex ? "un client" : "une cliente" ) +"!";
+	mes "B-b-b-b-b-"+ ( isday() ? "bonjour" : "bonsoir" ) +"! Est-ce que je peux vous aider?";
 	next;
-	switch(select("What do you do?:Please change my hairstyle.:Who is Prince Shammi?")) {
+	switch(select("Qu'est-ce que vous faites?:Je voudrais changer de coupe.:Qui est le Prince Shammi?")) {
 	case 1:
-		mes "[Assistant Beautician]";
-		mes "Oh! Me...? I'm";
-		mes "just an assistant";
-		mes "beautician, but I'm";
-		mes "training hard everyday";
-		mes "so that I can become";
-		mes "a real professional!";
+		mes "[Apprentie Esthéticienne]";
+		mes "Oh! Moi...? Je suis une simple apprentie esthéticienne, mais je travaille dur pour devenir une véritable professionnelle un jour!";
 		next;
-		mes "[Assistant Beautician]";
-		mes "Yeah, I do all sorts of";
-		mes "grunt work for the boss while";
-		mes "I'm in training. Sometimes, he";
-		mes "makes me work pretty hard.";
-		mes "In fact, I better get back to work before he gets angry at me!";
+		mes "[Apprentie Esthéticienne]";
+		mes "Oui, je fais toutes sortes de travaux ingrats pour le patron pendant ma formation. Il me fait vraiment travailler dur parfois. En fait, je ferais mieux d'y retourner avant qu'il ne s'énerve après moi!";
 		close;
 	case 2:
 		if (BaseLevel < 60) {
-			mes "[Assistant Beautician]";
-			mes "Me...? Oh no,";
-			mes "no I can't! I mean,";
-			mes "I'd love to but, I'm";
-			mes "still in training and";
-			mes "I can't take responsibility";
-			mes "if I mess up on a little kid!";
+			mes "[Apprentie Esthéticienne]";
+			mes "Moi...? Oh non, non, je ne peux pas! Je veux dire... J'adorerais, mais je suis toujours en formation, et je ne peux pas prendre la responsabilité de risquer de ruiner la coiffure de quelqu'un d'aussi jeune!";
 			close;
 		}
 		else if ((Zeny < 250000)) {
-			mes "[Assistant Beautician]";
-			mes "Well... I'm just an";
-			mes "assistant, but I have been";
-			mes "studying hairstyling after";
-			mes "work. If you want, just bring";
-			mes "me 250,000 zeny and I'll try";
-			mes "my best to change your hair~";
+			mes "[Apprentie Esthéticienne]";
+			mes "Eh bien... Je suis juste une apprentie, mais j'étudie la coiffure après le travail. Si vous le voulez, vous n'aurez qu'à me rapporter 250,000 zénys et j'essaierai de faire de mon mieux avec votre coiffure~";
 			next;
-			mes "[Assistant Beautician]";
-			mes "I'd appreciate it if you'd";
-			mes "give me this chance! The";
-			mes "boss doesn't think I'm ready";
-			mes "for styling real people yet, so";
-			mes "I haven't had much practice!";
+			mes "[Apprentie Esthéticienne]";
+			mes "Je vous en serais vraiment reconnaissante si vous me laissiez ma chance! Le patron pense que je ne suis pas encore prête pour m'occuper de véritables clients, alors je n'ai pas beaucoup de pratique!";
 			next;
-			mes "[Assistant Beautician]";
-			mes "I just know I could";
-			mes "do a good job on your";
-			mes "hair! Just... Just please";
-			mes "understand if I mess up.";
-			mes "It won't be too bad, I promise~";
+			mes "[Apprentie Esthéticienne]";
+			mes "Je sais juste que je ferais un super boulot avec vos cheveux! Enfin... Disons juste que même si je rate, ce ne sera pas si terrible, je vous le promets~";
 			close;
 		}
 		else {
-			mes "[Assistant Beautician]";
-			mes "You're really going to";
-			mes "give me a chance to practice?";
-			mes "Oh, I love you so much! Okay,";
-			mes "I'll need 250,000 zeny to make";
-			mes "up for the material expenses.";
-			mes "Is that okay with you?";
+			mes "[Apprentie Esthéticienne]";
+			mes "Vous allez vraiment me laisser ma chance? Oh, je vous aime tant! D'accord, il me faudra juste 250,000 zénys pour couvrir les frais en matériels. Est-ce que ça vous va?";
 			next;
-			switch(select("Of course~:On second thought...")) {
+			switch(select("Bien sûr~:En y réfléchissant bien...")) {
 			case 1:
-				mes "[Assistant Beautician]";
-				mes "Great! Now, please";
-				mes "choose a hairstyle";
-				mes "from ''1'' to ''23.''";
-				mes "Um, if you need to";
-				mes "cancel, just enter ''0.''";
+				mes "[Apprentie Esthéticienne]";
+				mes "Fantastique! Maintenant, veuillez choisir une coupe de \"1\" à \"23\". Oh, et si vous voulez annuler, entrez simplement \"0\".";
 				next;
 				input .@input;
 				if (.@input == 0) {
-					mes "[Assistant Beautician]";
+					mes "[Apprentie Esthéticienne]";
 					mes "Awwww...";
-					mes "I guess you don't";
-					mes "trust me after all...";
+					mes "J'imagine que vous ne me faites pas vraiment confiance en fin de compte...";
 					close;
 				}
 				else if ((.@input < 1) || (.@input > 23)) {
-					mes "[Assistant Beautician]";
-					mes "Huh? I thought I asked";
-					mes "you to enter a number from";
-					mes "''1'' to ''23?'' What did I do";
-					mes "wrong this time? Hmmm...";
+					mes "[Apprentie Esthéticienne]";
+					mes "Hein? Je pensais vous avoir demandé de m'indiquer une coupe entre \"1\" et \"23\"! J'aurais encore fait quelque chose de travers? Hummm...";
 					close;
 				}
 				else {
-					mes "[Assistant Beautician]";
-					mes "So this is the";
-					mes "style you want me";
-					mes "to try to do for you?";
+					mes "[Apprentie Esthéticienne]";
+					mes "Alors c'est bien cette coupe que vous voulez que je vous fasse?";
 					if (Sex == 1) {
 						if (.@input < 10)
 							cutin "hair_m_0"+.@input+".BMP",4;
@@ -934,84 +767,63 @@ lhz_in02,91,155,5	script	Assistant Beautician#li	862,{
 							cutin "hair_f_"+.@input+".BMP",4;
 					}
 					next;
-					switch(select("Yes, let's try it~:Cancel.")) {
+					switch(select("Oui, c'est bien cela~:Annuler.")) {
 					case 1:
 						break;
 					case 2:
-						mes "[Assistant Beautician]";
-						mes "Oooh, there must";
-						mes "be some style that";
-						mes "you like, right? Hmmm...";
+						mes "[Apprentie Esthéticienne]";
+						mes "Oooh, il doit bien y avoir une coupe que vous aimez, non? Hummm...";
 						close;
 					}
 				}
-				mes "[Assistant Beautician]";
-				mes "Great, you finally";
-				mes "picked one! What, which";
-				mes "one did you pick again?";
-				mes "Ah, I found it, I found it!";
-				mes "Haha! No problem here!";
-				mes "Now it's time to style!";
+				mes "[Apprentie Esthéticienne]";
+				mes "Fantastique, vous avez enfin choisi une coupe!";
+				mes "Attendez... C'était laquelle déjà? Ah, c'est bon! Je l'ai trouvée! Il n'y a pas de problème, ne vous en faites pas!";
+				mes "Il est temps de m'y mettre!";
 				next;
 				nude;
-				mes "[Assistant Beautician]";
+				mes "[Apprentie Esthéticienne]";
 				mes "Bwwwwaaaahhhh!";
 				next;
-				mes "[Assistant Beautician]";
+				mes "[Apprentie Esthéticienne]";
 				mes "Yap! Pwwwaaattt!";
 				next;
-				mes "[Assistant Beautician]";
+				mes "[Apprentie Esthéticienne]";
 				mes "Waaaah!";
-				mes "Oh crap!";
-				mes "Wait, I can...";
-				mes "I can fix this!";
+				mes "Oh mince!";
+				mes "Attendez, je peux...";
+				mes "Je peux arranger ça!";
 				next;
 				set .@style_r,rand(1,23);
 				set .@color_r,rand(1,8);
-				mes "[Assistant Beautician]";
-				mes "^333333*Pant Pant Pant*^000000";
+				mes "[Apprentie Esthéticienne]";
+				mes "^333333*Souffle* *Souffle* *Souffle*^000000";
 				next;
 				set zeny,zeny-250000;
 				setlook VAR_HEAD,.@style_r;
 				setlook VAR_HEADPALETTE,.@color_r;
-				mes "[Assistant Beautician]";
-				mes "Bwahahaha! Success!";
+				mes "[Apprentie Esthéticienne]";
+				mes "Bwahahaha! C'est réussi!";
 				if (.@input == .@style_r) {
-					mes "So... How do you like";
-					mes "your new style? I love it!";
+					mes "Alors... Comment aimez-vous votre nouvelle coupe? Moi, je l'adore!";
 				}
 				else {
-					mes "Wha...? This isn't what";
-					mes "you wanted? Uh oh... Um...";
-					mes "Well, next time I know I can";
-					mes "do a much better job! Right!";
+					mes "Hein...? Ce n'est pas ce que vous vouliez? Oh, euh... Hum... Hé bien, je ferai un bien meilleur travail la prochaine fois, c'est promis!";
 				}
 				next;
-				mes "[Assistant Beautician]";
-				mes "Oh, you're such a";
-				mes "sweetheart for helping";
-				mes "me! Thank you for using";
-				mes "my service and come again~";
+				mes "[Apprentie Esthéticienne]";
+				mes "Oh, vous êtes tellement chou de m'avoir aidée! Merci d'avoir utilisé mes services, et à très bientôt~";
 				emotion e_kis,"Assistant Beautician#li";
 				close;
 			case 2:
-				mes "[Assistant Beautician]";
-				mes "Huh? Oh no, you're";
-				mes "quitting? Well, I guess";
-				mes "I couldn't trust me to";
-				mes "style my hair either...";
-				mes "You're... You're right.";
+				mes "[Apprentie Esthéticienne]";
+				mes "Hein? Oh non, vous renoncez? Eh bien j'imagine que moi non plus je ne me ferais pas confiance pour mes cheveux... Vous... Vous avez raison.";
 				close;
 			}
 		}
 	case 3:
-		mes "[Assistant Beautician]";
-		mes "Prince Shammi?";
-		mes "He's only a genius when";
-		mes "it comes to hairstyling!";
-		mes "I'm just his apprentice, but";
-		mes "maybe someday, I can be a";
-		mes "force in the fashion world too!";
+		mes "[Apprentie Esthéticienne]";
+		mes "Le Prince Shammi? C'est un génie de la coiffure! Je ne suis que son apprentie, mais peut-être qu'un jour je serai moi aussi reconnue dans le monde de la mode!";
 		close;
 	}
 }
