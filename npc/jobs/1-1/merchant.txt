@@ -75,7 +75,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 	}
 	if (BaseJob == Job_Merchant) {
 		mes "[Chef Mahnsoo]";
-		mes "Bonjour!";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + "!";
 		mes "Alors, comment trouvez vous la vie de Marchand"+( sex ? "" : "e" )+"?";
 		next;
 		mes "[Chef Mahnsoo]";
@@ -95,8 +95,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 	}
 	else if (job_merchant_q == 9) {
 		mes "[Chef Mahnsoo]";
-		mes "Bonjour,";
-		mes ""+ strcharinfo(0) +".";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+ strcharinfo(0) +".";
 		set job_merchant_q,0;
 		set job_merchant_q2,0;
 		set quest_alb_01,0;
@@ -111,8 +110,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 	}
 	else if (job_merchant_q == 8 || job_merchant_q == 7) {
 		mes "[Chef Mahnsoo]";
-		mes "Bonjour,";
-		mes ""+ strcharinfo(0) +".";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+ strcharinfo(0) +".";
 		mes "BRAVO! Je viens de lire le compte-rendu de Kay, le Chef de l'Entrepôt, à votre sujet... Je suis impressionné! J'ai une grande nouvelle à vous annoncer!";
 		next;
 		mes "[Chef Mahnsoo]";
@@ -271,7 +269,7 @@ alberta_in,53,43,6	script	Chef Mahnsoo#mer	86,{
 	}
 	else if (job_merchant_q == 0) {
 		mes "[Chef Mahnsoo]";
-		mes "Bonjour, qu'est-ce qui vous amène à la Guilde des Marchands?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", qu'est-ce qui vous amène à la Guilde des Marchands?";
 		mes "Puis-je faire quelque chose pour vous aider?";
 		next;
 		switch(select("J'aimerais devenir Marchand"+( sex ? "" : "e" )+".:En quoi consiste le métier de Marchand?:Quels sont les pré-requis?:Non, rien merci.")) {
@@ -472,7 +470,7 @@ S_GiveSerial:
 alberta_in,28,29,2	script	Chef de l'Entrepôt#mer	83,{
 	if (BaseJob == Job_Merchant) {
 		mes "[Kay, Chef de l'Entrepôt]";
-		mes "Bonjour~ Qu'est-ce qui vous amène ici?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~ Qu'est-ce qui vous amène ici?";
 		close;
 	}
 	else if (BaseJob != Job_Merchant && BaseJob != Job_Novice) {
@@ -809,7 +807,7 @@ morocc_in,140,102,4	script	Apprenti Teinturier#mer	86,{
 geffen_in,155,122,4	script	Membre de la Guilde#mer	47,{
 	if (job_merchant_q == 4 || job_merchant_q == 3) {
 		mes "[Membre de la Guilde]";
-		mes "Oh, bonjour. Vous êtes membre de la Guilde Marchande? C'est vrai?! Ça veut dire que.........";
+		mes "Oh, " + ( isday() ? "Bonjour" : "Bonsoir" ) + ". Vous êtes membre de la Guilde Marchande? C'est vrai?! Ça veut dire que.........";
 		next;
 		mes "[Membre de la Guilde]";
 		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
@@ -860,7 +858,7 @@ geffen_in,155,122,4	script	Membre de la Guilde#mer	47,{
 	}
 	else if (job_merchant_q == 6 || job_merchant_q == 5 && job_merchant_q2 == 4 || job_merchant_q2 == 3) {
 		mes "[Membre de la Guilde]";
-		mes "Bonjour, Membre de la Guilde Marchande~";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", Membre de la Guilde Marchande~";
 		mes "Je vous remercie.";
 		close;
 	}
@@ -935,7 +933,7 @@ prontera,248,42,0	script	Kafra#mer	116,{
 	}
 	else {
 		mes "[Employée Kafra]";
-		mes "Bonjour. Je suis une Employée Kafra.";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ". Je suis une Employée Kafra.";
 		next;
 		mes "[Employée Kafra]";
 		mes "Comme vous pouvez le voir, l'^3355FFAssociation des Épéistes^000000 a déménagé à Izlude, une ville satellite de Prontera.";
@@ -965,7 +963,7 @@ prontera,248,42,0	script	Kafra#mer	116,{
 function	script	F_MercKafra	{
 	if ((job_merchant_q == 6 || job_merchant_q == 5) && (job_merchant_q2 == 8 || job_merchant_q2 == 7)) {
 		mes "[Employée Kafra]";
-		mes "Oh bonjour~";
+		mes "Oh " + ( isday() ? "bonjour" : "bonsoir" ) + "~";
 		mes "Hum, quelle raison peut bien vous obliger à venir dans cet endroit?";
 		close2;
 		cutin "",255;

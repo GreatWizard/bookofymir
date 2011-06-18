@@ -75,7 +75,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 		if (sex == 0) {
 			mes "[Altiregen]";
 			mes "Oh~";
-			mes "Bonjour jeune "+callfunc("ster")+"! Intéressée par le métier de Forgeron?";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", jeune "+callfunc("ster")+"! Intéressée par le métier de Forgeron?";
 			next;
 			mes "[Altiregen]";
 			mes "Si vous souhaitez rejoindre les rangs des Forgeron, il vous faudra d'abord apprendre le métier de Marchand! Pour cela, allez à Alberta vous adresser à la Guilde Marchande.";
@@ -84,7 +84,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 		else {
 			mes "[Altiregen]";
 			mes "Oh~";
-			mes "Bonjour mon jeune monsieur! Intéressé par le métier de Forgeron?";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + " mon jeune monsieur! Intéressé par le métier de Forgeron?";
 			next;
 			mes "[Altiregen]";
 			mes "Si vous souhaitez rejoindre les rangs des Forgeron, il vous faudra d'abord apprendre le métier de Marchand! Pour cela, allez à Alberta vous adresser à la Guilde Marchande.";
@@ -93,7 +93,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 	}
 	else if (BaseClass == Job_Swordman) {
 		mes "[Forgeron Altiregen]";
-		mes "Bonjour! Vous venez commander une arme? Désolé mais pour l'instant, j'ai de la paperasse à finir, donc je n'ai pas le temps de forger.";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + "! Vous venez commander une arme? Désolé mais pour l'instant, j'ai de la paperasse à finir, donc je n'ai pas le temps de forger.";
 		close;
 	}
 	else if (BaseClass == Job_Archer) {
@@ -264,7 +264,7 @@ ein_in01,18,28,4	script	Forgeron Altiregen#BLS	731,{
 
 ein_in01,201,27,3	script	Geschupenschte#alberta	63,{
 	mes "[Geschupenschte]";
-	mes "Bonjour mon cher!";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", mon cher!";
 	mes "Je suis le Forgeron ^8E6B23Geschupenschte^000000,";
 	mes "Ravi de vous rencontrer!";
 	next;
@@ -793,7 +793,7 @@ ein_in01,201,27,3	script	Geschupenschte#alberta	63,{
 geffen,46,164,1	script	Baisulist#BLS	69,{
 	if (BSMITH_Q == 9 && countitem(1610) > 0) {
 		mes "[Baisulist]";
-		mes "Oh, bonjour! Vous êtes venu pour livrer ma commande? C'était une Baguette Magique...";
+		mes "Oh, " + ( isday() ? "bonjour" : "bonsoir" ) + "! Vous êtes venu pour livrer ma commande? C'était une Baguette Magique...";
 		next;
 		mes "[Baisulist]";
 		mes "Vous êtes sûr que c'est ce que j'ai commandé? Je veux dire, si elle n'est pas parfaitement neuve, vous n'aurez qu'à la reprendre!";
@@ -1235,7 +1235,7 @@ ein_in01,24,41,5	script	Mitmayer#moc	726,{
 				mes "[Mitmayer]";
 				mes "5. Laquelle de ces statistiques affecte la réussite des forges?";
 				next;
-				if (select("STR :DEX:AGI :VIT ") == 2)
+				if (select("Force:Dextérité:Agilité:Vitalité") == 2)
 					set .@blackss_te,.@blackss_te+20;
 				break;
 			}

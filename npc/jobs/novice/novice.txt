@@ -62,7 +62,7 @@ new_1-1,144,107,2	script	Garde#nv2	105,{
 // Receptionist
 new_1-2,100,29,4	script	Réceptionniste#nv1	86,{
 	mes "[Réceptionniste]";
-	mes "Bonjour, vous semblez être nouveau ici.";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", vous semblez être nouveau ici.";
 	mes "Quel est votre nom?";
 	next;
 	input .@charname$;
@@ -218,7 +218,7 @@ new_1-1,53,114,4	script	Shion#nv1	727,{
 		mes "^666666*Soupire...*^000000";
 		next;
 		mes "[Shion]";
-		mes "Hey, quand tu entreras dans le Camp d'Entraînement, tu apprendras toutes sortes de choses qui te seront utiles pour jouer. Tu auras également la chance d'obtenir des Zénys et d'autres récompenses.";
+		mes "Hé, quand tu entreras dans le Camp d'Entraînement, tu apprendras toutes sortes de choses qui te seront utiles pour jouer. Tu auras également la chance d'obtenir des Zénys et d'autres récompenses.";
 		next;
 		mes "[Shion]";
 		mes "Tu peux aussi gagner de l'expérience de cette manière!";
@@ -231,7 +231,7 @@ new_1-1,53,114,4	script	Shion#nv1	727,{
 	}
 	else {
 		mes "[Shion]";
-		mes "Bonjour bonjour~";
+		mes ( isday() ? "Bonjour bonjour" : "Bonsoir bonsoir" ) + "~";
 		mes "Bienvenue au Camp d'Entraînement des Novices!";
 		next;
 		mes "[Shion]";
@@ -336,7 +336,7 @@ new_1-2,99,105,3	script	Instructeur (Interface)::Interface Instructor#nv1	751,{
 	}
 	else if (nov_get_item02 < 10) {
 		mes "[Kris]";
-		mes "Bonjour! Puis-je voir ton papier d'admission à l'entraînement?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + "! Puis-je voir ton papier d'admission à l'entraînement?";
 		next;
 		if (NEW_MES_FLAG0) {
 			mes "[Kris]";
@@ -690,7 +690,7 @@ new_1-2,83,111,3	script	Instructeur (Compétence)::Skill Tutor#nv	753,{
 			percentheal -50,0;
 			next;
 			mes "[Cecil]";
-			mes "Les compétences actives, comme Premiers Soins, ont besoin d'une certaine quantité de SP pour fonctionner. La compétence Premiers Soins est très utile pour les novices: elle redonne quelques HP.";
+			mes "Les compétences actives, comme Premiers Soins, ont besoin d'une certaine quantité de Points d'Énergie pour fonctionner. La compétence Premiers Soins est très utile pour les novices: elle redonne quelques Points de Vie.";
 			next;
 			mes "[Cecil]";
 			mes "Tu as été un bon élève, laisse-moi te récompenser!";
@@ -1405,13 +1405,13 @@ new_1-2,161,182,5	script	Instructeur#nv	92,{
 			mes "Quand la barre de Niveau de Base ou de Niveau de Métier atteint 100, tu gagnes un niveau supplémentaire, et la barre retombe à zéro.";
 			next;
 			mes "[Edwin]";
-			mes "HP signifie 'health points' (points de vie). Quand tes HP tombent à 0, tu meurs. Tu peux soit retourner à ton point de sauvegarde, soit attendre que quelqu'un te ressuscite.";
+			mes "PV signifie 'Points de Vie'. Quand tes Points de Vie tombent à 0, tu meurs. Tu peux soit retourner à ton point de sauvegarde, soit attendre que quelqu'un te ressuscite.";
 			next;
 			mes "[Edwin]";
 			mes "Si tu meurs dans un donjon ou en dehors de villes, tu auras une ^FF0000pénalité de -1 % d'EXP^000000, donc, fais bien attention.";
 			next;
 			mes "[Edwin]";
-			mes "SP signifie 'spell points' (points de sorts). Quand tu auras changé de classe, tu apprendras les compétences spécifiques de cette classe, qui ont besoin de SP pour être utilisées. L'instructeur spécialisé sur les compétences pourra t'en apprendre plus.";
+			mes "PE signifie 'Points d'Énergie'. Quand tu auras changé de classe, tu apprendras les compétences spécifiques de cette classe, qui ont besoin de Points d'Énergie pour être utilisées. L'instructeur spécialisé sur les compétences pourra t'en apprendre plus.";
 			next;
 			mes "[Edwin]";
 			mes "Si tu veux vérifier combien d'objets tu peux encore porter, regarde en bas à gauche de la fenêtre des Informations de Base.";
@@ -1420,7 +1420,7 @@ new_1-2,161,182,5	script	Instructeur#nv	92,{
 			mes "Le poids des objets que tu portes sur toi est indiqué à côté de la capacité maximum que tu peux porter.";
 			next;
 			mes "[Edwin]";
-			mes "Si tu transportes plus de 50% de ta capacité maximum, tes HP et SP ne seront plus régénérés naturellement.";
+			mes "Si tu transportes plus de 50% de ta capacité maximum, tes Points de Vie et d'Énergie ne seront plus régénérés naturellement.";
 			next;
 			mes "[Edwin]";
 			mes "Le chiffre à côté de la limite de poids montre la somme d'argent que tu possèdes. Pour information, la monnaie de Rune-Midgard est le Zény.";
@@ -1539,37 +1539,37 @@ new_1-2,182,182,3	script	Instructeur (Stats)	754,{
 		case 1:
 			mes "[Jare Riotte]";
 			mes "Bien, laisse-moi t'expliquer la Force en premier.";
-			mes "La ^4D4DFFForce (STR)^000000 augmente les ^4D4DFFdommages des attaques physique (ATK) ^000000 et ta ^4D4DFF capacité à porter des objets^000000.";
+			mes "La ^4D4DFFForce^000000 augmente les ^4D4DFFdommages des Attaques Physique^000000 et ta ^4D4DFF capacité à porter des objets^000000.";
 			next;
 			mes "[Jare Riotte]";
-			mes "1 STR augmente tes dommages d'attaques physiques d'1 point. Une certaine quantité de bonus d'attaque est donné quand la STR atteint un multiple de 10.";
+			mes "1 point de Force augmente tes dommages d'Attaques physiques d'1 point. Une certaine quantité de bonus d'Attaque est donné quand la Force atteint un multiple de 10.";
 			next;
 			mes "[Jare Riotte]";
-			mes "La façon dont le bonus d'attaque est calculé est la suivante: on prend la valeur totale de la force, on enlève le dernier chiffre, et prend le carré du nombre restant.";
+			mes "La façon dont le bonus d'Attaque est calculé est la suivante: on prend la valeur totale de la Force, on enlève le dernier chiffre, et prend le carré du nombre restant.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Disons que ta force est affichée comme suit: '48 + 1.' Ce qui fait un total de 49 de force. Quand on enlève le dernier numéro, '9,' il nous reste '4.' 4 au carré égal 16.";
+			mes "Disons que ta Force est affichée comme suit: '48 + 1.' Ce qui fait un total de 49 de Force. Quand on enlève le dernier numéro, '9,' il nous reste '4.' 4 au carré égal 16.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Le bonus d'attaque sera donc de 16. Maintenant, si tu as un total de 50 STR, le bonus d'attaque sera de 25. Et si ta STR est de 100, ton bonus d'attaque sera de 100.";
+			mes "Le bonus d'Attaque sera donc de 16. Maintenant, si tu as un total de 50 en Force, le bonus d'Attaque sera de 25. Et si ta Force est de 100, ton bonus d'Attaque sera de 100.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Bien, maintenant voyons plus en détails l'Agilité (AGI). L'agilité influe sur ton Taux d'Esquive, et ta vitesse d'attaque. Plus ton Taux d'Esquive est élevé, meilleures sont tes chances d'éviter une attaque adverse.";
+			mes "Bien, maintenant voyons plus en détails l'Agilité. L'Agilité influe sur ton Taux d'Esquive, et ta Vitesse d'Attaque. Plus ton Taux d'Esquive est élevé, meilleures sont tes chances d'éviter une Attaque adverse.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Ton Taux d'Esquive est égal à ton niveau de base, auquel on ajoute ton agilité.";
+			mes "Ton Taux d'Esquive est égal à ton Niveau de Base, auquel on ajoute ton Agilité.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Donc, si tu as 40 d'agilité, et un niveau de base de 30, ton Taux d'Esquive sera de 70. C'est aussi simple que ça!";
+			mes "Donc, si tu as 40 d'Agilité, et un Niveau de Base de 30, ton Taux d'Esquive sera de 70. C'est aussi simple que ça!";
 			next;
 			mes "[Jare Riotte]";
-			mes "Au fait, l'AGI augmente uniquement le Taux d'Esquive. Pour l'Esquive Parfaite un autre facteur entre en compte, c'est la chance (LUK), mais nous en discuterons plus tard.";
+			mes "Au fait, l'Agilité augmente uniquement le Taux d'Esquive. Pour l'Esquive Parfaite un autre facteur entre en compte, c'est la Chance, mais nous en discuterons plus tard.";
 			next;
 			mes "[Jare Riotte]";
-			mes "L'autre bénéfice d'augmenter l'AGI, est que ta vitesse d'attaque (ASPD) sera aussi augmentée, ce qui signifie que le temps entre chaque attaque physique sera réduit.";
+			mes "L'autre bénéfice d'augmenter l'Agilité, est que ta Vitesse d'Attaque sera aussi augmentée, ce qui signifie que le temps entre chaque Attaque Physique sera réduit.";
 			next;
 			mes "[Jare Riotte]";
-			mes "L'ASPD, diffère d'une classe à l'autre. Ne l'oublie pas.";
+			mes "La Vitesse d'Attaque varie d'une classe à l'autre. Ne l'oublie pas.";
 			next;
 			mes "[Jare Riotte]";
 			mes "^666666*Whew!*^000000";
@@ -1578,34 +1578,34 @@ new_1-2,182,182,3	script	Instructeur (Stats)	754,{
 			break;
 		case 2:
 			mes "[Jare Riotte]";
-			mes "Notre prochain sujet portera sur la vitalité (VIT) et l'intelligence (INT).";
+			mes "Notre prochain sujet portera sur la Vitalité et l'Intelligence.";
 			next;
 			mes "[Jare Riotte]";
-			mes "La ^4D4DFFVitalité^000000 influe sur le ^4D4DFFmaximum de HP, la quantité de HP restaurés, et la défense^000000. La quantité de HP augmente en fonction de la VIT et diffère d'une classe à l'autre.";
+			mes "La ^4D4DFFVitalité^000000 influe sur le ^4D4DFFmaximum de Points de Vie, la quantité de Points de Vie restaurés, et la Défense^000000. La quantité de Points de Vie augmente en fonction de la Vitalité et diffère d'une classe à l'autre.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Plus que toutes les autres, c'est la classe Épéiste qui bénéficie de la plus grande augmentation de HP.";
+			mes "Plus que toutes les autres, c'est la classe Épéiste qui bénéficie de la plus grande augmentation de Points de Vie.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Voyons la défense maintenant. Sur ta fenêtre de stats, la défense est affichée en tant que DEF. Deux valeurs sont montrées, et le second chiffre reflète la défense reçue par l'ajout de VIT.";
+			mes "Voyons la Défense maintenant. Sur ta fenêtre de stats, la Défense est affichée en tant que DEF. Deux valeurs sont montrées, et le second chiffre reflète la Défense ajoutée par la Vitalité.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Le premier chiffre, lui, affiche la défense calculée à partir de tes équipements.";
+			mes "Le premier chiffre, lui, affiche la Défense calculée à partir de tes équipements.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Les équipements que tu portes réduisent un certain pourcentage des dommages reçus, là où la VIT en réduit une certaine quantité. C'est pourquoi la défense est affichée avec deux chiffres.";
+			mes "Les équipements que tu portes réduisent un certain pourcentage des dommages reçus, là où la Vitalité en réduit une certaine quantité. C'est pourquoi la Défense est affichée avec deux chiffres.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Le prochain sujet est l'intelligence (INT).";
+			mes "Le prochain sujet est l'Intelligence.";
 			next;
 			mes "[Jare Riotte]";
-			mes "L'INT influe sur ^4D4DFFla quantité maximum de SP^000000, ^4D4DFFla restauration de SP^000000, les ^4D4DFF dommages des attaques magiques (MATK)^000000 et la ^4D4DFFdéfense contre les attaques magiques (MDEF)^000000.";
+			mes "L'Intelligence influe sur ^4D4DFFla quantité maximum de Points d'Énergie^000000, ^4D4DFFla restauration de l'Énergie^000000, les ^4D4DFFdommages des Attaques Magiques^000000 et la ^4D4DFFDéfense contre les Attaques Magiques^000000.";
 			next;
 			mes "[Jare Riotte]";
-			mes "La quantité de SP et la MATK augmentent de 1 par point d'intelligence. Le montant varie aussi selon la classe, exactement comme la VIT, ce qui signifie que certaines classes auront naturellement plus d'INT que d'autres.";
+			mes "La quantité de Points d'Énergie et l'Attaque Magique augmentent de 1 par point d'Intelligence. Le montant varie aussi selon la classe, exactement comme la Vitalité, ce qui signifie que certaines classes auront naturellement plus d'Intelligence que d'autres.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Comme la DEF, la défense magique (MDEF) montre deux valeurs différentes. La MDEF apportée par l'INT est la seconde valeur affichée.";
+			mes "Comme la Défense, la Défense Magique comprend deux valeurs différentes. La Défense Magique apportée par l'Intelligence est la seconde valeur affichée.";
 			next;
 			mes "[Jare Riotte]";
 			mes "Pour étudier la manipulation des éléments naturels, tu auras besoin d'Intelligence en premier lieu. C'est la raison pour laquelle les Sages et les Sorciers en font une priorité.";
@@ -1613,50 +1613,50 @@ new_1-2,182,182,3	script	Instructeur (Stats)	754,{
 			break;
 		case 3:
 			mes "[Jare Riotte]";
-			mes "Notre dernier sujet portera sur la Dextérité (DEX) et la chance (LUK).";
+			mes "Notre dernier sujet portera sur la Dextérité et la Chance.";
 			next;
 			mes "[Jare Riotte]";
-			mes "La dextérité affecte principalement la précision, la vitesse d'attaque(ASPD) et dans une moindre mesure, la force.";
+			mes "La Dextérité affecte principalement la précision, la Vitesse d'Attaque et dans une moindre mesure, la Force.";
 			next;
 			mes "[Jare Riotte]";
 			mes "Laisse-moi t'expliquer...";
-			mes "Si tu as une DEX basse, la différence entre les dégâts minimaux et maximaux que tu peux infliger sera énorme. Les dommages de tes attaques seront instables.";
+			mes "Si tu as une Dextérité basse, la différence entre les dégâts minimaux et maximaux que tu peux infliger sera énorme. Les dommages de tes Attaques seront instables.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Si tu utilises un ^4D4DFFArc^000000 en tant qu'arme principale, ta puissance sera basée sur la ^4D4DFFDEX^000000. Donc, les Archers devraient plutôt augmenter leur DEX avant tout.";
+			mes "Si tu utilises un ^4D4DFFArc^000000 en tant qu'arme principale, ta puissance sera basée sur la ^4D4DFFDextérité^000000. Donc, les Archers devraient augmenter leur Dextérité avant tout.";
 			next;
 			mes "[Jare Riotte]";
-			mes "La quantité de DEX que tu as influe aussi sur la précision de tes attaques. La précision des attaques est obtenue par l'ajout de la DEX au niveau de Base.";
+			mes "La quantité de Dextérité que tu as influe aussi sur la précision de tes Attaques. La précision des Attaques est obtenue par l'ajout de la Dextérité au Niveau de Base.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Par exemple, si tu as un niveau de Base de 40, et une DEX de 20, la précision sera de 60.";
+			mes "Par exemple, si tu as un Niveau de Base de 40, et une Dextérité de 20, la précision sera de 60.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Enfin, la DEX réduit aussi le temps d'incantation des sorts et des compétences. Avoir de la DEX peut donc s'avérer utile pour la classe des Magiciens.";
+			mes "Enfin, la Dextérité réduit aussi le temps d'incantation des sorts et des compétences. Avoir de la Dextérité peut donc s'avérer utile pour la classe des Magiciens.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Maintenant, laisse-moi te parler de la LUK.";
+			mes "Maintenant, laisse-moi te parler de la Chance.";
 			next;
 			mes "[Jare Riotte]";
-			mes "La chance (LUK) augmente les chances de faire une attaque critique. Elle augmente également l'esquive, et ajoute des dégâts sur les monstres.";
+			mes "La Chance augmente les chances de faire une Attaque critique. Elle augmente également l'Esquive, et ajoute des dégâts sur les monstres.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Pour les attaques critiques, la valeur de départ est de 1 pour tout le monde. Celle-ci augmente de ^4d4dff 1^000000 tous les ^4d4dff3 points de LUK^000000.";
+			mes "Pour les attaques critiques, la valeur de départ est de 1 pour tout le monde. Celle-ci augmente de ^4d4dff1^000000 tous les ^4d4dff3 points de Chance^000000.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Avec un minimum de LUK, les chances d'infliger un ^3355FFcoup critique^000000 augmentent. Les attaques critiques sont très utiles, car elles percent la défense de l'adversaire.";
+			mes "Avec un minimum de Chance, les Chances d'infliger un ^3355FFCoup Critique^000000 augmentent. Les Attaques critiques sont très utiles, car elles percent la Défense de l'adversaire.";
 			next;
 			mes "[Jare Riotte]";
-			mes "On peut remarquer une attaque critique quand une attaque a infligé plus de dommages que d'habitude, et que la valeur des dégâts est affichée avec un effet d'explosion rouge.";
+			mes "On peut remarquer une Attaque Critique quand une Attaque a infligé plus de dommages que d'habitude, et que la valeur des dégâts est affichée avec un effet d'explosion rouge.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Tous les 10 points de LUK, l'Esquive Parfaite augmente de 1 point. L'Esquive Parfaite est une deuxième esquive. Quand l'Esquive Parfaite entre en action, le mot '^FF7F00Chanceux^000000' apparaîtra au-dessus de ta tête.";
+			mes "Tous les 10 points de Chance, l'Esquive Parfaite augmente de 1 point. L'Esquive Parfaite est une deuxième Esquive. Quand l'Esquive Parfaite entre en action, le mot '^FF7F00Chanceux^000000' apparaîtra au-dessus de ta tête.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Bien que similaire à ton esquive classique, l'Esquive Parfaite est un facteur séparé et calculé différemment.";
+			mes "Bien que similaire à ton Esquive classique, l'Esquive Parfaite est un facteur séparé et calculé différemment.";
 			next;
 			mes "[Jare Riotte]";
-			mes "Hum, je peux dire qu'avoir de la chance est une bonne chose, mais ce n'est pas une statistique primordiale.";
+			mes "Hum, je peux dire qu'avoir de la Chance est une bonne chose, mais ce n'est pas une statistique primordiale.";
 			next;
 			break;
 		case 4:
@@ -1692,13 +1692,13 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 			mes "Voyez-vous l'icône Compétences de Base? Il se trouve tout en haut de votre fenêtre de compétences. Cliquez sur le bouton 'Up' à côté de l'icône pour ajouter un Point de Compétence aux Compétences de Bases.";
 			next;
 			mes "[Leo Handerson]";
-			mes "Vous verrez le mot 'Passive' à droite de l'icône des Compétences de Base. Cela signifie que la compétence est passive, et ne consomme aucun SP.";
+			mes "Vous verrez le mot 'Passive' à droite de l'icône des Compétences de Base. Cela signifie que la compétence est passive, et ne consomme aucun Point d'Énergie.";
 			next;
 			mes "[Leo Handerson]";
 			mes "Maintenant, faites un clic droit sur l'icône des Compétences de Base. Vous pourrez alors lire un bref résumé de la compétence.";
 			next;
 			mes "[Leo Handerson]";
-			mes "Les compétences actives, contrairement aux compétences passives, ont besoin de SP pour être utilisées.";
+			mes "Les compétences actives, contrairement aux compétences passives, ont besoin de Points d'Énergie pour être utilisées.";
 			next;
 			mes "[Leo Handerson]";
 			mes "Vous pouvez utiliser les compétences actives en double cliquant sur son icône dans la fenêtre de compétence.";
@@ -1707,7 +1707,7 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 			mes "Vous pouvez aussi faire glisser une icône de votre fenêtre de compétence, jusqu'à votre barre de raccourcis ('^3355FFF12^000000') pour assigner un raccourci à cette compétence.";
 			next;
 			mes "[Leo Handerson]";
-			mes "La quantité de SP nécessaire pour utiliser une compétence active est affichée à droite de l'icône de la compétence.";
+			mes "La quantité de Points d'Énergie nécessaire pour utiliser une compétence active est affichée à droite de l'icône de la compétence.";
 			next;
 			mes "[Leo Handerson]";
 			mes "Généralement, les compétences passives sont des compétences liées à l'entraînement physique ou psychique. Les techniques spéciales, propres à chaque classes sont des compétences actives.";
@@ -1766,7 +1766,7 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 					mes "Le système de groupe permet d'organiser un petit groupe de personnes afin de jouer en coopération, ou simplement pour s'amuser ensemble.";
 					next;
 					mes "[Leo Handerson]";
-					mes "Vous pouvez créer un groupe en tapant la commande: ^4F4FFF//organize ''Nom du groupe''^000000 dans votre fenêtre de discussion.";
+					mes "Vous pouvez créer un groupe en tapant la commande: ^4F4FFF//organize \"Nom du groupe\"^000000 dans votre fenêtre de discussion.";
 					next;
 					mes "[Leo Handerson]";
 					mes "Bien sûr, vous devez avoir appris les ^4d4dffCompétences de Base^000000 au niveau 7 ou plus pour utiliser le système de groupe.";
@@ -1805,7 +1805,7 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 					mes "En tout cas, il vous est possible d'utiliser votre ^4d4dffstock personnel Kafra^000000 après avoir appris les ^4D4DFF compétences de base^000000 au niveau 6 ou plus.";
 					next;
 					mes "[Leo Handerson]";
-					mes "Quand vous porterez trop d'objets pour vous, votre poids sera trop lourd et vous ne serez plus capable de régénérer vos HP et SP en vous reposant, ou même de vous défendre contre les monstres! Donc rangez ce dont vous n'avez pas besoin dans le stock Kafra.";
+					mes "Quand vous porterez trop d'objets pour vous, votre poids sera trop lourd et vous ne serez plus capable de régénérer vos Points de Vie et d'Énergie en vous reposant, ou même de vous défendre contre les monstres! Donc rangez ce dont vous n'avez pas besoin dans le stock Kafra.";
 					next;
 					break;
 				case 5:
@@ -1865,7 +1865,7 @@ new_1-2,121,101,2	script	Guide#nv1	105,{
 	mes "Chaque fois que vous visitez une ville pour la première fois, nous vous recommandons de nous demander votre chemin.";
 	next;
 	mes "[Guide Soldat]";
-	mes "Si vous désirez vous renseigner sur les classes, allez parler aux différents instructeurs aux alentours dans le camps d'entraînement. Bonne journée.";
+	mes "Si vous désirez vous renseigner sur les classes, allez parler aux différents instructeurs aux alentours dans le camps d'entraînement. Bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 	close;
 }
 
@@ -1991,10 +1991,10 @@ new_1-2,17,182,5	script	Aide#nv	84,{
 					mes "Par conséquent, tu reçois un certain pourcentage de point d'expérience en fonction du pourcentage de dégâts causés sur le monstre, comparé à son total de point de vie.";
 					next;
 					mes "[Elmeen]";
-					mes "Prenons une personne nommée 'Z.' Z fait 65 de dommage à un monstre qui a au total 100 total HP et donnant 1000 points d'expérience en mourant. Donc, Z recevra 650 points d'expérience.";
+					mes "Prenons une personne nommée 'Z.' Z fait 65 de dommage à un monstre qui a au total 100 Points de Vie et donnant 1000 points d'expérience en mourant. Donc, Z recevra 650 points d'expérience.";
 					next;
 					mes "[Elmeen]";
-					mes "Bien que cette règle s'applique dans la plupart des cas, si deux personnes infligent 65 dégâts sur le même monstre, l'expérience qu'ils recevront chacun peut différer, en fonction des HP restants du monstre.";
+					mes "Bien que cette règle s'applique dans la plupart des cas, si deux personnes infligent 65 dégâts sur le même monstre, l'expérience qu'ils recevront chacun peut différer, en fonction des Points de Vie restants du monstre.";
 					next;
 					mes "[Elmeen]";
 					mes "Par exemple, quelqu'un fait des dégâts à un monstre que tu étais déjà en train de frapper, et il fait le même montant que toi.";
@@ -2087,10 +2087,10 @@ new_1-2,17,182,5	script	Aide#nv	84,{
 				mes "Par conséquent, tu reçois un certain pourcentage de point d'expérience en fonction du pourcentage de dégâts causés sur le monstre, comparé à son total de point de vie.";
 				next;
 				mes "[Elmeen]";
-				mes "Prenons une personne nommée 'Z.' Z fait 65 de dommage à un monstre qui a au total 100 total HP et donnant 1000 points d'expérience en mourant. Donc, Z recevra 650 points d'expérience.";
+				mes "Prenons une personne nommée 'Z.' Z fait 65 de dommages à un monstre qui a au total 100 Points de Vie et donnant 1000 points d'expérience en mourant. Donc, Z recevra 650 points d'expérience.";
 				next;
 				mes "[Elmeen]";
-				mes "Bien que cette règle s'applique dans la plupart des cas, si deux personnes infligent 65 dégâts sur le même monstre, l'expérience qu'ils recevront chacun peut différer, en fonction des HP restants du monstre.";
+				mes "Bien que cette règle s'applique dans la plupart des cas, si deux personnes infligent 65 dégâts sur le même monstre, l'expérience qu'ils recevront chacun peut différer, en fonction des Points de Vie restants du monstre.";
 				next;
 				mes "[Elmeen]";
 				mes "Par exemple, quelqu'un fait des dégâts à un monstre que tu étais déjà en train de frapper, et il fait le même montant que toi.";
@@ -2386,8 +2386,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 	}
 	if (nov_3_swordman == 20) {
 		mes "[Hanson]";
-		mes "Bonjour,";
-		mes "^A62A2A" + strcharinfo(0) + "'^000000.";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", ^A62A2A" + strcharinfo(0) + "'^000000.";
 		mes "Tu as fait un sacré effort pour venir jusqu'ici.";
 		next;
 		mes "[Hanson]";
@@ -3545,7 +3544,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					mes "La seule faiblesse des Épéistes vient du fait qu'ils ne peuvent pas utiliser de magie. Cependant, ils peuvent compenser ce désavantage en utilisant des armes élémentaires.";
 					next;
 					mes "[Bruce]";
-					mes "L'une des grandes forces des Épéistes est qu'ils ont une énorme quantité d'HP, si bien qu'ils peuvent résister plus longtemps aux coups des ennemis.";
+					mes "L'une des grandes forces des Épéistes est qu'ils ont une énorme quantité de Points de Vie, si bien qu'ils peuvent résister plus longtemps aux coups des ennemis.";
 					next;
 					mes "[Bruce]";
 					mes "Après avoir appris quelques attaques puissantes, les Épéistes deviennent imbattables aux combat de mêlée.";
@@ -3584,7 +3583,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					mes "En dépit de leur physique moyen, les archers possèdent des attaques précises et d'une grande portée. Ça les rend capables d'attaquer et de tuer des monstres à distance et en sécurité.";
 					next;
 					mes "[Bruce]";
-					mes "Dans le monde de Ragnarök, les archers ont relativement peu d'HP, mais la portée de leurs attaques les rends capable de tuer leurs ennemis avant que ceux-ci ne soient assez près pour les attaquer.";
+					mes "Dans le monde de Ragnarök, les archers ont relativement peu de Points de Vie, mais la portée de leurs Attaques les rends capable de tuer leurs ennemis avant que ceux-ci ne soient assez près pour les attaquer.";
 					next;
 					mes "[Bruce]";
 					mes "Ils pourront par la suite choisir de devenir ^8E2323Chasseur^000000 ou ^8E2323Barde^000000 pour les hommes, et ^8E2323Danseuse^000000 pour les femmes.";
@@ -3661,7 +3660,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 			mes "Après toutes ces épreuves, te voilà enfin au bout de ton entraînement.";
 			next;
 			mes "[Bruce]";
-			mes "Bonjour, ^A62A2A" + strcharinfo(0) + "'^000000, je suis enchanté de te connaître.";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", ^A62A2A" + strcharinfo(0) + "'^000000, je suis enchanté de te connaître.";
 			mes "Je suis Bruce, du Royaume de Rune-Midgard.";
 			next;
 			mes "[Bruce]";
@@ -3686,7 +3685,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					mes "La seule faiblesse des Épéistes vient du fait qu'ils ne peuvent pas utiliser de magie. Cependant, ils peuvent compenser ce désavantage en utilisant des armes élémentaires.";
 					next;
 					mes "[Bruce]";
-					mes "L'une des grandes forces des Épéistes est qu'ils ont une énorme quantité d'HP, si bien qu'ils peuvent résister plus longtemps aux coups des ennemis.";
+					mes "L'une des grandes forces des Épéistes est qu'ils ont une énorme quantité de Points de Vie, si bien qu'ils peuvent résister plus longtemps aux coups des ennemis.";
 					next;
 					mes "[Bruce]";
 					mes "Après avoir appris quelques attaques puissantes, les Épéistes deviennent imbattables aux combat de mêlée.";
@@ -3725,7 +3724,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					mes "En dépit de leur physique moyen, les archers possèdent des attaques précises et d'une grande portée. Ça les rend capables d'attaquer et de tuer des monstres à distance et en sécurité.";
 					next;
 					mes "[Bruce]";
-					mes "Dans le monde de Ragnarök, les archers ont relativement peu d'HP, mais la portée de leurs attaques les rends capable de tuer leurs ennemis avant que ceux-ci ne soient assez près pour les attaquer.";
+					mes "Dans le monde de Ragnarök, les archers ont relativement peu de Points de Vie, mais la portée de leurs attaques les rends capable de tuer leurs ennemis avant que ceux-ci ne soient assez près pour les attaquer.";
 					next;
 					mes "[Bruce]";
 					mes "Ils pourront par la suite choisir de devenir ^8E2323Chasseur^000000 ou ^8E2323Barde^000000 pour les hommes, et ^8E2323Danseuse^000000 pour les femmes.";

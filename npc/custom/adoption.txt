@@ -128,7 +128,7 @@ A_Already:
 	close;
 A_YouBaby:
 	emotion 2;
-	mes "Dis BONJOUR à tes parents!";
+	mes "Dis " + ( isday() ? "BONJOUR" : "BONSOIR" ) + " à tes parents!";
 	if (getskilllv(408)<=0 || getskilllv(409)<=0) mes "Au fait, le Professeur veut te voir.";
 	close;
 }
@@ -488,7 +488,7 @@ function	script	AdoptReset	{
 prt_church,165,166,6	script	Professeur	97,{
 	mes "[Mario]";
 	if (Upper==2 && (getskilllv(408)<=0 || getskilllv(409)<=0)) goto L_Teach;
-	if (Upper==2) mes "Bonjour jeune bébé! Comment vas-tu?";
+	if (Upper==2) mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", jeune enfant! Comment vas-tu?";
 	if (Upper!=2) mes "Comment allez-vous?";
 	next;
 	menu "Super!",-,"Bien.",-,"Moyen...",-,"Vous avez une corde?",-;

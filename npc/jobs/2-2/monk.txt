@@ -34,7 +34,7 @@ prt_monk,59,247,1	script	Frère Portier::Guarding Monk#mk	120,6,2,{
 		mes "........";
 		next;
 		mes "[Tohobu]";
-		mes "C'est étrange... Je ne confonds jamais les gens d'habitude... Oh, eh bien... Passez une bonne journée.";
+		mes "C'est étrange... Je ne confonds jamais les gens d'habitude... Oh, eh bien... Passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 		close;
 	}
 	if (BaseJob == Job_Acolyte && MONK_Q == 0) {
@@ -267,7 +267,7 @@ OnTouch:
 
 monk_in,99,58,1	script	Frère Supérieur Moohae#m	60,{
 	mes "[Frère Supérieur Moohae]";
-	mes "Bonjour. Vous semblez être sur la voie de la pureté. Approchez. Que puis-je faire pour vous?";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + ". Vous semblez être sur la voie de la pureté. Approchez. Que puis-je faire pour vous?";
 	next;
 	if (SkillPoint) {
 		mes "[Frère Supérieur Moohae]";
@@ -459,7 +459,7 @@ monk_in,99,58,1	script	Frère Supérieur Moohae#m	60,{
 	}
 	else if (MONK_Q == 7) {
 		mes "[Frère Supérieur Moohae]";
-		mes "Bonjour. Vous êtes déjà de retour?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ". Vous êtes déjà de retour?";
 		next;
 		if (countitem(7053) > 4 && countitem(509) > 9 && countitem(508) > 9) {
 			mes "[Frère Supérieur Moohae]";
@@ -515,7 +515,7 @@ monk_in,99,58,1	script	Frère Supérieur Moohae#m	60,{
 	}
 	else if (MONK_Q == 9) {
 		mes "[Frère Supérieur Moohae]";
-		mes "Re-bonjour.";
+		mes "Re-" + ( isday() ? "bonjour" : "bonsoir" ) + ".";
 		next;
 		if (countitem(1027) > 4 && countitem(1025) > 19 && countitem(1042) > 9) {
 			mes "[Frère Supérieur Moohae]";
@@ -1679,7 +1679,7 @@ prt_monk,57,179,1	script	Boohae#mk	110,{
 	}
 	if (MONK_Q == 16) {
 		mes "[Boohae]";
-		mes "Re-bonjour. Alors, êtes vous prêt"+ ( sex ? "" : "e" ) +"? Vous n'aurez besoin de rien d'autre que de la force de vos jambes";
+		mes "Re-" + ( isday() ? "bonjour" : "bonsoir" ) + ". Alors, êtes vous prêt"+ ( sex ? "" : "e" ) +"? Vous n'aurez besoin de rien d'autre que de la force de vos jambes";
 		next;
 		mes "[Boohae]";
 		mes "Le but du marathon est de tester votre maîtrise de soi.";

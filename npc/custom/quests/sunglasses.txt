@@ -23,7 +23,7 @@
 alberta,88,193,5	script	Indic	73,{ // 'Commerçant de lunettes de soleil' c'est beaucoup trop long et ça ne colle pas avec le npc qui fournit seulement un renseignement. Je me suis donc permise de changer le nom du npc (Etna)
 	if(SG_QUEST1 == 1) goto L_SG_Q1_Done;
 	mes "[Indic]";
-	mes "Bonjour! Que puis-je faire pour vous?";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + "! Que puis-je faire pour vous?";
 	next;
 	menu "Il paraît que vous faites des ^0000FFLunettes de Soleil[1]^000000.",-,"Rien, désolé de vous avoir dérangé.",L_SG_No;
 
@@ -96,7 +96,7 @@ L_SG_No:
 moc_fild07,334,186,5	script	Maseph	702,{
 	if(SG_QUEST1 == 1) goto L_SG_2;
 	mes "[Maseph]";
-	mes "Belle journée, n'est-ce pas?";
+	mes "Belle "+ ( isday() ? "journée" : "soirée" ) +", n'est-ce pas?";
 	close;
 L_SG_2:
 	mes "[Maseph]";

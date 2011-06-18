@@ -709,7 +709,7 @@ prt_in,248,23,0	script	Femme de Chambre::Maid#sign2	111,{
 		mes "Je suis si fatiguée, même si je travaille moins ces temps-ci. Parfois, je me sens fatiguée sans raison apparente...";
 		next;
 		mes "[Elle]";
-		mes "Je devrais prendre une journée de congé et me reposer. Si j'avais quelque chose à boire, ce serait parfait...";
+		mes "Je devrais prendre une "+ ( isday() ? "journée" : "soirée" ) +" de congé et me reposer. Si j'avais quelque chose à boire, ce serait parfait...";
 // Je modifie un peu le code foireux qui suit [No Healing]
 		if (countitem(504) > 0) {
 			next;
@@ -755,7 +755,7 @@ prt_in,248,23,0	script	Femme de Chambre::Maid#sign2	111,{
 		emotion e_ho;
 		mes "[Elle]";
 		mes "La la la~";
-		mes "Oh, Bonjour.";
+		mes "Oh, " + ( isday() ? "bonjour" : "bonsoir" ) + ".";
 		mes "Ça faisait longtemps.";
 		mes "La la la~";
 		next;
@@ -780,7 +780,7 @@ prt_in,248,23,0	script	Femme de Chambre::Maid#sign2	111,{
 	}
 	else if (sign_q == 97) {
 		mes "[Elle]";
-		mes "Ah~ Bonjour!";
+		mes "Ah~ " + ( isday() ? "Bonjour" : "Bonsoir" ) + "!";
 		mes "Je suis heureuse de vous revoir~";
 		next;
 		mes "[Elle]";
@@ -1947,7 +1947,7 @@ aldeba_in,155,101,3	script	Sieur Jore#sign	805,7,7,{
 				next;
 				mes "[Sieur Jore]";
 				mes "...!";
-				mes "Oh, b-b-bonjour.";
+				mes "Oh, b-b-" + ( isday() ? "bonjour" : "bonsoir" ) + ".";
 				mes "Désolé mais je suis très occupé en ce moment. Oui, oui, vous pourriez revenir à 5 heures précises?";
 				next;
 				mes "[Sieur Jore]";
@@ -2155,7 +2155,7 @@ prt_maze02,14,183,4	script	Gordon#sign	51,{
 	if (sign_q < 18) {
 		emotion e_ho;
 		mes "[Gordon]";
-		mes "Bonjour, ma chérie. Qu'est-ce que tu as fait aujourd'hui?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", ma chérie. Qu'est-ce que tu as fait aujourd'hui?";
 		next;
 		donpcevent "Pleur#sign::OnHo";
 		mes "[Pleur]";
@@ -2335,7 +2335,7 @@ geffen_in,59,74,4	script	Jesqurienne#sign	803,{
 			next;
 			mes "[Jesqurienne]";
 			mes "Ahhhhhh~";
-			mes "Hein? Euh... Bonjour, "+ ( sex ? "joli jeune homme" : "jolie jeune femme" ) +"~";
+			mes "Hein? Euh... " + ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+ ( sex ? "joli jeune homme" : "jolie jeune femme" ) +"~";
 			mes "Je m'appelle Jesqurienne. Vous avez entendu parler de moi, n'est-ce pas? N'êtes-vous pas intimidé"+ ( sex ? "" : "e" ) +" de me voir en chair et en os?";
 			next;
 			switch(select("Je n'ai jamais entendu parler de vous.:Oh mon dieu, c'est Jesqurienne!!!")) {
@@ -4194,7 +4194,7 @@ alberta_in,154,171,5	script	Femme de Chambre::Maid#s10	758,{
 			}
 		case 44:
 			mes "[Seylin]";
-			mes "Bonjour~";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
 			mes "Oh, est-ce que vous avez changé d'avis? Êtes-vous prêt"+( sex ? "" : "e" )+" à m'aider? Je vous rendrai la pareille, bien sûr.";
 			next;
 			switch(select("Non.:Oui.")) {
@@ -4215,7 +4215,7 @@ alberta_in,154,171,5	script	Femme de Chambre::Maid#s10	758,{
 			}
 		case 45:
 			mes "[Seylin]";
-			mes "Bonjour~";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
 			mes "Alors, vous êtes-vous décidé"+( sex ? "" : "e" )+"? Je vous rendrai la pareille si vous décidez de m'aider.";
 			next;
 			switch(select("Hum, je dois encore y réfléchir.:D'accord.")) {
@@ -4627,7 +4627,7 @@ alberta_in,114,178,5	script	Majordome::Refined Steward	109,{
 	}
 	else if (sign_q == 41) {
 		mes "[Mahatra]";
-		mes "Bonjour. Hum? Est-ce que le maître vous a demandé de lui rendre un autre service?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ". Hum? Est-ce que le maître vous a demandé de lui rendre un autre service?";
 		next;
 		switch(select("Non.:Vous avez une autre tâche pour moi.")) {
 		case 1:
@@ -4682,7 +4682,7 @@ alberta,98,202,5	script	Garde::Guard#s10	105,{
 		mes "[Hurubu]";
 		mes "Bienvenue dans la Résidence Alchesh. Faites-le moi savoir si vous voulez vous entretenir avec le maître.";
 		next;
-		switch(select("Je voudrais voir M. Bakerlan.:Passez une bonne journée.")) {
+		switch(select("Je voudrais voir M. Bakerlan.:Passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".")) {
 		case 1:
 			mes "[Hurubu]";
 			mes "Ah, vous êtes venu"+ ( sex ? "" : "e" ) +" parler au maître? Il est là, donc il pourra certainement vous recevoir.";
@@ -4690,7 +4690,7 @@ alberta,98,202,5	script	Garde::Guard#s10	105,{
 		case 2:
 			mes "[Hurubu]";
 			mes "Ah...";
-			mes "Passez une bonne journée.";
+			mes "Passez une bonne "+ ( isday() ? "journée" : "soirée" ) +".";
 			close;
 		}
 	}
@@ -6785,7 +6785,7 @@ niflheim,313,70,4	script	Femme Attirante::Pleasant-Featured Lady#s	90,{
 	}
 	else if (sign_q == 84) {
 		mes "[Serin]";
-		mes "Bonjour, "+ ( sex ? "aventurier" : "aventurière" ) +". Comment allez-vous? Je suis surprise de vous trouver encore dans cette dangereuse ville.";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+ ( sex ? "aventurier" : "aventurière" ) +". Comment allez-vous? Je suis surprise de vous trouver encore dans cette dangereuse ville.";
 		next;
 		mes "[Serin]";
 		mes "Si vous explorez les environs, vous découvrirez que certains défunts ici sont différents. Allez leur parler, et voyez si vous pouvez leur être d'un certain secours.";
@@ -6803,7 +6803,7 @@ niflheim,313,70,4	script	Femme Attirante::Pleasant-Featured Lady#s	90,{
 	}
 	else if (sign_q < 92) {
 		mes "[Serin]";
-		mes "Bonjour, "+strcharinfo(0)+",";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+strcharinfo(0)+",";
 		mes "Je suis surprise que vous ayez réussi à survivre ici pendant tout ce temps. Rester en vie à Niflheim n'est pas une mince affaire pour "+ ( sex ? "un mortel" : "une mortelle" ) +"...";
 		close;
 	}
@@ -8512,7 +8512,7 @@ OnTouch:
 		mes "Vous devenez la clé qui ignore son maître.";
 		next;
 		mes "[Crayu]";
-		mes "Bonjour, "+ ( sex ? "aventurier" : "aventurière" ) +". Je sais que c'est très direct, mais que pensez-vous de Serin?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+ ( sex ? "aventurier" : "aventurière" ) +". Je sais que c'est très direct, mais que pensez-vous de Serin?";
 		next;
 		select("C'est quelqu'un de bien.:Elle a quelque chose de malsain!:Je ne sais pas quoi en penser.");
 		mes "[Crayu]";

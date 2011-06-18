@@ -38,7 +38,7 @@ turbo_room,124,86,0	shop	Marchande du Turbo Track::Turbo Track Merchant	90,501:-
 //This is the name on iRO as well. [Confirmed]
 turbo_room,99,120,4	script	Guide du Turbo Track::TBT_Guide#Broadcast	124,{
 	mes "[Guide du Turbo Track]";
-	mes "Bonjour~";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
 	mes "Puis-je vous renseigner à propos du Turbo Track? N'hésitez pas à demander!";
 	next;
 	while(1) {
@@ -315,7 +315,7 @@ turbo_room,93,117,5	script	Échange de Points::Point Exchange Helper	125,{
 	}
 	if (tt_point < 10) {
 		mes "[Échange de Points]";
-		mes "Bonjour, " + strcharinfo(0) + ".";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", " + strcharinfo(0) + ".";
 		mes "Vous avez un total de " + tt_point + " Points Turbo Track.";
 		next;
 		mes "[Échange de Points]";
@@ -342,7 +342,7 @@ turbo_room,93,117,5	script	Échange de Points::Point Exchange Helper	125,{
 	}
 	else {
 		mes "[Échange de Points]";
-		mes "Bonjour, " + strcharinfo(0) + ". Vous avez un total de " + tt_point + " Points Turbo Track. Voudriez-vous les échanger contre des objets?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", " + strcharinfo(0) + ". Vous avez un total de " + tt_point + " Points Turbo Track. Voudriez-vous les échanger contre des objets?";
 		next;
 		switch(select("Les échanger.:Annuler.")) {
 		case 1:
@@ -579,7 +579,7 @@ turbo_room,93,117,5	script	Échange de Points::Point Exchange Helper	125,{
 
 turbo_room,106,117,3	script	Responsable des Points::Point Manager#tt	833,{
 	mes "[Responsable des Points]";
-	mes "Bonjour. J'espère que vous appréciez le Turbo Track. En quoi puis-je vous aider?";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + ". J'espère que vous appréciez le Turbo Track. En quoi puis-je vous aider?";
 	next;
 // Bugfix: Ligne originale supprimée (pas de dialogue pour le case 3, cf plus bas): [No Healing]
 //	switch(select("Vérifier son nombre de Points:Convertir des Points:^660000Informations sur la Conversion^000000")) {
@@ -735,7 +735,7 @@ alde_gld,181,199,5	script	Responsable des Péco::Peco Peco Manager	845,{
 			else {
 				if (checkriding()) {
 					mes "[Responsable des Péco]";
-					mes "Oh, mais vous êtes déjà sur un Péco Péco! Vous ne pouvez pas en louer plusieurs. Bonne journée~";
+					mes "Oh, mais vous êtes déjà sur un Péco Péco! Vous ne pouvez pas en louer plusieurs. Bonne "+ ( isday() ? "journée" : "soirée" ) +"~";
 					close;
 				}
 				else {

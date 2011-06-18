@@ -29,7 +29,7 @@ geffen,178,72,3	script	Akkie#qsk_bs	726,{
 		}
 		else if (BLACK_SK == 8) {
 			mes "[Akkie]";
-			mes "Bonjour~";
+			mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
 			mes "Comment va la forge? J'apprécie que vous vous arrêtiez pour me saluer. ~";
 			next;
 			mes "[Akkie]";
@@ -40,8 +40,8 @@ geffen,178,72,3	script	Akkie#qsk_bs	726,{
 		if (JobLevel > 29) {
 			if (BLACK_SK == 0) {
 				mes "[Akkie]";
-				mes "Bonjour~";
-				mes "N'est-ce pas une belle journée? Parfait pour la chasse!";
+				mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
+				mes "N'est-ce pas une belle "+ ( isday() ? "journée" : "soirée" ) +"? Parfaite pour "+ ( isday() ? "la chasse" : "se détendre" ) +"!"; // Je change un peu là, parce que la chasse la nuit, bof (certains le font, mais bon...) [NoH]
 				next;
 				mes "[Akkie]";
 				mes "Hum, laissez-moi me présenter. Je m'appelle Akkie, je suis la représentante de la Guilde des Forgerons qui a été envoyée pour apprendre à forger de la Fausse Monnaie à nos membres.";
@@ -247,7 +247,7 @@ geffen,178,72,3	script	Akkie#qsk_bs	726,{
 				}
 				else {
 					mes "[Akkie]";
-					mes "Bonjour~";
+					mes ( isday() ? "Bonjour" : "Bonsoir" ) + "~";
 					mes "Comment va la forge? J'apprécie que vous vous arrêtiez pour me saluer. ~";
 					next;
 					mes "[Akkie]";
@@ -260,13 +260,13 @@ geffen,178,72,3	script	Akkie#qsk_bs	726,{
 		else {
 			mes "[Akkie]";
 			if (Upper == 1) {
-				mes "Bonjour, "+ strcharinfo(0) +". J'ai été envoyée par la Guilde des Forgerons pour apprendre une nouvelle technique à nos membres, mais votre niveau n'est pas encore assez élevé pour que je puisse déjà vous l'enseigner...";
+				mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", "+ strcharinfo(0) +". J'ai été envoyée par la Guilde des Forgerons pour apprendre une nouvelle technique à nos membres, mais votre niveau n'est pas encore assez élevé pour que je puisse déjà vous l'enseigner...";
 				next;
 				mes "[Akkie]";
 				mes "Continuez à pratiquer la forge, et une fois que vous serez prêt"+ ( sex ? "" : "e" ) +", je pourrai vous enseigner cette technique. Au revoir, et bonne chance!~";
 			}
 			else {
-				mes "Bonjour. Je m'appelle Akkie - je suis de la Guilde des Forgerons. Je suis ici pour enseigner une nouvelle technique aux Forgerons, mais on dirait que votre Niveau de Métier est encore trop bas...";
+				mes ( isday() ? "Bonjour" : "Bonsoir" ) + ". Je m'appelle Akkie - je suis de la Guilde des Forgerons. Je suis ici pour enseigner une nouvelle technique aux Forgerons, mais on dirait que votre Niveau de Métier est encore trop bas...";
 				next;
 				mes "[Akkie]";
 				mes "Je suis désolée, "+ strcharinfo(0) +", mais je ne pourrai vous l'apprendre que lorsque vous maîtriserez un peu mieux votre métier. Continuez à vous entraîner en attendant, d'accord?";
@@ -276,7 +276,7 @@ geffen,178,72,3	script	Akkie#qsk_bs	726,{
 	}
 	else {
 		mes "[Akkie]";
-		mes "Ah, quelle belle journée pour la forge! J'aurais envie d'aller derrière une magnifique cascade, d'emporter du matériel de haute qualité, et de me mettre à faire virevolter mon marteau!";
+		mes "Ah, quelle belle "+ ( isday() ? "journée" : "soirée" ) +" pour la forge! J'aurais envie d'aller derrière une magnifique cascade, d'emporter du matériel de haute qualité, et de me mettre à faire virevolter mon marteau!";
 		close;
 	}
 }
