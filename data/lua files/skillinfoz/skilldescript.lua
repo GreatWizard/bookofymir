@@ -3886,7 +3886,7 @@ SKILL_DESCRIPT = {
 		"Effet:^777777 Permet de lancer automatiquement des sorts en attaquant.",
 		"Le sage doit avoir appris les sorts en question. Ils coûteront les 2/3 de leur coût normal.^000000",
 		"[Nv 1]^777777  Choc Psychique niveau 3, 7% de chances^000000",
-,		"[Nv 2]^777777  Pluie Elémentale niveau 1, 9% de chances^000000",
+		"[Nv 2]^777777  Pluie Elémentale niveau 1, 9% de chances^000000",
 		"[Nv 3]^777777  Pluie Elémentale niveau 2, 11% de chances^000000",
 		"[Nv 4]^777777  Pluie Elémentale niveau 3, 13% de chances^000000",
 		"[Nv 5]^777777  Brûlure Psychique niveau 1, 15% de chances^000000",
@@ -8564,6 +8564,33 @@ SKILL_DESCRIPT = {
 		"Ô Douce Nuit",
 		"Effet:^777777 Permet de jouer un chant de Noël avec un Cristal Chantant.^000000",
 	},
+
+-- Pas officiel, mais utilisés avec certains objets
+
+	[SKID.NPC_DARKSTRIKE] = {
+
+	},
+
+	[SKID.CASH_BLESSING] = {
+
+	},
+
+	[SKID.CASH_INCAGI] = {
+
+	},
+	[SKID.CASH_ASSUMPTIO] = {
+
+	},
+
+	[SKID.NPC_INVINCIBLE] = {
+
+	},
+
+	[SKID.NPC_INVINCIBLEOFF] = {
+
+	},
+
+------------------------------------------------------
 
 	[SKID.ALL_BUYING_STORE] = {
 
