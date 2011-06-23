@@ -194,8 +194,7 @@ HOTKEY_2 = {
 	[33] = { EXE = MsgStrID.MSI_HK_PARTY_RECRUIT },
 	[34] = { EXE = MsgStrID.MSI_HK_PARTY_BOOKING_LIST },
 	[35] = { EXE = MsgStrID.MSI_HK_GROUND_CURSOR_ONOFF, KEY1 = 36, KEY2 = 18 },
-	[36] = { EXE = MsgStrID.MSI_HK_EXMACRO_SETUPWND },
-	[37] = { EXE = MsgStrID.MSI_HK_CASHSHOPWND }
+	[36] = { EXE = MsgStrID.MSI_HK_EXMACRO_SETUPWND }
 }
 HOTKEY_3 = {
 	[0] = { EXE = MsgStrID.MSI_HK_MACRO_1, KEY1 = 49, KEY2 = 18 },
@@ -239,7 +238,6 @@ BEHAVIOR_TO_WINDOWID = {
 	[125] = 25,
 	[157] = 30,
 	[191] = 36,
-	[184] = 37,
 }
 
 --Function #0
@@ -337,10 +335,10 @@ GetBehaviorOfHotKey = function(inKey1, inKey2)
 		key1,key2,des,exe = GetHotKey(tab, idx)
 		while exe ~= "" do
 			if exe == MsgStrID.MSI_HK_CHATMODE_ONOFF and key1 == inKey1 then
-				return idx + ((tab - 1) * 100)
+				return idx + size
 			end
 			if key1 == inKey1 and key2 == inKey2 then
-				return idx + ((tab - 1) * 100)
+				return idx + size
 			end
 		idx = idx + 1
 		key1,key2,des,exe = GetHotKey(tab, idx)

@@ -658,11 +658,6 @@ SKILL_INFO_LIST = {
 			{ SKID.PR_KYRIE,4 },
 			{ SKID.PR_MAGNIFICAT,3 }
 		},
-		NeedSkillList = {
-			[JOBID.JT_SUPERNOVICE2] = {
-				{ SKID.PR_SANCTUARY,7 }
-			}
-		}		
 	},
 
 	[SKID.PR_LEXDIVINA] = {
@@ -811,10 +806,10 @@ SKILL_INFO_LIST = {
 		SkillName = "Crocs Sismiques",
 		MaxLv = 5,
 		SpAmount = { 12, 14, 16, 18, 20 },
-		_NeedSkillList = {
-				{ SKID.MG_STONECURSE,1 }
-		},
 		NeedSkillList = {
+			[JOBID.JT_WIZARD] = {
+				{ SKID.MG_STONECURSE,1 }
+			},
 			[JOBID.JT_SAGE] = {
 				{ SKID.SA_SEISMICWEAPON,1 }
 			}
@@ -4376,7 +4371,7 @@ SKILL_INFO_LIST = {
 		SkillName = "Esprit du Faucheur",
 	},
 
-d	[SKID.SL_NINJA] = {
+	[SKID.SL_NINJA] = {
 		"SL_NINJA";
 		SkillName = "Esprit du Ninja",
 	},
@@ -4411,9 +4406,6 @@ d	[SKID.SL_NINJA] = {
 		SkillName = "Death Passive Attack",
 	},
 
-
-
-
 	[SKID.DE_PSPEED] = {
 		"DE_PSPEED";
 		SkillName = "Death Passive Speed",
@@ -4423,7 +4415,6 @@ d	[SKID.SL_NINJA] = {
 		"DE_PDEFENSE";
 		SkillName = "Death Passive Defense",
 	},
-
 
 	[SKID.DE_PCRITICAL] = {
 		"DE_PCRITICAL";
@@ -4882,15 +4873,6 @@ d	[SKID.SL_NINJA] = {
 		SkillName = "Plus une égratignure",
 	},
 
-
-
-
-
-
-
-
-
-
 	[SKID.GM_SANDMAN] = {
 		"GM_SANDMAN";
 		SkillName = "Bonne nuit mon chou",
@@ -4904,9 +4886,7 @@ d	[SKID.SL_NINJA] = {
 	[SKID.ALL_PARTYFLEE] = {
 		"ALL_PARTYFLEE";
 		SkillName = "Que souffle le Vent Sacré",
-
 	},
-
 
 	[SKID.ALL_ANGEL_PROTECT] = {
 		"ALL_ANGEL_PROTECT";
@@ -4937,7 +4917,7 @@ d	[SKID.SL_NINJA] = {
 
 	[SKID.NPC_DARKSTRIKE] = {
 		"NPC_DARKSTRIKE";
-		SkillName = "Brûlure_de_l'Âme",
+		SkillName = "Brûlure de l'Âme",
 	},
 
 	[SKID.CASH_BLESSING] = {
@@ -5315,7 +5295,6 @@ d	[SKID.SL_NINJA] = {
 		"GC_WEAPONBLOCKING";
 		SkillName = "Parade Martiale",
 		MaxLv = 5,
-
 		SpAmount = { 40, 36, 32, 28, 24 },
 		_NeedSkillList = {
 			{ SKID.AS_LEFT,5 }
@@ -5369,7 +5348,6 @@ d	[SKID.SL_NINJA] = {
 			{ SKID.AS_CLOAKING,3 }
 		}
 	},
-
 
 	[SKID.GC_PHANTOMMENACE] = {
 		"GC_PHANTOMMENACE";
@@ -6173,7 +6151,6 @@ d	[SKID.SL_NINJA] = {
 	[SKID.NC_ANALYZE] = {
 		"NC_ANALYZE";
 		SkillName = "Analyse des Données",
-
 		MaxLv = 3,
 		_NeedSkillList = {
 			{ SKID.NC_INFRAREDSCAN,1 }
@@ -6975,9 +6952,6 @@ d	[SKID.SL_NINJA] = {
 		SkillName = "Réverbération",
 		MaxLv = 5,
 		SpAmount = { 28, 32, 38, 42, 48 },
-
-
-
 		NeedSkillList = {
 			[JOBID.JT_MINSTREL] = {
 				{ SKID.BA_DISSONANCE,5 }
@@ -7807,7 +7781,6 @@ d	[SKID.SL_NINJA] = {
 		SpAmount = { 40, 45, 50, 55, 60 },
 		_NeedSkillList = {
 			{ SKID.GN_HELLS_PLANT,3 }
-
 		}
 	},
 
@@ -8228,10 +8201,7 @@ d	[SKID.SL_NINJA] = {
 		SkillName = "Transpercement",
 	},
 
-
-
 	[SKID.ML_PIERCE] = {
-
 		"ML_PIERCE";
 		SkillName = "Estoc",
 	},

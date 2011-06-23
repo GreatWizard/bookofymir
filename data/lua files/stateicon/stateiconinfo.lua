@@ -1,7 +1,6 @@
 COLOR_TITLE_BUFF = { 155, 202, 155 }
 COLOR_TITLE_DEBUFF = { 250, 100, 100 }
 COLOR_TITLE_TOGGLE = { 190, 190, 250 }
-COLOR_SYSTEM = { 255, 255, 0 }
 COLOR_TIME = { 255, 176, 98 }
 StateIconList = {}
 StateIconList[EFST_IDs.EFST_OVERTHRUSTMAX] = {
@@ -56,6 +55,14 @@ StateIconList[EFST_IDs.EFST_MANU_DEF] = {
 		{"%s", COLOR_TIME},
 		{"마누크 필드지역 몬스터에게 받는"},
 		{"물리, 마법 데미지 감소"}
+	}
+}
+StateIconList[EFST_IDs.EFST_ENERVATION] = {
+	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
+		{"Masquerade: Enervation", COLOR_TITLE_DEBUFF},
+		{"%s", COLOR_TIME},
+		{"Reduces ATK"},
+		{"Removes Spirit Spheres"}
 	}
 }
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
@@ -264,7 +271,7 @@ StateIconList[EFST_IDs.EFST_AUTOSPELL] = {
 		{"Auto Spell", COLOR_TITLE_BUFF},
 		{"%s", COLOR_TIME}, 
 		{"When physically attacking"},
-		{"the selected skill will automatically cast without casting time."}, 
+		{"the selected skill will automatically cast."}, 
 		{"SP consumed is 2/3 the regular amount"},
 		{"Skill will not cast without sufficient SP"}
 	}
@@ -628,6 +635,14 @@ StateIconList[EFST_IDs.EFST_MAXIMIZE] = {
 		{"Drains SP over time"}
 	}
 }
+StateIconList[EFST_IDs.EFST_LG_REFLECTDAMAGE] = {
+	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
+		{"Reflect Damage", COLOR_TITLE_BUFF}, 
+		{"%s", COLOR_TIME}, 
+		{"Applies damage received to all enemies in an area"}, 
+		{"Consumes SP every second"}
+	}
+}
 StateIconList[EFST_IDs.EFST_PROTECTSHIELD] = {
 	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
 		{"Chemical Protection (Shield)", COLOR_TITLE_BUFF}, 
@@ -665,13 +680,10 @@ StateIconList[EFST_IDs.EFST_MOVHASTE_HORSE] = {
 	}
 }
 StateIconList[EFST_IDs.EFST_CRESCENTELBOW] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
+	descript = {
 		{"Crescent Elbow", COLOR_TITLE_BUFF}, 
-		{"%s", COLOR_TIME}, 
 		{"Attempts to counter opponent's attack"}, 
-		{"Knocks back opponent and deals damage"}, 
-		{"You still take some of the damage"},
-		{"Does not affect boss monsters", COLOR_SYSTEM}
+		{"You still take some of the damage"}
 	}
 }
 StateIconList[EFST_IDs.EFST_SONG_OF_MANA] = {
@@ -730,7 +742,7 @@ StateIconList[EFST_IDs.EFST_EDP] = {
 		{"Enchant Deadly Poison", COLOR_TITLE_BUFF}, 
 		{"%s", COLOR_TIME}, 
 		{"Applies a deadly poison to weapon"}, 
-		{"Damage increase does not apply to boss monsters",COLOR_SYSTEM}
+		{"Damage increase does not apply to boss monsters"}
 	}
 }
 StateIconList[EFST_IDs.EFST_JOINTBEAT] = {
@@ -783,7 +795,7 @@ StateIconList[EFST_IDs.EFST_TRUESIGHT] = {
 StateIconList[EFST_IDs.EFST_CASH_PLUSONLYJOBEXP] = {
 	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
 		{"%s", COLOR_TIME},
-		{"Increases Job EXP acquired."}
+		{"Increases Job EXP acquired by 150%"}
 	}
 }
 StateIconList[EFST_IDs.EFST_ARMOR_PROPERTY] = {
@@ -857,7 +869,7 @@ StateIconList[EFST_IDs.EFST_RG_CCONFINE_M] = {
 		{"%s", COLOR_TIME}, 
 		{"Both Players cannot Move"}, 
 		{"Increases FLEE"}, 
-		{"Does not affect boss monsters", COLOR_SYSTEM}
+		{"Does not affect Boss"}
 	}
 }
 StateIconList[EFST_IDs.EFST_TRICKDEAD] = {
@@ -1832,7 +1844,7 @@ StateIconList[EFST_IDs.EFST_MAGIC_CANDY] = {
 		{"Magic Candy", COLOR_TITLE_BUFF},
 		{"%s", COLOR_TIME}, 
 		{"Increases MATK"}, 
-		{"Reduced fixed casting time."},
+		{"Reduced Fixed Casting"},
 		{"Casting cannot be interrupted."},
 		{"Drains SP every 10 seconds"}
 	}
@@ -1909,6 +1921,15 @@ StateIconList[EFST_IDs.EFST_VOLCANIC_ASH] = {
 		{"Increases fire damage taken"}
 	}
 }
+StateIconList[EFST_IDs.EFST_OVERLAPEXPUP] = {
+	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
+		{"Maldango Canned Cat", COLOR_TITLE_BUFF},
+		{"%s", COLOR_TIME}, 
+		{"When killing monsters in Maldango"}, 
+		{"Increases Base and Job EXP"},
+		{"Increases Item drop rate"}
+	}
+}
 StateIconList[EFST_IDs.EFST_ATKER_ASPD] = {
 	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
 		{"대환단", COLOR_TITLE_BUFF},
@@ -1925,15 +1946,6 @@ StateIconList[EFST_IDs.EFST_ATKER_MOVESPEED] = {
 		{"Increases SP recovery"}
 	}
 }
-StateIconList[EFST_IDs.EFST_OVERLAPEXPUP] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Maldango Canned Cat", COLOR_TITLE_BUFF},
-		{"%s", COLOR_TIME}, 
-		{"When killing monsters in Maldango"}, 
-		{"Increases Base and Job EXP"},
-		{"Increases Item drop rate"}
-	}
-}
 StateIconList[EFST_IDs.EFST_PLUSATTACKPOWER] = {
 	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
 		{"%s", COLOR_TIME}, 
@@ -1944,137 +1956,5 @@ StateIconList[EFST_IDs.EFST_PLUSMAGICPOWER] = {
 	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
 		{"%s", COLOR_TIME}, 
 		{"Increases MATK"}
-	}
-}
-StateIconList[EFST_IDs.EFST_MACRO] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Using Macros", COLOR_SYSTEM},
-		{"%s", COLOR_TIME}, 
-		{"Macro is activated"}
-	}
-}
-StateIconList[EFST_IDs.EFST_MACRO_POSTDELAY] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Macros Disabled", COLOR_SYSTEM},
-		{"%s", COLOR_TIME}, 
-		{"Macro is deactivated."}
-	}
-}
-StateIconList[EFST_IDs.EFST_MONSTER_TRANSFORM] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Monster Transformation", COLOR_TITLE_BUFF},
-		{"%s", COLOR_TIME}, 
-		{"Transformed into monster."}
-	}
-}
-StateIconList[EFST_IDs.EFST_SIT] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Sit", COLOR_TITLE_TOGGLE},
-	}
-}
-StateIconList[EFST_IDs.EFST_ALL_RIDING] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Riding", COLOR_TITLE_TOGGLE},
-	}
-}
-StateIconList[EFST_IDs.EFST_SKF_MATK] = {
-	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
-		{"%s", COLOR_TIME}, 
-		{"Increases MATK"},
-	}
-}
-StateIconList[EFST_IDs.EFST_SKF_ATK] = {
-	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
-		{"%s", COLOR_TIME}, 
-		{"Increases ATK"},
-	}
-}
-StateIconList[EFST_IDs.EFST_SKF_ASPD] = {
-	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
-		{"%s", COLOR_TIME}, 
-		{"Increases ASPD"},
-	}
-}
-StateIconList[EFST_IDs.EFST_SKF_CAST] = {
-	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
-		{"%s", COLOR_TIME}, 
-		{"Reduces casting time"},
-	}
-}
-StateIconList[EFST_IDs.EFST_REWARD_PLUSONLYJOBEXP] = {
-	haveTimeLimit = 1, posTimeLimitStr = 1, descript = {
-		{"%s", COLOR_TIME}, 
-		{"Increases gained Job experience"},
-	}
-}
-StateIconList[EFST_IDs.EFST_ENERVATION] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Masquerade: Enervation", COLOR_TITLE_DEBUFF},
-		{"%s", COLOR_TIME},
-		{"Reduces ATK"},
-		{"Removes Spirit Spheres"}
-	}
-}
-StateIconList[EFST_IDs.EFST_GROOMY] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Masquerade: Gloomy", COLOR_TITLE_DEBUFF},
-		{"%s", COLOR_TIME}, 
-		{"Decreases ASPD and HIT"},
-		{"Forced to release mounts and any related animals."},
-		{"Mounts and any related animals are disabled."},
-	}
-}
-StateIconList[EFST_IDs.EFST_IGNORANCE] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Masquerade: Ignorance", COLOR_TITLE_DEBUFF},
-		{"%s", COLOR_TIME}, 
-		{"Lost a certain amount of SP"},
-		{"Skills and Magics are disabled"},
-	}
-}
-StateIconList[EFST_IDs.EFST_LAZINESS] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Masquerade: Laziness", COLOR_TITLE_DEBUFF},
-		{"%s", COLOR_TIME}, 
-		{"Reduces Movement Speed and FLEE"},
-		{"Increases casting time"},
-		{"Adds a certain amount of SP when using a skill"},
-	}
-}
-StateIconList[EFST_IDs.EFST_UNLUCKY] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Masquerade: Unlucky", COLOR_TITLE_DEBUFF},
-		{"%s", COLOR_TIME}, 
-		{"Reduces critical rate"},
-		{"Reduces perfect dodge"},
-		{"Using skills costs zeny"},
-		{"Damage over time causes a certain status ailments."},
-	}
-}
-StateIconList[EFST_IDs.EFST_WEAKNESS] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Masquerade: Weakness", COLOR_TITLE_DEBUFF},
-		{"%s", COLOR_TIME}, 
-		{"Reduces Max HP"},
-		{"Strips weapons and shield"}, --피해 순간 무기, 방패 착용 해제 <-- help?
-		{"Cannot equip weapons and shield"},
-	}
-}
-StateIconList[EFST_IDs.EFST_STEELBODY] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Steel Body", COLOR_TITLE_BUFF},
-		{"%s", COLOR_TIME}, 
-		{"Sets DEF and MDEF to a fixed amount."}, --DEF, MDEF 높은 수치로 고정 <-- help?
-		{"Reduces Movement Speed and ASPD"},
-		{"Skills are disabled"},
-	}
-}
-StateIconList[EFST_IDs.EFST_LG_REFLECTDAMAGE] = {
-	haveTimeLimit = 1, posTimeLimitStr = 2, descript = {
-		{"Reflect Damage", COLOR_TITLE_TOGGLE}, 
-		{"%s", COLOR_TIME}, 
-		{"Applies damage received to all enemies in an area"}, 
-		{"(except for certain trap damage)"}, 
-		{"Consumes SP every second"}
 	}
 }
