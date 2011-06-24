@@ -7972,37 +7972,37 @@ SKILL_INFO_LIST = {
 
 	[SKID.MH_SUMMON_LEGION] = {
 		"MH_SUMMON_LEGION";
-		SkillName = "Summon Legion",
+		SkillName = "Invocation d'Insecte",
 		SpAmount = { 48, 60, 72, 84, 96 }
 	},
 
 	[SKID.MH_NEEDLE_OF_PARALYZE] = {
 		"MH_NEEDLE_OF_PARALYZE";
-		SkillName = "Needle of Paralyze",
+		SkillName = "Dard Paralysant",
 		SpAmount = { 60, 80, 100, 120, 140 }
 	},
 
 	[SKID.MH_POISON_MIST] = {
 		"MH_POISON_MIST";
-		SkillName = "Poison Mist",
+		SkillName = "Nuage de Poison",
 		SpAmount = { 65, 75, 85, 95, 105 }
 	},
 
 	[SKID.MH_PAIN_KILLER] = {
 		"MH_PAIN_KILLER";
-		SkillName = "Pain Killer",
+		SkillName = "Barbituriques",
 		SpAmount = { 48, 52, 56, 60, 64 }
 	},
 
 	[SKID.MH_LIGHT_OF_REGENE] = {
 		"MH_LIGHT_OF_REGENE";
-		SkillName = "Light of Regene",
+		SkillName = "Lumière de Régénération",
 		SpAmount = { 40, 50, 60, 70, 80 }
 	},
 
 	[SKID.MH_OVERED_BOOST] = {
 		"MH_OVERED_BOOST";
-		SkillName = "Overed Boost",
+		SkillName = "Rapidité Extrême",
 		SpAmount = { 70, 90, 110, 130, 150 }
 	},
 
@@ -8026,12 +8026,12 @@ SKILL_INFO_LIST = {
 
 	[SKID.MH_STYLE_CHANGE] = {
 		"MH_STYLE_CHANGE";
-		SkillName = "Style Change",
+		SkillName = "Changement d'Humeur",
 	},	
 
 	[SKID.MH_SONIC_CRAW] = {
 		"MH_SONIC_CRAW";
-		SkillName = "Sonic Claw",
+		SkillName = "Griffes Soniques",
 		SpAmount = { 20, 25, 30, 35, 40 }
 	},
 
@@ -8043,7 +8043,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MH_MIDNIGHT_FRENZY] = {
 		"MH_MIDNIGHT_FRENZY";
-		SkillName = "Midnight Frenzy",
+		SkillName = "Frénésir de Minuit",
 		SpAmount = { 8, 16, 24, 32, 40 }
 	},
 
@@ -8061,7 +8061,7 @@ SKILL_INFO_LIST = {
 
 	[SKID.MH_STEINWAND] = {
 		"MH_STEINWAND";
-		SkillName = "Stone Wall",
+		SkillName = "Mur de Pierre",
 		SpAmount = { 80, 90, 100, 110, 120 }
 	},
 
@@ -8097,32 +8097,32 @@ SKILL_INFO_LIST = {
 
 	[SKID.MH_MAGMA_FLOW] = {
 		"MH_MAGMA_FLOW";
-		SkillName = "Magma Flow",
+		SkillName = "Flux de Magma",
 		MaxLv = 5,
 		SpAmount = { 34, 38, 42, 46, 50 }
 	},
 
 	[SKID.MH_GRANITIC_ARMOR] = {
 		"MH_GRANITIC_ARMOR";
-		SkillName = "Granitic Armor",
+		SkillName = "Armure de Granite",
 		SpAmount = { 54, 58, 62, 66, 70 }
 	},
 
 	[SKID.MH_LAVA_SLIDE] = {
 		"MH_LAVA_SLIDE";
-		SkillName = "Lava Slide",
+		SkillName = "Glissement de Lave",
 		SpAmount = { 30, 35, 40, 45, 50 }
 	},
 
 	[SKID.MH_PYROCLASTIC] = {
 		"MH_PYROCLASTIC";
-		SkillName = "Pyroclastic",
+		SkillName = "Arme Pyroclastique",
 		SpAmount = { 20, 28, 36, 44, 52 }
 	},
 
 	[SKID.MH_VOLCANIC_ASH] = {
 		"MH_VOLCANIC_ASH";
-		SkillName = "Volcanic Ash",
+		SkillName = "Cendres Volcaniques",
 		SpAmount = { 60, 65, 70, 75, 80 }
 	},
 	
