@@ -30,8 +30,8 @@ map_list = {
 		{name = "Grotte de Payon N1"},
 		{name = "Grotte de Payon N2"},
 		{name = "Grotte de Payon N3"},
-		{name = "Grotte de Payon N4 (Temple Souterrain)"},
-		{name = "Grotte de Payon N5 (Temple Souterrain)", colorR = 255, colorG = 0, colorB = 0}}
+		{name = "Grotte N4 (Temple Souterrain)"},
+		{name = "Grotte N5 (Temple Souterrain)", colorR = 255, colorG = 0, colorB = 0}}
 	},
 	{name = "Aldebaran",
 	list = {{name = "Mt. Mjolnir, Nord", colorR = 255, colorG = 0, colorB = 0},
@@ -103,9 +103,9 @@ map_list = {
 	list = {{name = "Poste Frontière"},
 		{name = "Résidence de Kiel Hyre"},
 		{name = "Plateau d'El Mes"},
-		{name = "Gorge d'El Mes (Vallée des Abîmes)"},
+		{name = "Gorge d'El Mes"},
 		{name = "Académie de Kiel Hyre"},
-		{name = "Camp de Garde de Schwarzwald"},
+		{name = "Camp de Garde"},
 		{name = "Environs de Yuno"},
 		{name = "Route de Nogg N1"},
 		{name = "Route de Nogg N2"},
@@ -201,10 +201,10 @@ map_list = {
 		{name = "Vallée de Gyoll"},
 		{name = "Niflheim", colorR = 255, colorG = 0, colorB = 0}}
 	},
-	{name = "Passage",
+	{name = "Passage vers un Autre Monde",
 	list = {{name = "Environs de Manuk"},
 		{name = "Environs de Splendide"},
-		{name = "Au Pied de la Montagne de Kamidal"}, --El Descates Field Foot Of The Kamidal Mountain
+		{name = "Au Pied de la Montagne Kamidal"}, --El Descates Field Foot Of The Kamidal Mountain
 		{name = "Passage Souterrain de Kamidal"}, --Underground Passage Kamidal Tunnel
 		{name = "Nid Souterrain de Scaraba", colorR = 255, colorG = 0, colorB = 0}, --Underground Nest Scaraba Hole
 		{name = "Donjon de Nidhogg N1"},
@@ -213,7 +213,7 @@ map_list = {
 	{name = "Amatsu",
 	list = {{name = "Environs"},
 		{name = "Labyrinthe de Tatamis"},
-		{name = "Champ de Bataille de la Forêt Souterraine"},
+		{name = "Champ de Bataille de la Forêt"},
 		{name = "Sanctuaire Souterrain", colorR = 255, colorG = 0, colorB = 0}}
 	},
 	{name = "Gonryun",
