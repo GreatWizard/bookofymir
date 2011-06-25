@@ -201,7 +201,7 @@ map_list = {
 		{name = "Vallée de Gyoll"},
 		{name = "Niflheim", colorR = 255, colorG = 0, colorB = 0}}
 	},
-	{name = "Passage vers un Autre Monde",
+	{name = "Ash Vacuum",
 	list = {{name = "Environs de Manuk"},
 		{name = "Environs de Splendide"},
 		{name = "Au Pied de la Montagne Kamidal"}, --El Descates Field Foot Of The Kamidal Mountain
