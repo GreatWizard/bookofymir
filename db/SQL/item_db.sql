@@ -2595,7 +2595,7 @@ UPDATE `item_db` SET `name_japanese`= "Filir's Pinions" WHERE ID = 5664;
 UPDATE `item_db` SET `name_japanese`= "Shaman_Hat" WHERE ID = 5665;
 UPDATE `item_db` SET `name_japanese`= "Crown_Cap" WHERE ID = 5666;
 UPDATE `item_db` SET `name_japanese`= "Skeleton_Hood" WHERE ID = 5667;
-UPDATE `item_db` SET `name_japanese`= "Weird Pumpkin Hat" WHERE ID = 5668;
+UPDATE `item_db` SET `name_japanese`= "Étrange Chapeau-Citrouille" WHERE ID = 5668;
 UPDATE `item_db` SET `name_japanese`= "Green Ribbon" WHERE ID = 5681;
 UPDATE `item_db` SET `name_japanese`= "Triangle Rune Cap" WHERE ID = 5682;
 UPDATE `item_db` SET `name_japanese`= "Baphomet Horns" WHERE ID = 5683;
