@@ -435,7 +435,7 @@ UPDATE `mob_db` SET `kName`= "Pasana" WHERE ID = 1464;
 UPDATE `mob_db` SET `kName`= "Petite" WHERE ID = 1465;
 UPDATE `mob_db` SET `kName`= "Petite" WHERE ID = 1466;
 UPDATE `mob_db` SET `kName`= "Raydric" WHERE ID = 1467;
-UPDATE `mob_db` SET `kName`= "Requim" WHERE ID = 1468;
+UPDATE `mob_db` SET `kName`= "Requiem" WHERE ID = 1468;
 UPDATE `mob_db` SET `kName`= "Ouvrier Squelette" WHERE ID = 1469;
 UPDATE `mob_db` SET `kName`= "Zérom" WHERE ID = 1470;
 UPDATE `mob_db` SET `kName`= "Neuf-Queues" WHERE ID = 1471;
