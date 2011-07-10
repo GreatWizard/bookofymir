@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Myllena
+//traduit par Myllena, corrigé par Morrigan
 //Myllena: j'ai conservé certains textes de l'ancienne version
 //===== eAthena Script ======================================= 
 //= Soul Linker Job Quest
@@ -39,7 +39,7 @@ morocc_in,174,30,6	script	Enfant#link1	716,{
 		else {
 			mes "Ne seriez-vous pas un guerrier de la Lune?";
 		}
-		mes "Vous m'êtes comme familier... Après tout, les bases de vos capacités sont les mêmes que celle des Taekwon Do, n'est-ce pas?";
+		mes "Vous m'êtes comme familier"+ ( sex ? "" : "e" ) +"... Après tout, les bases de vos capacités sont les mêmes que celle des Taekwon Do, n'est-ce pas?";
 		close;
 	}
 	if (Class != Job_Taekwon) {
@@ -127,7 +127,7 @@ morocc_in,174,30,6	script	Enfant#link1	716,{
 				mes "^0000FF1 Diamant 3 Carats^000000,";
 				mes "^0000FF1 Coeur Immortel^000000 et";
 				mes "^0000FF1 Rose Éternelle^000000.";
-				mes "comme je vous l'ai demandé?";
+				mes "Comme je vous l'ai demandé?";
 				next;
 				if (select("Oui.:Non, pas encore...") == 1) {
 					if (countitem(732) > 0 && countitem(929) > 0 && countitem(748) > 0) {
@@ -164,7 +164,7 @@ morocc_in,174,30,6	script	Enfant#link1	716,{
 			}
 			set SOUL_Q,0;
 			mes "[Enfant]";
-			mes "Vous êtes devenu un Guerrier du Soleil, de la Lune et des Étoiles... ? Je ne pensais pas que vous en auriez le potentiel. Je suppose que je ne peux pas vous faire de reproches...";
+			mes "Vous êtes "+ ( sex ? "devenu un Guerrier" : "devenue une Guerrière" ) +" du Soleil, de la Lune et des Étoiles... ? Je ne pensais pas que vous en auriez le potentiel. Je suppose que je ne peux pas vous faire de reproches...";
 			close;
 		}
 		else if (SOUL_Q == 2) {
@@ -189,11 +189,11 @@ morocc_in,174,30,6	script	Enfant#link1	716,{
 		}
 		else if (SOUL_Q > 2) {
 			mes "[Maia]";
-			mes "Êtes-vous prêt à entrer dans les profondeurs de votre esprit?";
+			mes "Êtes-vous prêt"+ ( sex ? "" : "e" ) +" à entrer dans les profondeurs de votre esprit?";
 			next;
 			if (select("Non:Oui") == 1) {
 				mes "[Maia]";
-				mes "Très bien, revenez quand vous serez prêt. Je vous attends ici.";
+				mes "Très bien, revenez quand vous serez prêt"+ ( sex ? "" : "e" ) +". Je vous attends ici.";
 				close;
 			}
 			if (.SoulLinkerTest == 1) {
@@ -222,7 +222,7 @@ OnTouch:
 		if (JobLevel < 40) {
 			set getvariableofnpc(.SoulLinkerTest,"Enfant#link1"),0;
 			mes "[Maia]";
-			mes "Hum? Comment êtes-vous arrivé ici? Vous n'êtes pas encore qualifié pour assister à cette cérémonie. Je vais vous ramener à Morroc...";
+			mes "Hum? Comment êtes-vous arrivé"+ ( sex ? "" : "e" ) +" ici? Vous n'êtes pas encore qualifié"+ ( sex ? "" : "e" ) +" pour assister à cette cérémonie. Je vais vous ramener à Morroc...";
 			close2;
 			warp "morocc",157,47;
 			end;
@@ -232,7 +232,7 @@ OnTouch:
 			mes "Reconnaissez-vous cet endroit? Nous sommes actuellement à l'intérieur de votre esprit. Les âmes des guerriers qui sont morts attendent que vous en appeliez à leur pouvoir.";
 			next;
 			mes "[Maia]";
-			mes "Pour l'instant il ne sont que quelques uns, mais si vous continuez de vous entraîner, vous deviendrez capable de faire appel à de nombreuses âmes, en tant que Lieur d'Âmes.";
+			mes "Pour l'instant il ne sont que quelques-uns, mais si vous continuez de vous entraîner, vous deviendrez capable de faire appel à de nombreuses âmes, en tant que Lieur d'Âmes.";
 			next;
 			set SOUL_Q,3;
 			changequest 6006,6007;
@@ -247,7 +247,7 @@ OnTouch:
 		}
 		else if (SOUL_Q == 4) {
 			mes "[Maia]";
-			mes "Vous êtes maintenant prêt à devenir un Lieur d'Âmes. Cependant, si vous souhaitez parler à nouveau aux âmes, vous pouvez le faire.";
+			mes "Vous êtes maintenant prêt"+ ( sex ? "" : "e" ) +" à devenir un Lieur d'Âmes. Cependant, si vous souhaitez parler à nouveau aux âmes, vous pouvez le faire.";
 			next;
 			if (select("Discuter avec les âmes:Devenir Lieur d'Âmes") == 1) {
 				mes "[Maia]";
@@ -278,7 +278,7 @@ OnTouch:
 			callfunc "F_ClearJobVar";		// clears all job variables for the current player
 			set SOUL_Q,0;
 			mes "[Maia]";
-			mes "Je vous souhaite bonne chance dans votre nouvelle vie. Entourez-vous de fidèles alliés, et les esprits vous protègeront. Adieu, mon ami.";
+			mes "Je vous souhaite bonne chance dans votre nouvelle vie. Entourez-vous de fidèles alliés, et les esprits vous protègeront. Adieu, mon ami"+ ( sex ? "" : "e" ) +".";
 			close2;
 			set getvariableofnpc(.SoulLinkerTest,"Enfant#link1"),0;
 			donpcevent "Timer#link3::OnDisable";
@@ -300,7 +300,7 @@ OnTouch:
 	else {
 		mes "[Maia]";
 		mes "Étrange...";
-		mes "Vous n'êtes pas censé être ici. Laissez-moi vous reconduire à Morroc...";
+		mes "Vous n'êtes pas censé"+ ( sex ? "" : "e" ) +" être ici. Laissez-moi vous reconduire à Morroc...";
 	}
 	close2;
 	warp "morocc",157,47;
@@ -337,7 +337,7 @@ job_soul,30,35,6	script	Âme#link4	827,{
 		mes "Mais avec le temps, j'ai appris à mieux accepter mon passé.";
 		next;
 		mes "[Âme d'un Moine]";
-		mes "Vous... Vous avez l'air fort. Si seulement je pouvais vous transmettre la force d'esprit que j'ai réussi à acquérir depuis tout ce temps passé ici...";
+		mes "Vous... Vous avez l'air fort"+ ( sex ? "" : "e" ) +". Si seulement je pouvais vous transmettre la force d'esprit que j'ai réussi à acquérir depuis tout ce temps passé ici...";
 		set SOUL_Q,4;
 		if(checkquest(6008) == -1) {
 			changequest 6007,6008;

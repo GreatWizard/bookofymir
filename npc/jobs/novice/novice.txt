@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Tanos, Taitongue, Myllena, No Healing
+//traduit par Tanos, Taitongue, Myllena et No Healing, corrigé par Morrigan
 //corrigé par No Healing, Paradise Angel, Myllena
 //===== eAthena Script ======================================= 
 //= Ep 10+ Novice Training Grounds
@@ -54,7 +54,7 @@ new_1-1,144,107,2	script	Garde#nv2	105,{
 	}
 	else {
 		mes "Allez, Novice, allez!";
-		mes "Combattez et devenez plus fort! Pensez à votre avenir glorieux!";
+		mes "Combattez et devenez plus fort"+ ( sex ? "" : "e" ) +"! Pensez à votre avenir glorieux!";
 	}
 	close;
 }
@@ -62,7 +62,7 @@ new_1-1,144,107,2	script	Garde#nv2	105,{
 // Receptionist
 new_1-2,100,29,4	script	Réceptionniste#nv1	86,{
 	mes "[Réceptionniste]";
-	mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", vous semblez être nouveau ici.";
+	mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", vous semblez être "+ ( sex ? "nouveau" : "nouvelle" ) +" ici.";
 	mes "Quel est votre nom?";
 	next;
 	input .@charname$;
@@ -75,7 +75,7 @@ new_1-2,100,29,4	script	Réceptionniste#nv1	86,{
 	mes "Bienvenue! Vous vous trouvez à l'entrée du ^3355FFCamp d'Entraînement^000000.";
 	next;
 	mes "[Réceptionniste]";
-	mes "Si vous êtes nouveau dans le monde de Ragnarök, je vous conseille de choisir ^3355FFl'introduction au Camp d'Entraînement^000000 pour plus d'informations.";
+	mes "Si vous êtes "+ ( sex ? "nouveau" : "nouvelle" ) +" dans le monde de Ragnarök, je vous conseille de choisir ^3355FFl'introduction au Camp d'Entraînement^000000 pour plus d'informations.";
 	next;
 	while (1) {
 		switch(select("Participer à l'entraînement.:Accès direct au monde de Ragnarök.:^3355FFIntroduction au Terrain d'Entraînement.^000000:J'ai besoin d'un moment pour réfléchir.")) {
@@ -83,10 +83,10 @@ new_1-2,100,29,4	script	Réceptionniste#nv1	86,{
 			mes "Merci de participer à l'entraînement des Novices. Pour des informations détaillées pour chaque partie de l'entraînement, veuillez vous renseigner auprès des Guides.";
 			next;
 			mes "[Réceptionniste]";
-			mes "Si vous avez des questions à propos d'un point spécifique, ne vous sentez pas gêné de demander à un des instructeurs.";
+			mes "Si vous avez des questions à propos d'un point spécifique, ne vous sentez pas gêné"+ ( sex ? "" : "e" ) +" de demander à un des instructeurs.";
 			next;
 			mes "[Réceptionniste]";
-			mes "Vous allez maintenant être transféré au Camp d'Entraînement.";
+			mes "Vous allez maintenant être transféré"+ ( sex ? "" : "e" ) +" au Camp d'Entraînement.";
 			close2;
 			warp "new_1-2",100,70;
 			end;
@@ -170,7 +170,7 @@ new_1-1,53,114,4	script	Shion#nv1	727,{
 		next;
 		mes "[Shion]";
 		mes "Non, non, non~";
-		mes "Tu es censé utiliser une Aile de Papillon quand tu veux retourner en ville ^666666après^000000 avoir complété l'entraînement, d'accord?";
+		mes "Tu es censé"+ ( sex ? "" : "e" ) +" utiliser une Aile de Papillon quand tu veux retourner en ville ^666666après^000000 avoir complété l'entraînement, d'accord?";
 		next;
 		mes "[Shion]";
 		mes "Bien, maintenant, laisse-moi te reconduire au Camp d'Entraînement.";
@@ -190,10 +190,10 @@ new_1-1,53,114,4	script	Shion#nv1	727,{
 	else if (nov_1st_cos == 2) {
 		mes "[Shion]";
 		mes "Eh...";
-		mes "Espèce de petit vaurien!";
+		mes "Espèce de petit"+ ( sex ? "" : "e" ) +" vaurien"+ ( sex ? "" : "ne" ) +"!";
 		next;
 		mes "[Shion]";
-		mes "Attends... Calme-toi Shion. Tu es une entraineuse professionnelle! Ne laisse pas un Novice t'énerver comme ça!";
+		mes "Attends... Calme-toi Shion. Tu es une entraineuse professionnelle! Ne laisse pas un"+ ( sex ? "" : "e" ) +" Novice t'énerver comme ça!";
 		next;
 		mes "[Shion]";
 		mes "Va, et traverse le pont à droite, MAINTENANT! ^666666*Ahem*^000000 Tu trouveras un château, et à l'intérieur tu pourras rencontrer toutes sortes d'instructeurs.";
@@ -205,7 +205,11 @@ new_1-1,53,114,4	script	Shion#nv1	727,{
 		mes "Pour faire revenir ta caméra à sa position d'origine, il te suffit de double-cliquer sur le bouton droit de ta souris. Bien, maintenant, fais attention à toi!";
 		next;
 		mes "[Shion]";
-		mes "Oh, et avant que tu ne partes, apprends à te comporter en Gentleman avec les Dames, d'accord? Elles pourraient te donner des présents comme celui-ci!";
+		if(Sex) {
+			mes "Oh, et avant que tu ne partes, apprends à te comporter en Gentleman avec les Dames, d'accord? Elles pourraient te donner des présents comme celui-ci!";
+		} else {
+			mes "Oh, et avant que tu ne partes, dis bien aux Hommes de se comporter en Gentlemen. Ils pourraient ne pas avoir de présents comme celui-ci!";
+		}
 		set nov_1st_cos,3;
 		getexp 9,0;
 		close;
@@ -226,7 +230,7 @@ new_1-1,53,114,4	script	Shion#nv1	727,{
 		getexp 9,0;
 		next;
 		mes "[Shion]";
-		mes "Tout ce que tu apprendras au Camp d'Entraînement te sera bénéfique pour le futur. Donc, sois positif et avance, d'accord?";
+		mes "Tout ce que tu apprendras au Camp d'Entraînement te sera bénéfique pour le futur. Donc, sois positi"+ ( sex ? "f" : "ve" ) +" et avance, d'accord?";
 		close;
 	}
 	else {
@@ -324,13 +328,13 @@ new_1-2,99,105,3	script	Instructeur (Interface)::Interface Instructor#nv1	751,{
 			close;
 		case 3:
 			mes "[Kris]";
-			mes "Alors, tu voudrais être envoyé dans une ville? Si tu penses avoir suffisamment appris, vas vers la droite, et parle à l'^3355FFEmployée Kafra^000000.";
+			mes "Alors, tu voudrais être envoyé"+ ( sex ? "" : "e" ) +" dans une ville? Si tu penses avoir suffisamment appris, vas vers la droite, et parle à l'^3355FFEmployée Kafra^000000.";
 			next;
 			mes "[Kris]";
 			mes "Les 'Services Kafra' te seront extrêmement utiles une fois que tu seras dans le vrai monde. Tu pourras te téléporter, ou garder tes objets en sécurité grâce à ceux-ci.";
 			next;
 			mes "[Kris]";
-			mes "Nous ne nous reverrons sans doute jamais, mais j'espère que tu deviendras un grand aventurier.";
+			mes "Nous ne nous reverrons sans doute jamais, mais j'espère que tu deviendras "+ ( sex ? "un grand aventurier" : "une grande aventurière" ) +".";
 			close;
 		}
 	}
@@ -359,7 +363,7 @@ new_1-2,99,105,3	script	Instructeur (Interface)::Interface Instructor#nv1	751,{
 		mes strcharinfo(0)+".";
 		mes "Voudrais-tu en apprendre plus sur ce que nous appelons l'Interface de Base?";
 		next;
-		switch(select("Oui.:Nan, j'suis un pro~:Annuler.")) {
+		switch(select("Oui.:Nan, j'suis un"+ ( sex ? "" : "e" ) +" pro~:Annuler.")) {
 		case 1:
 			mes "[Kris]";
 			mes "Premièrement, il est possible de déplacer chaque fenêtre en les faisant glisser dans la fenêtre du jeu. Clique simplement sur le haut de la fenêtre que tu veux déplacer, maintient le clique gauche enfoncé et bouge ta souris.";
@@ -393,7 +397,7 @@ new_1-2,99,105,3	script	Instructeur (Interface)::Interface Instructor#nv1	751,{
 			}
 			else {
 				mes "Hum...";
-				mes "Je suppose que tu es déjà familier avec la jauge d'expérience ^^.";
+				mes "Je suppose que tu es déjà famili"+ ( sex ? "er" : "ère" ) +" avec la jauge d'expérience.";
 			}
 			next;
 			mes "[Kris]";
@@ -486,18 +490,18 @@ new_1-2,99,105,3	script	Instructeur (Interface)::Interface Instructor#nv1	751,{
 			mes "En suivant mes conseils sur l'utilisation des Compétences, tu en auras une meilleure compréhension.";
 			next;
 			mes "[Kris]";
-			mes "De plus, l'utilisation des Compétences est essentielle pour survivre dans Rune-Midgard, Je te suggère fortement d'écouter mes conseils.";
+			mes "De plus, l'utilisation des Compétences est essentielle pour survivre dans Rune-Midgard, je te suggère fortement d'écouter mes conseils.";
 			close2;
 			warp "new_1-2",84,107;
 			end;
 		case 2:
 			mes "[Kris]";
-			mes "Je vois, dans ce cas, tu dois être prêt pour l'Aire de Combat. Est-ce que je peux t'y conduire tout de suite?";
+			mes "Je vois, dans ce cas, tu dois être prêt"+ ( sex ? "" : "e" ) +" pour l'Aire de Combat. Est-ce que je peux t'y conduire tout de suite?";
 			next;
 			if (select("Non! A-Attend:Avec plaisir~!") == 1) {
 				mes "[Kris]";
 				mes "...?!";
-				mes "Très bien alors. Reviens quand tu te sentiras près.";
+				mes "Très bien alors. Reviens quand tu te sentiras prêt"+ ( sex ? "" : "e" ) +".";
 				close;
 			}
 			else {
@@ -529,12 +533,12 @@ new_1-2,99,105,3	script	Instructeur (Interface)::Interface Instructor#nv1	751,{
 			end;
 		case 2:
 			mes "[Kris]";
-			mes "Je vois. Dans ce cas, tu dois être prêt à partir pour l'Aire de Combat. Puis-je t'y conduire tout de suite?";
+			mes "Je vois. Dans ce cas, tu dois être prêt"+ ( sex ? "" : "e" ) +" à partir pour l'Aire de Combat. Puis-je t'y conduire tout de suite?";
 			next;
 			if (select("Non! A-Attend!:Avec plaisir~!") == 1) {
 				mes "[Kris]";
 				mes "...?!";
-				mes "D'accord. Reviens quand tu seras prêt dans ce cas.";
+				mes "D'accord. Reviens quand tu seras prêt"+ ( sex ? "" : "e" ) +" dans ce cas.";
 				close;
 			}
 			else {
@@ -556,7 +560,7 @@ new_1-2,83,111,3	script	Instructeur (Compétence)::Skill Tutor#nv	753,{
 		mes "[Cecil]";
 		mes "Huh...?";
 		mes "Tu as besoin de plus d'aide?";
-		mes "Je vois que tu as fini la tous les cours essentiels. As-tu également parlé aux assistants tuteurs?";
+		mes "Je vois que tu as fini tous les cours essentiels. As-tu également parlé aux assistants tuteurs?";
 		next;
 		switch(select("Envoie-moi au prochain cours!:Les assistants tuteurs?:Envoie-moi dans une ville!")) {
 		case 1:
@@ -565,7 +569,7 @@ new_1-2,83,111,3	script	Instructeur (Compétence)::Skill Tutor#nv	753,{
 			mes "Je suppose que tu devras bien t'entrainer un jour sur l'Aire de Combat.";
 			next;
 			mes "[Cecil]";
-			mes "Oh mon jeune ami, je suis tellement jaloux des instructeurs de l'Aire de Combat. Enseigner les informations basiques n'est pas aussi cool que de taper du monstre!";
+			mes "Oh "+ ( sex ? "mon jeune ami" : "ma jeune amie" ) +", je suis tellement jaloux des instructeurs de l'Aire de Combat. Enseigner les informations basiques n'est pas aussi cool que de taper du monstre!";
 			next;
 			mes "[Cecil]";
 			mes "Ah, bien.";
@@ -586,7 +590,7 @@ new_1-2,83,111,3	script	Instructeur (Compétence)::Skill Tutor#nv	753,{
 			mes "Mais il serait bon pour certaines personnes d'en apprendre plus.";
 			next;
 			mes "[Cecil]";
-			mes "Si tu es un débutant complet à Ragnarök, ça ne peut pas te faire de mal d'aller suivre les cours des assistants tuteurs.";
+			mes "Si tu es "+ ( sex ? "un débutant complet" : "une débutante complète" ) +" à Ragnarök, ça ne peut pas te faire de mal d'aller suivre les cours des assistants tuteurs.";
 			next;
 			mes "[Cecil]";
 			mes "Un type nommé Leo Handerson semble en connaître beaucoup sur les compétences. Je pense que ses connaissances te seraient utiles.";
@@ -658,7 +662,7 @@ new_1-2,83,111,3	script	Instructeur (Compétence)::Skill Tutor#nv	753,{
 			}
 			next;
 			mes "[Cecil]";
-			mes "Bien, as-tu distribué tes points de compétence pour apprendre les Compétences de Base? Il faut que tu maitrises totalement cette compétence une fois sorti d'ici.";
+			mes "Bien, as-tu distribué tes points de compétence pour apprendre les Compétences de Base? Il faut que tu maitrises totalement cette compétence une fois sorti"+ ( sex ? "" : "e" ) +" d'ici.";
 			next;
 			mes "[Cecil]";
 			mes "Pour plus d'informations, va parler à Leo Handerson, un des assistants tuteurs.";
@@ -797,7 +801,7 @@ new_1-2,115,111,3	script	Instructeur (Objets)::Item Instructeur#nv	726,{
 		mes "Huh...?";
 		mes "Tu as besoin d'aide pour trouver quelqu'un? Tu sembles avoir suivi tous les cours essentiels. Où veux-tu aller maintenant?";
 		next;
-		switch(select("Je ne sais pas~!:Envoie-moi en ville.:Nulle part, je suis bien ici")) {
+		switch(select("Je ne sais pas~!:Envoie-moi en ville.:Nulle part, je suis bien ici.")) {
 		case 1:
 			mes "[Alice]";
 			mes "Hum...";
@@ -831,7 +835,7 @@ new_1-2,115,111,3	script	Instructeur (Objets)::Item Instructeur#nv	726,{
 		mes "[Alice]";
 		mes "^666666*Baille~*^000000";
 		mes "C'est siiii ennuyaaant.";
-		mes "Oh! Salut, t'es nouveau ici?.";
+		mes "Oh! Salut, t'es "+ ( sex ? "nouveau" : "nouvelle" ) +" ici?.";
 		if (NEW_MES_FLAG0) {
 			mes "Oooh, ton papier d'admission a expiré. Laisse-moi t'en donner un autre.";
 			set NEW_MES_FLAG0,0;
@@ -844,7 +848,7 @@ new_1-2,115,111,3	script	Instructeur (Objets)::Item Instructeur#nv	726,{
 			set NEW_LVUP1,0;
 			set NEW_JOBLVUP,0;
 		}
-		mes "Es-tu venu pour participer à mon cours sur les objets?";
+		mes "Es-tu venu"+ ( sex ? "" : "e" ) +" pour participer à mon cours sur les objets?";
 		next;
 		switch(select("Ouaip!:Sans façons.:Comment j'peux faire pour aller en ville?")) {
 		case 1:
@@ -1006,7 +1010,7 @@ new_1-2,115,111,3	script	Instructeur (Objets)::Item Instructeur#nv	726,{
 			}
 		case 2:
 			mes "[Alice]";
-			mes "Tu es sûr de vraiment vouloir aller dans l'Aire de Combat? Tu as parlé à tous les instructeurs? Tu ferais mieux de le faire avant d'aller te battre.";
+			mes "Tu es sûr"+ ( sex ? "" : "e" ) +" de vraiment vouloir aller dans l'Aire de Combat? Tu as parlé à tous les instructeurs? Tu ferais mieux de le faire avant d'aller te battre.";
 			next;
 			switch(select("Oui je suis sûr, envoie-moi là-bas!:Oh, attends")) {
 			case 1:
@@ -1039,11 +1043,11 @@ new_1-2,115,111,3	script	Instructeur (Objets)::Item Instructeur#nv	726,{
 		case 1:
 			mes "[Cecil]";
 			mes "Parfait~";
-			mes "Tu apprendras des choses essentielles, et gagneras expérience et objets. L'instructeur pour l'Interface de Base se trouve au centre de cette pièce";
+			mes "Tu apprendras des choses essentielles, et gagneras expérience et objets. L'instructeur pour l'Interface de Base se trouve au centre de cette pièce.";
 			close;
 		case 2:
 			mes "[Alice]";
-			mes "Tu es sûr de vouloir aller à l'Aire de Combat? Tu as parlé à tous les instructeurs? Tu ferais mieux de le faire avant d'aller te battre.";
+			mes "Tu es sûr"+ ( sex ? "" : "e" ) +" de vouloir aller à l'Aire de Combat? Tu as parlé à tous les instructeurs? Tu ferais mieux de le faire avant d'aller te battre.";
 			next;
 			switch(select("Envoie-moi à l'Aire de Combat~!:Oh, attend!")) {
 			case 1:
@@ -1081,12 +1085,12 @@ new_1-2,115,111,3	script	Instructeur (Objets)::Item Instructeur#nv	726,{
 			end;
 		case 2:
 			mes "[Alice]";
-			mes "Tu es vraiment sûr de vouloir aller à l'Aire de Combat? Tu as parlé à tous les instructeurs? Tu devrais le faire avant d'aller te battre.";
+			mes "Tu es vraiment sûr"+ ( sex ? "" : "e" ) +" de vouloir aller à l'Aire de Combat? Tu as parlé à tous les instructeurs? Tu devrais le faire avant d'aller te battre.";
 			next;
 			switch(select("Envoie-moi à l'Aire de Combat~!:Oh, attends!")) {
 			case 1:
 				mes "[Alice]";
-				mes "Quel novice enthousiaste tu fais! Très bien, je vais t'envoyer à mon collègue qui s'occupe de l'Aire de combat. Parle bien à tous les instructeurs une fois là-bas.";
+				mes "Quel"+ ( sex ? "" : "le" ) +" novice enthousiaste tu fais! Très bien, je vais t'envoyer à mon collègue qui s'occupe de l'Aire de combat. Parle bien à tous les instructeurs une fois là-bas.";
 				next;
 				mes "[Alice]";
 				mes "Après tout...";
@@ -1286,7 +1290,7 @@ new_1-2,118,108,3	script	Employée Kafra#nv1	117,{
 				mes "Quand vous demandez à une employée Kafra de 'sauvegarder', votre point de sauvegarde sera changé.";
 				next;
 				mes "[Employée Kafra]";
-				mes "Votre point de sauvegarde est l'endroit où vous serez téléporté si vous mourrez.";
+				mes "Votre point de sauvegarde est l'endroit où vous serez téléporté"+ ( sex ? "" : "e" ) +" si vous mourrez.";
 				next;
 				mes "[Employée Kafra]";
 				mes "Le service de Sauvegarde proposé par la Kafra Corporation est totalement gratuit~!";
@@ -1487,7 +1491,7 @@ new_1-2,161,182,5	script	Instructeur#nv	92,{
 			mes "Quand tu cliques pour attaquer, le curseur de ta souris se changera en épée. Les compétences et les objets ciblés fonctionnent aussi avec l'option Magnétisme.";
 			next;
 			mes "[Edwin]";
-			mes "Ça peut sembler difficile ou inutile d'utiliser cette option. Mais une fois que tu y seras habitué tu pourras plus t'en passer.";
+			mes "Ça peut sembler difficile ou inutile d'utiliser cette option. Mais une fois que tu y seras habitué"+ ( sex ? "" : "e" ) +" tu pourras plus t'en passer.";
 			next;
 			mes "[Edwin]";
 			mes "Voilà, c'est tout pour la fenêtre options.";
@@ -1518,7 +1522,7 @@ new_1-2,161,182,5	script	Instructeur#nv	92,{
 
 new_1-2,182,182,3	script	Instructeur (Stats)	754,{
 	mes "[Jare Riotte]";
-	mes "Bienvenue, jeune aventurier.";
+	mes "Bienvenue, jeune aventuri"+ ( sex ? "er" : "ère" ) +".";
 	mes "Moi, Jare Riotte, je vais t'apprendre les règles fondamentales en ce qui concerne les statistiques de ton personnage.";
 	next;
 	mes "[Jare Riotte]";
@@ -1671,7 +1675,7 @@ new_1-2,182,182,3	script	Instructeur (Stats)	754,{
 new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 	mes "[Leo Handerson]";
 	mes "Bienvenue~";
-	mes "Oh, regardez-moi ce mignon petit Novice~!";
+	mes "Oh, regardez-moi "+ ( sex ? "ce mignon petit" : "cette mignonne petite" ) +" Novice~!";
 	next;
 	mes "[Leo Handerson]";
 	mes "Je suis Leo Handerson.";
@@ -1776,7 +1780,7 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 					next;
 					mes "[Leo Handerson]";
 					mes "Voilà pour le système des groupes.~";
-					mes "Un adorable novice comme vous devrait vite assimiler tous ces enseignements primordiaux~";
+					mes "Un"+ ( sex ? "" : "e" ) +" adorable novice comme vous devrait vite assimiler tous ces enseignements primordiaux~";
 					emotion e_kis;
 					next;
 					break;
@@ -1785,13 +1789,13 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 					mes "Lorsque vous avez acquis les ^4D4DFFCompétences de Base^000000 au niveau 4 ou plus, vous pouvez ouvrir votre propre Salon de Discussion. Vous pouvez aussi bien cliquer sur le bouton de ^3355FFchat^000000 dans la fenêtre d'informations ou simplement taper '^3355FFAlt^000000' + '^3355FFC^000000.'";
 					next;
 					mes "[Leo Handerson]";
-					mes "Une fois qu'un salon de discussion est ouvert, Vous pouvez vérifier les informations des personnes ayant rejoint le salon en cliquant droit sur leur pseudonyme.";
+					mes "Une fois qu'un salon de discussion est ouvert, vous pouvez vérifier les informations des personnes ayant rejoint le salon en cliquant droit sur leur pseudonyme.";
 					next;
 					mes "[Leo Handerson]";
-					mes "Vous pouvez aussi enregistrer les personnes en tant qu'ami en faisant de même. Si vous êtes l'organisateur du salon, vous pouvez changer son organisation.";
+					mes "Vous pouvez aussi enregistrer les personnes en tant qu'ami en faisant de même. Si vous êtes l'organisat"+ ( sex ? "eur" : "rice" ) +" du salon, vous pouvez changer son organisation.";
 					next;
 					mes "[Leo Handerson]";
-					mes "Une fois dans le salon de discussion, Vous ne pourrez plus entendre aucune conversation en dehors de celui-ci. Souvenez-vous bien de ça, d'accord?";
+					mes "Une fois dans le salon de discussion, vous ne pourrez plus entendre aucune conversation en dehors de celui-ci. Souvenez-vous bien de ça, d'accord?";
 					next;
 					break;
 				case 4:
@@ -1805,13 +1809,13 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 					mes "En tout cas, il vous est possible d'utiliser votre ^4d4dffstock personnel Kafra^000000 après avoir appris les ^4D4DFF compétences de base^000000 au niveau 6 ou plus.";
 					next;
 					mes "[Leo Handerson]";
-					mes "Quand vous porterez trop d'objets pour vous, votre poids sera trop lourd et vous ne serez plus capable de régénérer vos Points de Vie et d'Énergie en vous reposant, ou même de vous défendre contre les monstres! Donc rangez ce dont vous n'avez pas besoin dans le stock Kafra.";
+					mes "Quand vous porterez trop d'objets pour vous, votre poids sera trop important et vous ne serez plus capable de régénérer vos Points de Vie et d'Énergie en vous reposant, ou même de vous défendre contre les monstres! Donc rangez ce dont vous n'avez pas besoin dans le stock Kafra.";
 					next;
 					break;
 				case 5:
 					mes "[Leo Handerson]";
 					mes "Oh, c'est vrai?";
-					mes "Comme je l'espérais, vous êtes aussi vif que vous êtes élégant!";
+					mes "Comme je l'espérais, vous êtes aussi vi"+ ( sex ? "f" : "ve" ) +" que vous êtes élégant"+ ( sex ? "" : "e" ) +"!";
 					mes "Je suis vraiment impressionné, foi de Leo!";
 					next;
 					set .@end,1;
@@ -1824,7 +1828,7 @@ new_1-2,184,172,1	script	Instructeur (Compétence)::Compréhension des Skills	47,{
 			break;
 		case 3:
 			mes "[Leo Handerson]";
-			mes "Les ^4d4dffÉmoticônes^000000 sont couramment utilisées pour ^4D4DFFafficher les sentiments^000000. c'est une manière amusante de communiquer!";
+			mes "Les ^4d4dffÉmoticônes^000000 sont couramment utilisées pour ^4D4DFFafficher les sentiments^000000. C'est une manière amusante de communiquer!";
 			next;
 			mes "[Leo Handerson]";
 			mes "Vous devez d'abord avoir appris ^4D4DFFles compétences de base au niveau 2^000000 ou plus pour utiliser les émoticônes.";
@@ -1887,7 +1891,7 @@ new_1-2,17,182,5	script	Aide#nv	84,{
 			mes "Tout d'abord, tu dois placer ton curseur sur un monstre. Si tu fais un clic à gauche, pour frapper le monstre une fois.";
 			next;
 			mes "[Elmeen]";
-			mes "Si tu es trop fatigué pour cliquer tout le temps, tu peux cliquer en maintenant la touche '^4D4DFFCtrl^000000' enfoncée. Tu continueras à attaquer le monstre jusqu'à sa mort ou jusqu'à ce que tu décides de fuir.";
+			mes "Si tu es trop fatigué"+ ( sex ? "" : "e" ) +" pour cliquer tout le temps, tu peux cliquer en maintenant la touche '^4D4DFFCtrl^000000' enfoncée. Tu continueras à attaquer le monstre jusqu'à sa mort ou jusqu'à ce que tu décides de fuir.";
 			next;
 			mes "[Elmeen]";
 			mes "Tu peux aussi cliquer sur le monstre et garder le bouton enfoncé. Et pour ceux à qui ni l'un ni l'autre ne convient, il y a une autre option.";
@@ -1971,7 +1975,7 @@ new_1-2,17,182,5	script	Aide#nv	84,{
 					mes "Chaque arme possède aussi ses forces et ses faiblesses. La taille de l'arme affectera les dommages causés aux monstres.";
 					next;
 					mes "[Elmeen]";
-					mes "Par exemple, une arme de type dague fera 100 % de dommages sur les monstres de petite taille mais n'infligera que 50% des dégâts aux grands monstres.";
+					mes "Par exemple, une arme de type dague fera 100% de dommages sur les monstres de petite taille mais n'infligera que 50% des dégâts aux grands monstres.";
 					next;
 					mes "[Elmeen]";
 					mes "Les différentes propriétés des monstres sont: Eau, Vent, Terre, Feu, Ombre, Fantôme et Sacré. Si tu attaques un monstre de propriété opposée à celle de ton arme, tu pourras lui infliger des dommages supplémentaires~";
@@ -2067,7 +2071,7 @@ new_1-2,17,182,5	script	Aide#nv	84,{
 				mes "Chaque arme possède aussi ses forces et ses faiblesses. La taille de l'arme affectera les dommages causés aux monstres.";
 				next;
 				mes "[Elmeen]";
-				mes "Par exemple, une arme de type dague fera 100 % de dommages sur les monstres de petite taille mais n'infligera que 50% des dégâts aux grands monstres.";
+				mes "Par exemple, une arme de type dague fera 100% de dommages sur les monstres de petite taille mais n'infligera que 50% des dégâts aux grands monstres.";
 				next;
 				mes "[Elmeen]";
 				mes "Les différentes propriétés des monstres sont: Eau, Vent, Terre, Feu, Ombre, Fantôme et Sacré. Si tu attaques un monstre de propriété opposée à celle de ton arme, tu pourras infliger des dommages supplémentaires~";
@@ -2196,14 +2200,14 @@ new_1-2,38,182,3	script	Garde de l'Entrée#nv	92,{
 			end;
 		case 2:
 			mes "[Muriel]";
-			mes "Pas de problème. Si tu n'es pas sûr de pouvoir passer le test, pourquoi n'irais-tu pas suivre le cours de l'instructeur à l'est de la salle une nouvelle fois? Reviens dès que tu seras prêt.";
+			mes "Pas de problème. Si tu n'es pas sûr"+ ( sex ? "" : "e" ) +" de pouvoir passer le test, pourquoi n'irais-tu pas suivre le cours de l'instructeur à l'est de la salle une nouvelle fois? Reviens dès que tu seras prêt"+ ( sex ? "" : "e" ) +".";
 			close;
 		}
 		close;
 	}
 	else if ((nov_2nd_cos > 20) && (nov_2nd_cos < 31)) {
 		mes "[Muriel]";
-		mes "Oh bien sûr, je t'ai dit de rester vigilent. Fonce! Tu verras que ce n'est pas la mer à boire.";
+		mes "Oh bien sûr, je t'ai dit de rester vigilent"+ ( sex ? "" : "e" ) +". Fonce! Tu verras que ce n'est pas la mer à boire.";
 		mes "C'est en faisant des erreurs qu'on apprend.";
 		mes "Tu pourras repasser le test autant de fois que tu voudras.";
 		next;
@@ -2214,7 +2218,7 @@ new_1-2,38,182,3	script	Garde de l'Entrée#nv	92,{
 		case 1:
 			mes "[Muriel]";
 			mes "Je vais te redonner quelques provisions.";
-			mes "Sois prudent!";
+			mes "Sois prudent"+ ( sex ? "" : "e" ) +"!";
 			if (nov_2nd_cos == 22) {
 				set nov_2nd_cos,33;
 				getexp 16,0;
@@ -2254,13 +2258,13 @@ new_1-2,38,182,3	script	Garde de l'Entrée#nv	92,{
 			end;
 		case 2:
 			mes "[Muriel]";
-			mes "Pas de problème. Si tu n'es pas sûr de pouvoir passer le test, pourquoi n'irais-tu pas suivre le cours de l'instructeur à l'est de la salle une nouvelle fois? Reviens dès que tu seras prêt.";
+			mes "Pas de problème. Si tu n'es pas sûr"+ ( sex ? "" : "e" ) +" de pouvoir passer le test, pourquoi n'irais-tu pas suivre le cours de l'instructeur à l'est de la salle une nouvelle fois? Reviens dès que tu seras prêt"+ ( sex ? "" : "e" ) +".";
 			close;
 		}
 	}
 	else if (nov_2nd_cos > 30) {
 		mes "[Muriel]";
-		mes "Oh bien sûr, je t'ai dit de rester vigilent. Fonce! Tu verras que ce n'est pas la mer à boire.";
+		mes "Oh bien sûr, je t'ai dit de rester vigilent"+ ( sex ? "" : "e" ) +". Fonce! Tu verras que ce n'est pas la mer à boire.";
 		mes "C'est en faisant des erreurs qu'on apprend.";
 		mes "Tu pourras repasser le test autant de fois que tu voudras.";
 		mes "[Muriel]";
@@ -2269,14 +2273,14 @@ new_1-2,38,182,3	script	Garde de l'Entrée#nv	92,{
 		switch(select("Oui:Puis-je avoir plus de temps?")) {
 		case 1:
 			mes "[Muriel]";
-			mes "Je vais te soigner, sois prudent désormais!";
+			mes "Je vais te soigner, sois prudent"+ ( sex ? "" : "e" ) +" désormais!";
 			percentheal 100,0;
 			close2;
 			warp "new_1-3",96,21;
 			end;
 		case 2:
 			mes "[Muriel]";
-			mes "Pas de problème. Si tu n'es pas sûr de pouvoir passer le test, pourquoi n'irais-tu pas suivre le cours de l'instructeur à l'est de la salle une nouvelle fois? Reviens dès que tu seras prêt.";
+			mes "Pas de problème. Si tu n'es pas sûr de pouvoir passer le test, pourquoi n'irais-tu pas suivre le cours de l'instructeur à l'est de la salle une nouvelle fois? Reviens dès que tu seras prêt"+ ( sex ? "" : "e" ) +".";
 			close;
 		}
 	}
@@ -2316,7 +2320,7 @@ new_1-3,95,30,4	script	Entraineur#nv1::NovHoffman	84,{
 		end;
 	case 2:
 		mes "[Hoffman]";
-		mes "Tu dois aimer les défis, n'est-ce pas? Sois prudent, cela peut être vraiment dangereux...";
+		mes "Tu dois aimer les défis, n'est-ce pas? Sois prudent"+ ( sex ? "" : "e" ) +", cela peut être vraiment dangereux...";
 		next;
 		if (strnpcinfo(2) == "nv1" || strnpcinfo(2) == "nv2" || strnpcinfo(2) == "nv3") {
 			if (rand(2)) {
@@ -2338,7 +2342,7 @@ new_1-3,95,30,4	script	Entraineur#nv1::NovHoffman	84,{
 	case 3:
 		mes "[Hoffman]";
 		mes "Hum...?";
-		mes "Es-tu effrayé à l'idée d'avoir à affronter des monstres plus puissants? C'est compréhensible, Puisque tu es encore un nouvel aventurier. Bonne chance!";
+		mes "Es-tu effrayé"+ ( sex ? "" : "e" ) +" à l'idée d'avoir à affronter des monstres plus puissants? C'est compréhensible, puisque tu es encore "+ ( sex ? "un nouvel aventurier" : "une nouvelle aventurière" ) +". Bonne chance!";
 		close;
 	}
 }
@@ -2357,7 +2361,7 @@ new_1-3,96,174,3	script	Examinateur#nv1::NovKeyman	85,{
 	switch(select("Oui:Non")) {
 	case 1:
 		mes "[Keyman]";
-		mes "J'espère que tu deviendras un grand guerrier. Bonne route!";
+		mes "J'espère que tu deviendras "+ ( sex ? "un grand guerrier" : "une grande guerrière" ) +". Bonne route!";
 		close2;
 		warp "new_1-4",99,10;
 		return
@@ -2408,7 +2412,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 		case 1:
 			mes "[Hanson]";
 			mes "Excellent choix!";
-			mes "Tu es censé suivre tous les cours du camp d'entraînement si tu veux être un joueur bien préparé!";
+			mes "Tu es censé"+ ( sex ? "" : "e" ) +" suivre tous les cours du camp d'entraînement si tu veux être "+ ( sex ? "un joueur" : "une joueuse" ) +" bien préparé"+ ( sex ? "" : "e" ) +"!";
 			next;
 			mes "[Hanson]";
 			mes "D'accord laisse-moi commencer le premier test de personnalité. Relaxe-toi et ne te fatigue pas.";
@@ -2499,7 +2503,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 				break;
 			}
 			mes "[Hanson]";
-			mes "Tu es souvent agacé de voir quelqu'un meilleur que toi.";
+			mes "Tu es souvent agacé"+ ( sex ? "" : "e" ) +" de voir quelqu'un meilleur que toi.";
 			next;
 			switch(select("Oui.:Non.")) {
 			case 1:
@@ -2521,7 +2525,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 				break;
 			}
 			mes "[Hanson]";
-			mes "Tu es un meneur d'hommes.";
+			mes "Tu es "+ ( sex ? "un meneur" : "une meneuse" ) +" d'hommes.";
 			next;
 			switch(select("Oui.:Non.")) {
 			case 1:
@@ -2587,7 +2591,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 			mes "[Hanson]";
 			mes "Lorsque tu vois un emploi du temps bien rempli...";
 			next;
-			switch(select("Tu te sens comme un robot.:Tu es fier et satisfait.:Emploi du temps? Quel emploi du temps?")) {
+			switch(select("Tu te sens comme un robot.:Tu es fi"+ ( sex ? "er" : "ère" ) +" et satisfait"+ ( sex ? "" : "e" ) +".:Emploi du temps? Quel emploi du temps?")) {
 			case 1:
 				set .@swordman_p,.@swordman_p+1;
 				set .@thief_p,.@thief_p+1;
@@ -2633,12 +2637,12 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 				break;
 			}
 			mes "[Hanson]";
-			mes "Tu es responsable d'une tâche qui nécessite la coopération de beaucoup de personnes. Si tu t'en charges seul, cela nécessitera beaucoup de temps et d'efforts.";
+			mes "Tu es responsable d'une tâche qui nécessite la coopération de beaucoup de personnes. Si tu t'en charges seul"+ ( sex ? "" : "e" ) +", cela nécessitera beaucoup de temps et d'efforts.";
 			next;
 			mes "[Hanson]";
 			mes "Mais si tu coopères avec d'autres personnes, la tâche sera simple et joyeuse. Tu préfères... ";
 			next;
-			switch(select("T'en occuper seul, même si cela sera difficile.:Demander de l'aide de ses amis.")) {
+			switch(select("T'en occuper seul"+ ( sex ? "" : "e" ) +", même si cela sera difficile.:Demander de l'aide à ses amis.")) {
 			case 1:
 				set .@magician_p,.@magician_p+1;
 				break;
@@ -2647,9 +2651,9 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 				break;
 			}
 			mes "[Hanson]";
-			mes "Tu rencontres une fille qui est évanouie dans la rue. Que fais-tu?";
+			mes "Tu rencontres "+ ( sex ? "une fille" : "un garçon" ) +" qui est évanoui"+ ( sex ? "e" : "" ) +" dans la rue. Que fais-tu?";
 			next;
-			switch(select("Je la conduis à l'hôpital.:J'évalue la situation avant d'agir.:Je l'ignore.")) {
+			switch(select("Je l"+ ( sex ? "a" : "e" ) +" conduis à l'hôpital.:J'évalue la situation avant d'agir.:Je l'ignore.")) {
 			case 1:
 				set .@acolyte_p,.@acolyte_p+1;
 				break;
@@ -2700,7 +2704,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 				break;
 			}
 			mes "[Hanson]";
-			mes "Tu es en voyage avec ton (ta) conjoint(e). Ta moitié décide d'acheter un souvenir qui n'est pas particulièrement beau. Que fais-tu?";
+			mes "Tu es en voyage avec "+ ( sex ? "ta conjointe" : "ton conjoint" ) +". Ta moitié"+ ( sex ? "e" : "" ) +" décide d'acheter un souvenir qui n'est pas particulièrement beau. Que fais-tu?";
 			next;
 			switch(select("Tu lui achètes l'objet.:Tu dis 'non.':Tu lui promets de lui offrir la prochaine fois.")) {
 			case 1:
@@ -2897,7 +2901,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 			}
 			if (.@job_c == 1) {
 				mes "[Hanson]";
-				mes "Bien que tu sois quelqu'un de franc et de simple, tu as une volonté de fer et tu aspires à devenir quelqu'un d'important en ce monde.";
+				mes "Bien que tu sois quelqu'un de franc"+ ( sex ? "" : "he" ) +" et de simple, tu as une volonté de fer et tu aspires à devenir quelqu'un d'important en ce monde.";
 				next;
 				mes "[Hanson]";
 				mes "Tu essaies aussi toujours de protéger les faibles.";
@@ -2934,7 +2938,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 					mes "Les tickets pour l'entrepôt et le transport Kafra peuvent être utilisés pour utiliser les services correspondants gratuitement.";
 					next;
 					mes "[Hanson]";
-					mes "Le 'Zény' est la monnaie courante de Rune-Midgard. Le 'Fauchon' sera une arme très utile une fois que tu seras devenu Épéiste.";
+					mes "Le 'Zény' est la monnaie courante de Rune-Midgard. Le 'Fauchon' sera une arme très utile une fois que tu seras devenu"+ ( sex ? "" : "e" ) +" Épéiste.";
 					next;
 					mes "[Hanson]";
 					mes "Le 'Phracon' est un minerai qui permet d'améliorer les armes de niveau 1. Pour rendre plus puissante ton Fauchon, il faut utiliser un Phracon à la forge d'une ville.";
@@ -2943,7 +2947,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 					mes "La ville où je vais t'envoyer se nomme Izlude, une ville annexe de Prontera. L'association des Épéistes se situe à l'Ouest de la ville. Retiens-le bien.";
 					next;
 					mes "[Hanson]";
-					mes "Tu vas maintenant être téléporté. Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000 et adieu!";
+					mes "Tu vas maintenant être téléporté"+ ( sex ? "" : "e" ) +". Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000 et adieu!";
 					close2;
 					set nov_1st_cos,0;
 					set nov_2nd_cos,0;
@@ -2963,10 +2967,10 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 			}
 			else if (.@job_c == 2) {
 				mes "[Hanson]";
-				mes "Tu aimes analyser ce qui t'entoure, et tu es vraiment indépendant. Tu as un jugement plein de sagesse et tu peux être très réservé et logique.";
+				mes "Tu aimes analyser ce qui t'entoure, et tu es vraiment indépendant"+ ( sex ? "" : "e" ) +". Tu as un jugement plein de sagesse et tu peux être très réservé"+ ( sex ? "" : "e" ) +" et logique.";
 				next;
 				mes "[Hanson]";
-				mes "Pour toi, observateur et intellectuel, ^696969Magicien^000000 est la classe qui te correspond le mieux.";
+				mes "Pour toi, observat"+ ( sex ? "eur" : "rice" ) +" et intellectuel"+ ( sex ? "" : "le" ) +", ^696969Magicien^000000 est la classe qui te correspond le mieux.";
 				next;
 				mes "[Hanson]";
 				mes "Acceptes-tu de suivre mes recommandations ou vas-tu choisir toi-même ta classe?";
@@ -2975,7 +2979,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 				case 1:
 					mes "[Hanson]";
 					mes "C'est le bon choix!";
-					mes "je vais te donner quelques provisions et te téléporter dans l'académie des Magiciens.";
+					mes "Je vais te donner quelques provisions et te téléporter dans l'académie des Magiciens.";
 					next;
 					mes "^660000Liste des réserves^000000";
 					mes "^00003310 Tickets pour l'entrepôt Kafra^000000";
@@ -3004,17 +3008,17 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 					mes "Le 'Zény' est la monnaie courante de Rune-Midgard. Ce 'Cutter' t'as été donné afin que tu puisses tuer quelques monstres avant de devenir Magicien.";
 					next;
 					mes "[Hanson]";
-					mes "Une fois devenu Magicien, Tu pourras utiliser la 'Baguette' que je viens de te donner. Il peut t'être très utile lors de tes débuts en tant que Magicien.";
+					mes "Une fois devenu Magicien, tu pourras utiliser la 'Baguette' que je viens de te donner. Il peut t'être très utile lors de tes débuts en tant que Magicien.";
 					next;
 					mes "[Hanson]";
-					mes "Le 'Phracon' est un minerai qui permet d'améliorer les armes de niveau 1. Pour rendre plus puissante une arme de niveau 1 il faut utiliser un Phracon en visitant la forge d'une ville.";
+					mes "Le 'Phracon' est un minerai qui permet d'améliorer les armes de niveau 1. Pour rendre plus puissante une arme de niveau 1, il faut utiliser un Phracon en visitant la forge d'une ville.";
 					next;
 					mes "[Hanson]";
 					mes "La ville où tu vas te rendre se nomme 'Geffen'.";
 					mes "L'académie des Magiciens est située au Nord-Ouest de la ville. Souviens-t'en bien.";
 					next;
 					mes "[Hanson]";
-					mes "Tu vas maintenant être téléporté.";
+					mes "Tu vas maintenant être téléporté"+ ( sex ? "" : "e" ) +".";
 					mes "Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000 et adieu.";
 					close2;
 					set nov_1st_cos,0;
@@ -3035,7 +3039,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 			}
 			else if (.@job_c == 3) {
 				mes "[Hanson]";
-				mes "Tu es très entêté et très organisé. Tu t'es déjà trouvé un but dans la vie et te sens très responsable de tes actions.";
+				mes "Tu es très entêté"+ ( sex ? "" : "e" ) +" et très organisé"+ ( sex ? "" : "e" ) +". Tu t'es déjà trouvé"+ ( sex ? "" : "e" ) +" un but dans la vie et te sens très responsable de tes actions.";
 				next;
 				mes "[Hanson]";
 				mes "En raison du chemin parcouru et de ton désir de réussir, ^696969Marchand^000000 est la profession qui te correspond le mieux.";
@@ -3079,10 +3083,10 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 					mes "Le 'Phracon' est un minerai qui permet d'améliorer les armes de niveau 1. Pour rendre plus puissante ta Hache de Guerre, il faudra utiliser un Phracon en visitant la forge d'une ville..";
 					next;
 					mes "[Hanson]";
-					mes "La ville dans laquelle tu vas être envoyé se nomme Alberta. La guilde des marchands se situe au Sud-Est de la ville. Souviens-t'en bien.";
+					mes "La ville dans laquelle tu vas être envoyé"+ ( sex ? "" : "e" ) +" se nomme Alberta. La guilde des marchands se situe au Sud-Est de la ville. Souviens-t'en bien.";
 					next;
 					mes "[Hanson]";
-					mes "Tu vas maintenant être téléporté.";
+					mes "Tu vas maintenant être téléporté"+ ( sex ? "" : "e" ) +".";
 					mes "Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000, et adieu.";
 					close2;
 					set nov_1st_cos,0;
@@ -3150,10 +3154,10 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 					mes "Le 'Phracon' est un minerai qui permet d'améliorer les armes de niveau 1. Pour rendre plus puissante ta Main Gauche il te faudra utiliser un Phracon en te rendant à la forge de la ville..";
 					next;
 					mes "[Hanson]";
-					mes "La ville dans laquelle tu vas être téléporté se nomme Morroc. La guilde des voleurs se trouve au premier sous-sol de la pyramide, au nord-ouest de la ville. Ne l'oublie pas!";
+					mes "La ville dans laquelle tu vas être téléporté"+ ( sex ? "" : "e" ) +" se nomme Morroc. La guilde des voleurs se trouve au premier sous-sol de la pyramide, au nord-ouest de la ville. Ne l'oublie pas!";
 					next;
 					mes "[Hanson]";
-					mes "Tu vas maintenant être téléporté.";
+					mes "Tu vas maintenant être téléporté"+ ( sex ? "" : "e" ) +".";
 					mes "Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000, et adieu.";
 					close2;
 					savepoint "morocc",150,99;
@@ -3207,10 +3211,10 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 					mes "Le 'Phracon' est un minerai qui permet d'améliorer les armes de niveau 1. Pour rendre plus puissant ton Arc Composite il te faudra utiliser un Phracon en te rendant dans la forge de la ville.";
 					next;
 					mes "[Hanson]";
-					mes "La ville dans laquelle tu vas être téléporté se nomme Payon. La guilde des archers se trouve au Nord-Est de la ville. Ne l'oublie pas!.";
+					mes "La ville dans laquelle tu vas être téléporté"+ ( sex ? "" : "e" ) +" se nomme Payon. La guilde des archers se trouve au Nord-Est de la ville. Ne l'oublie pas!.";
 					next;
 					mes "[Hanson]";
-					mes "Tu vas maintenant être téléporté.";
+					mes "Tu vas maintenant être téléporté"+ ( sex ? "" : "e" ) +".";
 					mes "Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000, et adieu.";
 					close2;
 					set nov_1st_cos,0;
@@ -3231,10 +3235,10 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 			}
 			else if (.@job_c == 6) {
 				mes "[Hanson]";
-				mes "Tu es quelqu'un de très chaleureux et de prévenant. Tu es prêt à te sacrifier pour le bien des autres";
+				mes "Tu es quelqu'un de très chaleureux et de prévenant. Tu es prêt"+ ( sex ? "" : "e" ) +" à te sacrifier pour le bien des autres";
 				next;
 				mes "[Hanson]";
-				mes "Tu es toujours désireux d'aider les autres, c'est pourquoi tu es tant aimé";
+				mes "Tu es toujours désireu"+ ( sex ? "x" : "se" ) +" d'aider les autres, c'est pourquoi tu es tant aimé"+ ( sex ? "" : "e" ) +".";
 				next;
 				mes "[Hanson]";
 				mes "Pour toi qui a le coeur sur la main, ^696969Acolyte^000000 te correspond le mieux.";
@@ -3276,10 +3280,10 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 					mes "Le 'Phracon' est un minerai qui permet d'améliorer les armes de niveau 1. Pour rendre plus puissante ta masse il faudra utiliser un Phracon en te rendant dans la forge de la ville.";
 					next;
 					mes "[Hanson]";
-					mes "Tu as choisi de devenir Acolyte. La ville où tu vas être envoyé se nomme Prontera. Le sanctuaire est au Nord-Est de Prontera. Ne l'oublie pas!";
+					mes "Tu as choisi de devenir Acolyte. La ville où tu vas être envoyé"+ ( sex ? "" : "e" ) +" se nomme Prontera. Le sanctuaire est au Nord-Est de Prontera. Ne l'oublie pas!";
 					next;
 					mes "[Hanson]";
-					mes "Tu vas maintenant être téléporté.";
+					mes "Tu vas maintenant être téléporté"+ ( sex ? "" : "e" ) +".";
 					mes "Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000, et adieu.";
 					close2;
 					set nov_1st_cos,0;
@@ -3353,7 +3357,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 		mes "Pourquoi es-tu toujours ici?";
 		next;
 		mes "[Hanson]";
-		mes "Tu ne disais rien, donc je pensais que tu étais parti après que je t'ai donné les réserves...";
+		mes "Tu ne disais rien, donc je pensais que tu étais parti"+ ( sex ? "" : "e" ) +" après que je t'ai donné les réserves...";
 		next;
 		mes "[Hanson]";
 		mes "Il ne te reste plus maintenant qu'à partir pour Rune-Midgard~";
@@ -3408,7 +3412,7 @@ new_1-4,100,29,1	script	Hanson#nv	46,{
 S_UserJobchoice:
 	mes "[Hanson]";
 	mes "Je vois. c'est ton choix.";
-	mes "Tu n'es pas obligé de choisir le métier que nous te recommandons. S'il-te-plaît choisi une professions qui te convient.";
+	mes "Tu n'es pas obligé"+ ( sex ? "" : "e" ) +" de choisir le métier que nous te recommandons. S'il-te-plaît choisi une professions qui te convient.";
 	next;
 	select( "Épéiste:Magicien:Marchand:Voleur:Archer:Acolyte" );
 	// @menu is already set by Core.
@@ -3425,42 +3429,42 @@ S_UserJobchoice:
 	}
 	else if (@menu == 2) {
 		mes "de devenir Magicien.";
-		mes "Tu vas être envoyé dans la ville de Geffen.";
+		mes "Tu vas être envoyé"+ ( sex ? "" : "e" ) +" dans la ville de Geffen.";
 		next;
 		mes "[Hanson]";
 		mes "L'académie des Magiciens se situe au Nord-Ouest de la ville. Ne l'oublie pas!";
 	}
 	else if (@menu == 3) {					
 		mes "de devenir Marchand.";
-		mes "Tu vas être envoyé dans la ville d'Alberta.";
+		mes "Tu vas être envoyé"+ ( sex ? "" : "e" ) +" dans la ville d'Alberta.";
 		next;
 		mes "[Hanson]";
 		mes "L'académie des Marchands se situe au Sud-Ouest de la ville. Ne l'oublie pas!";
 	}
 	else if (@menu == 4) {
 		mes "de devenir Voleur.";
-		mes "Tu vas être envoyé dans la ville de Morroc.";
+		mes "Tu vas être envoyé"+ ( sex ? "" : "e" ) +" dans la ville de Morroc.";
 		next;
 		mes "[Hanson]";
 		mes "La guilde des voleurs se trouve dans le premier sous-sol de la pyramide au nord-ouest de Morroc. Ne l'oublie pas!";
 	}
 	else if (@menu == 5) {
 		mes "de devenir un Archer.";
-		mes "Tu seras envoyé dans la ville de Payon.";
+		mes "Tu seras envoyé"+ ( sex ? "" : "e" ) +" dans la ville de Payon.";
 		next;
 		mes "[Hanson]";
 		mes "La guilde des archers se situe au Nord-Est de Payon. Ne l'oublie pas!";
 	}
 	else {
 		mes "de devenir un Acolyte.";
-		mes "Tu seras envoyé dans la ville de Prontera.";
+		mes "Tu seras envoyé"+ ( sex ? "" : "e" ) +" dans la ville de Prontera.";
 		next;
 		mes "[Hanson]";
 		mes "Le sanctuaire de Prontera se situe au Nord-Est de la ville. Ne l'oublie pas!";
 	}
 	next;
 	mes "[Hanson]";
-	mes "Laisse-moi te donner quelques provisions. Tu seras ensuite transporté dans la ville choisie.";
+	mes "Laisse-moi te donner quelques provisions. Tu seras ensuite transporté"+ ( sex ? "" : "e" ) +" dans la ville choisie.";
 	next;
 	mes "^660000Liste des réserves^000000";
 	mes "^00003310 Tickets pour l'entrepôt Kafra^000000";
@@ -3485,7 +3489,7 @@ S_UserJobchoice:
 	mes "Le 'Zény' est la monnaie courante de Rune-Midgard. Les 'Vêtements d'Aventurier' te seront utiles une fois devenu "+.@Jobs$[@menu]+".";
 	next;
 	mes "[Hanson]";
-	mes "Tu vas maintenant être téléporté.";
+	mes "Tu vas maintenant être téléporté"+ ( sex ? "" : "e" ) +".";
 	mes "Bonne chance, ^A62A2A" + strcharinfo(0) + "^000000 et adieu!";
 	next;
 	set nov_1st_cos,0;
@@ -3547,7 +3551,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					mes "L'une des grandes forces des Épéistes est qu'ils ont une énorme quantité de Points de Vie, si bien qu'ils peuvent résister plus longtemps aux coups des ennemis.";
 					next;
 					mes "[Bruce]";
-					mes "Après avoir appris quelques attaques puissantes, les Épéistes deviennent imbattables aux combat de mêlée.";
+					mes "Après avoir appris quelques attaques puissantes, les Épéistes deviennent imbattables aux combats de mêlée.";
 					next;
 					mes "[Bruce]";
 					mes "Dans le monde de Ragnarök, les Épéistes sont généralement à l'avant-garde, protégeant ainsi les personnages des autres classes des attaques.";
@@ -3559,7 +3563,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					break;
 				case 2:
 					mes "[Bruce]";
-					mes "Les Magiciens sont spécialisés dans la manipulation des éléments: le Feu, l'eau, la terre et l'air, et les utilisent pour attaquer leurs ennemis.";
+					mes "Les Magiciens sont spécialisés dans la manipulation des éléments: le Feu, l'Eau, la Terre et l'Air, et les utilisent pour attaquer leurs ennemis.";
 					next;
 					mes "[Bruce]";
 					mes "Pourtant, en raison de leur faible constitution, ils ne peuvent manier que des bâtons ou des dagues, et porter des armures légères.";
@@ -3688,7 +3692,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					mes "L'une des grandes forces des Épéistes est qu'ils ont une énorme quantité de Points de Vie, si bien qu'ils peuvent résister plus longtemps aux coups des ennemis.";
 					next;
 					mes "[Bruce]";
-					mes "Après avoir appris quelques attaques puissantes, les Épéistes deviennent imbattables aux combat de mêlée.";
+					mes "Après avoir appris quelques attaques puissantes, les Épéistes deviennent imbattables aux combats de mêlée.";
 					next;
 					mes "[Bruce]";
 					mes "Dans le monde de Ragnarök, les Épéistes sont généralement à l'avant-garde, protégeant ainsi les personnages des autres classes des attaques.";
@@ -3700,7 +3704,7 @@ new_1-4,91,22,4	script	Bruce#nv	57,{
 					break;
 				case 2:
 					mes "[Bruce]";
-					mes "Les Magiciens sont spécialisés dans la manipulation des éléments: le Feu, l'eau, la terre et l'air, et les utilisent pour attaquer leurs ennemis.";
+					mes "Les Magiciens sont spécialisés dans la manipulation des éléments: le Feu, l'Eau, la Terre et l'Air, et les utilisent pour attaquer leurs ennemis.";
 					next;
 					mes "[Bruce]";
 					mes "Pourtant, en raison de leur faible constitution, ils ne peuvent manier que des bâtons ou des dagues, et porter des armures légères.";

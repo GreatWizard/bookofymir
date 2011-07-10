@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par KhaOs, corrigé par Etna et Fern
+//traduit par KhaOs, corrigé par Etna, Fern et Morrigan
 //===== eAthena Script ======================================= 
 //= Gunslinger Job Quest
 //===== By: ================================================== 
@@ -33,7 +33,7 @@
 que_ng,152,167,3	script	Maître Miller	901,{
 	if (Upper == 2) {
 		mes "[Maître Miller]";
-		mes "Oh, quel adorable bambin~";
+		mes "Oh, quel"+ ( sex ? "" : "le" ) +" adorable bambin"+ ( sex ? "" : "e" ) +"~";
 		mes "Où est ta maman?";
 		mes "Cet endroit est dangereux, alors s'il te plait rentre vite chez toi, d'accord?";
 		close;
@@ -56,7 +56,7 @@ que_ng,152,167,3	script	Maître Miller	901,{
 close;
 }
 mes "[Maître Miller]";
-mes "Hum. tu es un peu jeune, mais tes yeux me disent que tu es assez déterminé.";
+mes "Hum. Tu es un peu jeune, mais tes yeux me disent que tu es assez déterminé"+ ( sex ? "" : "e" ) +".";
 mes "Tu auras besoin de passer notre entretien et de suivre nos cours d'éducation pour devenir Gunslinger.";
 mes "Désires-tu t'engager dans cette voie?";
 next;
@@ -66,7 +66,7 @@ if(select("Laissez-moi y réfléchir un peu.:Bien sûr!") == 1) {
 	close;
 }
 mes "[Maître Miller]";
-mes "Bien, Bien. Bon alors, tu vas pouvoir commencer. Prends cette lettre et amène-la à M. Taureau Éclairé à Payon. C'est un chaman qui jugera si tu es qualifié ou non pour devenir Gunslinger.";
+mes "Bien, Bien. Bon alors, tu vas pouvoir commencer. Prends cette lettre et amène-la à M. Taureau Éclairé à Payon. C'est un chaman qui jugera si tu es qualifié"+ ( sex ? "" : "e" ) +" ou non pour devenir Gunslinger.";
 set GUNS_Q,1;
 setquest 6020;
 close;
@@ -84,12 +84,12 @@ mes "Prends cette lettre de recommandation que j'ai écrite pour toi et apporte-l
 		}
 		else if(GUNS_Q == 3) {
 			mes "[Maître Miller]";
-			mes "Taureau Éclairé t'a demandé de lui rapporter un peu de lait? Il doit vraiment t'apprécier pour te demander de lui rendre autant de services. Bonne chance, l'ami.";
+			mes "Taureau Éclairé t'a demandé de lui rapporter un peu de lait? Il doit vraiment t'apprécier pour te demander de lui rendre autant de services. Bonne chance, l'ami"+ ( sex ? "" : "e" ) +".";
 			close;
 		}
 		else if(GUNS_Q == 4) {
 			mes "[Maître Miller]";
-			mes "Je m'attends à avoir de bonnes nouvelles à ton sujet d'ici peu. Tu sais, je n'ai aucun doute sur le fait que tu deviendras un Gunslinger.";
+			mes "Je m'attends à avoir de bonnes nouvelles à ton sujet d'ici peu. Tu sais, je n'ai aucun doute sur le fait que tu deviendras un"+ ( sex ? "" : "e" ) +" Gunslinger.";
 			close;
 		}
 		else if(GUNS_Q == 5) {
@@ -114,7 +114,7 @@ mes "Prends cette lettre de recommandation que j'ai écrite pour toi et apporte-l
 			mes "Tu auras peut être la chance de la rencontrer un de ces jours. De toute façon, en ce moment nous devons réguler les Armes à Feux et les Balles, afin de les garder loin des gens mal intentionnés ou irresponsables.";
 			next;
 			mes "[Maître Miller]";
-			mes "En tout cas, c'est toujours un plaisir pour moi de parler à un autre Gunslinger, alors restons en contact. Puisse le pouvoir de la terre te protéger dans toutes tes aventures~";
+			mes "En tout cas, c'est toujours un plaisir pour moi de parler à un"+ ( sex ? "" : "e" ) +" autre Gunslinger, alors restons en contact. Puisse le pouvoir de la terre te protéger dans toutes tes aventures~";
 			callfunc "Job_Change",Job_Gunslinger;
 			set GUNS_Q,6;
 			completequest 6024;
@@ -128,7 +128,7 @@ mes "Prends cette lettre de recommandation que j'ai écrite pour toi et apporte-l
 	}else{
 		if (Class == Job_Gunslinger) {
 			mes "[Maître Miller]";
-			mes "Oh! Ça faisait longtemps que je ne t'avais pas vu, l'ami. Comment vas-tu? J'espère que tu entretiens bien ton Arme à Feu. Prends soin d'elle, et elle prendra soin de toi. Retiens bien cela.";
+			mes "Oh! Ça faisait longtemps que je ne t'avais pas vu, l'ami"+ ( sex ? "" : "e" ) +". Comment vas-tu? J'espère que tu entretiens bien ton Arme à Feu. Prends soin d'elle, et elle prendra soin de toi. Retiens bien cela.";
 			close;
 		}else{
 			mes "[Maître Miller]";
@@ -141,7 +141,7 @@ mes "Prends cette lettre de recommandation que j'ai écrite pour toi et apporte-l
 payon,184,65,3	script	Taureau Éclairé	866,{
 	if (GUNS_Q == 1) {
 		mes "[Taureau Éclairé]";
-		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", jeune loup.";
+		mes ( isday() ? "Bonjour" : "Bonsoir" ) + ", jeune "+ ( sex ? "loup" : "louve" ) +".";
 		mes "Que m'as-tu apporté là?";
 		next;
 		mes "["+strcharinfo(0)+"]";
@@ -155,7 +155,7 @@ payon,184,65,3	script	Taureau Éclairé	866,{
 		mes "Je peux le voir dans tes yeux: tu as un coeur généreux et un fort sens des responsabilités. Tout ce dont tu as besoin, c'est de la bénédiction de la Terre pour te protéger.";
 		next;
 		mes "[Taureau Éclairé]";
-		mes "Je peux te donner un justificatif qui prouvera ton désir de devenir un guerrier de la terre au Maître des Gunslinger.";
+		mes "Je peux te donner un justificatif qui prouvera ton désir de devenir "+ ( sex ? "un guerrier" : "une guerrière" ) +" de la terre au Maître des Gunslinger.";
 		mes "J'aurais besoin de ces objets...";
 		next;
 		mes "[Taureau Éclairé]";
@@ -199,13 +199,13 @@ payon,184,65,3	script	Taureau Éclairé	866,{
 		set GUNS_Q,3;
 		changequest 6021,6022;
 		mes "[Taureau Éclairé]";
-		mes "Ah, tu es revenu avec tout ce dont j'ai besoin. S'il te plait, donne-moi un peu de temps pour préparer le justificatif.";
+		mes "Ah, tu es revenu"+ ( sex ? "" : "e" ) +" avec tout ce dont j'ai besoin. S'il te plait, donne-moi un peu de temps pour préparer le justificatif.";
 		mes "Reviens dans un petit moment, j'en aurai fini avec ça.";
 		close;
 	}
 	else if(GUNS_Q == 3) {
 		mes "[Taureau Éclairé]";
-		mes "Oh, tu es arrivé juste à temps. Ça fait un moment que je n'ai pas fait l'un de ces justificatifs, alors je suis un peu rouillé. Ça me rappelle ma jeunesse.";
+		mes "Oh, tu es arrivé"+ ( sex ? "" : "e" ) +" juste à temps. Ça fait un moment que je n'ai pas fait l'un de ces justificatifs, alors je suis un peu rouillé. Ça me rappelle ma jeunesse.";
 		next;
 		mes "[Taureau Éclairé]";
 		mes "Je sers à ce poste en choisissant les destinataires dignes de recevoir le justificatif des Gunslinger depuis quelques décennies maintenant. Mais avant cela, j'étais un jeune aventurier tout comme toi.";
@@ -261,7 +261,7 @@ payon,184,65,3	script	Taureau Éclairé	866,{
 	}
 	else if(GUNS_Q == 6) {
 		mes "[Taureau Éclairé]";
-		mes "AAh, ça fait longtemps que je ne t'avais pas vu. J'espère que tu deviens un loup futé, et que tu utilises tes pouvoirs de Gunslinger pour protéger ce qui est bon et juste..";
+		mes "AAh, ça fait longtemps que je ne t'avais pas vu. J'espère que tu deviens "+ ( sex ? "un loup futé" : "une louve futée" ) +", et que tu utilises tes pouvoirs de Gunslinger pour protéger ce qui est bon et juste..";
 		close;
 	}
 	else {
