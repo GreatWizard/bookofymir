@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par Myllena, corrigé par Fern
+//traduit par Myllena, corrigé par Fern et Morrigan
 //===== eAthena Script ======================================= 
 //= Taekwon Job Quest
 //===== By: ================================================== 
@@ -43,16 +43,16 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 		next;
 		if (Class != Job_Novice && TK_Q != 0) {
 			mes "[Phoenix]";
-			mes "Noble aventurier: si vous connaissez quelqu'un qui n'a pas encore choisi son chemin de vie, n'hésitez pas à le recommander à moi. Je suis prêt à enseigner mon art à quiconque souhaite apprendre...";
+			mes "Noble "+ ( sex ? "aventurier" : "aventurière" ) +": si vous connaissez quelqu'un qui n'a pas encore choisi son chemin de vie, n'hésitez pas à le recommander à moi. Je suis prêt à enseigner mon art à quiconque souhaite apprendre...";
 			close;
 		}
 		mes "[Phoenix]";
-		mes "Vous... Souhaitez-vous rejoindre la voie de l'entraînement afin que je vous enseigne mon art du combat? Ce sera long et douloureux, mais vous en ressortirez plus fort... assurément...";
+		mes "Vous... Souhaitez-vous rejoindre la voie de l'entraînement afin que je vous enseigne mon art du combat? Ce sera long et douloureux, mais vous en ressortirez plus fort"+ ( sex ? "" : "e" ) +"... assurément...";
 		next;
 		if(select("Je souhaite rejoindre vos rangs.","Non, merci.") == 1) {
 			if(getskilllv("NV_BASIC") < 9) {
 				mes "[Phoenix]";
-				mes "Malheureusement, il semblerait que vous n'êtes pas encore prêt à faire un choix définitif en ce qui concerne votre avenir. Continuez de vous entraîner, jeune Novice.";
+				mes "Malheureusement, il semblerait que vous n'êtes pas encore prêt"+ ( sex ? "" : "e" ) +" à faire un choix définitif en ce qui concerne votre avenir. Continuez de vous entraîner, jeune Novice.";
 				close;
 			}
 			mes "[Phoenix]";
@@ -60,7 +60,7 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			next;
 			if(BaseLevel > 19) {
 				mes "[Phoenix]";
-				mes "Hum. Je vois que vous avez effectué un entraînement physique très poussé. Très bien, nous allons maintenant vous préparer à l'entraînement spirituel. Inspirez profondément, et dites-moi quand vous serez prêt.";
+				mes "Hum. Je vois que vous avez effectué un entraînement physique très poussé. Très bien, nous allons maintenant vous préparer à l'entraînement spirituel. Inspirez profondément, et dites-moi quand vous serez prêt"+ ( sex ? "" : "e" ) +".";
 				set TK_Q, 2;
 				setquest 6001;
 				close;
@@ -73,11 +73,11 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			set TK_Q, 1;
 			setquest 6000;
 			mes "[Phoenix]";
-			mes "Je sais que ce ne sera pas une tâche aisée, mais vous devez vous montrer capable de relever ce défi. J'espère que la prochaine fois que je vous reverrai, vous serez devenu plus fort.";
+			mes "Je sais que ce ne sera pas une tâche aisée, mais vous devez vous montrer capable de relever ce défi. J'espère que la prochaine fois que je vous reverrai, vous serez devenu plus fort"+ ( sex ? "" : "e" ) +".";
 			close;
 		}
 		mes "[Phoenix]";
-		mes "Je comprends. Chacun décide de son chemin de vie, et vous avez choisi de continuer votre voyage. J'espère que vous trouverez une voie qui éclairera le sens de votre vie. Bon voyage, aventurier.";
+		mes "Je comprends. Chacun décide de son chemin de vie, et vous avez choisi de continuer votre voyage. J'espère que vous trouverez une voie qui éclairera le sens de votre vie. Bon voyage, "+ ( sex ? "aventurier" : "aventurière" ) +".";
 		close;
 	}
 	switch(TK_Q) {
@@ -90,7 +90,7 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			close;
 		}
 		mes "[Phoenix]";
-		mes "Revenez lorsque vous aurez gagné plus d'endurance. Ne négligez jamais votre entraînement. J'espère que la prochaine fois que je vous reverrai, vous serez devenu plus fort.";
+		mes "Revenez lorsque vous aurez gagné plus d'endurance. Ne négligez jamais votre entraînement. J'espère que la prochaine fois que je vous reverrai, vous serez devenu plus fort"+ ( sex ? "" : "e" ) +".";
 		close;
 	case 2:
 		mes "[Phoenix]";
@@ -105,7 +105,7 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 		switch(select( "Je l'affronte.:J'essaye de l'éviter.:J'essaye de l'analyser.")) {
 		case 1:
 			mes "[Phoenix]";
-			mes "Oui, c'est la réponse que j'attendais. Même si au premier abord il semble que vous ne puissiez résoudre un problème seul, une détermination suffisamment forte fera tomber tous les obstacles que vous rencontrerez.";
+			mes "Oui, c'est la réponse que j'attendais. Même si au premier abord il semble que vous ne puissiez résoudre un problème seul"+ ( sex ? "" : "e" ) +", une détermination suffisamment forte fera tomber tous les obstacles que vous rencontrerez.";
 			next;
 			mes "[Phoenix]";
 			mes "Même si au final vous échouez, vous aurez appris de nombreuses choses de cette expérience. Un essai qui n'est pas mené à terme ne peut apporter de résultats bénéfiques.";
@@ -122,14 +122,14 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			close;
 		case 3:
 			mes "[Phoenix]";
-			mes "L'analyser? Ce n'est pas votre rôle. Vous devez éliminer le problème le plus rapidement possible. Comment pourriez-vous l'analyser sans y avoir été confronté de près? De plus, vous n'aurez pas toujours le temps ou la possibilité d'effectuer une analyse...";
+			mes "L'analyser? Ce n'est pas votre rôle. Vous devez éliminer le problème le plus rapidement possible. Comment pourriez-vous l'analyser sans y avoir été confronté"+ ( sex ? "" : "e" ) +" de près? De plus, vous n'aurez pas toujours le temps ou la possibilité d'effectuer une analyse...";
 			next;
 			mes "[Phoenix]";
 			mes "Certains problèmes peuvent être envisagés et analysés à l'avance. Seulement tout ceci reste de la théorie. Fuir trop rapidement face à un problème peut faire perdre ne nombreuses informations, et se révéler au final mal avisé. Méditez sur vos peurs et sur l'hésitation qui vous enserre, et revenez me voir lorsque vous aurez réglé vos conflits intérieurs.";
 			close;
 		}
 		mes "[Phoenix]";
-		mes "Au cours de vos futurs voyages, vous ferez de nombreuses rencontres, et serez confronté à la diversité d'opinion et d'origines culturelles. Inévitablement, vous rencontrerez un jour une personne dont vous ne partagerez pas les idéaux.";
+		mes "Au cours de vos futurs voyages, vous ferez de nombreuses rencontres, et serez confronté"+ ( sex ? "" : "e" ) +" à la diversité d'opinion et d'origines culturelles. Inévitablement, vous rencontrerez un jour une personne dont vous ne partagerez pas les idéaux.";
 		next;
 		mes "[Phoenix]";
 		mes "Cette personne ne comprendra pas le chemin que vous avez choisi dans votre vie. Vos deux points de vue entreront en conflit... Que faites-vous?";
@@ -150,7 +150,7 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			mes "Il est important de bien s'entendre avec les autres, mais vous n'en tirerez aucun profit si vous n'apportez pas votre contribution, vos idées, vos pensées, vos opinions.";
 			next;
 			mes "[Phoenix]";
-			mes "Lorsqu'un conflit d'idéaux éclate, si la discussion est menée avec respect, il peut s'agit d'une grande opportunité afin d'ouvrir votre esprit, votre compréhension du monde, et des autres.";
+			mes "Lorsqu'un conflit d'idéaux éclate, si la discussion est menée avec respect, il peut s'agir d'une grande opportunité afin d'ouvrir votre esprit, votre compréhension du monde, et des autres.";
 			next;
 			mes "[Phoenix]";
 			mes "Je vous laisse méditer sur cette idée d'établir une harmonie entre les autres et vous-même. Revenez me voir quand vous y aurez réfléchi.";
@@ -160,7 +160,7 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			mes "Bien. Vous devez accepter les critiques avec une considération sincère.";
 			next;
 			mes "[Phoenix]";
-			mes "Il est impossible de tout savoir dans ce monde. Il est impossible de comprendre tous les poins de vue. Mais cela ne signifie pas que ces points de vue n'ont pas à être pris en compte.";
+			mes "Il est impossible de tout savoir dans ce monde. Il est impossible de comprendre tous les points de vue. Mais cela ne signifie pas que ces points de vue n'ont pas à être pris en compte.";
 			next;
 			mes "[Phoenix]";
 			mes "Celui qui est en désaccord avec vous a peut-être la réponse que vous cherchez. Dans des temps sombres, cette personne peut être d'un grand secours. Souvenez-vous en.";
@@ -176,11 +176,11 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 		mes "Sentez-vous ce calme, cette paix? ... Je vais vous poser une question très importante. Répondez moi avec honnêteté.";	
 		next;
 		mes "[Phoenix]";
-		mes "^FF0000Êtes-vous prêt à vous consacrer corps et âme à l'apprentissage de l'Art que je vous enseignerai, et de vous entraîner sans relâche afin d'être digne de la philosophie de l'Art Taekwondo?^000000";
+		mes "^FF0000Êtes-vous prêt"+ ( sex ? "" : "e" ) +" à vous consacrer corps et âme à l'apprentissage de l'Art que je vous enseignerai, et de vous entraîner sans relâche afin d'être digne de la philosophie de l'Art Taekwondo?^000000";
 		next;
 		if( select( "Oui.","Non.") == 1) {
 			mes "[Phoenix]";
-			mes "Très bien. Vous devez maintenant prendre conscience du pouvoir et des responsabilités d'un disciple ^ff0000Taekwondo^000000.";
+			mes "Très bien. Vous devez maintenant prendre conscience du pouvoir et des responsabilités d'un"+ ( sex ? "" : "e" ) +" disciple ^ff0000Taekwondo^000000.";
 			next;
 			mes "[Phoenix]";
 			mes "'Taekwon' signifie le poing et le coup, et 'Do' signifie l'art. Cet art martial repose sur l'utilisation des pieds et des poings.";
@@ -189,7 +189,7 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			mes "Entraînez-vous à l'Art du Taekwondo afin de développer votre corps et votre esprit. Ne reculez jamais devant l'effort, ou vous apporterez la honte sur les disciples Taekwondo.";
 			next;
 			mes "[Phoenix]";
-			mes "Vous êtes si jeune... et pourtant vous méritez déjà de devenir un disciple de l'Art du ^ff0000Taekwondo^000000.";
+			mes "Vous êtes si jeune... et pourtant vous méritez déjà de devenir un"+ ( sex ? "" : "e" ) +" disciple de l'Art du ^ff0000Taekwondo^000000.";
 			next;
 			completequest 6002;
 			callfunc "Job_Change",Job_Taekwon;
@@ -204,17 +204,17 @@ payon,157,141,5	script	Phoenix#TKJobChange	753,{
 			}
 			next;
 			mes "[Phoenix]";
-			mes "Prenez cet uniforme d'entraînement et ce bouclier. Faites bon usage de vos dons pour le combat. Au cours de vos voyages, éclairez les autres sur de notre Art, et ne cessez jamais d'apprendre de nouvelles techniques.";
+			mes "Prenez cet uniforme d'entraînement et ce bouclier. Faites bon usage de vos dons pour le combat. Au cours de vos voyages, éclairez les autres sur notre Art, et ne cessez jamais d'apprendre de nouvelles techniques.";
 			next;
 			mes "[Phoenix]";
-			mes "Il est maintenant temps pour vous de partir en voyage afin de trouver de nouveaux défis et développer votre force. Soyez fier de pratiquer l'Art du Taekwondo...";
+			mes "Il est maintenant temps pour vous de partir en voyage afin de trouver de nouveaux défis et développer votre force. Soyez "+ ( sex ? "fier" : "fière" ) +" de pratiquer l'Art du Taekwondo...";
 			next;
 			mes "[Phoenix]";
 			mes "Bonne chance. J'espère vous revoir un jour, "+strcharinfo(0)+".";
 			close;
 		}
 		mes "[Phoenix]";
-		mes "Hum, vous n'êtes sûrement pas prêt à devenir un disciple à part entière. Quand vous vous sentirez prêt, revenez me voir.";
+		mes "Hum, vous n'êtes sûrement pas prêt"+ ( sex ? "" : "e" ) +" à devenir un"+ ( sex ? "" : "e" ) +" disciple à part entière. Quand vous vous sentirez prêt"+ ( sex ? "" : "e" ) +", revenez me voir.";
 		close;
 	}
 }
