@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.9
+//= 2.0
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
@@ -25,6 +25,7 @@
 //= 1.8 Applied updated eco/def systems. [L0ne_W0lf]
 //= 1.9 Fixed eco/def not actually incrementing. [L0ne_W0lf]
 //=     Can no longer gain eco/def higher than 100.
+//= 2.0 Fixed a possible exploit in guild castle investment. [Brian]
 //============================================================
 
 arug_cas01,1,1,0	script	Manager#aru01_02	111,{
@@ -1930,7 +1931,7 @@ arug_cas01,92,380,3	script	Steward#aru01	55,{
 			mes "L'Investissement Commercial du Bastion est à son maximum. Vous êtes un Maître très dévoué, comme je m'en doutais.";
 			close;
 		}
-		if (GetCastleData("arug_cas01",4) == 2) {
+		if (GetCastleData("arug_cas01",4) >= 2) {
 			mes "[ Steward ]";
 			mes "Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.";
 			close;
@@ -1948,6 +1949,11 @@ arug_cas01,92,380,3	script	Steward#aru01	55,{
 		next;
 		switch(select("Investir en Commerce:Annuler")) {
 		case 1:
+			if (GetCastleData("arug_cas01",4) >= 2) {
+				mes "[ Steward ]";
+				mes "Vous avez déjà investi deux fois aujourd'hui. Vous devrez attendre demain avant de pouvoir investir à nouveau.";
+				close;
+			}
 			if (Zeny < .@eco_invest) {
 				mes "[ Steward ]";
 				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";
@@ -2000,7 +2006,7 @@ arug_cas01,92,380,3	script	Steward#aru01	55,{
 			mes "L'Investissement Défensif du Bastion est à son maximum. Vous êtes un Maître très dévoué, comme je m'en doutais.";
 			close;
 		}
-		if (GetCastleData("arug_cas01",5) == 2) {
+		if (GetCastleData("arug_cas01",5) >= 2) {
 			mes "Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.";
 			close;
 		}
@@ -2015,6 +2021,11 @@ arug_cas01,92,380,3	script	Steward#aru01	55,{
 		next;
 		switch(select("Investir en Défense:Annuler")) {
 		case 1:
+			if (GetCastleData("arug_cas01",5) >= 2) {
+				mes "[ Steward ]";
+				mes "Vous avez déjà investi deux fois aujourd'hui. Vous devrez attendre demain avant de pouvoir investir à nouveau.";
+				close;
+			}
 			if (Zeny < .@def_invest) {
 				mes "[ Steward ]";
 				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";

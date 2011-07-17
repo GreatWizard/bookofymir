@@ -2497,7 +2497,7 @@ OnTouch_:
 			soundeffect "tao_gunka_stand.wav",0;
 			sc_end SC_Blind;
 			sc_start SC_Curse,3000,0;
-			if (!lhz_curse == 6) set lhz_curse,7;
+			if (lhz_curse == 6) set lhz_curse,7;
 		}
 	}
 	end;
@@ -2552,7 +2552,7 @@ OnTouch_:
 			mes "............";
 			next;
 			mes "............";
-			close;
+			close2;
 			soundeffect "tao_gunka_stand.wav",0;
 			sc_end SC_Blind;
 			sc_start SC_Curse,3000,0;
@@ -2778,7 +2778,7 @@ lhz_in01,282,166,0	script	#kiz10	-1,3,3,{
 OnTouch_:
 	if (countitem(7345) > 0) {
 		if (lhz_curse == 16) {
-			if (checkweight(1201,1) == 1) {
+			if (checkweight(1201,1) == 0) {
 				mes "^3355FFIl y a quelque chose";
 				mes "sur le sol, mais vous ne";
 				mes "pouvez pas voir précisemment";
@@ -3493,9 +3493,8 @@ OnTouch_:
 		else if(BaseLevel < 80) getexp 1000000,500000;
 		else if(BaseLevel < 90) getexp 1500000,800000;
 		else getexp 2000000,1000000;
-		close;
 	}
-	end;
+	close;
 }
 
 lhz_in01,114,181,5	script	Représentante#li_01	71,{
@@ -4105,7 +4104,7 @@ lhz_in01,286,226,3	script	Secrétaire#li	831,{
 	else if (lhz_curse == 30) {
 		set .@li_keka,rand(1,10);
 		if (.@li_keka > 7) {
-			if (checkweight(1201,1) == 1) {
+			if (checkweight(1201,1) == 0) {
 				mes "[Sueii Slierre]";
 				mes "^3355FFAttendez! Vous portez bien trop de choses sur vous, regardez comme vous courbez l'échine! Si vous ne voulez pas attraper un lumbago, vous devriez déposer tout ce qui ne vous est pas utile dans votre Stock Kafra.^000000";
 				close;
