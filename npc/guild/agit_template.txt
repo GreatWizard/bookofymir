@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.7
+//= 1.8
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
@@ -51,6 +51,7 @@
 //= 1.6b Moved where investments are added to eco/def. [L0ne_W0lf]
 //= 1.7 Updated Agitbreak announcements, added bc_woe [L0ne_W0lf]
 //=     and added extended anouncement format for mapannounce.
+//= 1.8 Fixed a possible exploit in guild castle investment. [Brian]
 //============================================================
 
 // AGIT Manager Template
@@ -527,7 +528,7 @@ OnRecvCastle:
 			mes "^ff0000L'Investissement Commercial de notre Château est à son maximum. Vous êtes un Maître très dévoué, comme je m'en doutais.^000000";
 			close;
 		}
-		if (GetCastleData(strnpcinfo(2),4) == 2) {
+		if (GetCastleData(strnpcinfo(2),4) >= 2) {
 			mes "^ff0000Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.^000000 J'espère que nos richesses ne cesseront de s'accroître!";
 			close;
 		}
@@ -540,6 +541,11 @@ OnRecvCastle:
 		next;
 		switch(select("Investir en Commerce.:Annuler")) {
 		case 1:
+			if (GetCastleData(strnpcinfo(2),4) >= 2) {
+				mes "[ Steward " + .@name$ + " ]";
+				mes "Je suis désolé mais vous avez déjà investi deux fois aujourd'hui. Vous ne pouvez investir plus.";
+				close;
+			}
 			if (Zeny < .@eco_invest) {
 				mes "[ Steward " + .@name$ + " ]";
 				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";
@@ -590,7 +596,7 @@ OnRecvCastle:
 			mes "^ff0000L'investissement défensif de ce château a déjà atteint le maximum de 100 points. Il n'est plus nécessaire d'investir à nouveau.^000000";
 			close;
 		}
-		if (GetCastleData(strnpcinfo(2),5) == 2) {
+		if (GetCastleData(strnpcinfo(2),5) >= 2) {
 			mes "^ff0000Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.^000000 J'espère que nos défenses ne cesseront de s'accroître!";
 			close;
 		}
@@ -603,6 +609,11 @@ OnRecvCastle:
 		next;
 		switch(select("Investir en Défense.:Annuler")) {
 		case 1:
+			if (GetCastleData(strnpcinfo(2),5) >= 2) {
+				mes "[ Steward " + .@name$ + " ]";
+				mes "Je suis désolé mais vous avez déjà investi deux fois aujourd'hui. Vous ne pouvez investir plus.";
+				close;
+			}
 			if (Zeny < .@def_invest) {
 				mes "[ Steward " + .@name$ + " ]";
 				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";

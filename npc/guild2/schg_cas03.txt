@@ -5,7 +5,7 @@
 //===== By: ==================================================
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 2.3
+//= 2.4
 //===== Compatible With: =====================================
 //= eAthena SVN
 //===== Description: =========================================
@@ -31,6 +31,7 @@
 //= 2.2 Fixed eco/def not actually incrementing. [L0ne_W0lf]
 //=     Can no longer gain eco/def higher than 100.
 //= 2.3 Fixed invalid corridinates when spawning a guardian. [L0ne_W0lf]
+//= 2.4 Fixed a possible exploit in guild castle investment. [Brian]
 //============================================================
 
 schg_cas03,1,1,0	script	Manager#sch03_02	111,{
@@ -1931,7 +1932,7 @@ schg_cas03,88,90,3	script	Steward#sch03	55,{
 			mes "L'Investissement Commercial du Bastion est à son maximum. Vous êtes un Maître très dévoué, comme je m'en doutais.";
 			close;
 		}
-		if (GetCastleData("schg_cas03",4) == 2) {
+		if (GetCastleData("schg_cas03",4) >= 2) {
 			mes "[ Steward ]";
 			mes "Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.";
 			close;
@@ -1949,6 +1950,11 @@ schg_cas03,88,90,3	script	Steward#sch03	55,{
 		next;
 		switch(select("Investir en Commerce:Annuler")) {
 		case 1:
+			if (GetCastleData("schg_cas03",4) >= 2) {
+				mes "[ Steward ]";
+				mes "Vous avez déjà investi deux fois aujourd'hui. Vous devrez attendre demain avant de pouvoir investir à nouveau.";
+				close;
+			}
 			if (Zeny < .@eco_invest) {
 				mes "[ Steward ]";
 				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";
@@ -2001,7 +2007,7 @@ schg_cas03,88,90,3	script	Steward#sch03	55,{
 			mes "L'Investissement Défensif du Bastion est à son maximum. Vous êtes un Maître très dévoué, comme je m'en doutais.";
 			close;
 		}
-		if (GetCastleData("schg_cas03",5) == 2) {
+		if (GetCastleData("schg_cas03",5) >= 2) {
 			mes "Vous avez déjà investi deux fois aujourd'hui, c'est le maximum possible.";
 			close;
 		}
@@ -2016,6 +2022,11 @@ schg_cas03,88,90,3	script	Steward#sch03	55,{
 		next;
 		switch(select("Investir en Défense:Annuler")) {
 		case 1:
+			if (GetCastleData("schg_cas03",5) >= 2) {
+				mes "[ Steward ]";
+				mes "Vous avez déjà investi deux fois aujourd'hui. Vous devrez attendre demain avant de pouvoir investir à nouveau.";
+				close;
+			}
 			if (Zeny < .@def_invest) {
 				mes "[ Steward ]";
 				mes "Maître, vous n'avez pas assez d'argent pour investir. L'investissement est donc annulé.";
