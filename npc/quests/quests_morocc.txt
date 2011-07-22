@@ -4281,7 +4281,7 @@ prontera,153,353,4	script	Messager::Messenger#prince1	105,{
 }
 
 prt_castle,117,163,5	script	Inspecteur::Inspector#prince	755,{
-	if (checkquest(10004) == 1) {
+	if (checkquest(10004) == 0 || checkquest(10004) == 1) { // Bugfix
 		mes "[Inspecteur]";
 		mes ( sex ? "Le" : "La" )+" juge! Comment cela se passe-t-il? Je ne pense pas qu'il soit facile de rencontrer et jauger sept candidats.";
 		next;
@@ -4977,7 +4977,7 @@ prt_castle,117,163,5	script	Inspecteur::Inspector#prince	755,{
 		mes "[Inspecteur]";
 		mes "Comment cela se passe-t-il? Évaluer quelqu'un n'est pas une mince affaire. C'est une lourde tâche - une lourde de tâche que vous remplissez pour votre pays.";
 		next;
-		if ((nkprince_eisen == 15) && (checkquest(10025) == 1)) {
+		if ((nkprince_eisen == 15) && (checkquest(10025) == 0 || checkquest(10025) == 1)) { // Bugfix
 			mes "- Vous lui parlez de l'incident entre Ahrum et Ernst. -";
 			next;
 			mes "[Inspecteur]";
@@ -5071,7 +5071,7 @@ prt_castle,272,375,4	script	Prince	881,{
 		mes "... Je n'ai vraiment pas de chance! Il voudrait que je sois corrompu, en sachant ce qui se passerait...";
 		close;
 	}
-	else if (checkquest(10020) == 1) {
+	else if (checkquest(10020) == 1 || checkquest(10020) == 0) { // Bugfix
 		mes "[Erich]";
 		mes "Je n'ai pas de chance ces temps-ci. Il ne m'arrive que des ennuis...";
 		close;
@@ -5098,7 +5098,8 @@ prt_castle,272,375,4	script	Prince	881,{
 		mes "[Erich]";
 		mes "Oh, c'en est assez! Vous pouvez interroger mon serviteur si vous voulez en apprendre plus. Je vais me reposer.";
 		set nk_prince,6;
-		completequest 10011;
+		if ( checkquest(10011) == 1 || checkquest(10011) == 0 ) // Bugfix
+			completequest 10011;
 		set .@prin1,checkquest(10005);
 		set .@prin2,checkquest(10006);
 		set .@prin3,checkquest(10007);
@@ -5130,7 +5131,7 @@ prt_castle,274,372,4	script	Serviteur::Servant#hans	48,{
 		mes "Mon prince n'a jamais rien fait de mal... Je m'excuse auprès de vous!";
 		close;
 	}
-	else if (checkquest(10020) == 1) {
+	else if (checkquest(10020) == 0 || checkquest(10020) == 1) { // Bugfix
 		mes "- Il sursaute à chaque fois que vous vous adressez à lui. Vous avez un sentiment de pitié pour lui parfois... -";
 		close;
 	}
@@ -5211,7 +5212,7 @@ prt_castle,339,202,3	script	Prince#urgen	989,{
 		mes "Mon magnifique corps n'est pas dans une condition parfaite en ce moment. Je ne veux le montrer à personne "+ ( isday() ? "aujourd'hui" : "ce soir" ) +".";
 		close;
 	}
-	else if (checkquest(10021) == 1) {
+	else if (checkquest(10021) == 0 || checkquest(10021) == 1) { // Bugfix
 		mes "[Urugen]";
 		mes "... Quoi? Qu'est-ce que vous venez de me dire? ... Hein?";
 		close;
@@ -5274,9 +5275,10 @@ prt_castle,339,202,3	script	Prince#urgen	989,{
 				mes "[Urugen]";
 				mes "Vous devez avoir une force mentale incroyable pour ne pas avoir perdu l'esprit après avoir été si longtemps témoin de ma beauté.";
 				if (.@p_a + .@p_b + .@p_c == 3) {
-					completequest 10009;
+					if ( checkquest(10009) == 1 || checkquest(10009) == 0 ) // Bugfix
+						completequest 10009;
 				}
-				completequest 10011;
+//				completequest 10011; // Bugfix
 				set .@prin1,checkquest(10005);
 				set .@prin2,checkquest(10006);
 				set .@prin3,checkquest(10007);
@@ -5306,7 +5308,7 @@ prt_castle,289,201,3	script	Prince#helmut	991,{
 		mes "Comment est-ce que je peux gérer tout ce stress? Non mais! Enfin...!";
 		close;
 	}
-	else if (checkquest(10022) == 1) {
+	else if (checkquest(10022) == 0 || checkquest(10022) == 1) { // Bugfix
 		mes "- Il rougit tellement... L'évidence se lit sur son visage. -";
 		close;
 	}
@@ -5353,7 +5355,8 @@ prt_castle,289,201,3	script	Prince#helmut	991,{
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			mes "......";
-			completequest 10010;
+			if ( checkquest(10010) == 1 || checkquest(10010) == 0 ) // Bugfix
+				completequest 10010;
 			set .@prin1,checkquest(10005);
 			set .@prin2,checkquest(10006);
 			set .@prin3,checkquest(10007);
@@ -5396,7 +5399,8 @@ prt_castle,289,201,3	script	Prince#helmut	991,{
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			mes "......";
-			completequest 10010;
+			if ( checkquest(10010) == 1 || checkquest(10010) == 0 ) // Bugfix
+				completequest 10010;
 			set .@prin1,checkquest(10005);
 			set .@prin2,checkquest(10006);
 			set .@prin3,checkquest(10007);
@@ -5439,7 +5443,8 @@ prt_castle,289,201,3	script	Prince#helmut	991,{
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			mes "......";
-			completequest 10010;
+			if ( checkquest(10010) == 1 || checkquest(10010) == 0 ) // Bugfix
+				completequest 10010;
 			set .@prin1,checkquest(10005);
 			set .@prin2,checkquest(10006);
 			set .@prin3,checkquest(10007);
@@ -5486,7 +5491,7 @@ prt_castle,391,205,3	script	Prince#poe	993,{
 		mes "Il a abandonné sans essayer. Ce n'est pas comme ça qu'un homme se comporte. Il n'est pas aussi bon que moi. Mais ça va. C'est juste qu'Eigen Ahrum me déçoit. J'attendais plus de lui.";
 		close;
 	}
-	else if (checkquest(10018) == 1) {
+	else if (checkquest(10018) == 0 || checkquest(10018) == 1) { // Bugfix
 		mes "[Poe]";
 		mes "......";
 		close;
@@ -5658,7 +5663,8 @@ prt_castle,391,205,3	script	Prince#poe	993,{
 				mes "[Poe]";
 				mes "Bien. La prochaine fois, rencontrons-nous dans un lieu un tant soit peu plus dangereux et excitant!";
 				if (.@p_a + .@p_b + .@p_c == 3) {
-					completequest 10007;
+					if ( checkquest(10007) == 1 || checkquest(10007) == 0 ) // Bugfix
+						completequest 10007;
 				}
 				set .@prin1,checkquest(10005);
 				set .@prin2,checkquest(10006);
@@ -5698,7 +5704,7 @@ prt_castle,364,375,4	script	Prince#peter	987,{
 		mes "Petite fille... Qu'est-ce qui a bien pu t'arriver?...";
 		close;
 	}
-	else if (checkquest(10019)== 1) {
+	else if (checkquest(10019)== 0 || checkquest(10019)== 1) { // Bugfix
 		mes "[Peter]";
 		mes "......";
 		close;
@@ -5709,7 +5715,7 @@ prt_castle,364,375,4	script	Prince#peter	987,{
 			mes "Je vous remercie vraiment. Vous êtes d'une gentillesse extrême.";
 			close;
 		}
-		else if (checkquest(10014) == 1) {
+		else if (checkquest(10014) == 0 || checkquest(10014) == 1) {
 			mes "[Peter]";
 			mes "Je suis content que la petite fille les ait aimées. J'ai voulu aller la revoir dès que j'ai été guéri.";
 			next;
@@ -5786,7 +5792,8 @@ prt_castle,364,375,4	script	Prince#peter	987,{
 					next;
 					mes "[Peter]";
 					mes "Est-ce que vous voudriez bien prendre ces fleurs et les apporter avec mes remerciements à cette petite fille d'Aldebaran?";
-					completequest 10008;
+					if ( checkquest(10008) == 1 || checkquest(10008) == 0 ) // Bugfix
+						completequest 10008;
 					next;
 					switch(select("D'accord, pas de problème.:Demandez à quelqu'un d'autre s'il vous plaît.")) {
 					case 1:
@@ -5829,7 +5836,7 @@ prt_castle,364,375,4	script	Prince#peter	987,{
 }
 
 aldebaran,132,184,3	script	Petite Fille::Girl#prince	96,{
-	if (checkquest(10013) == 1) {
+	if (checkquest(10013) == 0 || checkquest(10013) == 1) { // Bugfix
 		if (countitem(744) > 0) {
 			// Missed
 			mes "[Petite Fille]";
@@ -6263,7 +6270,8 @@ prt_castle,314,373,4	script	Prince#eisen	983,{
 				else {
 					set nkprince_eisen,1;
 				}
-				completequest 10005;
+				if ( checkquest(10005) == 1 || checkquest(10005) == 0 ) // Bugfix
+					completequest 10005;
 				set .@prin1,checkquest(10005);
 				set .@prin2,checkquest(10006);
 				set .@prin3,checkquest(10007);
@@ -6287,7 +6295,7 @@ prt_castle,368,312,4	script	Prince#ern	985,{
 		mes "... Ah, laissez-moi, s'il vous plaît. Je ne veux voir personne.";
 		close;
 	}
-	else if (checkquest(01024) == 1) {
+	else if (checkquest(01024) == 0 || checkquest(01024) == 1) { // Bugfix
 		mes "[Ernst]";
 		mes "... Frère Ahrum...";
 		close;
@@ -6445,7 +6453,8 @@ prt_castle,368,312,4	script	Prince#ern	985,{
 				else {
 					set nkprince_eisen,2;
 				}
-				completequest 10006;
+				if ( checkquest(10006) == 1 || checkquest(10006) == 0 ) // Bugfix
+					completequest 10006;
 				set .@prin1,checkquest(10005);
 				set .@prin2,checkquest(10006);
 				set .@prin3,checkquest(10007);
@@ -7275,7 +7284,7 @@ OnTouch:
 
 prt_castle,336,276,0	script	#ern	45,1,1,{
 OnTouch:
-	if (checkquest(10023) == 1) {
+	if (checkquest(10023) == 0 || checkquest(10023) == 1) { // Bugfix
 		donpcevent "Prince#eisen6::OnEnable";
 	}
 	warp "prt_castle",368,308;
@@ -7284,7 +7293,7 @@ OnTouch:
 
 prt_castle,300,276,0	script	#erich	45,1,1,{
 OnTouch:
-	if (checkquest(10020) == 1) {
+	if (checkquest(10020) == 0 || checkquest(10020) == 1) { // Bugfix
 		donpcevent "Prince#eisen1::OnEnable";
 	}
 	warp "prt_castle",274,368;
@@ -7293,7 +7302,7 @@ OnTouch:
 
 prt_castle,330,271,0	script	#helmut	45,1,1,{
 OnTouch:
-	if (checkquest(10022) == 1) {
+	if (checkquest(10022) == 0 || checkquest(10022) == 1) { // Bugfix
 		donpcevent "Prince#eisen3::OnEnable";
 	}
 	warp "prt_castle",290,208;
@@ -7302,7 +7311,7 @@ OnTouch:
 
 prt_castle,348,271,0	script	#poe	45,1,1,{
 OnTouch:
-	if (checkquest(10018) == 1) {
+	if (checkquest(10018) == 0 || checkquest(10018) == 1) { // Bugfix
 		donpcevent "Prince#eisen4::OnEnable";
 	}
 	warp "prt_castle",390,208;
@@ -7311,7 +7320,7 @@ OnTouch:
 
 prt_castle,354,276,0	script	#peter	45,1,1,{
 OnTouch:;
-	if (checkquest(10019) == 1) {
+	if (checkquest(10019) == 0 || checkquest(10019) == 1) { // Bugfix
 		donpcevent "Prince#eisen5::OnEnable";
 	}
 	warp "prt_castle",366,368;
@@ -7320,7 +7329,7 @@ OnTouch:;
 
 prt_castle,310,271,0	script	#urgen	45,1,1,{
 OnTouch:
-	if (checkquest(10021) == 1) {
+	if (checkquest(10021) == 0 || checkquest(10021) == 1) { // Bugfix
 		donpcevent "Prince#eisen2::OnEnable";
 	}
 	warp "prt_castle",340,208;
