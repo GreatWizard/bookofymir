@@ -1,5 +1,5 @@
 //Le Livre d'Ymir http://www.bookofymir.net/
-//traduit par No Healing (Thor Volcano Base Quest, Siblings Quest) et Irimar (Stone Quest) (en cours), corrigé par Fern et Myllena
+//traduit par No Healing (Thor Volcano Base Quest, Siblings Quest, Spy Quest) et Irimar (Stone Quest), corrigé par Fern et Myllena
 //===== eAthena Script ======================================= 
 //= Veins Quests
 //===== By: ================================================== 
@@ -407,53 +407,28 @@ ve_in02,68,39,7	script	Ouvrier#ve2	943,{
 
 // Spy Quest
 //============================================================ 
-prontera,202,122,0	script	Kid#sch	703,{
+prontera,202,122,0	script	Enfant::Kid#sch	703,{
 	if (que_sch == 0) {
 		mes "[Rooney]";
-		mes "Where the heck";
-		mes "is it? I don't... Where...?";
-		mes "He's got to be around here";
-		mes "somewhere, I think...";
+		mes "Mais où est-ce qu'il peut bien être? Je ne... Où ça?! Il devrait être par-ici je pense...";
 		next;
-		if (select("What's wrong?:...") == 1) {
+		if (select("Qu'est-ce qui ne va pas?:...") == 1) {
 			mes "[Rooney]";
-			mes "Oh, it's just...";
-			mes "Some guy sent me on a";
-			mes "delivery errand, but I can't";
-			mes "find the recipient. He said";
-			mes "that I can't miss him, but";
-			mes "I still can't figure it out.";
+			mes "Oh, c'est juste que... Un type m'a envoyé livrer quelque chose, mais je n'arrive pas à trouver le destinataire. Il a dit que je ne pourrais pas le manquer... Mais je ne le trouve pas.";
 			next;
 			mes "[Rooney]";
-			mes "I should have asked for";
-			mes "the exact location. I mean,";
-			mes "if I don't find him, then I'll";
-			mes "never get paid for doing";
-			mes "this delivery. ^333333*Sigh*^000000";
+			mes "J'aurais dû lui demander où il se trouvait exactement. Je veux dire... Si jamais je ne le trouve pas, on ne va pas me payer pour cette course. ^333333*Soupire*^000000";
 			next;
-			if (select("Sounds tough. Good luck!:Do you need any help?") == 1) {
+			if (select("C'est triste. Bonne chance!:Tu veux un coup de main?") == 1) {
 				mes "[Rooney]";
-				mes "Thanks. I think";
-				mes "I just might need it.";
-				mes "Where could this guy";
-				mes "be? If he's expecting";
-				mes "a delivery, he should";
-				mes "make himself easy to find...";
+				mes "Merci, je crois que je vais en avoir besoin. Où ce type peut-il bien être? Quand on attend une livraison, on s'arrange pour être facile à trouver...";
 				close;
 			}
 			mes "[Rooney]";
-			mes "Yeah, sure, it'd be great";
-			mes "if you could help me. Let's";
-			mes "see, I need to deliver this";
-			mes "letter to a bard named...";
-			mes "It was... Ah, ^FF0000Lasda Midar^000000!";
+			mes "Oui, ça m'aiderait! Voyons, il faut que je livre cette lettre à un barde du nom de... Euh... Comment c'est, déjà? Ah, oui: ^FF0000Lasda Midar^000000!";
 			next;
 			mes "[Rooney]";
-			mes "I've looked everywhere";
-			mes "in town for someone that";
-			mes "looks like a Bard, but I'm";
-			mes "not having any luck. If you";
-			mes "find him, would you tell me?";
+			mes "J'ai fait toute la ville en regardant si je ne voyais pas quelqu'un qui ressemblait à un Barde, mais rien. Vous viendrez me prévenir si jamais vous le voyez?";
 			set que_sch,1;
 			close;
 		}
@@ -461,290 +436,170 @@ prontera,202,122,0	script	Kid#sch	703,{
 	}
 	else if (que_sch == 1) {
 		mes "[Rooney]";
-		mes "I still haven't";
-		mes "found Lasda Midar.";
-		mes "Would you let me know";
-		mes "if you find him so that";
-		mes "I can deliver his letter?";
+		mes "Je n'ai toujours pas retrouvé Lasda Midar. Vous me préviendrez si jamais vous le voyez? Il faut que je lui apporte cette lettre...";
 		close;
 	}
 	else if (que_sch == 2) {
 		if (Zeny < 100) {
 			mes "[Rooney]";
-			mes "Lasda Midar...";
-			mes "Where the heck";
-			mes "could that guy be?";
+			mes "Lasda Midar... Qui est-ce que ce type pourrait bien être?";
 			close;
 		}
 		else {
 			mes "[Rooney]";
-			mes "Wow, did you really";
-			mes "find Lasda Midar?";
-			mes "Why couldn't I find him?";
-			mes "Anyway, thank you so much";
-			mes "for your help. I thought I was";
-			mes "going to fail my delivery!";
+			mes "Oh, vous avez vraiment trouvé Lasda Midar? Comment ça se fait que je n'arrivais pas à le trouver, moi? Mais merci beaucoup pour votre aide! Je pensais que je n'allais pas pouvoir livrer la lettre!";
 			next;
-			select("He asked me to give you this.");
+			select("Il m'a demandé de te donner ceci.");
 			mes "[Rooney]";
-			mes "Hey, alright! Thanks";
-			mes "for the cash! Heh heh~";
+			mes "Ah, d'accord! Merci pour l'argent! Hé hé~";
 			set zeny,zeny-100;
 			set que_sch,3;
 			close;
 		}
 	}
 	mes "[Rooney]";
-	mes "Nice day out, isn't it?";
+	mes ( isday() ? "Il fait beau aujourd'hui, non" : "C'est une belle soirée, non" )+"?";
 	close;
 }
 
-prt_church,89,108,6	script	Bard#sch	741,{
+prt_church,89,108,6	script	Barde::Bard#sch	741,{
 	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous transportez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra pour déposer quelques objets.^000000";
 		close;
 	}
 
 	if (que_sch < 1) {
 		mes "[Lasda]";
-		mes "Hello there, isn't today";
-		mes "such a wonderful day?";
-		mes "Nice weather always";
-		mes "inspires the poet in me,";
-		mes "and I can't seem to stop";
-		mes "singing my heart out~";
+		mes ( isday() ? "Bonjour! N'est-ce pas une journée magnifique?" : "Bonsoir! N'est-ce pas une soirée magnifique?" )+" Le poète qui vit en moi est toujours inspiré lorsqu'il fait aussi bon, et c'est comme si je ne pouvais plus m'arrêter de chanter~";
 		close;
 	}
 	else if (que_sch == 1) {
 		mes "[Lasda]";
-		mes "Why, what a glorious";
-		mes "day! I should sing a song";
-		mes "in praise of its wonder!";
+		mes "Quelle magnifique "+ ( isday() ? "journée" : "soirée" ) +"! Je devrais chanter une chanson pour rendre hommage à ces merveilles!";
 		mes "Ooooh... La la la-la~";
-		mes "Girls, girls, giiiirls...";
+		mes "Les femmes, les femmes, les feeeemmmees...";
 		next;
-		switch(select("Excuse me...:......")) {
+		switch(select("Excusez-moi...:......")) {
 		case 1:
 			mes "[Lasda]";
-			mes "Why, what a glorious";
-			mes "day! I should sing a song";
-			mes "in praise of its wonder!";
-			mes "Ooooh... La la la-la~";
-			mes "Girls, girls, giiiirls...";
+			mes "Les femmes, les femmes, les feeeemmmees... Font battre mon cœur comme... Comme s'il allait exploser. La course de mon cœur... Et il est sur la ligne d'arrivée! Le Champion de l'Amour!";
 			close;
 		case 2:
 			mes "[Lasda]";
-			mes "Girls, girls, giiiirls...";
-			mes "Making my heart";
-			mes "beat like... Like it's";
-			mes "going too fast. My heart's";
-			mes "racing... And you're at the";
-			mes "finish line--Love Champion!";
+			mes "Les femmes, les femmes, les feeeemmmees... Font battre mon cœur comme... Comme s'il allait exploser. La course de mon cœur... Et il est sur la ligne d'arrivée! Le Champion de l'Amour!";
 			next;
 			mes "[Lasda]";
-			mes "Oh? Don't stare at me";
-			mes "like that, you're making";
-			mes "me blush. Did you need to";
-			mes "talk to me or something?.";
+			mes "Oh? Ne me regardez pas comme ça, vous me faites rougir! Est-ce que vous vouliez me parler de quelque chose?";
 			next;
-			switch(select("I'm sorry.:Are you ^ff0000Lasda Midar^000000?")) {
+			switch(select("Je suis désolé"+ ( sex ? "" : "e" ) +".:Est-ce que vous êtes ^ff0000Lasda Midar^000000?")) {
 			case 1:
 				mes "[Lasda]";
-				mes "Oh, that's alright.";
+				mes "Oh, ce n'est rien.";
 				mes "...............................";
-				mes "Girl, I'll laugh at all your";
-				mes "jokes, and agree with yourv";
-				mes "politics~ You're hot! But";
-				mes "baby, you're dumb as bricks~";
+				mes "Demoiselle, je ris de tes plaisanteries, et acquiesce à tout ce que tu dis~ Tu es une bombe! Mais tu es aussi bête que tes pieds~";
+				next;
+				mes "["+strcharinfo(0)+"]"; // Passage rajouté
+				mes "Hein? De qui est-ce que ce type est en train de parler?!";
 				close;
 			case 2:
 				mes "[Lasda]";
-				mes "Oh? Oh, yes, that's me.";
-				mes "How can I help you?";
+				mes "Oh? Oh, oui, c'est moi. Qu'est-ce que je peux faire pour vous?";
 				next;
-				select("I'm here to deliver this to you.");
+				select("Je viens vous apporter ceci.");
 				mes "[Lasda]";
-				mes "Ah! He must have finally";
-				mes "sent it. Would you please";
-				mes "give me a second? Let's see...";
+				mes "Ah! Il me l'a enfin envoyée! Est-ce que vous pourriez me donner une seconde? Voyons...";
 				next;
-				mes "^3355FFLasda opened the letter";
-				mes "and started reading it.^000000";
+				mes "^3355FFLasda ouvre la lettre et commence à la lire.^000000";
 				next;
 				mes "[Lasda]";
-				mes "Umm...";
-				mes "Oh, no...";
+				mes "Hum...";
+				mes "Oh, non...";
 				next;
 				mes "[Lasda]";
-				mes "Ah, I'm sorry for";
-				mes "making you wait.";
-				mes "Here, please give";
-				mes "this money to that";
-				mes "kid that was supposed";
-				mes "to come find me here.";
+				mes "Ah, je suis désolé de vous avoir fait"+ ( sex ? "" : "e" ) +" attendre. Voilà, prenez cet argent, et apportez-le au gamin qui était censé me livrer cette lettre.";
 				set que_sch,2;
 				set zeny,zeny+100;
 				next;
 				mes "[Lasda]";
-				mes "I'd like you to come";
-				mes "talk to me again later";
-				mes "if you have the time";
-				mes "See you around~";
+				mes "J'aimerais bien que vous reveniez discuter avec moi plus tard si vous avez le temps. À une prochaine~";
 				close;
 			}
 		}
 	}
 	else if (que_sch == 2) {
-		mes "^3355FFLasda seems to be";
-		mes "lost in deep thought.^000000";
+		mes "^3355FFLasda semble perdu dans ses pensées.^000000";
 		close;
 	}
 	else if (que_sch == 3) {
 		mes "[Lasda]";
-		mes "Oh good, you came back!";
-		mes "Thanks for delivering that";
-		mes "letter for me. Listen, you";
-		mes "mind listening to me for";
-		mes "a bit? I want to ask you";
-		mes "for your help with something.";
+		mes "Oh bien, vous revoilà! Merci de m'avoir apporté cette lettre. Est-ce que vous avez le temps d'écouter ce que je voudrais vous dire? Je voudrais vous demander votre aide.";
 		next;
-		if (select("Sure.:No.") == 1) {
+		if (select("Bien sûr.:Non.") == 1) {
 			mes "[Lasda]";
-			mes "You see, the letter you";
-			mes "brought me was from my old";
-			mes "best friend. I haven't heard";
-			mes "from him for a while, so";
-			mes "I was pretty worried...";
+			mes "Vous voyez, la lettre que vous m'avez apportée venait de mon meilleur ami. Ça faisait un bout de temps que je n'avais pas eu de nouvelles, alors je commençais à m'inquiéter...";
 			next;
 			mes "[Lasda]";
-			mes "Vitre said in his letter";
-			mes "that he's in jail under";
-			mes "false charges so he wants";
-			mes "me to help him out. However,";
-			mes "there isn't much I can do.";
-			mes "Do you think you can help him?";
+			mes "Vitre me dit dans sa lettre qu'il est en prison pour un crime qu'il n'a pas commis, et il veut que je l'aide à sortir. Mais il n'y a pas grand-chose que je puisse aire. Vous pensez que vous pourriez l'aider?";
 			next;
-			if (select("Sure.:No.") == 1) {
+			if (select("Bien sûr.:Non.") == 1) {
 				mes "[Lasda]";
-				mes "Thank you so much!";
-				mes "I guess the best thing";
-				mes "to do for now is to find";
-				mes "my friend in a prison in";
-				mes "^FF0000Morroc^000000, and see what";
-				mes "you can do to help him..";
+				mes "Merci beaucoup! J'imagine que le mieux à faire pour vous maintenant, c'est d'aller rendre visite à mon ami dans la prison de ^FF0000Morroc^000000, et de voir ce que vous pouvez faire pour lui venir en aide...";
 				set que_sch,4;
 				close;
 			}
 			mes "[Lasda]";
-			mes "I... I guess...";
-			mes "You must not be";
-			mes "able to help him too...";
+			mes "Je... J'imagine que vous ne pourriez rien faire pour lui vous non plus...";
 			close;
 		}
 		mes "[Lasda]";
-		mes "I suppose that you";
-		mes "must already be busy";
-		mes "doing something else.";
-		mes "Well, I understand...";
+		mes "J'imagine que vous avez bien d'autres choses à faire... Je comprends...";
 		close;
 	}
 	else if (que_sch < 8) {
 		mes "[Lasda]";
-		mes "I still can't believe";
-		mes "Vitre is being held";
-		mes "in prison in Morroc. I mean,";
-		mes "what could have happened?";
-		mes "I hope you can help him...";
+		mes "Je n'arrive toujours pas à croire que Vitre est en prison à Morroc. Je veux dire... Qu'est-ce qui a bien pu se passer? J'espère que vous pourrez l'aider.";
 		close;
 	}
 	else if (que_sch == 8) {
 		mes "[Lasda]";
-		mes "He was arrested because";
-		mes "he's suspected of espionage?";
-		mes "That doesn't make any sense.";
-		mes "What could be going on?";
+		mes "Il a été arrêté parce qu'il était accusé d'espionnage?! C'est complètement absurde! Qu'est-ce qui a bien pu se passer?";
 		next;
-		select("^ff0000Krieg^000000 told me that.");
+		select("C'est ce que ^ff0000Krieg^000000 m'a dit.");
 		mes "[Lasda]";
-		mes "Krieg? Do you mean Krieg";
-		mes "Laje Mandi? I know him quite";
-		mes "well, actually. Let me write";
-		mes "you a letter or recommendation.";
-		mes "Hopefully, it'll be enough to";
-		mes "let you enter the prison.";
+		mes "Krieg? Est-ce que vous parlez de Krieg Laje Mandi? Je le connais assez bien à vrai dire. Laissez-moi vous écrire une lettre de recommandation. J'espère que ça suffira pour vous permettre d'entrer dans la prison.";
 		set que_sch,9;
 		close;
 	}
 	else if (que_sch == 9) {
 		mes "[Lasda]";
-		mes "Hurry and go bring";
-		mes "my letter to Krieg.";
-		mes "I wonder what happened...";
-		mes "There must be some kind";
-		mes "of weird misunderstanding.";
+		mes "Dépêchez-vous d'apporter ma lettre à Krieg. Je me demande ce qui s'est passé... Ce doit être une espèce de malentendu...";
 		close;
 	}
 	else if (que_sch < 19) {
 		mes "[Lasda]";
-		mes "He really asked you";
-		mes "to break him out of jail?";
-		mes "Well, I know that's a morally";
-		mes "hazy area, but I hope that";
-		mes "you do your best to help Vitre.";
+		mes "Il vous a vraiment demandé de le faire évader? Hé bien, je sais que c'est discutable du point de vue moral, mais j'espère que vous ferez de votre mieux pour aider Vitre.";
 		close;
 	}
 	else if (que_sch < 25) {
 		mes "[Lasda]";
-		mes "Thanks for offering";
-		mes "to help me out. I still";
-		mes "can't believe Vitre had";
-		mes "the gall to just break";
-		mes "out of prison, though...";
+		mes "Merci d'avoir offert de m'aider. Mais je n'arrive pas à croire que Vitre a été jusqu'à s'évader de prison...";
 		next;
 		mes "[Lasda]";
-		mes "I still can't do";
-		mes "anything to help him,";
-		mes "so please do what you";
-		mes "can to take care of him";
-		mes "for me. I really appreciate it.";
+		mes "Et même maintenant, je ne peux rien faire pour l'aider. Est-ce que vous pourriez vous assurer que tout va bien pour lui? Je vous en serez vraiment reconnaissant.";
 		close;
 	}
 	else if (que_sch == 25) {
 		mes "[Lasda]";
-		mes "Ah, you're back. I'm sure";
-		mes "you have a lot to ask me";
-		mes "right now. You deserve to";
-		mes "know that everything I asked";
-		mes "you to do was part of a plan";
-		mes "to confirm Vitre's guilt.";
+		mes "Ah, vous revoilà. Je suis certain que vous avez de nombreuses questions à me poser. Vous méritez bien que je vous réponde. Tout ce que je vous ai demandé de faire faisait partie d'un plan pour prouver la culpabilité de Vitre.";
 		next;
 		mes "[Lasda]";
-		mes "We arrested him once";
-		mes "we learned that he was";
-		mes "an Arunafeltz spy, but we";
-		mes "couldn't punish him since";
-		mes "we lacked concrete proof.";
+		mes "Nous l'avons arrêté quand nous avons appris qu'il était un espion pour le compte d'Arunafeltz, mais comme nous manquions de preuves concrètes, nous ne pouvions prononcer de jugement.";
 		next;
 		mes "[Lasda]";
-		mes "That's why we allowed";
-		mes "him to escape: we planned";
-		mes "on following him to get the";
-		mes "proof that we needed. Our";
-		mes "sting was even able to round";
-		mes "up all of his compatriots!";
+		mes "C'est pour cela que nous l'avons laissé s'évader. Nous avions prévu de le suivre pour obtenir les preuves dont nous avions besoin. Nous avons même pu berner tous ses acolytes!";
 		next;
 		mes "[Lasda]";
-		mes "I'm sorry for keeping";
-		mes "you in the dark, but it was";
-		mes "essential to the plan. We";
-		mes "couldn't have done it without";
-		mes "your help. Please take this";
-		mes "reward with our sincere thanks.";
+		mes "Je suis désolé de ne pas vous avoir mis"+ ( sex ? "" : "e" ) +" au courant, mais c'était nécessaire pour que le plan fonctionne. Nous n'aurions pas pu réussir sans votre aide. Veuillez accepter ceci, ainsi que nos plus sincères remerciements.";
 		set que_sch,26;
 		getitem 12106,1; //Accessory_Box
 		getexp 600000,0;
@@ -752,221 +607,132 @@ prt_church,89,108,6	script	Bard#sch	741,{
 	}
 	else {
 		mes "[Lasda]";
-		mes "We're having too many";
-		mes "cases involving spies";
-		mes "like Vitre lately. This";
-		mes "might be a sign that";
-		mes "Arunafeltz is planning";
-		mes "to move against us...";
+		mes "Nous devons traiter de bien trop nombreuses affaires impliquant des espions comme Vitre depuis quelques temps. C'est le signe qu'Arunafeltz se prépare à agir contre nous...";
 		close;
 	}
 }
 
-morocc,53,87,7	script	Prison Ward#sch	707,{
+morocc,53,87,7	script	Gardien de Prison::Prison Ward#sch	707,{
 	if (que_sch < 4) {
 		mes "[Jesse]";
-		mes "Only authorized";
-		mes "personnel can enter";
-		mes "this prison. You need";
-		mes "a permit if you want";
-		mes "to be able to enter.";
+		mes "Seul le personnel autorisé peut entrer dans cette prison. Il vous faudra un permis si vous voulez passer.";
 		close;
 	}
 	else if (que_sch == 4) {
 		mes "[Jesse]";
-		mes "What? You want to meet";
-		mes "the prisoner? I'm sorry,";
-		mes "but he's not allowed to";
-		mes "see anyone since he was";
-		mes "arrested on suspicion";
-		mes "of espionage.";
+		mes "Quoi? Vous voulez rencontrer le prisonnier? Je suis désolé, mais il est accusé d'espionnage: il n'est autorisé à rencontrer personne.";
 		set que_sch,5;
 		close;
 	}
 	else if (que_sch == 5) {
 		mes "[Jesse]";
-		mes "Huh. You're awfully";
-		mes "persistent. Alright,";
-		mes "if you can do me a favor,";
-		mes "I'll let you in. Bring me";
-		mes "1 dish of ^FF0000Fried Monkey Tails^000000";
+		mes "Erf! Vous êtes vraiment persévérant"+ ( sex ? "" : "e" ) +"! Bien, si vous me rendez un service, je vous laisserai passer. Rapportez-moi une ^FF0000Friture de Queues de Singe^000000";
 		next;
 		mes "[Jesse]";
-		mes "Of course, I can only let";
-		mes "you inside. Whether they'll";
-		mes "actually let you meet the";
-		mes "prisoner is another matter.";
-		mes "So do we have a deal?";
+		mes "Mais tout ce que je peux faire, c'est de vous laisser rentrer. Je ne peux pas vous garantir qu'ils vous laisseront rencontrer le prisonnier. Alors, marché conclu?";
 		set que_sch,6;
 		close;
 	}
 	else if (que_sch == 6) {
 		if (countitem(12066) > 0) {
 			mes "[Jesse]";
-			mes "Ah, that's the stuff!";
-			mes "Thanks for the Fried";
-			mes "Monkey Tails~ Alright,";
-			mes "go talk to ^FF0000Sir Krieg^000000 in";
-			mes "Morroc Castle. Get his";
-			mes "approval, and I'll let you in.";
+			mes "Ah, ça c'est de la cuisine! Merci pour la Friture de Queues de Singe~";
+			mes "D'accord, allez parler à ^FF0000Sieur Krieg^000000, près des ruines du Château de Morroc. Obtenez son accord, et je vous laisserai entrer.";
 			delitem 12066,1; //Luk_Dish01
 			set que_sch,7;
 			close;
 		}
 		mes "[Jesse]";
-		mes "Bring me a plate of";
-		mes "^FF0000Fried Monkey Tails^000000.";
-		mes "Do it, or I won't help";
-		mes "you out. I mean, I know";
-		mes "you mean well, but I'm";
-		mes "risking my job here...";
+		mes "Rapportez-moi une assiette de ^FF0000Friture de Queues de Singe^000000. Sans cela, je ne vous aiderai pas. Je sais que vous ne voulez rien de mal, mais je risque mon travail dans cette histoire...";
 		close;
 	}
 	else if (que_sch < 10) {
 		mes "[Jesse]";
-		mes "You didn't get approval";
-		mes "from Sir Krieg yet? You'd";
-		mes "better do it, or there's no";
-		mes "point in entering this prison.";
-		mes "You can't just sneak around";
-		mes "inside this place, you know?";
+		mes "Est-ce que vous avez déjà pu obtenir l'accord de Sieur Krieg? Entrer dans la prison ne servirait à rien sans cela. Ce n'est pas un endroit où vous  pouvez fouiner partout, vous savez?";
 		close;
 	}
 	else if (que_sch == 10) {
 		mes "[Jesse]";
-		mes "Did you really get";
-		mes "Sir Krieg's approval?";
-		mes "Alright, you may enter now.";
+		mes "Est-ce que vous avez vraiment pu obtenir l'accord de Sieur Krieg? D'accord, vous pouvez entrer.";
 		close2;
 		warp "ra_in01",48,355;
 		end;
 	}
 	else if (que_sch < 19) {
 		mes "[Jesse]";
-		mes "Do you want to enter?";
+		mes "Est-ce que vous voulez enter?";
 		next;
-		if (select("Yes.:No") == 1) {
+		if (select("Oui.:Non") == 1) {
 			mes "[Jesse]";
-			mes "Be careful when you talk";
-			mes "to that guy: he's a smooth";
-			mes "talker, and almost charmed";
-			mes "a lot of the guards into";
-			mes "letting him go free.";
+			mes "Faites bien attention avec ce type: c'est un beau parleur, et il a tenté d'user de cette qualité pour que les gardes le libèrent.";
 			close2;
 			warp "ra_in01",48,355;
 			end;
 		}
 		mes "[Jesse]";
-		mes "Take your time.";
-		mes "If you're not mentally";
-		mes "prepared, then it's not";
-		mes "a good idea to talk";
-		mes "to the prisoner.";
+		mes "Prenez votre temps. Si vous n'êtes pas prêt"+ ( sex ? "" : "e" ) +" dans votre tête, allez parler au prisonnier ne serait pas une bonne idée.";
 		close;
 	}
 	else if (que_sch < 19) {
 		mes "[Jesse]";
-		mes "Argh, I'm in trouble.";
-		mes "The prisoner escaped.";
-		mes "How could I let this...";
-		mes "happen?! Damn, I need to";
-		mes "report this to Mr. Krieg";
+		mes "Argh, je suis vraiment dans la mouise. Le prisonnier s'est évadé. Comment est-ce que j'ai pu laisser ça arriver... Je vais devoir aller faire mon rapport à Sieur Krieg";
 		close;
 	}
 	mes "[Jesse]";
-	mes "What a relief! They";
-	mes "really set it up so that";
-	mes "the prisoner could escape?";
-	mes "Well, I thought I was going";
-	mes "to get fired for all that.";
+	mes "Quel soulagement! Il ont vraiment mis tout cela en place afin que le prisonnier puisse s'échapper? Je pensais qu'on allait me virer à cause de cette histoire!";
 	close;
 }
 
-morocc_in,79,163,0	script	Public Security Officer	748,{
+morocc_in,79,163,0	script	Officier de la Sécurité::Public Security Officer	748,{
 	if (que_sch < 7) {
 		mes "[Krieg]";
-		mes "I'm in charge of public";
-		mes "security here in Morroc.";
-		mes "Lately, there have been";
-		mes "more incidents disturbing";
-		mes "the public peace and";
-		mes "many unsettling rumors...";
+		mes "Je suis responsable de la sécurité publique de Morroc. De nombreux incidents ont eu lieu récemment, mettant à mal la sécurité publique, et faisant courir toutes sortes de rumeurs...";
 		close;
 	}
 	else if (que_sch == 7) {
 		mes "[Krieg]";
-		mes "Hello, adventurer.";
-		mes "How may I help you?";
+		mes ( isday() ? "Bonjour" : "Bonsoir" )+", "+ ( sex ? "aventurier" : "aventurière" ) +". Que puis-je faire pour vous?";
 		next;
-		select("I'd like to see a prisoner, Mr. Vitre.");
+		select("J'aimerais rencontrer un prisonnier, M. Vitre.");
 		mes "[Krieg]";
-		mes "Vitre? I'm sorry, but";
-		mes "I can't approve of that.";
-		mes "I'd allow visitors for normal";
-		mes "prisoners, but not for people";
-		mes "suspected of espionage.";
-		mes "That's why he's in jail.";
+		mes "Vitre? Je suis désolé, mais je ne peux pas l'autoriser. Avec un prisonnier normal, ça serait différent, mais Vitre est accusé d'espionnage. C'est pour cela qu'il est en prison.";
 		next;
 		mes "[Krieg]";
-		mes "If I knew you personally,";
-		mes "or if someone I trust can";
-		mes "vouch for you, then I'd";
-		mes "reconsider letting you";
-		mes "meet Vitre. Otherwise,";
-		mes "I just can't do it.";
+		mes "Si je vous connaissais personnellement, ou si quelqu'un en qui j'avais confiance vous avait recommandé"+ ( sex ? "" : "e" ) +", j'aurais pu reconsidérer ma décision, mais ce n'est pas le cas.";
 		set que_sch,8;
 		close;
 	}
 	else if (que_sch == 8) {
 		mes "[Krieg]";
-		mes "I can't let you meet";
-		mes "Vitre until I'm absolutely";
-		mes "sure that you're not involved";
-		mes "with any espionage activities.";
+		mes "Je ne pourrai pas vous laisser rencontrer Vitre avant que je sois absolument certain que vous n'êtes pas impliqué"+ ( sex ? "" : "e" ) +" dans des affaires d'espionnage.";
 		close;
 	}
 	else if (que_sch == 9) {
 		mes "[Krieg]";
-		mes "I can't let you meet";
-		mes "Vitre until I'm absolutely";
-		mes "sure that you're not involved";
-		mes "with any espionage activities.";
+		mes "Je ne pourrai pas vous laisser rencontrer Vitre avant que je sois absolument certain que vous n'êtes pas impliqué"+ ( sex ? "" : "e" ) +" dans des affaires d'espionnage.";
 		next;
-		select("Here's a letter from Lasda.");
+		select("Voici une lettre de Lasda.");
 		mes "[Krieg]";
-		mes "Lasda? Now there's a";
-		mes "man I hold in high regard.";
-		mes "Please let me read what";
-		mes "he has to say. Hmmm...";
+		mes "Lasda? C'est quelqu'un que je porte dans mon estime. Laissez-moi lire ce qu'il m'écrit. Humm...";
 		next;
 		mes "[Krieg]";
-		mes "Alright, I'll let you visit";
-		mes "Vitre. I'll send a message";
-		mes "to the prison ward so that";
-		mes "he'll let you talk to him.";
+		mes "D'accord, je vais vous laisser rencontrer Vitre. Je vais envoyer un message au gardien de la prison pour qu'il vous laisser passer.";
 		set que_sch,10;
 		close;
 	}
 	else if (que_sch < 26) {
 		mes "[Krieg]";
-		mes "Hmm... This is almost too";
-		mes "difficult for me to handle.";
-		mes "What should I do?";
+		mes "Hum... C'est presque trop pour un seul homme. Qu'est-ce que je vais bien pouvoir faire?";
 		close;
 	}
 	mes "[Krieg]";
-	mes "I understand that you were";
-	mes "instrumental in solving a";
-	mes "problem regarding public";
-	mes "safety. I'd just like to thank";
-	mes "you, and apologize for any";
-	mes "trouble I might have caused.";
+	mes "Je sais que vous n'étiez qu'un instrument utilisé pour résoudre une affaire de sécurité publique. Je voudrais vous remercier, et m'excuser pour les problèmes que j'ai pu vous causer.";
 	close;
 }
 
 ra_in01,48,352,0	warp	que_sch_jail	1,1,morocc,56,89
 
-ra_in01,50,387,4	script	Upset Looking Bard#sch	51,{
+ra_in01,50,387,4	script	Barde à l'Air Énervé::Upset Looking Bard#sch	51,{
 	if (que_sch < 10) {
 		mes "[Vitre]";
 		mes ".............";
@@ -977,141 +743,82 @@ ra_in01,50,387,4	script	Upset Looking Bard#sch	51,{
 		mes "...............................";
 		mes "...............................";
 		mes "...............................";
-		mes "Damn, what should I do?";
+		mes "Mince, qu'est-ce que je vais bien pouvoir faire?";
 		next;
-		select("Excuse me...");
+		select("Excusez-moi...");
 		mes "[Vitre]";
-		mes "Hm? I'm Vitre Bizlita.";
-		mes "As you can see, I'm not in";
-		mes "any real position to help";
-		mes "you. Still, did you want";
-		mes "to ask me something?";
+		mes "Hein? Je m'appelle Vitre Bizlita. Comme vous pouvez le voir, je ne suis pas le mieux placé pour vous aider... Vous vouliez tout de même me demander quelque chose?";
 		next;
-		switch(select("Nothing.:I'm here on behalf of Mr. Lasda.")) {
+		switch(select("Rien.:Je viens de la part de M. Lasda.")) {
 		case 1:
 			mes "[Vitre]";
-			mes "Well...";
-			mes "It's nice to";
-			mes "receive visitors.";
-			mes "Jail can be lonely....";
+			mes "Hé bien... Ça fait toujours plaisir de recevoir de la visite. On se sent si seul en prison....";
 			close;
 		case 2:
 			mes "[Vitre]";
-			mes "Oh, good. Lasda finally";
-			mes "got my letter, eh? I don't";
-			mes "know what the hell's going";
-			mes "on. I mean, all I remember";
-			mes "is that these strange men";
-			mes "came and brought me here.";
+			mes "Oh, bien. Lasda a enfin reçu ma lettre, hein? Je ne sais vraiment pas ce qui se passe. Je veux dire... Tout ce dont je me souviens, ce sont de ces hommes étranges qui m'ont conduit ici.";
 			next;
 			mes "[Vitre]";
-			mes "I... I don't think";
-			mes "they'll let me out";
-			mes "of here. I mean, they";
-			mes "jailed me and there's no";
-			mes "proof I did anything wrong.";
+			mes "Je... Je ne pense pas qu'ils me laisseront sortir un jour. Il m'ont jeté en prison sans avoir aucune preuve, alors...";
 			next;
 			mes "[Vitre]";
-			mes "My life is in danger as";
-			mes "long as I'm here, so I have";
-			mes "to get out as soon as I can.";
-			mes "Luckily, I figured out that";
-			mes "I can open these doors if";
-			mes "I just had 2 things.";
+			mes "Ma vie est en danger tant que je reste ici. Je dois sortir au plus vite. Heureusement, je sais que je pourrais ouvrir ces portes avec deux objets seulement.";
 			next;
 			mes "[Vitre]";
-			mes "I just need a ^FF0000Megaphone^000000";
-			mes "and a ^FF0000Violin^000000. Luckily, they're";
-			mes "pretty mundane objects, so no";
-			mes "one would suspect anything if";
-			mes "you brought them here. Um...";
-			mes "You will help me, won't you?";
+			mes "Il me faudrait juste un ^FF0000Mégaphone^000000 et un ^FF0000Violon^000000. Fort heureusement, ce sont des objets assez mondains, alors les gardes ne devraient se douter de rien quand vous les apporterez. Hum... Vous m'aiderez, n'est-ce pas?";
 			next;
 			mes "[Vitre]";
-			mes "I understand if you have any";
-			mes "doubts about my innocence.";
-			mes "But think about it: wouldn't";
-			mes "you want to see what I do";
-			mes "with a Megaphone and Violin?";
-			mes "Sounds pretty cool, huh?";
+			mes "Je comprends que vous ayez quelques doutes au sujet de mon innocence. Mais pensez à ça: est-ce que vous ne voudriez pas voir ce que je ferais avec un Mégaphone et un Violon? Ça ne vous intrigue pas";
 			next;
-			mes "^3355FFYou can hear someone";
-			mes "mumbling from the cell";
-			mes "next to Vitre's.^000000";
+			mes "^3355FFVous pouvez entendre quelqu'un marmonner dans la cellule d'à côté.^000000";
 			next;
 			mes "[????]";
-			mes "I wonder how the lady";
-			mes "in the Dancer Job Change";
-			mes "place is doing by now...";
+			mes "Je me demande ce que devient la dame de la salle de répétition des Danseuses...";
 			set que_sch,11;
 			close;
 		}
 	}
 	else if (que_sch < 18) {
 		mes "[Vitre]";
-		mes "Didn't you bring the";
-		mes "Megaphone and Violin?";
-		mes "The longer I sit here,";
-		mes "the more likely it is";
-		mes "that they'll kill me!";
+		mes "Vous ne m'avez pas rapporté de Mégaphone et de Violon? Plus je reste ici, et plus j'ai de chances de me faire tuer!";
 		close;
 	}
 	else if (que_sch == 18) {
 		if (countitem(7040) > 0 && countitem(1901) > 0) {
 			mes "[Vitre]";
-			mes "You brought me a";
-			mes "Megaphone and Violin?";
-			mes "Perfect! Now, step aside";
-			mes "Can't have you getting hurt.";
+			mes "Vous m'avez rapporté un Mégaphone et un Violon? Parfait! Reculez un peu maintenant, je ne veux pas vous blesser.";
 			next;
 			mes "...............................";
 			mes "...............................";
 			mes "...............................";
 			next;
-			mes "^3355FFVitre drew in a deep";
-			mes "breath, and then smashed";
-			mes "the steel bars of his cell";
-			mes "with the Violin. Surprisingly,";
-			mes "the door swings open with";
-			mes "a very loud noise.^000000";
+			mes "^3355FFVitre prend une profonde inspiration et soudain frappe les barreau de fer de sa cellule avec le violon. Étrangement, ils se brisent en faisant tout un fracas.^000000";
 			next;
 			mes "[Vitre]";
-			mes "Heh! That was a little";
-			mes "harder than I thought,";
-			mes "but it looks like I'm free~";
-			mes "Alright, let's get a move on.";
+			mes "Hé! C'était un petit peu plus difficile que ce à quoi je m'attendais, mais regardez: on dirait que je suis libre~";
+			mes "Bon, ne nous arrêtons pas.";
 			next;
 			mes "[Jesse]";
-			mes "What?! What's this noise?!";
+			mes "Quoi?! Quel était ce bruit?!";
 			next;
 			enablenpc "Jesse#sch";
 			mes "[Jesse]";
-			mes "Hey! How did you";
-			mes "get out of your cell?!";
-			mes "Get back in there, NOW!";
+			mes "Hé! Comment est-ce que vous êtes sorti de votre cellule?! Retournez-y, MAINTENANT!";
 			next;
 			mes "[Vitre]";
-			mes "If you were me, would";
-			mes "you go back in your cell";
-			mes "just because someone's";
-			mes "yelling at you? Forget it~";
+			mes "Si vous étiez à ma place, vous retourneriez dans votre cellule uniquement parce que quelqu'un se met à crier? Oubliez ça~";
 			next;
-			mes "^3355FFVitre raised the Megaphone";
-			mes "to his mouth, and drew in";
-			mes "another deep breath.^000000";
+			mes "^3355FFVitre porte le Mégaphone à ses lèvres et prend une nouvelle inspiration.^000000";
 			next;
 			mes "[Vitre]";
-			mes "Wah!";
+			mes "Ouah!";
 			next;
 			mes "[Jesse]";
-			mes "Arg...";
-			mes "Oh Lord...!";
-			mes "M-my ears...";
+			mes "Arg... Oh mon dieu! Mes... Mes oreilles...";
 			next;
 			mes "[Vitre]";
-			mes "Heh! I love it when";
-			mes "a plan comes together~";
-			mes "Let's get out of here!";
+			mes "Hé! J'adore quand un plan fonctionne sans accroc~";
+			mes "Sortons d'ici!";
 			next;
 			delitem 1901,1; //Violin
 			delitem 7040,1; //Megaphone
@@ -1122,18 +829,13 @@ ra_in01,50,387,4	script	Upset Looking Bard#sch	51,{
 			end;
 		}
 		mes "[Vitre]";
-		mes "Didn't you bring";
-		mes "a Megaphone and";
-		mes "a Violin? Please";
-		mes "hurry, I don't have";
-		mes "much time left!";
+		mes "Vous n'avez pas rapporté de Mégaphone et de Violon? Dépêchez-vous, s'il vous plaît. Il ne me reste plus beaucoup de temps!";
 		close;
 	}
 	else {
 		mes "[Vitre]";
-		mes "Heh! I love it when";
-		mes "a plan comes together~";
-		mes "Let's get out of here!";
+		mes "Hé! J'adore quand un plan fonctionne sans accroc~";
+		mes "Sortons d'ici!";
 		close2;
 		warp "morocc",294,153;
 		end;
@@ -1148,64 +850,37 @@ OnInit:
 	end;
 }
 
-ra_in01,58,389,0	script	Guant Prisoner#sch	929,{
+ra_in01,58,389,0	script	Prisonnier::Guant Prisoner#sch	929,{
 	if (que_sch < 11) {
 		mes "[Ruan]";
-		mes "This stinks. Why am";
-		mes "I locked up in here?";
-		mes "I didn't do anything";
-		mes "to deserve this!";
+		mes "Ça craint! Qu'est-ce que je fais enfermé ici? Je n'ai rien fait de mal!";
 		next;
 		mes "[Ruan]";
-		mes "It's getting to be so";
-		mes "bad that I even miss the";
-		mes "sound of Hianna's voice.";
-		mes "It's freakishly loud.";
-		mes "You couldn't outyell her";
-		mes "even with a Megaphone.";
+		mes "Je me sens si mal que même la voix d'Hianna me manque, et pourtant quand elle se met à crier, on ne pourrait même pas s'entendre avec un mégaphone!";
 		close;
 	}
 	else if (que_sch == 11) {
 		mes "[Ruan]";
-		mes "This stinks. Why am";
-		mes "I locked up in here?";
-		mes "I didn't do anything";
-		mes "to deserve this!";
+		mes "Ça craint! Qu'est-ce que je fais enfermé ici? Je n'ai rien fait de mal!";
 		next;
 		mes "[Ruan]";
-		mes "It's getting to be so";
-		mes "bad that I even miss the";
-		mes "sound of Hianna's voice.";
-		mes "It's freakishly loud.";
-		mes "You couldn't outyell her";
-		mes "even with a Megaphone.";
+		mes "Je me sens si mal que même la voix d'Hianna me manque, et pourtant quand elle se met à crier, on ne pourrait même pas s'entendre avec un mégaphone!";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "What...?!";
+		mes "Quoi...?!";
 		next;
-		select("Where I can find that Megaphone?");
+		select("Où puis-je trouver un Mégaphone?");
 		mes "[Ruan]";
-		mes "Huh? Why would you";
-		mes "want to know that?";
+		mes "Hein? Pourquoi vous me demandez ça?";
 		next;
-		select("I really need one!");
+		select("Il m'en faut vraiment un!");
 		mes "[Ruan]";
-		mes "Uh, you can get one from";
-		mes "that Dancer Job Change";
-		mes "place in Comodo. They're";
-		mes "really hard to get, though,";
-		mes "if not impossible. Knock";
-		mes "yourself out, buddy.";
+		mes "Euh, il y en a peut-être à la salle de répétition des Danseuses à Comodo. Mais il est très difficile d'en trouver. C'est même presque impossible. Il faut vous faire une raison, l'ami"+ ( sex ? "" : "e" ) +".";
 		close;
 	}
 	else if (que_sch < 20) {
 		mes "[Ruan]";
-		mes "Nobody knows what";
-		mes "will happen tomorrow.";
-		mes "I mean, this is a world of";
-		mes "miracles and tragedies.";
-		mes "Death, or real love...";
-		mes "You will never know what will happen.";
+		mes "Personne ne sait de quoi demain sera fait. Je veux dire... Ce monde est fait de miracles et de tragédies. Mort ou amour éternel... Vous ne pouvez jamais savoir ce qui vous attend.";
 		close;
 	}
 	mes "[Ruan]";
@@ -1214,524 +889,333 @@ ra_in01,58,389,0	script	Guant Prisoner#sch	929,{
 }
 
 // Escort Dancers to Schwaltzvalt Republic
-job_duncer,93,106,6	script	Dance Instructor#sch	892,{
+job_duncer,93,106,6	script	Professeur de Danse::Dance Instructor#sch	892,{
 	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous transportez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra pour déposer quelques objets.^000000";
 		close;
 	}
 
 	if (que_sch < 11) {
 		mes "[Hianna]";
-		mes "Keep up the good work,";
-		mes "everyone! There's only";
-		mes "a few days left until the";
-		mes "big performance! Hey...";
-		mes "You! Can't you do it right?";
-		mes "Turn your waist quicker!";
+		mes "Continuez comme ça, tout le monde! Il ne reste que quelques jours avant la première!";
+		mes "Hé, toi! Ne me dis pas que tu n'arrives pas à faire ça?! Bouge-moi ce ventre!";
 		close;
 	}
 	else if (que_sch == 11) {
 		mes "[Hianna]";
-		mes "Hey, who are you?";
-		mes "We already have enough";
-		mes "problems with too many";
-		mes "pervs ogling the Dancers.";
-		mes "I'd prefer it if you didn't";
-		mes "come to watch us practice.";
+		mes "Hé, qui êtes-vous? Nous avons déjà assez de soucis avec tous ces pervers qui viennent reluquer les Danseuses... J'apprécierais que vous ne restiez pas là pendant que nous répétons.";
 		next;
-		if (select("I want a Megaphone.:Eeek...") == 2) {
+		if (select("Ile me faut un Mégaphone.:Eeek...") == 2) {
 			mes "[Hianna]";
-			mes "If you really want to";
-			mes "watch us dance, come to";
-			mes "the show and buy a ticket.";
-			mes "Watching for free isn't";
-			mes "exactly supporting the arts.";
+			mes "Si vous voulez vraiment nous regarder danser, achetez un billet et venez à la représentation. Vous n'aidez pas les artistes en resquillant.";
 			close;
 		}
 		mes "[Hianna]";
-		mes "You want a Megaphone?";
-		mes "Well, I'm sorry, but it's";
-		mes "not just something I can";
-		mes "lend to anybody. Then again";
-		mes "it's not like you can find one";
-		mes "anywhere else, either.";
+		mes "Vous voulez un Mégaphone? Hé bien, je suis désolée, mais ce n'est pas le genre de choses que je peux prêter à n'importe qui. En même temps, ce n'est pas comme si vous pourriez en trouver ailleurs...";
 		next;
-		if (select("Please! I'll do anything!:Later.") == 2) {
+		if (select("S'il vous plaît! Je ferai ce que vous voulez!:À plus tard.") == 2) {
 			mes "[Hianna]";
-			mes "Alright, then.";
-			mes "I'm sorry that";
-			mes "I can't help you.";
+			mes "D'accord. Je suis désolée de ne pas pouvoir vous aider.";
 			close;
 		}
 		mes "[Hianna]";
-		mes "Anything, huh?";
-		mes "Well, you just said";
-		mes "the magic word. Listen";
-		mes "carefully to what I want";
-		mes "you to do for me.";
+		mes "Ce que je veux, hein? Hé bien vous venez de prononcer le mot magique. Écoutez-moi bien: voici ce que je voudrais que vous fassiez pour moi.";
 		next;
-		if (select("Listen:Reconsider") == 1) {
+		if (select("L'écouter.:Changer d'avis.") == 1) {
 			mes "[Hianna]";
-			mes "First, I want a little";
-			mes "cash. Consider it a rental";
-			mes "fee. 500,000 zeny should be";
-			mes "just about enough. Then,";
-			mes "I want you to do me a favor.";
+			mes "Tout d'abord, je voudrais un peu d'argent. Prenez ça comme le prix de la location. 500.000 zénys devraient aller. Ensuite, je voudrais que vous me rendiez un service.";
 			next;
 			mes "[Hianna]";
-			mes "The Schwaltzvalt Republic";
-			mes "requested me to send some";
-			mes "Dancers for some party, but";
-			mes "I don't have enough guards";
-			mes "to protect them on their";
-			mes "way over there.";
+			mes "La République de Schwaltzvalt m'a demandé de leur envoyer des Danseuses pour une fête, mais je n'ai pas assez de gardes pour les protéger sur la route.";
 			next;
 			mes "[Hianna]";
-			mes "If you act as bodyguard";
-			mes "to my Dancers on the way";
-			mes "to the Schwaltzvalt Republic,";
-			mes "I'll lend you my Megaphone";
-			mes "once you come back. So...";
-			mes "How does that sound?";
+			mes "Si vous servez de garde du corps à mes danseuses jusqu'à ce qu'elles soient dans la République de Schwaltzvalt, je vous prêterai mon Mégaphone. Qu'est-ce que vous en dites?";
 			next;
-			if (select("Sounds good.:Like a ripoff.") == 1) {
+			if (select("Je suis d'accord.:Quelle arnaque!") == 1) {
 				mes "[Hianna]";
-				mes "I'm glad you agree~";
-				mes "Okay, the Dancers are";
-				mes "waiting are the entrance,";
-				mes "so bring them over to the";
-				mes "Schwaltzvalt Republic as";
-				mes "soon as you're ready.";
+				mes "Je suis contente que vous acceptiez~";
+				mes "Bien, les Danseuses attendent près de l'entrée. Escortez-les jusqu'à la République de Schwaltzvalt dès que vous serez prêt"+ ( sex ? "" : "e" ) +".";
 				set que_sch,12;
 				close;
 			}
 			mes "[Hianna]";
-			mes "So... I guess you";
-			mes "didn't need that";
-			mes "Megaphone as";
-			mes "badly as I thought.";
+			mes "Dans ce cas... J'imagine que vous n'avez pas autant besoin de ce Mégaphone que je ne le pensais.";
 			close;
 		}
 		mes "[Hianna]";
-		mes "Alright, take your";
-		mes "time. I'm in no rush.";
+		mes "D'accord, prenez votre temps. Rien ne presse.";
 		close;
 	}
 	else if (que_sch < 17) {
 		mes "[Hianna]";
-		mes "What are you still doing";
-		mes "here? Shouldn't you be";
-		mes "escorting the Dancers to";
-		mes "the Schwaltvalt Republic";
-		mes "already? Get a move on~";
+		mes "Qu'est-ce que vous faites encore ici? Ne devriez-vous pas être en train d'escorter les Danseuses jusqu'à la République de Schwaltvalt? Bougez-vous~";
 		close;
 	}
 	else if (que_sch == 17) {
 		mes "[Hianna]";
-		mes "Thanks for all your";
-		mes "hard work. The Dancers";
-		mes "told me that you did a good";
-		mes "job escorting them. Now...";
-		mes "Do you have the money?";
+		mes "Merci pour tous vos efforts. Les Danseuses m'ont dit que vous avez fait du bon travail. Maintenant... Est-ce que vous avez l'argent?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Oui:Non") == 1) {
 			if (Zeny < 500000) {
 				mes "[Hianna]";
-				mes "What's this? Hmm...";
-				mes "I think you made a mistake.";
-				mes "This isn't enough money.";
-				mes "Remember, 500,000 zeny~";
+				mes "Qu'est-ce que...? Hum... Je crois que vous avez dû faire une erreur. Il n'y a pas assez d'argent, là. Souvenez-vous, c'est 500.000 zénys~";
 				close;
 			}
 			mes "[Hianna]";
-			mes "Perfect. Well, here's";
-			mes "your Megaphone. Thanks";
-			mes "for everything, and I'll see";
-			mes "you around, adventurer~";
+			mes "Parfait. Eh bien, voici votre Mégaphone. Merci pour tout, et à bientôt, "+ ( sex ? "aventurier" : "aventurière" ) +"~";
 			set zeny,zeny-500000;
 			set que_sch,18;
 			getitem 7040,1; //Megaphone
 			close;
 		}
 		mes "[Hianna]";
-		mes "I can't have you breaking";
-		mes "your promises, so I won't";
-		mes "give you the Megaphone";
-		mes "until you pay me the";
-		mes "500,000 zeny that you";
-		mes "said that you would.";
+		mes "Je ne peux pas revenir sur ce que nous avions convenu. Je ne pourrai pas vous donner le Mégaphone tant que vous ne m'aurez pas apporté les 500.000 zénys que je vous avais demandés.";
 		close;
 	}
 	else if (que_sch == 18) {
 		mes "[Hianna]";
-		mes "Thanks for escorting";
-		mes "my Dancers over to the";
-		mes "Schwaltzvalt Republic.";
-		mes "Anything I can help";
-		mes "you with today?";
+		mes "Merci d'avoir escorté mes Danseuses jusqu'à la République de Schwaltzvalt. Est-ce que je peux faire quelque chose d'autre pour vous?";
 		next;
-		if (select("I'd like another Megaphone.:No thanks.") == 1) {
+		if (select("Il me faudrait un autre Mégaphone.:Non merci.") == 1) {
 			mes "[Hianna]";
-			mes "Well, I guess I can let";
-			mes "you have another one if";
-			mes "you pay me 500,000 zeny.";
-			mes "You sure you want to pay";
-			mes "the money for a Megaphone?";
+			mes "Hé bien, j'imagine que je pourrais vous en prêter un autre si vous me payez 500.000 zénys. Êtes-vous sûr"+ ( sex ? "" : "e" ) +" d'en vouloir un autre?";
 			next;
-			if (select("Yes:No") == 1) {
+			if (select("Oui:Non") == 1) {
 				if (Zeny < 500000) {
 					mes "[Hianna]";
-					mes "I'm sorry, but this";
-					mes "isn't enough money for";
-					mes "a Megaphone. Be sure";
-					mes "to bring me 500,000 zeny.";
+					mes "Je suis désolée, mais vous n'avez pas assez d'argent pour un Mégaphone. Rapportez-moi 500,000 zénys.";
 					close;
 				}
 				mes "[Hianna]";
-				mes "Here you are. The fact is...";
-				mes "These Megaphones are";
-				mes "considered guild property,";
-				mes "so I'm not supposed to let";
-				mes "you have this. Don't let";
-				mes "anyone know I gave you this!";
+				mes "Voilà pour vous! En fait... Ces Mégaphones sont la propriété de la guilde, alors je ne suis pas censée vous les donner. N'en parlez à personne!";
 				set zeny,zeny-500000;
 				getitem 7040,1; //Megaphone
 				close;
 			}
 			mes "[Hianna]";
-			mes "Alright~";
-			mes "Take care, and";
-			mes "travel safely~";
+			mes "D'accord~";
+			mes "Faites bien attention à vous dans vos voyages~";
 			close;
 		}
 		mes "[Hianna]";
-		mes "Alright~";
-		mes "Take care, and";
-		mes "travel safely~";
+		mes "D'accord~";
+		mes "Faites bien attention à vous dans vos voyages~";
 		close;
 	}
 	mes "[Hianna]";
-	mes "Trust me, we've made";
-	mes "good use of the money";
-	mes "that you've ''donated.''";
-	mes "Thanks for taking good";
-	mes "care of my Dancers~";
+	mes "Faites-moi confiance, nous avons fait bon usage de l'argent que vous nous avez *donné*. Merci d'avoir pris soin de mes Danseuses~";
 	close;
 }
 
-job_duncer,85,49,0	script	Young Dancer#sch1	724,{
+job_duncer,85,49,0	script	Jeune Danseuse::Young Dancer#sch1	724,{
 	if (que_sch < 12) {
-		mes "[Dancer]";
-		mes "Hi there~";
-		mes "Are you enjoying";
-		mes "yourself? I hope so!";
+		mes "[Danseuse]";
+		mes "Bonjour, vous~";
+		mes "Est-ce que vous prenez du bon temps? J'espère~";
 		close;
 	}
 	else if (que_sch == 12) {
-		mes "[Dancer]";
-		mes "Ah, you must be the";
-		mes "bodyguard. So are you";
-		mes "ready to go now?";
+		mes "[Danseuse]";
+		mes "Ah, vous devez être "+ ( sex ? "le" : "la" ) +" garde du corps. Alors, est-ce que vous êtes prêt"+ ( sex ? "" : "e" ) +" à partir maintenant?";
 		next;
-		if (select("Yes:No") == 1) {
-			mes "[Dancer]";
-			mes "Alright, then.";
-			mes "Here we go~";
+		if (select("Oui:Non") == 1) {
+			mes "[Danseuse]";
+			mes "Bien, allons-y dans ce cas~";
 			set que_sch,13;
 			close2;
 			warp "airplane",75,55;
 			end;
 		}
-		mes "[Dancer]";
-		mes "We need to depart soon,";
-		mes "so please hurry. I'll be";
-		mes "waiting for you here~";
+		mes "[Danseuse]";
+		mes "Nous devons partir au plus vite, alors dépêchez-vous s'il vous plaît. Je vous attendrai ici~";
 		close;
 	}
-	mes "[Dancer]";
-	mes "Oh, that was such a fun";
-	mes "performance. I can still";
-	mes "see the dazzling decorations";
-	mes "in the ballroom where we got";
-	mes "to dance. It was so wonderful!";
+	mes "[Danseuse]";
+	mes "Oh, j'ai vraiment pris plaisir à faire cette représentation! Je revois toutes ces décorations splendides dans la salle de bal où nous avons dansé... C'était merveilleux!";
 	close;
 }
 
-job_duncer,83,52,6	script	Cheerful Dancer#sch1	724,{
+job_duncer,83,52,6	script	Danseuse Joyeuse::Cheerful Dancer#sch1	724,{
 	if (que_sch < 12) {
-		mes "[Dancer]";
-		mes "Hi there~";
-		mes "Are you enjoying";
-		mes "yourself? I hope so!";
+		mes "[Danseuse]";
+		mes "Bonjour, vous~";
+		mes "Est-ce que vous prenez du bon temps? J'espère~";
 		close;
 	}
 	else if (que_sch == 12) {
-		mes "[Dancer]";
-		mes "Ah, you must be the";
-		mes "bodyguard. So are you";
-		mes "ready to go now?";
+		mes "[Danseuse]";
+		mes "Ah, vous devez être "+ ( sex ? "le" : "la" ) +" garde du corps. Alors, est-ce que vous êtes prêt"+ ( sex ? "" : "e" ) +" à partir maintenant?";
 		next;
-		if (select("Yes:No") == 1) {
-			mes "[Dancer]";
-			mes "Alright, then.";
-			mes "Here we go~";
+		if (select("Oui:Non") == 1) {
+			mes "[Danseuse]";
+			mes "Bien, allons-y dans ce cas~";
 			set que_sch,13;
 			close2;
 			warp "airplane",75,55;
 			end;
 		}
-		mes "[Dancer]";
-		mes "We need to depart soon,";
-		mes "so please hurry. I'll be";
-		mes "waiting for you here~";
+		mes "[Danseuse]";
+		mes "Nous devons partir au plus vite, alors dépêchez-vous s'il vous plaît. Je vous attendrai ici~";
 		close;
 	}
-	mes "[Dancer]";
-	mes "I guess it's pretty";
-	mes "fun to perform on stage~";
-	mes "But I still need to practice";
-	mes "more for the next performance.";
+	mes "[Danseuse]";
+	mes "Danser sur scène est vraiment excitant~";
+	mes "Mais il faut que je pratique encore plus avant la prochaine représentation.";
 	close;
 }
 
-job_duncer,87,50,2	script	Mature Looking Dancer#s1	724,{
+job_duncer,87,50,2	script	Danseuse d'Âge Mûr::Mature Looking Dancer#s1	724,{
 	if (que_sch < 12) {
-		mes "[Dancer]";
-		mes "Hi there~";
-		mes "Are you enjoying";
-		mes "yourself? I hope so!";
+		mes "[Danseuse]";
+		mes "Bonjour, vous~";
+		mes "Est-ce que vous prenez du bon temps? J'espère~";
 		close;
 	}
 	else if (que_sch == 12) {
-		mes "[Dancer]";
-		mes "Ah, you must be the";
-		mes "bodyguard. So are you";
-		mes "ready to go now?";
+		mes "[Danseuse]";
+		mes "Ah, vous devez être "+ ( sex ? "le" : "la" ) +" garde du corps. Alors, est-ce que vous êtes prêt"+ ( sex ? "" : "e" ) +" à partir maintenant?";
 		next;
-		if (select("Yes:No") == 1) {
-			mes "[Dancer]";
-			mes "Alright, then.";
-			mes "Here we go~";
+		if (select("Oui:Non") == 1) {
+			mes "[Danseuse]";
+			mes "Bien, allons-y dans ce cas~";
 			set que_sch,13;
 			close2;
 			warp "airplane",75,55;
 			end;
 		}
-		mes "[Dancer]";
-		mes "We need to depart soon,";
-		mes "so please hurry. I'll be";
-		mes "waiting for you here~";
+		mes "[Danseuse]";
+		mes "Nous devons partir au plus vite, alors dépêchez-vous s'il vous plaît. Je vous attendrai ici~";
 		close;
 	}
-	mes "[Dancer]";
-	mes "I sure learned a lot from";
-	mes "that trip. I hope that the new";
-	mes "girls also gained something";
-	mes "from their experiences.";
+	mes "[Danseuse]";
+	mes "J'ai beaucoup appris de ce voyage. J'espère que les nouvelles filles en auront aussi retenu quelque chose.";
 	close;
 }
 
-airplane,76,56,4	script	Young Dancer#sch2	724,{
+airplane,76,56,4	script	Jeune Danseuse::Young Dancer#sch2	724,{
 	if (que_sch < 13) {
-		mes "[Dancer]";
-		mes "Hi there~";
-		mes "Are you enjoying";
-		mes "yourself? I hope so!";
+		mes "[Danseuse]";
+		mes "Bonjour, vous~";
+		mes "Est-ce que vous prenez du bon temps? J'espère~";
 		close;
 	}
 	else if (que_sch == 13) {
-		mes "[Dancer]";
-		mes "This will be my";
-		mes "first performance...";
-		mes "I guess that's why";
-		mes "I have butterflies";
-		mes "in my stomach...";
+		mes "[Danseuse]";
+		mes "Ce sera ma première représentation... J'imagine que c'est pour ça que j'ai l'estomac tout noué...";
 		close;
 	}
-	mes "[Dancer]";
-	mes "I wonder which beautiful";
-	mes "place we'll get to perform in";
-	mes "next time! Ooh, I can't wait!";
+	mes "[Danseuse]";
+	mes "Je me demande dans quel endroit magnifique nous danserons la prochaine fois... Oh, je ne peux pas attendre!";
 	close;
 }
 
-airplane,75,53,0	script	Cheerful Dancer#sch2	724,{
+airplane,75,53,0	script	Danseuse Joyeuse::Cheerful Dancer#sch2	724,{
 	if (que_sch < 13) {
-		mes "[Dancer]";
-		mes "Hi there~";
-		mes "Are you enjoying";
-		mes "yourself? I hope so!";
+		mes "[Danseuse]";
+		mes "Bonjour, vous~";
+		mes "Est-ce que vous prenez du bon temps? J'espère~";
 		close;
 	}
 	else if (que_sch == 13) {
-		mes "[Dancer]";
-		mes "I've performed at many";
-		mes "venues, but this is the";
-		mes "frist time I'll be dancing";
-		mes "in the Schwaltzvalt Republic.";
-		mes "This is also my first time on";
-		mes "an airship. How exciting!";
+		mes "[Danseuse]";
+		mes "J'ai dansé dans de nombreux endroits, mais ça sera la première fois que je ferai une représentation dans la République de Schwaltzvalt. C'est aussi la première fois que je prends un zeppelin. Comme c'est excitant!";
 		close;
 	}
-	mes "[Dancer]";
-	mes "Traveling is really";
-	mes "thrilling... It's almost as";
-	mes "fun as dancing on stage~";
+	mes "[Danseuse]";
+	mes "C'est vraiment excitant de voyager... Presque autant que de danser sur scène~";
 	close;
 }
 
-airplane,79,55,2	script	Mature Looking Dancer#s2	724,{
+airplane,79,55,2	script	Danseuse d'Âge Mûr::Mature Looking Dancer#s2	724,{
 	if (que_sch < 13) {
-		mes "[Dancer]";
-		mes "Hi there~";
-		mes "Are you enjoying";
-		mes "yourself? I hope so!";
+		mes "[Danseuse]";
+		mes "Bonjour, vous~";
+		mes "Est-ce que vous prenez du bon temps? J'espère~";
 		close;
 	}
 	else if (que_sch == 13) {
-		mes "[Dancer]";
-		mes "This is the first time that";
-		mes "the Schwaltzvalt Republic";
-		mes "requested a performance";
-		mes "from us. Isn't that amazing?";
-		mes "I guess we earned a reputation";
-		mes "overseas. I'll do my best!";
+		mes "[Danseuse]";
+		mes "C'est la première fois que la République de Schwaltzvalt nous fait venir pour une représentation. N'est-ce pas fantastique? J'imagine que nous sommes connues même par-delà les océans! Je ferai de mon mieux...!";
 		next;
-		mes "[Airship Announcement]";
-		mes "We will be arriving";
-		mes "in Einbroch shortly.";
-		mes "Passengers to Einbroch,";
-		mes "please get ready to land.";
+		mes "[Annonce à Bord]";
+		mes "Nous allons atterrir à l'Aéroport d'Einbroch. Les passagers en destination d'Einbroch sont priés de se préparer à débarquer.";
 		next;
-		mes "[Dancer]";
-		mes "Oh! We're finally here!";
-		mes "Alright, I'll give this next";
-		mes "performance my all!";
+		mes "[Danseuse]";
+		mes "Oh! Nous sommes enfin arrivé"+ ( sex ? "" : "e" ) +"s! Bien, je donnerai tout ce que j'ai pour cette performance!";
 		close2;
 		set que_sch,14;
 		warp "ein_in01",278,223;
 		end;
 	}
-	mes "[Dancer]";
-	mes "I've been dancing on";
-	mes "stage for a long time, but";
-	mes "I always feel so nervous";
-	mes "right beforehand. I wonder";
-	mes "why that happens to me.";
+	mes "[Danseuse]";
+	mes "Voilà bien longtemps que je suis sur scène, mais j'ai toujours autant le trac avant la représentation... Je me demande comment à quoi c'est dû.";
 	close;
 }
 
-ein_in01,174,266,0	script	Young Dancer#sch3	724,{
+ein_in01,174,266,0	script	Jeune Danseuse::Young Dancer#sch3	724,{
 	if (que_sch < 17) {
-		mes "[Dancer]";
-		mes "Oh, the dinner";
-		mes "party isn't finished yet.";
-		mes "It'll be over before";
-		mes "you even know it~";
+		mes "[Danseuse]";
+		mes "Oh, la représentation n'est pas encore terminée, mais elle le sera avant que vous ne vous en rendiez compte~";
 		close;
 	}
 	else if (que_sch == 17) {
-		mes "[Dancer]";
-		mes "Hooray! My first";
-		mes "onstage performance";
-		mes "was a success! Oh";
-		mes "I was so nervous...";
-		mes "But I'm so proud";
-		mes "of myself now!";
+		mes "[Danseuse]";
+		mes "Hourra! Ma première performance sur scène était un succès! Uh, j'étais si nerveuse... Mais je suis fière de moi maintenant!";
 		close;
 	}
-	mes "[Dancer]";
-	mes "Without dance,";
-	mes "my life has no";
-	mes "meaning at all.";
+	mes "[Danseuse]";
+	mes "Sans la danse, ma vie n'aurait aucun sens!";
 	close;
 }
 
-ein_in01,172,266,0	script	Cheerful Dancer#sch3	724,{
+ein_in01,172,266,0	script	Danseuse Joyeuse::Cheerful Dancer#sch3	724,{
 	if (que_sch < 17) {
-		mes "[Dancer]";
-		mes "The dinner party isn't";
-		mes "even finished yet, but";
-		mes "I'm already exhausted~";
+		mes "[Danseuse]";
+		mes "La représentation n'est pas encore terminée, mais je suis déjà vidée~";
 		close;
 	}
 	else if (que_sch == 17) {
-		mes "[Dancer]";
-		mes "^333333*Whew*^000000 We gave a good";
-		mes "performance this time.";
-		mes "I was worried since that";
-		mes "airship trip really drained me.";
+		mes "[Danseuse]";
+		mes "^333333*Fiou*^000000 Nous avons fait une bonne représentation. J'étais nerveuse: ce voyage par les airs m'avait complètement vidée.";
 		close;
 	}
-	mes "[Dancer]";
-	mes "Dancing is really";
-	mes "hard work, and all that";
-	mes "practicing wears you out,";
-	mes "but it's worth it once you";
-	mes "get up on that stage.";
+	mes "[Danseuse]";
+	mes "La danse est un véritable travail, et la pratique prend tout votre temps, mais vous comprenez pourquoi vous donnez tant de vous-même quand vous montez sur scène.";
 	close;
 }
 
-ein_in01,170,266,0	script	Mature Looking Dancer#s3	724,{
+ein_in01,170,266,0	script	Danseuse d'Âge Mûr::Mature Looking Dancer#s3	724,{
 	if (que_sch < 17) {
-		mes "[Dancer]";
-		mes "Oh, the dinner";
-		mes "party isn't finished yet.";
-		mes "It'll be over before";
-		mes "you even know it~";
+		mes "[Danseuse]";
+		mes "Oh, la représentation n'est pas encore terminée, mais elle le sera avant que vous ne vous en rendiez compte~";
 		close;
 	}
 	else if (que_sch == 17) {
-		mes "[Dancer]";
-		mes "Well well, it looks like our";
-		mes "performance was a success.";
-		mes "The new girls did a really";
-		mes "great job. So let's head";
-		mes "back home, shall we?";
+		mes "[Danseuse]";
+		mes "Hé bien, on dirait que notre représentation était un succès! Les nouvelles filles ont vraiment fait du bon travail! Bien, il est temps de retourner à la maison, vous ne pensez pas?";
 		close2;
 		warp "comodo",191,146;
 		end;
 	}
-	mes "[Dancer]";
-	mes "Dancing is so fun, but";
-	mes "sometimes it's hard to";
-	mes "keep up with the audience's";
-	mes "expectations, you know?";
+	mes "[Danseuse]";
+	mes "Je prends tellement de plaisir à danser... Mais parfois, il est très difficile de comprendre les attentes de son public, vous savez?";
 	close;
 }
 
-ein_in01,279,221,0	script	Hotel Manager#sch	903,5,5,{
+ein_in01,279,221,0	script	Gérant de l'Hôtel::Hotel Manager#sch	903,5,5,{
 	if (que_sch < 15) {
-		mes "[Manager]";
-		mes "It'd be a really great";
-		mes "party if our customers";
-		mes "were a little less rowdy";
-		mes "Recently, they've been";
-		mes "more than a handful...";
+		mes "[Gérant]";
+		mes "C'est une très belle fête, mais elle le serait encore plus si nos invités étaient un petit peu moins tapageurs. Il sont quelques uns depuis un certain temps...";
 		close;
 	}
 	else if (que_sch == 15) {
-		mes "[Manager]";
-		mes "I'm glad our customers";
-		mes "enjoyed the performance";
-		mes "I was a little worried about";
-		mes "what they were going to think,";
-		mes "but I guess I was just being";
-		mes "overly anxious about it all.";
+		mes "[Gérant]";
+		mes "Je suis content que nos clients aient apprécié la représentation. Je m'inquiétais un peu de ce qu'ils allaient penser, mais j'imagine que je m'en faisais pour rien.";
 		close;
 	}
 	else if (que_sch == 16) {
-		mes "[Manager]";
-		mes "Thank you so much for";
-		mes "your services. I'll be sure to";
-		mes "have one of my employees";
-		mes "send you your payment";
-		mes "Have a safe trip back~";
+		mes "[Gérant]";
+		mes "Merci beaucoup pour vos services. Je vais m'assurer que l'un de mes employés vous verse votre cachet. Faites bonne route jusqu'à Comodo~";
 		set que_sch,17;
 		close;
 	}
@@ -1739,58 +1223,35 @@ ein_in01,279,221,0	script	Hotel Manager#sch	903,5,5,{
 
 OnTouch:
 	if (que_sch == 14) {
-		mes "[Manager]";
-		mes "Oh, did you enjoy";
-		mes "your trip? I'm glad to";
-		mes "see that everyone arrived";
-		mes "safely. The dinner party";
-		mes "will start shortly, so";
-		mes "please get ready~";
+		mes "[Gérant]";
+		mes "Oh, est-ce que vous avez fait bon voyage? Je suis content que le voyage se soit passé sans encombres. La fête commencera sous peu, alors allez vous préparer s'il vous plaît~";
 		set que_sch,15;
 		close;
 	}
 	end;
 }
 
-ein_in01,166,282,4	script	Employee#sch	904,{
+ein_in01,166,282,4	script	Employé::Employee#sch	904,{
 	if (que_sch < 15) {
-		mes "[Employee]";
-		mes "We've been so busy lately!";
-		mes "It's just one party reservation";
-		mes "after another! When will I be";
-		mes "able to just take a break?";
+		mes "[Employé]";
+		mes "Nous sommes surchargés de travail en ce moment! Nous avons réservations sur réservations! Quand est-ce que je vais pouvoir faire une pause?";
 		close;
 	}
 	else if (que_sch < 17) {
 		if (rand(1,3) == 2) {
-			mes "[Employee]";
-			mes "Hi, how may I help you?";
-			mes "Tonight, most of customers";
-			mes "are high ranking government";
-			mes "officials or public figures.";
-			mes "That man over there is the";
-			mes "Rekenber P.R. executive.";
+			mes "[Employé]";
+			mes ( IsDay() ? "Bonjour" : "Bonsoir" )+", en quoi puis-je vous aider? La plupart de nos clients aujourd'hui sont des officiels du gouvernement, ou des figures publiques. Nous avons même le Chargé des Relations Publiques de la Rekenber!";
 			next;
-			mes "[Employee]";
-			mes "That priest over there is";
-			mes "actually a diplomat from";
-			mes "Arunafeltz on business.";
-			mes "These are some very";
-			mes "important people!";
+			mes "[Employé]";
+			mes "La Prêtresse là-bas est une diplomate d'Arunafeltz en visite officielle. Ce sont des gens très importants!";
 			close;
 		}
-		mes "[Employee]";
-		mes "How can I help you?";
-		mes "Oh, would you like another";
-		mes "drink? There you go! Please";
-		mes "enjoy the dinner party~";
+		mes "[Employé]";
+		mes "En quoi puis-je vous aider? Oh, voulez-vous un autre verre? Et voilà! Passez un bon moment~";
 		close;
 	}
-	mes "[Employee]";
-	mes "Oh, the mess left after";
-	mes "a banquet is the biggest";
-	mes "part of my job. It's tough";
-	mes "work, but it needs to get done.";
+	mes "[Employé]";
+	mes "Oh, tout remettre en état après un banquet représente la plu grosse partie de mon travail. C'est une tâche ingrate, mais quelqu'un doit le faire.";
 	close;
 }
 
@@ -1802,65 +1263,37 @@ OnTouch:
 		enablenpc "Corporate Figure";
 		enablenpc "Arunafeltz Figure";
 		mes "[????]";
-		mes "I guess the party";
-		mes "will soon be over.";
-		mes "Did you enjoy yourself?";
+		mes "J'imagine que la fête sera bientôt terminée. Est-ce que vous prenez du bon temps?";
 		next;
 		mes "[??????]";
-		mes "Yes, thank you, I had";
-		mes "a great time. I'm sorry";
-		mes "I gave you such short";
-		mes "notice of my arrival, but";
-		mes "you held this party anyway.";
+		mes "Oui, merci, j'ai passé un bon moment";
+		mes "Je suis désolée de ne pas vous avoir prévenu avant de ma vue, mais puisque vous aviez déjà organisé ce banquet...";
 		next;
 		mes "[????]";
-		mes "Don't mention it.";
-		mes "You're a valued guest.";
-		mes "It would shame me if I'd";
-		mes "failed to entertain you.";
+		mes "Ce n'est rien. Vous êtes un hôte d'honneur. Je m'en voudrais si je n'avais pas réussi à vous divertir.";
 		next;
 		mes "[??????]";
-		mes "Ho ho, you certainly know";
-		mes "how to be a good host~";
+		mes "Hoho, vous savez vraiment recevoir~";
 		next;
 		mes "[????]";
-		mes "Your words honor me.";
+		mes "Vos paroles m'honorent.";
 		next;
-		mes "^3355FFThe man took a quick";
-		mes "look around the room.^000000";
+		mes "^3355FFLa Prêtresse jette un court regard autour d'elle.^000000";
 		next;
 		mes "[????]";
-		mes "No one's around.";
-		mes "I have something to";
-		mes "discuss with you before";
-		mes "we get down to business.";
+		mes "Il n'y a personne dans les environs. Il y a quelque chose dont je voudrais vous parler avant que nous en venions à nos affaires.";
 		next;
 		mes "[??????]";
-		mes "What kind of...?";
+		mes "De quel genre...?";
 		next;
 		mes "[????]";
-		mes "I'll explain in detail";
-		mes "someplace safer. The gist";
-		mes "is that some rogues over in";
-		mes "Arunafeltz are plotting to harm";
-		mes "relations between Arunafeltz";
-		mes "and the Rekenber Corporation.";
+		mes "Je vous donnerai tous les détails dans un endroit plus sûr. Certaines personnes à Arunafeltz complotent afin de ternir les relations entre Arunafeltz et la Corporation Rekenber.";
 		next;
 		mes "[??????]";
-		mes "Oh... I see. Yes,";
-		mes "we can't talk about";
-		mes "that here. To tell the";
-		mes "truth, I've suspected that";
-		mes "something like that was";
-		mes "going on... Yes, makes sense.";
+		mes "Oh... Je vois. Oui, nous ne pouvons pas parler de cela ici. À dire vrai, je soupçonnais quelque chose dans le genre... Oui, tout s'éclaire.";
 		next;
 		mes "[????]";
-		mes "We should relocate";
-		mes "so that we can talk";
-		mes "a bit more freely.";
-		mes "Please follow me,";
-		mes "I already have";
-		mes "a place prepared.";
+		mes "Nous devrions aller ailleurs pour parler plus librement. Suivez-moi s'il vous plaît, j'ai déjà fait préparer un endroit.";
 		set que_sch,16;
 		close2;
 		disablenpc "Corporate Figure";
@@ -1871,7 +1304,7 @@ OnTouch:
 	end;
 }
 
-ein_in01,181,284,0	script	Corporate Figure	109,{
+ein_in01,181,284,0	script	Homme d'Affaire::Corporate Figure	109,{
 	end;
 
 OnInit:
@@ -1879,7 +1312,7 @@ OnInit:
 	end;
 }
 
-ein_in01,181,285,0	script	Arunafeltz Figure	920,{
+ein_in01,181,285,0	script	Prêtresse d' Arunafeltz::Arunafeltz Figure	920,{
 	end;
 
 OnInit:
@@ -1887,32 +1320,22 @@ OnInit:
 	end;
 }
 
-ein_in01,168,274,0	script	Corporate Figure#sch	109,{
+ein_in01,168,274,0	script	Homme d'Affaire::Corporate Figure#sch	109,{
 	mes "[????]";
-	mes "Hmm... Good.";
-	mes "Everything looks";
-	mes "ready to me.";
+	mes "Hum... Bien, tout me semble prêt.";
 	close;
 }
 
-ein_in01,170,284,4	script	Arunafeltz Figure#sch	920,{
+ein_in01,170,284,4	script	Prêtresse d' Arunafeltz::Arunafeltz Figure#sch	920,{
 	mes "[??????]";
-	mes "I've got to say, only";
-	mes "Rekenber can host such";
-	mes "a magnificent party in";
-	mes "a city this polluted.";
-	mes "What's going on...?";
+	mes "Je dois dire que seule la Rekenber est capable de tenir un banquet aussi raffiné dans une ville aussi polluée.";
+	mes "Qu'est-ce qui se passe...?";
 	close;
 }
 
-morocc,297,154,0	script	Thin-Faced Bard#sch	51,{
+morocc,297,154,0	script	Barde au Visage Émacié::Thin-Faced Bard#sch	51,{
 	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
-		mes "^3355FFWait a second!";
-		mes "Right now, you're carrying";
-		mes "too many things with you.";
-		mes "Please come back after";
-		mes "using the Kafra Service";
-		mes "to store some of your items.^000000";
+		mes "^3355FFUne petite minute! Vous transportez trop d'objets sur vous. Revenez après avoir utilisé les services Kafra pour déposer quelques objets.^000000";
 		close;
 	}
 
@@ -1923,153 +1346,85 @@ morocc,297,154,0	script	Thin-Faced Bard#sch	51,{
 	}
 	else if (que_sch == 19) {
 		mes "[Vitre]";
-		mes "Thanks for your help.";
-		mes "This country's government";
-		mes "should know better than to";
-		mes "put a good man like me in jail.";
-		mes "Listen, I'm a fugitive now.";
-		mes "Do you think you can help me?";
+		mes "Merci de votre aide. Le gouvernement de ce pays devrait savoir que mieux vaut ne pas enfermer quelqu'un comme moi en prison. Écoutez, je suis maintenant un fugitif. Est-ce que vous pensez que vous pouvez m'aider?";
 		next;
-		select("Sure.:I may as well...");
+		select("Bien sûr.:Au point où j'en suis...");
 		mes "[Vitre]";
-		mes "I just need you to talk";
-		mes "to a few people, and let";
-		mes "me know what they said.";
-		mes "I'd do it myself, but you";
-		mes "understand that I've got";
-		mes "to keep a low profile.";
+		mes "Il faudrait juste que vous alliez parler à quelques personnes, et que vous me rapportiez ce qu'elles ont dit. Je le ferais bien moi-même, mais je suis sûr que vous comprenez qu'il faut que je garde profil bas.";
 		next;
 		mes "[Vitre]";
-		mes "Please meet these people";
-		mes "in the order that I tell you.";
-		mes "I've sent messengers to let";
-		mes "them know of your arrival,";
-		mes "but I had to send them out";
-		mes "at different times... Anyway...";
+		mes "S'il vous plaît, allez rencontrer ces personnes dans l'ordre que je vais vous indiquer. J'ai dépêché des messagers pour les prévenir de votre venue, mais je n'ai pas pu les envoyer au même moment... Quoi qu'il en soit...";
 		next;
 		mes "[Vitre]";
-		mes "First, go to Prontera";
-		mes "and talk to Chada. Second,";
-		mes "go to Geffen and speak to";
-		mes "Ghez. Lastly, please go to";
-		mes "Comodo and meet Nosdan.";
+		mes "Tout d'abord, allez parler Chada à Prontera. Ensuite, rendez-vous à Geffen pour parler à Ghez. Enfin, allez voir Nosdan à Comodo.";
 		next;
 		mes "[Vitre]";
-		mes "Each one of them will";
-		mes "sing you a song. Listen";
-		mes "carefully, and sing me their";
-		mes "songs when you come back.";
-		mes "Thanks, you have no idea how";
-		mes "much I appreciate your help.";
+		mes "Chacun d'entre eux vous chantera une chanson. Écoutez-les attentivement, et chantez-les moi quand vous reviendrez. Merci. Vous ne savez pas à quel point j'apprécie votre aide.";
 		set que_sch,20;
 		close;
 	}
 	else if (que_sch == 20) {
 		mes "[Vitre]";
-		mes "Chada is probably near";
-		mes "the middle of Prontera.";
-		mes "The messenger I sent to";
-		mes "him should have reached";
-		mes "him by now, so he should";
-		mes "be expecting your arrival.";
+		mes "Chada se trouve probablement dans le centre de Prontera. Le messager que j'ai envoyé devrait déjà l'avoir prévenu, alors il devrait vous attendre.";
 		close;
 	}
 	else if (que_sch == 21) {
 		mes "[Vitre]";
-		mes "Ah, now you've got to";
-		mes "talk to Ghez. He should";
-		mes "be in Northeast Geffen";
-		mes "somewhere. Hopefully";
-		mes "you won't have too much";
-		mes "trouble finding him.";
+		mes "Ah, il vous faut maintenant aller parler à Ghez. Il devrait se trouver quelque part dans le quartier Nord-Est de Geffen. J'espère que vous n'aurez pas trop de mal à le trouver.";
 		close;
 	}
 	else if (que_sch == 22) {
 		mes "[Vitre]";
-		mes "Trying to find Nosdan?";
-		mes "I think he's probably in the";
-		mes "Northern Cave in Comodo.";
-		mes "Please talk to him, and let";
-		mes "me know about his song.";
+		mes "Vous essayez de trouver Nosdan? Il doit sûrement être dans la grotte Nord de Comodo. S'il vous plaît, allez-lui parler et rapportez-moi sa chanson.";
 		close;
 	}
 	else if (que_sch == 23) {
 		mes "[Vitre]";
-		mes "Welcome back.";
-		mes "So did you listen";
-		mes "to all of their songs?";
+		mes "Bienvenue! Alors, est-ce que vous avez mémorisé leurs chansons?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Oui:Non") == 1) {
 			mes "[Vitre]";
-			mes "Perfect~ Here's a little";
-			mes "something to show my";
-			mes "gratitude. Hope you like it.";
+			mes "Parfait~ Voici un petit quelque chose pour vous prouver ma gratitude. J'espère que vous apprécierez.";
 			set que_sch,24;
 			getitem 603,1; //Old_Blue_Box
 			next;
 			mes "[Vitre]";
-			mes "Now, tell me, what";
-			mes "exactly did they si--";
+			mes "Maintenant, dites-moi les paroles exactes de leurs chan--";
 			next;
 			mes "[????]";
-			mes "Hold it!";
+			mes "Plus un geste!";
 			next;
 			enablenpc "????#sch1";
 			enablenpc "????#sch2";
 			enablenpc "????#sch3";
 			mes "[Vitre]";
-			mes "What? Wh-who the";
-			mes "hell are you guys?!";
+			mes "Quoi? Qui... Qui êtes-vous?!";
 			next;
 			mes "[????]";
-			mes "Rune-Midgarts";
-			mes "Secret Service!";
+			mes "Services Secrets de Rune Midgard!";
 			mes "Vitre Bizlleta--";
-			mes "you're under arrest";
-			mes "for espionage!";
+			mes "Vous êtes en état d'arrestation pour espionnage!";
 			next;
 			mes "[Vitre]";
-			mes "Again? Didn't you just";
-			mes "arrest me just for being";
-			mes "suspected of espionage?";
-			mes "I think it's a little unfair";
-			mes "to just capture me when";
-			mes "you don't have any proof.";
+			mes "Encore? Est-ce que vous ne m'aviez pas arrêté comme suspect dans une affaire d'espionnage? Vous ne pensez pas que c'est criminel de m'arrêter sans preuves?!";
 			next;
 			mes "[????]";
-			mes "We just seized concrete";
-			mes "evidence of your illegal";
-			mes "activities. It's probably";
-			mes "enough to imprison you";
-			mes "for life. Happy now?";
+			mes "Nous venons de mettre la main sur des preuves concrètes de vos activités illégales. Cela suffira certainement pour vous condamner à la prison à vie. Vous êtes satisfait maintenant?";
 			next;
 			mes "[Vitre]";
-			mes "You're bluffing.";
+			mes "C'est du bluff!";
 			next;
 			mes "[????]";
-			mes "You shouldn't have sent";
-			mes "that unsuspecting adventurer";
-			mes "to your news sources. We've";
-			mes "taken them into custody";
-			mes "Chada, Ghez, Nosdan.";
-			mes "That's them, right?";
+			mes "Vous n'auriez pas dû envoyer "+ ( sex ? "cet aventurier" : "cette aventurière" ) +" rencontrer vos contacts. Nous les avons placés en détention préventive. Chada, Ghez, Nosdan. C'est d'eux dont il s'agit, n'est-ce pas?";
 			next;
 			mes "[Vitre]";
-			mes "Nooooooooo!";
+			mes "Nooooooooon!";
 			next;
 			mes "[Suden]";
-			mes "Adventurer, thank you for";
-			mes "your cooperation. I am";
-			mes "Suden Griea, Secret Service";
-			mes "agent. I'm sure you have";
-			mes "a lot of questions, but ^FF0000Lasda";
-			mes "Midar^000000 will answer them.";
+			mes "Merci de votre coopération, "+ ( sex ? "aventurier" : "aventurière" ) +". Je m'appelle Suden Griea, des Services Secrets. Je suis certains que vous avez de nombreuses questions, mais ^FF0000Lasda Midar^000000 pourra y répondre.";
 			next;
 			mes "[Suden]";
-			mes "I'd explain here and now,";
-			mes "but I better dispose of";
-			mes "this trash with the rest of";
-			mes "his scum buddies... in jail!";
+			mes "J'y répondrais bien maintenant, mais je ferais mieux d'accompagner cette vermine là où il mérite d'être, avec ses moins-que-riens d'acolytes: en prison!";
 			set que_sch,25;
 			close2;
 			disablenpc "????#sch1";
@@ -2078,76 +1433,47 @@ morocc,297,154,0	script	Thin-Faced Bard#sch	51,{
 			end;
 		}
 		mes "[Vitre]";
-		mes "Would you please hurry?";
-		mes "Staying in one place like";
-		mes "this makes me nervous...";
-		mes "I should be on the move...";
+		mes "Est-ce que vous pourriez vous dépêcher? Ça me rend nerveux de rester trop longtemps dans un endroit comme ça... Je devrais déjà être parti...";
 		close;
 	}
 	else if (que_sch == 24) {
 		mes "[Vitre]";
-		mes "Now, tell me, what";
-		mes "exactly did they si--";
+		mes "Maintenant, dites-moi les paroles exactes de leurs chan--";
 		next;
 		mes "[????]";
-		mes "Hold it!";
+		mes "Plus un geste!";
 		next;
 		enablenpc "????#sch1";
 		enablenpc "????#sch2";
 		enablenpc "????#sch3";
 		mes "[Vitre]";
-		mes "What? Wh-who the";
-		mes "hell are you guys?!";
+		mes "Quoi? Qui... Qui êtes-vous?!";
 		next;
 		mes "[????]";
-		mes "Rune-Midgarts";
-		mes "Secret Service!";
+		mes "Services Secrets de Rune Midgard!";
 		mes "Vitre Bizlleta--";
-		mes "you're under arrest";
-		mes "for espionage!";
+		mes "Vous êtes en état d'arrestation pour espionnage!";
 		next;
 		mes "[Vitre]";
-		mes "Again? Didn't you just";
-		mes "arrest me just for being";
-		mes "suspected of espionage?";
-		mes "I think it's a little unfair";
-		mes "to just capture me when";
-		mes "you don't have any proof.";
+		mes "Encore? Est-ce que vous ne m'aviez pas arrêté comme suspect dans une affaire d'espionnage? Vous ne pensez pas que c'est criminel de m'arrêter sans preuves?!";
 		next;
 		mes "[????]";
-		mes "We just seized concrete";
-		mes "evidence of your illegal";
-		mes "activities. It's probably";
-		mes "enough to imprison you";
-		mes "for life. Happy now?";
+		mes "Nous venons de mettre la main sur des preuves concrètes de vos activités illégales. Cela suffira certainement pour vous condamner à la prison à vie. Vous êtes satisfait maintenant?";
 		next;
 		mes "[Vitre]";
-		mes "You're bluffing.";
+		mes "C'est du bluff!";
 		next;
 		mes "[????]";
-		mes "You shouldn't have sent";
-		mes "that unsuspecting adventurer";
-		mes "to your news sources. We've";
-		mes "taken them into custody";
-		mes "Chada, Ghez, Nosdan.";
-		mes "That's them, right?";
+		mes "Vous n'auriez pas dû envoyer "+ ( sex ? "cet aventurier" : "cette aventurière" ) +" rencontrer vos contacts. Nous les avons placés en détention préventive. Chada, Ghez, Nosdan. C'est d'eux dont il s'agit, n'est-ce pas?";
 		next;
 		mes "[Vitre]";
-		mes "Nooooooooo!";
+		mes "Nooooooooon!";
 		next;
 		mes "[Suden]";
-		mes "Adventurer, thank you for";
-		mes "your cooperation. I am";
-		mes "Suden Griea, Secret Service";
-		mes "agent. I'm sure you have";
-		mes "a lot of questions, but ^FF0000Lasda";
-		mes "Midar^000000 will answer them.";
+		mes "Merci de votre coopération, "+ ( sex ? "aventurier" : "aventurière" ) +". Je m'appelle Suden Griea, des Services Secrets. Je suis certains que vous avez de nombreuses questions, mais ^FF0000Lasda Midar^000000 pourra y répondre.";
 		next;
 		mes "[Suden]";
-		mes "I'd explain here and now,";
-		mes "but I better dispose of";
-		mes "this trash with the rest of";
-		mes "his scum buddies... in jail!";
+		mes "J'y répondrais bien maintenant, mais je ferais mieux d'accompagner cette vermine là où il mérite d'être, avec ses moins-que-riens d'acolytes: en prison!";
 		set que_sch,25;
 		close2;
 		disablenpc "????#sch1";
@@ -2156,19 +1482,10 @@ morocc,297,154,0	script	Thin-Faced Bard#sch	51,{
 		end;
 	}
 	mes "[Bard]";
-	mes "Oh, uh...";
-	mes "I'm not really Vitre.";
-	mes "I'm just a lookalike that's";
-	mes "been planted here in case";
-	mes "his hoodlum buddies come";
-	mes "here to find him. You know?";
+	mes "Oh, euh... Je ne suis pas vraiment Vitre, vous savez? Je ne suis que quelqu'un qui lui ressemble, posté ici au cas où ses amis malfrats viendraient le chercher.";
 	next;
 	mes "[Bard]";
-	mes "Yeah... This is a pretty";
-	mes "dumb job. I mean, all I do";
-	mes "is stand here, waiting for";
-	mes "his spy friends. What are";
-	mes "the odds of that happening?";
+	mes "Oui... C'est un boulot ridicule. Je reste planté là à attendre que ses amis espions se pointent. Il y a combien de chances pour que ça arrive?";
 	close;
 }
 
@@ -2196,226 +1513,192 @@ OnInit:
 	end;
 }
 
-prontera,109,161,6	script	Young Man#sch	83,{
+prontera,109,161,6	script	Jeune Homme::Young Man#sch	83,{
 	if (que_sch < 20) {
 		mes "[Chada]";
-		mes "What a boring day...";
-		mes "Perhaps I'll stave the";
-		mes "dreariness with song~";
+		mes "Comme je m'ennuie... Je pourrais peut-être chasser toute cette monotonie avec une chanson~";
 		close;
 	}
 	else if (que_sch == 20) {
 		mes "[Chada]";
-		mes "Are you the one that";
-		mes "Vitre sent? Good, good.";
-		mes "Let me treat you to my";
-		mes "wonderful song. Listen...";
-		mes "And learn... And love...";
+		mes "Est-ce que vous êtes "+ ( sex ? "celui" : "celle" ) +" que Vitre a envoyé? Bien, bien. Laissez-moi vous soigner avec ma magnifique chanson. Écoutez, et apprenez... Et laisse-vous remplir d'amour...";
 		next;
 		mes "[Chada]";
 		mes "La la la la la la la la~";
-		mes "A curse plagues the";
-		mes "royal family, and it's";
-		mes "been passed down to their";
-		mes "second child... la la la...";
-		mes "No one can cure it... Oooh~";
+		mes "Une malédiction frappe la famille royale";
+		mes "Et elle a été transmise à leur second fils.";
+		mes "La la la la la la la la~";
+		mes "Personne ne peut la guérir... Oooh~";
 		next;
 		mes "[Chada]";
-		mes "Hahaha! Isn't that";
-		mes "such a wonderful song?";
-		mes "Let Vitre know each and";
-		mes "every word to it, okay?";
+		mes "Hahaha! N'est-ce pas un chant merveilleux? Rapportez chacune des paroles à Vitre, d'accord?";
+		next;
+		mes "["+ strcharinfo(0) +"]"; // Rajouté
+		mes "Euh... C'est vraiment une chanson ça?";
 		set que_sch,21;
 		close;
 	}
 	else if (que_sch < 30) {
 		mes "[Chada]";
-		mes "Did you need to hear";
-		mes "the song again? Alright,";
-		mes "listen carefully this time~";
+		mes "Est-ce que vous voulez à nouveau entendre la chanson? D'accord, faites bien attention cette fois-ci~";
 		next;
 		mes "[Chada]";
 		mes "La la la la la la la la~";
-		mes "A curse plagues the";
-		mes "royal family, and it's";
-		mes "been passed down to their";
-		mes "second child... la la la...";
-		mes "No one can cure it... Oooh~";
+		mes "Une malédiction frappe la famille royale";
+		mes "Et elle a été transmise à leur second fils.";
+		mes "La la la la la la la la~";
+		mes "Personne ne peut la guérir... Oooh~";
 		next;
 		mes "[Chada]";
-		mes "Hahaha! Isn't that";
-		mes "such a wonderful song?";
-		mes "Let Vitre know each and";
-		mes "every word to it, okay?";
+		mes "Hahaha! N'est-ce pas un chant merveilleux? Rapportez chacune des paroles à Vitre, d'accord?";
+		next;
+		mes "["+ strcharinfo(0) +"]"; // Rajouté
+		mes "Euh... C'est vraiment une chanson ça?";
 		close;
 	}
 	else {
 		mes "[Chada]";
 		mes "...........";
-		mes "I have nothing to say to you.";
+		mes "Je n'ai rien à vous dire.";
 		close;
 	}
 }
 
-geffen,196,167,4	script	Young Woman#sch	101,{
+geffen,196,167,4	script	Jeune Femme::Young Woman#sch	101,{
 	if (que_sch < 21) {
 		mes "[Ghez]";
-		mes "When is he going";
-		mes "to send someone to";
-		mes "listen to my song?";
+		mes "Quand est-ce qu'il va bien pouvoir m'envoyer quelqu'un pour écouter ma chanson?";
 		close;
 	}
 	else if (que_sch == 21) {
 		mes "[Ghez]";
-		mes "Oh, Vitre send you?";
-		mes "Great, I've been waiting";
-		mes "for you. Check out this";
-		mes "new song I wrote. It's great.";
+		mes "Oh, Vitre vous envoie? Fantastique! Je vous attendais. Écoutez ce nouveau morceau que j'ai composé: c'est du pur génie!";
 		next;
 		mes "[Ghez]";
 		mes "Sha la la la la la";
-		mes "Prontera Knights gotta";
-		mes "protect the palace~";
+		mes "Les Chevaliers de Prontera";
+		mes "Doivent protéger le palais~";
 		mes "Sha hoo hoo haaaaa";
-		mes "Geffen Knights gotta";
-		mes "protect the magic tower~";
+		mes "Les Chevaliers de Geffen";
+		mes "Doivent protéger la Tour de Magie~";
 		next;
 		mes "[Ghez]";
 		mes "Na na na nan nan naaa";
-		mes "Prontera! Geffen! Knights";
-		mes "together! Protect the palace!";
-		mes "Ooooooooooooh yeah!";
-		mes "And crush their foes to the west!";
-		mes "That's the secret plan! La la la~";
+		mes "Prontera! Geffen! Chevaliers ensemble!";
+		mes "Protéger le palais!";
+		mes "Ooooooooooooh yeah!"; // Je laisse en anglais
+		mes "Et écraser l'ennemi à l'ouest!";
+		mes "Tel est le plan secret! La la la~";
 		next;
 		mes "[Ghez]";
-		mes "Wasn't that poetic?";
-		mes "Now sing that song exactly";
-		mes "as you heard it to Vitre.";
+		mes "N'étais-ce pas de la pure poésie? Maintenant, allez chantez cela à Vitre, exactement comme vous l'avez entendu.";
+		next;
+		mes "["+ strcharinfo(0) +"]"; // Rajouté
+		mes "Décidément, il y a quelque chose d'étrange dans cette histoire...";
 		set que_sch,22;
 		close;
 	}
 	else if (que_sch < 30) {
 		mes "[Ghez]";
-		mes "You want to hear my song";
-		mes "again? Fine, but make sure";
-		mes "to memorize it all this time.";
+		mes "Vous voulez de nouveau entendre ma chanson? D'accord, mais assurez-vous de la mémoriser cette fois-ci.";
 		next;
 		mes "[Ghez]";
 		mes "Sha la la la la la";
-		mes "Prontera Knights gotta";
-		mes "protect the palace~";
+		mes "Les Chevaliers de Prontera";
+		mes "Doivent protéger le palais~";
 		mes "Sha hoo hoo haaaaa";
-		mes "Geffen Knights gotta";
-		mes "protect the magic tower~";
+		mes "Les Chevaliers de Geffen";
+		mes "Doivent protéger la Tour de Magie~";
 		next;
 		mes "[Ghez]";
 		mes "Na na na nan nan naaa";
-		mes "Prontera! Geffen! Knights";
-		mes "together! Protect the palace!";
-		mes "Ooooooooooooh yeah!";
-		mes "And crush their foes to the west!";
-		mes "That's the secret plan! La la la~";
+		mes "Prontera! Geffen! Chevaliers ensemble!";
+		mes "Protéger le palais!";
+		mes "Ooooooooooooh yeah!"; // Je laisse en anglais
+		mes "Et écraser l'ennemi à l'ouest!";
+		mes "Tel est le plan secret! La la la~";
 		next;
 		mes "[Ghez]";
-		mes "Wasn't that poetic?";
-		mes "Now sing that song exactly";
-		mes "as you heard it to Vitre.";
+		mes "N'étais-ce pas de la pure poésie? Maintenant, allez chantez cela à Vitre, exactement comme vous l'avez entendu.";
+		next;
+		mes "["+ strcharinfo(0) +"]"; // Rajouté
+		mes "Décidément, il y a quelque chose d'étrange dans cette histoire...";
 		close;
 	}
 	else {
 		mes "[Ghez]";
-		mes "I'm doomed...";
+		mes "Je suis maudite...";
 		mes ".......";
 		close;
 	}
 }
 
-comodo,135,299,0	script	Young Man#sch2	809,{
+comodo,135,299,0	script	Jeune Homme::Young Man#sch2	809,{
 	if (que_sch < 22) {
 		mes "[Nosdan]";
-		mes "Have you come to hear";
-		mes "my song? Ah, it's good";
-		mes "that you've come to enjoy";
-		mes "my melodious vo--wait,";
-		mes "wait, where are you going?";
+		mes "Est-ce que vous êtes venu"+ ( sex ? "" : "e" ) +" écouter ma chanson? Ah, ça fait plaisir de voir quelqu'un qui apprécie mes mélod... Non, attendez! Oh! Où est-ce que vous allez?!";
 		close;
 	}
 	else if (que_sch == 22) {
 		mes "[Nosdan]";
-		mes "Ah, are you the one";
-		mes "that Vitre mentioned";
-		mes "in his message? Okay,";
-		mes "please give me a moment.";
+		mes "Ah, vous êtes "+ ( sex ? "celui" : "celle" ) +" dont Vitre me parlait dans son message? D'accord, laissez-moi un instant...";
 		next;
 		mes "[Nosdan]";
-		mes "^333333*Ahem ahem*^000000";
-		mes "I'm ready. Now";
-		mes "please listen..";
+		mes "^333333*Ahem* *Ahem*^000000";
+		mes "Voilà, je suis prêt. Maintenant, écoutez bien...";
 		next;
 		mes "[Nosdan]";
-		mes "Who dares stop the fearless";
-		mes "warrior? Baphomet? Drake?";
-		mes "No, they're too weak! His";
-		mes "steps now head to the group";
-		mes "of evil men trying to revive";
-		mes "Satan Morroc. I mean, come on!";
+		mes "Qui peut arrêter les guerriers?";
+		mes "Baphomet? Drake?";
+		mes "Non, ils sont trop faibles!";
+		mes "Leurs pas mènent vers le Démon,";
+		mes "Vers Satan Morroc ressuscité!";
 		next;
 		mes "[Nosdan]";
-		mes "Sad news from an old comrade,";
-		mes "the evil group discovered...";
-		mes "Time to stop Satan Morroc's";
-		mes "revival~ La la la la la la la";
+		mes "Mauvaises nouvelles pour nous,";
+		mes "Satan Morroc a trouvé le moyen";
+		mes "De s'échapper~";
+		mes "La la la la la la la la la la";
 		mes "la la la la la la la la la la";
 		mes "la la la la la la la la la la";
 		next;
 		mes "[Nosdan]";
-		mes "What'd you think?";
-		mes "Um, don't ask me about";
-		mes "the lyrics. Just a weird";
-		mes "artistic quirk I guess.";
-		mes "Oh, please sing that song";
-		mes "to Vitre for me, okay?";
+		mes "Qu'est-ce que vous en dites? Hum... Ne me posez pas de questions au sujet des paroles. Il ne s'agit que d'une fantaisie artistique j'imagine. Oh, et allez chanter cette chanson à Vitre pour moi, d'accord?";
+		next;
+		mes "["+ strcharinfo(0) +"]"; // Rajouté
+		mes "De plus en plus suspect...";
 		set que_sch,23;
 		close;
 	}
 	else if (que_sch < 30) {
 		mes "[Nosdan]";
-		mes "Oh, you need to";
-		mes "hear my song again?";
-		mes "No problem! I guess";
-		mes "you really like it~";
+		mes "Oh, vous avez besoin que je vous rechante ma chanson? Aucun problème! J'imagine que vous l'aimez vraiment~";
 		next;
 		mes "[Nosdan]";
-		mes "Who dares stop the fearless";
-		mes "warrior? Baphomet? Drake?";
-		mes "No, they're too weak! His";
-		mes "steps now head to the group";
-		mes "of evil men trying to revive";
-		mes "Satan Morroc. I mean, come on!";
+		mes "Qui peut arrêter les guerriers?";
+		mes "Baphomet? Drake?";
+		mes "Non, ils sont trop faibles!";
+		mes "Leurs pas mènent vers le Démon,";
+		mes "Vers Satan Morroc ressuscité!";
 		next;
 		mes "[Nosdan]";
-		mes "Sad news from an old comrade,";
-		mes "the evil group discovered...";
-		mes "Time to stop Satan Morroc's";
-		mes "revival~ La la la la la la la";
+		mes "Mauvaises nouvelles pour nous,";
+		mes "Satan Morroc a trouvé le moyen";
+		mes "De s'échapper~";
+		mes "La la la la la la la la la la";
 		mes "la la la la la la la la la la";
 		mes "la la la la la la la la la la";
 		next;
 		mes "[Nosdan]";
-		mes "What'd you think?";
-		mes "Um, don't ask me about";
-		mes "the lyrics. Just a weird";
-		mes "artistic quirk I guess.";
-		mes "Oh, please sing that song";
-		mes "to Vitre for me, okay?";
+		mes "Qu'est-ce que vous en dites? Hum... Ne me posez pas de questions au sujet des paroles. Il ne s'agit que d'une fantaisie artistique j'imagine. Oh, et allez chanter cette chanson à Vitre pour moi, d'accord?";
+		next;
+		mes "["+ strcharinfo(0) +"]"; // Rajouté
+		mes "De plus en plus suspect...";
 		close;
 	}
 	else {
 		mes "[Nosdan]";
-		mes "Oh, no! I didn't!";
-		mes "do anything wrong.";
-		mes "I swear!";
+		mes "Oh, non! Je n'ai rien fait de mal! Je le jure!";
 		close;
 	}
 }
