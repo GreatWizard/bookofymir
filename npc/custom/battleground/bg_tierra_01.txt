@@ -59,7 +59,7 @@ OnReadyCheck:
 
 	if( .@Guillaume < 10 || .@Croix < 10 )
 	{
-		mapannounce "bat_room","Champ de Bataille -- Vallée de Tierra [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",1,0xFFA500;
+		mapannounce "bat_room","Champ de Bataille -- Vallée de Tierra [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",0,0xFFA500;
 		end;
 	}
 
@@ -93,9 +93,9 @@ OnReadyCheck:
 	bg_warp $@TierraBG1_id2,"bat_a01",353,52;
 	// Final Messages
 	sleep 6000;
-	mapannounce "bat_a01","Aide de Camp de Guillaume Axl Rose : Chargez, fiers soldats, et réduisez les réserves de nourriture de Croix en cendres!",1,0x0000FF;
+	mapannounce "bat_a01","Aide de Camp de Guillaume Axl Rose : Chargez, fiers soldats, et réduisez les réserves de nourriture de Croix en cendres!",0,0x0000FF;
 	sleep 2000;
-	mapannounce "bat_a01","Aide de Camp de Croix Swandery : Seigneurs du Walhalla! Donnez-nous la force de brandir le fer avec foi et courage!",1,0xFF0000;
+	mapannounce "bat_a01","Aide de Camp de Croix Swandery : Seigneurs du Walhalla! Donnez-nous la force de brandir le fer avec foi et courage!",0,0xFF0000;
 	
 	initnpctimer;
 	end;
@@ -103,13 +103,13 @@ OnReadyCheck:
 OnNeutralBreak:
 	if( getcharid(4) == $@TierraBG1_id1 )
 	{
-		mapannounce "bat_a01","Guillaume a capturé une Bannière de Neutralité et gagne l'avantage.",1,0x0000FF;
+		mapannounce "bat_a01","Guillaume a capturé une Bannière de Neutralité et gagne l'avantage.",0,0x0000FF;
 		bg_team_setxy $@TierraBG1_id2,42,16;
 		areawarp "bat_a01",52,208,61,217,"bat_a01",42,16;
 	}
 	else if( getcharid(4) == $@TierraBG1_id2 )
 	{
-		mapannounce "bat_a01","Croix a capturé une Bannière de Neutralité et gagne l'avantage.",1,0xFF0000;
+		mapannounce "bat_a01","Croix a capturé une Bannière de Neutralité et gagne l'avantage.",0,0xFF0000;
 		bg_team_setxy $@TierraBG1_id1,50,374;
 		areawarp "bat_a01",52,208,61,217,"bat_a01",50,374;
 	}
@@ -148,26 +148,26 @@ OnGuardian3: set .Guardian_3, 0; end;
 
 OnGuillaumeBreak:
 	set $@TierraBG1_Victory, 2;
-	mapannounce "bat_a01","Aide de Camp de Croix Swandery: Nous avons détruit les réserves de nourriture de Guillaume. Hourra, braves guerriers!",1,0xFF0000;
+	mapannounce "bat_a01","Aide de Camp de Croix Swandery: Nous avons détruit les réserves de nourriture de Guillaume. Hourra, braves guerriers!",0,0xFF0000;
 	donpcevent "Tierra_BG1::OnStop";
 	end;
 
 OnCroixBreak:
 	set $@TierraBG1_Victory, 1;
-	mapannounce "bat_a01","Aide de Camp de Guillaume Axl Rose: Nous avons détruit les réserves de nourriture de Croix. Hourra, braves guerriers!",1,0x0000FF;
+	mapannounce "bat_a01","Aide de Camp de Guillaume Axl Rose: Nous avons détruit les réserves de nourriture de Croix. Hourra, braves guerriers!",0,0x0000FF;
 	donpcevent "Tierra_BG1::OnStop";
 	end;
 
 OnTimer2400000:
-	mapannounce "bat_a01","La bataille des Gorges de Tierra prendra fin dans 5 minutes.",1,0xF4A460;
+	mapannounce "bat_a01","La bataille des Gorges de Tierra prendra fin dans 5 minutes.",0,0xF4A460;
 	end;
 OnTimer2640000:
-	mapannounce "bat_a01","La bataille des Gorges de Tierra prendra fin dans 1 minute.",1,0xF4A460;
+	mapannounce "bat_a01","La bataille des Gorges de Tierra prendra fin dans 1 minute.",0,0xF4A460;
 	end;
 
 OnTimer2700000:
 	set $@TierraBG1_Victory, 3; // Draw Game
-	mapannounce "bat_a01","La Bataille des Gorges de Tierra est terminée. Elle s'achève par une égalité!",1,0xF4A460;
+	mapannounce "bat_a01","La Bataille des Gorges de Tierra est terminée. Elle s'achève par une égalité!",0,0xF4A460;
 	donpcevent "Tierra_BG1::OnStop";
 	end;
 
@@ -191,17 +191,17 @@ OnStop:
 	bg_warp $@TierraBG1_id1,"bat_a01",50,374;
 	bg_warp $@TierraBG1_id2,"bat_a01",42,16;
 	sleep 3000;
-	mapannounce "bat_a01","La Bataille des Gorges de Tierra prendra fin dans 1 minute!",1,0xFFA500;
+	mapannounce "bat_a01","La Bataille des Gorges de Tierra prendra fin dans 1 minute!",0,0xFFA500;
 	initnpctimer;
 	end;
 
 OnTimer30000:
 	if( $@TierraBG1 == 2 )
-		mapannounce "bat_a01","La Bataille des Gorges de Tierra prendra fin dans 30 secondes!",1,0xFFA500;
+		mapannounce "bat_a01","La Bataille des Gorges de Tierra prendra fin dans 30 secondes!",0,0xFFA500;
 	end;
 OnTimer50000:
 	if( $@TierraBG1 == 2 )
-		mapannounce "bat_a01","La Bataille des Gorges de Tierra prendra fin dans 10 secondes!",1,0xFFA500;
+		mapannounce "bat_a01","La Bataille des Gorges de Tierra prendra fin dans 10 secondes!",0,0xFFA500;
 	end;
 
 OnTimer60000:

@@ -80,26 +80,26 @@ close;
 		addtimer 2000, "Donneur de Départ::OnCount2000";
 		addtimer 3000, "Donneur de Départ::OnCount3000";
 		addtimer 4000, "Donneur de Départ::OnCount4000";
-		announce strcharinfo(0) + " vient de lancer le compte-à-rebours. Soyez prêts pour la course!",1;
+		announce strcharinfo(0) + " vient de lancer le compte-à-rebours. Soyez prêts pour la course!",bc_map;
 		close;
 
 
 	OnCount1000:
-		announce "[3]",1;
+		announce "[3]",bc_map;
 		end;
 
 	OnCount2000:
-		announce "[2]",1;
+		announce "[2]",bc_map;
 		end;
 
 	OnCount3000:
-		announce "[1]",1;
+		announce "[1]",bc_map;
 		end;
 
 	OnCount4000:
 		emotion 27;
 		specialeffect EF_CHIMTO;
-		announce "[PARTEZ!]",1;
+		announce "[PARTEZ!]",bc_map;
 		set $@race,1;
 		set $@position,0;
 		set $@counting,0;
@@ -145,7 +145,7 @@ end;
 OnTouch:
 if (@race != 1) goto L_Miss;
 set @race,2;
-announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [1]",1;
+announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [1]",bc_map;
 end;
 L_Miss:
 mes "Vous n'êtes pas passé par tous les points de contrôle. Veuillez faire demi-tour.";
@@ -158,7 +158,7 @@ end;
 OnTouch:
 if (@race != 2) goto L_Miss;
 set @race,3;
-announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [2]",1;
+announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [2]",bc_map;
 end;
 L_Miss:
 mes "Vous n'êtes pas passé par tous les points de contrôle. Veuillez faire demi-tour.";
@@ -171,7 +171,7 @@ end;
 OnTouch:
 if (@race != 3) goto L_Miss;
 set @race,4;
-announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [3]",1;
+announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [3]",bc_map;
 end;
 L_Miss:
 mes "Vous n'êtes pas passé par tous les points de contrôle. Veuillez faire demi-tour.";
@@ -184,7 +184,7 @@ end;
 OnTouch:
 if (@race != 4) goto L_Miss;
 set @race,5;
-announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [4]",1;
+announce "[" + strcharinfo(0) +"] a franchi le point de contrôle [4]",bc_map;
 end;
 L_Miss:
 mes "Vous n'êtes pas passé par tous les points de contrôle. Veuillez faire demi-tour.";
@@ -199,7 +199,7 @@ if (@raceid != $@raceid) goto L_WrongRace;
 if (@race != 5) goto L_Miss;
 set @race,6;
 set $@position,$@position+1;
-announce "[" + strcharinfo(0) +"] vient de franchir la Ligne d'Arrivée! [Position: " + $@position + "]",1;
+announce "[" + strcharinfo(0) +"] vient de franchir la Ligne d'Arrivée! [Position: " + $@position + "]",bc_map;
 end;
 L_Miss:
 mes "Vous n'êtes pas passé par tous les points de contrôle. Veuillez faire demi-tour.";
