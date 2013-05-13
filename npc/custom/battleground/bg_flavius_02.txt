@@ -59,7 +59,7 @@ OnReadyCheck:
 	
 	if( .@Guillaume < 10 || .@Croix < 10 )
 	{
-		mapannounce "bat_room","Champ de Bataille -- Flavius [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",1,0x006400;
+		mapannounce "bat_room","Champ de Bataille -- Flavius [80-99] G: " + .@Guillaume + "/10, C: " + .@Croix + "/10",0,0x006400;
 		end;
 	}
 
@@ -119,7 +119,7 @@ OnRoundStart:
 	bg_monster $@FlaviusBG2_id2,"bat_b02",61,140,"Garde de Croix",1950,"Flavius_BG2::OnCroGuardian";
 	set .Croix_Guardian, 2;
 	// Announces
-	mapannounce "bat_b02","Le round [ " + .Match + " ] de la bataille de Flavius vient de débuter!!",1,0x808000;
+	mapannounce "bat_b02","Le round [ " + .Match + " ] de la bataille de Flavius vient de débuter!!",0,0x808000;
 	end;
 
 OnRoundStop:
@@ -145,7 +145,7 @@ OnGuiGuardian:
 		delwall "gui_wall2-2";
 		delwall "gui_wall2-3";
 		delwall "gui_wall2-4";
-		mapannounce "bat_b02","Le Cristal de Guillaume est maintenant vulnérable aux attaques!",1,0x0000FF;
+		mapannounce "bat_b02","Le Cristal de Guillaume est maintenant vulnérable aux attaques!",0,0x0000FF;
 	}
 	end;
 
@@ -156,7 +156,7 @@ OnCroGuardian:
 		delwall "cro_wall2-2";
 		delwall "cro_wall2-3";
 		delwall "cro_wall2-4";
-		mapannounce "bat_b02","Le Cristal de Croix est maintenant vulnérable aux attaques!",1,0xFF0000;
+		mapannounce "bat_b02","Le Cristal de Croix est maintenant vulnérable aux attaques!",0,0xFF0000;
 	}
 	end;
 
@@ -166,13 +166,13 @@ OnGuillaumeBreak:
 	if( set(.Croix_Score, .Croix_Score + 1) < 2 )
 	{
 		bg_updatescore "bat_b02",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b02","Le Cristal de Guillaume vient d'être détruit!",1,0x0000FF;
+		mapannounce "bat_b02","Le Cristal de Guillaume vient d'être détruit!",0,0x0000FF;
 		donpcevent "Flavius_BG2::OnRoundStart";
 	}
 	else
 	{
 		bg_updatescore "bat_b02",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b02","L'armée de Croix remporte la Bataille de Flavius!",1,0xFF0000;
+		mapannounce "bat_b02","L'armée de Croix remporte la Bataille de Flavius!",0,0xFF0000;
 		set $@FlaviusBG2_Victory, 2;
 		donpcevent "Flavius_BG2::OnMatchEnd";
 	}
@@ -184,39 +184,39 @@ OnCroixBreak:
 	if( set(.Guillaume_Score, .Guillaume_Score + 1) < 2 )
 	{
 		bg_updatescore "bat_b02",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b02","Le Cristal de Croix vient d'être détruit!",1,0xFF0000;
+		mapannounce "bat_b02","Le Cristal de Croix vient d'être détruit!",0,0xFF0000;
 		donpcevent "Flavius_BG2::OnRoundStart";
 	}
 	else
 	{
 		bg_updatescore "bat_b02",.Guillaume_Score,.Croix_Score;
-		mapannounce "bat_b02","L'armée de Guillaume remporte la Bataille de Flavius!",1,0x0000FF;
+		mapannounce "bat_b02","L'armée de Guillaume remporte la Bataille de Flavius!",0,0x0000FF;
 		set $@FlaviusBG2_Victory, 1;
 		donpcevent "Flavius_BG2::OnMatchEnd";
 	}
 	end;
 
 OnTimer2400000:
-	mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 5 minutes.",1,0x808000;
+	mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 5 minutes.",0,0x808000;
 	end;
 OnTimer2640000:
-	mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 1 minute.",1,0x808000;
+	mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 1 minute.",0,0x808000;
 	end;
 
 OnTimer2700000:
 	if( .Croix_Score > .Guillaume_Score )
 	{
-		mapannounce "bat_b02","L'armée de Croix a remporté la Bataille de Flavius!",1,0xFF0000;
+		mapannounce "bat_b02","L'armée de Croix a remporté la Bataille de Flavius!",0,0xFF0000;
 		set $@FlaviusBG2_Victory, 2;
 	}
 	else if( .Croix_Score < .Guillaume_Score )
 	{
-		mapannounce "bat_b02","L'armée de Guillaume a remporté la Bataille de Flavius!",1,0x0000FF;
+		mapannounce "bat_b02","L'armée de Guillaume a remporté la Bataille de Flavius!",0,0x0000FF;
 		set $@FlaviusBG2_Victory, 1;
 	}
 	else
 	{
-		mapannounce "bat_b02","La Bataille de Flavius est terminée. Elle s'achève par une égalité!",1,0x808000;
+		mapannounce "bat_b02","La Bataille de Flavius est terminée. Elle s'achève par une égalité!",0,0x808000;
 		set $@FlaviusBG2_Victory, 3;
 	}
 
@@ -233,17 +233,17 @@ OnMatchEnd:
 	bg_warp $@FlaviusBG2_id1,"bat_b02",390,10;
 	bg_warp $@FlaviusBG2_id2,"bat_b02",10,290;
 	sleep 3000;
-	mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 1 minute!",1,0x808000;
+	mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 1 minute!",0,0x808000;
 	initnpctimer;
 	end;
 
 OnTimer30000:
 	if( $@FlaviusBG2 == 2 )
-		mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 30 secondes!",1,0x808000;
+		mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 30 secondes!",0,0x808000;
 	end;
 OnTimer50000:
 	if( $@FlaviusBG2 == 2 )
-		mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 10 secondes!",1,0x808000;
+		mapannounce "bat_b02","La Bataille de Flavius prendra fin dans 10 secondes!",0,0x808000;
 	end;
 
 OnTimer60000:
